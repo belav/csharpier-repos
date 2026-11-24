@@ -5,8 +5,8 @@
 namespace System.IdentityModel.Policy
 {
     using System.Collections;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.IdentityModel.Claims;
 
     public abstract class AuthorizationContext : IAuthorizationComponent
@@ -16,7 +16,9 @@ namespace System.IdentityModel.Policy
         public abstract DateTime ExpirationTime { get; }
         public abstract IDictionary<string, object> Properties { get; }
 
-        public static AuthorizationContext CreateDefaultAuthorizationContext(IList<IAuthorizationPolicy> authorizationPolicies)
+        public static AuthorizationContext CreateDefaultAuthorizationContext(
+            IList<IAuthorizationPolicy> authorizationPolicies
+        )
         {
             return SecurityUtils.CreateDefaultAuthorizationContext(authorizationPolicies);
         }

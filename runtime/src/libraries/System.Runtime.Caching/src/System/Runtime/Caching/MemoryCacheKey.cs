@@ -12,8 +12,14 @@ namespace System.Runtime.Caching
         private readonly string _key;
         private readonly int _hash;
 
-        internal int Hash { get { return _hash; } }
-        internal string Key { get { return _key; } }
+        internal int Hash
+        {
+            get { return _hash; }
+        }
+        internal string Key
+        {
+            get { return _key; }
+        }
 
         internal MemoryCacheKey(string key)
         {

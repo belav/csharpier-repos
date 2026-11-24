@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// The "Join" operation is used when two separate control flow paths converge at a single
         /// statement. This operation is used to combine the if/else paths of a conditional, or two
         /// "goto" statements to the same label, for example.
-        /// 
+        ///
         /// According to convention, Join moves "up" the lattice, so the following equations must hold:
         /// 1. Join(Unreachable(), X) = X
         /// 2. Join(Top, X) = Top
@@ -50,7 +50,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected abstract bool Join(ref TLocalState self, ref TLocalState other);
 
         /// <summary>
-        /// The Meet operation is the inverse of <see cref="Join(ref TLocalState, ref TLocalState)"/>. 
+        /// The Meet operation is the inverse of <see cref="Join(ref TLocalState, ref TLocalState)"/>.
         /// It's used when combining state additively, like when the state from a return statement
         /// inside a 'try' clause is combined with the end state of a 'finally' clause.
         ///

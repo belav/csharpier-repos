@@ -14,14 +14,8 @@ namespace System.Xml.Schema
 
         public bool EnableUpaCheck
         {
-            get
-            {
-                return _enableUpaCheck;
-            }
-            set
-            {
-                _enableUpaCheck = value;
-            }
+            get { return _enableUpaCheck; }
+            set { _enableUpaCheck = value; }
         }
     }
 }

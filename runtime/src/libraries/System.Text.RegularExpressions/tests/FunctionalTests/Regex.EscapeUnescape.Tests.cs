@@ -21,7 +21,10 @@ namespace System.Text.RegularExpressions.Tests
             if (expected.Length > 0)
             {
                 const int Count = 100;
-                Assert.Equal(string.Concat(Enumerable.Repeat(expected, Count)), Regex.Escape(string.Concat(Enumerable.Repeat(str, Count))));
+                Assert.Equal(
+                    string.Concat(Enumerable.Repeat(expected, Count)),
+                    Regex.Escape(string.Concat(Enumerable.Repeat(str, Count)))
+                );
             }
         }
 
@@ -45,7 +48,10 @@ namespace System.Text.RegularExpressions.Tests
             if (expected.Length > 0)
             {
                 const int Count = 100;
-                Assert.Equal(string.Concat(Enumerable.Repeat(expected, Count)), Regex.Unescape(string.Concat(Enumerable.Repeat(str, Count))));
+                Assert.Equal(
+                    string.Concat(Enumerable.Repeat(expected, Count)),
+                    Regex.Unescape(string.Concat(Enumerable.Repeat(str, Count)))
+                );
             }
         }
 

@@ -20,7 +20,14 @@ namespace System.Globalization.Tests
             }
             else
             {
-                yield return new object[] { randomDateTime, random.Next(1, (calendar.MaxSupportedDateTime.Year - randomDateTime.Year - 1911) * 12) };
+                yield return new object[]
+                {
+                    randomDateTime,
+                    random.Next(
+                        1,
+                        (calendar.MaxSupportedDateTime.Year - randomDateTime.Year - 1911) * 12
+                    ),
+                };
             }
 
             if ((calendar.MinSupportedDateTime.Year - randomDateTime.Year) < -1000)
@@ -29,7 +36,11 @@ namespace System.Globalization.Tests
             }
             else
             {
-                yield return new object[] { randomDateTime, random.Next((calendar.MinSupportedDateTime.Year - randomDateTime.Year) * 12, 0) };
+                yield return new object[]
+                {
+                    randomDateTime,
+                    random.Next((calendar.MinSupportedDateTime.Year - randomDateTime.Year) * 12, 0),
+                };
             }
 
             yield return new object[] { calendar.MaxSupportedDateTime, 0 };

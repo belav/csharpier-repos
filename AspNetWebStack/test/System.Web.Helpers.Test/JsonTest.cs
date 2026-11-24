@@ -107,7 +107,7 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void DecodeArrayImplicitConversionToArrayArrayValuesAreDynamic()
         {
-            // Act            
+            // Act
             dynamic[] objArray = Json.Decode("[{\"A\":1}]");
 
             // Assert
@@ -178,7 +178,7 @@ namespace System.Web.Helpers.Test
             // Act
             var values = Json.Decode("[11,12,13,14,15]");
 
-            // Assert            
+            // Assert
             Assert.Equal(5, values.Length);
             Assert.Equal(11, values[0]);
             Assert.Equal(12, values[1]);
@@ -344,7 +344,15 @@ namespace System.Web.Helpers.Test
         public void DecodeObjectWithImplicitConversionToNonDynamicTypeThrows()
         {
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => { Person person = Json.Decode("{\"Name\":\"David\", \"Age\":2, \"Address\":{\"Street\":\"Bellevue\"}}"); }, "Unable to convert to \"System.Web.Helpers.Test.JsonTest+Person\". Use Json.Decode<T> instead.");
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    Person person = Json.Decode(
+                        "{\"Name\":\"David\", \"Age\":2, \"Address\":{\"Street\":\"Bellevue\"}}"
+                    );
+                },
+                "Unable to convert to \"System.Web.Helpers.Test.JsonTest+Person\". Use Json.Decode<T> instead."
+            );
         }
 
         private class DummyDynamicObject : DynamicObject

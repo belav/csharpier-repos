@@ -6,12 +6,11 @@ namespace System.IdentityModel.Selectors
     using System;
     using System.Runtime.InteropServices;
     using System.Threading;
-    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
-
     //
     // For common & resources
     //
     using Microsoft.InfoCards;
+    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
 
     //
     // Summary:
@@ -19,13 +18,15 @@ namespace System.IdentityModel.Selectors
     //
     internal class AsymmetricCryptoHandle : ProofTokenCryptoHandle
     {
-        public AsymmetricCryptoHandle(InternalRefCountedHandle nativeHandle, DateTime expiration, IntPtr parameters)
-            : base(nativeHandle, expiration, parameters, typeof(RpcAsymmetricCryptoParameters))
-        {
-        }
+        public AsymmetricCryptoHandle(
+            InternalRefCountedHandle nativeHandle,
+            DateTime expiration,
+            IntPtr parameters
+        )
+            : base(nativeHandle, expiration, parameters, typeof(RpcAsymmetricCryptoParameters)) { }
 
-        private AsymmetricCryptoHandle(InternalRefCountedHandle internalHandle) : base(internalHandle) { }
-
+        private AsymmetricCryptoHandle(InternalRefCountedHandle internalHandle)
+            : base(internalHandle) { }
 
         protected override CryptoHandle OnDuplicate()
         {
@@ -38,4 +39,3 @@ namespace System.IdentityModel.Selectors
         }
     }
 }
-

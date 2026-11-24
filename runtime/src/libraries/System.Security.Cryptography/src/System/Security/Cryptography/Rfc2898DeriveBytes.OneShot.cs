@@ -42,12 +42,19 @@ namespace System.Security.Cryptography
             byte[] salt,
             int iterations,
             HashAlgorithmName hashAlgorithm,
-            int outputLength)
+            int outputLength
+        )
         {
             ArgumentNullException.ThrowIfNull(password);
             ArgumentNullException.ThrowIfNull(salt);
 
-            return Pbkdf2(new ReadOnlySpan<byte>(password), new ReadOnlySpan<byte>(salt), iterations, hashAlgorithm, outputLength);
+            return Pbkdf2(
+                new ReadOnlySpan<byte>(password),
+                new ReadOnlySpan<byte>(salt),
+                iterations,
+                hashAlgorithm,
+                outputLength
+            );
         }
 
         /// <summary>
@@ -77,7 +84,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> salt,
             int iterations,
             HashAlgorithmName hashAlgorithm,
-            int outputLength)
+            int outputLength
+        )
         {
             ArgumentOutOfRangeException.ThrowIfNegativeOrZero(iterations);
             ArgumentOutOfRangeException.ThrowIfNegative(outputLength);
@@ -114,7 +122,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> salt,
             Span<byte> destination,
             int iterations,
-            HashAlgorithmName hashAlgorithm)
+            HashAlgorithmName hashAlgorithm
+        )
         {
             ArgumentOutOfRangeException.ThrowIfNegativeOrZero(iterations);
 
@@ -161,12 +170,19 @@ namespace System.Security.Cryptography
             byte[] salt,
             int iterations,
             HashAlgorithmName hashAlgorithm,
-            int outputLength)
+            int outputLength
+        )
         {
             ArgumentNullException.ThrowIfNull(password);
             ArgumentNullException.ThrowIfNull(salt);
 
-            return Pbkdf2(password.AsSpan(), new ReadOnlySpan<byte>(salt), iterations, hashAlgorithm, outputLength);
+            return Pbkdf2(
+                password.AsSpan(),
+                new ReadOnlySpan<byte>(salt),
+                iterations,
+                hashAlgorithm,
+                outputLength
+            );
         }
 
         /// <summary>
@@ -204,7 +220,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> salt,
             int iterations,
             HashAlgorithmName hashAlgorithm,
-            int outputLength)
+            int outputLength
+        )
         {
             ArgumentOutOfRangeException.ThrowIfNegative(outputLength);
             ArgumentOutOfRangeException.ThrowIfNegativeOrZero(iterations);
@@ -249,7 +266,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> salt,
             Span<byte> destination,
             int iterations,
-            HashAlgorithmName hashAlgorithm)
+            HashAlgorithmName hashAlgorithm
+        )
         {
             ArgumentOutOfRangeException.ThrowIfNegativeOrZero(iterations);
 
@@ -263,7 +281,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> salt,
             Span<byte> destination,
             int iterations,
-            HashAlgorithmName hashAlgorithm)
+            HashAlgorithmName hashAlgorithm
+        )
         {
             Debug.Assert(hashAlgorithm.Name is not null);
             Debug.Assert(iterations > 0);
@@ -278,15 +297,22 @@ namespace System.Security.Cryptography
             byte[]? rentedPasswordBuffer = null;
             int maxEncodedSize = s_throwingUtf8Encoding.GetMaxByteCount(password.Length);
 
-            Span<byte> passwordBuffer = maxEncodedSize > MaxPasswordStackSize ?
-                (rentedPasswordBuffer = CryptoPool.Rent(maxEncodedSize)) :
-                stackalloc byte[MaxPasswordStackSize];
+            Span<byte> passwordBuffer =
+                maxEncodedSize > MaxPasswordStackSize
+                    ? (rentedPasswordBuffer = CryptoPool.Rent(maxEncodedSize))
+                    : stackalloc byte[MaxPasswordStackSize];
             int passwordBytesWritten = s_throwingUtf8Encoding.GetBytes(password, passwordBuffer);
             Span<byte> passwordBytes = passwordBuffer.Slice(0, passwordBytesWritten);
 
             try
             {
-                Pbkdf2Implementation.Fill(passwordBytes, salt, iterations, hashAlgorithm, destination);
+                Pbkdf2Implementation.Fill(
+                    passwordBytes,
+                    salt,
+                    iterations,
+                    hashAlgorithm,
+                    destination
+                );
             }
             finally
             {
@@ -304,7 +330,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> salt,
             Span<byte> destination,
             int iterations,
-            HashAlgorithmName hashAlgorithm)
+            HashAlgorithmName hashAlgorithm
+        )
         {
             Debug.Assert(hashAlgorithm.Name is not null);
             Debug.Assert(iterations > 0);
@@ -323,17 +350,21 @@ namespace System.Security.Cryptography
             ArgumentException.ThrowIfNullOrEmpty(hashAlgorithmName, nameof(hashAlgorithm));
 
             // MD5 intentionally left out.
-            if (hashAlgorithmName == HashAlgorithmName.SHA1.Name ||
-                hashAlgorithmName == HashAlgorithmName.SHA256.Name ||
-                hashAlgorithmName == HashAlgorithmName.SHA384.Name ||
-                hashAlgorithmName == HashAlgorithmName.SHA512.Name)
+            if (
+                hashAlgorithmName == HashAlgorithmName.SHA1.Name
+                || hashAlgorithmName == HashAlgorithmName.SHA256.Name
+                || hashAlgorithmName == HashAlgorithmName.SHA384.Name
+                || hashAlgorithmName == HashAlgorithmName.SHA512.Name
+            )
             {
                 return;
             }
 
-            if (hashAlgorithmName == HashAlgorithmName.SHA3_256.Name ||
-                hashAlgorithmName == HashAlgorithmName.SHA3_384.Name ||
-                hashAlgorithmName == HashAlgorithmName.SHA3_512.Name)
+            if (
+                hashAlgorithmName == HashAlgorithmName.SHA3_256.Name
+                || hashAlgorithmName == HashAlgorithmName.SHA3_384.Name
+                || hashAlgorithmName == HashAlgorithmName.SHA3_512.Name
+            )
             {
                 // All current platforms support HMAC-SHA3-256, 384, and 512 together, so we can simplify the check
                 // to just checking HMAC-SHA3-256 for the availability of 384 and 512, too.
@@ -345,7 +376,9 @@ namespace System.Security.Cryptography
                 throw new PlatformNotSupportedException();
             }
 
-            throw new CryptographicException(SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmName));
+            throw new CryptographicException(
+                SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmName)
+            );
         }
     }
 }

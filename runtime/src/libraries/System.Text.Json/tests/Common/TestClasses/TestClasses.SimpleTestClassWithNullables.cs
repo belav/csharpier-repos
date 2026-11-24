@@ -50,9 +50,7 @@ namespace System.Text.Json.Serialization.Tests
 
     public class SimpleTestClassWithNulls : SimpleBaseClassWithNullables, ITestClass
     {
-        public void Initialize()
-        {
-        }
+        public void Initialize() { }
 
         public void Verify()
         {
@@ -96,46 +94,47 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Null(MyStringToStringDict);
             Assert.Null(MyListOfNullInt);
         }
+
         public static readonly string s_json =
-                @"{" +
-                @"""MyInt16"" : null," +
-                @"""MyInt32"" : null," +
-                @"""MyInt64"" : null," +
-                @"""MyUInt16"" : null," +
-                @"""MyUInt32"" : null," +
-                @"""MyUInt64"" : null," +
-                @"""MyByte"" : null," +
-                @"""MySByte"" : null," +
-                @"""MyChar"" : null," +
-                @"""MyBooleanTrue"" : null," +
-                @"""MyBooleanFalse"" : null," +
-                @"""MySingle"" : null," +
-                @"""MyDouble"" : null," +
-                @"""MyDecimal"" : null," +
-                @"""MyDateTime"" : null," +
-                @"""MyDateTimeOffset"" : null," +
-                @"""MyGuid"" : null," +
-                @"""MyEnum"" : null," +
-                @"""MyInt16Array"" : null," +
-                @"""MyInt32Array"" : null," +
-                @"""MyInt64Array"" : null," +
-                @"""MyUInt16Array"" : null," +
-                @"""MyUInt32Array"" : null," +
-                @"""MyUInt64Array"" : null," +
-                @"""MyByteArray"" : null," +
-                @"""MySByteArray"" : null," +
-                @"""MyCharArray"" : null," +
-                @"""MyBooleanTrueArray"" : null," +
-                @"""MyBooleanFalseArray"" : null," +
-                @"""MySingleArray"" : null," +
-                @"""MyDoubleArray"" : null," +
-                @"""MyDecimalArray"" : null," +
-                @"""MyDateTimeArray"" : null," +
-                @"""MyDateTimeOffsetArray"" : null," +
-                @"""MyEnumArray"" : null," +
-                @"""MyStringToStringDict"" : null," +
-                @"""MyListOfNullInt"" : null" +
-                @"}";
+            @"{"
+            + @"""MyInt16"" : null,"
+            + @"""MyInt32"" : null,"
+            + @"""MyInt64"" : null,"
+            + @"""MyUInt16"" : null,"
+            + @"""MyUInt32"" : null,"
+            + @"""MyUInt64"" : null,"
+            + @"""MyByte"" : null,"
+            + @"""MySByte"" : null,"
+            + @"""MyChar"" : null,"
+            + @"""MyBooleanTrue"" : null,"
+            + @"""MyBooleanFalse"" : null,"
+            + @"""MySingle"" : null,"
+            + @"""MyDouble"" : null,"
+            + @"""MyDecimal"" : null,"
+            + @"""MyDateTime"" : null,"
+            + @"""MyDateTimeOffset"" : null,"
+            + @"""MyGuid"" : null,"
+            + @"""MyEnum"" : null,"
+            + @"""MyInt16Array"" : null,"
+            + @"""MyInt32Array"" : null,"
+            + @"""MyInt64Array"" : null,"
+            + @"""MyUInt16Array"" : null,"
+            + @"""MyUInt32Array"" : null,"
+            + @"""MyUInt64Array"" : null,"
+            + @"""MyByteArray"" : null,"
+            + @"""MySByteArray"" : null,"
+            + @"""MyCharArray"" : null,"
+            + @"""MyBooleanTrueArray"" : null,"
+            + @"""MyBooleanFalseArray"" : null,"
+            + @"""MySingleArray"" : null,"
+            + @"""MyDoubleArray"" : null,"
+            + @"""MyDecimalArray"" : null,"
+            + @"""MyDateTimeArray"" : null,"
+            + @"""MyDateTimeOffsetArray"" : null,"
+            + @"""MyEnumArray"" : null,"
+            + @"""MyStringToStringDict"" : null,"
+            + @"""MyListOfNullInt"" : null"
+            + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
     }
@@ -143,46 +142,46 @@ namespace System.Text.Json.Serialization.Tests
     public class SimpleTestClassWithNullables : SimpleBaseClassWithNullables, ITestClass
     {
         public static readonly string s_json =
-                @"{" +
-                @"""MyInt16"" : 1," +
-                @"""MyInt32"" : 2," +
-                @"""MyInt64"" : 3," +
-                @"""MyUInt16"" : 4," +
-                @"""MyUInt32"" : 5," +
-                @"""MyUInt64"" : 6," +
-                @"""MyByte"" : 7," +
-                @"""MySByte"" : 8," +
-                @"""MyChar"" : ""a""," +
-                @"""MyBooleanTrue"" : true," +
-                @"""MyBooleanFalse"" : false," +
-                @"""MySingle"" : 1.1," +
-                @"""MyDouble"" : 2.2," +
-                @"""MyDecimal"" : 3.3," +
-                @"""MyDateTime"" : ""2019-01-30T12:01:02.0000000Z""," +
-                @"""MyDateTimeOffset"" : ""2019-01-30T12:01:02.0000000+01:00""," +
-                @"""MyGuid"" : ""1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6""," +
-                @"""MyEnum"" : 2," +
-                @"""MyInt16Array"" : [1]," +
-                @"""MyInt32Array"" : [2]," +
-                @"""MyInt64Array"" : [3]," +
-                @"""MyUInt16Array"" : [4]," +
-                @"""MyUInt32Array"" : [5]," +
-                @"""MyUInt64Array"" : [6]," +
-                @"""MyByteArray"" : [7]," +
-                @"""MySByteArray"" : [8]," +
-                @"""MyCharArray"" : [""a""]," +
-                @"""MyBooleanTrueArray"" : [true]," +
-                @"""MyBooleanFalseArray"" : [false]," +
-                @"""MySingleArray"" : [1.1]," +
-                @"""MyDoubleArray"" : [2.2]," +
-                @"""MyDecimalArray"" : [3.3]," +
-                @"""MyDateTimeArray"" : [""2019-01-30T12:01:02.0000000Z""]," +
-                @"""MyDateTimeOffsetArray"" : [""2019-01-30T12:01:02.0000000+01:00""]," +
-                @"""MyGuidArray"" : [""1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6""]," +
-                @"""MyEnumArray"" : [2]," +
-                @"""MyStringToStringDict"" : {""key"" : ""value""}," +
-                @"""MyListOfNullInt"" : [null]" +
-                @"}";
+            @"{"
+            + @"""MyInt16"" : 1,"
+            + @"""MyInt32"" : 2,"
+            + @"""MyInt64"" : 3,"
+            + @"""MyUInt16"" : 4,"
+            + @"""MyUInt32"" : 5,"
+            + @"""MyUInt64"" : 6,"
+            + @"""MyByte"" : 7,"
+            + @"""MySByte"" : 8,"
+            + @"""MyChar"" : ""a"","
+            + @"""MyBooleanTrue"" : true,"
+            + @"""MyBooleanFalse"" : false,"
+            + @"""MySingle"" : 1.1,"
+            + @"""MyDouble"" : 2.2,"
+            + @"""MyDecimal"" : 3.3,"
+            + @"""MyDateTime"" : ""2019-01-30T12:01:02.0000000Z"","
+            + @"""MyDateTimeOffset"" : ""2019-01-30T12:01:02.0000000+01:00"","
+            + @"""MyGuid"" : ""1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6"","
+            + @"""MyEnum"" : 2,"
+            + @"""MyInt16Array"" : [1],"
+            + @"""MyInt32Array"" : [2],"
+            + @"""MyInt64Array"" : [3],"
+            + @"""MyUInt16Array"" : [4],"
+            + @"""MyUInt32Array"" : [5],"
+            + @"""MyUInt64Array"" : [6],"
+            + @"""MyByteArray"" : [7],"
+            + @"""MySByteArray"" : [8],"
+            + @"""MyCharArray"" : [""a""],"
+            + @"""MyBooleanTrueArray"" : [true],"
+            + @"""MyBooleanFalseArray"" : [false],"
+            + @"""MySingleArray"" : [1.1],"
+            + @"""MyDoubleArray"" : [2.2],"
+            + @"""MyDecimalArray"" : [3.3],"
+            + @"""MyDateTimeArray"" : [""2019-01-30T12:01:02.0000000Z""],"
+            + @"""MyDateTimeOffsetArray"" : [""2019-01-30T12:01:02.0000000+01:00""],"
+            + @"""MyGuidArray"" : [""1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6""],"
+            + @"""MyEnumArray"" : [2],"
+            + @"""MyStringToStringDict"" : {""key"" : ""value""},"
+            + @"""MyListOfNullInt"" : [null]"
+            + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -221,8 +220,14 @@ namespace System.Text.Json.Serialization.Tests
             MySingleArray = new float?[] { 1.1f };
             MyDoubleArray = new double?[] { 2.2d };
             MyDecimalArray = new decimal?[] { 3.3m };
-            MyDateTimeArray = new DateTime?[] { new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc) };
-            MyDateTimeOffsetArray = new DateTimeOffset?[] { new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0)) };
+            MyDateTimeArray = new DateTime?[]
+            {
+                new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc),
+            };
+            MyDateTimeOffsetArray = new DateTimeOffset?[]
+            {
+                new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0)),
+            };
             MyGuidArray = new Guid?[] { new Guid("1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6") };
             MyEnumArray = new SampleEnum?[] { SampleEnum.Two };
             MyStringToStringDict = new Dictionary<string, string> { { "key", "value" } };
@@ -246,7 +251,10 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(1.1f, MySingle);
             Assert.Equal(2.2d, MyDouble);
             Assert.Equal(new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc), MyDateTime);
-            Assert.Equal(new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0)), MyDateTimeOffset);
+            Assert.Equal(
+                new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0)),
+                MyDateTimeOffset
+            );
             Assert.Equal(new Guid("1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6"), MyGuid);
             Assert.Equal(SampleEnum.Two, MyEnum);
 
@@ -265,7 +273,10 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(1.1f, MySingleArray[0]);
             Assert.Equal(2.2d, MyDoubleArray[0]);
             Assert.Equal(new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc), MyDateTimeArray[0]);
-            Assert.Equal(new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0)), MyDateTimeOffsetArray[0]);
+            Assert.Equal(
+                new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0)),
+                MyDateTimeOffsetArray[0]
+            );
             Assert.Equal(new Guid("1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6"), MyGuidArray[0]);
             Assert.Equal(SampleEnum.Two, MyEnumArray[0]);
             Assert.Equal("value", MyStringToStringDict["key"]);

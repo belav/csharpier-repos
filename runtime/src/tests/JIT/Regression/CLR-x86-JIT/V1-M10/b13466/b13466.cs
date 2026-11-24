@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Default
 {
     //@BEGINRENAME; Verify this renames
@@ -11,8 +12,7 @@ namespace Default
 
     public class q
     {
-        static
-        int func(int i, int updateAddr, byte[] newBytes, int[] m_fixupPos)
+        static int func(int i, int updateAddr, byte[] newBytes, int[] m_fixupPos)
         {
             while (i > 10)
             {

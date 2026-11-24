@@ -18,5 +18,6 @@ public interface ITriggerAddedConvention : IConvention
     /// <param name="context">Additional information associated with convention execution.</param>
     void ProcessTriggerAdded(
         IConventionTriggerBuilder triggerBuilder,
-        IConventionContext<IConventionTriggerBuilder> context);
+        IConventionContext<IConventionTriggerBuilder> context
+    );
 }

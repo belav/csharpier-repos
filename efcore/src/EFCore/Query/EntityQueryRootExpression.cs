@@ -48,54 +48,53 @@ public class EntityQueryRootExpression : QueryRootExpression, IPrintableExpressi
     ///     Detaches the associated query provider from this query root expression.
     /// </summary>
     /// <returns>A new query root expression without query provider.</returns>
-    public override Expression DetachQueryProvider()
-        => new EntityQueryRootExpression(EntityType);
+    public override Expression DetachQueryProvider() => new EntityQueryRootExpression(EntityType);
 
     /// <summary>
     ///     Updates entity type associated with this query root with equivalent optimized version.
     /// </summary>
     /// <param name="entityType">The entity type to replace with.</param>
     /// <returns>New query root containing given entity type.</returns>
-    public virtual EntityQueryRootExpression UpdateEntityType(IEntityType entityType)
-        => entityType.ClrType != EntityType.ClrType
-            || entityType.Name != EntityType.Name
-                ? throw new InvalidOperationException(CoreStrings.QueryRootDifferentEntityType(entityType.DisplayName()))
-                : new EntityQueryRootExpression(entityType);
+    public virtual EntityQueryRootExpression UpdateEntityType(IEntityType entityType) =>
+        entityType.ClrType != EntityType.ClrType || entityType.Name != EntityType.Name
+            ? throw new InvalidOperationException(
+                CoreStrings.QueryRootDifferentEntityType(entityType.DisplayName())
+            )
+            : new EntityQueryRootExpression(entityType);
 
     /// <inheritdoc />
-    public override ExpressionType NodeType
-        => ExpressionType.Extension;
+    public override ExpressionType NodeType => ExpressionType.Extension;
 
     /// <inheritdoc />
-    public override bool CanReduce
-        => false;
+    public override bool CanReduce => false;
 
     /// <inheritdoc />
-    protected override Expression VisitChildren(ExpressionVisitor visitor)
-        => this;
+    protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 
     /// <summary>
     ///     Creates a printable string representation of the given expression using <see cref="ExpressionPrinter" />.
     /// </summary>
     /// <param name="expressionPrinter">The expression printer to use.</param>
-    protected override void Print(ExpressionPrinter expressionPrinter)
-        => expressionPrinter.Append(
+    protected override void Print(ExpressionPrinter expressionPrinter) =>
+        expressionPrinter.Append(
             EntityType.HasSharedClrType
                 ? $"DbSet<{EntityType.ClrType.ShortDisplayName()}>(\"{EntityType.Name}\")"
-                : $"DbSet<{EntityType.ClrType.ShortDisplayName()}>()");
+                : $"DbSet<{EntityType.ClrType.ShortDisplayName()}>()"
+        );
 
     /// <inheritdoc />
-    void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
-        => Print(expressionPrinter);
+    void IPrintableExpression.Print(ExpressionPrinter expressionPrinter) =>
+        Print(expressionPrinter);
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is EntityQueryRootExpression queryRootExpression
-                && EntityType == queryRootExpression.EntityType);
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is EntityQueryRootExpression queryRootExpression
+                && EntityType == queryRootExpression.EntityType
+        );
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(base.GetHashCode(), EntityType);
+    public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), EntityType);
 }

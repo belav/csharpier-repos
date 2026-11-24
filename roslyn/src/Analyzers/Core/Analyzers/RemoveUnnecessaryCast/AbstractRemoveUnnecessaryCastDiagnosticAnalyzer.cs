@@ -13,29 +13,42 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryCast
 {
     internal abstract class AbstractRemoveUnnecessaryCastDiagnosticAnalyzer<
         TLanguageKindEnum,
-        TCastExpression> : AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer
+        TCastExpression
+    > : AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer
         where TLanguageKindEnum : struct
         where TCastExpression : SyntaxNode
     {
         protected AbstractRemoveUnnecessaryCastDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId,
-                   EnforceOnBuildValues.RemoveUnnecessaryCast,
-                   option: null,
-                   fadingOption: null,
-                   new LocalizableResourceString(nameof(AnalyzersResources.Remove_Unnecessary_Cast), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)),
-                   new LocalizableResourceString(nameof(CompilerExtensionsResources.Cast_is_redundant), CompilerExtensionsResources.ResourceManager, typeof(CompilerExtensionsResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId,
+                EnforceOnBuildValues.RemoveUnnecessaryCast,
+                option: null,
+                fadingOption: null,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Remove_Unnecessary_Cast),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(CompilerExtensionsResources.Cast_is_redundant),
+                    CompilerExtensionsResources.ResourceManager,
+                    typeof(CompilerExtensionsResources)
+                )
+            ) { }
 
         protected abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
         protected abstract TextSpan GetFadeSpan(TCastExpression node);
-        protected abstract bool IsUnnecessaryCast(SemanticModel model, TCastExpression node, CancellationToken cancellationToken);
+        protected abstract bool IsUnnecessaryCast(
+            SemanticModel model,
+            TCastExpression node,
+            CancellationToken cancellationToken
+        );
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxNodeAction(AnalyzeSyntax, SyntaxKindsOfInterest);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxNodeAction(AnalyzeSyntax, SyntaxKindsOfInterest);
 
         private void AnalyzeSyntax(SyntaxNodeAnalysisContext context)
         {
@@ -45,7 +58,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryCast
             var diagnostic = TryRemoveCastExpression(
                 context.SemanticModel,
                 (TCastExpression)context.Node,
-                context.CancellationToken);
+                context.CancellationToken
+            );
 
             if (diagnostic != null)
             {
@@ -53,7 +67,11 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryCast
             }
         }
 
-        private Diagnostic? TryRemoveCastExpression(SemanticModel model, TCastExpression node, CancellationToken cancellationToken)
+        private Diagnostic? TryRemoveCastExpression(
+            SemanticModel model,
+            TCastExpression node,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -71,7 +89,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryCast
             return Diagnostic.Create(
                 Descriptor,
                 node.SyntaxTree.GetLocation(GetFadeSpan(node)),
-                ImmutableArray.Create(node.GetLocation()));
+                ImmutableArray.Create(node.GetLocation())
+            );
         }
     }
 }

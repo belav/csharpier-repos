@@ -11,14 +11,24 @@ internal static partial class Interop
         /// <summary>
         /// WARNING: This method does not implicitly handle long paths. Use GetFileAttributesEx.
         /// </summary>
-        [LibraryImport(Libraries.Kernel32, EntryPoint = "GetFileAttributesExW", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Kernel32,
+            EntryPoint = "GetFileAttributesExW",
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static partial bool GetFileAttributesExPrivate(
             string? name,
             GET_FILEEX_INFO_LEVELS fileInfoLevel,
-            ref WIN32_FILE_ATTRIBUTE_DATA lpFileInformation);
+            ref WIN32_FILE_ATTRIBUTE_DATA lpFileInformation
+        );
 
-        internal static bool GetFileAttributesEx(string? name, GET_FILEEX_INFO_LEVELS fileInfoLevel, ref WIN32_FILE_ATTRIBUTE_DATA lpFileInformation)
+        internal static bool GetFileAttributesEx(
+            string? name,
+            GET_FILEEX_INFO_LEVELS fileInfoLevel,
+            ref WIN32_FILE_ATTRIBUTE_DATA lpFileInformation
+        )
         {
             name = PathInternal.EnsureExtendedPrefixIfNeeded(name);
             return GetFileAttributesExPrivate(name, fileInfoLevel, ref lpFileInformation);

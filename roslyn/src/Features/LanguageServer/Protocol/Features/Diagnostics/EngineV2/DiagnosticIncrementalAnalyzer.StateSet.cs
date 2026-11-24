@@ -33,8 +33,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 Language = language;
                 Analyzer = analyzer;
 
-                _activeFileStates = new ConcurrentDictionary<DocumentId, ActiveFileState>(concurrencyLevel: 2, capacity: 10);
-                _projectStates = new ConcurrentDictionary<ProjectId, ProjectState>(concurrencyLevel: 2, capacity: 1);
+                _activeFileStates = new ConcurrentDictionary<DocumentId, ActiveFileState>(
+                    concurrencyLevel: 2,
+                    capacity: 10
+                );
+                _projectStates = new ConcurrentDictionary<ProjectId, ProjectState>(
+                    concurrencyLevel: 2,
+                    capacity: 1
+                );
             }
 
             public IEnumerable<ProjectId> GetProjectsWithDiagnostics()
@@ -59,14 +65,24 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 }
 
                 return new HashSet<ProjectId>(
-                    _activeFileStates.Where(kv => !kv.Value.IsEmpty)
-                                     .Select(kv => kv.Key.ProjectId)
-                                     .Concat(_projectStates.Where(kv => !kv.Value.IsEmpty())
-                                                           .Select(kv => kv.Key)));
+                    _activeFileStates
+                        .Where(kv => !kv.Value.IsEmpty)
+                        .Select(kv => kv.Key.ProjectId)
+                        .Concat(
+                            _projectStates.Where(kv => !kv.Value.IsEmpty()).Select(kv => kv.Key)
+                        )
+                );
             }
 
-            [PerformanceSensitive("https://github.com/dotnet/roslyn/issues/34761", AllowCaptures = false, AllowGenericEnumeration = false)]
-            public void CollectDocumentsWithDiagnostics(ProjectId projectId, HashSet<DocumentId> set)
+            [PerformanceSensitive(
+                "https://github.com/dotnet/roslyn/issues/34761",
+                AllowCaptures = false,
+                AllowGenericEnumeration = false
+            )]
+            public void CollectDocumentsWithDiagnostics(
+                ProjectId projectId,
+                HashSet<DocumentId> set
+            )
             {
                 RoslynDebug.Assert(set != null);
 
@@ -80,53 +96,88 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     }
                 }
 
-                if (_projectStates.TryGetValue(projectId, out var projectState) && !projectState.IsEmpty())
+                if (
+                    _projectStates.TryGetValue(projectId, out var projectState)
+                    && !projectState.IsEmpty()
+                )
                 {
                     set.UnionWith(projectState.GetDocumentsWithDiagnostics());
                 }
             }
 
-            public bool IsActiveFile(DocumentId documentId)
-                => _activeFileStates.ContainsKey(documentId);
+            public bool IsActiveFile(DocumentId documentId) =>
+                _activeFileStates.ContainsKey(documentId);
 
-            public bool FromBuild(ProjectId projectId)
-                => _projectStates.TryGetValue(projectId, out var projectState) && projectState.FromBuild;
+            public bool FromBuild(ProjectId projectId) =>
+                _projectStates.TryGetValue(projectId, out var projectState)
+                && projectState.FromBuild;
 
-            public bool TryGetActiveFileState(DocumentId documentId, [NotNullWhen(true)] out ActiveFileState? state)
-                => _activeFileStates.TryGetValue(documentId, out state);
+            public bool TryGetActiveFileState(
+                DocumentId documentId,
+                [NotNullWhen(true)] out ActiveFileState? state
+            ) => _activeFileStates.TryGetValue(documentId, out state);
 
-            public bool TryGetProjectState(ProjectId projectId, [NotNullWhen(true)] out ProjectState? state)
-                => _projectStates.TryGetValue(projectId, out state);
+            public bool TryGetProjectState(
+                ProjectId projectId,
+                [NotNullWhen(true)] out ProjectState? state
+            ) => _projectStates.TryGetValue(projectId, out state);
 
-            public ActiveFileState GetOrCreateActiveFileState(DocumentId documentId)
-                => _activeFileStates.GetOrAdd(documentId, id => new ActiveFileState(id));
+            public ActiveFileState GetOrCreateActiveFileState(DocumentId documentId) =>
+                _activeFileStates.GetOrAdd(documentId, id => new ActiveFileState(id));
 
-            public ProjectState GetOrCreateProjectState(ProjectId projectId)
-                => _projectStates.GetOrAdd(projectId, static (id, self) => new ProjectState(self, id), this);
+            public ProjectState GetOrCreateProjectState(ProjectId projectId) =>
+                _projectStates.GetOrAdd(
+                    projectId,
+                    static (id, self) => new ProjectState(self, id),
+                    this
+                );
 
             public async Task<bool> OnDocumentOpenedAsync(TextDocument document)
             {
                 // can not be cancelled
-                if (!TryGetProjectState(document.Project.Id, out var projectState) ||
-                    projectState.IsEmpty(document.Id))
+                if (
+                    !TryGetProjectState(document.Project.Id, out var projectState)
+                    || projectState.IsEmpty(document.Id)
+                )
                 {
                     // nothing to do
                     return false;
                 }
 
-                var result = await projectState.GetAnalysisDataAsync(document, avoidLoadingData: false, CancellationToken.None).ConfigureAwait(false);
-                var text = await document.GetValueTextAsync(CancellationToken.None).ConfigureAwait(false);
+                var result = await projectState
+                    .GetAnalysisDataAsync(document, avoidLoadingData: false, CancellationToken.None)
+                    .ConfigureAwait(false);
+                var text = await document
+                    .GetValueTextAsync(CancellationToken.None)
+                    .ConfigureAwait(false);
 
                 // store analysis result to active file state:
                 var activeFileState = GetOrCreateActiveFileState(document.Id);
 
-                activeFileState.Save(AnalysisKind.Syntax, new DocumentAnalysisData(result.Version, text.Lines.Count, result.GetDocumentDiagnostics(document.Id, AnalysisKind.Syntax)));
-                activeFileState.Save(AnalysisKind.Semantic, new DocumentAnalysisData(result.Version, text.Lines.Count, result.GetDocumentDiagnostics(document.Id, AnalysisKind.Semantic)));
+                activeFileState.Save(
+                    AnalysisKind.Syntax,
+                    new DocumentAnalysisData(
+                        result.Version,
+                        text.Lines.Count,
+                        result.GetDocumentDiagnostics(document.Id, AnalysisKind.Syntax)
+                    )
+                );
+                activeFileState.Save(
+                    AnalysisKind.Semantic,
+                    new DocumentAnalysisData(
+                        result.Version,
+                        text.Lines.Count,
+                        result.GetDocumentDiagnostics(document.Id, AnalysisKind.Semantic)
+                    )
+                );
 
                 return true;
             }
 
-            public async Task<bool> OnDocumentClosedAsync(TextDocument document, IGlobalOptionService globalOptions)
+            public async Task<bool> OnDocumentClosedAsync(
+                TextDocument document,
+                IGlobalOptionService globalOptions
+            )
             {
                 // can not be cancelled
                 // remove active file state and put it in project state
@@ -137,7 +188,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
                 // active file exist, put it in the project state
                 var projectState = GetOrCreateProjectState(document.Project.Id);
-                await projectState.MergeAsync(activeFileState, document, globalOptions).ConfigureAwait(false);
+                await projectState
+                    .MergeAsync(activeFileState, document, globalOptions)
+                    .ConfigureAwait(false);
                 return true;
             }
 

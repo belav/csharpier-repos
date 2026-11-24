@@ -13,9 +13,7 @@ internal class MSTestTestFrameworkMetadata : ITestFrameworkMetadata
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public MSTestTestFrameworkMetadata()
-    {
-    }
+    public MSTestTestFrameworkMetadata() { }
 
     public bool MatchesAttributeSyntacticName(string attributeSyntacticName)
     {

@@ -24,22 +24,23 @@ internal class RenameIntentProvider : IIntentProvider
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public RenameIntentProvider()
-    {
-    }
+    public RenameIntentProvider() { }
 
     public async Task<ImmutableArray<IntentProcessorResult>> ComputeIntentAsync(
         Document priorDocument,
         TextSpan priorSelection,
         Document currentDocument,
         IntentDataProvider intentDataProvider,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         var renameIntentData = intentDataProvider.GetIntentData<RenameIntentData>();
         Contract.ThrowIfNull(renameIntentData);
 
         var renameService = priorDocument.GetRequiredLanguageService<IEditorInlineRenameService>();
-        var renameInfo = await renameService.GetRenameInfoAsync(priorDocument, priorSelection.Start, cancellationToken).ConfigureAwait(false);
+        var renameInfo = await renameService
+            .GetRenameInfoAsync(priorDocument, priorSelection.Start, cancellationToken)
+            .ConfigureAwait(false);
         if (!renameInfo.CanRename)
         {
             return ImmutableArray<IntentProcessorResult>.Empty;
@@ -49,11 +50,23 @@ internal class RenameIntentProvider : IIntentProvider
             RenameOverloads: false,
             RenameInStrings: false,
             RenameInComments: false,
-            RenameFile: false);
+            RenameFile: false
+        );
 
-        var renameLocationSet = await renameInfo.FindRenameLocationsAsync(options, cancellationToken).ConfigureAwait(false);
-        var renameReplacementInfo = await renameLocationSet.GetReplacementsAsync(renameIntentData.NewName, options, cancellationToken).ConfigureAwait(false);
+        var renameLocationSet = await renameInfo
+            .FindRenameLocationsAsync(options, cancellationToken)
+            .ConfigureAwait(false);
+        var renameReplacementInfo = await renameLocationSet
+            .GetReplacementsAsync(renameIntentData.NewName, options, cancellationToken)
+            .ConfigureAwait(false);
 
-        return ImmutableArray.Create(new IntentProcessorResult(renameReplacementInfo.NewSolution, renameReplacementInfo.DocumentIds.ToImmutableArray(), EditorFeaturesResources.Rename, WellKnownIntents.Rename));
+        return ImmutableArray.Create(
+            new IntentProcessorResult(
+                renameReplacementInfo.NewSolution,
+                renameReplacementInfo.DocumentIds.ToImmutableArray(),
+                EditorFeaturesResources.Rename,
+                WellKnownIntents.Rename
+            )
+        );
     }
 }

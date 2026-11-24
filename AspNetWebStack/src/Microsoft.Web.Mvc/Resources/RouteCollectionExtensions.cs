@@ -21,7 +21,11 @@ namespace Microsoft.Web.Mvc.Resources
         /// <param name="routes"></param>
         /// <param name="controllerName"></param>
         /// <param name="routeSuffix"></param>
-        public static void MapResourceRoute(this RouteCollection routes, string controllerName, string routeSuffix)
+        public static void MapResourceRoute(
+            this RouteCollection routes,
+            string controllerName,
+            string routeSuffix
+        )
         {
             routes.MapResourceRoute(controllerName, null, routeSuffix, null);
         }
@@ -38,7 +42,12 @@ namespace Microsoft.Web.Mvc.Resources
         /// <param name="controllerName"></param>
         /// <param name="routeSuffix"></param>
         /// <param name="constraints"></param>
-        public static void MapResourceRoute(this RouteCollection routes, string controllerName, string routeSuffix, object constraints)
+        public static void MapResourceRoute(
+            this RouteCollection routes,
+            string controllerName,
+            string routeSuffix,
+            object constraints
+        )
         {
             routes.MapResourceRoute(controllerName, null, routeSuffix, constraints);
         }
@@ -55,7 +64,12 @@ namespace Microsoft.Web.Mvc.Resources
         /// <param name="controllerName"></param>
         /// <param name="routePrefix"></param>
         /// <param name="routeSuffix"></param>
-        public static void MapResourceRoute(this RouteCollection routes, string controllerName, string routePrefix, string routeSuffix)
+        public static void MapResourceRoute(
+            this RouteCollection routes,
+            string controllerName,
+            string routePrefix,
+            string routeSuffix
+        )
         {
             routes.MapResourceRoute(controllerName, routePrefix, routeSuffix, null);
         }
@@ -73,7 +87,13 @@ namespace Microsoft.Web.Mvc.Resources
         /// <param name="routePrefix"></param>
         /// <param name="routeSuffix"></param>
         /// <param name="constraints"></param>
-        public static void MapResourceRoute(this RouteCollection routes, string controllerName, string routePrefix, string routeSuffix, object constraints)
+        public static void MapResourceRoute(
+            this RouteCollection routes,
+            string controllerName,
+            string routePrefix,
+            string routeSuffix,
+            object constraints
+        )
         {
             if (String.IsNullOrEmpty(routePrefix))
             {
@@ -92,29 +112,43 @@ namespace Microsoft.Web.Mvc.Resources
                 controllerName + "-editForm",
                 routePrefix + routeSuffix + "/EditForm",
                 new { controller = controllerName, action = "EditForm" },
-                constraints);
+                constraints
+            );
             routes.MapRoute(
                 controllerName + "-createForm",
                 routePrefix + "/CreateForm",
-                new { controller = controllerName, action = "CreateForm" });
+                new { controller = controllerName, action = "CreateForm" }
+            );
             routes.MapRoute(
                 controllerName,
                 routePrefix + routeSuffix,
                 new { controller = controllerName },
-                constraints);
+                constraints
+            );
             routes.MapRoute(
                 controllerName + "-create",
                 routePrefix,
                 new { controller = controllerName, action = "Create" },
-                new { postOnly = new HttpMethodConstraint("POST") });
+                new { postOnly = new HttpMethodConstraint("POST") }
+            );
             routes.MapRoute(
                 controllerName + "-index",
                 routePrefix,
-                new { controller = controllerName, action = "Index" });
+                new { controller = controllerName, action = "Index" }
+            );
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "controller", Justification = "This is an extension method, the parameter is necessary to provide a place to hook the method")]
-        public static string GetResourceRouteName(this Controller controller, string controllerName, ActionType actionType)
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "controller",
+            Justification = "This is an extension method, the parameter is necessary to provide a place to hook the method"
+        )]
+        public static string GetResourceRouteName(
+            this Controller controller,
+            string controllerName,
+            ActionType actionType
+        )
         {
             switch (actionType)
             {

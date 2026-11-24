@@ -11,12 +11,17 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     {
         private class BinOpSig
         {
-            protected BinOpSig()
-            {
-            }
+            protected BinOpSig() { }
 
-            public BinOpSig(PredefinedType pt1, PredefinedType pt2,
-                BinOpMask mask, int cbosSkip, PfnBindBinOp pfn, OpSigFlags grfos, BinOpFuncKind fnkind)
+            public BinOpSig(
+                PredefinedType pt1,
+                PredefinedType pt2,
+                BinOpMask mask,
+                int cbosSkip,
+                PfnBindBinOp pfn,
+                OpSigFlags grfos,
+                BinOpFuncKind fnkind
+            )
             {
                 this.pt1 = pt1;
                 this.pt2 = pt2;
@@ -26,6 +31,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 this.grfos = grfos;
                 this.fnkind = fnkind;
             }
+
             public PredefinedType pt1;
             public PredefinedType pt2;
             public BinOpMask mask;
@@ -56,8 +62,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             private readonly CType _type1;
             private readonly CType _type2;
 
-            public BinOpFullSig(CType type1, CType type2, PfnBindBinOp pfn, OpSigFlags grfos,
-                LiftFlags grflt, BinOpFuncKind fnkind)
+            public BinOpFullSig(
+                CType type1,
+                CType type2,
+                PfnBindBinOp pfn,
+                OpSigFlags grfos,
+                LiftFlags grflt,
+                BinOpFuncKind fnkind
+            )
             {
                 this.pt1 = PredefinedType.PT_UNDEFINEDINDEX;
                 this.pt2 = PredefinedType.PT_UNDEFINEDINDEX;
@@ -104,8 +116,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 }
 
                 // We can't both convert and lift.
-                Debug.Assert(((_grflt & LiftFlags.Lift1) == 0) || ((_grflt & LiftFlags.Convert1) == 0));
-                Debug.Assert(((_grflt & LiftFlags.Lift2) == 0) || ((_grflt & LiftFlags.Convert2) == 0));
+                Debug.Assert(
+                    ((_grflt & LiftFlags.Lift1) == 0) || ((_grflt & LiftFlags.Convert1) == 0)
+                );
+                Debug.Assert(
+                    ((_grflt & LiftFlags.Lift2) == 0) || ((_grflt & LiftFlags.Convert2) == 0)
+                );
 
                 return true;
             }

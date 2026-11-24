@@ -6,16 +6,16 @@ namespace System.ServiceModel.Activation
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Runtime;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
     using System.Security;
-    using System.Security.Principal;
     using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.Threading;
-    using System.ServiceModel;
-    using System.ComponentModel;
 
     unsafe class SharedMemory : IDisposable
     {
@@ -27,16 +27,31 @@ namespace System.ServiceModel.Activation
         }
 
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-        public static unsafe SharedMemory Create(string name, Guid content, List<SecurityIdentifier> allowedSids)
+        public static unsafe SharedMemory Create(
+            string name,
+            Guid content,
+            List<SecurityIdentifier> allowedSids
+        )
         {
             int errorCode = UnsafeNativeMethods.ERROR_SUCCESS;
-            byte[] binarySecurityDescriptor = SecurityDescriptorHelper.FromSecurityIdentifiers(allowedSids, UnsafeNativeMethods.GENERIC_READ);
+            byte[] binarySecurityDescriptor = SecurityDescriptorHelper.FromSecurityIdentifiers(
+                allowedSids,
+                UnsafeNativeMethods.GENERIC_READ
+            );
             SafeFileMappingHandle fileMapping;
-            UnsafeNativeMethods.SECURITY_ATTRIBUTES securityAttributes = new UnsafeNativeMethods.SECURITY_ATTRIBUTES();
+            UnsafeNativeMethods.SECURITY_ATTRIBUTES securityAttributes =
+                new UnsafeNativeMethods.SECURITY_ATTRIBUTES();
             fixed (byte* pinnedSecurityDescriptor = binarySecurityDescriptor)
             {
                 securityAttributes.lpSecurityDescriptor = (IntPtr)pinnedSecurityDescriptor;
-                fileMapping = UnsafeNativeMethods.CreateFileMapping((IntPtr)(-1), securityAttributes, UnsafeNativeMethods.PAGE_READWRITE, 0, sizeof(SharedMemoryContents), name);
+                fileMapping = UnsafeNativeMethods.CreateFileMapping(
+                    (IntPtr)(-1),
+                    securityAttributes,
+                    UnsafeNativeMethods.PAGE_READWRITE,
+                    0,
+                    sizeof(SharedMemoryContents),
+                    name
+                );
                 errorCode = Marshal.GetLastWin32Error();
             }
 
@@ -44,7 +59,9 @@ namespace System.ServiceModel.Activation
             {
                 fileMapping.SetHandleAsInvalid();
                 fileMapping.Close();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(errorCode));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(errorCode)
+                );
             }
 
             SharedMemory sharedMemory = new SharedMemory(fileMapping);
@@ -76,9 +93,19 @@ namespace System.ServiceModel.Activation
             }
         }
 
-        static bool GetView(SafeFileMappingHandle fileMapping, bool writable, out SafeViewOfFileHandle handle)
+        static bool GetView(
+            SafeFileMappingHandle fileMapping,
+            bool writable,
+            out SafeViewOfFileHandle handle
+        )
         {
-            handle = UnsafeNativeMethods.MapViewOfFile(fileMapping, writable ? UnsafeNativeMethods.FILE_MAP_WRITE : UnsafeNativeMethods.FILE_MAP_READ, 0, 0, (IntPtr)sizeof(SharedMemoryContents));
+            handle = UnsafeNativeMethods.MapViewOfFile(
+                fileMapping,
+                writable ? UnsafeNativeMethods.FILE_MAP_WRITE : UnsafeNativeMethods.FILE_MAP_READ,
+                0,
+                0,
+                (IntPtr)sizeof(SharedMemoryContents)
+            );
             int errorCode = Marshal.GetLastWin32Error();
             if (!handle.IsInvalid)
             {
@@ -95,7 +122,9 @@ namespace System.ServiceModel.Activation
                     return false;
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(errorCode));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(errorCode)
+                );
             }
         }
 
@@ -108,7 +137,9 @@ namespace System.ServiceModel.Activation
                 return content;
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(UnsafeNativeMethods.ERROR_FILE_NOT_FOUND));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new Win32Exception(UnsafeNativeMethods.ERROR_FILE_NOT_FOUND)
+            );
         }
 
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
@@ -117,7 +148,11 @@ namespace System.ServiceModel.Activation
         {
             content = null;
 
-            SafeFileMappingHandle fileMapping = UnsafeNativeMethods.OpenFileMapping(UnsafeNativeMethods.FILE_MAP_READ, false, ListenerConstants.GlobalPrefix + name);
+            SafeFileMappingHandle fileMapping = UnsafeNativeMethods.OpenFileMapping(
+                UnsafeNativeMethods.FILE_MAP_READ,
+                false,
+                ListenerConstants.GlobalPrefix + name
+            );
             int errorCode = Marshal.GetLastWin32Error();
             if (fileMapping.IsInvalid)
             {
@@ -128,7 +163,9 @@ namespace System.ServiceModel.Activation
                     return false;
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(errorCode));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(errorCode)
+                );
             }
 
             try
@@ -141,7 +178,8 @@ namespace System.ServiceModel.Activation
 
                 try
                 {
-                    SharedMemoryContents* contents = (SharedMemoryContents*)view.DangerousGetHandle();
+                    SharedMemoryContents* contents = (SharedMemoryContents*)
+                        view.DangerousGetHandle();
                     content = contents->isInitialized ? contents->pipeGuid.ToString() : null;
                     return true;
                 }

@@ -14,6 +14,7 @@ namespace System.Reflection.Emit
         InlineI8 = 3,
         InlineMethod = 4,
         InlineNone = 5,
+
         [Obsolete("OperandType.InlinePhi has been deprecated and is not supported.")]
         InlinePhi = 6,
         InlineR = 7,

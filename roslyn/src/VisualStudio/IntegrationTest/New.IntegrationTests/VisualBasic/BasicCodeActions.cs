@@ -17,19 +17,23 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicCodeActions()
-            : base(nameof(BasicCodeActions))
-        {
-        }
+            : base(nameof(BasicCodeActions)) { }
 
         [IdeFact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task GenerateMethodInClosedFile()
         {
-            await TestServices.SolutionExplorer.AddFileAsync(ProjectName, "Goo.vb", @"
+            await TestServices.SolutionExplorer.AddFileAsync(
+                ProjectName,
+                "Goo.vb",
+                @"
 Class Goo
 End Class
-", cancellationToken: HangMitigatingCancellationToken);
+",
+                cancellationToken: HangMitigatingCancellationToken
+            );
 
-            await SetUpEditorAsync(@"
+            await SetUpEditorAsync(
+                @"
 Imports System;
 
 Class Program
@@ -38,10 +42,16 @@ Class Program
         f.Bar()$$
     End Sub
 End Class
-", HangMitigatingCancellationToken);
+",
+                HangMitigatingCancellationToken
+            );
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CodeActionAsync("Generate method 'Bar'", applyFix: true, cancellationToken: HangMitigatingCancellationToken);
+            await TestServices.EditorVerifier.CodeActionAsync(
+                "Generate method 'Bar'",
+                applyFix: true,
+                cancellationToken: HangMitigatingCancellationToken
+            );
             AssertEx.EqualOrDiff(
                 @"
 Class Goo
@@ -50,7 +60,12 @@ Class Goo
     End Sub
 End Class
 ",
-                await TestServices.SolutionExplorer.GetFileContentsAsync(ProjectName, "Goo.vb", HangMitigatingCancellationToken));
+                await TestServices.SolutionExplorer.GetFileContentsAsync(
+                    ProjectName,
+                    "Goo.vb",
+                    HangMitigatingCancellationToken
+                )
+            );
         }
     }
 }

@@ -17,7 +17,15 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new GenericModelBinderProvider(typeof(List<>), (Func<Type[], IExtensibleModelBinder>)null); }, "modelBinderFactory");
+                delegate
+                {
+                    new GenericModelBinderProvider(
+                        typeof(List<>),
+                        (Func<Type[], IExtensibleModelBinder>)null
+                    );
+                },
+                "modelBinderFactory"
+            );
         }
 
         [Fact]
@@ -25,9 +33,14 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Act & assert
             Assert.Throws<ArgumentException>(
-                delegate { new GenericModelBinderProvider(typeof(List<int>), _ => null); },
-                "The type 'System.Collections.Generic.List`1[System.Int32]' is not an open generic type." + Environment.NewLine
-              + "Parameter name: modelType");
+                delegate
+                {
+                    new GenericModelBinderProvider(typeof(List<int>), _ => null);
+                },
+                "The type 'System.Collections.Generic.List`1[System.Int32]' is not an open generic type."
+                    + Environment.NewLine
+                    + "Parameter name: modelType"
+            );
         }
 
         [Fact]
@@ -35,7 +48,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new GenericModelBinderProvider(null, _ => null); }, "modelType");
+                delegate
+                {
+                    new GenericModelBinderProvider(null, _ => null);
+                },
+                "modelType"
+            );
         }
 
         [Fact]
@@ -43,7 +61,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new GenericModelBinderProvider(typeof(List<>), (IExtensibleModelBinder)null); }, "modelBinder");
+                delegate
+                {
+                    new GenericModelBinderProvider(typeof(List<>), (IExtensibleModelBinder)null);
+                },
+                "modelBinder"
+            );
         }
 
         [Fact]
@@ -51,9 +74,17 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Act & assert
             Assert.Throws<ArgumentException>(
-                delegate { new GenericModelBinderProvider(typeof(List<int>), new MutableObjectModelBinder()); },
-                "The type 'System.Collections.Generic.List`1[System.Int32]' is not an open generic type." + Environment.NewLine
-              + "Parameter name: modelType");
+                delegate
+                {
+                    new GenericModelBinderProvider(
+                        typeof(List<int>),
+                        new MutableObjectModelBinder()
+                    );
+                },
+                "The type 'System.Collections.Generic.List`1[System.Int32]' is not an open generic type."
+                    + Environment.NewLine
+                    + "Parameter name: modelType"
+            );
         }
 
         [Fact]
@@ -61,7 +92,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new GenericModelBinderProvider(null, new MutableObjectModelBinder()); }, "modelType");
+                delegate
+                {
+                    new GenericModelBinderProvider(null, new MutableObjectModelBinder());
+                },
+                "modelType"
+            );
         }
 
         [Fact]
@@ -69,9 +105,14 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Act & assert
             Assert.Throws<ArgumentException>(
-                delegate { new GenericModelBinderProvider(typeof(List<>), typeof(string)); },
-                "The type 'System.String' does not implement the interface 'Microsoft.Web.Mvc.ModelBinding.IExtensibleModelBinder'." + Environment.NewLine
-              + "Parameter name: modelBinderType");
+                delegate
+                {
+                    new GenericModelBinderProvider(typeof(List<>), typeof(string));
+                },
+                "The type 'System.String' does not implement the interface 'Microsoft.Web.Mvc.ModelBinding.IExtensibleModelBinder'."
+                    + Environment.NewLine
+                    + "Parameter name: modelBinderType"
+            );
         }
 
         [Fact]
@@ -79,7 +120,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new GenericModelBinderProvider(typeof(List<>), (Type)null); }, "modelBinderType");
+                delegate
+                {
+                    new GenericModelBinderProvider(typeof(List<>), (Type)null);
+                },
+                "modelBinderType"
+            );
         }
 
         [Fact]
@@ -87,9 +133,17 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Act & assert
             Assert.Throws<ArgumentException>(
-                delegate { new GenericModelBinderProvider(typeof(List<>), typeof(DictionaryModelBinder<,>)); },
-                "The open model type 'System.Collections.Generic.List`1[T]' has 1 generic type argument(s), but the open binder type 'Microsoft.Web.Mvc.ModelBinding.DictionaryModelBinder`2[TKey,TValue]' has 2 generic type argument(s). The binder type must not be an open generic type or must have the same number of generic arguments as the open model type." + Environment.NewLine
-              + "Parameter name: modelBinderType");
+                delegate
+                {
+                    new GenericModelBinderProvider(
+                        typeof(List<>),
+                        typeof(DictionaryModelBinder<,>)
+                    );
+                },
+                "The open model type 'System.Collections.Generic.List`1[T]' has 1 generic type argument(s), but the open binder type 'Microsoft.Web.Mvc.ModelBinding.DictionaryModelBinder`2[TKey,TValue]' has 2 generic type argument(s). The binder type must not be an open generic type or must have the same number of generic arguments as the open model type."
+                    + Environment.NewLine
+                    + "Parameter name: modelBinderType"
+            );
         }
 
         [Fact]
@@ -97,9 +151,17 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Act & assert
             Assert.Throws<ArgumentException>(
-                delegate { new GenericModelBinderProvider(typeof(List<int>), typeof(MutableObjectModelBinder)); },
-                "The type 'System.Collections.Generic.List`1[System.Int32]' is not an open generic type." + Environment.NewLine
-              + "Parameter name: modelType");
+                delegate
+                {
+                    new GenericModelBinderProvider(
+                        typeof(List<int>),
+                        typeof(MutableObjectModelBinder)
+                    );
+                },
+                "The type 'System.Collections.Generic.List`1[System.Int32]' is not an open generic type."
+                    + Environment.NewLine
+                    + "Parameter name: modelType"
+            );
         }
 
         [Fact]
@@ -107,16 +169,24 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new GenericModelBinderProvider(null, typeof(MutableObjectModelBinder)); }, "modelType");
+                delegate
+                {
+                    new GenericModelBinderProvider(null, typeof(MutableObjectModelBinder));
+                },
+                "modelType"
+            );
         }
 
         [Fact]
         public void GetBinder_TypeDoesNotMatch_ModelTypeIsInterface_ReturnsNull()
         {
             // Arrange
-            GenericModelBinderProvider provider = new GenericModelBinderProvider(typeof(IEnumerable<>), typeof(CollectionModelBinder<>))
+            GenericModelBinderProvider provider = new GenericModelBinderProvider(
+                typeof(IEnumerable<>),
+                typeof(CollectionModelBinder<>)
+            )
             {
-                SuppressPrefixCheck = true
+                SuppressPrefixCheck = true,
             };
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(object));
 
@@ -131,9 +201,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void GetBinder_TypeDoesNotMatch_ModelTypeIsNotInterface_ReturnsNull()
         {
             // Arrange
-            GenericModelBinderProvider provider = new GenericModelBinderProvider(typeof(List<>), typeof(CollectionModelBinder<>))
+            GenericModelBinderProvider provider = new GenericModelBinderProvider(
+                typeof(List<>),
+                typeof(CollectionModelBinder<>)
+            )
             {
-                SuppressPrefixCheck = true
+                SuppressPrefixCheck = true,
             };
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(object));
 
@@ -149,7 +222,10 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Arrange
             IExtensibleModelBinder binderInstance = new Mock<IExtensibleModelBinder>().Object;
-            GenericModelBinderProvider provider = new GenericModelBinderProvider(typeof(List<>), binderInstance);
+            GenericModelBinderProvider provider = new GenericModelBinderProvider(
+                typeof(List<>),
+                binderInstance
+            );
 
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(List<int>));
             bindingContext.ValueProvider = new SimpleValueProvider();
@@ -173,9 +249,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 return binderInstance;
             };
 
-            GenericModelBinderProvider provider = new GenericModelBinderProvider(typeof(IList<>), binderFactory)
+            GenericModelBinderProvider provider = new GenericModelBinderProvider(
+                typeof(IList<>),
+                binderFactory
+            )
             {
-                SuppressPrefixCheck = true
+                SuppressPrefixCheck = true,
             };
 
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(List<int>));
@@ -193,9 +272,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             IExtensibleModelBinder binderInstance = new Mock<IExtensibleModelBinder>().Object;
 
-            GenericModelBinderProvider provider = new GenericModelBinderProvider(typeof(List<>), binderInstance)
+            GenericModelBinderProvider provider = new GenericModelBinderProvider(
+                typeof(List<>),
+                binderInstance
+            )
             {
-                SuppressPrefixCheck = true
+                SuppressPrefixCheck = true,
             };
 
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(List<int>));
@@ -211,9 +293,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void GetBinder_TypeMatches_Success_TypeActivation_ReturnsBinder()
         {
             // Arrange
-            GenericModelBinderProvider provider = new GenericModelBinderProvider(typeof(List<>), typeof(CollectionModelBinder<>))
+            GenericModelBinderProvider provider = new GenericModelBinderProvider(
+                typeof(List<>),
+                typeof(CollectionModelBinder<>)
+            )
             {
-                SuppressPrefixCheck = true
+                SuppressPrefixCheck = true,
             };
 
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(List<int>));
@@ -229,11 +314,19 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void GetBinderThrowsIfBindingContextIsNull()
         {
             // Arrange
-            GenericModelBinderProvider provider = new GenericModelBinderProvider(typeof(IEnumerable<>), typeof(CollectionModelBinder<>));
+            GenericModelBinderProvider provider = new GenericModelBinderProvider(
+                typeof(IEnumerable<>),
+                typeof(CollectionModelBinder<>)
+            );
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { provider.GetBinder(null, null); }, "bindingContext");
+                delegate
+                {
+                    provider.GetBinder(null, null);
+                },
+                "bindingContext"
+            );
         }
 
         [Fact]
@@ -241,16 +334,19 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Arrange
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(List<int>));
-            GenericModelBinderProvider provider =
-                new GenericModelBinderProvider(typeof(List<>), typeof(NoParameterlessCtorBinder<>))
-                {
-                    SuppressPrefixCheck = true,
-                };
+            GenericModelBinderProvider provider = new GenericModelBinderProvider(
+                typeof(List<>),
+                typeof(NoParameterlessCtorBinder<>)
+            )
+            {
+                SuppressPrefixCheck = true,
+            };
 
             // Act & Assert, confirming type name and full stack are available in Exception
             MissingMethodException exception = Assert.Throws<MissingMethodException>(
                 () => provider.GetBinder(null, bindingContext),
-                "No parameterless constructor defined for this object. Object type 'Microsoft.Web.Mvc.ModelBinding.Test.GenericModelBinderProviderTest+NoParameterlessCtorBinder`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]'.");
+                "No parameterless constructor defined for this object. Object type 'Microsoft.Web.Mvc.ModelBinding.Test.GenericModelBinderProviderTest+NoParameterlessCtorBinder`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]'."
+            );
             Assert.Contains("System.Activator.CreateInstance(", exception.ToString());
         }
 
@@ -258,17 +354,21 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             return new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(() => null, modelType)
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    () => null,
+                    modelType
+                ),
             };
         }
 
         private class NoParameterlessCtorBinder<T> : IExtensibleModelBinder
         {
-            public NoParameterlessCtorBinder(int parameter)
-            {
-            }
+            public NoParameterlessCtorBinder(int parameter) { }
 
-            public bool BindModel(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
+            public bool BindModel(
+                ControllerContext controllerContext,
+                ExtensibleModelBindingContext bindingContext
+            )
             {
                 throw new NotImplementedException();
             }

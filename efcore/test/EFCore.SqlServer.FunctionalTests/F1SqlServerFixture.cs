@@ -8,8 +8,7 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class F1ULongSqlServerFixture : F1SqlServerFixtureBase<ulong>
 {
-    protected override string StoreName
-        => "F1TestULong";
+    protected override string StoreName => "F1TestULong";
 
     protected override void BuildModelExternal(ModelBuilder modelBuilder)
     {
@@ -19,19 +18,22 @@ public class F1ULongSqlServerFixture : F1SqlServerFixtureBase<ulong>
         modelBuilder.Entity<Driver>().Property<ulong>("Version").HasConversion<byte[]>();
         modelBuilder.Entity<Team>().Property<ulong>("Version").HasConversion<byte[]>();
         modelBuilder.Entity<Sponsor>().Property<ulong>("Version").HasConversion<byte[]>();
-        modelBuilder.Entity<TitleSponsor>()
+        modelBuilder
+            .Entity<TitleSponsor>()
             .OwnsOne(
-                s => s.Details, eb =>
+                s => s.Details,
+                eb =>
                 {
                     eb.Property<ulong>("Version").IsRowVersion();
-                });
+                }
+            );
 
         modelBuilder.Entity<OptimisticOptionalChild>();
 
         modelBuilder
             .Entity<OptimisticParent>()
             .HasData(
-                new OptimisticParent { Id = new Guid("AF8451C3-61CB-4EDA-8282-92250D85EF03"), }
+                new OptimisticParent { Id = new Guid("AF8451C3-61CB-4EDA-8282-92250D85EF03") }
             );
 
         modelBuilder
@@ -136,22 +138,18 @@ public class F1SqlServerFixture : F1SqlServerFixtureBase<byte[]>
     private class BinaryVersionConverter : ValueConverter<List<byte>, byte[]>
     {
         public BinaryVersionConverter()
-            : base(
-                v => v == null ? null : v.ToArray(),
-                v => v == null ? null : v.ToList())
-        {
-        }
+            : base(v => v == null ? null : v.ToArray(), v => v == null ? null : v.ToList()) { }
     }
 
     private class BinaryVersionComparer : ValueComparer<List<byte>>
     {
         public BinaryVersionComparer()
             : base(
-                (l, r) => (l == null && r == null) || (l != null && r != null && l.SequenceEqual(r)),
+                (l, r) =>
+                    (l == null && r == null) || (l != null && r != null && l.SequenceEqual(r)),
                 v => CalculateHashCode(v),
-                v => v == null ? null : v.ToList())
-        {
-        }
+                v => v == null ? null : v.ToList()
+            ) { }
 
         private static int CalculateHashCode(List<byte> source)
         {
@@ -173,21 +171,22 @@ public class F1SqlServerFixture : F1SqlServerFixtureBase<byte[]>
 
 public abstract class F1SqlServerFixtureBase<TRowVersion> : F1RelationalFixture<TRowVersion>
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqlServerTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
-    public override TestHelpers TestHelpers
-        => SqlServerTestHelpers.Instance;
+    public override TestHelpers TestHelpers => SqlServerTestHelpers.Instance;
 
     protected override void BuildModelExternal(ModelBuilder modelBuilder)
     {
         base.BuildModelExternal(modelBuilder);
 
-        modelBuilder.Entity<TitleSponsor>()
+        modelBuilder
+            .Entity<TitleSponsor>()
             .OwnsOne(
-                s => s.Details, eb =>
+                s => s.Details,
+                eb =>
                 {
                     eb.Property(d => d.Space).HasColumnType("decimal(18,2)");
-                });
+                }
+            );
     }
 }

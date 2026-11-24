@@ -12,7 +12,6 @@ namespace System.Threading.Tasks.Tests
         [InlineData(API.For64, StartIndexBase.Int16, -1000, 100, WorkloadPattern.Increasing)]
         [InlineData(API.For64, StartIndexBase.Int16, 0, 5, WorkloadPattern.Random)]
         [InlineData(API.For64, StartIndexBase.Int16, 100, 100, WorkloadPattern.Similar)]
-
         [InlineData(API.For64, StartIndexBase.Int32, -1000, 5, WorkloadPattern.Increasing)]
         [InlineData(API.For64, StartIndexBase.Int32, 0, 5, WorkloadPattern.Decreasing)]
         [InlineData(API.For64, StartIndexBase.Int32, 0, 5, WorkloadPattern.Similar)]
@@ -26,7 +25,6 @@ namespace System.Threading.Tasks.Tests
         [InlineData(API.For64, StartIndexBase.Int32, 1000, 5, WorkloadPattern.Similar)]
         [InlineData(API.For64, StartIndexBase.Int32, 1000, 100, WorkloadPattern.Decreasing)]
         [InlineData(API.For64, StartIndexBase.Int32, 1000, 100, WorkloadPattern.Random)]
-
         [InlineData(API.For64, StartIndexBase.Int64, -1000, 100, WorkloadPattern.Decreasing)]
         [InlineData(API.For64, StartIndexBase.Int64, -1000, 100, WorkloadPattern.Increasing)]
         [InlineData(API.For64, StartIndexBase.Int64, -1000, 5, WorkloadPattern.Random)]
@@ -35,12 +33,10 @@ namespace System.Threading.Tasks.Tests
         [InlineData(API.For64, StartIndexBase.Int64, -100, 5, WorkloadPattern.Similar)]
         [InlineData(API.For64, StartIndexBase.Int64, -100, 100, WorkloadPattern.Random)]
         [InlineData(API.For64, StartIndexBase.Int64, -100, 100, WorkloadPattern.Similar)]
-
         [InlineData(API.For64, StartIndexBase.Zero, 0, 5, WorkloadPattern.Increasing)]
         [InlineData(API.For64, StartIndexBase.Zero, 0, 100, WorkloadPattern.Decreasing)]
         [InlineData(API.For64, StartIndexBase.Zero, 0, 100, WorkloadPattern.Similar)]
         [InlineData(API.For64, StartIndexBase.Zero, 100, 5, WorkloadPattern.Random)]
-
         [InlineData(API.For, StartIndexBase.Int16, -100, 5, WorkloadPattern.Similar)]
         [InlineData(API.For, StartIndexBase.Int16, -1000, 5, WorkloadPattern.Similar)]
         [InlineData(API.For, StartIndexBase.Int16, -1000, 100, WorkloadPattern.Random)]
@@ -50,18 +46,22 @@ namespace System.Threading.Tasks.Tests
         [InlineData(API.For, StartIndexBase.Int16, 100, 100, WorkloadPattern.Random)]
         [InlineData(API.For, StartIndexBase.Int16, 1000, 5, WorkloadPattern.Decreasing)]
         [InlineData(API.For, StartIndexBase.Int16, 1000, 100, WorkloadPattern.Similar)]
-
         [InlineData(API.For, StartIndexBase.Int32, -1000, 5, WorkloadPattern.Decreasing)]
         [InlineData(API.For, StartIndexBase.Int32, -100, 5, WorkloadPattern.Random)]
         [InlineData(API.For, StartIndexBase.Int32, -100, 100, WorkloadPattern.Decreasing)]
         [InlineData(API.For, StartIndexBase.Int32, -1000, 100, WorkloadPattern.Similar)]
-
         [InlineData(API.For, StartIndexBase.Zero, 0, 5, WorkloadPattern.Similar)]
         [InlineData(API.For, StartIndexBase.Zero, 100, 100, WorkloadPattern.Decreasing)]
         [InlineData(API.For, StartIndexBase.Zero, 100, 100, WorkloadPattern.Random)]
         [InlineData(API.For, StartIndexBase.Zero, 1000, 5, WorkloadPattern.Decreasing)]
         [InlineData(API.For, StartIndexBase.Zero, 1000, 5, WorkloadPattern.Random)]
-        public static void TestFor_Boundary(API api, StartIndexBase startIndexBase, int startIndexOffset, int count, WorkloadPattern workloadPattern)
+        public static void TestFor_Boundary(
+            API api,
+            StartIndexBase startIndexBase,
+            int startIndexOffset,
+            int count,
+            WorkloadPattern workloadPattern
+        )
         {
             var parameters = new TestParameters(api, startIndexBase, startIndexOffset)
             {

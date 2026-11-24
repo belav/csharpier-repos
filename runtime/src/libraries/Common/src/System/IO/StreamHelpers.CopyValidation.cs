@@ -16,7 +16,11 @@ namespace System.IO
 
             if (bufferSize <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(bufferSize), bufferSize, SR.ArgumentOutOfRange_NeedPosNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(bufferSize),
+                    bufferSize,
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
             }
 
             bool sourceCanRead = source.CanRead;
@@ -28,7 +32,10 @@ namespace System.IO
             bool destinationCanWrite = destination.CanWrite;
             if (!destinationCanWrite && !destination.CanRead)
             {
-                throw new ObjectDisposedException(nameof(destination), SR.ObjectDisposed_StreamClosed);
+                throw new ObjectDisposedException(
+                    nameof(destination),
+                    SR.ObjectDisposed_StreamClosed
+                );
             }
 
             if (!sourceCanRead)

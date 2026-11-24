@@ -1,10 +1,10 @@
 //------------------------------------------------------------------------------
 // <copyright file="SelectionListDesigner.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.Design.MobileControls 
+namespace System.Web.UI.Design.MobileControls
 {
     using System;
     using System.Collections;
@@ -12,24 +12,24 @@ namespace System.Web.UI.Design.MobileControls
     using System.ComponentModel.Design;
     using System.Data;
     using System.Diagnostics;
-    using System.Web.UI.MobileControls;
     using System.Web.UI.Design.MobileControls.Adapters;
-
+    using System.Web.UI.MobileControls;
     using DataBinding = System.Web.UI.DataBinding;
 
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    internal class SelectionListDesigner : 
-        MobileControlDesigner, IListDesigner, IDataSourceProvider
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    internal class SelectionListDesigner : MobileControlDesigner, IListDesigner, IDataSourceProvider
     {
-        private SelectionList           _selectionList;
-        private DesignerVerbCollection  _designerVerbs;
+        private SelectionList _selectionList;
+        private DesignerVerbCollection _designerVerbs;
 
-        private DataTable               _dummyDataTable;
-        private DataTable               _designTimeDataTable;
+        private DataTable _dummyDataTable;
+        private DataTable _designTimeDataTable;
 
         private const String _dataSourcePropertyName = "DataSource";
         private const String _dataMemberPropertyName = "DataMember";
@@ -39,39 +39,24 @@ namespace System.Web.UI.Design.MobileControls
 
         /// <summary>
         /// </summary>
-        public String DataValueField 
+        public String DataValueField
         {
-            get 
-            {
-                return _selectionList.DataValueField;
-            }
-            set
-            {
-                _selectionList.DataValueField = value;
-            }
+            get { return _selectionList.DataValueField; }
+            set { _selectionList.DataValueField = value; }
         }
 
         /// <summary>
         /// </summary>
-        public String DataTextField 
+        public String DataTextField
         {
-            get 
-            {
-                return _selectionList.DataTextField;
-            }
-            set
-            {
-                _selectionList.DataTextField = value;
-            }
+            get { return _selectionList.DataTextField; }
+            set { _selectionList.DataTextField = value; }
         }
 
-        public String DataMember 
+        public String DataMember
         {
-            get 
-            {
-                return _selectionList.DataMember;
-            }
-            set 
+            get { return _selectionList.DataMember; }
+            set
             {
                 _selectionList.DataMember = value;
                 OnDataSourceChanged();
@@ -80,10 +65,7 @@ namespace System.Web.UI.Design.MobileControls
 
         public MobileListItemCollection Items
         {
-            get
-            {
-                return _selectionList.Items;
-            }
+            get { return _selectionList.Items; }
         }
 
         /// <summary>
@@ -102,33 +84,37 @@ namespace System.Web.UI.Design.MobileControls
         ///       DataSource property in the control's binding collection.
         ///    </para>
         /// </remarks>
-        public String DataSource 
+        public String DataSource
         {
-            get 
+            get
             {
                 DataBinding binding = DataBindings[_dataSourcePropertyName];
 
-                if (binding != null) 
+                if (binding != null)
                 {
                     return binding.Expression;
                 }
                 return String.Empty;
             }
-            set 
+            set
             {
-                if ((value == null) || (value.Length == 0)) 
+                if ((value == null) || (value.Length == 0))
                 {
                     DataBindings.Remove(_dataSourcePropertyName);
                 }
-                else 
+                else
                 {
                     DataBinding binding = DataBindings[_dataSourcePropertyName];
 
-                    if (binding == null) 
+                    if (binding == null)
                     {
-                        binding = new DataBinding(_dataSourcePropertyName, typeof(IEnumerable), value);
+                        binding = new DataBinding(
+                            _dataSourcePropertyName,
+                            typeof(IEnumerable),
+                            value
+                        );
                     }
-                    else 
+                    else
                     {
                         binding.Expression = value;
                     }
@@ -151,15 +137,19 @@ namespace System.Web.UI.Design.MobileControls
         ///       designer.
         ///    </para>
         /// </value>
-        public override DesignerVerbCollection Verbs 
+        public override DesignerVerbCollection Verbs
         {
-            get 
+            get
             {
                 if (null == _designerVerbs)
                 {
                     _designerVerbs = base.Verbs;
-                    _designerVerbs.Add(new DesignerVerb(SR.GetString(SR.PropertyBuilderVerb),
-                        new EventHandler(this.OnPropertyBuilder)));
+                    _designerVerbs.Add(
+                        new DesignerVerb(
+                            SR.GetString(SR.PropertyBuilderVerb),
+                            new EventHandler(this.OnPropertyBuilder)
+                        )
+                    );
                 }
 
                 return _designerVerbs;
@@ -184,12 +174,10 @@ namespace System.Web.UI.Design.MobileControls
         ///    </para>
         /// </returns>
         ///
-        protected IEnumerable GetDesignTimeDataSource(
-            int minimumRows, out bool dummyDataSource)
+        protected IEnumerable GetDesignTimeDataSource(int minimumRows, out bool dummyDataSource)
         {
             IEnumerable selectedDataSource = GetResolvedSelectedDataSource();
-            return GetDesignTimeDataSource(
-                selectedDataSource, minimumRows, out dummyDataSource);
+            return GetDesignTimeDataSource(selectedDataSource, minimumRows, out dummyDataSource);
         }
 
         /// <summary>
@@ -214,25 +202,27 @@ namespace System.Web.UI.Design.MobileControls
         /// </returns>
         ///
         protected IEnumerable GetDesignTimeDataSource(
-            IEnumerable selectedDataSource, int minimumRows, out bool dummyDataSource)
+            IEnumerable selectedDataSource,
+            int minimumRows,
+            out bool dummyDataSource
+        )
         {
             DataTable dataTable = _designTimeDataTable;
             dummyDataSource = false;
 
             // use the datatable corresponding to the selected datasource if possible
-            if (dataTable == null) 
+            if (dataTable == null)
             {
-                if (selectedDataSource != null) 
+                if (selectedDataSource != null)
                 {
-                    _designTimeDataTable = 
-                        DesignTimeData.CreateSampleDataTable(selectedDataSource);
+                    _designTimeDataTable = DesignTimeData.CreateSampleDataTable(selectedDataSource);
                     dataTable = _designTimeDataTable;
                 }
 
-                if (dataTable == null) 
+                if (dataTable == null)
                 {
                     // fallback on a dummy datasource if we can't create a sample datatable
-                    if (_dummyDataTable == null) 
+                    if (_dummyDataTable == null)
                     {
                         _dummyDataTable = DesignTimeData.CreateDummyDataTable();
                     }
@@ -242,8 +232,10 @@ namespace System.Web.UI.Design.MobileControls
                 }
             }
 
-            IEnumerable liveDataSource = 
-                DesignTimeData.GetDesignTimeDataSource(dataTable, minimumRows);
+            IEnumerable liveDataSource = DesignTimeData.GetDesignTimeDataSource(
+                dataTable,
+                minimumRows
+            );
             return liveDataSource;
         }
 
@@ -258,11 +250,12 @@ namespace System.Web.UI.Design.MobileControls
         ///       The design-time HTML.
         ///    </para>
         /// </returns>
-        protected override String GetDesignTimeNormalHtml() 
+        protected override String GetDesignTimeNormalHtml()
         {
             const int numberOfStaticItems = 5;
             IEnumerable selectedDataSource = null;
-            String oldDataTextField = null, oldDataValueField = null;
+            String oldDataTextField = null,
+                oldDataValueField = null;
             bool dummyDataSource = false;
 
             DesignerTextWriter htmlWriter = new DesignerTextWriter(true);
@@ -282,20 +275,20 @@ namespace System.Web.UI.Design.MobileControls
                 // try designtime databinding.
                 selectedDataSource = GetResolvedSelectedDataSource();
 
-                IEnumerable designTimeDataSource = 
-                    GetDesignTimeDataSource(
+                IEnumerable designTimeDataSource = GetDesignTimeDataSource(
                     selectedDataSource,
                     sampleRows,
-                    out dummyDataSource);
+                    out dummyDataSource
+                );
 
-                // If dummy datasource is applied, change the data fields so that 
+                // If dummy datasource is applied, change the data fields so that
                 // dummy source will be rendered.
                 if (dummyDataSource)
                 {
-                    oldDataTextField    = _selectionList.DataTextField;
-                    oldDataValueField   = _selectionList.DataValueField;
-                    _selectionList.DataTextField    = "Column0";
-                    _selectionList.DataValueField   = "Column1";
+                    oldDataTextField = _selectionList.DataTextField;
+                    oldDataValueField = _selectionList.DataValueField;
+                    _selectionList.DataTextField = "Column0";
+                    _selectionList.DataValueField = "Column1";
                 }
 
                 try
@@ -320,19 +313,19 @@ namespace System.Web.UI.Design.MobileControls
             return htmlWriter.ToString();
         }
 
-        public IEnumerable GetResolvedSelectedDataSource() 
+        public IEnumerable GetResolvedSelectedDataSource()
         {
             IEnumerable selectedDataSource = null;
 
             DataBinding binding = DataBindings["DataSource"];
 
-            if (binding != null) 
+            if (binding != null)
             {
-                selectedDataSource = 
-                    DesignTimeData.GetSelectedDataSource(
+                selectedDataSource = DesignTimeData.GetSelectedDataSource(
                     _selectionList,
                     binding.Expression,
-                    DataMember);
+                    DataMember
+                );
             }
 
             return selectedDataSource;
@@ -351,16 +344,18 @@ namespace System.Web.UI.Design.MobileControls
         ///    </para>
         /// </returns>
         /// <seealso cref='System.Web.UI.Design.IDataSourceProvider'/>
-        public Object GetSelectedDataSource() 
+        public Object GetSelectedDataSource()
         {
             Object selectedDataSource = null;
 
             DataBinding binding = DataBindings[_dataSourcePropertyName];
 
-            if (binding != null) 
+            if (binding != null)
             {
-                selectedDataSource = 
-                    DesignTimeData.GetSelectedDataSource(_selectionList, binding.Expression);
+                selectedDataSource = DesignTimeData.GetSelectedDataSource(
+                    _selectionList,
+                    binding.Expression
+                );
             }
 
             return selectedDataSource;
@@ -383,10 +378,12 @@ namespace System.Web.UI.Design.MobileControls
         /// <seealso cref='System.ComponentModel.Design.IDesigner'/>
         public override void Initialize(IComponent component)
         {
-            Debug.Assert(component is System.Web.UI.MobileControls.SelectionList,
-                "SelectionListDesigner.Initialize - Invalid SelectionList Control");
+            Debug.Assert(
+                component is System.Web.UI.MobileControls.SelectionList,
+                "SelectionListDesigner.Initialize - Invalid SelectionList Control"
+            );
 
-            _selectionList = (SelectionList) component;
+            _selectionList = (SelectionList)component;
             base.Initialize(component);
         }
 
@@ -398,19 +395,19 @@ namespace System.Web.UI.Design.MobileControls
         /// <param name='initialPage'>
         ///    The page to begin with.
         /// </param>
-        protected internal void InvokePropertyBuilder(int initialPage) 
+        protected internal void InvokePropertyBuilder(int initialPage)
         {
             IComponentChangeService changeService = null;
             bool result = false;
 
             changeService = (IComponentChangeService)GetService(typeof(IComponentChangeService));
-            if (changeService != null) 
+            if (changeService != null)
             {
-                try 
+                try
                 {
                     changeService.OnComponentChanging(_selectionList, null);
                 }
-                catch (CheckoutException ex) 
+                catch (CheckoutException ex)
                 {
                     if (ex == CheckoutException.Canceled)
                     {
@@ -420,9 +417,11 @@ namespace System.Web.UI.Design.MobileControls
                 }
             }
 
-            try 
+            try
             {
-                SelectionListComponentEditor compEditor = new SelectionListComponentEditor(initialPage);
+                SelectionListComponentEditor compEditor = new SelectionListComponentEditor(
+                    initialPage
+                );
                 result = compEditor.EditComponent(_selectionList);
             }
             finally
@@ -450,12 +449,14 @@ namespace System.Web.UI.Design.MobileControls
         /// <param name=' e'>
         ///    The <see cref='System.ComponentModel.Design.ComponentChangedEventArgs'/> that provides data about the event.
         /// </param>
-        public override void OnComponentChanged(Object sender, ComponentChangedEventArgs e) 
+        public override void OnComponentChanged(Object sender, ComponentChangedEventArgs e)
         {
             if (e.Member != null)
             {
-                if (e.Member.Name.Equals(_dataSourcePropertyName) || 
-                    e.Member.Name.Equals(_dataMemberPropertyName))
+                if (
+                    e.Member.Name.Equals(_dataSourcePropertyName)
+                    || e.Member.Name.Equals(_dataMemberPropertyName)
+                )
                 {
                     OnDataSourceChanged();
                 }
@@ -470,7 +471,7 @@ namespace System.Web.UI.Design.MobileControls
         ///       Raises the DataSourceChanged event.
         ///    </para>
         /// </summary>
-        public void OnDataSourceChanged() 
+        public void OnDataSourceChanged()
         {
             _designTimeDataTable = null;
         }
@@ -486,7 +487,7 @@ namespace System.Web.UI.Design.MobileControls
         /// <param name=' e'>
         ///    An EventArgs object that provides data about the event.
         /// </param>
-        protected void OnPropertyBuilder(Object sender, EventArgs e) 
+        protected void OnPropertyBuilder(Object sender, EventArgs e)
         {
             InvokePropertyBuilder(0);
         }
@@ -501,7 +502,7 @@ namespace System.Web.UI.Design.MobileControls
         ///    The set of properties to filter.
         /// </param>
         /// <seealso cref='IDesignerFilter'/>
-        protected override void PreFilterProperties(IDictionary properties) 
+        protected override void PreFilterProperties(IDictionary properties)
         {
             base.PreFilterProperties(properties);
 
@@ -511,26 +512,30 @@ namespace System.Web.UI.Design.MobileControls
                 designerType,
                 typeof(String),
                 properties,
-                _dataSourcePropertyName, 
-                new TypeConverterAttribute(typeof(DataSourceConverter)));
+                _dataSourcePropertyName,
+                new TypeConverterAttribute(typeof(DataSourceConverter))
+            );
 
             DesignerAdapterUtil.AddAttributesToProperty(
                 designerType,
                 properties,
-                _dataMemberPropertyName, 
-                _emptyAttrs);
+                _dataMemberPropertyName,
+                _emptyAttrs
+            );
 
             DesignerAdapterUtil.AddAttributesToProperty(
                 designerType,
                 properties,
-                _dataTextFieldPropertyName, 
-                _emptyAttrs);
+                _dataTextFieldPropertyName,
+                _emptyAttrs
+            );
 
             DesignerAdapterUtil.AddAttributesToProperty(
                 designerType,
                 properties,
-                _dataValueFieldPropertyName, 
-                _emptyAttrs);
+                _dataValueFieldPropertyName,
+                _emptyAttrs
+            );
         }
     }
 }

@@ -30,10 +30,7 @@ namespace System.Text.Json
         /// </summary>
         public bool Indented
         {
-            get
-            {
-                return (_optionsMask & IndentBit) != 0;
-            }
+            get { return (_optionsMask & IndentBit) != 0; }
             set
             {
                 if (value)
@@ -59,7 +56,9 @@ namespace System.Text.Json
             {
                 if (value < 0)
                 {
-                    ThrowHelper.ThrowArgumentOutOfRangeException_MaxDepthMustBePositive(nameof(value));
+                    ThrowHelper.ThrowArgumentOutOfRangeException_MaxDepthMustBePositive(
+                        nameof(value)
+                    );
                 }
 
                 _maxDepth = value;
@@ -80,10 +79,7 @@ namespace System.Text.Json
         /// </remarks>
         public bool SkipValidation
         {
-            get
-            {
-                return (_optionsMask & SkipValidationBit) != 0;
-            }
+            get { return (_optionsMask & SkipValidationBit) != 0; }
             set
             {
                 if (value)

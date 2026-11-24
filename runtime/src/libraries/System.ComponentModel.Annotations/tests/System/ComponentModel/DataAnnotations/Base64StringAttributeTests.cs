@@ -22,7 +22,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             yield return new TestCase(attribute, Text2Base64("hello, world!"));
             yield return new TestCase(attribute, Text2Base64(new string('x', 2048)));
 
-            static string Text2Base64(string text) => Convert.ToBase64String(Encoding.UTF8.GetBytes(text));
+            static string Text2Base64(string text) =>
+                Convert.ToBase64String(Encoding.UTF8.GetBytes(text));
         }
 
         protected override IEnumerable<TestCase> InvalidValues()

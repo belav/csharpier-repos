@@ -3,14 +3,12 @@ using System.Threading.Tasks;
 
 partial class X
 {
-	partial void Foo ();
+    partial void Foo();
 
-	async partial void Foo ()
-	{
-		await Task.FromResult (1);
-	}
+    async partial void Foo()
+    {
+        await Task.FromResult(1);
+    }
 
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

@@ -11,13 +11,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
         {
             public int this[int x]
             {
-                get
-                {
-                    return 1;
-                }
+                get { return 1; }
             }
         }
-
 
         public static void DynamicCSharpRunTest()
         {
@@ -36,8 +32,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.indexer.getter.Oneclass.Twoparam.accessibility006.accessibility006
 {
@@ -47,13 +41,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
         {
             public int this[int x]
             {
-                get
-                {
-                    return 1;
-                }
+                get { return 1; }
             }
         }
-
 
         public static void DynamicCSharpRunTest()
         {
@@ -72,8 +62,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.indexer.getter.Oneclass.Twoparam.accessibility007.accessibility007
 {
@@ -83,13 +71,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
         {
             public int this[int x]
             {
-                get
-                {
-                    return 1;
-                }
+                get { return 1; }
             }
         }
-
 
         public static void DynamicCSharpRunTest()
         {
@@ -108,8 +92,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.indexer.getter.Oneclass.Twoparam.accessibility011.accessibility011
 {
@@ -121,13 +103,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
             {
                 public int this[int x]
                 {
-                    get
-                    {
-                        return 1;
-                    }
+                    get { return 1; }
                 }
             }
-
 
             public static void DynamicCSharpRunTest()
             {

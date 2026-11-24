@@ -364,8 +364,7 @@ public abstract class RequestDelegateCreationTestBase : LoggedTest
     internal static string GetMapActionString(
         string sources,
         string className = "TestMapActions"
-    ) =>
-        $$"""
+    ) => $$"""
 #nullable enable
 using System;
 using System.Collections.Generic;
@@ -609,8 +608,8 @@ Actual Line:
     {
         public DefaultEndpointRouteBuilder(IApplicationBuilder applicationBuilder)
         {
-            ApplicationBuilder =
-                applicationBuilder ?? throw new ArgumentNullException(nameof(applicationBuilder));
+            ApplicationBuilder = applicationBuilder
+                ?? throw new ArgumentNullException(nameof(applicationBuilder));
             DataSources = new List<EndpointDataSource>();
         }
 

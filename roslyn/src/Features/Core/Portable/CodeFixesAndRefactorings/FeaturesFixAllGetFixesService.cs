@@ -14,7 +14,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions;
 [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
 internal sealed class FeaturesFixAllGetFixesService() : AbstractFixAllGetFixesService
 {
-    protected override Solution? GetChangedSolution(Workspace workspace, Solution currentSolution, Solution newSolution, string fixAllPreviewChangesTitle, string fixAllTopLevelHeader, Glyph glyph)
+    protected override Solution? GetChangedSolution(
+        Workspace workspace,
+        Solution currentSolution,
+        Solution newSolution,
+        string fixAllPreviewChangesTitle,
+        string fixAllTopLevelHeader,
+        Glyph glyph
+    )
     {
         return newSolution;
     }

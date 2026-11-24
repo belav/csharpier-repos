@@ -91,7 +91,8 @@ namespace System
 
         public static unsafe (float Sin, float Cos) SinCos(float x)
         {
-            float sin, cos;
+            float sin,
+                cos;
             SinCos(x, &sin, &cos);
             return (sin, cos);
         }

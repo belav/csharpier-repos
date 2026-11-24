@@ -16,7 +16,8 @@ namespace System.CodeDom
             set => _name = value;
         }
 
-        public MemberAttributes Attributes { get; set; } = MemberAttributes.Private | MemberAttributes.Final;
+        public MemberAttributes Attributes { get; set; } =
+            MemberAttributes.Private | MemberAttributes.Final;
 
         public CodeAttributeDeclarationCollection CustomAttributes
         {
@@ -26,10 +27,13 @@ namespace System.CodeDom
 
         public CodeLinePragma LinePragma { get; set; }
 
-        public CodeCommentStatementCollection Comments { get; } = new CodeCommentStatementCollection();
+        public CodeCommentStatementCollection Comments { get; } =
+            new CodeCommentStatementCollection();
 
-        public CodeDirectiveCollection StartDirectives => _startDirectives ??= new CodeDirectiveCollection();
+        public CodeDirectiveCollection StartDirectives =>
+            _startDirectives ??= new CodeDirectiveCollection();
 
-        public CodeDirectiveCollection EndDirectives => _endDirectives ??= new CodeDirectiveCollection();
+        public CodeDirectiveCollection EndDirectives =>
+            _endDirectives ??= new CodeDirectiveCollection();
     }
 }

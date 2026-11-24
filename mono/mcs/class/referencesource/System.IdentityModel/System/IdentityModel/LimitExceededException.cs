@@ -19,18 +19,14 @@ namespace System.IdentityModel
         /// Initializes a new instance of <see cref="LimitExceededException"/>.
         /// </summary>
         public LimitExceededException()
-            : base()
-        {
-        }
+            : base() { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="LimitExceededException"/>.
         /// </summary>
         /// <param name="message">The message describes what was causing the exception.</param>
         public LimitExceededException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="LimitExceededException"/>.
@@ -38,9 +34,7 @@ namespace System.IdentityModel
         /// <param name="message">The message describes what was causing the exception.</param>
         /// <param name="innerException">The inner exception indicates the real reason the exception was thrown.</param>
         public LimitExceededException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="LimitExceededException"/>.
@@ -48,8 +42,6 @@ namespace System.IdentityModel
         /// <param name="info">The <see cref="SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
         /// <param name="context">The <see cref="StreamingContext"/>. that contains contextual information about the source or destination.</param>
         protected LimitExceededException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

@@ -93,9 +93,15 @@ namespace System.IO.Ports
             ArgumentNullException.ThrowIfNull(array);
 
             if (offset < 0)
-                throw new ArgumentOutOfRangeException(nameof(offset), SR.ArgumentOutOfRange_NeedNonNegNumRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(offset),
+                    SR.ArgumentOutOfRange_NeedNonNegNumRequired
+                );
             if (count < 0)
-                throw new ArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NeedNonNegNumRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNumRequired
+                );
             if (array.Length - offset < count)
                 throw new ArgumentException(SR.Argument_InvalidOffLen);
         }

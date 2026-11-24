@@ -13,13 +13,21 @@ namespace System.Net.NetworkInformation
         internal readonly int _mtu;
         private readonly AndroidIPInterfaceProperties _ipProperties;
 
-        internal unsafe AndroidNetworkInterface(string name, Interop.Sys.NetworkInterfaceInfo *networkInterfaceInfo)
+        internal unsafe AndroidNetworkInterface(
+            string name,
+            Interop.Sys.NetworkInterfaceInfo* networkInterfaceInfo
+        )
             : base(name)
         {
             _index = networkInterfaceInfo->InterfaceIndex;
             if (networkInterfaceInfo->NumAddressBytes > 0)
             {
-                _physicalAddress = new PhysicalAddress(new ReadOnlySpan<byte>(networkInterfaceInfo->AddressBytes, networkInterfaceInfo->NumAddressBytes).ToArray());
+                _physicalAddress = new PhysicalAddress(
+                    new ReadOnlySpan<byte>(
+                        networkInterfaceInfo->AddressBytes,
+                        networkInterfaceInfo->NumAddressBytes
+                    ).ToArray()
+                );
             }
 
             _mtu = networkInterfaceInfo->Mtu;
@@ -31,9 +39,11 @@ namespace System.Net.NetworkInformation
             NetworkInterfaceType = (NetworkInterfaceType)networkInterfaceInfo->HardwareType;
         }
 
-        internal unsafe void AddAddress(Interop.Sys.IpAddressInfo *addressInfo)
+        internal unsafe void AddAddress(Interop.Sys.IpAddressInfo* addressInfo)
         {
-            var address = new IPAddress(new ReadOnlySpan<byte>(addressInfo->AddressBytes, addressInfo->NumAddressBytes));
+            var address = new IPAddress(
+                new ReadOnlySpan<byte>(addressInfo->AddressBytes, addressInfo->NumAddressBytes)
+            );
             if (address.IsIPv6LinkLocal)
             {
                 address.ScopeId = addressInfo->InterfaceIndex;
@@ -43,9 +53,15 @@ namespace System.Net.NetworkInformation
         }
 
         public override bool SupportsMulticast { get; }
+
         public override IPInterfaceProperties GetIPProperties() => _ipProperties;
-        public override IPInterfaceStatistics GetIPStatistics() => throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
-        public override IPv4InterfaceStatistics GetIPv4Statistics() => throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+
+        public override IPInterfaceStatistics GetIPStatistics() =>
+            throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+
+        public override IPv4InterfaceStatistics GetIPv4Statistics() =>
+            throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+
         public override OperationalStatus OperationalStatus { get; }
         public override NetworkInterfaceType NetworkInterfaceType { get; }
         public override long Speed { get; }

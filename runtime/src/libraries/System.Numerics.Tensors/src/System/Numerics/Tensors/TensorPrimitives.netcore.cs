@@ -51,8 +51,11 @@ namespace System.Numerics.Tensors
             }
 
             ref float sourceRef = ref MemoryMarshal.GetReference(source);
-            ref ushort destinationRef = ref Unsafe.As<Half, ushort>(ref MemoryMarshal.GetReference(destination));
-            int i = 0, twoVectorsFromEnd;
+            ref ushort destinationRef = ref Unsafe.As<Half, ushort>(
+                ref MemoryMarshal.GetReference(destination)
+            );
+            int i = 0,
+                twoVectorsFromEnd;
 
             if (Vector512.IsHardwareAccelerated)
             {
@@ -62,21 +65,28 @@ namespace System.Numerics.Tensors
                     // Loop handling two input vectors / one output vector at a time.
                     do
                     {
-                        Vector512<uint> lower = SingleToHalfAsWidenedUInt32_Vector512(Vector512.LoadUnsafe(ref sourceRef, (uint)i));
-                        Vector512<uint> upper = SingleToHalfAsWidenedUInt32_Vector512(Vector512.LoadUnsafe(ref sourceRef, (uint)(i + Vector512<float>.Count)));
+                        Vector512<uint> lower = SingleToHalfAsWidenedUInt32_Vector512(
+                            Vector512.LoadUnsafe(ref sourceRef, (uint)i)
+                        );
+                        Vector512<uint> upper = SingleToHalfAsWidenedUInt32_Vector512(
+                            Vector512.LoadUnsafe(ref sourceRef, (uint)(i + Vector512<float>.Count))
+                        );
                         Vector512.Narrow(lower, upper).StoreUnsafe(ref destinationRef, (uint)i);
 
                         i += Vector512<float>.Count * 2;
-                    }
-                    while (i <= twoVectorsFromEnd);
+                    } while (i <= twoVectorsFromEnd);
 
                     // Handle any remaining elements with final vectors.
                     if (i != source.Length)
                     {
                         i = source.Length - (Vector512<float>.Count * 2);
 
-                        Vector512<uint> lower = SingleToHalfAsWidenedUInt32_Vector512(Vector512.LoadUnsafe(ref sourceRef, (uint)i));
-                        Vector512<uint> upper = SingleToHalfAsWidenedUInt32_Vector512(Vector512.LoadUnsafe(ref sourceRef, (uint)(i + Vector512<float>.Count)));
+                        Vector512<uint> lower = SingleToHalfAsWidenedUInt32_Vector512(
+                            Vector512.LoadUnsafe(ref sourceRef, (uint)i)
+                        );
+                        Vector512<uint> upper = SingleToHalfAsWidenedUInt32_Vector512(
+                            Vector512.LoadUnsafe(ref sourceRef, (uint)(i + Vector512<float>.Count))
+                        );
                         Vector512.Narrow(lower, upper).StoreUnsafe(ref destinationRef, (uint)i);
                     }
 
@@ -92,22 +102,29 @@ namespace System.Numerics.Tensors
                     // Loop handling two input vectors / one output vector at a time.
                     do
                     {
-                        Vector256<uint> lower = SingleToHalfAsWidenedUInt32_Vector256(Vector256.LoadUnsafe(ref sourceRef, (uint)i));
-                        Vector256<uint> upper = SingleToHalfAsWidenedUInt32_Vector256(Vector256.LoadUnsafe(ref sourceRef, (uint)(i + Vector256<float>.Count)));
+                        Vector256<uint> lower = SingleToHalfAsWidenedUInt32_Vector256(
+                            Vector256.LoadUnsafe(ref sourceRef, (uint)i)
+                        );
+                        Vector256<uint> upper = SingleToHalfAsWidenedUInt32_Vector256(
+                            Vector256.LoadUnsafe(ref sourceRef, (uint)(i + Vector256<float>.Count))
+                        );
                         Vector256<ushort> halfs = Vector256.Narrow(lower, upper);
                         halfs.StoreUnsafe(ref destinationRef, (uint)i);
 
                         i += Vector256<float>.Count * 2;
-                    }
-                    while (i <= twoVectorsFromEnd);
+                    } while (i <= twoVectorsFromEnd);
 
                     // Handle any remaining elements with final vectors.
                     if (i != source.Length)
                     {
                         i = source.Length - (Vector256<float>.Count * 2);
 
-                        Vector256<uint> lower = SingleToHalfAsWidenedUInt32_Vector256(Vector256.LoadUnsafe(ref sourceRef, (uint)i));
-                        Vector256<uint> upper = SingleToHalfAsWidenedUInt32_Vector256(Vector256.LoadUnsafe(ref sourceRef, (uint)(i + Vector256<float>.Count)));
+                        Vector256<uint> lower = SingleToHalfAsWidenedUInt32_Vector256(
+                            Vector256.LoadUnsafe(ref sourceRef, (uint)i)
+                        );
+                        Vector256<uint> upper = SingleToHalfAsWidenedUInt32_Vector256(
+                            Vector256.LoadUnsafe(ref sourceRef, (uint)(i + Vector256<float>.Count))
+                        );
                         Vector256.Narrow(lower, upper).StoreUnsafe(ref destinationRef, (uint)i);
                     }
 
@@ -123,21 +140,28 @@ namespace System.Numerics.Tensors
                     // Loop handling two input vectors / one output vector at a time.
                     do
                     {
-                        Vector128<uint> lower = SingleToHalfAsWidenedUInt32_Vector128(Vector128.LoadUnsafe(ref sourceRef, (uint)i));
-                        Vector128<uint> upper = SingleToHalfAsWidenedUInt32_Vector128(Vector128.LoadUnsafe(ref sourceRef, (uint)(i + Vector128<float>.Count)));
+                        Vector128<uint> lower = SingleToHalfAsWidenedUInt32_Vector128(
+                            Vector128.LoadUnsafe(ref sourceRef, (uint)i)
+                        );
+                        Vector128<uint> upper = SingleToHalfAsWidenedUInt32_Vector128(
+                            Vector128.LoadUnsafe(ref sourceRef, (uint)(i + Vector128<float>.Count))
+                        );
                         Vector128.Narrow(lower, upper).StoreUnsafe(ref destinationRef, (uint)i);
 
                         i += Vector128<float>.Count * 2;
-                    }
-                    while (i <= twoVectorsFromEnd);
+                    } while (i <= twoVectorsFromEnd);
 
                     // Handle any remaining elements with final vectors.
                     if (i != source.Length)
                     {
                         i = source.Length - (Vector128<float>.Count * 2);
 
-                        Vector128<uint> lower = SingleToHalfAsWidenedUInt32_Vector128(Vector128.LoadUnsafe(ref sourceRef, (uint)i));
-                        Vector128<uint> upper = SingleToHalfAsWidenedUInt32_Vector128(Vector128.LoadUnsafe(ref sourceRef, (uint)(i + Vector128<float>.Count)));
+                        Vector128<uint> lower = SingleToHalfAsWidenedUInt32_Vector128(
+                            Vector128.LoadUnsafe(ref sourceRef, (uint)i)
+                        );
+                        Vector128<uint> upper = SingleToHalfAsWidenedUInt32_Vector128(
+                            Vector128.LoadUnsafe(ref sourceRef, (uint)(i + Vector128<float>.Count))
+                        );
                         Vector128.Narrow(lower, upper).StoreUnsafe(ref destinationRef, (uint)i);
                     }
 
@@ -147,7 +171,9 @@ namespace System.Numerics.Tensors
 
             while (i < source.Length)
             {
-                Unsafe.Add(ref destinationRef, i) = BitConverter.HalfToUInt16Bits((Half)Unsafe.Add(ref sourceRef, i));
+                Unsafe.Add(ref destinationRef, i) = BitConverter.HalfToUInt16Bits(
+                    (Half)Unsafe.Add(ref sourceRef, i)
+                );
                 i++;
             }
 
@@ -176,7 +202,10 @@ namespace System.Numerics.Tensors
                 Vector128<uint> bitValue = value.AsUInt32();
 
                 // Extract sign bit
-                Vector128<uint> sign = Vector128.ShiftRightLogical(bitValue & Vector128.Create(SingleSignMask), 16);
+                Vector128<uint> sign = Vector128.ShiftRightLogical(
+                    bitValue & Vector128.Create(SingleSignMask),
+                    16
+                );
 
                 // Detecting NaN (0u if value is NaN; otherwise, ~0u)
                 Vector128<uint> realMask = Vector128.Equals(value, value).AsUInt32();
@@ -188,7 +217,9 @@ namespace System.Numerics.Tensors
                 value = Vector128.Min(Vector128.Create(MaxHalfValueBelowInfinity), value);
 
                 // Rectify lower exponent
-                Vector128<uint> exponentOffset0 = Vector128.Max(value, Vector128.Create(MinExp).AsSingle()).AsUInt32();
+                Vector128<uint> exponentOffset0 = Vector128
+                    .Max(value, Vector128.Create(MinExp).AsSingle())
+                    .AsUInt32();
 
                 // Extract exponent
                 exponentOffset0 &= Vector128.Create(SingleBiasedExponentMask);
@@ -201,7 +232,8 @@ namespace System.Numerics.Tensors
                 bitValue = value.AsUInt32();
 
                 // Only exponent bits will be modified if NaN
-                Vector128<uint> maskedHalfExponentForNaN = ~realMask & Vector128.Create(ExponentMask);
+                Vector128<uint> maskedHalfExponentForNaN =
+                    ~realMask & Vector128.Create(ExponentMask);
 
                 // Subtract exponent by 126
                 bitValue -= Vector128.Create(Exponent126);
@@ -233,7 +265,10 @@ namespace System.Numerics.Tensors
                 Vector256<uint> bitValue = value.AsUInt32();
 
                 // Extract sign bit
-                Vector256<uint> sign = Vector256.ShiftRightLogical(bitValue & Vector256.Create(SingleSignMask), 16);
+                Vector256<uint> sign = Vector256.ShiftRightLogical(
+                    bitValue & Vector256.Create(SingleSignMask),
+                    16
+                );
 
                 // Detecting NaN (0u if value is NaN; otherwise, ~0u)
                 Vector256<uint> realMask = Vector256.Equals(value, value).AsUInt32();
@@ -245,7 +280,9 @@ namespace System.Numerics.Tensors
                 value = Vector256.Min(Vector256.Create(MaxHalfValueBelowInfinity), value);
 
                 // Rectify lower exponent
-                Vector256<uint> exponentOffset0 = Vector256.Max(value, Vector256.Create(MinExp).AsSingle()).AsUInt32();
+                Vector256<uint> exponentOffset0 = Vector256
+                    .Max(value, Vector256.Create(MinExp).AsSingle())
+                    .AsUInt32();
 
                 // Extract exponent
                 exponentOffset0 &= Vector256.Create(SingleBiasedExponentMask);
@@ -258,7 +295,8 @@ namespace System.Numerics.Tensors
                 bitValue = value.AsUInt32();
 
                 // Only exponent bits will be modified if NaN
-                Vector256<uint> maskedHalfExponentForNaN = ~realMask & Vector256.Create(ExponentMask);
+                Vector256<uint> maskedHalfExponentForNaN =
+                    ~realMask & Vector256.Create(ExponentMask);
 
                 // Subtract exponent by 126
                 bitValue -= Vector256.Create(Exponent126);
@@ -290,7 +328,10 @@ namespace System.Numerics.Tensors
                 Vector512<uint> bitValue = value.AsUInt32();
 
                 // Extract sign bit
-                Vector512<uint> sign = Vector512.ShiftRightLogical(bitValue & Vector512.Create(SingleSignMask), 16);
+                Vector512<uint> sign = Vector512.ShiftRightLogical(
+                    bitValue & Vector512.Create(SingleSignMask),
+                    16
+                );
 
                 // Detecting NaN (0u if value is NaN; otherwise, ~0u)
                 Vector512<uint> realMask = Vector512.Equals(value, value).AsUInt32();
@@ -302,7 +343,9 @@ namespace System.Numerics.Tensors
                 value = Vector512.Min(Vector512.Create(MaxHalfValueBelowInfinity), value);
 
                 // Rectify lower exponent
-                Vector512<uint> exponentOffset0 = Vector512.Max(value, Vector512.Create(MinExp).AsSingle()).AsUInt32();
+                Vector512<uint> exponentOffset0 = Vector512
+                    .Max(value, Vector512.Create(MinExp).AsSingle())
+                    .AsUInt32();
 
                 // Extract exponent
                 exponentOffset0 &= Vector512.Create(SingleBiasedExponentMask);
@@ -315,7 +358,8 @@ namespace System.Numerics.Tensors
                 bitValue = value.AsUInt32();
 
                 // Only exponent bits will be modified if NaN
-                Vector512<uint> maskedHalfExponentForNaN = ~realMask & Vector512.Create(ExponentMask);
+                Vector512<uint> maskedHalfExponentForNaN =
+                    ~realMask & Vector512.Create(ExponentMask);
 
                 // Subtract exponent by 126
                 bitValue -= Vector512.Create(Exponent126);
@@ -365,9 +409,12 @@ namespace System.Numerics.Tensors
                 ThrowHelper.ThrowArgument_DestinationTooShort();
             }
 
-            ref short sourceRef = ref Unsafe.As<Half, short>(ref MemoryMarshal.GetReference(source));
+            ref short sourceRef = ref Unsafe.As<Half, short>(
+                ref MemoryMarshal.GetReference(source)
+            );
             ref float destinationRef = ref MemoryMarshal.GetReference(destination);
-            int i = 0, oneVectorFromEnd;
+            int i = 0,
+                oneVectorFromEnd;
 
             if (Vector512.IsHardwareAccelerated)
             {
@@ -377,22 +424,29 @@ namespace System.Numerics.Tensors
                     // Loop handling one input vector / two output vectors at a time.
                     do
                     {
-                        (Vector512<int> lower, Vector512<int> upper) = Vector512.Widen(Vector512.LoadUnsafe(ref sourceRef, (uint)i));
-                        HalfAsWidenedUInt32ToSingle_Vector512(lower.AsUInt32()).StoreUnsafe(ref destinationRef, (uint)i);
-                        HalfAsWidenedUInt32ToSingle_Vector512(upper.AsUInt32()).StoreUnsafe(ref destinationRef, (uint)(i + Vector512<float>.Count));
+                        (Vector512<int> lower, Vector512<int> upper) = Vector512.Widen(
+                            Vector512.LoadUnsafe(ref sourceRef, (uint)i)
+                        );
+                        HalfAsWidenedUInt32ToSingle_Vector512(lower.AsUInt32())
+                            .StoreUnsafe(ref destinationRef, (uint)i);
+                        HalfAsWidenedUInt32ToSingle_Vector512(upper.AsUInt32())
+                            .StoreUnsafe(ref destinationRef, (uint)(i + Vector512<float>.Count));
 
                         i += Vector512<short>.Count;
-                    }
-                    while (i <= oneVectorFromEnd);
+                    } while (i <= oneVectorFromEnd);
 
                     // Handle any remaining elements with a final input vector.
                     if (i != source.Length)
                     {
                         i = source.Length - Vector512<short>.Count;
 
-                        (Vector512<int> lower, Vector512<int> upper) = Vector512.Widen(Vector512.LoadUnsafe(ref sourceRef, (uint)i));
-                        HalfAsWidenedUInt32ToSingle_Vector512(lower.AsUInt32()).StoreUnsafe(ref destinationRef, (uint)i);
-                        HalfAsWidenedUInt32ToSingle_Vector512(upper.AsUInt32()).StoreUnsafe(ref destinationRef, (uint)(i + Vector512<float>.Count));
+                        (Vector512<int> lower, Vector512<int> upper) = Vector512.Widen(
+                            Vector512.LoadUnsafe(ref sourceRef, (uint)i)
+                        );
+                        HalfAsWidenedUInt32ToSingle_Vector512(lower.AsUInt32())
+                            .StoreUnsafe(ref destinationRef, (uint)i);
+                        HalfAsWidenedUInt32ToSingle_Vector512(upper.AsUInt32())
+                            .StoreUnsafe(ref destinationRef, (uint)(i + Vector512<float>.Count));
                     }
 
                     return;
@@ -407,22 +461,29 @@ namespace System.Numerics.Tensors
                     // Loop handling one input vector / two output vectors at a time.
                     do
                     {
-                        (Vector256<int> lower, Vector256<int> upper) = Vector256.Widen(Vector256.LoadUnsafe(ref sourceRef, (uint)i));
-                        HalfAsWidenedUInt32ToSingle_Vector256(lower.AsUInt32()).StoreUnsafe(ref destinationRef, (uint)i);
-                        HalfAsWidenedUInt32ToSingle_Vector256(upper.AsUInt32()).StoreUnsafe(ref destinationRef, (uint)(i + Vector256<float>.Count));
+                        (Vector256<int> lower, Vector256<int> upper) = Vector256.Widen(
+                            Vector256.LoadUnsafe(ref sourceRef, (uint)i)
+                        );
+                        HalfAsWidenedUInt32ToSingle_Vector256(lower.AsUInt32())
+                            .StoreUnsafe(ref destinationRef, (uint)i);
+                        HalfAsWidenedUInt32ToSingle_Vector256(upper.AsUInt32())
+                            .StoreUnsafe(ref destinationRef, (uint)(i + Vector256<float>.Count));
 
                         i += Vector256<short>.Count;
-                    }
-                    while (i <= oneVectorFromEnd);
+                    } while (i <= oneVectorFromEnd);
 
                     // Handle any remaining elements with a final input vector.
                     if (i != source.Length)
                     {
                         i = source.Length - Vector256<short>.Count;
 
-                        (Vector256<int> lower, Vector256<int> upper) = Vector256.Widen(Vector256.LoadUnsafe(ref sourceRef, (uint)i));
-                        HalfAsWidenedUInt32ToSingle_Vector256(lower.AsUInt32()).StoreUnsafe(ref destinationRef, (uint)i);
-                        HalfAsWidenedUInt32ToSingle_Vector256(upper.AsUInt32()).StoreUnsafe(ref destinationRef, (uint)(i + Vector256<float>.Count));
+                        (Vector256<int> lower, Vector256<int> upper) = Vector256.Widen(
+                            Vector256.LoadUnsafe(ref sourceRef, (uint)i)
+                        );
+                        HalfAsWidenedUInt32ToSingle_Vector256(lower.AsUInt32())
+                            .StoreUnsafe(ref destinationRef, (uint)i);
+                        HalfAsWidenedUInt32ToSingle_Vector256(upper.AsUInt32())
+                            .StoreUnsafe(ref destinationRef, (uint)(i + Vector256<float>.Count));
                     }
 
                     return;
@@ -437,22 +498,29 @@ namespace System.Numerics.Tensors
                     // Loop handling one input vector / two output vectors at a time.
                     do
                     {
-                        (Vector128<int> lower, Vector128<int> upper) = Vector128.Widen(Vector128.LoadUnsafe(ref sourceRef, (uint)i));
-                        HalfAsWidenedUInt32ToSingle_Vector128(lower.AsUInt32()).StoreUnsafe(ref destinationRef, (uint)i);
-                        HalfAsWidenedUInt32ToSingle_Vector128(upper.AsUInt32()).StoreUnsafe(ref destinationRef, (uint)(i + Vector128<float>.Count));
+                        (Vector128<int> lower, Vector128<int> upper) = Vector128.Widen(
+                            Vector128.LoadUnsafe(ref sourceRef, (uint)i)
+                        );
+                        HalfAsWidenedUInt32ToSingle_Vector128(lower.AsUInt32())
+                            .StoreUnsafe(ref destinationRef, (uint)i);
+                        HalfAsWidenedUInt32ToSingle_Vector128(upper.AsUInt32())
+                            .StoreUnsafe(ref destinationRef, (uint)(i + Vector128<float>.Count));
 
                         i += Vector128<short>.Count;
-                    }
-                    while (i <= oneVectorFromEnd);
+                    } while (i <= oneVectorFromEnd);
 
                     // Handle any remaining elements with a final input vector.
                     if (i != source.Length)
                     {
                         i = source.Length - Vector128<short>.Count;
 
-                        (Vector128<int> lower, Vector128<int> upper) = Vector128.Widen(Vector128.LoadUnsafe(ref sourceRef, (uint)i));
-                        HalfAsWidenedUInt32ToSingle_Vector128(lower.AsUInt32()).StoreUnsafe(ref destinationRef, (uint)i);
-                        HalfAsWidenedUInt32ToSingle_Vector128(upper.AsUInt32()).StoreUnsafe(ref destinationRef, (uint)(i + Vector128<float>.Count));
+                        (Vector128<int> lower, Vector128<int> upper) = Vector128.Widen(
+                            Vector128.LoadUnsafe(ref sourceRef, (uint)i)
+                        );
+                        HalfAsWidenedUInt32ToSingle_Vector128(lower.AsUInt32())
+                            .StoreUnsafe(ref destinationRef, (uint)i);
+                        HalfAsWidenedUInt32ToSingle_Vector128(upper.AsUInt32())
+                            .StoreUnsafe(ref destinationRef, (uint)(i + Vector128<float>.Count));
                     }
 
                     return;
@@ -461,7 +529,8 @@ namespace System.Numerics.Tensors
 
             while (i < source.Length)
             {
-                Unsafe.Add(ref destinationRef, i) = (float)Unsafe.As<short, Half>(ref Unsafe.Add(ref sourceRef, i));
+                Unsafe.Add(ref destinationRef, i) = (float)
+                    Unsafe.As<short, Half>(ref Unsafe.Add(ref sourceRef, i));
                 i++;
             }
 
@@ -489,27 +558,38 @@ namespace System.Numerics.Tensors
                 Vector128<uint> bitValueInProcess = value;
 
                 // Extract exponent bits of value (BiasedExponent is not for here as it performs unnecessary shift)
-                Vector128<uint> offsetExponent = bitValueInProcess & Vector128.Create(HalfExponentMask);
+                Vector128<uint> offsetExponent =
+                    bitValueInProcess & Vector128.Create(HalfExponentMask);
 
                 // ~0u when value is subnormal, 0 otherwise
-                Vector128<uint> subnormalMask = Vector128.Equals(offsetExponent, Vector128<uint>.Zero);
+                Vector128<uint> subnormalMask = Vector128.Equals(
+                    offsetExponent,
+                    Vector128<uint>.Zero
+                );
 
                 // ~0u when value is either Infinity or NaN, 0 otherwise
-                Vector128<uint> infinityOrNaNMask = Vector128.Equals(offsetExponent, Vector128.Create(HalfExponentMask));
+                Vector128<uint> infinityOrNaNMask = Vector128.Equals(
+                    offsetExponent,
+                    Vector128.Create(HalfExponentMask)
+                );
 
                 // 0x3880_0000u if value is subnormal, 0 otherwise
-                Vector128<uint> maskedExponentLowerBound = subnormalMask & Vector128.Create(ExponentLowerBound);
+                Vector128<uint> maskedExponentLowerBound =
+                    subnormalMask & Vector128.Create(ExponentLowerBound);
 
                 // 0x3880_0000u if value is subnormal, 0x3800_0000u otherwise
-                Vector128<uint> offsetMaskedExponentLowerBound = Vector128.Create(ExponentOffset) | maskedExponentLowerBound;
+                Vector128<uint> offsetMaskedExponentLowerBound =
+                    Vector128.Create(ExponentOffset) | maskedExponentLowerBound;
 
                 // Match the position of the boundary of exponent bits and fraction bits with IEEE 754 Binary32(Single)
                 bitValueInProcess = Vector128.ShiftLeft(bitValueInProcess, 13);
 
                 // Double the offsetMaskedExponentLowerBound if value is either Infinity or NaN
-                offsetMaskedExponentLowerBound = Vector128.ConditionalSelect(Vector128.Equals(infinityOrNaNMask, Vector128<uint>.Zero),
+                offsetMaskedExponentLowerBound = Vector128.ConditionalSelect(
+                    Vector128.Equals(infinityOrNaNMask, Vector128<uint>.Zero),
                     offsetMaskedExponentLowerBound,
-                    Vector128.ShiftLeft(offsetMaskedExponentLowerBound, 1));
+                    Vector128.ShiftLeft(offsetMaskedExponentLowerBound, 1)
+                );
 
                 // Extract exponent bits and fraction bits of value
                 bitValueInProcess &= Vector128.Create(HalfToSingleBitsMask);
@@ -518,7 +598,9 @@ namespace System.Numerics.Tensors
                 bitValueInProcess += offsetMaskedExponentLowerBound;
 
                 // If value is subnormal, remove unnecessary 1 on top of fraction bits.
-                Vector128<uint> absoluteValue = (bitValueInProcess.AsSingle() - maskedExponentLowerBound.AsSingle()).AsUInt32();
+                Vector128<uint> absoluteValue = (
+                    bitValueInProcess.AsSingle() - maskedExponentLowerBound.AsSingle()
+                ).AsUInt32();
 
                 // Merge sign bit with rest
                 return (absoluteValue | sign).AsSingle();
@@ -533,27 +615,38 @@ namespace System.Numerics.Tensors
                 Vector256<uint> bitValueInProcess = value;
 
                 // Extract exponent bits of value (BiasedExponent is not for here as it performs unnecessary shift)
-                Vector256<uint> offsetExponent = bitValueInProcess & Vector256.Create(HalfExponentMask);
+                Vector256<uint> offsetExponent =
+                    bitValueInProcess & Vector256.Create(HalfExponentMask);
 
                 // ~0u when value is subnormal, 0 otherwise
-                Vector256<uint> subnormalMask = Vector256.Equals(offsetExponent, Vector256<uint>.Zero);
+                Vector256<uint> subnormalMask = Vector256.Equals(
+                    offsetExponent,
+                    Vector256<uint>.Zero
+                );
 
                 // ~0u when value is either Infinity or NaN, 0 otherwise
-                Vector256<uint> infinityOrNaNMask = Vector256.Equals(offsetExponent, Vector256.Create(HalfExponentMask));
+                Vector256<uint> infinityOrNaNMask = Vector256.Equals(
+                    offsetExponent,
+                    Vector256.Create(HalfExponentMask)
+                );
 
                 // 0x3880_0000u if value is subnormal, 0 otherwise
-                Vector256<uint> maskedExponentLowerBound = subnormalMask & Vector256.Create(ExponentLowerBound);
+                Vector256<uint> maskedExponentLowerBound =
+                    subnormalMask & Vector256.Create(ExponentLowerBound);
 
                 // 0x3880_0000u if value is subnormal, 0x3800_0000u otherwise
-                Vector256<uint> offsetMaskedExponentLowerBound = Vector256.Create(ExponentOffset) | maskedExponentLowerBound;
+                Vector256<uint> offsetMaskedExponentLowerBound =
+                    Vector256.Create(ExponentOffset) | maskedExponentLowerBound;
 
                 // Match the position of the boundary of exponent bits and fraction bits with IEEE 754 Binary32(Single)
                 bitValueInProcess = Vector256.ShiftLeft(bitValueInProcess, 13);
 
                 // Double the offsetMaskedExponentLowerBound if value is either Infinity or NaN
-                offsetMaskedExponentLowerBound = Vector256.ConditionalSelect(Vector256.Equals(infinityOrNaNMask, Vector256<uint>.Zero),
+                offsetMaskedExponentLowerBound = Vector256.ConditionalSelect(
+                    Vector256.Equals(infinityOrNaNMask, Vector256<uint>.Zero),
                     offsetMaskedExponentLowerBound,
-                    Vector256.ShiftLeft(offsetMaskedExponentLowerBound, 1));
+                    Vector256.ShiftLeft(offsetMaskedExponentLowerBound, 1)
+                );
 
                 // Extract exponent bits and fraction bits of value
                 bitValueInProcess &= Vector256.Create(HalfToSingleBitsMask);
@@ -562,7 +655,9 @@ namespace System.Numerics.Tensors
                 bitValueInProcess += offsetMaskedExponentLowerBound;
 
                 // If value is subnormal, remove unnecessary 1 on top of fraction bits.
-                Vector256<uint> absoluteValue = (bitValueInProcess.AsSingle() - maskedExponentLowerBound.AsSingle()).AsUInt32();
+                Vector256<uint> absoluteValue = (
+                    bitValueInProcess.AsSingle() - maskedExponentLowerBound.AsSingle()
+                ).AsUInt32();
 
                 // Merge sign bit with rest
                 return (absoluteValue | sign).AsSingle();
@@ -577,27 +672,38 @@ namespace System.Numerics.Tensors
                 Vector512<uint> bitValueInProcess = value;
 
                 // Extract exponent bits of value (BiasedExponent is not for here as it performs unnecessary shift)
-                Vector512<uint> offsetExponent = bitValueInProcess & Vector512.Create(HalfExponentMask);
+                Vector512<uint> offsetExponent =
+                    bitValueInProcess & Vector512.Create(HalfExponentMask);
 
                 // ~0u when value is subnormal, 0 otherwise
-                Vector512<uint> subnormalMask = Vector512.Equals(offsetExponent, Vector512<uint>.Zero);
+                Vector512<uint> subnormalMask = Vector512.Equals(
+                    offsetExponent,
+                    Vector512<uint>.Zero
+                );
 
                 // ~0u when value is either Infinity or NaN, 0 otherwise
-                Vector512<uint> infinityOrNaNMask = Vector512.Equals(offsetExponent, Vector512.Create(HalfExponentMask));
+                Vector512<uint> infinityOrNaNMask = Vector512.Equals(
+                    offsetExponent,
+                    Vector512.Create(HalfExponentMask)
+                );
 
                 // 0x3880_0000u if value is subnormal, 0 otherwise
-                Vector512<uint> maskedExponentLowerBound = subnormalMask & Vector512.Create(ExponentLowerBound);
+                Vector512<uint> maskedExponentLowerBound =
+                    subnormalMask & Vector512.Create(ExponentLowerBound);
 
                 // 0x3880_0000u if value is subnormal, 0x3800_0000u otherwise
-                Vector512<uint> offsetMaskedExponentLowerBound = Vector512.Create(ExponentOffset) | maskedExponentLowerBound;
+                Vector512<uint> offsetMaskedExponentLowerBound =
+                    Vector512.Create(ExponentOffset) | maskedExponentLowerBound;
 
                 // Match the position of the boundary of exponent bits and fraction bits with IEEE 754 Binary32(Single)
                 bitValueInProcess = Vector512.ShiftLeft(bitValueInProcess, 13);
 
                 // Double the offsetMaskedExponentLowerBound if value is either Infinity or NaN
-                offsetMaskedExponentLowerBound = Vector512.ConditionalSelect(Vector512.Equals(infinityOrNaNMask, Vector512<uint>.Zero),
+                offsetMaskedExponentLowerBound = Vector512.ConditionalSelect(
+                    Vector512.Equals(infinityOrNaNMask, Vector512<uint>.Zero),
                     offsetMaskedExponentLowerBound,
-                    Vector512.ShiftLeft(offsetMaskedExponentLowerBound, 1));
+                    Vector512.ShiftLeft(offsetMaskedExponentLowerBound, 1)
+                );
 
                 // Extract exponent bits and fraction bits of value
                 bitValueInProcess &= Vector512.Create(HalfToSingleBitsMask);
@@ -606,7 +712,9 @@ namespace System.Numerics.Tensors
                 bitValueInProcess += offsetMaskedExponentLowerBound;
 
                 // If value is subnormal, remove unnecessary 1 on top of fraction bits.
-                Vector512<uint> absoluteValue = (bitValueInProcess.AsSingle() - maskedExponentLowerBound.AsSingle()).AsUInt32();
+                Vector512<uint> absoluteValue = (
+                    bitValueInProcess.AsSingle() - maskedExponentLowerBound.AsSingle()
+                ).AsUInt32();
 
                 // Merge sign bit with rest
                 return (absoluteValue | sign).AsSingle();
@@ -653,16 +761,23 @@ namespace System.Numerics.Tensors
                     ySumOfSquaresVector = FusedMultiplyAdd(yVec, yVec, ySumOfSquaresVector);
 
                     i += Vector512<float>.Count;
-                }
-                while (i <= oneVectorFromEnd);
+                } while (i <= oneVectorFromEnd);
 
                 // Process the last vector in the span, masking off elements already processed.
                 if (i != x.Length)
                 {
-                    Vector512<float> xVec = Vector512.LoadUnsafe(ref xRef, (uint)(x.Length - Vector512<float>.Count));
-                    Vector512<float> yVec = Vector512.LoadUnsafe(ref yRef, (uint)(x.Length - Vector512<float>.Count));
+                    Vector512<float> xVec = Vector512.LoadUnsafe(
+                        ref xRef,
+                        (uint)(x.Length - Vector512<float>.Count)
+                    );
+                    Vector512<float> yVec = Vector512.LoadUnsafe(
+                        ref yRef,
+                        (uint)(x.Length - Vector512<float>.Count)
+                    );
 
-                    Vector512<float> remainderMask = CreateRemainderMaskSingleVector512(x.Length - i);
+                    Vector512<float> remainderMask = CreateRemainderMaskSingleVector512(
+                        x.Length - i
+                    );
                     xVec &= remainderMask;
                     yVec &= remainderMask;
 
@@ -672,9 +787,11 @@ namespace System.Numerics.Tensors
                 }
 
                 // Sum(X * Y) / (|X| * |Y|)
-                return
-                    Vector512.Sum(dotProductVector) /
-                    (MathF.Sqrt(Vector512.Sum(xSumOfSquaresVector)) * MathF.Sqrt(Vector512.Sum(ySumOfSquaresVector)));
+                return Vector512.Sum(dotProductVector)
+                    / (
+                        MathF.Sqrt(Vector512.Sum(xSumOfSquaresVector))
+                        * MathF.Sqrt(Vector512.Sum(ySumOfSquaresVector))
+                    );
             }
 
             if (Vector256.IsHardwareAccelerated && x.Length >= Vector256<float>.Count)
@@ -699,16 +816,23 @@ namespace System.Numerics.Tensors
                     ySumOfSquaresVector = FusedMultiplyAdd(yVec, yVec, ySumOfSquaresVector);
 
                     i += Vector256<float>.Count;
-                }
-                while (i <= oneVectorFromEnd);
+                } while (i <= oneVectorFromEnd);
 
                 // Process the last vector in the span, masking off elements already processed.
                 if (i != x.Length)
                 {
-                    Vector256<float> xVec = Vector256.LoadUnsafe(ref xRef, (uint)(x.Length - Vector256<float>.Count));
-                    Vector256<float> yVec = Vector256.LoadUnsafe(ref yRef, (uint)(x.Length - Vector256<float>.Count));
+                    Vector256<float> xVec = Vector256.LoadUnsafe(
+                        ref xRef,
+                        (uint)(x.Length - Vector256<float>.Count)
+                    );
+                    Vector256<float> yVec = Vector256.LoadUnsafe(
+                        ref yRef,
+                        (uint)(x.Length - Vector256<float>.Count)
+                    );
 
-                    Vector256<float> remainderMask = CreateRemainderMaskSingleVector256(x.Length - i);
+                    Vector256<float> remainderMask = CreateRemainderMaskSingleVector256(
+                        x.Length - i
+                    );
                     xVec &= remainderMask;
                     yVec &= remainderMask;
 
@@ -718,9 +842,11 @@ namespace System.Numerics.Tensors
                 }
 
                 // Sum(X * Y) / (|X| * |Y|)
-                return
-                    Vector256.Sum(dotProductVector) /
-                    (MathF.Sqrt(Vector256.Sum(xSumOfSquaresVector)) * MathF.Sqrt(Vector256.Sum(ySumOfSquaresVector)));
+                return Vector256.Sum(dotProductVector)
+                    / (
+                        MathF.Sqrt(Vector256.Sum(xSumOfSquaresVector))
+                        * MathF.Sqrt(Vector256.Sum(ySumOfSquaresVector))
+                    );
             }
 
             if (Vector128.IsHardwareAccelerated && x.Length >= Vector128<float>.Count)
@@ -745,16 +871,23 @@ namespace System.Numerics.Tensors
                     ySumOfSquaresVector = FusedMultiplyAdd(yVec, yVec, ySumOfSquaresVector);
 
                     i += Vector128<float>.Count;
-                }
-                while (i <= oneVectorFromEnd);
+                } while (i <= oneVectorFromEnd);
 
                 // Process the last vector in the span, masking off elements already processed.
                 if (i != x.Length)
                 {
-                    Vector128<float> xVec = Vector128.LoadUnsafe(ref xRef, (uint)(x.Length - Vector128<float>.Count));
-                    Vector128<float> yVec = Vector128.LoadUnsafe(ref yRef, (uint)(x.Length - Vector128<float>.Count));
+                    Vector128<float> xVec = Vector128.LoadUnsafe(
+                        ref xRef,
+                        (uint)(x.Length - Vector128<float>.Count)
+                    );
+                    Vector128<float> yVec = Vector128.LoadUnsafe(
+                        ref yRef,
+                        (uint)(x.Length - Vector128<float>.Count)
+                    );
 
-                    Vector128<float> remainderMask = CreateRemainderMaskSingleVector128(x.Length - i);
+                    Vector128<float> remainderMask = CreateRemainderMaskSingleVector128(
+                        x.Length - i
+                    );
                     xVec &= remainderMask;
                     yVec &= remainderMask;
 
@@ -764,14 +897,18 @@ namespace System.Numerics.Tensors
                 }
 
                 // Sum(X * Y) / (|X| * |Y|)
-                return
-                    Vector128.Sum(dotProductVector) /
-                    (MathF.Sqrt(Vector128.Sum(xSumOfSquaresVector)) * MathF.Sqrt(Vector128.Sum(ySumOfSquaresVector)));
+                return Vector128.Sum(dotProductVector)
+                    / (
+                        MathF.Sqrt(Vector128.Sum(xSumOfSquaresVector))
+                        * MathF.Sqrt(Vector128.Sum(ySumOfSquaresVector))
+                    );
             }
 
             // Vectorization isn't supported or there are too few elements to vectorize.
             // Use a scalar implementation.
-            float dotProduct = 0f, xSumOfSquares = 0f, ySumOfSquares = 0f;
+            float dotProduct = 0f,
+                xSumOfSquares = 0f,
+                ySumOfSquares = 0f;
             for (int i = 0; i < x.Length; i++)
             {
                 dotProduct = MathF.FusedMultiplyAdd(x[i], y[i], dotProduct);
@@ -780,9 +917,7 @@ namespace System.Numerics.Tensors
             }
 
             // Sum(X * Y) / (|X| * |Y|)
-            return
-                dotProduct /
-                (MathF.Sqrt(xSumOfSquares) * MathF.Sqrt(ySumOfSquares));
+            return dotProduct / (MathF.Sqrt(xSumOfSquares) * MathF.Sqrt(ySumOfSquares));
         }
 
         /// <summary>Performs an aggregation over all elements in <paramref name="x"/> to produce a single-precision floating-point value.</summary>
@@ -792,7 +927,8 @@ namespace System.Numerics.Tensors
         /// The aggregation is applied after the transform is applied to each element.
         /// </typeparam>
         private static float Aggregate<TTransformOperator, TAggregationOperator>(
-            ReadOnlySpan<float> x)
+            ReadOnlySpan<float> x
+        )
             where TTransformOperator : struct, IUnaryOperator
             where TAggregationOperator : struct, IAggregationOperator
         {
@@ -877,7 +1013,10 @@ namespace System.Numerics.Tensors
 
                 for (nuint i = 0; i < length; i++)
                 {
-                    result = TAggregationOperator.Invoke(result, TTransformOperator.Invoke(Unsafe.Add(ref xRef, i)));
+                    result = TAggregationOperator.Invoke(
+                        result,
+                        TTransformOperator.Invoke(Unsafe.Add(ref xRef, i))
+                    );
                 }
 
                 return result;
@@ -890,7 +1029,9 @@ namespace System.Numerics.Tensors
                 // Preload the beginning and end so that overlapping accesses don't negatively impact the data
 
                 Vector128<float> beg = TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef));
-                Vector128<float> end = TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)));
+                Vector128<float> end = TTransformOperator.Invoke(
+                    Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count))
+                );
 
                 nuint misalignment = 0;
 
@@ -917,7 +1058,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            misalignment = ((uint)(sizeof(Vector128<float>)) - ((nuint)(xPtr) % (uint)(sizeof(Vector128<float>)))) / sizeof(float);
+                            misalignment =
+                                (
+                                    (uint)(sizeof(Vector128<float>))
+                                    - ((nuint)(xPtr) % (uint)(sizeof(Vector128<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
 
@@ -937,10 +1082,18 @@ namespace System.Numerics.Tensors
                         {
                             // We load, process, and store the first four vectors
 
-                            vector1 = TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0)));
-                            vector2 = TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1)));
-                            vector3 = TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2)));
-                            vector4 = TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3)));
+                            vector1 = TTransformOperator.Invoke(
+                                Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0))
+                            );
+                            vector2 = TTransformOperator.Invoke(
+                                Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1))
+                            );
+                            vector3 = TTransformOperator.Invoke(
+                                Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2))
+                            );
+                            vector4 = TTransformOperator.Invoke(
+                                Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3))
+                            );
 
                             vresult = TAggregationOperator.Invoke(vresult, vector1);
                             vresult = TAggregationOperator.Invoke(vresult, vector2);
@@ -949,10 +1102,18 @@ namespace System.Numerics.Tensors
 
                             // We load, process, and store the next four vectors
 
-                            vector1 = TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4)));
-                            vector2 = TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5)));
-                            vector3 = TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6)));
-                            vector4 = TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7)));
+                            vector1 = TTransformOperator.Invoke(
+                                Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4))
+                            );
+                            vector2 = TTransformOperator.Invoke(
+                                Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5))
+                            );
+                            vector3 = TTransformOperator.Invoke(
+                                Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6))
+                            );
+                            vector4 = TTransformOperator.Invoke(
+                                Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7))
+                            );
 
                             vresult = TAggregationOperator.Invoke(vresult, vector1);
                             vresult = TAggregationOperator.Invoke(vresult, vector2);
@@ -976,7 +1137,11 @@ namespace System.Numerics.Tensors
                 // Store the first block. Handling this separately simplifies the latter code as we know
                 // they come after and so we can relegate it to full blocks or the trailing elements
 
-                beg = Vector128.ConditionalSelect(CreateAlignmentMaskSingleVector128((int)(misalignment)), beg, Vector128.Create(TAggregationOperator.IdentityValue));
+                beg = Vector128.ConditionalSelect(
+                    CreateAlignmentMaskSingleVector128((int)(misalignment)),
+                    beg,
+                    Vector128.Create(TAggregationOperator.IdentityValue)
+                );
                 vresult = TAggregationOperator.Invoke(vresult, beg);
 
                 // Process the remaining [0, Count * 7] elements via a jump table
@@ -985,7 +1150,10 @@ namespace System.Numerics.Tensors
                 // worst case end up just doing the identity operation here if there
                 // were no trailing elements.
 
-                (nuint blocks, nuint trailing) = Math.DivRem(remainder, (nuint)(Vector128<float>.Count));
+                (nuint blocks, nuint trailing) = Math.DivRem(
+                    remainder,
+                    (nuint)(Vector128<float>.Count)
+                );
                 blocks -= (misalignment == 0) ? 1u : 0u;
                 remainder -= trailing;
 
@@ -993,49 +1161,84 @@ namespace System.Numerics.Tensors
                 {
                     case 7:
                     {
-                        Vector128<float> vector = TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 7)));
+                        Vector128<float> vector = TTransformOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 7)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector128<float> vector = TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 6)));
+                        Vector128<float> vector = TTransformOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 6)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector128<float> vector = TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 5)));
+                        Vector128<float> vector = TTransformOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 5)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector128<float> vector = TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 4)));
+                        Vector128<float> vector = TTransformOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 4)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector128<float> vector = TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 3)));
+                        Vector128<float> vector = TTransformOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 3)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector128<float> vector = TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 2)));
+                        Vector128<float> vector = TTransformOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 2)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 1;
                     }
 
                     case 1:
                     {
-                        Vector128<float> vector = TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 1)));
+                        Vector128<float> vector = TTransformOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 1)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 0;
                     }
@@ -1043,7 +1246,11 @@ namespace System.Numerics.Tensors
                     case 0:
                     {
                         // Store the last block, which includes any elements that wouldn't fill a full vector
-                        end = Vector128.ConditionalSelect(CreateRemainderMaskSingleVector128((int)(trailing)), end, Vector128.Create(TAggregationOperator.IdentityValue));
+                        end = Vector128.ConditionalSelect(
+                            CreateRemainderMaskSingleVector128((int)(trailing)),
+                            end,
+                            Vector128.Create(TAggregationOperator.IdentityValue)
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, end);
                         break;
                     }
@@ -1061,19 +1268,28 @@ namespace System.Numerics.Tensors
                 {
                     case 3:
                     {
-                        result = TAggregationOperator.Invoke(result, TTransformOperator.Invoke(Unsafe.Add(ref xRef, 2)));
+                        result = TAggregationOperator.Invoke(
+                            result,
+                            TTransformOperator.Invoke(Unsafe.Add(ref xRef, 2))
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        result = TAggregationOperator.Invoke(result, TTransformOperator.Invoke(Unsafe.Add(ref xRef, 1)));
+                        result = TAggregationOperator.Invoke(
+                            result,
+                            TTransformOperator.Invoke(Unsafe.Add(ref xRef, 1))
+                        );
                         goto case 1;
                     }
 
                     case 1:
                     {
-                        result = TAggregationOperator.Invoke(result, TTransformOperator.Invoke(xRef));
+                        result = TAggregationOperator.Invoke(
+                            result,
+                            TTransformOperator.Invoke(xRef)
+                        );
                         goto case 0;
                     }
 
@@ -1093,7 +1309,9 @@ namespace System.Numerics.Tensors
                 // Preload the beginning and end so that overlapping accesses don't negatively impact the data
 
                 Vector256<float> beg = TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef));
-                Vector256<float> end = TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count)));
+                Vector256<float> end = TTransformOperator.Invoke(
+                    Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count))
+                );
 
                 nuint misalignment = 0;
 
@@ -1120,7 +1338,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            misalignment = ((uint)(sizeof(Vector256<float>)) - ((nuint)(xPtr) % (uint)(sizeof(Vector256<float>)))) / sizeof(float);
+                            misalignment =
+                                (
+                                    (uint)(sizeof(Vector256<float>))
+                                    - ((nuint)(xPtr) % (uint)(sizeof(Vector256<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
 
@@ -1140,10 +1362,18 @@ namespace System.Numerics.Tensors
                         {
                             // We load, process, and store the first four vectors
 
-                            vector1 = TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0)));
-                            vector2 = TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1)));
-                            vector3 = TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2)));
-                            vector4 = TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3)));
+                            vector1 = TTransformOperator.Invoke(
+                                Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0))
+                            );
+                            vector2 = TTransformOperator.Invoke(
+                                Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1))
+                            );
+                            vector3 = TTransformOperator.Invoke(
+                                Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2))
+                            );
+                            vector4 = TTransformOperator.Invoke(
+                                Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3))
+                            );
 
                             vresult = TAggregationOperator.Invoke(vresult, vector1);
                             vresult = TAggregationOperator.Invoke(vresult, vector2);
@@ -1152,10 +1382,18 @@ namespace System.Numerics.Tensors
 
                             // We load, process, and store the next four vectors
 
-                            vector1 = TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4)));
-                            vector2 = TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5)));
-                            vector3 = TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6)));
-                            vector4 = TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7)));
+                            vector1 = TTransformOperator.Invoke(
+                                Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4))
+                            );
+                            vector2 = TTransformOperator.Invoke(
+                                Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5))
+                            );
+                            vector3 = TTransformOperator.Invoke(
+                                Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6))
+                            );
+                            vector4 = TTransformOperator.Invoke(
+                                Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7))
+                            );
 
                             vresult = TAggregationOperator.Invoke(vresult, vector1);
                             vresult = TAggregationOperator.Invoke(vresult, vector2);
@@ -1179,7 +1417,11 @@ namespace System.Numerics.Tensors
                 // Store the first block. Handling this separately simplifies the latter code as we know
                 // they come after and so we can relegate it to full blocks or the trailing elements
 
-                beg = Vector256.ConditionalSelect(CreateAlignmentMaskSingleVector256((int)(misalignment)), beg, Vector256.Create(TAggregationOperator.IdentityValue));
+                beg = Vector256.ConditionalSelect(
+                    CreateAlignmentMaskSingleVector256((int)(misalignment)),
+                    beg,
+                    Vector256.Create(TAggregationOperator.IdentityValue)
+                );
                 vresult = TAggregationOperator.Invoke(vresult, beg);
 
                 // Process the remaining [0, Count * 7] elements via a jump table
@@ -1188,7 +1430,10 @@ namespace System.Numerics.Tensors
                 // worst case end up just doing the identity operation here if there
                 // were no trailing elements.
 
-                (nuint blocks, nuint trailing) = Math.DivRem(remainder, (nuint)(Vector256<float>.Count));
+                (nuint blocks, nuint trailing) = Math.DivRem(
+                    remainder,
+                    (nuint)(Vector256<float>.Count)
+                );
                 blocks -= (misalignment == 0) ? 1u : 0u;
                 remainder -= trailing;
 
@@ -1196,49 +1441,84 @@ namespace System.Numerics.Tensors
                 {
                     case 7:
                     {
-                        Vector256<float> vector = TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 7)));
+                        Vector256<float> vector = TTransformOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 7)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector256<float> vector = TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 6)));
+                        Vector256<float> vector = TTransformOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 6)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector256<float> vector = TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 5)));
+                        Vector256<float> vector = TTransformOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 5)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector256<float> vector = TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 4)));
+                        Vector256<float> vector = TTransformOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 4)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector256<float> vector = TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 3)));
+                        Vector256<float> vector = TTransformOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 3)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector256<float> vector = TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 2)));
+                        Vector256<float> vector = TTransformOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 2)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 1;
                     }
 
                     case 1:
                     {
-                        Vector256<float> vector = TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 1)));
+                        Vector256<float> vector = TTransformOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 1)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 0;
                     }
@@ -1246,7 +1526,11 @@ namespace System.Numerics.Tensors
                     case 0:
                     {
                         // Store the last block, which includes any elements that wouldn't fill a full vector
-                        end = Vector256.ConditionalSelect(CreateRemainderMaskSingleVector256((int)(trailing)), end, Vector256.Create(TAggregationOperator.IdentityValue));
+                        end = Vector256.ConditionalSelect(
+                            CreateRemainderMaskSingleVector256((int)(trailing)),
+                            end,
+                            Vector256.Create(TAggregationOperator.IdentityValue)
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, end);
                         break;
                     }
@@ -1267,12 +1551,27 @@ namespace System.Numerics.Tensors
                     case 5:
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
-                        Vector128<float> vresult = Vector128.Create(TAggregationOperator.IdentityValue);
+                        Vector128<float> vresult = Vector128.Create(
+                            TAggregationOperator.IdentityValue
+                        );
 
-                        Vector128<float> beg = TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef));
-                        Vector128<float> end = TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)));
+                        Vector128<float> beg = TTransformOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef)
+                        );
+                        Vector128<float> end = TTransformOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            )
+                        );
 
-                        end = Vector128.ConditionalSelect(CreateRemainderMaskSingleVector128((int)(remainder % (uint)(Vector128<float>.Count))), end, Vector128.Create(TAggregationOperator.IdentityValue));
+                        end = Vector128.ConditionalSelect(
+                            CreateRemainderMaskSingleVector128(
+                                (int)(remainder % (uint)(Vector128<float>.Count))
+                            ),
+                            end,
+                            Vector128.Create(TAggregationOperator.IdentityValue)
+                        );
 
                         vresult = TAggregationOperator.Invoke(vresult, beg);
                         vresult = TAggregationOperator.Invoke(vresult, end);
@@ -1284,9 +1583,13 @@ namespace System.Numerics.Tensors
                     case 4:
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
-                        Vector128<float> vresult = Vector128.Create(TAggregationOperator.IdentityValue);
+                        Vector128<float> vresult = Vector128.Create(
+                            TAggregationOperator.IdentityValue
+                        );
 
-                        Vector128<float> beg = TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef));
+                        Vector128<float> beg = TTransformOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef)
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, beg);
 
                         result = TAggregationOperator.Invoke(vresult);
@@ -1295,19 +1598,28 @@ namespace System.Numerics.Tensors
 
                     case 3:
                     {
-                        result = TAggregationOperator.Invoke(result, TTransformOperator.Invoke(Unsafe.Add(ref xRef, 2)));
+                        result = TAggregationOperator.Invoke(
+                            result,
+                            TTransformOperator.Invoke(Unsafe.Add(ref xRef, 2))
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        result = TAggregationOperator.Invoke(result, TTransformOperator.Invoke(Unsafe.Add(ref xRef, 1)));
+                        result = TAggregationOperator.Invoke(
+                            result,
+                            TTransformOperator.Invoke(Unsafe.Add(ref xRef, 1))
+                        );
                         goto case 1;
                     }
 
                     case 1:
                     {
-                        result = TAggregationOperator.Invoke(result, TTransformOperator.Invoke(xRef));
+                        result = TAggregationOperator.Invoke(
+                            result,
+                            TTransformOperator.Invoke(xRef)
+                        );
                         goto case 0;
                     }
 
@@ -1327,7 +1639,9 @@ namespace System.Numerics.Tensors
                 // Preload the beginning and end so that overlapping accesses don't negatively impact the data
 
                 Vector512<float> beg = TTransformOperator.Invoke(Vector512.LoadUnsafe(ref xRef));
-                Vector512<float> end = TTransformOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count)));
+                Vector512<float> end = TTransformOperator.Invoke(
+                    Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count))
+                );
 
                 nuint misalignment = 0;
 
@@ -1354,7 +1668,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            misalignment = ((uint)(sizeof(Vector512<float>)) - ((nuint)(xPtr) % (uint)(sizeof(Vector512<float>)))) / sizeof(float);
+                            misalignment =
+                                (
+                                    (uint)(sizeof(Vector512<float>))
+                                    - ((nuint)(xPtr) % (uint)(sizeof(Vector512<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
 
@@ -1374,10 +1692,18 @@ namespace System.Numerics.Tensors
                         {
                             // We load, process, and store the first four vectors
 
-                            vector1 = TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0)));
-                            vector2 = TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1)));
-                            vector3 = TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2)));
-                            vector4 = TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3)));
+                            vector1 = TTransformOperator.Invoke(
+                                Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0))
+                            );
+                            vector2 = TTransformOperator.Invoke(
+                                Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1))
+                            );
+                            vector3 = TTransformOperator.Invoke(
+                                Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2))
+                            );
+                            vector4 = TTransformOperator.Invoke(
+                                Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3))
+                            );
 
                             vresult = TAggregationOperator.Invoke(vresult, vector1);
                             vresult = TAggregationOperator.Invoke(vresult, vector2);
@@ -1386,10 +1712,18 @@ namespace System.Numerics.Tensors
 
                             // We load, process, and store the next four vectors
 
-                            vector1 = TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4)));
-                            vector2 = TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5)));
-                            vector3 = TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6)));
-                            vector4 = TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7)));
+                            vector1 = TTransformOperator.Invoke(
+                                Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4))
+                            );
+                            vector2 = TTransformOperator.Invoke(
+                                Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5))
+                            );
+                            vector3 = TTransformOperator.Invoke(
+                                Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6))
+                            );
+                            vector4 = TTransformOperator.Invoke(
+                                Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7))
+                            );
 
                             vresult = TAggregationOperator.Invoke(vresult, vector1);
                             vresult = TAggregationOperator.Invoke(vresult, vector2);
@@ -1413,7 +1747,11 @@ namespace System.Numerics.Tensors
                 // Store the first block. Handling this separately simplifies the latter code as we know
                 // they come after and so we can relegate it to full blocks or the trailing elements
 
-                beg = Vector512.ConditionalSelect(CreateAlignmentMaskSingleVector512((int)(misalignment)), beg, Vector512.Create(TAggregationOperator.IdentityValue));
+                beg = Vector512.ConditionalSelect(
+                    CreateAlignmentMaskSingleVector512((int)(misalignment)),
+                    beg,
+                    Vector512.Create(TAggregationOperator.IdentityValue)
+                );
                 vresult = TAggregationOperator.Invoke(vresult, beg);
 
                 // Process the remaining [0, Count * 7] elements via a jump table
@@ -1422,7 +1760,10 @@ namespace System.Numerics.Tensors
                 // worst case end up just doing the identity operation here if there
                 // were no trailing elements.
 
-                (nuint blocks, nuint trailing) = Math.DivRem(remainder, (nuint)(Vector512<float>.Count));
+                (nuint blocks, nuint trailing) = Math.DivRem(
+                    remainder,
+                    (nuint)(Vector512<float>.Count)
+                );
                 blocks -= (misalignment == 0) ? 1u : 0u;
                 remainder -= trailing;
 
@@ -1430,49 +1771,84 @@ namespace System.Numerics.Tensors
                 {
                     case 7:
                     {
-                        Vector512<float> vector = TTransformOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 7)));
+                        Vector512<float> vector = TTransformOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 7)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector512<float> vector = TTransformOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 6)));
+                        Vector512<float> vector = TTransformOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 6)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector512<float> vector = TTransformOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 5)));
+                        Vector512<float> vector = TTransformOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 5)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector512<float> vector = TTransformOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 4)));
+                        Vector512<float> vector = TTransformOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 4)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector512<float> vector = TTransformOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 3)));
+                        Vector512<float> vector = TTransformOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 3)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector512<float> vector = TTransformOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 2)));
+                        Vector512<float> vector = TTransformOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 2)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 1;
                     }
 
                     case 1:
                     {
-                        Vector512<float> vector = TTransformOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 1)));
+                        Vector512<float> vector = TTransformOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 1)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 0;
                     }
@@ -1480,7 +1856,11 @@ namespace System.Numerics.Tensors
                     case 0:
                     {
                         // Store the last block, which includes any elements that wouldn't fill a full vector
-                        end = Vector512.ConditionalSelect(CreateRemainderMaskSingleVector512((int)(trailing)), end, Vector512.Create(TAggregationOperator.IdentityValue));
+                        end = Vector512.ConditionalSelect(
+                            CreateRemainderMaskSingleVector512((int)(trailing)),
+                            end,
+                            Vector512.Create(TAggregationOperator.IdentityValue)
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, end);
                         break;
                     }
@@ -1505,12 +1885,27 @@ namespace System.Numerics.Tensors
                     case 9:
                     {
                         Debug.Assert(Vector256.IsHardwareAccelerated);
-                        Vector256<float> vresult = Vector256.Create(TAggregationOperator.IdentityValue);
+                        Vector256<float> vresult = Vector256.Create(
+                            TAggregationOperator.IdentityValue
+                        );
 
-                        Vector256<float> beg = TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef));
-                        Vector256<float> end = TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count)));
+                        Vector256<float> beg = TTransformOperator.Invoke(
+                            Vector256.LoadUnsafe(ref xRef)
+                        );
+                        Vector256<float> end = TTransformOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count)
+                            )
+                        );
 
-                        end = Vector256.ConditionalSelect(CreateRemainderMaskSingleVector256((int)(remainder % (uint)(Vector256<float>.Count))), end, Vector256.Create(TAggregationOperator.IdentityValue));
+                        end = Vector256.ConditionalSelect(
+                            CreateRemainderMaskSingleVector256(
+                                (int)(remainder % (uint)(Vector256<float>.Count))
+                            ),
+                            end,
+                            Vector256.Create(TAggregationOperator.IdentityValue)
+                        );
 
                         vresult = TAggregationOperator.Invoke(vresult, beg);
                         vresult = TAggregationOperator.Invoke(vresult, end);
@@ -1522,9 +1917,13 @@ namespace System.Numerics.Tensors
                     case 8:
                     {
                         Debug.Assert(Vector256.IsHardwareAccelerated);
-                        Vector256<float> vresult = Vector256.Create(TAggregationOperator.IdentityValue);
+                        Vector256<float> vresult = Vector256.Create(
+                            TAggregationOperator.IdentityValue
+                        );
 
-                        Vector256<float> beg = TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef));
+                        Vector256<float> beg = TTransformOperator.Invoke(
+                            Vector256.LoadUnsafe(ref xRef)
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, beg);
 
                         result = TAggregationOperator.Invoke(vresult);
@@ -1536,12 +1935,27 @@ namespace System.Numerics.Tensors
                     case 5:
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
-                        Vector128<float> vresult = Vector128.Create(TAggregationOperator.IdentityValue);
+                        Vector128<float> vresult = Vector128.Create(
+                            TAggregationOperator.IdentityValue
+                        );
 
-                        Vector128<float> beg = TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef));
-                        Vector128<float> end = TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)));
+                        Vector128<float> beg = TTransformOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef)
+                        );
+                        Vector128<float> end = TTransformOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            )
+                        );
 
-                        end = Vector128.ConditionalSelect(CreateRemainderMaskSingleVector128((int)(remainder % (uint)(Vector128<float>.Count))), end, Vector128.Create(TAggregationOperator.IdentityValue));
+                        end = Vector128.ConditionalSelect(
+                            CreateRemainderMaskSingleVector128(
+                                (int)(remainder % (uint)(Vector128<float>.Count))
+                            ),
+                            end,
+                            Vector128.Create(TAggregationOperator.IdentityValue)
+                        );
 
                         vresult = TAggregationOperator.Invoke(vresult, beg);
                         vresult = TAggregationOperator.Invoke(vresult, end);
@@ -1553,9 +1967,13 @@ namespace System.Numerics.Tensors
                     case 4:
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
-                        Vector128<float> vresult = Vector128.Create(TAggregationOperator.IdentityValue);
+                        Vector128<float> vresult = Vector128.Create(
+                            TAggregationOperator.IdentityValue
+                        );
 
-                        Vector128<float> beg = TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef));
+                        Vector128<float> beg = TTransformOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef)
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, beg);
 
                         result = TAggregationOperator.Invoke(vresult);
@@ -1564,19 +1982,28 @@ namespace System.Numerics.Tensors
 
                     case 3:
                     {
-                        result = TAggregationOperator.Invoke(result, TTransformOperator.Invoke(Unsafe.Add(ref xRef, 2)));
+                        result = TAggregationOperator.Invoke(
+                            result,
+                            TTransformOperator.Invoke(Unsafe.Add(ref xRef, 2))
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        result = TAggregationOperator.Invoke(result, TTransformOperator.Invoke(Unsafe.Add(ref xRef, 1)));
+                        result = TAggregationOperator.Invoke(
+                            result,
+                            TTransformOperator.Invoke(Unsafe.Add(ref xRef, 1))
+                        );
                         goto case 1;
                     }
 
                     case 1:
                     {
-                        result = TAggregationOperator.Invoke(result, TTransformOperator.Invoke(xRef));
+                        result = TAggregationOperator.Invoke(
+                            result,
+                            TTransformOperator.Invoke(xRef)
+                        );
                         goto case 0;
                     }
 
@@ -1597,7 +2024,9 @@ namespace System.Numerics.Tensors
         /// The aggregation is applied to the results of the binary operations on the pair-wise values.
         /// </typeparam>
         private static float Aggregate<TBinaryOperator, TAggregationOperator>(
-            ReadOnlySpan<float> x, ReadOnlySpan<float> y)
+            ReadOnlySpan<float> x,
+            ReadOnlySpan<float> y
+        )
             where TBinaryOperator : struct, IBinaryOperator
             where TAggregationOperator : struct, IAggregationOperator
         {
@@ -1688,8 +2117,10 @@ namespace System.Numerics.Tensors
 
                 for (nuint i = 0; i < length; i++)
                 {
-                    result = TAggregationOperator.Invoke(result, TBinaryOperator.Invoke(Unsafe.Add(ref xRef, i),
-                                                                                        Unsafe.Add(ref yRef, i)));
+                    result = TAggregationOperator.Invoke(
+                        result,
+                        TBinaryOperator.Invoke(Unsafe.Add(ref xRef, i), Unsafe.Add(ref yRef, i))
+                    );
                 }
 
                 return result;
@@ -1701,10 +2132,14 @@ namespace System.Numerics.Tensors
 
                 // Preload the beginning and end so that overlapping accesses don't negatively impact the data
 
-                Vector128<float> beg = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                              Vector128.LoadUnsafe(ref yRef));
-                Vector128<float> end = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)),
-                                                              Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count)));
+                Vector128<float> beg = TBinaryOperator.Invoke(
+                    Vector128.LoadUnsafe(ref xRef),
+                    Vector128.LoadUnsafe(ref yRef)
+                );
+                Vector128<float> end = TBinaryOperator.Invoke(
+                    Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)),
+                    Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count))
+                );
 
                 nuint misalignment = 0;
 
@@ -1733,7 +2168,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            misalignment = ((uint)(sizeof(Vector128<float>)) - ((nuint)(xPtr) % (uint)(sizeof(Vector128<float>)))) / sizeof(float);
+                            misalignment =
+                                (
+                                    (uint)(sizeof(Vector128<float>))
+                                    - ((nuint)(xPtr) % (uint)(sizeof(Vector128<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             yPtr += misalignment;
@@ -1754,14 +2193,22 @@ namespace System.Numerics.Tensors
                         {
                             // We load, process, and store the first four vectors
 
-                            vector1 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0)),
-                                                             Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 0)));
-                            vector2 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1)),
-                                                             Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 1)));
-                            vector3 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2)),
-                                                             Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 2)));
-                            vector4 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3)),
-                                                             Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 3)));
+                            vector1 = TBinaryOperator.Invoke(
+                                Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0)),
+                                Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 0))
+                            );
+                            vector2 = TBinaryOperator.Invoke(
+                                Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1)),
+                                Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 1))
+                            );
+                            vector3 = TBinaryOperator.Invoke(
+                                Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2)),
+                                Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 2))
+                            );
+                            vector4 = TBinaryOperator.Invoke(
+                                Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3)),
+                                Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 3))
+                            );
 
                             vresult = TAggregationOperator.Invoke(vresult, vector1);
                             vresult = TAggregationOperator.Invoke(vresult, vector2);
@@ -1770,14 +2217,22 @@ namespace System.Numerics.Tensors
 
                             // We load, process, and store the next four vectors
 
-                            vector1 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4)),
-                                                             Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 4)));
-                            vector2 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5)),
-                                                             Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 5)));
-                            vector3 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6)),
-                                                             Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 6)));
-                            vector4 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7)),
-                                                             Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 7)));
+                            vector1 = TBinaryOperator.Invoke(
+                                Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4)),
+                                Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 4))
+                            );
+                            vector2 = TBinaryOperator.Invoke(
+                                Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5)),
+                                Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 5))
+                            );
+                            vector3 = TBinaryOperator.Invoke(
+                                Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6)),
+                                Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 6))
+                            );
+                            vector4 = TBinaryOperator.Invoke(
+                                Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7)),
+                                Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 7))
+                            );
 
                             vresult = TAggregationOperator.Invoke(vresult, vector1);
                             vresult = TAggregationOperator.Invoke(vresult, vector2);
@@ -1803,7 +2258,11 @@ namespace System.Numerics.Tensors
                 // Store the first block. Handling this separately simplifies the latter code as we know
                 // they come after and so we can relegate it to full blocks or the trailing elements
 
-                beg = Vector128.ConditionalSelect(CreateAlignmentMaskSingleVector128((int)(misalignment)), beg, Vector128.Create(TAggregationOperator.IdentityValue));
+                beg = Vector128.ConditionalSelect(
+                    CreateAlignmentMaskSingleVector128((int)(misalignment)),
+                    beg,
+                    Vector128.Create(TAggregationOperator.IdentityValue)
+                );
                 vresult = TAggregationOperator.Invoke(vresult, beg);
 
                 // Process the remaining [0, Count * 7] elements via a jump table
@@ -1812,7 +2271,10 @@ namespace System.Numerics.Tensors
                 // worst case end up just doing the identity operation here if there
                 // were no trailing elements.
 
-                (nuint blocks, nuint trailing) = Math.DivRem(remainder, (nuint)(Vector128<float>.Count));
+                (nuint blocks, nuint trailing) = Math.DivRem(
+                    remainder,
+                    (nuint)(Vector128<float>.Count)
+                );
                 blocks -= (misalignment == 0) ? 1u : 0u;
                 remainder -= trailing;
 
@@ -1820,56 +2282,112 @@ namespace System.Numerics.Tensors
                 {
                     case 7:
                     {
-                        Vector128<float> vector = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 7)),
-                                                                         Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 7)));
+                        Vector128<float> vector = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 7)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 7)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector128<float> vector = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 6)),
-                                                                         Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 6)));
+                        Vector128<float> vector = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 6)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 6)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector128<float> vector = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 5)),
-                                                                         Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 5)));
+                        Vector128<float> vector = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 5)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 5)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector128<float> vector = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 4)),
-                                                                         Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 4)));
+                        Vector128<float> vector = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 4)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 4)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector128<float> vector = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 3)),
-                                                                         Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 3)));
+                        Vector128<float> vector = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 3)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 3)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector128<float> vector = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 2)),
-                                                                         Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 2)));
+                        Vector128<float> vector = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 2)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 2)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 1;
                     }
 
                     case 1:
                     {
-                        Vector128<float> vector = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 1)),
-                                                                         Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 1)));
+                        Vector128<float> vector = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 1)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 1)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 0;
                     }
@@ -1877,7 +2395,11 @@ namespace System.Numerics.Tensors
                     case 0:
                     {
                         // Store the last block, which includes any elements that wouldn't fill a full vector
-                        end = Vector128.ConditionalSelect(CreateRemainderMaskSingleVector128((int)(trailing)), end, Vector128.Create(TAggregationOperator.IdentityValue));
+                        end = Vector128.ConditionalSelect(
+                            CreateRemainderMaskSingleVector128((int)(trailing)),
+                            end,
+                            Vector128.Create(TAggregationOperator.IdentityValue)
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, end);
                         break;
                     }
@@ -1895,21 +2417,28 @@ namespace System.Numerics.Tensors
                 {
                     case 3:
                     {
-                        result = TAggregationOperator.Invoke(result, TBinaryOperator.Invoke(Unsafe.Add(ref xRef, 2),
-                                                                                            Unsafe.Add(ref yRef, 2)));
+                        result = TAggregationOperator.Invoke(
+                            result,
+                            TBinaryOperator.Invoke(Unsafe.Add(ref xRef, 2), Unsafe.Add(ref yRef, 2))
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        result = TAggregationOperator.Invoke(result, TBinaryOperator.Invoke(Unsafe.Add(ref xRef, 1),
-                                                                                            Unsafe.Add(ref yRef, 1)));
+                        result = TAggregationOperator.Invoke(
+                            result,
+                            TBinaryOperator.Invoke(Unsafe.Add(ref xRef, 1), Unsafe.Add(ref yRef, 1))
+                        );
                         goto case 1;
                     }
 
                     case 1:
                     {
-                        result = TAggregationOperator.Invoke(result, TBinaryOperator.Invoke(xRef, yRef));
+                        result = TAggregationOperator.Invoke(
+                            result,
+                            TBinaryOperator.Invoke(xRef, yRef)
+                        );
                         goto case 0;
                     }
 
@@ -1928,10 +2457,14 @@ namespace System.Numerics.Tensors
 
                 // Preload the beginning and end so that overlapping accesses don't negatively impact the data
 
-                Vector256<float> beg = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef),
-                                                              Vector256.LoadUnsafe(ref yRef));
-                Vector256<float> end = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count)),
-                                                              Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count)));
+                Vector256<float> beg = TBinaryOperator.Invoke(
+                    Vector256.LoadUnsafe(ref xRef),
+                    Vector256.LoadUnsafe(ref yRef)
+                );
+                Vector256<float> end = TBinaryOperator.Invoke(
+                    Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count)),
+                    Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count))
+                );
 
                 nuint misalignment = 0;
 
@@ -1960,7 +2493,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            misalignment = ((uint)(sizeof(Vector256<float>)) - ((nuint)(xPtr) % (uint)(sizeof(Vector256<float>)))) / sizeof(float);
+                            misalignment =
+                                (
+                                    (uint)(sizeof(Vector256<float>))
+                                    - ((nuint)(xPtr) % (uint)(sizeof(Vector256<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             yPtr += misalignment;
@@ -1981,14 +2518,22 @@ namespace System.Numerics.Tensors
                         {
                             // We load, process, and store the first four vectors
 
-                            vector1 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0)),
-                                                             Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 0)));
-                            vector2 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1)),
-                                                             Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 1)));
-                            vector3 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2)),
-                                                             Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 2)));
-                            vector4 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3)),
-                                                             Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 3)));
+                            vector1 = TBinaryOperator.Invoke(
+                                Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0)),
+                                Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 0))
+                            );
+                            vector2 = TBinaryOperator.Invoke(
+                                Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1)),
+                                Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 1))
+                            );
+                            vector3 = TBinaryOperator.Invoke(
+                                Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2)),
+                                Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 2))
+                            );
+                            vector4 = TBinaryOperator.Invoke(
+                                Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3)),
+                                Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 3))
+                            );
 
                             vresult = TAggregationOperator.Invoke(vresult, vector1);
                             vresult = TAggregationOperator.Invoke(vresult, vector2);
@@ -1997,14 +2542,22 @@ namespace System.Numerics.Tensors
 
                             // We load, process, and store the next four vectors
 
-                            vector1 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4)),
-                                                             Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 4)));
-                            vector2 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5)),
-                                                             Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 5)));
-                            vector3 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6)),
-                                                             Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 6)));
-                            vector4 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7)),
-                                                             Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 7)));
+                            vector1 = TBinaryOperator.Invoke(
+                                Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4)),
+                                Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 4))
+                            );
+                            vector2 = TBinaryOperator.Invoke(
+                                Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5)),
+                                Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 5))
+                            );
+                            vector3 = TBinaryOperator.Invoke(
+                                Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6)),
+                                Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 6))
+                            );
+                            vector4 = TBinaryOperator.Invoke(
+                                Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7)),
+                                Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 7))
+                            );
 
                             vresult = TAggregationOperator.Invoke(vresult, vector1);
                             vresult = TAggregationOperator.Invoke(vresult, vector2);
@@ -2030,7 +2583,11 @@ namespace System.Numerics.Tensors
                 // Store the first block. Handling this separately simplifies the latter code as we know
                 // they come after and so we can relegate it to full blocks or the trailing elements
 
-                beg = Vector256.ConditionalSelect(CreateAlignmentMaskSingleVector256((int)(misalignment)), beg, Vector256.Create(TAggregationOperator.IdentityValue));
+                beg = Vector256.ConditionalSelect(
+                    CreateAlignmentMaskSingleVector256((int)(misalignment)),
+                    beg,
+                    Vector256.Create(TAggregationOperator.IdentityValue)
+                );
                 vresult = TAggregationOperator.Invoke(vresult, beg);
 
                 // Process the remaining [0, Count * 7] elements via a jump table
@@ -2039,7 +2596,10 @@ namespace System.Numerics.Tensors
                 // worst case end up just doing the identity operation here if there
                 // were no trailing elements.
 
-                (nuint blocks, nuint trailing) = Math.DivRem(remainder, (nuint)(Vector256<float>.Count));
+                (nuint blocks, nuint trailing) = Math.DivRem(
+                    remainder,
+                    (nuint)(Vector256<float>.Count)
+                );
                 blocks -= (misalignment == 0) ? 1u : 0u;
                 remainder -= trailing;
 
@@ -2047,56 +2607,112 @@ namespace System.Numerics.Tensors
                 {
                     case 7:
                     {
-                        Vector256<float> vector = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 7)),
-                                                                         Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 7)));
+                        Vector256<float> vector = TBinaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 7)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 7)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector256<float> vector = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 6)),
-                                                                         Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 6)));
+                        Vector256<float> vector = TBinaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 6)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 6)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector256<float> vector = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 5)),
-                                                                         Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 5)));
+                        Vector256<float> vector = TBinaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 5)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 5)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector256<float> vector = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 4)),
-                                                                         Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 4)));
+                        Vector256<float> vector = TBinaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 4)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 4)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector256<float> vector = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 3)),
-                                                                         Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 3)));
+                        Vector256<float> vector = TBinaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 3)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 3)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector256<float> vector = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 2)),
-                                                                         Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 2)));
+                        Vector256<float> vector = TBinaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 2)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 2)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 1;
                     }
 
                     case 1:
                     {
-                        Vector256<float> vector = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 1)),
-                                                                         Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 1)));
+                        Vector256<float> vector = TBinaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 1)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 1)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 0;
                     }
@@ -2104,7 +2720,11 @@ namespace System.Numerics.Tensors
                     case 0:
                     {
                         // Store the last block, which includes any elements that wouldn't fill a full vector
-                        end = Vector256.ConditionalSelect(CreateRemainderMaskSingleVector256((int)(trailing)), end, Vector256.Create(TAggregationOperator.IdentityValue));
+                        end = Vector256.ConditionalSelect(
+                            CreateRemainderMaskSingleVector256((int)(trailing)),
+                            end,
+                            Vector256.Create(TAggregationOperator.IdentityValue)
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, end);
                         break;
                     }
@@ -2125,14 +2745,32 @@ namespace System.Numerics.Tensors
                     case 5:
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
-                        Vector128<float> vresult = Vector128.Create(TAggregationOperator.IdentityValue);
+                        Vector128<float> vresult = Vector128.Create(
+                            TAggregationOperator.IdentityValue
+                        );
 
-                        Vector128<float> beg = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                                      Vector128.LoadUnsafe(ref yRef));
-                        Vector128<float> end = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)),
-                                                                      Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count)));
+                        Vector128<float> beg = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef),
+                            Vector128.LoadUnsafe(ref yRef)
+                        );
+                        Vector128<float> end = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            )
+                        );
 
-                        end = Vector128.ConditionalSelect(CreateRemainderMaskSingleVector128((int)(remainder % (uint)(Vector128<float>.Count))), end, Vector128.Create(TAggregationOperator.IdentityValue));
+                        end = Vector128.ConditionalSelect(
+                            CreateRemainderMaskSingleVector128(
+                                (int)(remainder % (uint)(Vector128<float>.Count))
+                            ),
+                            end,
+                            Vector128.Create(TAggregationOperator.IdentityValue)
+                        );
 
                         vresult = TAggregationOperator.Invoke(vresult, beg);
                         vresult = TAggregationOperator.Invoke(vresult, end);
@@ -2144,10 +2782,14 @@ namespace System.Numerics.Tensors
                     case 4:
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
-                        Vector128<float> vresult = Vector128.Create(TAggregationOperator.IdentityValue);
+                        Vector128<float> vresult = Vector128.Create(
+                            TAggregationOperator.IdentityValue
+                        );
 
-                        Vector128<float> beg = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                                      Vector128.LoadUnsafe(ref yRef));
+                        Vector128<float> beg = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef),
+                            Vector128.LoadUnsafe(ref yRef)
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, beg);
 
                         result = TAggregationOperator.Invoke(vresult);
@@ -2156,21 +2798,28 @@ namespace System.Numerics.Tensors
 
                     case 3:
                     {
-                        result = TAggregationOperator.Invoke(result, TBinaryOperator.Invoke(Unsafe.Add(ref xRef, 2),
-                                                                                            Unsafe.Add(ref yRef, 2)));
+                        result = TAggregationOperator.Invoke(
+                            result,
+                            TBinaryOperator.Invoke(Unsafe.Add(ref xRef, 2), Unsafe.Add(ref yRef, 2))
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        result = TAggregationOperator.Invoke(result, TBinaryOperator.Invoke(Unsafe.Add(ref xRef, 1),
-                                                                                            Unsafe.Add(ref yRef, 1)));
+                        result = TAggregationOperator.Invoke(
+                            result,
+                            TBinaryOperator.Invoke(Unsafe.Add(ref xRef, 1), Unsafe.Add(ref yRef, 1))
+                        );
                         goto case 1;
                     }
 
                     case 1:
                     {
-                        result = TAggregationOperator.Invoke(result, TBinaryOperator.Invoke(xRef, yRef));
+                        result = TAggregationOperator.Invoke(
+                            result,
+                            TBinaryOperator.Invoke(xRef, yRef)
+                        );
                         goto case 0;
                     }
 
@@ -2189,10 +2838,14 @@ namespace System.Numerics.Tensors
 
                 // Preload the beginning and end so that overlapping accesses don't negatively impact the data
 
-                Vector512<float> beg = TBinaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef),
-                                                              Vector512.LoadUnsafe(ref yRef));
-                Vector512<float> end = TBinaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count)),
-                                                              Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count)));
+                Vector512<float> beg = TBinaryOperator.Invoke(
+                    Vector512.LoadUnsafe(ref xRef),
+                    Vector512.LoadUnsafe(ref yRef)
+                );
+                Vector512<float> end = TBinaryOperator.Invoke(
+                    Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count)),
+                    Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count))
+                );
 
                 nuint misalignment = 0;
 
@@ -2221,7 +2874,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            misalignment = ((uint)(sizeof(Vector512<float>)) - ((nuint)(xPtr) % (uint)(sizeof(Vector512<float>)))) / sizeof(float);
+                            misalignment =
+                                (
+                                    (uint)(sizeof(Vector512<float>))
+                                    - ((nuint)(xPtr) % (uint)(sizeof(Vector512<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             yPtr += misalignment;
@@ -2242,14 +2899,22 @@ namespace System.Numerics.Tensors
                         {
                             // We load, process, and store the first four vectors
 
-                            vector1 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0)),
-                                                             Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 0)));
-                            vector2 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1)),
-                                                             Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 1)));
-                            vector3 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2)),
-                                                             Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 2)));
-                            vector4 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3)),
-                                                             Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 3)));
+                            vector1 = TBinaryOperator.Invoke(
+                                Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0)),
+                                Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 0))
+                            );
+                            vector2 = TBinaryOperator.Invoke(
+                                Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1)),
+                                Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 1))
+                            );
+                            vector3 = TBinaryOperator.Invoke(
+                                Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2)),
+                                Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 2))
+                            );
+                            vector4 = TBinaryOperator.Invoke(
+                                Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3)),
+                                Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 3))
+                            );
 
                             vresult = TAggregationOperator.Invoke(vresult, vector1);
                             vresult = TAggregationOperator.Invoke(vresult, vector2);
@@ -2258,14 +2923,22 @@ namespace System.Numerics.Tensors
 
                             // We load, process, and store the next four vectors
 
-                            vector1 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4)),
-                                                             Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 4)));
-                            vector2 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5)),
-                                                             Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 5)));
-                            vector3 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6)),
-                                                             Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 6)));
-                            vector4 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7)),
-                                                             Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 7)));
+                            vector1 = TBinaryOperator.Invoke(
+                                Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4)),
+                                Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 4))
+                            );
+                            vector2 = TBinaryOperator.Invoke(
+                                Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5)),
+                                Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 5))
+                            );
+                            vector3 = TBinaryOperator.Invoke(
+                                Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6)),
+                                Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 6))
+                            );
+                            vector4 = TBinaryOperator.Invoke(
+                                Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7)),
+                                Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 7))
+                            );
 
                             vresult = TAggregationOperator.Invoke(vresult, vector1);
                             vresult = TAggregationOperator.Invoke(vresult, vector2);
@@ -2291,7 +2964,11 @@ namespace System.Numerics.Tensors
                 // Store the first block. Handling this separately simplifies the latter code as we know
                 // they come after and so we can relegate it to full blocks or the trailing elements
 
-                beg = Vector512.ConditionalSelect(CreateAlignmentMaskSingleVector512((int)(misalignment)), beg, Vector512.Create(TAggregationOperator.IdentityValue));
+                beg = Vector512.ConditionalSelect(
+                    CreateAlignmentMaskSingleVector512((int)(misalignment)),
+                    beg,
+                    Vector512.Create(TAggregationOperator.IdentityValue)
+                );
                 vresult = TAggregationOperator.Invoke(vresult, beg);
 
                 // Process the remaining [0, Count * 7] elements via a jump table
@@ -2300,7 +2977,10 @@ namespace System.Numerics.Tensors
                 // worst case end up just doing the identity operation here if there
                 // were no trailing elements.
 
-                (nuint blocks, nuint trailing) = Math.DivRem(remainder, (nuint)(Vector512<float>.Count));
+                (nuint blocks, nuint trailing) = Math.DivRem(
+                    remainder,
+                    (nuint)(Vector512<float>.Count)
+                );
                 blocks -= (misalignment == 0) ? 1u : 0u;
                 remainder -= trailing;
 
@@ -2308,56 +2988,112 @@ namespace System.Numerics.Tensors
                 {
                     case 7:
                     {
-                        Vector512<float> vector = TBinaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 7)),
-                                                                         Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 7)));
+                        Vector512<float> vector = TBinaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 7)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 7)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector512<float> vector = TBinaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 6)),
-                                                                         Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 6)));
+                        Vector512<float> vector = TBinaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 6)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 6)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector512<float> vector = TBinaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 5)),
-                                                                         Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 5)));
+                        Vector512<float> vector = TBinaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 5)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 5)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector512<float> vector = TBinaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 4)),
-                                                                         Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 4)));
+                        Vector512<float> vector = TBinaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 4)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 4)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector512<float> vector = TBinaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 3)),
-                                                                         Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 3)));
+                        Vector512<float> vector = TBinaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 3)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 3)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector512<float> vector = TBinaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 2)),
-                                                                         Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 2)));
+                        Vector512<float> vector = TBinaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 2)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 2)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 1;
                     }
 
                     case 1:
                     {
-                        Vector512<float> vector = TBinaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 1)),
-                                                                         Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 1)));
+                        Vector512<float> vector = TBinaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 1)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 1)
+                            )
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, vector);
                         goto case 0;
                     }
@@ -2365,7 +3101,11 @@ namespace System.Numerics.Tensors
                     case 0:
                     {
                         // Store the last block, which includes any elements that wouldn't fill a full vector
-                        end = Vector512.ConditionalSelect(CreateRemainderMaskSingleVector512((int)(trailing)), end, Vector512.Create(TAggregationOperator.IdentityValue));
+                        end = Vector512.ConditionalSelect(
+                            CreateRemainderMaskSingleVector512((int)(trailing)),
+                            end,
+                            Vector512.Create(TAggregationOperator.IdentityValue)
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, end);
                         break;
                     }
@@ -2390,14 +3130,32 @@ namespace System.Numerics.Tensors
                     case 9:
                     {
                         Debug.Assert(Vector256.IsHardwareAccelerated);
-                        Vector256<float> vresult = Vector256.Create(TAggregationOperator.IdentityValue);
+                        Vector256<float> vresult = Vector256.Create(
+                            TAggregationOperator.IdentityValue
+                        );
 
-                        Vector256<float> beg = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef),
-                                                                      Vector256.LoadUnsafe(ref yRef));
-                        Vector256<float> end = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count)),
-                                                                      Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count)));
+                        Vector256<float> beg = TBinaryOperator.Invoke(
+                            Vector256.LoadUnsafe(ref xRef),
+                            Vector256.LoadUnsafe(ref yRef)
+                        );
+                        Vector256<float> end = TBinaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count)
+                            )
+                        );
 
-                        end = Vector256.ConditionalSelect(CreateRemainderMaskSingleVector256((int)(remainder % (uint)(Vector256<float>.Count))), end, Vector256.Create(TAggregationOperator.IdentityValue));
+                        end = Vector256.ConditionalSelect(
+                            CreateRemainderMaskSingleVector256(
+                                (int)(remainder % (uint)(Vector256<float>.Count))
+                            ),
+                            end,
+                            Vector256.Create(TAggregationOperator.IdentityValue)
+                        );
 
                         vresult = TAggregationOperator.Invoke(vresult, beg);
                         vresult = TAggregationOperator.Invoke(vresult, end);
@@ -2409,10 +3167,14 @@ namespace System.Numerics.Tensors
                     case 8:
                     {
                         Debug.Assert(Vector256.IsHardwareAccelerated);
-                        Vector256<float> vresult = Vector256.Create(TAggregationOperator.IdentityValue);
+                        Vector256<float> vresult = Vector256.Create(
+                            TAggregationOperator.IdentityValue
+                        );
 
-                        Vector256<float> beg = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef),
-                                                                      Vector256.LoadUnsafe(ref yRef));
+                        Vector256<float> beg = TBinaryOperator.Invoke(
+                            Vector256.LoadUnsafe(ref xRef),
+                            Vector256.LoadUnsafe(ref yRef)
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, beg);
 
                         result = TAggregationOperator.Invoke(vresult);
@@ -2424,14 +3186,32 @@ namespace System.Numerics.Tensors
                     case 5:
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
-                        Vector128<float> vresult = Vector128.Create(TAggregationOperator.IdentityValue);
+                        Vector128<float> vresult = Vector128.Create(
+                            TAggregationOperator.IdentityValue
+                        );
 
-                        Vector128<float> beg = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                                      Vector128.LoadUnsafe(ref yRef));
-                        Vector128<float> end = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)),
-                                                                      Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count)));
+                        Vector128<float> beg = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef),
+                            Vector128.LoadUnsafe(ref yRef)
+                        );
+                        Vector128<float> end = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            )
+                        );
 
-                        end = Vector128.ConditionalSelect(CreateRemainderMaskSingleVector128((int)(remainder % (uint)(Vector128<float>.Count))), end, Vector128.Create(TAggregationOperator.IdentityValue));
+                        end = Vector128.ConditionalSelect(
+                            CreateRemainderMaskSingleVector128(
+                                (int)(remainder % (uint)(Vector128<float>.Count))
+                            ),
+                            end,
+                            Vector128.Create(TAggregationOperator.IdentityValue)
+                        );
 
                         vresult = TAggregationOperator.Invoke(vresult, beg);
                         vresult = TAggregationOperator.Invoke(vresult, end);
@@ -2443,10 +3223,14 @@ namespace System.Numerics.Tensors
                     case 4:
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
-                        Vector128<float> vresult = Vector128.Create(TAggregationOperator.IdentityValue);
+                        Vector128<float> vresult = Vector128.Create(
+                            TAggregationOperator.IdentityValue
+                        );
 
-                        Vector128<float> beg = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                                      Vector128.LoadUnsafe(ref yRef));
+                        Vector128<float> beg = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef),
+                            Vector128.LoadUnsafe(ref yRef)
+                        );
                         vresult = TAggregationOperator.Invoke(vresult, beg);
 
                         result = TAggregationOperator.Invoke(vresult);
@@ -2455,21 +3239,28 @@ namespace System.Numerics.Tensors
 
                     case 3:
                     {
-                        result = TAggregationOperator.Invoke(result, TBinaryOperator.Invoke(Unsafe.Add(ref xRef, 2),
-                                                                                            Unsafe.Add(ref yRef, 2)));
+                        result = TAggregationOperator.Invoke(
+                            result,
+                            TBinaryOperator.Invoke(Unsafe.Add(ref xRef, 2), Unsafe.Add(ref yRef, 2))
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        result = TAggregationOperator.Invoke(result, TBinaryOperator.Invoke(Unsafe.Add(ref xRef, 1),
-                                                                                            Unsafe.Add(ref yRef, 1)));
+                        result = TAggregationOperator.Invoke(
+                            result,
+                            TBinaryOperator.Invoke(Unsafe.Add(ref xRef, 1), Unsafe.Add(ref yRef, 1))
+                        );
                         goto case 1;
                     }
 
                     case 1:
                     {
-                        result = TAggregationOperator.Invoke(result, TBinaryOperator.Invoke(xRef, yRef));
+                        result = TAggregationOperator.Invoke(
+                            result,
+                            TBinaryOperator.Invoke(xRef, yRef)
+                        );
                         goto case 0;
                     }
 
@@ -2537,7 +3328,10 @@ namespace System.Numerics.Tensors
                 // If any elements remain, handle them in one final vector.
                 if (i != x.Length)
                 {
-                    current = Vector512.LoadUnsafe(ref xRef, (uint)(x.Length - Vector512<float>.Count));
+                    current = Vector512.LoadUnsafe(
+                        ref xRef,
+                        (uint)(x.Length - Vector512<float>.Count)
+                    );
 
                     nanMask = ~Vector512.Equals(current, current);
                     if (nanMask != Vector512<float>.Zero)
@@ -2589,7 +3383,10 @@ namespace System.Numerics.Tensors
                 // If any elements remain, handle them in one final vector.
                 if (i != x.Length)
                 {
-                    current = Vector256.LoadUnsafe(ref xRef, (uint)(x.Length - Vector256<float>.Count));
+                    current = Vector256.LoadUnsafe(
+                        ref xRef,
+                        (uint)(x.Length - Vector256<float>.Count)
+                    );
 
                     nanMask = ~Vector256.Equals(current, current);
                     if (nanMask != Vector256<float>.Zero)
@@ -2641,7 +3438,10 @@ namespace System.Numerics.Tensors
                 // If any elements remain, handle them in one final vector.
                 if (i != x.Length)
                 {
-                    current = Vector128.LoadUnsafe(ref xRef, (uint)(x.Length - Vector128<float>.Count));
+                    current = Vector128.LoadUnsafe(
+                        ref xRef,
+                        (uint)(x.Length - Vector128<float>.Count)
+                    );
 
                     nanMask = ~Vector128.Equals(current, current);
                     if (nanMask != Vector128<float>.Zero)
@@ -2677,7 +3477,8 @@ namespace System.Numerics.Tensors
             return curResult;
         }
 
-        private static int IndexOfMinMaxCore<TIndexOfMinMax>(ReadOnlySpan<float> x) where TIndexOfMinMax : struct, IIndexOfOperator
+        private static int IndexOfMinMaxCore<TIndexOfMinMax>(ReadOnlySpan<float> x)
+            where TIndexOfMinMax : struct, IIndexOfOperator
         {
             if (x.IsEmpty)
             {
@@ -2692,7 +3493,24 @@ namespace System.Numerics.Tensors
             if (Vector512.IsHardwareAccelerated && x.Length >= Vector512<float>.Count)
             {
                 ref float xRef = ref MemoryMarshal.GetReference(x);
-                Vector512<int> resultIndex = Vector512.Create(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+                Vector512<int> resultIndex = Vector512.Create(
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15
+                );
                 Vector512<int> curIndex = resultIndex;
                 Vector512<int> increment = Vector512.Create(Vector512<float>.Count);
 
@@ -2731,7 +3549,10 @@ namespace System.Numerics.Tensors
                 // If any elements remain, handle them in one final vector.
                 if (i != x.Length)
                 {
-                    current = Vector512.LoadUnsafe(ref xRef, (uint)(x.Length - Vector512<float>.Count));
+                    current = Vector512.LoadUnsafe(
+                        ref xRef,
+                        (uint)(x.Length - Vector512<float>.Count)
+                    );
                     curIndex += Vector512.Create(x.Length - i);
 
                     nanMask = ~Vector512.Equals(current, current);
@@ -2789,7 +3610,10 @@ namespace System.Numerics.Tensors
                 // If any elements remain, handle them in one final vector.
                 if (i != x.Length)
                 {
-                    current = Vector256.LoadUnsafe(ref xRef, (uint)(x.Length - Vector256<float>.Count));
+                    current = Vector256.LoadUnsafe(
+                        ref xRef,
+                        (uint)(x.Length - Vector256<float>.Count)
+                    );
                     curIndex += Vector256.Create(x.Length - i);
 
                     nanMask = ~Vector256.Equals(current, current);
@@ -2849,7 +3673,10 @@ namespace System.Numerics.Tensors
                 {
                     curIndex += Vector128.Create(x.Length - i);
 
-                    current = Vector128.LoadUnsafe(ref xRef, (uint)(x.Length - Vector128<float>.Count));
+                    current = Vector128.LoadUnsafe(
+                        ref xRef,
+                        (uint)(x.Length - Vector128<float>.Count)
+                    );
 
                     nanMask = ~Vector128.Equals(current, current);
                     if (nanMask != Vector128<float>.Zero)
@@ -2904,7 +3731,9 @@ namespace System.Numerics.Tensors
         /// <summary>Performs an element-wise operation on <paramref name="x"/> and writes the results to <paramref name="destination"/>.</summary>
         /// <typeparam name="TUnaryOperator">Specifies the operation to perform on each element loaded from <paramref name="x"/>.</typeparam>
         private static void InvokeSpanIntoSpan<TUnaryOperator>(
-            ReadOnlySpan<float> x, Span<float> destination)
+            ReadOnlySpan<float> x,
+            Span<float> destination
+        )
             where TUnaryOperator : struct, IUnaryOperator
         {
             if (x.Length > destination.Length)
@@ -2999,7 +3828,9 @@ namespace System.Numerics.Tensors
                 // Preload the beginning and end so that overlapping accesses don't negatively impact the data
 
                 Vector128<float> beg = TUnaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef));
-                Vector128<float> end = TUnaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)));
+                Vector128<float> end = TUnaryOperator.Invoke(
+                    Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count))
+                );
 
                 if (remainder > (uint)(Vector128<float>.Count * 8))
                 {
@@ -3026,7 +3857,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector128<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector128<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector128<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector128<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             dPtr += misalignment;
@@ -3050,27 +3885,59 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TUnaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0)));
-                                vector2 = TUnaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1)));
-                                vector3 = TUnaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2)));
-                                vector4 = TUnaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3)));
+                                vector1 = TUnaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0))
+                                );
+                                vector2 = TUnaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1))
+                                );
+                                vector3 = TUnaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2))
+                                );
+                                vector4 = TUnaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 0));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 1));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 2));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 3));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 0)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 1)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 2)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 3)
+                                );
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TUnaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4)));
-                                vector2 = TUnaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5)));
-                                vector3 = TUnaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6)));
-                                vector4 = TUnaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7)));
+                                vector1 = TUnaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4))
+                                );
+                                vector2 = TUnaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5))
+                                );
+                                vector3 = TUnaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6))
+                                );
+                                vector4 = TUnaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 4));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 5));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 6));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 7));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 4)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 5)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 6)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 7)
+                                );
 
                                 // We adjust the source and destination references, then update
                                 // the count of remaining elements to process.
@@ -3087,10 +3954,18 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TUnaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0)));
-                                vector2 = TUnaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1)));
-                                vector3 = TUnaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2)));
-                                vector4 = TUnaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3)));
+                                vector1 = TUnaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0))
+                                );
+                                vector2 = TUnaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1))
+                                );
+                                vector3 = TUnaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2))
+                                );
+                                vector4 = TUnaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector128<float>.Count * 0));
                                 vector2.Store(dPtr + (uint)(Vector128<float>.Count * 1));
@@ -3099,10 +3974,18 @@ namespace System.Numerics.Tensors
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TUnaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4)));
-                                vector2 = TUnaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5)));
-                                vector3 = TUnaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6)));
-                                vector4 = TUnaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7)));
+                                vector1 = TUnaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4))
+                                );
+                                vector2 = TUnaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5))
+                                );
+                                vector3 = TUnaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6))
+                                );
+                                vector4 = TUnaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector128<float>.Count * 4));
                                 vector2.Store(dPtr + (uint)(Vector128<float>.Count * 5));
@@ -3134,56 +4017,114 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector128<float>.Count - 1)) & (nuint)(-Vector128<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector128<float>.Count - 1))
+                    & (nuint)(-Vector128<float>.Count);
 
                 switch (remainder / (uint)(Vector128<float>.Count))
                 {
                     case 8:
                     {
-                        Vector128<float> vector = TUnaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 8)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 8));
+                        Vector128<float> vector = TUnaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 8)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 8)
+                        );
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector128<float> vector = TUnaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 7)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 7));
+                        Vector128<float> vector = TUnaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 7)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 7)
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector128<float> vector = TUnaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 6)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 6));
+                        Vector128<float> vector = TUnaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 6)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 6)
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector128<float> vector = TUnaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 5)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 5));
+                        Vector128<float> vector = TUnaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 5)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 5)
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector128<float> vector = TUnaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 4)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 4));
+                        Vector128<float> vector = TUnaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 4)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 4)
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector128<float> vector = TUnaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 3)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 3));
+                        Vector128<float> vector = TUnaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 3)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 3)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector128<float> vector = TUnaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 2)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 2));
+                        Vector128<float> vector = TUnaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 2)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 2)
+                        );
                         goto case 1;
                     }
 
@@ -3240,7 +4181,9 @@ namespace System.Numerics.Tensors
                 // Preload the beginning and end so that overlapping accesses don't negatively impact the data
 
                 Vector256<float> beg = TUnaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef));
-                Vector256<float> end = TUnaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count)));
+                Vector256<float> end = TUnaryOperator.Invoke(
+                    Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count))
+                );
 
                 if (remainder > (uint)(Vector256<float>.Count * 8))
                 {
@@ -3267,7 +4210,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector256<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector256<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector256<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector256<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             dPtr += misalignment;
@@ -3291,27 +4238,59 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TUnaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0)));
-                                vector2 = TUnaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1)));
-                                vector3 = TUnaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2)));
-                                vector4 = TUnaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3)));
+                                vector1 = TUnaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0))
+                                );
+                                vector2 = TUnaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1))
+                                );
+                                vector3 = TUnaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2))
+                                );
+                                vector4 = TUnaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 0));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 1));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 2));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 3));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 0)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 1)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 2)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 3)
+                                );
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TUnaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4)));
-                                vector2 = TUnaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5)));
-                                vector3 = TUnaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6)));
-                                vector4 = TUnaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7)));
+                                vector1 = TUnaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4))
+                                );
+                                vector2 = TUnaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5))
+                                );
+                                vector3 = TUnaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6))
+                                );
+                                vector4 = TUnaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 4));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 5));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 6));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 7));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 4)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 5)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 6)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 7)
+                                );
 
                                 // We adjust the source and destination references, then update
                                 // the count of remaining elements to process.
@@ -3328,10 +4307,18 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TUnaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0)));
-                                vector2 = TUnaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1)));
-                                vector3 = TUnaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2)));
-                                vector4 = TUnaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3)));
+                                vector1 = TUnaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0))
+                                );
+                                vector2 = TUnaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1))
+                                );
+                                vector3 = TUnaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2))
+                                );
+                                vector4 = TUnaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector256<float>.Count * 0));
                                 vector2.Store(dPtr + (uint)(Vector256<float>.Count * 1));
@@ -3340,10 +4327,18 @@ namespace System.Numerics.Tensors
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TUnaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4)));
-                                vector2 = TUnaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5)));
-                                vector3 = TUnaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6)));
-                                vector4 = TUnaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7)));
+                                vector1 = TUnaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4))
+                                );
+                                vector2 = TUnaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5))
+                                );
+                                vector3 = TUnaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6))
+                                );
+                                vector4 = TUnaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector256<float>.Count * 4));
                                 vector2.Store(dPtr + (uint)(Vector256<float>.Count * 5));
@@ -3375,56 +4370,114 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector256<float>.Count - 1)) & (nuint)(-Vector256<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector256<float>.Count - 1))
+                    & (nuint)(-Vector256<float>.Count);
 
                 switch (remainder / (uint)(Vector256<float>.Count))
                 {
                     case 8:
                     {
-                        Vector256<float> vector = TUnaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 8)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 8));
+                        Vector256<float> vector = TUnaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 8)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 8)
+                        );
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector256<float> vector = TUnaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 7)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 7));
+                        Vector256<float> vector = TUnaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 7)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 7)
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector256<float> vector = TUnaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 6)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 6));
+                        Vector256<float> vector = TUnaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 6)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 6)
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector256<float> vector = TUnaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 5)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 5));
+                        Vector256<float> vector = TUnaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 5)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 5)
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector256<float> vector = TUnaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 4)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 4));
+                        Vector256<float> vector = TUnaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 4)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 4)
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector256<float> vector = TUnaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 3)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 3));
+                        Vector256<float> vector = TUnaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 3)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 3)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector256<float> vector = TUnaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 2)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 2));
+                        Vector256<float> vector = TUnaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 2)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 2)
+                        );
                         goto case 1;
                     }
 
@@ -3455,8 +4508,15 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
 
-                        Vector128<float> beg = TUnaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef));
-                        Vector128<float> end = TUnaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)));
+                        Vector128<float> beg = TUnaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef)
+                        );
+                        Vector128<float> end = TUnaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            )
+                        );
 
                         beg.StoreUnsafe(ref dRef);
                         end.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count));
@@ -3468,7 +4528,9 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
 
-                        Vector128<float> beg = TUnaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef));
+                        Vector128<float> beg = TUnaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef)
+                        );
                         beg.StoreUnsafe(ref dRef);
 
                         break;
@@ -3506,7 +4568,9 @@ namespace System.Numerics.Tensors
                 // Preload the beginning and end so that overlapping accesses don't negatively impact the data
 
                 Vector512<float> beg = TUnaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef));
-                Vector512<float> end = TUnaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count)));
+                Vector512<float> end = TUnaryOperator.Invoke(
+                    Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count))
+                );
 
                 if (remainder > (uint)(Vector512<float>.Count * 8))
                 {
@@ -3533,7 +4597,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector512<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector512<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector512<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector512<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             dPtr += misalignment;
@@ -3557,27 +4625,59 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TUnaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0)));
-                                vector2 = TUnaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1)));
-                                vector3 = TUnaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2)));
-                                vector4 = TUnaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3)));
+                                vector1 = TUnaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0))
+                                );
+                                vector2 = TUnaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1))
+                                );
+                                vector3 = TUnaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2))
+                                );
+                                vector4 = TUnaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 0));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 1));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 2));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 3));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 0)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 1)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 2)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 3)
+                                );
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TUnaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4)));
-                                vector2 = TUnaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5)));
-                                vector3 = TUnaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6)));
-                                vector4 = TUnaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7)));
+                                vector1 = TUnaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4))
+                                );
+                                vector2 = TUnaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5))
+                                );
+                                vector3 = TUnaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6))
+                                );
+                                vector4 = TUnaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 4));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 5));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 6));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 7));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 4)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 5)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 6)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 7)
+                                );
 
                                 // We adjust the source and destination references, then update
                                 // the count of remaining elements to process.
@@ -3594,10 +4694,18 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TUnaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0)));
-                                vector2 = TUnaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1)));
-                                vector3 = TUnaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2)));
-                                vector4 = TUnaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3)));
+                                vector1 = TUnaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0))
+                                );
+                                vector2 = TUnaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1))
+                                );
+                                vector3 = TUnaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2))
+                                );
+                                vector4 = TUnaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector512<float>.Count * 0));
                                 vector2.Store(dPtr + (uint)(Vector512<float>.Count * 1));
@@ -3606,10 +4714,18 @@ namespace System.Numerics.Tensors
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TUnaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4)));
-                                vector2 = TUnaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5)));
-                                vector3 = TUnaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6)));
-                                vector4 = TUnaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7)));
+                                vector1 = TUnaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4))
+                                );
+                                vector2 = TUnaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5))
+                                );
+                                vector3 = TUnaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6))
+                                );
+                                vector4 = TUnaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector512<float>.Count * 4));
                                 vector2.Store(dPtr + (uint)(Vector512<float>.Count * 5));
@@ -3641,56 +4757,114 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector512<float>.Count - 1)) & (nuint)(-Vector512<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector512<float>.Count - 1))
+                    & (nuint)(-Vector512<float>.Count);
 
                 switch (remainder / (uint)(Vector512<float>.Count))
                 {
                     case 8:
                     {
-                        Vector512<float> vector = TUnaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 8)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 8));
+                        Vector512<float> vector = TUnaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 8)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 8)
+                        );
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector512<float> vector = TUnaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 7)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 7));
+                        Vector512<float> vector = TUnaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 7)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 7)
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector512<float> vector = TUnaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 6)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 6));
+                        Vector512<float> vector = TUnaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 6)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 6)
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector512<float> vector = TUnaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 5)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 5));
+                        Vector512<float> vector = TUnaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 5)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 5)
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector512<float> vector = TUnaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 4)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 4));
+                        Vector512<float> vector = TUnaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 4)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 4)
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector512<float> vector = TUnaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 3)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 3));
+                        Vector512<float> vector = TUnaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 3)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 3)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector512<float> vector = TUnaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 2)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 2));
+                        Vector512<float> vector = TUnaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 2)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 2)
+                        );
                         goto case 1;
                     }
 
@@ -3725,8 +4899,15 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector256.IsHardwareAccelerated);
 
-                        Vector256<float> beg = TUnaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef));
-                        Vector256<float> end = TUnaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count)));
+                        Vector256<float> beg = TUnaryOperator.Invoke(
+                            Vector256.LoadUnsafe(ref xRef)
+                        );
+                        Vector256<float> end = TUnaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count)
+                            )
+                        );
 
                         beg.StoreUnsafe(ref dRef);
                         end.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count));
@@ -3738,7 +4919,9 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector256.IsHardwareAccelerated);
 
-                        Vector256<float> beg = TUnaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef));
+                        Vector256<float> beg = TUnaryOperator.Invoke(
+                            Vector256.LoadUnsafe(ref xRef)
+                        );
                         beg.StoreUnsafe(ref dRef);
 
                         break;
@@ -3750,8 +4933,15 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
 
-                        Vector128<float> beg = TUnaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef));
-                        Vector128<float> end = TUnaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)));
+                        Vector128<float> beg = TUnaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef)
+                        );
+                        Vector128<float> end = TUnaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            )
+                        );
 
                         beg.StoreUnsafe(ref dRef);
                         end.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count));
@@ -3763,7 +4953,9 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
 
-                        Vector128<float> beg = TUnaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef));
+                        Vector128<float> beg = TUnaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef)
+                        );
                         beg.StoreUnsafe(ref dRef);
 
                         break;
@@ -3803,7 +4995,10 @@ namespace System.Numerics.Tensors
         /// Specifies the operation to perform on the pair-wise elements loaded from <paramref name="x"/> and <paramref name="y"/>.
         /// </typeparam>
         private static void InvokeSpanSpanIntoSpan<TBinaryOperator>(
-            ReadOnlySpan<float> x, ReadOnlySpan<float> y, Span<float> destination)
+            ReadOnlySpan<float> x,
+            ReadOnlySpan<float> y,
+            Span<float> destination
+        )
             where TBinaryOperator : struct, IBinaryOperator
         {
             if (x.Length != y.Length)
@@ -3890,25 +5085,41 @@ namespace System.Numerics.Tensors
             SoftwareFallback(ref xRef, ref yRef, ref dRef, remainder);
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void SoftwareFallback(ref float xRef, ref float yRef, ref float dRef, nuint length)
+            static void SoftwareFallback(
+                ref float xRef,
+                ref float yRef,
+                ref float dRef,
+                nuint length
+            )
             {
                 for (nuint i = 0; i < length; i++)
                 {
-                    Unsafe.Add(ref dRef, i) = TBinaryOperator.Invoke(Unsafe.Add(ref xRef, i),
-                                                                     Unsafe.Add(ref yRef, i));
+                    Unsafe.Add(ref dRef, i) = TBinaryOperator.Invoke(
+                        Unsafe.Add(ref xRef, i),
+                        Unsafe.Add(ref yRef, i)
+                    );
                 }
             }
 
-            static void Vectorized128(ref float xRef, ref float yRef, ref float dRef, nuint remainder)
+            static void Vectorized128(
+                ref float xRef,
+                ref float yRef,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 ref float dRefBeg = ref dRef;
 
                 // Preload the beginning and end so that overlapping accesses don't negatively impact the data
 
-                Vector128<float> beg = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                              Vector128.LoadUnsafe(ref yRef));
-                Vector128<float> end = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)),
-                                                              Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count)));
+                Vector128<float> beg = TBinaryOperator.Invoke(
+                    Vector128.LoadUnsafe(ref xRef),
+                    Vector128.LoadUnsafe(ref yRef)
+                );
+                Vector128<float> end = TBinaryOperator.Invoke(
+                    Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)),
+                    Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count))
+                );
 
                 if (remainder > (uint)(Vector128<float>.Count * 8))
                 {
@@ -3937,7 +5148,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector128<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector128<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector128<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector128<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             yPtr += misalignment;
@@ -3962,35 +5177,67 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0)),
-                                                                 Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 0)));
-                                vector2 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1)),
-                                                                 Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 1)));
-                                vector3 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2)),
-                                                                 Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 2)));
-                                vector4 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3)),
-                                                                 Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 3)));
+                                vector1 = TBinaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 0))
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 1))
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 2))
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 3))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 0));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 1));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 2));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 3));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 0)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 1)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 2)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 3)
+                                );
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4)),
-                                                                 Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 4)));
-                                vector2 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5)),
-                                                                 Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 5)));
-                                vector3 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6)),
-                                                                 Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 6)));
-                                vector4 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7)),
-                                                                 Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 7)));
+                                vector1 = TBinaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 4))
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 5))
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 6))
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 7))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 4));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 5));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 6));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 7));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 4)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 5)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 6)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 7)
+                                );
 
                                 // We adjust the source and destination references, then update
                                 // the count of remaining elements to process.
@@ -4008,14 +5255,22 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0)),
-                                                                 Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 0)));
-                                vector2 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1)),
-                                                                 Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 1)));
-                                vector3 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2)),
-                                                                 Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 2)));
-                                vector4 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3)),
-                                                                 Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 3)));
+                                vector1 = TBinaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 0))
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 1))
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 2))
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 3))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector128<float>.Count * 0));
                                 vector2.Store(dPtr + (uint)(Vector128<float>.Count * 1));
@@ -4024,14 +5279,22 @@ namespace System.Numerics.Tensors
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4)),
-                                                                 Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 4)));
-                                vector2 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5)),
-                                                                 Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 5)));
-                                vector3 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6)),
-                                                                 Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 6)));
-                                vector4 = TBinaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7)),
-                                                                 Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 7)));
+                                vector1 = TBinaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 4))
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 5))
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 6))
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 7))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector128<float>.Count * 4));
                                 vector2.Store(dPtr + (uint)(Vector128<float>.Count * 5));
@@ -4065,63 +5328,142 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector128<float>.Count - 1)) & (nuint)(-Vector128<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector128<float>.Count - 1))
+                    & (nuint)(-Vector128<float>.Count);
 
                 switch (remainder / (uint)(Vector128<float>.Count))
                 {
                     case 8:
                     {
-                        Vector128<float> vector = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 8)),
-                                                                         Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 8)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 8));
+                        Vector128<float> vector = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 8)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 8)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 8)
+                        );
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector128<float> vector = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 7)),
-                                                                         Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 7)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 7));
+                        Vector128<float> vector = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 7)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 7)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 7)
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector128<float> vector = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 6)),
-                                                                         Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 6)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 6));
+                        Vector128<float> vector = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 6)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 6)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 6)
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector128<float> vector = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 5)),
-                                                                         Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 5)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 5));
+                        Vector128<float> vector = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 5)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 5)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 5)
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector128<float> vector = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 4)),
-                                                                         Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 4)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 4));
+                        Vector128<float> vector = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 4)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 4)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 4)
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector128<float> vector = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 3)),
-                                                                         Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 3)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 3));
+                        Vector128<float> vector = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 3)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 3)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 3)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector128<float> vector = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 2)),
-                                                                         Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 2)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 2));
+                        Vector128<float> vector = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 2)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 2)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 2)
+                        );
                         goto case 1;
                     }
 
@@ -4142,21 +5484,30 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void Vectorized128Small(ref float xRef, ref float yRef, ref float dRef, nuint remainder)
+            static void Vectorized128Small(
+                ref float xRef,
+                ref float yRef,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 switch (remainder)
                 {
                     case 3:
                     {
-                        Unsafe.Add(ref dRef, 2) = TBinaryOperator.Invoke(Unsafe.Add(ref xRef, 2),
-                                                                         Unsafe.Add(ref yRef, 2));
+                        Unsafe.Add(ref dRef, 2) = TBinaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 2),
+                            Unsafe.Add(ref yRef, 2)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Unsafe.Add(ref dRef, 1) = TBinaryOperator.Invoke(Unsafe.Add(ref xRef, 1),
-                                                                         Unsafe.Add(ref yRef, 1));
+                        Unsafe.Add(ref dRef, 1) = TBinaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 1),
+                            Unsafe.Add(ref yRef, 1)
+                        );
                         goto case 1;
                     }
 
@@ -4173,16 +5524,25 @@ namespace System.Numerics.Tensors
                 }
             }
 
-            static void Vectorized256(ref float xRef, ref float yRef, ref float dRef, nuint remainder)
+            static void Vectorized256(
+                ref float xRef,
+                ref float yRef,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 ref float dRefBeg = ref dRef;
 
                 // Preload the beginning and end so that overlapping accesses don't negatively impact the data
 
-                Vector256<float> beg = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef),
-                                                              Vector256.LoadUnsafe(ref yRef));
-                Vector256<float> end = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count)),
-                                                              Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count)));
+                Vector256<float> beg = TBinaryOperator.Invoke(
+                    Vector256.LoadUnsafe(ref xRef),
+                    Vector256.LoadUnsafe(ref yRef)
+                );
+                Vector256<float> end = TBinaryOperator.Invoke(
+                    Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count)),
+                    Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count))
+                );
 
                 if (remainder > (uint)(Vector256<float>.Count * 8))
                 {
@@ -4211,7 +5571,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector256<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector256<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector256<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector256<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             yPtr += misalignment;
@@ -4236,35 +5600,67 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0)),
-                                                                 Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 0)));
-                                vector2 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1)),
-                                                                 Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 1)));
-                                vector3 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2)),
-                                                                 Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 2)));
-                                vector4 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3)),
-                                                                 Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 3)));
+                                vector1 = TBinaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 0))
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 1))
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 2))
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 3))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 0));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 1));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 2));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 3));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 0)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 1)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 2)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 3)
+                                );
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4)),
-                                                                 Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 4)));
-                                vector2 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5)),
-                                                                 Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 5)));
-                                vector3 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6)),
-                                                                 Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 6)));
-                                vector4 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7)),
-                                                                 Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 7)));
+                                vector1 = TBinaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 4))
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 5))
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 6))
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 7))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 4));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 5));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 6));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 7));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 4)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 5)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 6)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 7)
+                                );
 
                                 // We adjust the source and destination references, then update
                                 // the count of remaining elements to process.
@@ -4282,14 +5678,22 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0)),
-                                                                 Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 0)));
-                                vector2 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1)),
-                                                                 Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 1)));
-                                vector3 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2)),
-                                                                 Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 2)));
-                                vector4 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3)),
-                                                                 Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 3)));
+                                vector1 = TBinaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 0))
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 1))
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 2))
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 3))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector256<float>.Count * 0));
                                 vector2.Store(dPtr + (uint)(Vector256<float>.Count * 1));
@@ -4298,14 +5702,22 @@ namespace System.Numerics.Tensors
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4)),
-                                                                 Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 4)));
-                                vector2 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5)),
-                                                                 Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 5)));
-                                vector3 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6)),
-                                                                 Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 6)));
-                                vector4 = TBinaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7)),
-                                                                 Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 7)));
+                                vector1 = TBinaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 4))
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 5))
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 6))
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 7))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector256<float>.Count * 4));
                                 vector2.Store(dPtr + (uint)(Vector256<float>.Count * 5));
@@ -4339,63 +5751,142 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector256<float>.Count - 1)) & (nuint)(-Vector256<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector256<float>.Count - 1))
+                    & (nuint)(-Vector256<float>.Count);
 
                 switch (remainder / (uint)(Vector256<float>.Count))
                 {
                     case 8:
                     {
-                        Vector256<float> vector = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 8)),
-                                                                         Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 8)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 8));
+                        Vector256<float> vector = TBinaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 8)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 8)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 8)
+                        );
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector256<float> vector = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 7)),
-                                                                         Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 7)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 7));
+                        Vector256<float> vector = TBinaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 7)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 7)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 7)
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector256<float> vector = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 6)),
-                                                                         Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 6)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 6));
+                        Vector256<float> vector = TBinaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 6)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 6)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 6)
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector256<float> vector = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 5)),
-                                                                         Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 5)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 5));
+                        Vector256<float> vector = TBinaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 5)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 5)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 5)
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector256<float> vector = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 4)),
-                                                                         Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 4)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 4));
+                        Vector256<float> vector = TBinaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 4)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 4)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 4)
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector256<float> vector = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 3)),
-                                                                         Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 3)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 3));
+                        Vector256<float> vector = TBinaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 3)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 3)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 3)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector256<float> vector = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 2)),
-                                                                         Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 2)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 2));
+                        Vector256<float> vector = TBinaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 2)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 2)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 2)
+                        );
                         goto case 1;
                     }
 
@@ -4416,7 +5907,12 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void Vectorized256Small(ref float xRef, ref float yRef, ref float dRef, nuint remainder)
+            static void Vectorized256Small(
+                ref float xRef,
+                ref float yRef,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 switch (remainder)
                 {
@@ -4426,10 +5922,20 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
 
-                        Vector128<float> beg = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                                      Vector128.LoadUnsafe(ref yRef));
-                        Vector128<float> end = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)),
-                                                                      Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count)));
+                        Vector128<float> beg = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef),
+                            Vector128.LoadUnsafe(ref yRef)
+                        );
+                        Vector128<float> end = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            )
+                        );
 
                         beg.StoreUnsafe(ref dRef);
                         end.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count));
@@ -4441,8 +5947,10 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
 
-                        Vector128<float> beg = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                                      Vector128.LoadUnsafe(ref yRef));
+                        Vector128<float> beg = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef),
+                            Vector128.LoadUnsafe(ref yRef)
+                        );
                         beg.StoreUnsafe(ref dRef);
 
                         break;
@@ -4450,15 +5958,19 @@ namespace System.Numerics.Tensors
 
                     case 3:
                     {
-                        Unsafe.Add(ref dRef, 2) = TBinaryOperator.Invoke(Unsafe.Add(ref xRef, 2),
-                                                                         Unsafe.Add(ref yRef, 2));
+                        Unsafe.Add(ref dRef, 2) = TBinaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 2),
+                            Unsafe.Add(ref yRef, 2)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Unsafe.Add(ref dRef, 1) = TBinaryOperator.Invoke(Unsafe.Add(ref xRef, 1),
-                                                                         Unsafe.Add(ref yRef, 1));
+                        Unsafe.Add(ref dRef, 1) = TBinaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 1),
+                            Unsafe.Add(ref yRef, 1)
+                        );
                         goto case 1;
                     }
 
@@ -4475,16 +5987,25 @@ namespace System.Numerics.Tensors
                 }
             }
 
-            static void Vectorized512(ref float xRef, ref float yRef, ref float dRef, nuint remainder)
+            static void Vectorized512(
+                ref float xRef,
+                ref float yRef,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 ref float dRefBeg = ref dRef;
 
                 // Preload the beginning and end so that overlapping accesses don't negatively impact the data
 
-                Vector512<float> beg = TBinaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef),
-                                                              Vector512.LoadUnsafe(ref yRef));
-                Vector512<float> end = TBinaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count)),
-                                                              Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count)));
+                Vector512<float> beg = TBinaryOperator.Invoke(
+                    Vector512.LoadUnsafe(ref xRef),
+                    Vector512.LoadUnsafe(ref yRef)
+                );
+                Vector512<float> end = TBinaryOperator.Invoke(
+                    Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count)),
+                    Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count))
+                );
 
                 if (remainder > (uint)(Vector512<float>.Count * 8))
                 {
@@ -4513,7 +6034,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector512<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector512<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector512<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector512<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             yPtr += misalignment;
@@ -4538,35 +6063,67 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0)),
-                                                                 Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 0)));
-                                vector2 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1)),
-                                                                 Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 1)));
-                                vector3 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2)),
-                                                                 Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 2)));
-                                vector4 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3)),
-                                                                 Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 3)));
+                                vector1 = TBinaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 0))
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 1))
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 2))
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 3))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 0));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 1));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 2));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 3));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 0)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 1)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 2)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 3)
+                                );
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4)),
-                                                                 Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 4)));
-                                vector2 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5)),
-                                                                 Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 5)));
-                                vector3 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6)),
-                                                                 Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 6)));
-                                vector4 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7)),
-                                                                 Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 7)));
+                                vector1 = TBinaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 4))
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 5))
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 6))
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 7))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 4));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 5));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 6));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 7));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 4)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 5)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 6)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 7)
+                                );
 
                                 // We adjust the source and destination references, then update
                                 // the count of remaining elements to process.
@@ -4584,14 +6141,22 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0)),
-                                                                 Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 0)));
-                                vector2 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1)),
-                                                                 Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 1)));
-                                vector3 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2)),
-                                                                 Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 2)));
-                                vector4 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3)),
-                                                                 Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 3)));
+                                vector1 = TBinaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 0))
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 1))
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 2))
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 3))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector512<float>.Count * 0));
                                 vector2.Store(dPtr + (uint)(Vector512<float>.Count * 1));
@@ -4600,14 +6165,22 @@ namespace System.Numerics.Tensors
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4)),
-                                                                 Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 4)));
-                                vector2 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5)),
-                                                                 Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 5)));
-                                vector3 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6)),
-                                                                 Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 6)));
-                                vector4 = TBinaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7)),
-                                                                 Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 7)));
+                                vector1 = TBinaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 4))
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 5))
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 6))
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 7))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector512<float>.Count * 4));
                                 vector2.Store(dPtr + (uint)(Vector512<float>.Count * 5));
@@ -4641,63 +6214,142 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector512<float>.Count - 1)) & (nuint)(-Vector512<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector512<float>.Count - 1))
+                    & (nuint)(-Vector512<float>.Count);
 
                 switch (remainder / (uint)(Vector512<float>.Count))
                 {
                     case 8:
                     {
-                        Vector512<float> vector = TBinaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 8)),
-                                                                         Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 8)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 8));
+                        Vector512<float> vector = TBinaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 8)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 8)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 8)
+                        );
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector512<float> vector = TBinaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 7)),
-                                                                         Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 7)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 7));
+                        Vector512<float> vector = TBinaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 7)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 7)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 7)
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector512<float> vector = TBinaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 6)),
-                                                                         Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 6)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 6));
+                        Vector512<float> vector = TBinaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 6)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 6)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 6)
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector512<float> vector = TBinaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 5)),
-                                                                         Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 5)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 5));
+                        Vector512<float> vector = TBinaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 5)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 5)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 5)
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector512<float> vector = TBinaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 4)),
-                                                                         Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 4)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 4));
+                        Vector512<float> vector = TBinaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 4)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 4)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 4)
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector512<float> vector = TBinaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 3)),
-                                                                         Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 3)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 3));
+                        Vector512<float> vector = TBinaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 3)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 3)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 3)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector512<float> vector = TBinaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 2)),
-                                                                         Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 2)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 2));
+                        Vector512<float> vector = TBinaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 2)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 2)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 2)
+                        );
                         goto case 1;
                     }
 
@@ -4718,7 +6370,12 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void Vectorized512Small(ref float xRef, ref float yRef, ref float dRef, nuint remainder)
+            static void Vectorized512Small(
+                ref float xRef,
+                ref float yRef,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 switch (remainder)
                 {
@@ -4732,10 +6389,20 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector256.IsHardwareAccelerated);
 
-                        Vector256<float> beg = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef),
-                                                                      Vector256.LoadUnsafe(ref yRef));
-                        Vector256<float> end = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count)),
-                                                                      Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count)));
+                        Vector256<float> beg = TBinaryOperator.Invoke(
+                            Vector256.LoadUnsafe(ref xRef),
+                            Vector256.LoadUnsafe(ref yRef)
+                        );
+                        Vector256<float> end = TBinaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count)
+                            )
+                        );
 
                         beg.StoreUnsafe(ref dRef);
                         end.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count));
@@ -4747,8 +6414,10 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector256.IsHardwareAccelerated);
 
-                        Vector256<float> beg = TBinaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef),
-                                                                      Vector256.LoadUnsafe(ref yRef));
+                        Vector256<float> beg = TBinaryOperator.Invoke(
+                            Vector256.LoadUnsafe(ref xRef),
+                            Vector256.LoadUnsafe(ref yRef)
+                        );
                         beg.StoreUnsafe(ref dRef);
 
                         break;
@@ -4760,10 +6429,20 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
 
-                        Vector128<float> beg = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                                      Vector128.LoadUnsafe(ref yRef));
-                        Vector128<float> end = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)),
-                                                                      Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count)));
+                        Vector128<float> beg = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef),
+                            Vector128.LoadUnsafe(ref yRef)
+                        );
+                        Vector128<float> end = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            )
+                        );
 
                         beg.StoreUnsafe(ref dRef);
                         end.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count));
@@ -4775,8 +6454,10 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
 
-                        Vector128<float> beg = TBinaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                                      Vector128.LoadUnsafe(ref yRef));
+                        Vector128<float> beg = TBinaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef),
+                            Vector128.LoadUnsafe(ref yRef)
+                        );
                         beg.StoreUnsafe(ref dRef);
 
                         break;
@@ -4784,15 +6465,19 @@ namespace System.Numerics.Tensors
 
                     case 3:
                     {
-                        Unsafe.Add(ref dRef, 2) = TBinaryOperator.Invoke(Unsafe.Add(ref xRef, 2),
-                                                                         Unsafe.Add(ref yRef, 2));
+                        Unsafe.Add(ref dRef, 2) = TBinaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 2),
+                            Unsafe.Add(ref yRef, 2)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Unsafe.Add(ref dRef, 1) = TBinaryOperator.Invoke(Unsafe.Add(ref xRef, 1),
-                                                                         Unsafe.Add(ref yRef, 1));
+                        Unsafe.Add(ref dRef, 1) = TBinaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 1),
+                            Unsafe.Add(ref yRef, 1)
+                        );
                         goto case 1;
                     }
 
@@ -4818,7 +6503,10 @@ namespace System.Numerics.Tensors
         /// Specifies the operation to perform on each element loaded from <paramref name="x"/> with <paramref name="y"/>.
         /// </typeparam>
         private static void InvokeSpanScalarIntoSpan<TBinaryOperator>(
-            ReadOnlySpan<float> x, float y, Span<float> destination)
+            ReadOnlySpan<float> x,
+            float y,
+            Span<float> destination
+        )
             where TBinaryOperator : struct, IBinaryOperator =>
             InvokeSpanScalarIntoSpan<IdentityOperator, TBinaryOperator>(x, y, destination);
 
@@ -4834,7 +6522,10 @@ namespace System.Numerics.Tensors
         /// Specifies the operation to perform on the transformed value from <paramref name="x"/> with <paramref name="y"/>.
         /// </typeparam>
         private static void InvokeSpanScalarIntoSpan<TTransformOperator, TBinaryOperator>(
-            ReadOnlySpan<float> x, float y, Span<float> destination)
+            ReadOnlySpan<float> x,
+            float y,
+            Span<float> destination
+        )
             where TTransformOperator : struct, IUnaryOperator
             where TBinaryOperator : struct, IBinaryOperator
         {
@@ -4919,8 +6610,10 @@ namespace System.Numerics.Tensors
             {
                 for (nuint i = 0; i < length; i++)
                 {
-                    Unsafe.Add(ref dRef, i) = TBinaryOperator.Invoke(TTransformOperator.Invoke(Unsafe.Add(ref xRef, i)),
-                                                                     y);
+                    Unsafe.Add(ref dRef, i) = TBinaryOperator.Invoke(
+                        TTransformOperator.Invoke(Unsafe.Add(ref xRef, i)),
+                        y
+                    );
                 }
             }
 
@@ -4932,10 +6625,16 @@ namespace System.Numerics.Tensors
 
                 Vector128<float> yVec = Vector128.Create(y);
 
-                Vector128<float> beg = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef)),
-                                                              yVec);
-                Vector128<float> end = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count))),
-                                                              yVec);
+                Vector128<float> beg = TBinaryOperator.Invoke(
+                    TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef)),
+                    yVec
+                );
+                Vector128<float> end = TBinaryOperator.Invoke(
+                    TTransformOperator.Invoke(
+                        Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count))
+                    ),
+                    yVec
+                );
 
                 if (remainder > (uint)(Vector128<float>.Count * 8))
                 {
@@ -4962,7 +6661,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector128<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector128<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector128<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector128<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             dPtr += misalignment;
@@ -4986,35 +6689,83 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0))),
-                                                                 yVec);
-                                vector2 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1))),
-                                                                 yVec);
-                                vector3 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2))),
-                                                                 yVec);
-                                vector4 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3))),
-                                                                 yVec);
+                                vector1 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0))
+                                    ),
+                                    yVec
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1))
+                                    ),
+                                    yVec
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2))
+                                    ),
+                                    yVec
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3))
+                                    ),
+                                    yVec
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 0));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 1));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 2));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 3));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 0)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 1)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 2)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 3)
+                                );
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4))),
-                                                                 yVec);
-                                vector2 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5))),
-                                                                 yVec);
-                                vector3 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6))),
-                                                                 yVec);
-                                vector4 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7))),
-                                                                 yVec);
+                                vector1 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4))
+                                    ),
+                                    yVec
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5))
+                                    ),
+                                    yVec
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6))
+                                    ),
+                                    yVec
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7))
+                                    ),
+                                    yVec
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 4));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 5));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 6));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 7));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 4)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 5)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 6)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 7)
+                                );
 
                                 // We adjust the source and destination references, then update
                                 // the count of remaining elements to process.
@@ -5031,14 +6782,30 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0))),
-                                                                 yVec);
-                                vector2 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1))),
-                                                                 yVec);
-                                vector3 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2))),
-                                                                 yVec);
-                                vector4 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3))),
-                                                                 yVec);
+                                vector1 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0))
+                                    ),
+                                    yVec
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1))
+                                    ),
+                                    yVec
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2))
+                                    ),
+                                    yVec
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3))
+                                    ),
+                                    yVec
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector128<float>.Count * 0));
                                 vector2.Store(dPtr + (uint)(Vector128<float>.Count * 1));
@@ -5047,14 +6814,30 @@ namespace System.Numerics.Tensors
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4))),
-                                                                 yVec);
-                                vector2 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5))),
-                                                                 yVec);
-                                vector3 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6))),
-                                                                 yVec);
-                                vector4 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7))),
-                                                                 yVec);
+                                vector1 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4))
+                                    ),
+                                    yVec
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5))
+                                    ),
+                                    yVec
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6))
+                                    ),
+                                    yVec
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7))
+                                    ),
+                                    yVec
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector128<float>.Count * 4));
                                 vector2.Store(dPtr + (uint)(Vector128<float>.Count * 5));
@@ -5086,63 +6869,135 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector128<float>.Count - 1)) & (nuint)(-Vector128<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector128<float>.Count - 1))
+                    & (nuint)(-Vector128<float>.Count);
 
                 switch (remainder / (uint)(Vector128<float>.Count))
                 {
                     case 8:
                     {
-                        Vector128<float> vector = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 8))),
-                                                                         yVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 8));
+                        Vector128<float> vector = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector128.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector128<float>.Count * 8)
+                                )
+                            ),
+                            yVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 8)
+                        );
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector128<float> vector = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 7))),
-                                                                         yVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 7));
+                        Vector128<float> vector = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector128.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector128<float>.Count * 7)
+                                )
+                            ),
+                            yVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 7)
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector128<float> vector = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 6))),
-                                                                         yVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 6));
+                        Vector128<float> vector = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector128.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector128<float>.Count * 6)
+                                )
+                            ),
+                            yVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 6)
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector128<float> vector = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 5))),
-                                                                         yVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 5));
+                        Vector128<float> vector = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector128.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector128<float>.Count * 5)
+                                )
+                            ),
+                            yVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 5)
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector128<float> vector = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 4))),
-                                                                         yVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 4));
+                        Vector128<float> vector = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector128.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector128<float>.Count * 4)
+                                )
+                            ),
+                            yVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 4)
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector128<float> vector = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 3))),
-                                                                         yVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 3));
+                        Vector128<float> vector = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector128.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector128<float>.Count * 3)
+                                )
+                            ),
+                            yVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 3)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector128<float> vector = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 2))),
-                                                                         yVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 2));
+                        Vector128<float> vector = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector128.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector128<float>.Count * 2)
+                                )
+                            ),
+                            yVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 2)
+                        );
                         goto case 1;
                     }
 
@@ -5169,16 +7024,20 @@ namespace System.Numerics.Tensors
                 {
                     case 3:
                     {
-                        Unsafe.Add(ref dRef, 2) = TBinaryOperator.Invoke(TTransformOperator.Invoke(Unsafe.Add(ref xRef, 2)),
-                                                                         y);
+                        Unsafe.Add(ref dRef, 2) = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(Unsafe.Add(ref xRef, 2)),
+                            y
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Unsafe.Add(ref dRef, 1) = TBinaryOperator.Invoke(TTransformOperator.Invoke(Unsafe.Add(ref xRef, 1)),
-                                                                         y);
-                            goto case 1;
+                        Unsafe.Add(ref dRef, 1) = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(Unsafe.Add(ref xRef, 1)),
+                            y
+                        );
+                        goto case 1;
                     }
 
                     case 1:
@@ -5202,10 +7061,16 @@ namespace System.Numerics.Tensors
 
                 Vector256<float> yVec = Vector256.Create(y);
 
-                Vector256<float> beg = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef)),
-                                                              yVec);
-                Vector256<float> end = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count))),
-                                                              yVec);
+                Vector256<float> beg = TBinaryOperator.Invoke(
+                    TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef)),
+                    yVec
+                );
+                Vector256<float> end = TBinaryOperator.Invoke(
+                    TTransformOperator.Invoke(
+                        Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count))
+                    ),
+                    yVec
+                );
 
                 if (remainder > (uint)(Vector256<float>.Count * 8))
                 {
@@ -5232,7 +7097,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector256<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector256<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector256<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector256<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             dPtr += misalignment;
@@ -5256,35 +7125,83 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0))),
-                                                                 yVec);
-                                vector2 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1))),
-                                                                 yVec);
-                                vector3 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2))),
-                                                                 yVec);
-                                vector4 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3))),
-                                                                 yVec);
+                                vector1 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0))
+                                    ),
+                                    yVec
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1))
+                                    ),
+                                    yVec
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2))
+                                    ),
+                                    yVec
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3))
+                                    ),
+                                    yVec
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 0));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 1));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 2));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 3));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 0)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 1)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 2)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 3)
+                                );
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4))),
-                                                                 yVec);
-                                vector2 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5))),
-                                                                 yVec);
-                                vector3 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6))),
-                                                                 yVec);
-                                vector4 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7))),
-                                                                 yVec);
+                                vector1 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4))
+                                    ),
+                                    yVec
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5))
+                                    ),
+                                    yVec
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6))
+                                    ),
+                                    yVec
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7))
+                                    ),
+                                    yVec
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 4));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 5));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 6));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 7));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 4)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 5)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 6)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 7)
+                                );
 
                                 // We adjust the source and destination references, then update
                                 // the count of remaining elements to process.
@@ -5301,14 +7218,30 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0))),
-                                                                 yVec);
-                                vector2 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1))),
-                                                                 yVec);
-                                vector3 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2))),
-                                                                 yVec);
-                                vector4 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3))),
-                                                                 yVec);
+                                vector1 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0))
+                                    ),
+                                    yVec
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1))
+                                    ),
+                                    yVec
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2))
+                                    ),
+                                    yVec
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3))
+                                    ),
+                                    yVec
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector256<float>.Count * 0));
                                 vector2.Store(dPtr + (uint)(Vector256<float>.Count * 1));
@@ -5317,14 +7250,30 @@ namespace System.Numerics.Tensors
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4))),
-                                                                 yVec);
-                                vector2 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5))),
-                                                                 yVec);
-                                vector3 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6))),
-                                                                 yVec);
-                                vector4 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7))),
-                                                                 yVec);
+                                vector1 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4))
+                                    ),
+                                    yVec
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5))
+                                    ),
+                                    yVec
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6))
+                                    ),
+                                    yVec
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7))
+                                    ),
+                                    yVec
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector256<float>.Count * 4));
                                 vector2.Store(dPtr + (uint)(Vector256<float>.Count * 5));
@@ -5356,63 +7305,135 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector256<float>.Count - 1)) & (nuint)(-Vector256<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector256<float>.Count - 1))
+                    & (nuint)(-Vector256<float>.Count);
 
                 switch (remainder / (uint)(Vector256<float>.Count))
                 {
                     case 8:
                     {
-                        Vector256<float> vector = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 8))),
-                                                                         yVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 8));
+                        Vector256<float> vector = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector256.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector256<float>.Count * 8)
+                                )
+                            ),
+                            yVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 8)
+                        );
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector256<float> vector = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 7))),
-                                                                         yVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 7));
+                        Vector256<float> vector = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector256.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector256<float>.Count * 7)
+                                )
+                            ),
+                            yVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 7)
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector256<float> vector = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 6))),
-                                                                         yVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 6));
+                        Vector256<float> vector = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector256.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector256<float>.Count * 6)
+                                )
+                            ),
+                            yVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 6)
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector256<float> vector = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 5))),
-                                                                         yVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 5));
+                        Vector256<float> vector = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector256.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector256<float>.Count * 5)
+                                )
+                            ),
+                            yVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 5)
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector256<float> vector = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 4))),
-                                                                         yVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 4));
+                        Vector256<float> vector = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector256.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector256<float>.Count * 4)
+                                )
+                            ),
+                            yVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 4)
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector256<float> vector = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 3))),
-                                                                         yVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 3));
+                        Vector256<float> vector = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector256.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector256<float>.Count * 3)
+                                )
+                            ),
+                            yVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 3)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector256<float> vector = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 2))),
-                                                                         yVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 2));
+                        Vector256<float> vector = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector256.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector256<float>.Count * 2)
+                                )
+                            ),
+                            yVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 2)
+                        );
                         goto case 1;
                     }
 
@@ -5445,10 +7466,19 @@ namespace System.Numerics.Tensors
 
                         Vector128<float> yVec = Vector128.Create(y);
 
-                        Vector128<float> beg = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef)),
-                                                                                                yVec);
-                        Vector128<float> end = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count))),
-                                                                                                yVec);
+                        Vector128<float> beg = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef)),
+                            yVec
+                        );
+                        Vector128<float> end = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector128.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector128<float>.Count)
+                                )
+                            ),
+                            yVec
+                        );
 
                         beg.StoreUnsafe(ref dRef);
                         end.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count));
@@ -5460,8 +7490,10 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
 
-                        Vector128<float> beg = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef)),
-                                                                                                Vector128.Create(y));
+                        Vector128<float> beg = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef)),
+                            Vector128.Create(y)
+                        );
                         beg.StoreUnsafe(ref dRef);
 
                         break;
@@ -5469,16 +7501,20 @@ namespace System.Numerics.Tensors
 
                     case 3:
                     {
-                        Unsafe.Add(ref dRef, 2) = TBinaryOperator.Invoke(TTransformOperator.Invoke(Unsafe.Add(ref xRef, 2)),
-                                                                         y);
+                        Unsafe.Add(ref dRef, 2) = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(Unsafe.Add(ref xRef, 2)),
+                            y
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Unsafe.Add(ref dRef, 1) = TBinaryOperator.Invoke(TTransformOperator.Invoke(Unsafe.Add(ref xRef, 1)),
-                                                                         y);
-                            goto case 1;
+                        Unsafe.Add(ref dRef, 1) = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(Unsafe.Add(ref xRef, 1)),
+                            y
+                        );
+                        goto case 1;
                     }
 
                     case 1:
@@ -5502,10 +7538,16 @@ namespace System.Numerics.Tensors
 
                 Vector512<float> yVec = Vector512.Create(y);
 
-                Vector512<float> beg = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.LoadUnsafe(ref xRef)),
-                                                              yVec);
-                Vector512<float> end = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count))),
-                                                              yVec);
+                Vector512<float> beg = TBinaryOperator.Invoke(
+                    TTransformOperator.Invoke(Vector512.LoadUnsafe(ref xRef)),
+                    yVec
+                );
+                Vector512<float> end = TBinaryOperator.Invoke(
+                    TTransformOperator.Invoke(
+                        Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count))
+                    ),
+                    yVec
+                );
 
                 if (remainder > (uint)(Vector512<float>.Count * 8))
                 {
@@ -5532,7 +7574,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector512<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector512<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector512<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector512<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             dPtr += misalignment;
@@ -5556,35 +7602,83 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0))),
-                                                                 yVec);
-                                vector2 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1))),
-                                                                 yVec);
-                                vector3 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2))),
-                                                                 yVec);
-                                vector4 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3))),
-                                                                 yVec);
+                                vector1 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0))
+                                    ),
+                                    yVec
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1))
+                                    ),
+                                    yVec
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2))
+                                    ),
+                                    yVec
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3))
+                                    ),
+                                    yVec
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 0));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 1));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 2));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 3));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 0)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 1)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 2)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 3)
+                                );
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4))),
-                                                                 yVec);
-                                vector2 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5))),
-                                                                 yVec);
-                                vector3 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6))),
-                                                                 yVec);
-                                vector4 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7))),
-                                                                 yVec);
+                                vector1 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4))
+                                    ),
+                                    yVec
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5))
+                                    ),
+                                    yVec
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6))
+                                    ),
+                                    yVec
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7))
+                                    ),
+                                    yVec
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 4));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 5));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 6));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 7));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 4)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 5)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 6)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 7)
+                                );
 
                                 // We adjust the source and destination references, then update
                                 // the count of remaining elements to process.
@@ -5601,14 +7695,30 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0))),
-                                                                 yVec);
-                                vector2 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1))),
-                                                                 yVec);
-                                vector3 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2))),
-                                                                 yVec);
-                                vector4 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3))),
-                                                                 yVec);
+                                vector1 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0))
+                                    ),
+                                    yVec
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1))
+                                    ),
+                                    yVec
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2))
+                                    ),
+                                    yVec
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3))
+                                    ),
+                                    yVec
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector512<float>.Count * 0));
                                 vector2.Store(dPtr + (uint)(Vector512<float>.Count * 1));
@@ -5617,14 +7727,30 @@ namespace System.Numerics.Tensors
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4))),
-                                                                 yVec);
-                                vector2 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5))),
-                                                                 yVec);
-                                vector3 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6))),
-                                                                 yVec);
-                                vector4 = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7))),
-                                                                 yVec);
+                                vector1 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4))
+                                    ),
+                                    yVec
+                                );
+                                vector2 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5))
+                                    ),
+                                    yVec
+                                );
+                                vector3 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6))
+                                    ),
+                                    yVec
+                                );
+                                vector4 = TBinaryOperator.Invoke(
+                                    TTransformOperator.Invoke(
+                                        Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7))
+                                    ),
+                                    yVec
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector512<float>.Count * 4));
                                 vector2.Store(dPtr + (uint)(Vector512<float>.Count * 5));
@@ -5656,63 +7782,135 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector512<float>.Count - 1)) & (nuint)(-Vector512<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector512<float>.Count - 1))
+                    & (nuint)(-Vector512<float>.Count);
 
                 switch (remainder / (uint)(Vector512<float>.Count))
                 {
                     case 8:
                     {
-                        Vector512<float> vector = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 8))),
-                                                                         yVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 8));
+                        Vector512<float> vector = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector512.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector512<float>.Count * 8)
+                                )
+                            ),
+                            yVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 8)
+                        );
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector512<float> vector = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 7))),
-                                                                         yVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 7));
+                        Vector512<float> vector = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector512.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector512<float>.Count * 7)
+                                )
+                            ),
+                            yVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 7)
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector512<float> vector = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 6))),
-                                                                         yVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 6));
+                        Vector512<float> vector = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector512.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector512<float>.Count * 6)
+                                )
+                            ),
+                            yVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 6)
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector512<float> vector = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 5))),
-                                                                         yVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 5));
+                        Vector512<float> vector = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector512.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector512<float>.Count * 5)
+                                )
+                            ),
+                            yVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 5)
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector512<float> vector = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 4))),
-                                                                         yVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 4));
+                        Vector512<float> vector = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector512.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector512<float>.Count * 4)
+                                )
+                            ),
+                            yVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 4)
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector512<float> vector = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 3))),
-                                                                         yVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 3));
+                        Vector512<float> vector = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector512.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector512<float>.Count * 3)
+                                )
+                            ),
+                            yVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 3)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector512<float> vector = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 2))),
-                                                                         yVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 2));
+                        Vector512<float> vector = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector512.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector512<float>.Count * 2)
+                                )
+                            ),
+                            yVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 2)
+                        );
                         goto case 1;
                     }
 
@@ -5749,10 +7947,19 @@ namespace System.Numerics.Tensors
 
                         Vector256<float> yVec = Vector256.Create(y);
 
-                        Vector256<float> beg = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef)),
-                                                                      yVec);
-                        Vector256<float> end = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count))),
-                                                                      yVec);
+                        Vector256<float> beg = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef)),
+                            yVec
+                        );
+                        Vector256<float> end = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector256.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector256<float>.Count)
+                                )
+                            ),
+                            yVec
+                        );
 
                         beg.StoreUnsafe(ref dRef);
                         end.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count));
@@ -5764,8 +7971,10 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector256.IsHardwareAccelerated);
 
-                        Vector256<float> beg = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef)),
-                                                                      Vector256.Create(y));
+                        Vector256<float> beg = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(Vector256.LoadUnsafe(ref xRef)),
+                            Vector256.Create(y)
+                        );
                         beg.StoreUnsafe(ref dRef);
 
                         break;
@@ -5779,10 +7988,19 @@ namespace System.Numerics.Tensors
 
                         Vector128<float> yVec = Vector128.Create(y);
 
-                        Vector128<float> beg = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef)),
-                                                                                                yVec);
-                        Vector128<float> end = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count))),
-                                                                                                yVec);
+                        Vector128<float> beg = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef)),
+                            yVec
+                        );
+                        Vector128<float> end = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(
+                                Vector128.LoadUnsafe(
+                                    ref xRef,
+                                    remainder - (uint)(Vector128<float>.Count)
+                                )
+                            ),
+                            yVec
+                        );
 
                         beg.StoreUnsafe(ref dRef);
                         end.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count));
@@ -5794,8 +8012,10 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
 
-                        Vector128<float> beg = TBinaryOperator.Invoke(TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef)),
-                                                                                                Vector128.Create(y));
+                        Vector128<float> beg = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(Vector128.LoadUnsafe(ref xRef)),
+                            Vector128.Create(y)
+                        );
                         beg.StoreUnsafe(ref dRef);
 
                         break;
@@ -5803,16 +8023,20 @@ namespace System.Numerics.Tensors
 
                     case 3:
                     {
-                        Unsafe.Add(ref dRef, 2) = TBinaryOperator.Invoke(TTransformOperator.Invoke(Unsafe.Add(ref xRef, 2)),
-                                                                         y);
+                        Unsafe.Add(ref dRef, 2) = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(Unsafe.Add(ref xRef, 2)),
+                            y
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Unsafe.Add(ref dRef, 1) = TBinaryOperator.Invoke(TTransformOperator.Invoke(Unsafe.Add(ref xRef, 1)),
-                                                                         y);
-                            goto case 1;
+                        Unsafe.Add(ref dRef, 1) = TBinaryOperator.Invoke(
+                            TTransformOperator.Invoke(Unsafe.Add(ref xRef, 1)),
+                            y
+                        );
+                        goto case 1;
                     }
 
                     case 1:
@@ -5838,7 +8062,11 @@ namespace System.Numerics.Tensors
         /// and <paramref name="z"/>.
         /// </typeparam>
         private static void InvokeSpanSpanSpanIntoSpan<TTernaryOperator>(
-            ReadOnlySpan<float> x, ReadOnlySpan<float> y, ReadOnlySpan<float> z, Span<float> destination)
+            ReadOnlySpan<float> x,
+            ReadOnlySpan<float> y,
+            ReadOnlySpan<float> z,
+            Span<float> destination
+        )
             where TTernaryOperator : struct, ITernaryOperator
         {
             if (x.Length != y.Length || x.Length != z.Length)
@@ -5927,28 +8155,46 @@ namespace System.Numerics.Tensors
             SoftwareFallback(ref xRef, ref yRef, ref zRef, ref dRef, remainder);
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void SoftwareFallback(ref float xRef, ref float yRef, ref float zRef, ref float dRef, nuint length)
+            static void SoftwareFallback(
+                ref float xRef,
+                ref float yRef,
+                ref float zRef,
+                ref float dRef,
+                nuint length
+            )
             {
                 for (nuint i = 0; i < length; i++)
                 {
-                    Unsafe.Add(ref dRef, i) = TTernaryOperator.Invoke(Unsafe.Add(ref xRef, i),
-                                                                      Unsafe.Add(ref yRef, i),
-                                                                      Unsafe.Add(ref zRef, i));
+                    Unsafe.Add(ref dRef, i) = TTernaryOperator.Invoke(
+                        Unsafe.Add(ref xRef, i),
+                        Unsafe.Add(ref yRef, i),
+                        Unsafe.Add(ref zRef, i)
+                    );
                 }
             }
 
-            static void Vectorized128(ref float xRef, ref float yRef, ref float zRef, ref float dRef, nuint remainder)
+            static void Vectorized128(
+                ref float xRef,
+                ref float yRef,
+                ref float zRef,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 ref float dRefBeg = ref dRef;
 
                 // Preload the beginning and end so that overlapping accesses don't negatively impact the data
 
-                Vector128<float> beg = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                               Vector128.LoadUnsafe(ref yRef),
-                                                               Vector128.LoadUnsafe(ref zRef));
-                Vector128<float> end = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)),
-                                                               Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count)),
-                                                               Vector128.LoadUnsafe(ref zRef, remainder - (uint)(Vector128<float>.Count)));
+                Vector128<float> beg = TTernaryOperator.Invoke(
+                    Vector128.LoadUnsafe(ref xRef),
+                    Vector128.LoadUnsafe(ref yRef),
+                    Vector128.LoadUnsafe(ref zRef)
+                );
+                Vector128<float> end = TTernaryOperator.Invoke(
+                    Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)),
+                    Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count)),
+                    Vector128.LoadUnsafe(ref zRef, remainder - (uint)(Vector128<float>.Count))
+                );
 
                 if (remainder > (uint)(Vector128<float>.Count * 8))
                 {
@@ -5979,7 +8225,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector128<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector128<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector128<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector128<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             yPtr += misalignment;
@@ -6005,43 +8255,75 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 0)),
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 0)));
-                                vector2 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 1)),
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 1)));
-                                vector3 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 2)),
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 2)));
-                                vector4 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 3)),
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 3)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 0)),
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 0))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 1)),
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 1))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 2)),
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 2))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 3)),
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 3))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 0));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 1));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 2));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 3));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 0)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 1)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 2)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 3)
+                                );
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 4)),
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 4)));
-                                vector2 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 5)),
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 5)));
-                                vector3 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 6)),
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 6)));
-                                vector4 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 7)),
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 7)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 4)),
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 4))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 5)),
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 5))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 6)),
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 6))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 7)),
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 7))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 4));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 5));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 6));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 7));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 4)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 5)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 6)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 7)
+                                );
 
                                 // We adjust the source and destination references, then update
                                 // the count of remaining elements to process.
@@ -6060,18 +8342,26 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 0)),
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 0)));
-                                vector2 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 1)),
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 1)));
-                                vector3 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 2)),
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 2)));
-                                vector4 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 3)),
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 3)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 0)),
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 0))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 1)),
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 1))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 2)),
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 2))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 3)),
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 3))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector128<float>.Count * 0));
                                 vector2.Store(dPtr + (uint)(Vector128<float>.Count * 1));
@@ -6080,18 +8370,26 @@ namespace System.Numerics.Tensors
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 4)),
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 4)));
-                                vector2 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 5)),
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 5)));
-                                vector3 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 6)),
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 6)));
-                                vector4 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 7)),
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 7)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 4)),
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 4))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 5)),
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 5))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 6)),
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 6))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 7)),
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 7))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector128<float>.Count * 4));
                                 vector2.Store(dPtr + (uint)(Vector128<float>.Count * 5));
@@ -6127,70 +8425,170 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector128<float>.Count - 1)) & (nuint)(-Vector128<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector128<float>.Count - 1))
+                    & (nuint)(-Vector128<float>.Count);
 
                 switch (remainder / (uint)(Vector128<float>.Count))
                 {
                     case 8:
                     {
-                        Vector128<float> vector = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 8)),
-                                                                          Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 8)),
-                                                                          Vector128.LoadUnsafe(ref zRef, remainder - (uint)(Vector128<float>.Count * 8)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 8));
+                        Vector128<float> vector = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 8)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 8)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector128<float>.Count * 8)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 8)
+                        );
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector128<float> vector = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 7)),
-                                                                          Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 7)),
-                                                                          Vector128.LoadUnsafe(ref zRef, remainder - (uint)(Vector128<float>.Count * 7)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 7));
+                        Vector128<float> vector = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 7)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 7)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector128<float>.Count * 7)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 7)
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector128<float> vector = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 6)),
-                                                                          Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 6)),
-                                                                          Vector128.LoadUnsafe(ref zRef, remainder - (uint)(Vector128<float>.Count * 6)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 6));
+                        Vector128<float> vector = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 6)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 6)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector128<float>.Count * 6)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 6)
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector128<float> vector = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 5)),
-                                                                          Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 5)),
-                                                                          Vector128.LoadUnsafe(ref zRef, remainder - (uint)(Vector128<float>.Count * 5)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 5));
+                        Vector128<float> vector = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 5)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 5)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector128<float>.Count * 5)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 5)
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector128<float> vector = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 4)),
-                                                                          Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 4)),
-                                                                          Vector128.LoadUnsafe(ref zRef, remainder - (uint)(Vector128<float>.Count * 4)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 4));
+                        Vector128<float> vector = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 4)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 4)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector128<float>.Count * 4)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 4)
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector128<float> vector = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 3)),
-                                                                          Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 3)),
-                                                                          Vector128.LoadUnsafe(ref zRef, remainder - (uint)(Vector128<float>.Count * 3)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 3));
+                        Vector128<float> vector = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 3)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 3)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector128<float>.Count * 3)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 3)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector128<float> vector = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 2)),
-                                                                          Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 2)),
-                                                                          Vector128.LoadUnsafe(ref zRef, remainder - (uint)(Vector128<float>.Count * 2)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 2));
+                        Vector128<float> vector = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 2)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 2)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector128<float>.Count * 2)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 2)
+                        );
                         goto case 1;
                     }
 
@@ -6211,23 +8609,33 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void Vectorized128Small(ref float xRef, ref float yRef, ref float zRef, ref float dRef, nuint remainder)
+            static void Vectorized128Small(
+                ref float xRef,
+                ref float yRef,
+                ref float zRef,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 switch (remainder)
                 {
                     case 3:
                     {
-                        Unsafe.Add(ref dRef, 2) = TTernaryOperator.Invoke(Unsafe.Add(ref xRef, 2),
-                                                                          Unsafe.Add(ref yRef, 2),
-                                                                          Unsafe.Add(ref zRef, 2));
+                        Unsafe.Add(ref dRef, 2) = TTernaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 2),
+                            Unsafe.Add(ref yRef, 2),
+                            Unsafe.Add(ref zRef, 2)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Unsafe.Add(ref dRef, 1) = TTernaryOperator.Invoke(Unsafe.Add(ref xRef, 1),
-                                                                          Unsafe.Add(ref yRef, 1),
-                                                                          Unsafe.Add(ref zRef, 1));
+                        Unsafe.Add(ref dRef, 1) = TTernaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 1),
+                            Unsafe.Add(ref yRef, 1),
+                            Unsafe.Add(ref zRef, 1)
+                        );
                         goto case 1;
                     }
 
@@ -6244,18 +8652,28 @@ namespace System.Numerics.Tensors
                 }
             }
 
-            static void Vectorized256(ref float xRef, ref float yRef, ref float zRef, ref float dRef, nuint remainder)
+            static void Vectorized256(
+                ref float xRef,
+                ref float yRef,
+                ref float zRef,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 ref float dRefBeg = ref dRef;
 
                 // Preload the beginning and end so that overlapping accesses don't negatively impact the data
 
-                Vector256<float> beg = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef),
-                                                               Vector256.LoadUnsafe(ref yRef),
-                                                               Vector256.LoadUnsafe(ref zRef));
-                Vector256<float> end = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count)),
-                                                               Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count)),
-                                                               Vector256.LoadUnsafe(ref zRef, remainder - (uint)(Vector256<float>.Count)));
+                Vector256<float> beg = TTernaryOperator.Invoke(
+                    Vector256.LoadUnsafe(ref xRef),
+                    Vector256.LoadUnsafe(ref yRef),
+                    Vector256.LoadUnsafe(ref zRef)
+                );
+                Vector256<float> end = TTernaryOperator.Invoke(
+                    Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count)),
+                    Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count)),
+                    Vector256.LoadUnsafe(ref zRef, remainder - (uint)(Vector256<float>.Count))
+                );
 
                 if (remainder > (uint)(Vector256<float>.Count * 8))
                 {
@@ -6286,7 +8704,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector256<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector256<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector256<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector256<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             yPtr += misalignment;
@@ -6312,43 +8734,75 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 0)),
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 0)));
-                                vector2 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 1)),
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 1)));
-                                vector3 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 2)),
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 2)));
-                                vector4 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 3)),
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 3)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 0)),
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 0))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 1)),
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 1))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 2)),
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 2))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 3)),
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 3))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 0));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 1));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 2));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 3));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 0)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 1)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 2)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 3)
+                                );
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 4)),
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 4)));
-                                vector2 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 5)),
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 5)));
-                                vector3 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 6)),
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 6)));
-                                vector4 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 7)),
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 7)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 4)),
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 4))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 5)),
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 5))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 6)),
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 6))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 7)),
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 7))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 4));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 5));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 6));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 7));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 4)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 5)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 6)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 7)
+                                );
 
                                 // We adjust the source and destination references, then update
                                 // the count of remaining elements to process.
@@ -6367,18 +8821,26 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 0)),
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 0)));
-                                vector2 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 1)),
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 1)));
-                                vector3 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 2)),
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 2)));
-                                vector4 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 3)),
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 3)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 0)),
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 0))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 1)),
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 1))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 2)),
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 2))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 3)),
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 3))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector256<float>.Count * 0));
                                 vector2.Store(dPtr + (uint)(Vector256<float>.Count * 1));
@@ -6387,18 +8849,26 @@ namespace System.Numerics.Tensors
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 4)),
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 4)));
-                                vector2 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 5)),
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 5)));
-                                vector3 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 6)),
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 6)));
-                                vector4 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 7)),
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 7)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 4)),
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 4))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 5)),
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 5))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 6)),
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 6))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 7)),
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 7))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector256<float>.Count * 4));
                                 vector2.Store(dPtr + (uint)(Vector256<float>.Count * 5));
@@ -6434,70 +8904,170 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector256<float>.Count - 1)) & (nuint)(-Vector256<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector256<float>.Count - 1))
+                    & (nuint)(-Vector256<float>.Count);
 
                 switch (remainder / (uint)(Vector256<float>.Count))
                 {
                     case 8:
                     {
-                        Vector256<float> vector = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 8)),
-                                                                          Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 8)),
-                                                                          Vector256.LoadUnsafe(ref zRef, remainder - (uint)(Vector256<float>.Count * 8)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 8));
+                        Vector256<float> vector = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 8)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 8)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector256<float>.Count * 8)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 8)
+                        );
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector256<float> vector = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 7)),
-                                                                          Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 7)),
-                                                                          Vector256.LoadUnsafe(ref zRef, remainder - (uint)(Vector256<float>.Count * 7)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 7));
+                        Vector256<float> vector = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 7)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 7)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector256<float>.Count * 7)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 7)
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector256<float> vector = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 6)),
-                                                                          Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 6)),
-                                                                          Vector256.LoadUnsafe(ref zRef, remainder - (uint)(Vector256<float>.Count * 6)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 6));
+                        Vector256<float> vector = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 6)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 6)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector256<float>.Count * 6)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 6)
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector256<float> vector = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 5)),
-                                                                          Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 5)),
-                                                                          Vector256.LoadUnsafe(ref zRef, remainder - (uint)(Vector256<float>.Count * 5)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 5));
+                        Vector256<float> vector = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 5)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 5)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector256<float>.Count * 5)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 5)
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector256<float> vector = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 4)),
-                                                                          Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 4)),
-                                                                          Vector256.LoadUnsafe(ref zRef, remainder - (uint)(Vector256<float>.Count * 4)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 4));
+                        Vector256<float> vector = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 4)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 4)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector256<float>.Count * 4)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 4)
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector256<float> vector = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 3)),
-                                                                          Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 3)),
-                                                                          Vector256.LoadUnsafe(ref zRef, remainder - (uint)(Vector256<float>.Count * 3)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 3));
+                        Vector256<float> vector = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 3)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 3)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector256<float>.Count * 3)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 3)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector256<float> vector = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 2)),
-                                                                          Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 2)),
-                                                                          Vector256.LoadUnsafe(ref zRef, remainder - (uint)(Vector256<float>.Count * 2)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 2));
+                        Vector256<float> vector = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 2)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 2)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector256<float>.Count * 2)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 2)
+                        );
                         goto case 1;
                     }
 
@@ -6518,7 +9088,13 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void Vectorized256Small(ref float xRef, ref float yRef, ref float zRef, ref float dRef, nuint remainder)
+            static void Vectorized256Small(
+                ref float xRef,
+                ref float yRef,
+                ref float zRef,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 switch (remainder)
                 {
@@ -6528,12 +9104,25 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
 
-                        Vector128<float> beg = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                                       Vector128.LoadUnsafe(ref yRef),
-                                                                       Vector128.LoadUnsafe(ref zRef));
-                        Vector128<float> end = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)),
-                                                                       Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count)),
-                                                                       Vector128.LoadUnsafe(ref zRef, remainder - (uint)(Vector128<float>.Count)));
+                        Vector128<float> beg = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef),
+                            Vector128.LoadUnsafe(ref yRef),
+                            Vector128.LoadUnsafe(ref zRef)
+                        );
+                        Vector128<float> end = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            )
+                        );
 
                         beg.StoreUnsafe(ref dRef);
                         end.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count));
@@ -6545,9 +9134,11 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
 
-                        Vector128<float> beg = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                                       Vector128.LoadUnsafe(ref yRef),
-                                                                       Vector128.LoadUnsafe(ref zRef));
+                        Vector128<float> beg = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef),
+                            Vector128.LoadUnsafe(ref yRef),
+                            Vector128.LoadUnsafe(ref zRef)
+                        );
                         beg.StoreUnsafe(ref dRef);
 
                         break;
@@ -6555,17 +9146,21 @@ namespace System.Numerics.Tensors
 
                     case 3:
                     {
-                        Unsafe.Add(ref dRef, 2) = TTernaryOperator.Invoke(Unsafe.Add(ref xRef, 2),
-                                                                          Unsafe.Add(ref yRef, 2),
-                                                                          Unsafe.Add(ref zRef, 2));
+                        Unsafe.Add(ref dRef, 2) = TTernaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 2),
+                            Unsafe.Add(ref yRef, 2),
+                            Unsafe.Add(ref zRef, 2)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Unsafe.Add(ref dRef, 1) = TTernaryOperator.Invoke(Unsafe.Add(ref xRef, 1),
-                                                                          Unsafe.Add(ref yRef, 1),
-                                                                          Unsafe.Add(ref zRef, 1));
+                        Unsafe.Add(ref dRef, 1) = TTernaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 1),
+                            Unsafe.Add(ref yRef, 1),
+                            Unsafe.Add(ref zRef, 1)
+                        );
                         goto case 1;
                     }
 
@@ -6582,18 +9177,28 @@ namespace System.Numerics.Tensors
                 }
             }
 
-            static void Vectorized512(ref float xRef, ref float yRef, ref float zRef, ref float dRef, nuint remainder)
+            static void Vectorized512(
+                ref float xRef,
+                ref float yRef,
+                ref float zRef,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 ref float dRefBeg = ref dRef;
 
                 // Preload the beginning and end so that overlapping accesses don't negatively impact the data
 
-                Vector512<float> beg = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef),
-                                                               Vector512.LoadUnsafe(ref yRef),
-                                                               Vector512.LoadUnsafe(ref zRef));
-                Vector512<float> end = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count)),
-                                                               Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count)),
-                                                               Vector512.LoadUnsafe(ref zRef, remainder - (uint)(Vector512<float>.Count)));
+                Vector512<float> beg = TTernaryOperator.Invoke(
+                    Vector512.LoadUnsafe(ref xRef),
+                    Vector512.LoadUnsafe(ref yRef),
+                    Vector512.LoadUnsafe(ref zRef)
+                );
+                Vector512<float> end = TTernaryOperator.Invoke(
+                    Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count)),
+                    Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count)),
+                    Vector512.LoadUnsafe(ref zRef, remainder - (uint)(Vector512<float>.Count))
+                );
 
                 if (remainder > (uint)(Vector512<float>.Count * 8))
                 {
@@ -6624,7 +9229,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector512<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector512<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector512<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector512<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             yPtr += misalignment;
@@ -6650,43 +9259,75 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 0)),
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 0)));
-                                vector2 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 1)),
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 1)));
-                                vector3 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 2)),
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 2)));
-                                vector4 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 3)),
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 3)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 0)),
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 0))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 1)),
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 1))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 2)),
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 2))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 3)),
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 3))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 0));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 1));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 2));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 3));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 0)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 1)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 2)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 3)
+                                );
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 4)),
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 4)));
-                                vector2 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 5)),
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 5)));
-                                vector3 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 6)),
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 6)));
-                                vector4 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 7)),
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 7)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 4)),
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 4))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 5)),
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 5))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 6)),
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 6))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 7)),
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 7))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 4));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 5));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 6));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 7));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 4)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 5)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 6)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 7)
+                                );
 
                                 // We adjust the source and destination references, then update
                                 // the count of remaining elements to process.
@@ -6705,18 +9346,26 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 0)),
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 0)));
-                                vector2 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 1)),
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 1)));
-                                vector3 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 2)),
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 2)));
-                                vector4 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 3)),
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 3)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 0)),
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 0))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 1)),
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 1))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 2)),
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 2))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 3)),
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 3))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector512<float>.Count * 0));
                                 vector2.Store(dPtr + (uint)(Vector512<float>.Count * 1));
@@ -6725,18 +9374,26 @@ namespace System.Numerics.Tensors
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 4)),
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 4)));
-                                vector2 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 5)),
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 5)));
-                                vector3 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 6)),
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 6)));
-                                vector4 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 7)),
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 7)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 4)),
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 4))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 5)),
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 5))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 6)),
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 6))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 7)),
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 7))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector512<float>.Count * 4));
                                 vector2.Store(dPtr + (uint)(Vector512<float>.Count * 5));
@@ -6772,70 +9429,170 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector512<float>.Count - 1)) & (nuint)(-Vector512<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector512<float>.Count - 1))
+                    & (nuint)(-Vector512<float>.Count);
 
                 switch (remainder / (uint)(Vector512<float>.Count))
                 {
                     case 8:
                     {
-                        Vector512<float> vector = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 8)),
-                                                                          Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 8)),
-                                                                          Vector512.LoadUnsafe(ref zRef, remainder - (uint)(Vector512<float>.Count * 8)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 8));
+                        Vector512<float> vector = TTernaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 8)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 8)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector512<float>.Count * 8)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 8)
+                        );
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector512<float> vector = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 7)),
-                                                                          Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 7)),
-                                                                          Vector512.LoadUnsafe(ref zRef, remainder - (uint)(Vector512<float>.Count * 7)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 7));
+                        Vector512<float> vector = TTernaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 7)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 7)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector512<float>.Count * 7)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 7)
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector512<float> vector = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 6)),
-                                                                          Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 6)),
-                                                                          Vector512.LoadUnsafe(ref zRef, remainder - (uint)(Vector512<float>.Count * 6)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 6));
+                        Vector512<float> vector = TTernaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 6)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 6)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector512<float>.Count * 6)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 6)
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector512<float> vector = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 5)),
-                                                                          Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 5)),
-                                                                          Vector512.LoadUnsafe(ref zRef, remainder - (uint)(Vector512<float>.Count * 5)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 5));
+                        Vector512<float> vector = TTernaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 5)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 5)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector512<float>.Count * 5)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 5)
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector512<float> vector = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 4)),
-                                                                          Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 4)),
-                                                                          Vector512.LoadUnsafe(ref zRef, remainder - (uint)(Vector512<float>.Count * 4)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 4));
+                        Vector512<float> vector = TTernaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 4)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 4)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector512<float>.Count * 4)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 4)
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector512<float> vector = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 3)),
-                                                                          Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 3)),
-                                                                          Vector512.LoadUnsafe(ref zRef, remainder - (uint)(Vector512<float>.Count * 3)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 3));
+                        Vector512<float> vector = TTernaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 3)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 3)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector512<float>.Count * 3)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 3)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector512<float> vector = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 2)),
-                                                                          Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 2)),
-                                                                          Vector512.LoadUnsafe(ref zRef, remainder - (uint)(Vector512<float>.Count * 2)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 2));
+                        Vector512<float> vector = TTernaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 2)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 2)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector512<float>.Count * 2)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 2)
+                        );
                         goto case 1;
                     }
 
@@ -6856,7 +9613,13 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void Vectorized512Small(ref float xRef, ref float yRef, ref float zRef, ref float dRef, nuint remainder)
+            static void Vectorized512Small(
+                ref float xRef,
+                ref float yRef,
+                ref float zRef,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 switch (remainder)
                 {
@@ -6870,12 +9633,25 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector256.IsHardwareAccelerated);
 
-                        Vector256<float> beg = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef),
-                                                                       Vector256.LoadUnsafe(ref yRef),
-                                                                       Vector256.LoadUnsafe(ref zRef));
-                        Vector256<float> end = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count)),
-                                                                       Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count)),
-                                                                       Vector256.LoadUnsafe(ref zRef, remainder - (uint)(Vector256<float>.Count)));
+                        Vector256<float> beg = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(ref xRef),
+                            Vector256.LoadUnsafe(ref yRef),
+                            Vector256.LoadUnsafe(ref zRef)
+                        );
+                        Vector256<float> end = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector256<float>.Count)
+                            )
+                        );
 
                         beg.StoreUnsafe(ref dRef);
                         end.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count));
@@ -6887,9 +9663,11 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector256.IsHardwareAccelerated);
 
-                        Vector256<float> beg = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef),
-                                                                       Vector256.LoadUnsafe(ref yRef),
-                                                                       Vector256.LoadUnsafe(ref zRef));
+                        Vector256<float> beg = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(ref xRef),
+                            Vector256.LoadUnsafe(ref yRef),
+                            Vector256.LoadUnsafe(ref zRef)
+                        );
                         beg.StoreUnsafe(ref dRef);
 
                         break;
@@ -6901,12 +9679,25 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
 
-                        Vector128<float> beg = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                                       Vector128.LoadUnsafe(ref yRef),
-                                                                       Vector128.LoadUnsafe(ref zRef));
-                        Vector128<float> end = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)),
-                                                                       Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count)),
-                                                                       Vector128.LoadUnsafe(ref zRef, remainder - (uint)(Vector128<float>.Count)));
+                        Vector128<float> beg = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef),
+                            Vector128.LoadUnsafe(ref yRef),
+                            Vector128.LoadUnsafe(ref zRef)
+                        );
+                        Vector128<float> end = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            )
+                        );
 
                         beg.StoreUnsafe(ref dRef);
                         end.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count));
@@ -6918,9 +9709,11 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
 
-                        Vector128<float> beg = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                                       Vector128.LoadUnsafe(ref yRef),
-                                                                       Vector128.LoadUnsafe(ref zRef));
+                        Vector128<float> beg = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef),
+                            Vector128.LoadUnsafe(ref yRef),
+                            Vector128.LoadUnsafe(ref zRef)
+                        );
                         beg.StoreUnsafe(ref dRef);
 
                         break;
@@ -6928,17 +9721,21 @@ namespace System.Numerics.Tensors
 
                     case 3:
                     {
-                        Unsafe.Add(ref dRef, 2) = TTernaryOperator.Invoke(Unsafe.Add(ref xRef, 2),
-                                                                          Unsafe.Add(ref yRef, 2),
-                                                                          Unsafe.Add(ref zRef, 2));
+                        Unsafe.Add(ref dRef, 2) = TTernaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 2),
+                            Unsafe.Add(ref yRef, 2),
+                            Unsafe.Add(ref zRef, 2)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Unsafe.Add(ref dRef, 1) = TTernaryOperator.Invoke(Unsafe.Add(ref xRef, 1),
-                                                                          Unsafe.Add(ref yRef, 1),
-                                                                          Unsafe.Add(ref zRef, 1));
+                        Unsafe.Add(ref dRef, 1) = TTernaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 1),
+                            Unsafe.Add(ref yRef, 1),
+                            Unsafe.Add(ref zRef, 1)
+                        );
                         goto case 1;
                     }
 
@@ -6965,7 +9762,11 @@ namespace System.Numerics.Tensors
         /// with <paramref name="z"/>.
         /// </typeparam>
         private static void InvokeSpanSpanScalarIntoSpan<TTernaryOperator>(
-            ReadOnlySpan<float> x, ReadOnlySpan<float> y, float z, Span<float> destination)
+            ReadOnlySpan<float> x,
+            ReadOnlySpan<float> y,
+            float z,
+            Span<float> destination
+        )
             where TTernaryOperator : struct, ITernaryOperator
         {
             if (x.Length != y.Length)
@@ -7052,17 +9853,31 @@ namespace System.Numerics.Tensors
             SoftwareFallback(ref xRef, ref yRef, z, ref dRef, remainder);
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void SoftwareFallback(ref float xRef, ref float yRef, float z, ref float dRef, nuint length)
+            static void SoftwareFallback(
+                ref float xRef,
+                ref float yRef,
+                float z,
+                ref float dRef,
+                nuint length
+            )
             {
                 for (nuint i = 0; i < length; i++)
                 {
-                    Unsafe.Add(ref dRef, i) = TTernaryOperator.Invoke(Unsafe.Add(ref xRef, i),
-                                                                      Unsafe.Add(ref yRef, i),
-                                                                      z);
+                    Unsafe.Add(ref dRef, i) = TTernaryOperator.Invoke(
+                        Unsafe.Add(ref xRef, i),
+                        Unsafe.Add(ref yRef, i),
+                        z
+                    );
                 }
             }
 
-            static void Vectorized128(ref float xRef, ref float yRef, float z, ref float dRef, nuint remainder)
+            static void Vectorized128(
+                ref float xRef,
+                ref float yRef,
+                float z,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 ref float dRefBeg = ref dRef;
 
@@ -7070,12 +9885,16 @@ namespace System.Numerics.Tensors
 
                 Vector128<float> zVec = Vector128.Create(z);
 
-                Vector128<float> beg = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                               Vector128.LoadUnsafe(ref yRef),
-                                                               zVec);
-                Vector128<float> end = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)),
-                                                               Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count)),
-                                                               zVec);
+                Vector128<float> beg = TTernaryOperator.Invoke(
+                    Vector128.LoadUnsafe(ref xRef),
+                    Vector128.LoadUnsafe(ref yRef),
+                    zVec
+                );
+                Vector128<float> end = TTernaryOperator.Invoke(
+                    Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)),
+                    Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count)),
+                    zVec
+                );
 
                 if (remainder > (uint)(Vector128<float>.Count * 8))
                 {
@@ -7104,7 +9923,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector128<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector128<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector128<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector128<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             yPtr += misalignment;
@@ -7129,43 +9952,75 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 0)),
-                                                                  zVec);
-                                vector2 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 1)),
-                                                                  zVec);
-                                vector3 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 2)),
-                                                                  zVec);
-                                vector4 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 3)),
-                                                                  zVec);
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 0)),
+                                    zVec
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 1)),
+                                    zVec
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 2)),
+                                    zVec
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 3)),
+                                    zVec
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 0));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 1));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 2));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 3));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 0)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 1)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 2)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 3)
+                                );
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 4)),
-                                                                  zVec);
-                                vector2 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 5)),
-                                                                  zVec);
-                                vector3 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 6)),
-                                                                  zVec);
-                                vector4 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 7)),
-                                                                  zVec);
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 4)),
+                                    zVec
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 5)),
+                                    zVec
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 6)),
+                                    zVec
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 7)),
+                                    zVec
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 4));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 5));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 6));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 7));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 4)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 5)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 6)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 7)
+                                );
 
                                 // We adjust the source and destination references, then update
                                 // the count of remaining elements to process.
@@ -7183,18 +10038,26 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 0)),
-                                                                  zVec);
-                                vector2 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 1)),
-                                                                  zVec);
-                                vector3 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 2)),
-                                                                  zVec);
-                                vector4 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 3)),
-                                                                  zVec);
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 0)),
+                                    zVec
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 1)),
+                                    zVec
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 2)),
+                                    zVec
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 3)),
+                                    zVec
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector128<float>.Count * 0));
                                 vector2.Store(dPtr + (uint)(Vector128<float>.Count * 1));
@@ -7203,18 +10066,26 @@ namespace System.Numerics.Tensors
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 4)),
-                                                                  zVec);
-                                vector2 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 5)),
-                                                                  zVec);
-                                vector3 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 6)),
-                                                                  zVec);
-                                vector4 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7)),
-                                                                  Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 7)),
-                                                                  zVec);
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 4)),
+                                    zVec
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 5)),
+                                    zVec
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 6)),
+                                    zVec
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7)),
+                                    Vector128.Load(yPtr + (uint)(Vector128<float>.Count * 7)),
+                                    zVec
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector128<float>.Count * 4));
                                 vector2.Store(dPtr + (uint)(Vector128<float>.Count * 5));
@@ -7248,70 +10119,149 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector128<float>.Count - 1)) & (nuint)(-Vector128<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector128<float>.Count - 1))
+                    & (nuint)(-Vector128<float>.Count);
 
                 switch (remainder / (uint)(Vector128<float>.Count))
                 {
                     case 8:
                     {
-                        Vector128<float> vector = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 8)),
-                                                                          Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 8)),
-                                                                          zVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 8));
+                        Vector128<float> vector = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 8)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 8)
+                            ),
+                            zVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 8)
+                        );
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector128<float> vector = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 7)),
-                                                                          Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 7)),
-                                                                          zVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 7));
+                        Vector128<float> vector = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 7)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 7)
+                            ),
+                            zVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 7)
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector128<float> vector = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 6)),
-                                                                          Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 6)),
-                                                                          zVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 6));
+                        Vector128<float> vector = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 6)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 6)
+                            ),
+                            zVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 6)
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector128<float> vector = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 5)),
-                                                                          Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 5)),
-                                                                          zVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 5));
+                        Vector128<float> vector = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 5)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 5)
+                            ),
+                            zVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 5)
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector128<float> vector = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 4)),
-                                                                          Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 4)),
-                                                                          zVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 4));
+                        Vector128<float> vector = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 4)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 4)
+                            ),
+                            zVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 4)
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector128<float> vector = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 3)),
-                                                                          Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 3)),
-                                                                          zVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 3));
+                        Vector128<float> vector = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 3)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 3)
+                            ),
+                            zVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 3)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector128<float> vector = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 2)),
-                                                                          Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count * 2)),
-                                                                          zVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 2));
+                        Vector128<float> vector = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 2)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count * 2)
+                            ),
+                            zVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 2)
+                        );
                         goto case 1;
                     }
 
@@ -7332,23 +10282,33 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void Vectorized128Small(ref float xRef, ref float yRef, float z, ref float dRef, nuint remainder)
+            static void Vectorized128Small(
+                ref float xRef,
+                ref float yRef,
+                float z,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 switch (remainder)
                 {
                     case 3:
                     {
-                        Unsafe.Add(ref dRef, 2) = TTernaryOperator.Invoke(Unsafe.Add(ref xRef, 2),
-                                                                          Unsafe.Add(ref yRef, 2),
-                                                                          z);
+                        Unsafe.Add(ref dRef, 2) = TTernaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 2),
+                            Unsafe.Add(ref yRef, 2),
+                            z
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Unsafe.Add(ref dRef, 1) = TTernaryOperator.Invoke(Unsafe.Add(ref xRef, 1),
-                                                                          Unsafe.Add(ref yRef, 1),
-                                                                          z);
+                        Unsafe.Add(ref dRef, 1) = TTernaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 1),
+                            Unsafe.Add(ref yRef, 1),
+                            z
+                        );
                         goto case 1;
                     }
 
@@ -7365,7 +10325,13 @@ namespace System.Numerics.Tensors
                 }
             }
 
-            static void Vectorized256(ref float xRef, ref float yRef, float z, ref float dRef, nuint remainder)
+            static void Vectorized256(
+                ref float xRef,
+                ref float yRef,
+                float z,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 ref float dRefBeg = ref dRef;
 
@@ -7373,12 +10339,16 @@ namespace System.Numerics.Tensors
 
                 Vector256<float> zVec = Vector256.Create(z);
 
-                Vector256<float> beg = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef),
-                                                               Vector256.LoadUnsafe(ref yRef),
-                                                               zVec);
-                Vector256<float> end = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count)),
-                                                               Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count)),
-                                                               zVec);
+                Vector256<float> beg = TTernaryOperator.Invoke(
+                    Vector256.LoadUnsafe(ref xRef),
+                    Vector256.LoadUnsafe(ref yRef),
+                    zVec
+                );
+                Vector256<float> end = TTernaryOperator.Invoke(
+                    Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count)),
+                    Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count)),
+                    zVec
+                );
 
                 if (remainder > (uint)(Vector256<float>.Count * 8))
                 {
@@ -7407,7 +10377,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector256<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector256<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector256<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector256<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             yPtr += misalignment;
@@ -7432,43 +10406,75 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 0)),
-                                                                  zVec);
-                                vector2 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 1)),
-                                                                  zVec);
-                                vector3 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 2)),
-                                                                  zVec);
-                                vector4 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 3)),
-                                                                  zVec);
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 0)),
+                                    zVec
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 1)),
+                                    zVec
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 2)),
+                                    zVec
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 3)),
+                                    zVec
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 0));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 1));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 2));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 3));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 0)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 1)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 2)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 3)
+                                );
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 4)),
-                                                                  zVec);
-                                vector2 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 5)),
-                                                                  zVec);
-                                vector3 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 6)),
-                                                                  zVec);
-                                vector4 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 7)),
-                                                                  zVec);
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 4)),
+                                    zVec
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 5)),
+                                    zVec
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 6)),
+                                    zVec
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 7)),
+                                    zVec
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 4));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 5));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 6));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 7));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 4)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 5)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 6)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 7)
+                                );
 
                                 // We adjust the source and destination references, then update
                                 // the count of remaining elements to process.
@@ -7486,18 +10492,26 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 0)),
-                                                                  zVec);
-                                vector2 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 1)),
-                                                                  zVec);
-                                vector3 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 2)),
-                                                                  zVec);
-                                vector4 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 3)),
-                                                                  zVec);
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 0)),
+                                    zVec
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 1)),
+                                    zVec
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 2)),
+                                    zVec
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 3)),
+                                    zVec
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector256<float>.Count * 0));
                                 vector2.Store(dPtr + (uint)(Vector256<float>.Count * 1));
@@ -7506,18 +10520,26 @@ namespace System.Numerics.Tensors
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 4)),
-                                                                  zVec);
-                                vector2 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 5)),
-                                                                  zVec);
-                                vector3 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 6)),
-                                                                  zVec);
-                                vector4 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7)),
-                                                                  Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 7)),
-                                                                  zVec);
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 4)),
+                                    zVec
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 5)),
+                                    zVec
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 6)),
+                                    zVec
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7)),
+                                    Vector256.Load(yPtr + (uint)(Vector256<float>.Count * 7)),
+                                    zVec
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector256<float>.Count * 4));
                                 vector2.Store(dPtr + (uint)(Vector256<float>.Count * 5));
@@ -7551,70 +10573,149 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector256<float>.Count - 1)) & (nuint)(-Vector256<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector256<float>.Count - 1))
+                    & (nuint)(-Vector256<float>.Count);
 
                 switch (remainder / (uint)(Vector256<float>.Count))
                 {
                     case 8:
                     {
-                        Vector256<float> vector = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 8)),
-                                                                          Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 8)),
-                                                                          zVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 8));
+                        Vector256<float> vector = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 8)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 8)
+                            ),
+                            zVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 8)
+                        );
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector256<float> vector = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 7)),
-                                                                          Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 7)),
-                                                                          zVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 7));
+                        Vector256<float> vector = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 7)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 7)
+                            ),
+                            zVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 7)
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector256<float> vector = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 6)),
-                                                                          Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 6)),
-                                                                          zVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 6));
+                        Vector256<float> vector = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 6)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 6)
+                            ),
+                            zVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 6)
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector256<float> vector = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 5)),
-                                                                          Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 5)),
-                                                                          zVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 5));
+                        Vector256<float> vector = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 5)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 5)
+                            ),
+                            zVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 5)
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector256<float> vector = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 4)),
-                                                                          Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 4)),
-                                                                          zVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 4));
+                        Vector256<float> vector = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 4)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 4)
+                            ),
+                            zVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 4)
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector256<float> vector = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 3)),
-                                                                          Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 3)),
-                                                                          zVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 3));
+                        Vector256<float> vector = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 3)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 3)
+                            ),
+                            zVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 3)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector256<float> vector = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 2)),
-                                                                          Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count * 2)),
-                                                                          zVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 2));
+                        Vector256<float> vector = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 2)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count * 2)
+                            ),
+                            zVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 2)
+                        );
                         goto case 1;
                     }
 
@@ -7635,7 +10736,13 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void Vectorized256Small(ref float xRef, ref float yRef, float z, ref float dRef, nuint remainder)
+            static void Vectorized256Small(
+                ref float xRef,
+                ref float yRef,
+                float z,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 switch (remainder)
                 {
@@ -7647,12 +10754,22 @@ namespace System.Numerics.Tensors
 
                         Vector128<float> zVec = Vector128.Create(z);
 
-                        Vector128<float> beg = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                                       Vector128.LoadUnsafe(ref yRef),
-                                                                       zVec);
-                        Vector128<float> end = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)),
-                                                                       Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count)),
-                                                                       zVec);
+                        Vector128<float> beg = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef),
+                            Vector128.LoadUnsafe(ref yRef),
+                            zVec
+                        );
+                        Vector128<float> end = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            ),
+                            zVec
+                        );
 
                         beg.StoreUnsafe(ref dRef);
                         end.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count));
@@ -7664,9 +10781,11 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
 
-                        Vector128<float> beg = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                                       Vector128.LoadUnsafe(ref yRef),
-                                                                       Vector128.Create(z));
+                        Vector128<float> beg = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef),
+                            Vector128.LoadUnsafe(ref yRef),
+                            Vector128.Create(z)
+                        );
                         beg.StoreUnsafe(ref dRef);
 
                         break;
@@ -7674,17 +10793,21 @@ namespace System.Numerics.Tensors
 
                     case 3:
                     {
-                        Unsafe.Add(ref dRef, 2) = TTernaryOperator.Invoke(Unsafe.Add(ref xRef, 2),
-                                                                          Unsafe.Add(ref yRef, 2),
-                                                                          z);
+                        Unsafe.Add(ref dRef, 2) = TTernaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 2),
+                            Unsafe.Add(ref yRef, 2),
+                            z
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Unsafe.Add(ref dRef, 1) = TTernaryOperator.Invoke(Unsafe.Add(ref xRef, 1),
-                                                                          Unsafe.Add(ref yRef, 1),
-                                                                          z);
+                        Unsafe.Add(ref dRef, 1) = TTernaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 1),
+                            Unsafe.Add(ref yRef, 1),
+                            z
+                        );
                         goto case 1;
                     }
 
@@ -7701,7 +10824,13 @@ namespace System.Numerics.Tensors
                 }
             }
 
-            static void Vectorized512(ref float xRef, ref float yRef, float z, ref float dRef, nuint remainder)
+            static void Vectorized512(
+                ref float xRef,
+                ref float yRef,
+                float z,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 ref float dRefBeg = ref dRef;
 
@@ -7709,12 +10838,16 @@ namespace System.Numerics.Tensors
 
                 Vector512<float> zVec = Vector512.Create(z);
 
-                Vector512<float> beg = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef),
-                                                               Vector512.LoadUnsafe(ref yRef),
-                                                               zVec);
-                Vector512<float> end = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count)),
-                                                               Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count)),
-                                                               zVec);
+                Vector512<float> beg = TTernaryOperator.Invoke(
+                    Vector512.LoadUnsafe(ref xRef),
+                    Vector512.LoadUnsafe(ref yRef),
+                    zVec
+                );
+                Vector512<float> end = TTernaryOperator.Invoke(
+                    Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count)),
+                    Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count)),
+                    zVec
+                );
 
                 if (remainder > (uint)(Vector512<float>.Count * 8))
                 {
@@ -7743,7 +10876,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector512<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector512<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector512<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector512<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             yPtr += misalignment;
@@ -7768,43 +10905,75 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 0)),
-                                                                  zVec);
-                                vector2 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 1)),
-                                                                  zVec);
-                                vector3 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 2)),
-                                                                  zVec);
-                                vector4 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 3)),
-                                                                  zVec);
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 0)),
+                                    zVec
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 1)),
+                                    zVec
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 2)),
+                                    zVec
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 3)),
+                                    zVec
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 0));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 1));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 2));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 3));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 0)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 1)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 2)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 3)
+                                );
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 4)),
-                                                                  zVec);
-                                vector2 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 5)),
-                                                                  zVec);
-                                vector3 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 6)),
-                                                                  zVec);
-                                vector4 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 7)),
-                                                                  zVec);
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 4)),
+                                    zVec
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 5)),
+                                    zVec
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 6)),
+                                    zVec
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 7)),
+                                    zVec
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 4));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 5));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 6));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 7));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 4)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 5)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 6)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 7)
+                                );
 
                                 // We adjust the source and destination references, then update
                                 // the count of remaining elements to process.
@@ -7822,18 +10991,26 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 0)),
-                                                                  zVec);
-                                vector2 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 1)),
-                                                                  zVec);
-                                vector3 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 2)),
-                                                                  zVec);
-                                vector4 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 3)),
-                                                                  zVec);
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 0)),
+                                    zVec
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 1)),
+                                    zVec
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 2)),
+                                    zVec
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 3)),
+                                    zVec
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector512<float>.Count * 0));
                                 vector2.Store(dPtr + (uint)(Vector512<float>.Count * 1));
@@ -7842,18 +11019,26 @@ namespace System.Numerics.Tensors
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 4)),
-                                                                  zVec);
-                                vector2 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 5)),
-                                                                  zVec);
-                                vector3 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 6)),
-                                                                  zVec);
-                                vector4 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7)),
-                                                                  Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 7)),
-                                                                  zVec);
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 4)),
+                                    zVec
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 5)),
+                                    zVec
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 6)),
+                                    zVec
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7)),
+                                    Vector512.Load(yPtr + (uint)(Vector512<float>.Count * 7)),
+                                    zVec
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector512<float>.Count * 4));
                                 vector2.Store(dPtr + (uint)(Vector512<float>.Count * 5));
@@ -7887,70 +11072,149 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector512<float>.Count - 1)) & (nuint)(-Vector512<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector512<float>.Count - 1))
+                    & (nuint)(-Vector512<float>.Count);
 
                 switch (remainder / (uint)(Vector512<float>.Count))
                 {
                     case 8:
                     {
-                        Vector512<float> vector = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 8)),
-                                                                          Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 8)),
-                                                                          zVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 8));
+                        Vector512<float> vector = TTernaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 8)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 8)
+                            ),
+                            zVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 8)
+                        );
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector512<float> vector = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 7)),
-                                                                          Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 7)),
-                                                                          zVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 7));
+                        Vector512<float> vector = TTernaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 7)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 7)
+                            ),
+                            zVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 7)
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector512<float> vector = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 6)),
-                                                                          Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 6)),
-                                                                          zVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 6));
+                        Vector512<float> vector = TTernaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 6)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 6)
+                            ),
+                            zVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 6)
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector512<float> vector = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 5)),
-                                                                          Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 5)),
-                                                                          zVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 5));
+                        Vector512<float> vector = TTernaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 5)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 5)
+                            ),
+                            zVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 5)
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector512<float> vector = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 4)),
-                                                                          Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 4)),
-                                                                          zVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 4));
+                        Vector512<float> vector = TTernaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 4)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 4)
+                            ),
+                            zVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 4)
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector512<float> vector = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 3)),
-                                                                          Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 3)),
-                                                                          zVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 3));
+                        Vector512<float> vector = TTernaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 3)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 3)
+                            ),
+                            zVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 3)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector512<float> vector = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 2)),
-                                                                          Vector512.LoadUnsafe(ref yRef, remainder - (uint)(Vector512<float>.Count * 2)),
-                                                                          zVec);
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 2));
+                        Vector512<float> vector = TTernaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 2)
+                            ),
+                            Vector512.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector512<float>.Count * 2)
+                            ),
+                            zVec
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 2)
+                        );
                         goto case 1;
                     }
 
@@ -7971,7 +11235,13 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void Vectorized512Small(ref float xRef, ref float yRef, float z, ref float dRef, nuint remainder)
+            static void Vectorized512Small(
+                ref float xRef,
+                ref float yRef,
+                float z,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 switch (remainder)
                 {
@@ -7987,12 +11257,22 @@ namespace System.Numerics.Tensors
 
                         Vector256<float> zVec = Vector256.Create(z);
 
-                        Vector256<float> beg = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef),
-                                                                       Vector256.LoadUnsafe(ref yRef),
-                                                                       zVec);
-                        Vector256<float> end = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count)),
-                                                                       Vector256.LoadUnsafe(ref yRef, remainder - (uint)(Vector256<float>.Count)),
-                                                                       zVec);
+                        Vector256<float> beg = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(ref xRef),
+                            Vector256.LoadUnsafe(ref yRef),
+                            zVec
+                        );
+                        Vector256<float> end = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count)
+                            ),
+                            Vector256.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector256<float>.Count)
+                            ),
+                            zVec
+                        );
 
                         beg.StoreUnsafe(ref dRef);
                         end.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count));
@@ -8004,9 +11284,11 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector256.IsHardwareAccelerated);
 
-                        Vector256<float> beg = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef),
-                                                                       Vector256.LoadUnsafe(ref yRef),
-                                                                       Vector256.Create(z));
+                        Vector256<float> beg = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(ref xRef),
+                            Vector256.LoadUnsafe(ref yRef),
+                            Vector256.Create(z)
+                        );
                         beg.StoreUnsafe(ref dRef);
 
                         break;
@@ -8020,12 +11302,22 @@ namespace System.Numerics.Tensors
 
                         Vector128<float> zVec = Vector128.Create(z);
 
-                        Vector128<float> beg = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                                       Vector128.LoadUnsafe(ref yRef),
-                                                                       zVec);
-                        Vector128<float> end = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)),
-                                                                       Vector128.LoadUnsafe(ref yRef, remainder - (uint)(Vector128<float>.Count)),
-                                                                       zVec);
+                        Vector128<float> beg = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef),
+                            Vector128.LoadUnsafe(ref yRef),
+                            zVec
+                        );
+                        Vector128<float> end = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            ),
+                            Vector128.LoadUnsafe(
+                                ref yRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            ),
+                            zVec
+                        );
 
                         beg.StoreUnsafe(ref dRef);
                         end.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count));
@@ -8037,9 +11329,11 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
 
-                        Vector128<float> beg = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                                       Vector128.LoadUnsafe(ref yRef),
-                                                                       Vector128.Create(z));
+                        Vector128<float> beg = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef),
+                            Vector128.LoadUnsafe(ref yRef),
+                            Vector128.Create(z)
+                        );
                         beg.StoreUnsafe(ref dRef);
 
                         break;
@@ -8047,17 +11341,21 @@ namespace System.Numerics.Tensors
 
                     case 3:
                     {
-                        Unsafe.Add(ref dRef, 2) = TTernaryOperator.Invoke(Unsafe.Add(ref xRef, 2),
-                                                                          Unsafe.Add(ref yRef, 2),
-                                                                          z);
+                        Unsafe.Add(ref dRef, 2) = TTernaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 2),
+                            Unsafe.Add(ref yRef, 2),
+                            z
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Unsafe.Add(ref dRef, 1) = TTernaryOperator.Invoke(Unsafe.Add(ref xRef, 1),
-                                                                          Unsafe.Add(ref yRef, 1),
-                                                                          z);
+                        Unsafe.Add(ref dRef, 1) = TTernaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 1),
+                            Unsafe.Add(ref yRef, 1),
+                            z
+                        );
                         goto case 1;
                     }
 
@@ -8084,7 +11382,11 @@ namespace System.Numerics.Tensors
         /// and the element loaded from <paramref name="z"/>.
         /// </typeparam>
         private static void InvokeSpanScalarSpanIntoSpan<TTernaryOperator>(
-            ReadOnlySpan<float> x, float y, ReadOnlySpan<float> z, Span<float> destination)
+            ReadOnlySpan<float> x,
+            float y,
+            ReadOnlySpan<float> z,
+            Span<float> destination
+        )
             where TTernaryOperator : struct, ITernaryOperator
         {
             if (x.Length != z.Length)
@@ -8171,17 +11473,31 @@ namespace System.Numerics.Tensors
             SoftwareFallback(ref xRef, y, ref zRef, ref dRef, remainder);
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void SoftwareFallback(ref float xRef, float y, ref float zRef, ref float dRef, nuint length)
+            static void SoftwareFallback(
+                ref float xRef,
+                float y,
+                ref float zRef,
+                ref float dRef,
+                nuint length
+            )
             {
                 for (nuint i = 0; i < length; i++)
                 {
-                    Unsafe.Add(ref dRef, i) = TTernaryOperator.Invoke(Unsafe.Add(ref xRef, i),
-                                                                      y,
-                                                                      Unsafe.Add(ref zRef, i));
+                    Unsafe.Add(ref dRef, i) = TTernaryOperator.Invoke(
+                        Unsafe.Add(ref xRef, i),
+                        y,
+                        Unsafe.Add(ref zRef, i)
+                    );
                 }
             }
 
-            static void Vectorized128(ref float xRef, float y, ref float zRef, ref float dRef, nuint remainder)
+            static void Vectorized128(
+                ref float xRef,
+                float y,
+                ref float zRef,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 ref float dRefBeg = ref dRef;
 
@@ -8189,12 +11505,16 @@ namespace System.Numerics.Tensors
 
                 Vector128<float> yVec = Vector128.Create(y);
 
-                Vector128<float> beg = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                               yVec,
-                                                               Vector128.LoadUnsafe(ref zRef));
-                Vector128<float> end = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)),
-                                                               yVec,
-                                                               Vector128.LoadUnsafe(ref zRef, remainder - (uint)(Vector128<float>.Count)));
+                Vector128<float> beg = TTernaryOperator.Invoke(
+                    Vector128.LoadUnsafe(ref xRef),
+                    yVec,
+                    Vector128.LoadUnsafe(ref zRef)
+                );
+                Vector128<float> end = TTernaryOperator.Invoke(
+                    Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)),
+                    yVec,
+                    Vector128.LoadUnsafe(ref zRef, remainder - (uint)(Vector128<float>.Count))
+                );
 
                 if (remainder > (uint)(Vector128<float>.Count * 8))
                 {
@@ -8223,7 +11543,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector128<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector128<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector128<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector128<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             zPtr += misalignment;
@@ -8248,43 +11572,75 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0)),
-                                                                  yVec,
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 0)));
-                                vector2 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1)),
-                                                                  yVec,
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 1)));
-                                vector3 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2)),
-                                                                  yVec,
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 2)));
-                                vector4 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3)),
-                                                                  yVec,
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 3)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0)),
+                                    yVec,
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 0))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1)),
+                                    yVec,
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 1))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2)),
+                                    yVec,
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 2))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3)),
+                                    yVec,
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 3))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 0));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 1));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 2));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 3));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 0)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 1)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 2)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 3)
+                                );
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4)),
-                                                                  yVec,
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 4)));
-                                vector2 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5)),
-                                                                  yVec,
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 5)));
-                                vector3 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6)),
-                                                                  yVec,
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 6)));
-                                vector4 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7)),
-                                                                  yVec,
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 7)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4)),
+                                    yVec,
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 4))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5)),
+                                    yVec,
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 5))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6)),
+                                    yVec,
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 6))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7)),
+                                    yVec,
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 7))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 4));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 5));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 6));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector128<float>.Count * 7));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 4)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 5)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 6)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector128<float>.Count * 7)
+                                );
 
                                 // We adjust the source and destination references, then update
                                 // the count of remaining elements to process.
@@ -8302,18 +11658,26 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0)),
-                                                                  yVec,
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 0)));
-                                vector2 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1)),
-                                                                  yVec,
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 1)));
-                                vector3 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2)),
-                                                                  yVec,
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 2)));
-                                vector4 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3)),
-                                                                  yVec,
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 3)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 0)),
+                                    yVec,
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 0))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 1)),
+                                    yVec,
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 1))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 2)),
+                                    yVec,
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 2))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 3)),
+                                    yVec,
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 3))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector128<float>.Count * 0));
                                 vector2.Store(dPtr + (uint)(Vector128<float>.Count * 1));
@@ -8322,18 +11686,26 @@ namespace System.Numerics.Tensors
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4)),
-                                                                  yVec,
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 4)));
-                                vector2 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5)),
-                                                                  yVec,
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 5)));
-                                vector3 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6)),
-                                                                  yVec,
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 6)));
-                                vector4 = TTernaryOperator.Invoke(Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7)),
-                                                                  yVec,
-                                                                  Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 7)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 4)),
+                                    yVec,
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 4))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 5)),
+                                    yVec,
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 5))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 6)),
+                                    yVec,
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 6))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector128.Load(xPtr + (uint)(Vector128<float>.Count * 7)),
+                                    yVec,
+                                    Vector128.Load(zPtr + (uint)(Vector128<float>.Count * 7))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector128<float>.Count * 4));
                                 vector2.Store(dPtr + (uint)(Vector128<float>.Count * 5));
@@ -8367,70 +11739,149 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector128<float>.Count - 1)) & (nuint)(-Vector128<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector128<float>.Count - 1))
+                    & (nuint)(-Vector128<float>.Count);
 
                 switch (remainder / (uint)(Vector128<float>.Count))
                 {
                     case 8:
                     {
-                        Vector128<float> vector = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 8)),
-                                                                          yVec,
-                                                                          Vector128.LoadUnsafe(ref zRef, remainder - (uint)(Vector128<float>.Count * 8)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 8));
+                        Vector128<float> vector = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 8)
+                            ),
+                            yVec,
+                            Vector128.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector128<float>.Count * 8)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 8)
+                        );
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector128<float> vector = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 7)),
-                                                                          yVec,
-                                                                          Vector128.LoadUnsafe(ref zRef, remainder - (uint)(Vector128<float>.Count * 7)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 7));
+                        Vector128<float> vector = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 7)
+                            ),
+                            yVec,
+                            Vector128.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector128<float>.Count * 7)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 7)
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector128<float> vector = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 6)),
-                                                                          yVec,
-                                                                          Vector128.LoadUnsafe(ref zRef, remainder - (uint)(Vector128<float>.Count * 6)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 6));
+                        Vector128<float> vector = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 6)
+                            ),
+                            yVec,
+                            Vector128.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector128<float>.Count * 6)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 6)
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector128<float> vector = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 5)),
-                                                                          yVec,
-                                                                          Vector128.LoadUnsafe(ref zRef, remainder - (uint)(Vector128<float>.Count * 5)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 5));
+                        Vector128<float> vector = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 5)
+                            ),
+                            yVec,
+                            Vector128.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector128<float>.Count * 5)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 5)
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector128<float> vector = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 4)),
-                                                                          yVec,
-                                                                          Vector128.LoadUnsafe(ref zRef, remainder - (uint)(Vector128<float>.Count * 4)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 4));
+                        Vector128<float> vector = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 4)
+                            ),
+                            yVec,
+                            Vector128.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector128<float>.Count * 4)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 4)
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector128<float> vector = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 3)),
-                                                                          yVec,
-                                                                          Vector128.LoadUnsafe(ref zRef, remainder - (uint)(Vector128<float>.Count * 3)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 3));
+                        Vector128<float> vector = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 3)
+                            ),
+                            yVec,
+                            Vector128.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector128<float>.Count * 3)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 3)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector128<float> vector = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count * 2)),
-                                                                          yVec,
-                                                                          Vector128.LoadUnsafe(ref zRef, remainder - (uint)(Vector128<float>.Count * 2)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count * 2));
+                        Vector128<float> vector = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count * 2)
+                            ),
+                            yVec,
+                            Vector128.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector128<float>.Count * 2)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector128<float>.Count * 2)
+                        );
                         goto case 1;
                     }
 
@@ -8451,23 +11902,33 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void Vectorized128Small(ref float xRef, float y, ref float zRef, ref float dRef, nuint remainder)
+            static void Vectorized128Small(
+                ref float xRef,
+                float y,
+                ref float zRef,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 switch (remainder)
                 {
                     case 3:
                     {
-                        Unsafe.Add(ref dRef, 2) = TTernaryOperator.Invoke(Unsafe.Add(ref xRef, 2),
-                                                                          y,
-                                                                          Unsafe.Add(ref zRef, 2));
+                        Unsafe.Add(ref dRef, 2) = TTernaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 2),
+                            y,
+                            Unsafe.Add(ref zRef, 2)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Unsafe.Add(ref dRef, 1) = TTernaryOperator.Invoke(Unsafe.Add(ref xRef, 1),
-                                                                          y,
-                                                                          Unsafe.Add(ref zRef, 1));
+                        Unsafe.Add(ref dRef, 1) = TTernaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 1),
+                            y,
+                            Unsafe.Add(ref zRef, 1)
+                        );
                         goto case 1;
                     }
 
@@ -8484,7 +11945,13 @@ namespace System.Numerics.Tensors
                 }
             }
 
-            static void Vectorized256(ref float xRef, float y, ref float zRef, ref float dRef, nuint remainder)
+            static void Vectorized256(
+                ref float xRef,
+                float y,
+                ref float zRef,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 ref float dRefBeg = ref dRef;
 
@@ -8492,12 +11959,16 @@ namespace System.Numerics.Tensors
 
                 Vector256<float> yVec = Vector256.Create(y);
 
-                Vector256<float> beg = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef),
-                                                               yVec,
-                                                               Vector256.LoadUnsafe(ref zRef));
-                Vector256<float> end = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count)),
-                                                               yVec,
-                                                               Vector256.LoadUnsafe(ref zRef, remainder - (uint)(Vector256<float>.Count)));
+                Vector256<float> beg = TTernaryOperator.Invoke(
+                    Vector256.LoadUnsafe(ref xRef),
+                    yVec,
+                    Vector256.LoadUnsafe(ref zRef)
+                );
+                Vector256<float> end = TTernaryOperator.Invoke(
+                    Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count)),
+                    yVec,
+                    Vector256.LoadUnsafe(ref zRef, remainder - (uint)(Vector256<float>.Count))
+                );
 
                 if (remainder > (uint)(Vector256<float>.Count * 8))
                 {
@@ -8526,7 +11997,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector256<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector256<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector256<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector256<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             zPtr += misalignment;
@@ -8551,43 +12026,75 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0)),
-                                                                  yVec,
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 0)));
-                                vector2 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1)),
-                                                                  yVec,
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 1)));
-                                vector3 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2)),
-                                                                  yVec,
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 2)));
-                                vector4 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3)),
-                                                                  yVec,
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 3)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0)),
+                                    yVec,
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 0))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1)),
+                                    yVec,
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 1))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2)),
+                                    yVec,
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 2))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3)),
+                                    yVec,
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 3))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 0));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 1));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 2));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 3));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 0)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 1)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 2)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 3)
+                                );
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4)),
-                                                                  yVec,
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 4)));
-                                vector2 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5)),
-                                                                  yVec,
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 5)));
-                                vector3 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6)),
-                                                                  yVec,
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 6)));
-                                vector4 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7)),
-                                                                  yVec,
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 7)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4)),
+                                    yVec,
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 4))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5)),
+                                    yVec,
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 5))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6)),
+                                    yVec,
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 6))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7)),
+                                    yVec,
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 7))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 4));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 5));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 6));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector256<float>.Count * 7));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 4)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 5)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 6)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector256<float>.Count * 7)
+                                );
 
                                 // We adjust the source and destination references, then update
                                 // the count of remaining elements to process.
@@ -8605,18 +12112,26 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0)),
-                                                                  yVec,
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 0)));
-                                vector2 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1)),
-                                                                  yVec,
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 1)));
-                                vector3 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2)),
-                                                                  yVec,
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 2)));
-                                vector4 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3)),
-                                                                  yVec,
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 3)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 0)),
+                                    yVec,
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 0))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 1)),
+                                    yVec,
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 1))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 2)),
+                                    yVec,
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 2))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 3)),
+                                    yVec,
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 3))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector256<float>.Count * 0));
                                 vector2.Store(dPtr + (uint)(Vector256<float>.Count * 1));
@@ -8625,18 +12140,26 @@ namespace System.Numerics.Tensors
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4)),
-                                                                  yVec,
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 4)));
-                                vector2 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5)),
-                                                                  yVec,
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 5)));
-                                vector3 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6)),
-                                                                  yVec,
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 6)));
-                                vector4 = TTernaryOperator.Invoke(Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7)),
-                                                                  yVec,
-                                                                  Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 7)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 4)),
+                                    yVec,
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 4))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 5)),
+                                    yVec,
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 5))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 6)),
+                                    yVec,
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 6))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector256.Load(xPtr + (uint)(Vector256<float>.Count * 7)),
+                                    yVec,
+                                    Vector256.Load(zPtr + (uint)(Vector256<float>.Count * 7))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector256<float>.Count * 4));
                                 vector2.Store(dPtr + (uint)(Vector256<float>.Count * 5));
@@ -8670,70 +12193,149 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector256<float>.Count - 1)) & (nuint)(-Vector256<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector256<float>.Count - 1))
+                    & (nuint)(-Vector256<float>.Count);
 
                 switch (remainder / (uint)(Vector256<float>.Count))
                 {
                     case 8:
                     {
-                        Vector256<float> vector = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 8)),
-                                                                          yVec,
-                                                                          Vector256.LoadUnsafe(ref zRef, remainder - (uint)(Vector256<float>.Count * 8)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 8));
+                        Vector256<float> vector = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 8)
+                            ),
+                            yVec,
+                            Vector256.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector256<float>.Count * 8)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 8)
+                        );
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector256<float> vector = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 7)),
-                                                                          yVec,
-                                                                          Vector256.LoadUnsafe(ref zRef, remainder - (uint)(Vector256<float>.Count * 7)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 7));
+                        Vector256<float> vector = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 7)
+                            ),
+                            yVec,
+                            Vector256.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector256<float>.Count * 7)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 7)
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector256<float> vector = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 6)),
-                                                                          yVec,
-                                                                          Vector256.LoadUnsafe(ref zRef, remainder - (uint)(Vector256<float>.Count * 6)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 6));
+                        Vector256<float> vector = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 6)
+                            ),
+                            yVec,
+                            Vector256.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector256<float>.Count * 6)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 6)
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector256<float> vector = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 5)),
-                                                                          yVec,
-                                                                          Vector256.LoadUnsafe(ref zRef, remainder - (uint)(Vector256<float>.Count * 5)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 5));
+                        Vector256<float> vector = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 5)
+                            ),
+                            yVec,
+                            Vector256.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector256<float>.Count * 5)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 5)
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector256<float> vector = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 4)),
-                                                                          yVec,
-                                                                          Vector256.LoadUnsafe(ref zRef, remainder - (uint)(Vector256<float>.Count * 4)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 4));
+                        Vector256<float> vector = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 4)
+                            ),
+                            yVec,
+                            Vector256.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector256<float>.Count * 4)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 4)
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector256<float> vector = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 3)),
-                                                                          yVec,
-                                                                          Vector256.LoadUnsafe(ref zRef, remainder - (uint)(Vector256<float>.Count * 3)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 3));
+                        Vector256<float> vector = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 3)
+                            ),
+                            yVec,
+                            Vector256.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector256<float>.Count * 3)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 3)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector256<float> vector = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count * 2)),
-                                                                          yVec,
-                                                                          Vector256.LoadUnsafe(ref zRef, remainder - (uint)(Vector256<float>.Count * 2)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count * 2));
+                        Vector256<float> vector = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count * 2)
+                            ),
+                            yVec,
+                            Vector256.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector256<float>.Count * 2)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector256<float>.Count * 2)
+                        );
                         goto case 1;
                     }
 
@@ -8754,7 +12356,13 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void Vectorized256Small(ref float xRef, float y, ref float zRef, ref float dRef, nuint remainder)
+            static void Vectorized256Small(
+                ref float xRef,
+                float y,
+                ref float zRef,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 switch (remainder)
                 {
@@ -8766,12 +12374,22 @@ namespace System.Numerics.Tensors
 
                         Vector128<float> yVec = Vector128.Create(y);
 
-                        Vector128<float> beg = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                                       yVec,
-                                                                       Vector128.LoadUnsafe(ref zRef));
-                        Vector128<float> end = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)),
-                                                                       yVec,
-                                                                       Vector128.LoadUnsafe(ref zRef, remainder - (uint)(Vector128<float>.Count)));
+                        Vector128<float> beg = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef),
+                            yVec,
+                            Vector128.LoadUnsafe(ref zRef)
+                        );
+                        Vector128<float> end = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            ),
+                            yVec,
+                            Vector128.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            )
+                        );
 
                         beg.StoreUnsafe(ref dRef);
                         end.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count));
@@ -8783,9 +12401,11 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
 
-                        Vector128<float> beg = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                                       Vector128.Create(y),
-                                                                       Vector128.LoadUnsafe(ref zRef));
+                        Vector128<float> beg = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef),
+                            Vector128.Create(y),
+                            Vector128.LoadUnsafe(ref zRef)
+                        );
                         beg.StoreUnsafe(ref dRef);
 
                         break;
@@ -8793,17 +12413,21 @@ namespace System.Numerics.Tensors
 
                     case 3:
                     {
-                        Unsafe.Add(ref dRef, 2) = TTernaryOperator.Invoke(Unsafe.Add(ref xRef, 2),
-                                                                          y,
-                                                                          Unsafe.Add(ref zRef, 2));
+                        Unsafe.Add(ref dRef, 2) = TTernaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 2),
+                            y,
+                            Unsafe.Add(ref zRef, 2)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Unsafe.Add(ref dRef, 1) = TTernaryOperator.Invoke(Unsafe.Add(ref xRef, 1),
-                                                                          y,
-                                                                          Unsafe.Add(ref zRef, 1));
+                        Unsafe.Add(ref dRef, 1) = TTernaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 1),
+                            y,
+                            Unsafe.Add(ref zRef, 1)
+                        );
                         goto case 1;
                     }
 
@@ -8820,7 +12444,13 @@ namespace System.Numerics.Tensors
                 }
             }
 
-            static void Vectorized512(ref float xRef, float y, ref float zRef, ref float dRef, nuint remainder)
+            static void Vectorized512(
+                ref float xRef,
+                float y,
+                ref float zRef,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 ref float dRefBeg = ref dRef;
 
@@ -8828,12 +12458,16 @@ namespace System.Numerics.Tensors
 
                 Vector512<float> yVec = Vector512.Create(y);
 
-                Vector512<float> beg = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef),
-                                                               yVec,
-                                                               Vector512.LoadUnsafe(ref zRef));
-                Vector512<float> end = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count)),
-                                                               yVec,
-                                                               Vector512.LoadUnsafe(ref zRef, remainder - (uint)(Vector512<float>.Count)));
+                Vector512<float> beg = TTernaryOperator.Invoke(
+                    Vector512.LoadUnsafe(ref xRef),
+                    yVec,
+                    Vector512.LoadUnsafe(ref zRef)
+                );
+                Vector512<float> end = TTernaryOperator.Invoke(
+                    Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count)),
+                    yVec,
+                    Vector512.LoadUnsafe(ref zRef, remainder - (uint)(Vector512<float>.Count))
+                );
 
                 if (remainder > (uint)(Vector512<float>.Count * 8))
                 {
@@ -8862,7 +12496,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector512<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector512<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector512<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector512<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             zPtr += misalignment;
@@ -8887,43 +12525,75 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0)),
-                                                                  yVec,
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 0)));
-                                vector2 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1)),
-                                                                  yVec,
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 1)));
-                                vector3 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2)),
-                                                                  yVec,
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 2)));
-                                vector4 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3)),
-                                                                  yVec,
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 3)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0)),
+                                    yVec,
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 0))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1)),
+                                    yVec,
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 1))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2)),
+                                    yVec,
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 2))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3)),
+                                    yVec,
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 3))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 0));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 1));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 2));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 3));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 0)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 1)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 2)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 3)
+                                );
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4)),
-                                                                  yVec,
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 4)));
-                                vector2 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5)),
-                                                                  yVec,
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 5)));
-                                vector3 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6)),
-                                                                  yVec,
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 6)));
-                                vector4 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7)),
-                                                                  yVec,
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 7)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4)),
+                                    yVec,
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 4))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5)),
+                                    yVec,
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 5))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6)),
+                                    yVec,
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 6))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7)),
+                                    yVec,
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 7))
+                                );
 
-                                vector1.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 4));
-                                vector2.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 5));
-                                vector3.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 6));
-                                vector4.StoreAlignedNonTemporal(dPtr + (uint)(Vector512<float>.Count * 7));
+                                vector1.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 4)
+                                );
+                                vector2.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 5)
+                                );
+                                vector3.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 6)
+                                );
+                                vector4.StoreAlignedNonTemporal(
+                                    dPtr + (uint)(Vector512<float>.Count * 7)
+                                );
 
                                 // We adjust the source and destination references, then update
                                 // the count of remaining elements to process.
@@ -8941,18 +12611,26 @@ namespace System.Numerics.Tensors
                             {
                                 // We load, process, and store the first four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0)),
-                                                                  yVec,
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 0)));
-                                vector2 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1)),
-                                                                  yVec,
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 1)));
-                                vector3 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2)),
-                                                                  yVec,
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 2)));
-                                vector4 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3)),
-                                                                  yVec,
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 3)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 0)),
+                                    yVec,
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 0))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 1)),
+                                    yVec,
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 1))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 2)),
+                                    yVec,
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 2))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 3)),
+                                    yVec,
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 3))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector512<float>.Count * 0));
                                 vector2.Store(dPtr + (uint)(Vector512<float>.Count * 1));
@@ -8961,18 +12639,26 @@ namespace System.Numerics.Tensors
 
                                 // We load, process, and store the next four vectors
 
-                                vector1 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4)),
-                                                                  yVec,
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 4)));
-                                vector2 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5)),
-                                                                  yVec,
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 5)));
-                                vector3 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6)),
-                                                                  yVec,
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 6)));
-                                vector4 = TTernaryOperator.Invoke(Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7)),
-                                                                  yVec,
-                                                                  Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 7)));
+                                vector1 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 4)),
+                                    yVec,
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 4))
+                                );
+                                vector2 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 5)),
+                                    yVec,
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 5))
+                                );
+                                vector3 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 6)),
+                                    yVec,
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 6))
+                                );
+                                vector4 = TTernaryOperator.Invoke(
+                                    Vector512.Load(xPtr + (uint)(Vector512<float>.Count * 7)),
+                                    yVec,
+                                    Vector512.Load(zPtr + (uint)(Vector512<float>.Count * 7))
+                                );
 
                                 vector1.Store(dPtr + (uint)(Vector512<float>.Count * 4));
                                 vector2.Store(dPtr + (uint)(Vector512<float>.Count * 5));
@@ -9006,70 +12692,149 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector512<float>.Count - 1)) & (nuint)(-Vector512<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector512<float>.Count - 1))
+                    & (nuint)(-Vector512<float>.Count);
 
                 switch (remainder / (uint)(Vector512<float>.Count))
                 {
                     case 8:
                     {
-                        Vector512<float> vector = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 8)),
-                                                                          yVec,
-                                                                          Vector512.LoadUnsafe(ref zRef, remainder - (uint)(Vector512<float>.Count * 8)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 8));
+                        Vector512<float> vector = TTernaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 8)
+                            ),
+                            yVec,
+                            Vector512.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector512<float>.Count * 8)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 8)
+                        );
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector512<float> vector = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 7)),
-                                                                          yVec,
-                                                                          Vector512.LoadUnsafe(ref zRef, remainder - (uint)(Vector512<float>.Count * 7)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 7));
+                        Vector512<float> vector = TTernaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 7)
+                            ),
+                            yVec,
+                            Vector512.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector512<float>.Count * 7)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 7)
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector512<float> vector = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 6)),
-                                                                          yVec,
-                                                                          Vector512.LoadUnsafe(ref zRef, remainder - (uint)(Vector512<float>.Count * 6)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 6));
+                        Vector512<float> vector = TTernaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 6)
+                            ),
+                            yVec,
+                            Vector512.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector512<float>.Count * 6)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 6)
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector512<float> vector = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 5)),
-                                                                          yVec,
-                                                                          Vector512.LoadUnsafe(ref zRef, remainder - (uint)(Vector512<float>.Count * 5)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 5));
+                        Vector512<float> vector = TTernaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 5)
+                            ),
+                            yVec,
+                            Vector512.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector512<float>.Count * 5)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 5)
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector512<float> vector = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 4)),
-                                                                          yVec,
-                                                                          Vector512.LoadUnsafe(ref zRef, remainder - (uint)(Vector512<float>.Count * 4)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 4));
+                        Vector512<float> vector = TTernaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 4)
+                            ),
+                            yVec,
+                            Vector512.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector512<float>.Count * 4)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 4)
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector512<float> vector = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 3)),
-                                                                          yVec,
-                                                                          Vector512.LoadUnsafe(ref zRef, remainder - (uint)(Vector512<float>.Count * 3)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 3));
+                        Vector512<float> vector = TTernaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 3)
+                            ),
+                            yVec,
+                            Vector512.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector512<float>.Count * 3)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 3)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector512<float> vector = TTernaryOperator.Invoke(Vector512.LoadUnsafe(ref xRef, remainder - (uint)(Vector512<float>.Count * 2)),
-                                                                          yVec,
-                                                                          Vector512.LoadUnsafe(ref zRef, remainder - (uint)(Vector512<float>.Count * 2)));
-                        vector.StoreUnsafe(ref dRef, remainder - (uint)(Vector512<float>.Count * 2));
+                        Vector512<float> vector = TTernaryOperator.Invoke(
+                            Vector512.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector512<float>.Count * 2)
+                            ),
+                            yVec,
+                            Vector512.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector512<float>.Count * 2)
+                            )
+                        );
+                        vector.StoreUnsafe(
+                            ref dRef,
+                            remainder - (uint)(Vector512<float>.Count * 2)
+                        );
                         goto case 1;
                     }
 
@@ -9090,7 +12855,13 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void Vectorized512Small(ref float xRef, float y, ref float zRef, ref float dRef, nuint remainder)
+            static void Vectorized512Small(
+                ref float xRef,
+                float y,
+                ref float zRef,
+                ref float dRef,
+                nuint remainder
+            )
             {
                 switch (remainder)
                 {
@@ -9106,12 +12877,22 @@ namespace System.Numerics.Tensors
 
                         Vector256<float> yVec = Vector256.Create(y);
 
-                        Vector256<float> beg = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef),
-                                                                       yVec,
-                                                                       Vector256.LoadUnsafe(ref zRef));
-                        Vector256<float> end = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef, remainder - (uint)(Vector256<float>.Count)),
-                                                                       yVec,
-                                                                       Vector256.LoadUnsafe(ref zRef, remainder - (uint)(Vector256<float>.Count)));
+                        Vector256<float> beg = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(ref xRef),
+                            yVec,
+                            Vector256.LoadUnsafe(ref zRef)
+                        );
+                        Vector256<float> end = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector256<float>.Count)
+                            ),
+                            yVec,
+                            Vector256.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector256<float>.Count)
+                            )
+                        );
 
                         beg.StoreUnsafe(ref dRef);
                         end.StoreUnsafe(ref dRef, remainder - (uint)(Vector256<float>.Count));
@@ -9123,9 +12904,11 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector256.IsHardwareAccelerated);
 
-                        Vector256<float> beg = TTernaryOperator.Invoke(Vector256.LoadUnsafe(ref xRef),
-                                                                       Vector256.Create(y),
-                                                                       Vector256.LoadUnsafe(ref zRef));
+                        Vector256<float> beg = TTernaryOperator.Invoke(
+                            Vector256.LoadUnsafe(ref xRef),
+                            Vector256.Create(y),
+                            Vector256.LoadUnsafe(ref zRef)
+                        );
                         beg.StoreUnsafe(ref dRef);
 
                         break;
@@ -9139,12 +12922,22 @@ namespace System.Numerics.Tensors
 
                         Vector128<float> yVec = Vector128.Create(y);
 
-                        Vector128<float> beg = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                                       yVec,
-                                                                       Vector128.LoadUnsafe(ref zRef));
-                        Vector128<float> end = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef, remainder - (uint)(Vector128<float>.Count)),
-                                                                       yVec,
-                                                                       Vector128.LoadUnsafe(ref zRef, remainder - (uint)(Vector128<float>.Count)));
+                        Vector128<float> beg = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef),
+                            yVec,
+                            Vector128.LoadUnsafe(ref zRef)
+                        );
+                        Vector128<float> end = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(
+                                ref xRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            ),
+                            yVec,
+                            Vector128.LoadUnsafe(
+                                ref zRef,
+                                remainder - (uint)(Vector128<float>.Count)
+                            )
+                        );
 
                         beg.StoreUnsafe(ref dRef);
                         end.StoreUnsafe(ref dRef, remainder - (uint)(Vector128<float>.Count));
@@ -9156,9 +12949,11 @@ namespace System.Numerics.Tensors
                     {
                         Debug.Assert(Vector128.IsHardwareAccelerated);
 
-                        Vector128<float> beg = TTernaryOperator.Invoke(Vector128.LoadUnsafe(ref xRef),
-                                                                       Vector128.Create(y),
-                                                                       Vector128.LoadUnsafe(ref zRef));
+                        Vector128<float> beg = TTernaryOperator.Invoke(
+                            Vector128.LoadUnsafe(ref xRef),
+                            Vector128.Create(y),
+                            Vector128.LoadUnsafe(ref zRef)
+                        );
                         beg.StoreUnsafe(ref dRef);
 
                         break;
@@ -9166,17 +12961,21 @@ namespace System.Numerics.Tensors
 
                     case 3:
                     {
-                        Unsafe.Add(ref dRef, 2) = TTernaryOperator.Invoke(Unsafe.Add(ref xRef, 2),
-                                                                          y,
-                                                                          Unsafe.Add(ref zRef, 2));
+                        Unsafe.Add(ref dRef, 2) = TTernaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 2),
+                            y,
+                            Unsafe.Add(ref zRef, 2)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Unsafe.Add(ref dRef, 1) = TTernaryOperator.Invoke(Unsafe.Add(ref xRef, 1),
-                                                                          y,
-                                                                          Unsafe.Add(ref zRef, 1));
+                        Unsafe.Add(ref dRef, 1) = TTernaryOperator.Invoke(
+                            Unsafe.Add(ref xRef, 1),
+                            y,
+                            Unsafe.Add(ref zRef, 1)
+                        );
                         goto case 1;
                     }
 
@@ -9196,7 +12995,11 @@ namespace System.Numerics.Tensors
 
         /// <summary>Performs (x * y) + z. It will be rounded as one ternary operation if such an operation is accelerated on the current hardware.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static Vector128<float> FusedMultiplyAdd(Vector128<float> x, Vector128<float> y, Vector128<float> addend)
+        private static Vector128<float> FusedMultiplyAdd(
+            Vector128<float> x,
+            Vector128<float> y,
+            Vector128<float> addend
+        )
         {
             if (Fma.IsSupported)
             {
@@ -9213,7 +13016,11 @@ namespace System.Numerics.Tensors
 
         /// <summary>Performs (x * y) + z. It will be rounded as one ternary operation if such an operation is accelerated on the current hardware.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static Vector256<float> FusedMultiplyAdd(Vector256<float> x, Vector256<float> y, Vector256<float> addend)
+        private static Vector256<float> FusedMultiplyAdd(
+            Vector256<float> x,
+            Vector256<float> y,
+            Vector256<float> addend
+        )
         {
             if (Fma.IsSupported)
             {
@@ -9225,7 +13032,11 @@ namespace System.Numerics.Tensors
 
         /// <summary>Performs (x * y) + z. It will be rounded as one ternary operation if such an operation is accelerated on the current hardware.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static Vector512<float> FusedMultiplyAdd(Vector512<float> x, Vector512<float> y, Vector512<float> addend)
+        private static Vector512<float> FusedMultiplyAdd(
+            Vector512<float> x,
+            Vector512<float> y,
+            Vector512<float> addend
+        )
         {
             if (Avx512F.IsSupported)
             {
@@ -9238,7 +13049,8 @@ namespace System.Numerics.Tensors
         /// <summary>Aggregates all of the elements in the <paramref name="x"/> into a single value.</summary>
         /// <typeparam name="TAggregate">Specifies the operation to be performed on each pair of values.</typeparam>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static float HorizontalAggregate<TAggregate>(Vector128<float> x) where TAggregate : struct, IBinaryOperator
+        private static float HorizontalAggregate<TAggregate>(Vector128<float> x)
+            where TAggregate : struct, IBinaryOperator
         {
             // We need to do log2(count) operations to compute the total sum
 
@@ -9251,13 +13063,15 @@ namespace System.Numerics.Tensors
         /// <summary>Aggregates all of the elements in the <paramref name="x"/> into a single value.</summary>
         /// <typeparam name="TAggregate">Specifies the operation to be performed on each pair of values.</typeparam>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static float HorizontalAggregate<TAggregate>(Vector256<float> x) where TAggregate : struct, IBinaryOperator =>
+        private static float HorizontalAggregate<TAggregate>(Vector256<float> x)
+            where TAggregate : struct, IBinaryOperator =>
             HorizontalAggregate<TAggregate>(TAggregate.Invoke(x.GetLower(), x.GetUpper()));
 
         /// <summary>Aggregates all of the elements in the <paramref name="x"/> into a single value.</summary>
         /// <typeparam name="TAggregate">Specifies the operation to be performed on each pair of values.</typeparam>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static float HorizontalAggregate<TAggregate>(Vector512<float> x) where TAggregate : struct, IBinaryOperator =>
+        private static float HorizontalAggregate<TAggregate>(Vector512<float> x)
+            where TAggregate : struct, IBinaryOperator =>
             HorizontalAggregate<TAggregate>(TAggregate.Invoke(x.GetLower(), x.GetUpper()));
 
         /// <summary>Gets whether the specified <see cref="float"/> is negative.</summary>
@@ -9306,8 +13120,11 @@ namespace System.Numerics.Tensors
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static Vector128<float> CreateAlignmentMaskSingleVector128(int count) =>
             Vector128.LoadUnsafe(
-                ref Unsafe.As<uint, float>(ref MemoryMarshal.GetReference(AlignmentUInt32Mask_16x16)),
-                (uint)(count * 16)); // first four floats in the row
+                ref Unsafe.As<uint, float>(
+                    ref MemoryMarshal.GetReference(AlignmentUInt32Mask_16x16)
+                ),
+                (uint)(count * 16)
+            ); // first four floats in the row
 
         /// <summary>
         /// Gets a vector mask that will be all-ones-set for the last <paramref name="count"/> elements
@@ -9316,8 +13133,11 @@ namespace System.Numerics.Tensors
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static Vector256<float> CreateAlignmentMaskSingleVector256(int count) =>
             Vector256.LoadUnsafe(
-                ref Unsafe.As<uint, float>(ref MemoryMarshal.GetReference(AlignmentUInt32Mask_16x16)),
-                (uint)(count * 16)); // first eight floats in the row
+                ref Unsafe.As<uint, float>(
+                    ref MemoryMarshal.GetReference(AlignmentUInt32Mask_16x16)
+                ),
+                (uint)(count * 16)
+            ); // first eight floats in the row
 
         /// <summary>
         /// Gets a vector mask that will be all-ones-set for the last <paramref name="count"/> elements
@@ -9326,8 +13146,11 @@ namespace System.Numerics.Tensors
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static Vector512<float> CreateAlignmentMaskSingleVector512(int count) =>
             Vector512.LoadUnsafe(
-                ref Unsafe.As<uint, float>(ref MemoryMarshal.GetReference(AlignmentUInt32Mask_16x16)),
-                (uint)(count * 16)); // all sixteen floats in the row
+                ref Unsafe.As<uint, float>(
+                    ref MemoryMarshal.GetReference(AlignmentUInt32Mask_16x16)
+                ),
+                (uint)(count * 16)
+            ); // all sixteen floats in the row
 
         /// <summary>
         /// Gets a vector mask that will be all-ones-set for the last <paramref name="count"/> elements
@@ -9336,8 +13159,11 @@ namespace System.Numerics.Tensors
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static Vector128<float> CreateRemainderMaskSingleVector128(int count) =>
             Vector128.LoadUnsafe(
-                ref Unsafe.As<uint, float>(ref MemoryMarshal.GetReference(RemainderUInt32Mask_16x16)),
-                (uint)((count * 16) + 12)); // last four floats in the row
+                ref Unsafe.As<uint, float>(
+                    ref MemoryMarshal.GetReference(RemainderUInt32Mask_16x16)
+                ),
+                (uint)((count * 16) + 12)
+            ); // last four floats in the row
 
         /// <summary>
         /// Gets a vector mask that will be all-ones-set for the last <paramref name="count"/> elements
@@ -9346,8 +13172,11 @@ namespace System.Numerics.Tensors
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static Vector256<float> CreateRemainderMaskSingleVector256(int count) =>
             Vector256.LoadUnsafe(
-                ref Unsafe.As<uint, float>(ref MemoryMarshal.GetReference(RemainderUInt32Mask_16x16)),
-                (uint)((count * 16) + 8)); // last eight floats in the row
+                ref Unsafe.As<uint, float>(
+                    ref MemoryMarshal.GetReference(RemainderUInt32Mask_16x16)
+                ),
+                (uint)((count * 16) + 8)
+            ); // last eight floats in the row
 
         /// <summary>
         /// Gets a vector mask that will be all-ones-set for the last <paramref name="count"/> elements
@@ -9356,19 +13185,27 @@ namespace System.Numerics.Tensors
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static Vector512<float> CreateRemainderMaskSingleVector512(int count) =>
             Vector512.LoadUnsafe(
-                ref Unsafe.As<uint, float>(ref MemoryMarshal.GetReference(RemainderUInt32Mask_16x16)),
-                (uint)(count * 16)); // all sixteen floats in the row
+                ref Unsafe.As<uint, float>(
+                    ref MemoryMarshal.GetReference(RemainderUInt32Mask_16x16)
+                ),
+                (uint)(count * 16)
+            ); // all sixteen floats in the row
 
         /// <summary>x + y</summary>
         private readonly struct AddOperator : IAggregationOperator
         {
             public static float Invoke(float x, float y) => x + y;
+
             public static Vector128<float> Invoke(Vector128<float> x, Vector128<float> y) => x + y;
+
             public static Vector256<float> Invoke(Vector256<float> x, Vector256<float> y) => x + y;
+
             public static Vector512<float> Invoke(Vector512<float> x, Vector512<float> y) => x + y;
 
             public static float Invoke(Vector128<float> x) => Vector128.Sum(x);
+
             public static float Invoke(Vector256<float> x) => Vector256.Sum(x);
+
             public static float Invoke(Vector512<float> x) => Vector512.Sum(x);
 
             public static float IdentityValue => 0;
@@ -9378,8 +13215,11 @@ namespace System.Numerics.Tensors
         private readonly struct SubtractOperator : IBinaryOperator
         {
             public static float Invoke(float x, float y) => x - y;
+
             public static Vector128<float> Invoke(Vector128<float> x, Vector128<float> y) => x - y;
+
             public static Vector256<float> Invoke(Vector256<float> x, Vector256<float> y) => x - y;
+
             public static Vector512<float> Invoke(Vector512<float> x, Vector512<float> y) => x - y;
         }
 
@@ -9415,13 +13255,21 @@ namespace System.Numerics.Tensors
         private readonly struct MultiplyOperator : IAggregationOperator
         {
             public static float Invoke(float x, float y) => x * y;
+
             public static Vector128<float> Invoke(Vector128<float> x, Vector128<float> y) => x * y;
+
             public static Vector256<float> Invoke(Vector256<float> x, Vector256<float> y) => x * y;
+
             public static Vector512<float> Invoke(Vector512<float> x, Vector512<float> y) => x * y;
 
-            public static float Invoke(Vector128<float> x) => HorizontalAggregate<MultiplyOperator>(x);
-            public static float Invoke(Vector256<float> x) => HorizontalAggregate<MultiplyOperator>(x);
-            public static float Invoke(Vector512<float> x) => HorizontalAggregate<MultiplyOperator>(x);
+            public static float Invoke(Vector128<float> x) =>
+                HorizontalAggregate<MultiplyOperator>(x);
+
+            public static float Invoke(Vector256<float> x) =>
+                HorizontalAggregate<MultiplyOperator>(x);
+
+            public static float Invoke(Vector512<float> x) =>
+                HorizontalAggregate<MultiplyOperator>(x);
 
             public static float IdentityValue => 1;
         }
@@ -9430,8 +13278,11 @@ namespace System.Numerics.Tensors
         private readonly struct DivideOperator : IBinaryOperator
         {
             public static float Invoke(float x, float y) => x / y;
+
             public static Vector128<float> Invoke(Vector128<float> x, Vector128<float> y) => x / y;
+
             public static Vector256<float> Invoke(Vector256<float> x, Vector256<float> y) => x / y;
+
             public static Vector512<float> Invoke(Vector512<float> x, Vector512<float> y) => x / y;
         }
 
@@ -9440,9 +13291,7 @@ namespace System.Numerics.Tensors
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static float Invoke(float x, float y) =>
-                x == y ?
-                    (IsNegative(x) ? y : x) :
-                    (y > x ? y : x);
+                x == y ? (IsNegative(x) ? y : x) : (y > x ? y : x);
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> Invoke(Vector128<float> x, Vector128<float> y)
@@ -9452,38 +13301,65 @@ namespace System.Numerics.Tensors
                     return AdvSimd.Max(x, y);
                 }
 
-                return
-                    Vector128.ConditionalSelect(Vector128.Equals(x, y),
-                        Vector128.ConditionalSelect(IsNegative(x), y, x),
-                        Vector128.Max(x, y));
+                return Vector128.ConditionalSelect(
+                    Vector128.Equals(x, y),
+                    Vector128.ConditionalSelect(IsNegative(x), y, x),
+                    Vector128.Max(x, y)
+                );
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> Invoke(Vector256<float> x, Vector256<float> y) =>
-                Vector256.ConditionalSelect(Vector256.Equals(x, y),
+                Vector256.ConditionalSelect(
+                    Vector256.Equals(x, y),
                     Vector256.ConditionalSelect(IsNegative(x), y, x),
-                    Vector256.Max(x, y));
+                    Vector256.Max(x, y)
+                );
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Invoke(Vector512<float> x, Vector512<float> y) =>
-                Vector512.ConditionalSelect(Vector512.Equals(x, y),
+                Vector512.ConditionalSelect(
+                    Vector512.Equals(x, y),
                     Vector512.ConditionalSelect(IsNegative(x), y, x),
-                    Vector512.Max(x, y));
+                    Vector512.Max(x, y)
+                );
 
             public static float Invoke(Vector128<float> x) => HorizontalAggregate<MaxOperator>(x);
+
             public static float Invoke(Vector256<float> x) => HorizontalAggregate<MaxOperator>(x);
+
             public static float Invoke(Vector512<float> x) => HorizontalAggregate<MaxOperator>(x);
         }
 
         private interface IIndexOfOperator
         {
-            static abstract int Invoke(ref float result, float current, int resultIndex, int curIndex);
+            static abstract int Invoke(
+                ref float result,
+                float current,
+                int resultIndex,
+                int curIndex
+            );
             static abstract int Invoke(Vector128<float> result, Vector128<int> resultIndex);
-            static abstract void Invoke(ref Vector128<float> result, Vector128<float> current, ref Vector128<int> resultIndex, Vector128<int> curIndex);
+            static abstract void Invoke(
+                ref Vector128<float> result,
+                Vector128<float> current,
+                ref Vector128<int> resultIndex,
+                Vector128<int> curIndex
+            );
             static abstract int Invoke(Vector256<float> result, Vector256<int> resultIndex);
-            static abstract void Invoke(ref Vector256<float> result, Vector256<float> current, ref Vector256<int> resultIndex, Vector256<int> curIndex);
+            static abstract void Invoke(
+                ref Vector256<float> result,
+                Vector256<float> current,
+                ref Vector256<int> resultIndex,
+                Vector256<int> curIndex
+            );
             static abstract int Invoke(Vector512<float> result, Vector512<int> resultIndex);
-            static abstract void Invoke(ref Vector512<float> result, Vector512<float> current, ref Vector512<int> resultIndex, Vector512<int> curIndex);
+            static abstract void Invoke(
+                ref Vector512<float> result,
+                Vector512<float> current,
+                ref Vector512<int> resultIndex,
+                Vector512<int> curIndex
+            );
         }
 
         /// <summary>Returns the index of MathF.Max(x, y)</summary>
@@ -9492,7 +13368,10 @@ namespace System.Numerics.Tensors
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static int Invoke(Vector128<float> result, Vector128<int> maxIndex)
             {
-                Vector128<float> tmpResult = Vector128.Shuffle(result, Vector128.Create(2, 3, 0, 1));
+                Vector128<float> tmpResult = Vector128.Shuffle(
+                    result,
+                    Vector128.Create(2, 3, 0, 1)
+                );
                 Vector128<int> tmpIndex = Vector128.Shuffle(maxIndex, Vector128.Create(2, 3, 0, 1));
 
                 Invoke(ref result, tmpResult, ref maxIndex, tmpIndex);
@@ -9505,7 +13384,12 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Invoke(ref Vector128<float> max, Vector128<float> current, ref Vector128<int> maxIndex, Vector128<int> curIndex)
+            public static void Invoke(
+                ref Vector128<float> max,
+                Vector128<float> current,
+                ref Vector128<int> maxIndex,
+                Vector128<int> curIndex
+            )
             {
                 Vector128<float> greaterThanMask = Vector128.GreaterThan(max, current);
 
@@ -9515,7 +13399,9 @@ namespace System.Numerics.Tensors
                     Vector128<float> negativeMask = IsNegative(current);
                     Vector128<int> lessThanMask = Vector128.LessThan(maxIndex, curIndex);
 
-                    greaterThanMask |= (negativeMask & equalMask) | (~IsNegative(max) & equalMask & lessThanMask.AsSingle());
+                    greaterThanMask |=
+                        (negativeMask & equalMask)
+                        | (~IsNegative(max) & equalMask & lessThanMask.AsSingle());
                 }
 
                 max = ElementWiseSelect(greaterThanMask, max, current);
@@ -9535,7 +13421,12 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Invoke(ref Vector256<float> max, Vector256<float> current, ref Vector256<int> maxIndex, Vector256<int> curIndex)
+            public static void Invoke(
+                ref Vector256<float> max,
+                Vector256<float> current,
+                ref Vector256<int> maxIndex,
+                Vector256<int> curIndex
+            )
             {
                 Vector256<float> greaterThanMask = Vector256.GreaterThan(max, current);
 
@@ -9545,7 +13436,9 @@ namespace System.Numerics.Tensors
                     Vector256<float> negativeMask = IsNegative(current);
                     Vector256<int> lessThanMask = Vector256.LessThan(maxIndex, curIndex);
 
-                    greaterThanMask |= (negativeMask & equalMask) | (~IsNegative(max) & equalMask & lessThanMask.AsSingle());
+                    greaterThanMask |=
+                        (negativeMask & equalMask)
+                        | (~IsNegative(max) & equalMask & lessThanMask.AsSingle());
                 }
 
                 max = ElementWiseSelect(greaterThanMask, max, current);
@@ -9565,7 +13458,12 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Invoke(ref Vector512<float> max, Vector512<float> current, ref Vector512<int> maxIndex, Vector512<int> curIndex)
+            public static void Invoke(
+                ref Vector512<float> max,
+                Vector512<float> current,
+                ref Vector512<int> maxIndex,
+                Vector512<int> curIndex
+            )
             {
                 Vector512<float> greaterThanMask = Vector512.GreaterThan(max, current);
 
@@ -9575,7 +13473,9 @@ namespace System.Numerics.Tensors
                     Vector512<float> negativeMask = IsNegative(current);
                     Vector512<int> lessThanMask = Vector512.LessThan(maxIndex, curIndex);
 
-                    greaterThanMask |= (negativeMask & equalMask) | (~IsNegative(max) & equalMask & lessThanMask.AsSingle());
+                    greaterThanMask |=
+                        (negativeMask & equalMask)
+                        | (~IsNegative(max) & equalMask & lessThanMask.AsSingle());
                 }
 
                 max = ElementWiseSelect(greaterThanMask, max, current);
@@ -9609,7 +13509,10 @@ namespace System.Numerics.Tensors
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static int Invoke(Vector128<float> result, Vector128<int> maxIndex)
             {
-                Vector128<float> tmpResult = Vector128.Shuffle(result, Vector128.Create(2, 3, 0, 1));
+                Vector128<float> tmpResult = Vector128.Shuffle(
+                    result,
+                    Vector128.Create(2, 3, 0, 1)
+                );
                 Vector128<int> tmpIndex = Vector128.Shuffle(maxIndex, Vector128.Create(2, 3, 0, 1));
 
                 Invoke(ref result, tmpResult, ref maxIndex, tmpIndex);
@@ -9622,9 +13525,15 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Invoke(ref Vector128<float> max, Vector128<float> current, ref Vector128<int> maxIndex, Vector128<int> curIndex)
+            public static void Invoke(
+                ref Vector128<float> max,
+                Vector128<float> current,
+                ref Vector128<int> maxIndex,
+                Vector128<int> curIndex
+            )
             {
-                Vector128<float> maxMag = Vector128.Abs(max), currentMag = Vector128.Abs(current);
+                Vector128<float> maxMag = Vector128.Abs(max),
+                    currentMag = Vector128.Abs(current);
 
                 Vector128<float> greaterThanMask = Vector128.GreaterThan(maxMag, currentMag);
 
@@ -9634,7 +13543,9 @@ namespace System.Numerics.Tensors
                     Vector128<float> negativeMask = IsNegative(current);
                     Vector128<int> lessThanMask = Vector128.LessThan(maxIndex, curIndex);
 
-                    greaterThanMask |= (negativeMask & equalMask) | (~IsNegative(max) & equalMask & lessThanMask.AsSingle());
+                    greaterThanMask |=
+                        (negativeMask & equalMask)
+                        | (~IsNegative(max) & equalMask & lessThanMask.AsSingle());
                 }
 
                 max = ElementWiseSelect(greaterThanMask, max, current);
@@ -9654,9 +13565,15 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Invoke(ref Vector256<float> max, Vector256<float> current, ref Vector256<int> maxIndex, Vector256<int> curIndex)
+            public static void Invoke(
+                ref Vector256<float> max,
+                Vector256<float> current,
+                ref Vector256<int> maxIndex,
+                Vector256<int> curIndex
+            )
             {
-                Vector256<float> maxMag = Vector256.Abs(max), currentMag = Vector256.Abs(current);
+                Vector256<float> maxMag = Vector256.Abs(max),
+                    currentMag = Vector256.Abs(current);
 
                 Vector256<float> greaterThanMask = Vector256.GreaterThan(maxMag, currentMag);
 
@@ -9666,7 +13583,9 @@ namespace System.Numerics.Tensors
                     Vector256<float> negativeMask = IsNegative(current);
                     Vector256<int> lessThanMask = Vector256.LessThan(maxIndex, curIndex);
 
-                    greaterThanMask |= (negativeMask & equalMask) | (~IsNegative(max) & equalMask & lessThanMask.AsSingle());
+                    greaterThanMask |=
+                        (negativeMask & equalMask)
+                        | (~IsNegative(max) & equalMask & lessThanMask.AsSingle());
                 }
 
                 max = ElementWiseSelect(greaterThanMask, max, current);
@@ -9686,9 +13605,15 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Invoke(ref Vector512<float> max, Vector512<float> current, ref Vector512<int> maxIndex, Vector512<int> curIndex)
+            public static void Invoke(
+                ref Vector512<float> max,
+                Vector512<float> current,
+                ref Vector512<int> maxIndex,
+                Vector512<int> curIndex
+            )
             {
-                Vector512<float> maxMag = Vector512.Abs(max), currentMag = Vector512.Abs(current);
+                Vector512<float> maxMag = Vector512.Abs(max),
+                    currentMag = Vector512.Abs(current);
                 Vector512<float> greaterThanMask = Vector512.GreaterThan(maxMag, currentMag);
 
                 Vector512<float> equalMask = Vector512.Equals(max, current);
@@ -9697,7 +13622,9 @@ namespace System.Numerics.Tensors
                     Vector512<float> negativeMask = IsNegative(current);
                     Vector512<int> lessThanMask = Vector512.LessThan(maxIndex, curIndex);
 
-                    greaterThanMask |= (negativeMask & equalMask) | (~IsNegative(max) & equalMask & lessThanMask.AsSingle());
+                    greaterThanMask |=
+                        (negativeMask & equalMask)
+                        | (~IsNegative(max) & equalMask & lessThanMask.AsSingle());
                 }
 
                 max = ElementWiseSelect(greaterThanMask, max, current);
@@ -9735,8 +13662,14 @@ namespace System.Numerics.Tensors
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static int Invoke(Vector128<float> result, Vector128<int> resultIndex)
             {
-                Vector128<float> tmpResult = Vector128.Shuffle(result, Vector128.Create(2, 3, 0, 1));
-                Vector128<int> tmpIndex = Vector128.Shuffle(resultIndex, Vector128.Create(2, 3, 0, 1));
+                Vector128<float> tmpResult = Vector128.Shuffle(
+                    result,
+                    Vector128.Create(2, 3, 0, 1)
+                );
+                Vector128<int> tmpIndex = Vector128.Shuffle(
+                    resultIndex,
+                    Vector128.Create(2, 3, 0, 1)
+                );
 
                 Invoke(ref result, tmpResult, ref resultIndex, tmpIndex);
 
@@ -9748,7 +13681,12 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Invoke(ref Vector128<float> result, Vector128<float> current, ref Vector128<int> resultIndex, Vector128<int> curIndex)
+            public static void Invoke(
+                ref Vector128<float> result,
+                Vector128<float> current,
+                ref Vector128<int> resultIndex,
+                Vector128<int> curIndex
+            )
             {
                 Vector128<float> lessThanMask = Vector128.LessThan(result, current);
 
@@ -9758,14 +13696,15 @@ namespace System.Numerics.Tensors
                     Vector128<float> negativeMask = IsNegative(current);
                     Vector128<int> lessThanIndexMask = Vector128.LessThan(resultIndex, curIndex);
 
-                    lessThanMask |= (~negativeMask & equalMask) | (IsNegative(result) & equalMask & lessThanIndexMask.AsSingle());
+                    lessThanMask |=
+                        (~negativeMask & equalMask)
+                        | (IsNegative(result) & equalMask & lessThanIndexMask.AsSingle());
                 }
 
                 result = ElementWiseSelect(lessThanMask, result, current);
 
                 resultIndex = ElementWiseSelect(lessThanMask.AsInt32(), resultIndex, curIndex);
             }
-
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static int Invoke(Vector256<float> result, Vector256<int> resultIndex)
@@ -9779,7 +13718,12 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Invoke(ref Vector256<float> result, Vector256<float> current, ref Vector256<int> resultIndex, Vector256<int> curIndex)
+            public static void Invoke(
+                ref Vector256<float> result,
+                Vector256<float> current,
+                ref Vector256<int> resultIndex,
+                Vector256<int> curIndex
+            )
             {
                 Vector256<float> lessThanMask = Vector256.LessThan(result, current);
 
@@ -9789,7 +13733,9 @@ namespace System.Numerics.Tensors
                     Vector256<float> negativeMask = IsNegative(current);
                     Vector256<int> lessThanIndexMask = Vector256.LessThan(resultIndex, curIndex);
 
-                    lessThanMask |= (~negativeMask & equalMask) | (IsNegative(result) & equalMask & lessThanIndexMask.AsSingle());
+                    lessThanMask |=
+                        (~negativeMask & equalMask)
+                        | (IsNegative(result) & equalMask & lessThanIndexMask.AsSingle());
                 }
 
                 result = ElementWiseSelect(lessThanMask, result, current);
@@ -9809,7 +13755,12 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Invoke(ref Vector512<float> result, Vector512<float> current, ref Vector512<int> resultIndex, Vector512<int> curIndex)
+            public static void Invoke(
+                ref Vector512<float> result,
+                Vector512<float> current,
+                ref Vector512<int> resultIndex,
+                Vector512<int> curIndex
+            )
             {
                 Vector512<float> lessThanMask = Vector512.LessThan(result, current);
 
@@ -9819,7 +13770,9 @@ namespace System.Numerics.Tensors
                     Vector512<float> negativeMask = IsNegative(current);
                     Vector512<int> lessThanIndexMask = Vector512.LessThan(resultIndex, curIndex);
 
-                    lessThanMask |= (~negativeMask & equalMask) | (IsNegative(result) & equalMask & lessThanIndexMask.AsSingle());
+                    lessThanMask |=
+                        (~negativeMask & equalMask)
+                        | (IsNegative(result) & equalMask & lessThanIndexMask.AsSingle());
                 }
 
                 result = ElementWiseSelect(lessThanMask, result, current);
@@ -9853,8 +13806,14 @@ namespace System.Numerics.Tensors
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static int Invoke(Vector128<float> result, Vector128<int> resultIndex)
             {
-                Vector128<float> tmpResult = Vector128.Shuffle(result, Vector128.Create(2, 3, 0, 1));
-                Vector128<int> tmpIndex = Vector128.Shuffle(resultIndex, Vector128.Create(2, 3, 0, 1));
+                Vector128<float> tmpResult = Vector128.Shuffle(
+                    result,
+                    Vector128.Create(2, 3, 0, 1)
+                );
+                Vector128<int> tmpIndex = Vector128.Shuffle(
+                    resultIndex,
+                    Vector128.Create(2, 3, 0, 1)
+                );
 
                 Invoke(ref result, tmpResult, ref resultIndex, tmpIndex);
 
@@ -9866,9 +13825,15 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Invoke(ref Vector128<float> result, Vector128<float> current, ref Vector128<int> resultIndex, Vector128<int> curIndex)
+            public static void Invoke(
+                ref Vector128<float> result,
+                Vector128<float> current,
+                ref Vector128<int> resultIndex,
+                Vector128<int> curIndex
+            )
             {
-                Vector128<float> minMag = Vector128.Abs(result), currentMag = Vector128.Abs(current);
+                Vector128<float> minMag = Vector128.Abs(result),
+                    currentMag = Vector128.Abs(current);
 
                 Vector128<float> lessThanMask = Vector128.LessThan(minMag, currentMag);
 
@@ -9878,7 +13843,9 @@ namespace System.Numerics.Tensors
                     Vector128<float> negativeMask = IsNegative(current);
                     Vector128<int> lessThanIndexMask = Vector128.LessThan(resultIndex, curIndex);
 
-                    lessThanMask |= (~negativeMask & equalMask) | (IsNegative(result) & equalMask & lessThanIndexMask.AsSingle());
+                    lessThanMask |=
+                        (~negativeMask & equalMask)
+                        | (IsNegative(result) & equalMask & lessThanIndexMask.AsSingle());
                 }
 
                 result = ElementWiseSelect(lessThanMask, result, current);
@@ -9898,9 +13865,15 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Invoke(ref Vector256<float> result, Vector256<float> current, ref Vector256<int> resultIndex, Vector256<int> curIndex)
+            public static void Invoke(
+                ref Vector256<float> result,
+                Vector256<float> current,
+                ref Vector256<int> resultIndex,
+                Vector256<int> curIndex
+            )
             {
-                Vector256<float> minMag = Vector256.Abs(result), currentMag = Vector256.Abs(current);
+                Vector256<float> minMag = Vector256.Abs(result),
+                    currentMag = Vector256.Abs(current);
 
                 Vector256<float> lessThanMask = Vector256.LessThan(minMag, currentMag);
 
@@ -9910,7 +13883,9 @@ namespace System.Numerics.Tensors
                     Vector256<float> negativeMask = IsNegative(current);
                     Vector256<int> lessThanIndexMask = Vector256.LessThan(resultIndex, curIndex);
 
-                    lessThanMask |= (~negativeMask & equalMask) | (IsNegative(result) & equalMask & lessThanIndexMask.AsSingle());
+                    lessThanMask |=
+                        (~negativeMask & equalMask)
+                        | (IsNegative(result) & equalMask & lessThanIndexMask.AsSingle());
                 }
 
                 result = ElementWiseSelect(lessThanMask, result, current);
@@ -9930,9 +13905,15 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Invoke(ref Vector512<float> result, Vector512<float> current, ref Vector512<int> resultIndex, Vector512<int> curIndex)
+            public static void Invoke(
+                ref Vector512<float> result,
+                Vector512<float> current,
+                ref Vector512<int> resultIndex,
+                Vector512<int> curIndex
+            )
             {
-                Vector512<float> minMag = Vector512.Abs(result), currentMag = Vector512.Abs(current);
+                Vector512<float> minMag = Vector512.Abs(result),
+                    currentMag = Vector512.Abs(current);
 
                 Vector512<float> lessThanMask = Vector512.LessThan(minMag, currentMag);
 
@@ -9942,7 +13923,9 @@ namespace System.Numerics.Tensors
                     Vector512<float> negativeMask = IsNegative(current);
                     Vector512<int> lessThanIndexMask = Vector512.LessThan(resultIndex, curIndex);
 
-                    lessThanMask |= (~negativeMask & equalMask) | (IsNegative(result) & equalMask & lessThanIndexMask.AsSingle());
+                    lessThanMask |=
+                        (~negativeMask & equalMask)
+                        | (IsNegative(result) & equalMask & lessThanIndexMask.AsSingle());
                 }
 
                 result = ElementWiseSelect(lessThanMask, result, current);
@@ -9987,35 +13970,52 @@ namespace System.Numerics.Tensors
                     return AdvSimd.Max(x, y);
                 }
 
-                return
-                    Vector128.ConditionalSelect(Vector128.Equals(x, x),
-                        Vector128.ConditionalSelect(Vector128.Equals(y, y),
-                            Vector128.ConditionalSelect(Vector128.Equals(x, y),
-                                Vector128.ConditionalSelect(IsNegative(x), y, x),
-                                Vector128.Max(x, y)),
-                            y),
-                        x);
+                return Vector128.ConditionalSelect(
+                    Vector128.Equals(x, x),
+                    Vector128.ConditionalSelect(
+                        Vector128.Equals(y, y),
+                        Vector128.ConditionalSelect(
+                            Vector128.Equals(x, y),
+                            Vector128.ConditionalSelect(IsNegative(x), y, x),
+                            Vector128.Max(x, y)
+                        ),
+                        y
+                    ),
+                    x
+                );
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> Invoke(Vector256<float> x, Vector256<float> y) =>
-                Vector256.ConditionalSelect(Vector256.Equals(x, x),
-                    Vector256.ConditionalSelect(Vector256.Equals(y, y),
-                        Vector256.ConditionalSelect(Vector256.Equals(x, y),
+                Vector256.ConditionalSelect(
+                    Vector256.Equals(x, x),
+                    Vector256.ConditionalSelect(
+                        Vector256.Equals(y, y),
+                        Vector256.ConditionalSelect(
+                            Vector256.Equals(x, y),
                             Vector256.ConditionalSelect(IsNegative(x), y, x),
-                            Vector256.Max(x, y)),
-                        y),
-                    x);
+                            Vector256.Max(x, y)
+                        ),
+                        y
+                    ),
+                    x
+                );
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Invoke(Vector512<float> x, Vector512<float> y) =>
-                Vector512.ConditionalSelect(Vector512.Equals(x, x),
-                    Vector512.ConditionalSelect(Vector512.Equals(y, y),
-                        Vector512.ConditionalSelect(Vector512.Equals(x, y),
+                Vector512.ConditionalSelect(
+                    Vector512.Equals(x, x),
+                    Vector512.ConditionalSelect(
+                        Vector512.Equals(y, y),
+                        Vector512.ConditionalSelect(
+                            Vector512.Equals(x, y),
                             Vector512.ConditionalSelect(IsNegative(x), y, x),
-                            Vector512.Max(x, y)),
-                        y),
-                    x);
+                            Vector512.Max(x, y)
+                        ),
+                        y
+                    ),
+                    x
+                );
         }
 
         /// <summary>Operator to get x or y based on which has the larger MathF.Abs (but NaNs may not be propagated)</summary>
@@ -10024,46 +14024,55 @@ namespace System.Numerics.Tensors
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static float Invoke(float x, float y)
             {
-                float xMag = MathF.Abs(x), yMag = MathF.Abs(y);
-                return
-                    xMag == yMag ?
-                        (IsNegative(x) ? y : x) :
-                        (xMag > yMag ? x : y);
+                float xMag = MathF.Abs(x),
+                    yMag = MathF.Abs(y);
+                return xMag == yMag ? (IsNegative(x) ? y : x) : (xMag > yMag ? x : y);
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> Invoke(Vector128<float> x, Vector128<float> y)
             {
-                Vector128<float> xMag = Vector128.Abs(x), yMag = Vector128.Abs(y);
-                return
-                    Vector128.ConditionalSelect(Vector128.Equals(xMag, yMag),
-                        Vector128.ConditionalSelect(IsNegative(x), y, x),
-                        Vector128.ConditionalSelect(Vector128.GreaterThan(xMag, yMag), x, y));
+                Vector128<float> xMag = Vector128.Abs(x),
+                    yMag = Vector128.Abs(y);
+                return Vector128.ConditionalSelect(
+                    Vector128.Equals(xMag, yMag),
+                    Vector128.ConditionalSelect(IsNegative(x), y, x),
+                    Vector128.ConditionalSelect(Vector128.GreaterThan(xMag, yMag), x, y)
+                );
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> Invoke(Vector256<float> x, Vector256<float> y)
             {
-                Vector256<float> xMag = Vector256.Abs(x), yMag = Vector256.Abs(y);
-                return
-                    Vector256.ConditionalSelect(Vector256.Equals(xMag, yMag),
-                        Vector256.ConditionalSelect(IsNegative(x), y, x),
-                        Vector256.ConditionalSelect(Vector256.GreaterThan(xMag, yMag), x, y));
+                Vector256<float> xMag = Vector256.Abs(x),
+                    yMag = Vector256.Abs(y);
+                return Vector256.ConditionalSelect(
+                    Vector256.Equals(xMag, yMag),
+                    Vector256.ConditionalSelect(IsNegative(x), y, x),
+                    Vector256.ConditionalSelect(Vector256.GreaterThan(xMag, yMag), x, y)
+                );
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Invoke(Vector512<float> x, Vector512<float> y)
             {
-                Vector512<float> xMag = Vector512.Abs(x), yMag = Vector512.Abs(y);
-                return
-                    Vector512.ConditionalSelect(Vector512.Equals(xMag, yMag),
-                        Vector512.ConditionalSelect(IsNegative(x), y, x),
-                        Vector512.ConditionalSelect(Vector512.GreaterThan(xMag, yMag), x, y));
+                Vector512<float> xMag = Vector512.Abs(x),
+                    yMag = Vector512.Abs(y);
+                return Vector512.ConditionalSelect(
+                    Vector512.Equals(xMag, yMag),
+                    Vector512.ConditionalSelect(IsNegative(x), y, x),
+                    Vector512.ConditionalSelect(Vector512.GreaterThan(xMag, yMag), x, y)
+                );
             }
 
-            public static float Invoke(Vector128<float> x) => HorizontalAggregate<MaxMagnitudeOperator>(x);
-            public static float Invoke(Vector256<float> x) => HorizontalAggregate<MaxMagnitudeOperator>(x);
-            public static float Invoke(Vector512<float> x) => HorizontalAggregate<MaxMagnitudeOperator>(x);
+            public static float Invoke(Vector128<float> x) =>
+                HorizontalAggregate<MaxMagnitudeOperator>(x);
+
+            public static float Invoke(Vector256<float> x) =>
+                HorizontalAggregate<MaxMagnitudeOperator>(x);
+
+            public static float Invoke(Vector512<float> x) =>
+                HorizontalAggregate<MaxMagnitudeOperator>(x);
         }
 
         /// <summary>Operator to get x or y based on which has the larger MathF.Abs</summary>
@@ -10075,43 +14084,61 @@ namespace System.Numerics.Tensors
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> Invoke(Vector128<float> x, Vector128<float> y)
             {
-                Vector128<float> xMag = Vector128.Abs(x), yMag = Vector128.Abs(y);
-                return
-                    Vector128.ConditionalSelect(Vector128.Equals(x, x),
-                        Vector128.ConditionalSelect(Vector128.Equals(y, y),
-                            Vector128.ConditionalSelect(Vector128.Equals(yMag, xMag),
-                                Vector128.ConditionalSelect(IsNegative(x), y, x),
-                                Vector128.ConditionalSelect(Vector128.GreaterThan(yMag, xMag), y, x)),
-                            y),
-                        x);
+                Vector128<float> xMag = Vector128.Abs(x),
+                    yMag = Vector128.Abs(y);
+                return Vector128.ConditionalSelect(
+                    Vector128.Equals(x, x),
+                    Vector128.ConditionalSelect(
+                        Vector128.Equals(y, y),
+                        Vector128.ConditionalSelect(
+                            Vector128.Equals(yMag, xMag),
+                            Vector128.ConditionalSelect(IsNegative(x), y, x),
+                            Vector128.ConditionalSelect(Vector128.GreaterThan(yMag, xMag), y, x)
+                        ),
+                        y
+                    ),
+                    x
+                );
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> Invoke(Vector256<float> x, Vector256<float> y)
             {
-                Vector256<float> xMag = Vector256.Abs(x), yMag = Vector256.Abs(y);
-                return
-                    Vector256.ConditionalSelect(Vector256.Equals(x, x),
-                        Vector256.ConditionalSelect(Vector256.Equals(y, y),
-                            Vector256.ConditionalSelect(Vector256.Equals(xMag, yMag),
-                                Vector256.ConditionalSelect(IsNegative(x), y, x),
-                                Vector256.ConditionalSelect(Vector256.GreaterThan(xMag, yMag), x, y)),
-                            y),
-                        x);
+                Vector256<float> xMag = Vector256.Abs(x),
+                    yMag = Vector256.Abs(y);
+                return Vector256.ConditionalSelect(
+                    Vector256.Equals(x, x),
+                    Vector256.ConditionalSelect(
+                        Vector256.Equals(y, y),
+                        Vector256.ConditionalSelect(
+                            Vector256.Equals(xMag, yMag),
+                            Vector256.ConditionalSelect(IsNegative(x), y, x),
+                            Vector256.ConditionalSelect(Vector256.GreaterThan(xMag, yMag), x, y)
+                        ),
+                        y
+                    ),
+                    x
+                );
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Invoke(Vector512<float> x, Vector512<float> y)
             {
-                Vector512<float> xMag = Vector512.Abs(x), yMag = Vector512.Abs(y);
-                return
-                    Vector512.ConditionalSelect(Vector512.Equals(x, x),
-                        Vector512.ConditionalSelect(Vector512.Equals(y, y),
-                            Vector512.ConditionalSelect(Vector512.Equals(xMag, yMag),
-                                Vector512.ConditionalSelect(IsNegative(x), y, x),
-                                Vector512.ConditionalSelect(Vector512.GreaterThan(xMag, yMag), x, y)),
-                            y),
-                        x);
+                Vector512<float> xMag = Vector512.Abs(x),
+                    yMag = Vector512.Abs(y);
+                return Vector512.ConditionalSelect(
+                    Vector512.Equals(x, x),
+                    Vector512.ConditionalSelect(
+                        Vector512.Equals(y, y),
+                        Vector512.ConditionalSelect(
+                            Vector512.Equals(xMag, yMag),
+                            Vector512.ConditionalSelect(IsNegative(x), y, x),
+                            Vector512.ConditionalSelect(Vector512.GreaterThan(xMag, yMag), x, y)
+                        ),
+                        y
+                    ),
+                    x
+                );
             }
         }
 
@@ -10120,9 +14147,7 @@ namespace System.Numerics.Tensors
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static float Invoke(float x, float y) =>
-                x == y ?
-                    (IsNegative(y) ? y : x) :
-                    (y < x ? y : x);
+                x == y ? (IsNegative(y) ? y : x) : (y < x ? y : x);
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> Invoke(Vector128<float> x, Vector128<float> y)
@@ -10132,26 +14157,33 @@ namespace System.Numerics.Tensors
                     return AdvSimd.Min(x, y);
                 }
 
-                return
-                    Vector128.ConditionalSelect(Vector128.Equals(x, y),
-                        Vector128.ConditionalSelect(IsNegative(y), y, x),
-                        Vector128.Min(x, y));
+                return Vector128.ConditionalSelect(
+                    Vector128.Equals(x, y),
+                    Vector128.ConditionalSelect(IsNegative(y), y, x),
+                    Vector128.Min(x, y)
+                );
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> Invoke(Vector256<float> x, Vector256<float> y) =>
-                Vector256.ConditionalSelect(Vector256.Equals(x, y),
+                Vector256.ConditionalSelect(
+                    Vector256.Equals(x, y),
                     Vector256.ConditionalSelect(IsNegative(y), y, x),
-                    Vector256.Min(x, y));
+                    Vector256.Min(x, y)
+                );
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Invoke(Vector512<float> x, Vector512<float> y) =>
-                Vector512.ConditionalSelect(Vector512.Equals(x, y),
+                Vector512.ConditionalSelect(
+                    Vector512.Equals(x, y),
                     Vector512.ConditionalSelect(IsNegative(y), y, x),
-                    Vector512.Min(x, y));
+                    Vector512.Min(x, y)
+                );
 
             public static float Invoke(Vector128<float> x) => HorizontalAggregate<MinOperator>(x);
+
             public static float Invoke(Vector256<float> x) => HorizontalAggregate<MinOperator>(x);
+
             public static float Invoke(Vector512<float> x) => HorizontalAggregate<MinOperator>(x);
         }
 
@@ -10169,35 +14201,52 @@ namespace System.Numerics.Tensors
                     return AdvSimd.Min(x, y);
                 }
 
-                return
-                    Vector128.ConditionalSelect(Vector128.Equals(x, x),
-                        Vector128.ConditionalSelect(Vector128.Equals(y, y),
-                            Vector128.ConditionalSelect(Vector128.Equals(x, y),
-                                Vector128.ConditionalSelect(IsNegative(x), x, y),
-                                Vector128.Min(x, y)),
-                            y),
-                        x);
+                return Vector128.ConditionalSelect(
+                    Vector128.Equals(x, x),
+                    Vector128.ConditionalSelect(
+                        Vector128.Equals(y, y),
+                        Vector128.ConditionalSelect(
+                            Vector128.Equals(x, y),
+                            Vector128.ConditionalSelect(IsNegative(x), x, y),
+                            Vector128.Min(x, y)
+                        ),
+                        y
+                    ),
+                    x
+                );
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> Invoke(Vector256<float> x, Vector256<float> y) =>
-                Vector256.ConditionalSelect(Vector256.Equals(x, x),
-                    Vector256.ConditionalSelect(Vector256.Equals(y, y),
-                        Vector256.ConditionalSelect(Vector256.Equals(x, y),
+                Vector256.ConditionalSelect(
+                    Vector256.Equals(x, x),
+                    Vector256.ConditionalSelect(
+                        Vector256.Equals(y, y),
+                        Vector256.ConditionalSelect(
+                            Vector256.Equals(x, y),
                             Vector256.ConditionalSelect(IsNegative(x), x, y),
-                            Vector256.Min(x, y)),
-                        y),
-                    x);
+                            Vector256.Min(x, y)
+                        ),
+                        y
+                    ),
+                    x
+                );
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Invoke(Vector512<float> x, Vector512<float> y) =>
-                Vector512.ConditionalSelect(Vector512.Equals(x, x),
-                    Vector512.ConditionalSelect(Vector512.Equals(y, y),
-                        Vector512.ConditionalSelect(Vector512.Equals(x, y),
+                Vector512.ConditionalSelect(
+                    Vector512.Equals(x, x),
+                    Vector512.ConditionalSelect(
+                        Vector512.Equals(y, y),
+                        Vector512.ConditionalSelect(
+                            Vector512.Equals(x, y),
                             Vector512.ConditionalSelect(IsNegative(x), x, y),
-                            Vector512.Min(x, y)),
-                        y),
-                    x);
+                            Vector512.Min(x, y)
+                        ),
+                        y
+                    ),
+                    x
+                );
         }
 
         /// <summary>Operator to get x or y based on which has the smaller MathF.Abs (but NaNs may not be propagated)</summary>
@@ -10206,45 +14255,55 @@ namespace System.Numerics.Tensors
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static float Invoke(float x, float y)
             {
-                float xMag = MathF.Abs(x), yMag = MathF.Abs(y);
-                return xMag == yMag ?
-                    (IsNegative(y) ? y : x) :
-                    (yMag < xMag ? y : x);
+                float xMag = MathF.Abs(x),
+                    yMag = MathF.Abs(y);
+                return xMag == yMag ? (IsNegative(y) ? y : x) : (yMag < xMag ? y : x);
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> Invoke(Vector128<float> x, Vector128<float> y)
             {
-                Vector128<float> xMag = Vector128.Abs(x), yMag = Vector128.Abs(y);
-                return
-                    Vector128.ConditionalSelect(Vector128.Equals(yMag, xMag),
-                        Vector128.ConditionalSelect(IsNegative(y), y, x),
-                        Vector128.ConditionalSelect(Vector128.LessThan(yMag, xMag), y, x));
+                Vector128<float> xMag = Vector128.Abs(x),
+                    yMag = Vector128.Abs(y);
+                return Vector128.ConditionalSelect(
+                    Vector128.Equals(yMag, xMag),
+                    Vector128.ConditionalSelect(IsNegative(y), y, x),
+                    Vector128.ConditionalSelect(Vector128.LessThan(yMag, xMag), y, x)
+                );
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> Invoke(Vector256<float> x, Vector256<float> y)
             {
-                Vector256<float> xMag = Vector256.Abs(x), yMag = Vector256.Abs(y);
-                return
-                    Vector256.ConditionalSelect(Vector256.Equals(yMag, xMag),
-                        Vector256.ConditionalSelect(IsNegative(y), y, x),
-                        Vector256.ConditionalSelect(Vector256.LessThan(yMag, xMag), y, x));
+                Vector256<float> xMag = Vector256.Abs(x),
+                    yMag = Vector256.Abs(y);
+                return Vector256.ConditionalSelect(
+                    Vector256.Equals(yMag, xMag),
+                    Vector256.ConditionalSelect(IsNegative(y), y, x),
+                    Vector256.ConditionalSelect(Vector256.LessThan(yMag, xMag), y, x)
+                );
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Invoke(Vector512<float> x, Vector512<float> y)
             {
-                Vector512<float> xMag = Vector512.Abs(x), yMag = Vector512.Abs(y);
-                return
-                    Vector512.ConditionalSelect(Vector512.Equals(yMag, xMag),
-                        Vector512.ConditionalSelect(IsNegative(y), y, x),
-                        Vector512.ConditionalSelect(Vector512.LessThan(yMag, xMag), y, x));
+                Vector512<float> xMag = Vector512.Abs(x),
+                    yMag = Vector512.Abs(y);
+                return Vector512.ConditionalSelect(
+                    Vector512.Equals(yMag, xMag),
+                    Vector512.ConditionalSelect(IsNegative(y), y, x),
+                    Vector512.ConditionalSelect(Vector512.LessThan(yMag, xMag), y, x)
+                );
             }
 
-            public static float Invoke(Vector128<float> x) => HorizontalAggregate<MinMagnitudeOperator>(x);
-            public static float Invoke(Vector256<float> x) => HorizontalAggregate<MinMagnitudeOperator>(x);
-            public static float Invoke(Vector512<float> x) => HorizontalAggregate<MinMagnitudeOperator>(x);
+            public static float Invoke(Vector128<float> x) =>
+                HorizontalAggregate<MinMagnitudeOperator>(x);
+
+            public static float Invoke(Vector256<float> x) =>
+                HorizontalAggregate<MinMagnitudeOperator>(x);
+
+            public static float Invoke(Vector512<float> x) =>
+                HorizontalAggregate<MinMagnitudeOperator>(x);
         }
 
         /// <summary>Operator to get x or y based on which has the smaller MathF.Abs</summary>
@@ -10256,43 +14315,61 @@ namespace System.Numerics.Tensors
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> Invoke(Vector128<float> x, Vector128<float> y)
             {
-                Vector128<float> xMag = Vector128.Abs(x), yMag = Vector128.Abs(y);
-                return
-                    Vector128.ConditionalSelect(Vector128.Equals(x, x),
-                        Vector128.ConditionalSelect(Vector128.Equals(y, y),
-                            Vector128.ConditionalSelect(Vector128.Equals(yMag, xMag),
-                                Vector128.ConditionalSelect(IsNegative(x), x, y),
-                                Vector128.ConditionalSelect(Vector128.LessThan(xMag, yMag), x, y)),
-                            y),
-                        x);
+                Vector128<float> xMag = Vector128.Abs(x),
+                    yMag = Vector128.Abs(y);
+                return Vector128.ConditionalSelect(
+                    Vector128.Equals(x, x),
+                    Vector128.ConditionalSelect(
+                        Vector128.Equals(y, y),
+                        Vector128.ConditionalSelect(
+                            Vector128.Equals(yMag, xMag),
+                            Vector128.ConditionalSelect(IsNegative(x), x, y),
+                            Vector128.ConditionalSelect(Vector128.LessThan(xMag, yMag), x, y)
+                        ),
+                        y
+                    ),
+                    x
+                );
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> Invoke(Vector256<float> x, Vector256<float> y)
             {
-                Vector256<float> xMag = Vector256.Abs(x), yMag = Vector256.Abs(y);
-                return
-                    Vector256.ConditionalSelect(Vector256.Equals(x, x),
-                        Vector256.ConditionalSelect(Vector256.Equals(y, y),
-                            Vector256.ConditionalSelect(Vector256.Equals(yMag, xMag),
-                                Vector256.ConditionalSelect(IsNegative(x), x, y),
-                                Vector256.ConditionalSelect(Vector256.LessThan(xMag, yMag), x, y)),
-                            y),
-                        x);
+                Vector256<float> xMag = Vector256.Abs(x),
+                    yMag = Vector256.Abs(y);
+                return Vector256.ConditionalSelect(
+                    Vector256.Equals(x, x),
+                    Vector256.ConditionalSelect(
+                        Vector256.Equals(y, y),
+                        Vector256.ConditionalSelect(
+                            Vector256.Equals(yMag, xMag),
+                            Vector256.ConditionalSelect(IsNegative(x), x, y),
+                            Vector256.ConditionalSelect(Vector256.LessThan(xMag, yMag), x, y)
+                        ),
+                        y
+                    ),
+                    x
+                );
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Invoke(Vector512<float> x, Vector512<float> y)
             {
-                Vector512<float> xMag = Vector512.Abs(x), yMag = Vector512.Abs(y);
-                return
-                    Vector512.ConditionalSelect(Vector512.Equals(x, x),
-                        Vector512.ConditionalSelect(Vector512.Equals(y, y),
-                            Vector512.ConditionalSelect(Vector512.Equals(yMag, xMag),
-                                Vector512.ConditionalSelect(IsNegative(x), x, y),
-                                Vector512.ConditionalSelect(Vector512.LessThan(xMag, yMag), x, y)),
-                            y),
-                        x);
+                Vector512<float> xMag = Vector512.Abs(x),
+                    yMag = Vector512.Abs(y);
+                return Vector512.ConditionalSelect(
+                    Vector512.Equals(x, x),
+                    Vector512.ConditionalSelect(
+                        Vector512.Equals(y, y),
+                        Vector512.ConditionalSelect(
+                            Vector512.Equals(yMag, xMag),
+                            Vector512.ConditionalSelect(IsNegative(x), x, y),
+                            Vector512.ConditionalSelect(Vector512.LessThan(xMag, yMag), x, y)
+                        ),
+                        y
+                    ),
+                    x
+                );
             }
         }
 
@@ -10300,8 +14377,11 @@ namespace System.Numerics.Tensors
         private readonly struct NegateOperator : IUnaryOperator
         {
             public static float Invoke(float x) => -x;
+
             public static Vector128<float> Invoke(Vector128<float> x) => -x;
+
             public static Vector256<float> Invoke(Vector256<float> x) => -x;
+
             public static Vector512<float> Invoke(Vector512<float> x) => -x;
         }
 
@@ -10309,26 +14389,59 @@ namespace System.Numerics.Tensors
         private readonly struct AddMultiplyOperator : ITernaryOperator
         {
             public static float Invoke(float x, float y, float z) => (x + y) * z;
-            public static Vector128<float> Invoke(Vector128<float> x, Vector128<float> y, Vector128<float> z) => (x + y) * z;
-            public static Vector256<float> Invoke(Vector256<float> x, Vector256<float> y, Vector256<float> z) => (x + y) * z;
-            public static Vector512<float> Invoke(Vector512<float> x, Vector512<float> y, Vector512<float> z) => (x + y) * z;
+
+            public static Vector128<float> Invoke(
+                Vector128<float> x,
+                Vector128<float> y,
+                Vector128<float> z
+            ) => (x + y) * z;
+
+            public static Vector256<float> Invoke(
+                Vector256<float> x,
+                Vector256<float> y,
+                Vector256<float> z
+            ) => (x + y) * z;
+
+            public static Vector512<float> Invoke(
+                Vector512<float> x,
+                Vector512<float> y,
+                Vector512<float> z
+            ) => (x + y) * z;
         }
 
         /// <summary>(x * y) + z</summary>
         private readonly struct MultiplyAddOperator : ITernaryOperator
         {
             public static float Invoke(float x, float y, float z) => (x * y) + z;
-            public static Vector128<float> Invoke(Vector128<float> x, Vector128<float> y, Vector128<float> z) => (x * y) + z;
-            public static Vector256<float> Invoke(Vector256<float> x, Vector256<float> y, Vector256<float> z) => (x * y) + z;
-            public static Vector512<float> Invoke(Vector512<float> x, Vector512<float> y, Vector512<float> z) => (x * y) + z;
+
+            public static Vector128<float> Invoke(
+                Vector128<float> x,
+                Vector128<float> y,
+                Vector128<float> z
+            ) => (x * y) + z;
+
+            public static Vector256<float> Invoke(
+                Vector256<float> x,
+                Vector256<float> y,
+                Vector256<float> z
+            ) => (x * y) + z;
+
+            public static Vector512<float> Invoke(
+                Vector512<float> x,
+                Vector512<float> y,
+                Vector512<float> z
+            ) => (x * y) + z;
         }
 
         /// <summary>x</summary>
         private readonly struct IdentityOperator : IUnaryOperator
         {
             public static float Invoke(float x) => x;
+
             public static Vector128<float> Invoke(Vector128<float> x) => x;
+
             public static Vector256<float> Invoke(Vector256<float> x) => x;
+
             public static Vector512<float> Invoke(Vector512<float> x) => x;
         }
 
@@ -10336,8 +14449,11 @@ namespace System.Numerics.Tensors
         private readonly struct SquaredOperator : IUnaryOperator
         {
             public static float Invoke(float x) => x * x;
+
             public static Vector128<float> Invoke(Vector128<float> x) => x * x;
+
             public static Vector256<float> Invoke(Vector256<float> x) => x * x;
+
             public static Vector512<float> Invoke(Vector512<float> x) => x * x;
         }
 
@@ -10345,8 +14461,11 @@ namespace System.Numerics.Tensors
         private readonly struct AbsoluteOperator : IUnaryOperator
         {
             public static float Invoke(float x) => MathF.Abs(x);
+
             public static Vector128<float> Invoke(Vector128<float> x) => Vector128.Abs(x);
+
             public static Vector256<float> Invoke(Vector256<float> x) => Vector256.Abs(x);
+
             public static Vector512<float> Invoke(Vector512<float> x) => Vector512.Abs(x);
         }
 
@@ -10437,19 +14556,16 @@ namespace System.Numerics.Tensors
                 Vector128<double> rl2 = rl * rl;
                 Vector128<double> rl4 = rl2 * rl2;
 
-                Vector128<double> polyl = (c4 * rl + c3) * rl2
-                                       + ((c6 * rl + c5) * rl4
-                                        + (c2 * rl + c1));
-
+                Vector128<double> polyl =
+                    (c4 * rl + c3) * rl2 + ((c6 * rl + c5) * rl4 + (c2 * rl + c1));
 
                 Vector128<double> ru = zu - dnu;
 
                 Vector128<double> ru2 = ru * ru;
                 Vector128<double> ru4 = ru2 * ru2;
 
-                Vector128<double> polyu = (c4 * ru + c3) * ru2
-                                       + ((c6 * ru + c5) * ru4
-                                        + (c2 * ru + c1));
+                Vector128<double> polyu =
+                    (c4 * ru + c3) * ru2 + ((c6 * ru + c5) * ru4 + (c2 * ru + c1));
 
                 // result = (float)[poly + (n << 52)]
                 Vector128<float> ret = Vector128.Narrow(
@@ -10458,10 +14574,18 @@ namespace System.Numerics.Tensors
                 );
 
                 // Check if -103 < |x| < 88
-                if (Vector128.GreaterThanAny(x.AsUInt32() & Vector128.Create(V_MASK), Vector128.Create(V_ARG_MAX)))
+                if (
+                    Vector128.GreaterThanAny(
+                        x.AsUInt32() & Vector128.Create(V_MASK),
+                        Vector128.Create(V_ARG_MAX)
+                    )
+                )
                 {
                     // (x > V_EXPF_MAX) ? float.PositiveInfinity : x
-                    Vector128<float> infinityMask = Vector128.GreaterThan(x, Vector128.Create(V_EXPF_MAX));
+                    Vector128<float> infinityMask = Vector128.GreaterThan(
+                        x,
+                        Vector128.Create(V_EXPF_MAX)
+                    );
 
                     ret = Vector128.ConditionalSelect(
                         infinityMask,
@@ -10470,7 +14594,10 @@ namespace System.Numerics.Tensors
                     );
 
                     // (x < V_EXPF_MIN) ? 0 : x
-                    ret = Vector128.AndNot(ret, Vector128.LessThan(x, Vector128.Create(V_EXPF_MIN)));
+                    ret = Vector128.AndNot(
+                        ret,
+                        Vector128.LessThan(x, Vector128.Create(V_EXPF_MIN))
+                    );
                 }
 
                 return ret;
@@ -10513,19 +14640,16 @@ namespace System.Numerics.Tensors
                 Vector256<double> rl2 = rl * rl;
                 Vector256<double> rl4 = rl2 * rl2;
 
-                Vector256<double> polyl = (c4 * rl + c3) * rl2
-                                       + ((c6 * rl + c5) * rl4
-                                        + (c2 * rl + c1));
-
+                Vector256<double> polyl =
+                    (c4 * rl + c3) * rl2 + ((c6 * rl + c5) * rl4 + (c2 * rl + c1));
 
                 Vector256<double> ru = zu - dnu;
 
                 Vector256<double> ru2 = ru * ru;
                 Vector256<double> ru4 = ru2 * ru2;
 
-                Vector256<double> polyu = (c4 * ru + c3) * ru2
-                                       + ((c6 * ru + c5) * ru4
-                                        + (c2 * ru + c1));
+                Vector256<double> polyu =
+                    (c4 * ru + c3) * ru2 + ((c6 * ru + c5) * ru4 + (c2 * ru + c1));
 
                 // result = (float)[poly + (n << 52)]
                 Vector256<float> ret = Vector256.Narrow(
@@ -10534,10 +14658,18 @@ namespace System.Numerics.Tensors
                 );
 
                 // Check if -103 < |x| < 88
-                if (Vector256.GreaterThanAny(x.AsUInt32() & Vector256.Create(V_MASK), Vector256.Create(V_ARG_MAX)))
+                if (
+                    Vector256.GreaterThanAny(
+                        x.AsUInt32() & Vector256.Create(V_MASK),
+                        Vector256.Create(V_ARG_MAX)
+                    )
+                )
                 {
                     // (x > V_EXPF_MAX) ? float.PositiveInfinity : x
-                    Vector256<float> infinityMask = Vector256.GreaterThan(x, Vector256.Create(V_EXPF_MAX));
+                    Vector256<float> infinityMask = Vector256.GreaterThan(
+                        x,
+                        Vector256.Create(V_EXPF_MAX)
+                    );
 
                     ret = Vector256.ConditionalSelect(
                         infinityMask,
@@ -10546,7 +14678,10 @@ namespace System.Numerics.Tensors
                     );
 
                     // (x < V_EXPF_MIN) ? 0 : x
-                    ret = Vector256.AndNot(ret, Vector256.LessThan(x, Vector256.Create(V_EXPF_MIN)));
+                    ret = Vector256.AndNot(
+                        ret,
+                        Vector256.LessThan(x, Vector256.Create(V_EXPF_MIN))
+                    );
                 }
 
                 return ret;
@@ -10589,19 +14724,16 @@ namespace System.Numerics.Tensors
                 Vector512<double> rl2 = rl * rl;
                 Vector512<double> rl4 = rl2 * rl2;
 
-                Vector512<double> polyl = (c4 * rl + c3) * rl2
-                                       + ((c6 * rl + c5) * rl4
-                                        + (c2 * rl + c1));
-
+                Vector512<double> polyl =
+                    (c4 * rl + c3) * rl2 + ((c6 * rl + c5) * rl4 + (c2 * rl + c1));
 
                 Vector512<double> ru = zu - dnu;
 
                 Vector512<double> ru2 = ru * ru;
                 Vector512<double> ru4 = ru2 * ru2;
 
-                Vector512<double> polyu = (c4 * ru + c3) * ru2
-                                       + ((c6 * ru + c5) * ru4
-                                        + (c2 * ru + c1));
+                Vector512<double> polyu =
+                    (c4 * ru + c3) * ru2 + ((c6 * ru + c5) * ru4 + (c2 * ru + c1));
 
                 // result = (float)[poly + (n << 52)]
                 Vector512<float> ret = Vector512.Narrow(
@@ -10610,10 +14742,18 @@ namespace System.Numerics.Tensors
                 );
 
                 // Check if -103 < |x| < 88
-                if (Vector512.GreaterThanAny(x.AsUInt32() & Vector512.Create(V_MASK), Vector512.Create(V_ARG_MAX)))
+                if (
+                    Vector512.GreaterThanAny(
+                        x.AsUInt32() & Vector512.Create(V_MASK),
+                        Vector512.Create(V_ARG_MAX)
+                    )
+                )
                 {
                     // (x > V_EXPF_MAX) ? float.PositiveInfinity : x
-                    Vector512<float> infinityMask = Vector512.GreaterThan(x, Vector512.Create(V_EXPF_MAX));
+                    Vector512<float> infinityMask = Vector512.GreaterThan(
+                        x,
+                        Vector512.Create(V_EXPF_MAX)
+                    );
 
                     ret = Vector512.ConditionalSelect(
                         infinityMask,
@@ -10622,7 +14762,10 @@ namespace System.Numerics.Tensors
                     );
 
                     // (x < V_EXPF_MIN) ? 0 : x
-                    ret = Vector512.AndNot(ret, Vector512.LessThan(x, Vector512.Create(V_EXPF_MIN)));
+                    ret = Vector512.AndNot(
+                        ret,
+                        Vector512.LessThan(x, Vector512.Create(V_EXPF_MIN))
+                    );
                 }
 
                 return ret;
@@ -10698,7 +14841,8 @@ namespace System.Numerics.Tensors
             {
                 Vector128<float> y = Vector128.Abs(x);
                 Vector128<float> z = ExpOperator.Invoke(y - Vector128.Create(LOGV));
-                Vector128<float> result = Vector128.Create(HALFV) * (z - (Vector128.Create(INVV2) / z));
+                Vector128<float> result =
+                    Vector128.Create(HALFV) * (z - (Vector128.Create(INVV2) / z));
                 Vector128<uint> sign = x.AsUInt32() & Vector128.Create(~SIGN_MASK);
                 return (sign ^ result.AsUInt32()).AsSingle();
             }
@@ -10707,7 +14851,8 @@ namespace System.Numerics.Tensors
             {
                 Vector256<float> y = Vector256.Abs(x);
                 Vector256<float> z = ExpOperator.Invoke(y - Vector256.Create(LOGV));
-                Vector256<float> result = Vector256.Create(HALFV) * (z - (Vector256.Create(INVV2) / z));
+                Vector256<float> result =
+                    Vector256.Create(HALFV) * (z - (Vector256.Create(INVV2) / z));
                 Vector256<uint> sign = x.AsUInt32() & Vector256.Create(~SIGN_MASK);
                 return (sign ^ result.AsUInt32()).AsSingle();
             }
@@ -10716,7 +14861,8 @@ namespace System.Numerics.Tensors
             {
                 Vector512<float> y = Vector512.Abs(x);
                 Vector512<float> z = ExpOperator.Invoke(y - Vector512.Create(LOGV));
-                Vector512<float> result = Vector512.Create(HALFV) * (z - (Vector512.Create(INVV2) / z));
+                Vector512<float> result =
+                    Vector512.Create(HALFV) * (z - (Vector512.Create(INVV2) / z));
                 Vector512<uint> sign = x.AsUInt32() & Vector512.Create(~SIGN_MASK);
                 return (sign ^ result.AsUInt32()).AsSingle();
             }
@@ -10751,7 +14897,8 @@ namespace System.Numerics.Tensors
             public static Vector128<float> Invoke(Vector128<float> x)
             {
                 Vector128<float> y = Vector128.Abs(x);
-                Vector128<float> z = ExpOperator.Invoke(Vector128.Create(-2f) * y) - Vector128.Create(1f);
+                Vector128<float> z =
+                    ExpOperator.Invoke(Vector128.Create(-2f) * y) - Vector128.Create(1f);
                 Vector128<uint> sign = x.AsUInt32() & Vector128.Create(~SIGN_MASK);
                 return (sign ^ (-z / (z + Vector128.Create(2f))).AsUInt32()).AsSingle();
             }
@@ -10759,7 +14906,8 @@ namespace System.Numerics.Tensors
             public static Vector256<float> Invoke(Vector256<float> x)
             {
                 Vector256<float> y = Vector256.Abs(x);
-                Vector256<float> z = ExpOperator.Invoke(Vector256.Create(-2f) * y) - Vector256.Create(1f);
+                Vector256<float> z =
+                    ExpOperator.Invoke(Vector256.Create(-2f) * y) - Vector256.Create(1f);
                 Vector256<uint> sign = x.AsUInt32() & Vector256.Create(~SIGN_MASK);
                 return (sign ^ (-z / (z + Vector256.Create(2f))).AsUInt32()).AsSingle();
             }
@@ -10767,7 +14915,8 @@ namespace System.Numerics.Tensors
             public static Vector512<float> Invoke(Vector512<float> x)
             {
                 Vector512<float> y = Vector512.Abs(x);
-                Vector512<float> z = ExpOperator.Invoke(Vector512.Create(-2f) * y) - Vector512.Create(1f);
+                Vector512<float> z =
+                    ExpOperator.Invoke(Vector512.Create(-2f) * y) - Vector512.Create(1f);
                 Vector512<uint> sign = x.AsUInt32() & Vector512.Create(~SIGN_MASK);
                 return (sign ^ (-z / (z + Vector512.Create(2f))).AsUInt32()).AsSingle();
             }
@@ -10854,7 +15003,10 @@ namespace System.Numerics.Tensors
                 Vector128<float> specialResult = x;
 
                 // x is subnormal or infinity or NaN
-                Vector128<uint> specialMask = Vector128.GreaterThanOrEqual(x.AsUInt32() - Vector128.Create(V_MIN), Vector128.Create(V_MAX - V_MIN));
+                Vector128<uint> specialMask = Vector128.GreaterThanOrEqual(
+                    x.AsUInt32() - Vector128.Create(V_MIN),
+                    Vector128.Create(V_MAX - V_MIN)
+                );
 
                 if (specialMask != Vector128<uint>.Zero)
                 {
@@ -10868,7 +15020,10 @@ namespace System.Numerics.Tensors
                     );
 
                     // (x < 0) ? float.NaN : x
-                    Vector128<float> lessThanZeroMask = Vector128.LessThan(x, Vector128<float>.Zero);
+                    Vector128<float> lessThanZeroMask = Vector128.LessThan(
+                        x,
+                        Vector128<float>.Zero
+                    );
 
                     specialResult = Vector128.ConditionalSelect(
                         lessThanZeroMask,
@@ -10877,10 +15032,11 @@ namespace System.Numerics.Tensors
                     );
 
                     // float.IsZero(x) | (x < 0) | float.IsNaN(x) | float.IsPositiveInfinity(x)
-                    Vector128<float> temp = zeroMask
-                                          | lessThanZeroMask
-                                          | ~Vector128.Equals(x, x)
-                                          | Vector128.Equals(x, Vector128.Create(float.PositiveInfinity));
+                    Vector128<float> temp =
+                        zeroMask
+                        | lessThanZeroMask
+                        | ~Vector128.Equals(x, x)
+                        | Vector128.Equals(x, Vector128.Create(float.PositiveInfinity));
 
                     // subnormal
                     Vector128<float> subnormalMask = Vector128.AndNot(specialMask.AsSingle(), temp);
@@ -10895,7 +15051,9 @@ namespace System.Numerics.Tensors
                 }
 
                 Vector128<uint> vx = x.AsUInt32() - Vector128.Create(V_OFF);
-                Vector128<float> n = Vector128.ConvertToSingle(Vector128.ShiftRightArithmetic(vx.AsInt32(), 23));
+                Vector128<float> n = Vector128.ConvertToSingle(
+                    Vector128.ShiftRightArithmetic(vx.AsInt32(), 23)
+                );
 
                 vx = (vx & Vector128.Create(V_MASK)) + Vector128.Create(V_OFF);
 
@@ -10905,11 +15063,19 @@ namespace System.Numerics.Tensors
                 Vector128<float> r4 = r2 * r2;
                 Vector128<float> r8 = r4 * r4;
 
-                Vector128<float> q = (Vector128.Create(C10) * r2 + (Vector128.Create(C9) * r + Vector128.Create(C8)))
-                                                          * r8 + (((Vector128.Create(C7) * r + Vector128.Create(C6))
-                                                            * r2 + (Vector128.Create(C5) * r + Vector128.Create(C4)))
-                                                           * r4 + ((Vector128.Create(C3) * r + Vector128.Create(C2))
-                                                            * r2 + (Vector128.Create(C1) * r + Vector128.Create(C0))));
+                Vector128<float> q =
+                    (Vector128.Create(C10) * r2 + (Vector128.Create(C9) * r + Vector128.Create(C8)))
+                        * r8
+                    + (
+                        (
+                            (Vector128.Create(C7) * r + Vector128.Create(C6)) * r2
+                            + (Vector128.Create(C5) * r + Vector128.Create(C4))
+                        ) * r4
+                        + (
+                            (Vector128.Create(C3) * r + Vector128.Create(C2)) * r2
+                            + (Vector128.Create(C1) * r + Vector128.Create(C0))
+                        )
+                    );
 
                 return Vector128.ConditionalSelect(
                     specialMask.AsSingle(),
@@ -10923,7 +15089,10 @@ namespace System.Numerics.Tensors
                 Vector256<float> specialResult = x;
 
                 // x is subnormal or infinity or NaN
-                Vector256<uint> specialMask = Vector256.GreaterThanOrEqual(x.AsUInt32() - Vector256.Create(V_MIN), Vector256.Create(V_MAX - V_MIN));
+                Vector256<uint> specialMask = Vector256.GreaterThanOrEqual(
+                    x.AsUInt32() - Vector256.Create(V_MIN),
+                    Vector256.Create(V_MAX - V_MIN)
+                );
 
                 if (specialMask != Vector256<uint>.Zero)
                 {
@@ -10937,7 +15106,10 @@ namespace System.Numerics.Tensors
                     );
 
                     // (x < 0) ? float.NaN : x
-                    Vector256<float> lessThanZeroMask = Vector256.LessThan(x, Vector256<float>.Zero);
+                    Vector256<float> lessThanZeroMask = Vector256.LessThan(
+                        x,
+                        Vector256<float>.Zero
+                    );
 
                     specialResult = Vector256.ConditionalSelect(
                         lessThanZeroMask,
@@ -10946,10 +15118,11 @@ namespace System.Numerics.Tensors
                     );
 
                     // float.IsZero(x) | (x < 0) | float.IsNaN(x) | float.IsPositiveInfinity(x)
-                    Vector256<float> temp = zeroMask
-                                          | lessThanZeroMask
-                                          | ~Vector256.Equals(x, x)
-                                          | Vector256.Equals(x, Vector256.Create(float.PositiveInfinity));
+                    Vector256<float> temp =
+                        zeroMask
+                        | lessThanZeroMask
+                        | ~Vector256.Equals(x, x)
+                        | Vector256.Equals(x, Vector256.Create(float.PositiveInfinity));
 
                     // subnormal
                     Vector256<float> subnormalMask = Vector256.AndNot(specialMask.AsSingle(), temp);
@@ -10964,7 +15137,9 @@ namespace System.Numerics.Tensors
                 }
 
                 Vector256<uint> vx = x.AsUInt32() - Vector256.Create(V_OFF);
-                Vector256<float> n = Vector256.ConvertToSingle(Vector256.ShiftRightArithmetic(vx.AsInt32(), 23));
+                Vector256<float> n = Vector256.ConvertToSingle(
+                    Vector256.ShiftRightArithmetic(vx.AsInt32(), 23)
+                );
 
                 vx = (vx & Vector256.Create(V_MASK)) + Vector256.Create(V_OFF);
 
@@ -10974,11 +15149,19 @@ namespace System.Numerics.Tensors
                 Vector256<float> r4 = r2 * r2;
                 Vector256<float> r8 = r4 * r4;
 
-                Vector256<float> q = (Vector256.Create(C10) * r2 + (Vector256.Create(C9) * r + Vector256.Create(C8)))
-                                                          * r8 + (((Vector256.Create(C7) * r + Vector256.Create(C6))
-                                                            * r2 + (Vector256.Create(C5) * r + Vector256.Create(C4)))
-                                                           * r4 + ((Vector256.Create(C3) * r + Vector256.Create(C2))
-                                                            * r2 + (Vector256.Create(C1) * r + Vector256.Create(C0))));
+                Vector256<float> q =
+                    (Vector256.Create(C10) * r2 + (Vector256.Create(C9) * r + Vector256.Create(C8)))
+                        * r8
+                    + (
+                        (
+                            (Vector256.Create(C7) * r + Vector256.Create(C6)) * r2
+                            + (Vector256.Create(C5) * r + Vector256.Create(C4))
+                        ) * r4
+                        + (
+                            (Vector256.Create(C3) * r + Vector256.Create(C2)) * r2
+                            + (Vector256.Create(C1) * r + Vector256.Create(C0))
+                        )
+                    );
 
                 return Vector256.ConditionalSelect(
                     specialMask.AsSingle(),
@@ -10992,7 +15175,10 @@ namespace System.Numerics.Tensors
                 Vector512<float> specialResult = x;
 
                 // x is subnormal or infinity or NaN
-                Vector512<uint> specialMask = Vector512.GreaterThanOrEqual(x.AsUInt32() - Vector512.Create(V_MIN), Vector512.Create(V_MAX - V_MIN));
+                Vector512<uint> specialMask = Vector512.GreaterThanOrEqual(
+                    x.AsUInt32() - Vector512.Create(V_MIN),
+                    Vector512.Create(V_MAX - V_MIN)
+                );
 
                 if (specialMask != Vector512<uint>.Zero)
                 {
@@ -11006,7 +15192,10 @@ namespace System.Numerics.Tensors
                     );
 
                     // (x < 0) ? float.NaN : x
-                    Vector512<float> lessThanZeroMask = Vector512.LessThan(x, Vector512<float>.Zero);
+                    Vector512<float> lessThanZeroMask = Vector512.LessThan(
+                        x,
+                        Vector512<float>.Zero
+                    );
 
                     specialResult = Vector512.ConditionalSelect(
                         lessThanZeroMask,
@@ -11015,10 +15204,11 @@ namespace System.Numerics.Tensors
                     );
 
                     // float.IsZero(x) | (x < 0) | float.IsNaN(x) | float.IsPositiveInfinity(x)
-                    Vector512<float> temp = zeroMask
-                                          | lessThanZeroMask
-                                          | ~Vector512.Equals(x, x)
-                                          | Vector512.Equals(x, Vector512.Create(float.PositiveInfinity));
+                    Vector512<float> temp =
+                        zeroMask
+                        | lessThanZeroMask
+                        | ~Vector512.Equals(x, x)
+                        | Vector512.Equals(x, Vector512.Create(float.PositiveInfinity));
 
                     // subnormal
                     Vector512<float> subnormalMask = Vector512.AndNot(specialMask.AsSingle(), temp);
@@ -11033,7 +15223,9 @@ namespace System.Numerics.Tensors
                 }
 
                 Vector512<uint> vx = x.AsUInt32() - Vector512.Create(V_OFF);
-                Vector512<float> n = Vector512.ConvertToSingle(Vector512.ShiftRightArithmetic(vx.AsInt32(), 23));
+                Vector512<float> n = Vector512.ConvertToSingle(
+                    Vector512.ShiftRightArithmetic(vx.AsInt32(), 23)
+                );
 
                 vx = (vx & Vector512.Create(V_MASK)) + Vector512.Create(V_OFF);
 
@@ -11043,11 +15235,19 @@ namespace System.Numerics.Tensors
                 Vector512<float> r4 = r2 * r2;
                 Vector512<float> r8 = r4 * r4;
 
-                Vector512<float> q = (Vector512.Create(C10) * r2 + (Vector512.Create(C9) * r + Vector512.Create(C8)))
-                                                          * r8 + (((Vector512.Create(C7) * r + Vector512.Create(C6))
-                                                            * r2 + (Vector512.Create(C5) * r + Vector512.Create(C4)))
-                                                           * r4 + ((Vector512.Create(C3) * r + Vector512.Create(C2))
-                                                            * r2 + (Vector512.Create(C1) * r + Vector512.Create(C0))));
+                Vector512<float> q =
+                    (Vector512.Create(C10) * r2 + (Vector512.Create(C9) * r + Vector512.Create(C8)))
+                        * r8
+                    + (
+                        (
+                            (Vector512.Create(C7) * r + Vector512.Create(C6)) * r2
+                            + (Vector512.Create(C5) * r + Vector512.Create(C4))
+                        ) * r4
+                        + (
+                            (Vector512.Create(C3) * r + Vector512.Create(C2)) * r2
+                            + (Vector512.Create(C1) * r + Vector512.Create(C0))
+                        )
+                    );
 
                 return Vector512.ConditionalSelect(
                     specialMask.AsSingle(),
@@ -11133,7 +15333,10 @@ namespace System.Numerics.Tensors
                 Vector128<float> specialResult = x;
 
                 // x is subnormal or infinity or NaN
-                Vector128<uint> specialMask = Vector128.GreaterThanOrEqual(x.AsUInt32() - Vector128.Create(V_MIN), Vector128.Create(V_MAX - V_MIN));
+                Vector128<uint> specialMask = Vector128.GreaterThanOrEqual(
+                    x.AsUInt32() - Vector128.Create(V_MIN),
+                    Vector128.Create(V_MAX - V_MIN)
+                );
 
                 if (specialMask != Vector128<uint>.Zero)
                 {
@@ -11147,7 +15350,10 @@ namespace System.Numerics.Tensors
                     );
 
                     // (x < 0) ? float.NaN : x
-                    Vector128<float> lessThanZeroMask = Vector128.LessThan(x, Vector128<float>.Zero);
+                    Vector128<float> lessThanZeroMask = Vector128.LessThan(
+                        x,
+                        Vector128<float>.Zero
+                    );
 
                     specialResult = Vector128.ConditionalSelect(
                         lessThanZeroMask,
@@ -11156,10 +15362,11 @@ namespace System.Numerics.Tensors
                     );
 
                     // float.IsZero(x) | (x < 0) | float.IsNaN(x) | float.IsPositiveInfinity(x)
-                    Vector128<float> temp = zeroMask
-                                          | lessThanZeroMask
-                                          | ~Vector128.Equals(x, x)
-                                          | Vector128.Equals(x, Vector128.Create(float.PositiveInfinity));
+                    Vector128<float> temp =
+                        zeroMask
+                        | lessThanZeroMask
+                        | ~Vector128.Equals(x, x)
+                        | Vector128.Equals(x, Vector128.Create(float.PositiveInfinity));
 
                     // subnormal
                     Vector128<float> subnormalMask = Vector128.AndNot(specialMask.AsSingle(), temp);
@@ -11174,7 +15381,9 @@ namespace System.Numerics.Tensors
                 }
 
                 Vector128<uint> vx = x.AsUInt32() - Vector128.Create(V_OFF);
-                Vector128<float> n = Vector128.ConvertToSingle(Vector128.ShiftRightArithmetic(vx.AsInt32(), 23));
+                Vector128<float> n = Vector128.ConvertToSingle(
+                    Vector128.ShiftRightArithmetic(vx.AsInt32(), 23)
+                );
 
                 vx = (vx & Vector128.Create(V_MASK)) + Vector128.Create(V_OFF);
 
@@ -11184,17 +15393,20 @@ namespace System.Numerics.Tensors
                 Vector128<float> r4 = r2 * r2;
                 Vector128<float> r8 = r4 * r4;
 
-                Vector128<float> poly = (Vector128.Create(C9) * r + Vector128.Create(C8)) * r8
-                                    + (((Vector128.Create(C7) * r + Vector128.Create(C6)) * r2
-                                      + (Vector128.Create(C5) * r + Vector128.Create(C4))) * r4
-                                     + ((Vector128.Create(C3) * r + Vector128.Create(C2)) * r2
-                                      + (Vector128.Create(C1) * r + Vector128.Create(C0))));
+                Vector128<float> poly =
+                    (Vector128.Create(C9) * r + Vector128.Create(C8)) * r8
+                    + (
+                        (
+                            (Vector128.Create(C7) * r + Vector128.Create(C6)) * r2
+                            + (Vector128.Create(C5) * r + Vector128.Create(C4))
+                        ) * r4
+                        + (
+                            (Vector128.Create(C3) * r + Vector128.Create(C2)) * r2
+                            + (Vector128.Create(C1) * r + Vector128.Create(C0))
+                        )
+                    );
 
-                return Vector128.ConditionalSelect(
-                    specialMask.AsSingle(),
-                    specialResult,
-                    n + poly
-                );
+                return Vector128.ConditionalSelect(specialMask.AsSingle(), specialResult, n + poly);
             }
 
             public static Vector256<float> Invoke(Vector256<float> x)
@@ -11202,7 +15414,10 @@ namespace System.Numerics.Tensors
                 Vector256<float> specialResult = x;
 
                 // x is subnormal or infinity or NaN
-                Vector256<uint> specialMask = Vector256.GreaterThanOrEqual(x.AsUInt32() - Vector256.Create(V_MIN), Vector256.Create(V_MAX - V_MIN));
+                Vector256<uint> specialMask = Vector256.GreaterThanOrEqual(
+                    x.AsUInt32() - Vector256.Create(V_MIN),
+                    Vector256.Create(V_MAX - V_MIN)
+                );
 
                 if (specialMask != Vector256<uint>.Zero)
                 {
@@ -11216,7 +15431,10 @@ namespace System.Numerics.Tensors
                     );
 
                     // (x < 0) ? float.NaN : x
-                    Vector256<float> lessThanZeroMask = Vector256.LessThan(x, Vector256<float>.Zero);
+                    Vector256<float> lessThanZeroMask = Vector256.LessThan(
+                        x,
+                        Vector256<float>.Zero
+                    );
 
                     specialResult = Vector256.ConditionalSelect(
                         lessThanZeroMask,
@@ -11225,10 +15443,11 @@ namespace System.Numerics.Tensors
                     );
 
                     // float.IsZero(x) | (x < 0) | float.IsNaN(x) | float.IsPositiveInfinity(x)
-                    Vector256<float> temp = zeroMask
-                                          | lessThanZeroMask
-                                          | ~Vector256.Equals(x, x)
-                                          | Vector256.Equals(x, Vector256.Create(float.PositiveInfinity));
+                    Vector256<float> temp =
+                        zeroMask
+                        | lessThanZeroMask
+                        | ~Vector256.Equals(x, x)
+                        | Vector256.Equals(x, Vector256.Create(float.PositiveInfinity));
 
                     // subnormal
                     Vector256<float> subnormalMask = Vector256.AndNot(specialMask.AsSingle(), temp);
@@ -11243,7 +15462,9 @@ namespace System.Numerics.Tensors
                 }
 
                 Vector256<uint> vx = x.AsUInt32() - Vector256.Create(V_OFF);
-                Vector256<float> n = Vector256.ConvertToSingle(Vector256.ShiftRightArithmetic(vx.AsInt32(), 23));
+                Vector256<float> n = Vector256.ConvertToSingle(
+                    Vector256.ShiftRightArithmetic(vx.AsInt32(), 23)
+                );
 
                 vx = (vx & Vector256.Create(V_MASK)) + Vector256.Create(V_OFF);
 
@@ -11253,17 +15474,20 @@ namespace System.Numerics.Tensors
                 Vector256<float> r4 = r2 * r2;
                 Vector256<float> r8 = r4 * r4;
 
-                Vector256<float> poly = (Vector256.Create(C9) * r + Vector256.Create(C8)) * r8
-                                    + (((Vector256.Create(C7) * r + Vector256.Create(C6)) * r2
-                                      + (Vector256.Create(C5) * r + Vector256.Create(C4))) * r4
-                                     + ((Vector256.Create(C3) * r + Vector256.Create(C2)) * r2
-                                      + (Vector256.Create(C1) * r + Vector256.Create(C0))));
+                Vector256<float> poly =
+                    (Vector256.Create(C9) * r + Vector256.Create(C8)) * r8
+                    + (
+                        (
+                            (Vector256.Create(C7) * r + Vector256.Create(C6)) * r2
+                            + (Vector256.Create(C5) * r + Vector256.Create(C4))
+                        ) * r4
+                        + (
+                            (Vector256.Create(C3) * r + Vector256.Create(C2)) * r2
+                            + (Vector256.Create(C1) * r + Vector256.Create(C0))
+                        )
+                    );
 
-                return Vector256.ConditionalSelect(
-                    specialMask.AsSingle(),
-                    specialResult,
-                    n + poly
-                );
+                return Vector256.ConditionalSelect(specialMask.AsSingle(), specialResult, n + poly);
             }
 
             public static Vector512<float> Invoke(Vector512<float> x)
@@ -11271,7 +15495,10 @@ namespace System.Numerics.Tensors
                 Vector512<float> specialResult = x;
 
                 // x is subnormal or infinity or NaN
-                Vector512<uint> specialMask = Vector512.GreaterThanOrEqual(x.AsUInt32() - Vector512.Create(V_MIN), Vector512.Create(V_MAX - V_MIN));
+                Vector512<uint> specialMask = Vector512.GreaterThanOrEqual(
+                    x.AsUInt32() - Vector512.Create(V_MIN),
+                    Vector512.Create(V_MAX - V_MIN)
+                );
 
                 if (specialMask != Vector512<uint>.Zero)
                 {
@@ -11285,7 +15512,10 @@ namespace System.Numerics.Tensors
                     );
 
                     // (x < 0) ? float.NaN : x
-                    Vector512<float> lessThanZeroMask = Vector512.LessThan(x, Vector512<float>.Zero);
+                    Vector512<float> lessThanZeroMask = Vector512.LessThan(
+                        x,
+                        Vector512<float>.Zero
+                    );
 
                     specialResult = Vector512.ConditionalSelect(
                         lessThanZeroMask,
@@ -11294,10 +15524,11 @@ namespace System.Numerics.Tensors
                     );
 
                     // float.IsZero(x) | (x < 0) | float.IsNaN(x) | float.IsPositiveInfinity(x)
-                    Vector512<float> temp = zeroMask
-                                          | lessThanZeroMask
-                                          | ~Vector512.Equals(x, x)
-                                          | Vector512.Equals(x, Vector512.Create(float.PositiveInfinity));
+                    Vector512<float> temp =
+                        zeroMask
+                        | lessThanZeroMask
+                        | ~Vector512.Equals(x, x)
+                        | Vector512.Equals(x, Vector512.Create(float.PositiveInfinity));
 
                     // subnormal
                     Vector512<float> subnormalMask = Vector512.AndNot(specialMask.AsSingle(), temp);
@@ -11312,7 +15543,9 @@ namespace System.Numerics.Tensors
                 }
 
                 Vector512<uint> vx = x.AsUInt32() - Vector512.Create(V_OFF);
-                Vector512<float> n = Vector512.ConvertToSingle(Vector512.ShiftRightArithmetic(vx.AsInt32(), 23));
+                Vector512<float> n = Vector512.ConvertToSingle(
+                    Vector512.ShiftRightArithmetic(vx.AsInt32(), 23)
+                );
 
                 vx = (vx & Vector512.Create(V_MASK)) + Vector512.Create(V_OFF);
 
@@ -11322,22 +15555,29 @@ namespace System.Numerics.Tensors
                 Vector512<float> r4 = r2 * r2;
                 Vector512<float> r8 = r4 * r4;
 
-                Vector512<float> poly = (Vector512.Create(C9) * r + Vector512.Create(C8)) * r8
-                                    + (((Vector512.Create(C7) * r + Vector512.Create(C6)) * r2
-                                      + (Vector512.Create(C5) * r + Vector512.Create(C4))) * r4
-                                     + ((Vector512.Create(C3) * r + Vector512.Create(C2)) * r2
-                                      + (Vector512.Create(C1) * r + Vector512.Create(C0))));
+                Vector512<float> poly =
+                    (Vector512.Create(C9) * r + Vector512.Create(C8)) * r8
+                    + (
+                        (
+                            (Vector512.Create(C7) * r + Vector512.Create(C6)) * r2
+                            + (Vector512.Create(C5) * r + Vector512.Create(C4))
+                        ) * r4
+                        + (
+                            (Vector512.Create(C3) * r + Vector512.Create(C2)) * r2
+                            + (Vector512.Create(C1) * r + Vector512.Create(C0))
+                        )
+                    );
 
-                return Vector512.ConditionalSelect(
-                    specialMask.AsSingle(),
-                    specialResult,
-                    n + poly
-                );
+                return Vector512.ConditionalSelect(specialMask.AsSingle(), specialResult, n + poly);
             }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static Vector128<float> ElementWiseSelect(Vector128<float> mask, Vector128<float> left, Vector128<float> right)
+        private static Vector128<float> ElementWiseSelect(
+            Vector128<float> mask,
+            Vector128<float> left,
+            Vector128<float> right
+        )
         {
             if (Sse41.IsSupported)
                 return Sse41.BlendVariable(left, right, ~mask);
@@ -11346,7 +15586,11 @@ namespace System.Numerics.Tensors
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static Vector128<int> ElementWiseSelect(Vector128<int> mask, Vector128<int> left, Vector128<int> right)
+        private static Vector128<int> ElementWiseSelect(
+            Vector128<int> mask,
+            Vector128<int> left,
+            Vector128<int> right
+        )
         {
             if (Sse41.IsSupported)
                 return Sse41.BlendVariable(left, right, ~mask);
@@ -11355,7 +15599,11 @@ namespace System.Numerics.Tensors
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static Vector256<float> ElementWiseSelect(Vector256<float> mask, Vector256<float> left, Vector256<float> right)
+        private static Vector256<float> ElementWiseSelect(
+            Vector256<float> mask,
+            Vector256<float> left,
+            Vector256<float> right
+        )
         {
             if (Avx2.IsSupported)
                 return Avx2.BlendVariable(left, right, ~mask);
@@ -11364,7 +15612,11 @@ namespace System.Numerics.Tensors
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static Vector256<int> ElementWiseSelect(Vector256<int> mask, Vector256<int> left, Vector256<int> right)
+        private static Vector256<int> ElementWiseSelect(
+            Vector256<int> mask,
+            Vector256<int> left,
+            Vector256<int> right
+        )
         {
             if (Avx2.IsSupported)
                 return Avx2.BlendVariable(left, right, ~mask);
@@ -11373,7 +15625,11 @@ namespace System.Numerics.Tensors
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static Vector512<float> ElementWiseSelect(Vector512<float> mask, Vector512<float> left, Vector512<float> right)
+        private static Vector512<float> ElementWiseSelect(
+            Vector512<float> mask,
+            Vector512<float> left,
+            Vector512<float> right
+        )
         {
             if (Avx512F.IsSupported)
                 return Avx512F.BlendVariable(left, right, ~mask);
@@ -11382,7 +15638,11 @@ namespace System.Numerics.Tensors
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static Vector512<int> ElementWiseSelect(Vector512<int> mask, Vector512<int> left, Vector512<int> right)
+        private static Vector512<int> ElementWiseSelect(
+            Vector512<int> mask,
+            Vector512<int> left,
+            Vector512<int> right
+        )
         {
             if (Avx512F.IsSupported)
                 return Avx512F.BlendVariable(left, right, ~mask);
@@ -11394,9 +15654,15 @@ namespace System.Numerics.Tensors
         private readonly struct SigmoidOperator : IUnaryOperator
         {
             public static float Invoke(float x) => 1.0f / (1.0f + MathF.Exp(-x));
-            public static Vector128<float> Invoke(Vector128<float> x) => Vector128.Create(1f) / (Vector128.Create(1f) + ExpOperator.Invoke(-x));
-            public static Vector256<float> Invoke(Vector256<float> x) => Vector256.Create(1f) / (Vector256.Create(1f) + ExpOperator.Invoke(-x));
-            public static Vector512<float> Invoke(Vector512<float> x) => Vector512.Create(1f) / (Vector512.Create(1f) + ExpOperator.Invoke(-x));
+
+            public static Vector128<float> Invoke(Vector128<float> x) =>
+                Vector128.Create(1f) / (Vector128.Create(1f) + ExpOperator.Invoke(-x));
+
+            public static Vector256<float> Invoke(Vector256<float> x) =>
+                Vector256.Create(1f) / (Vector256.Create(1f) + ExpOperator.Invoke(-x));
+
+            public static Vector512<float> Invoke(Vector512<float> x) =>
+                Vector512.Create(1f) / (Vector512.Create(1f) + ExpOperator.Invoke(-x));
         }
 
         /// <summary>Operator that takes one input value and returns a single value.</summary>
@@ -11431,9 +15697,21 @@ namespace System.Numerics.Tensors
         private interface ITernaryOperator
         {
             static abstract float Invoke(float x, float y, float z);
-            static abstract Vector128<float> Invoke(Vector128<float> x, Vector128<float> y, Vector128<float> z);
-            static abstract Vector256<float> Invoke(Vector256<float> x, Vector256<float> y, Vector256<float> z);
-            static abstract Vector512<float> Invoke(Vector512<float> x, Vector512<float> y, Vector512<float> z);
+            static abstract Vector128<float> Invoke(
+                Vector128<float> x,
+                Vector128<float> y,
+                Vector128<float> z
+            );
+            static abstract Vector256<float> Invoke(
+                Vector256<float> x,
+                Vector256<float> y,
+                Vector256<float> z
+            );
+            static abstract Vector512<float> Invoke(
+                Vector512<float> x,
+                Vector512<float> y,
+                Vector512<float> z
+            );
         }
     }
 }

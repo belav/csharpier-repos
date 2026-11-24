@@ -14,9 +14,15 @@ namespace System.Runtime.Loader
                 throw new ArgumentNullException("assemblyPath");
 
             if (!Path.IsPathRooted(assemblyPath))
-                throw new ArgumentException("Gimme an absolute path " + assemblyPath + " XXX " + Path.GetPathRoot(assemblyPath), "assemblyPath");
+                throw new ArgumentException(
+                    "Gimme an absolute path "
+                        + assemblyPath
+                        + " XXX "
+                        + Path.GetPathRoot(assemblyPath),
+                    "assemblyPath"
+                );
 
-            return Assembly.LoadFrom (assemblyPath);
+            return Assembly.LoadFrom(assemblyPath);
         }
 
         public Assembly LoadFromAssemblyName(AssemblyName assemblyName)
@@ -33,9 +39,9 @@ namespace System.Runtime.Loader
 
         public static AssemblyName GetAssemblyName(string assemblyPath)
         {
-            if (!File.Exists (assemblyPath))
-                throw new Exception ("file not found");
-            return new AssemblyName (Path.GetFileName (assemblyPath));
+            if (!File.Exists(assemblyPath))
+                throw new Exception("file not found");
+            return new AssemblyName(Path.GetFileName(assemblyPath));
         }
     }
 }

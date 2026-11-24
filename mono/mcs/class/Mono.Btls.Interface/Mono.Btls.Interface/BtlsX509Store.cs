@@ -28,64 +28,62 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Mono.Btls.Interface
 {
-	public class BtlsX509Store : BtlsObject
-	{
-		new internal MonoBtlsX509Store Instance {
-			get { return (MonoBtlsX509Store)base.Instance; }
-		}
+    public class BtlsX509Store : BtlsObject
+    {
+        internal new MonoBtlsX509Store Instance
+        {
+            get { return (MonoBtlsX509Store)base.Instance; }
+        }
 
-		internal BtlsX509Store (MonoBtlsX509Store store)
-			: base (store)
-		{
-		}
+        internal BtlsX509Store(MonoBtlsX509Store store)
+            : base(store) { }
 
-		public void LoadLocations (string file, string path)
-		{
-			Instance.LoadLocations (file, path);
-		}
+        public void LoadLocations(string file, string path)
+        {
+            Instance.LoadLocations(file, path);
+        }
 
-		public void AddTrustedRoots ()
-		{
-			Instance.AddTrustedRoots ();
-		}
+        public void AddTrustedRoots()
+        {
+            Instance.AddTrustedRoots();
+        }
 
-		public void AddCertificate (BtlsX509 x509)
-		{
-			Instance.AddCertificate (x509.Instance);
-		}
+        public void AddCertificate(BtlsX509 x509)
+        {
+            Instance.AddCertificate(x509.Instance);
+        }
 
-		public int GetCount ()
-		{
-			return Instance.GetCount ();
-		}
+        public int GetCount()
+        {
+            return Instance.GetCount();
+        }
 
-		public void AddLookup (X509CertificateCollection certificates, BtlsX509TrustKind trust)
-		{
-			Instance.AddCollection (certificates, (MonoBtlsX509TrustKind)trust);
-		}
+        public void AddLookup(X509CertificateCollection certificates, BtlsX509TrustKind trust)
+        {
+            Instance.AddCollection(certificates, (MonoBtlsX509TrustKind)trust);
+        }
 
-		static MonoBtlsX509FileType GetFileType (BtlsX509Format format)
-		{
-			switch (format) {
-			case BtlsX509Format.DER:
-				return MonoBtlsX509FileType.ASN1;
-			case BtlsX509Format.PEM:
-				return MonoBtlsX509FileType.PEM;
-			default:
-				throw new NotSupportedException ();
-			}
-		}
+        static MonoBtlsX509FileType GetFileType(BtlsX509Format format)
+        {
+            switch (format)
+            {
+                case BtlsX509Format.DER:
+                    return MonoBtlsX509FileType.ASN1;
+                case BtlsX509Format.PEM:
+                    return MonoBtlsX509FileType.PEM;
+                default:
+                    throw new NotSupportedException();
+            }
+        }
 
-		public void AddDirectoryLookup (string dir, BtlsX509Format format)
-		{
-			Instance.AddDirectoryLookup (dir, GetFileType (format));
-		}
+        public void AddDirectoryLookup(string dir, BtlsX509Format format)
+        {
+            Instance.AddDirectoryLookup(dir, GetFileType(format));
+        }
 
-		public void AddFileLookup (string file, BtlsX509Format format)
-		{
-			Instance.AddFileLookup (file, GetFileType (format));
-		}
-
-	}
+        public void AddFileLookup(string file, BtlsX509Format format)
+        {
+            Instance.AddFileLookup(file, GetFileType(format));
+        }
+    }
 }
-

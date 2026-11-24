@@ -10,19 +10,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class EnableKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public EnableKeywordRecommender()
-            : base(SyntaxKind.EnableKeyword, isValidInPreprocessorContext: true)
-        {
-        }
+            : base(SyntaxKind.EnableKeyword, isValidInPreprocessorContext: true) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             var previousToken1 = context.TargetToken;
             var previousToken2 = previousToken1.GetPreviousToken(includeSkipped: true);
 
             // # nullable |
             // # nullable e|
-            if (previousToken1.Kind() == SyntaxKind.NullableKeyword &&
-                previousToken2.Kind() == SyntaxKind.HashToken)
+            if (
+                previousToken1.Kind() == SyntaxKind.NullableKeyword
+                && previousToken2.Kind() == SyntaxKind.HashToken
+            )
             {
                 return true;
             }
@@ -30,11 +34,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             var previousToken3 = previousToken2.GetPreviousToken(includeSkipped: true);
 
             return
-               // # pragma warning |
-               // # pragma warning e|
-               previousToken1.Kind() == SyntaxKind.WarningKeyword &&
-               previousToken2.Kind() == SyntaxKind.PragmaKeyword &&
-               previousToken3.Kind() == SyntaxKind.HashToken;
+                // # pragma warning |
+                // # pragma warning e|
+                previousToken1.Kind() == SyntaxKind.WarningKeyword
+                && previousToken2.Kind() == SyntaxKind.PragmaKeyword
+                && previousToken3.Kind() == SyntaxKind.HashToken;
         }
     }
 }

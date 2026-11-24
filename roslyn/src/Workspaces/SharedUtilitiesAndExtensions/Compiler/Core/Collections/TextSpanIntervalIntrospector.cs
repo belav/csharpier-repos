@@ -9,24 +9,23 @@ namespace Microsoft.CodeAnalysis.Shared.Collections;
 
 internal readonly struct TextSpanIntervalIntrospector : IIntervalIntrospector<TextSpan>
 {
-    public int GetStart(TextSpan value)
-        => value.Start;
+    public int GetStart(TextSpan value) => value.Start;
 
-    public int GetLength(TextSpan value)
-        => value.Length;
+    public int GetLength(TextSpan value) => value.Length;
 }
 
 internal sealed class TextSpanIntervalTree(IEnumerable<TextSpan>? values)
-    : SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>(new TextSpanIntervalIntrospector(), values)
+    : SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>(
+        new TextSpanIntervalIntrospector(),
+        values
+    )
 {
-    public TextSpanIntervalTree() : this(null)
-    {
-    }
+    public TextSpanIntervalTree()
+        : this(null) { }
 
-    public TextSpanIntervalTree(params TextSpan[]? values) : this((IEnumerable<TextSpan>?)values)
-    {
-    }
+    public TextSpanIntervalTree(params TextSpan[]? values)
+        : this((IEnumerable<TextSpan>?)values) { }
 
-    public bool HasIntervalThatIntersectsWith(TextSpan span)
-        => this.HasIntervalThatIntersectsWith(span.Start, span.Length);
+    public bool HasIntervalThatIntersectsWith(TextSpan span) =>
+        this.HasIntervalThatIntersectsWith(span.Start, span.Length);
 }

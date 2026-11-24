@@ -8,6 +8,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 {
     internal static class VSTypeScriptWellKnownDiagnosticCustomTags
     {
-        public const string DoesNotSupportF1Help = WellKnownDiagnosticCustomTags.DoesNotSupportF1Help;
+        public const string DoesNotSupportF1Help =
+            WellKnownDiagnosticCustomTags.DoesNotSupportF1Help;
     }
 }

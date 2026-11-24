@@ -10,8 +10,8 @@
  * Copyright (c) 1999 Microsoft Corporation
  */
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     using System;
     using System.Collections;
     using System.Collections.Specialized;
@@ -25,13 +25,15 @@ namespace System.Web.UI {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public sealed class BindableTemplateBuilder : TemplateBuilder, IBindableTemplate {
+    public sealed class BindableTemplateBuilder : TemplateBuilder, IBindableTemplate
+    {
         private ExtractTemplateValuesMethod _extractTemplateValuesMethod;
-        
+
         /*
          * No-compile delegate handler for ExtractValues.
          */
-        private IOrderedDictionary ExtractTemplateValuesMethod(Control container) {
+        private IOrderedDictionary ExtractTemplateValuesMethod(Control container)
+        {
             /*System.Web.UI.OrderedDictionary @__table;
             System.Web.UI.WebControls.DropDownList ddl2;
             @__table = new System.Web.UI.OrderedDictionary();
@@ -40,39 +42,66 @@ namespace System.Web.UI {
                 @__table["FavVegetable"] = ddl2.SelectedValue;
             }
             return @__table;*/
-            
+
             BindableTemplateBuilder bindableTemplateBuilder = this as BindableTemplateBuilder;
 
-            Debug.Assert(bindableTemplateBuilder != null, "ExtractTemplateValuesMethod called on non-BindableTemplateBuilder.");
+            Debug.Assert(
+                bindableTemplateBuilder != null,
+                "ExtractTemplateValuesMethod called on non-BindableTemplateBuilder."
+            );
             OrderedDictionary table = new OrderedDictionary();
-            if (bindableTemplateBuilder != null) {
-                ExtractTemplateValuesRecursive(bindableTemplateBuilder.SubBuilders, table, container);
+            if (bindableTemplateBuilder != null)
+            {
+                ExtractTemplateValuesRecursive(
+                    bindableTemplateBuilder.SubBuilders,
+                    table,
+                    container
+                );
             }
 
             return table;
         }
 
-        private void ExtractTemplateValuesRecursive(ArrayList subBuilders, OrderedDictionary table, Control container) {
-            foreach (object subBuilderObject in subBuilders) {
+        private void ExtractTemplateValuesRecursive(
+            ArrayList subBuilders,
+            OrderedDictionary table,
+            Control container
+        )
+        {
+            foreach (object subBuilderObject in subBuilders)
+            {
                 ControlBuilder subBuilderControlBuilder = subBuilderObject as ControlBuilder;
-                if (subBuilderControlBuilder != null) {
+                if (subBuilderControlBuilder != null)
+                {
                     ICollection entries;
                     // filter out device filtered bound entries that don't apply to this device
-                    if (!subBuilderControlBuilder.HasFilteredBoundEntries) {
+                    if (!subBuilderControlBuilder.HasFilteredBoundEntries)
+                    {
                         entries = subBuilderControlBuilder.BoundPropertyEntries;
                     }
-                    else {
+                    else
+                    {
                         Debug.Assert(subBuilderControlBuilder.ServiceProvider == null);
-                        Debug.Assert(subBuilderControlBuilder.TemplateControl != null, "TemplateControl should not be null in no-compile pages. We need it for the FilterResolutionService.");
+                        Debug.Assert(
+                            subBuilderControlBuilder.TemplateControl != null,
+                            "TemplateControl should not be null in no-compile pages. We need it for the FilterResolutionService."
+                        );
 
                         ServiceContainer serviceContainer = new ServiceContainer();
-                        serviceContainer.AddService(typeof(IFilterResolutionService), subBuilderControlBuilder.TemplateControl);
+                        serviceContainer.AddService(
+                            typeof(IFilterResolutionService),
+                            subBuilderControlBuilder.TemplateControl
+                        );
 
-                        try {
+                        try
+                        {
                             subBuilderControlBuilder.SetServiceProvider(serviceContainer);
-                            entries = subBuilderControlBuilder.GetFilteredPropertyEntrySet(subBuilderControlBuilder.BoundPropertyEntries);
+                            entries = subBuilderControlBuilder.GetFilteredPropertyEntrySet(
+                                subBuilderControlBuilder.BoundPropertyEntries
+                            );
                         }
-                        finally {
+                        finally
+                        {
                             subBuilderControlBuilder.SetServiceProvider(null);
                         }
                     }
@@ -81,7 +110,8 @@ namespace System.Web.UI {
                     bool newControl = true;
                     Control control = null;
 
-                    foreach (BoundPropertyEntry entry in entries) {
+                    foreach (BoundPropertyEntry entry in entries)
+                    {
                         // Skip all entries that are not two-way
                         if (!entry.TwoWayBound)
                             continue;
@@ -89,56 +119,88 @@ namespace System.Web.UI {
                         // Reset the "previous" Property Entry if we're not looking at the same control.
                         // If we don't do this, Two controls that have conditionals on the same named property will have
                         // their conditionals incorrectly merged.
-                        if (String.Compare(previousControlName, entry.ControlID, StringComparison.Ordinal) != 0) {
+                        if (
+                            String.Compare(
+                                previousControlName,
+                                entry.ControlID,
+                                StringComparison.Ordinal
+                            ) != 0
+                        )
+                        {
                             newControl = true;
                         }
-                        else {
+                        else
+                        {
                             newControl = false;
                         }
 
                         previousControlName = entry.ControlID;
 
-                        if (newControl) {
+                        if (newControl)
+                        {
                             control = container.FindControl(entry.ControlID);
 
-                            if (control == null || !entry.ControlType.IsInstanceOfType(control)) {
-                                Debug.Assert(false, "BoundPropertyEntry is of wrong control type or couldn't be found.  Expected " + entry.ControlType.Name);
+                            if (control == null || !entry.ControlType.IsInstanceOfType(control))
+                            {
+                                Debug.Assert(
+                                    false,
+                                    "BoundPropertyEntry is of wrong control type or couldn't be found.  Expected "
+                                        + entry.ControlType.Name
+                                );
                                 continue;
                             }
                         }
 
                         string propertyName;
                         // map the property in case it's a complex property
-                        object targetObject = PropertyMapper.LocatePropertyObject(control, entry.Name, out propertyName, InDesigner);
+                        object targetObject = PropertyMapper.LocatePropertyObject(
+                            control,
+                            entry.Name,
+                            out propertyName,
+                            InDesigner
+                        );
 
                         // FastPropertyAccessor uses ReflectEmit for lightning speed
-                        table[entry.FieldName] = FastPropertyAccessor.GetProperty(targetObject, propertyName, InDesigner);
+                        table[entry.FieldName] = FastPropertyAccessor.GetProperty(
+                            targetObject,
+                            propertyName,
+                            InDesigner
+                        );
                     }
 
-                    ExtractTemplateValuesRecursive(subBuilderControlBuilder.SubBuilders, table, container);
+                    ExtractTemplateValuesRecursive(
+                        subBuilderControlBuilder.SubBuilders,
+                        table,
+                        container
+                    );
                 }
             }
         }
-        
+
         /*
          * IBindableTemplate implementation
          * This implementation of ITemplate is used in the designer and no-compile.
          */
-        public IOrderedDictionary ExtractValues(Control container) {
-            if (_extractTemplateValuesMethod != null && !InDesigner) {
+        public IOrderedDictionary ExtractValues(Control container)
+        {
+            if (_extractTemplateValuesMethod != null && !InDesigner)
+            {
                 return _extractTemplateValuesMethod(container);
             }
             return new OrderedDictionary();
         }
 
-        public override void OnAppendToParentBuilder(ControlBuilder parentBuilder) {
+        public override void OnAppendToParentBuilder(ControlBuilder parentBuilder)
+        {
             base.OnAppendToParentBuilder(parentBuilder);
-            if (HasTwoWayBoundProperties) {
-                _extractTemplateValuesMethod = new ExtractTemplateValuesMethod(ExtractTemplateValuesMethod);
+            if (HasTwoWayBoundProperties)
+            {
+                _extractTemplateValuesMethod = new ExtractTemplateValuesMethod(
+                    ExtractTemplateValuesMethod
+                );
             }
         }
     }
-
 
     // Delegates used for the compiled template and no-compile Bind
 
@@ -158,15 +220,19 @@ namespace System.Web.UI {
     /// <devdoc>
     /// <para>[To be supplied.]</para>
     /// </devdoc>
-    public sealed class CompiledBindableTemplateBuilder : IBindableTemplate {
+    public sealed class CompiledBindableTemplateBuilder : IBindableTemplate
+    {
         private BuildTemplateMethod _buildTemplateMethod;
         private ExtractTemplateValuesMethod _extractTemplateValuesMethod;
-
 
         /// <devdoc>
         /// <para>[To be supplied.]</para>
         /// </devdoc>
-        public CompiledBindableTemplateBuilder(BuildTemplateMethod buildTemplateMethod, ExtractTemplateValuesMethod extractTemplateValuesMethod) {
+        public CompiledBindableTemplateBuilder(
+            BuildTemplateMethod buildTemplateMethod,
+            ExtractTemplateValuesMethod extractTemplateValuesMethod
+        )
+        {
             _buildTemplateMethod = buildTemplateMethod;
             _extractTemplateValuesMethod = extractTemplateValuesMethod;
         }
@@ -176,19 +242,22 @@ namespace System.Web.UI {
         /// <devdoc>
         /// <para>Calls the ExtractTemplateValuesMethod delegate, which will return a dictionary of values.</para>
         /// </devdoc>
-        public IOrderedDictionary ExtractValues(Control container) {
-            if (_extractTemplateValuesMethod != null) {
+        public IOrderedDictionary ExtractValues(Control container)
+        {
+            if (_extractTemplateValuesMethod != null)
+            {
                 return _extractTemplateValuesMethod(container);
             }
             return new OrderedDictionary();
         }
-        
+
         // ITemplate::InstantiateIn
 
         /// <devdoc>
         /// <para>[To be supplied.]</para>
         /// </devdoc>
-        public void InstantiateIn(Control container) {
+        public void InstantiateIn(Control container)
+        {
             _buildTemplateMethod(container);
         }
     }

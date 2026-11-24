@@ -6,13 +6,12 @@
 
 using System;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using Xunit;
 
 namespace Test
 {
-
     public class Program
     {
         static Random random;
@@ -20,9 +19,10 @@ namespace Test
         public const int DefaultSeed = 20010415;
         public static int Seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
         {
-            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) => new Random().Next(),
+            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) =>
+                new Random().Next(),
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
-            _ => DefaultSeed
+            _ => DefaultSeed,
         };
 
         static Program()
@@ -30,7 +30,7 @@ namespace Test
             random = new Random(Seed);
         }
 
-        [MethodImpl( MethodImplOptions.NoInlining )]
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public static double StackScribble()
         {
             double d1 = random.NextDouble();
@@ -73,13 +73,49 @@ namespace Test
             double d38 = random.NextDouble();
             double d39 = random.NextDouble();
             double d40 = random.NextDouble();
-            return d1 + d2 + d3 + d4 + d5 + d6 + d7 + d8 + d9 + d10 +
-                   d11 + d12 + d13 + d14 + d15 + d16 + d17 + d18 + d19 + d20 +
-                   d21 + d22 + d23 + d24 + d25 + d26 + d27 + d28 + d29 + d20 +
-                   d31 + d32 + d33 + d34 + d35 + d36 + d37 + d38 + d39 + d40;
+            return d1
+                + d2
+                + d3
+                + d4
+                + d5
+                + d6
+                + d7
+                + d8
+                + d9
+                + d10
+                + d11
+                + d12
+                + d13
+                + d14
+                + d15
+                + d16
+                + d17
+                + d18
+                + d19
+                + d20
+                + d21
+                + d22
+                + d23
+                + d24
+                + d25
+                + d26
+                + d27
+                + d28
+                + d29
+                + d20
+                + d31
+                + d32
+                + d33
+                + d34
+                + d35
+                + d36
+                + d37
+                + d38
+                + d39
+                + d40;
         }
 
-        [MethodImpl( MethodImplOptions.NoInlining )]
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public static Vector3 getTestValue(float f1, float f2, float f3)
         {
             return new Vector3(f1, f2, f3);
@@ -95,7 +131,8 @@ namespace Test
             {
                 UInt32 expectedValueUInt = *(UInt32*)&expectedValue;
                 UInt32 expectedValueUIntLow = (expectedValueUInt == 0) ? 0 : expectedValueUInt - 1;
-                UInt32 expectedValueUIntHigh = (expectedValueUInt == 0xffffffff) ? 0xffffffff : expectedValueUInt + 1;
+                UInt32 expectedValueUIntHigh =
+                    (expectedValueUInt == 0xffffffff) ? 0xffffffff : expectedValueUInt + 1;
                 expectedValueLow = *(float*)&expectedValueUIntLow;
                 expectedValueHigh = *(float*)&expectedValueUIntHigh;
             }
@@ -176,4 +213,3 @@ namespace Test
         }
     }
 }
-

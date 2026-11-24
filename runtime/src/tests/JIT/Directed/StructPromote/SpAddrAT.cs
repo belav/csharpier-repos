@@ -2,13 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-using System.Runtime.CompilerServices;
 using System;
+using System.Runtime.CompilerServices;
 using Xunit;
 
 public class SpAddrAT
 {
-
     // This one makes sure that we don't (independently) promote a struct local that is address-taken.
 
     // Struct in reg (2 ints)
@@ -39,7 +38,7 @@ public class SpAddrAT
         s1.i0 = i2;
         s1.i1 = i3;
         int x = Bar(ref s0);
-        return Foo(s0, s1) + x;  // r0 <= &s0[0]; r1 <= &s0[4]; r2 <= r2; r3 <= r3
+        return Foo(s0, s1) + x; // r0 <= &s0[0]; r1 <= &s0[4]; r2 <= r2; r3 <= r3
     }
 
     [Fact]

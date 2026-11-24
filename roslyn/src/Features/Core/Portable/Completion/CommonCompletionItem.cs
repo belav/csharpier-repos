@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Completion
             ImmutableArray<string> tags = default,
             string? inlineDescription = null,
             string? displayTextPrefix = null,
-            bool isComplexTextEdit = false)
+            bool isComplexTextEdit = false
+        )
         {
             tags = tags.NullToEmpty();
 
@@ -44,7 +45,14 @@ namespace Microsoft.CodeAnalysis.Completion
 
             if (!description.IsDefault && description.Length > 0)
             {
-                properties = properties.NullToEmpty().Add(new KeyValuePair<string, string>(DescriptionProperty, EncodeDescription(description.ToTaggedText())));
+                properties = properties
+                    .NullToEmpty()
+                    .Add(
+                        new KeyValuePair<string, string>(
+                            DescriptionProperty,
+                            EncodeDescription(description.ToTaggedText())
+                        )
+                    );
             }
 
             return CompletionItem.CreateInternal(
@@ -57,11 +65,12 @@ namespace Microsoft.CodeAnalysis.Completion
                 tags: tags,
                 rules: rules,
                 inlineDescription: inlineDescription,
-                isComplexTextEdit: isComplexTextEdit);
+                isComplexTextEdit: isComplexTextEdit
+            );
         }
 
-        public static bool HasDescription(CompletionItem item)
-            => item.TryGetProperty(DescriptionProperty, out var _);
+        public static bool HasDescription(CompletionItem item) =>
+            item.TryGetProperty(DescriptionProperty, out var _);
 
         public static CompletionDescription GetDescription(CompletionItem item)
         {
@@ -77,12 +86,20 @@ namespace Microsoft.CodeAnalysis.Completion
 
         private static readonly char[] s_descriptionSeparators = ['|'];
 
-        private static string EncodeDescription(ImmutableArray<TaggedText> description)
-            => string.Join("|", description.SelectMany(d => new[] { d.Tag, d.Text }).Select(t => t.Escape('\\', s_descriptionSeparators)));
+        private static string EncodeDescription(ImmutableArray<TaggedText> description) =>
+            string.Join(
+                "|",
+                description
+                    .SelectMany(d => new[] { d.Tag, d.Text })
+                    .Select(t => t.Escape('\\', s_descriptionSeparators))
+            );
 
         private static CompletionDescription DecodeDescription(string encoded)
         {
-            var parts = encoded.Split(s_descriptionSeparators).Select(t => t.Unescape('\\')).ToArray();
+            var parts = encoded
+                .Split(s_descriptionSeparators)
+                .Select(t => t.Unescape('\\'))
+                .ToArray();
 
             var builder = ImmutableArray<TaggedText>.Empty.ToBuilder();
             for (var i = 0; i < parts.Length; i += 2)

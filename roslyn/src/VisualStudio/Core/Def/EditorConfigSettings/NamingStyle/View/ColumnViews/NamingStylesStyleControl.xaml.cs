@@ -21,7 +21,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
             DataContext = viewModel;
         }
 
-        private void StyleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-            => _viewModel.SelectionChanged(StyleComboBox.SelectedIndex);
+        private void StyleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
+            _viewModel.SelectionChanged(StyleComboBox.SelectedIndex);
     }
 }

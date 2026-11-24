@@ -21,10 +21,7 @@ namespace System.Activities
 
         ActivityWithResult Argument.IExpressionWrapper.InnerExpression
         {
-            get
-            {
-                return this.expression;
-            }
+            get { return this.expression; }
         }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)

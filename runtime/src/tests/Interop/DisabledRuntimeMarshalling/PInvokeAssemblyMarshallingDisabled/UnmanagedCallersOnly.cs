@@ -17,6 +17,13 @@ public unsafe class UnmanagedCallersOnly
         short s = 41;
         bool b = true;
 
-        Assert.True(DisabledRuntimeMarshallingNative.CallCheckStructWithShortAndBoolCallback(&DisabledRuntimeMarshallingNative.CheckStructWithShortAndBoolManaged, new StructWithShortAndBool(s, b), s, b));
+        Assert.True(
+            DisabledRuntimeMarshallingNative.CallCheckStructWithShortAndBoolCallback(
+                &DisabledRuntimeMarshallingNative.CheckStructWithShortAndBoolManaged,
+                new StructWithShortAndBool(s, b),
+                s,
+                b
+            )
+        );
     }
 }

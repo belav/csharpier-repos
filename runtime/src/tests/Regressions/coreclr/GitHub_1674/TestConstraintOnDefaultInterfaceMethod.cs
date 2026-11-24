@@ -28,13 +28,17 @@ namespace TestConstraint
 
         interface IBuggy<T1>
         {
-            public void Foo<T2>() where T2 : T1 => Console.WriteLine($"Works for type: {typeof(T1)}");
+            public void Foo<T2>()
+                where T2 : T1 => Console.WriteLine($"Works for type: {typeof(T1)}");
         }
-        public class Worky : IBuggy<int> { }
-        public class Worky2 : IBuggy<object> { }
-        public class Buggy : IBuggy<Open> { }
-        public class Open { }
 
+        public class Worky : IBuggy<int> { }
+
+        public class Worky2 : IBuggy<object> { }
+
+        public class Buggy : IBuggy<Open> { }
+
+        public class Open { }
 
         private interface ILogEntry
         {
@@ -45,7 +49,11 @@ namespace TestConstraint
             where TRecord : class, ILogEntry
         {
             ValueTask AppendAsync<TRecordImpl>(TRecordImpl impl, CancellationToken token)
-                where TRecordImpl : notnull, TRecord {Console.WriteLine("works.."); return new ValueTask();}
+                where TRecordImpl : notnull, TRecord
+            {
+                Console.WriteLine("works..");
+                return new ValueTask();
+            }
         }
 
         private interface IRaftLogEntry : ILogEntry
@@ -53,9 +61,7 @@ namespace TestConstraint
             long Term { get; }
         }
 
-        private sealed class AuditTrail : IAuditTrail<IRaftLogEntry>
-        {
-        }
+        private sealed class AuditTrail : IAuditTrail<IRaftLogEntry> { }
 
         private readonly struct EmptyLogEntry : IRaftLogEntry
         {

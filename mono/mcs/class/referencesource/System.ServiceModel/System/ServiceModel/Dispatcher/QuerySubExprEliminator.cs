@@ -30,7 +30,9 @@ namespace System.ServiceModel.Dispatcher
             {
                 this.ops = new InternalSubExprOpcode(parent);
                 this.ops.Attach(ops);
-                this.useSpecial = parent is SubExprHeader && ((SelectOpcode)ops).Criteria.Axis.Type == QueryAxisType.Child;
+                this.useSpecial =
+                    parent is SubExprHeader
+                    && ((SelectOpcode)ops).Criteria.Axis.Type == QueryAxisType.Child;
             }
             else
             {
@@ -55,10 +57,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal int Variable
         {
-            get
-            {
-                return this.var;
-            }
+            get { return this.var; }
         }
 
         internal SubExprOpcode Add(Opcode opseq, SubExprEliminator elim)
@@ -200,7 +199,8 @@ namespace System.ServiceModel.Dispatcher
 
         internal void Eval(ProcessingContext context)
         {
-            int count = 0, marker = context.Processor.CounterMarker;
+            int count = 0,
+                marker = context.Processor.CounterMarker;
 
             Opcode op = this.ops;
             if (this.useSpecial)
@@ -259,16 +259,18 @@ namespace System.ServiceModel.Dispatcher
         internal void Write(TextWriter outStream)
         {
             outStream.WriteLine("=======================");
-            outStream.WriteLine("= SubExpr #" + this.var.ToString() + " (" + this.refCount.ToString() + ")");
+            outStream.WriteLine(
+                "= SubExpr #" + this.var.ToString() + " (" + this.refCount.ToString() + ")"
+            );
             outStream.WriteLine("=======================");
 
-            for(Opcode o = this.ops; o != null; o = o.Next)
+            for (Opcode o = this.ops; o != null; o = o.Next)
             {
                 outStream.WriteLine(o.ToString());
             }
             outStream.WriteLine("");
 
-            for(int i = 0; i < this.children.Count; ++i)
+            for (int i = 0; i < this.children.Count; ++i)
             {
                 this.children[i].Write(outStream);
             }
@@ -398,7 +400,10 @@ namespace System.ServiceModel.Dispatcher
                     {
                         op = op.Eval(context);
                     }
-                    context.SaveVariable(this.children[i].var, context.Processor.ElapsedCount(marker));
+                    context.SaveVariable(
+                        this.children[i].var,
+                        context.Processor.ElapsedCount(marker)
+                    );
                     context.PopSequenceFrame();
                 }
                 else
@@ -481,18 +486,12 @@ namespace System.ServiceModel.Dispatcher
 
         internal List<SubExpr> Exprs
         {
-            get
-            {
-                return this.exprList;
-            }
+            get { return this.exprList; }
         }
 
         internal int VariableCount
         {
-            get
-            {
-                return this.nextVar;
-            }
+            get { return this.nextVar; }
         }
 
         internal Opcode Add(object item, Opcode ops)
@@ -621,7 +620,7 @@ namespace System.ServiceModel.Dispatcher
 #if DEBUG_FILTER
         internal void Write(TextWriter outStream)
         {
-            for(int i = 0; i < this.exprList.Count; ++i)
+            for (int i = 0; i < this.exprList.Count; ++i)
             {
                 this.exprList[i].Write(outStream);
             }
@@ -641,10 +640,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal SubExpr Expr
         {
-            get
-            {
-                return expr;
-            }
+            get { return expr; }
         }
 
         internal override bool Equals(Opcode op)
@@ -719,9 +715,7 @@ namespace System.ServiceModel.Dispatcher
     internal class InternalSubExprOpcode : SubExprOpcode
     {
         internal InternalSubExprOpcode(SubExpr expr)
-            : base(expr)
-        {
-        }
+            : base(expr) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {

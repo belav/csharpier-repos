@@ -1,19 +1,24 @@
 ﻿namespace AutoMapper.IntegrationTests;
+
 public class ConstructorDefaultValue : IntegrationTest<ConstructorDefaultValue.DatabaseInitializer>
 {
     public class Customer
     {
         public int Id { get; set; }
     }
+
     public class CustomerViewModel
     {
         public CustomerViewModel(int value = 5) => Value = value;
+
         public int Value { get; set; }
     }
+
     public class Context : LocalDbContext
     {
         public DbSet<Customer> Customers { get; set; }
     }
+
     public class DatabaseInitializer : DropCreateDatabaseAlways<Context>
     {
         protected override void Seed(Context context)
@@ -22,7 +27,10 @@ public class ConstructorDefaultValue : IntegrationTest<ConstructorDefaultValue.D
             base.Seed(context);
         }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateProjection<Customer, CustomerViewModel>());
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg => cfg.CreateProjection<Customer, CustomerViewModel>());
+
     [Fact]
     public void Can_map_with_projection()
     {
@@ -30,21 +38,26 @@ public class ConstructorDefaultValue : IntegrationTest<ConstructorDefaultValue.D
         ProjectTo<CustomerViewModel>(context.Customers).Single().Value.ShouldBe(5);
     }
 }
-public class StructConstructorMapping : IntegrationTest<StructConstructorMapping.DatabaseInitializer>
+
+public class StructConstructorMapping
+    : IntegrationTest<StructConstructorMapping.DatabaseInitializer>
 {
     public class Customer
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
     }
+
     public class CustomerViewModel
     {
         public DateOnly Date { get; set; }
     }
+
     public class Context : LocalDbContext
     {
         public DbSet<Customer> Customers { get; set; }
     }
+
     public class DatabaseInitializer : DropCreateDatabaseAlways<Context>
     {
         protected override void Seed(Context context)
@@ -53,11 +66,14 @@ public class StructConstructorMapping : IntegrationTest<StructConstructorMapping
             base.Seed(context);
         }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Customer, CustomerViewModel>();
-        cfg.CreateProjection<DateTime, DateOnly>();
-    });
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Customer, CustomerViewModel>();
+            cfg.CreateProjection<DateTime, DateOnly>();
+        });
+
     [Fact]
     public void Can_map_with_projection()
     {

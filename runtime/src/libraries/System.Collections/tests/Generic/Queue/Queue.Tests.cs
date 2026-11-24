@@ -11,9 +11,11 @@ namespace System.Collections.Tests
     {
         #region ICollection Helper Methods
         protected override bool Enumerator_Empty_UsesSingletonInstance => true;
-        protected override bool Enumerator_Empty_ModifiedDuringEnumeration_ThrowsInvalidOperationException => false;
+        protected override bool Enumerator_Empty_ModifiedDuringEnumeration_ThrowsInvalidOperationException =>
+            false;
 
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfEnumType_ThrowType => typeof(ArgumentException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfEnumType_ThrowType =>
+            typeof(ArgumentException);
 
         protected override void AddToCollection(ICollection collection, int numberOfItemsToAdd)
         {
@@ -29,12 +31,15 @@ namespace System.Collections.Tests
 
         protected override bool Enumerator_Current_UndefinedOperation_Throws => true;
 
-        protected override Type ICollection_NonGeneric_CopyTo_IndexLargerThanArrayCount_ThrowType => typeof(ArgumentOutOfRangeException);
+        protected override Type ICollection_NonGeneric_CopyTo_IndexLargerThanArrayCount_ThrowType =>
+            typeof(ArgumentOutOfRangeException);
 
         /// <summary>
         /// Returns a set of ModifyEnumerable delegates that modify the enumerable passed to them.
         /// </summary>
-        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(ModifyOperation operations)
+        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
+            ModifyOperation operations
+        )
         {
             if ((operations & ModifyOperation.Add) == ModifyOperation.Add)
             {
@@ -120,7 +125,11 @@ namespace System.Collections.Tests
             }
         }
 
-        private static Queue<T> CreateQueueAtCapacity<T>(bool initializeFromCollection, Func<int, T> selector, int size)
+        private static Queue<T> CreateQueueAtCapacity<T>(
+            bool initializeFromCollection,
+            Func<int, T> selector,
+            int size
+        )
         {
             Queue<T> q;
 
@@ -148,7 +157,11 @@ namespace System.Collections.Tests
         public void Clear_Wrapped(bool initializeFromCollection)
         {
             // Try to exercise special case of clearing when we've wrapped around
-            Queue<string> q = CreateQueueAtCapacity(initializeFromCollection, i => i.ToString(), size: 4);
+            Queue<string> q = CreateQueueAtCapacity(
+                initializeFromCollection,
+                i => i.ToString(),
+                size: 4
+            );
             Assert.Equal("0", q.Dequeue());
             Assert.Equal("1", q.Dequeue());
             q.Enqueue("5");
@@ -188,7 +201,11 @@ namespace System.Collections.Tests
         public void ToArray_Wrapped(bool initializeFromCollection)
         {
             // Create a queue whose head has wrapped around
-            Queue<string> q = CreateQueueAtCapacity(initializeFromCollection, i => i.ToString(), size: 4);
+            Queue<string> q = CreateQueueAtCapacity(
+                initializeFromCollection,
+                i => i.ToString(),
+                size: 4
+            );
             Assert.Equal("0", q.Dequeue());
             Assert.Equal("1", q.Dequeue());
             q.Enqueue("4");

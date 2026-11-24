@@ -17,10 +17,13 @@ namespace System
     {
         /// <summary>Size in bytes on entry to the reported collection.</summary>
         public long SizeBeforeBytes { get; }
+
         /// <summary>Fragmentation in bytes on entry to the reported collection.</summary>
         public long FragmentationBeforeBytes { get; }
+
         /// <summary>Size in bytes on exit from the reported collection.</summary>
         public long SizeAfterBytes { get; }
+
         /// <summary>Fragmentation in bytes on exit from the reported collection.</summary>
         public long FragmentationAfterBytes { get; }
     }
@@ -44,13 +47,16 @@ namespace System
     {
         /// <summary>Any kind of collection.</summary>
         Any = 0,
+
         /// <summary>A gen0 or gen1 collection.</summary>
         Ephemeral = 1,
+
         /// <summary>A blocking gen2 collection.</summary>
         FullBlocking = 2,
+
         /// <summary>A background collection.</summary>
         /// <remarks>This is always a gen2 collection.</remarks>
-        Background = 3
+        Background = 3,
     };
 
     [StructLayout(LayoutKind.Sequential)]
@@ -77,12 +83,14 @@ namespace System
         private GCGenerationInfo _generationInfo3;
         private GCGenerationInfo _generationInfo4;
 
-        internal ReadOnlySpan<GCGenerationInfo> GenerationInfoAsSpan => MemoryMarshal.CreateReadOnlySpan(ref _generationInfo0, 5);
+        internal ReadOnlySpan<GCGenerationInfo> GenerationInfoAsSpan =>
+            MemoryMarshal.CreateReadOnlySpan(ref _generationInfo0, 5);
 
         private TimeSpan _pauseDuration0;
         private TimeSpan _pauseDuration1;
 
-        internal ReadOnlySpan<TimeSpan> PauseDurationsAsSpan => MemoryMarshal.CreateReadOnlySpan(ref _pauseDuration0, 2);
+        internal ReadOnlySpan<TimeSpan> PauseDurationsAsSpan =>
+            MemoryMarshal.CreateReadOnlySpan(ref _pauseDuration0, 2);
     }
 
     /// <summary>Provides a set of APIs that can be used to retrieve garbage collection information.</summary>

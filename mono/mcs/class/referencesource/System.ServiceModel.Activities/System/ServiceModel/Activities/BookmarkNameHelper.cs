@@ -12,8 +12,16 @@ namespace System.ServiceModel.Activities
     {
         public static string CreateBookmarkName(string operationName, XName serviceContractName)
         {
-            Fx.Assert(!string.IsNullOrEmpty(operationName), "OperationName cannot be null or empty");
-            return string.Format(CultureInfo.InvariantCulture, "{0}|{1}", operationName, serviceContractName);
+            Fx.Assert(
+                !string.IsNullOrEmpty(operationName),
+                "OperationName cannot be null or empty"
+            );
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "{0}|{1}",
+                operationName,
+                serviceContractName
+            );
         }
     }
 }

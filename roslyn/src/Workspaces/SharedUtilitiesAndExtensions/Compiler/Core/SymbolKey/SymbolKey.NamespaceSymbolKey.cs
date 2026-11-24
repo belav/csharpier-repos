@@ -14,8 +14,8 @@ namespace Microsoft.CodeAnalysis
         {
             public static readonly NamespaceSymbolKey Instance = new();
 
-            // The containing symbol can be one of many things. 
-            // 1) Null when this is the global namespace for a compilation.  
+            // The containing symbol can be one of many things.
+            // 1) Null when this is the global namespace for a compilation.
             // 2) The SymbolId for an assembly symbol if this is the global namespace for an
             //    assembly.
             // 3) The SymbolId for a module symbol if this is the global namespace for a module.
@@ -56,7 +56,10 @@ namespace Microsoft.CodeAnalysis
             }
 
             protected sealed override SymbolKeyResolution Resolve(
-                SymbolKeyReader reader, INamespaceSymbol? contextualSymbol, out string? failureReason)
+                SymbolKeyReader reader,
+                INamespaceSymbol? contextualSymbol,
+                out string? failureReason
+            )
             {
                 var metadataName = reader.ReadRequiredString();
                 var containerKind = reader.ReadInteger();
@@ -72,11 +75,14 @@ namespace Microsoft.CodeAnalysis
 
                 // Namespaces are never parented by types, so there can be no contextual type to resolve our container.
                 var containingSymbolResolution = reader.ReadSymbolKey(
-                    containingContextualSymbol, out var containingSymbolFailureReason);
+                    containingContextualSymbol,
+                    out var containingSymbolFailureReason
+                );
 
                 if (containingSymbolFailureReason != null)
                 {
-                    failureReason = $"({nameof(EventSymbolKey)} {nameof(containingSymbolResolution)} failed -> {containingSymbolFailureReason})";
+                    failureReason =
+                        $"({nameof(EventSymbolKey)} {nameof(containingSymbolResolution)} failed -> {containingSymbolFailureReason})";
                     return default;
                 }
 
@@ -112,7 +118,11 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
 
-                return CreateResolution(result, $"({nameof(NamespaceSymbolKey)} '{metadataName}' not found)", out failureReason);
+                return CreateResolution(
+                    result,
+                    $"({nameof(NamespaceSymbolKey)} '{metadataName}' not found)",
+                    out failureReason
+                );
             }
         }
     }

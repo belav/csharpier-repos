@@ -9,9 +9,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Diagnostics;
 using System.Data.Query.InternalTrees;
+using System.Diagnostics;
+using System.Globalization;
 
 namespace System.Data.Query.PlanCompiler
 {
@@ -25,8 +25,8 @@ namespace System.Data.Query.PlanCompiler
     internal class VarRefManager
     {
         #region Internal State
-        private Dictionary<Node, Node> m_nodeToParentMap;   //child-parent mapping
-        private Dictionary<Node, int> m_nodeToSiblingNumber;   //the index of the given node among its siblings, i.e. 0 for a first child
+        private Dictionary<Node, Node> m_nodeToParentMap; //child-parent mapping
+        private Dictionary<Node, int> m_nodeToSiblingNumber; //the index of the given node among its siblings, i.e. 0 for a first child
         Command m_command;
         #endregion
 
@@ -51,8 +51,8 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="parent"></param>
         internal void AddChildren(Node parent)
         {
-            for(int i=0; i< parent.Children.Count; i++)
-            {                
+            for (int i = 0; i < parent.Children.Count; i++)
+            {
                 //We do not use add on purpose, we may be updating a child's parent after join elimination in a subtree
                 m_nodeToParentMap[parent.Children[i]] = parent;
                 m_nodeToSiblingNumber[parent.Children[i]] = i;
@@ -60,13 +60,13 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Determines whether any var from a given list of keys is referenced by any of defining node's right relatives, 
+        /// Determines whether any var from a given list of keys is referenced by any of defining node's right relatives,
         /// with the exception of the relatives brunching at the given targetJoinNode.
         /// </summary>
         /// <param name="keys">A list of vars to check for</param>
         /// <param name="definingNode">The node considered to be the defining node</param>
         /// <param name="targetJoinNode">The relatives branching at this node are skipped</param>
-        /// <returns>False, only it can determine that not a single var from a given list of keys is referenced by any 
+        /// <returns>False, only it can determine that not a single var from a given list of keys is referenced by any
         /// of defining node's right relatives, with the exception of the relatives brunching at the given targetJoinNode. </returns>
         internal bool HasKeyReferences(VarVec keys, Node definingNode, Node targetJoinNode)
         {
@@ -79,15 +79,31 @@ namespace System.Data.Query.PlanCompiler
                 if (parent != targetJoinNode)
                 {
                     // Check the parent
-                    if (HasVarReferencesShallow(parent, keys, m_nodeToSiblingNumber[currentChild], out continueUp))
+                    if (
+                        HasVarReferencesShallow(
+                            parent,
+                            keys,
+                            m_nodeToSiblingNumber[currentChild],
+                            out continueUp
+                        )
+                    )
                     {
                         return true;
                     }
 
                     //Check all the siblings to the right
-                    for (int i = m_nodeToSiblingNumber[currentChild] + 1; i < parent.Children.Count; i++)
+                    for (
+                        int i = m_nodeToSiblingNumber[currentChild] + 1;
+                        i < parent.Children.Count;
+                        i++
+                    )
                     {
-                        if (parent.Children[i].GetNodeInfo(m_command).ExternalReferences.Overlaps(keys))
+                        if (
+                            parent
+                                .Children[i]
+                                .GetNodeInfo(m_command)
+                                .ExternalReferences.Overlaps(keys)
+                        )
                         {
                             return true;
                         }
@@ -114,7 +130,12 @@ namespace System.Data.Query.PlanCompiler
         /// the decision of whether the given vars are referenced can be made on this level, it returns true,
         /// false otherwise</param>
         /// <returns>True if the given node has references to any of the vars in the given VarVec, false otherwise</returns>
-        private static bool HasVarReferencesShallow(Node node, VarVec vars, int childIndex, out bool continueUp)
+        private static bool HasVarReferencesShallow(
+            Node node,
+            VarVec vars,
+            int childIndex,
+            out bool continueUp
+        )
         {
             switch (node.Op.OpType)
             {
@@ -199,7 +220,7 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Does the list of outputs of the given SetOp contain a var 
+        /// Does the list of outputs of the given SetOp contain a var
         /// from the given VarVec defined by the SetOp's child with the given index
         /// </summary>
         /// <param name="op"></param>

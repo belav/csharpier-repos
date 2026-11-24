@@ -23,7 +23,10 @@ public class SqlConstantExpression : SqlExpression
     /// </summary>
     /// <param name="constantExpression">A <see cref="ConstantExpression" />.</param>
     /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
-    public SqlConstantExpression(ConstantExpression constantExpression, RelationalTypeMapping? typeMapping)
+    public SqlConstantExpression(
+        ConstantExpression constantExpression,
+        RelationalTypeMapping? typeMapping
+    )
         : base(constantExpression.Type.UnwrapNullableType(), typeMapping)
     {
         _constantExpression = constantExpression;
@@ -32,38 +35,38 @@ public class SqlConstantExpression : SqlExpression
     /// <summary>
     ///     The constant value.
     /// </summary>
-    public virtual object? Value
-        => _constantExpression.Value;
+    public virtual object? Value => _constantExpression.Value;
 
     /// <summary>
     ///     Applies supplied type mapping to this expression.
     /// </summary>
     /// <param name="typeMapping">A relational type mapping to apply.</param>
     /// <returns>A new expression which has supplied type mapping.</returns>
-    public virtual SqlExpression ApplyTypeMapping(RelationalTypeMapping? typeMapping)
-        => new SqlConstantExpression(_constantExpression, typeMapping);
+    public virtual SqlExpression ApplyTypeMapping(RelationalTypeMapping? typeMapping) =>
+        new SqlConstantExpression(_constantExpression, typeMapping);
 
     /// <inheritdoc />
-    protected override Expression VisitChildren(ExpressionVisitor visitor)
-        => this;
+    protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 
     /// <inheritdoc />
-    protected override void Print(ExpressionPrinter expressionPrinter)
-        => Print(Value, expressionPrinter);
+    protected override void Print(ExpressionPrinter expressionPrinter) =>
+        Print(Value, expressionPrinter);
 
-    private void Print(object? value, ExpressionPrinter expressionPrinter)
-        => expressionPrinter.Append(TypeMapping?.GenerateSqlLiteral(value) ?? Value?.ToString() ?? "NULL");
+    private void Print(object? value, ExpressionPrinter expressionPrinter) =>
+        expressionPrinter.Append(
+            TypeMapping?.GenerateSqlLiteral(value) ?? Value?.ToString() ?? "NULL"
+        );
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is SqlConstantExpression sqlConstantExpression
-                && Equals(sqlConstantExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is SqlConstantExpression sqlConstantExpression && Equals(sqlConstantExpression)
+        );
 
-    private bool Equals(SqlConstantExpression sqlConstantExpression)
-        => base.Equals(sqlConstantExpression)
-            && ValueEquals(Value, sqlConstantExpression.Value);
+    private bool Equals(SqlConstantExpression sqlConstantExpression) =>
+        base.Equals(sqlConstantExpression) && ValueEquals(Value, sqlConstantExpression.Value);
 
     private static bool ValueEquals(object? value1, object? value2)
     {
@@ -72,8 +75,7 @@ public class SqlConstantExpression : SqlExpression
             return value2 == null;
         }
 
-        if (value1 is IList list1
-            && value2 is IList list2)
+        if (value1 is IList list1 && value2 is IList list2)
         {
             if (list1.Count != list2.Count)
             {
@@ -95,6 +97,5 @@ public class SqlConstantExpression : SqlExpression
     }
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(base.GetHashCode(), Value);
+    public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Value);
 }

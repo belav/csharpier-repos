@@ -19,11 +19,12 @@ namespace System.CommandLine.Suggest.Tests
         public void EnumerateFilesWithoutExtension_returns_empty_when_directory_does_not_exist()
         {
             var path = Path.GetTempPath();
-            FileEnumerator.EnumerateFilesWithoutExtension(
-                new DirectoryInfo(Path.Combine(path,
-                Path.GetRandomFileName(),
-                "notexist")))
-                .Should().BeEmpty();
+            FileEnumerator
+                .EnumerateFilesWithoutExtension(
+                    new DirectoryInfo(Path.Combine(path, Path.GetRandomFileName(), "notexist"))
+                )
+                .Should()
+                .BeEmpty();
         }
 
         [Fact]
@@ -35,11 +36,12 @@ namespace System.CommandLine.Suggest.Tests
                 Directory.CreateDirectory(path);
                 File.WriteAllText(Path.Combine(path, "dotnet-suggest"), "");
                 File.WriteAllText(Path.Combine(path, "t-rex"), "");
-                FileEnumerator.EnumerateFilesWithoutExtension(new DirectoryInfo(path))
+                FileEnumerator
+                    .EnumerateFilesWithoutExtension(new DirectoryInfo(path))
                     .Should()
                     .BeEquivalentTo(
-                        GlobalToolsSuggestionRegistrationTests
-                        .FilesNameWithoutExtensionUnderDotnetProfileToolsExample);
+                        GlobalToolsSuggestionRegistrationTests.FilesNameWithoutExtensionUnderDotnetProfileToolsExample
+                    );
             }
             finally
             {

@@ -15,7 +15,8 @@ namespace System.ServiceModel.Channels
     class ContextMessageHeader : MessageHeader
     {
         public const string ContextHeaderName = "Context";
-        public const string ContextHeaderNamespace = "http://schemas.microsoft.com/ws/2006/05/context";
+        public const string ContextHeaderNamespace =
+            "http://schemas.microsoft.com/ws/2006/05/context";
         public const string ContextPropertyElement = "Property";
         public const string ContextPropertyNameAttribute = "name";
 
@@ -66,7 +67,9 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        internal static ChannelProtectionRequirements GetChannelProtectionRequirements(ProtectionLevel protectionLevel)
+        internal static ChannelProtectionRequirements GetChannelProtectionRequirements(
+            ProtectionLevel protectionLevel
+        )
         {
             ChannelProtectionRequirements result;
 
@@ -75,8 +78,11 @@ namespace System.ServiceModel.Channels
                 if (encryptAndSignChannelProtectionRequirements == null)
                 {
                     MessagePartSpecification header = new MessagePartSpecification();
-                    header.HeaderTypes.Add(new XmlQualifiedName(ContextHeaderName, ContextHeaderNamespace));
-                    ChannelProtectionRequirements requirements = new ChannelProtectionRequirements();
+                    header.HeaderTypes.Add(
+                        new XmlQualifiedName(ContextHeaderName, ContextHeaderNamespace)
+                    );
+                    ChannelProtectionRequirements requirements =
+                        new ChannelProtectionRequirements();
                     requirements.IncomingSignatureParts.AddParts(header);
                     requirements.IncomingEncryptionParts.AddParts(header);
                     requirements.OutgoingSignatureParts.AddParts(header);
@@ -91,8 +97,11 @@ namespace System.ServiceModel.Channels
                 if (signChannelProtectionRequirements == null)
                 {
                     MessagePartSpecification header = new MessagePartSpecification();
-                    header.HeaderTypes.Add(new XmlQualifiedName(ContextHeaderName, ContextHeaderNamespace));
-                    ChannelProtectionRequirements requirements = new ChannelProtectionRequirements();
+                    header.HeaderTypes.Add(
+                        new XmlQualifiedName(ContextHeaderName, ContextHeaderNamespace)
+                    );
+                    ChannelProtectionRequirements requirements =
+                        new ChannelProtectionRequirements();
                     requirements.IncomingSignatureParts.AddParts(header);
                     requirements.OutgoingSignatureParts.AddParts(header);
                     requirements.MakeReadOnly();
@@ -102,7 +111,9 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("protectionLevel"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("protectionLevel")
+                );
             }
 
             return result;
@@ -124,18 +135,30 @@ namespace System.ServiceModel.Channels
 
                     while (reader.MoveToContent() == XmlNodeType.Element)
                     {
-                        if (reader.LocalName != ContextPropertyElement || reader.NamespaceURI != ContextHeaderNamespace)
+                        if (
+                            reader.LocalName != ContextPropertyElement
+                            || reader.NamespaceURI != ContextHeaderNamespace
+                        )
                         {
                             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new ProtocolException(SR.GetString(SR.SchemaViolationInsideContextHeader)));
+                                new ProtocolException(
+                                    SR.GetString(SR.SchemaViolationInsideContextHeader)
+                                )
+                            );
                         }
 
                         string propertyName = reader.GetAttribute(ContextPropertyNameAttribute);
 
-                        if (string.IsNullOrEmpty(propertyName) || !ContextDictionary.TryValidateKeyValueSpace(propertyName))
+                        if (
+                            string.IsNullOrEmpty(propertyName)
+                            || !ContextDictionary.TryValidateKeyValueSpace(propertyName)
+                        )
                         {
                             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new ProtocolException(SR.GetString(SR.InvalidCookieContent, propertyName)));
+                                new ProtocolException(
+                                    SR.GetString(SR.InvalidCookieContent, propertyName)
+                                )
+                            );
                         }
                         result.Context[propertyName] = reader.ReadElementString();
                     }
@@ -143,20 +166,27 @@ namespace System.ServiceModel.Channels
                     if (reader.NodeType != XmlNodeType.EndElement)
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ProtocolException(SR.GetString(SR.SchemaViolationInsideContextHeader)));
+                            new ProtocolException(
+                                SR.GetString(SR.SchemaViolationInsideContextHeader)
+                            )
+                        );
                     }
                 }
             }
             catch (XmlException e)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ProtocolException(SR.GetString(SR.XmlFormatViolationInContextHeader), e));
+                    new ProtocolException(SR.GetString(SR.XmlFormatViolationInContextHeader), e)
+                );
             }
 
             return result;
         }
 
-        internal static void WriteHeaderContents(XmlDictionaryWriter writer, IDictionary<string, string> context)
+        internal static void WriteHeaderContents(
+            XmlDictionaryWriter writer,
+            IDictionary<string, string> context
+        )
         {
             foreach (KeyValuePair<string, string> pair in context)
             {
@@ -168,7 +198,10 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
+        protected override void OnWriteHeaderContents(
+            XmlDictionaryWriter writer,
+            MessageVersion messageVersion
+        )
         {
             if (writer == null)
             {

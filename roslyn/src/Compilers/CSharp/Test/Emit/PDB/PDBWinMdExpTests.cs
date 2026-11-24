@@ -13,30 +13,40 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
 {
     public class PDBWinMdExpTests : CSharpTestBase
     {
-        [ConditionalFact(typeof(WindowsOnly), Reason = ConditionalSkipReason.NativePdbRequiresDesktop)]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = ConditionalSkipReason.NativePdbRequiresDesktop
+        )]
         public void TestWinMdExpData_Empty()
         {
             #region "Source"
             var text = @"";
             #endregion
 
-            string expected = @"<?xml version=""1.0"" encoding=""utf-16""?>
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <token-map>
 </token-map>";
 
             var compilation = CreateCompilationWithMscorlib45(
-                text,
-                options: TestOptions.ReleaseWinMD,
-                sourceFileName: "source.cs").VerifyDiagnostics();
+                    text,
+                    options: TestOptions.ReleaseWinMD,
+                    sourceFileName: "source.cs"
+                )
+                .VerifyDiagnostics();
 
             string actual = PdbTestUtilities.GetTokenToLocationMap(compilation, true);
             AssertXml.Equal(expected, actual);
         }
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = ConditionalSkipReason.NativePdbRequiresDesktop)]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = ConditionalSkipReason.NativePdbRequiresDesktop
+        )]
         public void TestWinMdExpData_Basic()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -84,7 +94,8 @@ namespace X
 		}
 	}
 }";
-            string expected = @"
+            string expected =
+                @"
 <token-map>
     <token-location token=""0x02xxxxxx"" file=""source.cs"" start-line=""7"" start-column=""8"" end-line=""7"" end-column=""22""/>
     <token-location token=""0x06xxxxxx"" file=""source.cs"" start-line=""7"" start-column=""8"" end-line=""7"" end-column=""22""/>
@@ -106,20 +117,26 @@ namespace X
 </token-map>";
 
             var compilation = CreateCompilationWithMscorlib45(
-                text,
-                options: TestOptions.ReleaseWinMD,
-                sourceFileName: "source.cs").VerifyDiagnostics();
+                    text,
+                    options: TestOptions.ReleaseWinMD,
+                    sourceFileName: "source.cs"
+                )
+                .VerifyDiagnostics();
 
             string actual = PdbTestUtilities.GetTokenToLocationMap(compilation, true);
             AssertXml.Equal(expected, actual);
         }
 
         [WorkItem(693206, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/693206")]
-        [ConditionalFact(typeof(WindowsOnly), Reason = ConditionalSkipReason.NativePdbRequiresDesktop)]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = ConditionalSkipReason.NativePdbRequiresDesktop
+        )]
         public void Bug693206()
         {
             #region "Source"
-            var text = @"
+            var text =
+                @"
 namespace X
 { 
 	class DynamicMembers
@@ -138,7 +155,8 @@ namespace X
 }";
             #endregion
 
-            string expected = @"<?xml version=""1.0"" encoding=""utf-16""?>
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <token-map>
   <token-location token=""0x02xxxxxx"" file=""source.cs"" start-line=""4"" start-column=""8"" end-line=""4"" end-column=""22"" />
   <token-location token=""0x06xxxxxx"" file=""source.cs"" start-line=""4"" start-column=""8"" end-line=""4"" end-column=""22"" />
@@ -153,19 +171,25 @@ namespace X
 </token-map>";
 
             var compilation = CreateCompilationWithMscorlib45(
-                text,
-                options: TestOptions.ReleaseWinMD,
-                sourceFileName: "source.cs").VerifyDiagnostics();
+                    text,
+                    options: TestOptions.ReleaseWinMD,
+                    sourceFileName: "source.cs"
+                )
+                .VerifyDiagnostics();
 
             string actual = PdbTestUtilities.GetTokenToLocationMap(compilation, true);
             AssertXml.Equal(expected, actual);
         }
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = ConditionalSkipReason.NativePdbRequiresDesktop)]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = ConditionalSkipReason.NativePdbRequiresDesktop
+        )]
         public void TestWinMdExpData_Property_Event()
         {
             #region "Source"
-            var text = @"
+            var text =
+                @"
 using System;
 
 namespace X
@@ -203,7 +227,8 @@ namespace X
 }";
             #endregion
 
-            string expected = @"<?xml version=""1.0"" encoding=""utf-16""?>
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <token-map>
   <token-location token=""0x02xxxxxx"" file=""source.cs"" start-line=""6"" start-column=""23"" end-line=""6"" end-column=""24"" />
   <token-location token=""0x06xxxxxx"" file=""source.cs"" start-line=""6"" start-column=""23"" end-line=""6"" end-column=""24"" />
@@ -232,21 +257,28 @@ namespace X
 </token-map>";
 
             var compilation = CreateCompilationWithMscorlib45(
-                text,
-                options: TestOptions.ReleaseWinMD,
-                sourceFileName: "source.cs").VerifyDiagnostics(
+                    text,
+                    options: TestOptions.ReleaseWinMD,
+                    sourceFileName: "source.cs"
+                )
+                .VerifyDiagnostics(
                     Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("X.TestCase.E"),
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E2").WithArguments("X.TestCase.E2"));
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E2").WithArguments("X.TestCase.E2")
+                );
 
             string actual = PdbTestUtilities.GetTokenToLocationMap(compilation, true);
             AssertXml.Equal(expected, actual);
         }
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = ConditionalSkipReason.NativePdbRequiresDesktop)]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = ConditionalSkipReason.NativePdbRequiresDesktop
+        )]
         public void TestWinMdExpData_AnonymousTypes()
         {
             #region "Source"
-            var text = @"
+            var text =
+                @"
 namespace X
 { 
 	public sealed class TestCase
@@ -260,7 +292,8 @@ namespace X
 }";
             #endregion
 
-            string expected = @"<?xml version=""1.0"" encoding=""utf-16""?>
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <token-map>
   <token-location token=""0x02xxxxxx"" file=""source.cs"" start-line=""4"" start-column=""22"" end-line=""4"" end-column=""30"" />
   <token-location token=""0x06xxxxxx"" file=""source.cs"" start-line=""4"" start-column=""22"" end-line=""4"" end-column=""30"" />
@@ -268,9 +301,11 @@ namespace X
 </token-map>";
 
             var compilation = CreateCompilationWithMscorlib45(
-                text,
-                options: TestOptions.ReleaseWinMD,
-                sourceFileName: "source.cs").VerifyDiagnostics();
+                    text,
+                    options: TestOptions.ReleaseWinMD,
+                    sourceFileName: "source.cs"
+                )
+                .VerifyDiagnostics();
 
             string actual = PdbTestUtilities.GetTokenToLocationMap(compilation, true);
             AssertXml.Equal(expected, actual);

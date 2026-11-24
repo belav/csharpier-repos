@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,55 +24,53 @@
 //
 
 using System;
-using NUnit.Framework;
 using System.ComponentModel;
+using NUnit.Framework;
 
-namespace MonoTests.System.ComponentModel {
+namespace MonoTests.System.ComponentModel
+{
+    [TestFixture]
+    public class CurrentChangingEventArgsTest
+    {
+        public CurrentChangingEventArgsTest() { }
 
-	[TestFixture]
-	public class CurrentChangingEventArgsTest {
+        [Test]
+        public void CurrentChangingEventArgsConstructor1Test()
+        {
+            CurrentChangingEventArgs args = new CurrentChangingEventArgs();
 
-		public CurrentChangingEventArgsTest()
-		{
-		}
+            Assert.IsFalse(args.Cancel, "CTOR1_#1");
+            Assert.IsTrue(args.IsCancelable, "CTOR1_#2");
+        }
 
-		[Test]
-		public void CurrentChangingEventArgsConstructor1Test()
-		{
-			CurrentChangingEventArgs args = new CurrentChangingEventArgs ();
+        [Test]
+        public void CurrentChangingEventArgsConstructor2Test()
+        {
+            CurrentChangingEventArgs args = new CurrentChangingEventArgs(false);
 
-			Assert.IsFalse (args.Cancel, "CTOR1_#1");
-			Assert.IsTrue (args.IsCancelable, "CTOR1_#2");
-		}
+            Assert.IsFalse(args.Cancel, "CTOR2_#1");
+            Assert.IsFalse(args.IsCancelable, "CTOR2_#2");
 
-		[Test]
-		public void CurrentChangingEventArgsConstructor2Test()
-		{
-			CurrentChangingEventArgs args = new CurrentChangingEventArgs (false);
+            args = new CurrentChangingEventArgs(true);
 
-			Assert.IsFalse (args.Cancel, "CTOR2_#1");
-			Assert.IsFalse (args.IsCancelable, "CTOR2_#2");
+            Assert.IsFalse(args.Cancel, "CTOR1_#3");
+            Assert.IsTrue(args.IsCancelable, "CTOR1_#4");
 
-			args = new CurrentChangingEventArgs (true);
+            args.Cancel = true;
 
-			Assert.IsFalse (args.Cancel, "CTOR1_#3");
-			Assert.IsTrue (args.IsCancelable, "CTOR1_#4");
+            Assert.IsTrue(args.Cancel, "CTOR1_#5");
+        }
 
-			args.Cancel = true;
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ChangeCancelIfNotCancelableTest()
+        {
+            CurrentChangingEventArgs args = new CurrentChangingEventArgs(false);
 
-			Assert.IsTrue (args.Cancel, "CTOR1_#5");
-		}
+            Assert.IsFalse(args.Cancel, "InvOp_#1");
+            Assert.IsFalse(args.IsCancelable, "InvOp_#2");
 
-		[Test]
-		[ExpectedException(typeof(InvalidOperationException))]
-		public void ChangeCancelIfNotCancelableTest()
-		{
-			CurrentChangingEventArgs args = new CurrentChangingEventArgs (false);
-
-			Assert.IsFalse (args.Cancel, "InvOp_#1");
-			Assert.IsFalse (args.IsCancelable, "InvOp_#2");
-
-			args.Cancel = true;
-		}
-	}
+            args.Cancel = true;
+        }
+    }
 }

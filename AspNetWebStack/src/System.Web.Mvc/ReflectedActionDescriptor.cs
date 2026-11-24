@@ -15,12 +15,24 @@ namespace System.Web.Mvc
         private string _uniqueId;
         private ParameterDescriptor[] _parametersCache;
 
-        public ReflectedActionDescriptor(MethodInfo methodInfo, string actionName, ControllerDescriptor controllerDescriptor)
-            : this(methodInfo, actionName, controllerDescriptor, true /* validateMethod */)
-        {
-        }
+        public ReflectedActionDescriptor(
+            MethodInfo methodInfo,
+            string actionName,
+            ControllerDescriptor controllerDescriptor
+        )
+            : this(
+                methodInfo,
+                actionName,
+                controllerDescriptor,
+                true /* validateMethod */
+            ) { }
 
-        internal ReflectedActionDescriptor(MethodInfo methodInfo, string actionName, ControllerDescriptor controllerDescriptor, bool validateMethod)
+        internal ReflectedActionDescriptor(
+            MethodInfo methodInfo,
+            string actionName,
+            ControllerDescriptor controllerDescriptor,
+            bool validateMethod
+        )
         {
             if (methodInfo == null)
             {
@@ -63,13 +75,13 @@ namespace System.Web.Mvc
 
         public override string UniqueId
         {
-            get 
+            get
             {
                 if (_uniqueId == null)
                 {
                     _uniqueId = CreateUniqueId();
                 }
-                return _uniqueId; 
+                return _uniqueId;
             }
         }
 
@@ -80,7 +92,10 @@ namespace System.Web.Mvc
             return builder.ToString();
         }
 
-        public override object Execute(ControllerContext controllerContext, IDictionary<string, object> parameters)
+        public override object Execute(
+            ControllerContext controllerContext,
+            IDictionary<string, object> parameters
+        )
         {
             if (controllerContext == null)
             {
@@ -97,12 +112,19 @@ namespace System.Web.Mvc
             for (int i = 0; i < parameterInfos.Length; i++)
             {
                 ParameterInfo parameterInfo = parameterInfos[i];
-                object parameter = ExtractParameterFromDictionary(parameterInfo, parameters, MethodInfo);
+                object parameter = ExtractParameterFromDictionary(
+                    parameterInfo,
+                    parameters,
+                    MethodInfo
+                );
                 parametersArray[i] = parameter;
             }
 
             ActionMethodDispatcher dispatcher = DispatcherCache.GetDispatcher(MethodInfo);
-            object actionReturnValue = dispatcher.Execute(controllerContext.Controller, parametersArray);
+            object actionReturnValue = dispatcher.Execute(
+                controllerContext.Controller,
+                parametersArray
+            );
             return actionReturnValue;
         }
 
@@ -146,9 +168,18 @@ namespace System.Web.Mvc
             return ActionDescriptorHelper.IsDefined(MethodInfo, attributeType, inherit);
         }
 
-        internal static ReflectedActionDescriptor TryCreateDescriptor(MethodInfo methodInfo, string name, ControllerDescriptor controllerDescriptor)
+        internal static ReflectedActionDescriptor TryCreateDescriptor(
+            MethodInfo methodInfo,
+            string name,
+            ControllerDescriptor controllerDescriptor
+        )
         {
-            ReflectedActionDescriptor descriptor = new ReflectedActionDescriptor(methodInfo, name, controllerDescriptor, false /* validateMethod */);
+            ReflectedActionDescriptor descriptor = new ReflectedActionDescriptor(
+                methodInfo,
+                name,
+                controllerDescriptor,
+                false /* validateMethod */
+            );
             string failedMessage = VerifyActionMethodIsCallable(methodInfo);
             return (failedMessage == null) ? descriptor : null;
         }

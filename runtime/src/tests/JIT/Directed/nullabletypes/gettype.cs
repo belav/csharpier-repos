@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 class C<T>
@@ -14,7 +14,7 @@ class C<T>
 
     public bool Check()
     {
-	return Data.ElementAt(0).GetType() == typeof(bool);
+        return Data.ElementAt(0).GetType() == typeof(bool);
     }
 }
 
@@ -27,7 +27,7 @@ public class P
 
         // Try a nullable with value
         c.Data = new List<bool?> { true };
-        if(!c.Check())
+        if (!c.Check())
             return 666;
 
         // Try a nullable without value. Should throw NRE
@@ -38,13 +38,12 @@ public class P
         {
             c.Check();
         }
-        catch(NullReferenceException)
+        catch (NullReferenceException)
         {
             thrown = true;
         }
-        if(!thrown)
+        if (!thrown)
             return 667;
         return 100;
     }
 }
-

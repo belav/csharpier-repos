@@ -18,6 +18,7 @@ namespace System.Activities.DurableInstancing
                 return base.DeserializePropertyBag(gzip);
             }
         }
+
         protected override object DeserializeValue(Stream stream)
         {
             using (GZipStream gzip = new GZipStream(stream, CompressionMode.Decompress, true))
@@ -26,7 +27,10 @@ namespace System.Activities.DurableInstancing
             }
         }
 
-        protected override void SerializePropertyBag(Stream stream, Dictionary<XName, object> propertyBag)
+        protected override void SerializePropertyBag(
+            Stream stream,
+            Dictionary<XName, object> propertyBag
+        )
         {
             using (GZipStream gzip = new GZipStream(stream, CompressionLevel.Fastest, true))
             {

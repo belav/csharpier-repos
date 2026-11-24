@@ -4,14 +4,17 @@
 
 namespace System.ServiceModel.Activities.Tracking.Configuration
 {
-    using System.Runtime;
     using System.Configuration;
+    using System.Runtime;
 
     [Fx.Tag.XamlVisible(false)]
-    [ConfigurationCollection(typeof(BookmarkResumptionQueryElement),
+    [ConfigurationCollection(
+        typeof(BookmarkResumptionQueryElement),
         CollectionType = ConfigurationElementCollectionType.BasicMap,
-        AddItemName = TrackingConfigurationStrings.BookmarkResumptionQuery)]
-    public class BookmarkResumptionQueryElementCollection : TrackingConfigurationCollection<BookmarkResumptionQueryElement>
+        AddItemName = TrackingConfigurationStrings.BookmarkResumptionQuery
+    )]
+    public class BookmarkResumptionQueryElementCollection
+        : TrackingConfigurationCollection<BookmarkResumptionQueryElement>
     {
         protected override string ElementName
         {

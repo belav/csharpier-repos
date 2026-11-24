@@ -22,7 +22,7 @@ namespace Roslyn.Utilities
         /// <remarks>
         /// Dependencies are identified by simply checking the name of an assembly
         /// reference against a file name; if they match the file is considered a
-        /// dependency. Other factors, such as version, culture, public key, etc., 
+        /// dependency. Other factors, such as version, culture, public key, etc.,
         /// are not considered, and so the returned collection may include items that
         /// cannot in fact satisfy the original assembly's dependencies.
         /// </remarks>
@@ -61,8 +61,7 @@ namespace Roslyn.Utilities
                         // Suppression is questionable because Path.GetDirectoryName returns null on root directories https://github.com/dotnet/roslyn/issues/41636
                         string referencePath = Path.Combine(directory!, referenceName + ".dll");
 
-                        if (!assemblySet.Contains(referencePath) &&
-                            File.Exists(referencePath))
+                        if (!assemblySet.Contains(referencePath) && File.Exists(referencePath))
                         {
                             workList.Enqueue(referencePath);
                         }
@@ -111,15 +110,28 @@ namespace Roslyn.Utilities
             string resourcesNameWithoutExtension = fileNameWithoutExtension + ".resources";
             string resourcesNameWithExtension = resourcesNameWithoutExtension + ".dll";
 
-            foreach (var subDirectory in Directory.EnumerateDirectories(directory, "*", SearchOption.TopDirectoryOnly))
+            foreach (
+                var subDirectory in Directory.EnumerateDirectories(
+                    directory,
+                    "*",
+                    SearchOption.TopDirectoryOnly
+                )
+            )
             {
-                string satelliteAssemblyPath = Path.Combine(subDirectory, resourcesNameWithExtension);
+                string satelliteAssemblyPath = Path.Combine(
+                    subDirectory,
+                    resourcesNameWithExtension
+                );
                 if (File.Exists(satelliteAssemblyPath))
                 {
                     builder.Add(satelliteAssemblyPath);
                 }
 
-                satelliteAssemblyPath = Path.Combine(subDirectory, resourcesNameWithoutExtension, resourcesNameWithExtension);
+                satelliteAssemblyPath = Path.Combine(
+                    subDirectory,
+                    resourcesNameWithoutExtension,
+                    resourcesNameWithExtension
+                );
                 if (File.Exists(satelliteAssemblyPath))
                 {
                     builder.Add(satelliteAssemblyPath);
@@ -135,7 +147,10 @@ namespace Roslyn.Utilities
         /// </summary>
         /// <exception cref="IOException">If the files does not exist or cannot be accessed.</exception>
         /// <exception cref="BadImageFormatException">If one of the files is not an assembly or is somehow corrupted.</exception>
-        public static ImmutableArray<AssemblyIdentity> IdentifyMissingDependencies(string assemblyPath, IEnumerable<string> dependencyFilePaths)
+        public static ImmutableArray<AssemblyIdentity> IdentifyMissingDependencies(
+            string assemblyPath,
+            IEnumerable<string> dependencyFilePaths
+        )
         {
             RoslynDebug.Assert(PathUtilities.IsAbsolute(assemblyPath));
             RoslynDebug.Assert(dependencyFilePaths != null);

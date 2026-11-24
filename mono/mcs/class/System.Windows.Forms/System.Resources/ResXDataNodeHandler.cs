@@ -1,17 +1,17 @@
 //
-// ResXDataNodeHandler.cs : ResXDataNodeHandler is the base class for the 
+// ResXDataNodeHandler.cs : ResXDataNodeHandler is the base class for the
 // handler classes which are used to abstract away the different ways in
 // which the ResXDataNode members behave based on the resource type / how
-// it is stored in the resx file / whether it has been stored in a resx 
+// it is stored in the resx file / whether it has been stored in a resx
 // file as determined by tests against the .net framework.
 //
 // The IWritableHandler interface signifies a handler can return a copy
 // of the resource in the string form it appeared in the resx file thus
 // avoiding the need for instantiation.
-// 
+//
 // Author:
 //	Gary Barnett (gary.barnett.mono@gmail.com)
-// 
+//
 // Copyright (C) Gary Barnett (2012)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -21,10 +21,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,65 +37,68 @@ using System;
 using System.ComponentModel.Design;
 using System.Reflection;
 
-namespace System.Resources {
-	internal interface IWritableHandler {
-		string DataString { get;}
-	}
+namespace System.Resources
+{
+    internal interface IWritableHandler
+    {
+        string DataString { get; }
+    }
 
-	internal abstract class ResXDataNodeHandler {
-		protected ResXDataNodeHandler ()
-		{
-		}
+    internal abstract class ResXDataNodeHandler
+    {
+        protected ResXDataNodeHandler() { }
 
-		public abstract object GetValue (ITypeResolutionService typeResolver);
-		
-		public abstract object GetValue (AssemblyName [] assemblyNames);
+        public abstract object GetValue(ITypeResolutionService typeResolver);
 
-		public abstract string GetValueTypeName (ITypeResolutionService typeResolver);
+        public abstract object GetValue(AssemblyName[] assemblyNames);
 
-		public abstract string GetValueTypeName (AssemblyName [] assemblyNames);
+        public abstract string GetValueTypeName(ITypeResolutionService typeResolver);
 
-		//override by any inheritor that doesnt want to send the default output of GetValue to be written to ResXFile
-		public virtual object GetValueForResX ()
-		{
-			return GetValue ((AssemblyName []) null);
-		}
+        public abstract string GetValueTypeName(AssemblyName[] assemblyNames);
 
-		protected Type ResolveType (string typeString) 
-		{
-			// FIXME: check the test that shows you cant load a type with just a fullname from current assembly is valid
-			return Type.GetType (typeString);
-		}
+        //override by any inheritor that doesnt want to send the default output of GetValue to be written to ResXFile
+        public virtual object GetValueForResX()
+        {
+            return GetValue((AssemblyName[])null);
+        }
 
-		protected Type ResolveType (string typeString, AssemblyName [] assemblyNames) 
-		{
-			Type result = null;
+        protected Type ResolveType(string typeString)
+        {
+            // FIXME: check the test that shows you cant load a type with just a fullname from current assembly is valid
+            return Type.GetType(typeString);
+        }
 
-			if (assemblyNames != null) {
-				foreach (AssemblyName assem in assemblyNames) {
-						Assembly myAssembly = Assembly.Load (assem);
-						result = myAssembly.GetType (typeString, false);
-						if (result != null)
-							return result;
-					}
-			}
-			if (result == null)
-				result = ResolveType (typeString);
+        protected Type ResolveType(string typeString, AssemblyName[] assemblyNames)
+        {
+            Type result = null;
 
-			return result;
-		}
+            if (assemblyNames != null)
+            {
+                foreach (AssemblyName assem in assemblyNames)
+                {
+                    Assembly myAssembly = Assembly.Load(assem);
+                    result = myAssembly.GetType(typeString, false);
+                    if (result != null)
+                        return result;
+                }
+            }
+            if (result == null)
+                result = ResolveType(typeString);
 
-		protected Type ResolveType (string typeString, ITypeResolutionService typeResolver) 
-		{
-			Type result = null;
+            return result;
+        }
 
-			if (typeResolver != null)
-				result = typeResolver.GetType (typeString);
+        protected Type ResolveType(string typeString, ITypeResolutionService typeResolver)
+        {
+            Type result = null;
 
-			if (result == null)
-				result = ResolveType (typeString);
+            if (typeResolver != null)
+                result = typeResolver.GetType(typeString);
 
-			return result;
-		}
-	}
+            if (result == null)
+                result = ResolveType(typeString);
+
+            return result;
+        }
+    }
 }

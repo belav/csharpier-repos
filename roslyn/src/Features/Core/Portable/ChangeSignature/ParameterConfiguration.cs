@@ -13,15 +13,22 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         ImmutableArray<Parameter> parametersWithoutDefaultValues,
         ImmutableArray<Parameter> remainingEditableParameters,
         ExistingParameter? paramsParameter,
-        int selectedIndex)
+        int selectedIndex
+    )
     {
         public readonly ExistingParameter? ThisParameter = thisParameter;
-        public readonly ImmutableArray<Parameter> ParametersWithoutDefaultValues = parametersWithoutDefaultValues;
-        public readonly ImmutableArray<Parameter> RemainingEditableParameters = remainingEditableParameters;
+        public readonly ImmutableArray<Parameter> ParametersWithoutDefaultValues =
+            parametersWithoutDefaultValues;
+        public readonly ImmutableArray<Parameter> RemainingEditableParameters =
+            remainingEditableParameters;
         public readonly ExistingParameter? ParamsParameter = paramsParameter;
         public readonly int SelectedIndex = selectedIndex;
 
-        public static ParameterConfiguration Create(ImmutableArray<Parameter> parameters, bool isExtensionMethod, int selectedIndex)
+        public static ParameterConfiguration Create(
+            ImmutableArray<Parameter> parameters,
+            bool isExtensionMethod,
+            int selectedIndex
+        )
         {
             var parametersList = parameters.ToList();
             ExistingParameter? thisParameter = null;
@@ -51,14 +58,28 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                     seenDefaultValues = true;
                 }
 
-                (seenDefaultValues ? remainingReorderableParameters : parametersWithoutDefaultValues).Add(param);
+                (
+                    seenDefaultValues
+                        ? remainingReorderableParameters
+                        : parametersWithoutDefaultValues
+                ).Add(param);
             }
 
-            return new ParameterConfiguration(thisParameter, parametersWithoutDefaultValues.ToImmutableAndFree(), remainingReorderableParameters.ToImmutableAndFree(), paramsParameter, selectedIndex);
+            return new ParameterConfiguration(
+                thisParameter,
+                parametersWithoutDefaultValues.ToImmutableAndFree(),
+                remainingReorderableParameters.ToImmutableAndFree(),
+                paramsParameter,
+                selectedIndex
+            );
         }
 
-        internal ParameterConfiguration WithoutAddedParameters()
-            => Create(ToListOfParameters().OfType<ExistingParameter>().ToImmutableArray<Parameter>(), ThisParameter != null, selectedIndex: 0);
+        internal ParameterConfiguration WithoutAddedParameters() =>
+            Create(
+                ToListOfParameters().OfType<ExistingParameter>().ToImmutableArray<Parameter>(),
+                ThisParameter != null,
+                selectedIndex: 0
+            );
 
         public ImmutableArray<Parameter> ToListOfParameters()
         {
@@ -81,4 +102,3 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         }
     }
 }
-

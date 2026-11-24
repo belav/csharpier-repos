@@ -114,10 +114,7 @@ namespace System.Xml.Xsl.XsltOld
 
         public override bool HasValue
         {
-            get
-            {
-                return XmlReader.HasValueInternal(NodeType);
-            }
+            get { return XmlReader.HasValueInternal(NodeType); }
         }
 
         public override string Value
@@ -140,10 +137,7 @@ namespace System.Xml.Xsl.XsltOld
 
         public override string BaseURI
         {
-            get
-            {
-                return string.Empty;
-            }
+            get { return string.Empty; }
         }
 
         public override bool IsEmptyElement
@@ -346,7 +340,7 @@ namespace System.Xml.Xsl.XsltOld
                         case XmlNodeType.Whitespace:
                             if (Value.Length == 0)
                             {
-                                continue;                          // ignoring emty text nodes
+                                continue; // ignoring emty text nodes
                             }
                             if (XmlSpace == XmlSpace.Preserve)
                             {
@@ -388,7 +382,11 @@ namespace System.Xml.Xsl.XsltOld
         {
             string result = string.Empty;
 
-            if (NodeType == XmlNodeType.Element || NodeType == XmlNodeType.Attribute || _currentInfo == _attributeValue)
+            if (
+                NodeType == XmlNodeType.Element
+                || NodeType == XmlNodeType.Attribute
+                || _currentInfo == _attributeValue
+            )
             {
                 if (_mainNode.IsEmptyTag)
                 {
@@ -440,7 +438,7 @@ namespace System.Xml.Xsl.XsltOld
                     output.OmitXmlDecl();
                     int depth = Depth;
 
-                    Read();                 // skeep  begin Element
+                    Read(); // skeep  begin Element
                     while (depth < Depth)
                     { // process content
                         Debug.Assert(_builder != null);
@@ -448,7 +446,7 @@ namespace System.Xml.Xsl.XsltOld
                         Read();
                     }
                     Debug.Assert(NodeType == XmlNodeType.EndElement);
-                    Read();                 // skeep end element
+                    Read(); // skeep end element
 
                     output.TheEnd();
                     return output.Result!;
@@ -676,7 +674,14 @@ namespace System.Xml.Xsl.XsltOld
             Debug.Assert(_currentInfo != null);
             Debug.Assert(_attributeCount == 0 || _attributeList != null);
             Debug.Assert((_currentIndex == -1) == (_currentInfo == _mainNode));
-            Debug.Assert((_currentIndex == -1) || (_currentInfo == _attributeValue || _attributeList![_currentIndex] is BuilderInfo && _attributeList[_currentIndex] == _currentInfo));
+            Debug.Assert(
+                (_currentIndex == -1)
+                    || (
+                        _currentInfo == _attributeValue
+                        || _attributeList![_currentIndex] is BuilderInfo
+                            && _attributeList[_currentIndex] == _currentInfo
+                    )
+            );
         }
 
         private sealed class XmlEncoder
@@ -689,14 +694,19 @@ namespace System.Xml.Xsl.XsltOld
             private void Init()
             {
                 _buffer = new StringBuilder();
-                _encoder = new XmlTextEncoder(new StringWriter(_buffer, CultureInfo.InvariantCulture));
+                _encoder = new XmlTextEncoder(
+                    new StringWriter(_buffer, CultureInfo.InvariantCulture)
+                );
             }
 
             public string AttributeInnerXml(string value)
             {
-                if (_encoder == null) Init();
-                _buffer!.Length = 0;       // clean buffer
-                _encoder.StartAttribute(/*save:*/false);
+                if (_encoder == null)
+                    Init();
+                _buffer!.Length = 0; // clean buffer
+                _encoder.StartAttribute( /*save:*/
+                    false
+                );
                 _encoder.Write(value);
                 _encoder.EndAttribute();
                 return _buffer.ToString();
@@ -704,12 +714,15 @@ namespace System.Xml.Xsl.XsltOld
 
             public string AttributeOuterXml(string name, string value)
             {
-                if (_encoder == null) Init();
-                _buffer!.Length = 0;       // clean buffer
+                if (_encoder == null)
+                    Init();
+                _buffer!.Length = 0; // clean buffer
                 _buffer.Append(name);
                 _buffer.Append('=');
                 _buffer.Append(QuoteChar);
-                _encoder.StartAttribute(/*save:*/false);
+                _encoder.StartAttribute( /*save:*/
+                    false
+                );
                 _encoder.Write(value);
                 _encoder.EndAttribute();
                 _buffer.Append(QuoteChar);

@@ -22,17 +22,18 @@ namespace System.ComponentModel.Composition.Hosting
         /// <summary>
         /// Initializes a new instance of the <see cref="CompositionBatch"/> class.
         /// </summary>
-        public CompositionBatch() :
-            this(null, null)
-        {
-        }
+        public CompositionBatch()
+            : this(null, null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CompositionBatch"/> class.
         /// </summary>
         /// <param name="partsToAdd">The parts to add.</param>
         /// <param name="partsToRemove">The parts to remove.</param>
-        public CompositionBatch(IEnumerable<ComposablePart>? partsToAdd, IEnumerable<ComposablePart>? partsToRemove)
+        public CompositionBatch(
+            IEnumerable<ComposablePart>? partsToAdd,
+            IEnumerable<ComposablePart>? partsToRemove
+        )
         {
             _partsToAdd = new List<ComposablePart>();
             if (partsToAdd != null)

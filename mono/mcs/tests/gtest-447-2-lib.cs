@@ -4,12 +4,10 @@ using System;
 
 public class C
 {
-	public static string Print (string s)
-	{
-		return s;
-	}
+    public static string Print(string s)
+    {
+        return s;
+    }
 }
 
-public interface G<T>
-{
-}
+public interface G<T> { }

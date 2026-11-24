@@ -7,16 +7,17 @@ namespace System.ServiceProcess.Tests
 {
     public class ServiceProcessDescriptionAttributeTests
     {
-        public static TheoryData<string> Ctor_Data => new TheoryData<string>
-        {
-            { string.Empty },
-            { null },
-            { "hello" }
-        };
+        public static TheoryData<string> Ctor_Data =>
+            new TheoryData<string>
+            {
+                { string.Empty },
+                { null },
+                { "hello" },
+            };
 
-        [Theory,
-            MemberData(nameof(Ctor_Data))]
+        [Theory, MemberData(nameof(Ctor_Data))]
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework)]
-        public void CtorAndGetDescription_test(string input) => Assert.Equal(input, new ServiceProcessDescriptionAttribute(input).Description);
+        public void CtorAndGetDescription_test(string input) =>
+            Assert.Equal(input, new ServiceProcessDescriptionAttribute(input).Description);
     }
 }

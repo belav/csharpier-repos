@@ -38,8 +38,7 @@ public class JwtStore
             using var fileStream = new FileStream(_filePath, FileMode.Open, FileAccess.Read);
             if (fileStream.Length > 0)
             {
-                Jwts =
-                    JsonSerializer.Deserialize<IDictionary<string, Jwt>>(fileStream)
+                Jwts = JsonSerializer.Deserialize<IDictionary<string, Jwt>>(fileStream)
                     ?? new Dictionary<string, Jwt>();
             }
         }

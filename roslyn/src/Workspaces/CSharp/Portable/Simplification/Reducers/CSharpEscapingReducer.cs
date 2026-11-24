@@ -18,30 +18,41 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 {
     internal partial class CSharpEscapingReducer : AbstractCSharpReducer
     {
-        private static readonly ObjectPool<IReductionRewriter> s_pool = new(
-            () => new Rewriter(s_pool));
+        private static readonly ObjectPool<IReductionRewriter> s_pool = new(() =>
+            new Rewriter(s_pool)
+        );
 
-        private static readonly Func<SyntaxToken, SemanticModel, CSharpSimplifierOptions, CancellationToken, SyntaxToken> s_simplifyIdentifierToken = SimplifyIdentifierToken;
+        private static readonly Func<
+            SyntaxToken,
+            SemanticModel,
+            CSharpSimplifierOptions,
+            CancellationToken,
+            SyntaxToken
+        > s_simplifyIdentifierToken = SimplifyIdentifierToken;
 
-        public CSharpEscapingReducer() : base(s_pool)
-        {
-        }
+        public CSharpEscapingReducer()
+            : base(s_pool) { }
 
-        protected override bool IsApplicable(CSharpSimplifierOptions options)
-           => true;
+        protected override bool IsApplicable(CSharpSimplifierOptions options) => true;
 
         private static SyntaxToken SimplifyIdentifierToken(
             SyntaxToken token,
             SemanticModel semanticModel,
             CSharpSimplifierOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var unescapedIdentifier = token.ValueText;
 
-            var enclosingXmlNameAttr = token.GetAncestors(n => n is XmlNameAttributeSyntax).FirstOrDefault();
+            var enclosingXmlNameAttr = token
+                .GetAncestors(n => n is XmlNameAttributeSyntax)
+                .FirstOrDefault();
 
             // always escape keywords
-            if (SyntaxFacts.GetKeywordKind(unescapedIdentifier) != SyntaxKind.None && enclosingXmlNameAttr == null)
+            if (
+                SyntaxFacts.GetKeywordKind(unescapedIdentifier) != SyntaxKind.None
+                && enclosingXmlNameAttr == null
+            )
             {
                 return CreateNewIdentifierTokenFromToken(token, escape: true);
             }
@@ -51,9 +62,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
             var parent = token.Parent;
 
-            if (SyntaxFacts.GetContextualKeywordKind(unescapedIdentifier) == SyntaxKind.AwaitKeyword)
+            if (
+                SyntaxFacts.GetContextualKeywordKind(unescapedIdentifier) == SyntaxKind.AwaitKeyword
+            )
             {
-                var enclosingLambdaExpression = parent.GetAncestorsOrThis(n => (n is SimpleLambdaExpressionSyntax or ParenthesizedLambdaExpressionSyntax)).FirstOrDefault();
+                var enclosingLambdaExpression = parent
+                    .GetAncestorsOrThis(n =>
+                        (n is SimpleLambdaExpressionSyntax or ParenthesizedLambdaExpressionSyntax)
+                    )
+                    .FirstOrDefault();
                 if (enclosingLambdaExpression != null)
                 {
                     if (enclosingLambdaExpression is SimpleLambdaExpressionSyntax simpleLambda)
@@ -64,7 +81,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                         }
                     }
 
-                    if (enclosingLambdaExpression is ParenthesizedLambdaExpressionSyntax parenLamdba)
+                    if (
+                        enclosingLambdaExpression is ParenthesizedLambdaExpressionSyntax parenLamdba
+                    )
                     {
                         if (parenLamdba.AsyncKeyword.Kind() == SyntaxKind.AsyncKeyword)
                         {
@@ -73,9 +92,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     }
                 }
 
-                var enclosingMethodBlock = parent.GetAncestorsOrThis(n => n is MethodDeclarationSyntax).FirstOrDefault();
+                var enclosingMethodBlock = parent
+                    .GetAncestorsOrThis(n => n is MethodDeclarationSyntax)
+                    .FirstOrDefault();
 
-                if (enclosingMethodBlock != null && ((MethodDeclarationSyntax)enclosingMethodBlock).Modifiers.Any(SyntaxKind.AsyncKeyword))
+                if (
+                    enclosingMethodBlock != null
+                    && ((MethodDeclarationSyntax)enclosingMethodBlock).Modifiers.Any(
+                        SyntaxKind.AsyncKeyword
+                    )
+                )
                 {
                     return token;
                 }
@@ -104,7 +130,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 }
             }
 
-            var result = token.Kind() == SyntaxKind.IdentifierToken ? CreateNewIdentifierTokenFromToken(token, escape: false) : token;
+            var result =
+                token.Kind() == SyntaxKind.IdentifierToken
+                    ? CreateNewIdentifierTokenFromToken(token, escape: false)
+                    : token;
 
             // we can't remove the escaping if this would change the semantic. This can happen in cases
             // where there are two attribute declarations: one with and one without the attribute
@@ -113,7 +142,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             {
                 var expression = (SimpleNameSyntax)parent;
                 var newExpression = expression.WithIdentifier(result);
-                var speculationAnalyzer = new SpeculationAnalyzer(expression, newExpression, semanticModel, cancellationToken);
+                var speculationAnalyzer = new SpeculationAnalyzer(
+                    expression,
+                    newExpression,
+                    semanticModel,
+                    cancellationToken
+                );
                 if (speculationAnalyzer.ReplacementChangesSemantics())
                 {
                     return CreateNewIdentifierTokenFromToken(token, escape: true);
@@ -121,13 +155,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             }
 
             // TODO: handle crefs and param names of xml doc comments.
-            // crefs have the same escaping rules than csharp, param names do not allow escaping in Dev11, but 
+            // crefs have the same escaping rules than csharp, param names do not allow escaping in Dev11, but
             // we may want to change that for Roslyn (Bug 17984, " Could treat '@' specially in <param>, <typeparam>, etc")
 
             return result;
         }
 
-        private static SyntaxToken CreateNewIdentifierTokenFromToken(SyntaxToken originalToken, bool escape)
+        private static SyntaxToken CreateNewIdentifierTokenFromToken(
+            SyntaxToken originalToken,
+            bool escape
+        )
         {
             var isVerbatimIdentifier = originalToken.IsVerbatimIdentifier();
             if (isVerbatimIdentifier == escape)
@@ -135,11 +172,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 return originalToken;
             }
 
-            var unescapedText = isVerbatimIdentifier ? originalToken.ToString()[1..] : originalToken.ToString();
+            var unescapedText = isVerbatimIdentifier
+                ? originalToken.ToString()[1..]
+                : originalToken.ToString();
 
             return escape
-                ? originalToken.CopyAnnotationsTo(SyntaxFactory.VerbatimIdentifier(originalToken.LeadingTrivia, unescapedText, originalToken.ValueText, originalToken.TrailingTrivia))
-                : originalToken.CopyAnnotationsTo(SyntaxFactory.Identifier(originalToken.LeadingTrivia, SyntaxKind.IdentifierToken, unescapedText, originalToken.ValueText, originalToken.TrailingTrivia));
+                ? originalToken.CopyAnnotationsTo(
+                    SyntaxFactory.VerbatimIdentifier(
+                        originalToken.LeadingTrivia,
+                        unescapedText,
+                        originalToken.ValueText,
+                        originalToken.TrailingTrivia
+                    )
+                )
+                : originalToken.CopyAnnotationsTo(
+                    SyntaxFactory.Identifier(
+                        originalToken.LeadingTrivia,
+                        SyntaxKind.IdentifierToken,
+                        unescapedText,
+                        originalToken.ValueText,
+                        originalToken.TrailingTrivia
+                    )
+                );
         }
     }
 }

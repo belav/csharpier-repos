@@ -9,35 +9,34 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Query.InternalTrees;
 //using System.Diagnostics; // Please use PlanCompiler.Assert instead of Debug.Assert in this class...
 
 // It is fine to use Debug.Assert in cases where you assert an obvious thing that is supposed
-// to prevent from simple mistakes during development (e.g. method argument validation 
-// in cases where it was you who created the variables or the variables had already been validated or 
-// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default 
-// "else" block is chosen why the new condition should be treated separately). This kind of asserts are 
-// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in 
-// the shipped product. 
-// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions 
+// to prevent from simple mistakes during development (e.g. method argument validation
+// in cases where it was you who created the variables or the variables had already been validated or
+// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default
+// "else" block is chosen why the new condition should be treated separately). This kind of asserts are
+// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in
+// the shipped product.
+// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions
 // about how the tree was built etc. - in these cases we probably want to throw an exception (this is
-// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct 
+// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct
 // or the tree was built/rewritten not the way we thought it was.
 // Use your judgment - if you rather remove an assert than ship it use Debug.Assert otherwise use
 // PlanCompiler.Assert.
 
 using System.Globalization;
 
-using System.Data.Query.InternalTrees;
-
 //
-// The KeyPullup module helps pull up keys from the leaves of a subtree. 
+// The KeyPullup module helps pull up keys from the leaves of a subtree.
 //
 namespace System.Data.Query.PlanCompiler
 {
     /// <summary>
     /// The KeyPullup class subclasses the default visitor and pulls up keys
-    /// for the different node classes below. 
-    /// The only Op that really deserves special treatment is the ProjectOp. 
+    /// for the different node classes below.
+    /// The only Op that really deserves special treatment is the ProjectOp.
     /// </summary>
     internal class KeyPullup : BasicOpVisitor
     {
@@ -76,8 +75,8 @@ namespace System.Data.Query.PlanCompiler
 
         #region general helpers
         /// <summary>
-        /// Default visitor for children. Simply visit all children, and 
-        /// try to get keys for those nodes (relops, physicalOps) that 
+        /// Default visitor for children. Simply visit all children, and
+        /// try to get keys for those nodes (relops, physicalOps) that
         /// don't have keys as yet.
         /// </summary>
         /// <param name="n">Current node</param>
@@ -96,7 +95,7 @@ namespace System.Data.Query.PlanCompiler
         #region RelOp Visitors
 
         /// <summary>
-        /// Default visitor for RelOps. Simply visits the children, and 
+        /// Default visitor for RelOps. Simply visits the children, and
         /// then tries to recompute the NodeInfo (with the fond hope that
         /// some keys have now shown up)
         /// </summary>
@@ -109,14 +108,14 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Visitor for a ScanTableOp. Simply ensures that the keys get 
+        /// Visitor for a ScanTableOp. Simply ensures that the keys get
         /// added to the list of referenced columns
         /// </summary>
         /// <param name="op">current ScanTableOp</param>
         /// <param name="n">current subtree</param>
         public override void Visit(ScanTableOp op, Node n)
         {
-            // find the keys of the table. Make sure that they are 
+            // find the keys of the table. Make sure that they are
             // all references
             op.Table.ReferencedColumns.Or(op.Table.Keys);
             // recompute the nodeinfo - keys won't get picked up otherwise
@@ -125,7 +124,7 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// Pulls up keys for a ProjectOp. First visits its children to pull
-        /// up its keys; then identifies any keys from the input that it may have 
+        /// up its keys; then identifies any keys from the input that it may have
         /// projected out - and adds them to the output list of vars
         /// </summary>
         /// <param name="op">Current ProjectOp</param>
@@ -150,67 +149,67 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// Comments from Murali:
-        /// 
-        ///   There are several cases to consider here. 
-        ///     
+        ///
+        ///   There are several cases to consider here.
+        ///
         ///   Case 0:
-        ///     Let’s assume that K1 is the set of keys ({k1, k2, ..., kn}) for the 
-        ///     first input, and K2 ({l1, l2, …}) is the set of keys for the second
+        ///     Letï¿½s assume that K1 is the set of keys ({k1, k2, ..., kn}) for the
+        ///     first input, and K2 ({l1, l2, ï¿½}) is the set of keys for the second
         ///     input.
-        /// 
+        ///
         ///     The best case is when both K1 and K2 have the same cardinality (hopefully
         ///     greater than 0), and the keys are in the same locations (ie) the corresponding
         ///     positions in the select-list.  Even in this case, its not enough to take
-        ///     the keys, and treat them as the keys of the union-all. What we’ll need to 
-        ///     do is to add a “branch” discriminator constant for each branch of the 
-        ///     union-all, and use this as the prefix for the keys. 
-        /// 
+        ///     the keys, and treat them as the keys of the union-all. What weï¿½ll need to
+        ///     do is to add a ï¿½branchï¿½ discriminator constant for each branch of the
+        ///     union-all, and use this as the prefix for the keys.
+        ///
         ///     For example, if I had:
-        /// 
+        ///
         ///         Select c1, c2, c3... from ...
         ///         Union all
         ///         Select d1, d2, d3... from ...
-        /// 
-        ///     And for the sake of argument, lets say that {c2} and {d2} are the keys of 
-        ///     each of the branches. What you’ll need to do is to translate this into
-        ///     
+        ///
+        ///     And for the sake of argument, lets say that {c2} and {d2} are the keys of
+        ///     each of the branches. What youï¿½ll need to do is to translate this into
+        ///
         ///         Select 0 as bd, c1, c2, c3... from ...
         ///         Union all
         ///         Select 1 as bd, d1, d2, d3... from ...
         ///
-        ///     And then treat {bd, c2/d2} as the key of the union-all 
+        ///     And then treat {bd, c2/d2} as the key of the union-all
         ///
         ///   Case 1:  (actually, a subcase of Case 0):
-        ///     Now, if the keys don’t align, then we can simply take the union of the 
-        ///     corresponding positions, and make them all the keys (we would still need 
+        ///     Now, if the keys donï¿½t align, then we can simply take the union of the
+        ///     corresponding positions, and make them all the keys (we would still need
         ///     the branch discriminator)
         ///
         ///   Case 2:
-        ///     Finally, if you need to “pull” up keys from either of the branches, it is 
-        ///     possible that the branches get out of whack.  We will then need to push up 
-        ///     the keys (with nulls if the other branch doesn’t have the corresponding key) 
+        ///     Finally, if you need to ï¿½pullï¿½ up keys from either of the branches, it is
+        ///     possible that the branches get out of whack.  We will then need to push up
+        ///     the keys (with nulls if the other branch doesnï¿½t have the corresponding key)
         ///     into the union-all. (We still need the branch discriminator).
-        ///     
+        ///
         /// Now, unfortunately, whenever we've got polymorphic entity types, we'll end up
         /// in case 2 way more often than we really want to, because when we're pulling up
         /// keys, we don't want to reason about a caseop (which is how polymorphic types
         /// wrap their key value).
-        /// 
+        ///
         /// To simplify all of this, we:
-        /// 
+        ///
         /// (1) Pulling up the keys for both branches of the UnionAll, and computing which
         ///     keys are in the outputs and which are missing from the outputs.
-        /// 
+        ///
         /// (2) Accumulate all the missing keys.
         ///
         /// (3) Slap a projectOp around each branch, adding a branch discriminator
         ///     var and all the missing keys.  When keys are missing from a different
-        ///     branch, we'll construct null ops for them on the other branches.  If 
+        ///     branch, we'll construct null ops for them on the other branches.  If
         ///     a branch already has a branch descriminator, we'll re-use it instead
         ///     of constructing a new one.  (Of course, if there aren't any keys to
-        ///     add and it's already including the branch discriminator we won't 
+        ///     add and it's already including the branch discriminator we won't
         ///     need the projectOp)
-        ///     
+        ///
         /// </summary>
         /// <param name="op">the UnionAllOp</param>
         /// <param name="n">current subtree</param>
@@ -223,9 +222,9 @@ namespace System.Data.Query.PlanCompiler
             // Ensure we have keys pulled up on each branch of the union all.
             VisitChildren(n);
 
-            // Create the setOp var we'll use to output the branch discriminator value; if 
-            // any of the branches are already surfacing a branchDiscriminator var to the 
-            // output of this operation then we won't need to use this but we construct it 
+            // Create the setOp var we'll use to output the branch discriminator value; if
+            // any of the branches are already surfacing a branchDiscriminator var to the
+            // output of this operation then we won't need to use this but we construct it
             // early to simplify logic.
             Var outputBranchDiscriminatorVar = m_command.CreateSetOpVar(m_command.IntegerType);
 
@@ -271,8 +270,8 @@ namespace System.Data.Query.PlanCompiler
                 allKeyVarsToAddToOutput.Add(newKeyVar);
             }
 
-            // Now that we've identified all the keys we need to add, ensure that each branch 
-            // has both the branch discrimination var and the all the keys in them, even when 
+            // Now that we've identified all the keys we need to add, ensure that each branch
+            // has both the branch discrimination var and the all the keys in them, even when
             // the keys are just going to null (which we construct, as needed)
             for (int i = 0; i < n.Children.Count; i++)
             {
@@ -283,11 +282,14 @@ namespace System.Data.Query.PlanCompiler
                 List<Node> varDefNodes = new List<Node>();
 
                 // If the branch is a UnionAllOp that has a branch discriminator var then we can
-                // use it, otherwise we'll construct a new integer constant with the next value 
+                // use it, otherwise we'll construct a new integer constant with the next value
                 // of the branch discriminator value from the command object.
                 Var branchDiscriminatorVar;
 
-                if (OpType.UnionAll == branchNode.Op.OpType && null != ((UnionAllOp)branchNode.Op).BranchDiscriminator)
+                if (
+                    OpType.UnionAll == branchNode.Op.OpType
+                    && null != ((UnionAllOp)branchNode.Op).BranchDiscriminator
+                )
                 {
                     branchDiscriminatorVar = ((UnionAllOp)branchNode.Op).BranchDiscriminator;
 
@@ -301,11 +303,14 @@ namespace System.Data.Query.PlanCompiler
                     }
                     else
                     {
-                        // In this case, we're already outputting the branch discriminator var -- we'll 
+                        // In this case, we're already outputting the branch discriminator var -- we'll
                         // just use it for both sides.  We should never have a case where only one of the
                         // two branches are outputting the branch discriminator var, because it can only
                         // be constructed in this method, and we wouldn't need it for any other purpose.
-                        PlanCompiler.Assert(0 == i, "right branch has a discriminator var that the left branch doesn't have?");
+                        PlanCompiler.Assert(
+                            0 == i,
+                            "right branch has a discriminator var that the left branch doesn't have?"
+                        );
                         VarMap reverseVarMap = op.VarMap[i].GetReverseMap();
                         outputBranchDiscriminatorVar = reverseVarMap[branchDiscriminatorVar];
                     }
@@ -316,7 +321,14 @@ namespace System.Data.Query.PlanCompiler
                     varDefNodes.Add(
                         m_command.CreateVarDefNode(
                             m_command.CreateNode(
-                                m_command.CreateConstantOp(m_command.IntegerType, m_command.NextBranchDiscriminatorValue)), out branchDiscriminatorVar));
+                                m_command.CreateConstantOp(
+                                    m_command.IntegerType,
+                                    m_command.NextBranchDiscriminatorValue
+                                )
+                            ),
+                            out branchDiscriminatorVar
+                        )
+                    );
 
                     branchOutputVars.Set(branchDiscriminatorVar);
                     op.VarMap[i].Add(outputBranchDiscriminatorVar, branchDiscriminatorVar);
@@ -332,8 +344,10 @@ namespace System.Data.Query.PlanCompiler
                     {
                         varDefNodes.Add(
                             m_command.CreateVarDefNode(
-                                m_command.CreateNode(
-                                    m_command.CreateNullOp(keyVar.Type)), out keyVar));
+                                m_command.CreateNode(m_command.CreateNullOp(keyVar.Type)),
+                                out keyVar
+                            )
+                        );
 
                         branchOutputVars.Set(keyVar);
                     }
@@ -364,9 +378,11 @@ namespace System.Data.Query.PlanCompiler
 
                     // Now construct a project op to project out everything we've added, and
                     // replace the branchNode with it in the flattened ladder.
-                    n.Children[i] = m_command.CreateNode(m_command.CreateProjectOp(branchOutputVars),
-                                                        branchNode,
-                                                        m_command.CreateNode(m_command.CreateVarDefListOp(), varDefNodes));
+                    n.Children[i] = m_command.CreateNode(
+                        m_command.CreateProjectOp(branchOutputVars),
+                        branchNode,
+                        m_command.CreateNode(m_command.CreateVarDefListOp(), varDefNodes)
+                    );
 
                     // Finally, ensure that we update the Key info for the projectOp to include
                     // the original branch's keys, along with the branch discriminator var.
@@ -379,9 +395,13 @@ namespace System.Data.Query.PlanCompiler
 
             // All done with the branches, now it's time to update the UnionAll op to indicate
             // that we've got a branch discriminator var.
-            n.Op = m_command.CreateUnionAllOp(op.VarMap[0], op.VarMap[1], outputBranchDiscriminatorVar);
+            n.Op = m_command.CreateUnionAllOp(
+                op.VarMap[0],
+                op.VarMap[1],
+                outputBranchDiscriminatorVar
+            );
 
-            // Finally, the thing we've all been waiting for -- computing the keys.  We cheat here and let 
+            // Finally, the thing we've all been waiting for -- computing the keys.  We cheat here and let
             // nodeInfo do it so we don't have to duplicate the logic...
             m_command.RecomputeNodeInfo(n);
 

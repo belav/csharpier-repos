@@ -44,7 +44,8 @@ public class RelationalDataReader : IDisposable, IAsyncDisposable
         DbCommand command,
         DbDataReader reader,
         Guid commandId,
-        IRelationalCommandDiagnosticsLogger? logger)
+        IRelationalCommandDiagnosticsLogger? logger
+    )
     {
         _relationalConnection = relationalConnection;
         _command = command;
@@ -61,26 +62,22 @@ public class RelationalDataReader : IDisposable, IAsyncDisposable
     /// <summary>
     ///     Gets the underlying relational connection being used.
     /// </summary>
-    public virtual IRelationalConnection RelationalConnection
-        => _relationalConnection;
+    public virtual IRelationalConnection RelationalConnection => _relationalConnection;
 
     /// <summary>
     ///     Gets the underlying reader for the result set.
     /// </summary>
-    public virtual DbDataReader DbDataReader
-        => _reader;
+    public virtual DbDataReader DbDataReader => _reader;
 
     /// <summary>
     ///     Gets the underlying command for the result set.
     /// </summary>
-    public virtual DbCommand DbCommand
-        => _command;
+    public virtual DbCommand DbCommand => _command;
 
     /// <summary>
     ///     A correlation ID that identifies the <see cref="DbCommand" /> instance being used.
     /// </summary>
-    public virtual Guid CommandId
-        => _commandId;
+    public virtual Guid CommandId => _commandId;
 
     /// <summary>
     ///     Calls <see cref="System.Data.Common.DbDataReader.Read" /> on the underlying <see cref="System.Data.Common.DbDataReader" />.
@@ -127,7 +124,8 @@ public class RelationalDataReader : IDisposable, IAsyncDisposable
                     _commandId,
                     _reader.RecordsAffected,
                     _readCount,
-                    _startTime); // can throw
+                    _startTime
+                ); // can throw
             }
         }
         finally
@@ -166,7 +164,8 @@ public class RelationalDataReader : IDisposable, IAsyncDisposable
                     _reader.RecordsAffected,
                     _readCount,
                     _startTime,
-                    _stopwatch.Elapsed); // can throw
+                    _stopwatch.Elapsed
+                ); // can throw
             }
         }
         finally
@@ -208,14 +207,17 @@ public class RelationalDataReader : IDisposable, IAsyncDisposable
         {
             if (_logger?.ShouldLogDataReaderClose(DateTimeOffset.UtcNow) == true)
             {
-                closeInterceptionResult = await _logger.DataReaderClosingAsync(
-                    _relationalConnection,
-                    _command,
-                    _reader,
-                    _commandId,
-                    _reader.RecordsAffected,
-                    _readCount,
-                    _startTime).ConfigureAwait(false); // can throw
+                closeInterceptionResult = await _logger
+                    .DataReaderClosingAsync(
+                        _relationalConnection,
+                        _command,
+                        _reader,
+                        _commandId,
+                        _reader.RecordsAffected,
+                        _readCount,
+                        _startTime
+                    )
+                    .ConfigureAwait(false); // can throw
             }
         }
         finally
@@ -262,7 +264,8 @@ public class RelationalDataReader : IDisposable, IAsyncDisposable
                     _reader.RecordsAffected,
                     _readCount,
                     _startTime,
-                    _stopwatch.Elapsed); // can throw
+                    _stopwatch.Elapsed
+                ); // can throw
             }
         }
         finally

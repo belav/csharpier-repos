@@ -11,23 +11,26 @@ namespace System.Reflection.Tests
         [Fact]
         public static void LoadExternalAssembly1()
         {
-            Assembly runtimeAssembly = typeof(object).Assembly;  // Intentionally not projected.
+            Assembly runtimeAssembly = typeof(object).Assembly; // Intentionally not projected.
 
-            using (MetadataLoadContext lc = new MetadataLoadContext(
-                new FuncMetadataAssemblyResolver(
-                    delegate (MetadataLoadContext context, AssemblyName assemblyName)
-                    {
-                        if (assemblyName.Name == "SomeAssembly")
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new FuncMetadataAssemblyResolver(
+                        delegate(MetadataLoadContext context, AssemblyName assemblyName)
                         {
-                            return runtimeAssembly;
+                            if (assemblyName.Name == "SomeAssembly")
+                            {
+                                return runtimeAssembly;
+                            }
+                            else if (assemblyName.Name == "mscorlib")
+                            {
+                                return context.LoadFromByteArray(TestData.s_SimpleNameOnlyImage);
+                            }
+                            return null;
                         }
-                        else if (assemblyName.Name == "mscorlib")
-                        {
-                            return context.LoadFromByteArray(TestData.s_SimpleNameOnlyImage);
-                        }
-                        return null;
-                    }
-                    )))
+                    )
+                )
+            )
             {
                 string location = runtimeAssembly.Location;
 

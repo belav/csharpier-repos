@@ -36,7 +36,10 @@ namespace System.Web.Razor.Parser
             // Accept spaces, but not newlines
             bool foundSomeWhitespace = At(CSharpSymbolType.WhiteSpace);
             AcceptWhile(CSharpSymbolType.WhiteSpace);
-            Output(SpanKind.MetaCode, foundSomeWhitespace ? AcceptedCharacters.None : AcceptedCharacters.Any);
+            Output(
+                SpanKind.MetaCode,
+                foundSomeWhitespace ? AcceptedCharacters.None : AcceptedCharacters.Any
+            );
 
             // First non-whitespace character starts the Layout Page, then newline ends it
             AcceptUntil(CSharpSymbolType.NewLine);
@@ -44,7 +47,10 @@ namespace System.Web.Razor.Parser
             Span.EditHandler.EditorHints = EditorHints.LayoutPage | EditorHints.VirtualPath;
             bool foundNewline = Optional(CSharpSymbolType.NewLine);
             AddMarkerSymbolIfNecessary();
-            Output(SpanKind.MetaCode, foundNewline ? AcceptedCharacters.None : AcceptedCharacters.Any);
+            Output(
+                SpanKind.MetaCode,
+                foundNewline ? AcceptedCharacters.None : AcceptedCharacters.Any
+            );
         }
 
         protected virtual void SessionStateDirective()
@@ -57,10 +63,16 @@ namespace System.Web.Razor.Parser
 
         protected void SessionStateDirectiveCore()
         {
-            SessionStateTypeDirective(RazorResources.ParserEror_SessionDirectiveMissingValue, (key, value) => new RazorDirectiveAttributeCodeGenerator(key, value));
+            SessionStateTypeDirective(
+                RazorResources.ParserEror_SessionDirectiveMissingValue,
+                (key, value) => new RazorDirectiveAttributeCodeGenerator(key, value)
+            );
         }
 
-        protected void SessionStateTypeDirective(string noValueError, Func<string, string, SpanCodeGenerator> createCodeGenerator)
+        protected void SessionStateTypeDirective(
+            string noValueError,
+            Func<string, string, SpanCodeGenerator> createCodeGenerator
+        )
         {
             // Set the block type
             Context.CurrentBlock.Type = BlockType.Directive;
@@ -88,13 +100,15 @@ namespace System.Web.Razor.Parser
             }
 
             // Pull out the type name
-            string sessionStateValue = String.Concat(
-                Span.Symbols
-                    .Cast<CSharpSymbol>()
-                    .Select(sym => sym.Content)).Trim();
+            string sessionStateValue = String
+                .Concat(Span.Symbols.Cast<CSharpSymbol>().Select(sym => sym.Content))
+                .Trim();
 
             // Set up code generation
-            Span.CodeGenerator = createCodeGenerator(SyntaxConstants.CSharp.SessionStateKeyword, sessionStateValue);
+            Span.CodeGenerator = createCodeGenerator(
+                SyntaxConstants.CSharp.SessionStateKeyword,
+                sessionStateValue
+            );
 
             // Output the span and finish the block
             CompleteBlock();
@@ -106,8 +120,16 @@ namespace System.Web.Razor.Parser
             return Optional(CSharpSymbolType.Identifier);
         }
 
-        [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "Coupling will be reviewed at a later date")]
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "C# Keywords are always lower-case")]
+        [SuppressMessage(
+            "Microsoft.Maintainability",
+            "CA1506:AvoidExcessiveClassCoupling",
+            Justification = "Coupling will be reviewed at a later date"
+        )]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase",
+            Justification = "C# Keywords are always lower-case"
+        )]
         protected virtual void HelperDirective()
         {
             bool nested = Context.IsWithin(BlockType.Helper);
@@ -117,12 +139,18 @@ namespace System.Web.Razor.Parser
 
             // Verify we're on "helper" and accept
             AssertDirective(SyntaxConstants.CSharp.HelperKeyword);
-            Block block = new Block(CurrentSymbol.Content.ToString().ToLowerInvariant(), CurrentLocation);
+            Block block = new Block(
+                CurrentSymbol.Content.ToString().ToLowerInvariant(),
+                CurrentLocation
+            );
             AcceptAndMoveNext();
 
             if (nested)
             {
-                Context.OnError(CurrentLocation, RazorResources.ParseError_Helpers_Cannot_Be_Nested);
+                Context.OnError(
+                    CurrentLocation,
+                    RazorResources.ParseError_Helpers_Cannot_Be_Nested
+                );
             }
 
             // Accept a single whitespace character if present, if not, we should stop now
@@ -139,13 +167,18 @@ namespace System.Web.Razor.Parser
                 }
                 else
                 {
-                    error = String.Format(CultureInfo.CurrentCulture, RazorResources.ErrorComponent_Character, CurrentSymbol.Content);
+                    error = String.Format(
+                        CultureInfo.CurrentCulture,
+                        RazorResources.ErrorComponent_Character,
+                        CurrentSymbol.Content
+                    );
                 }
 
                 Context.OnError(
                     CurrentLocation,
                     RazorResources.ParseError_Unexpected_Character_At_Helper_Name_Start,
-                    error);
+                    error
+                );
                 PutCurrentBack();
                 Output(SpanKind.MetaCode);
                 return;
@@ -162,7 +195,11 @@ namespace System.Web.Razor.Parser
             AcceptWhile(IsSpacingToken(includeNewLines: false, includeComments: true)); // Don't accept newlines.
 
             // Expecting an identifier (helper name)
-            bool errorReported = !Required(CSharpSymbolType.Identifier, errorIfNotFound: true, errorBase: RazorResources.ParseError_Unexpected_Character_At_Helper_Name_Start);
+            bool errorReported = !Required(
+                CSharpSymbolType.Identifier,
+                errorIfNotFound: true,
+                errorBase: RazorResources.ParseError_Unexpected_Character_At_Helper_Name_Start
+            );
             if (!errorReported)
             {
                 Assert(CSharpSymbolType.Identifier);
@@ -181,27 +218,35 @@ namespace System.Web.Razor.Parser
                     Context.OnError(
                         CurrentLocation,
                         RazorResources.ParseError_MissingCharAfterHelperName,
-                        "(");
+                        "("
+                    );
                 }
             }
             else
             {
                 SourceLocation bracketStart = CurrentLocation;
-                if (!Balance(BalancingModes.NoErrorOnFailure,
-                             CSharpSymbolType.LeftParenthesis,
-                             CSharpSymbolType.RightParenthesis,
-                             bracketStart))
+                if (
+                    !Balance(
+                        BalancingModes.NoErrorOnFailure,
+                        CSharpSymbolType.LeftParenthesis,
+                        CSharpSymbolType.RightParenthesis,
+                        bracketStart
+                    )
+                )
                 {
                     errorReported = true;
                     Context.OnError(
                         bracketErrorPos,
-                        RazorResources.ParseError_UnterminatedHelperParameterList);
+                        RazorResources.ParseError_UnterminatedHelperParameterList
+                    );
                 }
                 Optional(CSharpSymbolType.RightParenthesis);
             }
 
             int bookmark = CurrentLocation.AbsoluteIndex;
-            IEnumerable<CSharpSymbol> ws = ReadWhile(IsSpacingToken(includeNewLines: true, includeComments: true));
+            IEnumerable<CSharpSymbol> ws = ReadWhile(
+                IsSpacingToken(includeNewLines: true, includeComments: true)
+            );
 
             // Expecting a "{"
             SourceLocation errorLocation = CurrentLocation;
@@ -221,7 +266,8 @@ namespace System.Web.Razor.Parser
                     Context.OnError(
                         errorLocation,
                         RazorResources.ParseError_MissingCharAfterHelperParameters,
-                        Language.GetSample(CSharpSymbolType.LeftBrace));
+                        Language.GetSample(CSharpSymbolType.LeftBrace)
+                    );
                 }
             }
 
@@ -231,7 +277,7 @@ namespace System.Web.Razor.Parser
             HelperCodeGenerator blockGen = new HelperCodeGenerator(signature, headerComplete);
             Context.CurrentBlock.CodeGenerator = blockGen;
 
-            // The block will generate appropriate code, 
+            // The block will generate appropriate code,
             Span.CodeGenerator = SpanCodeGenerator.Null;
 
             if (!headerComplete)
@@ -247,7 +293,9 @@ namespace System.Web.Razor.Parser
             }
 
             // We're valid, so parse the nested block
-            AutoCompleteEditHandler bodyEditHandler = new AutoCompleteEditHandler(Language.TokenizeString);
+            AutoCompleteEditHandler bodyEditHandler = new AutoCompleteEditHandler(
+                Language.TokenizeString
+            );
             using (PushSpanConfig(DefaultSpanConfig))
             {
                 using (Context.StartBlock(BlockType.Statement))
@@ -294,17 +342,30 @@ namespace System.Web.Razor.Parser
 
             if (nested)
             {
-                Context.OnError(CurrentLocation, String.Format(CultureInfo.CurrentCulture, RazorResources.ParseError_Sections_Cannot_Be_Nested, RazorResources.SectionExample_CS));
+                Context.OnError(
+                    CurrentLocation,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        RazorResources.ParseError_Sections_Cannot_Be_Nested,
+                        RazorResources.SectionExample_CS
+                    )
+                );
                 errorReported = true;
             }
 
-            IEnumerable<CSharpSymbol> ws = ReadWhile(IsSpacingToken(includeNewLines: true, includeComments: false));
+            IEnumerable<CSharpSymbol> ws = ReadWhile(
+                IsSpacingToken(includeNewLines: true, includeComments: false)
+            );
 
             // Get the section name
             string sectionName = String.Empty;
-            if (!Required(CSharpSymbolType.Identifier,
-                          errorIfNotFound: true,
-                          errorBase: RazorResources.ParseError_Unexpected_Character_At_Section_Name_Start))
+            if (
+                !Required(
+                    CSharpSymbolType.Identifier,
+                    errorIfNotFound: true,
+                    errorBase: RazorResources.ParseError_Unexpected_Character_At_Section_Name_Start
+                )
+            )
             {
                 if (!errorReported)
                 {
@@ -333,7 +394,10 @@ namespace System.Web.Razor.Parser
                 if (!errorReported)
                 {
                     errorReported = true;
-                    Context.OnError(errorLocation, RazorResources.ParseError_MissingOpenBraceAfterSection);
+                    Context.OnError(
+                        errorLocation,
+                        RazorResources.ParseError_MissingOpenBraceAfterSection
+                    );
                 }
 
                 PutCurrentBack();
@@ -350,7 +414,12 @@ namespace System.Web.Razor.Parser
             }
 
             // Set up edit handler
-            AutoCompleteEditHandler editHandler = new AutoCompleteEditHandler(Language.TokenizeString) { AutoCompleteAtEndOfSpan = true };
+            AutoCompleteEditHandler editHandler = new AutoCompleteEditHandler(
+                Language.TokenizeString
+            )
+            {
+                AutoCompleteAtEndOfSpan = true,
+            };
 
             Span.EditHandler = editHandler;
             Span.Accept(CurrentSymbol);
@@ -364,9 +433,11 @@ namespace System.Web.Razor.Parser
             if (!Optional(CSharpSymbolType.RightBrace))
             {
                 editHandler.AutoCompleteString = "}";
-                Context.OnError(CurrentLocation,
-                                RazorResources.ParseError_Expected_X,
-                                Language.GetSample(CSharpSymbolType.RightBrace));
+                Context.OnError(
+                    CurrentLocation,
+                    RazorResources.ParseError_Expected_X,
+                    Language.GetSample(CSharpSymbolType.RightBrace)
+                );
             }
             else
             {
@@ -391,9 +462,11 @@ namespace System.Web.Razor.Parser
 
             if (!At(CSharpSymbolType.LeftBrace))
             {
-                Context.OnError(CurrentLocation,
-                                RazorResources.ParseError_Expected_X,
-                                Language.GetSample(CSharpSymbolType.LeftBrace));
+                Context.OnError(
+                    CurrentLocation,
+                    RazorResources.ParseError_Expected_X,
+                    Language.GetSample(CSharpSymbolType.LeftBrace)
+                );
                 CompleteBlock();
                 Output(SpanKind.MetaCode);
                 return;
@@ -410,15 +483,28 @@ namespace System.Web.Razor.Parser
             // Output what we've seen and continue
             Output(SpanKind.MetaCode);
 
-            AutoCompleteEditHandler editHandler = new AutoCompleteEditHandler(Language.TokenizeString);
+            AutoCompleteEditHandler editHandler = new AutoCompleteEditHandler(
+                Language.TokenizeString
+            );
             Span.EditHandler = editHandler;
 
-            Balance(BalancingModes.NoErrorOnFailure, CSharpSymbolType.LeftBrace, CSharpSymbolType.RightBrace, blockStart);
+            Balance(
+                BalancingModes.NoErrorOnFailure,
+                CSharpSymbolType.LeftBrace,
+                CSharpSymbolType.RightBrace,
+                blockStart
+            );
             Span.CodeGenerator = new TypeMemberCodeGenerator();
             if (!At(CSharpSymbolType.RightBrace))
             {
                 editHandler.AutoCompleteString = "}";
-                Context.OnError(block.Start, RazorResources.ParseError_Expected_EndOfBlock_Before_EOF, block.Name, "}", "{");
+                Context.OnError(
+                    block.Start,
+                    RazorResources.ParseError_Expected_EndOfBlock_Before_EOF,
+                    block.Name,
+                    "}",
+                    "{"
+                );
                 CompleteBlock();
                 Output(SpanKind.Code);
             }
@@ -443,8 +529,17 @@ namespace System.Web.Razor.Parser
             InheritsDirectiveCore();
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "directive", Justification = "This only occurs in Release builds, where this method is empty by design")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "This only occurs in Release builds, where this method is empty by design")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "directive",
+            Justification = "This only occurs in Release builds, where this method is empty by design"
+        )]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This only occurs in Release builds, where this method is empty by design"
+        )]
         [Conditional("DEBUG")]
         protected void AssertDirective(string directive)
         {
@@ -454,10 +549,16 @@ namespace System.Web.Razor.Parser
 
         protected void InheritsDirectiveCore()
         {
-            BaseTypeDirective(RazorResources.ParseError_InheritsKeyword_Must_Be_Followed_By_TypeName, baseType => new SetBaseTypeCodeGenerator(baseType));
+            BaseTypeDirective(
+                RazorResources.ParseError_InheritsKeyword_Must_Be_Followed_By_TypeName,
+                baseType => new SetBaseTypeCodeGenerator(baseType)
+            );
         }
 
-        protected void BaseTypeDirective(string noTypeNameError, Func<string, SpanCodeGenerator> createCodeGenerator)
+        protected void BaseTypeDirective(
+            string noTypeNameError,
+            Func<string, SpanCodeGenerator> createCodeGenerator
+        )
         {
             // Set the block type
             Context.CurrentBlock.Type = BlockType.Directive;

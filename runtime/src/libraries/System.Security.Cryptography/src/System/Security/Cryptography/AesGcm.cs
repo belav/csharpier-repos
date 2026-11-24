@@ -15,7 +15,11 @@ namespace System.Security.Cryptography
         private const int NonceSize = 12;
         public static KeySizes NonceByteSizes { get; } = new KeySizes(NonceSize, NonceSize, 1);
 
-        [Obsolete(Obsoletions.AesGcmTagConstructorMessage, DiagnosticId = Obsoletions.AesGcmTagConstructorDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.AesGcmTagConstructorMessage,
+            DiagnosticId = Obsoletions.AesGcmTagConstructorDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public AesGcm(ReadOnlySpan<byte> key)
         {
             ThrowIfNotSupported();
@@ -24,11 +28,13 @@ namespace System.Security.Cryptography
             ImportKey(key);
         }
 
-        [Obsolete(Obsoletions.AesGcmTagConstructorMessage, DiagnosticId = Obsoletions.AesGcmTagConstructorDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.AesGcmTagConstructorMessage,
+            DiagnosticId = Obsoletions.AesGcmTagConstructorDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public AesGcm(byte[] key)
-            : this(new ReadOnlySpan<byte>(key ?? throw new ArgumentNullException(nameof(key))))
-        {
-        }
+            : this(new ReadOnlySpan<byte>(key ?? throw new ArgumentNullException(nameof(key)))) { }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="AesGcm" /> class with a provided key and required tag size.
@@ -58,7 +64,10 @@ namespace System.Security.Cryptography
 
             if (!tagSizeInBytes.IsLegalSize(TagByteSizes))
             {
-                throw new ArgumentException(SR.Cryptography_InvalidTagLength, nameof(tagSizeInBytes));
+                throw new ArgumentException(
+                    SR.Cryptography_InvalidTagLength,
+                    nameof(tagSizeInBytes)
+                );
             }
 
             TagSizeInBytes = tagSizeInBytes;
@@ -87,9 +96,10 @@ namespace System.Security.Cryptography
         ///   of <c>Decrypt</c> may supply a tag as input and that input is truncated to an unexpected size.
         /// </remarks>
         public AesGcm(byte[] key, int tagSizeInBytes)
-            : this(new ReadOnlySpan<byte>(key ?? throw new ArgumentNullException(nameof(key))), tagSizeInBytes)
-        {
-        }
+            : this(
+                new ReadOnlySpan<byte>(key ?? throw new ArgumentNullException(nameof(key))),
+                tagSizeInBytes
+            ) { }
 
         /// <summary>
         /// Gets the size of the tag, in bytes.
@@ -100,7 +110,13 @@ namespace System.Security.Cryptography
         /// </value>
         public int? TagSizeInBytes { get; }
 
-        public void Encrypt(byte[] nonce, byte[] plaintext, byte[] ciphertext, byte[] tag, byte[]? associatedData = null)
+        public void Encrypt(
+            byte[] nonce,
+            byte[] plaintext,
+            byte[] ciphertext,
+            byte[] tag,
+            byte[]? associatedData = null
+        )
         {
             ArgumentNullException.ThrowIfNull(nonce);
             ArgumentNullException.ThrowIfNull(plaintext);
@@ -115,13 +131,20 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> plaintext,
             Span<byte> ciphertext,
             Span<byte> tag,
-            ReadOnlySpan<byte> associatedData = default)
+            ReadOnlySpan<byte> associatedData = default
+        )
         {
             CheckParameters(plaintext, ciphertext, nonce, tag);
             EncryptCore(nonce, plaintext, ciphertext, tag, associatedData);
         }
 
-        public void Decrypt(byte[] nonce, byte[] ciphertext, byte[] tag, byte[] plaintext, byte[]? associatedData = null)
+        public void Decrypt(
+            byte[] nonce,
+            byte[] ciphertext,
+            byte[] tag,
+            byte[] plaintext,
+            byte[]? associatedData = null
+        )
         {
             ArgumentNullException.ThrowIfNull(nonce);
             ArgumentNullException.ThrowIfNull(ciphertext);
@@ -136,7 +159,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> ciphertext,
             ReadOnlySpan<byte> tag,
             Span<byte> plaintext,
-            ReadOnlySpan<byte> associatedData = default)
+            ReadOnlySpan<byte> associatedData = default
+        )
         {
             CheckParameters(plaintext, ciphertext, nonce, tag);
             DecryptCore(nonce, ciphertext, tag, plaintext, associatedData);
@@ -146,7 +170,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> plaintext,
             ReadOnlySpan<byte> ciphertext,
             ReadOnlySpan<byte> nonce,
-            ReadOnlySpan<byte> tag)
+            ReadOnlySpan<byte> tag
+        )
         {
             if (plaintext.Length != ciphertext.Length)
                 throw new ArgumentException(SR.Cryptography_PlaintextCiphertextLengthMismatch);
@@ -161,7 +186,10 @@ namespace System.Security.Cryptography
 
                 if (tag.Length != tagSizeInBytes)
                 {
-                    throw new ArgumentException(SR.Format(SR.Cryptography_IncorrectTagLength, tagSizeInBytes), nameof(tag));
+                    throw new ArgumentException(
+                        SR.Format(SR.Cryptography_IncorrectTagLength, tagSizeInBytes),
+                        nameof(tag)
+                    );
                 }
             }
             else if (!tag.Length.IsLegalSize(TagByteSizes))
@@ -174,7 +202,9 @@ namespace System.Security.Cryptography
         {
             if (!IsSupported)
             {
-                throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_AlgorithmNotSupported, nameof(AesGcm)));
+                throw new PlatformNotSupportedException(
+                    SR.Format(SR.Cryptography_AlgorithmNotSupported, nameof(AesGcm))
+                );
             }
         }
     }

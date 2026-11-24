@@ -48,7 +48,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     (false, true, false) => RefKind.Out,
                     (false, true, true) => RefKind.RefReadOnly,
                     (true, false, false) => RefKind.RefReadOnlyParameter,
-                    var bits => throw ExceptionUtilities.UnexpectedValue(bits)
+                    var bits => throw ExceptionUtilities.UnexpectedValue(bits),
                 };
             }
             set
@@ -61,7 +61,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     RefKind.Out => (false, true, false),
                     RefKind.RefReadOnly => (false, true, true),
                     RefKind.RefReadOnlyParameter => (true, false, false),
-                    _ => throw ExceptionUtilities.UnexpectedValue(value)
+                    _ => throw ExceptionUtilities.UnexpectedValue(value),
                 };
             }
         }
@@ -136,7 +136,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             Debug.Assert(firstWord is not null);
 
-            var bitVector = BitVector.FromWords(firstWord.Value, otherWords?.ToArrayAndFree() ?? Array.Empty<ulong>(), capacity * BitsPerRefKind);
+            var bitVector = BitVector.FromWords(
+                firstWord.Value,
+                otherWords?.ToArrayAndFree() ?? Array.Empty<ulong>(),
+                capacity * BitsPerRefKind
+            );
             result = new RefKindVector(bitVector);
             return true;
         }

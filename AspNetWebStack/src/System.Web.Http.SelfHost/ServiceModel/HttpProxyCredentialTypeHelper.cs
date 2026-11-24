@@ -9,7 +9,9 @@ namespace System.Web.Http.SelfHost.ServiceModel
 {
     internal static class HttpProxyCredentialTypeHelper
     {
-        internal static AuthenticationSchemes MapToAuthenticationScheme(HttpProxyCredentialType proxyCredentialType)
+        internal static AuthenticationSchemes MapToAuthenticationScheme(
+            HttpProxyCredentialType proxyCredentialType
+        )
         {
             switch (proxyCredentialType)
             {

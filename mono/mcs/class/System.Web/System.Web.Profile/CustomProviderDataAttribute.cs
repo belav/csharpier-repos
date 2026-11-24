@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,26 +30,24 @@ using System;
 
 namespace System.Web.Profile
 {
-	[AttributeUsage (AttributeTargets.Property)]
-	public sealed class CustomProviderDataAttribute : Attribute
-	{
-		public CustomProviderDataAttribute (string customProviderData)
-		{
-			this.customProviderData = customProviderData;
-		}
+    [AttributeUsage(AttributeTargets.Property)]
+    public sealed class CustomProviderDataAttribute : Attribute
+    {
+        public CustomProviderDataAttribute(string customProviderData)
+        {
+            this.customProviderData = customProviderData;
+        }
 
-		public override bool IsDefaultAttribute ()
-		{
-			return String.IsNullOrEmpty (CustomProviderData);
-		}
+        public override bool IsDefaultAttribute()
+        {
+            return String.IsNullOrEmpty(CustomProviderData);
+        }
 
-		public string CustomProviderData {
-			get {
-				return customProviderData;
-			}
-		}
+        public string CustomProviderData
+        {
+            get { return customProviderData; }
+        }
 
-		string customProviderData;
-	}
+        string customProviderData;
+    }
 }
-

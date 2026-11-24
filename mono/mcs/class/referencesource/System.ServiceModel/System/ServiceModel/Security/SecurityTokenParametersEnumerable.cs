@@ -30,7 +30,10 @@ namespace System.ServiceModel.Security
             if (this.sbe is SymmetricSecurityBindingElement)
             {
                 SymmetricSecurityBindingElement ssbe = (SymmetricSecurityBindingElement)sbe;
-                if (ssbe.ProtectionTokenParameters != null && (!this.clientTokensOnly || !ssbe.ProtectionTokenParameters.HasAsymmetricKey))
+                if (
+                    ssbe.ProtectionTokenParameters != null
+                    && (!this.clientTokensOnly || !ssbe.ProtectionTokenParameters.HasAsymmetricKey)
+                )
                     yield return ssbe.ProtectionTokenParameters;
             }
             else if (this.sbe is AsymmetricSecurityBindingElement)
@@ -41,19 +44,33 @@ namespace System.ServiceModel.Security
                 if (asbe.RecipientTokenParameters != null && !this.clientTokensOnly)
                     yield return asbe.RecipientTokenParameters;
             }
-            foreach (SecurityTokenParameters stp in this.sbe.EndpointSupportingTokenParameters.Endorsing)
+            foreach (
+                SecurityTokenParameters stp in this.sbe.EndpointSupportingTokenParameters.Endorsing
+            )
                 if (stp != null)
                     yield return stp;
-            foreach (SecurityTokenParameters stp in this.sbe.EndpointSupportingTokenParameters.SignedEncrypted)
+            foreach (
+                SecurityTokenParameters stp in this.sbe
+                    .EndpointSupportingTokenParameters
+                    .SignedEncrypted
+            )
                 if (stp != null)
                     yield return stp;
-            foreach (SecurityTokenParameters stp in this.sbe.EndpointSupportingTokenParameters.SignedEndorsing)
+            foreach (
+                SecurityTokenParameters stp in this.sbe
+                    .EndpointSupportingTokenParameters
+                    .SignedEndorsing
+            )
                 if (stp != null)
                     yield return stp;
-            foreach (SecurityTokenParameters stp in this.sbe.EndpointSupportingTokenParameters.Signed)
+            foreach (
+                SecurityTokenParameters stp in this.sbe.EndpointSupportingTokenParameters.Signed
+            )
                 if (stp != null)
                     yield return stp;
-            foreach (SupportingTokenParameters str in this.sbe.OperationSupportingTokenParameters.Values)
+            foreach (
+                SupportingTokenParameters str in this.sbe.OperationSupportingTokenParameters.Values
+            )
                 if (str != null)
                 {
                     foreach (SecurityTokenParameters stp in str.Endorsing)
@@ -73,7 +90,9 @@ namespace System.ServiceModel.Security
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
     }
 }

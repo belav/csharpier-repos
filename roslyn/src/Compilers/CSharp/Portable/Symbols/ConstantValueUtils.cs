@@ -4,8 +4,8 @@
 
 #nullable disable
 
-using System.Collections.Immutable;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.PooledObjects;
@@ -17,7 +17,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public readonly ConstantValue Value;
         public readonly ImmutableBindingDiagnostic<AssemblySymbol> Diagnostics;
 
-        public EvaluatedConstant(ConstantValue value, ImmutableBindingDiagnostic<AssemblySymbol> diagnostics)
+        public EvaluatedConstant(
+            ConstantValue value,
+            ImmutableBindingDiagnostic<AssemblySymbol> diagnostics
+        )
         {
             this.Value = value;
             this.Diagnostics = diagnostics.NullToEmpty();
@@ -31,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             EqualsValueClauseSyntax equalsValueNode,
             HashSet<SourceFieldSymbolWithSyntaxReference> dependencies,
             bool earlyDecodingWellKnownAttributes,
-            BindingDiagnosticBag diagnostics)
+            BindingDiagnosticBag diagnostics
+        )
         {
             var compilation = symbol.DeclaringCompilation;
             var binderFactory = compilation.GetBinderFactory(equalsValueNode.SyntaxTree);
@@ -43,10 +47,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 binder = new EarlyWellKnownAttributeBinder(binder);
             }
-            var inProgressBinder = new ConstantFieldsInProgressBinder(new ConstantFieldsInProgress(symbol, dependencies), binder);
-            BoundFieldEqualsValue boundValue = BindFieldOrEnumInitializer(inProgressBinder, symbol, equalsValueNode, diagnostics);
+            var inProgressBinder = new ConstantFieldsInProgressBinder(
+                new ConstantFieldsInProgress(symbol, dependencies),
+                binder
+            );
+            BoundFieldEqualsValue boundValue = BindFieldOrEnumInitializer(
+                inProgressBinder,
+                symbol,
+                equalsValueNode,
+                diagnostics
+            );
 
-            var value = GetAndValidateConstantValue(boundValue.Value, symbol, symbol.Type, equalsValueNode.Value, diagnostics);
+            var value = GetAndValidateConstantValue(
+                boundValue.Value,
+                symbol,
+                symbol.Type,
+                equalsValueNode.Value,
+                diagnostics
+            );
             Debug.Assert(value != null);
 
             return value;
@@ -56,20 +74,33 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Binder binder,
             FieldSymbol fieldSymbol,
             EqualsValueClauseSyntax initializer,
-            BindingDiagnosticBag diagnostics)
+            BindingDiagnosticBag diagnostics
+        )
         {
             var enumConstant = fieldSymbol as SourceEnumConstantSymbol;
             Binder collisionDetector = new LocalScopeBinder(binder);
-            collisionDetector = new ExecutableCodeBinder(initializer, fieldSymbol, collisionDetector);
+            collisionDetector = new ExecutableCodeBinder(
+                initializer,
+                fieldSymbol,
+                collisionDetector
+            );
             BoundFieldEqualsValue result;
 
             if ((object)enumConstant != null)
             {
-                result = collisionDetector.BindEnumConstantInitializer(enumConstant, initializer, diagnostics);
+                result = collisionDetector.BindEnumConstantInitializer(
+                    enumConstant,
+                    initializer,
+                    diagnostics
+                );
             }
             else
             {
-                result = collisionDetector.BindFieldInitializer(fieldSymbol, initializer, diagnostics);
+                result = collisionDetector.BindFieldInitializer(
+                    fieldSymbol,
+                    initializer,
+                    diagnostics
+                );
             }
 
             return result;
@@ -80,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Symbol thisSymbol,
             TypeSymbol typeSymbol,
             SyntaxNode initValueNode,
-            BindingDiagnosticBag diagnostics)
+            BindingDiagnosticBag diagnostics
+        )
         {
             var value = ConstantValue.Bad;
             CheckLangVersionForConstantValue(boundValue, diagnostics);
@@ -88,7 +120,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (typeSymbol.TypeKind == TypeKind.TypeParameter)
                 {
-                    diagnostics.Add(ErrorCode.ERR_InvalidConstantDeclarationType, initValueNode.Location, thisSymbol, typeSymbol);
+                    diagnostics.Add(
+                        ErrorCode.ERR_InvalidConstantDeclarationType,
+                        initValueNode.Location,
+                        thisSymbol,
+                        typeSymbol
+                    );
                 }
                 else
                 {
@@ -97,7 +134,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     while (unconvertedBoundValue.Kind == BoundKind.Conversion)
                     {
                         var conversion = (BoundConversion)unconvertedBoundValue;
-                        hasDynamicConversion = hasDynamicConversion || conversion.ConversionKind.IsDynamic();
+                        hasDynamicConversion =
+                            hasDynamicConversion || conversion.ConversionKind.IsDynamic();
                         unconvertedBoundValue = conversion.Operand;
                     }
 
@@ -106,10 +144,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     var constantValue = boundValue.ConstantValueOpt;
 
                     var unconvertedConstantValue = unconvertedBoundValue.ConstantValueOpt;
-                    if (unconvertedConstantValue != null &&
-                        !unconvertedConstantValue.IsNull &&
-                        typeSymbol.IsReferenceType &&
-                        typeSymbol.SpecialType != SpecialType.System_String)
+                    if (
+                        unconvertedConstantValue != null
+                        && !unconvertedConstantValue.IsNull
+                        && typeSymbol.IsReferenceType
+                        && typeSymbol.SpecialType != SpecialType.System_String
+                    )
                     {
                         // Suppose we are in this case:
                         //
@@ -120,7 +160,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         // from string.
                         //
                         // Give a special error for that case.
-                        diagnostics.Add(ErrorCode.ERR_NotNullConstRefField, initValueNode.Location, thisSymbol, typeSymbol);
+                        diagnostics.Add(
+                            ErrorCode.ERR_NotNullConstRefField,
+                            initValueNode.Location,
+                            thisSymbol,
+                            typeSymbol
+                        );
 
                         // If we get here, then the constantValue will likely be null.
                         // However, it seems reasonable to assume that the programmer will correct the error not
@@ -136,7 +181,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
                     else
                     {
-                        diagnostics.Add(ErrorCode.ERR_NotConstantExpression, initValueNode.Location, thisSymbol);
+                        diagnostics.Add(
+                            ErrorCode.ERR_NotConstantExpression,
+                            initValueNode.Location,
+                            thisSymbol
+                        );
                     }
                 }
             }
@@ -144,7 +193,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return value;
         }
 
-        private sealed class CheckConstantInterpolatedStringValidity : BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
+        private sealed class CheckConstantInterpolatedStringValidity
+            : BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
         {
             internal readonly BindingDiagnosticBag diagnostics;
 
@@ -155,12 +205,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             public override BoundNode VisitInterpolatedString(BoundInterpolatedString node)
             {
-                Binder.CheckFeatureAvailability(node.Syntax, MessageID.IDS_FeatureConstantInterpolatedStrings, diagnostics);
+                Binder.CheckFeatureAvailability(
+                    node.Syntax,
+                    MessageID.IDS_FeatureConstantInterpolatedStrings,
+                    diagnostics
+                );
                 return null;
             }
         }
 
-        internal static void CheckLangVersionForConstantValue(BoundExpression expression, BindingDiagnosticBag diagnostics)
+        internal static void CheckLangVersionForConstantValue(
+            BoundExpression expression,
+            BindingDiagnosticBag diagnostics
+        )
         {
             if (!(expression.Type is null) && expression.Type.IsStringType())
             {

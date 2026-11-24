@@ -24,8 +24,12 @@ namespace Microsoft.Diagnostics.NETCore.Client
         private static readonly TimeSpan ParseAdvertiseTimeout = TimeSpan.FromMilliseconds(250);
 
         private readonly CancellationTokenSource _disposalSource = new CancellationTokenSource();
-        private readonly HandleableCollection<IpcEndpointInfo> _endpointInfos = new HandleableCollection<IpcEndpointInfo>();
-        private readonly ConcurrentDictionary<Guid, HandleableCollection<Stream>> _streamCollections = new ConcurrentDictionary<Guid, HandleableCollection<Stream>>();
+        private readonly HandleableCollection<IpcEndpointInfo> _endpointInfos =
+            new HandleableCollection<IpcEndpointInfo>();
+        private readonly ConcurrentDictionary<
+            Guid,
+            HandleableCollection<Stream>
+        > _streamCollections = new ConcurrentDictionary<Guid, HandleableCollection<Stream>>();
         private readonly string _address;
 
         private bool _disposed = false;
@@ -119,7 +123,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
 
             if (IsStarted)
             {
-                throw new InvalidOperationException(nameof(ReversedDiagnosticsServer.Start) + " method can only be called once.");
+                throw new InvalidOperationException(
+                    nameof(ReversedDiagnosticsServer.Start) + " method can only be called once."
+                );
             }
 
             _listenTask = ListenAsync(maxConnections, _disposalSource.Token);
@@ -163,7 +169,12 @@ namespace Microsoft.Diagnostics.NETCore.Client
             VerifyNotDisposed();
             VerifyIsStarted();
 
-            if (_streamCollections.TryRemove(runtimeCookie, out HandleableCollection<Stream> streamCollection))
+            if (
+                _streamCollections.TryRemove(
+                    runtimeCookie,
+                    out HandleableCollection<Stream> streamCollection
+                )
+            )
             {
                 streamCollection.Dispose();
                 return true;
@@ -183,7 +194,10 @@ namespace Microsoft.Diagnostics.NETCore.Client
         {
             if (!IsStarted)
             {
-                throw new InvalidOperationException(nameof(ReversedDiagnosticsServer.Start) + " method must be called before invoking this operation.");
+                throw new InvalidOperationException(
+                    nameof(ReversedDiagnosticsServer.Start)
+                        + " method must be called before invoking this operation."
+                );
             }
         }
 
@@ -196,7 +210,12 @@ namespace Microsoft.Diagnostics.NETCore.Client
         private async Task ListenAsync(int maxConnections, CancellationToken token)
         {
             // This disposal shuts down the transport in case an exception is thrown.
-            using var transport = IpcServerTransport.Create(_address, maxConnections, _enableTcpIpProtocol, TransportCallback);
+            using var transport = IpcServerTransport.Create(
+                _address,
+                maxConnections,
+                _enableTcpIpProtocol,
+                TransportCallback
+            );
             // This disposal shuts down the transport in case of cancellation; causes the transport
             // to not recreate the server stream before the AcceptAsync call observes the cancellation.
             using var _ = token.Register(() => transport.Dispose());
@@ -209,9 +228,7 @@ namespace Microsoft.Diagnostics.NETCore.Client
                 {
                     stream = await transport.AcceptAsync(token).ConfigureAwait(false);
                 }
-                catch (OperationCanceledException)
-                {
-                }
+                catch (OperationCanceledException) { }
                 catch (Exception)
                 {
                     // The advertise data could be incomplete if the runtime shuts down before completely writing
@@ -223,12 +240,17 @@ namespace Microsoft.Diagnostics.NETCore.Client
                     // Cancel parsing of advertise data after timeout period to
                     // mitigate runtimes that write partial data and do not close the stream (avoid waiting forever).
                     using var parseCancellationSource = new CancellationTokenSource();
-                    using var linkedSource = CancellationTokenSource.CreateLinkedTokenSource(token, parseCancellationSource.Token);
+                    using var linkedSource = CancellationTokenSource.CreateLinkedTokenSource(
+                        token,
+                        parseCancellationSource.Token
+                    );
                     try
                     {
                         parseCancellationSource.CancelAfter(ParseAdvertiseTimeout);
 
-                        advertise = await IpcAdvertise.ParseAsync(stream, linkedSource.Token).ConfigureAwait(false);
+                        advertise = await IpcAdvertise
+                            .ParseAsync(stream, linkedSource.Token)
+                            .ConfigureAwait(false);
                     }
                     catch (Exception)
                     {
@@ -246,7 +268,10 @@ namespace Microsoft.Diagnostics.NETCore.Client
                     // use a thread-safe version of GetOrAdd; use equality comparison on the result to determine if
                     // the new collection was added to the dictionary or if an existing one was returned.
                     var newStreamCollection = new HandleableCollection<Stream>();
-                    var streamCollection = _streamCollections.GetOrAdd(runtimeCookie, newStreamCollection);
+                    var streamCollection = _streamCollections.GetOrAdd(
+                        runtimeCookie,
+                        newStreamCollection
+                    );
 
                     try
                     {
@@ -275,7 +300,10 @@ namespace Microsoft.Diagnostics.NETCore.Client
 
         private HandleableCollection<Stream> GetStreams(Guid runtimeCookie)
         {
-            return _streamCollections.GetOrAdd(runtimeCookie, _ => new HandleableCollection<Stream>());
+            return _streamCollections.GetOrAdd(
+                runtimeCookie,
+                _ => new HandleableCollection<Stream>()
+            );
         }
 
         internal Stream Connect(Guid runtimeInstanceCookie, TimeSpan timeout)
@@ -302,12 +330,17 @@ namespace Microsoft.Diagnostics.NETCore.Client
             GetStreams(runtimeInstanceCookie).Handle(WaitForConnectionHandler, timeout);
         }
 
-        internal async Task WaitForConnectionAsync(Guid runtimeInstanceCookie, CancellationToken token)
+        internal async Task WaitForConnectionAsync(
+            Guid runtimeInstanceCookie,
+            CancellationToken token
+        )
         {
             VerifyNotDisposed();
             VerifyIsStarted();
 
-            await GetStreams(runtimeInstanceCookie).HandleAsync(WaitForConnectionHandler, token).ConfigureAwait(false);
+            await GetStreams(runtimeInstanceCookie)
+                .HandleAsync(WaitForConnectionHandler, token)
+                .ConfigureAwait(false);
         }
 
         private static bool WaitForConnectionHandler(Stream item, out bool removeItem)
@@ -340,9 +373,7 @@ namespace Microsoft.Diagnostics.NETCore.Client
                     socket.Blocking = false;
                     socket.Send(Array.Empty<byte>(), 0, SocketFlags.None);
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
                 finally
                 {
                     socket.Blocking = blocking;
@@ -351,7 +382,10 @@ namespace Microsoft.Diagnostics.NETCore.Client
             }
             else if (stream is PipeStream pipeStream)
             {
-                Debug.Assert(RuntimeInformation.IsOSPlatform(OSPlatform.Windows), "Pipe stream should only be used on Windows.");
+                Debug.Assert(
+                    RuntimeInformation.IsOSPlatform(OSPlatform.Windows),
+                    "Pipe stream should only be used on Windows."
+                );
 
                 // PeekNamedPipe will return false if the pipe is disconnected/broken.
                 return NativeMethods.PeekNamedPipe(
@@ -360,7 +394,8 @@ namespace Microsoft.Diagnostics.NETCore.Client
                     0,
                     IntPtr.Zero,
                     IntPtr.Zero,
-                    IntPtr.Zero);
+                    IntPtr.Zero
+                );
             }
 
             return false;

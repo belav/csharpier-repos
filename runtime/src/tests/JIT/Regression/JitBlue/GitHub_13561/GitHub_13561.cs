@@ -9,14 +9,19 @@ public static class Program
 {
     class MemberInfo { }
 
-    class PropertyInfo : MemberInfo {  }
+    class PropertyInfo : MemberInfo { }
 
     class CustomAttributeData
     {
         public Attribute Instantiate() => new CLSCompliantAttribute(false);
     }
 
-    private static IEnumerable<CustomAttributeData> GetMatchingCustomAttributes(this MemberInfo element, Type optionalAttributeTypeFilter, bool inherit, bool skipTypeValidation = false)
+    private static IEnumerable<CustomAttributeData> GetMatchingCustomAttributes(
+        this MemberInfo element,
+        Type optionalAttributeTypeFilter,
+        bool inherit,
+        bool skipTypeValidation = false
+    )
     {
         {
             PropertyInfo propertyInfo = element as PropertyInfo;
@@ -30,15 +35,23 @@ public static class Program
         throw new NotSupportedException(); // Shouldn't get here.
     }
 
-    private static IEnumerable<TOut> Select<TIn, TOut>(this IEnumerable<TIn> source, Func<TIn, TOut> transform)
+    private static IEnumerable<TOut> Select<TIn, TOut>(
+        this IEnumerable<TIn> source,
+        Func<TIn, TOut> transform
+    )
     {
         foreach (var s in source)
             yield return transform(s);
     }
 
-    private static IEnumerable<T> GetCustomAttributes<T>(this MemberInfo element, bool inherit) where T : Attribute
+    private static IEnumerable<T> GetCustomAttributes<T>(this MemberInfo element, bool inherit)
+        where T : Attribute
     {
-        IEnumerable<CustomAttributeData> matches = element.GetMatchingCustomAttributes(typeof(T), inherit, skipTypeValidation: true);
+        IEnumerable<CustomAttributeData> matches = element.GetMatchingCustomAttributes(
+            typeof(T),
+            inherit,
+            skipTypeValidation: true
+        );
         return matches.Select(m => (T)(m.Instantiate()));
     }
 

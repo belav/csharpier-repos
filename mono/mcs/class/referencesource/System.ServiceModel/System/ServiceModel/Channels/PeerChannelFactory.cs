@@ -20,7 +20,7 @@ namespace System.ServiceModel.Channels
         long MaxBufferPoolSize { get; }
     }
 
-    [ObsoleteAttribute ("PeerChannel feature is obsolete and will be removed in the future.", false)]
+    [ObsoleteAttribute("PeerChannel feature is obsolete and will be removed in the future.", false)]
     sealed class PeerChannelFactory<TChannel> : TransportChannelFactory<TChannel>, IPeerFactory
     {
         // settings passed to PeerNode
@@ -35,20 +35,28 @@ namespace System.ServiceModel.Channels
         // used as a test hook to allow multiple PeerNode instances per app domain
         PeerNodeImplementation privatePeerNode;
 
-        internal PeerChannelFactory(PeerTransportBindingElement bindingElement, BindingContext context,
-            PeerResolver peerResolver)
+        internal PeerChannelFactory(
+            PeerTransportBindingElement bindingElement,
+            BindingContext context,
+            PeerResolver peerResolver
+        )
             : base(bindingElement, context)
         {
             this.listenIPAddress = bindingElement.ListenIPAddress;
             this.port = bindingElement.Port;
             this.resolver = peerResolver;
             readerQuotas = new XmlDictionaryReaderQuotas();
-            BinaryMessageEncodingBindingElement encoder = context.Binding.Elements.Find<BinaryMessageEncodingBindingElement>();
+            BinaryMessageEncodingBindingElement encoder =
+                context.Binding.Elements.Find<BinaryMessageEncodingBindingElement>();
             if (encoder != null)
                 encoder.ReaderQuotas.CopyTo(this.readerQuotas);
             else
                 EncoderDefaults.ReaderQuotas.CopyTo(this.readerQuotas);
-            this.securityManager = PeerSecurityManager.Create(bindingElement.Security, context, this.readerQuotas);
+            this.securityManager = PeerSecurityManager.Create(
+                bindingElement.Security,
+                context,
+                this.readerQuotas
+            );
             this.securityCapabilities = bindingElement.GetProperty<ISecurityCapabilities>(context);
         }
 
@@ -64,10 +72,7 @@ namespace System.ServiceModel.Channels
 
         public XmlDictionaryReaderQuotas ReaderQuotas
         {
-            get
-            {
-                return this.readerQuotas;
-            }
+            get { return this.readerQuotas; }
         }
 
         public PeerResolver Resolver
@@ -114,11 +119,13 @@ namespace System.ServiceModel.Channels
             return base.GetProperty<T>();
         }
 
-        protected override void OnOpen(TimeSpan timeout)
-        {
-        }
+        protected override void OnOpen(TimeSpan timeout) { }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }
@@ -148,14 +155,42 @@ namespace System.ServiceModel.Channels
 
             if (typeof(TChannel) == typeof(IOutputChannel))
             {
-                return (TChannel)(object)new PeerOutputChannel(peerNode, registration, this, to, via, this.MessageVersion);
+                return (TChannel)
+                    (object)
+                        new PeerOutputChannel(
+                            peerNode,
+                            registration,
+                            this,
+                            to,
+                            via,
+                            this.MessageVersion
+                        );
             }
 
             // typeof(TChannel) == typeof(IDuplexChannel)
             // 'to' is both the remote address and the local address
-            PeerDuplexChannel duplexChannel = new PeerDuplexChannel(peerNode, registration, this, to, via);
-            PeerMessageDispatcher<IDuplexChannel, PeerDuplexChannel>.PeerMessageQueueAdapter queueHandler = new PeerMessageDispatcher<IDuplexChannel, PeerDuplexChannel>.PeerMessageQueueAdapter(duplexChannel);
-            PeerMessageDispatcher<IDuplexChannel, PeerDuplexChannel> dispatcher = new PeerMessageDispatcher<IDuplexChannel, PeerDuplexChannel>(queueHandler, duplexChannel.InnerNode, this, to, via);
+            PeerDuplexChannel duplexChannel = new PeerDuplexChannel(
+                peerNode,
+                registration,
+                this,
+                to,
+                via
+            );
+            PeerMessageDispatcher<
+                IDuplexChannel,
+                PeerDuplexChannel
+            >.PeerMessageQueueAdapter queueHandler = new PeerMessageDispatcher<
+                IDuplexChannel,
+                PeerDuplexChannel
+            >.PeerMessageQueueAdapter(duplexChannel);
+            PeerMessageDispatcher<IDuplexChannel, PeerDuplexChannel> dispatcher =
+                new PeerMessageDispatcher<IDuplexChannel, PeerDuplexChannel>(
+                    queueHandler,
+                    duplexChannel.InnerNode,
+                    this,
+                    to,
+                    via
+                );
             duplexChannel.Dispatcher = dispatcher;
             return (TChannel)(object)duplexChannel;
         }

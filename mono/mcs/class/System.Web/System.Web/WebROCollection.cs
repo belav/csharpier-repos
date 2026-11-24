@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,48 +34,59 @@ using System.Web.Util;
 
 namespace System.Web
 {
-	class WebROCollection : NameValueCollection
-	{
-		bool got_id;
-		int id;
+    class WebROCollection : NameValueCollection
+    {
+        bool got_id;
+        int id;
 
-		public WebROCollection () : base (SecureHashCodeProvider.DefaultInvariant, CaseInsensitiveComparer.DefaultInvariant) { }
-		public bool GotID {
-			get { return got_id; }
-		}
+        public WebROCollection()
+            : base(
+                SecureHashCodeProvider.DefaultInvariant,
+                CaseInsensitiveComparer.DefaultInvariant
+            ) { }
 
-		public int ID {
-			get { return id; }
-			set {
-				got_id = true;
-				id = value;
-			}
-		}
-		public void Protect ()
-		{
-			IsReadOnly = true;
-		}
+        public bool GotID
+        {
+            get { return got_id; }
+        }
 
-		public void Unprotect ()
-		{
-			IsReadOnly = false;
-		}
+        public int ID
+        {
+            get { return id; }
+            set
+            {
+                got_id = true;
+                id = value;
+            }
+        }
 
-		public override string ToString ()
-		{
-			StringBuilder result = new StringBuilder ();
-			foreach (string key in AllKeys) {
-				if (result.Length > 0)
-					result.Append ('&');
+        public void Protect()
+        {
+            IsReadOnly = true;
+        }
 
-				if (key != null && key.Length > 0){
-					result.Append (key);
-					result.Append ('=');
-				}
-				result.Append (Get (key));
-			}
+        public void Unprotect()
+        {
+            IsReadOnly = false;
+        }
 
-			return result.ToString ();
-		}
-	}
+        public override string ToString()
+        {
+            StringBuilder result = new StringBuilder();
+            foreach (string key in AllKeys)
+            {
+                if (result.Length > 0)
+                    result.Append('&');
+
+                if (key != null && key.Length > 0)
+                {
+                    result.Append(key);
+                    result.Append('=');
+                }
+                result.Append(Get(key));
+            }
+
+            return result.ToString();
+        }
+    }
 }

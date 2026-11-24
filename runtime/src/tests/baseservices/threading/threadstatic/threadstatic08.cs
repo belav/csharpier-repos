@@ -19,19 +19,19 @@ public class Program
     [Fact]
     public static int TestEntryPoint()
     {
-        if(TSStruct.a != 0 || TSStruct.b != 0)
+        if (TSStruct.a != 0 || TSStruct.b != 0)
             return 101;
 
-        Struct str = new Struct ();
+        Struct str = new Struct();
         str.a = 0xdeadbeef;
         str.b = 0xba5eba11;
 
         TSStruct = str;
-        if(TSStruct.a != 0xdeadbeef || TSStruct.b != 0xba5eba11)
+        if (TSStruct.a != 0xdeadbeef || TSStruct.b != 0xba5eba11)
             return 102;
 
         Struct str2 = TSStruct;
-        if(str2.a != 0xdeadbeef || str2.b != 0xba5eba11)
+        if (str2.a != 0xdeadbeef || str2.b != 0xba5eba11)
             return 103;
 
         Console.WriteLine("Test Succeeded.");

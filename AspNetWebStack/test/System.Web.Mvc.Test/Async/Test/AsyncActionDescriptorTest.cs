@@ -17,9 +17,13 @@ namespace System.Web.Mvc.Async.Test
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
-                () => actionDescriptor.Execute(new Mock<ControllerContext>().Object, parameters: null),
+                () =>
+                    actionDescriptor.Execute(
+                        new Mock<ControllerContext>().Object,
+                        parameters: null
+                    ),
                 "The asynchronous action method 'testAction' cannot be executed synchronously."
-                );
+            );
         }
 
         private class TestableAsyncActionDescriptor : AsyncActionDescriptor
@@ -34,7 +38,12 @@ namespace System.Web.Mvc.Async.Test
                 get { throw new NotImplementedException(); }
             }
 
-            public override IAsyncResult BeginExecute(ControllerContext controllerContext, IDictionary<string, object> parameters, AsyncCallback callback, object state)
+            public override IAsyncResult BeginExecute(
+                ControllerContext controllerContext,
+                IDictionary<string, object> parameters,
+                AsyncCallback callback,
+                object state
+            )
             {
                 throw new NotImplementedException();
             }

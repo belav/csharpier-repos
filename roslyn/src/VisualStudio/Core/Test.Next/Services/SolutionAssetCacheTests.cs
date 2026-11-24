@@ -29,7 +29,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
         {
             var storage = new SolutionAssetCache();
 
-            var checksum = Checksum.Create(ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray()));
+            var checksum = Checksum.Create(
+                ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray())
+            );
             var data = new object();
 
             Assert.Equal(data, storage.GetOrAdd(checksum, data));
@@ -41,9 +43,15 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
         public async Task TestCleanup()
         {
             var storage = new SolutionAssetCache(
-                remoteWorkspace: null, cleanupInterval: TimeSpan.FromMilliseconds(1), purgeAfter: TimeSpan.FromMilliseconds(2), gcAfter: TimeSpan.FromMilliseconds(5));
+                remoteWorkspace: null,
+                cleanupInterval: TimeSpan.FromMilliseconds(1),
+                purgeAfter: TimeSpan.FromMilliseconds(2),
+                gcAfter: TimeSpan.FromMilliseconds(5)
+            );
 
-            var checksum = Checksum.Create(ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray()));
+            var checksum = Checksum.Create(
+                ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray())
+            );
             var data = new object();
 
             Assert.Equal(data, storage.GetOrAdd(checksum, data));
@@ -66,18 +74,26 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
         [Fact]
         public async Task TestSolutionKeepsAssetPinned()
         {
-            var workspace = new RemoteWorkspace(FeaturesTestCompositions.RemoteHost.GetHostServices());
+            var workspace = new RemoteWorkspace(
+                FeaturesTestCompositions.RemoteHost.GetHostServices()
+            );
             var solution = workspace.CurrentSolution;
             var checksums = await solution.State.GetStateChecksumsAsync(CancellationToken.None);
 
             // Ensure the lazy has computed its value.
             var storage = new SolutionAssetCache(
-                workspace, cleanupInterval: TimeSpan.FromMilliseconds(1), purgeAfter: TimeSpan.FromMilliseconds(2), gcAfter: TimeSpan.FromMilliseconds(5));
+                workspace,
+                cleanupInterval: TimeSpan.FromMilliseconds(1),
+                purgeAfter: TimeSpan.FromMilliseconds(2),
+                gcAfter: TimeSpan.FromMilliseconds(5)
+            );
 
             var checksum1 = checksums.Checksum;
             var data1 = new object();
 
-            var checksum2 = Checksum.Create(ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray()));
+            var checksum2 = Checksum.Create(
+                ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray())
+            );
             var data2 = new object();
 
             Assert.Equal(data1, storage.GetOrAdd(checksum1, data1));
@@ -100,7 +116,11 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             Assert.False(gotChecksum2);
 
             // Now, add a project.  At this point, the original pinned object should go away.
-            workspace.SetCurrentSolution(solution => solution.AddProject("Project", "Assembly", LanguageNames.CSharp).Solution, WorkspaceChangeKind.ProjectAdded);
+            workspace.SetCurrentSolution(
+                solution =>
+                    solution.AddProject("Project", "Assembly", LanguageNames.CSharp).Solution,
+                WorkspaceChangeKind.ProjectAdded
+            );
 
             for (var i = 0; i < 10; i++)
             {

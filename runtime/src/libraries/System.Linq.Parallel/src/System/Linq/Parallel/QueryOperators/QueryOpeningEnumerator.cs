@@ -38,14 +38,18 @@ namespace System.Linq.Parallel
         // => Both the topLevelDisposeFlag and the topLevelCancellationSignal are defined here, and will be shared
         //    down to QuerySettings and to the QueryTaskGroupStates that are associated with actual task-execution.
         // => whilst these are the definitions, it is best to consider QuerySettings as the true owner of these.
-        private readonly Shared<bool> _topLevelDisposedFlag = new Shared<bool>(false);  //a shared<bool> so that it can be referenced by others.
+        private readonly Shared<bool> _topLevelDisposedFlag = new Shared<bool>(false); //a shared<bool> so that it can be referenced by others.
 
         // a top-level cancellation signal is required so that QueryOpeningEnumerator.Dispose() can tear things down.
         // This cancellationSignal will be used as the actual internal signal in QueryTaskGroupState.
-        private readonly CancellationTokenSource _topLevelCancellationTokenSource = new CancellationTokenSource();
+        private readonly CancellationTokenSource _topLevelCancellationTokenSource =
+            new CancellationTokenSource();
 
-
-        internal QueryOpeningEnumerator(QueryOperator<TOutput> queryOperator, ParallelMergeOptions? mergeOptions, bool suppressOrderPreservation)
+        internal QueryOpeningEnumerator(
+            QueryOperator<TOutput> queryOperator,
+            ParallelMergeOptions? mergeOptions,
+            bool suppressOrderPreservation
+        )
         {
             Debug.Assert(queryOperator != null);
 
@@ -60,7 +64,9 @@ namespace System.Linq.Parallel
             {
                 if (_openedQueryEnumerator == null)
                 {
-                    throw new InvalidOperationException(SR.PLINQ_CommonEnumerator_Current_NotStarted);
+                    throw new InvalidOperationException(
+                        SR.PLINQ_CommonEnumerator_Current_NotStarted
+                    );
                 }
 
                 return _openedQueryEnumerator.Current;
@@ -92,7 +98,6 @@ namespace System.Linq.Parallel
                 throw new ObjectDisposedException("enumerator", SR.PLINQ_DisposeRequested);
             }
 
-
             //Note: if Dispose has been called on a different thread to the thread that is enumerating,
             //then there is a race condition where _openedQueryEnumerator is instantiated but not disposed.
             //Best practice is that Dispose() should only be called by the owning thread, hence this cannot occur in correct usage scenarios.
@@ -122,7 +127,8 @@ namespace System.Linq.Parallel
             if ((_moveNextIteration & CancellationState.POLL_INTERVAL) == 0)
             {
                 CancellationState.ThrowWithStandardMessageIfCanceled(
-                    _querySettings.CancellationState.ExternalCancellationToken);
+                    _querySettings.CancellationState.ExternalCancellationToken
+                );
             }
 
             _moveNextIteration++;
@@ -143,19 +149,27 @@ namespace System.Linq.Parallel
             try
             {
                 // stuff in appropriate defaults for unspecified options.
-                _querySettings = _queryOperator.SpecifiedQuerySettings
-                    .WithPerExecutionSettings(_topLevelCancellationTokenSource, _topLevelDisposedFlag)
+                _querySettings = _queryOperator
+                    .SpecifiedQuerySettings.WithPerExecutionSettings(
+                        _topLevelCancellationTokenSource,
+                        _topLevelDisposedFlag
+                    )
                     .WithDefaults();
 
                 QueryLifecycle.LogicalQueryExecutionBegin(_querySettings.QueryId);
 
                 _openedQueryEnumerator = _queryOperator.GetOpenedEnumerator(
-                    _mergeOptions, _suppressOrderPreservation, false, _querySettings);
-
+                    _mergeOptions,
+                    _suppressOrderPreservation,
+                    false,
+                    _querySettings
+                );
 
                 // Now that we have opened the query, and got our hands on a supplied cancellation token
                 // we can perform an early cancellation check so that we will not do any major work if the token is already canceled.
-                CancellationState.ThrowWithStandardMessageIfCanceled(_querySettings.CancellationState.ExternalCancellationToken);
+                CancellationState.ThrowWithStandardMessageIfCanceled(
+                    _querySettings.CancellationState.ExternalCancellationToken
+                );
             }
             catch
             {

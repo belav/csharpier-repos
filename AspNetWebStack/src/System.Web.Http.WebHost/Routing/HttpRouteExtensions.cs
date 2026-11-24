@@ -23,7 +23,9 @@ namespace System.Web.Http.WebHost.Routing
             }
 
             IRouteHandler handler =
-                (httpRoute.Handler is System.Web.Http.Routing.StopRoutingHandler) ? (new System.Web.Routing.StopRoutingHandler() as IRouteHandler) : HttpControllerRouteHandler.Instance;
+                (httpRoute.Handler is System.Web.Http.Routing.StopRoutingHandler)
+                    ? (new System.Web.Routing.StopRoutingHandler() as IRouteHandler)
+                    : HttpControllerRouteHandler.Instance;
 
             return new HttpWebRoute(
                 httpRoute.RouteTemplate,
@@ -31,10 +33,13 @@ namespace System.Web.Http.WebHost.Routing
                 MakeRouteValueDictionary(httpRoute.Constraints),
                 MakeRouteValueDictionary(httpRoute.DataTokens),
                 handler,
-                httpRoute);
+                httpRoute
+            );
         }
 
-        private static RouteValueDictionary MakeRouteValueDictionary(IDictionary<string, object> dictionary)
+        private static RouteValueDictionary MakeRouteValueDictionary(
+            IDictionary<string, object> dictionary
+        )
         {
             return dictionary == null
                 ? new RouteValueDictionary()

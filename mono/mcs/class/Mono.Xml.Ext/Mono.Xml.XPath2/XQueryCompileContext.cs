@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,7 +25,6 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-
 
 using System;
 using System.Collections;
@@ -37,55 +36,60 @@ using Mono.Xml.XPath2;
 
 namespace Mono.Xml.XPath2
 {
-	// Holds dynamic compile context that is shared between one or more
-	// compilers that are created during one XQueryCommand.Compile().
-	internal class XQueryCompileContext
-	{
-		public XQueryCompileContext ()
-		{
-			schemaCache = new Hashtable ();
-			moduleCache = new Hashtable ();
+    // Holds dynamic compile context that is shared between one or more
+    // compilers that are created during one XQueryCommand.Compile().
+    internal class XQueryCompileContext
+    {
+        public XQueryCompileContext()
+        {
+            schemaCache = new Hashtable();
+            moduleCache = new Hashtable();
 
-			inEffectSchemas = new XmlSchemaSet ();
-			inEffectVariables = new Hashtable ();
-			inEffectFunctions = new XQueryFunctionTable ();
-		}
+            inEffectSchemas = new XmlSchemaSet();
+            inEffectVariables = new Hashtable();
+            inEffectFunctions = new XQueryFunctionTable();
+        }
 
-		// Compiled schema table; It is used to avoid multiple time
-		// compilation of the same schemas that is likely to happen
-		// when a library module is divided into multiple files.
-		// [location string] -> XmlSchema (done) or null (not).
-		IDictionary schemaCache;
-		// ditto for local module resources.
-		// [location] -> XQueryLibraryModule (done) or null (not).
-		IDictionary moduleCache;
+        // Compiled schema table; It is used to avoid multiple time
+        // compilation of the same schemas that is likely to happen
+        // when a library module is divided into multiple files.
+        // [location string] -> XmlSchema (done) or null (not).
+        IDictionary schemaCache;
 
-		// Collects the whole schemas, variables and functions.
-		XmlSchemaSet inEffectSchemas;
-		Hashtable inEffectVariables;
-		XQueryFunctionTable inEffectFunctions;
+        // ditto for local module resources.
+        // [location] -> XQueryLibraryModule (done) or null (not).
+        IDictionary moduleCache;
 
-		public IDictionary SchemaCache {
-			get { return schemaCache; }
-		}
+        // Collects the whole schemas, variables and functions.
+        XmlSchemaSet inEffectSchemas;
+        Hashtable inEffectVariables;
+        XQueryFunctionTable inEffectFunctions;
 
-		public IDictionary ModuleCache {
-			get { return moduleCache; }
-		}
+        public IDictionary SchemaCache
+        {
+            get { return schemaCache; }
+        }
 
-		// Compilation results
+        public IDictionary ModuleCache
+        {
+            get { return moduleCache; }
+        }
 
-		public XmlSchemaSet InEffectSchemas {
-			get { return inEffectSchemas; }
-		}
+        // Compilation results
 
-		public Hashtable InEffectVariables {
-			get { return inEffectVariables; }
-		}
+        public XmlSchemaSet InEffectSchemas
+        {
+            get { return inEffectSchemas; }
+        }
 
-		public XQueryFunctionTable InEffectFunctions {
-			get { return inEffectFunctions; }
-		}
-	}
+        public Hashtable InEffectVariables
+        {
+            get { return inEffectVariables; }
+        }
+
+        public XQueryFunctionTable InEffectFunctions
+        {
+            get { return inEffectFunctions; }
+        }
+    }
 }
-

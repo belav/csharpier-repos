@@ -23,12 +23,12 @@ using System;
 
 namespace System.DirectoryServices.ActiveDirectory
 {
-	public enum ActiveDirectoryRole
-	{
-		SchemaRole,
-		NamingRole,
-		PdcRole,
-		RidRole,
-		InfrastructureRole
-	}
+    public enum ActiveDirectoryRole
+    {
+        SchemaRole,
+        NamingRole,
+        PdcRole,
+        RidRole,
+        InfrastructureRole,
+    }
 }

@@ -15,13 +15,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE80.CodeProperty2))]
-    public sealed partial class CodeProperty : AbstractCodeMember, ICodeElementContainer<CodeParameter>, ICodeElementContainer<CodeAttribute>, EnvDTE.CodeProperty, EnvDTE80.CodeProperty2
+    public sealed partial class CodeProperty
+        : AbstractCodeMember,
+            ICodeElementContainer<CodeParameter>,
+            ICodeElementContainer<CodeAttribute>,
+            EnvDTE.CodeProperty,
+            EnvDTE80.CodeProperty2
     {
         internal static EnvDTE.CodeProperty Create(
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
+            int? nodeKind
+        )
         {
             var element = new CodeProperty(state, fileCodeModel, nodeKey, nodeKind);
             var result = (EnvDTE.CodeProperty)ComAggregate.CreateAggregatedObject(element);
@@ -35,7 +41,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
+            string name
+        )
         {
             var element = new CodeProperty(state, fileCodeModel, nodeKind, name);
             return (EnvDTE.CodeProperty)ComAggregate.CreateAggregatedObject(element);
@@ -45,39 +52,34 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
-            : base(state, fileCodeModel, nodeKey, nodeKind)
-        {
-        }
+            int? nodeKind
+        )
+            : base(state, fileCodeModel, nodeKey, nodeKind) { }
 
         private CodeProperty(
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
-            : base(state, fileCodeModel, nodeKind, name)
-        {
-        }
+            string name
+        )
+            : base(state, fileCodeModel, nodeKind, name) { }
 
         private IPropertySymbol PropertySymbol
         {
             get { return (IPropertySymbol)LookupSymbol(); }
         }
 
-        EnvDTE.CodeElements ICodeElementContainer<CodeParameter>.GetCollection()
-            => this.Parameters;
+        EnvDTE.CodeElements ICodeElementContainer<CodeParameter>.GetCollection() => this.Parameters;
 
-        EnvDTE.CodeElements ICodeElementContainer<CodeAttribute>.GetCollection()
-            => this.Attributes;
+        EnvDTE.CodeElements ICodeElementContainer<CodeAttribute>.GetCollection() => this.Attributes;
 
-        internal override ImmutableArray<SyntaxNode> GetParameters()
-            => ImmutableArray.CreateRange(CodeModelService.GetParameterNodes(LookupNode()));
+        internal override ImmutableArray<SyntaxNode> GetParameters() =>
+            ImmutableArray.CreateRange(CodeModelService.GetParameterNodes(LookupNode()));
 
-        protected override object GetExtenderNames()
-            => CodeModelService.GetPropertyExtenderNames();
+        protected override object GetExtenderNames() => CodeModelService.GetPropertyExtenderNames();
 
-        protected override object GetExtender(string name)
-            => CodeModelService.GetPropertyExtender(name, LookupNode(), LookupSymbol());
+        protected override object GetExtender(string name) =>
+            CodeModelService.GetPropertyExtender(name, LookupNode(), LookupSymbol());
 
         public override EnvDTE.vsCMElement Kind
         {
@@ -136,29 +138,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             get { return this.Attributes; }
         }
 
-        private bool HasAccessorNode(MethodKind methodKind)
-            => CodeModelService.TryGetAccessorNode(LookupNode(), methodKind, out _);
+        private bool HasAccessorNode(MethodKind methodKind) =>
+            CodeModelService.TryGetAccessorNode(LookupNode(), methodKind, out _);
 
-        private bool IsExpressionBodiedProperty()
-            => CodeModelService.IsExpressionBodiedProperty(LookupNode());
+        private bool IsExpressionBodiedProperty() =>
+            CodeModelService.IsExpressionBodiedProperty(LookupNode());
 
         public EnvDTE.CodeFunction Getter
         {
             get
             {
-                if (!HasAccessorNode(MethodKind.PropertyGet) &&
-                    !IsExpressionBodiedProperty())
+                if (!HasAccessorNode(MethodKind.PropertyGet) && !IsExpressionBodiedProperty())
                 {
                     return null;
                 }
 
                 return CodeAccessorFunction.Create(this.State, this, MethodKind.PropertyGet);
             }
-
-            set
-            {
-                throw Exceptions.ThrowENotImpl();
-            }
+            set { throw Exceptions.ThrowENotImpl(); }
         }
 
         public EnvDTE.CodeFunction Setter
@@ -172,11 +169,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
                 return CodeAccessorFunction.Create(this.State, this, MethodKind.PropertySet);
             }
-
-            set
-            {
-                throw Exceptions.ThrowENotImpl();
-            }
+            set { throw Exceptions.ThrowENotImpl(); }
         }
 
         public EnvDTE.CodeTypeRef Type
@@ -185,7 +178,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             {
                 return CodeTypeRef.Create(this.State, this, GetProjectId(), PropertySymbol.Type);
             }
-
             set
             {
                 // The type is sometimes part of the node key, so we should be sure to reacquire
@@ -198,15 +190,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         public bool IsDefault
         {
-            get
-            {
-                return CodeModelService.GetIsDefault(LookupNode());
-            }
-
-            set
-            {
-                UpdateNode(FileCodeModel.UpdateIsDefault, value);
-            }
+            get { return CodeModelService.GetIsDefault(LookupNode()); }
+            set { UpdateNode(FileCodeModel.UpdateIsDefault, value); }
         }
 
         public EnvDTE80.vsCMPropertyKind ReadWrite

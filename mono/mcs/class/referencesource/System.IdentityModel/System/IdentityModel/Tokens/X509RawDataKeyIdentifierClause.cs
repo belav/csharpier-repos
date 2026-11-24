@@ -19,14 +19,10 @@ namespace System.IdentityModel.Tokens
         }
 
         public X509RawDataKeyIdentifierClause(byte[] certificateRawData)
-            : this(certificateRawData, true)
-        {
-        }
+            : this(certificateRawData, true) { }
 
         internal X509RawDataKeyIdentifierClause(byte[] certificateRawData, bool cloneBuffer)
-            : base(null, certificateRawData, cloneBuffer)
-        {
-        }
+            : base(null, certificateRawData, cloneBuffer) { }
 
         public override bool CanCreateKey
         {
@@ -69,7 +65,11 @@ namespace System.IdentityModel.Tokens
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "X509RawDataKeyIdentifierClause(RawData = {0})", ToBase64String());
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "X509RawDataKeyIdentifierClause(RawData = {0})",
+                ToBase64String()
+            );
         }
     }
 }

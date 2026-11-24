@@ -1,19 +1,22 @@
-class X {
-        public static void Main ()
-        {
-                int a;
+class X
+{
+    public static void Main()
+    {
+        int a;
 
-                call (out a);
-        }
+        call(out a);
+    }
 
-        static void call (out int a)
+    static void call(out int a)
+    {
+        while (true)
         {
-                while (true){
-                        try {
-                                a = 1;
-                                return ;
-                        } catch {
-                        }
-                }
+            try
+            {
+                a = 1;
+                return;
+            }
+            catch { }
         }
+    }
 }

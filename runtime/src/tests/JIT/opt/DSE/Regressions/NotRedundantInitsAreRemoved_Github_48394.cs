@@ -14,7 +14,8 @@ public struct Struct1
 public class NotRedundantInitsAreRemoved_Github_48394
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void ValidateAndAssignValue<T>(ref T obj) where T : new()
+    private static void ValidateAndAssignValue<T>(ref T obj)
+        where T : new()
     {
         if (obj != null)
             throw new Exception("obj was expected to be null");
@@ -23,7 +24,7 @@ public class NotRedundantInitsAreRemoved_Github_48394
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void ValidateAndAssignValue(ref int val) 
+    private static void ValidateAndAssignValue(ref int val)
     {
         if (val != 0)
             throw new Exception("val was expected to be zero");
@@ -50,8 +51,7 @@ public class NotRedundantInitsAreRemoved_Github_48394
         {
             obj = null;
             ValidateAndAssignValue(ref obj);
-        }
-        while (i++ < 2);
+        } while (i++ < 2);
     }
 
     [Fact]
@@ -63,8 +63,7 @@ public class NotRedundantInitsAreRemoved_Github_48394
         {
             val = 0;
             ValidateAndAssignValue(ref val);
-        }
-        while (i++ < 2);
+        } while (i++ < 2);
     }
 
     [Fact]
@@ -75,10 +74,9 @@ public class NotRedundantInitsAreRemoved_Github_48394
         do
         {
             val.a = 0;
-            val.b = 0; 
+            val.b = 0;
             ValidateAndAssignValue(ref val);
-        }
-        while (i++ < 2);
+        } while (i++ < 2);
     }
 
     [Fact]
@@ -144,7 +142,7 @@ public class NotRedundantInitsAreRemoved_Github_48394
         int val = Zero;
         int i = 0;
 
-    label:
+        label:
         val = Zero;
         ValidateAndAssignValue(ref val);
         i++;

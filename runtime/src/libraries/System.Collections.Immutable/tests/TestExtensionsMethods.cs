@@ -16,13 +16,17 @@ namespace System.Collections.Immutable.Tests
             Assert.Throws<NullReferenceException>(a);
         }
 
-        internal static void ValidateDefaultThisBehavior<TArg>(ReadOnlySpan<TArg> span, AssertExtensions.AssertThrowsActionReadOnly<TArg> action)
+        internal static void ValidateDefaultThisBehavior<TArg>(
+            ReadOnlySpan<TArg> span,
+            AssertExtensions.AssertThrowsActionReadOnly<TArg> action
+        )
         {
             try
             {
                 action(span);
             }
-            catch (NullReferenceException nullRefEx) when (nullRefEx.GetType() == typeof(NullReferenceException))
+            catch (NullReferenceException nullRefEx)
+                when (nullRefEx.GetType() == typeof(NullReferenceException))
             {
                 return;
             }

@@ -7,13 +7,15 @@ using Xunit;
 
 public interface IFoo { }
 
-public class Transition<T> where T : IFoo { }
+public class Transition<T>
+    where T : IFoo { }
 
 public class FooClass : IFoo { }
 
 public struct FooStruct : IFoo { }
 
-public class GenClass<T> where T : IFoo
+public class GenClass<T>
+    where T : IFoo
 {
     public static Transition<T> TransitiveConstraint()
     {
@@ -21,17 +23,20 @@ public class GenClass<T> where T : IFoo
     }
 }
 
-public struct GenStruct<T> where T : IFoo
+public struct GenStruct<T>
+    where T : IFoo
 {
     public static Transition<T> TransitiveConstraint()
     {
         return new Transition<T>();
     }
 }
+
 public class Test_Transitive_static01
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -40,17 +45,33 @@ public class Test_Transitive_static01
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     [Fact]
     public static int TestEntryPoint()
     {
-        Eval(GenClass<FooClass>.TransitiveConstraint().GetType().Equals(typeof(Transition<FooClass>)));
-        Eval(GenClass<FooStruct>.TransitiveConstraint().GetType().Equals(typeof(Transition<FooStruct>)));
+        Eval(
+            GenClass<FooClass>.TransitiveConstraint().GetType().Equals(typeof(Transition<FooClass>))
+        );
+        Eval(
+            GenClass<FooStruct>
+                .TransitiveConstraint()
+                .GetType()
+                .Equals(typeof(Transition<FooStruct>))
+        );
 
-        Eval(GenStruct<FooClass>.TransitiveConstraint().GetType().Equals(typeof(Transition<FooClass>)));
-        Eval(GenStruct<FooStruct>.TransitiveConstraint().GetType().Equals(typeof(Transition<FooStruct>)));
+        Eval(
+            GenStruct<FooClass>
+                .TransitiveConstraint()
+                .GetType()
+                .Equals(typeof(Transition<FooClass>))
+        );
+        Eval(
+            GenStruct<FooStruct>
+                .TransitiveConstraint()
+                .GetType()
+                .Equals(typeof(Transition<FooStruct>))
+        );
 
         if (result)
         {
@@ -63,6 +84,4 @@ public class Test_Transitive_static01
             return 1;
         }
     }
-
 }
-

@@ -24,7 +24,10 @@ namespace System.Globalization.Tests
         /// </summary>
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsIcuGlobalization))]
         [MemberData(nameof(PercentNegativePattern_TestData))]
-        public void PercentNegativePattern_Get_ReturnsExpected_ICU(NumberFormatInfo format, int expected)
+        public void PercentNegativePattern_Get_ReturnsExpected_ICU(
+            NumberFormatInfo format,
+            int expected
+        )
         {
             Assert.Equal(expected, format.PercentNegativePattern);
         }
@@ -52,13 +55,19 @@ namespace System.Globalization.Tests
         public void PercentNegativePattern_SetInvalid_ThrowsArgumentOutOfRangeException(int value)
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", "PercentNegativePattern", () => format.PercentNegativePattern = value);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                "PercentNegativePattern",
+                () => format.PercentNegativePattern = value
+            );
         }
 
         [Fact]
         public void PercentNegativePattern_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => NumberFormatInfo.InvariantInfo.PercentNegativePattern = 1);
+            Assert.Throws<InvalidOperationException>(() =>
+                NumberFormatInfo.InvariantInfo.PercentNegativePattern = 1
+            );
         }
     }
 }

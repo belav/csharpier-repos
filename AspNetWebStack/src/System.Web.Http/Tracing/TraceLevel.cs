@@ -43,6 +43,6 @@ namespace System.Web.Http.Tracing
         /// <summary>
         /// Trace level for fatal traces
         /// </summary>
-        Fatal = 5
+        Fatal = 5,
     }
 }

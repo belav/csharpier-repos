@@ -28,7 +28,10 @@ public class ObjectAccessExpression : Expression, IPrintableExpression, IAccessE
         {
             throw new InvalidOperationException(
                 CosmosStrings.NavigationPropertyIsNotAnEmbeddedEntity(
-                    navigation.DeclaringEntityType.DisplayName(), navigation.Name));
+                    navigation.DeclaringEntityType.DisplayName(),
+                    navigation.Name
+                )
+            );
         }
 
         Navigation = navigation;
@@ -41,8 +44,7 @@ public class ObjectAccessExpression : Expression, IPrintableExpression, IAccessE
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override ExpressionType NodeType
-        => ExpressionType.Extension;
+    public override ExpressionType NodeType => ExpressionType.Extension;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -50,8 +52,7 @@ public class ObjectAccessExpression : Expression, IPrintableExpression, IAccessE
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override Type Type
-        => Navigation.ClrType;
+    public override Type Type => Navigation.ClrType;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -83,8 +84,8 @@ public class ObjectAccessExpression : Expression, IPrintableExpression, IAccessE
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override Expression VisitChildren(ExpressionVisitor visitor)
-        => Update(visitor.Visit(AccessExpression));
+    protected override Expression VisitChildren(ExpressionVisitor visitor) =>
+        Update(visitor.Visit(AccessExpression));
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -92,8 +93,8 @@ public class ObjectAccessExpression : Expression, IPrintableExpression, IAccessE
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ObjectAccessExpression Update(Expression outerExpression)
-        => outerExpression != AccessExpression
+    public virtual ObjectAccessExpression Update(Expression outerExpression) =>
+        outerExpression != AccessExpression
             ? new ObjectAccessExpression(Navigation, outerExpression)
             : this;
 
@@ -103,8 +104,8 @@ public class ObjectAccessExpression : Expression, IPrintableExpression, IAccessE
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
-        => expressionPrinter.Append(ToString());
+    void IPrintableExpression.Print(ExpressionPrinter expressionPrinter) =>
+        expressionPrinter.Append(ToString());
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -112,8 +113,7 @@ public class ObjectAccessExpression : Expression, IPrintableExpression, IAccessE
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => $"{AccessExpression}[\"{Name}\"]";
+    public override string ToString() => $"{AccessExpression}[\"{Name}\"]";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -121,15 +121,17 @@ public class ObjectAccessExpression : Expression, IPrintableExpression, IAccessE
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool Equals(object obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is ObjectAccessExpression objectAccessExpression
-                && Equals(objectAccessExpression));
+    public override bool Equals(object obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is ObjectAccessExpression objectAccessExpression
+                && Equals(objectAccessExpression)
+        );
 
-    private bool Equals(ObjectAccessExpression objectAccessExpression)
-        => Navigation == objectAccessExpression.Navigation
-            && AccessExpression.Equals(objectAccessExpression.AccessExpression);
+    private bool Equals(ObjectAccessExpression objectAccessExpression) =>
+        Navigation == objectAccessExpression.Navigation
+        && AccessExpression.Equals(objectAccessExpression.AccessExpression);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -137,6 +139,5 @@ public class ObjectAccessExpression : Expression, IPrintableExpression, IAccessE
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override int GetHashCode()
-        => HashCode.Combine(Navigation, AccessExpression);
+    public override int GetHashCode() => HashCode.Combine(Navigation, AccessExpression);
 }

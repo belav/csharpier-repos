@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Activities.Presentation
 {
     using System;
-    using System.Globalization;
-    using System.Windows.Data;
-    using System.Activities.Presentation.Model;
     using System.Activities;
     using System.Activities.Core.Presentation;
+    using System.Activities.Presentation.Model;
+    using System.Globalization;
+    using System.Windows.Data;
 
     sealed class ActivityXRefConverter : IValueConverter
     {
@@ -25,7 +25,7 @@ namespace System.ServiceModel.Activities.Presentation
             }
             ModelItem activity = value as ModelItem;
             string displayName = value as string;
-            
+
             string formatString = (parameter as string) ?? "{0}";
 
             if (null != activity && typeof(Activity).IsAssignableFrom(activity.ItemType))
@@ -45,7 +45,12 @@ namespace System.ServiceModel.Activities.Presentation
             return string.Format(CultureInfo.CurrentUICulture, formatString, displayName);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             throw FxTrace.Exception.AsError(new NotSupportedException());
         }

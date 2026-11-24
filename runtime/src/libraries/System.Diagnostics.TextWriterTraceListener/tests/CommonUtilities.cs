@@ -18,9 +18,20 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                 File.Delete(fileName);
         }
 
-        internal static string ExpectedTraceEventOutput(TraceFilter filter, TraceEventCache cache, string source, TraceEventType eventType, int id, string format, object[] args)
+        internal static string ExpectedTraceEventOutput(
+            TraceFilter filter,
+            TraceEventCache cache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            string format,
+            object[] args
+        )
         {
-            if (filter != null && !filter.ShouldTrace(cache, source, eventType, id, format, args, null, null))
+            if (
+                filter != null
+                && !filter.ShouldTrace(cache, source, eventType, id, format, args, null, null)
+            )
                 return string.Empty;
 
             var builder = new StringBuilder();
@@ -32,9 +43,19 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             return builder.AppendLine().ToString();
         }
 
-        internal static string ExpectedTraceDataOutput(TraceFilter filter, TraceEventCache cache, string source, TraceEventType eventType, int id, object data)
+        internal static string ExpectedTraceDataOutput(
+            TraceFilter filter,
+            TraceEventCache cache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            object data
+        )
         {
-            if (filter != null && !filter.ShouldTrace(cache, source, eventType, id, null, null, data, null))
+            if (
+                filter != null
+                && !filter.ShouldTrace(cache, source, eventType, id, null, null, data, null)
+            )
                 return string.Empty;
 
             var builder = new StringBuilder();
@@ -46,9 +67,20 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             return builder.AppendLine().ToString();
         }
 
-        internal static string ExpectedTraceDataOutput(string delimiter, TraceFilter filter, TraceEventCache cache, string source, TraceEventType eventType, int id, object[] data)
+        internal static string ExpectedTraceDataOutput(
+            string delimiter,
+            TraceFilter filter,
+            TraceEventCache cache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            object[] data
+        )
         {
-            if (filter != null && !filter.ShouldTrace(cache, source, eventType, id, null, null, data, null))
+            if (
+                filter != null
+                && !filter.ShouldTrace(cache, source, eventType, id, null, null, data, null)
+            )
                 return string.Empty;
 
             string secondDelimiter = delimiter == "," ? DefaultDelimiter : ",";
@@ -70,7 +102,13 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             return builder.AppendLine().ToString();
         }
 
-        private static void AppendHeader(this StringBuilder builder, string source, TraceEventType eventType, int id, string delimiter = DefaultDelimiter)
+        private static void AppendHeader(
+            this StringBuilder builder,
+            string source,
+            TraceEventType eventType,
+            int id,
+            string delimiter = DefaultDelimiter
+        )
         {
             builder.Append(EscapedString(source));
             builder.Append(delimiter);
@@ -80,7 +118,11 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             builder.Append(delimiter);
         }
 
-        private static void AppendTraceEventCache(this StringBuilder builder, TraceEventCache cache, string delimiter = DefaultDelimiter)
+        private static void AppendTraceEventCache(
+            this StringBuilder builder,
+            TraceEventCache cache,
+            string delimiter = DefaultDelimiter
+        )
         {
             if (cache != null)
             {
@@ -90,7 +132,9 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                 builder.Append(delimiter);
                 builder.Append(EscapedString(cache.ThreadId));
                 builder.Append(delimiter);
-                builder.Append(EscapedString(cache.DateTime.ToString("o", CultureInfo.InvariantCulture)));
+                builder.Append(
+                    EscapedString(cache.DateTime.ToString("o", CultureInfo.InvariantCulture))
+                );
                 builder.Append(delimiter);
                 builder.Append(cache.Timestamp.ToString(CultureInfo.InvariantCulture));
                 builder.Append(delimiter);

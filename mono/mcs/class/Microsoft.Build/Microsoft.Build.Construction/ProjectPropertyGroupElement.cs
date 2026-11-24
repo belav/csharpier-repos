@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,62 +29,87 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Build.Internal;
 using System.Xml;
+using Microsoft.Build.Internal;
 
 namespace Microsoft.Build.Construction
 {
-        [System.Diagnostics.DebuggerDisplayAttribute ("#Properties={Count} Condition={Condition} Label={Label}")]
-        public class ProjectPropertyGroupElement : ProjectElementContainer
+    [System.Diagnostics.DebuggerDisplayAttribute(
+        "#Properties={Count} Condition={Condition} Label={Label}"
+    )]
+    public class ProjectPropertyGroupElement : ProjectElementContainer
+    {
+        public ProjectPropertyElement AddProperty(string name, string unevaluatedValue)
         {
-                public ProjectPropertyElement AddProperty (string name, string unevaluatedValue)
-                {
-                        var property = ContainingProject.CreatePropertyElement (name);
-                        property.Value = unevaluatedValue;
-                        AppendChild (property);
-                        return property;
-                }
-
-                public ProjectPropertyElement SetProperty (string name, string unevaluatedValue)
-                {
-                        var existing = Properties.Where (p => p.Name.Equals (name, StringComparison.OrdinalIgnoreCase)
-                                                         && p.Condition.Length == 0).FirstOrDefault ();
-                        if (existing != null) {
-                                existing.Value = unevaluatedValue;
-                                return existing;
-                        }
-                        
-                        return AddProperty (name, unevaluatedValue);
-                }
-
-                internal ProjectPropertyGroupElement (ProjectRootElement containingProject)
-                {
-                        ContainingProject = containingProject;
-                }
-
-                public ICollection<ProjectPropertyElement> Properties {
-                        get { return new CollectionFromEnumerable<ProjectPropertyElement> (
-                                new FilteredEnumerable<ProjectPropertyElement> (Children)); }
-                }
-
-                public ICollection<ProjectPropertyElement> PropertiesReversed {
-                        get { return new CollectionFromEnumerable<ProjectPropertyElement> (
-                                new FilteredEnumerable<ProjectPropertyElement> (ChildrenReversed)); }
-                }
-
-                internal override string XmlName {
-                        get { return "PropertyGroup"; }
-                }
-
-                internal override ProjectElement LoadChildElement (XmlReader reader)
-                {
-                        switch (reader.LocalName) {
-                        case "ItemGroup":
-                        case "PropertyGroup":
-                                throw CreateError (reader, string.Format ("{0} is a reserved name that cannot be used for a property.", reader.LocalName));
-                        // others need to be checked too, but things like "Project" are somehow allowed...
-                        }
-                        return AddProperty (reader.LocalName, null);
-                }
+            var property = ContainingProject.CreatePropertyElement(name);
+            property.Value = unevaluatedValue;
+            AppendChild(property);
+            return property;
         }
+
+        public ProjectPropertyElement SetProperty(string name, string unevaluatedValue)
+        {
+            var existing = Properties
+                .Where(p =>
+                    p.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
+                    && p.Condition.Length == 0
+                )
+                .FirstOrDefault();
+            if (existing != null)
+            {
+                existing.Value = unevaluatedValue;
+                return existing;
+            }
+
+            return AddProperty(name, unevaluatedValue);
+        }
+
+        internal ProjectPropertyGroupElement(ProjectRootElement containingProject)
+        {
+            ContainingProject = containingProject;
+        }
+
+        public ICollection<ProjectPropertyElement> Properties
+        {
+            get
+            {
+                return new CollectionFromEnumerable<ProjectPropertyElement>(
+                    new FilteredEnumerable<ProjectPropertyElement>(Children)
+                );
+            }
+        }
+
+        public ICollection<ProjectPropertyElement> PropertiesReversed
+        {
+            get
+            {
+                return new CollectionFromEnumerable<ProjectPropertyElement>(
+                    new FilteredEnumerable<ProjectPropertyElement>(ChildrenReversed)
+                );
+            }
+        }
+
+        internal override string XmlName
+        {
+            get { return "PropertyGroup"; }
+        }
+
+        internal override ProjectElement LoadChildElement(XmlReader reader)
+        {
+            switch (reader.LocalName)
+            {
+                case "ItemGroup":
+                case "PropertyGroup":
+                    throw CreateError(
+                        reader,
+                        string.Format(
+                            "{0} is a reserved name that cannot be used for a property.",
+                            reader.LocalName
+                        )
+                    );
+                // others need to be checked too, but things like "Project" are somehow allowed...
+            }
+            return AddProperty(reader.LocalName, null);
+        }
+    }
 }

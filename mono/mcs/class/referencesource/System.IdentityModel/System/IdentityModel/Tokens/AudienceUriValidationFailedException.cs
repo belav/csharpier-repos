@@ -5,8 +5,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Runtime.Serialization;
+using System.Text;
 
 namespace System.IdentityModel.Tokens
 {
@@ -20,32 +20,27 @@ namespace System.IdentityModel.Tokens
         /// Initializes a new instance of  <see cref="AudienceUriValidationFailedException"/>
         /// </summary>
         public AudienceUriValidationFailedException()
-            : base( SR.GetString( SR.ID4183 ) )
-        {
-        }
+            : base(SR.GetString(SR.ID4183)) { }
 
         /// <summary>
         /// Initializes a new instance of  <see cref="AudienceUriValidationFailedException"/>
         /// </summary>
-        public AudienceUriValidationFailedException( string message )
-            : base( message )
-        {
-        }
+        public AudienceUriValidationFailedException(string message)
+            : base(message) { }
 
         /// <summary>
         /// Initializes a new instance of  <see cref="AudienceUriValidationFailedException"/>
         /// </summary>
-        public AudienceUriValidationFailedException( string message, Exception inner )
-            : base( message, inner )
-        {
-        }
+        public AudienceUriValidationFailedException(string message, Exception inner)
+            : base(message, inner) { }
 
         /// <summary>
         /// Initializes a new instance of  <see cref="AudienceUriValidationFailedException"/>
         /// </summary>
-        protected AudienceUriValidationFailedException( SerializationInfo info, StreamingContext context )
-            : base( info, context )
-        {
-        }
+        protected AudienceUriValidationFailedException(
+            SerializationInfo info,
+            StreamingContext context
+        )
+            : base(info, context) { }
     }
 }

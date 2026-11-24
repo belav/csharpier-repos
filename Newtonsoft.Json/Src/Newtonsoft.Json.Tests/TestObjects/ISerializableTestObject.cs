@@ -51,7 +51,12 @@ namespace Newtonsoft.Json.Tests.TestObjects
         internal uint _uintValue;
         internal ulong _ulongValue;
 
-        public ISerializableTestObject(string stringValue, int intValue, DateTimeOffset dateTimeOffset, Person personValue)
+        public ISerializableTestObject(
+            string stringValue,
+            int intValue,
+            DateTimeOffset dateTimeOffset,
+            Person personValue
+        )
         {
             _stringValue = stringValue;
             _intValue = intValue;
@@ -64,7 +69,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
         {
             _stringValue = info.GetString("stringValue");
             _intValue = info.GetInt32("intValue");
-            _dateTimeOffsetValue = (DateTimeOffset)info.GetValue("dateTimeOffsetValue", typeof(DateTimeOffset));
+            _dateTimeOffsetValue = (DateTimeOffset)
+                info.GetValue("dateTimeOffsetValue", typeof(DateTimeOffset));
             _personValue = (Person)info.GetValue("personValue", typeof(Person));
             _nullPersonValue = (Person)info.GetValue("nullPersonValue", typeof(Person));
             _nullableInt = (int?)info.GetValue("nullableInt", typeof(int?));

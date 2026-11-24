@@ -3,19 +3,19 @@ namespace System.Workflow.Activities
     #region Imports
 
     using System;
-    using System.Text;
-    using System.Reflection;
-    using System.Collections;
     using System.CodeDom;
+    using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
     using System.Drawing;
     using System.Drawing.Drawing2D;
-    using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
-    using System.Workflow.ComponentModel.Compiler;
+    using System.Reflection;
+    using System.Text;
     using System.Workflow.Activities.Common;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
 
     #endregion
 
@@ -24,18 +24,21 @@ namespace System.Workflow.Activities
     [ToolboxBitmap(typeof(EventHandlingScopeActivity), "Resources.Sequence.png")]
     [ActivityValidator(typeof(EventHandlingScopeValidator))]
     [Designer(typeof(EventHandlingScopeDesigner), typeof(IDesigner))]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
-    public sealed class EventHandlingScopeActivity : CompositeActivity, IActivityEventListener<ActivityExecutionStatusChangedEventArgs>
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
+    public sealed class EventHandlingScopeActivity
+        : CompositeActivity,
+            IActivityEventListener<ActivityExecutionStatusChangedEventArgs>
     {
-        public EventHandlingScopeActivity()
-        {
-        }
-        public EventHandlingScopeActivity(string name)
-            : base(name)
-        {
-        }
+        public EventHandlingScopeActivity() { }
 
-        protected override ActivityExecutionStatus Execute(ActivityExecutionContext executionContext)
+        public EventHandlingScopeActivity(string name)
+            : base(name) { }
+
+        protected override ActivityExecutionStatus Execute(
+            ActivityExecutionContext executionContext
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -57,10 +60,10 @@ namespace System.Workflow.Activities
             bodyActivity.RegisterForStatusChange(Activity.ClosedEvent, this);
             executionContext.ExecuteActivity(bodyActivity);
 
-
             // return the status
             return this.ExecutionStatus;
         }
+
         protected override ActivityExecutionStatus Cancel(ActivityExecutionContext executionContext)
         {
             if (executionContext == null)
@@ -75,24 +78,41 @@ namespace System.Workflow.Activities
             bool cancelScheduled = false;
 
             // check the status of body
-            if (bodyActivity != null && bodyActivity.ExecutionStatus == ActivityExecutionStatus.Executing)
+            if (
+                bodyActivity != null
+                && bodyActivity.ExecutionStatus == ActivityExecutionStatus.Executing
+            )
             {
                 executionContext.CancelActivity(bodyActivity);
                 cancelScheduled = true;
             }
             //Check the status of EventHandlers
-            if (eventHandlers != null && eventHandlers.ExecutionStatus == ActivityExecutionStatus.Executing)
+            if (
+                eventHandlers != null
+                && eventHandlers.ExecutionStatus == ActivityExecutionStatus.Executing
+            )
             {
                 executionContext.CancelActivity(eventHandlers);
                 cancelScheduled = true;
             }
 
-            if (cancelScheduled ||
-                        (bodyActivity != null && (bodyActivity.ExecutionStatus == ActivityExecutionStatus.Faulting ||
-                        bodyActivity.ExecutionStatus == ActivityExecutionStatus.Canceling)) ||
-                        (eventHandlers != null && (eventHandlers.ExecutionStatus == ActivityExecutionStatus.Faulting ||
-                        eventHandlers.ExecutionStatus == ActivityExecutionStatus.Canceling))
+            if (
+                cancelScheduled
+                || (
+                    bodyActivity != null
+                    && (
+                        bodyActivity.ExecutionStatus == ActivityExecutionStatus.Faulting
+                        || bodyActivity.ExecutionStatus == ActivityExecutionStatus.Canceling
+                    )
                 )
+                || (
+                    eventHandlers != null
+                    && (
+                        eventHandlers.ExecutionStatus == ActivityExecutionStatus.Faulting
+                        || eventHandlers.ExecutionStatus == ActivityExecutionStatus.Canceling
+                    )
+                )
+            )
             {
                 return this.ExecutionStatus;
             }
@@ -101,7 +121,10 @@ namespace System.Workflow.Activities
 
         #region IActivityEventListener<ActivityExecutionStatusChangedEventArgs> Members
 
-        void IActivityEventListener<ActivityExecutionStatusChangedEventArgs>.OnEvent(object sender, ActivityExecutionStatusChangedEventArgs e)
+        void IActivityEventListener<ActivityExecutionStatusChangedEventArgs>.OnEvent(
+            object sender,
+            ActivityExecutionStatusChangedEventArgs e
+        )
         {
             ActivityExecutionContext context = sender as ActivityExecutionContext;
             if (context == null)
@@ -114,12 +137,15 @@ namespace System.Workflow.Activities
                 {
                     context.CloseActivity();
                 }
-                //else Eventhandlers faulted, let exception propagate up.                                
+                //else Eventhandlers faulted, let exception propagate up.
             }
             else
             {
                 EventHandlersActivity eventHandlers = this.EventHandlersActivity;
-                if (eventHandlers == null || eventHandlers.ExecutionStatus == ActivityExecutionStatus.Closed)
+                if (
+                    eventHandlers == null
+                    || eventHandlers.ExecutionStatus == ActivityExecutionStatus.Closed
+                )
                 {
                     context.CloseActivity();
                 }
@@ -157,14 +183,19 @@ namespace System.Workflow.Activities
                 return body;
             }
         }
+
         #region Dynamic Update Methods
 
         [NonSerialized]
         private bool eventHandlersRemovedInDynamicUpdate = false;
+
         [NonSerialized]
         private bool bodyActivityRemovedInDynamicUpdate = false;
 
-        protected override void OnActivityChangeRemove(ActivityExecutionContext executionContext, Activity removedActivity)
+        protected override void OnActivityChangeRemove(
+            ActivityExecutionContext executionContext,
+            Activity removedActivity
+        )
         {
             base.OnActivityChangeRemove(executionContext, removedActivity);
 
@@ -174,7 +205,9 @@ namespace System.Workflow.Activities
                 bodyActivityRemovedInDynamicUpdate = true;
         }
 
-        protected override void OnWorkflowChangesCompleted(ActivityExecutionContext executionContext)
+        protected override void OnWorkflowChangesCompleted(
+            ActivityExecutionContext executionContext
+        )
         {
             base.OnWorkflowChangesCompleted(executionContext);
 
@@ -183,14 +216,24 @@ namespace System.Workflow.Activities
                 case ActivityExecutionStatus.Executing:
                     if (bodyActivityRemovedInDynamicUpdate)
                     {
-                        if (EventHandlersActivity == null || EventHandlersActivity.ExecutionStatus == ActivityExecutionStatus.Closed)
+                        if (
+                            EventHandlersActivity == null
+                            || EventHandlersActivity.ExecutionStatus
+                                == ActivityExecutionStatus.Closed
+                        )
                             executionContext.CloseActivity();
-                        else if (EventHandlersActivity.ExecutionStatus == ActivityExecutionStatus.Executing)
+                        else if (
+                            EventHandlersActivity.ExecutionStatus
+                            == ActivityExecutionStatus.Executing
+                        )
                             EventHandlersActivity.UnsubscribeAndClose();
                     }
                     if (eventHandlersRemovedInDynamicUpdate)
                     {
-                        if (BodyActivity == null || BodyActivity.ExecutionStatus == ActivityExecutionStatus.Closed)
+                        if (
+                            BodyActivity == null
+                            || BodyActivity.ExecutionStatus == ActivityExecutionStatus.Closed
+                        )
                             executionContext.CloseActivity();
                     }
                     break;
@@ -212,7 +255,13 @@ namespace System.Workflow.Activities
 
             EventHandlingScopeActivity compositeActivity = obj as EventHandlingScopeActivity;
             if (compositeActivity == null)
-                throw new ArgumentException(SR.GetString(SR.Error_UnexpectedArgumentType, typeof(EventHandlingScopeActivity).FullName), "obj");
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Error_UnexpectedArgumentType,
+                        typeof(EventHandlingScopeActivity).FullName
+                    ),
+                    "obj"
+                );
 
             //we only allow one activity to be inserted
             int childCount = 0;
@@ -227,31 +276,71 @@ namespace System.Workflow.Activities
 
             // check if more than two activities inside the collection
             if (childCount > 1)
-                validationErrors.Add(new ValidationError(SR.GetString(SR.Error_MoreThanTwoActivitiesInEventHandlingScope, compositeActivity.QualifiedName), ErrorNumbers.Error_MoreThanTwoActivitiesInEventHandlingScope));
+                validationErrors.Add(
+                    new ValidationError(
+                        SR.GetString(
+                            SR.Error_MoreThanTwoActivitiesInEventHandlingScope,
+                            compositeActivity.QualifiedName
+                        ),
+                        ErrorNumbers.Error_MoreThanTwoActivitiesInEventHandlingScope
+                    )
+                );
 
             // check if more than one EventHandlers
             if (eventHandlersCount > 1)
-                validationErrors.Add(new ValidationError(SR.GetString(SR.Error_MoreThanOneEventHandlersDecl, compositeActivity.GetType().Name), ErrorNumbers.Error_ScopeMoreThanOneEventHandlersDecl));
+                validationErrors.Add(
+                    new ValidationError(
+                        SR.GetString(
+                            SR.Error_MoreThanOneEventHandlersDecl,
+                            compositeActivity.GetType().Name
+                        ),
+                        ErrorNumbers.Error_ScopeMoreThanOneEventHandlersDecl
+                    )
+                );
 
             return validationErrors;
         }
 
-        public override ValidationError ValidateActivityChange(Activity activity, ActivityChangeAction action)
+        public override ValidationError ValidateActivityChange(
+            Activity activity,
+            ActivityChangeAction action
+        )
         {
             if (activity == null)
                 throw new ArgumentNullException("activity");
             if (action == null)
                 throw new ArgumentNullException("action");
 
-            if (activity.ExecutionStatus != ActivityExecutionStatus.Initialized &&
-                activity.ExecutionStatus != ActivityExecutionStatus.Executing &&
-                activity.ExecutionStatus != ActivityExecutionStatus.Closed)
+            if (
+                activity.ExecutionStatus != ActivityExecutionStatus.Initialized
+                && activity.ExecutionStatus != ActivityExecutionStatus.Executing
+                && activity.ExecutionStatus != ActivityExecutionStatus.Closed
+            )
             {
-                return new ValidationError(SR.GetString(SR.Error_DynamicActivity2, activity.QualifiedName, Enum.GetName(typeof(ActivityExecutionStatus), activity.ExecutionStatus), activity.GetType().FullName), ErrorNumbers.Error_DynamicActivity2);
+                return new ValidationError(
+                    SR.GetString(
+                        SR.Error_DynamicActivity2,
+                        activity.QualifiedName,
+                        Enum.GetName(typeof(ActivityExecutionStatus), activity.ExecutionStatus),
+                        activity.GetType().FullName
+                    ),
+                    ErrorNumbers.Error_DynamicActivity2
+                );
             }
-            if (activity.ExecutionStatus == ActivityExecutionStatus.Executing && action is AddedActivityAction)
+            if (
+                activity.ExecutionStatus == ActivityExecutionStatus.Executing
+                && action is AddedActivityAction
+            )
             {
-                return new ValidationError(SR.GetString(SR.Error_DynamicActivity3, activity.QualifiedName, Enum.GetName(typeof(ActivityExecutionStatus), activity.ExecutionStatus), activity.GetType().FullName), ErrorNumbers.Error_DynamicActivity2);
+                return new ValidationError(
+                    SR.GetString(
+                        SR.Error_DynamicActivity3,
+                        activity.QualifiedName,
+                        Enum.GetName(typeof(ActivityExecutionStatus), activity.ExecutionStatus),
+                        activity.GetType().FullName
+                    ),
+                    ErrorNumbers.Error_DynamicActivity2
+                );
             }
             return null;
         }
@@ -266,21 +355,20 @@ namespace System.Workflow.Activities
         #region Properties and Methods
         public override bool CanExpandCollapse
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
         #endregion
 
-        public override bool CanInsertActivities(HitTestInfo insertLocation, System.Collections.ObjectModel.ReadOnlyCollection<Activity> activitiesToInsert)
+        public override bool CanInsertActivities(
+            HitTestInfo insertLocation,
+            System.Collections.ObjectModel.ReadOnlyCollection<Activity> activitiesToInsert
+        )
         {
             //we only allow one activity to be inserted
             int childCount = 0;
             foreach (Activity child in ((EventHandlingScopeActivity)this.Activity).Activities)
             {
-                if (!Helpers.IsFrameworkActivity(child) &&
-                    !(child is EventHandlersActivity))
+                if (!Helpers.IsFrameworkActivity(child) && !(child is EventHandlersActivity))
                     childCount++;
             }
             if (childCount > 0)

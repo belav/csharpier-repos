@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Text;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
@@ -12,34 +11,59 @@ namespace Internal.TypeSystem
         [System.Diagnostics.DebuggerHidden]
         public static void ThrowTypeLoadException(string nestedTypeName, ModuleDesc module)
         {
-            ThrowTypeLoadException(ExceptionStringID.ClassLoadGeneral, nestedTypeName, Format.Module(module));
+            ThrowTypeLoadException(
+                ExceptionStringID.ClassLoadGeneral,
+                nestedTypeName,
+                Format.Module(module)
+            );
         }
 
         [System.Diagnostics.DebuggerHidden]
         public static void ThrowTypeLoadException(string @namespace, string name, ModuleDesc module)
         {
-            ThrowTypeLoadException(ExceptionStringID.ClassLoadGeneral, Format.Type(@namespace, name), Format.Module(module));
+            ThrowTypeLoadException(
+                ExceptionStringID.ClassLoadGeneral,
+                Format.Type(@namespace, name),
+                Format.Module(module)
+            );
         }
 
         public static void ThrowTypeLoadException(string @namespace, string name, string moduleName)
         {
-            ThrowTypeLoadException(ExceptionStringID.ClassLoadGeneral, Format.Type(@namespace, name), moduleName);
+            ThrowTypeLoadException(
+                ExceptionStringID.ClassLoadGeneral,
+                Format.Type(@namespace, name),
+                moduleName
+            );
         }
 
         [System.Diagnostics.DebuggerHidden]
         public static void ThrowTypeLoadException(TypeDesc type)
         {
-            ThrowTypeLoadException(ExceptionStringID.ClassLoadGeneral, Format.Type(type), Format.OwningModule(type));
+            ThrowTypeLoadException(
+                ExceptionStringID.ClassLoadGeneral,
+                Format.Type(type),
+                Format.OwningModule(type)
+            );
         }
 
         [System.Diagnostics.DebuggerHidden]
         public static void ThrowTypeLoadException(ExceptionStringID id, MethodDesc method)
         {
-            ThrowTypeLoadException(id, Format.Type(method.OwningType), Format.OwningModule(method), Format.Method(method));
+            ThrowTypeLoadException(
+                id,
+                Format.Type(method.OwningType),
+                Format.OwningModule(method),
+                Format.Method(method)
+            );
         }
 
         [System.Diagnostics.DebuggerHidden]
-        public static void ThrowTypeLoadException(ExceptionStringID id, TypeDesc type, string messageArg)
+        public static void ThrowTypeLoadException(
+            ExceptionStringID id,
+            TypeDesc type,
+            string messageArg
+        )
         {
             ThrowTypeLoadException(id, Format.Type(type), Format.OwningModule(type), messageArg);
         }
@@ -94,7 +118,11 @@ namespace Internal.TypeSystem
                 return Method(method.OwningType, method.Name, method.Signature);
             }
 
-            public static string Method(TypeDesc owningType, string methodName, MethodSignature signature)
+            public static string Method(
+                TypeDesc owningType,
+                string methodName,
+                MethodSignature signature
+            )
             {
                 StringBuilder sb = new StringBuilder();
 

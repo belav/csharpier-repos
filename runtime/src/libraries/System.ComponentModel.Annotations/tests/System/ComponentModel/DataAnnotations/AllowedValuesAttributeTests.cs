@@ -23,13 +23,20 @@ namespace System.ComponentModel.DataAnnotations.Tests
             yield return new TestCase(allowAttr, 8);
             yield return new TestCase(allowAttr, 13);
 
-            allowAttr = new AllowedValuesAttribute(-1, false, 3.1, "str", null, new object(), new byte[] { 0xff });
+            allowAttr = new AllowedValuesAttribute(
+                -1,
+                false,
+                3.1,
+                "str",
+                null,
+                new object(),
+                new byte[] { 0xff }
+            );
             foreach (object? value in allowAttr.Values)
                 yield return new TestCase(allowAttr, value);
 
             foreach (object? value in allowAttr.Values)
                 yield return new TestCase(new AllowedValuesAttribute(value), value);
-
         }
 
         protected override IEnumerable<TestCase> InvalidValues()
@@ -48,7 +55,15 @@ namespace System.ComponentModel.DataAnnotations.Tests
             yield return new TestCase(allowAttr, "mango");
             yield return new TestCase(allowAttr, false);
 
-            allowAttr = new AllowedValuesAttribute(-1, false, 3.1, "str", null, new object(), new byte[] { 0xff });
+            allowAttr = new AllowedValuesAttribute(
+                -1,
+                false,
+                3.1,
+                "str",
+                null,
+                new object(),
+                new byte[] { 0xff }
+            );
             yield return new TestCase(allowAttr, 0);
             yield return new TestCase(allowAttr, true);
             yield return new TestCase(allowAttr, 3.11);

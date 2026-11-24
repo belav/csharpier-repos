@@ -7,9 +7,9 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System;
-using System.Data;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Metadata.Edm;
 using System.Diagnostics;
 
@@ -28,7 +28,8 @@ namespace System.Data.Entity.Design
         private CodeTypeReference _returnType;
         private List<CodeStatement> _additionalGetStatements = new List<CodeStatement>();
         private List<CodeStatement> _additionalSetStatements = new List<CodeStatement>();
-        private List<CodeAttributeDeclaration> _additionalAttributes = new List<CodeAttributeDeclaration>();
+        private List<CodeAttributeDeclaration> _additionalAttributes =
+            new List<CodeAttributeDeclaration>();
 
         #endregion
 
@@ -37,9 +38,7 @@ namespace System.Data.Entity.Design
         /// <summary>
         /// Default constructor
         /// </summary>
-        public PropertyGeneratedEventArgs()
-        {
-        }
+        public PropertyGeneratedEventArgs() { }
 
         /// <summary>
         /// Constructor
@@ -47,9 +46,11 @@ namespace System.Data.Entity.Design
         /// <param name="propertySource">The event source</param>
         /// <param name="backingFieldName">The name of the field corresponding to the property</param>
         /// <param name="returnType">The property return type</param>
-        public PropertyGeneratedEventArgs(MetadataItem propertySource, 
-                                          string backingFieldName,
-                                          CodeTypeReference returnType)
+        public PropertyGeneratedEventArgs(
+            MetadataItem propertySource,
+            string backingFieldName,
+            CodeTypeReference returnType
+        )
         {
             this._propertySource = propertySource;
             this._backingFieldName = backingFieldName;
@@ -65,10 +66,7 @@ namespace System.Data.Entity.Design
         /// </summary>
         public MetadataItem PropertySource
         {
-            get
-            {
-                return this._propertySource;
-            }
+            get { return this._propertySource; }
         }
 
         /// <summary>
@@ -77,10 +75,7 @@ namespace System.Data.Entity.Design
         /// </summary>
         public string BackingFieldName
         {
-            get
-            {
-                return this._backingFieldName;
-            }
+            get { return this._backingFieldName; }
         }
 
         /// <summary>
@@ -89,14 +84,8 @@ namespace System.Data.Entity.Design
         /// </summary>
         public CodeTypeReference ReturnType
         {
-            get
-            {
-                return this._returnType;
-            }
-            set
-            {
-                this._returnType = value;
-            }
+            get { return this._returnType; }
+            set { this._returnType = value; }
         }
 
         /// <summary>
@@ -104,10 +93,7 @@ namespace System.Data.Entity.Design
         /// </summary>
         public List<CodeStatement> AdditionalGetStatements
         {
-            get
-            {
-                return this._additionalGetStatements;
-            }
+            get { return this._additionalGetStatements; }
         }
 
         /// <summary>
@@ -115,10 +101,7 @@ namespace System.Data.Entity.Design
         /// </summary>
         public List<CodeStatement> AdditionalSetStatements
         {
-            get
-            {
-                return _additionalSetStatements;
-            }
+            get { return _additionalSetStatements; }
         }
 
         /// <summary>
@@ -126,10 +109,7 @@ namespace System.Data.Entity.Design
         /// </summary>
         public List<CodeAttributeDeclaration> AdditionalAttributes
         {
-            get
-            {
-                return this._additionalAttributes;
-            }
+            get { return this._additionalAttributes; }
         }
 
         #endregion

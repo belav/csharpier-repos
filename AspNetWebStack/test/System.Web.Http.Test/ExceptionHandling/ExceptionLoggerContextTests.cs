@@ -38,7 +38,10 @@ namespace System.Web.Http.ExceptionHandling
         {
             // Arrange
             Exception expectedException = new InvalidOperationException();
-            ExceptionContext context = new ExceptionContext(expectedException, ExceptionCatchBlocks.HttpServer);
+            ExceptionContext context = new ExceptionContext(
+                expectedException,
+                ExceptionCatchBlocks.HttpServer
+            );
             ExceptionLoggerContext product = CreateProductUnderTest(context);
 
             // Act
@@ -52,7 +55,11 @@ namespace System.Web.Http.ExceptionHandling
         public void CatchBlockGet_ReturnsSpecifiedInstance()
         {
             // Arrange
-            ExceptionContextCatchBlock expectedCatchBlock = new ExceptionContextCatchBlock("IgnoreName", false, false);
+            ExceptionContextCatchBlock expectedCatchBlock = new ExceptionContextCatchBlock(
+                "IgnoreName",
+                false,
+                false
+            );
             ExceptionContext context = new ExceptionContext(new Exception(), expectedCatchBlock);
             ExceptionLoggerContext product = CreateProductUnderTest(context);
 
@@ -69,7 +76,11 @@ namespace System.Web.Http.ExceptionHandling
             // Arrange
             using (HttpRequestMessage expectedRequest = new HttpRequestMessage())
             {
-                ExceptionContext context = new ExceptionContext(new Exception(), ExceptionCatchBlocks.HttpServer, expectedRequest);
+                ExceptionContext context = new ExceptionContext(
+                    new Exception(),
+                    ExceptionCatchBlocks.HttpServer,
+                    expectedRequest
+                );
 
                 ExceptionLoggerContext product = CreateProductUnderTest(context);
 
@@ -102,9 +113,14 @@ namespace System.Web.Http.ExceptionHandling
         public void CallsHandlerGet_ReturnsCatchBlockCallsHandler(bool expectedCallsHandler)
         {
             // Arrange
-            ExceptionContext context = new ExceptionContext(new Exception(),
-                new ExceptionContextCatchBlock("IgnoreName", isTopLevel: false,
-                    callsHandler: expectedCallsHandler));
+            ExceptionContext context = new ExceptionContext(
+                new Exception(),
+                new ExceptionContextCatchBlock(
+                    "IgnoreName",
+                    isTopLevel: false,
+                    callsHandler: expectedCallsHandler
+                )
+            );
 
             ExceptionLoggerContext product = CreateProductUnderTest(context);
 
@@ -123,7 +139,9 @@ namespace System.Web.Http.ExceptionHandling
             };
         }
 
-        private static ExceptionLoggerContext CreateProductUnderTest(ExceptionContext exceptionContext)
+        private static ExceptionLoggerContext CreateProductUnderTest(
+            ExceptionContext exceptionContext
+        )
         {
             return new ExceptionLoggerContext(exceptionContext);
         }

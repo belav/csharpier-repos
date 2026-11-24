@@ -12,6 +12,7 @@ namespace Internal.JitInterface
     internal class UnboxingMethodDescFactory : ConcurrentDictionary<MethodDesc, UnboxingMethodDesc>
     {
         private Func<MethodDesc, UnboxingMethodDesc> _factoryDelegate;
+
         private UnboxingMethodDesc CreateUnboxingMethod(MethodDesc method)
         {
             return new UnboxingMethodDesc(method, this);

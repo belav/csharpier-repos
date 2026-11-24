@@ -77,8 +77,8 @@ public partial class BodyModelBinder : IModelBinder
         _formatters = formatters;
         _readerFactory = readerFactory.CreateReader;
 
-        _logger =
-            loggerFactory?.CreateLogger<BodyModelBinder>() ?? NullLogger<BodyModelBinder>.Instance;
+        _logger = loggerFactory?.CreateLogger<BodyModelBinder>()
+            ?? NullLogger<BodyModelBinder>.Instance;
 
         _options = options;
     }
@@ -205,8 +205,7 @@ public partial class BodyModelBinder : IModelBinder
     private static bool ShouldHandleException(IInputFormatter formatter)
     {
         // Any explicit policy on the formatters overrides the default.
-        var policy =
-            (formatter as IInputFormatterExceptionPolicy)?.ExceptionPolicy
+        var policy = (formatter as IInputFormatterExceptionPolicy)?.ExceptionPolicy
             ?? InputFormatterExceptionPolicy.MalformedInputExceptions;
 
         return policy == InputFormatterExceptionPolicy.AllExceptions;

@@ -25,7 +25,10 @@ namespace System.Net.Http.Formatting
         /// <param name="mediaType1">The first media type.</param>
         /// <param name="mediaType2">The second media type.</param>
         /// <returns><c>true</c> if this is a subset of <paramref name="mediaType2"/>; false otherwise.</returns>
-        public static bool IsSubsetOf(this MediaTypeHeaderValue mediaType1, MediaTypeHeaderValue mediaType2)
+        public static bool IsSubsetOf(
+            this MediaTypeHeaderValue mediaType1,
+            MediaTypeHeaderValue mediaType2
+        )
         {
             MediaTypeHeaderValueRange mediaType2Range;
             return IsSubsetOf(mediaType1, mediaType2, out mediaType2Range);
@@ -43,7 +46,11 @@ namespace System.Net.Http.Formatting
         /// <param name="mediaType2">The second media type.</param>
         /// <param name="mediaType2Range">Indicates whether <paramref name="mediaType2"/> is a regular media type, a subtype media range, or a full media range</param>
         /// <returns><c>true</c> if this is a subset of <paramref name="mediaType2"/>; false otherwise.</returns>
-        public static bool IsSubsetOf(this MediaTypeHeaderValue mediaType1, MediaTypeHeaderValue mediaType2, out MediaTypeHeaderValueRange mediaType2Range)
+        public static bool IsSubsetOf(
+            this MediaTypeHeaderValue mediaType1,
+            MediaTypeHeaderValue mediaType2,
+            out MediaTypeHeaderValueRange mediaType2Range
+        )
         {
             // Performance-sensitive
             Contract.Assert(mediaType1 != null);
@@ -54,11 +61,16 @@ namespace System.Net.Http.Formatting
                 return false;
             }
 
-            ParsedMediaTypeHeaderValue parsedMediaType1 = new ParsedMediaTypeHeaderValue(mediaType1);
-            ParsedMediaTypeHeaderValue parsedMediaType2 = new ParsedMediaTypeHeaderValue(mediaType2);
-            mediaType2Range = parsedMediaType2.IsAllMediaRange ? MediaTypeHeaderValueRange.AllMediaRange :
-                parsedMediaType2.IsSubtypeMediaRange ? MediaTypeHeaderValueRange.SubtypeMediaRange :
-                MediaTypeHeaderValueRange.None;
+            ParsedMediaTypeHeaderValue parsedMediaType1 = new ParsedMediaTypeHeaderValue(
+                mediaType1
+            );
+            ParsedMediaTypeHeaderValue parsedMediaType2 = new ParsedMediaTypeHeaderValue(
+                mediaType2
+            );
+            mediaType2Range =
+                parsedMediaType2.IsAllMediaRange ? MediaTypeHeaderValueRange.AllMediaRange
+                : parsedMediaType2.IsSubtypeMediaRange ? MediaTypeHeaderValueRange.SubtypeMediaRange
+                : MediaTypeHeaderValueRange.None;
 
             if (!parsedMediaType1.TypesEqual(ref parsedMediaType2))
             {

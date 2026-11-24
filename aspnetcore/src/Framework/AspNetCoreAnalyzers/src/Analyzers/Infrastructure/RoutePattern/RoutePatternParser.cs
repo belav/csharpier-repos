@@ -714,8 +714,8 @@ internal partial struct RoutePatternParser
     private RoutePatternDefaultValueParameterPartNode ParseDefaultValue()
     {
         var equalsToken = _currentToken;
-        var defaultValue =
-            _lexer.TryScanDefaultValue() ?? CreateMissingToken(RoutePatternKind.DefaultValueToken);
+        var defaultValue = _lexer.TryScanDefaultValue()
+            ?? CreateMissingToken(RoutePatternKind.DefaultValueToken);
 
         ConsumeCurrentToken();
         var node = new RoutePatternDefaultValueParameterPartNode(equalsToken, defaultValue);

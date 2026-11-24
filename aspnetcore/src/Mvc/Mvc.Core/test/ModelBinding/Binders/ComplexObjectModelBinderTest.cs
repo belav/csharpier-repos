@@ -662,13 +662,10 @@ public class ComplexObjectModelBinderTest
         var bindingContext = CreateContext(GetMetadataForType(model.GetType()), model);
 
         var propertyBinder = new TestModelBinderProvider(property, ModelBindingResult.Failed());
-        var binder = CreateBinder(
-            bindingContext.ModelMetadata,
-            options =>
-            {
-                options.ModelBinderProviders.Insert(0, propertyBinder);
-            }
-        );
+        var binder = CreateBinder(bindingContext.ModelMetadata, options =>
+        {
+            options.ModelBinderProviders.Insert(0, propertyBinder);
+        });
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -732,13 +729,10 @@ public class ComplexObjectModelBinderTest
         );
         var propertyBinder = new TestModelBinderProvider(property, ModelBindingResult.Failed());
 
-        var binder = CreateBinder(
-            bindingContext.ModelMetadata,
-            options =>
-            {
-                options.ModelBinderProviders.Insert(0, propertyBinder);
-            }
-        );
+        var binder = CreateBinder(bindingContext.ModelMetadata, options =>
+        {
+            options.ModelBinderProviders.Insert(0, propertyBinder);
+        });
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -776,13 +770,10 @@ public class ComplexObjectModelBinderTest
             ModelBindingResult.Success(model: null)
         );
 
-        var binder = CreateBinder(
-            bindingContext.ModelMetadata,
-            options =>
-            {
-                options.ModelBinderProviders.Insert(0, propertyBinder);
-            }
-        );
+        var binder = CreateBinder(bindingContext.ModelMetadata, options =>
+        {
+            options.ModelBinderProviders.Insert(0, propertyBinder);
+        });
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -814,13 +805,10 @@ public class ComplexObjectModelBinderTest
         );
         var propertyBinder = new TestModelBinderProvider(property, ModelBindingResult.Failed());
 
-        var binder = CreateBinder(
-            bindingContext.ModelMetadata,
-            options =>
-            {
-                options.ModelBinderProviders.Insert(0, propertyBinder);
-            }
-        );
+        var binder = CreateBinder(bindingContext.ModelMetadata, options =>
+        {
+            options.ModelBinderProviders.Insert(0, propertyBinder);
+        });
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -843,13 +831,10 @@ public class ComplexObjectModelBinderTest
         );
         var propertyBinder = new TestModelBinderProvider(property, ModelBindingResult.Failed());
 
-        var binder = CreateBinder(
-            bindingContext.ModelMetadata,
-            options =>
-            {
-                options.ModelBinderProviders.Insert(0, propertyBinder);
-            }
-        );
+        var binder = CreateBinder(bindingContext.ModelMetadata, options =>
+        {
+            options.ModelBinderProviders.Insert(0, propertyBinder);
+        });
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -871,13 +856,10 @@ public class ComplexObjectModelBinderTest
         var property = GetMetadataForProperty(model.GetType(), nameof(Person.ValueTypeRequired));
         var propertyBinder = new TestModelBinderProvider(property, ModelBindingResult.Failed());
 
-        var binder = CreateBinder(
-            bindingContext.ModelMetadata,
-            options =>
-            {
-                options.ModelBinderProviders.Insert(0, propertyBinder);
-            }
-        );
+        var binder = CreateBinder(bindingContext.ModelMetadata, options =>
+        {
+            options.ModelBinderProviders.Insert(0, propertyBinder);
+        });
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -902,13 +884,10 @@ public class ComplexObjectModelBinderTest
             ModelBindingResult.Success(model: 57)
         );
 
-        var binder = CreateBinder(
-            bindingContext.ModelMetadata,
-            options =>
-            {
-                options.ModelBinderProviders.Insert(0, propertyBinder);
-            }
-        );
+        var binder = CreateBinder(bindingContext.ModelMetadata, options =>
+        {
+            options.ModelBinderProviders.Insert(0, propertyBinder);
+        });
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -929,26 +908,20 @@ public class ComplexObjectModelBinderTest
 
         var bindingContext = CreateContext(containerMetadata, model);
 
-        var binder = CreateBinder(
-            bindingContext.ModelMetadata,
-            options =>
-            {
-                var firstNameProperty = containerMetadata.Properties[nameof(model.FirstName)];
-                options.ModelBinderProviders.Insert(
-                    0,
-                    new TestModelBinderProvider(
-                        firstNameProperty,
-                        ModelBindingResult.Success("John")
-                    )
-                );
+        var binder = CreateBinder(bindingContext.ModelMetadata, options =>
+        {
+            var firstNameProperty = containerMetadata.Properties[nameof(model.FirstName)];
+            options.ModelBinderProviders.Insert(
+                0,
+                new TestModelBinderProvider(firstNameProperty, ModelBindingResult.Success("John"))
+            );
 
-                var lastNameProperty = containerMetadata.Properties[nameof(model.LastName)];
-                options.ModelBinderProviders.Insert(
-                    0,
-                    new TestModelBinderProvider(lastNameProperty, ModelBindingResult.Success("Doe"))
-                );
-            }
-        );
+            var lastNameProperty = containerMetadata.Properties[nameof(model.LastName)];
+            options.ModelBinderProviders.Insert(
+                0,
+                new TestModelBinderProvider(lastNameProperty, ModelBindingResult.Success("Doe"))
+            );
+        });
 
         // Act
         await binder.BindModelAsync(bindingContext);

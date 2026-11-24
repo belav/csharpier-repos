@@ -12,28 +12,30 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
 [Trait(Traits.Feature, Traits.Features.Outlining)]
-public class InitializerExpressionStructureTests : AbstractCSharpSyntaxNodeStructureTests<InitializerExpressionSyntax>
+public class InitializerExpressionStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<InitializerExpressionSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider()
-        => new InitializerExpressionStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new InitializerExpressionStructureProvider();
 
     [Fact]
     public async Task TestOuterInitializer()
     {
         await VerifyBlockSpansAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = {|hint:new Dictionary<int, int>{|textspan: $${
-                            { 1, 2 },
-                            { 1, 2 },
-                        }|}|};
-                    }
+                    var v = {|hint:new Dictionary<int, int>{|textspan: $${
+                        { 1, 2 },
+                        { 1, 2 },
+                    }|}|};
                 }
-                """,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            }
+            """,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -41,19 +43,20 @@ public class InitializerExpressionStructureTests : AbstractCSharpSyntaxNodeStruc
     {
         await VerifyBlockSpansAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = new Dictionary<int, int>{
-                            {|hint:{|textspan:$${
-                                1, 2
-                            },|}|}
-                            { 1, 2 },
-                        };
-                    }
+                    var v = new Dictionary<int, int>{
+                        {|hint:{|textspan:$${
+                            1, 2
+                        },|}|}
+                        { 1, 2 },
+                    };
                 }
-                """,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            }
+            """,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 }

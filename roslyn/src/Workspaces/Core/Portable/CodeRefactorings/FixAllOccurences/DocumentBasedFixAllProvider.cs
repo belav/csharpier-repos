@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
     /// </summary>
     /// <remarks>
     /// This type provides suitable logic for fixing large solutions in an efficient manner.  Projects are serially
-    /// processed, with all the documents in the project being processed in parallel. 
+    /// processed, with all the documents in the project being processed in parallel.
     /// <see cref="FixAllAsync(FixAllContext, Document, Optional{ImmutableArray{TextSpan}})"/> is invoked for each document for implementors to process.
     ///
     /// TODO: Make public, tracked with https://github.com/dotnet/roslyn/issues/60703
@@ -33,9 +33,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         private readonly ImmutableArray<FixAllScope> _supportedFixAllScopes;
 
         protected DocumentBasedFixAllProvider()
-            : this(DefaultSupportedFixAllScopes)
-        {
-        }
+            : this(DefaultSupportedFixAllScopes) { }
 
         protected DocumentBasedFixAllProvider(ImmutableArray<FixAllScope> supportedFixAllScopes)
         {
@@ -46,8 +44,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// Produce a suitable title for the fix-all <see cref="CodeAction"/> this type creates in <see
         /// cref="GetFixAsync(FixAllContext)"/>.  Override this if customizing that title is desired.
         /// </summary>
-        protected virtual string GetFixAllTitle(FixAllContext fixAllContext)
-            => fixAllContext.GetDefaultFixAllTitle();
+        protected virtual string GetFixAllTitle(FixAllContext fixAllContext) =>
+            fixAllContext.GetDefaultFixAllTitle();
 
         /// <summary>
         /// Apply fix all operation for the code refactoring in the <see cref="FixAllContext.Document"/>
@@ -63,20 +61,33 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// <para>-or-</para>
         /// <para><see langword="null"/>, if no changes were made to the document.</para>
         /// </returns>
-        protected abstract Task<Document?> FixAllAsync(FixAllContext fixAllContext, Document document, Optional<ImmutableArray<TextSpan>> fixAllSpans);
+        protected abstract Task<Document?> FixAllAsync(
+            FixAllContext fixAllContext,
+            Document document,
+            Optional<ImmutableArray<TextSpan>> fixAllSpans
+        );
 
-        public sealed override IEnumerable<FixAllScope> GetSupportedFixAllScopes()
-            => _supportedFixAllScopes;
+        public sealed override IEnumerable<FixAllScope> GetSupportedFixAllScopes() =>
+            _supportedFixAllScopes;
 
-        public sealed override Task<CodeAction?> GetFixAsync(FixAllContext fixAllContext)
-            => DefaultFixAllProviderHelpers.GetFixAsync(
-                fixAllContext.GetDefaultFixAllTitle(), fixAllContext, FixAllContextsHelperAsync);
+        public sealed override Task<CodeAction?> GetFixAsync(FixAllContext fixAllContext) =>
+            DefaultFixAllProviderHelpers.GetFixAsync(
+                fixAllContext.GetDefaultFixAllTitle(),
+                fixAllContext,
+                FixAllContextsHelperAsync
+            );
 
-        private Task<Solution?> FixAllContextsHelperAsync(FixAllContext originalFixAllContext, ImmutableArray<FixAllContext> fixAllContexts)
-            => DocumentBasedFixAllProviderHelpers.FixAllContextsAsync(originalFixAllContext, fixAllContexts,
-                    originalFixAllContext.Progress,
-                    this.GetFixAllTitle(originalFixAllContext),
-                    GetFixedDocumentsAsync);
+        private Task<Solution?> FixAllContextsHelperAsync(
+            FixAllContext originalFixAllContext,
+            ImmutableArray<FixAllContext> fixAllContexts
+        ) =>
+            DocumentBasedFixAllProviderHelpers.FixAllContextsAsync(
+                originalFixAllContext,
+                fixAllContexts,
+                originalFixAllContext.Progress,
+                this.GetFixAllTitle(originalFixAllContext),
+                GetFixedDocumentsAsync
+            );
 
         /// <summary>
         /// Attempts to apply fix all operations returning, for each updated document, either
@@ -84,37 +95,65 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// them, and are used to perform a final cleanup pass for formatting/simplication/etc.  Text is returned for
         /// documents that don't support syntax.
         /// </summary>
-        private async Task<Dictionary<DocumentId, (SyntaxNode? node, SourceText? text)>> GetFixedDocumentsAsync(
-            FixAllContext fixAllContext, IProgress<CodeAnalysisProgress> progressTracker)
+        private async Task<
+            Dictionary<DocumentId, (SyntaxNode? node, SourceText? text)>
+        > GetFixedDocumentsAsync(
+            FixAllContext fixAllContext,
+            IProgress<CodeAnalysisProgress> progressTracker
+        )
         {
-            Contract.ThrowIfFalse(fixAllContext.Scope is FixAllScope.Document or FixAllScope.Project
-                or FixAllScope.ContainingMember or FixAllScope.ContainingType);
+            Contract.ThrowIfFalse(
+                fixAllContext.Scope
+                    is FixAllScope.Document
+                        or FixAllScope.Project
+                        or FixAllScope.ContainingMember
+                        or FixAllScope.ContainingType
+            );
 
             var cancellationToken = fixAllContext.CancellationToken;
 
             using var _1 = progressTracker.ItemCompletedScope();
-            using var _2 = ArrayBuilder<Task<(DocumentId, (SyntaxNode? node, SourceText? text))>>.GetInstance(out var tasks);
+            using var _2 = ArrayBuilder<
+                Task<(DocumentId, (SyntaxNode? node, SourceText? text))>
+            >.GetInstance(out var tasks);
 
-            var docIdToNewRootOrText = new Dictionary<DocumentId, (SyntaxNode? node, SourceText? text)>();
+            var docIdToNewRootOrText =
+                new Dictionary<DocumentId, (SyntaxNode? node, SourceText? text)>();
 
             // Process all documents in parallel to get the change for each doc.
-            var documentsAndSpansToFix = await fixAllContext.GetFixAllSpansAsync(cancellationToken).ConfigureAwait(false);
+            var documentsAndSpansToFix = await fixAllContext
+                .GetFixAllSpansAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             foreach (var (document, spans) in documentsAndSpansToFix)
             {
-                tasks.Add(Task.Run(async () =>
-                {
-                    var newDocument = await this.FixAllAsync(fixAllContext, document, spans).ConfigureAwait(false);
-                    if (newDocument == null || newDocument == document)
-                        return default;
+                tasks.Add(
+                    Task.Run(
+                        async () =>
+                        {
+                            var newDocument = await this.FixAllAsync(fixAllContext, document, spans)
+                                .ConfigureAwait(false);
+                            if (newDocument == null || newDocument == document)
+                                return default;
 
-                    // For documents that support syntax, grab the tree so that we can clean it up later.  If it's a
-                    // language that doesn't support that, then just grab the text.
-                    var node = newDocument.SupportsSyntaxTree ? await newDocument.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false) : null;
-                    var text = newDocument.SupportsSyntaxTree ? null : await newDocument.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
+                            // For documents that support syntax, grab the tree so that we can clean it up later.  If it's a
+                            // language that doesn't support that, then just grab the text.
+                            var node = newDocument.SupportsSyntaxTree
+                                ? await newDocument
+                                    .GetRequiredSyntaxRootAsync(cancellationToken)
+                                    .ConfigureAwait(false)
+                                : null;
+                            var text = newDocument.SupportsSyntaxTree
+                                ? null
+                                : await newDocument
+                                    .GetValueTextAsync(cancellationToken)
+                                    .ConfigureAwait(false);
 
-                    return (document.Id, (node, text));
-                }, cancellationToken));
+                            return (document.Id, (node, text));
+                        },
+                        cancellationToken
+                    )
+                );
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);

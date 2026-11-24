@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
 {
     using VerifyCS = CSharpCodeFixVerifier<
         EmptyDiagnosticAnalyzer,
-        CSharpDisambiguateSameVariableCodeFixProvider>;
+        CSharpDisambiguateSameVariableCodeFixProvider
+    >;
 
     public class DisambiguateSameVariableTests
     {
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28290")]
         public async Task TestParamToParamWithSameNamedField()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     int a;
@@ -79,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
                         {|CS1717:a = a|};
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     int a;
@@ -88,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
                         this.a = a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -111,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28290")]
         public async Task TestParamToParamWithUnderscoreNamedField()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     int _a;
@@ -120,7 +125,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
                         {|CS1717:a = a|};
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     int _a;
@@ -129,13 +135,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
                         _a = a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28290")]
         public async Task TestParamToParamWithCapitalizedField()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     int A;
@@ -144,7 +152,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
                         {|CS1717:a = a|};
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     int A;
@@ -153,13 +162,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
                         A = a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28290")]
         public async Task TestParamToParamWithProperty()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     int A { get; set; }
@@ -168,7 +179,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
                         {|CS1717:a = a|};
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     int A { get; set; }
@@ -177,13 +189,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
                         A = a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28290")]
         public async Task TestParamToParamWithReadOnlyFieldInConstructor()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     readonly int a;
@@ -192,7 +206,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
                         {|CS1717:a = a|};
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     readonly int a;
@@ -201,14 +216,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
                         this.a = a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28290")]
         public async Task TestParamToParamWithReadOnlyFieldOutsideOfConstructor()
         {
             // Not legal, but is at least something they might want.
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     readonly int a;
@@ -217,7 +234,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
                         {|CS1717:a = a|};
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     readonly int a;
@@ -226,13 +244,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
                         {|CS0191:this.a|} = a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28290")]
         public async Task TestParamToParamWithAccessibleFieldInBaseType()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class Base
                 {
                     protected int a;
@@ -245,7 +265,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
                         {|CS1717:a = a|};
                     }
                 }
-                """, """
+                """,
+                """
                 class Base
                 {
                     protected int a;
@@ -258,7 +279,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
                         this.a = a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28290")]
@@ -302,7 +324,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28290")]
         public async Task TestParamToParamCompareWithSameNamedField()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     int a;
@@ -313,7 +336,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     int a;
@@ -324,13 +348,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28290")]
         public async Task TestFixAll1()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     int a;
@@ -340,7 +366,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
                         {|CS1717:a = a|};
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     int a;
@@ -350,13 +377,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
                         this.a = a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28290")]
         public async Task TestFieldToFieldWithPropAvailableOffOfThis()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     int a;
@@ -366,7 +395,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
                         {|CS1717:this.a = this.a|};
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     int a;
@@ -376,13 +406,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
                         this.A = this.a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28290")]
         public async Task TestFieldToFieldWithPropAvailableOffOfOtherInstance()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     int a;
@@ -392,7 +424,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
                         {|CS1717:c.a = c.a|};
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     int a;
@@ -402,7 +435,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
                         c.A = c.a;
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

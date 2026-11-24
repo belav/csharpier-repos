@@ -8,6 +8,6 @@ namespace System.Runtime.Caching
     public enum CacheItemPriority
     {
         Default = 0,
-        NotRemovable
+        NotRemovable,
     }
 }

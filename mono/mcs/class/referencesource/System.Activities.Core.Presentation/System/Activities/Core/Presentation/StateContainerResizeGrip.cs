@@ -19,19 +19,30 @@ namespace System.Activities.Core.Presentation
     //This class is visual representation of ResizeGrip like control, which is used in a Grid to allow resizing.
     class StateContainerResizeGrip : Control
     {
-        public static readonly DependencyProperty IconProperty =
-            DependencyProperty.Register("Icon", typeof(DrawingBrush), typeof(StateContainerResizeGrip));
+        public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+            "Icon",
+            typeof(DrawingBrush),
+            typeof(StateContainerResizeGrip)
+        );
 
         public static readonly DependencyProperty ParentStateContainerEditorProperty =
-            DependencyProperty.Register("ParentStateContainerEditor", typeof(StateContainerEditor), typeof(StateContainerResizeGrip));
+            DependencyProperty.Register(
+                "ParentStateContainerEditor",
+                typeof(StateContainerEditor),
+                typeof(StateContainerResizeGrip)
+            );
 
-        public static readonly DependencyProperty DisabledProperty =
-            DependencyProperty.Register("Disabled", typeof(bool), typeof(StateContainerResizeGrip), new UIPropertyMetadata(false));
+        public static readonly DependencyProperty DisabledProperty = DependencyProperty.Register(
+            "Disabled",
+            typeof(bool),
+            typeof(StateContainerResizeGrip),
+            new UIPropertyMetadata(false)
+        );
 
         Point offset;
 
-        // The scope is used for capturing the current size of all the StateContainer instances that contain the target ResizeGrip.  
-        // As the user resizes the target StateContainer, its Visual ancestors would get resized.  
+        // The scope is used for capturing the current size of all the StateContainer instances that contain the target ResizeGrip.
+        // As the user resizes the target StateContainer, its Visual ancestors would get resized.
         // The purpose of the scope is to store their sizes before the resizing to facilitate Undo.
         EditingScope scope;
 
@@ -75,7 +86,8 @@ namespace System.Activities.Core.Presentation
             {
                 Fx.Assert(false, "The model item type is invalid");
             }
-            this.scope = (EditingScope)this.ParentStateContainerEditor.ModelItem.BeginEdit(undoItemName);
+            this.scope = (EditingScope)
+                this.ParentStateContainerEditor.ModelItem.BeginEdit(undoItemName);
             base.OnGotMouseCapture(e);
         }
 
@@ -98,11 +110,14 @@ namespace System.Activities.Core.Presentation
                 this.CaptureMouse();
                 if (this.scope != null)
                 {
-                    this.ParentStateContainerEditor.StoreShapeSizeWithUndoRecursively(this.ParentStateContainerEditor.ModelItem);                    
+                    this.ParentStateContainerEditor.StoreShapeSizeWithUndoRecursively(
+                        this.ParentStateContainerEditor.ModelItem
+                    );
                 }
                 // Select the designer when it is being resized
-                WorkflowViewElement designer = this.ParentStateContainerEditor.ModelItem.View as WorkflowViewElement;
-                
+                WorkflowViewElement designer =
+                    this.ParentStateContainerEditor.ModelItem.View as WorkflowViewElement;
+
                 if (!designer.IsKeyboardFocusWithin)
                 {
                     // Fix 185562 - if the designer has the keyboard focus (i.e. DisplayName being edited)
@@ -112,7 +127,10 @@ namespace System.Activities.Core.Presentation
                     Keyboard.Focus(designer);
                 }
 
-                StateMachineDesigner stateMachineDesigner = VisualTreeUtils.FindVisualAncestor<StateMachineDesigner>(this.ParentStateContainerEditor);
+                StateMachineDesigner stateMachineDesigner =
+                    VisualTreeUtils.FindVisualAncestor<StateMachineDesigner>(
+                        this.ParentStateContainerEditor
+                    );
                 stateMachineDesigner.IsResizing = true;
 
                 e.Handled = true;
@@ -125,15 +143,25 @@ namespace System.Activities.Core.Presentation
             base.OnMouseMove(args);
             if (args != null && !this.Disabled)
             {
-                if (args.LeftButton == MouseButtonState.Pressed && this.IsMouseCaptured && this.scope != null)
+                if (
+                    args.LeftButton == MouseButtonState.Pressed
+                    && this.IsMouseCaptured
+                    && this.scope != null
+                )
                 {
                     StateContainerEditor stateContainerEditor = this.ParentStateContainerEditor;
                     FreeFormPanel panel = stateContainerEditor.Panel;
                     Grid stateContainerGrid = stateContainerEditor.stateContainerGrid;
                     Point currentPosition = Mouse.GetPosition(stateContainerGrid);
                     currentPosition.Offset(this.offset.X, this.offset.Y);
-                    stateContainerEditor.StateContainerWidth = Math.Min(Math.Max(panel.RequiredWidth, currentPosition.X), stateContainerGrid.MaxWidth);
-                    stateContainerEditor.StateContainerHeight = Math.Min(Math.Max(panel.RequiredHeight, currentPosition.Y), stateContainerGrid.MaxHeight);
+                    stateContainerEditor.StateContainerWidth = Math.Min(
+                        Math.Max(panel.RequiredWidth, currentPosition.X),
+                        stateContainerGrid.MaxWidth
+                    );
+                    stateContainerEditor.StateContainerHeight = Math.Min(
+                        Math.Max(panel.RequiredHeight, currentPosition.Y),
+                        stateContainerGrid.MaxHeight
+                    );
                     args.Handled = true;
                 }
             }
@@ -144,12 +172,24 @@ namespace System.Activities.Core.Presentation
             if (e != null && !this.Disabled && this.scope != null)
             {
                 ModelItem stateContainerModelItem = this.ParentStateContainerEditor.ModelItem;
-                ViewStateService viewStateService = this.ParentStateContainerEditor.Context.Services.GetService<ViewStateService>();
-                viewStateService.StoreViewStateWithUndo(stateContainerModelItem, StateContainerEditor.StateContainerWidthViewStateKey, this.ParentStateContainerEditor.StateContainerWidth);
-                viewStateService.StoreViewStateWithUndo(stateContainerModelItem, StateContainerEditor.StateContainerHeightViewStateKey, this.ParentStateContainerEditor.StateContainerHeight);
+                ViewStateService viewStateService =
+                    this.ParentStateContainerEditor.Context.Services.GetService<ViewStateService>();
+                viewStateService.StoreViewStateWithUndo(
+                    stateContainerModelItem,
+                    StateContainerEditor.StateContainerWidthViewStateKey,
+                    this.ParentStateContainerEditor.StateContainerWidth
+                );
+                viewStateService.StoreViewStateWithUndo(
+                    stateContainerModelItem,
+                    StateContainerEditor.StateContainerHeightViewStateKey,
+                    this.ParentStateContainerEditor.StateContainerHeight
+                );
                 Mouse.OverrideCursor = null;
                 Mouse.Capture(null);
-                StateMachineDesigner stateMachineDesigner = VisualTreeUtils.FindVisualAncestor<StateMachineDesigner>(this.ParentStateContainerEditor);
+                StateMachineDesigner stateMachineDesigner =
+                    VisualTreeUtils.FindVisualAncestor<StateMachineDesigner>(
+                        this.ParentStateContainerEditor
+                    );
                 stateMachineDesigner.IsResizing = false;
                 e.Handled = true;
             }

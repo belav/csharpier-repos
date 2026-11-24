@@ -13,7 +13,8 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
 {
     [Method(Methods.TextDocumentSemanticTokensRangeName)]
-    internal class SemanticTokensRangeHandler : ILspServiceDocumentRequestHandler<SemanticTokensRangeParams, LSP.SemanticTokens>
+    internal class SemanticTokensRangeHandler
+        : ILspServiceDocumentRequestHandler<SemanticTokensRangeParams, LSP.SemanticTokens>
     {
         private readonly IGlobalOptionService _globalOptions;
         private readonly SemanticTokensRefreshQueue _semanticTokenRefreshQueue;
@@ -23,13 +24,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
 
         public SemanticTokensRangeHandler(
             IGlobalOptionService globalOptions,
-            SemanticTokensRefreshQueue semanticTokensRefreshQueue)
+            SemanticTokensRefreshQueue semanticTokensRefreshQueue
+        )
         {
             _globalOptions = globalOptions;
             _semanticTokenRefreshQueue = semanticTokensRefreshQueue;
         }
 
-        public TextDocumentIdentifier GetTextDocumentIdentifier(LSP.SemanticTokensRangeParams request)
+        public TextDocumentIdentifier GetTextDocumentIdentifier(
+            LSP.SemanticTokensRangeParams request
+        )
         {
             Contract.ThrowIfNull(request.TextDocument);
             return request.TextDocument;
@@ -38,11 +42,20 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         public async Task<LSP.SemanticTokens> HandleRequestAsync(
             SemanticTokensRangeParams request,
             RequestContext context,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(request.TextDocument, "TextDocument is null.");
             var ranges = new[] { request.Range };
-            var tokensData = await SemanticTokensHelpers.HandleRequestHelperAsync(_globalOptions, _semanticTokenRefreshQueue, ranges, context, cancellationToken).ConfigureAwait(false);
+            var tokensData = await SemanticTokensHelpers
+                .HandleRequestHelperAsync(
+                    _globalOptions,
+                    _semanticTokenRefreshQueue,
+                    ranges,
+                    context,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return new LSP.SemanticTokens { Data = tokensData };
         }
     }

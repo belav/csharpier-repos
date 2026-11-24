@@ -3,17 +3,17 @@ namespace System.Workflow.Activities
     #region Imports
 
     using System;
-    using System.Text;
-    using System.Reflection;
-    using System.Collections;
     using System.CodeDom;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Drawing;
+    using System.Reflection;
+    using System.Text;
     using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
-    using System.Collections.Generic;
     using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
 
     #endregion
 
@@ -22,29 +22,37 @@ namespace System.Workflow.Activities
     [Designer(typeof(SequenceDesigner), typeof(IDesigner))]
     [ToolboxBitmap(typeof(SequenceActivity), "Resources.Sequence.png")]
     [SRCategory(SR.Standard)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
-    public class SequenceActivity : CompositeActivity, IActivityEventListener<ActivityExecutionStatusChangedEventArgs>
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
+    public class SequenceActivity
+        : CompositeActivity,
+            IActivityEventListener<ActivityExecutionStatusChangedEventArgs>
     {
         #region Constructors
 
-        public SequenceActivity()
-        {
-        }
+        public SequenceActivity() { }
 
         public SequenceActivity(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         #endregion
-        private static readonly DependencyProperty SequenceFaultingProperty = DependencyProperty.Register("SequenceFaulting", typeof(bool), typeof(SequenceActivity));
-        private static readonly DependencyProperty ActiveChildQualifiedNameProperty = DependencyProperty.Register("ActiveChildQualifiedName", typeof(string), typeof(SequenceActivity));
+        private static readonly DependencyProperty SequenceFaultingProperty =
+            DependencyProperty.Register("SequenceFaulting", typeof(bool), typeof(SequenceActivity));
+        private static readonly DependencyProperty ActiveChildQualifiedNameProperty =
+            DependencyProperty.Register(
+                "ActiveChildQualifiedName",
+                typeof(string),
+                typeof(SequenceActivity)
+            );
 
         [NonSerialized]
         private bool activeChildRemovedInDynamicUpdate = false;
 
         #region Protected Methods
-        protected override ActivityExecutionStatus Execute(ActivityExecutionContext executionContext)
+        protected override ActivityExecutionStatus Execute(
+            ActivityExecutionContext executionContext
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -58,10 +66,14 @@ namespace System.Workflow.Activities
             {
                 this.EnabledActivities[0].RegisterForStatusChange(Activity.ClosedEvent, this);
                 executionContext.ExecuteActivity(this.EnabledActivities[0]);
-                this.SetValue(ActiveChildQualifiedNameProperty, this.EnabledActivities[0].QualifiedName);
+                this.SetValue(
+                    ActiveChildQualifiedNameProperty,
+                    this.EnabledActivities[0].QualifiedName
+                );
                 return ActivityExecutionStatus.Executing;
             }
         }
+
         protected override ActivityExecutionStatus Cancel(ActivityExecutionContext executionContext)
         {
             if (executionContext == null)
@@ -77,7 +89,10 @@ namespace System.Workflow.Activities
                     return ActivityExecutionStatus.Canceling;
                 }
 
-                if (childActivity.ExecutionStatus == ActivityExecutionStatus.Canceling || childActivity.ExecutionStatus == ActivityExecutionStatus.Faulting)
+                if (
+                    childActivity.ExecutionStatus == ActivityExecutionStatus.Canceling
+                    || childActivity.ExecutionStatus == ActivityExecutionStatus.Faulting
+                )
                     return ActivityExecutionStatus.Canceling;
 
                 if (childActivity.ExecutionStatus == ActivityExecutionStatus.Closed)
@@ -90,7 +105,10 @@ namespace System.Workflow.Activities
             return ActivityExecutionStatus.Closed;
         }
 
-        protected override ActivityExecutionStatus HandleFault(ActivityExecutionContext executionContext, Exception exception)
+        protected override ActivityExecutionStatus HandleFault(
+            ActivityExecutionContext executionContext,
+            Exception exception
+        )
         {
             this.SetValue(SequenceFaultingProperty, true);
 
@@ -104,7 +122,10 @@ namespace System.Workflow.Activities
         #endregion
 
         #region IActivityEventListener<ActivityStatusChangeEventArgs> Implementation
-        void IActivityEventListener<ActivityExecutionStatusChangedEventArgs>.OnEvent(Object sender, ActivityExecutionStatusChangedEventArgs e)
+        void IActivityEventListener<ActivityExecutionStatusChangedEventArgs>.OnEvent(
+            Object sender,
+            ActivityExecutionStatusChangedEventArgs e
+        )
         {
             if (sender == null)
                 throw new ArgumentNullException("sender");
@@ -113,7 +134,10 @@ namespace System.Workflow.Activities
 
             ActivityExecutionContext context = sender as ActivityExecutionContext;
             if (context == null)
-                throw new ArgumentException(SR.Error_SenderMustBeActivityExecutionContext, "sender");
+                throw new ArgumentException(
+                    SR.Error_SenderMustBeActivityExecutionContext,
+                    "sender"
+                );
 
             e.Activity.UnregisterForStatusChange(Activity.ClosedEvent, this);
 
@@ -122,9 +146,11 @@ namespace System.Workflow.Activities
             if (sequenceActivity == null)
                 throw new ArgumentException("sender");
 
-            if (sequenceActivity.ExecutionStatus == ActivityExecutionStatus.Canceling ||
-                (sequenceActivity.ExecutionStatus == ActivityExecutionStatus.Faulting) &&
-                (bool)this.GetValue(SequenceFaultingProperty))
+            if (
+                sequenceActivity.ExecutionStatus == ActivityExecutionStatus.Canceling
+                || (sequenceActivity.ExecutionStatus == ActivityExecutionStatus.Faulting)
+                    && (bool)this.GetValue(SequenceFaultingProperty)
+            )
             {
                 if (sequenceActivity.ExecutionStatus == ActivityExecutionStatus.Faulting)
                     this.RemoveProperty(SequenceFaultingProperty);
@@ -171,10 +197,12 @@ namespace System.Workflow.Activities
 
             seqList[indexOfNextActivity].RegisterForStatusChange(Activity.ClosedEvent, this);
             executionContext.ExecuteActivity(seqList[indexOfNextActivity]);
-            this.SetValue(ActiveChildQualifiedNameProperty, seqList[indexOfNextActivity].QualifiedName);
+            this.SetValue(
+                ActiveChildQualifiedNameProperty,
+                seqList[indexOfNextActivity].QualifiedName
+            );
             return true;
         }
-
 
         protected virtual void OnSequenceComplete(ActivityExecutionContext executionContext)
         {
@@ -186,24 +214,34 @@ namespace System.Workflow.Activities
         #endregion
 
         #region Dynamic Update Handler
-        protected override void OnActivityChangeRemove(ActivityExecutionContext executionContext, Activity removedActivity)
+        protected override void OnActivityChangeRemove(
+            ActivityExecutionContext executionContext,
+            Activity removedActivity
+        )
         {
-            String activeChildQualifiedName = this.GetValue(ActiveChildQualifiedNameProperty) as String;
+            String activeChildQualifiedName =
+                this.GetValue(ActiveChildQualifiedNameProperty) as String;
 
             if (removedActivity.QualifiedName.Equals(activeChildQualifiedName))
                 activeChildRemovedInDynamicUpdate = true;
 
             base.OnActivityChangeRemove(executionContext, removedActivity);
         }
-        protected override void OnWorkflowChangesCompleted(ActivityExecutionContext executionContext)
+
+        protected override void OnWorkflowChangesCompleted(
+            ActivityExecutionContext executionContext
+        )
         {
-            String activeChildQualifiedName = this.GetValue(ActiveChildQualifiedNameProperty) as String;
+            String activeChildQualifiedName =
+                this.GetValue(ActiveChildQualifiedNameProperty) as String;
 
             if (activeChildQualifiedName != null && activeChildRemovedInDynamicUpdate)
-            {   //We have our active child removed.    
-                if (this.ExecutionStatus == ActivityExecutionStatus.Canceling ||
-                   (this.ExecutionStatus == ActivityExecutionStatus.Faulting) &&
-                   (bool)this.GetValue(SequenceFaultingProperty))
+            { //We have our active child removed.
+                if (
+                    this.ExecutionStatus == ActivityExecutionStatus.Canceling
+                    || (this.ExecutionStatus == ActivityExecutionStatus.Faulting)
+                        && (bool)this.GetValue(SequenceFaultingProperty)
+                )
                 {
                     if (this.ExecutionStatus == ActivityExecutionStatus.Faulting)
                         this.RemoveProperty(SequenceFaultingProperty);

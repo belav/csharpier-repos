@@ -4,19 +4,20 @@ using System;
 using TestLibrary;
 using Xunit;
 
-public class ArrayInit {
-
-	[Fact]
-	public static int TestEntryPoint()
-	{
-
+public class ArrayInit
+{
+    [Fact]
+    public static int TestEntryPoint()
+    {
         ArrayInit ai = new ArrayInit();
-        TestFramework.BeginTestCase("Exception thrown in default ctor of a valuetype during Array.Initialize");
+        TestFramework.BeginTestCase(
+            "Exception thrown in default ctor of a valuetype during Array.Initialize"
+        );
         if (ai.RunTests())
             return 100;
         else
             return 0;
-	}
+    }
 
     public bool RunTests()
     {
@@ -29,7 +30,9 @@ public class ArrayInit {
 
     public bool PosTest1()
     {
-        TestFramework.BeginScenario("PosTest1: Initialize on vector of value-type, where default ctor throws");
+        TestFramework.BeginScenario(
+            "PosTest1: Initialize on vector of value-type, where default ctor throws"
+        );
         bool retVal = true;
         try
         {
@@ -38,9 +41,7 @@ public class ArrayInit {
             TestFramework.LogError("001", "Expected exception to be thrown from Initialize");
             retVal = false;
         }
-        catch (NotSupportedException)
-        {
-        }
+        catch (NotSupportedException) { }
         catch (Exception e)
         {
             TestFramework.LogError("002", "Unexpected exception: " + e.ToString());
@@ -51,18 +52,18 @@ public class ArrayInit {
 
     public bool PosTest2()
     {
-        TestFramework.BeginScenario("PosTest2: Initialize on multi-dimensional array of value-type, where default ctor throws");
+        TestFramework.BeginScenario(
+            "PosTest2: Initialize on multi-dimensional array of value-type, where default ctor throws"
+        );
         bool retVal = true;
         try
         {
-            VT[,] arrVT = new VT[5,10];
+            VT[,] arrVT = new VT[5, 10];
             arrVT.Initialize();
             TestFramework.LogError("001", "Expected exception to be thrown from Initialize");
             retVal = false;
         }
-        catch (NotSupportedException)
-        {
-        }
+        catch (NotSupportedException) { }
         catch (Exception e)
         {
             TestFramework.LogError("002", "Unexpected exception: " + e.ToString());

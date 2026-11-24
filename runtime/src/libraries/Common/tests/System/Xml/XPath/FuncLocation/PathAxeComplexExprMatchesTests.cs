@@ -24,10 +24,17 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes.ComplexExpressions
         {
             var xml = "books.xml";
             var startingNodePath = "/bookstore/book[3]/author/publication/first.name/text()";
-            var testExpression = @"node()[starts-with(string(name()),'p')]//node()[local-name()=""""]";
+            var testExpression =
+                @"node()[starts-with(string(name()),'p')]//node()[local-name()=""""]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -45,7 +52,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes.ComplexExpressions
             var testExpression = @"node()//node()[local-name()=""""]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -66,8 +79,14 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes.ComplexExpressions
             namespaceManager.AddNamespace("my", "urn:http//www.placeholder-name-here.com/schema/");
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -85,7 +104,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes.ComplexExpressions
             var testExpression = @"bookstore//articles[story1[details]]//node()";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -107,8 +132,14 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes.ComplexExpressions
             namespaceManager.AddNamespace("dt", "urn:uuid:C2F41010-65B3-11d1-A29F-00AA00C14882/");
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -125,7 +156,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes.ComplexExpressions
             var testExpression = @"book[3]//node()";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -142,7 +179,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes.ComplexExpressions
             var testExpression = @"//book[3]//node()//text()";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
     }
 }

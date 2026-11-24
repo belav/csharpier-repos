@@ -13,7 +13,8 @@ namespace Test.Cryptography
             CngAlgorithm algorithm,
             string keySuffix = null,
             [CallerMemberName] string testName = null,
-            params CngProperty[] additionalParameters)
+            params CngProperty[] additionalParameters
+        )
         {
             CngKeyCreationParameters cngCreationParameters = new CngKeyCreationParameters
             {
@@ -26,7 +27,11 @@ namespace Test.Cryptography
                 cngCreationParameters.Parameters.Add(parameter);
             }
 
-            Key = CngKey.Create(algorithm, $"{testName}{algorithm.Algorithm}{keySuffix}", cngCreationParameters);
+            Key = CngKey.Create(
+                algorithm,
+                $"{testName}{algorithm.Algorithm}{keySuffix}",
+                cngCreationParameters
+            );
         }
 
         internal CngKey Key { get; }

@@ -268,13 +268,10 @@ public static class WebHost
             }
         );
 
-        ConfigureWebDefaultsWorker(
-            builder.UseKestrel(ConfigureKestrel),
-            services =>
-            {
-                services.AddRouting();
-            }
-        );
+        ConfigureWebDefaultsWorker(builder.UseKestrel(ConfigureKestrel), services =>
+        {
+            services.AddRouting();
+        });
 
         builder.UseIIS().UseIISIntegration();
     }

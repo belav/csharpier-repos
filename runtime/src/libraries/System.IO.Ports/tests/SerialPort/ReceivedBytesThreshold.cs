@@ -26,8 +26,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void ReceivedBytesThreshold_Default()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 ReceivedEventHandler rcvEventHandler = new ReceivedEventHandler(com1);
                 SerialPortProperties serPortProp = new SerialPortProperties();
@@ -37,7 +45,10 @@ namespace System.IO.Ports.Tests
                 com1.DataReceived += rcvEventHandler.HandleEvent;
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
 
                 Debug.WriteLine("Verifying default ReceivedBytesThreshold");
 
@@ -56,8 +67,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void ReceivedBytesThreshold_Rnd_ExactWrite()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 const int thresh = 8;
 
@@ -67,7 +86,8 @@ namespace System.IO.Ports.Tests
                 com2.Open();
 
                 int timesCalled = 0;
-                com1.DataReceived += (s, args) => {
+                com1.DataReceived += (s, args) =>
+                {
                     if (args.EventType == SerialData.Chars)
                         timesCalled++;
                 };
@@ -82,8 +102,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void ReceivedBytesThreshold_Rnd_MultipleWrite()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 ReceivedEventHandler rcvEventHandler = new ReceivedEventHandler(com1);
                 SerialPortProperties serPortProp = new SerialPortProperties();
@@ -98,14 +126,25 @@ namespace System.IO.Ports.Tests
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
                 serPortProp.SetProperty("ReceivedBytesThreshold", receivedBytesThreshold);
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
 
-                Debug.WriteLine("Verifying writing the number of bytes of ReceivedBytesThreshold after several write calls");
+                Debug.WriteLine(
+                    "Verifying writing the number of bytes of ReceivedBytesThreshold after several write calls"
+                );
 
-                com2.Write(new byte[(int)Math.Floor(com1.ReceivedBytesThreshold / 2.0)], 0,
-                    (int)Math.Floor(com1.ReceivedBytesThreshold / 2.0));
-                com2.Write(new byte[(int)Math.Ceiling(com1.ReceivedBytesThreshold / 2.0)], 0,
-                    (int)Math.Ceiling(com1.ReceivedBytesThreshold / 2.0));
+                com2.Write(
+                    new byte[(int)Math.Floor(com1.ReceivedBytesThreshold / 2.0)],
+                    0,
+                    (int)Math.Floor(com1.ReceivedBytesThreshold / 2.0)
+                );
+                com2.Write(
+                    new byte[(int)Math.Ceiling(com1.ReceivedBytesThreshold / 2.0)],
+                    0,
+                    (int)Math.Ceiling(com1.ReceivedBytesThreshold / 2.0)
+                );
 
                 rcvEventHandler.WaitForEvent(SerialData.Chars, MAX_TIME_WAIT);
 
@@ -116,12 +155,19 @@ namespace System.IO.Ports.Tests
             }
         }
 
-
         [ConditionalFact(nameof(HasNullModem))]
         public void ReceivedBytesThreshold_Above_Exact()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 ReceivedEventHandler rcvEventHandler = new ReceivedEventHandler(com1);
                 SerialPortProperties serPortProp = new SerialPortProperties();
@@ -136,10 +182,15 @@ namespace System.IO.Ports.Tests
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
                 serPortProp.SetProperty("ReceivedBytesThreshold", receivedBytesThreshold);
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
 
-                Debug.WriteLine("Verifying writing less then number of bytes of ReceivedBytesThreshold then setting " +
-                                "ReceivedBytesThreshold to the number of bytes written");
+                Debug.WriteLine(
+                    "Verifying writing less then number of bytes of ReceivedBytesThreshold then setting "
+                        + "ReceivedBytesThreshold to the number of bytes written"
+                );
 
                 com2.Write(new byte[receivedBytesThreshold], 0, receivedBytesThreshold);
 
@@ -147,7 +198,10 @@ namespace System.IO.Ports.Tests
 
                 if (0 != rcvEventHandler.NumEventsHandled)
                 {
-                    Fail("ERROR!!! Unexpected ReceivedEvent was fired NumEventsHandled={0}", rcvEventHandler.NumEventsHandled);
+                    Fail(
+                        "ERROR!!! Unexpected ReceivedEvent was fired NumEventsHandled={0}",
+                        rcvEventHandler.NumEventsHandled
+                    );
                 }
                 else
                 {
@@ -163,12 +217,19 @@ namespace System.IO.Ports.Tests
             }
         }
 
-
         [ConditionalFact(nameof(HasNullModem))]
         public void ReceivedBytesThreshold_Above_Below()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 ReceivedEventHandler rcvEventHandler = new ReceivedEventHandler(com1);
                 SerialPortProperties serPortProp = new SerialPortProperties();
@@ -183,10 +244,15 @@ namespace System.IO.Ports.Tests
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
                 serPortProp.SetProperty("ReceivedBytesThreshold", receivedBytesThreshold - 1);
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
 
-                Debug.WriteLine("Verifying writing less then number of bytes of ReceivedBytesThreshold then setting " +
-                                "ReceivedBytesThreshold to less then the number of bytes written");
+                Debug.WriteLine(
+                    "Verifying writing less then number of bytes of ReceivedBytesThreshold then setting "
+                        + "ReceivedBytesThreshold to less then the number of bytes written"
+                );
 
                 com2.Write(new byte[receivedBytesThreshold], 0, receivedBytesThreshold);
 
@@ -194,7 +260,10 @@ namespace System.IO.Ports.Tests
 
                 if (0 != rcvEventHandler.NumEventsHandled)
                 {
-                    Fail("ERROR!!! Unexpected ReceivedEvent was firered NumEventsHandled={0}", rcvEventHandler.NumEventsHandled);
+                    Fail(
+                        "ERROR!!! Unexpected ReceivedEvent was firered NumEventsHandled={0}",
+                        rcvEventHandler.NumEventsHandled
+                    );
                 }
                 else
                 {
@@ -213,8 +282,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void ReceivedBytesThreshold_Above_1()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 ReceivedEventHandler rcvEventHandler = new ReceivedEventHandler(com1);
                 SerialPortProperties serPortProp = new SerialPortProperties();
@@ -229,10 +306,15 @@ namespace System.IO.Ports.Tests
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
                 serPortProp.SetProperty("ReceivedBytesThreshold", 1);
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
 
-                Debug.WriteLine("Verifying writing less then number of bytes of ReceivedBytesThreshold then " +
-                                "setting ReceivedBytesThreshold to 1");
+                Debug.WriteLine(
+                    "Verifying writing less then number of bytes of ReceivedBytesThreshold then "
+                        + "setting ReceivedBytesThreshold to 1"
+                );
 
                 com2.Write(new byte[receivedBytesThreshold], 0, receivedBytesThreshold);
 
@@ -240,7 +322,10 @@ namespace System.IO.Ports.Tests
 
                 if (0 != rcvEventHandler.NumEventsHandled)
                 {
-                    Fail("ERROR!!! Unexpected ReceivedEvent was firered NumEventsHandled={0}", rcvEventHandler.NumEventsHandled);
+                    Fail(
+                        "ERROR!!! Unexpected ReceivedEvent was firered NumEventsHandled={0}",
+                        rcvEventHandler.NumEventsHandled
+                    );
                 }
                 else
                 {
@@ -281,7 +366,11 @@ namespace System.IO.Ports.Tests
 
         private void VerifyException(int receivedBytesThreshold, Type expectedException)
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 VerifyExceptionAtOpen(com, receivedBytesThreshold, expectedException);
 
@@ -292,14 +381,21 @@ namespace System.IO.Ports.Tests
             }
         }
 
-        private void VerifyExceptionAtOpen(SerialPort com, int receivedBytesThreshold, Type expectedException)
+        private void VerifyExceptionAtOpen(
+            SerialPort com,
+            int receivedBytesThreshold,
+            Type expectedException
+        )
         {
             int origReceivedBytesThreshold = com.ReceivedBytesThreshold;
 
             SerialPortProperties serPortProp = new SerialPortProperties();
 
             serPortProp.SetAllPropertiesToDefaults();
-            serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+            serPortProp.SetProperty(
+                "PortName",
+                TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+            );
 
             try
             {
@@ -307,18 +403,28 @@ namespace System.IO.Ports.Tests
 
                 if (null != expectedException)
                 {
-                    Fail("ERROR!!! Expected Open() to throw {0} and nothing was thrown", expectedException);
+                    Fail(
+                        "ERROR!!! Expected Open() to throw {0} and nothing was thrown",
+                        expectedException
+                    );
                 }
             }
             catch (Exception e)
             {
                 if (null == expectedException)
                 {
-                    Fail("ERROR!!! Expected Open() NOT to throw an exception and {0} was thrown", e.GetType());
+                    Fail(
+                        "ERROR!!! Expected Open() NOT to throw an exception and {0} was thrown",
+                        e.GetType()
+                    );
                 }
                 else if (e.GetType() != expectedException)
                 {
-                    Fail("ERROR!!! Expected Open() throw {0} and {1} was thrown", expectedException, e.GetType());
+                    Fail(
+                        "ERROR!!! Expected Open() throw {0} and {1} was thrown",
+                        expectedException,
+                        e.GetType()
+                    );
                 }
             }
 
@@ -327,14 +433,20 @@ namespace System.IO.Ports.Tests
             com.ReceivedBytesThreshold = origReceivedBytesThreshold;
         }
 
-
-        private void VerifyExceptionAfterOpen(SerialPort com, int receivedBytesThreshold, Type expectedException)
+        private void VerifyExceptionAfterOpen(
+            SerialPort com,
+            int receivedBytesThreshold,
+            Type expectedException
+        )
         {
             SerialPortProperties serPortProp = new SerialPortProperties();
 
             com.Open();
             serPortProp.SetAllPropertiesToOpenDefaults();
-            serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+            serPortProp.SetProperty(
+                "PortName",
+                TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+            );
 
             try
             {
@@ -342,18 +454,28 @@ namespace System.IO.Ports.Tests
 
                 if (null != expectedException)
                 {
-                    Fail("ERROR!!! Expected setting the ReceivedBytesThreshold after Open() to throw {0} and nothing was thrown", expectedException);
+                    Fail(
+                        "ERROR!!! Expected setting the ReceivedBytesThreshold after Open() to throw {0} and nothing was thrown",
+                        expectedException
+                    );
                 }
             }
             catch (Exception e)
             {
                 if (null == expectedException)
                 {
-                    Fail("ERROR!!! Expected setting the ReceivedBytesThreshold after Open() NOT to throw an exception and {0} was thrown", e.GetType());
+                    Fail(
+                        "ERROR!!! Expected setting the ReceivedBytesThreshold after Open() NOT to throw an exception and {0} was thrown",
+                        e.GetType()
+                    );
                 }
                 else if (e.GetType() != expectedException)
                 {
-                    Fail("ERROR!!! Expected setting the ReceivedBytesThreshold after Open() throw {0} and {1} was thrown", expectedException, e.GetType());
+                    Fail(
+                        "ERROR!!! Expected setting the ReceivedBytesThreshold after Open() throw {0} and {1} was thrown",
+                        expectedException,
+                        e.GetType()
+                    );
                 }
             }
             serPortProp.VerifyPropertiesAndPrint(com);
@@ -400,19 +522,31 @@ namespace System.IO.Ports.Tests
                 {
                     if (eventIndex >= NumEventsHandled)
                     {
-                        Fail("ERROR!!! Expected EvenIndex={0} is greater then the number of events handled {1}", eventIndex, NumEventsHandled);
+                        Fail(
+                            "ERROR!!! Expected EvenIndex={0} is greater then the number of events handled {1}",
+                            eventIndex,
+                            NumEventsHandled
+                        );
                     }
 
                     Assert.Equal(eventType, _eventType[eventIndex]);
 
                     if (bytesToRead > _bytesToRead[eventIndex])
                     {
-                        Fail("ERROR!!! Expected BytesToRead={0} actual={1}", bytesToRead, _bytesToRead[eventIndex]);
+                        Fail(
+                            "ERROR!!! Expected BytesToRead={0} actual={1}",
+                            bytesToRead,
+                            _bytesToRead[eventIndex]
+                        );
                     }
 
                     if (_com != Source[eventIndex])
                     {
-                        Fail("ERROR!!! Expected {0} source actual={1}", _com.BaseStream, Source[eventIndex]);
+                        Fail(
+                            "ERROR!!! Expected {0} source actual={1}",
+                            _com.BaseStream,
+                            Source[eventIndex]
+                        );
                     }
                 }
             }

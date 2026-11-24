@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis
     /// <summary>
     /// A list of <see cref="SyntaxNodeOrToken"/> structures.
     /// </summary>
-    public readonly struct SyntaxNodeOrTokenList : IEquatable<SyntaxNodeOrTokenList>, IReadOnlyCollection<SyntaxNodeOrToken>
+    public readonly struct SyntaxNodeOrTokenList
+        : IEquatable<SyntaxNodeOrTokenList>,
+            IReadOnlyCollection<SyntaxNodeOrToken>
     {
         /// <summary>
         /// The underlying field
@@ -50,18 +52,14 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="nodesAndTokens">The sequence of nodes and tokens</param>
         public SyntaxNodeOrTokenList(IEnumerable<SyntaxNodeOrToken> nodesAndTokens)
-            : this(CreateNode(nodesAndTokens), 0)
-        {
-        }
+            : this(CreateNode(nodesAndTokens), 0) { }
 
         /// <summary>
         /// Create a <see cref="SyntaxNodeOrTokenList"/> from one or more <see cref="SyntaxNodeOrToken"/>.
         /// </summary>
         /// <param name="nodesAndTokens">The nodes and tokens</param>
         public SyntaxNodeOrTokenList(params SyntaxNodeOrToken[] nodesAndTokens)
-            : this((IEnumerable<SyntaxNodeOrToken>)nodesAndTokens)
-        {
-        }
+            : this((IEnumerable<SyntaxNodeOrToken>)nodesAndTokens) { }
 
         private static SyntaxNode? CreateNode(IEnumerable<SyntaxNodeOrToken> nodesAndTokens)
         {
@@ -89,11 +87,16 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public int Count
         {
-            get { return _node == null ? 0 : _node.Green.IsList ? _node.SlotCount : 1; }
+            get
+            {
+                return _node == null ? 0
+                    : _node.Green.IsList ? _node.SlotCount
+                    : 1;
+            }
         }
 
         /// <summary>
-        /// Gets the <see cref="SyntaxNodeOrToken"/> at the specified index. 
+        /// Gets the <see cref="SyntaxNodeOrToken"/> at the specified index.
         /// </summary>
         /// <exception cref="IndexOutOfRangeException"><paramref name="index"/> is out of range.</exception>
         public SyntaxNodeOrToken this[int index]
@@ -116,7 +119,12 @@ namespace Microsoft.CodeAnalysis
                             var green = _node.Green.GetRequiredSlot(index);
                             if (green.IsToken)
                             {
-                                return new SyntaxToken(this.Parent, green, _node.GetChildPosition(index), this.index + index);
+                                return new SyntaxToken(
+                                    this.Parent,
+                                    green,
+                                    _node.GetChildPosition(index),
+                                    this.index + index
+                                );
                             }
 
                             return _node.GetRequiredNodeSlot(index);
@@ -139,33 +147,29 @@ namespace Microsoft.CodeAnalysis
         public TextSpan Span => _node?.Span ?? default(TextSpan);
 
         /// <summary>
-        /// Returns the string representation of the nodes and tokens in this list, not including the first node or token's leading trivia 
+        /// Returns the string representation of the nodes and tokens in this list, not including the first node or token's leading trivia
         /// and the last node or token's trailing trivia.
         /// </summary>
         /// <returns>
-        /// The string representation of the nodes and tokens in this list, not including the first node or token's leading trivia 
+        /// The string representation of the nodes and tokens in this list, not including the first node or token's leading trivia
         /// and the last node or token's trailing trivia.
         /// </returns>
         public override string ToString()
         {
-            return _node != null
-                ? _node.ToString()
-                : string.Empty;
+            return _node != null ? _node.ToString() : string.Empty;
         }
 
         /// <summary>
-        /// Returns the full string representation of the nodes and tokens in this list including the first node or token's leading trivia 
+        /// Returns the full string representation of the nodes and tokens in this list including the first node or token's leading trivia
         /// and the last node or token's trailing trivia.
         /// </summary>
         /// <returns>
-        /// The full string representation of the nodes and tokens in this list including the first node or token's leading trivia 
+        /// The full string representation of the nodes and tokens in this list including the first node or token's leading trivia
         /// and the last node or token's trailing trivia.
         /// </returns>
         public string ToFullString()
         {
-            return _node != null
-                ? _node.ToFullString()
-                : string.Empty;
+            return _node != null ? _node.ToFullString() : string.Empty;
         }
 
         /// <summary>
@@ -181,9 +185,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public SyntaxNodeOrToken FirstOrDefault()
         {
-            return this.Any()
-                ? this[0]
-                : default(SyntaxNodeOrToken);
+            return this.Any() ? this[0] : default(SyntaxNodeOrToken);
         }
 
         /// <summary>
@@ -199,9 +201,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public SyntaxNodeOrToken LastOrDefault()
         {
-            return this.Any()
-                ? this[this.Count - 1]
-                : default(SyntaxNodeOrToken);
+            return this.Any() ? this[this.Count - 1] : default(SyntaxNodeOrToken);
         }
 
         /// <summary>
@@ -287,7 +287,10 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="index">The index to insert at.</param>
         /// <param name="nodesAndTokens">The nodes or tokens to insert.</param>
-        public SyntaxNodeOrTokenList InsertRange(int index, IEnumerable<SyntaxNodeOrToken> nodesAndTokens)
+        public SyntaxNodeOrTokenList InsertRange(
+            int index,
+            IEnumerable<SyntaxNodeOrToken> nodesAndTokens
+        )
         {
             if (index < 0 || index > this.Count)
             {
@@ -319,10 +322,9 @@ namespace Microsoft.CodeAnalysis
             var newGreen = GreenNode.CreateList(items, static n => n.RequiredUnderlyingNode)!;
             if (newGreen.IsToken)
             {
-                newGreen = Syntax.InternalSyntax.SyntaxList.List(new[]
-                {
-                    new ArrayElement<GreenNode> {Value = newGreen}
-                });
+                newGreen = Syntax.InternalSyntax.SyntaxList.List(
+                    new[] { new ArrayElement<GreenNode> { Value = newGreen } }
+                );
             }
 
             return new SyntaxNodeOrTokenList(newGreen.CreateRed(), 0);
@@ -364,7 +366,10 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="nodeOrTokenInList">The element to replace.</param>
         /// <param name="newNodeOrToken">The new node or token.</param>
-        public SyntaxNodeOrTokenList Replace(SyntaxNodeOrToken nodeOrTokenInList, SyntaxNodeOrToken newNodeOrToken)
+        public SyntaxNodeOrTokenList Replace(
+            SyntaxNodeOrToken nodeOrTokenInList,
+            SyntaxNodeOrToken newNodeOrToken
+        )
         {
             if (newNodeOrToken == default(SyntaxNodeOrToken))
             {
@@ -379,7 +384,10 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="nodeOrTokenInList">The element to replace.</param>
         /// <param name="newNodesAndTokens">The new nodes and tokens.</param>
-        public SyntaxNodeOrTokenList ReplaceRange(SyntaxNodeOrToken nodeOrTokenInList, IEnumerable<SyntaxNodeOrToken> newNodesAndTokens)
+        public SyntaxNodeOrTokenList ReplaceRange(
+            SyntaxNodeOrToken nodeOrTokenInList,
+            IEnumerable<SyntaxNodeOrToken> newNodesAndTokens
+        )
         {
             var index = this.IndexOf(nodeOrTokenInList);
             if (index >= 0 && index < this.Count)
@@ -490,7 +498,7 @@ namespace Microsoft.CodeAnalysis
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
         public override int GetHashCode()
         {
@@ -500,7 +508,11 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Enumerator for lists of SyntaxNodeOrToken structs.
         /// </summary>
-        [SuppressMessage("Performance", "CA1067", Justification = "Equality not actually implemented")]
+        [SuppressMessage(
+            "Performance",
+            "CA1067",
+            Justification = "Equality not actually implemented"
+        )]
         public struct Enumerator : IEnumerator<SyntaxNodeOrToken>
         {
             private readonly SyntaxNodeOrTokenList _list;
@@ -552,9 +564,7 @@ namespace Microsoft.CodeAnalysis
             /// <summary>
             /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
             /// </summary>
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
 
             public override bool Equals(object? obj)
             {

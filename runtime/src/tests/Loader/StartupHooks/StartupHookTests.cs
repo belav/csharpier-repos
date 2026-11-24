@@ -4,7 +4,6 @@
 using System;
 using System.IO;
 using System.Reflection;
-
 using Xunit;
 
 [ConditionalClass(typeof(StartupHookTests), nameof(StartupHookTests.IsSupported))]
@@ -12,19 +11,32 @@ public unsafe class StartupHookTests
 {
     private const string StartupHookKey = "STARTUP_HOOKS";
 
-    private static Type s_startupHookProvider = typeof(object).Assembly.GetType("System.StartupHookProvider", throwOnError: true);
+    private static Type s_startupHookProvider = typeof(object).Assembly.GetType(
+        "System.StartupHookProvider",
+        throwOnError: true
+    );
 
-    private static delegate*<string, void> ProcessStartupHooks = (delegate*<string, void>)s_startupHookProvider.GetMethod("ProcessStartupHooks", BindingFlags.NonPublic | BindingFlags.Static).MethodHandle.GetFunctionPointer();
+    private static delegate* <string, void> ProcessStartupHooks = (delegate* <string, void>)
+        s_startupHookProvider
+            .GetMethod("ProcessStartupHooks", BindingFlags.NonPublic | BindingFlags.Static)
+            .MethodHandle.GetFunctionPointer();
 
     private static bool IsUnsupportedPlatform =
         // these platforms need special setup for startup hooks
-        OperatingSystem.IsAndroid() ||
-        OperatingSystem.IsIOS() ||
-        OperatingSystem.IsTvOS() ||
-        OperatingSystem.IsBrowser() ||
-        OperatingSystem.IsWasi();
+        OperatingSystem.IsAndroid()
+        || OperatingSystem.IsIOS()
+        || OperatingSystem.IsTvOS()
+        || OperatingSystem.IsBrowser()
+        || OperatingSystem.IsWasi();
 
-    public static bool IsSupported = !IsUnsupportedPlatform && ((delegate*<bool>)s_startupHookProvider.GetProperty(nameof(IsSupported), BindingFlags.NonPublic | BindingFlags.Static).GetMethod.MethodHandle.GetFunctionPointer())();
+    public static bool IsSupported =
+        !IsUnsupportedPlatform
+        && (
+            (delegate* <bool>)
+                s_startupHookProvider
+                    .GetProperty(nameof(IsSupported), BindingFlags.NonPublic | BindingFlags.Static)
+                    .GetMethod.MethodHandle.GetFunctionPointer()
+        )();
 
     [Fact]
     public static void ValidHookName()
@@ -67,7 +79,10 @@ public unsafe class StartupHookTests
         Hook hook2 = Hook.PrivateInitialize;
 
         // Set multiple hooks with an empty entry and leading/trailing separators
-        AppContext.SetData(StartupHookKey, $"{Path.PathSeparator}{hook1.Value}{Path.PathSeparator}{Path.PathSeparator}{hook2.Value}{Path.PathSeparator}");
+        AppContext.SetData(
+            StartupHookKey,
+            $"{Path.PathSeparator}{hook1.Value}{Path.PathSeparator}{Path.PathSeparator}{hook2.Value}{Path.PathSeparator}"
+        );
         hook1.CallCount = 0;
         hook2.CallCount = 0;
 
@@ -86,7 +101,8 @@ public unsafe class StartupHookTests
         Hook hook1 = Hook.Basic;
         Hook hook2 = Hook.PrivateInitialize;
         // Use multiple diagnostic hooks with an empty entry and leading/trailing separators
-        string diagnosticStartupHooks = $"{Path.PathSeparator}{hook1.Value}{Path.PathSeparator}{Path.PathSeparator}{hook2.Value}{Path.PathSeparator}";
+        string diagnosticStartupHooks =
+            $"{Path.PathSeparator}{hook1.Value}{Path.PathSeparator}{Path.PathSeparator}{hook2.Value}{Path.PathSeparator}";
 
         AppContext.SetData(StartupHookKey, null);
         hook1.CallCount = 0;
@@ -125,12 +141,17 @@ public unsafe class StartupHookTests
     {
         Console.WriteLine($"Running {nameof(MissingAssembly)}...");
 
-        string hook = useAssemblyName ? "MissingAssembly" : Path.Combine(AppContext.BaseDirectory, "MissingAssembly.dll");
+        string hook = useAssemblyName
+            ? "MissingAssembly"
+            : Path.Combine(AppContext.BaseDirectory, "MissingAssembly.dll");
         AppContext.SetData(StartupHookKey, $"{Hook.Basic.Value}{Path.PathSeparator}{hook}");
         Hook.Basic.CallCount = 0;
 
         var ex = Assert.Throws<ArgumentException>(() => ProcessStartupHooks(string.Empty));
-        Assert.Equal($"Startup hook assembly '{hook}' failed to load. See inner exception for details.", ex.Message);
+        Assert.Equal(
+            $"Startup hook assembly '{hook}' failed to load. See inner exception for details.",
+            ex.Message
+        );
         Assert.IsType<FileNotFoundException>(ex.InnerException);
 
         // Previous hooks should run before erroring on the missing assembly
@@ -150,7 +171,10 @@ public unsafe class StartupHookTests
             Hook.Basic.CallCount = 0;
 
             var ex = Assert.Throws<ArgumentException>(() => ProcessStartupHooks(string.Empty));
-            Assert.Equal($"Startup hook assembly '{hook}' failed to load. See inner exception for details.", ex.Message);
+            Assert.Equal(
+                $"Startup hook assembly '{hook}' failed to load. See inner exception for details.",
+                ex.Message
+            );
             var innerEx = ex.InnerException;
             Assert.IsType<BadImageFormatException>(ex.InnerException);
 
@@ -165,25 +189,30 @@ public unsafe class StartupHookTests
 
     public static System.Collections.Generic.IEnumerable<object[]> InvalidSimpleAssemblyNameData()
     {
-        yield return new object[] {$".{Path.DirectorySeparatorChar}Assembly", true };      // Directory separator
-        yield return new object[] {$".{Path.AltDirectorySeparatorChar}Assembly", true};    // Alternative directory separator
-        yield return new object[] {"Assembly,version=1.0.0.0", true};                      // Comma
-        yield return new object[] {"Assembly version", true};                              // Space
-        yield return new object[] {"Assembly.DLL", true};                                  // .dll suffix
-        yield return new object[] {"Assembly=Name", false};                                // Invalid name
+        yield return new object[] { $".{Path.DirectorySeparatorChar}Assembly", true }; // Directory separator
+        yield return new object[] { $".{Path.AltDirectorySeparatorChar}Assembly", true }; // Alternative directory separator
+        yield return new object[] { "Assembly,version=1.0.0.0", true }; // Comma
+        yield return new object[] { "Assembly version", true }; // Space
+        yield return new object[] { "Assembly.DLL", true }; // .dll suffix
+        yield return new object[] { "Assembly=Name", false }; // Invalid name
     }
 
     [Theory]
     [MemberData(nameof(InvalidSimpleAssemblyNameData))]
     public static void InvalidSimpleAssemblyName(string name, bool failsSimpleNameCheck)
     {
-        Console.WriteLine($"Running {nameof(InvalidSimpleAssemblyName)}({name}, {failsSimpleNameCheck})...");
+        Console.WriteLine(
+            $"Running {nameof(InvalidSimpleAssemblyName)}({name}, {failsSimpleNameCheck})..."
+        );
 
         AppContext.SetData(StartupHookKey, $"{Hook.Basic.Value}{Path.PathSeparator}{name}");
         Hook.Basic.CallCount = 0;
 
         var ex = Assert.Throws<ArgumentException>(() => ProcessStartupHooks(string.Empty));
-        Assert.StartsWith($"The startup hook simple assembly name '{name}' is invalid.", ex.Message);
+        Assert.StartsWith(
+            $"The startup hook simple assembly name '{name}' is invalid.",
+            ex.Message
+        );
         if (failsSimpleNameCheck)
         {
             Assert.Null(ex.InnerException);
@@ -208,7 +237,10 @@ public unsafe class StartupHookTests
         string hook = asm.Location;
         AppContext.SetData(StartupHookKey, hook);
         var ex = Assert.Throws<TypeLoadException>(() => ProcessStartupHooks(string.Empty));
-        Assert.StartsWith($"Could not load type 'StartupHook' from assembly '{asm.GetName().Name}", ex.Message);
+        Assert.StartsWith(
+            $"Could not load type 'StartupHook' from assembly '{asm.GetName().Name}",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -237,6 +269,9 @@ public unsafe class StartupHookTests
 
         AppContext.SetData(StartupHookKey, hook.Value);
         var ex = Assert.Throws<ArgumentException>(() => ProcessStartupHooks(string.Empty));
-        Assert.Equal($"The signature of the startup hook 'StartupHook.Initialize' in assembly '{hook.Value}' was invalid. It must be 'public static void Initialize()'.", ex.Message);
+        Assert.Equal(
+            $"The signature of the startup hook 'StartupHook.Initialize' in assembly '{hook.Value}' was invalid. It must be 'public static void Initialize()'.",
+            ex.Message
+        );
     }
 }

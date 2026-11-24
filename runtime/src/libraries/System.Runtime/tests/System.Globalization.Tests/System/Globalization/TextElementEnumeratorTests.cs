@@ -10,21 +10,38 @@ namespace System.Globalization.Tests
     {
         public static IEnumerable<object[]> Enumerate_TestData()
         {
-            yield return new object[] { new string[] { /* empty */ } };
+            yield return new object[]
+            {
+                new string[]
+                { /* empty */
+                },
+            };
             yield return new object[] { new string[] { "H", "e", "l", "l", "o" } };
 
             // Creates and initializes a string containing the following:
             //   - a surrogate pair (high surrogate U+D800 and low surrogate U+DC00)
             //   - a combining character sequence (the Latin small letter "a" followed by the combining grave accent)
             //   - a base character (the ligature "")
-            yield return new object[] { new string[] { "\uD800\uDC00", "\uD800\uDC00", "\u0061\u0300", "\u0061\u0300", "\u00C6" } };
+            yield return new object[]
+            {
+                new string[]
+                {
+                    "\uD800\uDC00",
+                    "\uD800\uDC00",
+                    "\u0061\u0300",
+                    "\u0061\u0300",
+                    "\u00C6",
+                },
+            };
         }
 
         [Theory]
         [MemberData(nameof(Enumerate_TestData))]
         public void Enumerate(string[] expectedElements)
         {
-            TextElementEnumerator enumerator = StringInfo.GetTextElementEnumerator(string.Concat(expectedElements));
+            TextElementEnumerator enumerator = StringInfo.GetTextElementEnumerator(
+                string.Concat(expectedElements)
+            );
             for (int i = 0; i < 2; i++)
             {
                 int charsProcessedSoFar = 0;
@@ -60,7 +77,8 @@ namespace System.Globalization.Tests
 
             // Cannot access Current, ElementIndex, or GetTextElement() after the enumerator has finished
             // enumerating.
-            while (enumerator.MoveNext()) ;
+            while (enumerator.MoveNext())
+                ;
             Assert.Throws<InvalidOperationException>(() => enumerator.Current);
             Assert.Throws<InvalidOperationException>(() => enumerator.ElementIndex);
             Assert.Throws<InvalidOperationException>(() => enumerator.GetTextElement());

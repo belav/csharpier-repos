@@ -22,7 +22,12 @@ namespace System.Web.Razor.Parser
 
         private Stack<BlockBuilder> _blockStack = new Stack<BlockBuilder>();
 
-        public ParserContext(ITextDocument source, ParserBase codeParser, ParserBase markupParser, ParserBase activeParser)
+        public ParserContext(
+            ITextDocument source,
+            ParserBase codeParser,
+            ParserBase markupParser,
+            ParserBase activeParser
+        )
         {
             if (source == null)
             {
@@ -42,7 +47,10 @@ namespace System.Web.Razor.Parser
             }
             if (activeParser != codeParser && activeParser != markupParser)
             {
-                throw new ArgumentException(RazorResources.ActiveParser_Must_Be_Code_Or_Markup_Parser, "activeParser");
+                throw new ArgumentException(
+                    RazorResources.ActiveParser_Must_Be_Code_Or_Markup_Parser,
+                    "activeParser"
+                );
             }
 
             CaptureOwnerTask();
@@ -158,7 +166,9 @@ namespace System.Web.Razor.Parser
 
             if (_blockStack.Count == 0)
             {
-                throw new InvalidOperationException(RazorResources.EndBlock_Called_Without_Matching_StartBlock);
+                throw new InvalidOperationException(
+                    RazorResources.EndBlock_Called_Without_Matching_StartBlock
+                );
             }
             if (_blockStack.Count > 1)
             {
@@ -212,11 +222,15 @@ namespace System.Web.Razor.Parser
         {
             if (_blockStack.Count == 0)
             {
-                throw new InvalidOperationException(RazorResources.ParserContext_CannotCompleteTree_NoRootBlock);
+                throw new InvalidOperationException(
+                    RazorResources.ParserContext_CannotCompleteTree_NoRootBlock
+                );
             }
             if (_blockStack.Count != 1)
             {
-                throw new InvalidOperationException(RazorResources.ParserContext_CannotCompleteTree_OutstandingBlocks);
+                throw new InvalidOperationException(
+                    RazorResources.ParserContext_CannotCompleteTree_OutstandingBlocks
+                );
             }
             return new ParserResults(_blockStack.Pop().Build(), Errors);
         }
@@ -240,7 +254,11 @@ namespace System.Web.Razor.Parser
         }
 
         [Conditional("DEBUG")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "The method body is empty in Release builds")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "The method body is empty in Release builds"
+        )]
         internal void AssertCurrent(char expected)
         {
             Debug.Assert(CurrentCharacter == expected);
@@ -287,7 +305,9 @@ namespace System.Web.Razor.Parser
                     _infiniteLoopGuardCount++;
                     if (_infiniteLoopGuardCount > InfiniteLoopCountThreshold)
                     {
-                        Debug.Fail("An internal parser error is causing an infinite loop at this location.");
+                        Debug.Fail(
+                            "An internal parser error is causing an infinite loop at this location."
+                        );
                         _terminated = true;
                         return true;
                     }

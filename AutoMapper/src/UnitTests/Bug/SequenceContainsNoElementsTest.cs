@@ -2,10 +2,11 @@ namespace AutoMapper.UnitTests.Bug;
 
 public class SequenceContainsNoElementsTest : AutoMapperSpecBase
 {
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Person, PersonModel>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Person, PersonModel>();
+        });
 
     [Fact]
     public void should_not_throw_InvalidOperationException()
@@ -21,10 +22,12 @@ public class SequenceContainsNoElementsTest : AutoMapperSpecBase
 public class People : IEnumerable
 {
     private readonly Person[] people;
+
     public People(Person[] people)
     {
         this.people = people;
     }
+
     public IEnumerator GetEnumerator() => people.GetEnumerator();
 }
 

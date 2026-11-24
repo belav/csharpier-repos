@@ -16,7 +16,10 @@ namespace System.Web.WebPages.Test
             var webPageRenderingBase = new Mock<WebPageRenderingBase>() { CallBase = true }.Object;
 
             // Act and Assert
-            Assert.ThrowsArgumentNullOrEmptyString(() => webPageRenderingBase.Culture = value, "value");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => webPageRenderingBase.Culture = value,
+                "value"
+            );
         }
 
         [Fact]
@@ -27,7 +30,10 @@ namespace System.Web.WebPages.Test
             var webPageRenderingBase = new Mock<WebPageRenderingBase>() { CallBase = true }.Object;
 
             // Act and Assert
-            Assert.ThrowsArgumentNullOrEmptyString(() => webPageRenderingBase.Culture = value, "value");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => webPageRenderingBase.Culture = value,
+                "value"
+            );
         }
 
         [Fact]
@@ -38,7 +44,10 @@ namespace System.Web.WebPages.Test
             var webPageRenderingBase = new Mock<WebPageRenderingBase>() { CallBase = true }.Object;
 
             // Act and Assert
-            Assert.ThrowsArgumentNullOrEmptyString(() => webPageRenderingBase.UICulture = value, "value");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => webPageRenderingBase.UICulture = value,
+                "value"
+            );
         }
 
         [Fact]
@@ -49,7 +58,10 @@ namespace System.Web.WebPages.Test
             var webPageRenderingBase = new Mock<WebPageRenderingBase>() { CallBase = true }.Object;
 
             // Act and Assert
-            Assert.ThrowsArgumentNullOrEmptyString(() => webPageRenderingBase.UICulture = value, "value");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => webPageRenderingBase.UICulture = value,
+                "value"
+            );
         }
 
         [Fact]

@@ -27,12 +27,16 @@ namespace Microsoft.CodeAnalysis.Options
 
             if (language != null && !option.IsPerLanguage)
             {
-                throw new ArgumentException(WorkspacesResources.A_language_name_cannot_be_specified_for_this_option);
+                throw new ArgumentException(
+                    WorkspacesResources.A_language_name_cannot_be_specified_for_this_option
+                );
             }
 
             if (language == null && option.IsPerLanguage)
             {
-                throw new ArgumentNullException(WorkspacesResources.A_language_name_must_be_specified_for_this_option);
+                throw new ArgumentNullException(
+                    WorkspacesResources.A_language_name_must_be_specified_for_this_option
+                );
             }
 
             Option = option;
@@ -45,8 +49,10 @@ namespace Microsoft.CodeAnalysis.Options
 
             static bool OptionEqual(IOption thisOption, IOption otherOption)
             {
-                if (thisOption is not IOption2 thisOption2 ||
-                    otherOption is not IOption2 otherOption2)
+                if (
+                    thisOption is not IOption2 thisOption2
+                    || otherOption is not IOption2 otherOption2
+                )
                 {
                     // Third party definition of 'IOption'.
                     return thisOption.Equals(otherOption);
@@ -75,9 +81,7 @@ namespace Microsoft.CodeAnalysis.Options
                 return "";
             }
 
-            var languageDisplay = Option.IsPerLanguage
-                ? $"({Language}) "
-                : string.Empty;
+            var languageDisplay = Option.IsPerLanguage ? $"({Language}) " : string.Empty;
 
             return languageDisplay + Option.ToString();
         }

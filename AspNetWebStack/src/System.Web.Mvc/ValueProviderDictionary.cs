@@ -10,10 +10,15 @@ using System.Web.Routing;
 
 namespace System.Web.Mvc
 {
-    [Obsolete("The recommended alternative is to use one of the specific ValueProvider types, such as FormValueProvider.")]
+    [Obsolete(
+        "The recommended alternative is to use one of the specific ValueProvider types, such as FormValueProvider."
+    )]
     public class ValueProviderDictionary : IDictionary<string, ValueProviderResult>, IValueProvider
     {
-        private readonly Dictionary<string, ValueProviderResult> _dictionary = new Dictionary<string, ValueProviderResult>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, ValueProviderResult> _dictionary = new Dictionary<
+            string,
+            ValueProviderResult
+        >(StringComparer.OrdinalIgnoreCase);
 
         public ValueProviderDictionary(ControllerContext controllerContext)
         {
@@ -28,7 +33,10 @@ namespace System.Web.Mvc
 
         public int Count
         {
-            get { return ((ICollection<KeyValuePair<string, ValueProviderResult>>)Dictionary).Count; }
+            get
+            {
+                return ((ICollection<KeyValuePair<string, ValueProviderResult>>)Dictionary).Count;
+            }
         }
 
         internal Dictionary<string, ValueProviderResult> Dictionary
@@ -38,7 +46,12 @@ namespace System.Web.Mvc
 
         public bool IsReadOnly
         {
-            get { return ((ICollection<KeyValuePair<string, ValueProviderResult>>)Dictionary).IsReadOnly; }
+            get
+            {
+                return (
+                    (ICollection<KeyValuePair<string, ValueProviderResult>>)Dictionary
+                ).IsReadOnly;
+            }
         }
 
         public ICollection<string> Keys
@@ -70,7 +83,11 @@ namespace System.Web.Mvc
         public void Add(string key, object value)
         {
             string attemptedValue = Convert.ToString(value, CultureInfo.InvariantCulture);
-            ValueProviderResult valueProviderResult = new ValueProviderResult(value, attemptedValue, CultureInfo.InvariantCulture);
+            ValueProviderResult valueProviderResult = new ValueProviderResult(
+                value,
+                attemptedValue,
+                CultureInfo.InvariantCulture
+            );
             Add(key, valueProviderResult);
         }
 
@@ -97,7 +114,9 @@ namespace System.Web.Mvc
 
         public bool Contains(KeyValuePair<string, ValueProviderResult> item)
         {
-            return ((ICollection<KeyValuePair<string, ValueProviderResult>>)Dictionary).Contains(item);
+            return ((ICollection<KeyValuePair<string, ValueProviderResult>>)Dictionary).Contains(
+                item
+            );
         }
 
         public bool ContainsKey(string key)
@@ -107,12 +126,17 @@ namespace System.Web.Mvc
 
         public void CopyTo(KeyValuePair<string, ValueProviderResult>[] array, int arrayIndex)
         {
-            ((ICollection<KeyValuePair<string, ValueProviderResult>>)Dictionary).CopyTo(array, arrayIndex);
+            ((ICollection<KeyValuePair<string, ValueProviderResult>>)Dictionary).CopyTo(
+                array,
+                arrayIndex
+            );
         }
 
         public IEnumerator<KeyValuePair<string, ValueProviderResult>> GetEnumerator()
         {
-            return ((IEnumerable<KeyValuePair<string, ValueProviderResult>>)Dictionary).GetEnumerator();
+            return (
+                (IEnumerable<KeyValuePair<string, ValueProviderResult>>)Dictionary
+            ).GetEnumerator();
         }
 
         private void PopulateDictionary()
@@ -133,7 +157,11 @@ namespace System.Web.Mvc
                 {
                     string[] rawValue = form.GetValues(key);
                     string attemptedValue = form[key];
-                    ValueProviderResult result = new ValueProviderResult(rawValue, attemptedValue, currentCulture);
+                    ValueProviderResult result = new ValueProviderResult(
+                        rawValue,
+                        attemptedValue,
+                        currentCulture
+                    );
                     AddToDictionaryIfNotPresent(key, result);
                 }
             }
@@ -146,7 +174,11 @@ namespace System.Web.Mvc
                     string key = kvp.Key;
                     object rawValue = kvp.Value;
                     string attemptedValue = Convert.ToString(rawValue, invariantCulture);
-                    ValueProviderResult result = new ValueProviderResult(rawValue, attemptedValue, invariantCulture);
+                    ValueProviderResult result = new ValueProviderResult(
+                        rawValue,
+                        attemptedValue,
+                        invariantCulture
+                    );
                     AddToDictionaryIfNotPresent(key, result);
                 }
             }
@@ -159,7 +191,11 @@ namespace System.Web.Mvc
                 {
                     string[] rawValue = queryString.GetValues(key);
                     string attemptedValue = queryString[key];
-                    ValueProviderResult result = new ValueProviderResult(rawValue, attemptedValue, invariantCulture);
+                    ValueProviderResult result = new ValueProviderResult(
+                        rawValue,
+                        attemptedValue,
+                        invariantCulture
+                    );
                     AddToDictionaryIfNotPresent(key, result);
                 }
             }
@@ -167,7 +203,9 @@ namespace System.Web.Mvc
 
         public bool Remove(KeyValuePair<string, ValueProviderResult> item)
         {
-            return ((ICollection<KeyValuePair<string, ValueProviderResult>>)Dictionary).Remove(item);
+            return ((ICollection<KeyValuePair<string, ValueProviderResult>>)Dictionary).Remove(
+                item
+            );
         }
 
         public bool Remove(string key)
@@ -191,7 +229,11 @@ namespace System.Web.Mvc
 
         #region IValueProvider Members
 
-        [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "The declaring type is obsolete, so there is little benefit to exposing this as a virtual method.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1033:InterfaceMethodsShouldBeCallableByChildTypes",
+            Justification = "The declaring type is obsolete, so there is little benefit to exposing this as a virtual method."
+        )]
         bool IValueProvider.ContainsPrefix(string prefix)
         {
             if (prefix == null)
@@ -202,7 +244,11 @@ namespace System.Web.Mvc
             return ValueProviderUtil.CollectionContainsPrefix(Keys, prefix);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "The declaring type is obsolete, so there is little benefit to exposing this as a virtual method.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1033:InterfaceMethodsShouldBeCallableByChildTypes",
+            Justification = "The declaring type is obsolete, so there is little benefit to exposing this as a virtual method."
+        )]
         ValueProviderResult IValueProvider.GetValue(string key)
         {
             if (key == null)

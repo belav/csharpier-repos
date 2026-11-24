@@ -15,7 +15,10 @@ namespace System.Runtime
                 return;
             }
 
-            if (transaction.TransactionInformation.Status == TransactionStatus.Aborted || transaction.TransactionInformation.Status == TransactionStatus.InDoubt)
+            if (
+                transaction.TransactionInformation.Status == TransactionStatus.Aborted
+                || transaction.TransactionInformation.Status == TransactionStatus.InDoubt
+            )
             {
                 //This will throw TransactionAbortedException/TransactionInDoubtException with corresponding inner exception if any
                 using (TransactionScope scope = new TransactionScope(transaction))

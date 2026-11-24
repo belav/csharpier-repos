@@ -25,9 +25,7 @@ public class HeadMergeException
                 local *= 3;
             }
         }
-        catch (Exception)
-        {
-        }
+        catch (Exception) { }
 
         return local;
     }

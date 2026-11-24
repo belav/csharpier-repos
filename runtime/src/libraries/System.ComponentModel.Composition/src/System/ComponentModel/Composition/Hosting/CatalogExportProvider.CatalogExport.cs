@@ -15,8 +15,11 @@ namespace System.ComponentModel.Composition.Hosting
             protected readonly ComposablePartDefinition _partDefinition;
             protected readonly ExportDefinition _definition;
 
-            public CatalogExport(CatalogExportProvider catalogExportProvider,
-                ComposablePartDefinition partDefinition, ExportDefinition definition)
+            public CatalogExport(
+                CatalogExportProvider catalogExportProvider,
+                ComposablePartDefinition partDefinition,
+                ExportDefinition definition
+            )
             {
                 _catalogExportProvider = catalogExportProvider;
                 _partDefinition = partDefinition;
@@ -25,18 +28,12 @@ namespace System.ComponentModel.Composition.Hosting
 
             public override ExportDefinition Definition
             {
-                get
-                {
-                    return _definition;
-                }
+                get { return _definition; }
             }
 
             protected virtual bool IsSharedPart
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
             protected CatalogPart GetPartCore()
@@ -56,13 +53,23 @@ namespace System.ComponentModel.Composition.Hosting
 
             protected override object? GetExportedValueCore()
             {
-                return _catalogExportProvider.GetExportedValue(GetPart(), _definition, IsSharedPart);
+                return _catalogExportProvider.GetExportedValue(
+                    GetPart(),
+                    _definition,
+                    IsSharedPart
+                );
             }
 
-            public static CatalogExport CreateExport(CatalogExportProvider catalogExportProvider,
-                ComposablePartDefinition partDefinition, ExportDefinition definition, CreationPolicy importCreationPolicy)
+            public static CatalogExport CreateExport(
+                CatalogExportProvider catalogExportProvider,
+                ComposablePartDefinition partDefinition,
+                ExportDefinition definition,
+                CreationPolicy importCreationPolicy
+            )
             {
-                CreationPolicy partPolicy = partDefinition.Metadata.GetValue<CreationPolicy>(CompositionConstants.PartCreationPolicyMetadataName);
+                CreationPolicy partPolicy = partDefinition.Metadata.GetValue<CreationPolicy>(
+                    CompositionConstants.PartCreationPolicyMetadataName
+                );
                 bool isSharedPart = ShouldUseSharedPart(partPolicy, importCreationPolicy);
 
                 if (isSharedPart)
@@ -71,11 +78,18 @@ namespace System.ComponentModel.Composition.Hosting
                 }
                 else
                 {
-                    return new NonSharedCatalogExport(catalogExportProvider, partDefinition, definition);
+                    return new NonSharedCatalogExport(
+                        catalogExportProvider,
+                        partDefinition,
+                        definition
+                    );
                 }
             }
 
-            private static bool ShouldUseSharedPart(CreationPolicy partPolicy, CreationPolicy importPolicy)
+            private static bool ShouldUseSharedPart(
+                CreationPolicy partPolicy,
+                CreationPolicy importPolicy
+            )
             {
                 // Matrix that details which policy to use for a given part to satisfy a given import.
                 //                   Part.Any   Part.Shared  Part.NonShared
@@ -86,32 +100,37 @@ namespace System.ComponentModel.Composition.Hosting
                 switch (partPolicy)
                 {
                     case CreationPolicy.Any:
+                    {
+                        if (
+                            importPolicy == CreationPolicy.Any
+                            || importPolicy == CreationPolicy.Shared
+                        )
                         {
-                            if (importPolicy == CreationPolicy.Any ||
-                                importPolicy == CreationPolicy.Shared)
-                            {
-                                return true;
-                            }
-                            return false;
-                        }
-
-                    case CreationPolicy.NonShared:
-                        {
-                            if (importPolicy == CreationPolicy.Shared)
-                            {
-                                throw new Exception(SR.Diagnostic_InternalExceptionMessage);
-                            }
-                            return false;
-                        }
-
-                    default:
-                        {
-                            if (partPolicy != CreationPolicy.Shared || importPolicy == CreationPolicy.NonShared)
-                            {
-                                throw new Exception(SR.Diagnostic_InternalExceptionMessage);
-                            }
                             return true;
                         }
+                        return false;
+                    }
+
+                    case CreationPolicy.NonShared:
+                    {
+                        if (importPolicy == CreationPolicy.Shared)
+                        {
+                            throw new Exception(SR.Diagnostic_InternalExceptionMessage);
+                        }
+                        return false;
+                    }
+
+                    default:
+                    {
+                        if (
+                            partPolicy != CreationPolicy.Shared
+                            || importPolicy == CreationPolicy.NonShared
+                        )
+                        {
+                            throw new Exception(SR.Diagnostic_InternalExceptionMessage);
+                        }
+                        return true;
+                    }
                 }
             }
         }
@@ -121,11 +140,12 @@ namespace System.ComponentModel.Composition.Hosting
             private CatalogPart? _part;
             private readonly object _lock = new object();
 
-            public NonSharedCatalogExport(CatalogExportProvider catalogExportProvider,
-                ComposablePartDefinition partDefinition, ExportDefinition definition)
-                : base(catalogExportProvider, partDefinition, definition)
-            {
-            }
+            public NonSharedCatalogExport(
+                CatalogExportProvider catalogExportProvider,
+                ComposablePartDefinition partDefinition,
+                ExportDefinition definition
+            )
+                : base(catalogExportProvider, partDefinition, definition) { }
 
             protected override CatalogPart GetPart()
             {
@@ -155,10 +175,7 @@ namespace System.ComponentModel.Composition.Hosting
 
             protected override bool IsSharedPart
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             void IDisposable.Dispose()

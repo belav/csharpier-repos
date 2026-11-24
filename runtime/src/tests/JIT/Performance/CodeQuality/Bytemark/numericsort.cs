@@ -55,9 +55,9 @@ public class NumericSortJagged : SortStruct
         /*
         ** Set the error context string.
         */
-        int[][] arraybase;     /* Base pointers of array */
-        long accumtime;         /* Accumulated time */
-        double iterations;      /* Iteration counter */
+        int[][] arraybase; /* Base pointers of array */
+        long accumtime; /* Accumulated time */
+        double iterations; /* Iteration counter */
 
         /*
         ** See if we need to do self adjustment code.
@@ -87,10 +87,10 @@ public class NumericSortJagged : SortStruct
                 ** try again.
                 */
 
-                if (DoNumSortIteration(arraybase,
-                    this.arraysize,
-                    this.numarrays) > global.min_ticks)
-                    break;          /* We're ok...exit */
+                if (
+                    DoNumSortIteration(arraybase, this.arraysize, this.numarrays) > global.min_ticks
+                )
+                    break; /* We're ok...exit */
                 if (this.numarrays++ > global.NUMNUMARRAYS)
                 {
                     throw new Exception("CPU:NSORT -- NUMNUMARRAYS hit.");
@@ -116,9 +116,7 @@ public class NumericSortJagged : SortStruct
 
         do
         {
-            accumtime += DoNumSortIteration(arraybase,
-                this.arraysize,
-                this.numarrays);
+            accumtime += DoNumSortIteration(arraybase, this.arraysize, this.numarrays);
             iterations += (double)1.0;
         } while (ByteMark.TicksToSecs(accumtime) < this.request_secs);
 
@@ -140,7 +138,7 @@ public class NumericSortJagged : SortStruct
     // can be inferred from the arraybase. <shrug>
     private static int DoNumSortIteration(int[][] arraybase, int arraysize, int numarrays)
     {
-        long elapsed;          /* Elapsed ticks */
+        long elapsed; /* Elapsed ticks */
         int i;
         /*
         ** Load up the array with random numbers
@@ -168,7 +166,7 @@ public class NumericSortJagged : SortStruct
 #if DEBUG
         {
             for (i = 0; i < arraysize - 1; i++)
-            {   /*
+            { /*
                 ** Compare to check for proper
                 ** sort.
                 */
@@ -189,11 +187,13 @@ public class NumericSortJagged : SortStruct
     **************************
     ** Load up an array with random longs.
     */
-    private static void LoadNumArrayWithRand(int[][] array,     /* Pointer to arrays */
-            int arraysize,
-            int numarrays)         /* # of elements in array */
+    private static void LoadNumArrayWithRand(
+        int[][] array, /* Pointer to arrays */
+        int arraysize,
+        int numarrays
+    ) /* # of elements in array */
     {
-        int i;                 /* Used for index */
+        int i; /* Used for index */
 
         /*
         ** Initialize the random number generator
@@ -228,12 +228,14 @@ public class NumericSortJagged : SortStruct
     ** integers.  Also pass in minimum and maximum offsets.
     ** This routine performs a heap sort on that array.
     */
-    private static void NumHeapSort(int[] array,
-        int bottom,           /* Lower bound */
-        int top)              /* Upper bound */
+    private static void NumHeapSort(
+        int[] array,
+        int bottom, /* Lower bound */
+        int top
+    ) /* Upper bound */
     {
-        int temp;                     /* Used to exchange elements */
-        int i;                        /* Loop index */
+        int temp; /* Used to exchange elements */
+        int i; /* Loop index */
 
         /*
         ** First, build a heap in the array
@@ -249,7 +251,7 @@ public class NumericSortJagged : SortStruct
         for (i = top; i > 0; --i)
         {
             NumSift(array, bottom, i);
-            temp = array[0];                    /* Perform exchange */
+            temp = array[0]; /* Perform exchange */
             array[0] = array[i];
             array[i] = temp;
         }
@@ -262,12 +264,14 @@ public class NumericSortJagged : SortStruct
     ** Performs the shift operation on a numeric array,
     ** constructing a heap in the array.
     */
-    private static void NumSift(int[] array,     /* Array of numbers */
-        int i,                /* Minimum of array */
-        int j)                /* Maximum of array */
+    private static void NumSift(
+        int[] array, /* Array of numbers */
+        int i, /* Minimum of array */
+        int j
+    ) /* Maximum of array */
     {
         int k;
-        int temp;                              /* Used for exchange */
+        int temp; /* Used for exchange */
 
         while ((i + i) <= j)
         {
@@ -304,9 +308,9 @@ public class NumericSortRect : SortStruct
         /*
         ** Set the error context string.
         */
-        int[,] arraybase;        /* Base pointers of array */
-        long accumtime;         /* Accumulated time */
-        double iterations;      /* Iteration counter */
+        int[,] arraybase; /* Base pointers of array */
+        long accumtime; /* Accumulated time */
+        double iterations; /* Iteration counter */
 
         /*
         ** See if we need to do self adjustment code.
@@ -333,10 +337,10 @@ public class NumericSortRect : SortStruct
                 ** minimum, then allocate for more arrays and
                 ** try again.
                 */
-                if (DoNumSortIteration(arraybase,
-                    this.arraysize,
-                    this.numarrays) > global.min_ticks)
-                    break;          /* We're ok...exit */
+                if (
+                    DoNumSortIteration(arraybase, this.arraysize, this.numarrays) > global.min_ticks
+                )
+                    break; /* We're ok...exit */
                 if (this.numarrays++ > global.NUMNUMARRAYS)
                 {
                     throw new Exception("CPU:NSORT -- NUMNUMARRAYS hit.");
@@ -360,9 +364,7 @@ public class NumericSortRect : SortStruct
 
         do
         {
-            accumtime += DoNumSortIteration(arraybase,
-                this.arraysize,
-                this.numarrays);
+            accumtime += DoNumSortIteration(arraybase, this.arraysize, this.numarrays);
             iterations += (double)1.0;
         } while (ByteMark.TicksToSecs(accumtime) < this.request_secs);
 
@@ -384,7 +386,7 @@ public class NumericSortRect : SortStruct
     // can be inferred from the arraybase. <shrug>
     private static int DoNumSortIteration(int[,] arraybase, int arraysize, int numarrays)
     {
-        long elapsed;          /* Elapsed ticks */
+        long elapsed; /* Elapsed ticks */
         int i;
         /*
         ** Load up the array with random numbers
@@ -412,13 +414,18 @@ public class NumericSortRect : SortStruct
 #if DEBUG
         {
             for (i = 0; i < arraysize - 1; i++)
-            {   /*
+            { /*
                 ** Compare to check for proper
                 ** sort.
                 */
                 if (arraybase[0, i + 1] < arraybase[0, i])
                 {
-                    Console.Write("size: {0}, count: {1}, total: {2}\n", arraysize, numarrays, arraybase.Length);
+                    Console.Write(
+                        "size: {0}, count: {1}, total: {2}\n",
+                        arraysize,
+                        numarrays,
+                        arraybase.Length
+                    );
                     Console.Write("Sort Error at index {0}\n", i);
                     break;
                 }
@@ -434,11 +441,13 @@ public class NumericSortRect : SortStruct
     **************************
     ** Load up an array with random longs.
     */
-    private static void LoadNumArrayWithRand(int[,] array,     /* Pointer to arrays */
-            int arraysize,
-            int numarrays)         /* # of elements in array */
+    private static void LoadNumArrayWithRand(
+        int[,] array, /* Pointer to arrays */
+        int arraysize,
+        int numarrays
+    ) /* # of elements in array */
     {
-        int i;                 /* Used for index */
+        int i; /* Used for index */
 
         /*
         ** Initialize the random number generator
@@ -471,12 +480,14 @@ public class NumericSortRect : SortStruct
     ** integers.  Also pass in minimum and maximum offsets.
     ** This routine performs a heap sort on that array.
     */
-    private static void NumHeapSort(int[,] array,
-        int row,              /* which row */
-        int top)              /* Upper bound */
+    private static void NumHeapSort(
+        int[,] array,
+        int row, /* which row */
+        int top
+    ) /* Upper bound */
     {
-        int temp;                     /* Used to exchange elements */
-        int i;                        /* Loop index */
+        int temp; /* Used to exchange elements */
+        int i; /* Loop index */
 
         /*
         ** First, build a heap in the array
@@ -492,7 +503,7 @@ public class NumericSortRect : SortStruct
         for (i = top; i > 0; --i)
         {
             NumSift(array, row, 0, i);
-            temp = array[row, 0];                    /* Perform exchange */
+            temp = array[row, 0]; /* Perform exchange */
             array[row, 0] = array[row, i];
             array[row, i] = temp;
         }
@@ -505,13 +516,15 @@ public class NumericSortRect : SortStruct
     ** Performs the shift operation on a numeric array,
     ** constructing a heap in the array.
     */
-    private static void NumSift(int[,] array,     /* Array of numbers */
+    private static void NumSift(
+        int[,] array, /* Array of numbers */
         int row,
-        int i,                /* Minimum of array */
-        int j)                /* Maximum of array */
+        int i, /* Minimum of array */
+        int j
+    ) /* Maximum of array */
     {
         int k;
-        int temp;                              /* Used for exchange */
+        int temp; /* Used for exchange */
 
         while ((i + i) <= j)
         {

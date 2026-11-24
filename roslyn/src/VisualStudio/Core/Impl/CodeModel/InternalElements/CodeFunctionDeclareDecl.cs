@@ -19,10 +19,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
     public sealed class CodeFunctionDeclareDecl : CodeFunction
     {
         internal static new EnvDTE.CodeFunction Create(
-          CodeModelState state,
-          FileCodeModel fileCodeModel,
-          SyntaxNodeKey nodeKey,
-          int? nodeKind)
+            CodeModelState state,
+            FileCodeModel fileCodeModel,
+            SyntaxNodeKey nodeKey,
+            int? nodeKind
+        )
         {
             var element = new CodeFunctionDeclareDecl(state, fileCodeModel, nodeKey, nodeKind);
             var result = (EnvDTE.CodeFunction)ComAggregate.CreateAggregatedObject(element);
@@ -33,10 +34,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         }
 
         internal static new EnvDTE.CodeFunction CreateUnknown(
-           CodeModelState state,
-           FileCodeModel fileCodeModel,
-           int nodeKind,
-           string name)
+            CodeModelState state,
+            FileCodeModel fileCodeModel,
+            int nodeKind,
+            string name
+        )
         {
             var element = new CodeFunctionDeclareDecl(state, fileCodeModel, nodeKind, name);
             return (EnvDTE.CodeFunction)ComAggregate.CreateAggregatedObject(element);
@@ -46,19 +48,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
-            : base(state, fileCodeModel, nodeKey, nodeKind)
-        {
-        }
+            int? nodeKind
+        )
+            : base(state, fileCodeModel, nodeKey, nodeKind) { }
 
         private CodeFunctionDeclareDecl(
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
-            : base(state, fileCodeModel, nodeKind, name)
-        {
-        }
+            string name
+        )
+            : base(state, fileCodeModel, nodeKind, name) { }
 
         public override vsCMElement Kind
         {

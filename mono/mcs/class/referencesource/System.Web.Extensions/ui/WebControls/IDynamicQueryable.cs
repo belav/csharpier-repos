@@ -4,11 +4,12 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls
+{
     using System.Linq;
 
-    internal interface IDynamicQueryable {
-
+    internal interface IDynamicQueryable
+    {
         IQueryable Where(IQueryable source, string predicate, params object[] values);
 
         IQueryable Select(IQueryable source, string selector, params object[] values);
@@ -19,10 +20,13 @@ namespace System.Web.UI.WebControls {
 
         IQueryable Skip(IQueryable source, int count);
 
-        IQueryable GroupBy(IQueryable source, string keySelector, string elementSelector, params object[] values);
+        IQueryable GroupBy(
+            IQueryable source,
+            string keySelector,
+            string elementSelector,
+            params object[] values
+        );
 
         int Count(IQueryable source);
-
     }
-
 }

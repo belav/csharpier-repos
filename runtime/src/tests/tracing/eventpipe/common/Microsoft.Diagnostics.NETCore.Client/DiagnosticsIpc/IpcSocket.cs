@@ -13,16 +13,16 @@ namespace Microsoft.Diagnostics.NETCore.Client
     internal class IpcSocket : Socket
     {
         public IpcSocket(SocketType socketType, ProtocolType protocolType)
-            : base(socketType, protocolType)
-        {
-        }
+            : base(socketType, protocolType) { }
 
-        public IpcSocket(AddressFamily addressFamily, SocketType socketType, ProtocolType protocolType)
-            : base(addressFamily, socketType, protocolType)
-        {
-        }
+        public IpcSocket(
+            AddressFamily addressFamily,
+            SocketType socketType,
+            ProtocolType protocolType
+        )
+            : base(addressFamily, socketType, protocolType) { }
 
-// .NET 6 implements this method directly on Socket, but for earlier runtimes we need a polyfill
+        // .NET 6 implements this method directly on Socket, but for earlier runtimes we need a polyfill
 #if !NET6_0_OR_GREATER
         public async Task<Socket> AcceptAsync(CancellationToken token)
         {
@@ -30,7 +30,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
             {
                 try
                 {
-                    return await Task.Factory.FromAsync(BeginAccept, EndAccept, this).ConfigureAwait(false);
+                    return await Task
+                        .Factory.FromAsync(BeginAccept, EndAccept, this)
+                        .ConfigureAwait(false);
                 }
                 // When the socket is closed, the FromAsync logic will try to call EndAccept on the socket,
                 // but that will throw an ObjectDisposedException. Only catch the exception if due to cancellation.
@@ -62,7 +64,7 @@ namespace Microsoft.Diagnostics.NETCore.Client
             }
         }
 
-// .NET 6 implements this method directly on Socket, but for earlier runtimes we need a polyfill
+        // .NET 6 implements this method directly on Socket, but for earlier runtimes we need a polyfill
 #if !NET6_0_OR_GREATER
         public async Task ConnectAsync(EndPoint remoteEP, CancellationToken token)
         {
@@ -74,7 +76,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
                     {
                         return BeginConnect(remoteEP, callback, state);
                     };
-                    await Task.Factory.FromAsync(beginConnect, EndConnect, this).ConfigureAwait(false);
+                    await Task
+                        .Factory.FromAsync(beginConnect, EndConnect, this)
+                        .ConfigureAwait(false);
                 }
                 // When the socket is closed, the FromAsync logic will try to call EndAccept on the socket,
                 // but that will throw an ObjectDisposedException. Only catch the exception if due to cancellation.

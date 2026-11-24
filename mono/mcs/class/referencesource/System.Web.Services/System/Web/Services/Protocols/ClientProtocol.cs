@@ -4,35 +4,42 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Protocols {
+namespace System.Web.Services.Protocols
+{
     using System;
     using System.Collections;
-    using System.Diagnostics;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.IO;
-    using System.Reflection;
-    using System.Xml.Serialization;
     using System.Net;
     using System.Net.Cache;
-    using System.Threading;
-    using System.Text;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Security.Cryptography.X509Certificates;
     using System.Security.Permissions;
-    using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Threading;
     using System.Web.Services.Diagnostics;
+    using System.Xml.Serialization;
 
-    internal class ClientTypeCache {
+    internal class ClientTypeCache
+    {
         Hashtable cache = new Hashtable();
 
-        internal object this[Type key] {
+        internal object this[Type key]
+        {
             get { return cache[key]; }
         }
 
-        internal void Add(Type key, object value) {
-            lock (this) {
-                if (cache[key] == value) return;
+        internal void Add(Type key, object value)
+        {
+            lock (this)
+            {
+                if (cache[key] == value)
+                    return;
                 Hashtable clone = new Hashtable();
-                foreach (object k in cache.Keys) {
+                foreach (object k in cache.Keys)
+                {
                     clone.Add(k, cache[k]);
                 }
                 cache = clone;
@@ -49,7 +56,8 @@ namespace System.Web.Services.Protocols {
     ///    </para>
     /// </devdoc>
     [ComVisible(true)]
-    public abstract class WebClientProtocol : Component {
+    public abstract class WebClientProtocol : Component
+    {
         static AsyncCallback getRequestStreamAsyncCallback;
         static AsyncCallback getResponseAsyncCallback;
 
@@ -71,9 +79,12 @@ namespace System.Web.Services.Protocols {
         Hashtable asyncInvokes = Hashtable.Synchronized(new Hashtable());
 
         private static Object s_InternalSyncObject;
-        internal static Object InternalSyncObject {
-            get {
-                if (s_InternalSyncObject == null) {
+        internal static Object InternalSyncObject
+        {
+            get
+            {
+                if (s_InternalSyncObject == null)
+                {
                     Object o = new Object();
                     Interlocked.CompareExchange(ref s_InternalSyncObject, o, null);
                 }
@@ -81,7 +92,8 @@ namespace System.Web.Services.Protocols {
             }
         }
 
-        static WebClientProtocol() {
+        static WebClientProtocol()
+        {
             cache = new ClientTypeCache();
         }
 
@@ -89,11 +101,13 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected WebClientProtocol() {
+        protected WebClientProtocol()
+        {
             this.timeout = 100000; // should be kept in sync with HttpWebRequest.Timeout default (see private WebRequest.DefaultTimeout)
         }
 
-        internal WebClientProtocol(WebClientProtocol protocol) {
+        internal WebClientProtocol(WebClientProtocol protocol)
+        {
             this.credentials = protocol.credentials;
             this.uri = protocol.uri;
             this.timeout = protocol.timeout;
@@ -101,9 +115,12 @@ namespace System.Web.Services.Protocols {
             this.requestEncoding = protocol.requestEncoding;
         }
 
-        internal static RequestCachePolicy BypassCache {
-            get {
-                if (bypassCache == null) {
+        internal static RequestCachePolicy BypassCache
+        {
+            get
+            {
+                if (bypassCache == null)
+                {
                     bypassCache = new RequestCachePolicy(RequestCacheLevel.BypassCache);
                 }
                 return bypassCache;
@@ -114,26 +131,20 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public ICredentials Credentials {
-            get {
-                return credentials;
-            }
-            set {
-                credentials = value;
-            }
+        public ICredentials Credentials
+        {
+            get { return credentials; }
+            set { credentials = value; }
         }
 
         /// <include file='doc\ClientProtocol.uex' path='docs/doc[@for="WebClientProtocol.UseDefaultCredentials"]/*' />
         /// <devdoc>
         ///    <para>Sets Credentials to CredentialCache.DefaultCredentials</para>
         /// </devdoc>
-        public bool UseDefaultCredentials {
-            get {
-                return (credentials == CredentialCache.DefaultCredentials) ? true : false;
-            }
-            set {
-                credentials = value ? CredentialCache.DefaultCredentials : null;
-            }
+        public bool UseDefaultCredentials
+        {
+            get { return (credentials == CredentialCache.DefaultCredentials) ? true : false; }
+            set { credentials = value ? CredentialCache.DefaultCredentials : null; }
         }
 
         /// <include file='doc\ClientProtocol.uex' path='docs/doc[@for="WebClientProtocol.ConnectionGroupName"]/*' />
@@ -143,12 +154,14 @@ namespace System.Web.Services.Protocols {
         ///    </para>
         /// </devdoc>
         [DefaultValue("")]
-        public string ConnectionGroupName {
+        public string ConnectionGroupName
+        {
             get { return (connectionGroupName == null) ? string.Empty : connectionGroupName; }
             set { connectionGroupName = value; }
         }
 
-        internal WebRequest PendingSyncRequest {
+        internal WebRequest PendingSyncRequest
+        {
             get { return pendingSyncRequest; }
             set { pendingSyncRequest = value; }
         }
@@ -160,7 +173,8 @@ namespace System.Web.Services.Protocols {
         ///    </para>
         /// </devdoc>
         [DefaultValue(false), WebServicesDescription(Res.ClientProtocolPreAuthenticate)]
-        public bool PreAuthenticate {
+        public bool PreAuthenticate
+        {
             get { return preAuthenticate; }
             set { preAuthenticate = value; }
         }
@@ -172,20 +186,24 @@ namespace System.Web.Services.Protocols {
         ///    </para>
         /// </devdoc>
         [DefaultValue(""), SettingsBindable(true), WebServicesDescription(Res.ClientProtocolUrl)]
-        public string Url {
+        public string Url
+        {
             get { return uri == null ? string.Empty : uri.ToString(); }
             set { uri = new Uri(value); }
         }
 
-        internal Hashtable AsyncInvokes {
+        internal Hashtable AsyncInvokes
+        {
             get { return asyncInvokes; }
         }
 
-        internal object NullToken {
+        internal object NullToken
+        {
             get { return nullToken; }
         }
 
-        internal Uri Uri {
+        internal Uri Uri
+        {
             get { return uri; }
             set { uri = value; }
         }
@@ -196,8 +214,13 @@ namespace System.Web.Services.Protocols {
         ///       Gets or sets the encoding used for making the request.
         ///    </para>
         /// </devdoc>
-        [DefaultValue(null), SettingsBindable(true), WebServicesDescription(Res.ClientProtocolEncoding)]
-        public Encoding RequestEncoding {
+        [
+            DefaultValue(null),
+            SettingsBindable(true),
+            WebServicesDescription(Res.ClientProtocolEncoding)
+        ]
+        public Encoding RequestEncoding
+        {
             get { return requestEncoding; }
             set { requestEncoding = value; }
         }
@@ -208,14 +231,23 @@ namespace System.Web.Services.Protocols {
         ///       Gets or sets the timeout (in milliseconds) used for synchronous calls.
         ///    </para>
         /// </devdoc>
-        [DefaultValue(100000), SettingsBindable(true), WebServicesDescription(Res.ClientProtocolTimeout)]
-        public int Timeout {
+        [
+            DefaultValue(100000),
+            SettingsBindable(true),
+            WebServicesDescription(Res.ClientProtocolTimeout)
+        ]
+        public int Timeout
+        {
             get { return timeout; }
-            set { timeout = (value < Threading.Timeout.Infinite) ? Threading.Timeout.Infinite : value; }
+            set
+            {
+                timeout = (value < Threading.Timeout.Infinite) ? Threading.Timeout.Infinite : value;
+            }
         }
 
         /// <include file='doc\ClientProtocol.uex' path='docs/doc[@for="WebClientProtocol.Abort"]/*' />
-        public virtual void Abort() {
+        public virtual void Abort()
+        {
             WebRequest request = PendingSyncRequest;
             if (request != null)
                 request.Abort();
@@ -230,17 +262,30 @@ namespace System.Web.Services.Protocols {
         ///     InitializeAsyncRequest and WriteAsyncRequest methods.
         ///    </para>
         /// </devdoc>
-        internal IAsyncResult BeginSend(Uri requestUri, WebClientAsyncResult asyncResult, bool callWriteAsyncRequest) {
-            if (readResponseAsyncCallback == null) {
-                lock (InternalSyncObject) {
-                    if (readResponseAsyncCallback == null) {
-                        getRequestStreamAsyncCallback = new AsyncCallback(GetRequestStreamAsyncCallback);
+        internal IAsyncResult BeginSend(
+            Uri requestUri,
+            WebClientAsyncResult asyncResult,
+            bool callWriteAsyncRequest
+        )
+        {
+            if (readResponseAsyncCallback == null)
+            {
+                lock (InternalSyncObject)
+                {
+                    if (readResponseAsyncCallback == null)
+                    {
+                        getRequestStreamAsyncCallback = new AsyncCallback(
+                            GetRequestStreamAsyncCallback
+                        );
                         getResponseAsyncCallback = new AsyncCallback(GetResponseAsyncCallback);
                         readResponseAsyncCallback = new AsyncCallback(ReadResponseAsyncCallback);
                     }
                 }
             }
-            Debug.Assert(asyncResult.Request == null, "calling GetWebRequest twice for the same WebClientAsyncResult");
+            Debug.Assert(
+                asyncResult.Request == null,
+                "calling GetWebRequest twice for the same WebClientAsyncResult"
+            );
             WebRequest request = GetWebRequest(requestUri);
             asyncResult.Request = request;
             InitializeAsyncRequest(request, asyncResult.InternalAsyncState);
@@ -254,40 +299,65 @@ namespace System.Web.Services.Protocols {
             return asyncResult;
         }
 
-        static private void ProcessAsyncException(WebClientAsyncResult client, Exception e, string method) {
-            if (Tracing.On) Tracing.ExceptionCatch(TraceEventType.Error, typeof(WebClientProtocol), method, e);
+        private static void ProcessAsyncException(
+            WebClientAsyncResult client,
+            Exception e,
+            string method
+        )
+        {
+            if (Tracing.On)
+                Tracing.ExceptionCatch(TraceEventType.Error, typeof(WebClientProtocol), method, e);
             WebException webException = e as WebException;
-            if (webException != null && webException.Response != null) {
+            if (webException != null && webException.Response != null)
+            {
                 client.Response = webException.Response;
             }
-            else {
+            else
+            {
                 // If we've already completed the call then the exception must have come
                 // out of the user callback in which case we need to rethrow it here
                 // so that it bubbles up to the AppDomain unhandled exception event.
                 if (client.IsCompleted)
-                    throw new InvalidOperationException(Res.GetString(Res.ThereWasAnErrorDuringAsyncProcessing), e);
+                    throw new InvalidOperationException(
+                        Res.GetString(Res.ThereWasAnErrorDuringAsyncProcessing),
+                        e
+                    );
                 else
                     client.Complete(e);
             }
         }
 
-        static private void GetRequestStreamAsyncCallback(IAsyncResult asyncResult) {
+        private static void GetRequestStreamAsyncCallback(IAsyncResult asyncResult)
+        {
             WebClientAsyncResult client = (WebClientAsyncResult)asyncResult.AsyncState;
             client.CombineCompletedSynchronously(asyncResult.CompletedSynchronously);
             bool processingRequest = true;
-            try {
+            try
+            {
                 Stream requestStream = client.Request.EndGetRequestStream(asyncResult);
                 processingRequest = false;
-                try {
-                    client.ClientProtocol.AsyncBufferedSerialize(client.Request, requestStream, client.InternalAsyncState);
+                try
+                {
+                    client.ClientProtocol.AsyncBufferedSerialize(
+                        client.Request,
+                        requestStream,
+                        client.InternalAsyncState
+                    );
                 }
-                finally {
+                finally
+                {
                     requestStream.Close();
                 }
                 client.Request.BeginGetResponse(getResponseAsyncCallback, client);
             }
-            catch (Exception e) {
-                if (e is ThreadAbortException || e is StackOverflowException || e is OutOfMemoryException) {
+            catch (Exception e)
+            {
+                if (
+                    e is ThreadAbortException
+                    || e is StackOverflowException
+                    || e is OutOfMemoryException
+                )
+                {
                     throw;
                 }
                 ProcessAsyncException(client, e, "GetRequestStreamAsyncCallback");
@@ -306,14 +376,22 @@ namespace System.Web.Services.Protocols {
             }
         }
 
-        static private void GetResponseAsyncCallback(IAsyncResult asyncResult) {
+        private static void GetResponseAsyncCallback(IAsyncResult asyncResult)
+        {
             WebClientAsyncResult client = (WebClientAsyncResult)asyncResult.AsyncState;
             client.CombineCompletedSynchronously(asyncResult.CompletedSynchronously);
-            try {
+            try
+            {
                 client.Response = client.ClientProtocol.GetWebResponse(client.Request, asyncResult);
             }
-            catch (Exception e) {
-                if (e is ThreadAbortException || e is StackOverflowException || e is OutOfMemoryException) {
+            catch (Exception e)
+            {
+                if (
+                    e is ThreadAbortException
+                    || e is StackOverflowException
+                    || e is OutOfMemoryException
+                )
+                {
                     throw;
                 }
                 ProcessAsyncException(client, e, "GetResponseAsyncCallback");
@@ -324,51 +402,76 @@ namespace System.Web.Services.Protocols {
             ReadAsyncResponse(client);
         }
 
-        static private void ReadAsyncResponse(WebClientAsyncResult client) {
-            if (client.Response.ContentLength == 0) {
+        private static void ReadAsyncResponse(WebClientAsyncResult client)
+        {
+            if (client.Response.ContentLength == 0)
+            {
                 client.Complete();
                 return;
             }
-            try {
+            try
+            {
                 client.ResponseStream = client.Response.GetResponseStream();
                 ReadAsyncResponseStream(client);
             }
-            catch (Exception e) {
-                if (e is ThreadAbortException || e is StackOverflowException || e is OutOfMemoryException) {
+            catch (Exception e)
+            {
+                if (
+                    e is ThreadAbortException
+                    || e is StackOverflowException
+                    || e is OutOfMemoryException
+                )
+                {
                     throw;
                 }
                 ProcessAsyncException(client, e, "ReadAsyncResponse");
             }
         }
 
-        static private void ReadAsyncResponseStream(WebClientAsyncResult client) {
+        private static void ReadAsyncResponseStream(WebClientAsyncResult client)
+        {
             IAsyncResult asyncResult;
-            do {
+            do
+            {
                 byte[] buffer = client.Buffer;
                 long contentLength = client.Response.ContentLength;
                 if (buffer == null)
                     buffer = client.Buffer = new byte[(contentLength == -1) ? 1024 : contentLength];
                 else if (contentLength != -1 && contentLength > buffer.Length)
                     buffer = client.Buffer = new byte[contentLength];
-                asyncResult = client.ResponseStream.BeginRead(buffer, 0, buffer.Length, readResponseAsyncCallback, client);
+                asyncResult = client.ResponseStream.BeginRead(
+                    buffer,
+                    0,
+                    buffer.Length,
+                    readResponseAsyncCallback,
+                    client
+                );
                 if (!asyncResult.CompletedSynchronously)
                     return;
-            }
-            while (!ProcessAsyncResponseStreamResult(client, asyncResult));
+            } while (!ProcessAsyncResponseStreamResult(client, asyncResult));
         }
 
-        static private bool ProcessAsyncResponseStreamResult(WebClientAsyncResult client, IAsyncResult asyncResult) {
+        private static bool ProcessAsyncResponseStreamResult(
+            WebClientAsyncResult client,
+            IAsyncResult asyncResult
+        )
+        {
             bool complete;
             int bytesRead = client.ResponseStream.EndRead(asyncResult);
             long contentLength = client.Response.ContentLength;
-            if (contentLength > 0 && bytesRead == contentLength) {
+            if (contentLength > 0 && bytesRead == contentLength)
+            {
                 // the non-chunked response finished in a single read
                 client.ResponseBufferedStream = new MemoryStream(client.Buffer);
                 complete = true;
             }
-            else if (bytesRead > 0) {
-                if (client.ResponseBufferedStream == null) {
-                    int capacity = (int)((contentLength == -1) ? client.Buffer.Length : contentLength);
+            else if (bytesRead > 0)
+            {
+                if (client.ResponseBufferedStream == null)
+                {
+                    int capacity = (int)(
+                        (contentLength == -1) ? client.Buffer.Length : contentLength
+                    );
                     client.ResponseBufferedStream = new MemoryStream(capacity);
                 }
                 client.ResponseBufferedStream.Write(client.Buffer, 0, bytesRead);
@@ -382,31 +485,42 @@ namespace System.Web.Services.Protocols {
             return complete;
         }
 
-        static private void ReadResponseAsyncCallback(IAsyncResult asyncResult) {
+        private static void ReadResponseAsyncCallback(IAsyncResult asyncResult)
+        {
             WebClientAsyncResult client = (WebClientAsyncResult)asyncResult.AsyncState;
             client.CombineCompletedSynchronously(asyncResult.CompletedSynchronously);
             if (asyncResult.CompletedSynchronously)
                 return;
-            try {
+            try
+            {
                 bool complete = ProcessAsyncResponseStreamResult(client, asyncResult);
                 if (!complete)
                     ReadAsyncResponseStream(client);
             }
-            catch (Exception e) {
-                if (e is ThreadAbortException || e is StackOverflowException || e is OutOfMemoryException) {
+            catch (Exception e)
+            {
+                if (
+                    e is ThreadAbortException
+                    || e is StackOverflowException
+                    || e is OutOfMemoryException
+                )
+                {
                     throw;
                 }
                 ProcessAsyncException(client, e, "ReadResponseAsyncCallback");
             }
         }
 
-        internal void NotifyClientCallOut(WebRequest request) {
+        internal void NotifyClientCallOut(WebRequest request)
+        {
 #if !MONO
-            if (RemoteDebugger.IsClientCallOutEnabled()) {
+            if (RemoteDebugger.IsClientCallOutEnabled())
+            {
                 debugger = new RemoteDebugger();
                 debugger.NotifyClientCallOut(request);
             }
-            else {
+            else
+            {
                 debugger = null;
             }
 #endif
@@ -421,7 +535,8 @@ namespace System.Web.Services.Protocols {
         ///     properties need to be set on the web request instance.
         ///    </para>
         /// </devdoc>
-        protected virtual WebRequest GetWebRequest(Uri uri) {
+        protected virtual WebRequest GetWebRequest(Uri uri)
+        {
             if (uri == null)
                 throw new InvalidOperationException(Res.GetString(Res.WebMissingPath));
             WebRequest request = (WebRequest)WebRequest.Create(uri);
@@ -442,23 +557,35 @@ namespace System.Web.Services.Protocols {
         ///     processing on the response instance.
         ///    </para>
         /// </devdoc>
-        protected virtual WebResponse GetWebResponse(WebRequest request) {
+        protected virtual WebResponse GetWebResponse(WebRequest request)
+        {
             TraceMethod caller = Tracing.On ? new TraceMethod(this, "GetWebResponse") : null;
             WebResponse response = null;
-            try {
-                if (Tracing.On) Tracing.Enter("WebRequest.GetResponse", caller, new TraceMethod(request, "GetResponse"));
+            try
+            {
+                if (Tracing.On)
+                    Tracing.Enter(
+                        "WebRequest.GetResponse",
+                        caller,
+                        new TraceMethod(request, "GetResponse")
+                    );
                 response = request.GetResponse();
-                if (Tracing.On) Tracing.Exit("WebRequest.GetResponse", caller);
+                if (Tracing.On)
+                    Tracing.Exit("WebRequest.GetResponse", caller);
             }
-            catch (WebException e) {
+            catch (WebException e)
+            {
                 if (e.Response == null)
                     throw e;
-                else {
-                    if (Tracing.On) Tracing.ExceptionCatch(TraceEventType.Error, this, "GetWebResponse", e);
+                else
+                {
+                    if (Tracing.On)
+                        Tracing.ExceptionCatch(TraceEventType.Error, this, "GetWebResponse", e);
                     response = e.Response;
                 }
             }
-            finally {
+            finally
+            {
 #if !MONO
                 if (debugger != null)
                     debugger.NotifyClientCallReturn(response);
@@ -476,7 +603,8 @@ namespace System.Web.Services.Protocols {
         ///     async request processing.
         ///    </para>
         /// </devdoc>
-        protected virtual WebResponse GetWebResponse(WebRequest request, IAsyncResult result) {
+        protected virtual WebResponse GetWebResponse(WebRequest request, IAsyncResult result)
+        {
             WebResponse response = request.EndGetResponse(result);
 #if !MONO
             if (response != null && debugger != null)
@@ -494,21 +622,35 @@ namespace System.Web.Services.Protocols {
         ///    </para>
         /// </devdoc>
         [PermissionSet(SecurityAction.InheritanceDemand, Name = "FullTrust")]
-        internal virtual void InitializeAsyncRequest(WebRequest request, object internalAsyncState) {
+        internal virtual void InitializeAsyncRequest(WebRequest request, object internalAsyncState)
+        {
             return;
         }
 
         [PermissionSet(SecurityAction.InheritanceDemand, Name = "FullTrust")]
-        internal virtual void AsyncBufferedSerialize(WebRequest request, Stream requestStream, object internalAsyncState) {
+        internal virtual void AsyncBufferedSerialize(
+            WebRequest request,
+            Stream requestStream,
+            object internalAsyncState
+        )
+        {
             throw new NotSupportedException(Res.GetString(Res.ProtocolDoesNotAsyncSerialize));
         }
 
-        internal WebResponse EndSend(IAsyncResult asyncResult, ref object internalAsyncState, ref Stream responseStream) {
-            if (asyncResult == null) throw new ArgumentNullException(Res.GetString(Res.WebNullAsyncResultInEnd));
+        internal WebResponse EndSend(
+            IAsyncResult asyncResult,
+            ref object internalAsyncState,
+            ref Stream responseStream
+        )
+        {
+            if (asyncResult == null)
+                throw new ArgumentNullException(Res.GetString(Res.WebNullAsyncResultInEnd));
 
             WebClientAsyncResult client = (WebClientAsyncResult)asyncResult;
             if (client.EndSendCalled)
-                throw new InvalidOperationException(Res.GetString(Res.CanTCallTheEndMethodOfAnAsyncCallMoreThan));
+                throw new InvalidOperationException(
+                    Res.GetString(Res.CanTCallTheEndMethodOfAnAsyncCallMoreThan)
+                );
             client.EndSendCalled = true;
             WebResponse response = client.WaitForResponse();
             internalAsyncState = client.InternalAsyncState;
@@ -520,7 +662,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         /// Returns an instance of a client protocol handler from the cache.
         /// </devdoc>
-        protected static object GetFromCache(Type type) {
+        protected static object GetFromCache(Type type)
+        {
             return cache[type];
         }
 
@@ -530,15 +673,16 @@ namespace System.Web.Services.Protocols {
         ///       Add an instance of the client protocol handler to the cache.
         ///    </para>
         /// </devdoc>
-        protected static void AddToCache(Type type, object value) {
+        protected static void AddToCache(Type type, object value)
+        {
             cache.Add(type, value);
         }
-
     }
 
     /// <include file='doc\ClientProtocol.uex' path='docs/doc[@for="WebClientAsyncResult"]/*' />
     [PermissionSet(SecurityAction.InheritanceDemand, Name = "FullTrust")]
-    public class WebClientAsyncResult : IAsyncResult {
+    public class WebClientAsyncResult : IAsyncResult
+    {
         private object userAsyncState;
         private bool completedSynchronously;
         private bool isCompleted;
@@ -557,11 +701,13 @@ namespace System.Web.Services.Protocols {
         internal byte[] Buffer;
         internal bool EndSendCalled;
 
-        internal WebClientAsyncResult(WebClientProtocol clientProtocol,
+        internal WebClientAsyncResult(
+            WebClientProtocol clientProtocol,
             object internalAsyncState,
             WebRequest request,
             AsyncCallback userCallback,
-            object userAsyncState) 
+            object userAsyncState
+        )
         {
             this.ClientProtocol = clientProtocol;
             this.InternalAsyncState = internalAsyncState;
@@ -572,14 +718,21 @@ namespace System.Web.Services.Protocols {
         }
 
         /// <include file='doc\ClientProtocol.uex' path='docs/doc[@for="WebClientAsyncResult.AsyncState"]/*' />
-        public object AsyncState { get { return userAsyncState; } }
+        public object AsyncState
+        {
+            get { return userAsyncState; }
+        }
 
         /// <include file='doc\ClientProtocol.uex' path='docs/doc[@for="WebClientAsyncResult.AsyncWaitHandle"]/*' />
-        public WaitHandle AsyncWaitHandle {
-            get {
+        public WaitHandle AsyncWaitHandle
+        {
+            get
+            {
                 bool savedIsCompleted = isCompleted;
-                if (manualResetEvent == null) {
-                    lock (this) {
+                if (manualResetEvent == null)
+                {
+                    lock (this)
+                    {
                         if (manualResetEvent == null)
                             manualResetEvent = new ManualResetEvent(savedIsCompleted);
                     }
@@ -591,26 +744,33 @@ namespace System.Web.Services.Protocols {
         }
 
         /// <include file='doc\ClientProtocol.uex' path='docs/doc[@for="WebClientAsyncResult.CompletedSynchronously"]/*' />
-        public bool CompletedSynchronously {
+        public bool CompletedSynchronously
+        {
             get { return completedSynchronously; }
         }
 
         /// <include file='doc\ClientProtocol.uex' path='docs/doc[@for="WebClientAsyncResult.IsCompleted"]/*' />
-        public bool IsCompleted { get { return isCompleted; } }
+        public bool IsCompleted
+        {
+            get { return isCompleted; }
+        }
 
         /// <include file='doc\ClientProtocol.uex' path='docs/doc[@for="WebClientAsyncResult.Abort"]/*' />
-        public void Abort() {
+        public void Abort()
+        {
             WebRequest req = Request;
             if (req != null)
                 req.Abort();
         }
 
-
-        internal void Complete() {
+        internal void Complete()
+        {
             Debug.Assert(!isCompleted, "Complete called more than once.");
 
-            try {
-                if (ResponseStream != null) {
+            try
+            {
+                if (ResponseStream != null)
+                {
                     ResponseStream.Close();
                     ResponseStream = null;
                 }
@@ -618,28 +778,43 @@ namespace System.Web.Services.Protocols {
                 if (ResponseBufferedStream != null)
                     ResponseBufferedStream.Position = 0;
             }
-            catch (Exception e) {
-                if (e is ThreadAbortException || e is StackOverflowException || e is OutOfMemoryException) {
+            catch (Exception e)
+            {
+                if (
+                    e is ThreadAbortException
+                    || e is StackOverflowException
+                    || e is OutOfMemoryException
+                )
+                {
                     throw;
                 }
                 if (this.Exception == null)
                     this.Exception = e;
-                if (Tracing.On) Tracing.ExceptionCatch(TraceEventType.Error, this, "Complete", e);
+                if (Tracing.On)
+                    Tracing.ExceptionCatch(TraceEventType.Error, this, "Complete", e);
             }
 
             isCompleted = true;
 
-            try {
+            try
+            {
                 if (manualResetEvent != null)
                     manualResetEvent.Set();
             }
-            catch (Exception e) {
-                if (e is ThreadAbortException || e is StackOverflowException || e is OutOfMemoryException) {
+            catch (Exception e)
+            {
+                if (
+                    e is ThreadAbortException
+                    || e is StackOverflowException
+                    || e is OutOfMemoryException
+                )
+                {
                     throw;
                 }
                 if (this.Exception == null)
                     this.Exception = e;
-                if (Tracing.On) Tracing.ExceptionCatch(TraceEventType.Error, this, "Complete", e);
+                if (Tracing.On)
+                    Tracing.ExceptionCatch(TraceEventType.Error, this, "Complete", e);
             }
 
             // We want to let exceptions in user callback to bubble up to
@@ -649,12 +824,14 @@ namespace System.Web.Services.Protocols {
                 userCallback(this);
         }
 
-        internal void Complete(Exception e) {
+        internal void Complete(Exception e)
+        {
             this.Exception = e;
             Complete();
         }
 
-        internal WebResponse WaitForResponse() {
+        internal WebResponse WaitForResponse()
+        {
             if (!isCompleted)
                 AsyncWaitHandle.WaitOne();
 
@@ -664,7 +841,8 @@ namespace System.Web.Services.Protocols {
             return Response;
         }
 
-        internal void CombineCompletedSynchronously(bool innerCompletedSynchronously) {
+        internal void CombineCompletedSynchronously(bool innerCompletedSynchronously)
+        {
             completedSynchronously = completedSynchronously && innerCompletedSynchronously;
         }
     }
@@ -679,11 +857,18 @@ namespace System.Web.Services.Protocols {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public class InvokeCompletedEventArgs : AsyncCompletedEventArgs {
+    public class InvokeCompletedEventArgs : AsyncCompletedEventArgs
+    {
         object[] results;
 
-        internal InvokeCompletedEventArgs(object[] results, Exception exception, bool cancelled, object userState) :
-            base(exception, cancelled, userState) {
+        internal InvokeCompletedEventArgs(
+            object[] results,
+            Exception exception,
+            bool cancelled,
+            object userState
+        )
+            : base(exception, cancelled, userState)
+        {
             this.results = results;
         }
 
@@ -693,24 +878,31 @@ namespace System.Web.Services.Protocols {
         ///       Gets or sets a value indicating whether the client should automatically follow server redirects.
         ///    </para>
         /// </devdoc>
-        public object[] Results {
-            get {
-                return results;
-            }
+        public object[] Results
+        {
+            get { return results; }
         }
     }
 
-
-    internal class UserToken {
+    internal class UserToken
+    {
         SendOrPostCallback callback;
         object userState;
 
-        internal UserToken(SendOrPostCallback callback, object userState) {
+        internal UserToken(SendOrPostCallback callback, object userState)
+        {
             this.callback = callback;
             this.userState = userState;
         }
-        internal SendOrPostCallback Callback { get { return callback; } }
-        internal object UserState { get { return userState; } }
+
+        internal SendOrPostCallback Callback
+        {
+            get { return callback; }
+        }
+        internal object UserState
+        {
+            get { return userState; }
+        }
     }
 
     /// <include file='doc\ClientProtocol.uex' path='docs/doc[@for="HttpWebClientProtocol"]/*' />
@@ -718,13 +910,17 @@ namespace System.Web.Services.Protocols {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [ComVisible(true)]
-    public abstract class HttpWebClientProtocol : WebClientProtocol {
+    public abstract class HttpWebClientProtocol : WebClientProtocol
+    {
         private bool allowAutoRedirect;
         private bool enableDecompression = false;
         private CookieContainer cookieJar = null;
         private X509CertificateCollection clientCertificates;
         private IWebProxy proxy;
-        private static string UserAgentDefault = "Mozilla/4.0 (compatible; MSIE 6.0; MS Web Services Client Protocol " + System.Environment.Version.ToString() + ")";
+        private static string UserAgentDefault =
+            "Mozilla/4.0 (compatible; MSIE 6.0; MS Web Services Client Protocol "
+            + System.Environment.Version.ToString()
+            + ")";
         private string userAgent;
         private bool unsafeAuthenticatedConnectionSharing;
 
@@ -732,7 +928,9 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected HttpWebClientProtocol() : base() {
+        protected HttpWebClientProtocol()
+            : base()
+        {
             this.allowAutoRedirect = false;
             this.userAgent = UserAgentDefault;
             // the right thing to do, for NetClasses to pick up the default
@@ -744,13 +942,14 @@ namespace System.Web.Services.Protocols {
 
         // used by SoapHttpClientProtocol.Discover
         internal HttpWebClientProtocol(HttpWebClientProtocol protocol)
-            : base(protocol) {
-            this.allowAutoRedirect  = protocol.allowAutoRedirect;
-            this.enableDecompression  = protocol.enableDecompression;
-            this.cookieJar          = protocol.cookieJar;
+            : base(protocol)
+        {
+            this.allowAutoRedirect = protocol.allowAutoRedirect;
+            this.enableDecompression = protocol.enableDecompression;
+            this.cookieJar = protocol.cookieJar;
             this.clientCertificates = protocol.clientCertificates;
-            this.proxy              = protocol.proxy;
-            this.userAgent          = protocol.userAgent;
+            this.proxy = protocol.proxy;
+            this.userAgent = protocol.userAgent;
         }
 
         /// <include file='doc\ClientProtocol.uex' path='docs/doc[@for="HttpWebClientProtocol.AllowAutoRedirect"]/*' />
@@ -760,33 +959,32 @@ namespace System.Web.Services.Protocols {
         ///    </para>
         /// </devdoc>
         [DefaultValue(false), WebServicesDescription(Res.ClientProtocolAllowAutoRedirect)]
-        public bool AllowAutoRedirect {
-            get {
-                return allowAutoRedirect;
-            }
-
-            set {
-                allowAutoRedirect = value;
-            }
+        public bool AllowAutoRedirect
+        {
+            get { return allowAutoRedirect; }
+            set { allowAutoRedirect = value; }
         }
-
 
         /// <include file='doc\ClientProtocol.uex' path='docs/doc[@for="HttpWebClientProtocol.CookieContainer"]/*' />
         [DefaultValue(null), WebServicesDescription(Res.ClientProtocolCookieContainer)]
-        public CookieContainer CookieContainer {
-            get {
-                return cookieJar;
-            }
-            set {
-                cookieJar = value;
-            }
+        public CookieContainer CookieContainer
+        {
+            get { return cookieJar; }
+            set { cookieJar = value; }
         }
 
         /// <include file='doc\ClientProtocol.uex' path='docs/doc[@for="HttpWebClientProtocol.ClientCertificates"]/*' />
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), WebServicesDescription(Res.ClientProtocolClientCertificates)]
-        public X509CertificateCollection ClientCertificates {
-            get {
-                if (clientCertificates == null) {
+        [
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            WebServicesDescription(Res.ClientProtocolClientCertificates)
+        ]
+        public X509CertificateCollection ClientCertificates
+        {
+            get
+            {
+                if (clientCertificates == null)
+                {
                     clientCertificates = new X509CertificateCollection();
                 }
                 return clientCertificates;
@@ -800,25 +998,26 @@ namespace System.Web.Services.Protocols {
         ///    </para>
         /// </devdoc>
         [DefaultValue(false), WebServicesDescription(Res.ClientProtocolEnableDecompression)]
-        public bool EnableDecompression {
-            get {
-                return enableDecompression;
-            }
-
-            set {
-                enableDecompression = value;
-            }
+        public bool EnableDecompression
+        {
+            get { return enableDecompression; }
+            set { enableDecompression = value; }
         }
 
-         /// <include file='doc\ClientProtocol.uex' path='docs/doc[@for="HttpWebClientProtocol.UserAgent"]/*' />
-         /// <devdoc>
-         ///    <para>
-         ///       Gets or sets the value for the user agent header that is
-         ///       sent with each request.
-         ///    </para>
-         /// </devdoc>
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), WebServicesDescription(Res.ClientProtocolUserAgent)]
-        public string UserAgent {
+        /// <include file='doc\ClientProtocol.uex' path='docs/doc[@for="HttpWebClientProtocol.UserAgent"]/*' />
+        /// <devdoc>
+        ///    <para>
+        ///       Gets or sets the value for the user agent header that is
+        ///       sent with each request.
+        ///    </para>
+        /// </devdoc>
+        [
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            WebServicesDescription(Res.ClientProtocolUserAgent)
+        ]
+        public string UserAgent
+        {
             get { return (userAgent == null) ? string.Empty : userAgent; }
             set { userAgent = value; }
         }
@@ -830,7 +1029,8 @@ namespace System.Web.Services.Protocols {
         ///    </para>
         /// </devdoc>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public IWebProxy Proxy {
+        public IWebProxy Proxy
+        {
             get { return proxy; }
             set { proxy = value; }
         }
@@ -839,24 +1039,34 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override WebRequest GetWebRequest(Uri uri) {
+        protected override WebRequest GetWebRequest(Uri uri)
+        {
             WebRequest request = base.GetWebRequest(uri);
             HttpWebRequest httpRequest = request as HttpWebRequest;
-            if (httpRequest != null) {
+            if (httpRequest != null)
+            {
                 httpRequest.UserAgent = UserAgent;
                 httpRequest.AllowAutoRedirect = allowAutoRedirect;
-                httpRequest.AutomaticDecompression = enableDecompression ? DecompressionMethods.GZip : DecompressionMethods.None;
+                httpRequest.AutomaticDecompression = enableDecompression
+                    ? DecompressionMethods.GZip
+                    : DecompressionMethods.None;
                 httpRequest.AllowWriteStreamBuffering = true;
                 httpRequest.SendChunked = false;
-                if (unsafeAuthenticatedConnectionSharing != httpRequest.UnsafeAuthenticatedConnectionSharing)
-                    httpRequest.UnsafeAuthenticatedConnectionSharing = unsafeAuthenticatedConnectionSharing;
+                if (
+                    unsafeAuthenticatedConnectionSharing
+                    != httpRequest.UnsafeAuthenticatedConnectionSharing
+                )
+                    httpRequest.UnsafeAuthenticatedConnectionSharing =
+                        unsafeAuthenticatedConnectionSharing;
                 // if the user has set a proxy explictly then we need to
                 // propagate that to the WebRequest, otherwise we'll let NetClasses
                 // use their global setting (GlobalProxySelection.Select).
-                if (proxy != null) {
+                if (proxy != null)
+                {
                     httpRequest.Proxy = proxy;
                 }
-                if (clientCertificates != null && clientCertificates.Count > 0) {
+                if (clientCertificates != null && clientCertificates.Count > 0)
+                {
                     httpRequest.ClientCertificates.AddRange(clientCertificates);
                 }
                 httpRequest.CookieContainer = cookieJar;
@@ -868,7 +1078,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override WebResponse GetWebResponse(WebRequest request) {
+        protected override WebResponse GetWebResponse(WebRequest request)
+        {
             WebResponse response = base.GetWebResponse(request);
             return response;
         }
@@ -877,14 +1088,16 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override WebResponse GetWebResponse(WebRequest request, IAsyncResult result) {
+        protected override WebResponse GetWebResponse(WebRequest request, IAsyncResult result)
+        {
             WebResponse response = base.GetWebResponse(request, result);
             return response;
         }
 
         /// <include file='doc\ClientProtocol.uex' path='docs/doc[@for="HttpWebClientProtocol.UnsafeAuthenticatedConnectionSharing"]/*' />
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool UnsafeAuthenticatedConnectionSharing {
+        public bool UnsafeAuthenticatedConnectionSharing
+        {
             get { return unsafeAuthenticatedConnectionSharing; }
             set { unsafeAuthenticatedConnectionSharing = value; }
         }
@@ -893,22 +1106,44 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected void CancelAsync(object userState) {
+        protected void CancelAsync(object userState)
+        {
             if (userState == null)
                 userState = NullToken;
-            WebClientAsyncResult result = OperationCompleted(userState, new object[] { null }, null, true);
-            if (result != null) {
+            WebClientAsyncResult result = OperationCompleted(
+                userState,
+                new object[] { null },
+                null,
+                true
+            );
+            if (result != null)
+            {
                 result.Abort();
             }
         }
 
-        internal WebClientAsyncResult OperationCompleted(object userState, object[] parameters, Exception e, bool canceled) {
-            Debug.Assert(userState != null, "We should not call OperationCompleted with null user token.");
+        internal WebClientAsyncResult OperationCompleted(
+            object userState,
+            object[] parameters,
+            Exception e,
+            bool canceled
+        )
+        {
+            Debug.Assert(
+                userState != null,
+                "We should not call OperationCompleted with null user token."
+            );
             WebClientAsyncResult result = (WebClientAsyncResult)AsyncInvokes[userState];
-            if (result != null) {
+            if (result != null)
+            {
                 AsyncOperation asyncOp = (AsyncOperation)result.AsyncState;
                 UserToken token = (UserToken)asyncOp.UserSuppliedState;
-                InvokeCompletedEventArgs eventArgs = new InvokeCompletedEventArgs(parameters, e, canceled, userState);
+                InvokeCompletedEventArgs eventArgs = new InvokeCompletedEventArgs(
+                    parameters,
+                    e,
+                    canceled,
+                    userState
+                );
                 AsyncInvokes.Remove(userState);
                 asyncOp.PostOperationCompleted(token.Callback, eventArgs);
             }
@@ -919,17 +1154,27 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static bool GenerateXmlMappings(Type type, ArrayList mappings) {
-            if (typeof(SoapHttpClientProtocol).IsAssignableFrom(type)) {
+        public static bool GenerateXmlMappings(Type type, ArrayList mappings)
+        {
+            if (typeof(SoapHttpClientProtocol).IsAssignableFrom(type))
+            {
                 WebServiceBindingAttribute binding = WebServiceBindingReflector.GetAttribute(type);
                 if (binding == null)
-                    throw new InvalidOperationException(Res.GetString(Res.WebClientBindingAttributeRequired));
+                    throw new InvalidOperationException(
+                        Res.GetString(Res.WebClientBindingAttributeRequired)
+                    );
                 // Note: Service namespace is taken from WebserviceBindingAttribute and not WebserviceAttribute because
-                // the generated proxy does not have a WebServiceAttribute; however all have a WebServiceBindingAttribute. 
+                // the generated proxy does not have a WebServiceAttribute; however all have a WebServiceBindingAttribute.
                 string serviceNamespace = binding.Namespace;
                 bool serviceDefaultIsEncoded = SoapReflector.ServiceDefaultIsEncoded(type);
                 ArrayList soapMethodList = new ArrayList();
-                SoapClientType.GenerateXmlMappings(type, soapMethodList, serviceNamespace, serviceDefaultIsEncoded, mappings);
+                SoapClientType.GenerateXmlMappings(
+                    type,
+                    soapMethodList,
+                    serviceNamespace,
+                    serviceDefaultIsEncoded,
+                    mappings
+                );
                 return true;
             }
             return false;
@@ -939,14 +1184,17 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static Hashtable GenerateXmlMappings(Type[] types, ArrayList mappings) {
+        public static Hashtable GenerateXmlMappings(Type[] types, ArrayList mappings)
+        {
             if (types == null)
                 throw new ArgumentNullException("types");
 
             Hashtable mappedTypes = new Hashtable();
-            foreach (Type type in types) {
+            foreach (Type type in types)
+            {
                 ArrayList typeMappings = new ArrayList();
-                if (GenerateXmlMappings(type, mappings)) {
+                if (GenerateXmlMappings(type, mappings))
+                {
                     mappedTypes.Add(type, typeMappings);
                     mappings.Add(typeMappings);
                 }

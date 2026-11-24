@@ -7,7 +7,7 @@ namespace System.ServiceModel.Activities
     using System.Activities;
     using System.Collections.Generic;
     using System.ServiceModel.Description;
-    
+
     // used in Send.Content
     public abstract class SendContent
     {
@@ -15,9 +15,7 @@ namespace System.ServiceModel.Activities
 
         // internal ctor since we control the hierarchy
         // only supported subclasses are SendMessageContent and SendParametersContent
-        internal SendContent()
-        {
-        }
+        internal SendContent() { }
 
         internal static SendContent DefaultSendContent
         {
@@ -48,14 +46,33 @@ namespace System.ServiceModel.Activities
 
         internal abstract bool IsFault { get; }
 
-        internal abstract void CacheMetadata(ActivityMetadata metadata, Activity owner, string operationName);
+        internal abstract void CacheMetadata(
+            ActivityMetadata metadata,
+            Activity owner,
+            string operationName
+        );
 
-        internal abstract void ConfigureInternalSend(InternalSendMessage internalSendMessage, out ToRequest requestFormatter);
+        internal abstract void ConfigureInternalSend(
+            InternalSendMessage internalSendMessage,
+            out ToRequest requestFormatter
+        );
 
-        internal abstract void ConfigureInternalSendReply(InternalSendMessage internalSendMessage, out ToReply responseFormatter);
+        internal abstract void ConfigureInternalSendReply(
+            InternalSendMessage internalSendMessage,
+            out ToReply responseFormatter
+        );
 
-        internal abstract void InferMessageDescription(OperationDescription operation, object owner, MessageDirection direction);
+        internal abstract void InferMessageDescription(
+            OperationDescription operation,
+            object owner,
+            MessageDirection direction
+        );
 
-        internal abstract void ValidateContract(NativeActivityContext context, OperationDescription targetOperation, object owner, MessageDirection direction);
+        internal abstract void ValidateContract(
+            NativeActivityContext context,
+            OperationDescription targetOperation,
+            object owner,
+            MessageDirection direction
+        );
     }
 }

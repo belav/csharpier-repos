@@ -12,22 +12,29 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Rename;
 
-public sealed class PrepareRenameTests(ITestOutputHelper testOutputHelper) : AbstractLanguageServerProtocolTests(testOutputHelper)
+public sealed class PrepareRenameTests(ITestOutputHelper testOutputHelper)
+    : AbstractLanguageServerProtocolTests(testOutputHelper)
 {
     [Theory, CombinatorialData]
     public async Task TestPrepareRenameValidLocationAsync(bool mutatingLspWorkspace)
     {
         var markup =
-@"class A
+            @"class A
 {
     void {|caret:|}{|range:M|}()
     {
     }
 }";
-        await using var testLspServer = await CreateTestLspServerAsync(markup, mutatingLspWorkspace);
+        await using var testLspServer = await CreateTestLspServerAsync(
+            markup,
+            mutatingLspWorkspace
+        );
         var renameLocation = testLspServer.GetLocations("caret").First();
 
-        var results = await RunPrepareRenameAsync(testLspServer, CreatePrepareRenameParams(renameLocation));
+        var results = await RunPrepareRenameAsync(
+            testLspServer,
+            CreatePrepareRenameParams(renameLocation)
+        );
         Assert.Equal(testLspServer.GetLocations("range").Single().Range, results);
     }
 
@@ -35,16 +42,22 @@ public sealed class PrepareRenameTests(ITestOutputHelper testOutputHelper) : Abs
     public async Task TestPrepareRenameAfterMethodNameAsync(bool mutatingLspWorkspace)
     {
         var markup =
-@"class A
+            @"class A
 {
     void {|range:M|}{|caret:|}()
     {
     }
 }";
-        await using var testLspServer = await CreateTestLspServerAsync(markup, mutatingLspWorkspace);
+        await using var testLspServer = await CreateTestLspServerAsync(
+            markup,
+            mutatingLspWorkspace
+        );
         var renameLocation = testLspServer.GetLocations("caret").First();
 
-        var results = await RunPrepareRenameAsync(testLspServer, CreatePrepareRenameParams(renameLocation));
+        var results = await RunPrepareRenameAsync(
+            testLspServer,
+            CreatePrepareRenameParams(renameLocation)
+        );
         Assert.Equal(testLspServer.GetLocations("range").Single().Range, results);
     }
 
@@ -52,17 +65,23 @@ public sealed class PrepareRenameTests(ITestOutputHelper testOutputHelper) : Abs
     public async Task TestPrepareRenameWithAtSymbolAsync(bool mutatingLspWorkspace)
     {
         var markup =
-@"class A
+            @"class A
 {
     void M()
     {
         var {|caret:|}{|range:@foo|} = 1;
     }
 }";
-        await using var testLspServer = await CreateTestLspServerAsync(markup, mutatingLspWorkspace);
+        await using var testLspServer = await CreateTestLspServerAsync(
+            markup,
+            mutatingLspWorkspace
+        );
         var renameLocation = testLspServer.GetLocations("caret").First();
 
-        var results = await RunPrepareRenameAsync(testLspServer, CreatePrepareRenameParams(renameLocation));
+        var results = await RunPrepareRenameAsync(
+            testLspServer,
+            CreatePrepareRenameParams(renameLocation)
+        );
         Assert.Equal(testLspServer.GetLocations("range").Single().Range, results);
     }
 
@@ -70,29 +89,42 @@ public sealed class PrepareRenameTests(ITestOutputHelper testOutputHelper) : Abs
     public async Task TestPrepareRenameInvalidLocationAsync(bool mutatingLspWorkspace)
     {
         var markup =
-@"class A
+            @"class A
 {
     // Cannot rename {|caret:|}inside a comment.
     void M()
     {
     }
 }";
-        await using var testLspServer = await CreateTestLspServerAsync(markup, mutatingLspWorkspace);
+        await using var testLspServer = await CreateTestLspServerAsync(
+            markup,
+            mutatingLspWorkspace
+        );
         var renameLocation = testLspServer.GetLocations("caret").First();
 
-        var results = await RunPrepareRenameAsync(testLspServer, CreatePrepareRenameParams(renameLocation));
+        var results = await RunPrepareRenameAsync(
+            testLspServer,
+            CreatePrepareRenameParams(renameLocation)
+        );
         Assert.Null(results);
     }
 
-    private static LSP.PrepareRenameParams CreatePrepareRenameParams(LSP.Location location)
-        => new LSP.PrepareRenameParams()
+    private static LSP.PrepareRenameParams CreatePrepareRenameParams(LSP.Location location) =>
+        new LSP.PrepareRenameParams()
         {
             Position = location.Range.Start,
-            TextDocument = CreateTextDocumentIdentifier(location.Uri)
+            TextDocument = CreateTextDocumentIdentifier(location.Uri),
         };
 
-    private static async Task<LSP.Range?> RunPrepareRenameAsync(TestLspServer testLspServer, LSP.PrepareRenameParams prepareRenameParams)
+    private static async Task<LSP.Range?> RunPrepareRenameAsync(
+        TestLspServer testLspServer,
+        LSP.PrepareRenameParams prepareRenameParams
+    )
     {
-        return await testLspServer.ExecuteRequestAsync<LSP.PrepareRenameParams, LSP.Range?>(LSP.Methods.TextDocumentPrepareRenameName, prepareRenameParams, CancellationToken.None);
+        return await testLspServer.ExecuteRequestAsync<LSP.PrepareRenameParams, LSP.Range?>(
+            LSP.Methods.TextDocumentPrepareRenameName,
+            prepareRenameParams,
+            CancellationToken.None
+        );
     }
 }

@@ -12,7 +12,6 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-
     internal partial class Symbol
     {
         /// <summary>
@@ -23,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static bool IsSymbolAccessible(
             Symbol symbol,
             NamedTypeSymbol within,
-            NamedTypeSymbol throughTypeOpt = null)
+            NamedTypeSymbol throughTypeOpt = null
+        )
         {
             if ((object)symbol == null)
             {
@@ -40,15 +40,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 symbol,
                 within,
                 ref discardedUseSiteInfo,
-                throughTypeOpt);
+                throughTypeOpt
+            );
         }
 
         /// <summary>
-        /// Checks if 'symbol' is accessible from within assembly 'within'.  
+        /// Checks if 'symbol' is accessible from within assembly 'within'.
         /// </summary>
-        public static bool IsSymbolAccessible(
-            Symbol symbol,
-            AssemblySymbol within)
+        public static bool IsSymbolAccessible(Symbol symbol, AssemblySymbol within)
         {
             if ((object)symbol == null)
             {

@@ -17,10 +17,15 @@ namespace Microsoft.CodeAnalysis
     {
         private static class BodyLevelSymbolKey
         {
-            public static ImmutableArray<Location> GetBodyLevelSourceLocations(ISymbol symbol, CancellationToken cancellationToken)
+            public static ImmutableArray<Location> GetBodyLevelSourceLocations(
+                ISymbol symbol,
+                CancellationToken cancellationToken
+            )
             {
                 Contract.ThrowIfFalse(IsBodyLevelSymbol(symbol));
-                Contract.ThrowIfTrue(symbol.DeclaringSyntaxReferences.IsEmpty && symbol.Locations.IsEmpty);
+                Contract.ThrowIfTrue(
+                    symbol.DeclaringSyntaxReferences.IsEmpty && symbol.Locations.IsEmpty
+                );
 
                 using var _ = ArrayBuilder<Location>.GetInstance(out var result);
 
@@ -46,7 +51,7 @@ namespace Microsoft.CodeAnalysis
                 // even if the solution changed (which is a supported use case for SymbolKey).
                 //
                 // The first way just stores the location of the symbol, which we can then validate during resolution
-                // maps back to the same symbol kind/name.  
+                // maps back to the same symbol kind/name.
                 //
                 // The second determines the sequence of symbols of the same kind and same name in the file and keeps
                 // track of our index in that sequence.  That way, if trivial edits happen, or symbols with different
@@ -59,7 +64,9 @@ namespace Microsoft.CodeAnalysis
                 visitor.WriteInteger((int)kind);
 
                 // write out the locations for precision
-                Contract.ThrowIfTrue(symbol.DeclaringSyntaxReferences.IsEmpty && symbol.Locations.IsEmpty);
+                Contract.ThrowIfTrue(
+                    symbol.DeclaringSyntaxReferences.IsEmpty && symbol.Locations.IsEmpty
+                );
 
                 var locations = GetBodyLevelSourceLocations(symbol, cancellationToken);
 
@@ -76,18 +83,34 @@ namespace Microsoft.CodeAnalysis
                 int GetOrdinal()
                 {
                     var syntaxTree = locations[0].SourceTree;
-                    var compilation = ((ISourceAssemblySymbol)symbol.ContainingAssembly).Compilation;
+                    var compilation = (
+                        (ISourceAssemblySymbol)symbol.ContainingAssembly
+                    ).Compilation;
 
                     // See if we can find an appropriate container for this local and attempt to find this local's index
                     // within it.
-                    var containerDeclaration = TryGetContainerDeclaration(container, syntaxTree, cancellationToken);
+                    var containerDeclaration = TryGetContainerDeclaration(
+                        container,
+                        syntaxTree,
+                        cancellationToken
+                    );
 
                     // Ensure that the tree we're looking at is actually in this compilation.  It may not be in the
                     // compilation in the case of work done with a speculative model.
-                    if (containerDeclaration != null &&
-                        TryGetSemanticModel(compilation, syntaxTree, out var semanticModel))
+                    if (
+                        containerDeclaration != null
+                        && TryGetSemanticModel(compilation, syntaxTree, out var semanticModel)
+                    )
                     {
-                        foreach (var possibleSymbol in EnumerateSymbols(semanticModel, containerDeclaration, kind, localName, cancellationToken))
+                        foreach (
+                            var possibleSymbol in EnumerateSymbols(
+                                semanticModel,
+                                containerDeclaration,
+                                kind,
+                                localName,
+                                cancellationToken
+                            )
+                        )
                         {
                             if (possibleSymbol.symbol.Equals(symbol))
                                 return possibleSymbol.ordinal;
@@ -98,7 +121,11 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            private static SyntaxNode? TryGetContainerDeclaration(ISymbol container, SyntaxTree? syntaxTree, CancellationToken cancellationToken)
+            private static SyntaxNode? TryGetContainerDeclaration(
+                ISymbol container,
+                SyntaxTree? syntaxTree,
+                CancellationToken cancellationToken
+            )
             {
                 if (syntaxTree != null)
                 {
@@ -113,8 +140,10 @@ namespace Microsoft.CodeAnalysis
             }
 
             private static bool TryGetSemanticModel(
-                Compilation compilation, SyntaxTree? syntaxTree,
-                [NotNullWhen(true)] out SemanticModel? semanticModel)
+                Compilation compilation,
+                SyntaxTree? syntaxTree,
+                [NotNullWhen(true)] out SemanticModel? semanticModel
+            )
             {
                 // Ensure that the tree we're looking at is actually in this compilation.  It may not be in the
                 // compilation in the case of work done with a speculative model.
@@ -128,7 +157,10 @@ namespace Microsoft.CodeAnalysis
                 return false;
             }
 
-            public static SymbolKeyResolution Resolve(SymbolKeyReader reader, out string? failureReason)
+            public static SymbolKeyResolution Resolve(
+                SymbolKeyReader reader,
+                out string? failureReason
+            )
             {
                 var cancellationToken = reader.CancellationToken;
 
@@ -136,12 +168,16 @@ namespace Microsoft.CodeAnalysis
                 var kind = (SymbolKind)reader.ReadInteger();
                 using var locations = reader.ReadLocationArray(out var locationsFailureReason);
 
-                var containingSymbol = reader.ReadSymbolKey(contextualSymbol: null, out var containingSymbolFailureReason);
+                var containingSymbol = reader.ReadSymbolKey(
+                    contextualSymbol: null,
+                    out var containingSymbolFailureReason
+                );
                 var ordinal = reader.ReadInteger();
 
                 if (locationsFailureReason != null)
                 {
-                    failureReason = $"({nameof(BodyLevelSymbolKey)} {nameof(locations)} failed -> {locationsFailureReason})";
+                    failureReason =
+                        $"({nameof(BodyLevelSymbolKey)} {nameof(locations)} failed -> {locationsFailureReason})";
                     return default;
                 }
 
@@ -156,9 +192,10 @@ namespace Microsoft.CodeAnalysis
 
                     if (!TryResolveLocation(loc, i, out var resolution, out var reason))
                     {
-                        totalFailureReason = totalFailureReason == null
-                            ? $"({reason})"
-                            : $"({totalFailureReason} -> {reason})";
+                        totalFailureReason =
+                            totalFailureReason == null
+                                ? $"({reason})"
+                                : $"({totalFailureReason} -> {reason})";
                         continue;
                     }
 
@@ -171,21 +208,37 @@ namespace Microsoft.CodeAnalysis
                 {
                     if (containingSymbolFailureReason != null)
                     {
-                        var reason = $"({nameof(BodyLevelSymbolKey)} {nameof(containingSymbol)} failed -> {containingSymbolFailureReason})";
+                        var reason =
+                            $"({nameof(BodyLevelSymbolKey)} {nameof(containingSymbol)} failed -> {containingSymbolFailureReason})";
 
-                        totalFailureReason = totalFailureReason == null
-                            ? $"({reason})"
-                            : $"({totalFailureReason} -> {reason})";
+                        totalFailureReason =
+                            totalFailureReason == null
+                                ? $"({reason})"
+                                : $"({totalFailureReason} -> {reason})";
                     }
                     else
                     {
                         var firstSourceTree = locations[0]?.SourceTree;
                         var containerDeclaration = GetContainerDeclaration(firstSourceTree);
 
-                        if (containerDeclaration != null &&
-                            TryGetSemanticModel(reader.Compilation, firstSourceTree, out var semanticModel))
+                        if (
+                            containerDeclaration != null
+                            && TryGetSemanticModel(
+                                reader.Compilation,
+                                firstSourceTree,
+                                out var semanticModel
+                            )
+                        )
                         {
-                            foreach (var symbol in EnumerateSymbols(semanticModel, containerDeclaration, kind, name, cancellationToken))
+                            foreach (
+                                var symbol in EnumerateSymbols(
+                                    semanticModel,
+                                    containerDeclaration,
+                                    kind,
+                                    name,
+                                    cancellationToken
+                                )
+                            )
                             {
                                 if (symbol.ordinal == ordinal)
                                 {
@@ -197,7 +250,8 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
 
-                failureReason = $"({nameof(BodyLevelSymbolKey)} '{name}' not found -> {totalFailureReason})";
+                failureReason =
+                    $"({nameof(BodyLevelSymbolKey)} '{name}' not found -> {totalFailureReason})";
                 return default;
 
                 SyntaxNode? GetContainerDeclaration(SyntaxTree? syntaxTree)
@@ -217,7 +271,12 @@ namespace Microsoft.CodeAnalysis
                     return null;
                 }
 
-                bool TryResolveLocation(Location loc, int index, out SymbolKeyResolution resolution, out string? reason)
+                bool TryResolveLocation(
+                    Location loc,
+                    int index,
+                    out SymbolKeyResolution resolution,
+                    out string? reason
+                )
                 {
                     var resolutionOpt = reader.ResolveLocation(loc);
                     if (resolutionOpt == null)
@@ -253,7 +312,12 @@ namespace Microsoft.CodeAnalysis
             }
 
             private static IEnumerable<(ISymbol symbol, int ordinal)> EnumerateSymbols(
-                SemanticModel semanticModel, SyntaxNode containerDeclaration, SymbolKind kind, string localName, CancellationToken cancellationToken)
+                SemanticModel semanticModel,
+                SyntaxNode containerDeclaration,
+                SymbolKind kind,
+                string localName,
+                CancellationToken cancellationToken
+            )
             {
                 Contract.ThrowIfTrue(semanticModel.SyntaxTree != containerDeclaration.SyntaxTree);
 
@@ -263,8 +327,10 @@ namespace Microsoft.CodeAnalysis
                 {
                     var symbol = semanticModel.GetDeclaredSymbol(node, cancellationToken);
 
-                    if (symbol?.Kind == kind &&
-                        SymbolKey.Equals(semanticModel.Compilation, symbol.Name, localName))
+                    if (
+                        symbol?.Kind == kind
+                        && SymbolKey.Equals(semanticModel.Compilation, symbol.Name, localName)
+                    )
                     {
                         yield return (symbol, ordinal++);
                     }

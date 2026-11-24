@@ -19,8 +19,7 @@ public class CustomersController : TestODataController, IDisposable
 
     [HttpGet]
     [EnableQuery]
-    public IEnumerable<Customer> Get()
-        => _context.Customers;
+    public IEnumerable<Customer> Get() => _context.Customers;
 
     [HttpGet]
     [EnableQuery]
@@ -31,9 +30,7 @@ public class CustomersController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }
 
 public class OrdersController : TestODataController, IDisposable
@@ -47,8 +44,7 @@ public class OrdersController : TestODataController, IDisposable
 
     [HttpGet]
     [EnableQuery]
-    public IEnumerable<Order> Get()
-        => _context.Orders;
+    public IEnumerable<Order> Get() => _context.Orders;
 
     [HttpGet]
     [EnableQuery]
@@ -59,9 +55,7 @@ public class OrdersController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }
 
 public class OrderDetailsController : TestODataController, IDisposable
@@ -75,21 +69,20 @@ public class OrderDetailsController : TestODataController, IDisposable
 
     [HttpGet]
     [EnableQuery]
-    public IEnumerable<OrderDetail> Get()
-        => _context.OrderDetails;
+    public IEnumerable<OrderDetail> Get() => _context.OrderDetails;
 
     [HttpGet]
     [EnableQuery]
     public ITestActionResult Get([FromODataUri] int keyOrderId, [FromODataUri] int keyProductId)
     {
-        var result = _context.OrderDetails.FirstOrDefault(e => e.OrderID == keyOrderId && e.ProductID == keyProductId);
+        var result = _context.OrderDetails.FirstOrDefault(e =>
+            e.OrderID == keyOrderId && e.ProductID == keyProductId
+        );
 
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }
 
 public class EmployeesController : TestODataController, IDisposable
@@ -103,8 +96,7 @@ public class EmployeesController : TestODataController, IDisposable
 
     [HttpGet]
     [EnableQuery]
-    public IEnumerable<Employee> Get()
-        => _context.Employees;
+    public IEnumerable<Employee> Get() => _context.Employees;
 
     [HttpGet]
     [EnableQuery]
@@ -115,9 +107,7 @@ public class EmployeesController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }
 
 public class ProductsController : TestODataController, IDisposable
@@ -131,8 +121,7 @@ public class ProductsController : TestODataController, IDisposable
 
     [HttpGet]
     [EnableQuery]
-    public IEnumerable<Product> Get()
-        => _context.Products;
+    public IEnumerable<Product> Get() => _context.Products;
 
     [HttpGet]
     [EnableQuery]
@@ -143,7 +132,5 @@ public class ProductsController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }

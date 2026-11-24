@@ -33,7 +33,8 @@ public class EntityEntryGraphNode : IInfrastructure<InternalEntityEntry>
     public EntityEntryGraphNode(
         InternalEntityEntry entry,
         InternalEntityEntry? sourceEntry,
-        INavigationBase? inboundNavigation)
+        INavigationBase? inboundNavigation
+    )
     {
         _entry = entry;
         _sourceEntry = sourceEntry;
@@ -47,8 +48,8 @@ public class EntityEntryGraphNode : IInfrastructure<InternalEntityEntry>
     /// <remarks>
     ///     See <see cref="ChangeTracker.TrackGraph" /> for information on how graph nodes are used.
     /// </remarks>
-    public virtual EntityEntry? SourceEntry
-        => _sourceEntry == null ? null : new EntityEntry(_sourceEntry);
+    public virtual EntityEntry? SourceEntry =>
+        _sourceEntry == null ? null : new EntityEntry(_sourceEntry);
 
     /// <summary>
     ///     Gets the navigation property that is being traversed to reach this node in the graph.
@@ -64,8 +65,7 @@ public class EntityEntryGraphNode : IInfrastructure<InternalEntityEntry>
     /// <remarks>
     ///     See <see cref="ChangeTracker.TrackGraph" /> for information on how graph nodes are used.
     /// </remarks>
-    public virtual EntityEntry Entry
-        => new(_entry);
+    public virtual EntityEntry Entry => new(_entry);
 
     /// <summary>
     ///     <para>
@@ -85,8 +85,7 @@ public class EntityEntryGraphNode : IInfrastructure<InternalEntityEntry>
     ///     </para>
     /// </remarks>
     [EntityFrameworkInternal]
-    InternalEntityEntry IInfrastructure<InternalEntityEntry>.Instance
-        => _entry;
+    InternalEntityEntry IInfrastructure<InternalEntityEntry>.Instance => _entry;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -98,6 +97,6 @@ public class EntityEntryGraphNode : IInfrastructure<InternalEntityEntry>
     public virtual EntityEntryGraphNode CreateNode(
         EntityEntryGraphNode currentNode,
         InternalEntityEntry internalEntityEntry,
-        INavigationBase reachedVia)
-        => new(internalEntityEntry, currentNode.Entry.GetInfrastructure(), reachedVia);
+        INavigationBase reachedVia
+    ) => new(internalEntityEntry, currentNode.Entry.GetInfrastructure(), reachedVia);
 }

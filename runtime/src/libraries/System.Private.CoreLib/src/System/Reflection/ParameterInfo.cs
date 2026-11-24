@@ -10,7 +10,7 @@ namespace System.Reflection
     public class ParameterInfo : ICustomAttributeProvider
 #pragma warning disable SYSLIB0050 // IObjectReference is obsolete
 #pragma warning disable SA1001 // CommasMustBeSpacedCorrectly
-        , IObjectReference
+            , IObjectReference
 #pragma warning restore SA1001
 #pragma warning restore SYSLIB0050
     {
@@ -38,10 +38,16 @@ namespace System.Reflection
             return false;
         }
 
-        public virtual IEnumerable<CustomAttributeData> CustomAttributes => GetCustomAttributesData();
-        public virtual IList<CustomAttributeData> GetCustomAttributesData() { throw NotImplemented.ByDesign; }
+        public virtual IEnumerable<CustomAttributeData> CustomAttributes =>
+            GetCustomAttributesData();
+
+        public virtual IList<CustomAttributeData> GetCustomAttributesData()
+        {
+            throw NotImplemented.ByDesign;
+        }
 
         public virtual object[] GetCustomAttributes(bool inherit) => Array.Empty<object>();
+
         public virtual object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             ArgumentNullException.ThrowIfNull(attributeType);
@@ -51,11 +57,16 @@ namespace System.Reflection
         public virtual Type GetModifiedParameterType() => throw new NotSupportedException();
 
         public virtual Type[] GetOptionalCustomModifiers() => Type.EmptyTypes;
+
         public virtual Type[] GetRequiredCustomModifiers() => Type.EmptyTypes;
 
         public virtual int MetadataToken => MetadataToken_ParamDef;
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public object GetRealObject(StreamingContext context)
         {

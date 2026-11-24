@@ -49,24 +49,51 @@ namespace System.Activities.Core.Presentation
         public static void RegisterMetadata(AttributeTableBuilder builder)
         {
             Type stateMachineType = typeof(StateMachine);
-            builder.AddCustomAttributes(stateMachineType, new DesignerAttribute(typeof(StateMachineDesigner)));
-            builder.AddCustomAttributes(stateMachineType, stateMachineType.GetProperty(StateMachineDesigner.StatesPropertyName), BrowsableAttribute.No);
-            builder.AddCustomAttributes(stateMachineType, stateMachineType.GetProperty(StateMachineDesigner.VariablesPropertyName), BrowsableAttribute.No);
-            builder.AddCustomAttributes(stateMachineType, stateMachineType.GetProperty(StateMachineDesigner.InitialStatePropertyName), BrowsableAttribute.No);
-            builder.AddCustomAttributes(stateMachineType, stateMachineType.GetProperty(StateMachineDesigner.InitialStatePropertyName), new ShowPropertyInOutlineViewAttribute() { DuplicatedChildNodesVisible = true });
-            builder.AddCustomAttributes(stateMachineType, stateMachineType.GetProperty(StateMachineDesigner.StatesPropertyName), new ShowPropertyInOutlineViewAttribute());
+            builder.AddCustomAttributes(
+                stateMachineType,
+                new DesignerAttribute(typeof(StateMachineDesigner))
+            );
+            builder.AddCustomAttributes(
+                stateMachineType,
+                stateMachineType.GetProperty(StateMachineDesigner.StatesPropertyName),
+                BrowsableAttribute.No
+            );
+            builder.AddCustomAttributes(
+                stateMachineType,
+                stateMachineType.GetProperty(StateMachineDesigner.VariablesPropertyName),
+                BrowsableAttribute.No
+            );
+            builder.AddCustomAttributes(
+                stateMachineType,
+                stateMachineType.GetProperty(StateMachineDesigner.InitialStatePropertyName),
+                BrowsableAttribute.No
+            );
+            builder.AddCustomAttributes(
+                stateMachineType,
+                stateMachineType.GetProperty(StateMachineDesigner.InitialStatePropertyName),
+                new ShowPropertyInOutlineViewAttribute() { DuplicatedChildNodesVisible = true }
+            );
+            builder.AddCustomAttributes(
+                stateMachineType,
+                stateMachineType.GetProperty(StateMachineDesigner.StatesPropertyName),
+                new ShowPropertyInOutlineViewAttribute()
+            );
 
-
-            builder.AddCustomAttributes(stateMachineType, new FeatureAttribute(typeof(StateMachineValidationErrorSourceLocatorFeature)));
+            builder.AddCustomAttributes(
+                stateMachineType,
+                new FeatureAttribute(typeof(StateMachineValidationErrorSourceLocatorFeature))
+            );
         }
 
         protected override void OnModelItemChanged(object newItem)
         {
-            ViewStateService viewStateService = this.Context.Services.GetService<ViewStateService>();
+            ViewStateService viewStateService =
+                this.Context.Services.GetService<ViewStateService>();
             if (viewStateService != null)
             {
                 // Make StateMachine designer always collapsed by default, but only if the user didn't explicitly specify collapsed or expanded.
-                bool? isExpanded = (bool?)viewStateService.RetrieveViewState((ModelItem)newItem, ExpandViewStateKey);
+                bool? isExpanded = (bool?)
+                    viewStateService.RetrieveViewState((ModelItem)newItem, ExpandViewStateKey);
                 if (isExpanded == null)
                 {
                     viewStateService.StoreViewState((ModelItem)newItem, ExpandViewStateKey, false);
@@ -93,4 +120,4 @@ namespace System.Activities.Core.Presentation
             e.Handled = IsResizing && e.Key == Key.Enter;
         }
     }
- }
+}

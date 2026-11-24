@@ -17,7 +17,7 @@ namespace System.Net
     {
         Unknown,
         WebRequest,
-        WebResponse
+        WebResponse,
     }
 
     public class WebHeaderCollection : NameValueCollection, ISerializable
@@ -29,9 +29,16 @@ namespace System.Net
 
         private static HeaderInfoTable? _headerInfo;
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected WebHeaderCollection(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        protected WebHeaderCollection(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             throw new PlatformNotSupportedException();
         }
@@ -50,7 +57,11 @@ namespace System.Net
 
         private static HeaderInfoTable HeaderInfo => _headerInfo ??= new HeaderInfoTable();
 
-        private NameValueCollection InnerCollection => _innerCollection ??= new NameValueCollection(ApproxHighAvgNumHeaders, CaseInsensitiveAscii.StaticInstance);
+        private NameValueCollection InnerCollection =>
+            _innerCollection ??= new NameValueCollection(
+                ApproxHighAvgNumHeaders,
+                CaseInsensitiveAscii.StaticInstance
+            );
 
         private bool AllowHttpResponseHeader
         {
@@ -137,14 +148,24 @@ namespace System.Net
             this.Set(header.GetName(), value);
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        public override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             throw new PlatformNotSupportedException();
         }
 
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             throw new PlatformNotSupportedException();
         }
@@ -180,7 +201,9 @@ namespace System.Net
         public static bool IsRestricted(string headerName, bool response)
         {
             headerName = HttpValidationHelpers.CheckBadHeaderNameChars(headerName);
-            return response ? HeaderInfo[headerName].IsResponseRestricted : HeaderInfo[headerName].IsRequestRestricted;
+            return response
+                ? HeaderInfo[headerName].IsResponseRestricted
+                : HeaderInfo[headerName].IsRequestRestricted;
         }
 
         public override string[]? GetValues(int index)
@@ -401,10 +424,7 @@ namespace System.Net
             foreach (string? key in InnerCollection)
             {
                 string? val = InnerCollection.Get(key);
-                sb.Append(key)
-                    .Append(": ")
-                    .Append(val)
-                    .Append("\r\n");
+                sb.Append(key).Append(": ").Append(val).Append("\r\n");
             }
 
             sb.Append("\r\n");
@@ -417,32 +437,21 @@ namespace System.Net
             return System.Text.Encoding.ASCII.GetBytes(tempString);
         }
 
-        public WebHeaderCollection()
-        {
-        }
+        public WebHeaderCollection() { }
 
         public override int Count
         {
-            get
-            {
-                return (_innerCollection == null ? 0 : _innerCollection.Count);
-            }
+            get { return (_innerCollection == null ? 0 : _innerCollection.Count); }
         }
 
         public override KeysCollection Keys
         {
-            get
-            {
-                return InnerCollection.Keys;
-            }
+            get { return InnerCollection.Keys; }
         }
 
         public override string[] AllKeys
         {
-            get
-            {
-                return InnerCollection.AllKeys!;
-            }
+            get { return InnerCollection.AllKeys!; }
         }
 
         public override IEnumerator GetEnumerator()

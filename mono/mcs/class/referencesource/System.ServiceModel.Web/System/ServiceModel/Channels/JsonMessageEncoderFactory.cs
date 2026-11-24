@@ -19,12 +19,25 @@ namespace System.ServiceModel.Channels
 
     class JsonMessageEncoderFactory : MessageEncoderFactory
     {
-        static readonly TextMessageEncoderFactory.ContentEncoding[] ApplicationJsonContentEncoding = GetContentEncodingMap(JsonGlobals.applicationJsonMediaType);
+        static readonly TextMessageEncoderFactory.ContentEncoding[] ApplicationJsonContentEncoding =
+            GetContentEncodingMap(JsonGlobals.applicationJsonMediaType);
         JsonMessageEncoder messageEncoder;
 
-        public JsonMessageEncoderFactory(Encoding writeEncoding, int maxReadPoolSize, int maxWritePoolSize, XmlDictionaryReaderQuotas quotas, bool crossDomainScriptAccessEnabled)
+        public JsonMessageEncoderFactory(
+            Encoding writeEncoding,
+            int maxReadPoolSize,
+            int maxWritePoolSize,
+            XmlDictionaryReaderQuotas quotas,
+            bool crossDomainScriptAccessEnabled
+        )
         {
-            messageEncoder = new JsonMessageEncoder(writeEncoding, maxReadPoolSize, maxWritePoolSize, quotas, crossDomainScriptAccessEnabled);
+            messageEncoder = new JsonMessageEncoder(
+                writeEncoding,
+                maxReadPoolSize,
+                maxWritePoolSize,
+                quotas,
+                crossDomainScriptAccessEnabled
+            );
         }
 
         public override MessageEncoder Encoder
@@ -41,22 +54,33 @@ namespace System.ServiceModel.Channels
         {
             if (encodingElement == null)
             {
-                return WebMessageEncoderFactory.GetContentType(JsonGlobals.applicationJsonMediaType, TextEncoderDefaults.Encoding);
+                return WebMessageEncoderFactory.GetContentType(
+                    JsonGlobals.applicationJsonMediaType,
+                    TextEncoderDefaults.Encoding
+                );
             }
             else
             {
-                return WebMessageEncoderFactory.GetContentType(JsonGlobals.applicationJsonMediaType, encodingElement.WriteEncoding);
+                return WebMessageEncoderFactory.GetContentType(
+                    JsonGlobals.applicationJsonMediaType,
+                    encodingElement.WriteEncoding
+                );
             }
         }
 
         static TextMessageEncoderFactory.ContentEncoding[] GetContentEncodingMap(string mediaType)
         {
             Encoding[] readEncodings = TextMessageEncoderFactory.GetSupportedEncodings();
-            TextMessageEncoderFactory.ContentEncoding[] map = new TextMessageEncoderFactory.ContentEncoding[readEncodings.Length];
+            TextMessageEncoderFactory.ContentEncoding[] map =
+                new TextMessageEncoderFactory.ContentEncoding[readEncodings.Length];
             for (int i = 0; i < readEncodings.Length; i++)
             {
-                TextMessageEncoderFactory.ContentEncoding contentEncoding = new TextMessageEncoderFactory.ContentEncoding();
-                contentEncoding.contentType = WebMessageEncoderFactory.GetContentType(mediaType, readEncodings[i]);
+                TextMessageEncoderFactory.ContentEncoding contentEncoding =
+                    new TextMessageEncoderFactory.ContentEncoding();
+                contentEncoding.contentType = WebMessageEncoderFactory.GetContentType(
+                    mediaType,
+                    readEncodings[i]
+                );
                 contentEncoding.encoding = readEncodings[i];
                 map[i] = contentEncoding;
             }
@@ -86,11 +110,19 @@ namespace System.ServiceModel.Channels
             bool crossDomainScriptAccessEnabled;
             byte[] encodedClosingFunctionCall;
 
-            public JsonMessageEncoder(Encoding writeEncoding, int maxReadPoolSize, int maxWritePoolSize, XmlDictionaryReaderQuotas quotas, bool crossDomainScriptAccessEnabled)
+            public JsonMessageEncoder(
+                Encoding writeEncoding,
+                int maxReadPoolSize,
+                int maxWritePoolSize,
+                XmlDictionaryReaderQuotas quotas,
+                bool crossDomainScriptAccessEnabled
+            )
             {
                 if (writeEncoding == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("writeEncoding");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "writeEncoding"
+                    );
                 }
 
                 thisLock = new object();
@@ -105,9 +137,14 @@ namespace System.ServiceModel.Channels
                 this.onStreamedReaderClose = new OnXmlDictionaryReaderClose(ReturnStreamedReader);
                 quotas.CopyTo(this.readerQuotas);
 
-                this.bufferedReadReaderQuotas = EncoderHelpers.GetBufferedReadQuotas(this.readerQuotas);
+                this.bufferedReadReaderQuotas = EncoderHelpers.GetBufferedReadQuotas(
+                    this.readerQuotas
+                );
 
-                this.contentType = WebMessageEncoderFactory.GetContentType(JsonGlobals.applicationJsonMediaType, writeEncoding);
+                this.contentType = WebMessageEncoderFactory.GetContentType(
+                    JsonGlobals.applicationJsonMediaType,
+                    writeEncoding
+                );
                 this.crossDomainScriptAccessEnabled = crossDomainScriptAccessEnabled;
                 this.encodedClosingFunctionCall = this.writeEncoding.GetBytes(");");
             }
@@ -137,7 +174,9 @@ namespace System.ServiceModel.Channels
                         {
                             if (recycledStatePool == null)
                             {
-                                recycledStatePool = new SynchronizedPool<RecycledMessageState>(maxReadPoolSize);
+                                recycledStatePool = new SynchronizedPool<RecycledMessageState>(
+                                    maxReadPoolSize
+                                );
                             }
                         }
                     }
@@ -159,11 +198,17 @@ namespace System.ServiceModel.Channels
                 return IsJsonContentType(contentType);
             }
 
-            public override Message ReadMessage(ArraySegment<byte> buffer, BufferManager bufferManager, string contentType)
+            public override Message ReadMessage(
+                ArraySegment<byte> buffer,
+                BufferManager bufferManager,
+                string contentType
+            )
             {
                 if (bufferManager == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("bufferManager"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("bufferManager")
+                    );
                 }
 
                 if (WebTD.JsonMessageDecodingStartIsEnabled())
@@ -174,7 +219,10 @@ namespace System.ServiceModel.Channels
                 Message message;
 
                 JsonBufferedMessageData messageData = TakeBufferedReader();
-                messageData.Encoding = TextMessageEncoderFactory.GetEncodingFromContentType(contentType, JsonMessageEncoderFactory.ApplicationJsonContentEncoding);
+                messageData.Encoding = TextMessageEncoderFactory.GetEncodingFromContentType(
+                    contentType,
+                    JsonMessageEncoderFactory.ApplicationJsonContentEncoding
+                );
                 messageData.Open(buffer, bufferManager);
                 RecycledMessageState messageState = messageData.TakeMessageState();
                 if (messageState == null)
@@ -190,7 +238,8 @@ namespace System.ServiceModel.Channels
                     SMTD.MessageReadByEncoder(
                         EventTraceActivityHelper.TryExtractActivity(message, true),
                         buffer.Count,
-                        this);
+                        this
+                    );
                 }
 
                 if (MessageLogger.LogMessagesAtTransportLevel)
@@ -201,11 +250,17 @@ namespace System.ServiceModel.Channels
                 return message;
             }
 
-            public override Message ReadMessage(Stream stream, int maxSizeOfHeaders, string contentType)
+            public override Message ReadMessage(
+                Stream stream,
+                int maxSizeOfHeaders,
+                string contentType
+            )
             {
                 if (stream == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("stream"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("stream")
+                    );
                 }
 
                 if (WebTD.JsonMessageDecodingStartIsEnabled())
@@ -213,13 +268,25 @@ namespace System.ServiceModel.Channels
                     WebTD.JsonMessageDecodingStart();
                 }
 
-                XmlReader reader = TakeStreamedReader(stream, TextMessageEncoderFactory.GetEncodingFromContentType(contentType, JsonMessageEncoderFactory.ApplicationJsonContentEncoding));
-                Message message = Message.CreateMessage(reader, maxSizeOfHeaders, MessageVersion.None);
+                XmlReader reader = TakeStreamedReader(
+                    stream,
+                    TextMessageEncoderFactory.GetEncodingFromContentType(
+                        contentType,
+                        JsonMessageEncoderFactory.ApplicationJsonContentEncoding
+                    )
+                );
+                Message message = Message.CreateMessage(
+                    reader,
+                    maxSizeOfHeaders,
+                    MessageVersion.None
+                );
                 message.Properties.Encoder = this;
 
                 if (SMTD.StreamedMessageReadByEncoderIsEnabled())
                 {
-                    SMTD.StreamedMessageReadByEncoder(EventTraceActivityHelper.TryExtractActivity(message, true));
+                    SMTD.StreamedMessageReadByEncoder(
+                        EventTraceActivityHelper.TryExtractActivity(message, true)
+                    );
                 }
 
                 if (MessageLogger.LogMessagesAtTransportLevel)
@@ -229,25 +296,47 @@ namespace System.ServiceModel.Channels
                 return message;
             }
 
-            public override ArraySegment<byte> WriteMessage(Message message, int maxMessageSize, BufferManager bufferManager, int messageOffset)
+            public override ArraySegment<byte> WriteMessage(
+                Message message,
+                int maxMessageSize,
+                BufferManager bufferManager,
+                int messageOffset
+            )
             {
                 if (message == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("message"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("message")
+                    );
                 }
                 if (bufferManager == null)
                 {
-                    throw TraceUtility.ThrowHelperError(new ArgumentNullException("bufferManager"), message);
+                    throw TraceUtility.ThrowHelperError(
+                        new ArgumentNullException("bufferManager"),
+                        message
+                    );
                 }
                 if (maxMessageSize < 0)
                 {
-                    throw TraceUtility.ThrowHelperError(new ArgumentOutOfRangeException("maxMessageSize", maxMessageSize,
-                        SR2.GetString(SR2.ValueMustBeNonNegative)), message);
+                    throw TraceUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "maxMessageSize",
+                            maxMessageSize,
+                            SR2.GetString(SR2.ValueMustBeNonNegative)
+                        ),
+                        message
+                    );
                 }
                 if (messageOffset < 0 || messageOffset > maxMessageSize)
                 {
-                    throw TraceUtility.ThrowHelperError(new ArgumentOutOfRangeException("messageOffset", messageOffset,
-                        SR2.GetString(SR2.JsonValueMustBeInRange, 0, maxMessageSize)), message);
+                    throw TraceUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "messageOffset",
+                            messageOffset,
+                            SR2.GetString(SR2.JsonValueMustBeInRange, 0, maxMessageSize)
+                        ),
+                        message
+                    );
                 }
 
                 EventTraceActivity eventTraceActivity = null;
@@ -262,20 +351,35 @@ namespace System.ServiceModel.Channels
                 JsonBufferedMessageWriter messageWriter = TakeBufferedWriter();
 
                 JavascriptCallbackResponseMessageProperty javascriptResponseMessageProperty;
-                if (message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(JavascriptCallbackResponseMessageProperty.Name, out javascriptResponseMessageProperty) &&
-                    javascriptResponseMessageProperty != null)
+                if (
+                    message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(
+                        JavascriptCallbackResponseMessageProperty.Name,
+                        out javascriptResponseMessageProperty
+                    )
+                    && javascriptResponseMessageProperty != null
+                )
                 {
                     if (this.crossDomainScriptAccessEnabled)
                     {
-                        messageWriter.SetJavascriptCallbackProperty(javascriptResponseMessageProperty);
+                        messageWriter.SetJavascriptCallbackProperty(
+                            javascriptResponseMessageProperty
+                        );
                     }
                     else
                     {
-                        throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR2.JavascriptCallbackNotEnabled), message);
+                        throw TraceUtility.ThrowHelperError(
+                            new InvalidOperationException(SR2.JavascriptCallbackNotEnabled),
+                            message
+                        );
                     }
                 }
 
-                ArraySegment<byte> messageData = messageWriter.WriteMessage(message, bufferManager, messageOffset, maxMessageSize);
+                ArraySegment<byte> messageData = messageWriter.WriteMessage(
+                    message,
+                    bufferManager,
+                    messageOffset,
+                    maxMessageSize
+                );
                 ReturnMessageWriter(messageWriter);
 
                 if (SMTD.MessageWrittenByEncoderIsEnabled() && messageData != null)
@@ -283,14 +387,26 @@ namespace System.ServiceModel.Channels
                     SMTD.MessageWrittenByEncoder(
                         eventTraceActivity ?? EventTraceActivityHelper.TryExtractActivity(message),
                         messageData.Count,
-                        this);
+                        this
+                    );
                 }
 
                 if (MessageLogger.LogMessagesAtTransportLevel)
                 {
-                    XmlDictionaryReader xmlDictionaryReader = JsonReaderWriterFactory.CreateJsonReader(
-                        messageData.Array, messageData.Offset, messageData.Count, null, XmlDictionaryReaderQuotas.Max, null);
-                    MessageLogger.LogMessage(ref message, xmlDictionaryReader, MessageLoggingSource.TransportSend);
+                    XmlDictionaryReader xmlDictionaryReader =
+                        JsonReaderWriterFactory.CreateJsonReader(
+                            messageData.Array,
+                            messageData.Offset,
+                            messageData.Count,
+                            null,
+                            XmlDictionaryReaderQuotas.Max,
+                            null
+                        );
+                    MessageLogger.LogMessage(
+                        ref message,
+                        xmlDictionaryReader,
+                        MessageLoggingSource.TransportSend
+                    );
                 }
 
                 return messageData;
@@ -300,11 +416,16 @@ namespace System.ServiceModel.Channels
             {
                 if (message == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("message"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("message")
+                    );
                 }
                 if (stream == null)
                 {
-                    throw TraceUtility.ThrowHelperError(new ArgumentNullException("stream"), message);
+                    throw TraceUtility.ThrowHelperError(
+                        new ArgumentNullException("stream"),
+                        message
+                    );
                 }
                 ThrowIfMismatchedMessageVersion(message);
 
@@ -318,15 +439,29 @@ namespace System.ServiceModel.Channels
                 message.Properties.Encoder = this;
                 XmlDictionaryWriter xmlWriter = TakeStreamedWriter(stream);
                 JavascriptCallbackResponseMessageProperty javascriptResponseMessageProperty;
-                if (message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(JavascriptCallbackResponseMessageProperty.Name, out javascriptResponseMessageProperty)
+                if (
+                    message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(
+                        JavascriptCallbackResponseMessageProperty.Name,
+                        out javascriptResponseMessageProperty
+                    )
                     && javascriptResponseMessageProperty != null
-                    && !String.IsNullOrEmpty(javascriptResponseMessageProperty.CallbackFunctionName))
+                    && !String.IsNullOrEmpty(javascriptResponseMessageProperty.CallbackFunctionName)
+                )
                 {
                     if (!this.crossDomainScriptAccessEnabled)
                     {
-                        throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR2.JavascriptCallbackNotEnabled), message);
+                        throw TraceUtility.ThrowHelperError(
+                            new InvalidOperationException(SR2.JavascriptCallbackNotEnabled),
+                            message
+                        );
                     }
-                    byte[] buffer = this.writeEncoding.GetBytes(String.Format(CultureInfo.InvariantCulture, "{0}(", javascriptResponseMessageProperty.CallbackFunctionName));
+                    byte[] buffer = this.writeEncoding.GetBytes(
+                        String.Format(
+                            CultureInfo.InvariantCulture,
+                            "{0}(",
+                            javascriptResponseMessageProperty.CallbackFunctionName
+                        )
+                    );
                     stream.Write(buffer, 0, buffer.Length);
                 }
                 xmlWriter.WriteStartDocument();
@@ -334,21 +469,37 @@ namespace System.ServiceModel.Channels
                 xmlWriter.WriteEndDocument();
                 xmlWriter.Flush();
                 ReturnStreamedWriter(xmlWriter);
-                if (javascriptResponseMessageProperty != null
-                    && !String.IsNullOrEmpty(javascriptResponseMessageProperty.CallbackFunctionName))
+                if (
+                    javascriptResponseMessageProperty != null
+                    && !String.IsNullOrEmpty(javascriptResponseMessageProperty.CallbackFunctionName)
+                )
                 {
-                    if (javascriptResponseMessageProperty.StatusCode != null && (int)javascriptResponseMessageProperty.StatusCode != 200)
+                    if (
+                        javascriptResponseMessageProperty.StatusCode != null
+                        && (int)javascriptResponseMessageProperty.StatusCode != 200
+                    )
                     {
-                        byte[] buffer = this.writeEncoding.GetBytes(String.Format(CultureInfo.InvariantCulture, ",{0}", (int)javascriptResponseMessageProperty.StatusCode));
+                        byte[] buffer = this.writeEncoding.GetBytes(
+                            String.Format(
+                                CultureInfo.InvariantCulture,
+                                ",{0}",
+                                (int)javascriptResponseMessageProperty.StatusCode
+                            )
+                        );
                         stream.Write(buffer, 0, buffer.Length);
                     }
-                    stream.Write(this.encodedClosingFunctionCall, 0, this.encodedClosingFunctionCall.Length);
+                    stream.Write(
+                        this.encodedClosingFunctionCall,
+                        0,
+                        this.encodedClosingFunctionCall.Length
+                    );
                 }
 
                 if (SMTD.StreamedMessageWrittenByEncoderIsEnabled())
                 {
                     SMTD.StreamedMessageWrittenByEncoder(
-                        eventTraceActivity ?? EventTraceActivityHelper.TryExtractActivity(message));
+                        eventTraceActivity ?? EventTraceActivityHelper.TryExtractActivity(message)
+                    );
                 }
 
                 if (MessageLogger.LogMessagesAtTransportLevel)
@@ -365,7 +516,16 @@ namespace System.ServiceModel.Channels
 
             bool IsJsonContentType(string contentType)
             {
-                return IsContentTypeSupported(contentType, JsonGlobals.applicationJsonMediaType, JsonGlobals.applicationJsonMediaType) || IsContentTypeSupported(contentType, JsonGlobals.textJsonMediaType, JsonGlobals.textJsonMediaType);
+                return IsContentTypeSupported(
+                        contentType,
+                        JsonGlobals.applicationJsonMediaType,
+                        JsonGlobals.applicationJsonMediaType
+                    )
+                    || IsContentTypeSupported(
+                        contentType,
+                        JsonGlobals.textJsonMediaType,
+                        JsonGlobals.textJsonMediaType
+                    );
             }
 
             void ReturnBufferedData(JsonBufferedMessageData messageData)
@@ -397,7 +557,9 @@ namespace System.ServiceModel.Channels
                     {
                         if (bufferedReaderPool == null)
                         {
-                            bufferedReaderPool = new SynchronizedPool<JsonBufferedMessageData>(maxReadPoolSize);
+                            bufferedReaderPool = new SynchronizedPool<JsonBufferedMessageData>(
+                                maxReadPoolSize
+                            );
                         }
                     }
                 }
@@ -417,7 +579,9 @@ namespace System.ServiceModel.Channels
                     {
                         if (bufferedWriterPool == null)
                         {
-                            bufferedWriterPool = new SynchronizedPool<JsonBufferedMessageWriter>(maxWritePoolSize);
+                            bufferedWriterPool = new SynchronizedPool<JsonBufferedMessageWriter>(
+                                maxWritePoolSize
+                            );
                         }
                     }
                 }
@@ -437,18 +601,30 @@ namespace System.ServiceModel.Channels
                     {
                         if (streamedReaderPool == null)
                         {
-                            streamedReaderPool = new SynchronizedPool<XmlDictionaryReader>(maxReadPoolSize);
+                            streamedReaderPool = new SynchronizedPool<XmlDictionaryReader>(
+                                maxReadPoolSize
+                            );
                         }
                     }
                 }
                 XmlDictionaryReader xmlReader = streamedReaderPool.Take();
                 if (xmlReader == null)
                 {
-                    xmlReader = JsonReaderWriterFactory.CreateJsonReader(stream, enc, this.readerQuotas, this.onStreamedReaderClose);
+                    xmlReader = JsonReaderWriterFactory.CreateJsonReader(
+                        stream,
+                        enc,
+                        this.readerQuotas,
+                        this.onStreamedReaderClose
+                    );
                 }
                 else
                 {
-                    ((IXmlJsonReaderInitializer)xmlReader).SetInput(stream, enc, this.readerQuotas, this.onStreamedReaderClose);
+                    ((IXmlJsonReaderInitializer)xmlReader).SetInput(
+                        stream,
+                        enc,
+                        this.readerQuotas,
+                        this.onStreamedReaderClose
+                    );
                 }
                 return xmlReader;
             }
@@ -461,18 +637,28 @@ namespace System.ServiceModel.Channels
                     {
                         if (streamedWriterPool == null)
                         {
-                            streamedWriterPool = new SynchronizedPool<XmlDictionaryWriter>(maxWritePoolSize);
+                            streamedWriterPool = new SynchronizedPool<XmlDictionaryWriter>(
+                                maxWritePoolSize
+                            );
                         }
                     }
                 }
                 XmlDictionaryWriter xmlWriter = streamedWriterPool.Take();
                 if (xmlWriter == null)
                 {
-                    xmlWriter = JsonReaderWriterFactory.CreateJsonWriter(stream, this.writeEncoding, false);
+                    xmlWriter = JsonReaderWriterFactory.CreateJsonWriter(
+                        stream,
+                        this.writeEncoding,
+                        false
+                    );
                 }
                 else
                 {
-                    ((IXmlJsonWriterInitializer)xmlWriter).SetOutput(stream, this.writeEncoding, false);
+                    ((IXmlJsonWriterInitializer)xmlWriter).SetOutput(
+                        stream,
+                        this.writeEncoding,
+                        false
+                    );
                 }
                 return xmlWriter;
             }
@@ -484,7 +670,10 @@ namespace System.ServiceModel.Channels
                 OnXmlDictionaryReaderClose onClose;
                 Pool<XmlDictionaryReader> readerPool;
 
-                public JsonBufferedMessageData(JsonMessageEncoder messageEncoder, int maxReaderPoolSize)
+                public JsonBufferedMessageData(
+                    JsonMessageEncoder messageEncoder,
+                    int maxReaderPoolSize
+                )
                     : base(messageEncoder.RecycledStatePool)
                 {
                     this.messageEncoder = messageEncoder;
@@ -504,10 +693,7 @@ namespace System.ServiceModel.Channels
 
                 internal Encoding Encoding
                 {
-                    set
-                    {
-                        this.encoding = value;
-                    }
+                    set { this.encoding = value; }
                 }
 
                 protected override void OnClosed()
@@ -530,11 +716,25 @@ namespace System.ServiceModel.Channels
                     XmlDictionaryReader xmlReader = readerPool.Take();
                     if (xmlReader == null)
                     {
-                        xmlReader = JsonReaderWriterFactory.CreateJsonReader(buffer.Array, buffer.Offset, buffer.Count, this.encoding, this.Quotas, onClose);
+                        xmlReader = JsonReaderWriterFactory.CreateJsonReader(
+                            buffer.Array,
+                            buffer.Offset,
+                            buffer.Count,
+                            this.encoding,
+                            this.Quotas,
+                            onClose
+                        );
                     }
                     else
                     {
-                        ((IXmlJsonReaderInitializer)xmlReader).SetInput(buffer.Array, buffer.Offset, buffer.Count, this.encoding, this.Quotas, onClose);
+                        ((IXmlJsonReaderInitializer)xmlReader).SetInput(
+                            buffer.Array,
+                            buffer.Offset,
+                            buffer.Count,
+                            this.encoding,
+                            this.Quotas,
+                            onClose
+                        );
                     }
 
                     return xmlReader;
@@ -552,18 +752,23 @@ namespace System.ServiceModel.Channels
                     this.messageEncoder = messageEncoder;
                 }
 
-                public void SetJavascriptCallbackProperty(JavascriptCallbackResponseMessageProperty javascriptResponseMessageProperty)
+                public void SetJavascriptCallbackProperty(
+                    JavascriptCallbackResponseMessageProperty javascriptResponseMessageProperty
+                )
                 {
                     if (this.javascriptWrapper == null)
                     {
-                        this.javascriptWrapper = new JavascriptXmlWriterWrapper(this.messageEncoder.writeEncoding)
+                        this.javascriptWrapper = new JavascriptXmlWriterWrapper(
+                            this.messageEncoder.writeEncoding
+                        )
                         {
-                            JavascriptResponseMessageProperty = javascriptResponseMessageProperty
+                            JavascriptResponseMessageProperty = javascriptResponseMessageProperty,
                         };
                     }
                     else
                     {
-                        this.javascriptWrapper.JavascriptResponseMessageProperty = javascriptResponseMessageProperty;
+                        this.javascriptWrapper.JavascriptResponseMessageProperty =
+                            javascriptResponseMessageProperty;
                     }
                 }
 
@@ -602,16 +807,27 @@ namespace System.ServiceModel.Channels
                     XmlDictionaryWriter writer = null;
                     if (this.returnedWriter == null)
                     {
-                        writer = JsonReaderWriterFactory.CreateJsonWriter(stream, messageEncoder.writeEncoding, false);
+                        writer = JsonReaderWriterFactory.CreateJsonWriter(
+                            stream,
+                            messageEncoder.writeEncoding,
+                            false
+                        );
                     }
                     else
                     {
                         writer = this.returnedWriter;
-                        ((IXmlJsonWriterInitializer)writer).SetOutput(stream, messageEncoder.writeEncoding, false);
+                        ((IXmlJsonWriterInitializer)writer).SetOutput(
+                            stream,
+                            messageEncoder.writeEncoding,
+                            false
+                        );
                         this.returnedWriter = null;
                     }
 
-                    if (this.javascriptWrapper != null && this.javascriptWrapper.JavascriptResponseMessageProperty != null)
+                    if (
+                        this.javascriptWrapper != null
+                        && this.javascriptWrapper.JavascriptResponseMessageProperty != null
+                    )
                     {
                         this.javascriptWrapper.SetOutput(stream, writer);
                         writer = this.javascriptWrapper;

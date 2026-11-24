@@ -8,11 +8,11 @@
 //
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-using Xunit;
 using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Diagnostics;
+using Xunit;
 
 namespace System.Threading.Tasks.Tests
 {
@@ -42,7 +42,10 @@ namespace System.Threading.Tasks.Tests
         /// </summary>
         private const int LongTaskMilliseconds = 100;
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [OuterLoop]
         [InlineData(true)]
         [InlineData(false)]
@@ -61,7 +64,10 @@ namespace System.Threading.Tasks.Tests
             longTask.EndDoTask(asyncResult);
 
             AssertTaskCompleted(asyncResult);
-            Assert.False(asyncResult.CompletedSynchronously, "Should not have completed synchronously.");
+            Assert.False(
+                asyncResult.CompletedSynchronously,
+                "Should not have completed synchronously."
+            );
         }
 
         [Theory]
@@ -86,7 +92,10 @@ namespace System.Threading.Tasks.Tests
             }
 
             AssertTaskCompleted(asyncResult);
-            Assert.False(asyncResult.CompletedSynchronously, "Should not have completed synchronously.");
+            Assert.False(
+                asyncResult.CompletedSynchronously,
+                "Should not have completed synchronously."
+            );
         }
 
         [Theory]
@@ -107,7 +116,10 @@ namespace System.Threading.Tasks.Tests
             asyncResult.AsyncWaitHandle.WaitOne();
 
             AssertTaskCompleted(asyncResult);
-            Assert.False(asyncResult.CompletedSynchronously, "Should not have completed synchronously.");
+            Assert.False(
+                asyncResult.CompletedSynchronously,
+                "Should not have completed synchronously."
+            );
         }
 
         [Fact]
@@ -118,7 +130,10 @@ namespace System.Threading.Tasks.Tests
             tcs.SetResult();
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [OuterLoop]
         [InlineData(true)]
         [InlineData(false)]
@@ -134,14 +149,21 @@ namespace System.Threading.Tasks.Tests
 
             IAsyncResult asyncResult;
             if (_hasReturnType)
-                asyncResult = ((LongTask<int>)longTask).BeginDoTask(IntInput, TaskCompleted, longTask);
+                asyncResult = ((LongTask<int>)longTask).BeginDoTask(
+                    IntInput,
+                    TaskCompleted,
+                    longTask
+                );
             else
                 asyncResult = longTask.BeginDoTask(TaskCompleted, longTask);
 
             _mre.WaitOne(); //Block the main thread until async thread finishes executing the call back
 
             AssertTaskCompleted(asyncResult);
-            Assert.False(asyncResult.CompletedSynchronously, "Should not have completed synchronously.");
+            Assert.False(
+                asyncResult.CompletedSynchronously,
+                "Should not have completed synchronously."
+            );
         }
 
         /// <summary>
@@ -155,7 +177,9 @@ namespace System.Threading.Tasks.Tests
                 LongTask<int> lt = (LongTask<int>)ar.AsyncState;
                 int retValue = lt.EndDoTask(ar);
                 if (retValue != IntInput)
-                    Assert.Fail(string.Format("Mismatch: Return = {0} vs Expect = {1}", retValue, IntInput));
+                    Assert.Fail(
+                        string.Format("Mismatch: Return = {0} vs Expect = {1}", retValue, IntInput)
+                    );
             }
             else
             {
@@ -210,14 +234,17 @@ namespace System.Threading.Tasks.Tests
                 {
                     DoTask(); //simulates workload
                 },
-                state);
+                state
+            );
 
             if (callback != null)
             {
-                task.ContinueWith(delegate
-                {
-                    callback(task);
-                });
+                task.ContinueWith(
+                    delegate
+                    {
+                        callback(task);
+                    }
+                );
             }
 
             return task; // Return the IAsyncResult to the caller
@@ -239,9 +266,7 @@ namespace System.Threading.Tasks.Tests
     public sealed class LongTask<T> : LongTask
     {
         public LongTask(int milliseconds)
-            : base(milliseconds)
-        {
-        }
+            : base(milliseconds) { }
 
         // Synchronous version of time-consuming method
         public T DoTask(T input)
@@ -258,12 +283,15 @@ namespace System.Threading.Tasks.Tests
                 {
                     return DoTask(input);
                 },
-                state);
+                state
+            );
 
-            task.ContinueWith(delegate
-            {
-                callback(task);
-            });
+            task.ContinueWith(
+                delegate
+                {
+                    callback(task);
+                }
+            );
 
             return task; // Return the IAsyncResult to the caller
         }

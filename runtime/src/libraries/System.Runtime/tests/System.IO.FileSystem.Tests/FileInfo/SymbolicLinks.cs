@@ -11,8 +11,7 @@ namespace System.IO.Tests
     {
         protected override bool IsDirectoryTest => false;
 
-        protected override FileSystemInfo GetFileSystemInfo(string path) =>
-            new FileInfo(path);
+        protected override FileSystemInfo GetFileSystemInfo(string path) => new FileInfo(path);
 
         protected override void CreateFileOrDirectory(string path, bool createOpposite = false)
         {
@@ -35,13 +34,11 @@ namespace System.IO.Tests
             Assert.True(linkInfo is FileInfo);
         }
 
-        protected override void AssertLinkExists(FileSystemInfo link) =>
-            Assert.True(link.Exists);
+        protected override void AssertLinkExists(FileSystemInfo link) => Assert.True(link.Exists);
 
         [Fact]
         public void ResolveLinkTarget_Throws_NotExists() =>
             ResolveLinkTarget_Throws_NotExists_Internal<FileNotFoundException>();
-
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)]
@@ -63,8 +60,12 @@ namespace System.IO.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void CreateSymbolicLink_PathToTarget_RelativeToLinkPath()
         {
-            RemoteExecutor.Invoke(() => CreateSymbolicLink_PathToTarget_RelativeToLinkPath_Internal(false)).Dispose();
-            RemoteExecutor.Invoke(() => CreateSymbolicLink_PathToTarget_RelativeToLinkPath_Internal(true)).Dispose();
+            RemoteExecutor
+                .Invoke(() => CreateSymbolicLink_PathToTarget_RelativeToLinkPath_Internal(false))
+                .Dispose();
+            RemoteExecutor
+                .Invoke(() => CreateSymbolicLink_PathToTarget_RelativeToLinkPath_Internal(true))
+                .Dispose();
         }
     }
 }

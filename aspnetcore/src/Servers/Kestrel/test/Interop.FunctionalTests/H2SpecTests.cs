@@ -32,18 +32,14 @@ public class H2SpecTests : LoggedTest
                 webHostBuilder
                     .UseKestrel(options =>
                     {
-                        options.Listen(
-                            IPAddress.Loopback,
-                            0,
-                            listenOptions =>
+                        options.Listen(IPAddress.Loopback, 0, listenOptions =>
+                        {
+                            listenOptions.Protocols = HttpProtocols.Http2;
+                            if (testCase.Https)
                             {
-                                listenOptions.Protocols = HttpProtocols.Http2;
-                                if (testCase.Https)
-                                {
-                                    listenOptions.UseHttps(TestResources.GetTestCertificate());
-                                }
+                                listenOptions.UseHttps(TestResources.GetTestCertificate());
                             }
-                        );
+                        });
                     })
                     .Configure(ConfigureHelloWorld);
             })

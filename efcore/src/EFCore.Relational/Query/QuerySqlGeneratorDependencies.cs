@@ -46,7 +46,8 @@ public sealed record QuerySqlGeneratorDependencies
     [EntityFrameworkInternal]
     public QuerySqlGeneratorDependencies(
         IRelationalCommandBuilderFactory relationalCommandBuilderFactory,
-        ISqlGenerationHelper sqlGenerationHelper)
+        ISqlGenerationHelper sqlGenerationHelper
+    )
     {
         RelationalCommandBuilderFactory = relationalCommandBuilderFactory;
         SqlGenerationHelper = sqlGenerationHelper;

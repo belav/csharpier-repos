@@ -7,8 +7,8 @@ namespace System
     // vice versa
     public enum UriIdnScope
     {
-        None,                   // Never use Idn
-        AllExceptIntranet,      // Use Idn in Internet and not intranet
-        All                     // Internet and intranet
+        None, // Never use Idn
+        AllExceptIntranet, // Use Idn in Internet and not intranet
+        All, // Internet and intranet
     }
 }

@@ -9,10 +9,20 @@ namespace Internal.Cryptography
 {
     internal static class AesBCryptModes
     {
-        private static readonly Lazy<SafeAlgorithmHandle> s_hAlgCbc = OpenAesAlgorithm(Cng.BCRYPT_CHAIN_MODE_CBC);
-        private static readonly Lazy<SafeAlgorithmHandle> s_hAlgEcb = OpenAesAlgorithm(Cng.BCRYPT_CHAIN_MODE_ECB);
-        private static readonly Lazy<SafeAlgorithmHandle> s_hAlgCfb128 = OpenAesAlgorithm(Cng.BCRYPT_CHAIN_MODE_CFB, 16);
-        private static readonly Lazy<SafeAlgorithmHandle> s_hAlgCfb8 = OpenAesAlgorithm(Cng.BCRYPT_CHAIN_MODE_CFB, 1);
+        private static readonly Lazy<SafeAlgorithmHandle> s_hAlgCbc = OpenAesAlgorithm(
+            Cng.BCRYPT_CHAIN_MODE_CBC
+        );
+        private static readonly Lazy<SafeAlgorithmHandle> s_hAlgEcb = OpenAesAlgorithm(
+            Cng.BCRYPT_CHAIN_MODE_ECB
+        );
+        private static readonly Lazy<SafeAlgorithmHandle> s_hAlgCfb128 = OpenAesAlgorithm(
+            Cng.BCRYPT_CHAIN_MODE_CFB,
+            16
+        );
+        private static readonly Lazy<SafeAlgorithmHandle> s_hAlgCfb8 = OpenAesAlgorithm(
+            Cng.BCRYPT_CHAIN_MODE_CFB,
+            1
+        );
 
         internal static SafeAlgorithmHandle GetSharedHandle(CipherMode cipherMode, int feedback) =>
             // Windows 8 added support to set the CipherMode value on a key,
@@ -26,12 +36,18 @@ namespace Internal.Cryptography
                 _ => throw new NotSupportedException(),
             };
 
-        internal static Lazy<SafeAlgorithmHandle> OpenAesAlgorithm(string cipherMode, int feedback = 0)
+        internal static Lazy<SafeAlgorithmHandle> OpenAesAlgorithm(
+            string cipherMode,
+            int feedback = 0
+        )
         {
             return new Lazy<SafeAlgorithmHandle>(() =>
             {
-                SafeAlgorithmHandle hAlg = Cng.BCryptOpenAlgorithmProvider(Cng.BCRYPT_AES_ALGORITHM, null,
-                    Cng.OpenAlgorithmProviderFlags.NONE);
+                SafeAlgorithmHandle hAlg = Cng.BCryptOpenAlgorithmProvider(
+                    Cng.BCRYPT_AES_ALGORITHM,
+                    null,
+                    Cng.OpenAlgorithmProviderFlags.NONE
+                );
                 hAlg.SetCipherMode(cipherMode);
 
                 // feedback is in bytes!
@@ -47,7 +63,10 @@ namespace Internal.Cryptography
                     }
                     catch (CryptographicException ex)
                     {
-                        throw new CryptographicException(SR.Cryptography_FeedbackSizeNotSupported, ex);
+                        throw new CryptographicException(
+                            SR.Cryptography_FeedbackSizeNotSupported,
+                            ex
+                        );
                     }
                 }
 

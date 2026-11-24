@@ -15,16 +15,17 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
         [Fact]
         public static void CertificateTypeRequired()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "certificateType",
-                () => new Pkcs12CertBag(null, ReadOnlyMemory<byte>.Empty));
+            AssertExtensions.Throws<ArgumentNullException>("certificateType", () =>
+                new Pkcs12CertBag(null, ReadOnlyMemory<byte>.Empty)
+            );
         }
 
         [Fact]
         public static void InvalidCertificateTypeVerifiedInCtor()
         {
-            Assert.ThrowsAny<CryptographicException>(
-                () => new Pkcs12CertBag(new Oid(null, null), s_derNull));
+            Assert.ThrowsAny<CryptographicException>(() =>
+                new Pkcs12CertBag(new Oid(null, null), s_derNull)
+            );
         }
 
         [Fact]

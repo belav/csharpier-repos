@@ -17,7 +17,10 @@ namespace System.Web.Mvc.Test
             viewDataContainer.Setup(container => container.ViewData).Returns(viewDataDictionary);
 
             // Act
-            HtmlHelper<object> htmlHelper = new HtmlHelper<object>(new Mock<ViewContext>().Object, viewDataContainer.Object);
+            HtmlHelper<object> htmlHelper = new HtmlHelper<object>(
+                new Mock<ViewContext>().Object,
+                viewDataContainer.Object
+            );
             htmlHelper.ViewData["B"] = 2;
             htmlHelper.ViewBag.C = 3;
 

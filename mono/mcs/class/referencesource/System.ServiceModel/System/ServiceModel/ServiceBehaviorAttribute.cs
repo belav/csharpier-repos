@@ -4,19 +4,19 @@
 
 namespace System.ServiceModel
 {
-    using System.ServiceModel.Administration;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Description;
-    using System.ServiceModel.Configuration;
-    using System.Runtime.Serialization;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
-    using System.Threading;
-    using System.Transactions;
-    using System.Runtime.CompilerServices;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Globalization;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
+    using System.ServiceModel.Administration;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Configuration;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
+    using System.Threading;
+    using System.Transactions;
 
     [AttributeUsage(ServiceModelAttributeTargets.ServiceBehavior)]
     public sealed class ServiceBehaviorAttribute : Attribute, IServiceBehavior
@@ -31,8 +31,8 @@ namespace System.ServiceModel
         bool releaseServiceInstanceOnTransactionCompleteSet = false;
         bool transactionAutoCompleteOnSessionClose = false;
         bool transactionAutoCompleteOnSessionCloseSet = false;
-        object wellKnownSingleton = null;  // if the user passes an object to the ServiceHost, it is stored here
-        object hiddenSingleton = null;     // if the user passes a type to the ServiceHost, and instanceMode==Single, we store the instance here
+        object wellKnownSingleton = null; // if the user passes an object to the ServiceHost, it is stored here
+        object hiddenSingleton = null; // if the user passes a type to the ServiceHost, and instanceMode==Single, we store the instance here
         bool validateMustUnderstand = true;
         bool ignoreExtensionDataObject = DataContractSerializerDefaults.IgnoreExtensionDataObject;
         int maxItemsInObjectGraph = DataContractSerializerDefaults.MaxItemsInObjectGraph;
@@ -75,7 +75,9 @@ namespace System.ServiceModel
             {
                 if (!AddressFilterModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
 
                 this.addressFilterMode = value;
@@ -101,8 +103,12 @@ namespace System.ServiceModel
                 }
                 if (value == string.Empty)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value",
-                        SR.GetString(SR.SFxConfigurationNameCannotBeEmpty)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.SFxConfigurationNameCannotBeEmpty)
+                        )
+                    );
                 }
                 this.configurationName = value;
             }
@@ -125,7 +131,9 @@ namespace System.ServiceModel
                         break;
 
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentOutOfRangeException("value")
+                        );
                 }
 
                 this.transactionIsolationLevel = value;
@@ -158,7 +166,9 @@ namespace System.ServiceModel
             {
                 if (!ConcurrencyModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
 
                 this.concurrencyMode = value;
@@ -180,7 +190,9 @@ namespace System.ServiceModel
             {
                 if (!InstanceContextModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
 
                 this.instanceMode = value;
@@ -239,7 +251,9 @@ namespace System.ServiceModel
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("value")
+                    );
                 }
 
                 try
@@ -249,7 +263,9 @@ namespace System.ServiceModel
                     if (timeout < TimeSpan.Zero)
                     {
                         string message = SR.GetString(SR.SFxTimeoutOutOfRange0);
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value, message));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentOutOfRangeException("value", value, message)
+                        );
                     }
 
                     this.transactionTimeout = timeout;
@@ -258,11 +274,19 @@ namespace System.ServiceModel
                 }
                 catch (FormatException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.SFxTimeoutInvalidStringFormat), "value", e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(SR.SFxTimeoutInvalidStringFormat),
+                            "value",
+                            e
+                        )
+                    );
                 }
                 catch (OverflowException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
             }
         }
@@ -340,31 +364,48 @@ namespace System.ServiceModel
         void SetIsolationLevel(ChannelDispatcher channelDispatcher)
         {
             if (channelDispatcher == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("channelDispatcher");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "channelDispatcher"
+                );
 
             channelDispatcher.TransactionIsolationLevel = this.transactionIsolationLevel;
         }
 
-        void IServiceBehavior.Validate(ServiceDescription description, ServiceHostBase serviceHostBase)
+        void IServiceBehavior.Validate(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        )
         {
             if (this.concurrencyMode != ConcurrencyMode.Single && this.ensureOrderedDispatch)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxNonConcurrentOrEnsureOrderedDispatch, description.Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxNonConcurrentOrEnsureOrderedDispatch, description.Name)
+                    )
+                );
             }
         }
 
-        void IServiceBehavior.AddBindingParameters(ServiceDescription description, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection parameters)
-        {
-        }
+        void IServiceBehavior.AddBindingParameters(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection parameters
+        ) { }
 
-        void IServiceBehavior.ApplyDispatchBehavior(ServiceDescription description, ServiceHostBase serviceHostBase)
+        void IServiceBehavior.ApplyDispatchBehavior(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        )
         {
             for (int i = 0; i < serviceHostBase.ChannelDispatchers.Count; i++)
             {
-                ChannelDispatcher channelDispatcher = serviceHostBase.ChannelDispatchers[i] as ChannelDispatcher;
+                ChannelDispatcher channelDispatcher =
+                    serviceHostBase.ChannelDispatchers[i] as ChannelDispatcher;
                 if (channelDispatcher != null)
                 {
-                    channelDispatcher.IncludeExceptionDetailInFaults = this.includeExceptionDetailInFaults;
+                    channelDispatcher.IncludeExceptionDetailInFaults =
+                        this.includeExceptionDetailInFaults;
 
                     if (channelDispatcher.HasApplicationEndpoints())
                     {
@@ -372,7 +413,9 @@ namespace System.ServiceModel
                         if (isolationLevelSet)
                             SetIsolationLevel(channelDispatcher);
 
-                        foreach (EndpointDispatcher endpointDispatcher in channelDispatcher.Endpoints)
+                        foreach (
+                            EndpointDispatcher endpointDispatcher in channelDispatcher.Endpoints
+                        )
                         {
                             if (endpointDispatcher.IsSystemEndpoint)
                             {
@@ -383,8 +426,10 @@ namespace System.ServiceModel
                             behavior.EnsureOrderedDispatch = this.ensureOrderedDispatch;
                             behavior.ValidateMustUnderstand = validateMustUnderstand;
                             behavior.AutomaticInputSessionShutdown = this.automaticSessionShutdown;
-                            behavior.TransactionAutoCompleteOnSessionClose = this.transactionAutoCompleteOnSessionClose;
-                            behavior.ReleaseServiceInstanceOnTransactionComplete = this.releaseServiceInstanceOnTransactionComplete;
+                            behavior.TransactionAutoCompleteOnSessionClose =
+                                this.transactionAutoCompleteOnSessionClose;
+                            behavior.ReleaseServiceInstanceOnTransactionComplete =
+                                this.releaseServiceInstanceOnTransactionComplete;
                             if (!this.useSynchronizationContext)
                             {
                                 behavior.SynchronizationContext = null;
@@ -393,17 +438,22 @@ namespace System.ServiceModel
                             if (!endpointDispatcher.AddressFilterSetExplicit)
                             {
                                 EndpointAddress address = endpointDispatcher.OriginalAddress;
-                                if (address == null || this.AddressFilterMode == AddressFilterMode.Any)
+                                if (
+                                    address == null
+                                    || this.AddressFilterMode == AddressFilterMode.Any
+                                )
                                 {
                                     endpointDispatcher.AddressFilter = new MatchAllMessageFilter();
                                 }
                                 else if (this.AddressFilterMode == AddressFilterMode.Prefix)
                                 {
-                                    endpointDispatcher.AddressFilter = new PrefixEndpointAddressMessageFilter(address);
+                                    endpointDispatcher.AddressFilter =
+                                        new PrefixEndpointAddressMessageFilter(address);
                                 }
                                 else if (this.AddressFilterMode == AddressFilterMode.Exact)
                                 {
-                                    endpointDispatcher.AddressFilter = new EndpointAddressMessageFilter(address);
+                                    endpointDispatcher.AddressFilter =
+                                        new EndpointAddressMessageFilter(address);
                                 }
                             }
                         }
@@ -411,7 +461,11 @@ namespace System.ServiceModel
 #pragma warning suppress 56506
                 }
             }
-            DataContractSerializerServiceBehavior.ApplySerializationSettings(description, ignoreExtensionDataObject, maxItemsInObjectGraph);
+            DataContractSerializerServiceBehavior.ApplySerializationSettings(
+                description,
+                ignoreExtensionDataObject,
+                maxItemsInObjectGraph
+            );
             ApplyInstancing(description, serviceHostBase);
         }
 
@@ -422,7 +476,8 @@ namespace System.ServiceModel
 
             for (int i = 0; i < serviceHostBase.ChannelDispatchers.Count; i++)
             {
-                ChannelDispatcher channelDispatcher = serviceHostBase.ChannelDispatchers[i] as ChannelDispatcher;
+                ChannelDispatcher channelDispatcher =
+                    serviceHostBase.ChannelDispatchers[i] as ChannelDispatcher;
                 if (channelDispatcher != null)
                 {
                     foreach (EndpointDispatcher endpointDispatcher in channelDispatcher.Endpoints)
@@ -437,10 +492,23 @@ namespace System.ServiceModel
                             if (instanceProvider == null)
                             {
                                 if (serviceType == null && this.wellKnownSingleton == null)
-                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.InstanceSettingsMustHaveTypeOrWellKnownObject0)));
+                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                        new InvalidOperationException(
+                                            SR.GetString(
+                                                SR.InstanceSettingsMustHaveTypeOrWellKnownObject0
+                                            )
+                                        )
+                                    );
 
-                                if (this.instanceMode != InstanceContextMode.Single && this.wellKnownSingleton != null)
-                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxWellKnownNonSingleton0)));
+                                if (
+                                    this.instanceMode != InstanceContextMode.Single
+                                    && this.wellKnownSingleton != null
+                                )
+                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                        new InvalidOperationException(
+                                            SR.GetString(SR.SFxWellKnownNonSingleton0)
+                                        )
+                                    );
                             }
                             else
                             {
@@ -448,20 +516,36 @@ namespace System.ServiceModel
                             }
                         }
                         dispatch.Type = serviceType;
-                        dispatch.InstanceContextProvider = InstanceContextProviderBase.GetProviderForMode(this.instanceMode, dispatch);
+                        dispatch.InstanceContextProvider =
+                            InstanceContextProviderBase.GetProviderForMode(
+                                this.instanceMode,
+                                dispatch
+                            );
 
-                        if ((this.instanceMode == InstanceContextMode.Single) &&
-                            (dispatch.SingletonInstanceContext == null))
+                        if (
+                            (this.instanceMode == InstanceContextMode.Single)
+                            && (dispatch.SingletonInstanceContext == null)
+                        )
                         {
                             if (singleton == null)
                             {
                                 if (this.wellKnownSingleton != null)
                                 {
-                                    singleton = new InstanceContext(serviceHostBase, this.wellKnownSingleton, true, false);
+                                    singleton = new InstanceContext(
+                                        serviceHostBase,
+                                        this.wellKnownSingleton,
+                                        true,
+                                        false
+                                    );
                                 }
                                 else if (this.hiddenSingleton != null)
                                 {
-                                    singleton = new InstanceContext(serviceHostBase, this.hiddenSingleton, false, false);
+                                    singleton = new InstanceContext(
+                                        serviceHostBase,
+                                        this.hiddenSingleton,
+                                        false,
+                                        false
+                                    );
                                 }
                                 else
                                 {

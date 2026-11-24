@@ -90,8 +90,7 @@ public abstract class LoggedTestBase : ITestMethodLifecycle, IDisposable
             TestOutputHelper = testOutputHelper;
 
             var classType = GetType();
-            var logLevelAttribute =
-                methodInfo.GetCustomAttribute<LogLevelAttribute>()
+            var logLevelAttribute = methodInfo.GetCustomAttribute<LogLevelAttribute>()
                 ?? methodInfo.DeclaringType.GetCustomAttribute<LogLevelAttribute>()
                 ?? methodInfo.DeclaringType.Assembly.GetCustomAttribute<LogLevelAttribute>();
 

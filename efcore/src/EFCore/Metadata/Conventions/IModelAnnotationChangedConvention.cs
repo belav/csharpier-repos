@@ -24,5 +24,6 @@ public interface IModelAnnotationChangedConvention : IConvention
         string name,
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation,
-        IConventionContext<IConventionAnnotation> context);
+        IConventionContext<IConventionAnnotation> context
+    );
 }

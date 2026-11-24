@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler
@@ -10,16 +9,23 @@ namespace ILCompiler
     internal sealed class CompilerMetadataFieldLayoutAlgorithm : MetadataFieldLayoutAlgorithm
     {
         // GC statics start with a pointer to the "MethodTable" that signals the size and GCDesc to the GC
-        public static LayoutInt GetGCStaticFieldOffset(TypeSystemContext context) => context.Target.LayoutPointerSize;
+        public static LayoutInt GetGCStaticFieldOffset(TypeSystemContext context) =>
+            context.Target.LayoutPointerSize;
 
-        protected override void PrepareRuntimeSpecificStaticFieldLayout(TypeSystemContext context, ref ComputedStaticFieldLayout layout)
+        protected override void PrepareRuntimeSpecificStaticFieldLayout(
+            TypeSystemContext context,
+            ref ComputedStaticFieldLayout layout
+        )
         {
             LayoutInt offset = GetGCStaticFieldOffset(context);
             layout.GcStatics.Size = offset;
             layout.ThreadGcStatics.Size = offset;
         }
 
-        protected override void FinalizeRuntimeSpecificStaticFieldLayout(TypeSystemContext context, ref ComputedStaticFieldLayout layout)
+        protected override void FinalizeRuntimeSpecificStaticFieldLayout(
+            TypeSystemContext context,
+            ref ComputedStaticFieldLayout layout
+        )
         {
             LayoutInt offset = GetGCStaticFieldOffset(context);
 
@@ -39,7 +45,10 @@ namespace ILCompiler
             Debug.Assert(layout.ThreadNonGcStatics.Size == LayoutInt.Zero);
         }
 
-        protected override ComputedInstanceFieldLayout ComputeInstanceFieldLayout(MetadataType type, int numInstanceFields)
+        protected override ComputedInstanceFieldLayout ComputeInstanceFieldLayout(
+            MetadataType type,
+            int numInstanceFields
+        )
         {
             if (type.IsExplicitLayout)
             {

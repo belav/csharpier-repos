@@ -12,7 +12,16 @@ namespace System.Diagnostics
     // for the current instance of the target type. The expression will be limited,
     // however: there is no access to aliases, locals, or pointers.
     // In addition, attributes on properties referenced in the expression are not processed.
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Delegate | AttributeTargets.Enum | AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Assembly, AllowMultiple = true)]
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Delegate
+            | AttributeTargets.Enum
+            | AttributeTargets.Field
+            | AttributeTargets.Property
+            | AttributeTargets.Assembly,
+        AllowMultiple = true
+    )]
     public sealed class DebuggerDisplayAttribute : Attribute
     {
         private Type? _target;

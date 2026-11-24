@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,96 +27,127 @@ using System;
 using System.IO;
 using System.Security.RightsManagement;
 
-namespace System.IO.Packaging {
+namespace System.IO.Packaging
+{
+    public class EncryptedPackageEnvelope : IDisposable
+    {
+        internal EncryptedPackageEnvelope() { }
 
-	public class EncryptedPackageEnvelope : IDisposable
-	{
-		internal EncryptedPackageEnvelope ()
-		{
-		}
+        protected virtual void Dispose(bool disposing)
+        {
+            throw new NotImplementedException();
+        }
 
-		protected virtual void Dispose (bool disposing)
-		{
-			throw new NotImplementedException ();
-		}
+        public FileAccess FileOpenAccess
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public FileAccess FileOpenAccess {
-			get { throw new NotImplementedException (); }
-		}
+        public PackageProperties PackageProperties
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public PackageProperties PackageProperties {
-			get { throw new NotImplementedException (); }
-		}
+        public RightsManagementInformation RightsManagementInformation
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public RightsManagementInformation RightsManagementInformation {
-			get { throw new NotImplementedException (); }
-		}
+        public StorageInfo StorageInfo
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public StorageInfo StorageInfo {
-			get { throw new NotImplementedException (); }
-		}
+        public void Close()
+        {
+            throw new NotImplementedException();
+        }
 
-		public void Close ()
-		{
-			throw new NotImplementedException ();
-		}
-		public void Dispose ()
-		{
-			throw new NotImplementedException ();
-		}
-		public void Flush ()
-		{
-			throw new NotImplementedException ();
-		}
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
 
-		public Package GetPackage ()
-		{
-			throw new NotImplementedException ();
-		}
+        public void Flush()
+        {
+            throw new NotImplementedException();
+        }
 
-		public static bool IsEncryptedPackageEnvelope (Stream stream)
-		{
-			throw new NotImplementedException ();
-		}
-		public static bool IsEncryptedPackageEnvelope (string fileName)
-		{
-			throw new NotImplementedException ();
-		}
+        public Package GetPackage()
+        {
+            throw new NotImplementedException();
+        }
 
-		public static EncryptedPackageEnvelope Create (Stream envelopeStream, PublishLicense publishLicense, CryptoProvider cryptoProvider)
-		{
-			throw new NotImplementedException ();
-		}
-		public static EncryptedPackageEnvelope Create (string envelopeFileName, PublishLicense publishLicense, CryptoProvider cryptoProvider)
-		{
-			throw new NotImplementedException ();
-		}
-		public static EncryptedPackageEnvelope CreateFromPackage (Stream envelopeStream, Stream packageStream, PublishLicense publishLicense, CryptoProvider cryptoProvider)
-		{
-			throw new NotImplementedException ();
-		}
-		public static EncryptedPackageEnvelope CreateFromPackage (string envelopeFileName, Stream packageStream, PublishLicense publishLicense, CryptoProvider cryptoProvider)
-		{
-			throw new NotImplementedException ();
-		}
+        public static bool IsEncryptedPackageEnvelope(Stream stream)
+        {
+            throw new NotImplementedException();
+        }
 
-		public static EncryptedPackageEnvelope Open (Stream envelopeStream)
-		{
-			throw new NotImplementedException ();
-		}
-		public static EncryptedPackageEnvelope Open (string envelopeFileName)
-		{
-			throw new NotImplementedException ();
-		}
-		public static EncryptedPackageEnvelope Open (string envelopeFileName, FileAccess access)
-		{
-			throw new NotImplementedException ();
-		}
-		public static EncryptedPackageEnvelope Open (string envelopeFileName, FileAccess access, FileShare sharing)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public static bool IsEncryptedPackageEnvelope(string fileName)
+        {
+            throw new NotImplementedException();
+        }
 
+        public static EncryptedPackageEnvelope Create(
+            Stream envelopeStream,
+            PublishLicense publishLicense,
+            CryptoProvider cryptoProvider
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        public static EncryptedPackageEnvelope Create(
+            string envelopeFileName,
+            PublishLicense publishLicense,
+            CryptoProvider cryptoProvider
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        public static EncryptedPackageEnvelope CreateFromPackage(
+            Stream envelopeStream,
+            Stream packageStream,
+            PublishLicense publishLicense,
+            CryptoProvider cryptoProvider
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        public static EncryptedPackageEnvelope CreateFromPackage(
+            string envelopeFileName,
+            Stream packageStream,
+            PublishLicense publishLicense,
+            CryptoProvider cryptoProvider
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        public static EncryptedPackageEnvelope Open(Stream envelopeStream)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static EncryptedPackageEnvelope Open(string envelopeFileName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static EncryptedPackageEnvelope Open(string envelopeFileName, FileAccess access)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static EncryptedPackageEnvelope Open(
+            string envelopeFileName,
+            FileAccess access,
+            FileShare sharing
+        )
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
-

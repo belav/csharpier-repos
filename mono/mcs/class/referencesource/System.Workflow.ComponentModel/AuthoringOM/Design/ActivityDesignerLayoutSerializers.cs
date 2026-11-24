@@ -1,37 +1,53 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.ComponentModel.Design.Serialization;
-using System.Reflection;
-using System.Xml;
-using System.Workflow.ComponentModel.Serialization;
 using System.Drawing;
+using System.Reflection;
+using System.Text;
+using System.Workflow.ComponentModel.Serialization;
+using System.Xml;
 
 namespace System.Workflow.ComponentModel.Design
 {
     #region Class ActivityDesignerLayoutSerializer
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class ActivityDesignerLayoutSerializer : WorkflowMarkupSerializer
     {
-        protected override void OnBeforeSerialize(WorkflowMarkupSerializationManager serializationManager, object obj)
+        protected override void OnBeforeSerialize(
+            WorkflowMarkupSerializationManager serializationManager,
+            object obj
+        )
         {
             base.OnBeforeSerialize(serializationManager, obj);
 
             //For root activity we will go through all the nested activities and put the namespaces at the top level
             ActivityDesigner activityDesigner = obj as ActivityDesigner;
-            XmlWriter writer = serializationManager.WorkflowMarkupStack[typeof(XmlWriter)] as XmlWriter;
-            if (activityDesigner.Activity != null && activityDesigner.Activity.Parent == null && writer != null)
+            XmlWriter writer =
+                serializationManager.WorkflowMarkupStack[typeof(XmlWriter)] as XmlWriter;
+            if (
+                activityDesigner.Activity != null
+                && activityDesigner.Activity.Parent == null
+                && writer != null
+            )
             {
                 string prefix = String.Empty;
-                XmlQualifiedName xmlQualifiedName = serializationManager.GetXmlQualifiedName(typeof(Point), out prefix);
+                XmlQualifiedName xmlQualifiedName = serializationManager.GetXmlQualifiedName(
+                    typeof(Point),
+                    out prefix
+                );
                 writer.WriteAttributeString("xmlns", prefix, null, xmlQualifiedName.Namespace);
             }
         }
 
-        protected override object CreateInstance(WorkflowMarkupSerializationManager serializationManager, Type type)
+        protected override object CreateInstance(
+            WorkflowMarkupSerializationManager serializationManager,
+            Type type
+        )
         {
             if (serializationManager == null)
                 throw new ArgumentNullException("serializationManager");
@@ -40,29 +56,52 @@ namespace System.Workflow.ComponentModel.Design
 
             object designer = null;
 
-            IDesignerHost host = serializationManager.GetService(typeof(IDesignerHost)) as IDesignerHost;
-            XmlReader reader = serializationManager.WorkflowMarkupStack[typeof(XmlReader)] as XmlReader;
+            IDesignerHost host =
+                serializationManager.GetService(typeof(IDesignerHost)) as IDesignerHost;
+            XmlReader reader =
+                serializationManager.WorkflowMarkupStack[typeof(XmlReader)] as XmlReader;
             if (host != null && reader != null)
             {
                 //Find the associated activity
                 string associatedActivityName = String.Empty;
-                while (reader.MoveToNextAttribute() && !reader.LocalName.Equals("Name", StringComparison.Ordinal));
-                if (reader.LocalName.Equals("Name", StringComparison.Ordinal) && reader.ReadAttributeValue())
+                while (
+                    reader.MoveToNextAttribute()
+                    && !reader.LocalName.Equals("Name", StringComparison.Ordinal)
+                )
+                    ;
+                if (
+                    reader.LocalName.Equals("Name", StringComparison.Ordinal)
+                    && reader.ReadAttributeValue()
+                )
                     associatedActivityName = reader.Value;
                 reader.MoveToElement();
 
                 if (!String.IsNullOrEmpty(associatedActivityName))
                 {
-                    CompositeActivityDesigner parentDesigner = serializationManager.Context[typeof(CompositeActivityDesigner)] as CompositeActivityDesigner;
+                    CompositeActivityDesigner parentDesigner =
+                        serializationManager.Context[typeof(CompositeActivityDesigner)]
+                        as CompositeActivityDesigner;
                     if (parentDesigner == null)
                     {
                         Activity activity = host.RootComponent as Activity;
-                        if (activity != null && !associatedActivityName.Equals(activity.Name, StringComparison.Ordinal))
+                        if (
+                            activity != null
+                            && !associatedActivityName.Equals(
+                                activity.Name,
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             foreach (IComponent component in host.Container.Components)
                             {
                                 activity = component as Activity;
-                                if (activity != null && associatedActivityName.Equals(activity.Name, StringComparison.Ordinal))
+                                if (
+                                    activity != null
+                                    && associatedActivityName.Equals(
+                                        activity.Name,
+                                        StringComparison.Ordinal
+                                    )
+                                )
                                     break;
                             }
                         }
@@ -72,13 +111,19 @@ namespace System.Workflow.ComponentModel.Design
                     }
                     else
                     {
-                        CompositeActivity compositeActivity = parentDesigner.Activity as CompositeActivity;
+                        CompositeActivity compositeActivity =
+                            parentDesigner.Activity as CompositeActivity;
                         if (compositeActivity != null)
                         {
                             Activity matchingActivity = null;
                             foreach (Activity activity in compositeActivity.Activities)
                             {
-                                if (associatedActivityName.Equals(activity.Name, StringComparison.Ordinal))
+                                if (
+                                    associatedActivityName.Equals(
+                                        activity.Name,
+                                        StringComparison.Ordinal
+                                    )
+                                )
                                 {
                                     matchingActivity = activity;
                                     break;
@@ -91,30 +136,50 @@ namespace System.Workflow.ComponentModel.Design
                     }
 
                     if (designer == null)
-                        serializationManager.ReportError(SR.GetString(SR.Error_LayoutSerializationActivityNotFound, reader.LocalName, associatedActivityName, "Name"));
+                        serializationManager.ReportError(
+                            SR.GetString(
+                                SR.Error_LayoutSerializationActivityNotFound,
+                                reader.LocalName,
+                                associatedActivityName,
+                                "Name"
+                            )
+                        );
                 }
                 else
                 {
-                    serializationManager.ReportError(SR.GetString(SR.Error_LayoutSerializationAssociatedActivityNotFound, reader.LocalName, "Name"));
+                    serializationManager.ReportError(
+                        SR.GetString(
+                            SR.Error_LayoutSerializationAssociatedActivityNotFound,
+                            reader.LocalName,
+                            "Name"
+                        )
+                    );
                 }
             }
 
             return designer;
         }
 
-        protected internal override PropertyInfo[] GetProperties(WorkflowMarkupSerializationManager serializationManager, object obj)
+        protected internal override PropertyInfo[] GetProperties(
+            WorkflowMarkupSerializationManager serializationManager,
+            object obj
+        )
         {
             if (serializationManager == null)
                 throw new ArgumentNullException("serializationManager");
             if (obj == null)
                 throw new ArgumentNullException("obj");
 
-            List<PropertyInfo> properties = new List<PropertyInfo>(base.GetProperties(serializationManager, obj));
+            List<PropertyInfo> properties = new List<PropertyInfo>(
+                base.GetProperties(serializationManager, obj)
+            );
 
             ActivityDesigner activityDesigner = obj as ActivityDesigner;
             if (activityDesigner != null)
             {
-                PropertyInfo nameProperty = activityDesigner.GetType().GetProperty("Name", BindingFlags.Instance | BindingFlags.NonPublic);
+                PropertyInfo nameProperty = activityDesigner
+                    .GetType()
+                    .GetProperty("Name", BindingFlags.Instance | BindingFlags.NonPublic);
                 if (nameProperty != null)
                     properties.Insert(0, nameProperty);
             }
@@ -125,30 +190,49 @@ namespace System.Workflow.ComponentModel.Design
     #endregion
 
     #region Class CompositeActivityDesignerLayoutSerializer
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class CompositeActivityDesignerLayoutSerializer : ActivityDesignerLayoutSerializer
     {
-        protected internal override PropertyInfo[] GetProperties(WorkflowMarkupSerializationManager serializationManager, object obj)
+        protected internal override PropertyInfo[] GetProperties(
+            WorkflowMarkupSerializationManager serializationManager,
+            object obj
+        )
         {
-            List<PropertyInfo> properties = new List<PropertyInfo>(base.GetProperties(serializationManager, obj));
-            properties.Add(typeof(CompositeActivityDesigner).GetProperty("Designers", BindingFlags.Instance | BindingFlags.NonPublic));
+            List<PropertyInfo> properties = new List<PropertyInfo>(
+                base.GetProperties(serializationManager, obj)
+            );
+            properties.Add(
+                typeof(CompositeActivityDesigner).GetProperty(
+                    "Designers",
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                )
+            );
             return properties.ToArray();
         }
     }
     #endregion
 
     #region Class FreeformActivityDesignerLayoutSerializer
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
-    public class FreeformActivityDesignerLayoutSerializer : CompositeActivityDesignerLayoutSerializer
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
+    public class FreeformActivityDesignerLayoutSerializer
+        : CompositeActivityDesignerLayoutSerializer
     {
-        protected internal override PropertyInfo[] GetProperties(WorkflowMarkupSerializationManager serializationManager, object obj)
+        protected internal override PropertyInfo[] GetProperties(
+            WorkflowMarkupSerializationManager serializationManager,
+            object obj
+        )
         {
             if (serializationManager == null)
                 throw new ArgumentNullException("serializationManager");
             if (obj == null)
                 throw new ArgumentNullException("obj");
 
-            XmlWriter writer = serializationManager.WorkflowMarkupStack[typeof(XmlWriter)] as XmlWriter;
+            XmlWriter writer =
+                serializationManager.WorkflowMarkupStack[typeof(XmlWriter)] as XmlWriter;
             PropertyInfo[] properties = base.GetProperties(serializationManager, obj);
             FreeformActivityDesigner freeformDesigner = obj as FreeformActivityDesigner;
             if (freeformDesigner != null)
@@ -157,9 +241,12 @@ namespace System.Workflow.ComponentModel.Design
                 foreach (PropertyInfo property in properties)
                 {
                     //Only filter this property out when we are writting
-                    if (writer != null &&
-                        property.Name.Equals("AutoSizeMargin", StringComparison.Ordinal) &&
-                        freeformDesigner.AutoSizeMargin == FreeformActivityDesigner.DefaultAutoSizeMargin)
+                    if (
+                        writer != null
+                        && property.Name.Equals("AutoSizeMargin", StringComparison.Ordinal)
+                        && freeformDesigner.AutoSizeMargin
+                            == FreeformActivityDesigner.DefaultAutoSizeMargin
+                    )
                     {
                         continue;
                     }
@@ -167,7 +254,12 @@ namespace System.Workflow.ComponentModel.Design
                     serializableProperties.Add(property);
                 }
 
-                serializableProperties.Add(typeof(FreeformActivityDesigner).GetProperty("DesignerConnectors", BindingFlags.Instance | BindingFlags.NonPublic));
+                serializableProperties.Add(
+                    typeof(FreeformActivityDesigner).GetProperty(
+                        "DesignerConnectors",
+                        BindingFlags.Instance | BindingFlags.NonPublic
+                    )
+                );
                 properties = serializableProperties.ToArray();
             }
 
@@ -177,28 +269,73 @@ namespace System.Workflow.ComponentModel.Design
     #endregion
 
     #region ConnectorLayoutSerializer
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class ConnectorLayoutSerializer : WorkflowMarkupSerializer
     {
-        protected internal override PropertyInfo[] GetProperties(WorkflowMarkupSerializationManager serializationManager, object obj)
+        protected internal override PropertyInfo[] GetProperties(
+            WorkflowMarkupSerializationManager serializationManager,
+            object obj
+        )
         {
             if (serializationManager == null)
                 throw new ArgumentNullException("serializationManager");
             if (obj == null)
                 throw new ArgumentNullException("obj");
 
-            List<PropertyInfo> properties = new List<PropertyInfo>(base.GetProperties(serializationManager, obj));
-            properties.Add(typeof(Connector).GetProperty("SourceActivity", BindingFlags.Instance | BindingFlags.NonPublic));
-            properties.Add(typeof(Connector).GetProperty("SourceConnectionIndex", BindingFlags.Instance | BindingFlags.NonPublic));
-            properties.Add(typeof(Connector).GetProperty("SourceConnectionEdge", BindingFlags.Instance | BindingFlags.NonPublic));
-            properties.Add(typeof(Connector).GetProperty("TargetActivity", BindingFlags.Instance | BindingFlags.NonPublic));
-            properties.Add(typeof(Connector).GetProperty("TargetConnectionIndex", BindingFlags.Instance | BindingFlags.NonPublic));
-            properties.Add(typeof(Connector).GetProperty("TargetConnectionEdge", BindingFlags.Instance | BindingFlags.NonPublic));
-            properties.Add(typeof(Connector).GetProperty("Segments", BindingFlags.Instance | BindingFlags.NonPublic));
+            List<PropertyInfo> properties = new List<PropertyInfo>(
+                base.GetProperties(serializationManager, obj)
+            );
+            properties.Add(
+                typeof(Connector).GetProperty(
+                    "SourceActivity",
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                )
+            );
+            properties.Add(
+                typeof(Connector).GetProperty(
+                    "SourceConnectionIndex",
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                )
+            );
+            properties.Add(
+                typeof(Connector).GetProperty(
+                    "SourceConnectionEdge",
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                )
+            );
+            properties.Add(
+                typeof(Connector).GetProperty(
+                    "TargetActivity",
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                )
+            );
+            properties.Add(
+                typeof(Connector).GetProperty(
+                    "TargetConnectionIndex",
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                )
+            );
+            properties.Add(
+                typeof(Connector).GetProperty(
+                    "TargetConnectionEdge",
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                )
+            );
+            properties.Add(
+                typeof(Connector).GetProperty(
+                    "Segments",
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                )
+            );
             return properties.ToArray();
         }
 
-        protected override object CreateInstance(WorkflowMarkupSerializationManager serializationManager, Type type)
+        protected override object CreateInstance(
+            WorkflowMarkupSerializationManager serializationManager,
+            Type type
+        )
         {
             if (serializationManager == null)
                 throw new ArgumentNullException("serializationManager");
@@ -207,8 +344,11 @@ namespace System.Workflow.ComponentModel.Design
 
             Connector connector = null;
 
-            IReferenceService referenceService = serializationManager.GetService(typeof(IReferenceService)) as IReferenceService;
-            FreeformActivityDesigner freeformDesigner = serializationManager.Context[typeof(FreeformActivityDesigner)] as FreeformActivityDesigner;
+            IReferenceService referenceService =
+                serializationManager.GetService(typeof(IReferenceService)) as IReferenceService;
+            FreeformActivityDesigner freeformDesigner =
+                serializationManager.Context[typeof(FreeformActivityDesigner)]
+                as FreeformActivityDesigner;
             if (freeformDesigner != null && referenceService != null)
             {
                 ConnectionPoint sourceConnection = null;
@@ -216,33 +356,74 @@ namespace System.Workflow.ComponentModel.Design
 
                 try
                 {
-                    Dictionary<string, string> constructionArguments = GetConnectorConstructionArguments(serializationManager, type);
+                    Dictionary<string, string> constructionArguments =
+                        GetConnectorConstructionArguments(serializationManager, type);
 
-                    if (constructionArguments.ContainsKey("SourceActivity") &&
-                        constructionArguments.ContainsKey("SourceConnectionIndex") &&
-                        constructionArguments.ContainsKey("SourceConnectionEdge"))
+                    if (
+                        constructionArguments.ContainsKey("SourceActivity")
+                        && constructionArguments.ContainsKey("SourceConnectionIndex")
+                        && constructionArguments.ContainsKey("SourceConnectionEdge")
+                    )
                     {
-                        ActivityDesigner sourceDesigner = ActivityDesigner.GetDesigner(referenceService.GetReference(constructionArguments["SourceActivity"] as string) as Activity);
-                        DesignerEdges sourceEdge = (DesignerEdges)Enum.Parse(typeof(DesignerEdges), constructionArguments["SourceConnectionEdge"] as string);
-                        int sourceIndex = Convert.ToInt32(constructionArguments["SourceConnectionIndex"] as string, System.Globalization.CultureInfo.InvariantCulture);
-                        if (sourceDesigner != null && sourceEdge != DesignerEdges.None && sourceIndex >= 0)
-                            sourceConnection = new ConnectionPoint(sourceDesigner, sourceEdge, sourceIndex);
+                        ActivityDesigner sourceDesigner = ActivityDesigner.GetDesigner(
+                            referenceService.GetReference(
+                                constructionArguments["SourceActivity"] as string
+                            ) as Activity
+                        );
+                        DesignerEdges sourceEdge = (DesignerEdges)
+                            Enum.Parse(
+                                typeof(DesignerEdges),
+                                constructionArguments["SourceConnectionEdge"] as string
+                            );
+                        int sourceIndex = Convert.ToInt32(
+                            constructionArguments["SourceConnectionIndex"] as string,
+                            System.Globalization.CultureInfo.InvariantCulture
+                        );
+                        if (
+                            sourceDesigner != null
+                            && sourceEdge != DesignerEdges.None
+                            && sourceIndex >= 0
+                        )
+                            sourceConnection = new ConnectionPoint(
+                                sourceDesigner,
+                                sourceEdge,
+                                sourceIndex
+                            );
                     }
 
-                    if (constructionArguments.ContainsKey("TargetActivity") &&
-                        constructionArguments.ContainsKey("TargetConnectionIndex") &&
-                        constructionArguments.ContainsKey("TargetConnectionEdge"))
+                    if (
+                        constructionArguments.ContainsKey("TargetActivity")
+                        && constructionArguments.ContainsKey("TargetConnectionIndex")
+                        && constructionArguments.ContainsKey("TargetConnectionEdge")
+                    )
                     {
-                        ActivityDesigner targetDesigner = ActivityDesigner.GetDesigner(referenceService.GetReference(constructionArguments["TargetActivity"] as string) as Activity);
-                        DesignerEdges targetEdge = (DesignerEdges)Enum.Parse(typeof(DesignerEdges), constructionArguments["TargetConnectionEdge"] as string);
-                        int targetIndex = Convert.ToInt32(constructionArguments["TargetConnectionIndex"] as string, System.Globalization.CultureInfo.InvariantCulture);
-                        if (targetDesigner != null && targetEdge != DesignerEdges.None && targetIndex >= 0)
-                            targetConnection = new ConnectionPoint(targetDesigner, targetEdge, targetIndex);
+                        ActivityDesigner targetDesigner = ActivityDesigner.GetDesigner(
+                            referenceService.GetReference(
+                                constructionArguments["TargetActivity"] as string
+                            ) as Activity
+                        );
+                        DesignerEdges targetEdge = (DesignerEdges)
+                            Enum.Parse(
+                                typeof(DesignerEdges),
+                                constructionArguments["TargetConnectionEdge"] as string
+                            );
+                        int targetIndex = Convert.ToInt32(
+                            constructionArguments["TargetConnectionIndex"] as string,
+                            System.Globalization.CultureInfo.InvariantCulture
+                        );
+                        if (
+                            targetDesigner != null
+                            && targetEdge != DesignerEdges.None
+                            && targetIndex >= 0
+                        )
+                            targetConnection = new ConnectionPoint(
+                                targetDesigner,
+                                targetEdge,
+                                targetIndex
+                            );
                     }
                 }
-                catch
-                {
-                }
+                catch { }
 
                 if (sourceConnection != null && targetConnection != null)
                     connector = freeformDesigner.AddConnector(sourceConnection, targetConnection);
@@ -251,7 +432,10 @@ namespace System.Workflow.ComponentModel.Design
             return connector;
         }
 
-        protected override void OnAfterDeserialize(WorkflowMarkupSerializationManager serializationManager, object obj)
+        protected override void OnAfterDeserialize(
+            WorkflowMarkupSerializationManager serializationManager,
+            object obj
+        )
         {
             base.OnAfterDeserialize(serializationManager, obj);
 
@@ -261,11 +445,15 @@ namespace System.Workflow.ComponentModel.Design
                 connector.SetConnectorModified(true);
         }
 
-        protected Dictionary<string, string> GetConnectorConstructionArguments(WorkflowMarkupSerializationManager serializationManager, Type type)
+        protected Dictionary<string, string> GetConnectorConstructionArguments(
+            WorkflowMarkupSerializationManager serializationManager,
+            Type type
+        )
         {
             Dictionary<string, string> argumentDictionary = new Dictionary<string, string>();
 
-            XmlReader reader = serializationManager.WorkflowMarkupStack[typeof(XmlReader)] as XmlReader;
+            XmlReader reader =
+                serializationManager.WorkflowMarkupStack[typeof(XmlReader)] as XmlReader;
             if (reader != null && reader.NodeType == XmlNodeType.Element)
             {
                 while (reader.MoveToNextAttribute())
@@ -289,7 +477,12 @@ namespace System.Workflow.ComponentModel.Design
     internal sealed class ActivityDesignerLayoutSerializerProvider : IDesignerSerializationProvider
     {
         #region IDesignerSerializationProvider Members
-        object IDesignerSerializationProvider.GetSerializer(IDesignerSerializationManager manager, object currentSerializer, Type objectType, Type serializerType)
+        object IDesignerSerializationProvider.GetSerializer(
+            IDesignerSerializationManager manager,
+            object currentSerializer,
+            Type objectType,
+            Type serializerType
+        )
         {
             if (typeof(System.Drawing.Color) == objectType)
                 currentSerializer = new ColorMarkupSerializer();
@@ -306,12 +499,18 @@ namespace System.Workflow.ComponentModel.Design
     #region Class ColorMarkupSerializer
     internal sealed class ColorMarkupSerializer : WorkflowMarkupSerializer
     {
-        protected internal override bool CanSerializeToString(WorkflowMarkupSerializationManager serializationManager, object value)
+        protected internal override bool CanSerializeToString(
+            WorkflowMarkupSerializationManager serializationManager,
+            object value
+        )
         {
             return (value is System.Drawing.Color);
         }
 
-        protected internal override string SerializeToString(WorkflowMarkupSerializationManager serializationManager, object value)
+        protected internal override string SerializeToString(
+            WorkflowMarkupSerializationManager serializationManager,
+            object value
+        )
         {
             if (serializationManager == null)
                 throw new ArgumentNullException("serializationManager");
@@ -322,13 +521,21 @@ namespace System.Workflow.ComponentModel.Design
             if (value is System.Drawing.Color)
             {
                 System.Drawing.Color color = (System.Drawing.Color)value;
-                long colorValue = (long)((uint)(color.A << 24 | color.R << 16 | color.G << 8 | color.B)) & 0xFFFFFFFF;
-                stringValue = "0X" + colorValue.ToString("X08", System.Globalization.CultureInfo.InvariantCulture);
+                long colorValue =
+                    (long)((uint)(color.A << 24 | color.R << 16 | color.G << 8 | color.B))
+                    & 0xFFFFFFFF;
+                stringValue =
+                    "0X"
+                    + colorValue.ToString("X08", System.Globalization.CultureInfo.InvariantCulture);
             }
             return stringValue;
         }
 
-        protected internal override object DeserializeFromString(WorkflowMarkupSerializationManager serializationManager, Type propertyType, string value)
+        protected internal override object DeserializeFromString(
+            WorkflowMarkupSerializationManager serializationManager,
+            Type propertyType,
+            string value
+        )
         {
             if (propertyType.IsAssignableFrom(typeof(System.Drawing.Color)))
             {
@@ -338,11 +545,20 @@ namespace System.Workflow.ComponentModel.Design
                     if (colorValue.StartsWith("0X", StringComparison.OrdinalIgnoreCase))
                     {
                         long propertyValue = Convert.ToInt64((string)value, 16) & 0xFFFFFFFF;
-                        return System.Drawing.Color.FromArgb((Byte)(propertyValue >> 24), (Byte)(propertyValue >> 16), (Byte)(propertyValue >> 8), (Byte)(propertyValue));
+                        return System.Drawing.Color.FromArgb(
+                            (Byte)(propertyValue >> 24),
+                            (Byte)(propertyValue >> 16),
+                            (Byte)(propertyValue >> 8),
+                            (Byte)(propertyValue)
+                        );
                     }
                     else
                     {
-                        return base.DeserializeFromString(serializationManager, propertyType, value);
+                        return base.DeserializeFromString(
+                            serializationManager,
+                            propertyType,
+                            value
+                        );
                     }
                 }
             }
@@ -355,12 +571,18 @@ namespace System.Workflow.ComponentModel.Design
     #region Class SizeMarkupSerializer
     internal sealed class SizeMarkupSerializer : WorkflowMarkupSerializer
     {
-        protected internal override bool CanSerializeToString(WorkflowMarkupSerializationManager serializationManager, object value)
+        protected internal override bool CanSerializeToString(
+            WorkflowMarkupSerializationManager serializationManager,
+            object value
+        )
         {
             return (value is System.Drawing.Size);
         }
 
-        protected internal override PropertyInfo[] GetProperties(WorkflowMarkupSerializationManager serializationManager, object obj)
+        protected internal override PropertyInfo[] GetProperties(
+            WorkflowMarkupSerializationManager serializationManager,
+            object obj
+        )
         {
             List<PropertyInfo> properties = new List<PropertyInfo>();
             if (obj is Size)
@@ -371,7 +593,10 @@ namespace System.Workflow.ComponentModel.Design
             return properties.ToArray();
         }
 
-        protected internal override string SerializeToString(WorkflowMarkupSerializationManager serializationManager, object value)
+        protected internal override string SerializeToString(
+            WorkflowMarkupSerializationManager serializationManager,
+            object value
+        )
         {
             string convertedValue = String.Empty;
 
@@ -383,7 +608,11 @@ namespace System.Workflow.ComponentModel.Design
             return convertedValue;
         }
 
-        protected internal override object DeserializeFromString(WorkflowMarkupSerializationManager serializationManager, Type propertyType, string value)
+        protected internal override object DeserializeFromString(
+            WorkflowMarkupSerializationManager serializationManager,
+            Type propertyType,
+            string value
+        )
         {
             object size = Size.Empty;
 
@@ -391,7 +620,11 @@ namespace System.Workflow.ComponentModel.Design
             if (!String.IsNullOrEmpty(sizeValue))
             {
                 TypeConverter converter = TypeDescriptor.GetConverter(typeof(Size));
-                if (converter != null && converter.CanConvertFrom(typeof(string)) && !IsValidCompactAttributeFormat(sizeValue))
+                if (
+                    converter != null
+                    && converter.CanConvertFrom(typeof(string))
+                    && !IsValidCompactAttributeFormat(sizeValue)
+                )
                     size = converter.ConvertFrom(value);
                 else
                     size = base.SerializeToString(serializationManager, value);
@@ -405,12 +638,18 @@ namespace System.Workflow.ComponentModel.Design
     #region Class PointMarkupSerializer
     internal sealed class PointMarkupSerializer : WorkflowMarkupSerializer
     {
-        protected internal override bool CanSerializeToString(WorkflowMarkupSerializationManager serializationManager, object value)
+        protected internal override bool CanSerializeToString(
+            WorkflowMarkupSerializationManager serializationManager,
+            object value
+        )
         {
             return (value is Point);
         }
 
-        protected internal override PropertyInfo[] GetProperties(WorkflowMarkupSerializationManager serializationManager, object obj)
+        protected internal override PropertyInfo[] GetProperties(
+            WorkflowMarkupSerializationManager serializationManager,
+            object obj
+        )
         {
             List<PropertyInfo> properties = new List<PropertyInfo>();
             if (obj is Point)
@@ -421,7 +660,10 @@ namespace System.Workflow.ComponentModel.Design
             return properties.ToArray();
         }
 
-        protected internal override string SerializeToString(WorkflowMarkupSerializationManager serializationManager, object value)
+        protected internal override string SerializeToString(
+            WorkflowMarkupSerializationManager serializationManager,
+            object value
+        )
         {
             string convertedValue = String.Empty;
 
@@ -433,7 +675,11 @@ namespace System.Workflow.ComponentModel.Design
             return convertedValue;
         }
 
-        protected internal override object DeserializeFromString(WorkflowMarkupSerializationManager serializationManager, Type propertyType, string value)
+        protected internal override object DeserializeFromString(
+            WorkflowMarkupSerializationManager serializationManager,
+            Type propertyType,
+            string value
+        )
         {
             object point = Point.Empty;
 
@@ -441,7 +687,11 @@ namespace System.Workflow.ComponentModel.Design
             if (!String.IsNullOrEmpty(pointValue))
             {
                 TypeConverter converter = TypeDescriptor.GetConverter(typeof(Point));
-                if (converter != null && converter.CanConvertFrom(typeof(string)) && !IsValidCompactAttributeFormat(pointValue))
+                if (
+                    converter != null
+                    && converter.CanConvertFrom(typeof(string))
+                    && !IsValidCompactAttributeFormat(pointValue)
+                )
                     point = converter.ConvertFrom(value);
                 else
                     point = base.SerializeToString(serializationManager, value);

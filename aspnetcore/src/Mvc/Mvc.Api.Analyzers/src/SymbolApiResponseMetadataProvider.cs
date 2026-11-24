@@ -50,8 +50,9 @@ internal static class SymbolApiResponseMetadataProvider
         IMethodSymbol method
     )
     {
-        var errorTypeAttribute =
-            method.GetAttributes(symbolCache.ProducesErrorResponseTypeAttribute).FirstOrDefault()
+        var errorTypeAttribute = method
+            .GetAttributes(symbolCache.ProducesErrorResponseTypeAttribute)
+            .FirstOrDefault()
             ?? method
                 .ContainingType.GetAttributes(symbolCache.ProducesErrorResponseTypeAttribute)
                 .FirstOrDefault()

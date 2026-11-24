@@ -6,12 +6,11 @@ using Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
-public class OptimisticConcurrencyULongSqlServerTest : OptimisticConcurrencySqlServerTestBase<F1ULongSqlServerFixture, ulong>
+public class OptimisticConcurrencyULongSqlServerTest
+    : OptimisticConcurrencySqlServerTestBase<F1ULongSqlServerFixture, ulong>
 {
     public OptimisticConcurrencyULongSqlServerTest(F1ULongSqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [ConditionalFact]
     public async Task ULong_row_version_can_handle_empty_array_from_the_database()
@@ -20,98 +19,144 @@ public class OptimisticConcurrencyULongSqlServerTest : OptimisticConcurrencySqlS
 
         await context
             .Set<F1ULongSqlServerFixture.OptimisticParent>()
-            .Select(
-                x => new
+            .Select(x => new
+            {
+                x.Id,
+                Child = new
                 {
-                    x.Id,
-                    Child = new
-                    {
-                        Id = x.OptionalChild == null ? Guid.Empty : x.OptionalChild.Id,
-                        Version = x.OptionalChild == null ? 0 : x.OptionalChild.Version
-                    }
-                }
-            ).ToArrayAsync();
+                    Id = x.OptionalChild == null ? Guid.Empty : x.OptionalChild.Id,
+                    Version = x.OptionalChild == null ? 0 : x.OptionalChild.Version,
+                },
+            })
+            .ToArrayAsync();
     }
 
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public Task Ulong_row_version_with_TPH_and_owned_types(bool updateOwnedFirst)
-        => Row_version_with_owned_types<SuperFan, ulong>(updateOwnedFirst, Mapping.Tph, "ULongVersion");
+    public Task Ulong_row_version_with_TPH_and_owned_types(bool updateOwnedFirst) =>
+        Row_version_with_owned_types<SuperFan, ulong>(
+            updateOwnedFirst,
+            Mapping.Tph,
+            "ULongVersion"
+        );
 
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public Task Ulong_row_version_with_TPT_and_owned_types(bool updateOwnedFirst)
-        => Row_version_with_owned_types<SuperFanTpt, ulong>(updateOwnedFirst, Mapping.Tpt, "ULongVersion");
+    public Task Ulong_row_version_with_TPT_and_owned_types(bool updateOwnedFirst) =>
+        Row_version_with_owned_types<SuperFanTpt, ulong>(
+            updateOwnedFirst,
+            Mapping.Tpt,
+            "ULongVersion"
+        );
 
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public Task Ulong_row_version_with_TPC_and_owned_types(bool updateOwnedFirst)
-        => Row_version_with_owned_types<SuperFanTpc, ulong>(updateOwnedFirst, Mapping.Tpc, "ULongVersion");
+    public Task Ulong_row_version_with_TPC_and_owned_types(bool updateOwnedFirst) =>
+        Row_version_with_owned_types<SuperFanTpc, ulong>(
+            updateOwnedFirst,
+            Mapping.Tpc,
+            "ULongVersion"
+        );
 
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public Task Ulong_row_version_with_TPH_and_table_splitting(bool updateDependentFirst)
-        => Row_version_with_table_splitting<StreetCircuit, City, ulong>(updateDependentFirst, Mapping.Tph, "ULongVersion");
+    public Task Ulong_row_version_with_TPH_and_table_splitting(bool updateDependentFirst) =>
+        Row_version_with_table_splitting<StreetCircuit, City, ulong>(
+            updateDependentFirst,
+            Mapping.Tph,
+            "ULongVersion"
+        );
 
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public Task Ulong_row_version_with_TPT_and_table_splitting(bool updateDependentFirst)
-        => Row_version_with_table_splitting<StreetCircuitTpt, CityTpt, ulong>(updateDependentFirst, Mapping.Tpt, "ULongVersion");
+    public Task Ulong_row_version_with_TPT_and_table_splitting(bool updateDependentFirst) =>
+        Row_version_with_table_splitting<StreetCircuitTpt, CityTpt, ulong>(
+            updateDependentFirst,
+            Mapping.Tpt,
+            "ULongVersion"
+        );
 
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public Task Ulong_row_version_with_TPC_and_table_splitting(bool updateDependentFirst)
-        => Row_version_with_table_splitting<StreetCircuitTpc, CityTpc, ulong>(updateDependentFirst, Mapping.Tpc, "ULongVersion");
+    public Task Ulong_row_version_with_TPC_and_table_splitting(bool updateDependentFirst) =>
+        Row_version_with_table_splitting<StreetCircuitTpc, CityTpc, ulong>(
+            updateDependentFirst,
+            Mapping.Tpc,
+            "ULongVersion"
+        );
 }
 
-public class OptimisticConcurrencySqlServerTest : OptimisticConcurrencySqlServerTestBase<F1SqlServerFixture, byte[]>
+public class OptimisticConcurrencySqlServerTest
+    : OptimisticConcurrencySqlServerTestBase<F1SqlServerFixture, byte[]>
 {
     public OptimisticConcurrencySqlServerTest(F1SqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public Task Row_version_with_TPH_and_owned_types(bool updateOwnedFirst)
-        => Row_version_with_owned_types<SuperFan, List<byte>>(updateOwnedFirst, Mapping.Tph, "BinaryVersion");
+    public Task Row_version_with_TPH_and_owned_types(bool updateOwnedFirst) =>
+        Row_version_with_owned_types<SuperFan, List<byte>>(
+            updateOwnedFirst,
+            Mapping.Tph,
+            "BinaryVersion"
+        );
 
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public Task Row_version_with_TPT_and_owned_types(bool updateOwnedFirst)
-        => Row_version_with_owned_types<SuperFanTpt, List<byte>>(updateOwnedFirst, Mapping.Tpt, "BinaryVersion");
+    public Task Row_version_with_TPT_and_owned_types(bool updateOwnedFirst) =>
+        Row_version_with_owned_types<SuperFanTpt, List<byte>>(
+            updateOwnedFirst,
+            Mapping.Tpt,
+            "BinaryVersion"
+        );
 
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public Task Row_version_with_TPC_and_owned_types(bool updateOwnedFirst)
-        => Row_version_with_owned_types<SuperFanTpc, List<byte>>(updateOwnedFirst, Mapping.Tpc, "BinaryVersion");
+    public Task Row_version_with_TPC_and_owned_types(bool updateOwnedFirst) =>
+        Row_version_with_owned_types<SuperFanTpc, List<byte>>(
+            updateOwnedFirst,
+            Mapping.Tpc,
+            "BinaryVersion"
+        );
 
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public Task Ulong_row_version_with_TPH_and_table_splitting(bool updateDependentFirst)
-        => Row_version_with_table_splitting<StreetCircuit, City, List<byte>>(updateDependentFirst, Mapping.Tph, "BinaryVersion");
+    public Task Ulong_row_version_with_TPH_and_table_splitting(bool updateDependentFirst) =>
+        Row_version_with_table_splitting<StreetCircuit, City, List<byte>>(
+            updateDependentFirst,
+            Mapping.Tph,
+            "BinaryVersion"
+        );
 
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public Task Ulong_row_version_with_TPT_and_table_splitting(bool updateDependentFirst)
-        => Row_version_with_table_splitting<StreetCircuitTpt, CityTpt, List<byte>>(updateDependentFirst, Mapping.Tpt, "BinaryVersion");
+    public Task Ulong_row_version_with_TPT_and_table_splitting(bool updateDependentFirst) =>
+        Row_version_with_table_splitting<StreetCircuitTpt, CityTpt, List<byte>>(
+            updateDependentFirst,
+            Mapping.Tpt,
+            "BinaryVersion"
+        );
 
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public Task Ulong_row_version_with_TPC_and_table_splitting(bool updateDependentFirst)
-        => Row_version_with_table_splitting<StreetCircuitTpc, CityTpc, List<byte>>(updateDependentFirst, Mapping.Tpc, "BinaryVersion");
+    public Task Ulong_row_version_with_TPC_and_table_splitting(bool updateDependentFirst) =>
+        Row_version_with_table_splitting<StreetCircuitTpc, CityTpc, List<byte>>(
+            updateDependentFirst,
+            Mapping.Tpc,
+            "BinaryVersion"
+        );
 }
 
 public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersion>
@@ -119,26 +164,30 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
     where TFixture : F1RelationalFixture<TRowVersion>, new()
 {
     protected OptimisticConcurrencySqlServerTestBase(TFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     protected enum Mapping
     {
         Tph,
         Tpt,
-        Tpc
+        Tpc,
     }
 
-    protected async Task Row_version_with_owned_types<TEntity, TVersion>(bool updateOwnedFirst, Mapping mapping, string propertyName)
+    protected async Task Row_version_with_owned_types<TEntity, TVersion>(
+        bool updateOwnedFirst,
+        Mapping mapping,
+        string propertyName
+    )
         where TEntity : class, ISuperFan
     {
         await using var c = CreateF1Context();
 
-        await c.Database.CreateExecutionStrategy().ExecuteAsync(
-            c, async context =>
+        await c
+            .Database.CreateExecutionStrategy()
+            .ExecuteAsync(c, async context =>
             {
-                var synthesizedPropertyName = $"_TableSharingConcurrencyTokenConvention_{propertyName}";
+                var synthesizedPropertyName =
+                    $"_TableSharingConcurrencyTokenConvention_{propertyName}";
 
                 await using var transaction = BeginTransaction(context.Database);
 
@@ -151,7 +200,9 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
 
                 if (mapping != Mapping.Tpt) // Issue #22060
                 {
-                    swagVersion1 = swagEntry.Property<TVersion>(synthesizedPropertyName).CurrentValue;
+                    swagVersion1 = swagEntry
+                        .Property<TVersion>(synthesizedPropertyName)
+                        .CurrentValue;
 
                     Assert.Equal(fanVersion1, swagVersion1);
                 }
@@ -179,7 +230,9 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
                     return;
                 }
 
-                await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() => context.SaveChangesAsync());
+                await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() =>
+                    context.SaveChangesAsync()
+                );
 
                 await fanEntry.ReloadAsync();
                 await swagEntry.ReloadAsync();
@@ -192,7 +245,9 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
                 var swagVersion2 = default(TVersion);
                 if (mapping != Mapping.Tpt) // Issue #22060
                 {
-                    swagVersion2 = swagEntry.Property<TVersion>(synthesizedPropertyName).CurrentValue;
+                    swagVersion2 = swagEntry
+                        .Property<TVersion>(synthesizedPropertyName)
+                        .CurrentValue;
                     Assert.Equal(fanVersion2, swagVersion2);
                     Assert.NotEqual(swagVersion1, swagVersion2);
                 }
@@ -219,7 +274,9 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
                     return;
                 }
 
-                await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() => context.SaveChangesAsync());
+                await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() =>
+                    context.SaveChangesAsync()
+                );
 
                 await fanEntry.ReloadAsync();
                 await swagEntry.ReloadAsync();
@@ -231,7 +288,9 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
 
                 if (mapping != Mapping.Tpt) // Issue #22060
                 {
-                    var swagVersion3 = swagEntry.Property<TVersion>(synthesizedPropertyName).CurrentValue;
+                    var swagVersion3 = swagEntry
+                        .Property<TVersion>(synthesizedPropertyName)
+                        .CurrentValue;
                     Assert.Equal(fanVersion3, swagVersion3);
                     Assert.NotEqual(swagVersion2, swagVersion3);
                 }
@@ -241,20 +300,26 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
     protected async Task Row_version_with_table_splitting<TEntity, TCity, TVersion>(
         bool updateDependentFirst,
         Mapping mapping,
-        string propertyName)
+        string propertyName
+    )
         where TEntity : class, IStreetCircuit<TCity>
         where TCity : class, ICity
     {
         await using var c = CreateF1Context();
 
-        await c.Database.CreateExecutionStrategy().ExecuteAsync(
-            c, async context =>
+        await c
+            .Database.CreateExecutionStrategy()
+            .ExecuteAsync(c, async context =>
             {
-                var synthesizedPropertyName = $"_TableSharingConcurrencyTokenConvention_{propertyName}";
+                var synthesizedPropertyName =
+                    $"_TableSharingConcurrencyTokenConvention_{propertyName}";
 
                 await using var transaction = BeginTransaction(context.Database);
 
-                var circuit = context.Set<TEntity>().Include(e => e.City).Single(e => e.Name == "Monaco");
+                var circuit = context
+                    .Set<TEntity>()
+                    .Include(e => e.City)
+                    .Single(e => e.Name == "Monaco");
 
                 var circuitEntry = c.Entry(circuit);
                 var cityEntry = circuitEntry.Reference(s => s.City).TargetEntry!;
@@ -263,14 +328,19 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
 
                 if (mapping != Mapping.Tpt) // Issue #22060
                 {
-                    cityVersion1 = cityEntry.Property<TVersion>(synthesizedPropertyName).CurrentValue;
+                    cityVersion1 = cityEntry
+                        .Property<TVersion>(synthesizedPropertyName)
+                        .CurrentValue;
 
                     Assert.Equal(circuitVersion1, cityVersion1);
                 }
 
                 await using var innerContext = CreateF1Context();
                 UseTransaction(innerContext.Database, transaction);
-                var circuitInner = innerContext.Set<TEntity>().Include(e => e.City).Single(e => e.Name == "Monaco");
+                var circuitInner = innerContext
+                    .Set<TEntity>()
+                    .Include(e => e.City)
+                    .Single(e => e.Name == "Monaco");
 
                 if (updateDependentFirst)
                 {
@@ -291,7 +361,9 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
                     return;
                 }
 
-                await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() => context.SaveChangesAsync());
+                await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() =>
+                    context.SaveChangesAsync()
+                );
 
                 await circuitEntry.ReloadAsync();
                 await cityEntry.ReloadAsync();
@@ -304,7 +376,9 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
                 var cityVersion2 = default(TVersion);
                 if (mapping != Mapping.Tpt) // Issue #22060
                 {
-                    cityVersion2 = cityEntry.Property<TVersion>(synthesizedPropertyName).CurrentValue;
+                    cityVersion2 = cityEntry
+                        .Property<TVersion>(synthesizedPropertyName)
+                        .CurrentValue;
                     Assert.Equal(circuitVersion2, cityVersion2);
                     Assert.NotEqual(cityVersion1, cityVersion2);
                 }
@@ -331,7 +405,9 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
                     return;
                 }
 
-                await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() => context.SaveChangesAsync());
+                await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() =>
+                    context.SaveChangesAsync()
+                );
 
                 await circuitEntry.ReloadAsync();
                 await cityEntry.ReloadAsync();
@@ -343,7 +419,9 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
 
                 if (mapping != Mapping.Tpt) // Issue #22060
                 {
-                    var cityVersion3 = cityEntry.Property<TVersion>(synthesizedPropertyName).CurrentValue;
+                    var cityVersion3 = cityEntry
+                        .Property<TVersion>(synthesizedPropertyName)
+                        .CurrentValue;
                     Assert.Equal(circuitVersion3, cityVersion3);
                     Assert.NotEqual(cityVersion2, cityVersion3);
                 }
@@ -354,28 +432,42 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
     public async Task Modifying_concurrency_token_only_is_noop()
     {
         using var c = CreateF1Context();
-        await c.Database.CreateExecutionStrategy().ExecuteAsync(
-            c, async context =>
+        await c
+            .Database.CreateExecutionStrategy()
+            .ExecuteAsync(c, async context =>
             {
                 using var transaction = context.Database.BeginTransaction();
                 var driver = context.Drivers.Single(d => d.CarNumber == 1);
                 driver.Podiums = StorePodiums;
-                var firstVersion = context.Entry(driver).Property<TRowVersion>("Version").CurrentValue;
+                var firstVersion = context
+                    .Entry(driver)
+                    .Property<TRowVersion>("Version")
+                    .CurrentValue;
                 await context.SaveChangesAsync();
 
                 using var innerContext = CreateF1Context();
                 innerContext.Database.UseTransaction(transaction.GetDbTransaction());
                 driver = innerContext.Drivers.Single(d => d.CarNumber == 1);
-                Assert.NotEqual(firstVersion, innerContext.Entry(driver).Property<TRowVersion>("Version").CurrentValue);
+                Assert.NotEqual(
+                    firstVersion,
+                    innerContext.Entry(driver).Property<TRowVersion>("Version").CurrentValue
+                );
                 Assert.Equal(StorePodiums, driver.Podiums);
 
-                var secondVersion = innerContext.Entry(driver).Property<TRowVersion>("Version").CurrentValue;
-                innerContext.Entry(driver).Property<TRowVersion>("Version").CurrentValue = firstVersion;
+                var secondVersion = innerContext
+                    .Entry(driver)
+                    .Property<TRowVersion>("Version")
+                    .CurrentValue;
+                innerContext.Entry(driver).Property<TRowVersion>("Version").CurrentValue =
+                    firstVersion;
                 await innerContext.SaveChangesAsync();
                 using var validationContext = CreateF1Context();
                 validationContext.Database.UseTransaction(transaction.GetDbTransaction());
                 driver = validationContext.Drivers.Single(d => d.CarNumber == 1);
-                Assert.Equal(secondVersion, validationContext.Entry(driver).Property<TRowVersion>("Version").CurrentValue);
+                Assert.Equal(
+                    secondVersion,
+                    validationContext.Entry(driver).Property<TRowVersion>("Version").CurrentValue
+                );
                 Assert.Equal(StorePodiums, driver.Podiums);
             });
     }
@@ -384,8 +476,9 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
     public async Task Database_concurrency_token_value_is_updated_for_all_sharing_entities()
     {
         using var c = CreateF1Context();
-        await c.Database.CreateExecutionStrategy().ExecuteAsync(
-            c, async context =>
+        await c
+            .Database.CreateExecutionStrategy()
+            .ExecuteAsync(c, async context =>
             {
                 using var transaction = context.Database.BeginTransaction();
                 var sponsor = context.Set<TitleSponsor>().Single();
@@ -394,7 +487,9 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
                 var sponsorVersion = sponsorEntry.Property<TRowVersion>("Version").CurrentValue;
                 var detailsVersion = detailsEntry.Property<TRowVersion>("Version").CurrentValue;
 
-                Assert.Null(sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue);
+                Assert.Null(
+                    sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue
+                );
                 sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue = 1;
 
                 sponsor.Name = "Telecom";
@@ -409,8 +504,14 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
                 Assert.Equal(newSponsorVersion, newDetailsVersion);
                 Assert.NotEqual(sponsorVersion, newSponsorVersion);
 
-                Assert.Equal(1, sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue);
-                Assert.Equal(1, detailsEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue);
+                Assert.Equal(
+                    1,
+                    sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue
+                );
+                Assert.Equal(
+                    1,
+                    detailsEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue
+                );
             });
     }
 
@@ -418,15 +519,18 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
     public async Task Original_concurrency_token_value_is_used_when_replacing_owned_instance()
     {
         using var c = CreateF1Context();
-        await c.Database.CreateExecutionStrategy().ExecuteAsync(
-            c, async context =>
+        await c
+            .Database.CreateExecutionStrategy()
+            .ExecuteAsync(c, async context =>
             {
                 using var transaction = context.Database.BeginTransaction();
                 var sponsor = context.Set<TitleSponsor>().Single();
                 var sponsorEntry = c.Entry(sponsor);
                 var sponsorVersion = sponsorEntry.Property<TRowVersion>("Version").CurrentValue;
 
-                Assert.Null(sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue);
+                Assert.Null(
+                    sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue
+                );
                 sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue = 1;
 
                 sponsor.Details = new SponsorDetails { Days = 11, Space = 51m };
@@ -444,8 +548,14 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
                 Assert.Equal(newSponsorVersion, newDetailsVersion);
                 Assert.NotEqual(sponsorVersion, newSponsorVersion);
 
-                Assert.Equal(1, sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue);
-                Assert.Equal(1, detailsEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue);
+                Assert.Equal(
+                    1,
+                    sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue
+                );
+                Assert.Equal(
+                    1,
+                    detailsEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue
+                );
             });
     }
 
@@ -473,12 +583,15 @@ SET NOCOUNT ON;
 UPDATE [Engines] SET [Name] = @p0
 OUTPUT 1
 WHERE [Id] = @p1 AND [EngineSupplierId] = @p2 AND [Name] = @p3 AND [StorageLocation_Latitude] = @p4 AND [StorageLocation_Longitude] = @p5;
-""");
+"""
+        );
     }
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-    protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    protected override void UseTransaction(
+        DatabaseFacade facade,
+        IDbContextTransaction transaction
+    ) => facade.UseTransaction(transaction.GetDbTransaction());
 }

@@ -15,14 +15,27 @@ namespace System.Text.Json.Serialization
     /// <see cref="JsonSerializerOptions.Converters"/> or there is another <see cref="JsonConverterAttribute"/> on a property or field
     /// of the same type.
     /// </remarks>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct | AttributeTargets.Enum | AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Interface
+            | AttributeTargets.Struct
+            | AttributeTargets.Enum
+            | AttributeTargets.Property
+            | AttributeTargets.Field,
+        AllowMultiple = false
+    )]
     public class JsonConverterAttribute : JsonAttribute
     {
         /// <summary>
         /// Initializes a new instance of <see cref="JsonConverterAttribute"/> with the specified converter type.
         /// </summary>
         /// <param name="converterType">The type of the converter.</param>
-        public JsonConverterAttribute([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type converterType)
+        public JsonConverterAttribute(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type converterType
+        )
         {
             ConverterType = converterType;
         }

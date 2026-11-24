@@ -3,11 +3,11 @@
 
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.Tracing;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Security;
@@ -30,7 +30,10 @@ namespace HttpStress
 
         public long TotalErrorCount => _aggregator.TotalErrorCount;
 
-        public StressClient((string name, Func<RequestContext, Task> operation)[] clientOperations, Configuration configuration)
+        public StressClient(
+            (string name, Func<RequestContext, Task> operation)[] clientOperations,
+            Configuration configuration
+        )
         {
             _clientOperations = clientOperations;
             _config = configuration;
@@ -49,18 +52,26 @@ namespace HttpStress
                 {
                     return new System.Net.Http.WinHttpHandler()
                     {
-                        ServerCertificateValidationCallback = delegate { return true; }
+                        ServerCertificateValidationCallback = delegate
+                        {
+                            return true;
+                        },
                     };
                 }
                 else
                 {
                     return new SocketsHttpHandler()
                     {
-                        PooledConnectionLifetime = _config.ConnectionLifetime.GetValueOrDefault(Timeout.InfiniteTimeSpan),
+                        PooledConnectionLifetime = _config.ConnectionLifetime.GetValueOrDefault(
+                            Timeout.InfiniteTimeSpan
+                        ),
                         SslOptions = new SslClientAuthenticationOptions
                         {
-                            RemoteCertificateValidationCallback = delegate { return true; }
-                        }
+                            RemoteCertificateValidationCallback = delegate
+                            {
+                                return true;
+                            },
+                        },
                     };
                 }
             }
@@ -70,7 +81,7 @@ namespace HttpStress
                 BaseAddress = _baseAddress,
                 Timeout = _config.DefaultTimeout,
                 DefaultRequestVersion = _config.HttpVersion,
-                DefaultVersionPolicy = HttpVersionPolicy.RequestVersionExact
+                DefaultVersionPolicy = HttpVersionPolicy.RequestVersionExact,
             };
         }
 
@@ -152,7 +163,9 @@ namespace HttpStress
                     }
                     catch (HttpRequestException) when (remainingRetries > 0)
                     {
-                        Console.WriteLine($"Stress client could not connect to host {_baseAddress}, {remainingRetries} attempts remaining");
+                        Console.WriteLine(
+                            $"Stress client could not connect to host {_baseAddress}, {remainingRetries} attempts remaining"
+                        );
                         var delay = TimeSpan.FromSeconds(1) - sw.Elapsed;
                         if (delay > TimeSpan.Zero)
                         {
@@ -173,15 +186,23 @@ namespace HttpStress
                 while (!_cts.IsCancellationRequested)
                 {
                     Thread.Sleep(_config.DisplayInterval);
-                    lock (Console.Out) { _aggregator.PrintCurrentResults(_stopwatch.Elapsed); }
+                    lock (Console.Out)
+                    {
+                        _aggregator.PrintCurrentResults(_stopwatch.Elapsed);
+                    }
                 }
             })
-            { IsBackground = true }.Start();
+            {
+                IsBackground = true,
+            }.Start();
 
             Console.WriteLine($"Spinning up {_config.ConcurrentRequests} concurrent workers.");
 
             // Start N workers, each of which sits in a loop making requests.
-            Task[] tasks = Enumerable.Range(0, _config.ConcurrentRequests).Select(RunWorker).ToArray();
+            Task[] tasks = Enumerable
+                .Range(0, _config.ConcurrentRequests)
+                .Select(RunWorker)
+                .ToArray();
             await Task.WhenAll(tasks);
 
             async Task RunWorker(int taskNum)
@@ -196,8 +217,16 @@ namespace HttpStress
                         break;
 
                     int opIndex = (int)(i % _clientOperations.Length);
-                    (string operation, Func<RequestContext, Task> func) = _clientOperations[opIndex];
-                    var requestContext = new RequestContext(_config, client, random, _cts.Token, taskNum);
+                    (string operation, Func<RequestContext, Task> func) = _clientOperations[
+                        opIndex
+                    ];
+                    var requestContext = new RequestContext(
+                        _config,
+                        client,
+                        random,
+                        _cts.Token,
+                        taskNum
+                    );
                     stopwatch.Restart();
                     try
                     {
@@ -205,13 +234,22 @@ namespace HttpStress
 
                         _aggregator.RecordSuccess(opIndex, stopwatch.Elapsed);
                     }
-                    catch (OperationCanceledException) when (requestContext.IsCancellationRequested || _cts.IsCancellationRequested)
+                    catch (OperationCanceledException)
+                        when (requestContext.IsCancellationRequested || _cts.IsCancellationRequested
+                        )
                     {
                         _aggregator.RecordCancellation(opIndex, stopwatch.Elapsed);
                     }
                     catch (Exception e)
                     {
-                        _aggregator.RecordFailure(e, opIndex, stopwatch.Elapsed, requestContext.IsCancellationRequested, taskNum: taskNum, iteration: i);
+                        _aggregator.RecordFailure(
+                            e,
+                            opIndex,
+                            stopwatch.Elapsed,
+                            requestContext.IsCancellationRequested,
+                            taskNum: taskNum,
+                            iteration: i
+                        );
                     }
                 }
 
@@ -229,13 +267,21 @@ namespace HttpStress
         {
             // Representative error text of stress failure
             public string ErrorText { get; }
+
             // Operation id => failure timestamps
-            public Dictionary<int, List<(DateTime timestamp, TimeSpan duration, bool isCancelled)>> Failures { get; }
+            public Dictionary<
+                int,
+                List<(DateTime timestamp, TimeSpan duration, bool isCancelled)>
+            > Failures { get; }
 
             public StressFailureType(string errorText)
             {
                 ErrorText = errorText;
-                Failures = new Dictionary<int, List<(DateTime timestamp, TimeSpan duration, bool isCancelled)>>();
+                Failures =
+                    new Dictionary<
+                        int,
+                        List<(DateTime timestamp, TimeSpan duration, bool isCancelled)>
+                    >();
             }
 
             public int FailureCount => Failures.Values.Select(x => x.Count).Sum();
@@ -246,11 +292,16 @@ namespace HttpStress
             private readonly string[] _operationNames;
 
             private long _totalRequests = 0;
-            private readonly long[] _successes, _cancellations, _failures;
+            private readonly long[] _successes,
+                _cancellations,
+                _failures;
             private long _reuseAddressFailures = 0;
             private long _lastTotal = -1;
 
-            private readonly ConcurrentDictionary<(Type exception, string message, string callSite)[], StressFailureType> _failureTypes;
+            private readonly ConcurrentDictionary<
+                (Type exception, string message, string callSite)[],
+                StressFailureType
+            > _failureTypes;
             private readonly ConcurrentBag<double> _latencies = new ConcurrentBag<double>();
 
             public long TotalErrorCount => _failures.Sum();
@@ -261,7 +312,10 @@ namespace HttpStress
                 _successes = new long[operations.Length];
                 _cancellations = new long[operations.Length];
                 _failures = new long[operations.Length];
-                _failureTypes = new ConcurrentDictionary<(Type, string, string)[], StressFailureType>(new StructuralEqualityComparer<(Type, string, string)[]>());
+                _failureTypes = new ConcurrentDictionary<
+                    (Type, string, string)[],
+                    StressFailureType
+                >(new StructuralEqualityComparer<(Type, string, string)[]>());
             }
 
             public void RecordSuccess(int operationIndex, TimeSpan elapsed)
@@ -280,7 +334,14 @@ namespace HttpStress
                 _latencies.Add(elapsed.TotalMilliseconds);
             }
 
-            public void RecordFailure(Exception exn, int operationIndex, TimeSpan elapsed, bool isCancelled, int taskNum, long iteration)
+            public void RecordFailure(
+                Exception exn,
+                int operationIndex,
+                TimeSpan elapsed,
+                bool isCancelled,
+                int taskNum,
+                long iteration
+            )
             {
                 DateTime timestamp = DateTime.Now;
 
@@ -297,26 +358,51 @@ namespace HttpStress
                 {
                     (Type, string, string)[] key = ClassifyFailure(exn);
 
-                    StressFailureType failureType = _failureTypes.GetOrAdd(key, _ => new StressFailureType(exn.ToString()));
+                    StressFailureType failureType = _failureTypes.GetOrAdd(
+                        key,
+                        _ => new StressFailureType(exn.ToString())
+                    );
 
                     lock (failureType)
                     {
-                        if(!failureType.Failures.TryGetValue(operationIndex, out List<(DateTime timestamp, TimeSpan duration, bool isCancelled)>? details))
+                        if (
+                            !failureType.Failures.TryGetValue(
+                                operationIndex,
+                                out List<(
+                                    DateTime timestamp,
+                                    TimeSpan duration,
+                                    bool isCancelled
+                                )>? details
+                            )
+                        )
                         {
-                            details = new List<(DateTime timestamp, TimeSpan duration, bool isCancelled)>();
+                            details =
+                                new List<(
+                                    DateTime timestamp,
+                                    TimeSpan duration,
+                                    bool isCancelled
+                                )>();
                             failureType.Failures.Add(operationIndex, details);
                         }
 
                         details.Add((timestamp, elapsed, isCancelled));
                     }
 
-                    (Type exception, string message, string callSite)[] ClassifyFailure(Exception exn)
+                    (Type exception, string message, string callSite)[] ClassifyFailure(
+                        Exception exn
+                    )
                     {
                         var acc = new List<(Type exception, string message, string callSite)>();
 
                         for (Exception? e = exn; e != null; )
                         {
-                            acc.Add((e.GetType(), e.Message ?? "", new StackTrace(e, true).GetFrame(0)?.ToString() ?? ""));
+                            acc.Add(
+                                (
+                                    e.GetType(),
+                                    e.Message ?? "",
+                                    new StackTrace(e, true).GetFrame(0)?.ToString() ?? ""
+                                )
+                            );
                             e = e.InnerException;
                         }
 
@@ -326,7 +412,11 @@ namespace HttpStress
 
                 void PrintToConsole()
                 {
-                    if (exn is HttpRequestException hre && hre.InnerException is SocketException se && se.SocketErrorCode == SocketError.AddressAlreadyInUse)
+                    if (
+                        exn is HttpRequestException hre
+                        && hre.InnerException is SocketException se
+                        && se.SocketErrorCode == SocketError.AddressAlreadyInUse
+                    )
                     {
                         Interlocked.Increment(ref _reuseAddressFailures);
                     }
@@ -335,7 +425,9 @@ namespace HttpStress
                         lock (Console.Out)
                         {
                             Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.WriteLine($"Error from iteration {iteration} ({_operationNames[operationIndex]}) in task {taskNum} with {_successes.Sum()} successes / {_failures.Sum()} fails:");
+                            Console.WriteLine(
+                                $"Error from iteration {iteration} ({_operationNames[operationIndex]}) in task {taskNum} with {_successes.Sum()} successes / {_failures.Sum()} fails:"
+                            );
                             Console.ResetColor();
                             Console.WriteLine(exn);
                             Console.WriteLine();
@@ -362,7 +454,9 @@ namespace HttpStress
                 if (_reuseAddressFailures > 0)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("~~ Reuse address failures: " + _reuseAddressFailures.ToString("N0") + "~~");
+                    Console.WriteLine(
+                        "~~ Reuse address failures: " + _reuseAddressFailures.ToString("N0") + "~~"
+                    );
                     Console.ResetColor();
                 }
 
@@ -408,15 +502,19 @@ namespace HttpStress
                 var latencies = _latencies.ToArray();
                 Array.Sort(latencies);
 
-                Console.WriteLine($"Latency(ms) : n={latencies.Length}, p50={Pc(0.5)}, p75={Pc(0.75)}, p99={Pc(0.99)}, p999={Pc(0.999)}, max={Pc(1)}");
+                Console.WriteLine(
+                    $"Latency(ms) : n={latencies.Length}, p50={Pc(0.5)}, p75={Pc(0.75)}, p99={Pc(0.99)}, p999={Pc(0.999)}, max={Pc(1)}"
+                );
                 Console.WriteLine();
 
                 double Pc(double percentile)
                 {
                     int N = latencies.Length;
                     double n = (N - 1) * percentile + 1;
-                    if (n == 1) return Rnd(latencies[0]);
-                    else if (n == N) return Rnd(latencies[N - 1]);
+                    if (n == 1)
+                        return Rnd(latencies[0]);
+                    else if (n == N)
+                        return Rnd(latencies[N - 1]);
                     else
                     {
                         int k = (int)n;
@@ -434,12 +532,18 @@ namespace HttpStress
                     return;
 
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"There were a total of {_failures.Sum()} failures classified into {_failureTypes.Count} different types:");
+                Console.WriteLine(
+                    $"There were a total of {_failures.Sum()} failures classified into {_failureTypes.Count} different types:"
+                );
                 Console.WriteLine();
                 Console.ResetColor();
 
                 int i = 0;
-                foreach (StressFailureType failure in _failureTypes.Values.OrderByDescending(x => x.FailureCount))
+                foreach (
+                    StressFailureType failure in _failureTypes.Values.OrderByDescending(x =>
+                        x.FailureCount
+                    )
+                )
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine($"Failure Type {++i}/{_failureTypes.Count}:");
@@ -447,7 +551,12 @@ namespace HttpStress
                     Console.WriteLine(failure.ErrorText);
                     Console.WriteLine();
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    foreach (KeyValuePair<int, List<(DateTime timestamp, TimeSpan duration, bool isCancelled)>> operation in failure.Failures)
+                    foreach (
+                        KeyValuePair<
+                            int,
+                            List<(DateTime timestamp, TimeSpan duration, bool isCancelled)>
+                        > operation in failure.Failures
+                    )
                     {
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.Write($"\t{_operationNames[operation.Key].PadRight(30)}");
@@ -456,7 +565,9 @@ namespace HttpStress
                         Console.Write("Fail: ");
                         Console.ResetColor();
                         Console.Write(operation.Value.Count);
-                        Console.WriteLine($"\t{string.Join(", ", operation.Value.Select(x => $"Timestamps: {x.timestamp:HH:mm:ss.fffffff}, Duration: {x.duration}, Cancelled: {x.isCancelled}"))}");
+                        Console.WriteLine(
+                            $"\t{string.Join(", ", operation.Value.Select(x => $"Timestamps: {x.timestamp:HH:mm:ss.fffffff}, Duration: {x.duration}, Cancelled: {x.isCancelled}"))}"
+                        );
                     }
 
                     Console.ForegroundColor = ConsoleColor.Cyan;
@@ -471,11 +582,15 @@ namespace HttpStress
             }
         }
 
-
-        private class StructuralEqualityComparer<T> : IEqualityComparer<T> where T : IStructuralEquatable
+        private class StructuralEqualityComparer<T> : IEqualityComparer<T>
+            where T : IStructuralEquatable
         {
-            public bool Equals(T? left, T? right) => left != null && left.Equals(right, StructuralComparisons.StructuralEqualityComparer);
-            public int GetHashCode([DisallowNull] T value) => value.GetHashCode(StructuralComparisons.StructuralEqualityComparer);
+            public bool Equals(T? left, T? right) =>
+                left != null
+                && left.Equals(right, StructuralComparisons.StructuralEqualityComparer);
+
+            public int GetHashCode([DisallowNull] T value) =>
+                value.GetHashCode(StructuralComparisons.StructuralEqualityComparer);
         }
     }
 }

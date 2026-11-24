@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes.ErrorCases
             get { return ImmutableArray.Create(CodeFixServiceTests.MockFixer.Id); }
         }
 
-        public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
-            => throw new Exception($"Exception thrown in register method of {nameof(ExceptionInRegisterMethod)}");
+        public sealed override Task RegisterCodeFixesAsync(CodeFixContext context) =>
+            throw new Exception(
+                $"Exception thrown in register method of {nameof(ExceptionInRegisterMethod)}"
+            );
     }
 }

@@ -19,7 +19,10 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="reader">XML reader over the RSTR</param>
         /// <param name="context">Current Serialization context.</param>
         /// <returns>RequestSecurityTokenResponse object if teh deserialization was successful</returns>
-        public abstract RequestSecurityTokenResponse ReadXml(XmlReader reader, WSTrustSerializationContext context);
+        public abstract RequestSecurityTokenResponse ReadXml(
+            XmlReader reader,
+            WSTrustSerializationContext context
+        );
 
         /// <summary>
         /// When overridden in the derived class reads a child element inside RSTR.
@@ -27,15 +30,23 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="reader">Reader pointing at an element to read inside the RSTR.</param>
         /// <param name="requestSecurityTokenResponse">The RequestSecurityTokenResponse element that is being populated from the reader.</param>
         /// <param name="context">Current Serialization context.</param>
-        public abstract void ReadXmlElement(XmlReader reader, RequestSecurityTokenResponse requestSecurityTokenResponse, WSTrustSerializationContext context);
+        public abstract void ReadXmlElement(
+            XmlReader reader,
+            RequestSecurityTokenResponse requestSecurityTokenResponse,
+            WSTrustSerializationContext context
+        );
 
         /// <summary>
-        /// When overridden in the derived class writes out the supported elements on the response object. 
+        /// When overridden in the derived class writes out the supported elements on the response object.
         /// </summary>
         /// <param name="requestSecurityTokenResponse">The response instance</param>
         /// <param name="writer">The writer to write to</param>
         /// <param name="context">Current Serialization context.</param>
-        public abstract void WriteKnownResponseElement(RequestSecurityTokenResponse requestSecurityTokenResponse, XmlWriter writer, WSTrustSerializationContext context);
+        public abstract void WriteKnownResponseElement(
+            RequestSecurityTokenResponse requestSecurityTokenResponse,
+            XmlWriter writer,
+            WSTrustSerializationContext context
+        );
 
         /// <summary>
         /// When overriden in the derived class serializes the given RequestSecurityTokenResponse into the XmlWriter
@@ -43,7 +54,11 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="response">RequestSecurityTokenRespone object to be serializes</param>
         /// <param name="writer">XML writer to serialize into</param>
         /// <param name="context">Current Serialization context.</param>
-        public abstract void WriteXml(RequestSecurityTokenResponse response, XmlWriter writer, WSTrustSerializationContext context);
+        public abstract void WriteXml(
+            RequestSecurityTokenResponse response,
+            XmlWriter writer,
+            WSTrustSerializationContext context
+        );
 
         /// <summary>
         /// When overridden in the derived class writes a specific RSTR parameter to the outgoing stream.
@@ -53,7 +68,13 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="elementValue">The value of the element.</param>
         /// <param name="requestSecurityTokenResponse">The entire RSTR object that is being serialized.</param>
         /// <param name="context">Current Serialization context.</param>
-        public abstract void WriteXmlElement(XmlWriter writer, string elementName, object elementValue, RequestSecurityTokenResponse requestSecurityTokenResponse, WSTrustSerializationContext context);
+        public abstract void WriteXmlElement(
+            XmlWriter writer,
+            string elementName,
+            object elementValue,
+            RequestSecurityTokenResponse requestSecurityTokenResponse,
+            WSTrustSerializationContext context
+        );
 
         /// <summary>
         /// Creates an instance of the RequestSecurityTokenResponse object that this class can Serialize or Deserialize.

@@ -10,9 +10,7 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class WsdlImporterElement : ConfigurationElement
     {
-        public WsdlImporterElement()
-        {
-        }
+        public WsdlImporterElement() { }
 
         public WsdlImporterElement(string type)
         {
@@ -21,17 +19,21 @@ namespace System.ServiceModel.Configuration
 
         public WsdlImporterElement(Type type)
         {
-            SubclassTypeValidator validator = new SubclassTypeValidator(typeof(IWsdlImportExtension));
+            SubclassTypeValidator validator = new SubclassTypeValidator(
+                typeof(IWsdlImportExtension)
+            );
             validator.Validate(type);
             this.Type = type.AssemblyQualifiedName;
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Type, Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Type,
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
         [StringValidator(MinLength = 1)]
         public string Type
         {
-            get
-            { return (string)base[ConfigurationStrings.Type]; }
+            get { return (string)base[ConfigurationStrings.Type]; }
             set
             {
                 if (String.IsNullOrEmpty(value))

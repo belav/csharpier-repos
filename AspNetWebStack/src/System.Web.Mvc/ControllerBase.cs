@@ -22,7 +22,11 @@ namespace System.Web.Mvc
 
         public ControllerContext ControllerContext { get; set; }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This property is settable so that unit tests can provide mock implementations.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "This property is settable so that unit tests can provide mock implementations."
+        )]
         public TempDataDictionary TempData
         {
             get
@@ -52,7 +56,9 @@ namespace System.Web.Mvc
             {
                 if (_valueProvider == null)
                 {
-                    _valueProvider = ValueProviderFactories.Factories.GetValueProvider(ControllerContext);
+                    _valueProvider = ValueProviderFactories.Factories.GetValueProvider(
+                        ControllerContext
+                    );
                 }
                 return _valueProvider;
             }
@@ -71,7 +77,11 @@ namespace System.Web.Mvc
             }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This property is settable so that unit tests can provide mock implementations.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "This property is settable so that unit tests can provide mock implementations."
+        )]
         public ViewDataDictionary ViewData
         {
             get
@@ -93,7 +103,10 @@ namespace System.Web.Mvc
             }
             if (requestContext.HttpContext == null)
             {
-                throw new ArgumentException(MvcResources.ControllerBase_CannotExecuteWithNullHttpContext, "requestContext");
+                throw new ArgumentException(
+                    MvcResources.ControllerBase_CannotExecuteWithNullHttpContext,
+                    "requestContext"
+                );
             }
 
             VerifyExecuteCalledOnce();
@@ -116,7 +129,11 @@ namespace System.Web.Mvc
         {
             if (!_executeWasCalledGate.TryEnter())
             {
-                string message = String.Format(CultureInfo.CurrentCulture, MvcResources.ControllerBase_CannotHandleMultipleRequests, GetType());
+                string message = String.Format(
+                    CultureInfo.CurrentCulture,
+                    MvcResources.ControllerBase_CannotHandleMultipleRequests,
+                    GetType()
+                );
                 throw new InvalidOperationException(message);
             }
         }

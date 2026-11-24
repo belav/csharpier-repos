@@ -53,20 +53,20 @@ namespace Microsoft.NET.Build.Tasks
     {
         public bool HasLoggedErrors { get; private set; }
 
-        public void LogMessage(string format, params string[] args)
-            => Log(CreateMessage(MessageLevel.NormalImportance, format, args));
+        public void LogMessage(string format, params string[] args) =>
+            Log(CreateMessage(MessageLevel.NormalImportance, format, args));
 
-        public void LogMessage(MessageImportance importance, string format, params string[] args)
-            => Log(CreateMessage(importance.ToLevel(), format, args));
+        public void LogMessage(MessageImportance importance, string format, params string[] args) =>
+            Log(CreateMessage(importance.ToLevel(), format, args));
 
-        public void LogWarning(string format, params string[] args)
-            => Log(CreateMessage(MessageLevel.Warning, format, args));
+        public void LogWarning(string format, params string[] args) =>
+            Log(CreateMessage(MessageLevel.Warning, format, args));
 
-        public void LogError(string format, params string[] args)
-            => Log(CreateMessage(MessageLevel.Error, format, args));
+        public void LogError(string format, params string[] args) =>
+            Log(CreateMessage(MessageLevel.Error, format, args));
 
-        public void LogNonSdkError(string code, string format, params string[] args)
-            => Log(new Message(MessageLevel.Error, string.Format(format, args), code));
+        public void LogNonSdkError(string code, string format, params string[] args) =>
+            Log(new Message(MessageLevel.Error, string.Format(format, args), code));
 
         public void Log(in Message message)
         {
@@ -80,7 +80,8 @@ namespace Microsoft.NET.Build.Tasks
         {
             string code;
 
-            if (format.Length >= 12
+            if (
+                format.Length >= 12
                 && format[0] == 'N'
                 && format[1] == 'E'
                 && format[2] == 'T'
@@ -92,7 +93,8 @@ namespace Microsoft.NET.Build.Tasks
                 && IsAsciiDigit(format[8])
                 && IsAsciiDigit(format[9])
                 && format[10] == ':'
-                && format[11] == ' ')
+                && format[11] == ' '
+            )
             {
                 code = format.Substring(0, 10);
                 format = format.Substring(12);
@@ -104,14 +106,15 @@ namespace Microsoft.NET.Build.Tasks
 
             DebugThrowMissingOrIncorrectCode(code, format, level);
 
-            return new Message(
-                level,
-                text: string.Format(format, args),
-                code: code);
+            return new Message(level, text: string.Format(format, args), code: code);
         }
 
         [Conditional("DEBUG")]
-        private static void DebugThrowMissingOrIncorrectCode(string code, string message, MessageLevel level)
+        private static void DebugThrowMissingOrIncorrectCode(
+            string code,
+            string message,
+            MessageLevel level
+        )
         {
             // NB: This is not localized because it represents a bug in our code base, not a user error.
             //     To log message with external codes, use Log.Log(in Message, string[]) directly.
@@ -125,22 +128,23 @@ namespace Microsoft.NET.Build.Tasks
                     {
                         throw new ArgumentException(
                             "Message is not prefixed with NETSDK error code or error code is formatted incorrectly: "
-                            + message);
+                                + message
+                        );
                     }
                     break;
 
                 default:
                     if (code != null)
                     {
-                       throw new ArgumentException(
-                           "Message is prefixed with NETSDK error, but error codes should not be used for informational messages: "
-                           + $"{code}:{message}");
+                        throw new ArgumentException(
+                            "Message is prefixed with NETSDK error, but error codes should not be used for informational messages: "
+                                + $"{code}:{message}"
+                        );
                     }
                     break;
             }
         }
 
-        private static bool IsAsciiDigit(char c)
-            => c >= '0' && c <= '9';
+        private static bool IsAsciiDigit(char c) => c >= '0' && c <= '9';
     }
 }

@@ -15,15 +15,17 @@ namespace System.Web.Mvc.Test
         public void ClientRulesWithRequiredAttribute()
         {
             // Arrange
-            var metadata = ModelMetadataProviders.Current.GetMetadataForProperty(() => null, typeof(string), "Length");
+            var metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                () => null,
+                typeof(string),
+                "Length"
+            );
             var context = new ControllerContext();
             var attribute = new RequiredAttribute();
             var adapter = new RequiredAttributeAdapter(metadata, context, attribute);
 
             // Act
-            var rules = adapter.GetClientValidationRules()
-                .OrderBy(r => r.ValidationType)
-                .ToArray();
+            var rules = adapter.GetClientValidationRules().OrderBy(r => r.ValidationType).ToArray();
 
             // Assert
             ModelClientValidationRule rule = Assert.Single(rules);

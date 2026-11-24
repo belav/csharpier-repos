@@ -7,21 +7,22 @@ public class GraphUpdatesSqliteFullWithOriginalsNotificationsTest
     : GraphUpdatesSqliteTestBase<GraphUpdatesSqliteFullWithOriginalsNotificationsTest.SqliteFixture>
 {
     public GraphUpdatesSqliteFullWithOriginalsNotificationsTest(SqliteFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
-    protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    protected override void UseTransaction(
+        DatabaseFacade facade,
+        IDbContextTransaction transaction
+    ) => facade.UseTransaction(transaction.GetDbTransaction());
 
     public class SqliteFixture : GraphUpdatesSqliteFixtureBase
     {
-        protected override string StoreName
-            => "GraphUpdatesFullWithOriginalsTest";
+        protected override string StoreName => "GraphUpdatesFullWithOriginalsTest";
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {
-            modelBuilder.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues);
+            modelBuilder.HasChangeTrackingStrategy(
+                ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
+            );
 
             base.OnModelCreating(modelBuilder, context);
         }

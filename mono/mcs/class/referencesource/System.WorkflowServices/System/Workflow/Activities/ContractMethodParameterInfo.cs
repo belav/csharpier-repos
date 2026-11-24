@@ -11,8 +11,10 @@ namespace System.Workflow.Activities
 
     internal sealed class ContractMethodParameterInfo : ParameterInfo
     {
-        internal ContractMethodParameterInfo(ContractMethodInfo member,
-            OperationParameterInfo parameterInfo)
+        internal ContractMethodParameterInfo(
+            ContractMethodInfo member,
+            OperationParameterInfo parameterInfo
+        )
         {
             if (member == null)
             {
@@ -38,11 +40,15 @@ namespace System.Workflow.Activities
 
                     if (this.Member.DeclaringType is DesignTimeType)
                     {
-                        this.ClassImpl = (this.Member.DeclaringType as DesignTimeType).ResolveType(typeName);
+                        this.ClassImpl = (this.Member.DeclaringType as DesignTimeType).ResolveType(
+                            typeName
+                        );
                     }
                     else if (parameterInfo.ParameterType is DesignTimeType)
                     {
-                        this.ClassImpl = (parameterInfo.ParameterType as DesignTimeType).ResolveType(typeName);
+                        this.ClassImpl = (
+                            parameterInfo.ParameterType as DesignTimeType
+                        ).ResolveType(typeName);
                     }
                     else
                     {

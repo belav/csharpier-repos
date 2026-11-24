@@ -8,19 +8,18 @@
 //
 
 using System.Xml.Serialization;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.XmlSerialization
 {
-	[TestFixture]
-	public class XmlEnumAttributeTests
-	{
-		[Test]
-		public void NameDefault ()
-		{
-			XmlEnumAttribute attr = new XmlEnumAttribute ();
-			Assert.IsNull (attr.Name);
-		}
-	}
+    [TestFixture]
+    public class XmlEnumAttributeTests
+    {
+        [Test]
+        public void NameDefault()
+        {
+            XmlEnumAttribute attr = new XmlEnumAttribute();
+            Assert.IsNull(attr.Name);
+        }
+    }
 }

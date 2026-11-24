@@ -2,11 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
-using Internal.TypeSystem.Ecma;
-using Internal.TypeSystem;
-using Internal.JitInterface;
 using System.Reflection.Metadata;
+using Internal.JitInterface;
+using Internal.TypeSystem;
+using Internal.TypeSystem.Ecma;
 
 namespace ILCompiler
 {
@@ -21,7 +20,9 @@ namespace ILCompiler
         public ReadyToRunLibraryRootProvider(EcmaModule module)
         {
             _module = module;
-            _instructionSetSupport = ((ReadyToRunCompilerContext)module.Context).InstructionSetSupport;
+            _instructionSetSupport = (
+                (ReadyToRunCompilerContext)module.Context
+            ).InstructionSetSupport;
         }
 
         public void AddCompilationRoots(IRootingServiceProvider rootProvider)
@@ -40,7 +41,11 @@ namespace ILCompiler
             }
         }
 
-        private void RootMethods(MetadataType type, string reason, IRootingServiceProvider rootProvider)
+        private void RootMethods(
+            MetadataType type,
+            string reason,
+            IRootingServiceProvider rootProvider
+        )
         {
             foreach (MethodDesc method in type.GetAllMethods())
             {
@@ -65,7 +70,11 @@ namespace ILCompiler
                     if (!CorInfoImpl.ShouldSkipCompilation(_instructionSetSupport, method))
                     {
                         CheckCanGenerateMethod(methodToRoot);
-                        rootProvider.AddCompilationRoot(methodToRoot, rootMinimalDependencies: false, reason: reason);
+                        rootProvider.AddCompilationRoot(
+                            methodToRoot,
+                            rootMinimalDependencies: false,
+                            reason: reason
+                        );
                     }
                 }
                 catch (TypeSystemException)
@@ -90,7 +99,10 @@ namespace ILCompiler
             MethodSignature signature = method.Signature;
 
             // Vararg methods are not supported in .NET Core
-            if ((signature.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask) == MethodSignatureFlags.CallingConventionVarargs)
+            if (
+                (signature.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask)
+                == MethodSignatureFlags.CallingConventionVarargs
+            )
                 ThrowHelper.ThrowBadImageFormatException();
 
             CheckTypeCanBeUsedInSignature(signature.ReturnType);

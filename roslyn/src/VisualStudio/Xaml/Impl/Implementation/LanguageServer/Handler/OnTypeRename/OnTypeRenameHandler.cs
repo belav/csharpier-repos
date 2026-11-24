@@ -19,7 +19,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 {
     [ExportStatelessXamlLspService(typeof(OnTypeRenameHandler)), Shared]
     [Method(Methods.TextDocumentLinkedEditingRangeName)]
-    internal class OnTypeRenameHandler : ILspServiceRequestHandler<LinkedEditingRangeParams, LinkedEditingRanges?>
+    internal class OnTypeRenameHandler
+        : ILspServiceRequestHandler<LinkedEditingRangeParams, LinkedEditingRanges?>
     {
         // From https://www.w3.org/TR/xml/#NT-NameStartChar
         // Notes:
@@ -29,41 +30,42 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
         //     optional in the name char pattern.
 
         // NameStartChar ::= ":" | [A-Z] | "_" | [a-z] | [#xC0-#xD6] | [#xD8-#xF6] | [#xF8-#x2FF] | [#x370-#x37D] | [#x37F-#x1FFF] | [#x200C-#x200D] | [#x2070-#x218F] | [#x2C00-#x2FEF] | [#x3001-#xD7FF] | [#xF900-#xFDCF] | [#xFDF0-#xFFFD] | [#x10000-#xEFFFF]
-        private const string NameStartCharPattern = "A-Z_a-z" +
-                                                    "\\u00C0-\\u00D6" +
-                                                    "\\u00D8-\\u00F6" +
-                                                    "\\u00F8-\\u02FF" +
-                                                    "\\u0370-\\u037D" +
-                                                    "\\u037F-\\u1FFF" +
-                                                    "\\u200C-\\u200D" +
-                                                    "\\u2070-\\u218F" +
-                                                    "\\u2C00-\\u2FEF" +
-                                                    "\\u3001-\\uD7FF" +
-                                                    "\\uF900-\\uFDCF" +
-                                                    "\\uFDF0-\\uFFFD";
+        private const string NameStartCharPattern =
+            "A-Z_a-z"
+            + "\\u00C0-\\u00D6"
+            + "\\u00D8-\\u00F6"
+            + "\\u00F8-\\u02FF"
+            + "\\u0370-\\u037D"
+            + "\\u037F-\\u1FFF"
+            + "\\u200C-\\u200D"
+            + "\\u2070-\\u218F"
+            + "\\u2C00-\\u2FEF"
+            + "\\u3001-\\uD7FF"
+            + "\\uF900-\\uFDCF"
+            + "\\uFDF0-\\uFFFD";
 
         // NameChar ::= NameStartChar | "-" | "." | [0-9] | #xB7 | [#x0300-#x036F] | [#x203F-#x2040]
-        private const string NameCharPattern = NameStartCharPattern +
-                                                    ":\\-.0-9" +
-                                                    "\\u00B7" +
-                                                    "\\u0300-\\u036F" +
-                                                    "\\u203F-\\u2040";
+        private const string NameCharPattern =
+            NameStartCharPattern + ":\\-.0-9" + "\\u00B7" + "\\u0300-\\u036F" + "\\u203F-\\u2040";
 
         // Name ::= NameStartChar (NameChar)*
         internal const string NamePattern = $"[{NameStartCharPattern}]?[{NameCharPattern}]*";
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public OnTypeRenameHandler()
-        {
-        }
+        public OnTypeRenameHandler() { }
 
         public bool MutatesSolutionState => false;
         public bool RequiresLSPSolution => true;
 
-        public TextDocumentIdentifier GetTextDocumentIdentifier(LinkedEditingRangeParams request) => request.TextDocument;
+        public TextDocumentIdentifier GetTextDocumentIdentifier(LinkedEditingRangeParams request) =>
+            request.TextDocument;
 
-        public async Task<LinkedEditingRanges?> HandleRequestAsync(LinkedEditingRangeParams request, RequestContext context, CancellationToken cancellationToken)
+        public async Task<LinkedEditingRanges?> HandleRequestAsync(
+            LinkedEditingRangeParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var document = context.Document;
             if (document == null)
@@ -78,9 +80,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             }
 
             var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
-            var offset = text.Lines.GetPosition(ProtocolConversions.PositionToLinePosition(request.Position));
+            var offset = text.Lines.GetPosition(
+                ProtocolConversions.PositionToLinePosition(request.Position)
+            );
 
-            var result = await renameService.GetTypeRenameAsync(document, offset, cancellationToken).ConfigureAwait(false);
+            var result = await renameService
+                .GetTypeRenameAsync(document, offset, cancellationToken)
+                .ConfigureAwait(false);
             if (result == null)
             {
                 return null;
@@ -90,8 +96,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 
             return new LinkedEditingRanges
             {
-                Ranges = result.Ranges.Select(s => ProtocolConversions.TextSpanToRange(s, text)).ToArray(),
-                WordPattern = result.WordPattern
+                Ranges = result
+                    .Ranges.Select(s => ProtocolConversions.TextSpanToRange(s, text))
+                    .ToArray(),
+                WordPattern = result.WordPattern,
             };
         }
     }

@@ -14,7 +14,7 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
 //
@@ -31,32 +31,39 @@ using System;
 
 namespace Microsoft.Build.Execution
 {
-	public class ProjectPropertyInstance
-	{
-		internal ProjectPropertyInstance (string name, bool isImmutable, string evaluatedValue, Func<string> evaluatedValueGetter = null)
-		{
-			Name = name;
-			IsImmutable = isImmutable;
-			evaluated_value_getter = evaluatedValueGetter ?? (() => evaluatedValue);
-		}
+    public class ProjectPropertyInstance
+    {
+        internal ProjectPropertyInstance(
+            string name,
+            bool isImmutable,
+            string evaluatedValue,
+            Func<string> evaluatedValueGetter = null
+        )
+        {
+            Name = name;
+            IsImmutable = isImmutable;
+            evaluated_value_getter = evaluatedValueGetter ?? (() => evaluatedValue);
+        }
 
-		Func<string> evaluated_value_getter;
-		public string EvaluatedValue {
-			get { return evaluated_value_getter (); }
-			set {
-				if (IsImmutable)
-					throw new InvalidOperationException ();
-				evaluated_value_getter = () => value;
-			}
-		}
+        Func<string> evaluated_value_getter;
+        public string EvaluatedValue
+        {
+            get { return evaluated_value_getter(); }
+            set
+            {
+                if (IsImmutable)
+                    throw new InvalidOperationException();
+                evaluated_value_getter = () => value;
+            }
+        }
 
-		public virtual bool IsImmutable { get; private set; }
+        public virtual bool IsImmutable { get; private set; }
 
-		public string Name { get; private set; }
-		
-		public override string ToString ()
-		{
-			return string.Format ("{0}={1}", Name, EvaluatedValue);
-		}
-	}
+        public string Name { get; private set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0}={1}", Name, EvaluatedValue);
+        }
+    }
 }

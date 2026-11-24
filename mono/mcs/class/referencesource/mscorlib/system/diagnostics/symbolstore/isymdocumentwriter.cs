@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -12,12 +12,12 @@
 ** defined by a URL and a document type GUID. Document source can
 ** optionally be stored in the symbol store.
 **
-** 
+**
 ===========================================================*/
-namespace System.Diagnostics.SymbolStore {
-    
+namespace System.Diagnostics.SymbolStore
+{
     using System;
-    
+
     // Interface does not need to be marked with the serializable attribute
     [System.Runtime.InteropServices.ComVisible(true)]
     public interface ISymbolDocumentWriter
@@ -26,7 +26,7 @@ namespace System.Diagnostics.SymbolStore {
         // symbol store. An array of unsigned bytes is used instead of
         // character data to accommodate a wider variety of "source".
         void SetSource(byte[] source);
-    
+
         // Check sum support.
         void SetCheckSum(Guid algorithmId, byte[] checkSum);
     }

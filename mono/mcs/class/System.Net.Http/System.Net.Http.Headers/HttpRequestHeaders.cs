@@ -30,293 +30,265 @@ using System.Collections.Generic;
 
 namespace System.Net.Http.Headers
 {
-	public sealed class HttpRequestHeaders : HttpHeaders
-	{
-		bool? expectContinue;
+    public sealed class HttpRequestHeaders : HttpHeaders
+    {
+        bool? expectContinue;
 
-		internal HttpRequestHeaders ()
-			: base (HttpHeaderKind.Request)
-		{
-		}
+        internal HttpRequestHeaders()
+            : base(HttpHeaderKind.Request) { }
 
-		public HttpHeaderValueCollection<MediaTypeWithQualityHeaderValue> Accept {
-			get {
-				return GetValues<MediaTypeWithQualityHeaderValue> ("Accept");
-			}
-		}
+        public HttpHeaderValueCollection<MediaTypeWithQualityHeaderValue> Accept
+        {
+            get { return GetValues<MediaTypeWithQualityHeaderValue>("Accept"); }
+        }
 
-		public HttpHeaderValueCollection<StringWithQualityHeaderValue> AcceptCharset {
-			get {
-				return GetValues<StringWithQualityHeaderValue> ("Accept-Charset");
-			}
-		}
+        public HttpHeaderValueCollection<StringWithQualityHeaderValue> AcceptCharset
+        {
+            get { return GetValues<StringWithQualityHeaderValue>("Accept-Charset"); }
+        }
 
-		public HttpHeaderValueCollection<StringWithQualityHeaderValue> AcceptEncoding {
-			get {
-				return GetValues<StringWithQualityHeaderValue> ("Accept-Encoding");
-			}
-		}
+        public HttpHeaderValueCollection<StringWithQualityHeaderValue> AcceptEncoding
+        {
+            get { return GetValues<StringWithQualityHeaderValue>("Accept-Encoding"); }
+        }
 
-		public HttpHeaderValueCollection<StringWithQualityHeaderValue> AcceptLanguage {
-			get {
-				return GetValues<StringWithQualityHeaderValue> ("Accept-Language");
-			}
-		}
+        public HttpHeaderValueCollection<StringWithQualityHeaderValue> AcceptLanguage
+        {
+            get { return GetValues<StringWithQualityHeaderValue>("Accept-Language"); }
+        }
 
-		public AuthenticationHeaderValue Authorization {
-			get {
-				return GetValue<AuthenticationHeaderValue> ("Authorization");
-			}
-			set {
-				AddOrRemove ("Authorization", value);
-			}
-		}
+        public AuthenticationHeaderValue Authorization
+        {
+            get { return GetValue<AuthenticationHeaderValue>("Authorization"); }
+            set { AddOrRemove("Authorization", value); }
+        }
 
-		public CacheControlHeaderValue CacheControl {
-			get {
-				return GetValue<CacheControlHeaderValue> ("Cache-Control");
-			}
-			set {
-				AddOrRemove ("Cache-Control", value);
-			}
-		}
+        public CacheControlHeaderValue CacheControl
+        {
+            get { return GetValue<CacheControlHeaderValue>("Cache-Control"); }
+            set { AddOrRemove("Cache-Control", value); }
+        }
 
-		public HttpHeaderValueCollection<string> Connection {
-			get {
-				return GetValues<string> ("Connection");
-			}
-		}
+        public HttpHeaderValueCollection<string> Connection
+        {
+            get { return GetValues<string>("Connection"); }
+        }
 
-		public bool? ConnectionClose {
-			get {
-				if (connectionclose == true || Connection.Find (l => string.Equals (l, "close", StringComparison.OrdinalIgnoreCase)) != null)
-					return true;
+        public bool? ConnectionClose
+        {
+            get
+            {
+                if (
+                    connectionclose == true
+                    || Connection.Find(l =>
+                        string.Equals(l, "close", StringComparison.OrdinalIgnoreCase)
+                    ) != null
+                )
+                    return true;
 
-				return connectionclose;
-			}
-			set {
-				if (connectionclose == value)
-					return;
+                return connectionclose;
+            }
+            set
+            {
+                if (connectionclose == value)
+                    return;
 
-				Connection.Remove ("close");
-				if (value == true)
-					Connection.Add ("close");
+                Connection.Remove("close");
+                if (value == true)
+                    Connection.Add("close");
 
-				connectionclose = value;
-			}
-		}
+                connectionclose = value;
+            }
+        }
 
-		internal bool ConnectionKeepAlive {
-			get {
-				return Connection.Find (l => string.Equals (l, "Keep-Alive", StringComparison.OrdinalIgnoreCase)) != null;
-			}
-		}
+        internal bool ConnectionKeepAlive
+        {
+            get
+            {
+                return Connection.Find(l =>
+                        string.Equals(l, "Keep-Alive", StringComparison.OrdinalIgnoreCase)
+                    ) != null;
+            }
+        }
 
-		public DateTimeOffset? Date {
-			get {
-				return GetValue<DateTimeOffset?> ("Date");
-			}
-			set {
-				AddOrRemove ("Date", value, Parser.DateTime.ToString);
-			}
-		}
+        public DateTimeOffset? Date
+        {
+            get { return GetValue<DateTimeOffset?>("Date"); }
+            set { AddOrRemove("Date", value, Parser.DateTime.ToString); }
+        }
 
-		public HttpHeaderValueCollection<NameValueWithParametersHeaderValue> Expect {
-			get {
-				return GetValues<NameValueWithParametersHeaderValue> ("Expect");
-			}
-		}
+        public HttpHeaderValueCollection<NameValueWithParametersHeaderValue> Expect
+        {
+            get { return GetValues<NameValueWithParametersHeaderValue>("Expect"); }
+        }
 
-		public bool? ExpectContinue { 
-			get {
-				if (expectContinue.HasValue)
-					return expectContinue;
+        public bool? ExpectContinue
+        {
+            get
+            {
+                if (expectContinue.HasValue)
+                    return expectContinue;
 
-				var found = TransferEncoding.Find (l => string.Equals (l.Value, "100-continue", StringComparison.OrdinalIgnoreCase));
-				return found != null ? true : (bool?) null;
-			}
-			set {
-				if (expectContinue == value)
-					return;
+                var found = TransferEncoding.Find(l =>
+                    string.Equals(l.Value, "100-continue", StringComparison.OrdinalIgnoreCase)
+                );
+                return found != null ? true : (bool?)null;
+            }
+            set
+            {
+                if (expectContinue == value)
+                    return;
 
-				Expect.Remove (l => l.Name == "100-continue");
+                Expect.Remove(l => l.Name == "100-continue");
 
-				if (value == true)
-					Expect.Add (new NameValueWithParametersHeaderValue ("100-continue"));
+                if (value == true)
+                    Expect.Add(new NameValueWithParametersHeaderValue("100-continue"));
 
-				expectContinue = value;
-			}
-		}
+                expectContinue = value;
+            }
+        }
 
-		public string From {
-			get {
-				return GetValue<string> ("From");
-			}
-			set {
-				if (!string.IsNullOrEmpty (value) && !Parser.EmailAddress.TryParse (value, out value))
-					throw new FormatException ();
+        public string From
+        {
+            get { return GetValue<string>("From"); }
+            set
+            {
+                if (!string.IsNullOrEmpty(value) && !Parser.EmailAddress.TryParse(value, out value))
+                    throw new FormatException();
 
-				AddOrRemove ("From", value);
-			}
-		}
+                AddOrRemove("From", value);
+            }
+        }
 
-		public string Host {
-			get {
-				return GetValue<string> ("Host");
-			}
-			set {
-				AddOrRemove ("Host", value);
-			}
-		}
+        public string Host
+        {
+            get { return GetValue<string>("Host"); }
+            set { AddOrRemove("Host", value); }
+        }
 
-		public HttpHeaderValueCollection<EntityTagHeaderValue> IfMatch {
-			get {
-				return GetValues<EntityTagHeaderValue> ("If-Match");
-			}
-		}
+        public HttpHeaderValueCollection<EntityTagHeaderValue> IfMatch
+        {
+            get { return GetValues<EntityTagHeaderValue>("If-Match"); }
+        }
 
-		public DateTimeOffset? IfModifiedSince {
-			get {
-				return GetValue<DateTimeOffset?> ("If-Modified-Since");
-			}
-			set {
-				AddOrRemove ("If-Modified-Since", value, Parser.DateTime.ToString);
-			}
-		}
+        public DateTimeOffset? IfModifiedSince
+        {
+            get { return GetValue<DateTimeOffset?>("If-Modified-Since"); }
+            set { AddOrRemove("If-Modified-Since", value, Parser.DateTime.ToString); }
+        }
 
-		public HttpHeaderValueCollection<EntityTagHeaderValue> IfNoneMatch {
-			get {
-				return GetValues<EntityTagHeaderValue> ("If-None-Match");
-			}
-		}
+        public HttpHeaderValueCollection<EntityTagHeaderValue> IfNoneMatch
+        {
+            get { return GetValues<EntityTagHeaderValue>("If-None-Match"); }
+        }
 
-		public RangeConditionHeaderValue IfRange {
-			get {
-				return GetValue<RangeConditionHeaderValue> ("If-Range");
-			}
-			set {
-				AddOrRemove ("If-Range", value);
-			}
-		}
+        public RangeConditionHeaderValue IfRange
+        {
+            get { return GetValue<RangeConditionHeaderValue>("If-Range"); }
+            set { AddOrRemove("If-Range", value); }
+        }
 
-		public DateTimeOffset? IfUnmodifiedSince {
-			get {
-				return GetValue<DateTimeOffset?> ("If-Unmodified-Since");
-			}
-			set {
-				AddOrRemove ("If-Unmodified-Since", value, Parser.DateTime.ToString);
-			}
-		}
+        public DateTimeOffset? IfUnmodifiedSince
+        {
+            get { return GetValue<DateTimeOffset?>("If-Unmodified-Since"); }
+            set { AddOrRemove("If-Unmodified-Since", value, Parser.DateTime.ToString); }
+        }
 
-		public int? MaxForwards {
-			get {
-				return GetValue<int?> ("Max-Forwards");
-			}
-			set {
-				AddOrRemove ("Max-Forwards", value);
-			}
-		}
+        public int? MaxForwards
+        {
+            get { return GetValue<int?>("Max-Forwards"); }
+            set { AddOrRemove("Max-Forwards", value); }
+        }
 
-		public HttpHeaderValueCollection<NameValueHeaderValue> Pragma {
-			get {
-				return GetValues<NameValueHeaderValue> ("Pragma");
-			}
-		}
+        public HttpHeaderValueCollection<NameValueHeaderValue> Pragma
+        {
+            get { return GetValues<NameValueHeaderValue>("Pragma"); }
+        }
 
-		public AuthenticationHeaderValue ProxyAuthorization {
-			get {
-				return GetValue<AuthenticationHeaderValue> ("Proxy-Authorization");
-			}
-			set {
-				AddOrRemove ("Proxy-Authorization", value);
-			}
-		}
+        public AuthenticationHeaderValue ProxyAuthorization
+        {
+            get { return GetValue<AuthenticationHeaderValue>("Proxy-Authorization"); }
+            set { AddOrRemove("Proxy-Authorization", value); }
+        }
 
-		public RangeHeaderValue Range {
-			get {
-				return GetValue<RangeHeaderValue> ("Range");
-			}
-			set {
-				AddOrRemove ("Range", value);
-			}
-		}
+        public RangeHeaderValue Range
+        {
+            get { return GetValue<RangeHeaderValue>("Range"); }
+            set { AddOrRemove("Range", value); }
+        }
 
-		public Uri Referrer {
-			get {
-				return GetValue<Uri> ("Referer");
-			}
-			set {
-				AddOrRemove ("Referer", value);
-			}
-		}
+        public Uri Referrer
+        {
+            get { return GetValue<Uri>("Referer"); }
+            set { AddOrRemove("Referer", value); }
+        }
 
-		public HttpHeaderValueCollection<TransferCodingWithQualityHeaderValue> TE {
-		    get {
-		        return GetValues<TransferCodingWithQualityHeaderValue> ("TE");
-		    }
-		}
+        public HttpHeaderValueCollection<TransferCodingWithQualityHeaderValue> TE
+        {
+            get { return GetValues<TransferCodingWithQualityHeaderValue>("TE"); }
+        }
 
-		public HttpHeaderValueCollection<string> Trailer {
-			get {
-				return GetValues<string> ("Trailer");
-			}
-		}
+        public HttpHeaderValueCollection<string> Trailer
+        {
+            get { return GetValues<string>("Trailer"); }
+        }
 
-		public HttpHeaderValueCollection<TransferCodingHeaderValue> TransferEncoding {
-			get {
-				return GetValues<TransferCodingHeaderValue> ("Transfer-Encoding");
-			}
-		}
+        public HttpHeaderValueCollection<TransferCodingHeaderValue> TransferEncoding
+        {
+            get { return GetValues<TransferCodingHeaderValue>("Transfer-Encoding"); }
+        }
 
-		public bool? TransferEncodingChunked {
-			get {
-				if (transferEncodingChunked.HasValue)
-					return transferEncodingChunked;
+        public bool? TransferEncodingChunked
+        {
+            get
+            {
+                if (transferEncodingChunked.HasValue)
+                    return transferEncodingChunked;
 
-				var found = TransferEncoding.Find (l => string.Equals (l.Value, "chunked", StringComparison.OrdinalIgnoreCase));
-				return found != null ? true : (bool?) null;
-			}
-			set {
-				if (value == transferEncodingChunked)
-					return;
+                var found = TransferEncoding.Find(l =>
+                    string.Equals(l.Value, "chunked", StringComparison.OrdinalIgnoreCase)
+                );
+                return found != null ? true : (bool?)null;
+            }
+            set
+            {
+                if (value == transferEncodingChunked)
+                    return;
 
-				TransferEncoding.Remove (l => l.Value == "chunked");
-				if (value == true)
-					TransferEncoding.Add (new TransferCodingHeaderValue ("chunked"));
+                TransferEncoding.Remove(l => l.Value == "chunked");
+                if (value == true)
+                    TransferEncoding.Add(new TransferCodingHeaderValue("chunked"));
 
-				transferEncodingChunked = value;
-			}
-		}
+                transferEncodingChunked = value;
+            }
+        }
 
-		public HttpHeaderValueCollection<ProductHeaderValue> Upgrade {
-			get {
-				return GetValues<ProductHeaderValue> ("Upgrade");
-			}
-		}
+        public HttpHeaderValueCollection<ProductHeaderValue> Upgrade
+        {
+            get { return GetValues<ProductHeaderValue>("Upgrade"); }
+        }
 
-		public HttpHeaderValueCollection<ProductInfoHeaderValue> UserAgent {
-			get {
-				return GetValues<ProductInfoHeaderValue> ("User-Agent");
-			}
-		}
+        public HttpHeaderValueCollection<ProductInfoHeaderValue> UserAgent
+        {
+            get { return GetValues<ProductInfoHeaderValue>("User-Agent"); }
+        }
 
-		public HttpHeaderValueCollection<ViaHeaderValue> Via {
-			get {
-				return GetValues<ViaHeaderValue> ("Via");
-			}
-		}
+        public HttpHeaderValueCollection<ViaHeaderValue> Via
+        {
+            get { return GetValues<ViaHeaderValue>("Via"); }
+        }
 
-		public HttpHeaderValueCollection<WarningHeaderValue> Warning {
-			get {
-				return GetValues<WarningHeaderValue> ("Warning");
-			}
-		}
+        public HttpHeaderValueCollection<WarningHeaderValue> Warning
+        {
+            get { return GetValues<WarningHeaderValue>("Warning"); }
+        }
 
-		internal void AddHeaders (HttpRequestHeaders headers)
-		{
-			foreach (var header in headers) {
-				TryAddWithoutValidation (header.Key, header.Value);
-			}
-		}
-	}
+        internal void AddHeaders(HttpRequestHeaders headers)
+        {
+            foreach (var header in headers)
+            {
+                TryAddWithoutValidation(header.Key, header.Value);
+            }
+        }
+    }
 }

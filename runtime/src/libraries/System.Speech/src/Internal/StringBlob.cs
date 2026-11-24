@@ -9,9 +9,7 @@ namespace System.Speech.Internal
     {
         #region Constructors
 
-        internal StringBlob()
-        {
-        }
+        internal StringBlob() { }
 
         internal StringBlob(char[] pszStringArray)
         {
@@ -186,10 +184,7 @@ namespace System.Speech.Internal
 
         internal int Count
         {
-            get
-            {
-                return _cWords;
-            }
+            get { return _cWords; }
         }
 
         #endregion

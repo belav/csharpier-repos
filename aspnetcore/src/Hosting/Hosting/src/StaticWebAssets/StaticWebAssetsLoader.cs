@@ -57,8 +57,7 @@ public class StaticWebAssetsLoader
     {
         try
         {
-            var candidate =
-                configuration[WebHostDefaults.StaticWebAssetsKey]
+            var candidate = configuration[WebHostDefaults.StaticWebAssetsKey]
                 ?? ResolveRelativeToAssembly(environment);
             if (candidate != null && File.Exists(candidate))
             {

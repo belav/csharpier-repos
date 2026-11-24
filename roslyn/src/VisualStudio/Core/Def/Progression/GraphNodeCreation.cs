@@ -18,7 +18,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Progression
     /// </summary>
     public static class GraphNodeCreation
     {
-        public static async Task<GraphNodeId> CreateNodeIdAsync(ISymbol symbol, Solution solution, CancellationToken cancellationToken)
+        public static async Task<GraphNodeId> CreateNodeIdAsync(
+            ISymbol symbol,
+            Solution solution,
+            CancellationToken cancellationToken
+        )
         {
             if (symbol == null)
             {
@@ -33,33 +37,63 @@ namespace Microsoft.VisualStudio.LanguageServices.Progression
             switch (symbol.Kind)
             {
                 case SymbolKind.Assembly:
-                    return await GraphNodeIdCreation.GetIdForAssemblyAsync((IAssemblySymbol)symbol, solution, cancellationToken).ConfigureAwait(false);
+                    return await GraphNodeIdCreation
+                        .GetIdForAssemblyAsync((IAssemblySymbol)symbol, solution, cancellationToken)
+                        .ConfigureAwait(false);
 
                 case SymbolKind.Namespace:
-                    return await GraphNodeIdCreation.GetIdForNamespaceAsync((INamespaceSymbol)symbol, solution, cancellationToken).ConfigureAwait(false);
+                    return await GraphNodeIdCreation
+                        .GetIdForNamespaceAsync(
+                            (INamespaceSymbol)symbol,
+                            solution,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
                 case SymbolKind.NamedType:
-                    return await GraphNodeIdCreation.GetIdForTypeAsync((ITypeSymbol)symbol, solution, cancellationToken).ConfigureAwait(false);
+                    return await GraphNodeIdCreation
+                        .GetIdForTypeAsync((ITypeSymbol)symbol, solution, cancellationToken)
+                        .ConfigureAwait(false);
 
                 case SymbolKind.Method:
                 case SymbolKind.Field:
                 case SymbolKind.Property:
                 case SymbolKind.Event:
-                    return await GraphNodeIdCreation.GetIdForMemberAsync(symbol, solution, cancellationToken).ConfigureAwait(false);
+                    return await GraphNodeIdCreation
+                        .GetIdForMemberAsync(symbol, solution, cancellationToken)
+                        .ConfigureAwait(false);
 
                 case SymbolKind.Parameter:
-                    return await GraphNodeIdCreation.GetIdForParameterAsync((IParameterSymbol)symbol, solution, cancellationToken).ConfigureAwait(false);
+                    return await GraphNodeIdCreation
+                        .GetIdForParameterAsync(
+                            (IParameterSymbol)symbol,
+                            solution,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
                 case SymbolKind.Local:
                 case SymbolKind.RangeVariable:
-                    return await GraphNodeIdCreation.GetIdForLocalVariableAsync(symbol, solution, cancellationToken).ConfigureAwait(false);
+                    return await GraphNodeIdCreation
+                        .GetIdForLocalVariableAsync(symbol, solution, cancellationToken)
+                        .ConfigureAwait(false);
 
                 default:
-                    throw new ArgumentException(string.Format(ServicesVSResources.Can_t_create_a_node_id_for_this_symbol_kind_colon_0, symbol));
+                    throw new ArgumentException(
+                        string.Format(
+                            ServicesVSResources.Can_t_create_a_node_id_for_this_symbol_kind_colon_0,
+                            symbol
+                        )
+                    );
             }
         }
 
-        public static async Task<GraphNode> CreateNodeAsync(this Graph graph, ISymbol symbol, Solution solution, CancellationToken cancellationToken)
+        public static async Task<GraphNode> CreateNodeAsync(
+            this Graph graph,
+            ISymbol symbol,
+            Solution solution,
+            CancellationToken cancellationToken
+        )
         {
             if (graph == null)
             {
@@ -76,7 +110,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Progression
                 throw new ArgumentNullException(nameof(solution));
             }
 
-            return await GraphBuilder.GetOrCreateNodeAsync(graph, symbol, solution, cancellationToken).ConfigureAwait(false);
+            return await GraphBuilder
+                .GetOrCreateNodeAsync(graph, symbol, solution, cancellationToken)
+                .ConfigureAwait(false);
         }
     }
 }

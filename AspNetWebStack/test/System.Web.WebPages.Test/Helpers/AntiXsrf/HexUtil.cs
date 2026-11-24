@@ -24,7 +24,13 @@ namespace System.Web.Helpers.AntiXsrf.Test
             List<byte> bytes = new List<byte>(input.Length / 2);
             for (int i = 0; i < input.Length; i += 2)
             {
-                bytes.Add(Byte.Parse(input.Substring(i, 2), NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture));
+                bytes.Add(
+                    Byte.Parse(
+                        input.Substring(i, 2),
+                        NumberStyles.AllowHexSpecifier,
+                        CultureInfo.InvariantCulture
+                    )
+                );
             }
             return bytes.ToArray();
         }

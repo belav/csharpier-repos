@@ -14,13 +14,25 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
         private int _onBeforeSymbolRenamedCount = 0;
         private int _onAfterSymbolRenamedCount = 0;
 
-        public int OnBeforeSymbolRenamedCount { get { return _onBeforeSymbolRenamedCount; } }
-        public int OnAfterSymbolRenamedCount { get { return _onAfterSymbolRenamedCount; } }
+        public int OnBeforeSymbolRenamedCount
+        {
+            get { return _onBeforeSymbolRenamedCount; }
+        }
+        public int OnAfterSymbolRenamedCount
+        {
+            get { return _onAfterSymbolRenamedCount; }
+        }
 
         public bool OnBeforeSymbolRenamedReturnValue { get; set; }
         public bool OnAfterSymbolRenamedReturnValue { get; set; }
 
-        public bool TryOnBeforeGlobalSymbolRenamed(Workspace workspace, IEnumerable<DocumentId> changedDocumentIDs, ISymbol symbol, string newName, bool throwOnFailure)
+        public bool TryOnBeforeGlobalSymbolRenamed(
+            Workspace workspace,
+            IEnumerable<DocumentId> changedDocumentIDs,
+            ISymbol symbol,
+            string newName,
+            bool throwOnFailure
+        )
         {
             _onBeforeSymbolRenamedCount++;
 
@@ -32,7 +44,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
             return OnBeforeSymbolRenamedReturnValue;
         }
 
-        public bool TryOnAfterGlobalSymbolRenamed(Workspace workspace, IEnumerable<DocumentId> changedDocumentIDs, ISymbol symbol, string newName, bool throwOnFailure)
+        public bool TryOnAfterGlobalSymbolRenamed(
+            Workspace workspace,
+            IEnumerable<DocumentId> changedDocumentIDs,
+            ISymbol symbol,
+            string newName,
+            bool throwOnFailure
+        )
         {
             _onAfterSymbolRenamedCount++;
 

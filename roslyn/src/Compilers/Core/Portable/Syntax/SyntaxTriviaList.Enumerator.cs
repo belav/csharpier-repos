@@ -37,7 +37,12 @@ namespace Microsoft.CodeAnalysis
             }
 
             // PERF: Passing SyntaxToken by ref since it's a non-trivial struct
-            private void InitializeFrom(in SyntaxToken token, GreenNode greenNode, int index, int position)
+            private void InitializeFrom(
+                in SyntaxToken token,
+                GreenNode greenNode,
+                int index,
+                int position
+            )
             {
                 _token = token;
                 _singleNodeOrList = greenNode;
@@ -156,9 +161,7 @@ namespace Microsoft.CodeAnalysis
                 throw new NotSupportedException();
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
     }
 }

@@ -40,7 +40,10 @@ namespace System.Security.Cryptography
         {
             ThrowIfDisposed();
 
-            CngPkcs8.Pkcs8Response response = CngPkcs8.ImportPkcs8PrivateKey(source, out int localRead);
+            CngPkcs8.Pkcs8Response response = CngPkcs8.ImportPkcs8PrivateKey(
+                source,
+                out int localRead
+            );
 
             ProcessPkcs8Response(response);
             bytesRead = localRead;
@@ -49,14 +52,16 @@ namespace System.Security.Cryptography
         public override void ImportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<byte> passwordBytes,
             ReadOnlySpan<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             ThrowIfDisposed();
 
             CngPkcs8.Pkcs8Response response = CngPkcs8.ImportEncryptedPkcs8PrivateKey(
                 passwordBytes,
                 source,
-                out int localRead);
+                out int localRead
+            );
 
             ProcessPkcs8Response(response);
             bytesRead = localRead;
@@ -65,14 +70,16 @@ namespace System.Security.Cryptography
         public override void ImportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<char> password,
             ReadOnlySpan<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             ThrowIfDisposed();
 
             CngPkcs8.Pkcs8Response response = CngPkcs8.ImportEncryptedPkcs8PrivateKey(
                 password,
                 source,
-                out int localRead);
+                out int localRead
+            );
 
             ProcessPkcs8Response(response);
             bytesRead = localRead;
@@ -92,71 +99,73 @@ namespace System.Security.Cryptography
 
         public override byte[] ExportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<byte> passwordBytes,
-            PbeParameters pbeParameters)
+            PbeParameters pbeParameters
+        )
         {
             ArgumentNullException.ThrowIfNull(pbeParameters);
 
-            return CngPkcs8.ExportEncryptedPkcs8PrivateKey(
-                this,
-                passwordBytes,
-                pbeParameters);
+            return CngPkcs8.ExportEncryptedPkcs8PrivateKey(this, passwordBytes, pbeParameters);
         }
 
         public override byte[] ExportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<char> password,
-            PbeParameters pbeParameters)
+            PbeParameters pbeParameters
+        )
         {
             ArgumentNullException.ThrowIfNull(pbeParameters);
 
             PasswordBasedEncryption.ValidatePbeParameters(
                 pbeParameters,
                 password,
-                ReadOnlySpan<byte>.Empty);
+                ReadOnlySpan<byte>.Empty
+            );
 
             if (CngPkcs8.IsPlatformScheme(pbeParameters))
             {
                 return ExportEncryptedPkcs8(password, pbeParameters.IterationCount);
             }
 
-            return CngPkcs8.ExportEncryptedPkcs8PrivateKey(
-                this,
-                password,
-                pbeParameters);
+            return CngPkcs8.ExportEncryptedPkcs8PrivateKey(this, password, pbeParameters);
         }
 
         public override bool TryExportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<byte> passwordBytes,
             PbeParameters pbeParameters,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ArgumentNullException.ThrowIfNull(pbeParameters);
 
             PasswordBasedEncryption.ValidatePbeParameters(
                 pbeParameters,
                 ReadOnlySpan<char>.Empty,
-                passwordBytes);
+                passwordBytes
+            );
 
             return CngPkcs8.TryExportEncryptedPkcs8PrivateKey(
                 this,
                 passwordBytes,
                 pbeParameters,
                 destination,
-                out bytesWritten);
+                out bytesWritten
+            );
         }
 
         public override bool TryExportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<char> password,
             PbeParameters pbeParameters,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ArgumentNullException.ThrowIfNull(pbeParameters);
 
             PasswordBasedEncryption.ValidatePbeParameters(
                 pbeParameters,
                 password,
-                ReadOnlySpan<byte>.Empty);
+                ReadOnlySpan<byte>.Empty
+            );
 
             if (CngPkcs8.IsPlatformScheme(pbeParameters))
             {
@@ -164,7 +173,8 @@ namespace System.Security.Cryptography
                     password,
                     pbeParameters.IterationCount,
                     destination,
-                    out bytesWritten);
+                    out bytesWritten
+                );
             }
 
             return CngPkcs8.TryExportEncryptedPkcs8PrivateKey(
@@ -172,7 +182,8 @@ namespace System.Security.Cryptography
                 password,
                 pbeParameters,
                 destination,
-                out bytesWritten);
+                out bytesWritten
+            );
         }
 
         /// <summary>

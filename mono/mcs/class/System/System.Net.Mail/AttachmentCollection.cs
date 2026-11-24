@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,41 +29,39 @@
 //
 
 using System;
-using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
-namespace System.Net.Mail {
-	public sealed class AttachmentCollection : Collection<Attachment>, IDisposable
-	{
-		internal AttachmentCollection ()
-		{
-		}
-		
-		public void Dispose ()
-		{
-			for (int i = 0; i < Count; i += 1)
-				this [i].Dispose ();
-		}
+namespace System.Net.Mail
+{
+    public sealed class AttachmentCollection : Collection<Attachment>, IDisposable
+    {
+        internal AttachmentCollection() { }
 
-		protected override void ClearItems ()
-		{
-			base.ClearItems ();
-		}
+        public void Dispose()
+        {
+            for (int i = 0; i < Count; i += 1)
+                this[i].Dispose();
+        }
 
-		protected override void InsertItem (int index, Attachment item)
-		{
-			base.InsertItem (index, item);
-		}
+        protected override void ClearItems()
+        {
+            base.ClearItems();
+        }
 
-		protected override void RemoveItem (int index)
-		{
-			base.RemoveItem (index);
-		}
+        protected override void InsertItem(int index, Attachment item)
+        {
+            base.InsertItem(index, item);
+        }
 
-		protected override void SetItem (int index, Attachment item)
-		{
-			base.SetItem (index, item);
-		}
-	}
+        protected override void RemoveItem(int index)
+        {
+            base.RemoveItem(index);
+        }
+
+        protected override void SetItem(int index, Attachment item)
+        {
+            base.SetItem(index, item);
+        }
+    }
 }
-

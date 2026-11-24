@@ -171,9 +171,8 @@ public class RazorPagesRazorViewEngineOptionsSetupTest
         setup.Configure(viewEngineOptions);
 
         // Assert
-        Assert.Collection(
-            viewEngineOptions.ViewLocationExpanders,
-            expander => Assert.IsType<PageViewLocationExpander>(expander)
+        Assert.Collection(viewEngineOptions.ViewLocationExpanders, expander =>
+            Assert.IsType<PageViewLocationExpander>(expander)
         );
     }
 

@@ -65,5 +65,5 @@ namespace System.ComponentModel.Composition.Hosting
         {
             return new CompositionElement(underlyingObject);
         }
-   }
+    }
 }

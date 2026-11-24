@@ -10,8 +10,8 @@ namespace System.ServiceModel.Discovery
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Dispatcher;
-    using System.Xml.Linq;
     using System.Xml;
+    using System.Xml.Linq;
 
     [Fx.Tag.XamlVisible(false)]
     public class EndpointDiscoveryBehavior : IEndpointBehavior
@@ -28,15 +28,8 @@ namespace System.ServiceModel.Discovery
 
         public bool Enabled
         {
-            get
-            {
-                return this.enabled;
-            }
-
-            set
-            {
-                this.enabled = value;
-            }
+            get { return this.enabled; }
+            set { this.enabled = value; }
         }
 
         public Collection<XmlQualifiedName> ContractTypeNames
@@ -79,46 +72,50 @@ namespace System.ServiceModel.Discovery
 
         internal Collection<XmlQualifiedName> InternalContractTypeNames
         {
-            get
-            {
-                return this.contractTypeNames;
-            }
+            get { return this.contractTypeNames; }
         }
 
         internal Collection<Uri> InternalScopes
         {
-            get
-            {
-                return this.scopes;
-            }
+            get { return this.scopes; }
         }
 
         internal Collection<XElement> InternalExtensions
         {
-            get
-            {
-                return this.extensions;
-            }
+            get { return this.extensions; }
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.InterfaceMethodsShouldBeCallableByChildTypes)]
-        void IEndpointBehavior.AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
-        {
-        }
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.InterfaceMethodsShouldBeCallableByChildTypes
+        )]
+        void IEndpointBehavior.AddBindingParameters(
+            ServiceEndpoint endpoint,
+            BindingParameterCollection bindingParameters
+        ) { }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.InterfaceMethodsShouldBeCallableByChildTypes)]
-        void IEndpointBehavior.ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
-        {
-        }
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.InterfaceMethodsShouldBeCallableByChildTypes
+        )]
+        void IEndpointBehavior.ApplyClientBehavior(
+            ServiceEndpoint endpoint,
+            ClientRuntime clientRuntime
+        ) { }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.InterfaceMethodsShouldBeCallableByChildTypes)]
-        void IEndpointBehavior.ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
-        {
-        }
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.InterfaceMethodsShouldBeCallableByChildTypes
+        )]
+        void IEndpointBehavior.ApplyDispatchBehavior(
+            ServiceEndpoint endpoint,
+            EndpointDispatcher endpointDispatcher
+        ) { }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.InterfaceMethodsShouldBeCallableByChildTypes)]
-        void IEndpointBehavior.Validate(ServiceEndpoint endpoint)
-        {
-        }
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.InterfaceMethodsShouldBeCallableByChildTypes
+        )]
+        void IEndpointBehavior.Validate(ServiceEndpoint endpoint) { }
     }
 }

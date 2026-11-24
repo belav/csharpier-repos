@@ -20,7 +20,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.UnitTests
         public void WithLanguageVersion()
         {
             var options = ScriptOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8);
-            Assert.Equal(LanguageVersion.CSharp8, ((CSharpParseOptions)options.ParseOptions).LanguageVersion);
+            Assert.Equal(
+                LanguageVersion.CSharp8,
+                ((CSharpParseOptions)options.ParseOptions).LanguageVersion
+            );
         }
 
         [Fact]
@@ -33,8 +36,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.UnitTests
         [Fact]
         public void WithLanguageVersion_NonCSharpParseOptions_Throws()
         {
-            var options = ScriptOptions.Default.WithParseOptions(new VisualBasicParseOptions(kind: SourceCodeKind.Script, languageVersion: VisualBasic.LanguageVersion.Latest));
-            Assert.Throws<InvalidOperationException>(() => options.WithLanguageVersion(LanguageVersion.CSharp8));
+            var options = ScriptOptions.Default.WithParseOptions(
+                new VisualBasicParseOptions(
+                    kind: SourceCodeKind.Script,
+                    languageVersion: VisualBasic.LanguageVersion.Latest
+                )
+            );
+            Assert.Throws<InvalidOperationException>(() =>
+                options.WithLanguageVersion(LanguageVersion.CSharp8)
+            );
         }
     }
 }

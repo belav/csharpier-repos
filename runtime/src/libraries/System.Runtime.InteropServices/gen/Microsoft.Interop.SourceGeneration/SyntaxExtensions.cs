@@ -13,7 +13,10 @@ namespace Microsoft.Interop
 {
     public static class SyntaxExtensions
     {
-        private static FixedStatementSyntax AddStatementWithoutEmptyStatements(this FixedStatementSyntax fixedStatement, StatementSyntax childStatement)
+        private static FixedStatementSyntax AddStatementWithoutEmptyStatements(
+            this FixedStatementSyntax fixedStatement,
+            StatementSyntax childStatement
+        )
         {
             if (fixedStatement.Statement.IsKind(SyntaxKind.EmptyStatement))
             {
@@ -36,7 +39,9 @@ namespace Microsoft.Interop
 
             if (childStatement.IsKind(SyntaxKind.Block))
             {
-                block = block.WithStatements(block.Statements.AddRange(((BlockSyntax)childStatement).Statements));
+                block = block.WithStatements(
+                    block.Statements.AddRange(((BlockSyntax)childStatement).Statements)
+                );
             }
             else
             {
@@ -46,17 +51,22 @@ namespace Microsoft.Interop
             return fixedStatement.WithStatement(block);
         }
 
-        public static StatementSyntax NestFixedStatements(this ImmutableArray<FixedStatementSyntax> fixedStatements, StatementSyntax innerStatement)
+        public static StatementSyntax NestFixedStatements(
+            this ImmutableArray<FixedStatementSyntax> fixedStatements,
+            StatementSyntax innerStatement
+        )
         {
             StatementSyntax nestedStatement = innerStatement;
             if (!fixedStatements.IsEmpty)
             {
                 int i = fixedStatements.Length - 1;
-                nestedStatement = fixedStatements[i].AddStatementWithoutEmptyStatements(WrapStatementInBlock(nestedStatement));
+                nestedStatement = fixedStatements[i]
+                    .AddStatementWithoutEmptyStatements(WrapStatementInBlock(nestedStatement));
                 i--;
                 for (; i >= 0; i--)
                 {
-                    nestedStatement = fixedStatements[i].AddStatementWithoutEmptyStatements(nestedStatement);
+                    nestedStatement = fixedStatements[i]
+                        .AddStatementWithoutEmptyStatements(nestedStatement);
                 }
             }
             return nestedStatement;
@@ -86,7 +96,13 @@ namespace Microsoft.Interop
             List<SyntaxToken> strippedTokens = new();
             for (int i = 0; i < tokenList.Count; i++)
             {
-                if (tokenList[i].Kind() is SyntaxKind.PublicKeyword or SyntaxKind.InternalKeyword or SyntaxKind.ProtectedKeyword or SyntaxKind.PrivateKeyword)
+                if (
+                    tokenList[i].Kind()
+                    is SyntaxKind.PublicKeyword
+                        or SyntaxKind.InternalKeyword
+                        or SyntaxKind.ProtectedKeyword
+                        or SyntaxKind.PrivateKeyword
+                )
                 {
                     continue;
                 }
@@ -95,7 +111,10 @@ namespace Microsoft.Interop
             return new SyntaxTokenList(strippedTokens);
         }
 
-        public static SyntaxTokenList AddToModifiers(this SyntaxTokenList modifiers, SyntaxKind modifierToAdd)
+        public static SyntaxTokenList AddToModifiers(
+            this SyntaxTokenList modifiers,
+            SyntaxKind modifierToAdd
+        )
         {
             if (modifiers.IndexOf(modifierToAdd) >= 0)
             {
@@ -111,15 +130,22 @@ namespace Microsoft.Interop
                 (-1, -1) => modifiers.Count,
                 (-1, _) => idxRef,
                 (_, -1) => idxPartial,
-                (_, _) => Math.Min(idxPartial, idxRef)
+                (_, _) => Math.Min(idxPartial, idxRef),
             };
 
             return modifiers.Insert(idxInsert, SyntaxFactory.Token(modifierToAdd));
         }
 
-        public static bool IsInPartialContext(this TypeDeclarationSyntax syntax, [NotNullWhen(false)] out SyntaxToken? nonPartialIdentifier)
+        public static bool IsInPartialContext(
+            this TypeDeclarationSyntax syntax,
+            [NotNullWhen(false)] out SyntaxToken? nonPartialIdentifier
+        )
         {
-            for (SyntaxNode? parentNode = syntax; parentNode is TypeDeclarationSyntax typeDecl; parentNode = parentNode.Parent)
+            for (
+                SyntaxNode? parentNode = syntax;
+                parentNode is TypeDeclarationSyntax typeDecl;
+                parentNode = parentNode.Parent
+            )
             {
                 if (!typeDecl.Modifiers.Any(SyntaxKind.PartialKeyword))
                 {

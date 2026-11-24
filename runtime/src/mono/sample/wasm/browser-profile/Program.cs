@@ -11,7 +11,7 @@ namespace Sample
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine ("Hello, World!");
+            Console.WriteLine("Hello, World!");
         }
 
         [JSExport]
@@ -21,6 +21,6 @@ namespace Sample
         }
 
         [JSExport]
-        public static void StopProfile(){}
+        public static void StopProfile() { }
     }
 }

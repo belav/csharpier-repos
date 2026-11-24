@@ -5,17 +5,23 @@ namespace System.ServiceModel
 {
     using System;
     using System.ComponentModel;
+    using System.Net;
+    using System.Net.Security;
     using System.Security.Authentication.ExtendedProtection;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
-    using System.Net;
-    using System.Net.Security;
 
     public sealed class HttpTransportSecurity
     {
-        internal const HttpClientCredentialType DefaultClientCredentialType = HttpClientCredentialType.None;
-        internal const HttpProxyCredentialType DefaultProxyCredentialType = HttpProxyCredentialType.None;
-        internal const string DefaultRealm = System.ServiceModel.Channels.HttpTransportDefaults.Realm;
+        internal const HttpClientCredentialType DefaultClientCredentialType =
+            HttpClientCredentialType.None;
+        internal const HttpProxyCredentialType DefaultProxyCredentialType =
+            HttpProxyCredentialType.None;
+        internal const string DefaultRealm = System
+            .ServiceModel
+            .Channels
+            .HttpTransportDefaults
+            .Realm;
 
         HttpClientCredentialType clientCredentialType;
         HttpProxyCredentialType proxyCredentialType;
@@ -37,7 +43,9 @@ namespace System.ServiceModel
             {
                 if (!HttpClientCredentialTypeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.clientCredentialType = value;
             }
@@ -50,7 +58,9 @@ namespace System.ServiceModel
             {
                 if (!HttpProxyCredentialTypeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.proxyCredentialType = value;
             }
@@ -64,10 +74,7 @@ namespace System.ServiceModel
 
         public ExtendedProtectionPolicy ExtendedProtectionPolicy
         {
-            get
-            {
-                return this.extendedProtectionPolicy;
-            }
+            get { return this.extendedProtectionPolicy; }
             set
             {
                 if (value == null)
@@ -75,11 +82,21 @@ namespace System.ServiceModel
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("value");
                 }
 
-                if (value.PolicyEnforcement == PolicyEnforcement.Always &&
-                    !System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy.OSSupportsExtendedProtection)
+                if (
+                    value.PolicyEnforcement == PolicyEnforcement.Always
+                    && !System
+                        .Security
+                        .Authentication
+                        .ExtendedProtection
+                        .ExtendedProtectionPolicy
+                        .OSSupportsExtendedProtection
+                )
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new PlatformNotSupportedException(SR.GetString(SR.ExtendedProtectionNotSupported)));
+                        new PlatformNotSupportedException(
+                            SR.GetString(SR.ExtendedProtectionNotSupported)
+                        )
+                    );
                 }
 
                 this.extendedProtectionPolicy = value;
@@ -94,16 +111,26 @@ namespace System.ServiceModel
 
         void ConfigureAuthentication(HttpTransportBindingElement http)
         {
-            http.AuthenticationScheme = HttpClientCredentialTypeHelper.MapToAuthenticationScheme(this.clientCredentialType);
-            http.ProxyAuthenticationScheme = HttpProxyCredentialTypeHelper.MapToAuthenticationScheme(this.proxyCredentialType);
+            http.AuthenticationScheme = HttpClientCredentialTypeHelper.MapToAuthenticationScheme(
+                this.clientCredentialType
+            );
+            http.ProxyAuthenticationScheme =
+                HttpProxyCredentialTypeHelper.MapToAuthenticationScheme(this.proxyCredentialType);
             http.Realm = this.Realm;
             http.ExtendedProtectionPolicy = this.extendedProtectionPolicy;
         }
 
-        static void ConfigureAuthentication(HttpTransportBindingElement http, HttpTransportSecurity transportSecurity)
+        static void ConfigureAuthentication(
+            HttpTransportBindingElement http,
+            HttpTransportSecurity transportSecurity
+        )
         {
-            transportSecurity.clientCredentialType = HttpClientCredentialTypeHelper.MapToClientCredentialType(http.AuthenticationScheme);
-            transportSecurity.proxyCredentialType = HttpProxyCredentialTypeHelper.MapToProxyCredentialType(http.ProxyAuthenticationScheme);
+            transportSecurity.clientCredentialType =
+                HttpClientCredentialTypeHelper.MapToClientCredentialType(http.AuthenticationScheme);
+            transportSecurity.proxyCredentialType =
+                HttpProxyCredentialTypeHelper.MapToProxyCredentialType(
+                    http.ProxyAuthenticationScheme
+                );
             transportSecurity.Realm = http.Realm;
             transportSecurity.extendedProtectionPolicy = http.ExtendedProtectionPolicy;
         }
@@ -120,16 +147,25 @@ namespace System.ServiceModel
 
         static bool IsDisabledAuthentication(HttpTransportBindingElement http)
         {
-            return http.AuthenticationScheme == AuthenticationSchemes.Anonymous && http.ProxyAuthenticationScheme == AuthenticationSchemes.Anonymous && http.Realm == DefaultRealm;
+            return http.AuthenticationScheme == AuthenticationSchemes.Anonymous
+                && http.ProxyAuthenticationScheme == AuthenticationSchemes.Anonymous
+                && http.Realm == DefaultRealm;
         }
 
-        internal void ConfigureTransportProtectionAndAuthentication(HttpsTransportBindingElement https)
+        internal void ConfigureTransportProtectionAndAuthentication(
+            HttpsTransportBindingElement https
+        )
         {
             ConfigureAuthentication(https);
-            https.RequireClientCertificate = (this.clientCredentialType == HttpClientCredentialType.Certificate);
+            https.RequireClientCertificate = (
+                this.clientCredentialType == HttpClientCredentialType.Certificate
+            );
         }
 
-        internal static void ConfigureTransportProtectionAndAuthentication(HttpsTransportBindingElement https, HttpTransportSecurity transportSecurity)
+        internal static void ConfigureTransportProtectionAndAuthentication(
+            HttpsTransportBindingElement https,
+            HttpTransportSecurity transportSecurity
+        )
         {
             ConfigureAuthentication(https, transportSecurity);
             if (https.RequireClientCertificate)
@@ -140,14 +176,24 @@ namespace System.ServiceModel
         {
             if (this.clientCredentialType == HttpClientCredentialType.Certificate)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.CertificateUnsupportedForHttpTransportCredentialOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.CertificateUnsupportedForHttpTransportCredentialOnly)
+                    )
+                );
             }
             ConfigureAuthentication(http);
         }
 
-        internal static bool IsConfiguredTransportAuthentication(HttpTransportBindingElement http, HttpTransportSecurity transportSecurity)
+        internal static bool IsConfiguredTransportAuthentication(
+            HttpTransportBindingElement http,
+            HttpTransportSecurity transportSecurity
+        )
         {
-            if (HttpClientCredentialTypeHelper.MapToClientCredentialType(http.AuthenticationScheme) == HttpClientCredentialType.Certificate)
+            if (
+                HttpClientCredentialTypeHelper.MapToClientCredentialType(http.AuthenticationScheme)
+                == HttpClientCredentialType.Certificate
+            )
                 return false;
             ConfigureAuthentication(http, transportSecurity);
             return true;
@@ -192,7 +238,10 @@ namespace System.ServiceModel
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool ShouldSerializeExtendedProtectionPolicy()
         {
-            return !ChannelBindingUtility.AreEqual(this.ExtendedProtectionPolicy, ChannelBindingUtility.DefaultPolicy);
+            return !ChannelBindingUtility.AreEqual(
+                this.ExtendedProtectionPolicy,
+                ChannelBindingUtility.DefaultPolicy
+            );
         }
     }
 }

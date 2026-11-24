@@ -5,8 +5,8 @@
 using System;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.CodeAnalysis;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 [TestClass]
 public class RandomRealParserTests
@@ -26,19 +26,29 @@ public class RandomRealParserTests
                 int beforeCount = r.Next(3);
                 int afterCount = r.Next(1 + part % 50);
                 int exp = r.Next(-330, 330);
-                if (beforeCount == 0) b.Append('0');
-                for (int j = 0; j < beforeCount; j++) b.Append((char)('0' + r.Next(10)));
+                if (beforeCount == 0)
+                    b.Append('0');
+                for (int j = 0; j < beforeCount; j++)
+                    b.Append((char)('0' + r.Next(10)));
                 b.Append('.');
-                for (int j = 0; j < afterCount; j++) b.Append((char)('0' + r.Next(10)));
+                for (int j = 0; j < afterCount; j++)
+                    b.Append((char)('0' + r.Next(10)));
                 b.Append('e');
-                if (exp >= 0 && r.Next(2) == 0) b.Append('+');
+                if (exp >= 0 && r.Next(2) == 0)
+                    b.Append('+');
                 b.Append(exp);
                 var s = b.ToString();
                 double d1;
                 d1 = CLibraryShim.RealConversions.atod(s);
                 double d2;
-                if (!RealParser.TryParseDouble(s, out d2)) d2 = 1.0 / 0.0;
-                Assert.AreEqual(d1, d2, 0.0, $"{s} differ\n  RealParser=>{d2:G17}\n  atod=>{d1:G17}\n");
+                if (!RealParser.TryParseDouble(s, out d2))
+                    d2 = 1.0 / 0.0;
+                Assert.AreEqual(
+                    d1,
+                    d2,
+                    0.0,
+                    $"{s} differ\n  RealParser=>{d2:G17}\n  atod=>{d1:G17}\n"
+                );
             }
         });
     }
@@ -58,19 +68,29 @@ public class RandomRealParserTests
                 int beforeCount = r.Next(3);
                 int afterCount = r.Next(1 + part % 50);
                 int exp = r.Next(-50, 40);
-                if (beforeCount == 0) b.Append('0');
-                for (int j = 0; j < beforeCount; j++) b.Append((char)('0' + r.Next(10)));
+                if (beforeCount == 0)
+                    b.Append('0');
+                for (int j = 0; j < beforeCount; j++)
+                    b.Append((char)('0' + r.Next(10)));
                 b.Append('.');
-                for (int j = 0; j < afterCount; j++) b.Append((char)('0' + r.Next(10)));
+                for (int j = 0; j < afterCount; j++)
+                    b.Append((char)('0' + r.Next(10)));
                 b.Append('e');
-                if (exp >= 0 && r.Next(2) == 0) b.Append('+');
+                if (exp >= 0 && r.Next(2) == 0)
+                    b.Append('+');
                 b.Append(exp);
                 var s = b.ToString();
                 float d1;
                 d1 = CLibraryShim.RealConversions.atof(s);
                 float d2;
-                if (!RealParser.TryParseFloat(s, out d2)) d2 = 1.0f / 0.0f;
-                Assert.AreEqual(d1, d2, 0.0, $"{s} differ\n  RealParser=>{d2:G17}\n  atof=>{d1:G17}\n");
+                if (!RealParser.TryParseFloat(s, out d2))
+                    d2 = 1.0f / 0.0f;
+                Assert.AreEqual(
+                    d1,
+                    d2,
+                    0.0,
+                    $"{s} differ\n  RealParser=>{d2:G17}\n  atof=>{d1:G17}\n"
+                );
             }
         });
     }

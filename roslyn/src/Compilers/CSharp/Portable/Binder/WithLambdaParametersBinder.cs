@@ -52,20 +52,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override Symbol ContainingMemberOrLambda
         {
-            get
-            {
-                return this.lambdaSymbol;
-            }
+            get { return this.lambdaSymbol; }
         }
 
         internal override bool IsNestedFunctionBinder => true;
 
         internal override bool IsDirectlyInIterator
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         // NOTE: Specifically not overriding IsIndirectlyInIterator.
@@ -75,7 +69,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return TypeWithAnnotations.Create(CreateErrorType());
         }
 
-        protected override void ValidateYield(YieldStatementSyntax node, BindingDiagnosticBag diagnostics)
+        protected override void ValidateYield(
+            YieldStatementSyntax node,
+            BindingDiagnosticBag diagnostics
+        )
         {
             if (node != null)
             {
@@ -84,7 +81,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         internal override void LookupSymbolsInSingleBinder(
-            LookupResult result, string name, int arity, ConsList<TypeSymbol> basesBeingResolved, LookupOptions options, Binder originalBinder, bool diagnose, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+            LookupResult result,
+            string name,
+            int arity,
+            ConsList<TypeSymbol> basesBeingResolved,
+            LookupOptions options,
+            Binder originalBinder,
+            bool diagnose,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(result.IsClear);
 
@@ -95,11 +100,24 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             foreach (var parameterSymbol in parameterMap[name])
             {
-                result.MergeEqual(originalBinder.CheckViability(parameterSymbol, arity, options, null, diagnose, ref useSiteInfo));
+                result.MergeEqual(
+                    originalBinder.CheckViability(
+                        parameterSymbol,
+                        arity,
+                        options,
+                        null,
+                        diagnose,
+                        ref useSiteInfo
+                    )
+                );
             }
         }
 
-        internal override void AddLookupSymbolsInfoInSingleBinder(LookupSymbolsInfo result, LookupOptions options, Binder originalBinder)
+        internal override void AddLookupSymbolsInfoInSingleBinder(
+            LookupSymbolsInfo result,
+            LookupOptions options,
+            Binder originalBinder
+        )
         {
             if (options.CanConsiderMembers())
             {
@@ -113,7 +131,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private static bool ReportConflictWithParameter(ParameterSymbol parameter, Symbol newSymbol, string name, Location newLocation, BindingDiagnosticBag diagnostics)
+        private static bool ReportConflictWithParameter(
+            ParameterSymbol parameter,
+            Symbol newSymbol,
+            string name,
+            Location newLocation,
+            BindingDiagnosticBag diagnostics
+        )
         {
             var oldLocation = parameter.GetFirstLocation();
             if (oldLocation == newLocation)
@@ -122,8 +146,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            // Quirk of the way we represent lambda parameters.                
-            SymbolKind newSymbolKind = (object)newSymbol == null ? SymbolKind.Parameter : newSymbol.Kind;
+            // Quirk of the way we represent lambda parameters.
+            SymbolKind newSymbolKind =
+                (object)newSymbol == null ? SymbolKind.Parameter : newSymbol.Kind;
 
             switch (newSymbolKind)
             {
@@ -155,24 +180,39 @@ namespace Microsoft.CodeAnalysis.CSharp
             return false;
         }
 
-        internal override bool EnsureSingleDefinition(Symbol symbol, string name, Location location, BindingDiagnosticBag diagnostics)
+        internal override bool EnsureSingleDefinition(
+            Symbol symbol,
+            string name,
+            Location location,
+            BindingDiagnosticBag diagnostics
+        )
         {
             ParameterSymbol existingDeclaration;
             var map = _definitionMap;
             if (map != null && map.TryGetValue(name, out existingDeclaration))
             {
-                return ReportConflictWithParameter(existingDeclaration, symbol, name, location, diagnostics);
+                return ReportConflictWithParameter(
+                    existingDeclaration,
+                    symbol,
+                    name,
+                    location,
+                    diagnostics
+                );
             }
 
             return false;
         }
 
-        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(SyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(
+            SyntaxNode scopeDesignator
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }
 
-        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(CSharpSyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(
+            CSharpSyntaxNode scopeDesignator
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }

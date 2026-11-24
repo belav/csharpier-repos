@@ -8,16 +8,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
     internal static class BaseArgumentListSyntaxExtensions
     {
-        public static SyntaxToken GetOpenToken(this BaseArgumentListSyntax node)
-            => node switch
+        public static SyntaxToken GetOpenToken(this BaseArgumentListSyntax node) =>
+            node switch
             {
                 ArgumentListSyntax list => list.OpenParenToken,
                 BracketedArgumentListSyntax bracketedList => bracketedList.OpenBracketToken,
                 _ => default,
             };
 
-        public static SyntaxToken GetCloseToken(this BaseArgumentListSyntax node)
-            => node switch
+        public static SyntaxToken GetCloseToken(this BaseArgumentListSyntax node) =>
+            node switch
             {
                 ArgumentListSyntax list => list.CloseParenToken,
                 BracketedArgumentListSyntax bracketedList => bracketedList.CloseBracketToken,

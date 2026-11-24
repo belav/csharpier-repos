@@ -32,11 +32,12 @@ namespace System.Data.Metadata.Edm
 
         #region Fields
         internal const DataSpace TargetPerspectiveDataSpace = DataSpace.SSpace;
+
         // TargetPerspective uses a ModelPerspective for a second lookup in type lookup
         private ModelPerspective _modelPerspective;
         #endregion
 
-        #region Methods 
+        #region Methods
         /// <summary>
         /// Look up a type in the target data space based upon the fullName
         /// </summary>
@@ -44,12 +45,23 @@ namespace System.Data.Metadata.Edm
         /// <param name="ignoreCase">true for case-insensitive lookup</param>
         /// <param name="usage"></param>
         /// <returns>a list of types that have the specified full name but may differ by strong name</returns>
-        internal override bool TryGetTypeByName(string fullName, bool ignoreCase, out TypeUsage usage)
+        internal override bool TryGetTypeByName(
+            string fullName,
+            bool ignoreCase,
+            out TypeUsage usage
+        )
         {
             EntityUtil.CheckStringArgument(fullName, "fullName");
-            
+
             EdmType edmType = null;
-            if (this.MetadataWorkspace.TryGetItem<EdmType>(fullName, ignoreCase, this.TargetDataspace, out edmType))
+            if (
+                this.MetadataWorkspace.TryGetItem<EdmType>(
+                    fullName,
+                    ignoreCase,
+                    this.TargetDataspace,
+                    out edmType
+                )
+            )
             {
                 usage = TypeUsage.Create(edmType);
                 usage = Helper.GetModelTypeUsage(usage);
@@ -66,11 +78,19 @@ namespace System.Data.Metadata.Edm
         /// <param name="ignoreCase"></param>
         /// <param name="entityContainer"></param>
         /// <returns></returns>
-        internal override bool TryGetEntityContainer(string name, bool ignoreCase, out EntityContainer entityContainer)
+        internal override bool TryGetEntityContainer(
+            string name,
+            bool ignoreCase,
+            out EntityContainer entityContainer
+        )
         {
             if (!base.TryGetEntityContainer(name, ignoreCase, out entityContainer))
             {
-                return _modelPerspective.TryGetEntityContainer(name, ignoreCase, out entityContainer);
+                return _modelPerspective.TryGetEntityContainer(
+                    name,
+                    ignoreCase,
+                    out entityContainer
+                );
             }
 
             return true;

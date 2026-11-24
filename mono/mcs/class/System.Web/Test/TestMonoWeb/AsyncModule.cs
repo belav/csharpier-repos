@@ -3,34 +3,46 @@ using System.Web;
 
 namespace TestMonoWeb
 {
-	/// <summary>
-	/// Summary description for AsyncModule.
-	/// </summary>
-	public class AsyncModule : IHttpModule
-	{
-		HttpApplication _app;
+    /// <summary>
+    /// Summary description for AsyncModule.
+    /// </summary>
+    public class AsyncModule : IHttpModule
+    {
+        HttpApplication _app;
 
-		public void Init(HttpApplication app) {
-			app.AddOnPreRequestHandlerExecuteAsync(
-				new BeginEventHandler(this.BeginPreHandlerExecute), 
-				new EndEventHandler(this.EndPreHandlerExecute));
+        public void Init(HttpApplication app)
+        {
+            app.AddOnPreRequestHandlerExecuteAsync(
+                new BeginEventHandler(this.BeginPreHandlerExecute),
+                new EndEventHandler(this.EndPreHandlerExecute)
+            );
 
-			_app = app;
-		}
+            _app = app;
+        }
 
-		IAsyncResult BeginPreHandlerExecute(Object source, EventArgs e, AsyncCallback cb, Object extraData) {
-			((HttpApplication) source).Context.Response.Write("AsyncModule.BeginPreHandlerExecute()<br>\n");
+        IAsyncResult BeginPreHandlerExecute(
+            Object source,
+            EventArgs e,
+            AsyncCallback cb,
+            Object extraData
+        )
+        {
+            ((HttpApplication)source).Context.Response.Write(
+                "AsyncModule.BeginPreHandlerExecute()<br>\n"
+            );
 
-			AsynchOperation asynch = new AsynchOperation(cb, _app.Context, extraData);
-			asynch.StartAsyncWork();
-			return asynch;
-		}
-		
-		void EndPreHandlerExecute(IAsyncResult ar) {
-			((AsynchOperation) ar).Context.Response.Write("AsyncModule.EndPreHandlerExecute()<br>\n");
-		}		
+            AsynchOperation asynch = new AsynchOperation(cb, _app.Context, extraData);
+            asynch.StartAsyncWork();
+            return asynch;
+        }
 
-		public void Dispose() {
-		}
-	}
+        void EndPreHandlerExecute(IAsyncResult ar)
+        {
+            ((AsynchOperation)ar).Context.Response.Write(
+                "AsyncModule.EndPreHandlerExecute()<br>\n"
+            );
+        }
+
+        public void Dispose() { }
+    }
 }

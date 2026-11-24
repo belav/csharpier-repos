@@ -4,11 +4,11 @@
 
 #nullable disable
 
+using System;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator;
 using Microsoft.VisualStudio.Debugger.Evaluation;
 using Roslyn.Test.Utilities;
-using System;
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         public void LanguageId()
         {
             var source =
-@"class C
+                @"class C
 {
     static void F() { }
 }";
@@ -40,11 +40,27 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             var module = new Module(bytes);
             using (var process = new Process(module))
             {
-                var requestDefaultId = new Request(null, MemberSignatureParser.Parse("F"), Guid.Empty);
+                var requestDefaultId = new Request(
+                    null,
+                    MemberSignatureParser.Parse("F"),
+                    Guid.Empty
+                );
                 var requestUnknown = new Request(null, MemberSignatureParser.Parse("F"), unknownId);
-                var requestCausalityBreakpoint = new Request(null, MemberSignatureParser.Parse("F"), DkmLanguageId.CausalityBreakpoint);
-                var requestMethodId = new Request(null, MemberSignatureParser.Parse("F"), DkmLanguageId.MethodId);
-                var requestCSharp = new Request(null, MemberSignatureParser.Parse("F"), csharpLanguageId);
+                var requestCausalityBreakpoint = new Request(
+                    null,
+                    MemberSignatureParser.Parse("F"),
+                    DkmLanguageId.CausalityBreakpoint
+                );
+                var requestMethodId = new Request(
+                    null,
+                    MemberSignatureParser.Parse("F"),
+                    DkmLanguageId.MethodId
+                );
+                var requestCSharp = new Request(
+                    null,
+                    MemberSignatureParser.Parse("F"),
+                    csharpLanguageId
+                );
                 var requestVB = new Request(null, MemberSignatureParser.Parse("F"), vbLanguageId);
                 var requestCPP = new Request(null, MemberSignatureParser.Parse("F"), cppLanguageId);
                 resolver.EnableResolution(process, requestDefaultId);
@@ -67,11 +83,27 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             module = new Module(bytes);
             using (var process = new Process())
             {
-                var requestDefaultId = new Request(null, MemberSignatureParser.Parse("F"), Guid.Empty);
+                var requestDefaultId = new Request(
+                    null,
+                    MemberSignatureParser.Parse("F"),
+                    Guid.Empty
+                );
                 var requestUnknown = new Request(null, MemberSignatureParser.Parse("F"), unknownId);
-                var requestCausalityBreakpoint = new Request(null, MemberSignatureParser.Parse("F"), DkmLanguageId.CausalityBreakpoint);
-                var requestMethodId = new Request(null, MemberSignatureParser.Parse("F"), DkmLanguageId.MethodId);
-                var requestCSharp = new Request(null, MemberSignatureParser.Parse("F"), csharpLanguageId);
+                var requestCausalityBreakpoint = new Request(
+                    null,
+                    MemberSignatureParser.Parse("F"),
+                    DkmLanguageId.CausalityBreakpoint
+                );
+                var requestMethodId = new Request(
+                    null,
+                    MemberSignatureParser.Parse("F"),
+                    DkmLanguageId.MethodId
+                );
+                var requestCSharp = new Request(
+                    null,
+                    MemberSignatureParser.Parse("F"),
+                    csharpLanguageId
+                );
                 var requestVB = new Request(null, MemberSignatureParser.Parse("F"), vbLanguageId);
                 var requestCPP = new Request(null, MemberSignatureParser.Parse("F"), cppLanguageId);
                 resolver.EnableResolution(process, requestCPP);
@@ -97,7 +129,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         public void Properties()
         {
             var source =
-@"abstract class A
+                @"abstract class A
 {
     abstract internal object P { get; set; }
 }
@@ -121,7 +153,15 @@ interface I
             using (var process = new Process(new Module(compilation.EmitToArray())))
             {
                 var resolver = Resolver.VisualBasicResolver;
-                Resolve(process, resolver, "P", "B.get_P()", "B.set_P(System.Object)", "C.get_P()", "D.set_P(System.Int32)");
+                Resolve(
+                    process,
+                    resolver,
+                    "P",
+                    "B.get_P()",
+                    "B.set_P(System.Object)",
+                    "C.get_P()",
+                    "D.set_P(System.Int32)"
+                );
                 Resolve(process, resolver, "A.P");
                 Resolve(process, resolver, "B.P", "B.get_P()", "B.set_P(System.Object)");
                 Resolve(process, resolver, "B.P()");
@@ -133,7 +173,13 @@ interface I
                 Resolve(process, resolver, "D.P()");
                 Resolve(process, resolver, "D.P(Object)");
                 Resolve(process, resolver, "get_P", "B.get_P()", "C.get_P()");
-                Resolve(process, resolver, "set_P", "B.set_P(System.Object)", "D.set_P(System.Int32)");
+                Resolve(
+                    process,
+                    resolver,
+                    "set_P",
+                    "B.set_P(System.Object)",
+                    "D.set_P(System.Int32)"
+                );
                 Resolve(process, resolver, "B.get_P()", "B.get_P()");
                 Resolve(process, resolver, "B.set_P", "B.set_P(System.Object)");
             }
@@ -143,7 +189,7 @@ interface I
         public void DifferentCase_MethodsAndProperties()
         {
             var source =
-@"class A
+                @"class A
 {
     static void method() { }
     static void Method(object o) { }
@@ -158,11 +204,46 @@ class B
             using (var process = new Process(new Module(compilation.EmitToArray())))
             {
                 var resolver = Resolver.VisualBasicResolver;
-                Resolve(process, resolver, "method", "A.method()", "A.Method(System.Object)", "B.Method()");
-                Resolve(process, resolver, "Method", "A.method()", "A.Method(System.Object)", "B.Method()");
-                Resolve(process, resolver, "[property]", "A.get_property()", "B.get_Property()", "B.set_Property(System.Object)");
-                Resolve(process, resolver, "[Property]", "A.get_property()", "B.get_Property()", "B.set_Property(System.Object)");
-                Resolve(process, resolver, "[PROPERTY]", "A.get_property()", "B.get_Property()", "B.set_Property(System.Object)");
+                Resolve(
+                    process,
+                    resolver,
+                    "method",
+                    "A.method()",
+                    "A.Method(System.Object)",
+                    "B.Method()"
+                );
+                Resolve(
+                    process,
+                    resolver,
+                    "Method",
+                    "A.method()",
+                    "A.Method(System.Object)",
+                    "B.Method()"
+                );
+                Resolve(
+                    process,
+                    resolver,
+                    "[property]",
+                    "A.get_property()",
+                    "B.get_Property()",
+                    "B.set_Property(System.Object)"
+                );
+                Resolve(
+                    process,
+                    resolver,
+                    "[Property]",
+                    "A.get_property()",
+                    "B.get_Property()",
+                    "B.set_Property(System.Object)"
+                );
+                Resolve(
+                    process,
+                    resolver,
+                    "[PROPERTY]",
+                    "A.get_property()",
+                    "B.get_Property()",
+                    "B.set_Property(System.Object)"
+                );
                 Resolve(process, resolver, "GET_PROPERTY", "A.get_property()", "B.get_Property()");
             }
         }
@@ -171,7 +252,7 @@ class B
         public void DifferentCase_NamespacesAndTypes()
         {
             var source =
-@"namespace one.two
+                @"namespace one.two
 {
     class THREE
     {
@@ -189,17 +270,64 @@ namespace One.Two
             using (var process = new Process(new Module(compilation.EmitToArray())))
             {
                 var resolver = Resolver.VisualBasicResolver;
-                Resolve(process, resolver, "Method", "One.Two.Three.Method(One.Two.Three)", "one.two.THREE.Method(one.two.THREE)");
-                Resolve(process, resolver, "Three.Method", "One.Two.Three.Method(One.Two.Three)", "one.two.THREE.Method(one.two.THREE)");
-                Resolve(process, resolver, "three.Method(three)", "One.Two.Three.Method(One.Two.Three)", "one.two.THREE.Method(one.two.THREE)");
-                Resolve(process, resolver, "THREE.Method(THREE)", "One.Two.Three.Method(One.Two.Three)", "one.two.THREE.Method(one.two.THREE)");
-                Resolve(process, resolver, "ONE.TWO.THREE.Method", "One.Two.Three.Method(One.Two.Three)", "one.two.THREE.Method(one.two.THREE)");
-                Resolve(process, resolver, "one.two.three.Method(one.two.three)", "One.Two.Three.Method(One.Two.Three)", "one.two.THREE.Method(one.two.THREE)");
-                Resolve(process, resolver, "THREE", "One.Two.Three..ctor()", "one.two.THREE..ctor()");
+                Resolve(
+                    process,
+                    resolver,
+                    "Method",
+                    "One.Two.Three.Method(One.Two.Three)",
+                    "one.two.THREE.Method(one.two.THREE)"
+                );
+                Resolve(
+                    process,
+                    resolver,
+                    "Three.Method",
+                    "One.Two.Three.Method(One.Two.Three)",
+                    "one.two.THREE.Method(one.two.THREE)"
+                );
+                Resolve(
+                    process,
+                    resolver,
+                    "three.Method(three)",
+                    "One.Two.Three.Method(One.Two.Three)",
+                    "one.two.THREE.Method(one.two.THREE)"
+                );
+                Resolve(
+                    process,
+                    resolver,
+                    "THREE.Method(THREE)",
+                    "One.Two.Three.Method(One.Two.Three)",
+                    "one.two.THREE.Method(one.two.THREE)"
+                );
+                Resolve(
+                    process,
+                    resolver,
+                    "ONE.TWO.THREE.Method",
+                    "One.Two.Three.Method(One.Two.Three)",
+                    "one.two.THREE.Method(one.two.THREE)"
+                );
+                Resolve(
+                    process,
+                    resolver,
+                    "one.two.three.Method(one.two.three)",
+                    "One.Two.Three.Method(One.Two.Three)",
+                    "one.two.THREE.Method(one.two.THREE)"
+                );
+                Resolve(
+                    process,
+                    resolver,
+                    "THREE",
+                    "One.Two.Three..ctor()",
+                    "one.two.THREE..ctor()"
+                );
             }
         }
 
-        private static void Resolve(Process process, Resolver resolver, string str, params string[] expectedSignatures)
+        private static void Resolve(
+            Process process,
+            Resolver resolver,
+            string str,
+            params string[] expectedSignatures
+        )
         {
             var signature = MemberSignatureParser.Parse(str);
             Assert.NotNull(signature);

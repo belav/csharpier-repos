@@ -33,10 +33,12 @@ public class DbContextFactorySource<TContext> : IDbContextFactorySource<TContext
 
     private static Func<IServiceProvider, DbContextOptions<TContext>, TContext> CreateActivator()
     {
-        var constructors
-            = typeof(TContext).GetTypeInfo().DeclaredConstructors
-                .Where(c => c is { IsStatic: false, IsPublic: true } && c.GetParameters().Length != 0)
-                .ToArray();
+        var constructors = typeof(TContext)
+            .GetTypeInfo()
+            .DeclaredConstructors.Where(c =>
+                c is { IsStatic: false, IsPublic: true } && c.GetParameters().Length != 0
+            )
+            .ToArray();
 
         if (constructors.Length == 1)
         {
@@ -45,19 +47,25 @@ public class DbContextFactorySource<TContext> : IDbContextFactorySource<TContext
             if (parameters.Length == 1)
             {
                 var isGeneric = parameters[0].ParameterType == typeof(DbContextOptions<TContext>);
-                if (isGeneric
-                    || parameters[0].ParameterType == typeof(DbContextOptions))
+                if (isGeneric || parameters[0].ParameterType == typeof(DbContextOptions))
                 {
-                    var optionsParam = Expression.Parameter(typeof(DbContextOptions<TContext>), "options");
+                    var optionsParam = Expression.Parameter(
+                        typeof(DbContextOptions<TContext>),
+                        "options"
+                    );
                     var providerParam = Expression.Parameter(typeof(IServiceProvider), "provider");
 
-                    return Expression.Lambda<Func<IServiceProvider, DbContextOptions<TContext>, TContext>>(
+                    return Expression
+                        .Lambda<Func<IServiceProvider, DbContextOptions<TContext>, TContext>>(
                             Expression.New(
                                 constructors[0],
                                 isGeneric
                                     ? optionsParam
-                                    : Expression.Convert(optionsParam, typeof(DbContextOptions))),
-                            providerParam, optionsParam)
+                                    : Expression.Convert(optionsParam, typeof(DbContextOptions))
+                            ),
+                            providerParam,
+                            optionsParam
+                        )
                         .Compile();
                 }
             }

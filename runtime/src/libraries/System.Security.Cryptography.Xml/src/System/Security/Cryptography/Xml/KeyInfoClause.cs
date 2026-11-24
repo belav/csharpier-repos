@@ -18,6 +18,7 @@ namespace System.Security.Cryptography.Xml
         //
 
         public abstract XmlElement GetXml();
+
         internal virtual XmlElement GetXml(XmlDocument xmlDocument)
         {
             XmlElement keyInfo = GetXml();

@@ -32,7 +32,8 @@ namespace System.Collections.Generic.Tests
         }
     }
 
-    public abstract class ArrayBuilderTests<T, TGenerator> where TGenerator : IGenerator<T>, new()
+    public abstract class ArrayBuilderTests<T, TGenerator>
+        where TGenerator : IGenerator<T>, new()
     {
         private static readonly TGenerator s_generator = new TGenerator();
 
@@ -218,7 +219,8 @@ namespace System.Collections.Generic.Tests
         }
     }
 
-    public class ArrayBuilderTestsString : ArrayBuilderTests<string, ArrayBuilderTestsString.Generator>
+    public class ArrayBuilderTestsString
+        : ArrayBuilderTests<string, ArrayBuilderTestsString.Generator>
     {
         public sealed class Generator : IGenerator<string>
         {

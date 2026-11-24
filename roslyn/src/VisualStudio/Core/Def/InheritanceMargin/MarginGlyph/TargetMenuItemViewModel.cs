@@ -28,15 +28,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
         internal TargetMenuItemViewModel(
             string displayContent,
             ImageMoniker imageMoniker,
-            DetachedDefinitionItem definitionItem) : base(displayContent, imageMoniker)
+            DetachedDefinitionItem definitionItem
+        )
+            : base(displayContent, imageMoniker)
         {
             DefinitionItem = definitionItem;
         }
 
-        public static TargetMenuItemViewModel Create(InheritanceTargetItem target, string displayContent)
-            => new(
-                displayContent,
-                target.Glyph.GetImageMoniker(),
-                target.DefinitionItem);
+        public static TargetMenuItemViewModel Create(
+            InheritanceTargetItem target,
+            string displayContent
+        ) => new(displayContent, target.Glyph.GetImageMoniker(), target.DefinitionItem);
     }
 }

@@ -141,8 +141,7 @@ public static class WebHostBuilderExtensions
                 )]
                 object GetStartupInstance(IServiceProvider serviceProvider)
                 {
-                    var instance =
-                        startupFactory(context)
+                    var instance = startupFactory(context)
                         ?? throw new InvalidOperationException(
                             "The specified factory returned null startup instance."
                         );
@@ -199,20 +198,17 @@ public static class WebHostBuilderExtensions
             }
             else
             {
-                services.AddSingleton(
-                    typeof(IStartup),
-                    sp =>
-                    {
-                        var hostingEnvironment = sp.GetRequiredService<IHostEnvironment>();
-                        return new ConventionBasedStartup(
-                            StartupLoader.LoadMethods(
-                                sp,
-                                startupType,
-                                hostingEnvironment.EnvironmentName
-                            )
-                        );
-                    }
-                );
+                services.AddSingleton(typeof(IStartup), sp =>
+                {
+                    var hostingEnvironment = sp.GetRequiredService<IHostEnvironment>();
+                    return new ConventionBasedStartup(
+                        StartupLoader.LoadMethods(
+                            sp,
+                            startupType,
+                            hostingEnvironment.EnvironmentName
+                        )
+                    );
+                });
             }
         });
     }

@@ -27,14 +27,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             /// <summary>
             /// Computes a list of nodes and tokens that need to be reduced in the given syntax root.
             /// </summary>
-            public static ImmutableArray<NodeOrTokenToReduce> Compute(SyntaxNode root, Func<SyntaxNodeOrToken, bool> isNodeOrTokenOutsideSimplifySpans)
+            public static ImmutableArray<NodeOrTokenToReduce> Compute(
+                SyntaxNode root,
+                Func<SyntaxNodeOrToken, bool> isNodeOrTokenOutsideSimplifySpans
+            )
             {
-                var reduceNodeComputer = new NodesAndTokensToReduceComputer(isNodeOrTokenOutsideSimplifySpans);
+                var reduceNodeComputer = new NodesAndTokensToReduceComputer(
+                    isNodeOrTokenOutsideSimplifySpans
+                );
                 reduceNodeComputer.Visit(root);
                 return reduceNodeComputer._nodesAndTokensToReduce.ToImmutableArray();
             }
 
-            private NodesAndTokensToReduceComputer(Func<SyntaxNodeOrToken, bool> isNodeOrTokenOutsideSimplifySpans)
+            private NodesAndTokensToReduceComputer(
+                Func<SyntaxNodeOrToken, bool> isNodeOrTokenOutsideSimplifySpans
+            )
                 : base(visitIntoStructuredTrivia: true)
             {
                 _isNodeOrTokenOutsideSimplifySpans = isNodeOrTokenOutsideSimplifySpans;
@@ -55,7 +62,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     {
                         // One of the ancestor node is within a simplification span, but this node is outside all simplification spans.
                         // Add DoNotSimplifyAnnotation to node to ensure it doesn't get simplified.
-                        return node.WithAdditionalAnnotations(SimplificationHelpers.DoNotSimplifyAnnotation);
+                        return node.WithAdditionalAnnotations(
+                            SimplificationHelpers.DoNotSimplifyAnnotation
+                        );
                     }
                     else
                     {
@@ -64,15 +73,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 }
 
                 var savedSimplifyAllDescendants = _simplifyAllDescendants;
-                _simplifyAllDescendants = _simplifyAllDescendants || node.HasAnnotation(Simplifier.Annotation);
+                _simplifyAllDescendants =
+                    _simplifyAllDescendants || node.HasAnnotation(Simplifier.Annotation);
 
                 if (!_insideSpeculatedNode && SpeculationAnalyzer.CanSpeculateOnNode(node))
                 {
-                    if (_simplifyAllDescendants || node.DescendantNodesAndTokens(s_containsAnnotations, descendIntoTrivia: true).Any(s_hasSimplifierAnnotation))
+                    if (
+                        _simplifyAllDescendants
+                        || node.DescendantNodesAndTokens(
+                                s_containsAnnotations,
+                                descendIntoTrivia: true
+                            )
+                            .Any(s_hasSimplifierAnnotation)
+                    )
                     {
                         _insideSpeculatedNode = true;
                         var rewrittenNode = base.Visit(node);
-                        _nodesAndTokensToReduce.Add(new NodeOrTokenToReduce(rewrittenNode, _simplifyAllDescendants, node));
+                        _nodesAndTokensToReduce.Add(
+                            new NodeOrTokenToReduce(rewrittenNode, _simplifyAllDescendants, node)
+                        );
                         _insideSpeculatedNode = false;
                     }
                 }
@@ -93,7 +112,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     {
                         // One of the ancestor node is within a simplification span, but this token is outside all simplification spans.
                         // Add DoNotSimplifyAnnotation to token to ensure it doesn't get simplified.
-                        return token.WithAdditionalAnnotations(SimplificationHelpers.DoNotSimplifyAnnotation);
+                        return token.WithAdditionalAnnotations(
+                            SimplificationHelpers.DoNotSimplifyAnnotation
+                        );
                     }
                     else
                     {
@@ -102,11 +123,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 }
 
                 var savedSimplifyAllDescendants = _simplifyAllDescendants;
-                _simplifyAllDescendants = _simplifyAllDescendants || token.HasAnnotation(Simplifier.Annotation);
+                _simplifyAllDescendants =
+                    _simplifyAllDescendants || token.HasAnnotation(Simplifier.Annotation);
 
-                if (_simplifyAllDescendants && !_insideSpeculatedNode && !token.IsKind(SyntaxKind.None))
+                if (
+                    _simplifyAllDescendants
+                    && !_insideSpeculatedNode
+                    && !token.IsKind(SyntaxKind.None)
+                )
                 {
-                    _nodesAndTokensToReduce.Add(new NodeOrTokenToReduce(token, SimplifyAllDescendants: true, token));
+                    _nodesAndTokensToReduce.Add(
+                        new NodeOrTokenToReduce(token, SimplifyAllDescendants: true, token)
+                    );
                 }
 
                 if (token.ContainsAnnotations || savedSimplifyAllDescendants)

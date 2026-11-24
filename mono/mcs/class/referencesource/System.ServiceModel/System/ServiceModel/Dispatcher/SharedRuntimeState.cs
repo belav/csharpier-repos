@@ -53,11 +53,19 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (this.IsOnServer)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxImmutableServiceHostBehavior0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxImmutableServiceHostBehavior0)
+                        )
+                    );
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxImmutableChannelFactoryBehavior0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxImmutableChannelFactoryBehavior0)
+                        )
+                    );
                 }
             }
         }

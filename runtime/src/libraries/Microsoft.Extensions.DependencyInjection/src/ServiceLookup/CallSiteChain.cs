@@ -21,7 +21,9 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         {
             if (_callSiteChain.ContainsKey(serviceIdentifier))
             {
-                throw new InvalidOperationException(CreateCircularDependencyExceptionMessage(serviceIdentifier));
+                throw new InvalidOperationException(
+                    CreateCircularDependencyExceptionMessage(serviceIdentifier)
+                );
             }
         }
 
@@ -32,13 +34,21 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
         public void Add(ServiceIdentifier serviceIdentifier, Type? implementationType = null)
         {
-            _callSiteChain[serviceIdentifier] = new ChainItemInfo(_callSiteChain.Count, implementationType);
+            _callSiteChain[serviceIdentifier] = new ChainItemInfo(
+                _callSiteChain.Count,
+                implementationType
+            );
         }
 
         private string CreateCircularDependencyExceptionMessage(ServiceIdentifier serviceIdentifier)
         {
             var messageBuilder = new StringBuilder();
-            messageBuilder.Append(SR.Format(SR.CircularDependencyException, TypeNameHelper.GetTypeDisplayName(serviceIdentifier.ServiceType)));
+            messageBuilder.Append(
+                SR.Format(
+                    SR.CircularDependencyException,
+                    TypeNameHelper.GetTypeDisplayName(serviceIdentifier.ServiceType)
+                )
+            );
             messageBuilder.AppendLine();
 
             AppendResolutionPath(messageBuilder, serviceIdentifier);
@@ -46,7 +56,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             return messageBuilder.ToString();
         }
 
-        private void AppendResolutionPath(StringBuilder builder, ServiceIdentifier currentlyResolving)
+        private void AppendResolutionPath(
+            StringBuilder builder,
+            ServiceIdentifier currentlyResolving
+        )
         {
             var ordered = new List<KeyValuePair<ServiceIdentifier, ChainItemInfo>>(_callSiteChain);
             ordered.Sort((a, b) => a.Value.Order.CompareTo(b.Value.Order));
@@ -55,16 +68,22 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             {
                 ServiceIdentifier serviceIdentifier = pair.Key;
                 Type? implementationType = pair.Value.ImplementationType;
-                if (implementationType == null || serviceIdentifier.ServiceType == implementationType)
+                if (
+                    implementationType == null
+                    || serviceIdentifier.ServiceType == implementationType
+                )
                 {
-                    builder.Append(TypeNameHelper.GetTypeDisplayName(serviceIdentifier.ServiceType));
+                    builder.Append(
+                        TypeNameHelper.GetTypeDisplayName(serviceIdentifier.ServiceType)
+                    );
                 }
                 else
                 {
-                    builder.Append(TypeNameHelper.GetTypeDisplayName(serviceIdentifier.ServiceType))
-                           .Append('(')
-                           .Append(TypeNameHelper.GetTypeDisplayName(implementationType))
-                           .Append(')');
+                    builder
+                        .Append(TypeNameHelper.GetTypeDisplayName(serviceIdentifier.ServiceType))
+                        .Append('(')
+                        .Append(TypeNameHelper.GetTypeDisplayName(implementationType))
+                        .Append(')');
                 }
 
                 builder.Append(" -> ");

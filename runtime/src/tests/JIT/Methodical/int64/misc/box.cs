@@ -27,7 +27,7 @@ namespace JitTest_box_misc_cs
             }
             Console.WriteLine("Passed");
             return 100;
-        fail:
+            fail:
             Console.WriteLine("Failed");
             return 1;
         }

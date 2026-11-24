@@ -3,9 +3,7 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 using Internal.Cryptography;
-
 using Microsoft.Win32.SafeHandles;
 
 internal static partial class Interop
@@ -16,25 +14,56 @@ internal static partial class Interop
     //
     internal static partial class Crypt32
     {
-        internal static unsafe SafeHandle CryptDecodeObjectToMemory(CryptDecodeObjectStructType lpszStructType, byte[] pbEncoded)
+        internal static unsafe SafeHandle CryptDecodeObjectToMemory(
+            CryptDecodeObjectStructType lpszStructType,
+            byte[] pbEncoded
+        )
         {
             fixed (byte* pbEncodedPointer = pbEncoded)
             {
-                return CryptDecodeObjectToMemory(lpszStructType, (IntPtr)pbEncodedPointer, pbEncoded.Length);
+                return CryptDecodeObjectToMemory(
+                    lpszStructType,
+                    (IntPtr)pbEncodedPointer,
+                    pbEncoded.Length
+                );
             }
         }
 
-        internal static unsafe SafeHandle CryptDecodeObjectToMemory(CryptDecodeObjectStructType lpszStructType, IntPtr pbEncoded, int cbEncoded)
+        internal static unsafe SafeHandle CryptDecodeObjectToMemory(
+            CryptDecodeObjectStructType lpszStructType,
+            IntPtr pbEncoded,
+            int cbEncoded
+        )
         {
             int cbRequired = 0;
 
-            if (!CryptDecodeObject(MsgEncodingType.All, (IntPtr)lpszStructType, pbEncoded, cbEncoded, 0, null, ref cbRequired))
+            if (
+                !CryptDecodeObject(
+                    MsgEncodingType.All,
+                    (IntPtr)lpszStructType,
+                    pbEncoded,
+                    cbEncoded,
+                    0,
+                    null,
+                    ref cbRequired
+                )
+            )
             {
                 throw Marshal.GetLastPInvokeError().ToCryptographicException();
             }
 
             SafeHandle sh = SafeHeapAllocHandle.Alloc(cbRequired);
-            if (!CryptDecodeObject(MsgEncodingType.All, (IntPtr)lpszStructType, pbEncoded, cbEncoded, 0, (void*)sh.DangerousGetHandle(), ref cbRequired))
+            if (
+                !CryptDecodeObject(
+                    MsgEncodingType.All,
+                    (IntPtr)lpszStructType,
+                    pbEncoded,
+                    cbEncoded,
+                    0,
+                    (void*)sh.DangerousGetHandle(),
+                    ref cbRequired
+                )
+            )
             {
                 Exception e = Marshal.GetLastPInvokeError().ToCryptographicException();
                 sh.Dispose();
@@ -44,7 +73,10 @@ internal static partial class Interop
             return sh;
         }
 
-        internal static unsafe byte[] CryptEncodeObjectToByteArray(CryptDecodeObjectStructType lpszStructType, void* decoded)
+        internal static unsafe byte[] CryptEncodeObjectToByteArray(
+            CryptDecodeObjectStructType lpszStructType,
+            void* decoded
+        )
         {
             int cb = 0;
             if (!CryptEncodeObject(MsgEncodingType.All, lpszStructType, decoded, null, ref cb))

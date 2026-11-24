@@ -79,7 +79,11 @@ namespace System.Web.Mvc
             set { _viewContext = value; }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This is the mechanism by which the ViewUserControl gets its ViewDataDictionary object.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "This is the mechanism by which the ViewUserControl gets its ViewDataDictionary object."
+        )]
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ViewDataDictionary ViewData
@@ -106,7 +110,9 @@ namespace System.Web.Mvc
                 ViewPage viewPage = Page as ViewPage;
                 if (viewPage == null)
                 {
-                    throw new InvalidOperationException(MvcResources.ViewUserControl_RequiresViewPage);
+                    throw new InvalidOperationException(
+                        MvcResources.ViewUserControl_RequiresViewPage
+                    );
                 }
                 return viewPage;
             }
@@ -137,7 +143,9 @@ namespace System.Web.Mvc
                     String.Format(
                         CultureInfo.CurrentCulture,
                         MvcResources.ViewUserControl_RequiresViewDataProvider,
-                        AppRelativeVirtualPath));
+                        AppRelativeVirtualPath
+                    )
+                );
             }
 
             ViewDataDictionary myViewData = vdc.ViewData;
@@ -147,7 +155,9 @@ namespace System.Web.Mvc
             if (!String.IsNullOrEmpty(ViewDataKey))
             {
                 object target = myViewData.Eval(ViewDataKey);
-                myViewData = target as ViewDataDictionary ?? new ViewDataDictionary(myViewData) { Model = target };
+                myViewData =
+                    target as ViewDataDictionary
+                    ?? new ViewDataDictionary(myViewData) { Model = target };
             }
 
             SetViewData(myViewData);
@@ -170,13 +180,18 @@ namespace System.Web.Mvc
 
         public virtual void RenderView(ViewContext viewContext)
         {
-            using (ViewUserControlContainerPage containerPage = new ViewUserControlContainerPage(this))
+            using (
+                ViewUserControlContainerPage containerPage = new ViewUserControlContainerPage(this)
+            )
             {
                 RenderViewAndRestoreContentType(containerPage, viewContext);
             }
         }
 
-        internal static void RenderViewAndRestoreContentType(ViewPage containerPage, ViewContext viewContext)
+        internal static void RenderViewAndRestoreContentType(
+            ViewPage containerPage,
+            ViewContext viewContext
+        )
         {
             // We need to restore the Content-Type since Page.SetIntrinsics() will reset it. It's not possible
             // to work around the call to SetIntrinsics() since the control's render method requires the
@@ -187,9 +202,21 @@ namespace System.Web.Mvc
             viewContext.HttpContext.Response.ContentType = savedContentType;
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "textWriter", Justification = "This method existed in MVC 1.0 and has been deprecated.")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "This method existed in MVC 1.0 and has been deprecated.")]
-        [Obsolete("The TextWriter is now provided by the ViewContext object passed to the RenderView method.", true /* error */)]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "textWriter",
+            Justification = "This method existed in MVC 1.0 and has been deprecated."
+        )]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This method existed in MVC 1.0 and has been deprecated."
+        )]
+        [Obsolete(
+            "The TextWriter is now provided by the ViewContext object passed to the RenderView method.",
+            true /* error */
+        )]
         public void SetTextWriter(TextWriter textWriter)
         {
             // this is now a no-op

@@ -6,6 +6,7 @@ namespace System.Configuration
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class PositiveTimeSpanValidatorAttribute : ConfigurationValidatorAttribute
     {
-        public override ConfigurationValidatorBase ValidatorInstance => new PositiveTimeSpanValidator();
+        public override ConfigurationValidatorBase ValidatorInstance =>
+            new PositiveTimeSpanValidator();
     }
 }

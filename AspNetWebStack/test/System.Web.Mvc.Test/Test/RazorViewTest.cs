@@ -17,10 +17,44 @@ namespace System.Web.Mvc.Test
         public void Constructor_RunViewStartPagesParam()
         {
             var context = new ControllerContext();
-            Assert.True(new RazorView(context, "~/view", "~/master", runViewStartPages: true, viewStartFileExtensions: null).RunViewStartPages);
-            Assert.False(new RazorView(context, "~/view", "~/master", runViewStartPages: false, viewStartFileExtensions: null).RunViewStartPages);
-            Assert.True(new RazorView(context, "~/view", "~/master", runViewStartPages: true, viewStartFileExtensions: null, viewPageActivator: new Mock<IViewPageActivator>().Object).RunViewStartPages);
-            Assert.False(new RazorView(context, "~/view", "~/master", runViewStartPages: false, viewStartFileExtensions: null, viewPageActivator: new Mock<IViewPageActivator>().Object).RunViewStartPages);
+            Assert.True(
+                new RazorView(
+                    context,
+                    "~/view",
+                    "~/master",
+                    runViewStartPages: true,
+                    viewStartFileExtensions: null
+                ).RunViewStartPages
+            );
+            Assert.False(
+                new RazorView(
+                    context,
+                    "~/view",
+                    "~/master",
+                    runViewStartPages: false,
+                    viewStartFileExtensions: null
+                ).RunViewStartPages
+            );
+            Assert.True(
+                new RazorView(
+                    context,
+                    "~/view",
+                    "~/master",
+                    runViewStartPages: true,
+                    viewStartFileExtensions: null,
+                    viewPageActivator: new Mock<IViewPageActivator>().Object
+                ).RunViewStartPages
+            );
+            Assert.False(
+                new RazorView(
+                    context,
+                    "~/view",
+                    "~/master",
+                    runViewStartPages: false,
+                    viewStartFileExtensions: null,
+                    viewPageActivator: new Mock<IViewPageActivator>().Object
+                ).RunViewStartPages
+            );
         }
 
         [Fact]
@@ -28,9 +62,16 @@ namespace System.Web.Mvc.Test
         {
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                () => new RazorView(new ControllerContext(), String.Empty, "~/master", false, Enumerable.Empty<string>()),
+                () =>
+                    new RazorView(
+                        new ControllerContext(),
+                        String.Empty,
+                        "~/master",
+                        false,
+                        Enumerable.Empty<string>()
+                    ),
                 "viewPath"
-                );
+            );
         }
 
         [Fact]
@@ -38,9 +79,16 @@ namespace System.Web.Mvc.Test
         {
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                () => new RazorView(new ControllerContext(), null, "~/master", false, Enumerable.Empty<string>()),
+                () =>
+                    new RazorView(
+                        new ControllerContext(),
+                        null,
+                        "~/master",
+                        false,
+                        Enumerable.Empty<string>()
+                    ),
                 "viewPath"
-                );
+            );
         }
 
         [Fact]
@@ -48,9 +96,10 @@ namespace System.Web.Mvc.Test
         {
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                () => new RazorView(null, "view path", "~/master", false, Enumerable.Empty<string>()),
+                () =>
+                    new RazorView(null, "view path", "~/master", false, Enumerable.Empty<string>()),
                 "controllerContext"
-                );
+            );
         }
 
         [Fact]
@@ -60,7 +109,13 @@ namespace System.Web.Mvc.Test
             ControllerContext controllerContext = new ControllerContext();
 
             // Act
-            RazorView view = new RazorView(new ControllerContext(), "view path", "master path", false, Enumerable.Empty<string>());
+            RazorView view = new RazorView(
+                new ControllerContext(),
+                "view path",
+                "master path",
+                false,
+                Enumerable.Empty<string>()
+            );
 
             // Assert
             Assert.Equal("master path", view.LayoutPath);
@@ -70,7 +125,13 @@ namespace System.Web.Mvc.Test
         public void LayoutPathPropertyReturnsEmptyStringIfNullLayoutSpecified()
         {
             // Act
-            RazorView view = new RazorView(new ControllerContext(), "view path", null, false, Enumerable.Empty<string>());
+            RazorView view = new RazorView(
+                new ControllerContext(),
+                "view path",
+                null,
+                false,
+                Enumerable.Empty<string>()
+            );
 
             // Assert
             Assert.Equal(String.Empty, view.LayoutPath);
@@ -80,7 +141,13 @@ namespace System.Web.Mvc.Test
         public void LayoutPathPropertyReturnsEmptyStringIfLayoutNotSpecified()
         {
             // Act
-            RazorView view = new RazorView(new ControllerContext(), "view path", null, false, Enumerable.Empty<string>());
+            RazorView view = new RazorView(
+                new ControllerContext(),
+                "view path",
+                null,
+                false,
+                Enumerable.Empty<string>()
+            );
 
             // Assert
             Assert.Equal(String.Empty, view.LayoutPath);
@@ -90,17 +157,20 @@ namespace System.Web.Mvc.Test
         public void RenderWithNullWriterThrows()
         {
             // Arrange
-            RazorView view = new RazorView(new ControllerContext(), "~/viewPath", null, false, Enumerable.Empty<string>());
+            RazorView view = new RazorView(
+                new ControllerContext(),
+                "~/viewPath",
+                null,
+                false,
+                Enumerable.Empty<string>()
+            );
             Mock<ViewContext> viewContextMock = new Mock<ViewContext>();
 
             MockBuildManager buildManager = new MockBuildManager("~/viewPath", typeof(object));
             view.BuildManager = buildManager;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(
-                () => view.Render(viewContextMock.Object, null),
-                "writer"
-                );
+            Assert.ThrowsArgumentNull(() => view.Render(viewContextMock.Object, null), "writer");
         }
 
         [Fact]
@@ -109,14 +179,20 @@ namespace System.Web.Mvc.Test
             // Arrange
             ViewContext context = new Mock<ViewContext>().Object;
             MockBuildManager buildManagerMock = new MockBuildManager("view path", typeof(object));
-            RazorView view = new RazorView(new ControllerContext(), "view path", null, false, Enumerable.Empty<string>());
+            RazorView view = new RazorView(
+                new ControllerContext(),
+                "view path",
+                null,
+                false,
+                Enumerable.Empty<string>()
+            );
             view.BuildManager = buildManagerMock;
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
                 () => view.Render(context, new Mock<TextWriter>().Object),
                 "The view at 'view path' must derive from WebViewPage, or WebViewPage<TModel>."
-                );
+            );
         }
 
         [Fact]
@@ -125,13 +201,22 @@ namespace System.Web.Mvc.Test
             // Arrange
             StubWebViewPage viewPage = new StubWebViewPage();
             Mock<ViewContext> viewContextMock = new Mock<ViewContext>();
-            viewContextMock.Setup(vc => vc.HttpContext.Items).Returns(new Dictionary<object, object>());
+            viewContextMock
+                .Setup(vc => vc.HttpContext.Items)
+                .Returns(new Dictionary<object, object>());
             viewContextMock.Setup(vc => vc.HttpContext.Request.IsLocal).Returns(false);
             MockBuildManager buildManager = new MockBuildManager("~/viewPath", typeof(object));
             Mock<IViewPageActivator> activator = new Mock<IViewPageActivator>(MockBehavior.Strict);
             ControllerContext controllerContext = new ControllerContext();
             activator.Setup(l => l.Create(controllerContext, typeof(object))).Returns(viewPage);
-            RazorView view = new RazorView(controllerContext, "~/viewPath", null, false, Enumerable.Empty<string>(), activator.Object);
+            RazorView view = new RazorView(
+                controllerContext,
+                "~/viewPath",
+                null,
+                false,
+                Enumerable.Empty<string>(),
+                activator.Object
+            );
             view.StartPageLookup = (WebPageRenderingBase p, string n, IEnumerable<string> e) =>
             {
                 Assert.True(false, "ViewStart page lookup should not be called");
@@ -155,15 +240,28 @@ namespace System.Web.Mvc.Test
             // Arrange
             StubWebViewPage viewPage = new StubWebViewPage();
             Mock<ViewContext> viewContextMock = new Mock<ViewContext>();
-            viewContextMock.Setup(vc => vc.HttpContext.Items).Returns(new Dictionary<object, object>());
+            viewContextMock
+                .Setup(vc => vc.HttpContext.Items)
+                .Returns(new Dictionary<object, object>());
             MockBuildManager buildManager = new MockBuildManager("~/viewPath", typeof(object));
             Mock<IViewPageActivator> activator = new Mock<IViewPageActivator>(MockBehavior.Strict);
             ControllerContext controllerContext = new ControllerContext();
             activator.Setup(l => l.Create(controllerContext, typeof(object))).Returns(viewPage);
-            RazorView view = new RazorView(controllerContext, "~/viewPath", null, true, new[] { "cshtml" }, activator.Object);
+            RazorView view = new RazorView(
+                controllerContext,
+                "~/viewPath",
+                null,
+                true,
+                new[] { "cshtml" },
+                activator.Object
+            );
             Mock<ViewStartPage> startPage = new Mock<ViewStartPage>();
             startPage.Setup(sp => sp.ExecutePageHierarchy()).Verifiable();
-            view.StartPageLookup = (WebPageRenderingBase page, string fileName, IEnumerable<string> extensions) =>
+            view.StartPageLookup = (
+                WebPageRenderingBase page,
+                string fileName,
+                IEnumerable<string> extensions
+            ) =>
             {
                 Assert.Equal(viewPage, page);
                 Assert.Equal("_ViewStart", fileName);
@@ -204,12 +302,23 @@ namespace System.Web.Mvc.Test
 
             Mock<WebPage> layoutPage = new Mock<WebPage> { CallBase = true };
             layoutPage.Setup(c => c.Execute()).Callback(() => layoutPage.Object.RenderBody());
-            Mock<IVirtualPathFactory> virtualPathFactory = new Mock<IVirtualPathFactory>(MockBehavior.Strict);
+            Mock<IVirtualPathFactory> virtualPathFactory = new Mock<IVirtualPathFactory>(
+                MockBehavior.Strict
+            );
             virtualPathFactory.Setup(f => f.Exists("~/layoutPath")).Returns(true);
-            virtualPathFactory.Setup(f => f.CreateInstance("~/layoutPath")).Returns(layoutPage.Object);
+            virtualPathFactory
+                .Setup(f => f.CreateInstance("~/layoutPath"))
+                .Returns(layoutPage.Object);
             ControllerContext controllerContext = new ControllerContext();
             activator.Setup(l => l.Create(controllerContext, typeof(object))).Returns(viewPage);
-            RazorView view = new RazorView(controllerContext, "~/viewPath", "~/layoutPath", false, Enumerable.Empty<string>(), activator.Object);
+            RazorView view = new RazorView(
+                controllerContext,
+                "~/viewPath",
+                "~/layoutPath",
+                false,
+                Enumerable.Empty<string>(),
+                activator.Object
+            );
             view.BuildManager = buildManager;
             view.VirtualPathFactory = virtualPathFactory.Object;
             view.DisplayModeProvider = DisplayModeProvider.Instance;

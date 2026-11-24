@@ -16,10 +16,10 @@ namespace Microsoft.CodeAnalysis.Interactive
     /// </summary>
     internal static class InteractiveWindowContentTypes
     {
-        public const string CommandContentTypeName = "Specialized CSharp and VB Interactive Command";
+        public const string CommandContentTypeName =
+            "Specialized CSharp and VB Interactive Command";
 
         [Export, Name(CommandContentTypeName), BaseDefinition("code")]
         internal static readonly ContentTypeDefinition CommandContentTypeDefinition;
     }
 }
-

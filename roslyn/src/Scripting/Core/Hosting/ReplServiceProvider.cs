@@ -18,6 +18,11 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         public abstract DiagnosticFormatter DiagnosticFormatter { get; }
         public abstract string Logo { get; }
 
-        public abstract Script<T> CreateScript<T>(string code, ScriptOptions options, Type globalsTypeOpt, InteractiveAssemblyLoader assemblyLoader);
+        public abstract Script<T> CreateScript<T>(
+            string code,
+            ScriptOptions options,
+            Type globalsTypeOpt,
+            InteractiveAssemblyLoader assemblyLoader
+        );
     }
 }

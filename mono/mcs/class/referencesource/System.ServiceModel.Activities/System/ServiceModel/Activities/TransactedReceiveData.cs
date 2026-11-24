@@ -4,31 +4,22 @@
 namespace System.ServiceModel.Activities
 {
     using System;
-    using System.Transactions;
     using System.Runtime.Serialization;
+    using System.Transactions;
 
     [DataContract]
     class TransactedReceiveData
     {
-        const string propertyName = "System.ServiceModel.Activities.TransactedReceiveDataExecutionPropertyName";
+        const string propertyName =
+            "System.ServiceModel.Activities.TransactedReceiveDataExecutionPropertyName";
 
-        public TransactedReceiveData()
-        {
-        }
+        public TransactedReceiveData() { }
 
         public static string TransactedReceiveDataExecutionPropertyName
         {
-            get
-            {
-                return propertyName;
-            }
+            get { return propertyName; }
         }
 
-        public Transaction InitiatingTransaction
-        {
-            get;
-            set;
-        }
+        public Transaction InitiatingTransaction { get; set; }
     }
 }
-

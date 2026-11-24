@@ -18,11 +18,27 @@ namespace System.Net
         private static volatile X509Store? s_myMachineCertStoreEx;
         private static X509Chain? s_chain;
 
-        internal static X509Certificate2? GetRemoteCertificate(SafeDeleteContext? securityContext) =>
-            GetRemoteCertificate(securityContext, retrieveChainCertificates: false, ref s_chain, null);
+        internal static X509Certificate2? GetRemoteCertificate(
+            SafeDeleteContext? securityContext
+        ) =>
+            GetRemoteCertificate(
+                securityContext,
+                retrieveChainCertificates: false,
+                ref s_chain,
+                null
+            );
 
-        internal static X509Certificate2? GetRemoteCertificate(SafeDeleteContext? securityContext, ref X509Chain? chain, X509ChainPolicy? chainPolicy) =>
-            GetRemoteCertificate(securityContext, retrieveChainCertificates: true, ref chain, chainPolicy);
+        internal static X509Certificate2? GetRemoteCertificate(
+            SafeDeleteContext? securityContext,
+            ref X509Chain? chain,
+            X509ChainPolicy? chainPolicy
+        ) =>
+            GetRemoteCertificate(
+                securityContext,
+                retrieveChainCertificates: true,
+                ref chain,
+                chainPolicy
+            );
 
         static partial void CheckSupportsStore(StoreLocation storeLocation, ref bool hasSupport);
 
@@ -32,7 +48,9 @@ namespace System.Net
 
             if (store == null)
             {
-                StoreLocation storeLocation = isMachineStore ? StoreLocation.LocalMachine : StoreLocation.CurrentUser;
+                StoreLocation storeLocation = isMachineStore
+                    ? StoreLocation.LocalMachine
+                    : StoreLocation.CurrentUser;
 
                 // On Windows and OSX CheckSupportsStore is not defined, so the call is eliminated and the
                 // if should be folded out.
@@ -58,7 +76,10 @@ namespace System.Net
                             store = OpenStore(storeLocation);
 
                             if (NetEventSource.Log.IsEnabled())
-                                NetEventSource.Info(null, $"storeLocation: {storeLocation} returned store {store}");
+                                NetEventSource.Info(
+                                    null,
+                                    $"storeLocation: {storeLocation} returned store {store}"
+                                );
 
                             if (isMachineStore)
                             {
@@ -71,14 +92,26 @@ namespace System.Net
                         }
                         catch (Exception exception)
                         {
-                            if (exception is CryptographicException || exception is SecurityException)
+                            if (
+                                exception is CryptographicException
+                                || exception is SecurityException
+                            )
                             {
-                                Debug.Fail($"Failed to open cert store, location: {storeLocation} exception: {exception}");
+                                Debug.Fail(
+                                    $"Failed to open cert store, location: {storeLocation} exception: {exception}"
+                                );
                                 return null;
                             }
 
                             if (NetEventSource.Log.IsEnabled())
-                                NetEventSource.Error(null, SR.Format(SR.net_log_open_store_failed, storeLocation, exception));
+                                NetEventSource.Error(
+                                    null,
+                                    SR.Format(
+                                        SR.net_log_open_store_failed,
+                                        storeLocation,
+                                        exception
+                                    )
+                                );
 
                             throw;
                         }

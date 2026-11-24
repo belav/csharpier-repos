@@ -16,10 +16,10 @@ namespace System.Xml.Xsl.XsltOld
     {
         internal sealed class FormatInfo
         {
-            public bool isSeparator;      // False for alphanumeric strings of chars
-            public NumberingSequence numSequence;      // Specifies numbering sequence
-            public int length;           // Minimum length of decimal numbers (if necessary, pad to left with zeros)
-            public string? formatString;     // Format string for separator token
+            public bool isSeparator; // False for alphanumeric strings of chars
+            public NumberingSequence numSequence; // Specifies numbering sequence
+            public int length; // Minimum length of decimal numbers (if necessary, pad to left with zeros)
+            public string? formatString; // Format string for separator token
 
             public FormatInfo(bool isSeparator, string? formatString)
             {
@@ -42,11 +42,22 @@ namespace System.Xml.Xsl.XsltOld
 
             internal NumberingFormat() { }
 
-            internal void setNumberingType(NumberingSequence seq) { _seq = seq; }
+            internal void setNumberingType(NumberingSequence seq)
+            {
+                _seq = seq;
+            }
+
             //void setLangID(LID langid) {_langid = langid;}
             //internal void setTraditional(bool fTraditional) {_grfnfc = fTraditional ? msofnfcTraditional : 0;}
-            internal void setMinLen(int cMinLen) { _cMinLen = cMinLen; }
-            internal void setGroupingSeparator(string? separator) { _separator = separator; }
+            internal void setMinLen(int cMinLen)
+            {
+                _cMinLen = cMinLen;
+            }
+
+            internal void setGroupingSeparator(string? separator)
+            {
+                _separator = separator;
+            }
 
             internal void setGroupingSize(int sizeGroup)
             {
@@ -92,7 +103,12 @@ namespace System.Xml.Xsl.XsltOld
                         if (dblVal <= MaxAlphabeticValue)
                         {
                             StringBuilder sb = new StringBuilder();
-                            ConvertToAlphabetic(sb, dblVal, _seq == NumberingSequence.UCLetter ? 'A' : 'a', 26);
+                            ConvertToAlphabetic(
+                                sb,
+                                dblVal,
+                                _seq == NumberingSequence.UCLetter ? 'A' : 'a',
+                                26
+                            );
                             return sb.ToString();
                         }
                         break;
@@ -110,7 +126,12 @@ namespace System.Xml.Xsl.XsltOld
                 return ConvertToArabic(dblVal, _cMinLen, _sizeGroup, _separator);
             }
 
-            private static string ConvertToArabic(double val, int minLength, int groupSize, string? groupSeparator)
+            private static string ConvertToArabic(
+                double val,
+                int minLength,
+                int groupSize,
+                string? groupSeparator
+            )
             {
                 string str;
 
@@ -149,6 +170,7 @@ namespace System.Xml.Xsl.XsltOld
         private Avt? _letterAvt;
         private Avt? _groupingSepAvt;
         private Avt? _groupingSizeAvt;
+
         // Compile time precalculated AVTs
         private List<FormatInfo?>? _formatTokens;
         private string? _lang;
@@ -172,12 +194,22 @@ namespace System.Xml.Xsl.XsltOld
             else if (Ref.Equal(name, compiler.Atoms.Count))
             {
                 _countPattern = value;
-                _countKey = compiler.AddQuery(value, /*allowVars:*/true, /*allowKey:*/true, /*pattern*/true);
+                _countKey = compiler.AddQuery(
+                    value, /*allowVars:*/
+                    true, /*allowKey:*/
+                    true, /*pattern*/
+                    true
+                );
             }
             else if (Ref.Equal(name, compiler.Atoms.From))
             {
                 _from = value;
-                _fromKey = compiler.AddQuery(value, /*allowVars:*/true, /*allowKey:*/true, /*pattern*/true);
+                _fromKey = compiler.AddQuery(
+                    value, /*allowVars:*/
+                    true, /*allowKey:*/
+                    true, /*pattern*/
+                    true
+                );
             }
             else if (Ref.Equal(name, compiler.Atoms.Value))
             {
@@ -233,7 +265,10 @@ namespace System.Xml.Xsl.XsltOld
             int result = 0;
             // Our current point will be our end point in this search
             XPathNavigator endNode = frame.Node!;
-            if (endNode.NodeType == XPathNodeType.Attribute || endNode.NodeType == XPathNodeType.Namespace)
+            if (
+                endNode.NodeType == XPathNodeType.Attribute
+                || endNode.NodeType == XPathNodeType.Namespace
+            )
             {
                 endNode = endNode.Clone();
                 endNode.MoveToParent();
@@ -254,13 +289,17 @@ namespace System.Xml.Xsl.XsltOld
                 } while (startNode.MoveToParent());
 
                 Debug.Assert(
-                    processor.Matches(startNode, _fromKey) ||   // we hit 'from' or
-                    startNode.NodeType == XPathNodeType.Root        // we are at root
+                    processor.Matches(startNode, _fromKey)
+                        || // we hit 'from' or
+                        startNode.NodeType == XPathNodeType.Root // we are at root
                 );
 
                 // from this point (matched parent | root) create descendent quiery:
                 // we have to reset 'result' on each 'from' node, because this point can' be not last from point;
-                XPathNodeIterator sel = startNode.SelectDescendants(XPathNodeType.All, /*matchSelf:*/ true);
+                XPathNodeIterator sel = startNode.SelectDescendants(
+                    XPathNodeType.All, /*matchSelf:*/
+                    true
+                );
                 while (sel.MoveNext())
                 {
                     if (processor.Matches(sel.Current, _fromKey))
@@ -286,7 +325,10 @@ namespace System.Xml.Xsl.XsltOld
             {
                 // without 'from' we startting from the root
                 startNode.MoveToRoot();
-                XPathNodeIterator sel = startNode.SelectDescendants(XPathNodeType.All, /*matchSelf:*/ true);
+                XPathNodeIterator sel = startNode.SelectDescendants(
+                    XPathNodeType.All, /*matchSelf:*/
+                    true
+                );
                 // and count root node by itself
                 while (sel.MoveNext())
                 {
@@ -321,7 +363,11 @@ namespace System.Xml.Xsl.XsltOld
             return false;
         }
 
-        private bool moveToCount(XPathNavigator nav, Processor processor, XPathNavigator contextNode)
+        private bool moveToCount(
+            XPathNavigator nav,
+            Processor processor,
+            XPathNavigator contextNode
+        )
         {
             do
             {
@@ -339,7 +385,9 @@ namespace System.Xml.Xsl.XsltOld
 
         private int numberCount(XPathNavigator nav, Processor processor, XPathNavigator contextNode)
         {
-            Debug.Assert(nav.NodeType != XPathNodeType.Attribute && nav.NodeType != XPathNodeType.Namespace);
+            Debug.Assert(
+                nav.NodeType != XPathNodeType.Attribute && nav.NodeType != XPathNodeType.Namespace
+            );
             Debug.Assert(MatchCountKey(processor, contextNode, nav));
             XPathNavigator runner = nav.Clone();
             int number = 1;
@@ -354,7 +402,9 @@ namespace System.Xml.Xsl.XsltOld
                     }
                     if (!runner.MoveToNext())
                     {
-                        Debug.Fail("We implementing preceding-sibling::node() and some how miss context node 'nav'");
+                        Debug.Fail(
+                            "We implementing preceding-sibling::node() and some how miss context node 'nav'"
+                        );
                         break;
                     }
                 }
@@ -414,9 +464,12 @@ namespace System.Xml.Xsl.XsltOld
                     else
                     {
                         bool multiple = (_level == "multiple");
-                        XPathNavigator contextNode = frame.Node!;         // context of xsl:number element. We using this node in MatchCountKey()
+                        XPathNavigator contextNode = frame.Node!; // context of xsl:number element. We using this node in MatchCountKey()
                         XPathNavigator countNode = frame.Node!.Clone(); // node we count for
-                        if (countNode.NodeType == XPathNodeType.Attribute || countNode.NodeType == XPathNodeType.Namespace)
+                        if (
+                            countNode.NodeType == XPathNodeType.Attribute
+                            || countNode.NodeType == XPathNodeType.Namespace
+                        )
                         {
                             countNode.MoveToParent();
                         }
@@ -435,10 +488,17 @@ namespace System.Xml.Xsl.XsltOld
                     }
 
                     /*CalculatingFormat:*/
-                    frame.StoredOutput = Format(list,
-                        _formatAvt == null ? _formatTokens : ParseFormat(_formatAvt.Evaluate(processor, frame)),
-                        _groupingSepAvt == null ? _groupingSep : _groupingSepAvt.Evaluate(processor, frame),
-                        _groupingSizeAvt == null ? _groupingSize : _groupingSizeAvt.Evaluate(processor, frame)
+                    frame.StoredOutput = Format(
+                        list,
+                        _formatAvt == null
+                            ? _formatTokens
+                            : ParseFormat(_formatAvt.Evaluate(processor, frame)),
+                        _groupingSepAvt == null
+                            ? _groupingSep
+                            : _groupingSepAvt.Evaluate(processor, frame),
+                        _groupingSizeAvt == null
+                            ? _groupingSize
+                            : _groupingSizeAvt.Evaluate(processor, frame)
                     );
                     goto case OutputNumber;
                 case OutputNumber:
@@ -456,13 +516,20 @@ namespace System.Xml.Xsl.XsltOld
             }
         }
 
-        private bool MatchCountKey(Processor processor, XPathNavigator contextNode, XPathNavigator nav)
+        private bool MatchCountKey(
+            Processor processor,
+            XPathNavigator contextNode,
+            XPathNavigator nav
+        )
         {
             if (_countKey != Compiler.InvalidQueryKey)
             {
                 return processor.Matches(nav, _countKey);
             }
-            if (contextNode.Name == nav.Name && BasicNodeType(contextNode.NodeType) == BasicNodeType(nav.NodeType))
+            if (
+                contextNode.Name == nav.Name
+                && BasicNodeType(contextNode.NodeType) == BasicNodeType(nav.NodeType)
+            )
             {
                 return true;
             }
@@ -486,7 +553,12 @@ namespace System.Xml.Xsl.XsltOld
         // in case of no AVTs we can build this object at compile time and reuse it on execution time.
         // even partial step in this derection will be usefull (when cFormats == 0)
 
-        private static string Format(ArrayList numberlist, List<FormatInfo?>? tokens, string? groupingSep, string? groupingSize)
+        private static string Format(
+            ArrayList numberlist,
+            List<FormatInfo?>? tokens,
+            string? groupingSep,
+            string? groupingSize
+        )
         {
             StringBuilder result = new StringBuilder();
             int cFormats = 0;
@@ -500,7 +572,9 @@ namespace System.Xml.Xsl.XsltOld
             {
                 try
                 {
-                    numberingFormat.setGroupingSize(Convert.ToInt32(groupingSize, CultureInfo.InvariantCulture));
+                    numberingFormat.setGroupingSize(
+                        Convert.ToInt32(groupingSize, CultureInfo.InvariantCulture)
+                    );
                 }
                 catch (System.FormatException) { }
                 catch (System.OverflowException) { }
@@ -519,7 +593,8 @@ namespace System.Xml.Xsl.XsltOld
                     sufix = tokens[cFormats - 1];
                     cFormats--;
                 }
-                FormatInfo periodicSeparator = 2 < cFormats ? tokens[cFormats - 2]! : s_defaultSeparator;
+                FormatInfo periodicSeparator =
+                    2 < cFormats ? tokens[cFormats - 2]! : s_defaultSeparator;
                 FormatInfo periodicFormat = 0 < cFormats ? tokens[cFormats - 1]! : s_defaultFormat;
                 if (prefix != null)
                 {
@@ -532,7 +607,9 @@ namespace System.Xml.Xsl.XsltOld
                     bool haveFormat = formatIndex < cFormats;
                     if (0 < i)
                     {
-                        FormatInfo thisSeparator = haveFormat ? tokens[formatIndex + 0]! : periodicSeparator;
+                        FormatInfo thisSeparator = haveFormat
+                            ? tokens[formatIndex + 0]!
+                            : periodicSeparator;
                         Debug.Assert(thisSeparator.isSeparator);
                         result.Append(thisSeparator.formatString);
                     }
@@ -580,7 +657,13 @@ namespace System.Xml.Xsl.XsltOld
             padding, if necessary.
         ----------------------------------------------------------------------------
         */
-        private static void mapFormatToken(string wsToken, int startLen, int tokLen, out NumberingSequence seq, out int pminlen)
+        private static void mapFormatToken(
+            string wsToken,
+            int startLen,
+            int tokLen,
+            out NumberingSequence seq,
+            out int pminlen
+        )
         {
             char wch = wsToken[startLen];
             bool UseArabic = false;
@@ -589,11 +672,11 @@ namespace System.Xml.Xsl.XsltOld
 
             switch ((int)wch)
             {
-                case 0x0030:    // Digit zero
-                case 0x0966:    // Hindi digit zero
-                case 0x0e50:    // Thai digit zero
-                case 0xc77b:    // Korean digit zero
-                case 0xff10:    // Digit zero (double-byte)
+                case 0x0030: // Digit zero
+                case 0x0966: // Hindi digit zero
+                case 0x0e50: // Thai digit zero
+                case 0xc77b: // Korean digit zero
+                case 0xff10: // Digit zero (double-byte)
                     do
                     {
                         // Leading zeros request padding.  Track how much.
@@ -613,33 +696,87 @@ namespace System.Xml.Xsl.XsltOld
                 // Map characters of token to number format ID
                 switch ((int)wsToken[startLen])
                 {
-                    case 0x0031: seq = NumberingSequence.Arabic; break;
-                    case 0x0041: seq = NumberingSequence.UCLetter; break;
-                    case 0x0049: seq = NumberingSequence.UCRoman; break;
-                    case 0x0061: seq = NumberingSequence.LCLetter; break;
-                    case 0x0069: seq = NumberingSequence.LCRoman; break;
-                    case 0x0410: seq = NumberingSequence.UCRus; break;
-                    case 0x0430: seq = NumberingSequence.LCRus; break;
-                    case 0x05d0: seq = NumberingSequence.Hebrew; break;
-                    case 0x0623: seq = NumberingSequence.ArabicScript; break;
-                    case 0x0905: seq = NumberingSequence.Hindi2; break;
-                    case 0x0915: seq = NumberingSequence.Hindi1; break;
-                    case 0x0967: seq = NumberingSequence.Hindi3; break;
-                    case 0x0e01: seq = NumberingSequence.Thai1; break;
-                    case 0x0e51: seq = NumberingSequence.Thai2; break;
-                    case 0x30a2: seq = NumberingSequence.DAiueo; break;
-                    case 0x30a4: seq = NumberingSequence.DIroha; break;
-                    case 0x3131: seq = NumberingSequence.DChosung; break;
-                    case 0x4e00: seq = NumberingSequence.FEDecimal; break;
-                    case 0x58f1: seq = NumberingSequence.DbNum3; break;
-                    case 0x58f9: seq = NumberingSequence.ChnCmplx; break;
-                    case 0x5b50: seq = NumberingSequence.Zodiac2; break;
-                    case 0xac00: seq = NumberingSequence.Ganada; break;
-                    case 0xc77c: seq = NumberingSequence.KorDbNum1; break;
-                    case 0xd558: seq = NumberingSequence.KorDbNum3; break;
-                    case 0xff11: seq = NumberingSequence.DArabic; break;
-                    case 0xff71: seq = NumberingSequence.Aiueo; break;
-                    case 0xff72: seq = NumberingSequence.Iroha; break;
+                    case 0x0031:
+                        seq = NumberingSequence.Arabic;
+                        break;
+                    case 0x0041:
+                        seq = NumberingSequence.UCLetter;
+                        break;
+                    case 0x0049:
+                        seq = NumberingSequence.UCRoman;
+                        break;
+                    case 0x0061:
+                        seq = NumberingSequence.LCLetter;
+                        break;
+                    case 0x0069:
+                        seq = NumberingSequence.LCRoman;
+                        break;
+                    case 0x0410:
+                        seq = NumberingSequence.UCRus;
+                        break;
+                    case 0x0430:
+                        seq = NumberingSequence.LCRus;
+                        break;
+                    case 0x05d0:
+                        seq = NumberingSequence.Hebrew;
+                        break;
+                    case 0x0623:
+                        seq = NumberingSequence.ArabicScript;
+                        break;
+                    case 0x0905:
+                        seq = NumberingSequence.Hindi2;
+                        break;
+                    case 0x0915:
+                        seq = NumberingSequence.Hindi1;
+                        break;
+                    case 0x0967:
+                        seq = NumberingSequence.Hindi3;
+                        break;
+                    case 0x0e01:
+                        seq = NumberingSequence.Thai1;
+                        break;
+                    case 0x0e51:
+                        seq = NumberingSequence.Thai2;
+                        break;
+                    case 0x30a2:
+                        seq = NumberingSequence.DAiueo;
+                        break;
+                    case 0x30a4:
+                        seq = NumberingSequence.DIroha;
+                        break;
+                    case 0x3131:
+                        seq = NumberingSequence.DChosung;
+                        break;
+                    case 0x4e00:
+                        seq = NumberingSequence.FEDecimal;
+                        break;
+                    case 0x58f1:
+                        seq = NumberingSequence.DbNum3;
+                        break;
+                    case 0x58f9:
+                        seq = NumberingSequence.ChnCmplx;
+                        break;
+                    case 0x5b50:
+                        seq = NumberingSequence.Zodiac2;
+                        break;
+                    case 0xac00:
+                        seq = NumberingSequence.Ganada;
+                        break;
+                    case 0xc77c:
+                        seq = NumberingSequence.KorDbNum1;
+                        break;
+                    case 0xd558:
+                        seq = NumberingSequence.KorDbNum3;
+                        break;
+                    case 0xff11:
+                        seq = NumberingSequence.DArabic;
+                        break;
+                    case 0xff71:
+                        seq = NumberingSequence.Aiueo;
+                        break;
+                    case 0xff72:
+                        seq = NumberingSequence.Iroha;
+                        break;
 
                     case 0x7532:
                         if (tokLen > 1 && wsToken[startLen + 1] == 0x5b50)
@@ -668,7 +805,6 @@ namespace System.Xml.Xsl.XsltOld
                 pminlen = 0;
             }
         }
-
 
         /*
         ----------------------------------------------------------------------------
@@ -699,14 +835,23 @@ namespace System.Xml.Xsl.XsltOld
             while (length <= formatString.Length)
             {
                 // Loop until a switch from format token to separator is detected (or vice-versa)
-                bool currentchar = length < formatString.Length ? CharUtil.IsAlphaNumeric(formatString[length]) : !lastAlphaNumeric;
+                bool currentchar =
+                    length < formatString.Length
+                        ? CharUtil.IsAlphaNumeric(formatString[length])
+                        : !lastAlphaNumeric;
                 if (lastAlphaNumeric != currentchar)
                 {
                     FormatInfo formatInfo = new FormatInfo();
                     if (lastAlphaNumeric)
                     {
                         // We just finished a format token.  Map it to a numbering format ID and a min-length bound.
-                        mapFormatToken(formatString, count, length - count, out formatInfo.numSequence, out formatInfo.length);
+                        mapFormatToken(
+                            formatString,
+                            count,
+                            length - count,
+                            out formatInfo.numSequence,
+                            out formatInfo.length
+                        );
                     }
                     else
                     {

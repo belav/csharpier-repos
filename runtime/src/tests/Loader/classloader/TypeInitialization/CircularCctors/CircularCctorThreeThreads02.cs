@@ -3,7 +3,7 @@
 
 /*
 A --> B --> C --> D --> E --> A
-3 threads: Thread T1 starts initialization at A, thread T2 starts initialization at C, and thread T3 starts initialization at E.  
+3 threads: Thread T1 starts initialization at A, thread T2 starts initialization at C, and thread T3 starts initialization at E.
 A::.cctor sleeps for a few seconds so Thread T1 is blocked.
 T2 invokes C::.cctor ' D::.cctor ' E::.cctor ' A::.cctor at which point T2 becomes blocked waiting for T1.
 T3 is blocked because T2 is in E::.cctor.
@@ -18,161 +18,148 @@ In C.cctor: thread T2: D.i 8
 */
 
 using System;
-using System.Threading;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using Xunit;
-public class A 
+
+public class A
 {
-	public static int i;
+    public static int i;
 
-	static A()
-	{	
+    static A()
+    {
+        Thread.Sleep(1000 * 2); // 1 second
+        Console.WriteLine("In A.cctor: thread {0}: B.i {1}", Thread.CurrentThread.Name, B.i);
+        A.i = 5;
+    }
 
-	       Thread.Sleep(1000*2); // 1 second
-		Console.WriteLine("In A.cctor: thread {0}: B.i {1}",Thread.CurrentThread.Name,B.i);
-		A.i = 5;
-	}
-
-	    // invoking this should trigger the cctor
-	    [MethodImpl(MethodImplOptions.NoInlining)] 
-	    public static void SomeMethod()
-	    {
-	        Console.WriteLine("In MyClass.SomeMethod(): thread {0}",Thread.CurrentThread.Name);    
-	    }
-
+    // invoking this should trigger the cctor
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static void SomeMethod()
+    {
+        Console.WriteLine("In MyClass.SomeMethod(): thread {0}", Thread.CurrentThread.Name);
+    }
 }
 
 public class B
 {
-	public static int i;
-	
-	static B()
-	{	
+    public static int i;
 
+    static B()
+    {
+        Console.WriteLine("In B.cctor: thread {0}: C.i {1}", Thread.CurrentThread.Name, C.i);
+        B.i = 6;
+    }
 
-		Console.WriteLine("In B.cctor: thread {0}: C.i {1}",Thread.CurrentThread.Name,C.i);
-		B.i = 6;
-	}
-
-	// invoking this should trigger the cctor
-	[MethodImpl(MethodImplOptions.NoInlining)] 
-	public static void SomeMethod()
-	{
-	    Console.WriteLine("In MyClass.SomeMethod(): thread {0}",Thread.CurrentThread.Name);    
-	}
-
+    // invoking this should trigger the cctor
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static void SomeMethod()
+    {
+        Console.WriteLine("In MyClass.SomeMethod(): thread {0}", Thread.CurrentThread.Name);
+    }
 }
 
 public class C
 {
-	public static int i;
-	
-	static C()
-	{	
-		Console.WriteLine("In C.cctor: thread {0}: D.i {1}",Thread.CurrentThread.Name,D.i);
-		C.i = 7;
-	}
+    public static int i;
 
-	// invoking this should trigger the cctor
-	[MethodImpl(MethodImplOptions.NoInlining)] 
-	public static void SomeMethod()
-	{
-	    Console.WriteLine("In MyClass.SomeMethod(): thread {0}",Thread.CurrentThread.Name);    
-	}
+    static C()
+    {
+        Console.WriteLine("In C.cctor: thread {0}: D.i {1}", Thread.CurrentThread.Name, D.i);
+        C.i = 7;
+    }
 
+    // invoking this should trigger the cctor
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static void SomeMethod()
+    {
+        Console.WriteLine("In MyClass.SomeMethod(): thread {0}", Thread.CurrentThread.Name);
+    }
 }
 
 public class D
 {
-	public static int i;
+    public static int i;
 
-	
-	static D()
-	{	
-		Console.WriteLine("In D.cctor: thread {0}: E.i {1}",Thread.CurrentThread.Name,E.i);
-		D.i = 8;
-	}
+    static D()
+    {
+        Console.WriteLine("In D.cctor: thread {0}: E.i {1}", Thread.CurrentThread.Name, E.i);
+        D.i = 8;
+    }
 
-	// invoking this should trigger the cctor
-	[MethodImpl(MethodImplOptions.NoInlining)] 
-	public static void SomeMethod()
-	{
-	    Console.WriteLine("In MyClass.SomeMethod(): thread {0}",Thread.CurrentThread.Name);    
-	}
-
+    // invoking this should trigger the cctor
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static void SomeMethod()
+    {
+        Console.WriteLine("In MyClass.SomeMethod(): thread {0}", Thread.CurrentThread.Name);
+    }
 }
 
 public class E
 {
-	public static int i;
-	
-	static E()
-	{	
-		Console.WriteLine("In E.cctor: thread {0}: A.i {1}",Thread.CurrentThread.Name,A.i);
-		E.i = 9;
-	}
+    public static int i;
 
-	// invoking this should trigger the cctor
-	[MethodImpl(MethodImplOptions.NoInlining)] 
-	public static void SomeMethod()
-	{
-	    Console.WriteLine("In MyClass.SomeMethod(): thread {0}",Thread.CurrentThread.Name);    
-	}
+    static E()
+    {
+        Console.WriteLine("In E.cctor: thread {0}: A.i {1}", Thread.CurrentThread.Name, A.i);
+        E.i = 9;
+    }
 
+    // invoking this should trigger the cctor
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static void SomeMethod()
+    {
+        Console.WriteLine("In MyClass.SomeMethod(): thread {0}", Thread.CurrentThread.Name);
+    }
 }
 
 public class Test_CircularCctorThreeThreads02
 {
+    public static void RunGetA()
+    {
+        A.SomeMethod();
+    }
 
-	public static void RunGetA()
-	{
-		A.SomeMethod();
-	}
+    public static void RunGetC()
+    {
+        C.SomeMethod();
+    }
 
-	public static void RunGetC()
-	{
-		C.SomeMethod();
-	}
+    public static void RunGetE()
+    {
+        E.SomeMethod();
+    }
 
-	public static void RunGetE()
-	{
-		E.SomeMethod();
-	}
+    [Fact]
+    public static int TestEntryPoint()
+    {
+        Thread t1 = new Thread(RunGetA);
+        t1.Name = "T1";
+        Thread t2 = new Thread(RunGetC);
+        t2.Name = "T2";
+        Thread t3 = new Thread(RunGetE);
+        t3.Name = "T3";
 
+        t1.Start();
+        Thread.Sleep(1000 * 1); // 1 second
+        t2.Start();
+        Thread.Sleep(1000 * 1); // 1 second
+        t3.Start();
 
-	[Fact]
-	public static int TestEntryPoint()
-	{
+        t3.Join();
+        t2.Join();
+        t1.Join();
 
-		Thread t1 = new Thread(RunGetA);
-	        t1.Name = "T1";
-	        Thread t2 = new Thread(RunGetC);
-	        t2.Name = "T2";
-		Thread t3 = new Thread(RunGetE);
-	        t3.Name = "T3";
-	 
-		  
-			
-	        t1.Start();
-	        Thread.Sleep(1000*1); // 1 second
-	        t2.Start();
-	        Thread.Sleep(1000*1); // 1 second
-	        t3.Start();
-
-	        t3.Join();
-	        t2.Join();
-	        t1.Join();
-
-		// make sure that statics were set correctly.
-		if ( A.i == 5 && B.i == 6 && C.i == 7 && D.i == 8 && E.i == 9 )
-		{
-			Console.WriteLine("PASS");
-			return 100;
-		}
-		else
-		{
-			Console.WriteLine("FAIL");
-			return 101;
-		}
-	}
+        // make sure that statics were set correctly.
+        if (A.i == 5 && B.i == 6 && C.i == 7 && D.i == 8 && E.i == 9)
+        {
+            Console.WriteLine("PASS");
+            return 100;
+        }
+        else
+        {
+            Console.WriteLine("FAIL");
+            return 101;
+        }
+    }
 }

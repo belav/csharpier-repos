@@ -10,15 +10,15 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders.Snippets
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class CSharpForEachSnippetCompletionProviderTests : AbstractCSharpSnippetCompletionProviderTests
+    public class CSharpForEachSnippetCompletionProviderTests
+        : AbstractCSharpSnippetCompletionProviderTests
     {
         protected override string ItemToCommit => "foreach";
 
         [WpfFact]
         public async Task InsertForEachSnippetInMethodTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class Program
                 {
                     public void Method()
@@ -28,8 +28,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 class Program
                 {
                     public void Method()
@@ -41,14 +40,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertForEachSnippetInMethodItemUsedTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class Program
                 {
                     public void Method()
@@ -59,8 +61,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 class Program
                 {
                     public void Method()
@@ -73,32 +74,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertForEachSnippetInGlobalContextTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 Ins$$
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 foreach (var item in collection)
                 {
                     $$
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertForEachSnippetInConstructorTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class Program
                 {
                     public Program()
@@ -108,8 +114,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 class Program
                 {
                     public Program()
@@ -121,14 +126,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertForEachSnippetWithCollectionTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 using System;
                 using System.Collections.Generic;
 
@@ -142,8 +150,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 using System;
                 using System.Collections.Generic;
 
@@ -159,14 +166,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertForEachSnippetInLocalFunctionTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class Program
                 {
                     public void Method()
@@ -180,8 +190,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 class Program
                 {
                     public void Method()
@@ -197,14 +206,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertForEachSnippetInAnonymousFunctionTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 public delegate void Print(int value);
                 static void Main(string[] args)
                 {
@@ -214,8 +226,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 public delegate void Print(int value);
                 static void Main(string[] args)
                 {
@@ -227,14 +238,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     };
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertForEachSnippetInParenthesizedLambdaExpressionRegularTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 Func<int, int, bool> testForEquality = (x, y) =>
                 {
                     $$
@@ -242,8 +256,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 };
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 Func<int, int, bool> testForEquality = (x, y) =>
                 {
                     foreach (var item in args)
@@ -253,14 +266,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     return x == y;
                 };
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit, sourceCodeKind: SourceCodeKind.Regular);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit,
+                sourceCodeKind: SourceCodeKind.Regular
+            );
         }
 
         [WpfFact]
         public async Task InsertForEachSnippetInParenthesizedLambdaExpressionScriptTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 Func<int, int, bool> testForEquality = (x, y) =>
                 {
                     $$
@@ -268,8 +285,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 };
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 Func<int, int, bool> testForEquality = (x, y) =>
                 {
                     foreach (var item in collection)
@@ -279,7 +295,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     return x == y;
                 };
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit, sourceCodeKind: SourceCodeKind.Script);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit,
+                sourceCodeKind: SourceCodeKind.Script
+            );
         }
 
         [WpfTheory]
@@ -306,7 +327,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             var expectedCodeAfterCommit = $$"""
                 using System.Collections.Generic;
                 using System.Collections;
-                
+
                 class C
                 {
                     void M({{collectionType}} enumerable)
@@ -319,7 +340,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -388,7 +413,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
@@ -422,13 +451,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
         [InlineData("// comment")]
         [InlineData("/* comment */")]
-        public async Task CorrectlyDealWithLeadingTriviaInInlineSnippetInGlobalStatementTest1(string trivia)
+        public async Task CorrectlyDealWithLeadingTriviaInInlineSnippetInGlobalStatementTest1(
+            string trivia
+        )
         {
             var markupBeforeCommit = $$"""
                 {{trivia}}
@@ -443,7 +478,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
@@ -451,7 +490,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [InlineData("#if true")]
         [InlineData("#pragma warning disable CS0108")]
         [InlineData("#nullable enable")]
-        public async Task CorrectlyDealWithLeadingTriviaInInlineSnippetInGlobalStatementTest2(string trivia)
+        public async Task CorrectlyDealWithLeadingTriviaInInlineSnippetInGlobalStatementTest2(
+            string trivia
+        )
         {
             var markupBeforeCommit = $$"""
                 {{trivia}}
@@ -467,13 +508,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
         [InlineData("")]
         [InlineData("async ")]
-        public async Task InsertForEachSnippetAfterSingleAwaitKeywordInMethodBodyTest(string asyncKeyword)
+        public async Task InsertForEachSnippetAfterSingleAwaitKeywordInMethodBodyTest(
+            string asyncKeyword
+        )
         {
             var markupBeforeCommit = $$"""
                 <Workspace>
@@ -502,7 +549,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -523,7 +574,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -543,20 +598,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [WpfTheory]
         [InlineData("")]
         [InlineData("async ")]
-        public async Task PreferAsyncEnumerableVariableInScopeForAwaitForEachTest(string asyncKeyword)
+        public async Task PreferAsyncEnumerableVariableInScopeForAwaitForEachTest(
+            string asyncKeyword
+        )
         {
             var markupBeforeCommit = $$"""
                 <Workspace>
                     <Project Language="C#" CommonReferencesNet7="true">
                         <Document>using System.Collections.Generic;
-                
+
                 class C
                 {
                     {{asyncKeyword}}void M()
                     {
                         IEnumerable&lt;int&gt; enumerable;
                         IAsyncEnumerable&lt;int&gt; asyncEnumerable;
-                
+
                         await $$
                     }
                 }</Document>
@@ -566,14 +623,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 
             var expectedCodeAfterCommit = $$"""
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     {{asyncKeyword}}void M()
                     {
                         IEnumerable<int> enumerable;
                         IAsyncEnumerable<int> asyncEnumerable;
-                
+
                         await foreach (var item in asyncEnumerable)
                         {
                             $$
@@ -582,19 +639,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
         [InlineData("")]
         [InlineData("async ")]
-        public async Task InsertAwaitForEachSnippetForPostfixAsyncEnumerableTest(string asyncKeyword)
+        public async Task InsertAwaitForEachSnippetForPostfixAsyncEnumerableTest(
+            string asyncKeyword
+        )
         {
             var markupBeforeCommit = $$"""
                 <Workspace>
                     <Project Language="C#" CommonReferencesNet7="true">
                         <Document>using System.Collections.Generic;
-                
+
                 class C
                 {
                     {{asyncKeyword}}void M(IAsyncEnumerable&lt;int&gt; asyncEnumerable)
@@ -608,7 +671,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 
             var expectedCodeAfterCommit = $$"""
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     {{asyncKeyword}}void M(IAsyncEnumerable<int> asyncEnumerable)
@@ -621,7 +684,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
     }
 }

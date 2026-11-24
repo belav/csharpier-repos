@@ -24,20 +24,40 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioReferenceCleanupService(IProjectSystemReferenceCleanupService projectSystemReferenceUpdateService)
+        public VisualStudioReferenceCleanupService(
+            IProjectSystemReferenceCleanupService projectSystemReferenceUpdateService
+        )
         {
-            _projectSystemReferenceUpdateService = (IProjectSystemReferenceCleanupService2)projectSystemReferenceUpdateService;
+            _projectSystemReferenceUpdateService =
+                (IProjectSystemReferenceCleanupService2)projectSystemReferenceUpdateService;
         }
 
-        public async Task<ImmutableArray<ReferenceInfo>> GetProjectReferencesAsync(string projectPath, CancellationToken cancellationToken)
+        public async Task<ImmutableArray<ReferenceInfo>> GetProjectReferencesAsync(
+            string projectPath,
+            CancellationToken cancellationToken
+        )
         {
-            var projectSystemReferences = await _projectSystemReferenceUpdateService.GetProjectReferencesAsync(projectPath, cancellationToken).ConfigureAwait(false);
-            return projectSystemReferences.Select(reference => reference.ToReferenceInfo()).ToImmutableArray();
+            var projectSystemReferences = await _projectSystemReferenceUpdateService
+                .GetProjectReferencesAsync(projectPath, cancellationToken)
+                .ConfigureAwait(false);
+            return projectSystemReferences
+                .Select(reference => reference.ToReferenceInfo())
+                .ToImmutableArray();
         }
 
-        public async Task<bool> TryUpdateReferenceAsync(string projectPath, ReferenceUpdate referenceUpdate, CancellationToken cancellationToken)
+        public async Task<bool> TryUpdateReferenceAsync(
+            string projectPath,
+            ReferenceUpdate referenceUpdate,
+            CancellationToken cancellationToken
+        )
         {
-            var operation = await _projectSystemReferenceUpdateService.GetUpdateReferenceOperationAsync(projectPath, referenceUpdate.ToProjectSystemReferenceUpdate(), cancellationToken).ConfigureAwait(true);
+            var operation = await _projectSystemReferenceUpdateService
+                .GetUpdateReferenceOperationAsync(
+                    projectPath,
+                    referenceUpdate.ToProjectSystemReferenceUpdate(),
+                    cancellationToken
+                )
+                .ConfigureAwait(true);
             if (operation is null)
                 return false;
 

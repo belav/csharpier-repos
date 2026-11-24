@@ -43,7 +43,6 @@ namespace System.Numerics.Tests
             // Large Non Power Of Two
             VerifyIsPowerOfTwo((BigInteger)int.MaxValue + 2, false);
 
-
             // Small Power Of Two
             VerifyIsPowerOfTwo((BigInteger)short.MaxValue + 1, true);
 

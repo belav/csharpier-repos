@@ -18,7 +18,11 @@ namespace System.Globalization
             ERROR_MIXED_COMPOSITION_NOT_FOUND = -3,
         }
 
-        private unsafe int CompareStringNative(ReadOnlySpan<char> string1, ReadOnlySpan<char> string2, CompareOptions options)
+        private unsafe int CompareStringNative(
+            ReadOnlySpan<char> string1,
+            ReadOnlySpan<char> string2,
+            CompareOptions options
+        )
         {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(!GlobalizationMode.UseNls);
@@ -31,7 +35,15 @@ namespace System.Globalization
             fixed (char* pString1 = &MemoryMarshal.GetReference(string1))
             fixed (char* pString2 = &MemoryMarshal.GetReference(string2))
             {
-                result = Interop.Globalization.CompareStringNative(m_name, m_name.Length, pString1, string1.Length, pString2, string2.Length, options);
+                result = Interop.Globalization.CompareStringNative(
+                    m_name,
+                    m_name.Length,
+                    pString1,
+                    string1.Length,
+                    pString2,
+                    string2.Length,
+                    options
+                );
             }
 
             Debug.Assert(result != (int)ErrorCodes.ERROR_COMPARISON_OPTIONS_NOT_FOUND);
@@ -39,35 +51,82 @@ namespace System.Globalization
             return result;
         }
 
-        private unsafe int IndexOfCoreNative(char* target, int cwTargetLength, char* pSource, int cwSourceLength, CompareOptions options, bool fromBeginning, int* matchLengthPtr)
+        private unsafe int IndexOfCoreNative(
+            char* target,
+            int cwTargetLength,
+            char* pSource,
+            int cwSourceLength,
+            CompareOptions options,
+            bool fromBeginning,
+            int* matchLengthPtr
+        )
         {
             AssertComparisonSupported(options);
 
-            Interop.Range result = Interop.Globalization.IndexOfNative(m_name, m_name.Length, target, cwTargetLength, pSource, cwSourceLength, options, fromBeginning);
+            Interop.Range result = Interop.Globalization.IndexOfNative(
+                m_name,
+                m_name.Length,
+                target,
+                cwTargetLength,
+                pSource,
+                cwSourceLength,
+                options,
+                fromBeginning
+            );
             Debug.Assert(result.Location != (int)ErrorCodes.ERROR_COMPARISON_OPTIONS_NOT_FOUND);
             if (result.Location == (int)ErrorCodes.ERROR_MIXED_COMPOSITION_NOT_FOUND)
-                throw new PlatformNotSupportedException(SR.PlatformNotSupported_HybridGlobalizationWithMixedCompositions);
+                throw new PlatformNotSupportedException(
+                    SR.PlatformNotSupported_HybridGlobalizationWithMixedCompositions
+                );
             if (matchLengthPtr != null)
                 *matchLengthPtr = result.Length;
 
             return result.Location;
         }
 
-        private unsafe bool NativeStartsWith(char* pPrefix, int cwPrefixLength, char* pSource, int cwSourceLength, CompareOptions options)
+        private unsafe bool NativeStartsWith(
+            char* pPrefix,
+            int cwPrefixLength,
+            char* pSource,
+            int cwSourceLength,
+            CompareOptions options
+        )
         {
             AssertComparisonSupported(options);
 
-            int result = Interop.Globalization.StartsWithNative(m_name, m_name.Length, pPrefix, cwPrefixLength, pSource, cwSourceLength, options);
+            int result = Interop.Globalization.StartsWithNative(
+                m_name,
+                m_name.Length,
+                pPrefix,
+                cwPrefixLength,
+                pSource,
+                cwSourceLength,
+                options
+            );
             Debug.Assert(result != (int)ErrorCodes.ERROR_COMPARISON_OPTIONS_NOT_FOUND);
 
             return result > 0 ? true : false;
         }
 
-        private unsafe bool NativeEndsWith(char* pSuffix, int cwSuffixLength, char* pSource, int cwSourceLength, CompareOptions options)
+        private unsafe bool NativeEndsWith(
+            char* pSuffix,
+            int cwSuffixLength,
+            char* pSource,
+            int cwSourceLength,
+            CompareOptions options
+        )
         {
             AssertComparisonSupported(options);
 
-            int result = Interop.Globalization.EndsWithNative(m_name, m_name.Length, pSuffix, cwSuffixLength, pSource, cwSourceLength, options);
+            int result = Interop.Globalization.EndsWithNative(
+                m_name,
+                m_name.Length,
+                pSuffix,
+                cwSuffixLength,
+                pSource,
+                cwSourceLength,
+                options
+            );
             Debug.Assert(result != (int)ErrorCodes.ERROR_COMPARISON_OPTIONS_NOT_FOUND);
 
             return result > 0 ? true : false;
@@ -79,8 +138,12 @@ namespace System.Globalization
                 throw new PlatformNotSupportedException(GetPNSE(options));
         }
 
-        private const CompareOptions SupportedCompareOptions = CompareOptions.None | CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace |
-                                                               CompareOptions.IgnoreWidth | CompareOptions.StringSort;
+        private const CompareOptions SupportedCompareOptions =
+            CompareOptions.None
+            | CompareOptions.IgnoreCase
+            | CompareOptions.IgnoreNonSpace
+            | CompareOptions.IgnoreWidth
+            | CompareOptions.StringSort;
 
         private static string GetPNSE(CompareOptions options) =>
             SR.Format(SR.PlatformNotSupported_HybridGlobalizationWithCompareOptions, options);

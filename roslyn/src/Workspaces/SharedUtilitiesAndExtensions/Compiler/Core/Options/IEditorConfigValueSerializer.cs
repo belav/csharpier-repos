@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.Options
         bool TryParse(string value, out object? result);
 
         /// <summary>
-        /// Gets the editorconfig string representation for the specified <paramref name="value"/>. 
+        /// Gets the editorconfig string representation for the specified <paramref name="value"/>.
         /// </summary>
         string Serialize(object? value);
     }

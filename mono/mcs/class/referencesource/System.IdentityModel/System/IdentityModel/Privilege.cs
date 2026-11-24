@@ -9,10 +9,10 @@ namespace System.IdentityModel
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using System.Security.AccessControl;
     using System.Security.Principal;
     using System.ServiceModel.Diagnostics;
-    using System.Runtime.Versioning;
 
     class Privilege
     {
@@ -44,7 +44,7 @@ namespace System.IdentityModel
         public void Enable()
         {
             // Note: AdjustTokenPrivileges should not try to adjust if the token is
-            // Primary token (process).  Duplicate the process token (impersonation) and 
+            // Primary token (process).  Duplicate the process token (impersonation) and
             // then set token to current thread  and unsetting (RevertToSelf) later.
             DiagnosticUtility.DebugAssert(this.threadToken == null, "");
             this.threadToken = GetThreadToken();
@@ -67,13 +67,16 @@ namespace System.IdentityModel
                     TOKEN_PRIVILEGE previousState;
                     uint previousSize = 0;
 
-                    if (!NativeMethods.AdjustTokenPrivileges(
-                                      this.threadToken,
-                                      false,
-                                      ref newState,
-                                      TOKEN_PRIVILEGE.Size,
-                                      out previousState,
-                                      out previousSize))
+                    if (
+                        !NativeMethods.AdjustTokenPrivileges(
+                            this.threadToken,
+                            false,
+                            ref newState,
+                            TOKEN_PRIVILEGE.Size,
+                            out previousState,
+                            out previousSize
+                        )
+                    )
                     {
                         return Marshal.GetLastWin32Error();
                     }
@@ -99,7 +102,7 @@ namespace System.IdentityModel
         }
 
         [ResourceExposure(ResourceScope.None)]
-        [ResourceConsumption( ResourceScope.Process, ResourceScope.Process )]
+        [ResourceConsumption(ResourceScope.Process, ResourceScope.Process)]
         SafeCloseHandle GetThreadToken()
         {
             //
@@ -107,44 +110,61 @@ namespace System.IdentityModel
             // the process token by impersonating self.
             //
             SafeCloseHandle threadToken;
-            if (!NativeMethods.OpenThreadToken(
-                            NativeMethods.GetCurrentThread(),
-                            TokenAccessLevels.Query | TokenAccessLevels.AdjustPrivileges,
-                            true,
-                            out threadToken))
+            if (
+                !NativeMethods.OpenThreadToken(
+                    NativeMethods.GetCurrentThread(),
+                    TokenAccessLevels.Query | TokenAccessLevels.AdjustPrivileges,
+                    true,
+                    out threadToken
+                )
+            )
             {
                 int error = Marshal.GetLastWin32Error();
                 Utility.CloseInvalidOutSafeHandle(threadToken);
                 if (error != ERROR_NO_TOKEN)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(error));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new Win32Exception(error)
+                    );
                 }
                 else
                 {
                     SafeCloseHandle processToken;
-                    if (!NativeMethods.OpenProcessToken(
-                                    NativeMethods.GetCurrentProcess(),
-                                    TokenAccessLevels.Duplicate,
-                                    out processToken))
+                    if (
+                        !NativeMethods.OpenProcessToken(
+                            NativeMethods.GetCurrentProcess(),
+                            TokenAccessLevels.Duplicate,
+                            out processToken
+                        )
+                    )
                     {
                         error = Marshal.GetLastWin32Error();
                         Utility.CloseInvalidOutSafeHandle(processToken);
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(error));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new Win32Exception(error)
+                        );
                     }
 
                     try
                     {
-                        if (!NativeMethods.DuplicateTokenEx(
-                                            processToken,
-                                            TokenAccessLevels.Impersonate | TokenAccessLevels.Query | TokenAccessLevels.AdjustPrivileges,
-                                            IntPtr.Zero,
-                                            SECURITY_IMPERSONATION_LEVEL.Impersonation,
-                                            TokenType.TokenImpersonation,
-                                            out threadToken))
+                        if (
+                            !NativeMethods.DuplicateTokenEx(
+                                processToken,
+                                TokenAccessLevels.Impersonate
+                                    | TokenAccessLevels.Query
+                                    | TokenAccessLevels.AdjustPrivileges,
+                                IntPtr.Zero,
+                                SECURITY_IMPERSONATION_LEVEL.Impersonation,
+                                TokenType.TokenImpersonation,
+                                out threadToken
+                            )
+                        )
                         {
                             error = Marshal.GetLastWin32Error();
                             Utility.CloseInvalidOutSafeHandle(threadToken);
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(error));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new Win32Exception(error)
+                            );
                         }
 
                         SetThreadToken(threadToken);
@@ -173,34 +193,39 @@ namespace System.IdentityModel
 
             // CER
             RuntimeHelpers.PrepareConstrainedRegions();
-            try
-            {
-            }
+            try { }
             finally
             {
                 success = NativeMethods.AdjustTokenPrivileges(
-                                  threadToken,
-                                  false,
-                                  ref newState,
-                                  TOKEN_PRIVILEGE.Size,
-                                  out previousState,
-                                  out previousSize);
+                    threadToken,
+                    false,
+                    ref newState,
+                    TOKEN_PRIVILEGE.Size,
+                    out previousState,
+                    out previousSize
+                );
 
                 error = Marshal.GetLastWin32Error();
                 if (success && error == ERROR_SUCCESS)
                 {
-                    this.initialEnabled = (0 != (previousState.Privilege.Attributes & SE_PRIVILEGE_ENABLED));
+                    this.initialEnabled = (
+                        0 != (previousState.Privilege.Attributes & SE_PRIVILEGE_ENABLED)
+                    );
                     this.needToRevert = true;
                 }
             }
 
             if (error == ERROR_NOT_ALL_ASSIGNED)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new PrivilegeNotHeldException(this.privilege));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new PrivilegeNotHeldException(this.privilege)
+                );
             }
             else if (!success)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(error));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(error)
+                );
             }
         }
 
@@ -210,9 +235,7 @@ namespace System.IdentityModel
             int error = 0;
             // CER
             RuntimeHelpers.PrepareConstrainedRegions();
-            try
-            {
-            }
+            try { }
             finally
             {
                 if (!NativeMethods.SetThreadToken(IntPtr.Zero, threadToken))
@@ -226,7 +249,9 @@ namespace System.IdentityModel
             }
             if (!this.isImpersonating)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(error));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(error)
+                );
             }
         }
 
@@ -244,7 +269,9 @@ namespace System.IdentityModel
             if (!NativeMethods.LookupPrivilegeValueW(null, privilege, out luid))
             {
                 int error = Marshal.GetLastWin32Error();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(error));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(error)
+                );
             }
 
             lock (luids)

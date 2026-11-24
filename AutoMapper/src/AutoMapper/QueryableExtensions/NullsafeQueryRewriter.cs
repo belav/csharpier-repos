@@ -37,7 +37,8 @@ internal class NullsafeQueryRewriter : ExpressionVisitor
 {
     static readonly LockingConcurrentDictionary<Type, Expression> Cache = new(Fallback);
 
-    public static Expression NullCheck(Expression expression) => new NullsafeQueryRewriter().Visit(expression);
+    public static Expression NullCheck(Expression expression) =>
+        new NullsafeQueryRewriter().Visit(expression);
 
     /// <inheritdoc />
     protected override Expression VisitMember(MemberExpression node)
@@ -88,7 +89,11 @@ internal class NullsafeQueryRewriter : ExpressionVisitor
         return node.Update(target, arguments);
     }
 
-    static Expression BeSafe(Expression target, Expression expression, Func<Expression, Expression> update)
+    static Expression BeSafe(
+        Expression target,
+        Expression expression,
+        Func<Expression, Expression> update
+    )
     {
         var fallback = Cache.GetOrAdd(target.Type);
 
@@ -103,7 +108,8 @@ internal class NullsafeQueryRewriter : ExpressionVisitor
 
         // expression can be default or null, which is basically the same...
         var expressionFallback = !IsNullableOrReferenceType(expression.Type)
-            ? (Expression)Default(expression.Type) : Constant(null, expression.Type);
+            ? (Expression)Default(expression.Type)
+            : Constant(null, expression.Type);
 
         return Condition(Equal(target, targetFallback), expressionFallback, expression);
     }

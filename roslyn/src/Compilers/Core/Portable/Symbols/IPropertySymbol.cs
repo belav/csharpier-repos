@@ -58,7 +58,7 @@ namespace Microsoft.CodeAnalysis
         RefKind RefKind { get; }
 
         /// <summary>
-        /// The type of the property. 
+        /// The type of the property.
         /// </summary>
         ITypeSymbol Type { get; }
 
@@ -83,7 +83,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// The original definition of the property. If the property is constructed from another
-        /// symbol by type substitution, OriginalDefinition gets the original symbol, as it was 
+        /// symbol by type substitution, OriginalDefinition gets the original symbol, as it was
         /// defined in source or metadata.
         /// </summary>
         new IPropertySymbol OriginalDefinition { get; }
@@ -107,7 +107,7 @@ namespace Microsoft.CodeAnalysis
         ImmutableArray<CustomModifier> RefCustomModifiers { get; }
 
         /// <summary>
-        /// The list of custom modifiers, if any, associated with the type of the property. 
+        /// The list of custom modifiers, if any, associated with the type of the property.
         /// </summary>
         ImmutableArray<CustomModifier> TypeCustomModifiers { get; }
     }

@@ -1,4 +1,3 @@
-
 //------------------------------------------------------------------------------
 // <copyright file="DtdParser.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -9,12 +8,18 @@
 using System;
 using System.Xml;
 
-namespace System.Xml {
-
-    internal partial interface IDtdParser {
-
+namespace System.Xml
+{
+    internal partial interface IDtdParser
+    {
         IDtdInfo ParseInternalDtd(IDtdParserAdapter adapter, bool saveInternalSubset);
-        IDtdInfo ParseFreeFloatingDtd(string baseUri, string docTypeName, string publicId, string systemId, string internalSubset, IDtdParserAdapter adapter);
-
+        IDtdInfo ParseFreeFloatingDtd(
+            string baseUri,
+            string docTypeName,
+            string publicId,
+            string systemId,
+            string internalSubset,
+            IDtdParserAdapter adapter
+        );
     }
 }

@@ -8,9 +8,9 @@ namespace System.IdentityModel.Tokens
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Security.Cryptography;
-    using System.Runtime.CompilerServices;
 
     public class RsaSecurityToken : SecurityToken
     {
@@ -22,9 +22,7 @@ namespace System.IdentityModel.Tokens
         GCHandle rsaHandle;
 
         public RsaSecurityToken(RSA rsa)
-            : this(rsa, SecurityUniqueId.Create().Value)
-        {
-        }
+            : this(rsa, SecurityUniqueId.Create().Value) { }
 
         public RsaSecurityToken(RSA rsa, string id)
         {
@@ -42,7 +40,7 @@ namespace System.IdentityModel.Tokens
         // Rsa finalizer can throw and bring down the process if in finalizer context.
         // This internal ctor is used by SM's IssuedSecurityTokenProvider.
         // If ownsRsa=true, this class will take ownership of the Rsa object and provides
-        // a reliable finalizing/disposing of Rsa object.  The GCHandle is used to ensure 
+        // a reliable finalizing/disposing of Rsa object.  The GCHandle is used to ensure
         // order in finalizer sequence.
         RsaSecurityToken(RSACryptoServiceProvider rsa, bool ownsRsa)
         {
@@ -53,7 +51,7 @@ namespace System.IdentityModel.Tokens
             this.effectiveTime = DateTime.UtcNow;
             if (ownsRsa)
             {
-                // This also key pair generation.  
+                // This also key pair generation.
                 // This must be called before PersistKeyInCsp to avoid a handle to go out of scope.
                 this.keyContainerInfo = rsa.CspKeyContainerInfo;
                 // We will handle key file deletion
@@ -93,17 +91,25 @@ namespace System.IdentityModel.Tokens
 
                     // Best effort delete key file in user context
                     SafeProvHandle provHandle;
-                    if (!NativeMethods.CryptAcquireContextW(out provHandle,
-                                                            keyContainerName,
-                                                            providerName,
-                                                            providerType,
-                                                            NativeMethods.CRYPT_DELETEKEYSET))
+                    if (
+                        !NativeMethods.CryptAcquireContextW(
+                            out provHandle,
+                            keyContainerName,
+                            providerName,
+                            providerType,
+                            NativeMethods.CRYPT_DELETEKEYSET
+                        )
+                    )
                     {
                         int error = Marshal.GetLastWin32Error();
                         try
                         {
                             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(SR.GetString(SR.FailedToDeleteKeyContainerFile), new Win32Exception(error)));
+                                new InvalidOperationException(
+                                    SR.GetString(SR.FailedToDeleteKeyContainerFile),
+                                    new Win32Exception(error)
+                                )
+                            );
                         }
                         catch (InvalidOperationException ex)
                         {
@@ -127,9 +133,7 @@ namespace System.IdentityModel.Tokens
             RuntimeHelpers.PrepareConstrainedRegions();
             try
             {
-                try
-                {
-                }
+                try { }
                 finally
                 {
                     rsa = new RSACryptoServiceProvider(keySize);
@@ -192,13 +196,23 @@ namespace System.IdentityModel.Tokens
             if (typeof(T) == typeof(RsaKeyIdentifierClause))
                 return (T)((object)new RsaKeyIdentifierClause(this.rsa));
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(
-                SR.GetString(SR.TokenDoesNotSupportKeyIdentifierClauseCreation, GetType().Name, typeof(T).Name)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(
+                    SR.GetString(
+                        SR.TokenDoesNotSupportKeyIdentifierClauseCreation,
+                        GetType().Name,
+                        typeof(T).Name
+                    )
+                )
+            );
         }
 
-        public override bool MatchesKeyIdentifierClause(SecurityKeyIdentifierClause keyIdentifierClause)
+        public override bool MatchesKeyIdentifierClause(
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
-            RsaKeyIdentifierClause rsaKeyIdentifierClause = keyIdentifierClause as RsaKeyIdentifierClause;
+            RsaKeyIdentifierClause rsaKeyIdentifierClause =
+                keyIdentifierClause as RsaKeyIdentifierClause;
             if (rsaKeyIdentifierClause != null)
                 return rsaKeyIdentifierClause.Matches(this.rsa);
 

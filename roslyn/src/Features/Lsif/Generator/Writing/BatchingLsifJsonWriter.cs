@@ -30,7 +30,7 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Writing
         /// writes to the JSON as much as possible to avoid a lot of locking overhead. There's some shared state
         /// that we must track for global symbols, like IDs of various reference lists, and for us to add
         /// reference to those we need to ensure that shared state is flushed before we can write per-document state.
-        /// 
+        ///
         /// This lock is acquired during the entirety of a call to <see cref="FlushToUnderlyingAndEmpty"/>. That
         /// method wants to hold <see cref="_elementsGate"/> for a short as possible, to allow other threads
         /// producing new (unrelated) work to not be blocked behind us writing to the output. But if multiple threads

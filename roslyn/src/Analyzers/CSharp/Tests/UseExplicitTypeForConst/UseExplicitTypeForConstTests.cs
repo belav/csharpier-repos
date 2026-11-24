@@ -14,15 +14,15 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseExplicitTypeForConst)]
-    public sealed class UseExplicitTypeForConstTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public sealed class UseExplicitTypeForConstTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public UseExplicitTypeForConstTests(ITestOutputHelper logger)
-            : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new UseExplicitTypeForConstCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new UseExplicitTypeForConstCodeFixProvider());
 
         [Fact]
         public async Task TestWithIntLiteral()
@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
                         const int v = 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
                         const string v = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -95,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
                         const System.Action v = default(System.Action);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -119,7 +122,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
                         const string v = System.Console.ReadLine();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -143,7 +147,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
                         const (int, bool) v = (0, true);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -158,7 +163,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
                         const [|var|] v = null;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -173,7 +179,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
                         const [|var|] v = default;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -197,7 +204,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
                         const System.Action v = () => { };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -212,7 +220,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
                         const [|var|] v = new { a = 0 };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -227,7 +236,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
                         const [|var|] v = { 0, 1 };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -242,7 +252,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
                         const [|var|] v =
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -258,7 +269,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
                         const [|var|] v = 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -270,7 +282,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
                 {
                     const [|var|] v = 0;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -285,7 +298,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
                         const [|var|] a = 0, b = 0;
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

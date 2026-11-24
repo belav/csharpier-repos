@@ -9,6 +9,10 @@ internal static partial class Interop
     internal static partial class Sys
     {
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetSockName")]
-        internal static unsafe partial Error GetSockName(SafeHandle socket, byte* socketAddress, int* socketAddressLen);
+        internal static unsafe partial Error GetSockName(
+            SafeHandle socket,
+            byte* socketAddress,
+            int* socketAddressLen
+        );
     }
 }

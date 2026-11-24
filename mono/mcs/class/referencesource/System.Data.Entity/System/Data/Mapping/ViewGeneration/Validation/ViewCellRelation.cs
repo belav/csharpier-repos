@@ -8,10 +8,9 @@
 //---------------------------------------------------------------------
 
 using System.Collections.Generic;
+using System.Data.Common.Utils;
 using System.Data.Mapping.ViewGeneration.Structures;
 using System.Text;
-using System.Data.Common.Utils;
-
 
 namespace System.Data.Mapping.ViewGeneration.Validation
 {
@@ -23,7 +22,6 @@ namespace System.Data.Mapping.ViewGeneration.Validation
     /// </summary>
     internal class ViewCellRelation : CellRelation
     {
-
         #region Constructor
         // effects: Creates a view cell relation for "cell" with the
         // projected slots given by slots -- cellNumber is the number of the
@@ -66,8 +64,10 @@ namespace System.Data.Mapping.ViewGeneration.Validation
             foreach (ViewCellSlot viewSlot in m_slots)
             {
                 // If the left or right slots are equal, return the viewSlot
-                if (ProjectedSlot.EqualityComparer.Equals(slot, viewSlot.CSlot) ||
-                    ProjectedSlot.EqualityComparer.Equals(slot, viewSlot.SSlot))
+                if (
+                    ProjectedSlot.EqualityComparer.Equals(slot, viewSlot.CSlot)
+                    || ProjectedSlot.EqualityComparer.Equals(slot, viewSlot.SSlot)
+                )
                 {
                     return viewSlot;
                 }

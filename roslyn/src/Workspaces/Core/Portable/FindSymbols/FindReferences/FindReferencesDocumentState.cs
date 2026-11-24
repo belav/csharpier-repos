@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         SemanticModel semanticModel,
         SyntaxNode root,
         FindReferenceCache cache,
-        HashSet<string>? globalAliases)
+        HashSet<string>? globalAliases
+    )
     {
         private static readonly HashSet<string> s_empty = new();
 
@@ -25,7 +26,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
         public readonly Solution Solution = document.Project.Solution;
         public readonly SyntaxTree SyntaxTree = semanticModel.SyntaxTree;
-        public readonly ISyntaxFactsService SyntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-        public readonly ISemanticFactsService SemanticFacts = document.GetRequiredLanguageService<ISemanticFactsService>();
+        public readonly ISyntaxFactsService SyntaxFacts =
+            document.GetRequiredLanguageService<ISyntaxFactsService>();
+        public readonly ISemanticFactsService SemanticFacts =
+            document.GetRequiredLanguageService<ISemanticFactsService>();
     }
 }

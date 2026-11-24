@@ -19,10 +19,12 @@ namespace System.Threading.Channels
 
         /// <summary>Implicit cast from a channel to its readable half.</summary>
         /// <param name="channel">The channel being cast.</param>
-        public static implicit operator ChannelReader<TRead>(Channel<TWrite, TRead> channel) => channel.Reader;
+        public static implicit operator ChannelReader<TRead>(Channel<TWrite, TRead> channel) =>
+            channel.Reader;
 
         /// <summary>Implicit cast from a channel to its writable half.</summary>
         /// <param name="channel">The channel being cast.</param>
-        public static implicit operator ChannelWriter<TWrite>(Channel<TWrite, TRead> channel) => channel.Writer;
+        public static implicit operator ChannelWriter<TWrite>(Channel<TWrite, TRead> channel) =>
+            channel.Writer;
     }
 }

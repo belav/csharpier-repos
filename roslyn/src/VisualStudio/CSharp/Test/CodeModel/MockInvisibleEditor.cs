@@ -23,14 +23,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.CodeModel
 
         public Microsoft.VisualStudio.Text.ITextBuffer TextBuffer
         {
-            get
-            {
-                return _workspace.GetTestDocument(_documentId).GetTextBuffer();
-            }
+            get { return _workspace.GetTestDocument(_documentId).GetTextBuffer(); }
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 }

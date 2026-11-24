@@ -10,15 +10,15 @@ public class Program
     static bool s_caughtException;
 
     static uint s_uint_value = int.MaxValue + 1U;
-    static int  s_int_result = 0;
+    static int s_int_result = 0;
 
-    static int  s_int_value =  -1;
+    static int s_int_value = -1;
     static uint s_uint_result = 0;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     static int CastToIntChecked(uint value)
     {
-	// checked cast of uint to int
+        // checked cast of uint to int
         return checked((int)value);
     }
 
@@ -28,8 +28,8 @@ public class Program
     static void Test1()
     {
         int result = CastToIntChecked(s_uint_value);
-	s_int_result = result;
-	Console.WriteLine("Result is " + result);
+        s_int_result = result;
+        Console.WriteLine("Result is " + result);
     }
 
     // Testing a checked cast of uint to int -- the non-inlining case
@@ -59,7 +59,7 @@ public class Program
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     static uint CastToUIntChecked(int value)
     {
-	// checked cast of int to uint
+        // checked cast of int to uint
         return checked((uint)value);
     }
 
@@ -69,8 +69,8 @@ public class Program
     static void Test3()
     {
         uint result = CastToUIntChecked(s_int_value);
-	s_uint_result = result;
-	Console.WriteLine("Result is " + result);
+        s_uint_result = result;
+        Console.WriteLine("Result is " + result);
     }
 
     // Testing a checked cast of int to uint -- the non-inlining case

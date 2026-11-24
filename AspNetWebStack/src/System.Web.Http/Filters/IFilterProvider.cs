@@ -8,6 +8,9 @@ namespace System.Web.Http.Filters
 {
     public interface IFilterProvider
     {
-        IEnumerable<FilterInfo> GetFilters(HttpConfiguration configuration, HttpActionDescriptor actionDescriptor);
+        IEnumerable<FilterInfo> GetFilters(
+            HttpConfiguration configuration,
+            HttpActionDescriptor actionDescriptor
+        );
     }
 }

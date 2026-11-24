@@ -1,10 +1,9 @@
 //------------------------------------------------------------------------------
 // <copyright file="MobileControl.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-using System.Text;
 using System.Collections;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -14,6 +13,8 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Globalization;
 using System.IO;
+using System.Security.Permissions;
+using System.Text;
 using System.Web;
 using System.Web.Mobile;
 using System.Web.UI;
@@ -21,11 +22,9 @@ using System.Web.UI.Design.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.Util;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {
-
     /*
      * Mobile control base class.
      * All core controls and extension controls extend from this class.
@@ -42,9 +41,17 @@ namespace System.Web.UI.MobileControls
         ToolboxItemFilter("System.Web.UI"),
         ToolboxItemFilter("System.Web.UI.MobileControls", ToolboxItemFilterType.Require),
     ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public abstract class MobileControl : Control, IAttributeAccessor
     {
         private IControlAdapter _adapter;
@@ -78,15 +85,15 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        [
-            DefaultValue(false)
-        ]
-        public override sealed bool EnableTheming {
-            get {
-                return false;
-            }
-            set {
-                throw new NotSupportedException(SR.GetString(SR.Theme_Not_Supported_On_MobileControls));
+        [DefaultValue(false)]
+        public sealed override bool EnableTheming
+        {
+            get { return false; }
+            set
+            {
+                throw new NotSupportedException(
+                    SR.GetString(SR.Theme_Not_Supported_On_MobileControls)
+                );
             }
         }
 
@@ -109,8 +116,8 @@ namespace System.Web.UI.MobileControls
                         if (Site == null || !Site.DesignMode)
                         {
                             throw new Exception(
-                                SR.GetString(SR.MobileControl_MustBeInMobilePage,
-                                             Page));
+                                SR.GetString(SR.MobileControl_MustBeInMobilePage, Page)
+                            );
                         }
                     }
                     return mobilePage;
@@ -148,31 +155,30 @@ namespace System.Web.UI.MobileControls
 
                     if (_form == null && RequiresForm)
                     {
-                        throw new Exception(SR.GetString(SR.MobileControl_MustBeInForm, 
-                                                         UniqueID,
-                                                         GetType().Name));
+                        throw new Exception(
+                            SR.GetString(SR.MobileControl_MustBeInForm, UniqueID, GetType().Name)
+                        );
                     }
                 }
                 return _form;
             }
         }
 
-        [
-            Browsable(false)
-        ]
-        public override sealed string SkinID {
-            get {
-                return String.Empty;
-            }
-            set {
-                throw new NotSupportedException(SR.GetString(SR.Theme_Not_Supported_On_MobileControls));
+        [Browsable(false)]
+        public sealed override string SkinID
+        {
+            get { return String.Empty; }
+            set
+            {
+                throw new NotSupportedException(
+                    SR.GetString(SR.Theme_Not_Supported_On_MobileControls)
+                );
             }
         }
 
-        [
-            EditorBrowsable(EditorBrowsableState.Never),
-        ]
-        public override sealed void ApplyStyleSheetSkin(Page page) {
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public sealed override void ApplyStyleSheetSkin(Page page)
+        {
             throw new NotSupportedException(SR.GetString(SR.Theme_Not_Supported_On_MobileControls));
         }
 
@@ -182,8 +188,7 @@ namespace System.Web.UI.MobileControls
             Form form = ResolveFormReferenceNoThrow(formID);
             if (form == null)
             {
-                throw new ArgumentException(
-                    SR.GetString(SR.MobilePage_FormNotFound, formID));
+                throw new ArgumentException(SR.GetString(SR.MobilePage_FormNotFound, formID));
             }
 
             return form;
@@ -207,22 +212,25 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.AddedControl"]/*' />
-        protected override void AddedControl(Control control, int index) 
+        protected override void AddedControl(Control control, int index)
         {
             _cachedInnerText = null;
             base.AddedControl(control, index);
         }
 
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.RemovedControl"]/*' />
-        protected override void RemovedControl(Control control) {
+        protected override void RemovedControl(Control control)
+        {
             MobileControl ctl = control as MobileControl;
-            if (ctl != null) {
+            if (ctl != null)
+            {
                 ctl.InvalidateParentStyles();
             }
 
             // Remove the cached _deviceSpecific.
             DeviceSpecific deviceSpecific = control as DeviceSpecific;
-            if (deviceSpecific != null) {
+            if (deviceSpecific != null)
+            {
                 _deviceSpecific.SetOwner(null);
                 _deviceSpecific = null;
             }
@@ -286,9 +294,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.EnsureTemplatedUI"]/*' />
-        public virtual void EnsureTemplatedUI()
-        {
-        }
+        public virtual void EnsureTemplatedUI() { }
 
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.CreateTemplatedUI"]/*' />
         protected virtual void CreateTemplatedUI(bool doDataBind)
@@ -298,8 +304,7 @@ namespace System.Web.UI.MobileControls
             // this case.
             if (!IsTemplated)
             {
-                throw new Exception(
-                    SR.GetString(SR.MobileControl_NoTemplatesDefined));
+                throw new Exception(SR.GetString(SR.MobileControl_NoTemplatesDefined));
             }
             Adapter.CreateTemplatedUI(doDataBind);
         }
@@ -315,29 +320,28 @@ namespace System.Web.UI.MobileControls
         internal TemplateControl FindContainingTemplateControl()
         {
             Control control = this;
-            while (!(control is TemplateControl) &&
-                   control != null)
+            while (!(control is TemplateControl) && control != null)
             {
                 control = control.Parent;
             }
 
             // We assume that the only template controls are Page and
-            // UserControl. 
-            Debug.Assert(control == null ||
-                         control is Page ||
-                         control is UserControl);
+            // UserControl.
+            Debug.Assert(control == null || control is Page || control is UserControl);
 
             return (TemplateControl)control;
         }
-        
+
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.ResolveUrl"]/*' />
         public new String ResolveUrl(String relativeUrl)
         {
             int length;
 
-            if (relativeUrl == null || 
-                    (length = relativeUrl.Length) == 0 || 
-                    !UrlPath.IsRelativeUrl(relativeUrl))
+            if (
+                relativeUrl == null
+                || (length = relativeUrl.Length) == 0
+                || !UrlPath.IsRelativeUrl(relativeUrl)
+            )
             {
                 return relativeUrl;
             }
@@ -351,7 +355,7 @@ namespace System.Web.UI.MobileControls
             // Determine if there are any . or .. sequences.
 
             bool containsDots = false;
-            for (int examine = 0; examine < length; examine++) 
+            for (int examine = 0; examine < length; examine++)
             {
                 examine = relativeUrl.IndexOf('.', examine);
                 if (examine < 0)
@@ -360,10 +364,17 @@ namespace System.Web.UI.MobileControls
                 }
 
                 // Expression borrowed from UrlPath.cs
-                if ((examine == 0 || relativeUrl[examine - 1] == '/')
-                    && (examine + 1 == length || relativeUrl[examine + 1] == '/' ||
-                        (relativeUrl[examine + 1] == '.' && 
-                            (examine + 2 == length || relativeUrl[examine + 2] == '/'))))
+                if (
+                    (examine == 0 || relativeUrl[examine - 1] == '/')
+                    && (
+                        examine + 1 == length
+                        || relativeUrl[examine + 1] == '/'
+                        || (
+                            relativeUrl[examine + 1] == '.'
+                            && (examine + 2 == length || relativeUrl[examine + 2] == '/')
+                        )
+                    )
+                )
                 {
                     containsDots = true;
                     break;
@@ -394,7 +405,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.OnDataBinding"]/*' />
-        protected override void OnDataBinding(EventArgs e) 
+        protected override void OnDataBinding(EventArgs e)
         {
             if (_containsDataboundLiteral)
             {
@@ -418,10 +429,7 @@ namespace System.Web.UI.MobileControls
         ]
         public DeviceSpecific DeviceSpecific
         {
-            get
-            {
-                return _deviceSpecific;
-            }
+            get { return _deviceSpecific; }
             set
             {
                 _deviceSpecific = value;
@@ -447,8 +455,7 @@ namespace System.Web.UI.MobileControls
                 }
                 else
                 {
-                    throw new Exception(
-                        SR.GetString(SR.MobileControl_NoMultipleDeviceSpecifics));
+                    throw new Exception(SR.GetString(SR.MobileControl_NoMultipleDeviceSpecifics));
                 }
             }
             else
@@ -486,13 +493,13 @@ namespace System.Web.UI.MobileControls
             }
             base.OnInit(e);
 
-            // If we are being created after the first pass 
-            // then 
+            // If we are being created after the first pass
+            // then
 
             if (isRuntime && page.PrivateViewStateLoaded)
             {
                 Object privateViewState = ((MobilePage)Page).GetPrivateViewState(this);
-                if(privateViewState != null)
+                if (privateViewState != null)
                 {
                     LoadPrivateViewStateInternal(privateViewState);
                 }
@@ -541,10 +548,9 @@ namespace System.Web.UI.MobileControls
                 if (illegalCustomAttributes != null)
                 {
                     throw new Exception(
-                        SR.GetString(SR.MobileControl_NoCustomAttributes,
-                                     illegalCustomAttributes));
+                        SR.GetString(SR.MobileControl_NoCustomAttributes, illegalCustomAttributes)
+                    );
                 }
-                
             }
             Adapter.OnLoad(e);
             base.OnLoad(e);
@@ -573,10 +579,7 @@ namespace System.Web.UI.MobileControls
 
         internal virtual bool RequiresForm
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.OnRender"]/*' />
@@ -589,7 +592,8 @@ namespace System.Web.UI.MobileControls
         protected override void OnUnload(EventArgs e)
         {
             base.OnUnload(e);
-            if (Adapter != null) {
+            if (Adapter != null)
+            {
                 Adapter.OnUnload(e);
             }
         }
@@ -612,7 +616,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.LoadViewState"]/*' />
-        protected override void LoadViewState(Object savedState) 
+        protected override void LoadViewState(Object savedState)
         {
             if (savedState != null)
             {
@@ -650,7 +654,7 @@ namespace System.Web.UI.MobileControls
             return new Object[2] { baseState, styleState };
         }
 
-        internal void SavePrivateViewStateInternal()        
+        internal void SavePrivateViewStateInternal()
         {
             Object privateState = SavePrivateViewState();
             Object adapterState = Adapter.SaveAdapterState();
@@ -676,9 +680,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.LoadPrivateViewState"]/*' />
-        protected virtual void LoadPrivateViewState(Object state)
-        {
-        }
+        protected virtual void LoadPrivateViewState(Object state) { }
 
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.SavePrivateViewState"]/*' />
         protected virtual Object SavePrivateViewState()
@@ -716,14 +718,14 @@ namespace System.Web.UI.MobileControls
 
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.IAttributeAccessor.GetAttribute"]/*' />
         /// <internalonly/>
-        protected String GetAttribute(String name) 
+        protected String GetAttribute(String name)
         {
             return (_customAttributes != null) ? (String)_customAttributes[name] : null;
         }
 
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.IAttributeAccessor.SetAttribute"]/*' />
         /// <internalonly/>
-        protected void SetAttribute(String name, String value) 
+        protected void SetAttribute(String name, String value)
         {
             CustomAttributes[name] = value;
         }
@@ -740,7 +742,7 @@ namespace System.Web.UI.MobileControls
             Bindable(false),
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
         ]
-        internal protected virtual Style Style
+        protected internal virtual Style Style
         {
             get
             {
@@ -764,25 +766,20 @@ namespace System.Web.UI.MobileControls
             this.Style.Refresh();
         }
 
-
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.StyleReference"]/*' />
         [
             Bindable(false),
             DefaultValue(null),
             MobileCategory(SR.Category_Appearance),
             MobileSysDescription(SR.MobileControl_StyleReference),
-            TypeConverter(typeof(System.Web.UI.Design.MobileControls.Converters.StyleReferenceConverter))
+            TypeConverter(
+                typeof(System.Web.UI.Design.MobileControls.Converters.StyleReferenceConverter)
+            )
         ]
         public virtual String StyleReference
         {
-            get
-            {
-                return this.Style.StyleReference;
-            }
-            set
-            {
-                this.Style.StyleReference = value;
-            }
+            get { return this.Style.StyleReference; }
+            set { this.Style.StyleReference = value; }
         }
 
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.Font"]/*' />
@@ -795,10 +792,7 @@ namespace System.Web.UI.MobileControls
         ]
         public virtual FontInfo Font
         {
-            get
-            {
-                return this.Style.Font;
-            }
+            get { return this.Style.Font; }
         }
 
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.Alignment"]/*' />
@@ -810,14 +804,8 @@ namespace System.Web.UI.MobileControls
         ]
         public virtual Alignment Alignment
         {
-            get
-            {
-                return this.Style.Alignment;
-            }
-            set
-            {
-                this.Style.Alignment = value;
-            }
+            get { return this.Style.Alignment; }
+            set { this.Style.Alignment = value; }
         }
 
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.Wrapping"]/*' />
@@ -829,14 +817,8 @@ namespace System.Web.UI.MobileControls
         ]
         public virtual Wrapping Wrapping
         {
-            get
-            {
-                return this.Style.Wrapping;
-            }
-            set
-            {
-                this.Style.Wrapping = value;
-            }
+            get { return this.Style.Wrapping; }
+            set { this.Style.Wrapping = value; }
         }
 
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.ForeColor"]/*' />
@@ -849,14 +831,8 @@ namespace System.Web.UI.MobileControls
         ]
         public virtual Color ForeColor
         {
-            get
-            {
-                return this.Style.ForeColor;
-            }
-            set
-            {
-                this.Style.ForeColor = value;
-            }
+            get { return this.Style.ForeColor; }
+            set { this.Style.ForeColor = value; }
         }
 
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.BackColor"]/*' />
@@ -869,16 +845,9 @@ namespace System.Web.UI.MobileControls
         ]
         public virtual Color BackColor
         {
-            get
-            {
-                return this.Style.BackColor;
-            }
-            set
-            {
-                this.Style.BackColor = value;
-            }
+            get { return this.Style.BackColor; }
+            set { this.Style.BackColor = value; }
         }
-
 
         /////////////////////////////////////////////////////////////////////////
         //  END STYLE PROPERTIES
@@ -913,30 +882,35 @@ namespace System.Web.UI.MobileControls
                     bool trimInnerText = TrimInnerText;
                     bool trimNewlines = TrimNewlines;
 
-                    text = GetControlText(out containTag, out _containsDataboundLiteral, trimInnerText);
+                    text = GetControlText(
+                        out containTag,
+                        out _containsDataboundLiteral,
+                        trimInnerText
+                    );
 
                     // Cannot throw exceptions from properties at designtime,
                     // this will break property browser.
-                    if (containTag && 
-                        !AllowInnerMarkup && 
-                        (MobilePage == null || !MobilePage.DesignMode))
+                    if (
+                        containTag
+                        && !AllowInnerMarkup
+                        && (MobilePage == null || !MobilePage.DesignMode)
+                    )
                     {
                         throw new Exception(
-                            SR.GetString(SR.MobileControl_InnerTextCannotContainTags, 
-                            GetType().ToString(), 
-                            UniqueID));
-
+                            SR.GetString(
+                                SR.MobileControl_InnerTextCannotContainTags,
+                                GetType().ToString(),
+                                UniqueID
+                            )
+                        );
                     }
 
                     // Reset text to empty string at design time if the control
                     // contains DataBoundLiteral child control.
-                    if (MobilePage != null && 
-                        MobilePage.DesignMode && 
-                        _containsDataboundLiteral)
+                    if (MobilePage != null && MobilePage.DesignMode && _containsDataboundLiteral)
                     {
                         text = String.Empty;
                     }
-
 
                     if (trimNewlines)
                     {
@@ -1000,15 +974,17 @@ namespace System.Web.UI.MobileControls
 
                 return text;
             }
-
             set
             {
                 if (!AllowMultiLines && value != null && value.IndexOf('\r') >= 0)
                 {
                     throw new ArgumentException(
-                        SR.GetString(SR.MobileControl_TextCannotContainNewlines, 
-                                     GetType().ToString(), 
-                                     UniqueID));
+                        SR.GetString(
+                            SR.MobileControl_TextCannotContainNewlines,
+                            GetType().ToString(),
+                            UniqueID
+                        )
+                    );
                 }
 
                 ViewState[InnerTextViewStateKey] = value;
@@ -1019,9 +995,11 @@ namespace System.Web.UI.MobileControls
                 for (int i = Controls.Count - 1; i >= 0; i--)
                 {
                     Control child = Controls[i];
-                    if (child is LiteralControl ||
-                        child is DataBoundLiteralControl ||
-                        child is DesignerDataBoundLiteralControl)
+                    if (
+                        child is LiteralControl
+                        || child is DataBoundLiteralControl
+                        || child is DesignerDataBoundLiteralControl
+                    )
                     {
                         Controls.RemoveAt(i);
                     }
@@ -1036,8 +1014,11 @@ namespace System.Web.UI.MobileControls
             return GetControlText(out containTag, out containDataboundLiteral, false);
         }
 
-
-        private String GetControlText(out bool containTag, out bool containDataboundLiteral, bool trim)
+        private String GetControlText(
+            out bool containTag,
+            out bool containDataboundLiteral,
+            bool trim
+        )
         {
             containTag = false;
             containDataboundLiteral = false;
@@ -1102,7 +1083,7 @@ namespace System.Web.UI.MobileControls
 
                 if (trim)
                 {
-                    text = text.Trim ();
+                    text = text.Trim();
                 }
 
                 if (translate || returnedText != null)
@@ -1147,7 +1128,7 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        static internal void TranslateAndAppendText(String text, StringWriter writer)
+        internal static void TranslateAndAppendText(String text, StringWriter writer)
         {
             // Can't quite use HtmlDecode, because HtmlDecode doesn't
             // parse &nbsp; the way we'd like it to.
@@ -1169,40 +1150,26 @@ namespace System.Web.UI.MobileControls
 
         internal virtual bool AllowMultiLines
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         internal virtual bool AllowInnerMarkup
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         internal virtual bool TrimInnerText
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         internal virtual bool TrimNewlines
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.AddLinkedForms"]/*' />
-        public virtual void AddLinkedForms(IList linkedForms)
-        {
-        }
+        public virtual void AddLinkedForms(IList linkedForms) { }
 
         //  convenience method for returning a non-null string value
         internal String ToString(Object o)
@@ -1229,6 +1196,7 @@ namespace System.Web.UI.MobileControls
         }
 
         private int _firstPage = -1;
+
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.FirstPage"]/*' />
         [
             Browsable(false),
@@ -1237,17 +1205,12 @@ namespace System.Web.UI.MobileControls
         ]
         public int FirstPage
         {
-            get
-            {
-                return _firstPage;
-            }
-            set
-            {
-                _firstPage = value;
-            }
+            get { return _firstPage; }
+            set { _firstPage = value; }
         }
 
         private int _lastPage = -1;
+
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.LastPage"]/*' />
         [
             Browsable(false),
@@ -1256,14 +1219,8 @@ namespace System.Web.UI.MobileControls
         ]
         public int LastPage
         {
-            get
-            {
-                return _lastPage;
-            }
-            set
-            {
-                _lastPage = value;
-            }
+            get { return _lastPage; }
+            set { _lastPage = value; }
         }
 
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.VisibleWeight"]/*' />
@@ -1310,23 +1267,14 @@ namespace System.Web.UI.MobileControls
 
         internal bool EnablePagination
         {
-            get
-            {
-                return _enablePagination;
-            }
-            set
-            {
-                _enablePagination = value;
-            }
+            get { return _enablePagination; }
+            set { _enablePagination = value; }
         }
 
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.PaginateChildren"]/*' />
         protected virtual bool PaginateChildren
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.PaginateRecursive"]/*' />
@@ -1360,7 +1308,11 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        internal static void DoPaginateChildren(ControlPager pager, Control ctl, ref int firstAssignedPage)
+        internal static void DoPaginateChildren(
+            ControlPager pager,
+            Control ctl,
+            ref int firstAssignedPage
+        )
         {
             if (ctl.HasControls())
             {
@@ -1395,10 +1347,9 @@ namespace System.Web.UI.MobileControls
                     MobileControl mobileChild = child as MobileControl;
                     if (mobileChild != null)
                     {
-                            mobileChild.SetControlPage(page);
- 
+                        mobileChild.SetControlPage(page);
                     }
-                    else 
+                    else
                     {
                         SetControlPageRecursive(child, page);
                     }
@@ -1406,15 +1357,18 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        internal static void SetEnablePaginationRecursive(Control control, bool pagination) 
+        internal static void SetEnablePaginationRecursive(Control control, bool pagination)
         {
-            if(control.HasControls()) {
-                foreach(Control child in control.Controls) {
-                    SetEnablePaginationRecursive(child,pagination);
+            if (control.HasControls())
+            {
+                foreach (Control child in control.Controls)
+                {
+                    SetEnablePaginationRecursive(child, pagination);
                 }
             }
             MobileControl mobileControl = control as MobileControl;
-            if(mobileControl != null) {
+            if (mobileControl != null)
+            {
                 mobileControl.EnablePagination = pagination;
             }
         }
@@ -1463,58 +1417,57 @@ namespace System.Web.UI.MobileControls
         ]
         public virtual bool BreakAfter
         {
-            get
-            {
-                return _breakAfter;
-            }
-
-            set
-            {
-                _breakAfter = value;
-            }
+            get { return _breakAfter; }
+            set { _breakAfter = value; }
         }
 
         // BEGIN: logic to check for infinite cycles when control trees are instantiated
         // through templates.
-        
+
         // InstantiatingTemplate refers to template that instantiated this control
         // (or null if not instantiated by template).
         private ITemplate _instantiatingTemplate = null;
         private ITemplate InstantiatingTemplate
         {
-            get
-            {
-                return _instantiatingTemplate;
-            }
+            get { return _instantiatingTemplate; }
         }
 
         // The prospective parent of this control is passed as a parameter.  Typically this
         // control has not been added to parent.Controls, so cannot use Parent property.
-        private void SetInstantiatingTemplateAndVerify (ITemplate instantiatingTemplate, MobileControl parent)
+        private void SetInstantiatingTemplateAndVerify(
+            ITemplate instantiatingTemplate,
+            MobileControl parent
+        )
         {
             for (MobileControl c = parent; c != null; c = c.Parent as MobileControl)
             {
                 if (c.InstantiatingTemplate == instantiatingTemplate)
                 {
-                    throw new Exception (SR.GetString(SR.MobileControl_InfiniteTemplateRecursion));
+                    throw new Exception(SR.GetString(SR.MobileControl_InfiniteTemplateRecursion));
                 }
             }
             _instantiatingTemplate = instantiatingTemplate;
         }
-        
+
         // Typically target has not been added to targetParent.Controls collection yet.
-        internal void CheckedInstantiateTemplate(ITemplate template, MobileControl target, MobileControl targetParent)
+        internal void CheckedInstantiateTemplate(
+            ITemplate template,
+            MobileControl target,
+            MobileControl targetParent
+        )
         {
-            template.InstantiateIn (target);
-            target.SetInstantiatingTemplateAndVerify (template, targetParent);
+            template.InstantiateIn(target);
+            target.SetInstantiatingTemplateAndVerify(template, targetParent);
         }
 
         #region IAttributeAccessor implementation
-        String IAttributeAccessor.GetAttribute(String name) {
+        String IAttributeAccessor.GetAttribute(String name)
+        {
             return GetAttribute(name);
         }
 
-        void IAttributeAccessor.SetAttribute(String name, String value) {
+        void IAttributeAccessor.SetAttribute(String name, String value)
+        {
             SetAttribute(name, value);
         }
         #endregion

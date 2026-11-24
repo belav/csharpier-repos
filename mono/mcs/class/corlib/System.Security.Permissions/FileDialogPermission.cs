@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,145 +29,156 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Security.Permissions {
+namespace System.Security.Permissions
+{
+    [ComVisible(true)]
+    [Serializable]
+    public sealed class FileDialogPermission
+        : CodeAccessPermission,
+            IUnrestrictedPermission,
+            IBuiltInPermission
+    {
+        private const int version = 1;
 
-	[ComVisible (true)]
-	[Serializable]
-	public sealed class FileDialogPermission : CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermission {
+        private FileDialogPermissionAccess _access;
 
-		private const int version = 1;
+        // Constructors
 
-		private FileDialogPermissionAccess _access;
+        public FileDialogPermission(PermissionState state)
+        {
+            if (CheckPermissionState(state, true) == PermissionState.Unrestricted)
+                _access = FileDialogPermissionAccess.OpenSave;
+            else
+                _access = FileDialogPermissionAccess.None;
+        }
 
-		// Constructors
+        public FileDialogPermission(FileDialogPermissionAccess access)
+        {
+            // reuse validation by the Flags property
+            Access = access;
+        }
 
-		public FileDialogPermission (PermissionState state)
-		{
-			if (CheckPermissionState (state, true) == PermissionState.Unrestricted)
-				_access = FileDialogPermissionAccess.OpenSave;
-			else
-				_access = FileDialogPermissionAccess.None;
-		}
+        // Properties
 
-		public FileDialogPermission (FileDialogPermissionAccess access)
-		{
-			// reuse validation by the Flags property
-			Access = access;
-		}
+        public FileDialogPermissionAccess Access
+        {
+            get { return _access; }
+            set
+            {
+                if (!Enum.IsDefined(typeof(FileDialogPermissionAccess), value))
+                {
+                    string msg = String.Format(Locale.GetText("Invalid enum {0}"), value);
+                    throw new ArgumentException(msg, "FileDialogPermissionAccess");
+                }
+                _access = value;
+            }
+        }
 
-		// Properties
+        // Methods
 
-		public FileDialogPermissionAccess Access { 
-			get { return _access; }
-			set {
-				if (!Enum.IsDefined (typeof (FileDialogPermissionAccess), value)) {
-					string msg = String.Format (Locale.GetText ("Invalid enum {0}"), value);
-					throw new ArgumentException (msg, "FileDialogPermissionAccess");
-				}
-				_access = value;
-			}
-		}
+        public override IPermission Copy()
+        {
+            return new FileDialogPermission(_access);
+        }
 
-		// Methods
+        public override void FromXml(SecurityElement esd)
+        {
+            // General validation in CodeAccessPermission
+            CheckSecurityElement(esd, "esd", version, version);
+            // Note: we do not (yet) care about the return value
+            // as we only accept version 1 (min/max values)
 
-		public override IPermission Copy () 
-		{
-			return new FileDialogPermission (_access);
-		}
+            if (IsUnrestricted(esd))
+            {
+                _access = FileDialogPermissionAccess.OpenSave;
+            }
+            else
+            {
+                string a = esd.Attribute("Access");
+                if (a == null)
+                    _access = FileDialogPermissionAccess.None;
+                else
+                {
+                    _access = (FileDialogPermissionAccess)
+                        Enum.Parse(typeof(FileDialogPermissionAccess), a);
+                }
+            }
+        }
 
-		public override void FromXml (SecurityElement esd) 
-		{
-			// General validation in CodeAccessPermission
-			CheckSecurityElement (esd, "esd", version, version);
-			// Note: we do not (yet) care about the return value 
-			// as we only accept version 1 (min/max values)
+        public override IPermission Intersect(IPermission target)
+        {
+            FileDialogPermission fdp = Cast(target);
+            if (fdp == null)
+                return null;
 
-			if (IsUnrestricted (esd)) {
-				_access = FileDialogPermissionAccess.OpenSave;
-			}
-			else {
-				string a = esd.Attribute ("Access");
-				if (a == null)
-					_access = FileDialogPermissionAccess.None;
-				else {
-					_access = (FileDialogPermissionAccess) Enum.Parse (
-						typeof (FileDialogPermissionAccess), a);
-				}
-			}
-		}
+            FileDialogPermissionAccess a = (_access & fdp._access);
+            return ((a == FileDialogPermissionAccess.None) ? null : new FileDialogPermission(a));
+        }
 
-		public override IPermission Intersect (IPermission target) 
-		{
-			FileDialogPermission fdp = Cast (target);
-			if (fdp == null)
-				return null;
+        public override bool IsSubsetOf(IPermission target)
+        {
+            FileDialogPermission fdp = Cast(target);
+            if (fdp == null)
+                return false;
 
-			FileDialogPermissionAccess a = (_access & fdp._access);
-			return ((a == FileDialogPermissionAccess.None) ? null : new FileDialogPermission (a));
-		}
+            return ((_access & fdp._access) == _access);
+        }
 
-		public override bool IsSubsetOf (IPermission target) 
-		{
-			FileDialogPermission fdp = Cast (target);
-			if (fdp == null)
-				return false;
+        public bool IsUnrestricted()
+        {
+            return (_access == FileDialogPermissionAccess.OpenSave);
+        }
 
-			return ((_access & fdp._access) == _access);
-		}
+        public override SecurityElement ToXml()
+        {
+            SecurityElement se = Element(1);
+            switch (_access)
+            {
+                case FileDialogPermissionAccess.Open:
+                    se.AddAttribute("Access", "Open");
+                    break;
+                case FileDialogPermissionAccess.Save:
+                    se.AddAttribute("Access", "Save");
+                    break;
+                case FileDialogPermissionAccess.OpenSave:
+                    se.AddAttribute("Unrestricted", "true");
+                    break;
+            }
+            return se;
+        }
 
-		public bool IsUnrestricted () 
-		{
-			return (_access == FileDialogPermissionAccess.OpenSave);
-		}
+        public override IPermission Union(IPermission target)
+        {
+            FileDialogPermission fdp = Cast(target);
+            if (fdp == null)
+                return Copy();
 
-		public override SecurityElement ToXml () 
-		{
-			SecurityElement se = Element (1);
-			switch (_access) {
-				case FileDialogPermissionAccess.Open:
-					se.AddAttribute ("Access", "Open");
-					break;
-				case FileDialogPermissionAccess.Save:
-					se.AddAttribute ("Access", "Save");
-					break;
-				case FileDialogPermissionAccess.OpenSave:
-					se.AddAttribute ("Unrestricted", "true");
-					break;
-			}
-			return se;
-		}
+            if (IsUnrestricted() || fdp.IsUnrestricted())
+                return new FileDialogPermission(PermissionState.Unrestricted);
 
-		public override IPermission Union (IPermission target)
-		{
-			FileDialogPermission fdp = Cast (target);
-			if (fdp == null)
-				return Copy ();
+            return new FileDialogPermission(_access | fdp._access);
+        }
 
-			if (IsUnrestricted () || fdp.IsUnrestricted ())
-				return new FileDialogPermission (PermissionState.Unrestricted);
+        // IBuiltInPermission
+        int IBuiltInPermission.GetTokenIndex()
+        {
+            return (int)BuiltInToken.FileDialog;
+        }
 
-			return new FileDialogPermission (_access | fdp._access);
-		}
+        // helpers
 
-		// IBuiltInPermission
-		int IBuiltInPermission.GetTokenIndex ()
-		{
-			return (int) BuiltInToken.FileDialog;
-		}
+        private FileDialogPermission Cast(IPermission target)
+        {
+            if (target == null)
+                return null;
 
-		// helpers
+            FileDialogPermission fdp = (target as FileDialogPermission);
+            if (fdp == null)
+            {
+                ThrowInvalidPermission(target, typeof(FileDialogPermission));
+            }
 
-		private FileDialogPermission Cast (IPermission target)
-		{
-			if (target == null)
-				return null;
-
-			FileDialogPermission fdp = (target as FileDialogPermission);
-			if (fdp == null) {
-				ThrowInvalidPermission (target, typeof (FileDialogPermission));
-			}
-
-			return fdp;
-		}
-	}
+            return fdp;
+        }
+    }
 }

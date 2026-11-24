@@ -29,20 +29,19 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             {
-                get
-                {
-                    return ImmutableArray.Create(s_rule);
-                }
+                get { return ImmutableArray.Create(s_rule); }
             }
 
             public override void Initialize(AnalysisContext analysisContext)
             {
                 analysisContext.RegisterCompilationAction(
                     (context) =>
-                        {
-                            context.ReportDiagnostic(CodeAnalysis.Diagnostic.Create(s_rule, Location.None, messageArgs: Id));
-                        }
-                    );
+                    {
+                        context.ReportDiagnostic(
+                            CodeAnalysis.Diagnostic.Create(s_rule, Location.None, messageArgs: Id)
+                        );
+                    }
+                );
             }
         }
 
@@ -63,26 +62,35 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             {
                 analysisContext.RegisterSymbolAction(
                     (context) =>
+                    {
+                        if (
+                            context.Symbol.Name.StartsWith(
+                                _errorSymbolPrefix,
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
-                            if (context.Symbol.Name.StartsWith(_errorSymbolPrefix, StringComparison.Ordinal))
-                            {
-                                context.ReportDiagnostic(CodeAnalysis.Diagnostic.Create(s_rule, context.Symbol.Locations.First(), messageArgs: context.Symbol.Name));
-                            }
-                        },
+                            context.ReportDiagnostic(
+                                CodeAnalysis.Diagnostic.Create(
+                                    s_rule,
+                                    context.Symbol.Locations.First(),
+                                    messageArgs: context.Symbol.Name
+                                )
+                            );
+                        }
+                    },
                     SymbolKind.Event,
                     SymbolKind.Field,
                     SymbolKind.Method,
                     SymbolKind.NamedType,
                     SymbolKind.Namespace,
-                    SymbolKind.Property);
+                    SymbolKind.Property
+                );
             }
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             {
-                get
-                {
-                    return ImmutableArray.Create(s_rule);
-                }
+                get { return ImmutableArray.Create(s_rule); }
             }
         }
 
@@ -96,18 +104,22 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             {
                 analysisContext.RegisterSymbolAction(
                     (context) =>
-                        {
-                            context.ReportDiagnostic(CodeAnalysis.Diagnostic.Create(s_rule, context.Symbol.Locations.First(), messageArgs: context.Symbol.Name));
-                        },
-                    SymbolKind.NamedType);
+                    {
+                        context.ReportDiagnostic(
+                            CodeAnalysis.Diagnostic.Create(
+                                s_rule,
+                                context.Symbol.Locations.First(),
+                                messageArgs: context.Symbol.Name
+                            )
+                        );
+                    },
+                    SymbolKind.NamedType
+                );
             }
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             {
-                get
-                {
-                    return ImmutableArray.Create(s_rule);
-                }
+                get { return ImmutableArray.Create(s_rule); }
             }
         }
 
@@ -126,59 +138,92 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             {
-                get
-                {
-                    return ImmutableArray.Create(s_rule);
-                }
+                get { return ImmutableArray.Create(s_rule); }
             }
 
             public override void Initialize(AnalysisContext analysisContext)
             {
                 if (_language == LanguageNames.CSharp)
                 {
-                    analysisContext.RegisterCodeBlockStartAction<CSharp.SyntaxKind>(new CSharpCodeBodyAnalyzer().Initialize);
+                    analysisContext.RegisterCodeBlockStartAction<CSharp.SyntaxKind>(
+                        new CSharpCodeBodyAnalyzer().Initialize
+                    );
                 }
                 else
                 {
-                    analysisContext.RegisterCodeBlockStartAction<VisualBasic.SyntaxKind>(new BasicCodeBodyAnalyzer().Initialize);
+                    analysisContext.RegisterCodeBlockStartAction<VisualBasic.SyntaxKind>(
+                        new BasicCodeBodyAnalyzer().Initialize
+                    );
                 }
             }
 
             protected class CSharpCodeBodyAnalyzer
             {
-                public void Initialize(CodeBlockStartAnalysisContext<CSharp.SyntaxKind> analysisContext)
+                public void Initialize(
+                    CodeBlockStartAnalysisContext<CSharp.SyntaxKind> analysisContext
+                )
                 {
                     analysisContext.RegisterCodeBlockEndAction(
                         (context) =>
-                            {
-                                context.ReportDiagnostic(CodeAnalysis.Diagnostic.Create(s_rule, context.OwningSymbol.Locations.First(), messageArgs: context.OwningSymbol.Name + ":end"));
-                            });
+                        {
+                            context.ReportDiagnostic(
+                                CodeAnalysis.Diagnostic.Create(
+                                    s_rule,
+                                    context.OwningSymbol.Locations.First(),
+                                    messageArgs: context.OwningSymbol.Name + ":end"
+                                )
+                            );
+                        }
+                    );
 
                     analysisContext.RegisterSyntaxNodeAction(
                         (context) =>
-                            {
-                                context.ReportDiagnostic(CodeAnalysis.Diagnostic.Create(s_rule, context.Node.GetLocation(), messageArgs: context.Node.ToFullString()));
-                            },
-                        CSharp.SyntaxKind.InvocationExpression);
+                        {
+                            context.ReportDiagnostic(
+                                CodeAnalysis.Diagnostic.Create(
+                                    s_rule,
+                                    context.Node.GetLocation(),
+                                    messageArgs: context.Node.ToFullString()
+                                )
+                            );
+                        },
+                        CSharp.SyntaxKind.InvocationExpression
+                    );
                 }
             }
 
             protected class BasicCodeBodyAnalyzer
             {
-                public void Initialize(CodeBlockStartAnalysisContext<VisualBasic.SyntaxKind> analysisContext)
+                public void Initialize(
+                    CodeBlockStartAnalysisContext<VisualBasic.SyntaxKind> analysisContext
+                )
                 {
                     analysisContext.RegisterCodeBlockEndAction(
                         (context) =>
-                            {
-                                context.ReportDiagnostic(CodeAnalysis.Diagnostic.Create(s_rule, context.OwningSymbol.Locations.First(), messageArgs: context.OwningSymbol.Name + ":end"));
-                            });
+                        {
+                            context.ReportDiagnostic(
+                                CodeAnalysis.Diagnostic.Create(
+                                    s_rule,
+                                    context.OwningSymbol.Locations.First(),
+                                    messageArgs: context.OwningSymbol.Name + ":end"
+                                )
+                            );
+                        }
+                    );
 
                     analysisContext.RegisterSyntaxNodeAction(
                         (context) =>
-                            {
-                                context.ReportDiagnostic(CodeAnalysis.Diagnostic.Create(s_rule, context.Node.GetLocation(), messageArgs: context.Node.ToFullString()));
-                            },
-                        VisualBasic.SyntaxKind.InvocationExpression);
+                        {
+                            context.ReportDiagnostic(
+                                CodeAnalysis.Diagnostic.Create(
+                                    s_rule,
+                                    context.Node.GetLocation(),
+                                    messageArgs: context.Node.ToFullString()
+                                )
+                            );
+                        },
+                        VisualBasic.SyntaxKind.InvocationExpression
+                    );
                 }
             }
         }
@@ -191,28 +236,35 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             {
-                get
-                {
-                    return ImmutableArray.Create(s_rule);
-                }
+                get { return ImmutableArray.Create(s_rule); }
             }
 
             public override void Initialize(AnalysisContext analysisContext)
             {
                 analysisContext.RegisterSyntaxTreeAction(
                     (context) =>
-                        {
-                            var comments = context.Tree.GetRoot().DescendantTrivia()
-                               .Where(t =>
-                                   t.IsKind(SyntaxKind.SingleLineCommentTrivia) ||
-                                   t.IsKind(SyntaxKind.MultiLineCommentTrivia) ||
-                                   t.IsKind(VisualBasic.SyntaxKind.CommentTrivia));
+                    {
+                        var comments = context
+                            .Tree.GetRoot()
+                            .DescendantTrivia()
+                            .Where(t =>
+                                t.IsKind(SyntaxKind.SingleLineCommentTrivia)
+                                || t.IsKind(SyntaxKind.MultiLineCommentTrivia)
+                                || t.IsKind(VisualBasic.SyntaxKind.CommentTrivia)
+                            );
 
-                            foreach (var comment in comments)
-                            {
-                                context.ReportDiagnostic(CodeAnalysis.Diagnostic.Create(s_rule, comment.GetLocation(), messageArgs: comment.ToFullString()));
-                            }
-                        });
+                        foreach (var comment in comments)
+                        {
+                            context.ReportDiagnostic(
+                                CodeAnalysis.Diagnostic.Create(
+                                    s_rule,
+                                    comment.GetLocation(),
+                                    messageArgs: comment.ToFullString()
+                                )
+                            );
+                        }
+                    }
+                );
             }
         }
 
@@ -230,25 +282,34 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             {
-                get
-                {
-                    return ImmutableArray.Create(s_rule);
-                }
+                get { return ImmutableArray.Create(s_rule); }
             }
 
             public override void Initialize(AnalysisContext analysisContext)
             {
                 analysisContext.RegisterSyntaxTreeAction(
                     (context) =>
+                    {
+                        foreach (
+                            var nodeOrToken in context.Tree.GetRoot().DescendantNodesAndTokens()
+                        )
                         {
-                            foreach (var nodeOrToken in context.Tree.GetRoot().DescendantNodesAndTokens())
+                            if (
+                                nodeOrToken.IsToken
+                                && _spans.Any(s => s.OverlapsWith(nodeOrToken.FullSpan))
+                            )
                             {
-                                if (nodeOrToken.IsToken && _spans.Any(s => s.OverlapsWith(nodeOrToken.FullSpan)))
-                                {
-                                    context.ReportDiagnostic(CodeAnalysis.Diagnostic.Create(s_rule, nodeOrToken.GetLocation(), messageArgs: nodeOrToken.ToString()));
-                                }
+                                context.ReportDiagnostic(
+                                    CodeAnalysis.Diagnostic.Create(
+                                        s_rule,
+                                        nodeOrToken.GetLocation(),
+                                        messageArgs: nodeOrToken.ToString()
+                                    )
+                                );
                             }
-                        });
+                        }
+                    }
+                );
             }
         }
 
@@ -259,31 +320,33 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             private static readonly DiagnosticDescriptor s_rule = GetRule(Id);
             private readonly ExceptionDispatchInfo _exceptionDispatchInfo;
 
-            public ThrowExceptionForEachNamedTypeAnalyzer(ExceptionDispatchInfo exceptionDispatchInfo)
+            public ThrowExceptionForEachNamedTypeAnalyzer(
+                ExceptionDispatchInfo exceptionDispatchInfo
+            )
             {
                 _exceptionDispatchInfo = exceptionDispatchInfo;
             }
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             {
-                get
-                {
-                    return ImmutableArray.Create(s_rule);
-                }
+                get { return ImmutableArray.Create(s_rule); }
             }
 
             public string AssemblyName { get; private set; }
 
             public override void Initialize(AnalysisContext analysisContext)
             {
-                analysisContext.RegisterCompilationStartAction(context => AssemblyName = context.Compilation.AssemblyName);
+                analysisContext.RegisterCompilationStartAction(context =>
+                    AssemblyName = context.Compilation.AssemblyName
+                );
 
                 analysisContext.RegisterSymbolAction(
                     (context) =>
                     {
                         _exceptionDispatchInfo.Throw();
                     },
-                    SymbolKind.NamedType);
+                    SymbolKind.NamedType
+                );
             }
         }
 
@@ -305,8 +368,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                 }
             }
 
-            public override void Initialize(AnalysisContext analysisContext)
-                => throw ExceptionUtilities.Unreachable();
+            public override void Initialize(AnalysisContext analysisContext) =>
+                throw ExceptionUtilities.Unreachable();
         }
 
         protected static DiagnosticDescriptor GetRule(string id)
@@ -317,7 +380,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                 TestDiagnosticMessageTemplate,
                 TestDiagnosticCategory,
                 DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+                isEnabledByDefault: true
+            );
         }
     }
 }

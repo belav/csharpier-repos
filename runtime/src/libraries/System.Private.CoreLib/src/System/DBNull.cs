@@ -9,18 +9,23 @@ namespace System
     [Serializable]
     public sealed class DBNull : ISerializable, IConvertible
     {
-        private DBNull()
-        {
-        }
+        private DBNull() { }
 
         public static readonly DBNull Value = new DBNull();
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
 #pragma warning disable SYSLIB0050 // UnitySerializationHolder is obsolete
-            UnitySerializationHolder.GetUnitySerializationInfo(info, UnitySerializationHolder.NullUnity);
+            UnitySerializationHolder.GetUnitySerializationInfo(
+                info,
+                UnitySerializationHolder.NullUnity
+            );
 #pragma warning restore SYSLIB0050
         }
 

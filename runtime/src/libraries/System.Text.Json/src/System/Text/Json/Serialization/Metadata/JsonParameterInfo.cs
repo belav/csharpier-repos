@@ -35,7 +35,10 @@ namespace System.Text.Json.Serialization.Metadata
 
         public JsonPropertyInfo MatchingProperty { get; }
 
-        public JsonParameterInfo(JsonParameterInfoValues parameterInfoValues, JsonPropertyInfo matchingProperty)
+        public JsonParameterInfo(
+            JsonParameterInfoValues parameterInfoValues,
+            JsonPropertyInfo matchingProperty
+        )
         {
             Debug.Assert(matchingProperty.IsConfigured);
 

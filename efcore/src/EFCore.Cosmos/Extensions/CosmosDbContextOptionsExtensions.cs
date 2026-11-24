@@ -35,14 +35,17 @@ public static class CosmosDbContextOptionsExtensions
         string accountEndpoint,
         string accountKey,
         string databaseName,
-        Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null)
-        where TContext : DbContext
-        => (DbContextOptionsBuilder<TContext>)UseCosmos(
-            (DbContextOptionsBuilder)optionsBuilder,
-            accountEndpoint,
-            accountKey,
-            databaseName,
-            cosmosOptionsAction);
+        Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null
+    )
+        where TContext : DbContext =>
+        (DbContextOptionsBuilder<TContext>)
+            UseCosmos(
+                (DbContextOptionsBuilder)optionsBuilder,
+                accountEndpoint,
+                accountKey,
+                databaseName,
+                cosmosOptionsAction
+            );
 
     /// <summary>
     ///     Configures the context to connect to an Azure Cosmos database.
@@ -62,7 +65,8 @@ public static class CosmosDbContextOptionsExtensions
         string accountEndpoint,
         string accountKey,
         string databaseName,
-        Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null)
+        Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null
+    )
     {
         Check.NotNull(optionsBuilder, nameof(optionsBuilder));
         Check.NotNull(accountEndpoint, nameof(accountEndpoint));
@@ -103,14 +107,17 @@ public static class CosmosDbContextOptionsExtensions
         string accountEndpoint,
         TokenCredential tokenCredential,
         string databaseName,
-        Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null)
-        where TContext : DbContext
-        => (DbContextOptionsBuilder<TContext>)UseCosmos(
-            (DbContextOptionsBuilder)optionsBuilder,
-            accountEndpoint,
-            tokenCredential,
-            databaseName,
-            cosmosOptionsAction);
+        Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null
+    )
+        where TContext : DbContext =>
+        (DbContextOptionsBuilder<TContext>)
+            UseCosmos(
+                (DbContextOptionsBuilder)optionsBuilder,
+                accountEndpoint,
+                tokenCredential,
+                databaseName,
+                cosmosOptionsAction
+            );
 
     /// <summary>
     ///     Configures the context to connect to an Azure Cosmos database.
@@ -130,7 +137,8 @@ public static class CosmosDbContextOptionsExtensions
         string accountEndpoint,
         TokenCredential tokenCredential,
         string databaseName,
-        Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null)
+        Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null
+    )
     {
         Check.NotNull(optionsBuilder, nameof(optionsBuilder));
         Check.NotNull(accountEndpoint, nameof(accountEndpoint));
@@ -169,13 +177,16 @@ public static class CosmosDbContextOptionsExtensions
         this DbContextOptionsBuilder<TContext> optionsBuilder,
         string connectionString,
         string databaseName,
-        Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null)
-        where TContext : DbContext
-        => (DbContextOptionsBuilder<TContext>)UseCosmos(
-            (DbContextOptionsBuilder)optionsBuilder,
-            connectionString,
-            databaseName,
-            cosmosOptionsAction);
+        Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null
+    )
+        where TContext : DbContext =>
+        (DbContextOptionsBuilder<TContext>)
+            UseCosmos(
+                (DbContextOptionsBuilder)optionsBuilder,
+                connectionString,
+                databaseName,
+                cosmosOptionsAction
+            );
 
     /// <summary>
     ///     Configures the context to connect to an Azure Cosmos database.
@@ -193,7 +204,8 @@ public static class CosmosDbContextOptionsExtensions
         this DbContextOptionsBuilder optionsBuilder,
         string connectionString,
         string databaseName,
-        Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null)
+        Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null
+    )
     {
         Check.NotNull(optionsBuilder, nameof(optionsBuilder));
         Check.NotNull(connectionString, nameof(connectionString));
@@ -202,9 +214,7 @@ public static class CosmosDbContextOptionsExtensions
         var extension = optionsBuilder.Options.FindExtension<CosmosOptionsExtension>()
             ?? new CosmosOptionsExtension();
 
-        extension = extension
-            .WithConnectionString(connectionString)
-            .WithDatabaseName(databaseName);
+        extension = extension.WithConnectionString(connectionString).WithDatabaseName(databaseName);
 
         ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(extension);
 

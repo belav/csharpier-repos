@@ -55,14 +55,22 @@ namespace MS.Internal.Xml.XPath
 
                 if (index < 1)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.Sch_EnumNotStarted, string.Empty));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.Sch_EnumNotStarted, string.Empty)
+                    );
                 }
                 return (XPathNavigator?)list[index - 1];
             }
         }
 
-        public override int CurrentPosition { get { return index; } }
-        public override int Count { get { return list.Count; } }
+        public override int CurrentPosition
+        {
+            get { return index; }
+        }
+        public override int Count
+        {
+            get { return list.Count; }
+        }
 
         public override bool MoveNext()
         {
@@ -85,6 +93,12 @@ namespace MS.Internal.Xml.XPath
             return list.GetEnumerator();
         }
 
-        private object? debuggerDisplayProxy { get { return index < 1 ? null : (object)new XPathNavigator.DebuggerDisplayProxy(Current!); } }
+        private object? debuggerDisplayProxy
+        {
+            get
+            {
+                return index < 1 ? null : (object)new XPathNavigator.DebuggerDisplayProxy(Current!);
+            }
+        }
     }
 }

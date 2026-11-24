@@ -26,8 +26,8 @@ internal sealed class ComponentFactory
 
     public ComponentFactory(IComponentActivator componentActivator, Renderer renderer)
     {
-        _componentActivator =
-            componentActivator ?? throw new ArgumentNullException(nameof(componentActivator));
+        _componentActivator = componentActivator
+            ?? throw new ArgumentNullException(nameof(componentActivator));
         _renderer = renderer ?? throw new ArgumentNullException(nameof(renderer));
     }
 
@@ -184,8 +184,7 @@ internal sealed class ComponentFactory
                         );
                     }
 
-                    serviceInstance =
-                        keyedServiceProvider.GetKeyedService(propertyType, serviceKey)
+                    serviceInstance = keyedServiceProvider.GetKeyedService(propertyType, serviceKey)
                         ?? throw new InvalidOperationException(
                             $"Cannot provide a value for property "
                                 + $"'{propertyName}' on type '{type.FullName}'. There is no "
@@ -194,8 +193,7 @@ internal sealed class ComponentFactory
                 }
                 else
                 {
-                    serviceInstance =
-                        serviceProvider.GetService(propertyType)
+                    serviceInstance = serviceProvider.GetService(propertyType)
                         ?? throw new InvalidOperationException(
                             $"Cannot provide a value for property "
                                 + $"'{propertyName}' on type '{type.FullName}'. There is no "

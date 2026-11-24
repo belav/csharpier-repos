@@ -4,12 +4,14 @@
 public class PublicClassSample
 {
     public PublicClassSample() { }
+
     public PublicClassSample(int param) { }
 }
 
 class PrivateClassSample
 {
     public PrivateClassSample() { }
+
     public PrivateClassSample(int param) { }
 }
 

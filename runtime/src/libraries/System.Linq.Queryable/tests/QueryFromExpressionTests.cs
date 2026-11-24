@@ -53,7 +53,7 @@ namespace System.Linq.Tests
                 Expression.Equal(
                     Expression.Modulo(Expression.Constant(1), Expression.Constant(2)),
                     Expression.Constant(0)
-                   ),
+                ),
                 Expression.Constant(Enumerable.Range(0, 2).AsQueryable()),
                 Expression.Constant(Enumerable.Range(3, 2).AsQueryable())
             );
@@ -65,7 +65,9 @@ namespace System.Linq.Tests
         {
             get
             {
-                return Enumerable.Range(0, 128).AsQueryable()
+                return Enumerable
+                    .Range(0, 128)
+                    .AsQueryable()
                     .Select(i => (char)i)
                     .Where(c => char.IsControl(c));
             }
@@ -74,7 +76,11 @@ namespace System.Linq.Tests
         [Fact]
         public void PropertyAccess()
         {
-            Expression access = Expression.Property(null, typeof(QueryFromExpressionTests), "AsciiControlCharacters");
+            Expression access = Expression.Property(
+                null,
+                typeof(QueryFromExpressionTests),
+                "AsciiControlCharacters"
+            );
             IQueryable<char> q = _prov.CreateQuery<char>(access);
             Assert.Equal(Enumerable.Range(0, 128).Select(i => (char)i).Where(char.IsControl), q);
         }
@@ -90,8 +96,9 @@ namespace System.Linq.Tests
                 Expression.NewArrayInit(
                     typeof(char),
                     Expression.ArrayIndex(array, Expression.Constant(0)),
-                    Expression.ArrayIndex(array, Expression.Constant(2)))
-                );
+                    Expression.ArrayIndex(array, Expression.Constant(2))
+                )
+            );
             Assert.Equal(new[] { 'a', 'c' }, _prov.CreateQuery<char>(call));
         }
 
@@ -101,10 +108,13 @@ namespace System.Linq.Tests
             Expression cond = Expression.Condition(
                 Expression.Not(
                     Expression.NotEqual(
-                        Expression.Add(Expression.UnaryPlus(Expression.Constant(1)), Expression.Negate(Expression.Constant(2))),
-                        Expression.Constant(-1)
-                        )
+                        Expression.Add(
+                            Expression.UnaryPlus(Expression.Constant(1)),
+                            Expression.Negate(Expression.Constant(2))
                         ),
+                        Expression.Constant(-1)
+                    )
+                ),
                 Expression.Constant(Enumerable.Range(0, 2).AsQueryable()),
                 Expression.Constant(Enumerable.Range(3, 2).AsQueryable())
             );
@@ -118,10 +128,13 @@ namespace System.Linq.Tests
             Expression cond = Expression.Condition(
                 Expression.Not(
                     Expression.NotEqual(
-                        Expression.AddChecked(Expression.UnaryPlus(Expression.Constant(1)), Expression.NegateChecked(Expression.Constant(2))),
-                        Expression.Constant(-1)
-                        )
+                        Expression.AddChecked(
+                            Expression.UnaryPlus(Expression.Constant(1)),
+                            Expression.NegateChecked(Expression.Constant(2))
                         ),
+                        Expression.Constant(-1)
+                    )
+                ),
                 Expression.Constant(Enumerable.Range(0, 2).AsQueryable()),
                 Expression.Constant(Enumerable.Range(3, 2).AsQueryable())
             );
@@ -134,7 +147,8 @@ namespace System.Linq.Tests
         {
             Expression logic = Expression.OrElse(
                 Expression.AndAlso(
-                    Expression.LessThanOrEqual(Expression.Constant(3), Expression.Constant(4)), Expression.LessThan(Expression.Constant(2), Expression.Constant(1))
+                    Expression.LessThanOrEqual(Expression.Constant(3), Expression.Constant(4)),
+                    Expression.LessThan(Expression.Constant(2), Expression.Constant(1))
                 ),
                 Expression.Or(
                     Expression.And(
@@ -165,13 +179,13 @@ namespace System.Linq.Tests
                 new Type[0],
                 Expression.Subtract(Expression.Constant(6), Expression.Constant(2)),
                 Expression.SubtractChecked(Expression.Constant(12), Expression.Constant(3))
-                );
+            );
             Expression call = Expression.Call(
                 typeof(Queryable),
                 "AsQueryable",
                 new[] { typeof(int) },
                 rangeCall
-                );
+            );
             IQueryable<int> q = _prov.CreateQuery<int>(call);
             Assert.Equal(Enumerable.Range(4, 9), q);
         }
@@ -185,13 +199,13 @@ namespace System.Linq.Tests
                 new Type[0],
                 Expression.Multiply(Expression.Constant(4), Expression.Constant(5)),
                 Expression.MultiplyChecked(Expression.Constant(3), Expression.Constant(2))
-                );
+            );
             Expression call = Expression.Call(
                 typeof(Queryable),
                 "AsQueryable",
                 new[] { typeof(int) },
                 rangeCall
-                );
+            );
             IQueryable<int> q = _prov.CreateQuery<int>(call);
             Assert.Equal(Enumerable.Range(20, 6), q);
         }
@@ -203,15 +217,18 @@ namespace System.Linq.Tests
                 typeof(Enumerable),
                 "Range",
                 new Type[0],
-                Expression.Convert(Expression.Power(Expression.Constant(4.0), Expression.Constant(5.0)), typeof(int)),
+                Expression.Convert(
+                    Expression.Power(Expression.Constant(4.0), Expression.Constant(5.0)),
+                    typeof(int)
+                ),
                 Expression.Divide(Expression.Constant(20), Expression.Constant(10))
-                );
+            );
             Expression call = Expression.Call(
                 typeof(Queryable),
                 "AsQueryable",
                 new[] { typeof(int) },
                 rangeCall
-                );
+            );
             IQueryable<int> q = _prov.CreateQuery<int>(call);
             Assert.Equal(Enumerable.Range(1024, 2), q);
         }
@@ -223,15 +240,23 @@ namespace System.Linq.Tests
                 Expression.Equal(
                     Expression.AddChecked(
                         Expression.Convert(
-                            Expression.ArrayLength(Expression.NewArrayInit(typeof(int), Enumerable.Range(0, 3).Select(i => Expression.Constant(i)))),
-                            typeof(long)),
-                        Expression.ConvertChecked(
-                            Expression.ArrayLength(Expression.NewArrayBounds(typeof(bool), Expression.Constant(2))),
-                            typeof(long)
-                            )
+                            Expression.ArrayLength(
+                                Expression.NewArrayInit(
+                                    typeof(int),
+                                    Enumerable.Range(0, 3).Select(i => Expression.Constant(i))
+                                )
                             ),
-                    Expression.Constant(5L)
+                            typeof(long)
+                        ),
+                        Expression.ConvertChecked(
+                            Expression.ArrayLength(
+                                Expression.NewArrayBounds(typeof(bool), Expression.Constant(2))
+                            ),
+                            typeof(long)
+                        )
                     ),
+                    Expression.Constant(5L)
+                ),
                 Expression.Constant(Enumerable.Range(0, 2).AsQueryable()),
                 Expression.Constant(Enumerable.Range(3, 2).AsQueryable())
             );
@@ -239,21 +264,27 @@ namespace System.Linq.Tests
             Assert.Equal(Enumerable.Range(0, 2), q);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void CoalesceShifts()
         {
             Expression list = Expression.ListInit(
                 Expression.New(typeof(List<int>)),
                 Expression.LeftShift(Expression.Constant(5), Expression.Constant(2)),
                 Expression.RightShift(Expression.Constant(31), Expression.Constant(1))
-                );
+            );
             Expression call = Expression.Call(
                 typeof(Queryable),
                 "AsQueryable",
                 new[] { typeof(int) },
                 list
-                );
-            Expression coal = Expression.Coalesce(Expression.Constant(null, typeof(IQueryable<int>)), call);
+            );
+            Expression coal = Expression.Coalesce(
+                Expression.Constant(null, typeof(IQueryable<int>)),
+                call
+            );
             IQueryable<int> q = _prov.CreateQuery<int>(coal);
             Assert.Equal(new[] { 20, 15 }, q);
         }
@@ -265,7 +296,7 @@ namespace System.Linq.Tests
                 Expression.Equal(
                     Expression.Constant(null),
                     Expression.TypeAs(Expression.Constant("", typeof(object)), typeof(string))
-                    ),
+                ),
                 Expression.Constant(Enumerable.Range(0, 2).AsQueryable()),
                 Expression.Constant(Enumerable.Range(3, 2).AsQueryable())
             );
@@ -275,7 +306,7 @@ namespace System.Linq.Tests
                 Expression.Equal(
                     Expression.Constant(null),
                     Expression.TypeAs(Expression.Constant("", typeof(object)), typeof(Uri))
-                    ),
+                ),
                 Expression.Constant(Enumerable.Range(0, 2).AsQueryable()),
                 Expression.Constant(Enumerable.Range(3, 2).AsQueryable())
             );
@@ -306,16 +337,16 @@ namespace System.Linq.Tests
         public void MemberInit()
         {
             Expression init = Expression.MemberInit(
-                    Expression.New(typeof(SimplePair)),
-                    Expression.Bind(typeof(SimplePair).GetMember("First")[0], Expression.Constant(8)),
-                    Expression.Bind(typeof(SimplePair).GetMember("Second")[0], Expression.Constant(13))
-                );
+                Expression.New(typeof(SimplePair)),
+                Expression.Bind(typeof(SimplePair).GetMember("First")[0], Expression.Constant(8)),
+                Expression.Bind(typeof(SimplePair).GetMember("Second")[0], Expression.Constant(13))
+            );
             Expression call = Expression.Call(
                 typeof(Queryable),
                 "AsQueryable",
                 new[] { typeof(int) },
                 init
-                );
+            );
             IQueryable<int> q = _prov.CreateQuery<int>(call);
             Assert.Equal(new[] { 8, 13 }, q);
         }
@@ -323,7 +354,8 @@ namespace System.Linq.Tests
         [Fact]
         public void InvokeAndMemberAccess()
         {
-            Expression<Func<int, IQueryable<char>>> lambda = start => "acbdefghijklmnop".AsQueryable().Skip(start);
+            Expression<Func<int, IQueryable<char>>> lambda = start =>
+                "acbdefghijklmnop".AsQueryable().Skip(start);
             Expression invoke = Expression.Invoke(lambda, Expression.Constant(2));
             IQueryable<char> q = _prov.CreateQuery<char>(invoke);
             Assert.Equal("bdefghijklmnop".ToCharArray(), q.ToArray());
@@ -336,11 +368,13 @@ namespace System.Linq.Tests
                 Expression.Equal(
                     Expression.Modulo(Expression.Constant(1), Expression.Constant(2)),
                     Expression.Constant(0)
-                   ),
+                ),
                 Expression.Constant(Enumerable.Range(0, 2).AsQueryable()),
                 Expression.Constant(Enumerable.Range(3, 2).AsQueryable())
             );
-            IQueryable<int> q = _prov.CreateQuery<int>(Expression.Constant(_prov.CreateQuery<int>(cond)));
+            IQueryable<int> q = _prov.CreateQuery<int>(
+                Expression.Constant(_prov.CreateQuery<int>(cond))
+            );
             Assert.Equal(Enumerable.Range(3, 2), q);
         }
 
@@ -372,7 +406,11 @@ namespace System.Linq.Tests
         [Fact]
         public void SimpleMethodCall()
         {
-            Expression call = Expression.Call(Expression.Constant(this), "SimpleMethod", new Type[0]);
+            Expression call = Expression.Call(
+                Expression.Constant(this),
+                "SimpleMethod",
+                new Type[0]
+            );
             IQueryable<string> q = _prov.CreateQuery<string>(call);
             Assert.Equal(new[] { "a", "b", "c" }, q);
         }
@@ -395,9 +433,23 @@ namespace System.Linq.Tests
         {
             ParameterExpression start = Expression.Parameter(typeof(char));
             ParameterExpression end = Expression.Parameter(typeof(char));
-            Expression call = Expression.Call(Expression.Constant(this), "ParameterMethod", new Type[0], start, end);
-            Expression lambda = Expression.Lambda<Func<char, char, IQueryable<char>>>(call, start, end);
-            Expression invoke = Expression.Invoke(lambda, Expression.Constant('b'), Expression.Constant('g'));
+            Expression call = Expression.Call(
+                Expression.Constant(this),
+                "ParameterMethod",
+                new Type[0],
+                start,
+                end
+            );
+            Expression lambda = Expression.Lambda<Func<char, char, IQueryable<char>>>(
+                call,
+                start,
+                end
+            );
+            Expression invoke = Expression.Invoke(
+                lambda,
+                Expression.Constant('b'),
+                Expression.Constant('g')
+            );
             Assert.Equal("bcdef".ToCharArray(), _prov.CreateQuery<char>(invoke));
         }
 
@@ -438,7 +490,9 @@ namespace System.Linq.Tests
 
             public static IQueryable<int> RunningTotals(IQueryable<int> source, int initialTally)
             {
-                return RunningTotals(Enumerable.Repeat(initialTally, 1).AsQueryable().Concat(source));
+                return RunningTotals(
+                    Enumerable.Repeat(initialTally, 1).AsQueryable().Concat(source)
+                );
             }
         }
 
@@ -456,9 +510,13 @@ namespace System.Linq.Tests
             Expression call = Expression.Call(
                 typeof(TestLinqExtensions)
                     .GetMethods()
-                    .First(mi => mi.Name == "RunningTotals" && mi.GetParameters().Length == 1 && mi.GetParameters()[0].ParameterType == typeof(IQueryable<int>)),
+                    .First(mi =>
+                        mi.Name == "RunningTotals"
+                        && mi.GetParameters().Length == 1
+                        && mi.GetParameters()[0].ParameterType == typeof(IQueryable<int>)
+                    ),
                 Expression.Constant(Enumerable.Range(1, 3).AsQueryable())
-                );
+            );
             IQueryable<int> q = _prov.CreateQuery<int>(call);
             Assert.Equal(new[] { 1, 3, 6 }, q);
         }
@@ -469,9 +527,12 @@ namespace System.Linq.Tests
             Expression call = Expression.Call(
                 typeof(TestLinqExtensions)
                     .GetMethods()
-                    .First(mi => mi.Name == "RunningTotalsNoMatch" && mi.GetParameters()[0].ParameterType == typeof(IQueryable<int>)),
+                    .First(mi =>
+                        mi.Name == "RunningTotalsNoMatch"
+                        && mi.GetParameters()[0].ParameterType == typeof(IQueryable<int>)
+                    ),
                 Expression.Constant(Enumerable.Range(1, 3).AsQueryable())
-                );
+            );
             IQueryable<int> q = _prov.CreateQuery<int>(call);
             Assert.Throws<InvalidOperationException>(() => q.GetEnumerator());
         }
@@ -485,7 +546,7 @@ namespace System.Linq.Tests
                     .First(mi => mi.Name == "RunningTotals" && mi.GetParameters().Length == 2),
                 Expression.Constant(Enumerable.Range(1, 3).AsQueryable()),
                 Expression.Constant(3)
-                );
+            );
             IQueryable<int> q = _prov.CreateQuery<int>(call);
             Assert.Throws<InvalidOperationException>(() => q.GetEnumerator());
         }
@@ -499,7 +560,7 @@ namespace System.Linq.Tests
                     .GetMethods()
                     .First(mi => mi.Name == "RunningTotals"),
                 Expression.Constant(Enumerable.Range(1, 3).AsQueryable())
-                );
+            );
             IQueryable<int> q = _prov.CreateQuery<int>(call);
             Assert.Throws<InvalidOperationException>(() => q.GetEnumerator());
         }
@@ -507,7 +568,12 @@ namespace System.Linq.Tests
         [Fact]
         public void EnumerableQueryAsInternalArgumentToQueryableMethod()
         {
-            Expression call = Expression.Call(typeof(Queryable), "AsQueryable", new[] { typeof(int) }, Expression.Constant(Enumerable.Range(1, 3).AsQueryable(), typeof(IQueryable<int>)));
+            Expression call = Expression.Call(
+                typeof(Queryable),
+                "AsQueryable",
+                new[] { typeof(int) },
+                Expression.Constant(Enumerable.Range(1, 3).AsQueryable(), typeof(IQueryable<int>))
+            );
             IQueryable<int> q = _prov.CreateQuery<int>(call);
             Assert.Equal(new[] { 1, 2, 3 }, q);
         }
@@ -515,7 +581,12 @@ namespace System.Linq.Tests
         [Fact]
         public void NonGeneric()
         {
-            Expression call = Expression.Call(typeof(Queryable), "AsQueryable", new[] { typeof(int) }, Expression.Constant(Enumerable.Range(1, 3).AsQueryable(), typeof(IQueryable<int>)));
+            Expression call = Expression.Call(
+                typeof(Queryable),
+                "AsQueryable",
+                new[] { typeof(int) },
+                Expression.Constant(Enumerable.Range(1, 3).AsQueryable(), typeof(IQueryable<int>))
+            );
             IQueryable q = _prov.CreateQuery(call);
             Assert.Equal(new[] { 1, 2, 3 }, q.Cast<int>());
         }
@@ -532,8 +603,8 @@ namespace System.Linq.Tests
                     Expression.Constant(new long?[] { 2, 3, null, 1 }.AsQueryable()),
                     Expression.Constant(Enumerable.Range(0, 3).AsQueryable().Select(i => (long)i)),
                     typeof(IQueryable)
-                    )
-                );
+                )
+            );
             IQueryable<long> q = _prov.CreateQuery<long>(call);
             Assert.Equal(new long[] { 2, 3, 1 }, q);
         }
@@ -544,7 +615,7 @@ namespace System.Linq.Tests
             Expression block = Expression.Block(
                 Expression.Empty(),
                 Expression.Constant(Enumerable.Range(0, 2).AsQueryable())
-                );
+            );
             IQueryable<int> q = _prov.CreateQuery<int>(block);
             Assert.Equal(Enumerable.Range(0, 2), q);
         }
@@ -556,7 +627,7 @@ namespace System.Linq.Tests
                 typeof(IQueryable<int>),
                 Expression.Empty(),
                 Expression.Constant(Enumerable.Range(0, 2).AsQueryable())
-                );
+            );
             IQueryable<int> q = _prov.CreateQuery<int>(block);
             Assert.Equal(Enumerable.Range(0, 2), q);
         }
@@ -566,9 +637,12 @@ namespace System.Linq.Tests
         {
             LabelTarget target = Expression.Label(typeof(IQueryable<int>));
             Expression block = Expression.Block(
-                    Expression.Return(target, Expression.Constant(Enumerable.Range(0, 2).AsQueryable())),
-                    Expression.Label(target, Expression.Default(typeof(IQueryable<int>)))
-                );
+                Expression.Return(
+                    target,
+                    Expression.Constant(Enumerable.Range(0, 2).AsQueryable())
+                ),
+                Expression.Label(target, Expression.Default(typeof(IQueryable<int>)))
+            );
             IQueryable<int> q = _prov.CreateQuery<int>(block);
             Assert.Equal(Enumerable.Range(0, 2), q);
         }
@@ -578,9 +652,12 @@ namespace System.Linq.Tests
         {
             LabelTarget target = Expression.Label(typeof(IQueryable<int>));
             Expression block = Expression.Block(
-                    Expression.Return(target, Expression.Constant(new[] { 1, 1, 2, 3, 5, 8 }.AsQueryable())),
-                    Expression.Label(target, Expression.Default(typeof(IQueryable<int>)))
-                );
+                Expression.Return(
+                    target,
+                    Expression.Constant(new[] { 1, 1, 2, 3, 5, 8 }.AsQueryable())
+                ),
+                Expression.Label(target, Expression.Default(typeof(IQueryable<int>)))
+            );
             IQueryable<int> q = _prov.CreateQuery<int>(block);
             Assert.Equal(new[] { 1, 1, 2, 3, 5, 8 }, q);
         }
@@ -590,9 +667,14 @@ namespace System.Linq.Tests
         {
             LabelTarget target = Expression.Label(typeof(IQueryable<int>));
             Expression block = Expression.Block(
-                    Expression.Return(target, Expression.Constant(Enumerable.Range(0, 3).OrderByDescending(i => i).AsQueryable())),
-                    Expression.Label(target, Expression.Default(typeof(IOrderedQueryable<int>)))
-                );
+                Expression.Return(
+                    target,
+                    Expression.Constant(
+                        Enumerable.Range(0, 3).OrderByDescending(i => i).AsQueryable()
+                    )
+                ),
+                Expression.Label(target, Expression.Default(typeof(IOrderedQueryable<int>)))
+            );
             IQueryable<int> q = _prov.CreateQuery<int>(block);
             Assert.Equal(new[] { 2, 1, 0 }, q);
         }
@@ -602,9 +684,14 @@ namespace System.Linq.Tests
         {
             LabelTarget target = Expression.Label(typeof(IQueryable<int>));
             Expression block = Expression.Block(
-                    Expression.Return(target, Expression.Constant(Enumerable.Range(0, 3).AsQueryable().OrderByDescending(i => i))),
-                    Expression.Label(target, Expression.Default(typeof(IOrderedQueryable<int>)))
-                );
+                Expression.Return(
+                    target,
+                    Expression.Constant(
+                        Enumerable.Range(0, 3).AsQueryable().OrderByDescending(i => i)
+                    )
+                ),
+                Expression.Label(target, Expression.Default(typeof(IOrderedQueryable<int>)))
+            );
             IQueryable<int> q = _prov.CreateQuery<int>(block);
             Assert.Equal(new[] { 2, 1, 0 }, q);
         }
@@ -618,10 +705,10 @@ namespace System.Linq.Tests
                     Expression.Constant(true),
                     Expression.Return(target, Expression.Constant(3)),
                     Expression.Return(target, Expression.Constant(1))
-                    ),
+                ),
                 Expression.Return(target, Expression.Constant(2)),
                 Expression.Label(target, Expression.Default(typeof(int)))
-                );
+            );
             Assert.Equal(3, _prov.Execute<int>(block));
         }
 
@@ -634,10 +721,10 @@ namespace System.Linq.Tests
                     Expression.Constant(true),
                     Expression.Return(target, Expression.Constant(3)),
                     Expression.Return(target, Expression.Constant(1))
-                    ),
+                ),
                 Expression.Return(target, Expression.Constant(2)),
                 Expression.Label(target, Expression.Default(typeof(int)))
-                );
+            );
             Assert.Equal(3, _prov.Execute(block));
         }
     }

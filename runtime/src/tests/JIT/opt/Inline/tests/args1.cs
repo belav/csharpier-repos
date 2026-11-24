@@ -8,63 +8,215 @@ namespace JitInliningTest
 {
     public class Args1
     {
-        private static string f1a(bool a) { return a.ToString(); }
-        private static string f1c(ref bool a) { return a.ToString(); }
-        private static void f1b(out bool a) { a = true; }
+        private static string f1a(bool a)
+        {
+            return a.ToString();
+        }
 
-        private static string f2a(char a) { return a.ToString(); }
-        private static string f2c(ref char a) { return a.ToString(); }
-        private static void f2b(out char a) { a = 'a'; }
+        private static string f1c(ref bool a)
+        {
+            return a.ToString();
+        }
 
-        private static string f3a(byte a) { return a.ToString(); }
-        private static string f3c(ref byte a) { return a.ToString(); }
-        private static void f3b(out byte a) { a = (byte)0; }
+        private static void f1b(out bool a)
+        {
+            a = true;
+        }
 
-        private static string f4a(short a) { return a.ToString(); }
-        private static string f4c(ref short a) { return a.ToString(); }
-        private static void f4b(out short a) { a = -1; }
+        private static string f2a(char a)
+        {
+            return a.ToString();
+        }
 
-        private static string f5a(int a) { return a.ToString(); }
-        private static string f5c(ref int a) { return a.ToString(); }
-        private static void f5b(out int a) { a = -1; }
+        private static string f2c(ref char a)
+        {
+            return a.ToString();
+        }
 
-        private static string f6a(long a) { return a.ToString(); }
-        private static string f6c(ref long a) { return a.ToString(); }
-        private static void f6b(out long a) { a = -1; }
+        private static void f2b(out char a)
+        {
+            a = 'a';
+        }
 
-        private static string f7a(sbyte a) { return a.ToString(); }
-        private static string f7c(ref sbyte a) { return a.ToString(); }
-        private static void f7b(out sbyte a) { a = -1; }
+        private static string f3a(byte a)
+        {
+            return a.ToString();
+        }
 
-        private static string f8a(ushort a) { return a.ToString(); }
-        private static string f8c(ref ushort a) { return a.ToString(); }
-        private static void f8b(out ushort a) { a = 1; }
+        private static string f3c(ref byte a)
+        {
+            return a.ToString();
+        }
 
-        private static string f9a(uint a) { return a.ToString(); }
-        private static string f9c(ref uint a) { return a.ToString(); }
-        private static void f9b(out uint a) { a = 1; }
+        private static void f3b(out byte a)
+        {
+            a = (byte)0;
+        }
 
-        private static string f10a(ulong a) { return a.ToString(); }
-        private static string f10c(ref ulong a) { return a.ToString(); }
-        private static void f10b(out ulong a) { a = 1; }
+        private static string f4a(short a)
+        {
+            return a.ToString();
+        }
 
-        private static string f11a(float a) { return a.ToString(); }
-        private static string f11c(ref float a) { return a.ToString(); }
-        private static void f11b(out float a) { a = -1; }
+        private static string f4c(ref short a)
+        {
+            return a.ToString();
+        }
 
-        private static string f12a(double a) { return a.ToString(); }
-        private static string f12c(ref double a) { return a.ToString(); }
-        private static void f12b(out double a) { a = -1; }
+        private static void f4b(out short a)
+        {
+            a = -1;
+        }
 
-        private static string f13a(object a) { return a.ToString(); }
-        private static string f13c(ref object a) { return a.ToString(); }
-        private static void f13b(out object a) { a = -1; }
+        private static string f5a(int a)
+        {
+            return a.ToString();
+        }
 
-        private static string f14a(string a) { return a.ToString(); }
-        private static string f14c(ref string a) { return a.ToString(); }
-        private static void f14b(out string a) { a = "INLINE"; }
+        private static string f5c(ref int a)
+        {
+            return a.ToString();
+        }
 
+        private static void f5b(out int a)
+        {
+            a = -1;
+        }
 
+        private static string f6a(long a)
+        {
+            return a.ToString();
+        }
+
+        private static string f6c(ref long a)
+        {
+            return a.ToString();
+        }
+
+        private static void f6b(out long a)
+        {
+            a = -1;
+        }
+
+        private static string f7a(sbyte a)
+        {
+            return a.ToString();
+        }
+
+        private static string f7c(ref sbyte a)
+        {
+            return a.ToString();
+        }
+
+        private static void f7b(out sbyte a)
+        {
+            a = -1;
+        }
+
+        private static string f8a(ushort a)
+        {
+            return a.ToString();
+        }
+
+        private static string f8c(ref ushort a)
+        {
+            return a.ToString();
+        }
+
+        private static void f8b(out ushort a)
+        {
+            a = 1;
+        }
+
+        private static string f9a(uint a)
+        {
+            return a.ToString();
+        }
+
+        private static string f9c(ref uint a)
+        {
+            return a.ToString();
+        }
+
+        private static void f9b(out uint a)
+        {
+            a = 1;
+        }
+
+        private static string f10a(ulong a)
+        {
+            return a.ToString();
+        }
+
+        private static string f10c(ref ulong a)
+        {
+            return a.ToString();
+        }
+
+        private static void f10b(out ulong a)
+        {
+            a = 1;
+        }
+
+        private static string f11a(float a)
+        {
+            return a.ToString();
+        }
+
+        private static string f11c(ref float a)
+        {
+            return a.ToString();
+        }
+
+        private static void f11b(out float a)
+        {
+            a = -1;
+        }
+
+        private static string f12a(double a)
+        {
+            return a.ToString();
+        }
+
+        private static string f12c(ref double a)
+        {
+            return a.ToString();
+        }
+
+        private static void f12b(out double a)
+        {
+            a = -1;
+        }
+
+        private static string f13a(object a)
+        {
+            return a.ToString();
+        }
+
+        private static string f13c(ref object a)
+        {
+            return a.ToString();
+        }
+
+        private static void f13b(out object a)
+        {
+            a = -1;
+        }
+
+        private static string f14a(string a)
+        {
+            return a.ToString();
+        }
+
+        private static string f14c(ref string a)
+        {
+            return a.ToString();
+        }
+
+        private static void f14b(out string a)
+        {
+            a = "INLINE";
+        }
 
         [Fact]
         public static void TestEntryPoint()
@@ -131,4 +283,3 @@ namespace JitInliningTest
         }
     }
 }
-

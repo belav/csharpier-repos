@@ -32,7 +32,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
         private readonly T[] _array;
 
         /// <summary>Gets the empty array.</summary>
-        public static ImmutableArray<T> Empty { get { return s_empty; } }
+        public static ImmutableArray<T> Empty
+        {
+            get { return s_empty; }
+        }
 
         /// <summary>Initializes the immutable array with the specified elements.</summary>
         /// <param name="elements">The element array to use for this array's data.</param>
@@ -62,10 +65,12 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             // Get the index of the element.  If it's not in the array, just return this array.
             int index = Array.IndexOf(_array, item);
-            if (index < 0) return this;
+            if (index < 0)
+                return this;
 
             // It's in the array, so if it's the only one, just return the empty array
-            if (_array.Length == 1) return Empty;
+            if (_array.Length == 1)
+                return Empty;
 
             // Otherwise, copy the other elements to a new array that's returned.
             var newArray = new T[_array.Length - 1];
@@ -75,18 +80,30 @@ namespace System.Threading.Tasks.Dataflow.Internal
         }
 
         /// <summary>Gets the number of elements in this array.</summary>
-        public int Count { get { return _array.Length; } }
+        public int Count
+        {
+            get { return _array.Length; }
+        }
 
         /// <summary>Gets whether the array contains the specified item.</summary>
         /// <param name="item">The item to lookup.</param>
         /// <returns>true if the array contains the item; otherwise, false.</returns>
-        public bool Contains(T item) { return Array.IndexOf(_array, item) >= 0; }
+        public bool Contains(T item)
+        {
+            return Array.IndexOf(_array, item) >= 0;
+        }
 
         /// <summary>Returns an enumerator that iterates through the collection.</summary>
-        public IEnumerator<T> GetEnumerator() { return ((IEnumerable<T>)_array).GetEnumerator(); }
+        public IEnumerator<T> GetEnumerator()
+        {
+            return ((IEnumerable<T>)_array).GetEnumerator();
+        }
 
         /// <summary>Returns the contents of the collection as an array.</summary>
         /// <returns>An array containing the contents of this collection.</returns>
-        public T[] ToArray() { return _array.Length == 0 ? s_empty._array : (T[])_array.Clone(); }
+        public T[] ToArray()
+        {
+            return _array.Length == 0 ? s_empty._array : (T[])_array.Clone();
+        }
     }
 }

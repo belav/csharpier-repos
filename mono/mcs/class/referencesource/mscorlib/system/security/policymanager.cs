@@ -1,52 +1,82 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 //
 // PolicyManager.cs
 //
 
-namespace System.Security {
+namespace System.Security
+{
     using System.Collections;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.IO;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Runtime.Versioning;
-    using System.Security.Util;
-    using System.Security.Policy;
     using System.Security.Permissions;
+    using System.Security.Policy;
+    using System.Security.Util;
     using System.Text;
     using System.Threading;
-    using System.Diagnostics.Contracts;
 
-    internal class PolicyManager {
+    internal class PolicyManager
+    {
         // Only parse the system CAS policy levels when needed. In particular,
         // we do not use these when the AppDomain is homogeneous for example.
         private object m_policyLevels;
-        private IList PolicyLevels {
-            [System.Security.SecurityCritical]  // auto-generated
+        private IList PolicyLevels
+        {
+            [System.Security.SecurityCritical] // auto-generated
             [ResourceExposure(ResourceScope.None)]
             [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-            get {
-                if (m_policyLevels == null) {
+            get
+            {
+                if (m_policyLevels == null)
+                {
                     ArrayList policyLevels = new ArrayList();
 
-                    string enterpriseConfig = PolicyLevel.GetLocationFromType(System.Security.PolicyLevelType.Enterprise);
-                    policyLevels.Add(new PolicyLevel(System.Security.PolicyLevelType.Enterprise, enterpriseConfig, ConfigId.EnterprisePolicyLevel));
+                    string enterpriseConfig = PolicyLevel.GetLocationFromType(
+                        System.Security.PolicyLevelType.Enterprise
+                    );
+                    policyLevels.Add(
+                        new PolicyLevel(
+                            System.Security.PolicyLevelType.Enterprise,
+                            enterpriseConfig,
+                            ConfigId.EnterprisePolicyLevel
+                        )
+                    );
 
-                    string machineConfig = PolicyLevel.GetLocationFromType(System.Security.PolicyLevelType.Machine);
-                    policyLevels.Add(new PolicyLevel(System.Security.PolicyLevelType.Machine, machineConfig, ConfigId.MachinePolicyLevel));
+                    string machineConfig = PolicyLevel.GetLocationFromType(
+                        System.Security.PolicyLevelType.Machine
+                    );
+                    policyLevels.Add(
+                        new PolicyLevel(
+                            System.Security.PolicyLevelType.Machine,
+                            machineConfig,
+                            ConfigId.MachinePolicyLevel
+                        )
+                    );
 
                     // The user directory could be null if the user does not have a user profile for example.
-                    if (Config.UserDirectory != null) {
-                        string userConfig = PolicyLevel.GetLocationFromType(System.Security.PolicyLevelType.User);
-                        policyLevels.Add(new PolicyLevel(System.Security.PolicyLevelType.User, userConfig, ConfigId.UserPolicyLevel));
+                    if (Config.UserDirectory != null)
+                    {
+                        string userConfig = PolicyLevel.GetLocationFromType(
+                            System.Security.PolicyLevelType.User
+                        );
+                        policyLevels.Add(
+                            new PolicyLevel(
+                                System.Security.PolicyLevelType.User,
+                                userConfig,
+                                ConfigId.UserPolicyLevel
+                            )
+                        );
                     }
                     Interlocked.CompareExchange(ref m_policyLevels, policyLevels, null);
                 }
@@ -54,20 +84,25 @@ namespace System.Security {
             }
         }
 
-        internal PolicyManager() {}
+        internal PolicyManager() { }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal void AddLevel (PolicyLevel level) {
+        [System.Security.SecurityCritical] // auto-generated
+        internal void AddLevel(PolicyLevel level)
+        {
             PolicyLevels.Add(level);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        [SecurityPermissionAttribute(SecurityAction.Demand, Flags=SecurityPermissionFlag.ControlPolicy)]
-        internal IEnumerator PolicyHierarchy() {
+        [System.Security.SecurityCritical] // auto-generated
+        [SecurityPermissionAttribute(
+            SecurityAction.Demand,
+            Flags = SecurityPermissionFlag.ControlPolicy
+        )]
+        internal IEnumerator PolicyHierarchy()
+        {
             return PolicyLevels.GetEnumerator();
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal PermissionSet Resolve(Evidence evidence)
         {
             // If we can resolve the grant set for the evidence via the host or the current AppDomain state,
@@ -77,17 +112,21 @@ namespace System.Security {
             {
                 return grantSet;
             }
-            else 
+            else
             {
-                BCLDebug.Assert(AppDomain.CurrentDomain.IsLegacyCasPolicyEnabled, "We're about to apply policy in a policy disabled app");
+                BCLDebug.Assert(
+                    AppDomain.CurrentDomain.IsLegacyCasPolicyEnabled,
+                    "We're about to apply policy in a policy disabled app"
+                );
                 return CodeGroupResolve(evidence, false);
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.AppDomain, ResourceScope.AppDomain)]
-        internal PermissionSet CodeGroupResolve (Evidence evidence, bool systemPolicy) {
+        internal PermissionSet CodeGroupResolve(Evidence evidence, bool systemPolicy)
+        {
             Contract.Assert(AppDomain.CurrentDomain.IsLegacyCasPolicyEnabled);
 
             PermissionSet grant = null;
@@ -105,15 +144,19 @@ namespace System.Security {
             byte[] serializedEvidence = evidence.RawSerialize();
             int count = evidence.RawCount;
 
-            bool legacyIgnoreSystemPolicy = (AppDomain.CurrentDomain.GetData("IgnoreSystemPolicy") != null);
+            bool legacyIgnoreSystemPolicy = (
+                AppDomain.CurrentDomain.GetData("IgnoreSystemPolicy") != null
+            );
             bool testApplicationLevels = false;
             while (levelEnumerator.MoveNext())
             {
                 currentLevel = (PolicyLevel)levelEnumerator.Current;
-                if (systemPolicy) {
+                if (systemPolicy)
+                {
                     if (currentLevel.Type == PolicyLevelType.AppDomain)
                         continue;
-                } else if (legacyIgnoreSystemPolicy && currentLevel.Type != PolicyLevelType.AppDomain)
+                }
+                else if (legacyIgnoreSystemPolicy && currentLevel.Type != PolicyLevelType.AppDomain)
                     continue;
 
                 policy = currentLevel.Resolve(evidence, count, serializedEvidence);
@@ -131,7 +174,10 @@ namespace System.Security {
                 {
                     break;
                 }
-                else if ((policy.Attributes & PolicyStatementAttribute.LevelFinal) == PolicyStatementAttribute.LevelFinal)
+                else if (
+                    (policy.Attributes & PolicyStatementAttribute.LevelFinal)
+                    == PolicyStatementAttribute.LevelFinal
+                )
                 {
                     if (currentLevel.Type != PolicyLevelType.AppDomain)
                     {
@@ -147,7 +193,7 @@ namespace System.Security {
 
                 for (int i = PolicyLevels.Count - 1; i >= 0; --i)
                 {
-                    currentLevel = (PolicyLevel) PolicyLevels[i];
+                    currentLevel = (PolicyLevel)PolicyLevels[i];
                     if (currentLevel.Type == PolicyLevelType.AppDomain)
                     {
                         appDomainLevel = currentLevel;
@@ -179,9 +225,9 @@ namespace System.Security {
                     IIdentityPermissionFactory factory = obj as IIdentityPermissionFactory;
                     if (factory != null)
                     {
-                        IPermission perm = factory.CreateIdentityPermission( evidence );
+                        IPermission perm = factory.CreateIdentityPermission(evidence);
                         if (perm != null)
-                            grant.AddPermission( perm );
+                            grant.AddPermission(perm);
                     }
                 }
             }
@@ -190,18 +236,22 @@ namespace System.Security {
             return grant;
         }
 
-        internal static bool IsGacAssembly (Evidence evidence) {
+        internal static bool IsGacAssembly(Evidence evidence)
+        {
             return new GacMembershipCondition().Check(evidence);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal IEnumerator ResolveCodeGroups (Evidence evidence) {
+        [System.Security.SecurityCritical] // auto-generated
+        internal IEnumerator ResolveCodeGroups(Evidence evidence)
+        {
             ArrayList accumList = new ArrayList();
             IEnumerator levelEnumerator = PolicyLevels.GetEnumerator();
 
             while (levelEnumerator.MoveNext())
             {
-                CodeGroup temp = ((PolicyLevel)levelEnumerator.Current).ResolveMatchingCodeGroups(evidence);
+                CodeGroup temp = ((PolicyLevel)levelEnumerator.Current).ResolveMatchingCodeGroups(
+                    evidence
+                );
                 if (temp != null)
                     accumList.Add(temp);
             }
@@ -228,21 +278,27 @@ namespace System.Security {
         ///     membership condition supports it also return the evidence which was used to match the
         ///     membership condition.
         /// </summary>
-        internal static bool CheckMembershipCondition(IMembershipCondition membershipCondition,
-                                                      Evidence evidence,
-                                                      out object usedEvidence) {
+        internal static bool CheckMembershipCondition(
+            IMembershipCondition membershipCondition,
+            Evidence evidence,
+            out object usedEvidence
+        )
+        {
             BCLDebug.Assert(membershipCondition != null, "membershipCondition != null");
             BCLDebug.Assert(evidence != null, "evidence != null");
 
-            IReportMatchMembershipCondition reportMatchMembershipCondition = membershipCondition as IReportMatchMembershipCondition;
+            IReportMatchMembershipCondition reportMatchMembershipCondition =
+                membershipCondition as IReportMatchMembershipCondition;
 
             // If the membership condition supports telling us which evidence was used to match, then use
             // that capability.  Otherwise, we cannot report this information - which means we need to be
             // conservative and assume that all of the evidence was used and mark it as such.
-            if (reportMatchMembershipCondition != null) {
+            if (reportMatchMembershipCondition != null)
+            {
                 return reportMatchMembershipCondition.Check(evidence, out usedEvidence);
             }
-            else {
+            else
+            {
                 usedEvidence = null;
                 evidence.MarkAllEvidenceAsUsed();
 
@@ -250,18 +306,20 @@ namespace System.Security {
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal void Save () {
+        [System.Security.SecurityCritical] // auto-generated
+        internal void Save()
+        {
             EncodeLevel(Environment.GetResourceString("Policy_PL_Enterprise"));
             EncodeLevel(Environment.GetResourceString("Policy_PL_Machine"));
             EncodeLevel(Environment.GetResourceString("Policy_PL_User"));
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        private void EncodeLevel (string label) {
+        [System.Security.SecurityCritical] // auto-generated
+        private void EncodeLevel(string label)
+        {
             for (int i = 0; i < PolicyLevels.Count; ++i)
             {
-                PolicyLevel currentLevel = (PolicyLevel) PolicyLevels[i];
+                PolicyLevel currentLevel = (PolicyLevel)PolicyLevels[i];
                 if (currentLevel.Label.Equals(label))
                 {
                     EncodeLevel(currentLevel);
@@ -270,22 +328,24 @@ namespace System.Security {
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        internal static void EncodeLevel (PolicyLevel level)
+        internal static void EncodeLevel(PolicyLevel level)
         {
             Contract.Assert(level != null, "No policy level to encode.");
 
-            // We cannot encode a policy level without a backing file  
+            // We cannot encode a policy level without a backing file
             if (level.Path == null)
             {
-                string errorMessage = Environment.GetResourceString("Policy_UnableToSave",
-                                                    level.Label,
-                                                    Environment.GetResourceString("Policy_SaveNotFileBased"));
+                string errorMessage = Environment.GetResourceString(
+                    "Policy_UnableToSave",
+                    level.Label,
+                    Environment.GetResourceString("Policy_SaveNotFileBased")
+                );
                 throw new PolicyException(errorMessage);
             }
-                
+
             SecurityElement elConf = new SecurityElement("configuration");
             SecurityElement elMscorlib = new SecurityElement("mscorlib");
             SecurityElement elSecurity = new SecurityElement("security");
@@ -315,8 +375,16 @@ namespace System.Security {
                 Exception extendedError = Marshal.GetExceptionForHR(hrSave);
                 if (extendedError != null)
                 {
-                    string extendedInformation = extendedError != null ? extendedError.Message : String.Empty;
-                    throw new PolicyException(Environment.GetResourceString("Policy_UnableToSave", level.Label, extendedInformation), extendedError);
+                    string extendedInformation =
+                        extendedError != null ? extendedError.Message : String.Empty;
+                    throw new PolicyException(
+                        Environment.GetResourceString(
+                            "Policy_UnableToSave",
+                            level.Label,
+                            extendedInformation
+                        ),
+                        extendedError
+                    );
                 }
             }
             catch (Exception e)
@@ -324,7 +392,14 @@ namespace System.Security {
                 if (e is PolicyException)
                     throw e;
                 else
-                    throw new PolicyException(Environment.GetResourceString("Policy_UnableToSave", level.Label, e.Message), e);
+                    throw new PolicyException(
+                        Environment.GetResourceString(
+                            "Policy_UnableToSave",
+                            level.Label,
+                            e.Message
+                        ),
+                        e
+                    );
             }
 
             Config.ResetCacheData(level.ConfigId);
@@ -345,7 +420,7 @@ namespace System.Security {
         // is far from arbitrary.  There are a number of conditions that must
         // be true for the QuickCache to produce valid result.  These
         // are:
-        // 
+        //
         // * equivalent evidence objects must produce the same
         //   grant set (i.e. it must be independent of time of day,
         //   space on the harddisk, other "external" factors, and
@@ -360,7 +435,8 @@ namespace System.Security {
         // the ones defined within mscorlib and that there are
         // no Exclusive bits set on any code groups.
 
-        internal static bool CanUseQuickCache (CodeGroup group) {
+        internal static bool CanUseQuickCache(CodeGroup group)
+        {
             ArrayList list = new ArrayList();
 
             list.Add(group);
@@ -403,13 +479,15 @@ namespace System.Security {
             return true;
         }
 
-        private static bool TestPolicyStatement (PolicyStatement policy) {
+        private static bool TestPolicyStatement(PolicyStatement policy)
+        {
             if (policy == null)
                 return true;
             return (policy.Attributes & PolicyStatementAttribute.Exclusive) == 0;
         }
 
-        private volatile static QuickCacheEntryType[] FullTrustMap;
+        private static volatile QuickCacheEntryType[] FullTrustMap;
+
         private static QuickCacheEntryType GenerateQuickCache(PolicyLevel level)
         {
             if (FullTrustMap == null)
@@ -418,10 +496,10 @@ namespace System.Security {
                 FullTrustMap = new QuickCacheEntryType[]
                 {
                     QuickCacheEntryType.FullTrustZoneMyComputer,
-                  QuickCacheEntryType.FullTrustZoneIntranet,
+                    QuickCacheEntryType.FullTrustZoneIntranet,
                     QuickCacheEntryType.FullTrustZoneTrusted,
-                  QuickCacheEntryType.FullTrustZoneInternet,
-                    QuickCacheEntryType.FullTrustZoneUntrusted
+                    QuickCacheEntryType.FullTrustZoneInternet,
+                    QuickCacheEntryType.FullTrustZoneUntrusted,
                 };
             }
 
@@ -433,13 +511,11 @@ namespace System.Security {
 
             try
             {
-                policy = level.Resolve( noEvidence ).PermissionSet;
+                policy = level.Resolve(noEvidence).PermissionSet;
                 if (policy.IsUnrestricted())
                     accumulator |= QuickCacheEntryType.FullTrustAll;
             }
-            catch (PolicyException)
-            {
-            }
+            catch (PolicyException) { }
 
             foreach (SecurityZone zone in Enum.GetValues(typeof(SecurityZone)))
             {
@@ -453,23 +529,24 @@ namespace System.Security {
 
                 try
                 {
-                    zonePolicy = level.Resolve( zoneEvidence ).PermissionSet;
+                    zonePolicy = level.Resolve(zoneEvidence).PermissionSet;
                     if (zonePolicy.IsUnrestricted())
                     {
-                        Contract.Assert(0 <= (int)zone && (int)zone < FullTrustMap.Length, "FullTrustMap does not contain a mapping for this zone.");
+                        Contract.Assert(
+                            0 <= (int)zone && (int)zone < FullTrustMap.Length,
+                            "FullTrustMap does not contain a mapping for this zone."
+                        );
                         accumulator |= FullTrustMap[(int)zone];
                     }
                 }
-                catch (PolicyException)
-                {
-                }
+                catch (PolicyException) { }
             }
 
             return accumulator;
         }
 
 #if _DEBUG
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
         internal static extern int DebugOut(String file, String message);

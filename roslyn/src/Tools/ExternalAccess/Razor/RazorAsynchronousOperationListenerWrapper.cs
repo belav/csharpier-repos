@@ -12,12 +12,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
     {
         private readonly IAsynchronousOperationListener _implementation;
 
-        public RazorAsynchronousOperationListenerWrapper(IAsynchronousOperationListener implementation)
+        public RazorAsynchronousOperationListenerWrapper(
+            IAsynchronousOperationListener implementation
+        )
         {
             _implementation = implementation;
         }
 
-        public IDisposable BeginAsyncOperation(string name, object? tag = null, [CallerFilePath] string filePath = "", [CallerLineNumber] int lineNumber = 0)
-            => _implementation.BeginAsyncOperation(name, tag, filePath, lineNumber);
+        public IDisposable BeginAsyncOperation(
+            string name,
+            object? tag = null,
+            [CallerFilePath] string filePath = "",
+            [CallerLineNumber] int lineNumber = 0
+        ) => _implementation.BeginAsyncOperation(name, tag, filePath, lineNumber);
     }
 }

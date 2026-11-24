@@ -20,28 +20,39 @@ namespace Microsoft.CodeAnalysis.Xaml.Diagnostics.Analyzers
         {
             get
             {
-                return XamlProjectService.AnalyzerService?.SupportedDiagnostics ?? ImmutableArray<DiagnosticDescriptor>.Empty;
+                return XamlProjectService.AnalyzerService?.SupportedDiagnostics
+                    ?? ImmutableArray<DiagnosticDescriptor>.Empty;
             }
         }
 
-        public override async Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(Document document, CancellationToken cancellationToken)
+        public override async Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             if (XamlProjectService.AnalyzerService == null)
             {
                 return ImmutableArray<Diagnostic>.Empty;
             }
 
-            return await XamlProjectService.AnalyzerService.AnalyzeSyntaxAsync(document, cancellationToken).ConfigureAwait(false);
+            return await XamlProjectService
+                .AnalyzerService.AnalyzeSyntaxAsync(document, cancellationToken)
+                .ConfigureAwait(false);
         }
 
-        public override async Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(Document document, CancellationToken cancellationToken)
+        public override async Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             if (XamlProjectService.AnalyzerService == null)
             {
                 return ImmutableArray<Diagnostic>.Empty;
             }
 
-            return await XamlProjectService.AnalyzerService.AnalyzeSemanticsAsync(document, cancellationToken).ConfigureAwait(false);
+            return await XamlProjectService
+                .AnalyzerService.AnalyzeSemanticsAsync(document, cancellationToken)
+                .ConfigureAwait(false);
         }
     }
 }

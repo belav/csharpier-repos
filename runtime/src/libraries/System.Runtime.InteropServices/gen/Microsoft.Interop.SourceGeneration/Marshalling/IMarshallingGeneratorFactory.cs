@@ -13,8 +13,6 @@ namespace Microsoft.Interop
         /// <param name="info">Type details</param>
         /// <param name="context">Metadata about the stub the type is associated with</param>
         /// <returns>A <see cref="ResolvedGenerator"/> instance.</returns>
-        public ResolvedGenerator Create(
-            TypePositionInfo info,
-            StubCodeContext context);
+        public ResolvedGenerator Create(TypePositionInfo info, StubCodeContext context);
     }
 }

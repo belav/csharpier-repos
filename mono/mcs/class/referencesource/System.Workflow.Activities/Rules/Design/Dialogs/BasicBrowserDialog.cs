@@ -8,15 +8,15 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
+using System.Workflow.Activities.Common;
+using System.Workflow.Activities.Rules;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Design;
-using System.Workflow.Activities.Rules;
 using System.Workflow.Interop;
-using System.Globalization;
-using System.Workflow.Activities.Common;
 
 #endregion
 
@@ -64,10 +64,7 @@ namespace System.Workflow.Activities.Rules.Design
 
         protected Activity Activity
         {
-            get
-            {
-                return this.activity;
-            }
+            get { return this.activity; }
         }
 
         #endregion
@@ -76,10 +73,7 @@ namespace System.Workflow.Activities.Rules.Design
 
         public string SelectedName
         {
-            get
-            {
-                return this.name;
-            }
+            get { return this.name; }
         }
 
         #endregion
@@ -117,7 +111,8 @@ namespace System.Workflow.Activities.Rules.Design
         {
             if (serviceProvider != null)
             {
-                IHelpService helpService = serviceProvider.GetService(typeof(IHelpService)) as IHelpService;
+                IHelpService helpService =
+                    serviceProvider.GetService(typeof(IHelpService)) as IHelpService;
                 if (helpService != null)
                 {
                     helpService.ShowHelpFromKeyword(this.GetType().FullName + ".UI");
@@ -147,7 +142,9 @@ namespace System.Workflow.Activities.Rules.Design
                 {
                     using (new WaitCursor())
                     {
-                        ListViewItem listViewItem = this.rulesListView.Items.Add(new ListViewItem());
+                        ListViewItem listViewItem = this.rulesListView.Items.Add(
+                            new ListViewItem()
+                        );
                         this.UpdateListViewItem(newObject, listViewItem);
                         listViewItem.Selected = true;
                         this.OnComponentChanged();
@@ -171,7 +168,10 @@ namespace System.Workflow.Activities.Rules.Design
                 {
                     using (new WaitCursor())
                     {
-                        this.UpdateListViewItem(updatedRuleObject, this.rulesListView.SelectedItems[0]);
+                        this.UpdateListViewItem(
+                            updatedRuleObject,
+                            this.rulesListView.SelectedItems[0]
+                        );
                         this.UpdatePreview(this.previewRichTextBox, updatedRuleObject);
                         this.OnComponentChanged();
                     }
@@ -211,8 +211,15 @@ namespace System.Workflow.Activities.Rules.Design
             MessageBoxOptions mbo = (MessageBoxOptions)0;
             if (CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft)
                 mbo = MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading;
-            DialogResult dr = MessageBox.Show(this, this.ConfirmDeleteMessageText, this.ConfirmDeleteTitleText,
-                MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, mbo);
+            DialogResult dr = MessageBox.Show(
+                this,
+                this.ConfirmDeleteMessageText,
+                this.ConfirmDeleteTitleText,
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button1,
+                mbo
+            );
             if (dr == DialogResult.OK)
             {
                 using (new WaitCursor())
@@ -228,7 +235,10 @@ namespace System.Workflow.Activities.Rules.Design
                         this.rulesListView.Items.RemoveAt(selectionIndex);
                         if (this.rulesListView.Items.Count > 0)
                         {
-                            int newSelectionIndex = Math.Min(selectionIndex, this.rulesListView.Items.Count - 1);
+                            int newSelectionIndex = Math.Min(
+                                selectionIndex,
+                                this.rulesListView.Items.Count - 1
+                            );
                             this.rulesListView.Items[newSelectionIndex].Selected = true;
                             selectedRuleObject = this.rulesListView.Items[newSelectionIndex].Tag;
                         }
@@ -288,7 +298,8 @@ namespace System.Workflow.Activities.Rules.Design
         {
             bool canChange = true;
             ISite site = ((IComponent)this.activity).Site;
-            IComponentChangeService changeService = (IComponentChangeService)site.GetService(typeof(IComponentChangeService));
+            IComponentChangeService changeService = (IComponentChangeService)
+                site.GetService(typeof(IComponentChangeService));
 
             if (changeService != null)
             {
@@ -310,7 +321,8 @@ namespace System.Workflow.Activities.Rules.Design
         private void OnComponentChanged()
         {
             ISite site = ((IComponent)this.activity).Site;
-            IComponentChangeService changeService = (IComponentChangeService)site.GetService(typeof(IComponentChangeService));
+            IComponentChangeService changeService = (IComponentChangeService)
+                site.GetService(typeof(IComponentChangeService));
 
             if (changeService != null)
                 changeService.OnComponentChanged(this.activity, null, null, null);
@@ -340,7 +352,10 @@ namespace System.Workflow.Activities.Rules.Design
 
         //commands
         protected abstract object OnNewInternal();
-        protected abstract bool OnEditInternal(object currentRuleObject, out object updatedRuleObject);
+        protected abstract bool OnEditInternal(
+            object currentRuleObject,
+            out object updatedRuleObject
+        );
         protected abstract void OnDeleteInternal(object ruleObject);
         protected abstract string OnRenameInternal(object ruleObject);
 
@@ -366,12 +381,14 @@ namespace System.Workflow.Activities.Rules.Design
         private class WaitCursor : IDisposable
         {
             private Cursor oldCursor;
+
             public WaitCursor()
             {
                 Application.DoEvents(); // Force redraw before waiting
                 oldCursor = Cursor.Current;
                 Cursor.Current = Cursors.WaitCursor;
             }
+
             public void Dispose()
             {
                 Cursor.Current = oldCursor;

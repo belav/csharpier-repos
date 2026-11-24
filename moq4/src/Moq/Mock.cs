@@ -822,22 +822,18 @@ namespace Moq
                 Guard.CanWrite(pi);
             }
 
-            return Mock.SetupRecursive(
-                mock,
-                expression,
-                (targetMock, _, _) =>
-                {
-                    var setup = new StubbedPropertySetup(
-                        targetMock,
-                        expression,
-                        getter,
-                        setter,
-                        initialValue
-                    );
-                    targetMock.MutableSetups.Add(setup);
-                    return setup;
-                }
-            );
+            return Mock.SetupRecursive(mock, expression, (targetMock, _, _) =>
+            {
+                var setup = new StubbedPropertySetup(
+                    targetMock,
+                    expression,
+                    getter,
+                    setter,
+                    initialValue
+                );
+                targetMock.MutableSetups.Add(setup);
+                return setup;
+            });
 
             /* Unmerged change from project 'Moq(netstandard2.0)'
             Before:

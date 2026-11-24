@@ -27,6 +27,5 @@ public readonly struct ConcurrencyDetectorCriticalSectionDisposer : IDisposable
     }
 
     /// <inheritdoc />
-    public void Dispose()
-        => _concurrencyDetector.ExitCriticalSection();
+    public void Dispose() => _concurrencyDetector.ExitCriticalSection();
 }

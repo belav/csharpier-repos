@@ -22,9 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         private ExpressionAndDiagnostics _lazyExpressionAndDiagnostics;
 
         internal LockOrUsingBinder(Binder enclosing)
-            : base(enclosing)
-        {
-        }
+            : base(enclosing) { }
 
         protected abstract ExpressionSyntax TargetExpressionSyntax { get; }
 
@@ -34,15 +32,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (_lazyLockedOrDisposedVariables == null)
                 {
-                    ImmutableHashSet<Symbol> lockedOrDisposedVariables = this.Next.LockedOrDisposedVariables;
+                    ImmutableHashSet<Symbol> lockedOrDisposedVariables =
+                        this.Next.LockedOrDisposedVariables;
 
                     ExpressionSyntax targetExpressionSyntax = TargetExpressionSyntax;
 
                     if (targetExpressionSyntax != null)
                     {
                         // We rely on this in the GetBinder call below.
-                        Debug.Assert(targetExpressionSyntax.Parent.Kind() == SyntaxKind.LockStatement ||
-                                     targetExpressionSyntax.Parent.Kind() == SyntaxKind.UsingStatement);
+                        Debug.Assert(
+                            targetExpressionSyntax.Parent.Kind() == SyntaxKind.LockStatement
+                                || targetExpressionSyntax.Parent.Kind() == SyntaxKind.UsingStatement
+                        );
 
                         // For some reason, dev11 only warnings about locals and parameters.  If you do the same thing
                         // with a field of a local or parameter (e.g. lock(p.x)), there's no warning when you modify
@@ -53,50 +54,85 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // that require lvalue checks.
                         if (targetExpressionSyntax.Kind() == SyntaxKind.IdentifierName)
                         {
-                            BoundExpression expression = BindTargetExpression(diagnostics: null, // Diagnostics reported by BindUsingStatementParts.
-                                                                              originalBinder: GetBinder(targetExpressionSyntax.Parent));
+                            BoundExpression expression = BindTargetExpression(
+                                diagnostics: null, // Diagnostics reported by BindUsingStatementParts.
+                                originalBinder: GetBinder(targetExpressionSyntax.Parent)
+                            );
 
                             switch (expression.Kind)
                             {
                                 case BoundKind.Local:
-                                    lockedOrDisposedVariables = lockedOrDisposedVariables.Add(((BoundLocal)expression).LocalSymbol);
+                                    lockedOrDisposedVariables = lockedOrDisposedVariables.Add(
+                                        ((BoundLocal)expression).LocalSymbol
+                                    );
                                     break;
                                 case BoundKind.Parameter:
-                                    lockedOrDisposedVariables = lockedOrDisposedVariables.Add(((BoundParameter)expression).ParameterSymbol);
+                                    lockedOrDisposedVariables = lockedOrDisposedVariables.Add(
+                                        ((BoundParameter)expression).ParameterSymbol
+                                    );
                                     break;
                             }
                         }
                     }
 
-                    Interlocked.CompareExchange(ref _lazyLockedOrDisposedVariables, lockedOrDisposedVariables, null);
+                    Interlocked.CompareExchange(
+                        ref _lazyLockedOrDisposedVariables,
+                        lockedOrDisposedVariables,
+                        null
+                    );
                 }
                 Debug.Assert(_lazyLockedOrDisposedVariables != null);
                 return _lazyLockedOrDisposedVariables;
             }
         }
 
-        protected BoundExpression BindTargetExpression(BindingDiagnosticBag diagnostics, Binder originalBinder, TypeSymbol targetTypeOpt = null)
+        protected BoundExpression BindTargetExpression(
+            BindingDiagnosticBag diagnostics,
+            Binder originalBinder,
+            TypeSymbol targetTypeOpt = null
+        )
         {
             if (_lazyExpressionAndDiagnostics == null)
             {
                 // Filter out method group in conversion.
                 var expressionDiagnostics = BindingDiagnosticBag.GetInstance();
-                BoundExpression boundExpression = originalBinder.BindValue(TargetExpressionSyntax, expressionDiagnostics, Binder.BindValueKind.RValueOrMethodGroup);
+                BoundExpression boundExpression = originalBinder.BindValue(
+                    TargetExpressionSyntax,
+                    expressionDiagnostics,
+                    Binder.BindValueKind.RValueOrMethodGroup
+                );
                 if (targetTypeOpt is object)
                 {
-                    boundExpression = originalBinder.GenerateConversionForAssignment(targetTypeOpt, boundExpression, expressionDiagnostics);
+                    boundExpression = originalBinder.GenerateConversionForAssignment(
+                        targetTypeOpt,
+                        boundExpression,
+                        expressionDiagnostics
+                    );
                 }
                 else
                 {
-                    boundExpression = originalBinder.BindToNaturalType(boundExpression, expressionDiagnostics);
+                    boundExpression = originalBinder.BindToNaturalType(
+                        boundExpression,
+                        expressionDiagnostics
+                    );
                 }
-                Interlocked.CompareExchange(ref _lazyExpressionAndDiagnostics, new ExpressionAndDiagnostics(boundExpression, expressionDiagnostics.ToReadOnlyAndFree()), null);
+                Interlocked.CompareExchange(
+                    ref _lazyExpressionAndDiagnostics,
+                    new ExpressionAndDiagnostics(
+                        boundExpression,
+                        expressionDiagnostics.ToReadOnlyAndFree()
+                    ),
+                    null
+                );
             }
             Debug.Assert(_lazyExpressionAndDiagnostics != null);
 
             if (diagnostics != null)
             {
-                diagnostics.AddRange(_lazyExpressionAndDiagnostics.Diagnostics, allowMismatchInDependencyAccumulation: true);
+                diagnostics.AddRange(
+                    _lazyExpressionAndDiagnostics.Diagnostics,
+                    allowMismatchInDependencyAccumulation: true
+                );
             }
 
             return _lazyExpressionAndDiagnostics.Expression;
@@ -112,7 +148,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             public readonly BoundExpression Expression;
             public readonly ImmutableBindingDiagnostic<AssemblySymbol> Diagnostics;
 
-            public ExpressionAndDiagnostics(BoundExpression expression, ImmutableBindingDiagnostic<AssemblySymbol> diagnostics)
+            public ExpressionAndDiagnostics(
+                BoundExpression expression,
+                ImmutableBindingDiagnostic<AssemblySymbol> diagnostics
+            )
             {
                 this.Expression = expression;
                 this.Diagnostics = diagnostics;

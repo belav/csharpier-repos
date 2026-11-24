@@ -20,18 +20,34 @@ namespace Microsoft.CodeAnalysis.Host
 
         ParseOptions GetDefaultParseOptionsWithLatestLanguageVersion();
 
-        ParseOptions TryParsePdbParseOptions(IReadOnlyDictionary<string, string> compilationOptionsMetadata);
+        ParseOptions TryParsePdbParseOptions(
+            IReadOnlyDictionary<string, string> compilationOptionsMetadata
+        );
 
         /// <summary>
         /// Returns true if the two options differ only by preprocessor directives; this allows for us to reuse trees
         /// if they don't have preprocessor directives in them.
         /// </summary>
-        bool OptionsDifferOnlyByPreprocessorDirectives(ParseOptions options1, ParseOptions options2);
+        bool OptionsDifferOnlyByPreprocessorDirectives(
+            ParseOptions options1,
+            ParseOptions options2
+        );
 
         // new tree from root node
-        SyntaxTree CreateSyntaxTree(string? filePath, ParseOptions options, Encoding? encoding, SourceHashAlgorithm checksumAlgorithm, SyntaxNode root);
+        SyntaxTree CreateSyntaxTree(
+            string? filePath,
+            ParseOptions options,
+            Encoding? encoding,
+            SourceHashAlgorithm checksumAlgorithm,
+            SyntaxNode root
+        );
 
         // new tree from text
-        SyntaxTree ParseSyntaxTree(string? filePath, ParseOptions options, SourceText text, CancellationToken cancellationToken);
+        SyntaxTree ParseSyntaxTree(
+            string? filePath,
+            ParseOptions options,
+            SourceText text,
+            CancellationToken cancellationToken
+        );
     }
 }

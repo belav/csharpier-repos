@@ -12,7 +12,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Testing;
 
 internal partial class TestRunner
 {
-    private class DebugTestHostLauncher(BufferedProgress<RunTestsPartialResult> progress, IClientLanguageServerManager clientLanguageServerManager) : ITestHostLauncher2, ITestHostLauncher3
+    private class DebugTestHostLauncher(
+        BufferedProgress<RunTestsPartialResult> progress,
+        IClientLanguageServerManager clientLanguageServerManager
+    ) : ITestHostLauncher2, ITestHostLauncher3
     {
         public bool IsDebug => true;
 
@@ -26,7 +29,10 @@ internal partial class TestRunner
             return AttachDebugger(pid, cancellationToken);
         }
 
-        public bool AttachDebuggerToProcess(AttachDebuggerInfo attachDebuggerInfo, CancellationToken cancellationToken)
+        public bool AttachDebuggerToProcess(
+            AttachDebuggerInfo attachDebuggerInfo,
+            CancellationToken cancellationToken
+        )
         {
             return AttachDebugger(attachDebuggerInfo.ProcessId, cancellationToken);
         }
@@ -37,7 +43,10 @@ internal partial class TestRunner
             throw new NotImplementedException();
         }
 
-        public int LaunchTestHost(TestProcessStartInfo defaultTestHostStartInfo, CancellationToken cancellationToken)
+        public int LaunchTestHost(
+            TestProcessStartInfo defaultTestHostStartInfo,
+            CancellationToken cancellationToken
+        )
         {
             // This is not called anymore in modern client and vstest.console.
             throw new NotImplementedException();
@@ -45,21 +54,45 @@ internal partial class TestRunner
 
         private bool AttachDebugger(int processId, CancellationToken cancellationToken)
         {
-            progress.Report(new RunTestsPartialResult(LanguageServerResources.Debugging_tests, string.Format(LanguageServerResources.Attaching_debugger_to_process_0, processId), Progress: null));
+            progress.Report(
+                new RunTestsPartialResult(
+                    LanguageServerResources.Debugging_tests,
+                    string.Format(
+                        LanguageServerResources.Attaching_debugger_to_process_0,
+                        processId
+                    ),
+                    Progress: null
+                )
+            );
 
             // Send an explicit request to the client to tell it to attach to the debugger and wait for the response.
             // We want to wait for the attach to complete before we continue.
-            var task = Task.Run(async () => await AttachDebuggerAsync(processId, cancellationToken), cancellationToken);
+            var task = Task.Run(
+                async () => await AttachDebuggerAsync(processId, cancellationToken),
+                cancellationToken
+            );
             return task.WaitAndGetResult_CanCallOnBackground(cancellationToken);
         }
 
-        private async Task<bool> AttachDebuggerAsync(int processId, CancellationToken cancellationToken)
+        private async Task<bool> AttachDebuggerAsync(
+            int processId,
+            CancellationToken cancellationToken
+        )
         {
             var request = new DebugAttachParams(processId);
-            var result = await clientLanguageServerManager.SendRequestAsync<DebugAttachParams, DebugAttachResult>("workspace/attachDebugger", request, cancellationToken);
+            var result = await clientLanguageServerManager.SendRequestAsync<
+                DebugAttachParams,
+                DebugAttachResult
+            >("workspace/attachDebugger", request, cancellationToken);
             if (!result.DidAttach)
             {
-                progress.Report(new RunTestsPartialResult(LanguageServerResources.Debugging_tests, LanguageServerResources.Client_failed_to_attach_the_debugger, Progress: null));
+                progress.Report(
+                    new RunTestsPartialResult(
+                        LanguageServerResources.Debugging_tests,
+                        LanguageServerResources.Client_failed_to_attach_the_debugger,
+                        Progress: null
+                    )
+                );
             }
 
             return result.DidAttach;

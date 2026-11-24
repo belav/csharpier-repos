@@ -107,7 +107,15 @@ namespace ILCompiler.DependencyAnalysis.ARM
         public void EmitMOV(Register destination, Register source)
         {
             Debug.Assert(IsValidReg(destination) && IsValidReg(source));
-            Builder.EmitShort((short)(0x4600 + (((byte)destination & 0x8) << 4) + (((byte)source & 0x8) << 3) + (((byte)source & 0x7) << 3) + ((byte)destination & 0x7)));
+            Builder.EmitShort(
+                (short)(
+                    0x4600
+                    + (((byte)destination & 0x8) << 4)
+                    + (((byte)source & 0x8) << 3)
+                    + (((byte)source & 0x7) << 3)
+                    + ((byte)destination & 0x7)
+                )
+            );
         }
 
         // ldr reg, [reg]
@@ -115,7 +123,9 @@ namespace ILCompiler.DependencyAnalysis.ARM
         public void EmitLDR(Register destination, Register source)
         {
             Debug.Assert(IsLowReg(destination) && IsLowReg(source));
-            Builder.EmitShort((short)(0x6800 + (((byte)source & 0x7) << 3) + ((byte)destination & 0x7)));
+            Builder.EmitShort(
+                (short)(0x6800 + (((byte)source & 0x7) << 3) + ((byte)destination & 0x7))
+            );
         }
 
         // ldr.w reg, [reg, #offset]
@@ -133,7 +143,9 @@ namespace ILCompiler.DependencyAnalysis.ARM
             else
             {
                 Builder.EmitShort((short)(0xf850 + ((byte)(source))));
-                Builder.EmitShort((short)(-offset + (((byte)destination) << 12) + (((byte)12) << 8)));
+                Builder.EmitShort(
+                    (short)(-offset + (((byte)destination) << 12) + (((byte)12) << 8))
+                );
             }
         }
 
@@ -142,7 +154,10 @@ namespace ILCompiler.DependencyAnalysis.ARM
         // reg range: [0..12, LR]
         public void EmitMOV(Register destination, ISymbolNode symbol)
         {
-            Debug.Assert(destination >= Register.R0 && (destination <= Register.R12 || destination == TargetRegister.LR));
+            Debug.Assert(
+                destination >= Register.R0
+                    && (destination <= Register.R12 || destination == TargetRegister.LR)
+            );
             Builder.EmitReloc(symbol, RelocType.IMAGE_REL_BASED_THUMB_MOV32);
             Builder.EmitShort(unchecked((short)0xf240));
             Builder.EmitShort((short)((byte)destination << 8));

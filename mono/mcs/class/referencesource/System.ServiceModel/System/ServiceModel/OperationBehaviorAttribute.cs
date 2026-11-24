@@ -4,26 +4,26 @@
 
 namespace System.ServiceModel
 {
-    using System.Reflection;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Description;
-    using System.Transactions;
-    using System.ServiceModel.Security;
-    using System.Security.Principal;
     using System.Collections.Generic;
+    using System.Reflection;
+    using System.Security.Principal;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
+    using System.ServiceModel.Security;
+    using System.Transactions;
 
     [AttributeUsage(ServiceModelAttributeTargets.OperationBehavior)]
     public sealed class OperationBehaviorAttribute : Attribute, IOperationBehavior
     {
-        internal const ImpersonationOption DefaultImpersonationOption = ImpersonationOption.NotAllowed;
+        internal const ImpersonationOption DefaultImpersonationOption =
+            ImpersonationOption.NotAllowed;
         bool autoCompleteTransaction = true;
         bool autoEnlistTransaction = false;
         bool autoDisposeParameters = true;
         bool preferAsyncInvocation = false;
         ImpersonationOption impersonation = ImpersonationOption.NotAllowed;
         ReleaseInstanceMode releaseInstance = ReleaseInstanceMode.None;
-
 
         public bool TransactionAutoComplete
         {
@@ -45,15 +45,14 @@ namespace System.ServiceModel
 
         public ImpersonationOption Impersonation
         {
-            get
-            {
-                return this.impersonation;
-            }
+            get { return this.impersonation; }
             set
             {
                 if (!ImpersonationOptionHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.impersonation = value;
             }
@@ -66,7 +65,9 @@ namespace System.ServiceModel
             {
                 if (!ReleaseInstanceModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
 
                 this.releaseInstance = value;
@@ -79,15 +80,17 @@ namespace System.ServiceModel
             set { this.preferAsyncInvocation = value; }
         }
 
-        void IOperationBehavior.Validate(OperationDescription description)
-        {
-        }
+        void IOperationBehavior.Validate(OperationDescription description) { }
 
-        void IOperationBehavior.AddBindingParameters(OperationDescription description, BindingParameterCollection parameters)
-        {
-        }
+        void IOperationBehavior.AddBindingParameters(
+            OperationDescription description,
+            BindingParameterCollection parameters
+        ) { }
 
-        void IOperationBehavior.ApplyDispatchBehavior(OperationDescription description, DispatchOperation dispatch)
+        void IOperationBehavior.ApplyDispatchBehavior(
+            OperationDescription description,
+            DispatchOperation dispatch
+        )
         {
             if (description == null)
             {
@@ -99,20 +102,28 @@ namespace System.ServiceModel
             }
             if (description.IsServerInitiated() && this.releaseInstance != ReleaseInstanceMode.None)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR.GetString(SR.SFxOperationBehaviorAttributeReleaseInstanceModeDoesNotApplyToCallback,
-                    description.Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFxOperationBehaviorAttributeReleaseInstanceModeDoesNotApplyToCallback,
+                            description.Name
+                        )
+                    )
+                );
             }
             dispatch.TransactionRequired = this.autoEnlistTransaction;
             dispatch.TransactionAutoComplete = this.autoCompleteTransaction;
             dispatch.AutoDisposeParameters = this.autoDisposeParameters;
-            dispatch.ReleaseInstanceBeforeCall = (this.releaseInstance & ReleaseInstanceMode.BeforeCall) != 0;
-            dispatch.ReleaseInstanceAfterCall = (this.releaseInstance & ReleaseInstanceMode.AfterCall) != 0;
+            dispatch.ReleaseInstanceBeforeCall =
+                (this.releaseInstance & ReleaseInstanceMode.BeforeCall) != 0;
+            dispatch.ReleaseInstanceAfterCall =
+                (this.releaseInstance & ReleaseInstanceMode.AfterCall) != 0;
             dispatch.Impersonation = this.Impersonation;
         }
 
-        void IOperationBehavior.ApplyClientBehavior(OperationDescription description, ClientOperation proxy)
-        {
-        }
+        void IOperationBehavior.ApplyClientBehavior(
+            OperationDescription description,
+            ClientOperation proxy
+        ) { }
     }
 }

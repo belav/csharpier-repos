@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,56 +31,50 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.HtmlControls
 {
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[DefaultEventAttribute ("")]
-	[SupportsEventValidation]
-	public class HtmlInputReset : HtmlInputButton
-	{
-		static readonly object ServerClickEvent = new object();
+    // CAS
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    // attributes
+    [DefaultEventAttribute("")]
+    [SupportsEventValidation]
+    public class HtmlInputReset : HtmlInputButton
+    {
+        static readonly object ServerClickEvent = new object();
 
-		public HtmlInputReset ()
-			: base ("reset")
-		{
-		}
+        public HtmlInputReset()
+            : base("reset") { }
 
-		public HtmlInputReset (string type)
-			: base (type)
-		{
-		}
+        public HtmlInputReset(string type)
+            : base(type) { }
 
-		[Browsable (false)]
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public override bool CausesValidation {
-			get {
-				return ViewState.GetBool ("CausesValidation", true);
-			}
-			set {
-				ViewState ["CausesValidation"] = value;
-			}
-		}
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override bool CausesValidation
+        {
+            get { return ViewState.GetBool("CausesValidation", true); }
+            set { ViewState["CausesValidation"] = value; }
+        }
 
-		[Browsable (false)]
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public override string ValidationGroup
-		{
-			get {
-				return ViewState.GetString ("ValidationGroup", "");
-			}
-			set {
-				ViewState ["ValidationGroup"] = value;
-			}
-		}
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override string ValidationGroup
+        {
+            get { return ViewState.GetString("ValidationGroup", ""); }
+            set { ViewState["ValidationGroup"] = value; }
+        }
 
-		[Browsable (false)]
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public new event EventHandler ServerClick {
-			add { Events.AddHandler (ServerClickEvent, value); }
-			remove { Events.RemoveHandler (ServerClickEvent, value); }
-		}
-
-	}
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public new event EventHandler ServerClick
+        {
+            add { Events.AddHandler(ServerClickEvent, value); }
+            remove { Events.RemoveHandler(ServerClickEvent, value); }
+        }
+    }
 }
-

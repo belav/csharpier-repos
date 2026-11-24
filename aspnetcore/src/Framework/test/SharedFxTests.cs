@@ -130,16 +130,13 @@ public class SharedFxTests
         Assert.Equal(target, (string)depsFile["runtimeTarget"]["name"]);
         Assert.NotNull(depsFile["compilationOptions"]);
         Assert.Empty(depsFile["compilationOptions"]);
-        Assert.All(
-            depsFile["libraries"],
-            item =>
-            {
-                var prop = Assert.IsType<JProperty>(item);
-                var lib = Assert.IsType<JObject>(prop.Value);
-                Assert.Equal("package", lib["type"].Value<string>());
-                Assert.Empty(lib["sha512"].Value<string>());
-            }
-        );
+        Assert.All(depsFile["libraries"], item =>
+        {
+            var prop = Assert.IsType<JProperty>(item);
+            var lib = Assert.IsType<JObject>(prop.Value);
+            Assert.Equal("package", lib["type"].Value<string>());
+            Assert.Empty(lib["sha512"].Value<string>());
+        });
 
         Assert.NotNull(depsFile["libraries"][libraryId]);
         Assert.Single(depsFile["libraries"].Values());
@@ -148,44 +145,38 @@ public class SharedFxTests
         Assert.Single(targetLibraries.Values());
         var runtimeLibrary = targetLibraries[libraryId];
         Assert.Null(runtimeLibrary["dependencies"]);
-        Assert.All(
-            runtimeLibrary["runtime"],
-            item =>
-            {
-                var obj = Assert.IsType<JProperty>(item);
-                var assemblyVersion = obj.Value["assemblyVersion"].Value<string>();
-                Assert.NotEmpty(assemblyVersion);
-                Assert.True(
-                    Version.TryParse(assemblyVersion, out _),
-                    $"{assemblyVersion} should deserialize to System.Version"
-                );
-                var fileVersion = obj.Value["fileVersion"].Value<string>();
-                Assert.NotEmpty(fileVersion);
-                Assert.True(
-                    Version.TryParse(fileVersion, out _),
-                    $"{fileVersion} should deserialize to System.Version"
-                );
-            }
-        );
+        Assert.All(runtimeLibrary["runtime"], item =>
+        {
+            var obj = Assert.IsType<JProperty>(item);
+            var assemblyVersion = obj.Value["assemblyVersion"].Value<string>();
+            Assert.NotEmpty(assemblyVersion);
+            Assert.True(
+                Version.TryParse(assemblyVersion, out _),
+                $"{assemblyVersion} should deserialize to System.Version"
+            );
+            var fileVersion = obj.Value["fileVersion"].Value<string>();
+            Assert.NotEmpty(fileVersion);
+            Assert.True(
+                Version.TryParse(fileVersion, out _),
+                $"{fileVersion} should deserialize to System.Version"
+            );
+        });
 
         if (
             _expectedRid.StartsWith("win", StringComparison.Ordinal)
             && !_expectedRid.Contains("arm")
         )
         {
-            Assert.All(
-                runtimeLibrary["native"],
-                item =>
-                {
-                    var obj = Assert.IsType<JProperty>(item);
-                    var fileVersion = obj.Value["fileVersion"].Value<string>();
-                    Assert.NotEmpty(fileVersion);
-                    Assert.True(
-                        Version.TryParse(fileVersion, out _),
-                        $"{fileVersion} should deserialize to System.Version"
-                    );
-                }
-            );
+            Assert.All(runtimeLibrary["native"], item =>
+            {
+                var obj = Assert.IsType<JProperty>(item);
+                var fileVersion = obj.Value["fileVersion"].Value<string>();
+                Assert.NotEmpty(fileVersion);
+                Assert.True(
+                    Version.TryParse(fileVersion, out _),
+                    $"{fileVersion} should deserialize to System.Version"
+                );
+            });
         }
         else
         {
@@ -212,46 +203,43 @@ public class SharedFxTests
         var dlls = Directory.GetFiles(_sharedFxRoot, "*.dll", SearchOption.AllDirectories);
         Assert.NotEmpty(dlls);
 
-        Assert.All(
-            dlls,
-            path =>
+        Assert.All(dlls, path =>
+        {
+            var name = Path.GetFileNameWithoutExtension(path);
+            if (string.Equals(name, "aspnetcorev2_inprocess", StringComparison.Ordinal))
             {
-                var name = Path.GetFileNameWithoutExtension(path);
-                if (string.Equals(name, "aspnetcorev2_inprocess", StringComparison.Ordinal))
-                {
-                    // Skip our native assembly.
-                    return;
-                }
-
-                var expectedVersion = repoAssemblies.Contains(name) ? aspnetcoreVersion : version;
-
-                using var fileStream = File.OpenRead(path);
-                using var peReader = new PEReader(fileStream, PEStreamOptions.Default);
-                var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
-                var assemblyDefinition = reader.GetAssemblyDefinition();
-
-                // Assembly versions should all match Major.Minor.0.0
-                if (repoAssemblies.Contains(name))
-                {
-                    // We always align major.minor in assemblies and packages.
-                    Assert.Equal(expectedVersion.Major, assemblyDefinition.Version.Major);
-                }
-                else
-                {
-                    // ... but dotnet/runtime has a window between package version and (then) assembly version updates.
-                    Assert.True(
-                        expectedVersion.Major == assemblyDefinition.Version.Major
-                            || expectedVersion.Major - 1 == assemblyDefinition.Version.Major,
-                        $"Unexpected Major assembly version '{assemblyDefinition.Version.Major}' is neither "
-                            + $"{expectedVersion.Major - 1}' nor '{expectedVersion.Major}'."
-                    );
-                }
-
-                Assert.Equal(expectedVersion.Minor, assemblyDefinition.Version.Minor);
-                Assert.Equal(0, assemblyDefinition.Version.Build);
-                Assert.Equal(0, assemblyDefinition.Version.Revision);
+                // Skip our native assembly.
+                return;
             }
-        );
+
+            var expectedVersion = repoAssemblies.Contains(name) ? aspnetcoreVersion : version;
+
+            using var fileStream = File.OpenRead(path);
+            using var peReader = new PEReader(fileStream, PEStreamOptions.Default);
+            var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
+            var assemblyDefinition = reader.GetAssemblyDefinition();
+
+            // Assembly versions should all match Major.Minor.0.0
+            if (repoAssemblies.Contains(name))
+            {
+                // We always align major.minor in assemblies and packages.
+                Assert.Equal(expectedVersion.Major, assemblyDefinition.Version.Major);
+            }
+            else
+            {
+                // ... but dotnet/runtime has a window between package version and (then) assembly version updates.
+                Assert.True(
+                    expectedVersion.Major == assemblyDefinition.Version.Major
+                        || expectedVersion.Major - 1 == assemblyDefinition.Version.Major,
+                    $"Unexpected Major assembly version '{assemblyDefinition.Version.Major}' is neither "
+                        + $"{expectedVersion.Major - 1}' nor '{expectedVersion.Major}'."
+                );
+            }
+
+            Assert.Equal(expectedVersion.Minor, assemblyDefinition.Version.Minor);
+            Assert.Equal(0, assemblyDefinition.Version.Build);
+            Assert.Equal(0, assemblyDefinition.Version.Revision);
+        });
     }
 
     // ASP.NET Core shared Fx assemblies should reference only ASP.NET Core assemblies with Revsion == 0.
@@ -271,32 +259,26 @@ public class SharedFxTests
         );
         Assert.NotEmpty(dlls);
 
-        Assert.All(
-            dlls,
-            path =>
+        Assert.All(dlls, path =>
+        {
+            // Unlike dotnet/aspnetcore, dotnet/runtime varies the assembly version while in servicing.
+            // dotnet/aspnetcore assemblies build against RTM targeting pack from dotnet/runtime.
+            if (!repoAssemblies.Contains(Path.GetFileNameWithoutExtension(path)))
             {
-                // Unlike dotnet/aspnetcore, dotnet/runtime varies the assembly version while in servicing.
-                // dotnet/aspnetcore assemblies build against RTM targeting pack from dotnet/runtime.
-                if (!repoAssemblies.Contains(Path.GetFileNameWithoutExtension(path)))
-                {
-                    return;
-                }
-
-                using var fileStream = File.OpenRead(path);
-                using var peReader = new PEReader(fileStream, PEStreamOptions.Default);
-                var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
-
-                Assert.All(
-                    reader.AssemblyReferences,
-                    handle =>
-                    {
-                        var reference = reader.GetAssemblyReference(handle);
-                        Assert.Equal(0, reference.Version.Build);
-                        Assert.Equal(0, reference.Version.Revision);
-                    }
-                );
+                return;
             }
-        );
+
+            using var fileStream = File.OpenRead(path);
+            using var peReader = new PEReader(fileStream, PEStreamOptions.Default);
+            var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
+
+            Assert.All(reader.AssemblyReferences, handle =>
+            {
+                var reference = reader.GetAssemblyReference(handle);
+                Assert.Equal(0, reference.Version.Build);
+                Assert.Equal(0, reference.Version.Revision);
+            });
+        });
     }
 
     [Fact]
@@ -357,29 +339,26 @@ public class SharedFxTests
         Assert.Empty(missing);
         Assert.Empty(unexpected);
 
-        Assert.All(
-            runtimeListEntries,
-            i =>
+        Assert.All(runtimeListEntries, i =>
+        {
+            var assemblyType = i.Attribute("Type").Value;
+            var assemblyPath = i.Attribute("Path").Value;
+            var fileVersion = i.Attribute("FileVersion").Value;
+
+            if (assemblyType.Equals("Managed"))
             {
-                var assemblyType = i.Attribute("Type").Value;
-                var assemblyPath = i.Attribute("Path").Value;
-                var fileVersion = i.Attribute("FileVersion").Value;
-
-                if (assemblyType.Equals("Managed"))
-                {
-                    var assemblyVersion = i.Attribute("AssemblyVersion").Value;
-                    Assert.True(
-                        Version.TryParse(assemblyVersion, out _),
-                        $"{assemblyPath} has assembly version {assemblyVersion}. Assembly version must be convertable to System.Version"
-                    );
-                }
-
+                var assemblyVersion = i.Attribute("AssemblyVersion").Value;
                 Assert.True(
-                    Version.TryParse(fileVersion, out _),
-                    $"{assemblyPath} has file version {fileVersion}. File version must be convertable to System.Version"
+                    Version.TryParse(assemblyVersion, out _),
+                    $"{assemblyPath} has assembly version {assemblyVersion}. Assembly version must be convertable to System.Version"
                 );
             }
-        );
+
+            Assert.True(
+                Version.TryParse(fileVersion, out _),
+                $"{assemblyPath} has file version {fileVersion}. File version must be convertable to System.Version"
+            );
+        });
     }
 
     [Fact]

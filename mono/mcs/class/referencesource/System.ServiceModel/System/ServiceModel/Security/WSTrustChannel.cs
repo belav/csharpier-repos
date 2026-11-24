@@ -10,8 +10,8 @@ namespace System.ServiceModel.Security
     using System.IdentityModel;
     using System.IdentityModel.Policy;
     using System.IdentityModel.Protocols.WSTrust;
-    using System.Runtime;
     using System.IdentityModel.Tokens;
+    using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security.Tokens;
@@ -29,7 +29,13 @@ namespace System.ServiceModel.Security
 
         internal class WSTrustChannelAsyncResult : System.IdentityModel.AsyncResult
         {
-            public enum Operations { Cancel, Issue, Renew, Validate };
+            public enum Operations
+            {
+                Cancel,
+                Issue,
+                Renew,
+                Validate,
+            };
 
             IWSTrustContract _client;
             System.IdentityModel.Protocols.WSTrust.RequestSecurityToken _rst;
@@ -37,13 +43,15 @@ namespace System.ServiceModel.Security
             Message _response;
             Operations _operation;
 
-            public WSTrustChannelAsyncResult(IWSTrustContract client,
-                                              Operations operation,
-                                              System.IdentityModel.Protocols.WSTrust.RequestSecurityToken rst,
-                                              WSTrustSerializationContext serializationContext,
-                                              Message request,
-                                              AsyncCallback callback,
-                                              object state)
+            public WSTrustChannelAsyncResult(
+                IWSTrustContract client,
+                Operations operation,
+                System.IdentityModel.Protocols.WSTrust.RequestSecurityToken rst,
+                WSTrustSerializationContext serializationContext,
+                Message request,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 _client = client;
@@ -66,7 +74,9 @@ namespace System.ServiceModel.Security
                         client.BeginValidate(request, OnOperationCompleted, null);
                         break;
                     default:
-                        throw IM.DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID3285, Enum.GetName(typeof(Operations), _operation)));
+                        throw IM.DiagnosticUtility.ThrowHelperInvalidOperation(
+                            SR.GetString(SR.ID3285, Enum.GetName(typeof(Operations), _operation))
+                        );
                 }
             }
 
@@ -94,14 +104,16 @@ namespace System.ServiceModel.Security
                 set { _serializationContext = value; }
             }
 
-            public new static Message End(IAsyncResult iar)
+            public static new Message End(IAsyncResult iar)
             {
                 System.IdentityModel.AsyncResult.End(iar);
 
                 WSTrustChannelAsyncResult tcar = iar as WSTrustChannelAsyncResult;
                 if (tcar == null)
                 {
-                    throw IM.DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID2004, typeof(WSTrustChannelAsyncResult), iar.GetType()));
+                    throw IM.DiagnosticUtility.ThrowHelperInvalidOperation(
+                        SR.GetString(SR.ID2004, typeof(WSTrustChannelAsyncResult), iar.GetType())
+                    );
                 }
 
                 return tcar.Response;
@@ -137,7 +149,9 @@ namespace System.ServiceModel.Security
                     case Operations.Validate:
                         return this.Client.EndValidate(iar);
                     default:
-                        throw IM.DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID3285, _operation));
+                        throw IM.DiagnosticUtility.ThrowHelperInvalidOperation(
+                            SR.GetString(SR.ID3285, _operation)
+                        );
                 }
             }
         }
@@ -172,14 +186,8 @@ namespace System.ServiceModel.Security
         /// </summary>
         public IChannel Channel
         {
-            get
-            {
-                return _innerChannel;
-            }
-            protected set
-            {
-                _innerChannel = value;
-            }
+            get { return _innerChannel; }
+            protected set { _innerChannel = value; }
         }
 
         /// <summary>
@@ -187,30 +195,18 @@ namespace System.ServiceModel.Security
         /// </summary>
         public WSTrustChannelFactory ChannelFactory
         {
-            get
-            {
-                return _factory;
-            }
-            protected set
-            {
-                _factory = value;
-            }
+            get { return _factory; }
+            protected set { _factory = value; }
         }
 
         /// <summary>
-        /// The <see cref="IWSTrustChannelContract" /> this class uses for sending and receiving 
+        /// The <see cref="IWSTrustChannelContract" /> this class uses for sending and receiving
         /// <see cref="Message" /> objects.
         /// </summary>
         public IWSTrustChannelContract Contract
         {
-            get
-            {
-                return _innerContract;
-            }
-            protected set
-            {
-                _innerContract = value;
-            }
+            get { return _innerContract; }
+            protected set { _innerContract = value; }
         }
 
         /// <summary>
@@ -218,15 +214,16 @@ namespace System.ServiceModel.Security
         /// </summary>
         public TrustVersion TrustVersion
         {
-            get
-            {
-                return _trustVersion;
-            }
+            get { return _trustVersion; }
             protected set
             {
-                if (!((value == null) || (value == TrustVersion.WSTrust13) || (value == TrustVersion.WSTrustFeb2005)))
-                {
-                }
+                if (
+                    !(
+                        (value == null)
+                        || (value == TrustVersion.WSTrust13)
+                        || (value == TrustVersion.WSTrustFeb2005)
+                    )
+                ) { }
                 _trustVersion = value;
             }
         }
@@ -236,14 +233,8 @@ namespace System.ServiceModel.Security
         /// </summary>
         public WSTrustSerializationContext WSTrustSerializationContext
         {
-            get
-            {
-                return _context;
-            }
-            protected set
-            {
-                _context = value;
-            }
+            get { return _context; }
+            protected set { _context = value; }
         }
 
         /// <summary>
@@ -251,14 +242,8 @@ namespace System.ServiceModel.Security
         /// </summary>
         public WSTrustRequestSerializer WSTrustRequestSerializer
         {
-            get
-            {
-                return _wsTrustRequestSerializer;
-            }
-            protected set
-            {
-                _wsTrustRequestSerializer = value;
-            }
+            get { return _wsTrustRequestSerializer; }
+            protected set { _wsTrustRequestSerializer = value; }
         }
 
         /// <summary>
@@ -267,14 +252,8 @@ namespace System.ServiceModel.Security
         /// </summary>
         public WSTrustResponseSerializer WSTrustResponseSerializer
         {
-            get
-            {
-                return _wsTrustResponseSerializer;
-            }
-            protected set
-            {
-                _wsTrustResponseSerializer = value;
-            }
+            get { return _wsTrustResponseSerializer; }
+            protected set { _wsTrustResponseSerializer = value; }
         }
 
         /// <summary>
@@ -282,7 +261,7 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="factory">The <see cref="WSTrustChannelFactory" /> that is creating this object.</param>
         /// <param name="inner">
-        /// The <see cref="IWSTrustChannelContract" /> this object will use to send and receive 
+        /// The <see cref="IWSTrustChannelContract" /> this object will use to send and receive
         /// <see cref="Message" /> objects.
         /// </param>
         /// <param name="trustVersion">
@@ -298,12 +277,14 @@ namespace System.ServiceModel.Security
         /// The <see cref="WSTrustResponseSerializer" /> this channel will use for serializing WS-Trust response
         /// messages.
         /// </param>
-        public WSTrustChannel(WSTrustChannelFactory factory,
-                               IWSTrustChannelContract inner,
-                               TrustVersion trustVersion,
-                               WSTrustSerializationContext context,
-                               WSTrustRequestSerializer requestSerializer,
-                               WSTrustResponseSerializer responseSerializer)
+        public WSTrustChannel(
+            WSTrustChannelFactory factory,
+            IWSTrustChannelContract inner,
+            TrustVersion trustVersion,
+            WSTrustSerializationContext context,
+            WSTrustRequestSerializer requestSerializer,
+            WSTrustResponseSerializer responseSerializer
+        )
         {
             if (factory == null)
             {
@@ -322,12 +303,16 @@ namespace System.ServiceModel.Security
 
             if (requestSerializer == null)
             {
-                throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("requestSerializer");
+                throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "requestSerializer"
+                );
             }
 
             if (responseSerializer == null)
             {
-                throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("responseSerializer");
+                throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "responseSerializer"
+                );
             }
 
             if (trustVersion == null)
@@ -352,9 +337,11 @@ namespace System.ServiceModel.Security
             // Use the Binding's MessageVersion for creating our requests.
             //
             _messageVersion = MessageVersion.Default;
-            if (_factory.Endpoint != null
+            if (
+                _factory.Endpoint != null
                 && _factory.Endpoint.Binding != null
-                && _factory.Endpoint.Binding.MessageVersion != null)
+                && _factory.Endpoint.Binding.MessageVersion != null
+            )
             {
                 _messageVersion = _factory.Endpoint.Binding.MessageVersion;
             }
@@ -365,15 +352,22 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="request">The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityToken"/> to serialize into the message.</param>
         /// <param name="requestType">The type of WS-Trust request to serialize. This parameter must be one of the
-        /// string constants in <see cref="RequestTypes" />.</param>                
+        /// string constants in <see cref="RequestTypes" />.</param>
         /// <returns>The <see cref="Message" /> object that represents the WS-Trust message.</returns>
-        protected virtual Message CreateRequest(System.IdentityModel.Protocols.WSTrust.RequestSecurityToken request, string requestType)
+        protected virtual Message CreateRequest(
+            System.IdentityModel.Protocols.WSTrust.RequestSecurityToken request,
+            string requestType
+        )
         {
-            return Message.CreateMessage(_messageVersion,
-                                          GetRequestAction(requestType, TrustVersion),
-                                          new WSTrustRequestBodyWriter(request,
-                                                                        WSTrustRequestSerializer,
-                                                                        WSTrustSerializationContext));
+            return Message.CreateMessage(
+                _messageVersion,
+                GetRequestAction(requestType, TrustVersion),
+                new WSTrustRequestBodyWriter(
+                    request,
+                    WSTrustRequestSerializer,
+                    WSTrustSerializationContext
+                )
+            );
         }
 
         /// <summary>
@@ -384,7 +378,9 @@ namespace System.ServiceModel.Security
         /// <returns>
         /// The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse" /> deserialized from <paramref name="response"/>.
         /// </returns>
-        protected virtual System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse ReadResponse(Message response)
+        protected virtual System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse ReadResponse(
+            Message response
+        )
         {
             if (response == null)
             {
@@ -393,7 +389,10 @@ namespace System.ServiceModel.Security
 
             if (response.IsFault)
             {
-                MessageFault fault = MessageFault.CreateFault(response, WSTrustChannel.FaultMaxBufferSize);
+                MessageFault fault = MessageFault.CreateFault(
+                    response,
+                    WSTrustChannel.FaultMaxBufferSize
+                );
                 string action = null;
                 if (response.Headers != null)
                 {
@@ -401,10 +400,13 @@ namespace System.ServiceModel.Security
                 }
                 FaultException faultException = FaultException.CreateFault(fault, action);
 
-                 throw FxTrace.Exception.AsError(faultException);
+                throw FxTrace.Exception.AsError(faultException);
             }
 
-            return WSTrustResponseSerializer.ReadXml(response.GetReaderAtBodyContents(), WSTrustSerializationContext);
+            return WSTrustResponseSerializer.ReadXml(
+                response.GetReaderAtBodyContents(),
+                WSTrustSerializationContext
+            );
         }
 
         /// <summary>
@@ -417,33 +419,42 @@ namespace System.ServiceModel.Security
         /// <returns>The WS-Addressing action to use.</returns>
         protected static string GetRequestAction(string requestType, TrustVersion trustVersion)
         {
-            if (trustVersion != TrustVersion.WSTrust13 && trustVersion != TrustVersion.WSTrustFeb2005)
+            if (
+                trustVersion != TrustVersion.WSTrust13
+                && trustVersion != TrustVersion.WSTrustFeb2005
+            )
             {
                 throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR.GetString(SR.ID3137, trustVersion.ToString())));
+                    new NotSupportedException(SR.GetString(SR.ID3137, trustVersion.ToString()))
+                );
             }
 
             switch (requestType)
             {
                 case RequestTypes.Cancel:
-                    return trustVersion == TrustVersion.WSTrustFeb2005 ?
-                        WSTrustFeb2005Constants.Actions.Cancel : WSTrust13Constants.Actions.Cancel;
+                    return trustVersion == TrustVersion.WSTrustFeb2005
+                        ? WSTrustFeb2005Constants.Actions.Cancel
+                        : WSTrust13Constants.Actions.Cancel;
 
                 case RequestTypes.Issue:
-                    return trustVersion == TrustVersion.WSTrustFeb2005 ?
-                        WSTrustFeb2005Constants.Actions.Issue : WSTrust13Constants.Actions.Issue;
+                    return trustVersion == TrustVersion.WSTrustFeb2005
+                        ? WSTrustFeb2005Constants.Actions.Issue
+                        : WSTrust13Constants.Actions.Issue;
 
                 case RequestTypes.Renew:
-                    return trustVersion == TrustVersion.WSTrustFeb2005 ?
-                        WSTrustFeb2005Constants.Actions.Renew : WSTrust13Constants.Actions.Renew;
+                    return trustVersion == TrustVersion.WSTrustFeb2005
+                        ? WSTrustFeb2005Constants.Actions.Renew
+                        : WSTrust13Constants.Actions.Renew;
 
                 case RequestTypes.Validate:
-                    return trustVersion == TrustVersion.WSTrustFeb2005 ?
-                        WSTrustFeb2005Constants.Actions.Validate : WSTrust13Constants.Actions.Validate;
+                    return trustVersion == TrustVersion.WSTrustFeb2005
+                        ? WSTrustFeb2005Constants.Actions.Validate
+                        : WSTrust13Constants.Actions.Validate;
 
                 default:
                     throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(SR.GetString(SR.ID3141, requestType.ToString())));
+                        new NotSupportedException(SR.GetString(SR.ID3141, requestType.ToString()))
+                    );
             }
         }
 
@@ -454,7 +465,10 @@ namespace System.ServiceModel.Security
         /// <param name="response">The response containing the security token</param>
         /// <returns>parsed security token.</returns>
         /// <exception cref="ArgumentNullException">If response is null</exception>
-        public virtual SecurityToken GetTokenFromResponse(System.IdentityModel.Protocols.WSTrust.RequestSecurityToken request, System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse response)
+        public virtual SecurityToken GetTokenFromResponse(
+            System.IdentityModel.Protocols.WSTrust.RequestSecurityToken request,
+            System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse response
+        )
         {
             if (null == response)
             {
@@ -464,7 +478,8 @@ namespace System.ServiceModel.Security
             if (!response.IsFinal)
             {
                 throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotImplementedException(SR.GetString(SR.ID3270)));
+                    new NotImplementedException(SR.GetString(SR.ID3270))
+                );
             }
 
             if (response.RequestedSecurityToken == null)
@@ -480,13 +495,14 @@ namespace System.ServiceModel.Security
                 if (response.RequestedSecurityToken.SecurityTokenXml == null)
                 {
                     throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ID3138)));
+                        new InvalidOperationException(SR.GetString(SR.ID3138))
+                    );
                 }
 
                 SecurityToken proofToken = GetProofKey(request, response);
 
                 //
-                // If we don't see a lifetime in the response we set the expires time to 
+                // If we don't see a lifetime in the response we set the expires time to
                 // 10 hours from created time.
                 //
                 DateTime? created = null;
@@ -512,13 +528,15 @@ namespace System.ServiceModel.Security
                     expires = DateTime.UtcNow.AddHours(10);
                 }
 
-                return new GenericXmlSecurityToken(response.RequestedSecurityToken.SecurityTokenXml,
-                                                    proofToken,
-                                                    created.Value,
-                                                    expires.Value,
-                                                    response.RequestedAttachedReference,
-                                                    response.RequestedUnattachedReference,
-                                                    new ReadOnlyCollection<IAuthorizationPolicy>(new List<IAuthorizationPolicy>()));
+                return new GenericXmlSecurityToken(
+                    response.RequestedSecurityToken.SecurityTokenXml,
+                    proofToken,
+                    created.Value,
+                    expires.Value,
+                    response.RequestedAttachedReference,
+                    response.RequestedUnattachedReference,
+                    new ReadOnlyCollection<IAuthorizationPolicy>(new List<IAuthorizationPolicy>())
+                );
             }
             else
             {
@@ -535,14 +553,21 @@ namespace System.ServiceModel.Security
             else
             {
                 throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR.GetString(SR.ID3190, requestKeyType)));
+                    new NotSupportedException(SR.GetString(SR.ID3190, requestKeyType))
+                );
             }
         }
 
         /// <summary>
         /// The types of proof keys that can be issued in WS-Trust
         /// </summary>
-        internal enum ProofKeyType { Unknown, Bearer, Symmetric, Asymmetric };
+        internal enum ProofKeyType
+        {
+            Unknown,
+            Bearer,
+            Symmetric,
+            Asymmetric,
+        };
 
         /// <summary>
         /// Determines the ProofKeyType corresponding to the Uri contents
@@ -550,22 +575,28 @@ namespace System.ServiceModel.Security
         /// </summary>
         internal static ProofKeyType GetKeyType(string keyType)
         {
-            if (keyType == WSTrust13Constants.KeyTypes.Symmetric
+            if (
+                keyType == WSTrust13Constants.KeyTypes.Symmetric
                 || keyType == WSTrustFeb2005Constants.KeyTypes.Symmetric
                 || keyType == KeyTypes.Symmetric
-                || String.IsNullOrEmpty(keyType))
+                || String.IsNullOrEmpty(keyType)
+            )
             {
                 return ProofKeyType.Symmetric;
             }
-            else if (keyType == WSTrust13Constants.KeyTypes.Asymmetric
-                     || keyType == WSTrustFeb2005Constants.KeyTypes.Asymmetric
-                     || keyType == KeyTypes.Asymmetric)
+            else if (
+                keyType == WSTrust13Constants.KeyTypes.Asymmetric
+                || keyType == WSTrustFeb2005Constants.KeyTypes.Asymmetric
+                || keyType == KeyTypes.Asymmetric
+            )
             {
                 return ProofKeyType.Asymmetric;
             }
-            else if (keyType == WSTrust13Constants.KeyTypes.Bearer
-                     || keyType == WSTrustFeb2005Constants.KeyTypes.Bearer
-                     || keyType == KeyTypes.Bearer)
+            else if (
+                keyType == WSTrust13Constants.KeyTypes.Bearer
+                || keyType == WSTrustFeb2005Constants.KeyTypes.Bearer
+                || keyType == KeyTypes.Bearer
+            )
             {
                 return ProofKeyType.Bearer;
             }
@@ -577,28 +608,34 @@ namespace System.ServiceModel.Security
 
         internal static bool IsPsha1(string algorithm)
         {
-            return (algorithm == WSTrust13Constants.ComputedKeyAlgorithms.PSHA1
-                  || algorithm == WSTrustFeb2005Constants.ComputedKeyAlgorithms.PSHA1
-                  || algorithm == ComputedKeyAlgorithms.Psha1);
+            return (
+                algorithm == WSTrust13Constants.ComputedKeyAlgorithms.PSHA1
+                || algorithm == WSTrustFeb2005Constants.ComputedKeyAlgorithms.PSHA1
+                || algorithm == ComputedKeyAlgorithms.Psha1
+            );
         }
 
         /// <summary>
         /// Computes a SecurityToken representing the computed proof key which combines
         /// requestor and issuer entropies using the PSHA1 algorithm.
         /// </summary>
-        internal static SecurityToken ComputeProofKey(System.IdentityModel.Protocols.WSTrust.RequestSecurityToken request,
-                                                       System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse response)
+        internal static SecurityToken ComputeProofKey(
+            System.IdentityModel.Protocols.WSTrust.RequestSecurityToken request,
+            System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse response
+        )
         {
             if (response.Entropy == null)
             {
                 throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR.GetString(SR.ID3193)));
+                    new NotSupportedException(SR.GetString(SR.ID3193))
+                );
             }
 
             if (request.Entropy == null)
             {
                 throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR.GetString(SR.ID3194)));
+                    new NotSupportedException(SR.GetString(SR.ID3194))
+                );
             }
 
             //
@@ -610,9 +647,11 @@ namespace System.ServiceModel.Security
                 keySize = response.KeySizeInBits.Value;
             }
 
-            byte[] keyMaterial = System.IdentityModel.CryptoHelper.KeyGenerator.ComputeCombinedKey(request.Entropy.GetKeyBytes(),
-                                                                  response.Entropy.GetKeyBytes(),
-                                                                  keySize);
+            byte[] keyMaterial = System.IdentityModel.CryptoHelper.KeyGenerator.ComputeCombinedKey(
+                request.Entropy.GetKeyBytes(),
+                response.Entropy.GetKeyBytes(),
+                keySize
+            );
 
             return new BinarySecretSecurityToken(keyMaterial);
         }
@@ -621,7 +660,7 @@ namespace System.ServiceModel.Security
         //  Response               | Request                | Proof Key
         //  =======================#========================#============================================
         //   Contains a proof key  | Ignored                | Use the response's issued proof key
-        //  -----------------------+------------------------+-------------------------------------------- 
+        //  -----------------------+------------------------+--------------------------------------------
         //   Contains Entropy      | Contains Entropy       | Compute a proof key using the specified
         //   and MUST specify      |                        | computation algorithm
         //   computation algorithm |                        |
@@ -633,7 +672,10 @@ namespace System.ServiceModel.Security
         //   No proof key          | Contains UseKey        | Use UseKey as proof key
         //  -----------------------+------------------------+--------------------------------------------
         //
-        internal static SecurityToken GetProofKey(System.IdentityModel.Protocols.WSTrust.RequestSecurityToken request, System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse response)
+        internal static SecurityToken GetProofKey(
+            System.IdentityModel.Protocols.WSTrust.RequestSecurityToken request,
+            System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse response
+        )
         {
             //
             // The following attempts to get an issued proof key or compute a proof key in accordance
@@ -649,7 +691,9 @@ namespace System.ServiceModel.Security
                 //
                 if (response.RequestedProofToken.ProtectedKey != null)
                 {
-                    return new BinarySecretSecurityToken(response.RequestedProofToken.ProtectedKey.GetKeyBytes());
+                    return new BinarySecretSecurityToken(
+                        response.RequestedProofToken.ProtectedKey.GetKeyBytes()
+                    );
                 }
                 //
                 // partial
@@ -668,7 +712,14 @@ namespace System.ServiceModel.Security
                     // If there is a RequestedProofToken there must either be a
                     // ProtectedKey or a ComputedKeyAlgorithm!
                     //
-                    throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ID3192, response.RequestedProofToken.ComputedKeyAlgorithm)));
+                    throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(
+                                SR.ID3192,
+                                response.RequestedProofToken.ComputedKeyAlgorithm
+                            )
+                        )
+                    );
                 }
             }
             else
@@ -676,9 +727,9 @@ namespace System.ServiceModel.Security
                 //
                 // ommitted
                 //
-                // " In the case of omitted, an existing key is used or the resulting token 
+                // " In the case of omitted, an existing key is used or the resulting token
                 //   is not directly associated with a key. "
-                //                
+                //
                 ProofKeyType requestKeyType = GetKeyType(request.KeyType);
                 switch (requestKeyType)
                 {
@@ -694,7 +745,8 @@ namespace System.ServiceModel.Security
                             // ComputedKey element.
                             //
                             throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new NotSupportedException(SR.GetString(SR.ID3191)));
+                                new NotSupportedException(SR.GetString(SR.ID3191))
+                            );
                         }
 
                         if (request.Entropy != null)
@@ -711,7 +763,8 @@ namespace System.ServiceModel.Security
 
                     default:
                         throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(SR.GetString(SR.ID3139, request.KeyType)));
+                            new NotSupportedException(SR.GetString(SR.ID3139, request.KeyType))
+                        );
                 }
             }
         }
@@ -720,10 +773,11 @@ namespace System.ServiceModel.Security
 
         /// <summary>
         /// Returns a typed object requested, if present, from the appropriate layer in the channel stack.
-        /// </summary>        
+        /// </summary>
         /// <typeparam name="T">The typed object for which the method is querying.</typeparam>
         /// <returns>The typed object <typeparamref name="T"/> requested if it is present or nullNothingnullptra null reference (Nothing in Visual Basic) if it is not.</returns>
-        public T GetProperty<T>() where T : class
+        public T GetProperty<T>()
+            where T : class
         {
             return Channel.GetProperty<T>();
         }
@@ -733,7 +787,7 @@ namespace System.ServiceModel.Security
         #region ICommunicationObject Members
 
         /// <summary>
-        /// Causes a communication object to transition immediately from its current state into the closed state. 
+        /// Causes a communication object to transition immediately from its current state into the closed state.
         /// </summary>
         public void Abort()
         {
@@ -747,11 +801,11 @@ namespace System.ServiceModel.Security
         /// The <see cref="TimeSpan" /> that specifies how long the close operation has to complete before timing out.
         /// </param>
         /// <param name="callback">
-        /// The <see cref="AsyncCallback" /> delegate that receives notification of the completion of the asynchronous 
+        /// The <see cref="AsyncCallback" /> delegate that receives notification of the completion of the asynchronous
         /// close operation.
         /// </param>
         /// <param name="state">
-        /// An object, specified by the application, that contains state information associated with the asynchronous 
+        /// An object, specified by the application, that contains state information associated with the asynchronous
         /// close operation.
         /// </param>
         /// <returns>The <see cref="IAsyncResult" /> that references the asynchronous close operation.</returns>
@@ -764,11 +818,11 @@ namespace System.ServiceModel.Security
         /// Begins an asynchronous operation to close a communication object.
         /// </summary>
         /// <param name="callback">
-        /// The <see cref="AsyncCallback" /> delegate that receives notification of the completion of the asynchronous 
+        /// The <see cref="AsyncCallback" /> delegate that receives notification of the completion of the asynchronous
         /// close operation.
         /// </param>
         /// <param name="state">
-        /// An object, specified by the application, that contains state information associated with the asynchronous 
+        /// An object, specified by the application, that contains state information associated with the asynchronous
         /// close operation.
         /// </param>
         /// <returns>The <see cref="IAsyncResult" /> that references the asynchronous close operation.</returns>
@@ -784,11 +838,11 @@ namespace System.ServiceModel.Security
         /// The <see cref="TimeSpan" /> that specifies how long the open operation has to complete before timing out.
         /// </param>
         /// <param name="callback">
-        /// The <see cref="AsyncCallback" /> delegate that receives notification of the completion of the asynchronous 
+        /// The <see cref="AsyncCallback" /> delegate that receives notification of the completion of the asynchronous
         /// close operation.
         /// </param>
         /// <param name="state">
-        /// An object, specified by the application, that contains state information associated with the asynchronous 
+        /// An object, specified by the application, that contains state information associated with the asynchronous
         /// close operation.
         /// </param>
         /// <returns>The <see cref="IAsyncResult" /> that references the asynchronous open operation.</returns>
@@ -801,11 +855,11 @@ namespace System.ServiceModel.Security
         /// Begins an asynchronous operation to open a communication object.
         /// </summary>
         /// <param name="callback">
-        /// The <see cref="AsyncCallback" /> delegate that receives notification of the completion of the asynchronous 
+        /// The <see cref="AsyncCallback" /> delegate that receives notification of the completion of the asynchronous
         /// close operation.
         /// </param>
         /// <param name="state">
-        /// An object, specified by the application, that contains state information associated with the asynchronous 
+        /// An object, specified by the application, that contains state information associated with the asynchronous
         /// close operation.
         /// </param>
         /// <returns>The <see cref="IAsyncResult" /> that references the asynchronous open operation.</returns>
@@ -838,14 +892,8 @@ namespace System.ServiceModel.Security
         /// </summary>
         public event EventHandler Closed
         {
-            add
-            {
-                Channel.Closed += value;
-            }
-            remove
-            {
-                Channel.Closed -= value;
-            }
+            add { Channel.Closed += value; }
+            remove { Channel.Closed -= value; }
         }
 
         /// <summary>
@@ -853,14 +901,8 @@ namespace System.ServiceModel.Security
         /// </summary>
         public event EventHandler Closing
         {
-            add
-            {
-                Channel.Closing += value;
-            }
-            remove
-            {
-                Channel.Closing -= value;
-            }
+            add { Channel.Closing += value; }
+            remove { Channel.Closing -= value; }
         }
 
         /// <summary>
@@ -886,14 +928,8 @@ namespace System.ServiceModel.Security
         /// </summary>
         public event EventHandler Faulted
         {
-            add
-            {
-                Channel.Faulted += value;
-            }
-            remove
-            {
-                Channel.Faulted -= value;
-            }
+            add { Channel.Faulted += value; }
+            remove { Channel.Faulted -= value; }
         }
 
         /// <summary>
@@ -908,7 +944,7 @@ namespace System.ServiceModel.Security
         }
 
         /// <summary>
-        /// Causes a communication object to transition from the created state into the opened state. 
+        /// Causes a communication object to transition from the created state into the opened state.
         /// </summary>
         public void Open()
         {
@@ -920,14 +956,8 @@ namespace System.ServiceModel.Security
         /// </summary>
         public event EventHandler Opened
         {
-            add
-            {
-                Channel.Opened += value;
-            }
-            remove
-            {
-                Channel.Opened -= value;
-            }
+            add { Channel.Opened += value; }
+            remove { Channel.Opened -= value; }
         }
 
         /// <summary>
@@ -935,14 +965,8 @@ namespace System.ServiceModel.Security
         /// </summary>
         public event EventHandler Opening
         {
-            add
-            {
-                Channel.Opening += value;
-            }
-            remove
-            {
-                Channel.Opening -= value;
-            }
+            add { Channel.Opening += value; }
+            remove { Channel.Opening -= value; }
         }
 
         /// <summary>
@@ -960,9 +984,11 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Sends a WS-Trust Cancel message to an endpoint.
         /// </summary>
-        /// <param name="rst">The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityToken" /> that represents the request to the STS.</param>        
+        /// <param name="rst">The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityToken" /> that represents the request to the STS.</param>
         /// <returns>The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse" /> representing the STS response.</returns>
-        public virtual System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse Cancel(System.IdentityModel.Protocols.WSTrust.RequestSecurityToken rst)
+        public virtual System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse Cancel(
+            System.IdentityModel.Protocols.WSTrust.RequestSecurityToken rst
+        )
         {
             return ReadResponse(this.Contract.Cancel(CreateRequest(rst, RequestTypes.Cancel)));
         }
@@ -972,7 +998,9 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="rst">The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityToken" /> that represents the request to the STS.</param>
         /// <returns>A <see cref="SecurityToken" /> that represents the token issued by the STS.</returns>
-        public virtual SecurityToken Issue(System.IdentityModel.Protocols.WSTrust.RequestSecurityToken rst)
+        public virtual SecurityToken Issue(
+            System.IdentityModel.Protocols.WSTrust.RequestSecurityToken rst
+        )
         {
             System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse rstr = null;
             return this.Issue(rst, out rstr);
@@ -982,10 +1010,13 @@ namespace System.ServiceModel.Security
         /// Sends a WS-Trust Issue message to an endpoint STS
         /// </summary>
         /// <param name="rst">The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityToken" /> that represents the request to the STS.</param>
-        /// <param name="rstr">The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse" /> that represents the response from 
+        /// <param name="rstr">The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse" /> that represents the response from
         /// the STS.</param>
         /// <returns>A <see cref="SecurityToken" /> that represents the token issued by the STS.</returns>
-        public virtual SecurityToken Issue(System.IdentityModel.Protocols.WSTrust.RequestSecurityToken rst, out System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse rstr)
+        public virtual SecurityToken Issue(
+            System.IdentityModel.Protocols.WSTrust.RequestSecurityToken rst,
+            out System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse rstr
+        )
         {
             Message request = CreateRequest(rst, RequestTypes.Issue);
 
@@ -998,9 +1029,11 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Sends a WS-Trust Renew message to an endpoint.
         /// </summary>
-        /// <param name="rst">The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityToken" /> that represents the request to the STS.</param>        
+        /// <param name="rst">The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityToken" /> that represents the request to the STS.</param>
         /// <returns>The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse" /> representing the STS response.</returns>
-        public virtual System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse Renew(System.IdentityModel.Protocols.WSTrust.RequestSecurityToken rst)
+        public virtual System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse Renew(
+            System.IdentityModel.Protocols.WSTrust.RequestSecurityToken rst
+        )
         {
             return ReadResponse(this.Contract.Renew(CreateRequest(rst, RequestTypes.Renew)));
         }
@@ -1008,20 +1041,24 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Sends a WS-Trust Validate message to an endpoint.
         /// </summary>
-        /// <param name="rst">The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityToken" /> that represents the request to the STS.</param>        
+        /// <param name="rst">The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityToken" /> that represents the request to the STS.</param>
         /// <returns>The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse" /> representing the STS response.</returns>
-        public virtual System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse Validate(System.IdentityModel.Protocols.WSTrust.RequestSecurityToken rst)
+        public virtual System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse Validate(
+            System.IdentityModel.Protocols.WSTrust.RequestSecurityToken rst
+        )
         {
             return ReadResponse(this.Contract.Validate(CreateRequest(rst, RequestTypes.Validate)));
         }
 
         #endregion
 
-        IAsyncResult BeginOperation(WSTrustChannel.WSTrustChannelAsyncResult.Operations operation,
-                                     string requestType,
-                                     System.IdentityModel.Protocols.WSTrust.RequestSecurityToken rst,
-                                     AsyncCallback callback,
-                                     object state)
+        IAsyncResult BeginOperation(
+            WSTrustChannel.WSTrustChannelAsyncResult.Operations operation,
+            string requestType,
+            System.IdentityModel.Protocols.WSTrust.RequestSecurityToken rst,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (rst == null)
             {
@@ -1031,10 +1068,21 @@ namespace System.ServiceModel.Security
             Message request = this.CreateRequest(rst, requestType);
 
             WSTrustSerializationContext context = this.WSTrustSerializationContext;
-            return new WSTrustChannelAsyncResult(this, operation, rst, context, request, callback, state);
+            return new WSTrustChannelAsyncResult(
+                this,
+                operation,
+                rst,
+                context,
+                request,
+                callback,
+                state
+            );
         }
 
-        System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse EndOperation(IAsyncResult result, out WSTrustChannelAsyncResult tcar)
+        System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse EndOperation(
+            IAsyncResult result,
+            out WSTrustChannelAsyncResult tcar
+        )
         {
             if (result == null)
             {
@@ -1045,7 +1093,8 @@ namespace System.ServiceModel.Security
             if (tcar == null)
             {
                 throw IM.DiagnosticUtility.ThrowHelperInvalidOperation(
-                    SR.GetString(SR.ID2004, typeof(WSTrustChannelAsyncResult), result.GetType()));
+                    SR.GetString(SR.ID2004, typeof(WSTrustChannelAsyncResult), result.GetType())
+                );
             }
 
             Message response = WSTrustChannelAsyncResult.End(result);
@@ -1057,15 +1106,25 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Asynchronously sends a WS-Trust Cancel message to an endpoint.
         /// </summary>
-        /// <param name="rst">The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityToken" /> that represents the request to the STS.</param>        
+        /// <param name="rst">The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityToken" /> that represents the request to the STS.</param>
         /// <param name="callback">An optional asynchronous callback, to be called when the send is complete.</param>
-        /// <param name="state">A user-provided object that distinguishes this particular asynchronous send 
+        /// <param name="state">A user-provided object that distinguishes this particular asynchronous send
         /// request from other requests.</param>
-        /// <returns>An <see cref="IAsyncResult" /> object that represents the asynchronous send, which could still 
+        /// <returns>An <see cref="IAsyncResult" /> object that represents the asynchronous send, which could still
         /// be pending. </returns>
-        public IAsyncResult BeginCancel(System.IdentityModel.Protocols.WSTrust.RequestSecurityToken rst, AsyncCallback callback, object state)
+        public IAsyncResult BeginCancel(
+            System.IdentityModel.Protocols.WSTrust.RequestSecurityToken rst,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return BeginOperation(WSTrustChannelAsyncResult.Operations.Cancel, RequestTypes.Cancel, rst, callback, state);
+            return BeginOperation(
+                WSTrustChannelAsyncResult.Operations.Cancel,
+                RequestTypes.Cancel,
+                rst,
+                callback,
+                state
+            );
         }
 
         /// <summary>
@@ -1074,7 +1133,10 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="result">A reference to the outstanding asynchronous send request.</param>
         /// <param name="rstr">The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse" /> representing the STS response.</param>
-        public void EndCancel(IAsyncResult result, out System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse rstr)
+        public void EndCancel(
+            IAsyncResult result,
+            out System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse rstr
+        )
         {
             WSTrustChannelAsyncResult tcar;
             rstr = EndOperation(result, out tcar);
@@ -1083,15 +1145,25 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Asynchronously sends a WS-Trust Renew message to an endpoint.
         /// </summary>
-        /// <param name="rst">The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityToken" /> that represents the request to the STS.</param>        
+        /// <param name="rst">The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityToken" /> that represents the request to the STS.</param>
         /// <param name="callback">An optional asynchronous callback, to be called when the send is complete.</param>
-        /// <param name="asyncState">A user-provided object that distinguishes this particular asynchronous send 
+        /// <param name="asyncState">A user-provided object that distinguishes this particular asynchronous send
         /// request from other requests.</param>
-        /// <returns>An <see cref="IAsyncResult" /> object that represents the asynchronous send, which could still 
+        /// <returns>An <see cref="IAsyncResult" /> object that represents the asynchronous send, which could still
         /// be pending. </returns>
-        public IAsyncResult BeginIssue(System.IdentityModel.Protocols.WSTrust.RequestSecurityToken rst, AsyncCallback callback, object asyncState)
+        public IAsyncResult BeginIssue(
+            System.IdentityModel.Protocols.WSTrust.RequestSecurityToken rst,
+            AsyncCallback callback,
+            object asyncState
+        )
         {
-            return BeginOperation(WSTrustChannelAsyncResult.Operations.Issue, RequestTypes.Issue, rst, callback, asyncState);
+            return BeginOperation(
+                WSTrustChannelAsyncResult.Operations.Issue,
+                RequestTypes.Issue,
+                rst,
+                callback,
+                asyncState
+            );
         }
 
         /// <summary>
@@ -1101,7 +1173,10 @@ namespace System.ServiceModel.Security
         /// <param name="result">A reference to the outstanding asynchronous send request.</param>
         /// <param name="rstr">The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse" /> representing the STS response.</param>
         /// <returns>A <see cref="SecurityToken" /> that represents the token issued by the STS.</returns>
-        public SecurityToken EndIssue(IAsyncResult result, out System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse rstr)
+        public SecurityToken EndIssue(
+            IAsyncResult result,
+            out System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse rstr
+        )
         {
             WSTrustChannelAsyncResult tcar;
             rstr = EndOperation(result, out tcar);
@@ -1112,15 +1187,25 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Asynchronously sends a WS-Trust Renew message to an endpoint.
         /// </summary>
-        /// <param name="rst">The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityToken" /> that represents the request to the STS.</param>        
+        /// <param name="rst">The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityToken" /> that represents the request to the STS.</param>
         /// <param name="callback">An optional asynchronous callback, to be called when the send is complete.</param>
-        /// <param name="state">A user-provided object that distinguishes this particular asynchronous send 
+        /// <param name="state">A user-provided object that distinguishes this particular asynchronous send
         /// request from other requests.</param>
-        /// <returns>An <see cref="IAsyncResult" /> object that represents the asynchronous send, which could still 
+        /// <returns>An <see cref="IAsyncResult" /> object that represents the asynchronous send, which could still
         /// be pending. </returns>
-        public IAsyncResult BeginRenew(System.IdentityModel.Protocols.WSTrust.RequestSecurityToken rst, AsyncCallback callback, object state)
+        public IAsyncResult BeginRenew(
+            System.IdentityModel.Protocols.WSTrust.RequestSecurityToken rst,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return BeginOperation(WSTrustChannelAsyncResult.Operations.Renew, RequestTypes.Renew, rst, callback, state);
+            return BeginOperation(
+                WSTrustChannelAsyncResult.Operations.Renew,
+                RequestTypes.Renew,
+                rst,
+                callback,
+                state
+            );
         }
 
         /// <summary>
@@ -1129,7 +1214,10 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="result">A reference to the outstanding asynchronous send request.</param>
         /// <param name="rstr">The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse" /> representing the STS response.</param>
-        public void EndRenew(IAsyncResult result, out System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse rstr)
+        public void EndRenew(
+            IAsyncResult result,
+            out System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse rstr
+        )
         {
             WSTrustChannelAsyncResult tcar;
             rstr = EndOperation(result, out tcar);
@@ -1138,15 +1226,25 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Asynchronously sends a WS-Trust Validate message to an endpoint.
         /// </summary>
-        /// <param name="rst">The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityToken" /> that represents the request to the STS.</param>        
+        /// <param name="rst">The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityToken" /> that represents the request to the STS.</param>
         /// <param name="callback">An optional asynchronous callback, to be called when the send is complete.</param>
-        /// <param name="state">A user-provided object that distinguishes this particular asynchronous send 
+        /// <param name="state">A user-provided object that distinguishes this particular asynchronous send
         /// request from other requests.</param>
-        /// <returns>An <see cref="IAsyncResult" /> object that represents the asynchronous send, which could still 
+        /// <returns>An <see cref="IAsyncResult" /> object that represents the asynchronous send, which could still
         /// be pending. </returns>
-        public IAsyncResult BeginValidate(System.IdentityModel.Protocols.WSTrust.RequestSecurityToken rst, AsyncCallback callback, object state)
+        public IAsyncResult BeginValidate(
+            System.IdentityModel.Protocols.WSTrust.RequestSecurityToken rst,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return BeginOperation(WSTrustChannelAsyncResult.Operations.Validate, RequestTypes.Validate, rst, callback, state);
+            return BeginOperation(
+                WSTrustChannelAsyncResult.Operations.Validate,
+                RequestTypes.Validate,
+                rst,
+                callback,
+                state
+            );
         }
 
         /// <summary>
@@ -1155,7 +1253,10 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="result">A reference to the outstanding asynchronous send request.</param>
         /// <param name="rstr">The <see cref="System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse" /> representing the STS response.</param>
-        public void EndValidate(IAsyncResult result, out System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse rstr)
+        public void EndValidate(
+            IAsyncResult result,
+            out System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse rstr
+        )
         {
             WSTrustChannelAsyncResult tcar;
             rstr = EndOperation(result, out tcar);
@@ -1180,11 +1281,11 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="message">The <see cref="Message" /> that contains the instructions for the request to the STS.</param>
         /// <param name="callback">
-        /// The <see cref="AsyncCallback" /> delegate that receives notification of the completion of the asynchronous 
+        /// The <see cref="AsyncCallback" /> delegate that receives notification of the completion of the asynchronous
         /// close operation.
         /// </param>
         /// <param name="asyncState">
-        /// An object, specified by the application, that contains state information associated with the asynchronous 
+        /// An object, specified by the application, that contains state information associated with the asynchronous
         /// close operation.
         /// </param>
         /// <returns>The <see cref="IAsyncResult" /> that references the asynchronous close operation.</returns>
@@ -1218,11 +1319,11 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="message">The <see cref="Message" /> that contains the instructions for the request to the STS.</param>
         /// <param name="callback">
-        /// The <see cref="AsyncCallback" /> delegate that receives notification of the completion of the asynchronous 
+        /// The <see cref="AsyncCallback" /> delegate that receives notification of the completion of the asynchronous
         /// issue operation.
         /// </param>
         /// <param name="asyncState">
-        /// An object, specified by the application, that contains state information associated with the asynchronous 
+        /// An object, specified by the application, that contains state information associated with the asynchronous
         /// issue operation.
         /// </param>
         /// <returns>The <see cref="IAsyncResult" /> that references the asynchronous issue operation.</returns>
@@ -1256,11 +1357,11 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="message">The <see cref="Message" /> that contains the instructions for the request to the STS.</param>
         /// <param name="callback">
-        /// The <see cref="AsyncCallback" /> delegate that receives notification of the completion of the asynchronous 
+        /// The <see cref="AsyncCallback" /> delegate that receives notification of the completion of the asynchronous
         /// renew operation.
         /// </param>
         /// <param name="asyncState">
-        /// An object, specified by the application, that contains state information associated with the asynchronous 
+        /// An object, specified by the application, that contains state information associated with the asynchronous
         /// renew operation.
         /// </param>
         /// <returns>The <see cref="IAsyncResult" /> that references the asynchronous renew operation.</returns>
@@ -1294,15 +1395,19 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="message">The <see cref="Message" /> that contains the instructions for the request to the STS.</param>
         /// <param name="callback">
-        /// The <see cref="AsyncCallback" /> delegate that receives notification of the completion of the asynchronous 
+        /// The <see cref="AsyncCallback" /> delegate that receives notification of the completion of the asynchronous
         /// validate operation.
         /// </param>
         /// <param name="asyncState">
-        /// An object, specified by the application, that contains state information associated with the asynchronous 
+        /// An object, specified by the application, that contains state information associated with the asynchronous
         /// validate operation.
         /// </param>
         /// <returns>The <see cref="IAsyncResult" /> that references the asynchronous validate operation.</returns>
-        public IAsyncResult BeginValidate(Message message, AsyncCallback callback, object asyncState)
+        public IAsyncResult BeginValidate(
+            Message message,
+            AsyncCallback callback,
+            object asyncState
+        )
         {
             return Contract.BeginValidate(message, callback, asyncState);
         }

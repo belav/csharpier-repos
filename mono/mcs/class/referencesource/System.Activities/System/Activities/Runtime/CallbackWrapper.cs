@@ -5,10 +5,10 @@
 namespace System.Activities.Runtime
 {
     using System;
-    using System.Reflection;
-    using System.Runtime.Serialization;
     using System.Diagnostics.CodeAnalysis;
+    using System.Reflection;
     using System.Runtime;
+    using System.Runtime.Serialization;
     using System.Security;
     using System.Security.Permissions;
     using System.Threading;
@@ -16,7 +16,12 @@ namespace System.Activities.Runtime
     [DataContract]
     class CallbackWrapper
     {
-        static BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly | BindingFlags.Static;
+        static BindingFlags bindingFlags =
+            BindingFlags.Instance
+            | BindingFlags.NonPublic
+            | BindingFlags.Public
+            | BindingFlags.DeclaredOnly
+            | BindingFlags.Static;
 
         static PermissionSet ReflectionMemberAccessPermissionSet = null;
 
@@ -35,33 +40,21 @@ namespace System.Activities.Runtime
             this.ActivityInstance = owningInstance;
             this.callback = callback;
         }
-        
+
         public ActivityInstance ActivityInstance
         {
-            get
-            {
-                return this.activityInstance;
-            }
-            private set
-            {
-                this.activityInstance = value;
-            }
+            get { return this.activityInstance; }
+            private set { this.activityInstance = value; }
         }
 
         protected bool IsCallbackNull
         {
-            get
-            {
-                return this.callback == null && this.callbackName == null;
-            }
+            get { return this.callback == null && this.callbackName == null; }
         }
 
         protected Delegate Callback
         {
-            get
-            {
-                return this.callback;
-            }
+            get { return this.callback; }
         }
 
         [DataMember(Name = "callbackName")]
@@ -98,10 +91,13 @@ namespace System.Activities.Runtime
 
             object target = callback.Target;
 
-            // if the target is null, it is static 
+            // if the target is null, it is static
             if (target == null)
             {
-                Fx.Assert(callback.Method.IsStatic, "This method should be static when target is null");
+                Fx.Assert(
+                    callback.Method.IsStatic,
+                    "This method should be static when target is null"
+                );
                 return true;
             }
 
@@ -128,32 +124,62 @@ namespace System.Activities.Runtime
         //
         // These checks are both made in Security[Safe]Critical code.
 
-        [Fx.Tag.SecurityNote(Critical = "Because we are calling GenerateCallback, which are SecurityCritical.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Because we are calling GenerateCallback, which are SecurityCritical."
+        )]
         [SecurityCritical]
-        protected void EnsureCallback(Type delegateType, Type[] parameterTypes, Type genericParameter)
+        protected void EnsureCallback(
+            Type delegateType,
+            Type[] parameterTypes,
+            Type genericParameter
+        )
         {
             // We were unloaded and have some work to do to rebuild the callback
             if (this.callback == null)
             {
                 this.callback = GenerateCallback(delegateType, parameterTypes, genericParameter);
-                Fx.Assert(this.callback != null, "GenerateCallback should have been able to produce a non-null callback.");
+                Fx.Assert(
+                    this.callback != null,
+                    "GenerateCallback should have been able to produce a non-null callback."
+                );
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Because we are calling GenerateCallback, which are SecurityCritical.",
-            Safe = "Because the delegate is not leaked out of this routine. It is only validated.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Because we are calling GenerateCallback, which are SecurityCritical.",
+            Safe = "Because the delegate is not leaked out of this routine. It is only validated."
+        )]
         [SecuritySafeCritical]
-        protected void ValidateCallbackResolution(Type delegateType, Type[] parameterTypes, Type genericParameter)
+        protected void ValidateCallbackResolution(
+            Type delegateType,
+            Type[] parameterTypes,
+            Type genericParameter
+        )
         {
-            Fx.Assert(this.callback != null && this.callbackName != null, "We must have a callback and a callback name");
-            
-            if (!this.callback.Equals(GenerateCallback(delegateType, parameterTypes, genericParameter)))
+            Fx.Assert(
+                this.callback != null && this.callbackName != null,
+                "We must have a callback and a callback name"
+            );
+
+            if (
+                !this.callback.Equals(
+                    GenerateCallback(delegateType, parameterTypes, genericParameter)
+                )
+            )
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.InvalidExecutionCallback(this.callback.Method, null)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.InvalidExecutionCallback(this.callback.Method, null)
+                    )
+                );
             }
         }
 
-        MethodInfo FindMatchingGenericMethod(Type declaringType, Type[] parameterTypes, Type genericParameter)
+        MethodInfo FindMatchingGenericMethod(
+            Type declaringType,
+            Type[] parameterTypes,
+            Type genericParameter
+        )
         {
             MethodInfo[] potentialMatches = declaringType.GetMethods(bindingFlags);
             for (int i = 0; i < potentialMatches.Length; i++)
@@ -162,7 +188,10 @@ namespace System.Activities.Runtime
 
                 if (potentialMatch.IsGenericMethod && potentialMatch.Name == this.callbackName)
                 {
-                    Fx.Assert(potentialMatch.IsGenericMethodDefinition, "We should be getting the generic method definition here.");
+                    Fx.Assert(
+                        potentialMatch.IsGenericMethodDefinition,
+                        "We should be getting the generic method definition here."
+                    );
 
                     Type[] genericArguments = potentialMatch.GetGenericArguments();
 
@@ -173,11 +202,19 @@ namespace System.Activities.Runtime
                         ParameterInfo[] parameters = potentialMatch.GetParameters();
 
                         bool match = true;
-                        for (int parameterIndex = 0; parameterIndex < parameters.Length; parameterIndex++)
+                        for (
+                            int parameterIndex = 0;
+                            parameterIndex < parameters.Length;
+                            parameterIndex++
+                        )
                         {
                             ParameterInfo parameter = parameters[parameterIndex];
 
-                            if (parameter.IsOut || parameter.IsOptional || parameter.ParameterType != parameterTypes[parameterIndex])
+                            if (
+                                parameter.IsOut
+                                || parameter.IsOptional
+                                || parameter.ParameterType != parameterTypes[parameterIndex]
+                            )
                             {
                                 match = false;
                                 break;
@@ -194,7 +231,9 @@ namespace System.Activities.Runtime
             return null;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Because we are calling RecreateCallback, which is SecurityCritical.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Because we are calling RecreateCallback, which is SecurityCritical."
+        )]
         [SecurityCritical]
         Delegate GenerateCallback(Type delegateType, Type[] parameterTypes, Type genericParameter)
         {
@@ -204,18 +243,24 @@ namespace System.Activities.Runtime
             if (methodInfo == null)
             {
                 Fx.Assert(declaringType != null, "We must have found the declaring type.");
-                methodInfo = FindMatchingGenericMethod(declaringType, parameterTypes, genericParameter);
+                methodInfo = FindMatchingGenericMethod(
+                    declaringType,
+                    parameterTypes,
+                    genericParameter
+                );
             }
 
             if (methodInfo == null)
             {
                 return null;
             }
-            
+
             return RecreateCallback(delegateType, methodInfo);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Because we are calling RecreateCallback, which is SecurityCritical.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Because we are calling RecreateCallback, which is SecurityCritical."
+        )]
         [SecurityCritical]
         protected void EnsureCallback(Type delegateType, Type[] parameters)
         {
@@ -233,7 +278,10 @@ namespace System.Activities.Runtime
 
         MethodInfo GetMatchingMethod(Type[] parameters, out Type declaringType)
         {
-            Fx.Assert(this.callbackName != null, "This should only be called when there is actually a callback to run.");
+            Fx.Assert(
+                this.callbackName != null,
+                "This should only be called when there is actually a callback to run."
+            );
 
             object targetInstance = this.ActivityInstance.Activity;
 
@@ -257,13 +305,18 @@ namespace System.Activities.Runtime
                 declaringType = callbackAssembly.GetType(this.declaringTypeName);
             }
 
-            Fx.Assert(declaringType != null, "declaring type should be re-constructable from our serialized components");
+            Fx.Assert(
+                declaringType != null,
+                "declaring type should be re-constructable from our serialized components"
+            );
 
             return declaringType.GetMethod(this.callbackName, bindingFlags, null, parameters, null);
         }
 
         // The MethodInfo passed to this method must be derived
-        [Fx.Tag.SecurityNote(Critical = "Because we are Asserting ReflectionPermission(MemberAccess) in order to get at private callback methods.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Because we are Asserting ReflectionPermission(MemberAccess) in order to get at private callback methods."
+        )]
         [SecurityCritical]
         Delegate RecreateCallback(Type delegateType, MethodInfo callbackMethod)
         {
@@ -284,8 +337,14 @@ namespace System.Activities.Runtime
             if (ReflectionMemberAccessPermissionSet == null)
             {
                 PermissionSet myPermissionSet = new PermissionSet(PermissionState.None);
-                myPermissionSet.AddPermission(new ReflectionPermission(ReflectionPermissionFlag.MemberAccess));
-                Interlocked.CompareExchange(ref ReflectionMemberAccessPermissionSet, myPermissionSet, null);
+                myPermissionSet.AddPermission(
+                    new ReflectionPermission(ReflectionPermissionFlag.MemberAccess)
+                );
+                Interlocked.CompareExchange(
+                    ref ReflectionMemberAccessPermissionSet,
+                    myPermissionSet,
+                    null
+                );
             }
             ReflectionMemberAccessPermissionSet.Assert();
             try
@@ -300,8 +359,11 @@ namespace System.Activities.Runtime
 
         [OnSerializing]
         [SuppressMessage(FxCop.Category.Usage, FxCop.Rule.ReviewUnusedParameters)]
-        [SuppressMessage(FxCop.Category.Usage, "CA2238:ImplementSerializationMethodsCorrectly",
-            Justification = "Needs to be internal for serialization in partial trust. We have set InternalsVisibleTo(System.Runtime.Serialization) to allow this.")]
+        [SuppressMessage(
+            FxCop.Category.Usage,
+            "CA2238:ImplementSerializationMethodsCorrectly",
+            Justification = "Needs to be internal for serialization in partial trust. We have set InternalsVisibleTo(System.Runtime.Serialization) to allow this."
+        )]
         internal void OnSerializing(StreamingContext context)
         {
             if (this.callbackName == null && !this.IsCallbackNull)
@@ -322,18 +384,22 @@ namespace System.Activities.Runtime
                         this.declaringAssemblyName = declaringType.Assembly.FullName;
                     }
                 }
-                
+
                 if (method.IsGenericMethod)
                 {
                     OnSerializingGenericCallback();
                 }
             }
         }
-        
+
         protected virtual void OnSerializingGenericCallback()
         {
             // Generics are invalid by default
-            throw FxTrace.Exception.AsError(new InvalidOperationException(SR.InvalidExecutionCallback(this.callback.Method, null)));
+            throw FxTrace.Exception.AsError(
+                new InvalidOperationException(
+                    SR.InvalidExecutionCallback(this.callback.Method, null)
+                )
+            );
         }
     }
 }

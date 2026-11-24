@@ -9,11 +9,15 @@ namespace Microsoft.VisualBasic.Activities
     using System.Activities.Expressions;
     using System.Activities.Validation;
     using System.Globalization;
-    using System.Reflection;     
+    using System.Reflection;
 
     sealed class VisualBasicNameShadowingConstraint : Constraint
     {
-        protected override void OnExecute(NativeActivityContext context, object objectToValidate, ValidationContext objectToValidateContext)
+        protected override void OnExecute(
+            NativeActivityContext context,
+            object objectToValidate,
+            ValidationContext objectToValidateContext
+        )
         {
             bool foundMultiple;
             ActivityWithResult boundExpression;
@@ -26,32 +30,51 @@ namespace Microsoft.VisualBasic.Activities
 
                 if (boundExpression != null && boundExpression is ILocationReferenceWrapper)
                 {
-                    locationReference = ((ILocationReferenceWrapper)boundExpression).LocationReference;
+                    locationReference = (
+                        (ILocationReferenceWrapper)boundExpression
+                    ).LocationReference;
 
                     if (locationReference != null)
                     {
-                        foundMultiple = FindLocationReferencesFromEnvironment(objectToValidateContext.Environment, locationReference.Name);
+                        foundMultiple = FindLocationReferencesFromEnvironment(
+                            objectToValidateContext.Environment,
+                            locationReference.Name
+                        );
                         if (foundMultiple)
                         {
-                            Constraint.AddValidationError(context, new ValidationError(SR.AmbiguousVBVariableReference(locationReference.Name)));
+                            Constraint.AddValidationError(
+                                context,
+                                new ValidationError(
+                                    SR.AmbiguousVBVariableReference(locationReference.Name)
+                                )
+                            );
                         }
                     }
-                }               
+                }
             }
         }
 
-        static bool FindLocationReferencesFromEnvironment(LocationReferenceEnvironment environment, string targetName)
+        static bool FindLocationReferencesFromEnvironment(
+            LocationReferenceEnvironment environment,
+            string targetName
+        )
         {
-            LocationReference foundLocationReference = null;            
+            LocationReference foundLocationReference = null;
             LocationReferenceEnvironment currentEnvironment;
             bool foundMultiple = false;
 
-            currentEnvironment = environment;            
+            currentEnvironment = environment;
             while (currentEnvironment != null)
             {
                 foreach (LocationReference reference in currentEnvironment.GetLocationReferences())
                 {
-                    if (string.Equals(reference.Name, targetName, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        string.Equals(
+                            reference.Name,
+                            targetName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         if (foundLocationReference != null)
                         {
@@ -68,5 +91,5 @@ namespace Microsoft.VisualBasic.Activities
 
             return foundMultiple;
         }
-    } 
+    }
 }

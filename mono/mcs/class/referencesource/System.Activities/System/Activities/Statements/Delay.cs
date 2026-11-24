@@ -14,7 +14,9 @@ namespace System.Activities.Statements
     [ContentProperty("Duration")]
     public sealed class Delay : NativeActivity
     {
-        static Func<TimerExtension> getDefaultTimerExtension = new Func<TimerExtension>(GetDefaultTimerExtension);
+        static Func<TimerExtension> getDefaultTimerExtension = new Func<TimerExtension>(
+            GetDefaultTimerExtension
+        );
         Variable<Bookmark> timerBookmark;
 
         public Delay()
@@ -25,23 +27,21 @@ namespace System.Activities.Statements
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<TimeSpan> Duration
-        {
-            get;
-            set;
-        }
+        public InArgument<TimeSpan> Duration { get; set; }
 
         protected override bool CanInduceIdle
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         protected override void CacheMetadata(NativeActivityMetadata metadata)
         {
-            RuntimeArgument durationArgument = new RuntimeArgument("Duration", typeof(TimeSpan), ArgumentDirection.In, true);
+            RuntimeArgument durationArgument = new RuntimeArgument(
+                "Duration",
+                typeof(TimeSpan),
+                ArgumentDirection.In,
+                true
+            );
             metadata.Bind(this.Duration, durationArgument);
             metadata.SetArgumentsCollection(new Collection<RuntimeArgument> { durationArgument });
             metadata.AddImplementationVariable(this.timerBookmark);
@@ -58,14 +58,18 @@ namespace System.Activities.Statements
             TimeSpan duration = this.Duration.Get(context);
             if (duration < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange("Duration", duration, SR.DurationIsNegative(this.DisplayName));
+                throw FxTrace.Exception.ArgumentOutOfRange(
+                    "Duration",
+                    duration,
+                    SR.DurationIsNegative(this.DisplayName)
+                );
             }
 
             if (duration == TimeSpan.Zero)
             {
-                return; 
+                return;
             }
-                        
+
             TimerExtension timerExtension = GetTimerExtension(context);
             Bookmark bookmark = context.CreateBookmark();
             timerExtension.RegisterTimer(duration, bookmark);

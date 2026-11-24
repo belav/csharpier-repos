@@ -18,7 +18,8 @@ namespace System.IdentityModel.Tokens
         private Saml2Advice advice;
         private Saml2Conditions conditions;
         private EncryptingCredentials encryptingCredentials;
-        private Collection<EncryptedKeyIdentifierClause> externalEncryptedKeys = new Collection<EncryptedKeyIdentifierClause>();
+        private Collection<EncryptedKeyIdentifierClause> externalEncryptedKeys =
+            new Collection<EncryptedKeyIdentifierClause>();
         private Saml2Id id = new Saml2Id();
         private DateTime issueInstant = DateTime.UtcNow;
         private Saml2NameIdentifier issuer;
@@ -44,7 +45,7 @@ namespace System.IdentityModel.Tokens
 
         /// <summary>
         /// Gets or sets additional information related to the assertion that assists processing in certain
-        /// situations but which may be ignored by applications that do not understand the 
+        /// situations but which may be ignored by applications that do not understand the
         /// advice or do not wish to make use of it. [Saml2Core, 2.3.3]
         /// </summary>
         public Saml2Advice Advice
@@ -61,13 +62,13 @@ namespace System.IdentityModel.Tokens
         /// <para>
         /// The default implementation preserves the source data when read using
         /// Saml2AssertionSerializer.ReadAssertion and is willing to re-emit the
-        /// original data as long as the Id has not changed from the time that 
+        /// original data as long as the Id has not changed from the time that
         /// assertion was read.
         /// </para>
         /// <para>
         /// Note that it is vitally important that SAML assertions with different
         /// data have different IDs. If implementing a scheme whereby an assertion
-        /// "template" is loaded and certain bits of data are filled in, the Id 
+        /// "template" is loaded and certain bits of data are filled in, the Id
         /// must be changed.
         /// </para>
         /// </remarks>
@@ -89,7 +90,7 @@ namespace System.IdentityModel.Tokens
 
         /// <summary>
         /// Gets or sets the credentials used for encrypting the assertion. The key
-        /// identifier in the encrypting credentials will be used for the 
+        /// identifier in the encrypting credentials will be used for the
         /// embedded EncryptedKey in the EncryptedData element.
         /// </summary>
         public EncryptingCredentials EncryptingCredentials
@@ -99,7 +100,7 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets additional encrypted keys which will be specified external to the 
+        /// Gets additional encrypted keys which will be specified external to the
         /// EncryptedData element, as children of the EncryptedAssertion element.
         /// </summary>
         public Collection<EncryptedKeyIdentifierClause> ExternalEncryptedKeys
@@ -112,11 +113,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public Saml2Id Id
         {
-            get 
-            { 
-                return this.id; 
-            }
-
+            get { return this.id; }
             set
             {
                 if (null == value)
@@ -143,11 +140,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public Saml2NameIdentifier Issuer
         {
-            get 
-            { 
-                return this.issuer; 
-            }
-
+            get { return this.issuer; }
             set
             {
                 if (value == null)
@@ -206,24 +199,27 @@ namespace System.IdentityModel.Tokens
             if (!this.CanWriteSourceData)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ID4140)));
+                    new InvalidOperationException(SR.GetString(SR.ID4140))
+                );
             }
 
             // This call will properly just reuse the existing writer if it already qualifies
-            XmlDictionaryWriter dictionaryWriter = XmlDictionaryWriter.CreateDictionaryWriter(writer);
+            XmlDictionaryWriter dictionaryWriter = XmlDictionaryWriter.CreateDictionaryWriter(
+                writer
+            );
             this.sourceData.SetElementExclusion(null, null);
             this.sourceData.GetWriter().WriteTo(dictionaryWriter, new DictionaryManager());
         }
 
         /// <summary>
-        /// Captures the XML source data from an EnvelopedSignatureReader. 
+        /// Captures the XML source data from an EnvelopedSignatureReader.
         /// </summary>
         /// <remarks>
         /// The EnvelopedSignatureReader that was used to read the data for this
         /// assertion should be passed to this method after the &lt;/Assertion>
         /// element has been read. This method will preserve the raw XML data
         /// that was read, including the signature, so that it may be re-emitted
-        /// without changes and without the need to re-sign the data. See 
+        /// without changes and without the need to re-sign the data. See
         /// CanWriteSourceData and WriteSourceData.
         /// </remarks>
         /// <param name="reader"><see cref="EnvelopedSignatureReader"/> that contains the data for the assertion.</param>

@@ -11,23 +11,41 @@ namespace System.Speech.AudioFormat
     {
         #region Constructors
 
-        private SpeechAudioFormatInfo(EncodingFormat encodingFormat, int samplesPerSecond, short bitsPerSample, short channelCount, byte[] formatSpecificData)
+        private SpeechAudioFormatInfo(
+            EncodingFormat encodingFormat,
+            int samplesPerSecond,
+            short bitsPerSample,
+            short channelCount,
+            byte[] formatSpecificData
+        )
         {
             if (encodingFormat == 0)
             {
-                throw new ArgumentException(SR.Get(SRID.CannotUseCustomFormat), nameof(encodingFormat));
+                throw new ArgumentException(
+                    SR.Get(SRID.CannotUseCustomFormat),
+                    nameof(encodingFormat)
+                );
             }
             if (samplesPerSecond <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(samplesPerSecond), SR.Get(SRID.MustBeGreaterThanZero));
+                throw new ArgumentOutOfRangeException(
+                    nameof(samplesPerSecond),
+                    SR.Get(SRID.MustBeGreaterThanZero)
+                );
             }
             if (bitsPerSample <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(bitsPerSample), SR.Get(SRID.MustBeGreaterThanZero));
+                throw new ArgumentOutOfRangeException(
+                    nameof(bitsPerSample),
+                    SR.Get(SRID.MustBeGreaterThanZero)
+                );
             }
             if (channelCount <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(channelCount), SR.Get(SRID.MustBeGreaterThanZero));
+                throw new ArgumentOutOfRangeException(
+                    nameof(channelCount),
+                    SR.Get(SRID.MustBeGreaterThanZero)
+                );
             }
 
             _encodingFormat = encodingFormat;
@@ -58,23 +76,49 @@ namespace System.Speech.AudioFormat
                     break;
             }
         }
+
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public SpeechAudioFormatInfo(EncodingFormat encodingFormat, int samplesPerSecond, int bitsPerSample, int channelCount, int averageBytesPerSecond, int blockAlign, byte[] formatSpecificData)
-            : this(encodingFormat, samplesPerSecond, (short)bitsPerSample, (short)channelCount, formatSpecificData)
+        public SpeechAudioFormatInfo(
+            EncodingFormat encodingFormat,
+            int samplesPerSecond,
+            int bitsPerSample,
+            int channelCount,
+            int averageBytesPerSecond,
+            int blockAlign,
+            byte[] formatSpecificData
+        )
+            : this(
+                encodingFormat,
+                samplesPerSecond,
+                (short)bitsPerSample,
+                (short)channelCount,
+                formatSpecificData
+            )
         {
             // Don't explicitly check these are sensible values - allow flexibility here as some formats may do unexpected things here.
             if (averageBytesPerSecond <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(averageBytesPerSecond), SR.Get(SRID.MustBeGreaterThanZero));
+                throw new ArgumentOutOfRangeException(
+                    nameof(averageBytesPerSecond),
+                    SR.Get(SRID.MustBeGreaterThanZero)
+                );
             }
             if (blockAlign <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(blockAlign), SR.Get(SRID.MustBeGreaterThanZero));
+                throw new ArgumentOutOfRangeException(
+                    nameof(blockAlign),
+                    SR.Get(SRID.MustBeGreaterThanZero)
+                );
             }
             _averageBytesPerSecond = averageBytesPerSecond;
             _blockAlign = (short)blockAlign;
         }
-        public SpeechAudioFormatInfo(int samplesPerSecond, AudioBitsPerSample bitsPerSample, AudioChannel channel)
+
+        public SpeechAudioFormatInfo(
+            int samplesPerSecond,
+            AudioBitsPerSample bitsPerSample,
+            AudioChannel channel
+        )
             : this(EncodingFormat.Pcm, samplesPerSecond, (short)bitsPerSample, (short)channel, null)
         {
             // Don't explicitly check these are sensible values - allow flexibility here as some formats may do unexpected things here.
@@ -86,19 +130,43 @@ namespace System.Speech.AudioFormat
 
         #region Public Properties
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public int AverageBytesPerSecond { get { return _averageBytesPerSecond; } }
+        public int AverageBytesPerSecond
+        {
+            get { return _averageBytesPerSecond; }
+        }
+
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public int BitsPerSample { get { return _bitsPerSample; } }
+        public int BitsPerSample
+        {
+            get { return _bitsPerSample; }
+        }
+
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public int BlockAlign { get { return _blockAlign; } }
-        public EncodingFormat EncodingFormat { get { return _encodingFormat; } }
-        public int ChannelCount { get { return _channelCount; } }
-        public int SamplesPerSecond { get { return _samplesPerSecond; } }
+        public int BlockAlign
+        {
+            get { return _blockAlign; }
+        }
+        public EncodingFormat EncodingFormat
+        {
+            get { return _encodingFormat; }
+        }
+        public int ChannelCount
+        {
+            get { return _channelCount; }
+        }
+        public int SamplesPerSecond
+        {
+            get { return _samplesPerSecond; }
+        }
 
         #endregion
 
         #region Public Methods
-        public byte[] FormatSpecificData() { return (byte[])_formatSpecificData.Clone(); }
+        public byte[] FormatSpecificData()
+        {
+            return (byte[])_formatSpecificData.Clone();
+        }
+
         public override bool Equals(object obj)
         {
             SpeechAudioFormatInfo refObj = obj as SpeechAudioFormatInfo;
@@ -107,12 +175,16 @@ namespace System.Speech.AudioFormat
                 return false;
             }
 
-            if (!(_averageBytesPerSecond.Equals(refObj._averageBytesPerSecond) &&
-                _bitsPerSample.Equals(refObj._bitsPerSample) &&
-                _blockAlign.Equals(refObj._blockAlign) &&
-                _encodingFormat.Equals(refObj._encodingFormat) &&
-                _channelCount.Equals(refObj._channelCount) &&
-                _samplesPerSecond.Equals(refObj._samplesPerSecond)))
+            if (
+                !(
+                    _averageBytesPerSecond.Equals(refObj._averageBytesPerSecond)
+                    && _bitsPerSample.Equals(refObj._bitsPerSample)
+                    && _blockAlign.Equals(refObj._blockAlign)
+                    && _encodingFormat.Equals(refObj._encodingFormat)
+                    && _channelCount.Equals(refObj._channelCount)
+                    && _samplesPerSecond.Equals(refObj._samplesPerSecond)
+                )
+            )
             {
                 return false;
             }
@@ -129,6 +201,7 @@ namespace System.Speech.AudioFormat
             }
             return true;
         }
+
         public override int GetHashCode()
         {
             return _averageBytesPerSecond.GetHashCode();
@@ -180,12 +253,13 @@ namespace System.Speech.AudioFormat
     public enum AudioChannel
     {
         Mono = 1,
-        Stereo = 2
+        Stereo = 2,
     }
+
     public enum AudioBitsPerSample
     {
         Eight = 8,
-        Sixteen = 16
+        Sixteen = 16,
     }
 
     #endregion

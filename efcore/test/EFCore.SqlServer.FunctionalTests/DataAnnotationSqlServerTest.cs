@@ -7,20 +7,25 @@ using Microsoft.EntityFrameworkCore.SqlServer.Diagnostics.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
-public class DataAnnotationSqlServerTest : DataAnnotationRelationalTestBase<DataAnnotationSqlServerTest.DataAnnotationSqlServerFixture>
+public class DataAnnotationSqlServerTest
+    : DataAnnotationRelationalTestBase<DataAnnotationSqlServerTest.DataAnnotationSqlServerFixture>
 {
-    public DataAnnotationSqlServerTest(DataAnnotationSqlServerFixture fixture, ITestOutputHelper testOutputHelper)
+    public DataAnnotationSqlServerTest(
+        DataAnnotationSqlServerFixture fixture,
+        ITestOutputHelper testOutputHelper
+    )
         : base(fixture)
     {
         fixture.TestSqlLoggerFactory.Clear();
         fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
     }
 
-    protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    protected override void UseTransaction(
+        DatabaseFacade facade,
+        IDbContextTransaction transaction
+    ) => facade.UseTransaction(transaction.GetDbTransaction());
 
-    protected override TestHelpers TestHelpers
-        => SqlServerTestHelpers.Instance;
+    protected override TestHelpers TestHelpers => SqlServerTestHelpers.Instance;
 
     [ConditionalFact]
     public virtual void Default_for_key_string_column_throws()
@@ -33,10 +38,13 @@ public class DataAnnotationSqlServerTest : DataAnnotationRelationalTestBase<Data
         Assert.Equal(
             CoreStrings.WarningAsErrorTemplate(
                 RelationalEventId.ModelValidationKeyDefaultValueWarning,
-                RelationalResources.LogKeyHasDefaultValue(new TestLogger<SqlServerLoggingDefinitions>())
+                RelationalResources
+                    .LogKeyHasDefaultValue(new TestLogger<SqlServerLoggingDefinitions>())
                     .GenerateMessage(nameof(Login1.UserName), nameof(Login1)),
-                "RelationalEventId.ModelValidationKeyDefaultValueWarning"),
-            Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message);
+                "RelationalEventId.ModelValidationKeyDefaultValueWarning"
+            ),
+            Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message
+        );
     }
 
     [ConditionalFact]
@@ -45,12 +53,11 @@ public class DataAnnotationSqlServerTest : DataAnnotationRelationalTestBase<Data
         var modelBuilder = CreateModelBuilder();
 
         modelBuilder.Entity<PrincipalA>();
-        modelBuilder.Entity<DependantA>(
-            b =>
-            {
-                b.HasKey(e => new { e.Id, e.PrincipalId });
-                b.Property(e => e.PrincipalId).HasDefaultValue(77);
-            });
+        modelBuilder.Entity<DependantA>(b =>
+        {
+            b.HasKey(e => new { e.Id, e.PrincipalId });
+            b.Property(e => e.PrincipalId).HasDefaultValue(77);
+        });
 
         Validate(modelBuilder);
     }
@@ -60,12 +67,11 @@ public class DataAnnotationSqlServerTest : DataAnnotationRelationalTestBase<Data
     {
         var modelBuilder = CreateModelBuilder();
 
-        modelBuilder.Entity<PrincipalB>(
-            b =>
-            {
-                b.HasKey(e => new { e.Id1, e.Id2 });
-                b.Property(e => e.Id1).HasDefaultValue(77);
-            });
+        modelBuilder.Entity<PrincipalB>(b =>
+        {
+            b.HasKey(e => new { e.Id1, e.Id2 });
+            b.Property(e => e.Id1).HasDefaultValue(77);
+        });
 
         Validate(modelBuilder);
     }
@@ -75,21 +81,23 @@ public class DataAnnotationSqlServerTest : DataAnnotationRelationalTestBase<Data
     {
         var modelBuilder = CreateModelBuilder();
 
-        modelBuilder.Entity<PrincipalB>(
-            b =>
-            {
-                b.HasKey(e => new { e.Id1, e.Id2 });
-                b.Property(e => e.Id1).HasDefaultValue(77);
-                b.Property(e => e.Id2).HasDefaultValue(78);
-            });
+        modelBuilder.Entity<PrincipalB>(b =>
+        {
+            b.HasKey(e => new { e.Id1, e.Id2 });
+            b.Property(e => e.Id1).HasDefaultValue(77);
+            b.Property(e => e.Id2).HasDefaultValue(78);
+        });
 
         Assert.Equal(
             CoreStrings.WarningAsErrorTemplate(
                 RelationalEventId.ModelValidationKeyDefaultValueWarning,
-                RelationalResources.LogKeyHasDefaultValue(new TestLogger<SqlServerLoggingDefinitions>())
+                RelationalResources
+                    .LogKeyHasDefaultValue(new TestLogger<SqlServerLoggingDefinitions>())
                     .GenerateMessage(nameof(PrincipalB.Id1), nameof(PrincipalB)),
-                "RelationalEventId.ModelValidationKeyDefaultValueWarning"),
-            Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message);
+                "RelationalEventId.ModelValidationKeyDefaultValueWarning"
+            ),
+            Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message
+        );
     }
 
     public override IModel Non_public_annotations_are_enabled()
@@ -164,8 +172,13 @@ public class DataAnnotationSqlServerTest : DataAnnotationRelationalTestBase<Data
     {
         var model = base.DatabaseGeneratedOption_configures_the_property_correctly();
 
-        var identity = model.FindEntityType(typeof(GeneratedEntity)).FindProperty(nameof(GeneratedEntity.Identity));
-        Assert.Equal(SqlServerValueGenerationStrategy.IdentityColumn, identity.GetValueGenerationStrategy());
+        var identity = model
+            .FindEntityType(typeof(GeneratedEntity))
+            .FindProperty(nameof(GeneratedEntity.Identity));
+        Assert.Equal(
+            SqlServerValueGenerationStrategy.IdentityColumn,
+            identity.GetValueGenerationStrategy()
+        );
 
         return model;
     }
@@ -180,7 +193,8 @@ public class DataAnnotationSqlServerTest : DataAnnotationRelationalTestBase<Data
 
         Assert.Equal(
             "Unique_No",
-            model.FindEntityType(typeof(One)).FindProperty(nameof(One.UniqueNo)).GetColumnName());
+            model.FindEntityType(typeof(One)).FindProperty(nameof(One.UniqueNo)).GetColumnName()
+        );
     }
 
     public override IModel DatabaseGeneratedOption_Identity_does_not_throw_on_noninteger_properties()
@@ -190,13 +204,22 @@ public class DataAnnotationSqlServerTest : DataAnnotationRelationalTestBase<Data
         var entity = model.FindEntityType(typeof(GeneratedEntityNonInteger));
 
         var stringProperty = entity.FindProperty(nameof(GeneratedEntityNonInteger.String));
-        Assert.Equal(SqlServerValueGenerationStrategy.None, stringProperty.GetValueGenerationStrategy());
+        Assert.Equal(
+            SqlServerValueGenerationStrategy.None,
+            stringProperty.GetValueGenerationStrategy()
+        );
 
         var dateTimeProperty = entity.FindProperty(nameof(GeneratedEntityNonInteger.DateTime));
-        Assert.Equal(SqlServerValueGenerationStrategy.None, dateTimeProperty.GetValueGenerationStrategy());
+        Assert.Equal(
+            SqlServerValueGenerationStrategy.None,
+            dateTimeProperty.GetValueGenerationStrategy()
+        );
 
         var guidProperty = entity.FindProperty(nameof(GeneratedEntityNonInteger.Guid));
-        Assert.Equal(SqlServerValueGenerationStrategy.None, guidProperty.GetValueGenerationStrategy());
+        Assert.Equal(
+            SqlServerValueGenerationStrategy.None,
+            guidProperty.GetValueGenerationStrategy()
+        );
 
         return model;
     }
@@ -242,7 +265,8 @@ SET NOCOUNT ON;
 UPDATE [Sample] SET [Name] = @p0, [RowVersion] = @p1
 OUTPUT 1
 WHERE [Unique_No] = @p2 AND [RowVersion] = @p3;
-""");
+"""
+        );
     }
 
     public override void DatabaseGeneratedAttribute_autogenerates_values_when_set_to_identity()
@@ -264,7 +288,8 @@ SET NOCOUNT ON;
 INSERT INTO [Sample] ([MaxLengthProperty], [Name], [RowVersion], [AdditionalDetails_Name], [AdditionalDetails_Value], [Details_Name], [Details_Value])
 OUTPUT INSERTED.[Unique_No]
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
-""");
+"""
+        );
     }
 
     public override void MaxLengthAttribute_throws_while_inserting_value_longer_than_max_length()
@@ -302,7 +327,8 @@ SET NOCOUNT ON;
 INSERT INTO [Sample] ([MaxLengthProperty], [Name], [RowVersion], [AdditionalDetails_Name], [AdditionalDetails_Value], [Details_Name], [Details_Value])
 OUTPUT INSERTED.[Unique_No]
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
-""");
+"""
+        );
     }
 
     public override void StringLengthAttribute_throws_while_inserting_value_longer_than_max_length()
@@ -328,25 +354,24 @@ SET NOCOUNT ON;
 INSERT INTO [Two] ([Data])
 OUTPUT INSERTED.[Id], INSERTED.[Timestamp]
 VALUES (@p0);
-""");
+"""
+        );
     }
 
-    public override void TimestampAttribute_throws_if_value_in_database_changed()
-        => base.TimestampAttribute_throws_if_value_in_database_changed();
+    public override void TimestampAttribute_throws_if_value_in_database_changed() =>
+        base.TimestampAttribute_throws_if_value_in_database_changed();
 
     // Not validating SQL because not significantly different from other tests and
     // row version value is not stable.
     private static readonly string _eol = Environment.NewLine;
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
     public class DataAnnotationSqlServerFixture : DataAnnotationRelationalFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
     }
 }

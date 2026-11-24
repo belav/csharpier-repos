@@ -5,7 +5,10 @@ public delegate byte ModDele(sbyte p1, ref string p2);
 
 public enum ModEnum : ulong
 {
-    None = 0, Red = 255, White = 255255, Blue=1
+    None = 0,
+    Red = 255,
+    White = 255255,
+    Blue = 1,
 }
 
 public interface ModIBase
@@ -28,20 +31,35 @@ namespace NS.Module
         {
             SField = p;
         }
+
         private ModClass SField;
         internal ushort SProp { get; set; }
-        public ulong SM() { return 0; }
+
+        public ulong SM()
+        {
+            return 0;
+        }
     }
 
     public class ModClass
     {
         private short prop = 0;
-        public short CProp { get { return prop; } set { prop = value; } }
-        public ModIDerive CM(int p1 = 0, uint p2 = 1, long p3 = 2) { return null; }
-        public string this[string s] { get { return s; } }
+        public short CProp
+        {
+            get { return prop; }
+            set { prop = value; }
+        }
+
+        public ModIDerive CM(int p1 = 0, uint p2 = 1, long p3 = 2)
+        {
+            return null;
+        }
+
+        public string this[string s]
+        {
+            get { return s; }
+        }
     }
 }
 
-public static class StaticModClass
-{
-}
+public static class StaticModClass { }

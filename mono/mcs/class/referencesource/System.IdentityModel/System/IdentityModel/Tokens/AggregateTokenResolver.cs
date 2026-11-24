@@ -3,17 +3,15 @@
 //------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Text;
-
-
+using System.Collections.ObjectModel;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
-using System.Collections.ObjectModel;
+using System.Text;
 
 namespace System.IdentityModel.Tokens
 {
     /// <summary>
-    /// This class defines a TokenResolver that can wrap multiple Token Resolvers 
+    /// This class defines a TokenResolver that can wrap multiple Token Resolvers
     /// and resolve tokens across all the wrapped token resolvers.
     /// </summary>
     public class AggregateTokenResolver : SecurityTokenResolver
@@ -27,14 +25,14 @@ namespace System.IdentityModel.Tokens
         /// <exception cref="ArgumentNullException">The input argument 'tokenResolvers' is null.</exception>
         /// <exception cref="ArgumentException">The input 'tokenResolver' list does not contain a valid
         /// SecurityTokenResolver. At least one SecurityTokenResolver should be specified.</exception>
-        public AggregateTokenResolver( IEnumerable<SecurityTokenResolver> tokenResolvers )
+        public AggregateTokenResolver(IEnumerable<SecurityTokenResolver> tokenResolvers)
         {
-            if ( tokenResolvers == null )
+            if (tokenResolvers == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "tokenResolvers" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("tokenResolvers");
             }
-            
-            AddNonEmptyResolvers( tokenResolvers );
+
+            AddNonEmptyResolvers(tokenResolvers);
         }
 
         /// <summary>
@@ -42,31 +40,33 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public ReadOnlyCollection<SecurityTokenResolver> TokenResolvers
         {
-            get
-            {
-                return _tokenResolvers.AsReadOnly();
-            }
+            get { return _tokenResolvers.AsReadOnly(); }
         }
 
         /// <summary>
-        /// Override of the base class. Resolves the given SecurityKeyIdentifierClause to a 
+        /// Override of the base class. Resolves the given SecurityKeyIdentifierClause to a
         /// SecurityKey.
         /// </summary>
         /// <param name="keyIdentifierClause">The Clause to be resolved.</param>
         /// <param name="key">The resolved SecurityKey</param>
         /// <returns>True if successfully resolved.</returns>
         /// <exception cref="ArgumentNullException">Input argument 'keyIdentifierClause' is null.</exception>
-        protected override bool TryResolveSecurityKeyCore( SecurityKeyIdentifierClause keyIdentifierClause, out SecurityKey key )
+        protected override bool TryResolveSecurityKeyCore(
+            SecurityKeyIdentifierClause keyIdentifierClause,
+            out SecurityKey key
+        )
         {
-            if ( keyIdentifierClause == null )
+            if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "keyIdentifierClause" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "keyIdentifierClause"
+                );
             }
 
             key = null;
-            foreach ( SecurityTokenResolver tokenResolver in _tokenResolvers )
+            foreach (SecurityTokenResolver tokenResolver in _tokenResolvers)
             {
-                if ( tokenResolver.TryResolveSecurityKey( keyIdentifierClause, out key ) )
+                if (tokenResolver.TryResolveSecurityKey(keyIdentifierClause, out key))
                 {
                     return true;
                 }
@@ -76,24 +76,27 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Override of the base class. Resolves the given SecurityKeyIdentifier to a 
+        /// Override of the base class. Resolves the given SecurityKeyIdentifier to a
         /// SecurityToken.
         /// </summary>
         /// <param name="keyIdentifier">The KeyIdentifier to be resolved.</param>
         /// <param name="token">The resolved SecurityToken</param>
         /// <returns>True if successfully resolved.</returns>
         /// <exception cref="ArgumentNullException">Input argument 'keyIdentifier' is null.</exception>
-        protected override bool TryResolveTokenCore( SecurityKeyIdentifier keyIdentifier, out SecurityToken token )
+        protected override bool TryResolveTokenCore(
+            SecurityKeyIdentifier keyIdentifier,
+            out SecurityToken token
+        )
         {
-            if ( keyIdentifier == null )
+            if (keyIdentifier == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "keyIdentifer" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("keyIdentifer");
             }
 
             token = null;
-            foreach ( SecurityTokenResolver tokenResolver in _tokenResolvers )
+            foreach (SecurityTokenResolver tokenResolver in _tokenResolvers)
             {
-                if ( tokenResolver.TryResolveToken( keyIdentifier, out token ) )
+                if (tokenResolver.TryResolveToken(keyIdentifier, out token))
                 {
                     return true;
                 }
@@ -103,24 +106,29 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Override of the base class. Resolves the given SecurityKeyIdentifierClause to a 
+        /// Override of the base class. Resolves the given SecurityKeyIdentifierClause to a
         /// SecurityToken.
         /// </summary>
         /// <param name="keyIdentifierClause">The KeyIdentifier to be resolved.</param>
         /// <param name="token">The resolved SecurityToken</param>
         /// <returns>True if successfully resolved.</returns>
         /// <exception cref="ArgumentNullException">Input argument 'keyIdentifierClause' is null.</exception>
-        protected override bool TryResolveTokenCore( SecurityKeyIdentifierClause keyIdentifierClause, out SecurityToken token )
+        protected override bool TryResolveTokenCore(
+            SecurityKeyIdentifierClause keyIdentifierClause,
+            out SecurityToken token
+        )
         {
-            if ( keyIdentifierClause == null )
+            if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "keyIdentifierClause" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "keyIdentifierClause"
+                );
             }
 
             token = null;
-            foreach ( SecurityTokenResolver tokenResolver in _tokenResolvers )
+            foreach (SecurityTokenResolver tokenResolver in _tokenResolvers)
             {
-                if ( tokenResolver.TryResolveToken( keyIdentifierClause, out token ) )
+                if (tokenResolver.TryResolveToken(keyIdentifierClause, out token))
                 {
                     return true;
                 }
@@ -129,13 +137,13 @@ namespace System.IdentityModel.Tokens
             return false;
         }
 
-        private void AddNonEmptyResolvers( IEnumerable<SecurityTokenResolver> resolvers )
+        private void AddNonEmptyResolvers(IEnumerable<SecurityTokenResolver> resolvers)
         {
-            foreach ( SecurityTokenResolver resolver in resolvers )
+            foreach (SecurityTokenResolver resolver in resolvers)
             {
-                if ( resolver != null && resolver != EmptySecurityTokenResolver.Instance )
+                if (resolver != null && resolver != EmptySecurityTokenResolver.Instance)
                 {
-                    _tokenResolvers.Add( resolver );
+                    _tokenResolvers.Add(resolver);
                 }
             }
         }

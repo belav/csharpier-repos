@@ -7,11 +7,11 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel.Description;
     using System.Xml;
 
-    public sealed class UseManagedPresentationBindingElement : BindingElement, IPolicyExportExtension
+    public sealed class UseManagedPresentationBindingElement
+        : BindingElement,
+            IPolicyExportExtension
     {
-        public UseManagedPresentationBindingElement()
-        {
-        }
+        public UseManagedPresentationBindingElement() { }
 
         public override BindingElement Clone()
         {
@@ -27,7 +27,10 @@ namespace System.ServiceModel.Channels
             return context.GetInnerProperty<T>();
         }
 
-        void IPolicyExportExtension.ExportPolicy(MetadataExporter exporter, PolicyConversionContext context)
+        void IPolicyExportExtension.ExportPolicy(
+            MetadataExporter exporter,
+            PolicyConversionContext context
+        )
         {
             if (context == null)
             {
@@ -44,9 +47,11 @@ namespace System.ServiceModel.Channels
                     XmlDocument doc = new XmlDocument();
 
                     // UseUseManagedPresentation assertion
-                    XmlElement assertion = doc.CreateElement(UseManagedPresentationPolicyStrings.UseManagedPresentationPrefix,
-                                                              UseManagedPresentationPolicyStrings.RequireFederatedIdentityProvisioningName,
-                                                              UseManagedPresentationPolicyStrings.UseManagedPresentationNamespace);
+                    XmlElement assertion = doc.CreateElement(
+                        UseManagedPresentationPolicyStrings.UseManagedPresentationPrefix,
+                        UseManagedPresentationPolicyStrings.RequireFederatedIdentityProvisioningName,
+                        UseManagedPresentationPolicyStrings.UseManagedPresentationNamespace
+                    );
 
                     context.GetBindingAssertions().Add(assertion);
                 }

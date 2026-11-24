@@ -24,7 +24,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             _type = type;
         }
 
-        internal override void AddLookupSymbolsInfoInSingleBinder(LookupSymbolsInfo result, LookupOptions options, Binder originalBinder)
+        internal override void AddLookupSymbolsInfoInSingleBinder(
+            LookupSymbolsInfo result,
+            LookupOptions options,
+            Binder originalBinder
+        )
         {
             if (options.CanConsiderMembers())
             {
@@ -49,7 +53,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (_lazyPrimaryCtorWithParameters == (object)ErrorMethodSymbol.UnknownMethod)
             {
-                if (_type is SourceMemberContainerTypeSymbol { PrimaryConstructor: { ParameterCount: not 0 } primaryCtor })
+                if (
+                    _type is SourceMemberContainerTypeSymbol
+                    {
+                        PrimaryConstructor: { ParameterCount: not 0 } primaryCtor
+                    }
+                )
                 {
                     _lazyPrimaryCtorWithParameters = primaryCtor;
                 }
@@ -61,11 +70,24 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         internal override void LookupSymbolsInSingleBinder(
-            LookupResult result, string name, int arity, ConsList<TypeSymbol> basesBeingResolved, LookupOptions options, Binder originalBinder, bool diagnose, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+            LookupResult result,
+            string name,
+            int arity,
+            ConsList<TypeSymbol> basesBeingResolved,
+            LookupOptions options,
+            Binder originalBinder,
+            bool diagnose,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(result.IsClear);
 
-            if ((options & (LookupOptions.NamespaceAliasesOnly | LookupOptions.NamespacesOrTypesOnly)) != 0)
+            if (
+                (
+                    options
+                    & (LookupOptions.NamespaceAliasesOnly | LookupOptions.NamespacesOrTypesOnly)
+                ) != 0
+            )
             {
                 return;
             }
@@ -81,7 +103,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (parameterMap == null)
             {
                 var parameters = _lazyPrimaryCtorWithParameters.Parameters;
-                parameterMap = new MultiDictionary<string, ParameterSymbol>(parameters.Length, EqualityComparer<string>.Default);
+                parameterMap = new MultiDictionary<string, ParameterSymbol>(
+                    parameters.Length,
+                    EqualityComparer<string>.Default
+                );
                 foreach (var parameter in parameters)
                 {
                     parameterMap.Add(parameter.Name, parameter);
@@ -92,7 +117,16 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             foreach (var parameterSymbol in parameterMap[name])
             {
-                result.MergeEqual(originalBinder.CheckViability(parameterSymbol, arity, options, null, diagnose, ref useSiteInfo));
+                result.MergeEqual(
+                    originalBinder.CheckViability(
+                        parameterSymbol,
+                        arity,
+                        options,
+                        null,
+                        diagnose,
+                        ref useSiteInfo
+                    )
+                );
             }
         }
     }

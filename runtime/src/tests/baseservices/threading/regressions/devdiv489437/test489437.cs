@@ -33,7 +33,6 @@ public class Test
         s.Release();
         cts.Cancel();
 
-
         if (t.Status != TaskStatus.Canceled && s.CurrentCount == 0)
         {
             Console.WriteLine("PASS");
@@ -46,8 +45,5 @@ public class Test
             Console.WriteLine("Actual: Task: " + t.Status + "; CurrentCount: " + s.CurrentCount);
             return 101;
         }
-
-
     }
 }
-

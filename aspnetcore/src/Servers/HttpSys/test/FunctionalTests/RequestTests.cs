@@ -382,33 +382,28 @@ public class RequestTests : LoggedTest
     )
     {
         string root;
-        using (
-            CreateServer(
-                out root,
-                httpContext =>
+        using (CreateServer(out root, httpContext =>
+            {
+                var requestInfo = httpContext.Features.Get<IHttpRequestFeature>();
+                var requestIdentifierFeature =
+                    httpContext.Features.Get<IHttpRequestIdentifierFeature>();
+                try
                 {
-                    var requestInfo = httpContext.Features.Get<IHttpRequestFeature>();
-                    var requestIdentifierFeature =
-                        httpContext.Features.Get<IHttpRequestIdentifierFeature>();
-                    try
-                    {
-                        Assert.Equal(expectedPath, requestInfo.Path);
-                        Assert.Equal(expectedPathBase, requestInfo.PathBase);
-                        Assert.Equal(requestPath, requestInfo.RawTarget);
+                    Assert.Equal(expectedPath, requestInfo.Path);
+                    Assert.Equal(expectedPathBase, requestInfo.PathBase);
+                    Assert.Equal(requestPath, requestInfo.RawTarget);
 
-                        // Trace identifier
-                        Assert.NotNull(requestIdentifierFeature);
-                        Assert.NotNull(requestIdentifierFeature.TraceIdentifier);
-                    }
-                    catch (Exception ex)
-                    {
-                        byte[] body = Encoding.ASCII.GetBytes(ex.ToString());
-                        httpContext.Response.Body.Write(body, 0, body.Length);
-                    }
-                    return Task.FromResult(0);
+                    // Trace identifier
+                    Assert.NotNull(requestIdentifierFeature);
+                    Assert.NotNull(requestIdentifierFeature.TraceIdentifier);
                 }
-            )
-        )
+                catch (Exception ex)
+                {
+                    byte[] body = Encoding.ASCII.GetBytes(ex.ToString());
+                    httpContext.Response.Body.Write(body, 0, body.Length);
+                }
+                return Task.FromResult(0);
+            }))
         {
             string response = await SendRequestAsync(root + requestPath);
             Assert.Equal(string.Empty, response);

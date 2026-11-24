@@ -34,30 +34,31 @@ using Microsoft.Build.Tasks;
 using Microsoft.Build.Utilities;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Tasks {
+namespace MonoTests.Microsoft.Build.Tasks
+{
+    [TestFixture]
+    public class CombinePathTest
+    {
+        [Test]
+        public void TestAssignment()
+        {
+            CombinePath cp = new CombinePath();
 
-	[TestFixture]
-	public class CombinePathTest {
+            cp.BasePath = "a";
+            cp.Paths = new ITaskItem[] { new TaskItem("b") };
 
-		[Test]
-		public void TestAssignment ()
-		{
-			CombinePath cp = new CombinePath ();
+            Assert.AreEqual("a", cp.BasePath, "A1");
+            Assert.AreEqual("b", cp.Paths[0].ItemSpec, "A2");
+        }
 
-			cp.BasePath = "a";
-			cp.Paths = new ITaskItem [] { new TaskItem ("b")};
+        [Test]
+        public void TestExecution1()
+        {
+            Engine engine;
+            Project project;
 
-			Assert.AreEqual ("a", cp.BasePath, "A1");
-			Assert.AreEqual ("b", cp.Paths [0].ItemSpec, "A2");
-		}
-
-		[Test]
-		public void TestExecution1 ()
-		{
-			Engine engine;
-			Project project;
-
-			string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<ItemGroup>
 						<Dir Include='b' />
@@ -75,26 +76,30 @@ namespace MonoTests.Microsoft.Build.Tasks {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
-			Assert.IsTrue (project.Build ("1"), "A1");
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
+            Assert.IsTrue(project.Build("1"), "A1");
 
-			BuildItemGroup output = project.GetEvaluatedItemsByName ("Out");
-			Assert.AreEqual (3, output.Count, "A2");
-			Assert.AreEqual (Path.Combine ("a", "b"), output [0].FinalItemSpec, "A3");
-			Assert.AreEqual (Path.Combine ("a", "c"), output [1].FinalItemSpec, "A4");
-			Assert.AreEqual (Path.Combine ("a", Path.Combine ("d", "e")), output [2].FinalItemSpec, "A5");
+            BuildItemGroup output = project.GetEvaluatedItemsByName("Out");
+            Assert.AreEqual(3, output.Count, "A2");
+            Assert.AreEqual(Path.Combine("a", "b"), output[0].FinalItemSpec, "A3");
+            Assert.AreEqual(Path.Combine("a", "c"), output[1].FinalItemSpec, "A4");
+            Assert.AreEqual(
+                Path.Combine("a", Path.Combine("d", "e")),
+                output[2].FinalItemSpec,
+                "A5"
+            );
+        }
 
-		}
+        [Test]
+        public void TestExecution2()
+        {
+            Engine engine;
+            Project project;
 
-		[Test]
-		public void TestExecution2 ()
-		{
-			Engine engine;
-			Project project;
-
-			string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<ItemGroup>
 						<Dir Include='a\b' />
@@ -110,15 +115,14 @@ namespace MonoTests.Microsoft.Build.Tasks {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
-			Assert.IsTrue (project.Build ("1"), "A1");
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
+            Assert.IsTrue(project.Build("1"), "A1");
 
-			BuildItemGroup output = project.GetEvaluatedItemsByName ("Out");
-			Assert.AreEqual (1, output.Count, "A2");
-			Assert.AreEqual (Path.Combine ("a", "b"), output [0].FinalItemSpec, "A3");
-		}
-	}
+            BuildItemGroup output = project.GetEvaluatedItemsByName("Out");
+            Assert.AreEqual(1, output.Count, "A2");
+            Assert.AreEqual(Path.Combine("a", "b"), output[0].FinalItemSpec, "A3");
+        }
+    }
 }
-

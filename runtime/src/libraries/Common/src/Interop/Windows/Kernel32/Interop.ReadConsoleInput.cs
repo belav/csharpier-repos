@@ -31,11 +31,20 @@ internal static partial class Interop
         // This struct is a union!  Word alignment should take care of padding!
     }
 
-
     internal static partial class Kernel32
     {
-        [LibraryImport(Libraries.Kernel32, EntryPoint = "ReadConsoleInputW",  SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Kernel32,
+            EntryPoint = "ReadConsoleInputW",
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool ReadConsoleInput(IntPtr hConsoleInput, out INPUT_RECORD buffer, int numInputRecords_UseOne, out int numEventsRead);
+        internal static partial bool ReadConsoleInput(
+            IntPtr hConsoleInput,
+            out INPUT_RECORD buffer,
+            int numInputRecords_UseOne,
+            out int numEventsRead
+        );
     }
 }

@@ -23,11 +23,11 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using Newtonsoft.Json.Serialization;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -61,7 +61,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 {
                     Message = message,
                     Level = GetLogLevel(level),
-                    Exception = ex
+                    Exception = ex,
                 };
 
                 // log Json.NET message to NLog
@@ -96,13 +96,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 "New Zealand",
                 "Australia",
                 "Denmark",
-                "China"
+                "China",
             };
 
-            string json = JsonConvert.SerializeObject(countries, Formatting.Indented, new JsonSerializerSettings
-            {
-                TraceWriter = new NLogTraceWriter()
-            });
+            string json = JsonConvert.SerializeObject(
+                countries,
+                Formatting.Indented,
+                new JsonSerializerSettings { TraceWriter = new NLogTraceWriter() }
+            );
 
             Console.WriteLine(json);
             // [
@@ -113,12 +114,15 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // ]
             #endregion
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   ""New Zealand"",
   ""Australia"",
   ""Denmark"",
   ""China""
-]", json);
+]",
+                json
+            );
         }
     }
 }

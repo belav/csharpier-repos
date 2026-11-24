@@ -45,96 +45,186 @@ namespace JitTest_deep_deep_cs
                     throw new Exception();
 
                 L = Method2(
-
-                    Method(0.0d, 0.0f, ref
-                    Method(1.0d, 0.0f, ref
-                    Method(2.0d, 0.0f, ref
-                    Method(3.0d, 0.0f, ref
-                    Method(4.0d, 0.0f, ref
-                    Method(5.0d, 0.0f, ref
-                    Method(6.0d, 0.0f, ref
-                    Method(7.0d, 0.0f, ref
-                    Method(8.0d, 0.0f, ref
-                    Method(9.0d, 0.0f, ref
-                    Method(0.0d, 1.0f, ref
-                    Method(0.0d, 2.0f, ref
-                    Method(0.0d, 3.0f, ref
-                    Method(0.0d, 4.0f, ref
-                    Method(0.0d, 5.0f, ref
-                    Method(0.0d, 6.0f, ref
-                    Method(0.0d, 7.0f, ref
-                    Method(0.0d, 8.0f, ref
-                    Method(0.0d, 9.0f, ref
-                    Method(0.0d, 10.0f, ref
-                    Method(0.0d, 11.0f, ref
-                    Method(0.0d, 12.0f, ref L
-                    )[1]
-                    )[2]
-                    )[3]
-                    )[0]
-                    )[1]
-                    )[2]
-                    )[3]
-                    )[2]
-                    )[1]
-                    )[0]
-                    )[0]
-                    )[1]
-                    )[2]
-                    )[2]
-                    )[3]
-                    )[2]
-                    )[1]
-                    )[0]
-                    )[1]
-                    )[1]
-                    )[1]
-                    )[1]
-
-                    , 0,
-                    Method2(1.0d, 0,
-                    Method2(2.0d, 0,
-                    Method2(3.0d, 0,
-                    Method2(4.0d, 0,
-                    Method2(5.0d, 0,
-                    Method2(6.0d, 0,
-                    Method2(7.0d, 0,
-                    Method2(8.0d, 0,
-                    Method2(9.0d, 0,
-                    Method2(0.0d, 1,
-                    Method2(0.0d, 2,
-                    Method2(0.0d, 3,
-                    Method2(0.0d, 4,
-                    Method2(0.0d, 5,
-                    Method2(0.0d, 6,
-                    Method2(0.0d, 7,
-                    Method2(0.0d, 8,
-                    Method2(0.0d, 9,
-                    Method2(0.0d, 10,
-                    Method2(0.0d, 11,
-                    Method2(0.0d, 12, L
+                    Method(
+                        0.0d,
+                        0.0f,
+                        ref Method(
+                            1.0d,
+                            0.0f,
+                            ref Method(
+                                2.0d,
+                                0.0f,
+                                ref Method(
+                                    3.0d,
+                                    0.0f,
+                                    ref Method(
+                                        4.0d,
+                                        0.0f,
+                                        ref Method(
+                                            5.0d,
+                                            0.0f,
+                                            ref Method(
+                                                6.0d,
+                                                0.0f,
+                                                ref Method(
+                                                    7.0d,
+                                                    0.0f,
+                                                    ref Method(
+                                                        8.0d,
+                                                        0.0f,
+                                                        ref Method(
+                                                            9.0d,
+                                                            0.0f,
+                                                            ref Method(
+                                                                0.0d,
+                                                                1.0f,
+                                                                ref Method(
+                                                                    0.0d,
+                                                                    2.0f,
+                                                                    ref Method(
+                                                                        0.0d,
+                                                                        3.0f,
+                                                                        ref Method(
+                                                                            0.0d,
+                                                                            4.0f,
+                                                                            ref Method(
+                                                                                0.0d,
+                                                                                5.0f,
+                                                                                ref Method(
+                                                                                    0.0d,
+                                                                                    6.0f,
+                                                                                    ref Method(
+                                                                                        0.0d,
+                                                                                        7.0f,
+                                                                                        ref Method(
+                                                                                            0.0d,
+                                                                                            8.0f,
+                                                                                            ref Method(
+                                                                                                0.0d,
+                                                                                                9.0f,
+                                                                                                ref Method(
+                                                                                                    0.0d,
+                                                                                                    10.0f,
+                                                                                                    ref Method(
+                                                                                                        0.0d,
+                                                                                                        11.0f,
+                                                                                                        ref Method(
+                                                                                                            0.0d,
+                                                                                                            12.0f,
+                                                                                                            ref L
+                                                                                                        )[
+                                                                                                            1
+                                                                                                        ]
+                                                                                                    )[
+                                                                                                        2
+                                                                                                    ]
+                                                                                                )[3]
+                                                                                            )[0]
+                                                                                        )[1]
+                                                                                    )[2]
+                                                                                )[3]
+                                                                            )[2]
+                                                                        )[1]
+                                                                    )[0]
+                                                                )[0]
+                                                            )[1]
+                                                        )[2]
+                                                    )[2]
+                                                )[3]
+                                            )[2]
+                                        )[1]
+                                    )[0]
+                                )[1]
+                            )[1]
+                        )[1]
+                    )[1],
+                    0,
+                    Method2(
+                        1.0d,
+                        0,
+                        Method2(
+                            2.0d,
+                            0,
+                            Method2(
+                                3.0d,
+                                0,
+                                Method2(
+                                    4.0d,
+                                    0,
+                                    Method2(
+                                        5.0d,
+                                        0,
+                                        Method2(
+                                            6.0d,
+                                            0,
+                                            Method2(
+                                                7.0d,
+                                                0,
+                                                Method2(
+                                                    8.0d,
+                                                    0,
+                                                    Method2(
+                                                        9.0d,
+                                                        0,
+                                                        Method2(
+                                                            0.0d,
+                                                            1,
+                                                            Method2(
+                                                                0.0d,
+                                                                2,
+                                                                Method2(
+                                                                    0.0d,
+                                                                    3,
+                                                                    Method2(
+                                                                        0.0d,
+                                                                        4,
+                                                                        Method2(
+                                                                            0.0d,
+                                                                            5,
+                                                                            Method2(
+                                                                                0.0d,
+                                                                                6,
+                                                                                Method2(
+                                                                                    0.0d,
+                                                                                    7,
+                                                                                    Method2(
+                                                                                        0.0d,
+                                                                                        8,
+                                                                                        Method2(
+                                                                                            0.0d,
+                                                                                            9,
+                                                                                            Method2(
+                                                                                                0.0d,
+                                                                                                10,
+                                                                                                Method2(
+                                                                                                    0.0d,
+                                                                                                    11,
+                                                                                                    Method2(
+                                                                                                        0.0d,
+                                                                                                        12,
+                                                                                                        L
+                                                                                                    )
+                                                                                                )
+                                                                                            )
+                                                                                        )
+                                                                                    )
+                                                                                )
+                                                                            )
+                                                                        )
+                                                                    )
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
                     )
-                    )
-                    )
-                    )
-                    )
-                    )
-                    )
-                    )
-                    )
-                    )
-                    )
-                    )
-                    )
-                    )
-                    )
-                    )
-                    )
-                    )
-                    )
-                    )
-                    )
-                    );
+                );
             }
             catch
             {

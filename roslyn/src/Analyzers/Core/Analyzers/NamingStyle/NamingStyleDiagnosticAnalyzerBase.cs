@@ -19,26 +19,37 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         : AbstractBuiltInCodeStyleDiagnosticAnalyzer
         where TLanguageKindEnum : struct
     {
-        private static readonly LocalizableString s_localizableMessageFormat = new LocalizableResourceString(nameof(AnalyzersResources.Naming_rule_violation_0), AnalyzersResources.ResourceManager, typeof(AnalyzersResources));
-        private static readonly LocalizableString s_localizableTitleNamingStyle = new LocalizableResourceString(nameof(AnalyzersResources.Naming_Styles), AnalyzersResources.ResourceManager, typeof(AnalyzersResources));
+        private static readonly LocalizableString s_localizableMessageFormat =
+            new LocalizableResourceString(
+                nameof(AnalyzersResources.Naming_rule_violation_0),
+                AnalyzersResources.ResourceManager,
+                typeof(AnalyzersResources)
+            );
+        private static readonly LocalizableString s_localizableTitleNamingStyle =
+            new LocalizableResourceString(
+                nameof(AnalyzersResources.Naming_Styles),
+                AnalyzersResources.ResourceManager,
+                typeof(AnalyzersResources)
+            );
 
         protected NamingStyleDiagnosticAnalyzerBase()
-            : base(IDEDiagnosticIds.NamingRuleId,
-                   EnforceOnBuildValues.NamingRule,
-                   option: null,    // No unique option to configure the diagnosticId
-                   s_localizableTitleNamingStyle,
-                   s_localizableMessageFormat)
-        {
-        }
+            : base(
+                IDEDiagnosticIds.NamingRuleId,
+                EnforceOnBuildValues.NamingRule,
+                option: null, // No unique option to configure the diagnosticId
+                s_localizableTitleNamingStyle,
+                s_localizableMessageFormat
+            ) { }
 
-        // Applicable SymbolKind list is limited due to https://github.com/dotnet/roslyn/issues/8753. 
+        // Applicable SymbolKind list is limited due to https://github.com/dotnet/roslyn/issues/8753.
         // Locals and fields are handled by SupportedSyntaxKinds for now.
         private static readonly ImmutableArray<SymbolKind> _symbolKinds = ImmutableArray.Create(
             SymbolKind.Event,
             SymbolKind.Method,
             SymbolKind.NamedType,
             SymbolKind.Namespace,
-            SymbolKind.Property);
+            SymbolKind.Property
+        );
 
         // Workaround: RegisterSymbolAction doesn't work with locals, local functions, parameters, or type parameters.
         // see https://github.com/dotnet/roslyn/issues/14061
@@ -46,13 +57,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 
         protected abstract bool ShouldIgnore(ISymbol symbol);
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterCompilationStartAction(CompilationStartAction);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterCompilationStartAction(CompilationStartAction);
 
         private void CompilationStartAction(CompilationStartAnalysisContext context)
         {
-            var idToCachedResult = new ConcurrentDictionary<Guid, ConcurrentDictionary<string, string?>>(
-                concurrencyLevel: 2, capacity: 0);
+            var idToCachedResult = new ConcurrentDictionary<
+                Guid,
+                ConcurrentDictionary<string, string?>
+            >(concurrencyLevel: 2, capacity: 0);
 
             context.RegisterSymbolAction(SymbolAction, _symbolKinds);
             context.RegisterSyntaxNodeAction(SyntaxNodeAction, SupportedSyntaxKinds);
@@ -63,8 +76,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             void SymbolAction(SymbolAnalysisContext symbolContext)
             {
                 var sourceTree = symbolContext.Symbol.Locations.FirstOrDefault()?.SourceTree;
-                if (sourceTree == null
-                    || ShouldSkipAnalysis(sourceTree, symbolContext.Options, symbolContext.Compilation.Options, notification: null, symbolContext.CancellationToken))
+                if (
+                    sourceTree == null
+                    || ShouldSkipAnalysis(
+                        sourceTree,
+                        symbolContext.Options,
+                        symbolContext.Compilation.Options,
+                        notification: null,
+                        symbolContext.CancellationToken
+                    )
+                )
                 {
                     return;
                 }
@@ -75,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                     sourceTree,
                     symbolContext.Options,
                     idToCachedResult,
-                    symbolContext.CancellationToken);
+                    symbolContext.CancellationToken
+                );
 
                 if (diagnostic != null)
                 {
@@ -90,7 +112,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                     return;
                 }
 
-                var symbol = syntaxContext.SemanticModel.GetDeclaredSymbol(syntaxContext.Node, syntaxContext.CancellationToken);
+                var symbol = syntaxContext.SemanticModel.GetDeclaredSymbol(
+                    syntaxContext.Node,
+                    syntaxContext.CancellationToken
+                );
                 if (symbol?.Locations.FirstOrDefault()?.SourceTree is not { } sourceTree)
                 {
                     // Catch clauses don't need to have a declaration.
@@ -103,7 +128,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                     sourceTree,
                     syntaxContext.Options,
                     idToCachedResult,
-                    syntaxContext.CancellationToken);
+                    syntaxContext.CancellationToken
+                );
 
                 if (diagnostic != null)
                 {
@@ -121,14 +147,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             SyntaxTree sourceTree,
             AnalyzerOptions options,
             ConcurrentDictionary<Guid, ConcurrentDictionary<string, string?>> idToCachedResult,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (string.IsNullOrEmpty(symbol.Name))
             {
                 return null;
             }
 
-            if (symbol is IMethodSymbol methodSymbol && methodSymbol.IsEntryPoint(compilation.TaskType(), compilation.TaskOfTType()))
+            if (
+                symbol is IMethodSymbol methodSymbol
+                && methodSymbol.IsEntryPoint(compilation.TaskType(), compilation.TaskOfTType())
+            )
             {
                 return null;
             }
@@ -146,8 +176,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             var namingPreferences = options.GetAnalyzerOptions(sourceTree).NamingPreferences;
             var namingStyleRules = namingPreferences.Rules;
 
-            if (!namingStyleRules.TryGetApplicableRule(symbol, out var applicableRule) ||
-                applicableRule.EnforcementLevel == ReportDiagnostic.Suppress)
+            if (
+                !namingStyleRules.TryGetApplicableRule(symbol, out var applicableRule)
+                || applicableRule.EnforcementLevel == ReportDiagnostic.Suppress
+            )
             {
                 return null;
             }
@@ -174,10 +206,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             builder["OptionName"] = nameof(NamingStyleOptions.NamingPreferences);
             builder["OptionLanguage"] = compilation.Language;
 
-            return DiagnosticHelper.Create(Descriptor, symbol.Locations.First(), NotificationOption2.ForSeverity(applicableRule.EnforcementLevel), additionalLocations: null, builder.ToImmutable(), failureReason);
+            return DiagnosticHelper.Create(
+                Descriptor,
+                symbol.Locations.First(),
+                NotificationOption2.ForSeverity(applicableRule.EnforcementLevel),
+                additionalLocations: null,
+                builder.ToImmutable(),
+                failureReason
+            );
         }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
     }
 }

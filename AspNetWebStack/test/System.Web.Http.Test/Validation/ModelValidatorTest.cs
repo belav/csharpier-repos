@@ -11,8 +11,10 @@ namespace System.Web.Http.Validation
 {
     public class ModelValidatorTest
     {
-        private static DataAnnotationsModelMetadataProvider _metadataProvider = new DataAnnotationsModelMetadataProvider();
-        private static IEnumerable<ModelValidatorProvider> _noValidatorProviders = Enumerable.Empty<ModelValidatorProvider>();
+        private static DataAnnotationsModelMetadataProvider _metadataProvider =
+            new DataAnnotationsModelMetadataProvider();
+        private static IEnumerable<ModelValidatorProvider> _noValidatorProviders =
+            Enumerable.Empty<ModelValidatorProvider>();
 
         [Fact]
         public void ConstructorGuards()
@@ -23,14 +25,19 @@ namespace System.Web.Http.Validation
             // Act & Assert
             Assert.ThrowsArgumentNull(
                 () => new TestableModelValidator(validatorProviders: null),
-                "validatorProviders");
+                "validatorProviders"
+            );
         }
 
         [Fact]
         public void ValuesSet()
         {
             // Arrange
-            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(() => 15, typeof(string), "Length");
+            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(
+                () => 15,
+                typeof(string),
+                "Length"
+            );
 
             // Act
             TestableModelValidator validator = new TestableModelValidator(_noValidatorProviders);
@@ -43,7 +50,11 @@ namespace System.Web.Http.Validation
         public void IsRequiredFalseByDefault()
         {
             // Arrange
-            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(() => 15, typeof(string), "Length");
+            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(
+                () => 15,
+                typeof(string),
+                "Length"
+            );
 
             // Act
             TestableModelValidator validator = new TestableModelValidator(_noValidatorProviders);
@@ -56,9 +67,15 @@ namespace System.Web.Http.Validation
         public void GetModelValidator_DoesNotReadPropertyValues()
         {
             // Arrange
-            IEnumerable<ModelValidatorProvider> validatorProviders = new[] { new ObservableModelValidatorProvider() };
+            IEnumerable<ModelValidatorProvider> validatorProviders = new[]
+            {
+                new ObservableModelValidatorProvider(),
+            };
             ObservableModel model = new ObservableModel();
-            ModelMetadata metadata = new EmptyModelMetadataProvider().GetMetadataForType(() => model, typeof(ObservableModel));
+            ModelMetadata metadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                () => model,
+                typeof(ObservableModel)
+            );
 
             // Act
             ModelValidator validator = ModelValidator.GetModelValidator(validatorProviders);
@@ -70,19 +87,25 @@ namespace System.Web.Http.Validation
 
         private class ObservableModelValidatorProvider : ModelValidatorProvider
         {
-            public override IEnumerable<ModelValidator> GetValidators(ModelMetadata metadata, IEnumerable<ModelValidatorProvider> validatorProviders)
+            public override IEnumerable<ModelValidator> GetValidators(
+                ModelMetadata metadata,
+                IEnumerable<ModelValidatorProvider> validatorProviders
+            )
             {
                 return new ModelValidator[] { new ObservableModelValidator(validatorProviders) };
             }
 
             private class ObservableModelValidator : ModelValidator
             {
-                public ObservableModelValidator(IEnumerable<ModelValidatorProvider> validatorProviders)
-                    : base(validatorProviders)
-                {
-                }
+                public ObservableModelValidator(
+                    IEnumerable<ModelValidatorProvider> validatorProviders
+                )
+                    : base(validatorProviders) { }
 
-                public override IEnumerable<ModelValidationResult> Validate(ModelMetadata metadata, object container)
+                public override IEnumerable<ModelValidationResult> Validate(
+                    ModelMetadata metadata,
+                    object container
+                )
                 {
                     return Enumerable.Empty<ModelValidationResult>();
                 }
@@ -111,11 +134,12 @@ namespace System.Web.Http.Validation
         private class TestableModelValidator : ModelValidator
         {
             public TestableModelValidator(IEnumerable<ModelValidatorProvider> validatorProviders)
-                : base(validatorProviders)
-            {
-            }
+                : base(validatorProviders) { }
 
-            public override IEnumerable<ModelValidationResult> Validate(ModelMetadata metadata, object container)
+            public override IEnumerable<ModelValidationResult> Validate(
+                ModelMetadata metadata,
+                object container
+            )
             {
                 throw new NotImplementedException();
             }

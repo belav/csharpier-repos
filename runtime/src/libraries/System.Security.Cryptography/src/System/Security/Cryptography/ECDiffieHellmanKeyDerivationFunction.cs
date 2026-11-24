@@ -10,6 +10,6 @@ namespace System.Security.Cryptography
     {
         Hash,
         Hmac,
-        Tls
+        Tls,
     }
 }

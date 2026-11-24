@@ -83,10 +83,22 @@ namespace System.IO.Tests
             RunTest(writer => writer.Write(long.MaxValue), reader => reader.ReadInt64());
             RunTest(writer => writer.Write(ulong.MinValue), reader => reader.ReadUInt64());
             RunTest(writer => writer.Write(ulong.MaxValue), reader => reader.ReadUInt64());
-            RunTest(writer => writer.Write7BitEncodedInt(int.MinValue), reader => reader.Read7BitEncodedInt());
-            RunTest(writer => writer.Write7BitEncodedInt(int.MaxValue), reader => reader.Read7BitEncodedInt());
-            RunTest(writer => writer.Write7BitEncodedInt64(long.MinValue), reader => reader.Read7BitEncodedInt64());
-            RunTest(writer => writer.Write7BitEncodedInt64(long.MaxValue), reader => reader.Read7BitEncodedInt64());
+            RunTest(
+                writer => writer.Write7BitEncodedInt(int.MinValue),
+                reader => reader.Read7BitEncodedInt()
+            );
+            RunTest(
+                writer => writer.Write7BitEncodedInt(int.MaxValue),
+                reader => reader.Read7BitEncodedInt()
+            );
+            RunTest(
+                writer => writer.Write7BitEncodedInt64(long.MinValue),
+                reader => reader.Read7BitEncodedInt64()
+            );
+            RunTest(
+                writer => writer.Write7BitEncodedInt64(long.MaxValue),
+                reader => reader.Read7BitEncodedInt64()
+            );
 
             // test non-integer numeric types
 
@@ -101,11 +113,17 @@ namespace System.IO.Tests
             RunTest(writer => writer.Write(false), reader => reader.ReadBoolean());
             RunTest(writer => writer.Write(string.Empty), reader => reader.ReadString());
             RunTest(writer => writer.Write("hello world"), reader => reader.ReadString());
-            RunTest(writer => writer.Write(new string('x', 1024 * 1024)), reader => reader.ReadString());
+            RunTest(
+                writer => writer.Write(new string('x', 1024 * 1024)),
+                reader => reader.ReadString()
+            );
 
             void RunTest(Action<BinaryWriter> writeAction, Action<BinaryReader> readAction)
             {
-                UTF8Encoding encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
+                UTF8Encoding encoding = new UTF8Encoding(
+                    encoderShouldEmitUTF8Identifier: false,
+                    throwOnInvalidBytes: true
+                );
                 MemoryStream memoryStream = new MemoryStream();
 
                 // First, call the write action twice
@@ -134,7 +152,13 @@ namespace System.IO.Tests
         [Fact]
         public void BinaryReader_Read7BitEncodedInt_AllowsOverlongEncodings()
         {
-            MemoryStream memoryStream = new MemoryStream(new byte[] { 0x9F, 0x00 /* overlong */ });
+            MemoryStream memoryStream = new MemoryStream(
+                new byte[]
+                {
+                    0x9F,
+                    0x00, /* overlong */
+                }
+            );
             BinaryReader reader = new BinaryReader(memoryStream);
 
             int actual = reader.Read7BitEncodedInt();
@@ -147,7 +171,9 @@ namespace System.IO.Tests
             // Serialized form of 0b1_00000000_00000000_00000000_00000000
             //                      |0x10|| 0x80 || 0x80 || 0x80 || 0x80|
 
-            MemoryStream memoryStream = new MemoryStream(new byte[] { 0x80, 0x80, 0x80, 0x80, 0x10 });
+            MemoryStream memoryStream = new MemoryStream(
+                new byte[] { 0x80, 0x80, 0x80, 0x80, 0x10 }
+            );
             BinaryReader reader = new BinaryReader(memoryStream);
             Assert.Throws<FormatException>(() => reader.Read7BitEncodedInt());
 
@@ -161,7 +187,13 @@ namespace System.IO.Tests
         [Fact]
         public void BinaryReader_Read7BitEncodedInt64_AllowsOverlongEncodings()
         {
-            MemoryStream memoryStream = new MemoryStream(new byte[] { 0x9F, 0x00 /* overlong */ });
+            MemoryStream memoryStream = new MemoryStream(
+                new byte[]
+                {
+                    0x9F,
+                    0x00, /* overlong */
+                }
+            );
             BinaryReader reader = new BinaryReader(memoryStream);
 
             long actual = reader.Read7BitEncodedInt64();
@@ -175,13 +207,17 @@ namespace System.IO.Tests
             //                      | || 0x80| | 0x80|| 0x80 || 0x80 || 0x80 || 0x80 || 0x80 || 0x80 || 0x80|
             //                       `-- 0x02
 
-            MemoryStream memoryStream = new MemoryStream(new byte[] { 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x02 });
+            MemoryStream memoryStream = new MemoryStream(
+                new byte[] { 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x02 }
+            );
             BinaryReader reader = new BinaryReader(memoryStream);
             Assert.Throws<FormatException>(() => reader.Read7BitEncodedInt64());
 
             // 10 bytes, all with the "there's more data after this" flag set
 
-            memoryStream = new MemoryStream(new byte[] { 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80 });
+            memoryStream = new MemoryStream(
+                new byte[] { 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80 }
+            );
             reader = new BinaryReader(memoryStream);
             Assert.Throws<FormatException>(() => reader.Read7BitEncodedInt());
         }
@@ -228,7 +264,13 @@ namespace System.IO.Tests
                     return 1;
                 }
 
-                public override int GetChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex)
+                public override int GetChars(
+                    byte[] bytes,
+                    int byteIndex,
+                    int byteCount,
+                    char[] chars,
+                    int charIndex
+                )
                 {
                     return -10000000;
                 }
@@ -257,7 +299,13 @@ namespace System.IO.Tests
         [InlineData(100, 25, 50, 100, 50)]
         [InlineData(50, 0, 100, 100, 50)]
         [InlineData(0, 0, 10, 10, 0)]
-        public void Read_CharArray(int sourceSize, int index, int count, int destinationSize, int expectedReadLength)
+        public void Read_CharArray(
+            int sourceSize,
+            int index,
+            int count,
+            int destinationSize,
+            int expectedReadLength
+        )
         {
             using (var stream = CreateStream())
             {
@@ -319,7 +367,11 @@ namespace System.IO.Tests
 
             public override int Read(Span<byte> destination)
             {
-                return base.Read(destination.Length > 10 ? destination.Slice(0, destination.Length - 3) : destination);
+                return base.Read(
+                    destination.Length > 10
+                        ? destination.Slice(0, destination.Length - 3)
+                        : destination
+                );
             }
         }
 
@@ -372,7 +424,10 @@ namespace System.IO.Tests
                     int readCount = reader.Read(new Span<byte>(destination));
 
                     Assert.Equal(expectedReadLength, readCount);
-                    Assert.Equal(source.Take(expectedReadLength), destination.Take(expectedReadLength));
+                    Assert.Equal(
+                        source.Take(expectedReadLength),
+                        destination.Take(expectedReadLength)
+                    );
 
                     // Make sure we didn't write past the end
                     Assert.True(destination.Skip(expectedReadLength).All(b => b == default(byte)));
@@ -419,7 +474,10 @@ namespace System.IO.Tests
                     int readCount = reader.Read(new Span<char>(destination));
 
                     Assert.Equal(expectedReadLength, readCount);
-                    Assert.Equal(source.Take(expectedReadLength), destination.Take(expectedReadLength));
+                    Assert.Equal(
+                        source.Take(expectedReadLength),
+                        destination.Take(expectedReadLength)
+                    );
 
                     // Make sure we didn't write past the end
                     Assert.True(destination.Skip(expectedReadLength).All(b => b == default(char)));
@@ -440,7 +498,8 @@ namespace System.IO.Tests
 
         private class DerivedBinaryReader : BinaryReader
         {
-            public DerivedBinaryReader(Stream input) : base(input) { }
+            public DerivedBinaryReader(Stream input)
+                : base(input) { }
 
             public void CallFillBuffer0()
             {

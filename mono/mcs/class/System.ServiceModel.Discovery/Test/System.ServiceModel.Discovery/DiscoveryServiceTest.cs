@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,51 +35,94 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Discovery
 {
-	[TestFixture]
-	public class DiscoveryServiceTest
-	{
-		[Test]
-		public void ContractInterfaceManaged ()
-		{
-			// This will raise IOE if DiscoveryService does not implement any of the contract interfaces.
-			var host = new ServiceHost (typeof (DiscoveryService));
-			host.AddServiceEndpoint (new DiscoveryEndpoint (DiscoveryVersion.WSDiscovery11, ServiceDiscoveryMode.Managed, new BasicHttpBinding (), new EndpointAddress ("http://localhost:8080")));
-			host.AddServiceEndpoint (new DiscoveryEndpoint (DiscoveryVersion.WSDiscoveryApril2005, ServiceDiscoveryMode.Managed, new BasicHttpBinding (), new EndpointAddress ("http://localhost:8081")));
-			host.AddServiceEndpoint (new DiscoveryEndpoint (DiscoveryVersion.WSDiscoveryCD1, ServiceDiscoveryMode.Managed, new BasicHttpBinding (), new EndpointAddress ("http://localhost:8082")));
+    [TestFixture]
+    public class DiscoveryServiceTest
+    {
+        [Test]
+        public void ContractInterfaceManaged()
+        {
+            // This will raise IOE if DiscoveryService does not implement any of the contract interfaces.
+            var host = new ServiceHost(typeof(DiscoveryService));
+            host.AddServiceEndpoint(
+                new DiscoveryEndpoint(
+                    DiscoveryVersion.WSDiscovery11,
+                    ServiceDiscoveryMode.Managed,
+                    new BasicHttpBinding(),
+                    new EndpointAddress("http://localhost:8080")
+                )
+            );
+            host.AddServiceEndpoint(
+                new DiscoveryEndpoint(
+                    DiscoveryVersion.WSDiscoveryApril2005,
+                    ServiceDiscoveryMode.Managed,
+                    new BasicHttpBinding(),
+                    new EndpointAddress("http://localhost:8081")
+                )
+            );
+            host.AddServiceEndpoint(
+                new DiscoveryEndpoint(
+                    DiscoveryVersion.WSDiscoveryCD1,
+                    ServiceDiscoveryMode.Managed,
+                    new BasicHttpBinding(),
+                    new EndpointAddress("http://localhost:8082")
+                )
+            );
 
-			var v11 = host.Description.Endpoints.FirstOrDefault (ep => ep.Contract.Namespace == "http://docs.oasis-open.org/ws-dd/ns/discovery/2009/01");
-			Assert.IsNotNull (v11, "v11");
-			Assert.AreEqual ("BasicHttpBinding_DiscoveryProxy", v11.Name, "v11.Name");
+            var v11 = host.Description.Endpoints.FirstOrDefault(ep =>
+                ep.Contract.Namespace == "http://docs.oasis-open.org/ws-dd/ns/discovery/2009/01"
+            );
+            Assert.IsNotNull(v11, "v11");
+            Assert.AreEqual("BasicHttpBinding_DiscoveryProxy", v11.Name, "v11.Name");
 
-			var v200504 = host.Description.Endpoints.FirstOrDefault (ep => ep.Contract.Namespace == "http://schemas.xmlsoap.org/ws/2005/04/discovery");
-			Assert.IsNotNull (v200504, "v200504");
-			Assert.AreEqual ("BasicHttpBinding_DiscoveryProxy", v200504.Name, "v200504.Name");
+            var v200504 = host.Description.Endpoints.FirstOrDefault(ep =>
+                ep.Contract.Namespace == "http://schemas.xmlsoap.org/ws/2005/04/discovery"
+            );
+            Assert.IsNotNull(v200504, "v200504");
+            Assert.AreEqual("BasicHttpBinding_DiscoveryProxy", v200504.Name, "v200504.Name");
 
-			var vCD1 = host.Description.Endpoints.FirstOrDefault (ep => ep.Contract.Namespace == "http://docs.oasis-open.org/ws-dd/ns/discovery/2008/09");
-			Assert.IsNotNull (vCD1, "vCD1");
-			Assert.AreEqual ("BasicHttpBinding_DiscoveryProxy", vCD1.Name, "v11.Name");
-		}
+            var vCD1 = host.Description.Endpoints.FirstOrDefault(ep =>
+                ep.Contract.Namespace == "http://docs.oasis-open.org/ws-dd/ns/discovery/2008/09"
+            );
+            Assert.IsNotNull(vCD1, "vCD1");
+            Assert.AreEqual("BasicHttpBinding_DiscoveryProxy", vCD1.Name, "v11.Name");
+        }
 
-		[Test]
-		public void ContractInterfaceAdhoc ()
-		{
-			// This will raise IOE if DiscoveryService does not implement any of the contract interfaces.
-			var host = new ServiceHost (typeof (DiscoveryService));
-			host.AddServiceEndpoint (new UdpDiscoveryEndpoint (DiscoveryVersion.WSDiscovery11));
-			host.AddServiceEndpoint (new UdpDiscoveryEndpoint (DiscoveryVersion.WSDiscoveryApril2005, "soap.udp://239.255.255.250:3703/"));
-			host.AddServiceEndpoint (new UdpDiscoveryEndpoint (DiscoveryVersion.WSDiscoveryCD1, "soap.udp://239.255.255.250:3704/"));
+        [Test]
+        public void ContractInterfaceAdhoc()
+        {
+            // This will raise IOE if DiscoveryService does not implement any of the contract interfaces.
+            var host = new ServiceHost(typeof(DiscoveryService));
+            host.AddServiceEndpoint(new UdpDiscoveryEndpoint(DiscoveryVersion.WSDiscovery11));
+            host.AddServiceEndpoint(
+                new UdpDiscoveryEndpoint(
+                    DiscoveryVersion.WSDiscoveryApril2005,
+                    "soap.udp://239.255.255.250:3703/"
+                )
+            );
+            host.AddServiceEndpoint(
+                new UdpDiscoveryEndpoint(
+                    DiscoveryVersion.WSDiscoveryCD1,
+                    "soap.udp://239.255.255.250:3704/"
+                )
+            );
 
-			var v11 = host.Description.Endpoints.FirstOrDefault (ep => ep.Contract.Namespace == "http://docs.oasis-open.org/ws-dd/ns/discovery/2009/01");
-			Assert.IsNotNull (v11, "v11");
-			Assert.AreEqual ("CustomBinding_TargetService", v11.Name, "v11.Name");
+            var v11 = host.Description.Endpoints.FirstOrDefault(ep =>
+                ep.Contract.Namespace == "http://docs.oasis-open.org/ws-dd/ns/discovery/2009/01"
+            );
+            Assert.IsNotNull(v11, "v11");
+            Assert.AreEqual("CustomBinding_TargetService", v11.Name, "v11.Name");
 
-			var v200504 = host.Description.Endpoints.FirstOrDefault (ep => ep.Contract.Namespace == "http://schemas.xmlsoap.org/ws/2005/04/discovery");
-			Assert.IsNotNull (v200504, "v200504");
-			Assert.AreEqual ("CustomBinding_TargetService", v200504.Name, "v200504.Name");
+            var v200504 = host.Description.Endpoints.FirstOrDefault(ep =>
+                ep.Contract.Namespace == "http://schemas.xmlsoap.org/ws/2005/04/discovery"
+            );
+            Assert.IsNotNull(v200504, "v200504");
+            Assert.AreEqual("CustomBinding_TargetService", v200504.Name, "v200504.Name");
 
-			var vCD1 = host.Description.Endpoints.FirstOrDefault (ep => ep.Contract.Namespace == "http://docs.oasis-open.org/ws-dd/ns/discovery/2008/09");
-			Assert.IsNotNull (vCD1, "vCD1");
-			Assert.AreEqual ("CustomBinding_TargetService", vCD1.Name, "v11.Name");
-		}
-	}
+            var vCD1 = host.Description.Endpoints.FirstOrDefault(ep =>
+                ep.Contract.Namespace == "http://docs.oasis-open.org/ws-dd/ns/discovery/2008/09"
+            );
+            Assert.IsNotNull(vCD1, "vCD1");
+            Assert.AreEqual("CustomBinding_TargetService", vCD1.Name, "v11.Name");
+        }
+    }
 }

@@ -13,7 +13,8 @@ namespace System.Activities
         public static class Runtime
         {
             // commonly used pieces of data
-            public const string Namespace = "http://schemas.datacontract.org/2010/02/System.Activities";
+            public const string Namespace =
+                "http://schemas.datacontract.org/2010/02/System.Activities";
             public const string BookmarkManager = "BookmarkManager";
             public const string ActivityInstanceMap = "InstanceMap";
             public const string Scheduler = "Scheduler";
@@ -72,5 +73,3 @@ namespace System.Activities
         }
     }
 }
-
-

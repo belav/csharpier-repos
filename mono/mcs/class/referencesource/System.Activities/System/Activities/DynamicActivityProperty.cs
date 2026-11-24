@@ -14,9 +14,7 @@ namespace System.Activities
     {
         Collection<Attribute> attributes;
 
-        public DynamicActivityProperty()
-        {
-        }
+        public DynamicActivityProperty() { }
 
         public Collection<Attribute> Attributes
         {
@@ -31,27 +29,18 @@ namespace System.Activities
         }
 
         [DefaultValue(null)]
-        public string Name
-        {
-            get;
-            set;
-        }
+        public string Name { get; set; }
 
         [DefaultValue(null)]
-        [SuppressMessage(FxCop.Category.Naming, FxCop.Rule.PropertyNamesShouldNotMatchGetMethods, 
-            Justification = "Workflow normalizes on Type for Type properties")]
-        public Type Type
-        {
-            get;
-            set;
-        }
+        [SuppressMessage(
+            FxCop.Category.Naming,
+            FxCop.Rule.PropertyNamesShouldNotMatchGetMethods,
+            Justification = "Workflow normalizes on Type for Type properties"
+        )]
+        public Type Type { get; set; }
 
         [DefaultValue(null)]
-        public object Value
-        {
-            get;
-            set;
-        }
+        public object Value { get; set; }
 
         public override string ToString()
         {

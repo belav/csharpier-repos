@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -11,9 +12,14 @@ namespace Test
     {
         public static sbyte m_sb = 0;
     }
+
     public struct CC
     {
-        float Method1() { return 0; }
+        float Method1()
+        {
+            return 0;
+        }
+
         [Fact]
         public static void TestEntryPoint()
         {

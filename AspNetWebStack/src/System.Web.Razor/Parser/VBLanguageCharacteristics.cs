@@ -9,13 +9,13 @@ using System.Web.Razor.Tokenizer.Symbols;
 
 namespace System.Web.Razor.Parser
 {
-    public class VBLanguageCharacteristics : LanguageCharacteristics<VBTokenizer, VBSymbol, VBSymbolType>
+    public class VBLanguageCharacteristics
+        : LanguageCharacteristics<VBTokenizer, VBSymbol, VBSymbolType>
     {
-        private static readonly VBLanguageCharacteristics _instance = new VBLanguageCharacteristics();
+        private static readonly VBLanguageCharacteristics _instance =
+            new VBLanguageCharacteristics();
 
-        private VBLanguageCharacteristics()
-        {
-        }
+        private VBLanguageCharacteristics() { }
 
         public static VBLanguageCharacteristics Instance
         {
@@ -83,7 +83,12 @@ namespace System.Web.Razor.Parser
             }
         }
 
-        protected override VBSymbol CreateSymbol(SourceLocation location, string content, VBSymbolType type, IEnumerable<RazorError> errors)
+        protected override VBSymbol CreateSymbol(
+            SourceLocation location,
+            string content,
+            VBSymbolType type,
+            IEnumerable<RazorError> errors
+        )
         {
             return new VBSymbol(location, content, type, errors);
         }

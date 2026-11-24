@@ -30,21 +30,23 @@ using System.Collections.Generic;
 
 namespace System.Net.Http.Headers
 {
-	static class HashCodeCalculator
-	{
-		public static int Calculate<T> (ICollection<T> list)
-		{
-			if (list == null)
-				return 0;
+    static class HashCodeCalculator
+    {
+        public static int Calculate<T>(ICollection<T> list)
+        {
+            if (list == null)
+                return 0;
 
-			int hash = 17;
-			foreach (var item in list) {
-				unchecked {
-					hash = hash * 29 + item.GetHashCode ();
-				}
-			}
+            int hash = 17;
+            foreach (var item in list)
+            {
+                unchecked
+                {
+                    hash = hash * 29 + item.GetHashCode();
+                }
+            }
 
-			return hash;
-		}
-	}
+            return hash;
+        }
+    }
 }

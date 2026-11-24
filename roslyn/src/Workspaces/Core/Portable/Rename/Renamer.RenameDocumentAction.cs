@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.Rename
         /// Individual action from RenameDocument APIs in <see cref="Renamer"/>. Represents
         /// changes that will be done to one or more document contents to help facilitate
         /// a smooth experience while moving documents around.
-        /// 
+        ///
         /// See <see cref="RenameDocumentActionSet" /> on use case and how to apply them to a solution.
         /// </summary>
         public abstract class RenameDocumentAction
@@ -32,8 +32,16 @@ namespace Microsoft.CodeAnalysis.Rename
             /// Get any errors that have been noted for this action before it is applied.
             /// Can be used to present to a user.
             /// </summary>
-            public ImmutableArray<string> GetErrors(CultureInfo? culture = null)
-                => _errorStringKeys.SelectAsArray(s => string.Format(WorkspacesResources.ResourceManager.GetString(s.FormatString, culture ?? WorkspacesResources.Culture)!, s.Arguments));
+            public ImmutableArray<string> GetErrors(CultureInfo? culture = null) =>
+                _errorStringKeys.SelectAsArray(s =>
+                    string.Format(
+                        WorkspacesResources.ResourceManager.GetString(
+                            s.FormatString,
+                            culture ?? WorkspacesResources.Culture
+                        )!,
+                        s.Arguments
+                    )
+                );
 
             /// <summary>
             /// Gets the description of the action. Can be used to present to a user to describe
@@ -41,7 +49,11 @@ namespace Microsoft.CodeAnalysis.Rename
             /// </summary>
             public abstract string GetDescription(CultureInfo? culture = null);
 
-            internal abstract Task<Solution> GetModifiedSolutionAsync(Document document, DocumentRenameOptions options, CancellationToken cancellationToken);
+            internal abstract Task<Solution> GetModifiedSolutionAsync(
+                Document document,
+                DocumentRenameOptions options,
+                CancellationToken cancellationToken
+            );
 
             internal readonly struct ErrorResource(string formatString, object[] arguments)
             {

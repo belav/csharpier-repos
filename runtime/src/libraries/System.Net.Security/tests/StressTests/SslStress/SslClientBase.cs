@@ -14,7 +14,6 @@ using SslStress.Utils;
 
 namespace SslStress
 {
-
     public abstract partial class SslClientBase : IAsyncDisposable
     {
         protected readonly Configuration _config;
@@ -26,21 +25,37 @@ namespace SslStress
 
         public SslClientBase(Configuration config)
         {
-            if (config.MaxConnections < 1) throw new ArgumentOutOfRangeException(nameof(config.MaxConnections));
+            if (config.MaxConnections < 1)
+                throw new ArgumentOutOfRangeException(nameof(config.MaxConnections));
 
             _config = config;
             _aggregator = new StressResultAggregator(config.MaxConnections);
             _clientTask = new Lazy<Task>(Task.Run(StartCore));
         }
 
-        protected abstract Task HandleConnection(int workerId, long jobId, SslStream stream, TcpClient client, Random random, TimeSpan duration, CancellationToken token);
+        protected abstract Task HandleConnection(
+            int workerId,
+            long jobId,
+            SslStream stream,
+            TcpClient client,
+            Random random,
+            TimeSpan duration,
+            CancellationToken token
+        );
 
-        protected virtual async Task<SslStream> EstablishSslStream(Stream networkStream, Random random, CancellationToken token)
+        protected virtual async Task<SslStream> EstablishSslStream(
+            Stream networkStream,
+            Random random,
+            CancellationToken token
+        )
         {
             var sslStream = new SslStream(networkStream, leaveInnerStreamOpen: false);
             var clientOptions = new SslClientAuthenticationOptions
             {
-                ApplicationProtocols = new List<SslApplicationProtocol> { SslApplicationProtocol.Http11 },
+                ApplicationProtocols = new List<SslApplicationProtocol>
+                {
+                    SslApplicationProtocol.Http11,
+                },
                 RemoteCertificateValidationCallback = ((x, y, z, w) => true),
                 TargetHost = SslServerBase.Hostname,
             };
@@ -53,7 +68,8 @@ namespace SslStress
 
         public void Start()
         {
-            if (_cts.IsCancellationRequested) throw new ObjectDisposedException(nameof(SslClientBase));
+            if (_cts.IsCancellationRequested)
+                throw new ObjectDisposedException(nameof(SslClientBase));
             _ = _clientTask.Value;
         }
 
@@ -67,7 +83,8 @@ namespace SslStress
         {
             get
             {
-                if (!_clientTask.IsValueCreated) throw new InvalidOperationException("Client has not been started yet");
+                if (!_clientTask.IsValueCreated)
+                    throw new InvalidOperationException("Client has not been started yet");
                 return _clientTask.Value;
             }
         }
@@ -84,12 +101,21 @@ namespace SslStress
                 while (!_cts.IsCancellationRequested)
                 {
                     Thread.Sleep(_config.DisplayInterval);
-                    lock (Console.Out) { _aggregator.PrintCurrentResults(_stopwatch.Elapsed, showAggregatesOnly: false); }
+                    lock (Console.Out)
+                    {
+                        _aggregator.PrintCurrentResults(
+                            _stopwatch.Elapsed,
+                            showAggregatesOnly: false
+                        );
+                    }
                 }
             })
-            { IsBackground = true }.Start();
+            {
+                IsBackground = true,
+            }.Start();
 
-            IEnumerable<Task> workers = CreateWorkerSeeds().Select(x => RunSingleWorker(x.workerId, x.random));
+            IEnumerable<Task> workers = CreateWorkerSeeds()
+                .Select(x => RunSingleWorker(x.workerId, x.random));
             return Task.WhenAll(workers);
 
             async Task RunSingleWorker(int workerId, Random random)
@@ -98,11 +124,15 @@ namespace SslStress
 
                 for (long jobId = 0; !_cts.IsCancellationRequested; jobId++)
                 {
-                    TimeSpan connectionLifetime = _config.MinConnectionLifetime + random.NextDouble() * (_config.MaxConnectionLifetime - _config.MinConnectionLifetime);
+                    TimeSpan connectionLifetime =
+                        _config.MinConnectionLifetime
+                        + random.NextDouble()
+                            * (_config.MaxConnectionLifetime - _config.MinConnectionLifetime);
                     TimeSpan cancellationDelay =
-                        (random.NextBoolean(probability: _config.CancellationProbability)) ?
-                        connectionLifetime * random.NextDouble() : // cancel in a random interval within the lifetime
-                        connectionLifetime + TimeSpan.FromSeconds(10); // otherwise trigger cancellation 10 seconds after expected expiry
+                        (random.NextBoolean(probability: _config.CancellationProbability))
+                            ? connectionLifetime * random.NextDouble()
+                            : // cancel in a random interval within the lifetime
+                            connectionLifetime + TimeSpan.FromSeconds(10); // otherwise trigger cancellation 10 seconds after expected expiry
 
                     using var cts = CancellationTokenSource.CreateLinkedTokenSource(_cts.Token);
                     cts.CancelAfter(cancellationDelay);
@@ -113,10 +143,25 @@ namespace SslStress
                     try
                     {
                         using var client = new TcpClient();
-                        await client.ConnectAsync(_config.ServerEndpoint.Address, _config.ServerEndpoint.Port);
+                        await client.ConnectAsync(
+                            _config.ServerEndpoint.Address,
+                            _config.ServerEndpoint.Port
+                        );
                         var stream = new CountingStream(client.GetStream(), counter);
-                        using SslStream sslStream = await EstablishSslStream(stream, random, cts.Token);
-                        await HandleConnection(workerId, jobId, sslStream, client, random, connectionLifetime, cts.Token);
+                        using SslStream sslStream = await EstablishSslStream(
+                            stream,
+                            random,
+                            cts.Token
+                        );
+                        await HandleConnection(
+                            workerId,
+                            jobId,
+                            sslStream,
+                            client,
+                            random,
+                            connectionLifetime,
+                            cts.Token
+                        );
 
                         _aggregator.RecordSuccess(workerId);
                     }
@@ -136,12 +181,14 @@ namespace SslStress
                     async void CheckForStalledConnection()
                     {
                         await Task.Delay(10_000);
-                        if(!isTestCompleted)
+                        if (!isTestCompleted)
                         {
                             lock (Console.Out)
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine($"Worker #{workerId} test #{jobId} has stalled, terminating the stress app.");
+                                Console.WriteLine(
+                                    $"Worker #{workerId} test #{jobId} has stalled, terminating the stress app."
+                                );
                                 Console.WriteLine();
                                 Console.ResetColor();
                             }

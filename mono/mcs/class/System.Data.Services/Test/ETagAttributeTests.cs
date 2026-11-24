@@ -31,38 +31,40 @@ using System.Data.Services;
 using System.Linq;
 using NUnit.Framework;
 
-namespace MonoTests.System.Data.Services {
-	[TestFixture]
-	public class ETagAttributeTests {
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void CtorPropertyNameNull()
-		{
-			new ETagAttribute ((string)null);
-		}
+namespace MonoTests.System.Data.Services
+{
+    [TestFixture]
+    public class ETagAttributeTests
+    {
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CtorPropertyNameNull()
+        {
+            new ETagAttribute((string)null);
+        }
 
-		[Test]
-		public void CtorPropertyName()
-		{
-			var e = new ETagAttribute ("tag");
-			Assert.AreEqual (1, e.PropertyNames.Count);
-			Assert.AreEqual ("tag", e.PropertyNames.First());
-		}
+        [Test]
+        public void CtorPropertyName()
+        {
+            var e = new ETagAttribute("tag");
+            Assert.AreEqual(1, e.PropertyNames.Count);
+            Assert.AreEqual("tag", e.PropertyNames.First());
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void CtorPropertyNamesNull()
-		{
-			new ETagAttribute ((string[])null);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CtorPropertyNamesNull()
+        {
+            new ETagAttribute((string[])null);
+        }
 
-		[Test]
-		public void CtorPropertyNames()
-		{
-			var e = new ETagAttribute (new[] { "foo", "bar" });
-			Assert.AreEqual (2, e.PropertyNames.Count);
-			Assert.AreEqual ("foo", e.PropertyNames[0]);
-			Assert.AreEqual ("bar", e.PropertyNames[1]);
-		}
-	}
+        [Test]
+        public void CtorPropertyNames()
+        {
+            var e = new ETagAttribute(new[] { "foo", "bar" });
+            Assert.AreEqual(2, e.PropertyNames.Count);
+            Assert.AreEqual("foo", e.PropertyNames[0]);
+            Assert.AreEqual("bar", e.PropertyNames[1]);
+        }
+    }
 }

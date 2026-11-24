@@ -8,7 +8,9 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
 {
-    internal class SyncNamespaceDocumentsNotInSolutionException(ImmutableArray<DocumentId> documentIds) : Exception
+    internal class SyncNamespaceDocumentsNotInSolutionException(
+        ImmutableArray<DocumentId> documentIds
+    ) : Exception
     {
         private readonly ImmutableArray<DocumentId> _documentIds = documentIds;
 
@@ -17,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
             using var _ = PooledStringBuilder.GetInstance(out var builder);
             foreach (var documentId in _documentIds)
             {
-                builder.AppendLine($"{documentId.GetDebuggerDisplay()}, IsSourceGeneratedDocument: {documentId.IsSourceGenerated}");
+                builder.AppendLine(
+                    $"{documentId.GetDebuggerDisplay()}, IsSourceGeneratedDocument: {documentId.IsSourceGenerated}"
+                );
             }
 
             return builder.ToString();

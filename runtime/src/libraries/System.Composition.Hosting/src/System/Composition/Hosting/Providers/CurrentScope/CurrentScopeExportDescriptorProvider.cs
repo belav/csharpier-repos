@@ -8,19 +8,27 @@ namespace System.Composition.Hosting.Providers.CurrentScope
 {
     internal sealed class CurrentScopeExportDescriptorProvider : ExportDescriptorProvider
     {
-        private static readonly CompositionContract s_currentScopeContract = new CompositionContract(typeof(CompositionContext));
+        private static readonly CompositionContract s_currentScopeContract =
+            new CompositionContract(typeof(CompositionContext));
 
-        public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(CompositionContract contract, DependencyAccessor definitionAccessor)
+        public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
+            CompositionContract contract,
+            DependencyAccessor definitionAccessor
+        )
         {
             if (!contract.Equals(s_currentScopeContract))
                 return NoExportDescriptors;
 
-            return new[] { new ExportDescriptorPromise(
-                contract,
-                nameof(CompositionContext),
-                true,
-                NoDependencies,
-                _ => ExportDescriptor.Create((c, o) => c, NoMetadata)) };
+            return new[]
+            {
+                new ExportDescriptorPromise(
+                    contract,
+                    nameof(CompositionContext),
+                    true,
+                    NoDependencies,
+                    _ => ExportDescriptor.Create((c, o) => c, NoMetadata)
+                ),
+            };
         }
     }
 }

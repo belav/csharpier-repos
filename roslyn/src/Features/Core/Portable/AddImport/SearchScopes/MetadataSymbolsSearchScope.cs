@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             Project assemblyProject,
             IAssemblySymbol assembly,
             PortableExecutableReference metadataReference,
-            bool exact) : SearchScope(provider, exact)
+            bool exact
+        ) : SearchScope(provider, exact)
         {
             private readonly Project _assemblyProject = assemblyProject;
             private readonly IAssemblySymbol _assembly = assembly;
@@ -29,19 +30,35 @@ namespace Microsoft.CodeAnalysis.AddImport
                     provider,
                     searchResult.WithSymbol<INamespaceOrTypeSymbol>(searchResult.Symbol),
                     _assemblyProject.Id,
-                    _metadataReference);
+                    _metadataReference
+                );
             }
 
             protected override async Task<ImmutableArray<ISymbol>> FindDeclarationsAsync(
-                SymbolFilter filter, SearchQuery searchQuery, CancellationToken cancellationToken)
+                SymbolFilter filter,
+                SearchQuery searchQuery,
+                CancellationToken cancellationToken
+            )
             {
-                var service = _assemblyProject.Solution.Services.GetRequiredService<ISymbolTreeInfoCacheService>();
-                var info = await service.TryGetPotentiallyStaleMetadataSymbolTreeInfoAsync(_assemblyProject, _metadataReference, cancellationToken).ConfigureAwait(false);
+                var service =
+                    _assemblyProject.Solution.Services.GetRequiredService<ISymbolTreeInfoCacheService>();
+                var info = await service
+                    .TryGetPotentiallyStaleMetadataSymbolTreeInfoAsync(
+                        _assemblyProject,
+                        _metadataReference,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (info == null)
                     return ImmutableArray<ISymbol>.Empty;
 
                 var declarations = await info.FindAsync(
-                    searchQuery, _assembly, filter, cancellationToken).ConfigureAwait(false);
+                        searchQuery,
+                        _assembly,
+                        filter,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 return declarations;
             }

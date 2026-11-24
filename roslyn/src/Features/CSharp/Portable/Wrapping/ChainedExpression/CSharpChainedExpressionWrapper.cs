@@ -11,15 +11,14 @@ using Microsoft.CodeAnalysis.Wrapping.ChainedExpression;
 
 namespace Microsoft.CodeAnalysis.CSharp.Wrapping.ChainedExpression
 {
-    internal class CSharpChainedExpressionWrapper :
-        AbstractChainedExpressionWrapper<NameSyntax, BaseArgumentListSyntax>
+    internal class CSharpChainedExpressionWrapper
+        : AbstractChainedExpressionWrapper<NameSyntax, BaseArgumentListSyntax>
     {
         public CSharpChainedExpressionWrapper()
-            : base(CSharpIndentationService.Instance, CSharpSyntaxFacts.Instance)
-        {
-        }
+            : base(CSharpIndentationService.Instance, CSharpSyntaxFacts.Instance) { }
 
-        protected override SyntaxTriviaList GetNewLineBeforeOperatorTrivia(SyntaxTriviaList newLine)
-            => newLine;
+        protected override SyntaxTriviaList GetNewLineBeforeOperatorTrivia(
+            SyntaxTriviaList newLine
+        ) => newLine;
     }
 }

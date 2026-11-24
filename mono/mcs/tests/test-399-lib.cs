@@ -2,138 +2,149 @@
 
 using System;
 
-public struct Result {
-	public int res;
-	// big enough that it won't be returned in registers
-	double duh;
-	long bah;
+public struct Result
+{
+    public int res;
 
-	public Result (int val) {
-		res = val;
-		bah = val;
-		duh = val;
-	}
+    // big enough that it won't be returned in registers
+    double duh;
+    long bah;
+
+    public Result(int val)
+    {
+        res = val;
+        bah = val;
+        duh = val;
+    }
 }
 
 public class Vararg
 {
-	public static int AddABunchOfInts (__arglist)
-	{
-		int result = 0;
+    public static int AddABunchOfInts(__arglist)
+    {
+        int result = 0;
 
-		System.ArgIterator iter = new System.ArgIterator (__arglist);
-		int argCount = iter.GetRemainingCount();
+        System.ArgIterator iter = new System.ArgIterator(__arglist);
+        int argCount = iter.GetRemainingCount();
 
-		for (int i = 0; i < argCount; i++) {
-			System.TypedReference typedRef = iter.GetNextArg();
-			result += (int)TypedReference.ToObject( typedRef );
-		}
-		
-		return result;
-	}
+        for (int i = 0; i < argCount; i++)
+        {
+            System.TypedReference typedRef = iter.GetNextArg();
+            result += (int)TypedReference.ToObject(typedRef);
+        }
 
-	public static int AddASecondBunchOfInts (int a, __arglist)
-	{
-		int result = 0;
+        return result;
+    }
 
-		System.ArgIterator iter = new System.ArgIterator (__arglist);
-		int argCount = iter.GetRemainingCount();
+    public static int AddASecondBunchOfInts(int a, __arglist)
+    {
+        int result = 0;
 
-		for (int i = 0; i < argCount; i++) {
-			System.TypedReference typedRef = iter.GetNextArg();
-			result += (int)TypedReference.ToObject( typedRef );
-		}
-		
-		return result;
-	}
+        System.ArgIterator iter = new System.ArgIterator(__arglist);
+        int argCount = iter.GetRemainingCount();
 
-	public static Result VtAddABunchOfInts (__arglist)
-	{
-		int result = 0;
+        for (int i = 0; i < argCount; i++)
+        {
+            System.TypedReference typedRef = iter.GetNextArg();
+            result += (int)TypedReference.ToObject(typedRef);
+        }
 
-		System.ArgIterator iter = new System.ArgIterator (__arglist);
-		int argCount = iter.GetRemainingCount();
+        return result;
+    }
 
-		for (int i = 0; i < argCount; i++) {
-			System.TypedReference typedRef = iter.GetNextArg();
-			result += (int)TypedReference.ToObject( typedRef );
-		}
-		
-		return new Result (result);
-	}
+    public static Result VtAddABunchOfInts(__arglist)
+    {
+        int result = 0;
 
-	public static Result VtAddASecondBunchOfInts (int a, __arglist)
-	{
-		int result = 0;
+        System.ArgIterator iter = new System.ArgIterator(__arglist);
+        int argCount = iter.GetRemainingCount();
 
-		System.ArgIterator iter = new System.ArgIterator (__arglist);
-		int argCount = iter.GetRemainingCount();
+        for (int i = 0; i < argCount; i++)
+        {
+            System.TypedReference typedRef = iter.GetNextArg();
+            result += (int)TypedReference.ToObject(typedRef);
+        }
 
-		for (int i = 0; i < argCount; i++) {
-			System.TypedReference typedRef = iter.GetNextArg();
-			result += (int)TypedReference.ToObject( typedRef );
-		}
-		
-		return new Result (result);
-	}
+        return new Result(result);
+    }
 
-	public int InstAddABunchOfInts (__arglist)
-	{
-		int result = 0;
+    public static Result VtAddASecondBunchOfInts(int a, __arglist)
+    {
+        int result = 0;
 
-		System.ArgIterator iter = new System.ArgIterator (__arglist);
-		int argCount = iter.GetRemainingCount();
+        System.ArgIterator iter = new System.ArgIterator(__arglist);
+        int argCount = iter.GetRemainingCount();
 
-		for (int i = 0; i < argCount; i++) {
-			System.TypedReference typedRef = iter.GetNextArg();
-			result += (int)TypedReference.ToObject( typedRef );
-		}
-		
-		return result;
-	}
+        for (int i = 0; i < argCount; i++)
+        {
+            System.TypedReference typedRef = iter.GetNextArg();
+            result += (int)TypedReference.ToObject(typedRef);
+        }
 
-	public int InstAddASecondBunchOfInts (int a, __arglist)
-	{
-		int result = 0;
+        return new Result(result);
+    }
 
-		System.ArgIterator iter = new System.ArgIterator (__arglist);
-		int argCount = iter.GetRemainingCount();
+    public int InstAddABunchOfInts(__arglist)
+    {
+        int result = 0;
 
-		for (int i = 0; i < argCount; i++) {
-			System.TypedReference typedRef = iter.GetNextArg();
-			result += (int)TypedReference.ToObject( typedRef );
-		}
-		
-		return result;
-	}
+        System.ArgIterator iter = new System.ArgIterator(__arglist);
+        int argCount = iter.GetRemainingCount();
 
-	public Result InstVtAddABunchOfInts (__arglist)
-	{
-		int result = 0;
+        for (int i = 0; i < argCount; i++)
+        {
+            System.TypedReference typedRef = iter.GetNextArg();
+            result += (int)TypedReference.ToObject(typedRef);
+        }
 
-		System.ArgIterator iter = new System.ArgIterator (__arglist);
-		int argCount = iter.GetRemainingCount();
+        return result;
+    }
 
-		for (int i = 0; i < argCount; i++) {
-			System.TypedReference typedRef = iter.GetNextArg();
-			result += (int)TypedReference.ToObject( typedRef );
-		}
-		
-		return new Result (result);
-	}
+    public int InstAddASecondBunchOfInts(int a, __arglist)
+    {
+        int result = 0;
 
-	public Result InstVtAddASecondBunchOfInts (int a, __arglist)
-	{
-		int result = 0;
+        System.ArgIterator iter = new System.ArgIterator(__arglist);
+        int argCount = iter.GetRemainingCount();
 
-		System.ArgIterator iter = new System.ArgIterator (__arglist);
-		int argCount = iter.GetRemainingCount();
+        for (int i = 0; i < argCount; i++)
+        {
+            System.TypedReference typedRef = iter.GetNextArg();
+            result += (int)TypedReference.ToObject(typedRef);
+        }
 
-		for (int i = 0; i < argCount; i++) {
-			System.TypedReference typedRef = iter.GetNextArg();
-			result += (int)TypedReference.ToObject( typedRef );
-		}
-		
-		return new Result (result);
-	}
+        return result;
+    }
+
+    public Result InstVtAddABunchOfInts(__arglist)
+    {
+        int result = 0;
+
+        System.ArgIterator iter = new System.ArgIterator(__arglist);
+        int argCount = iter.GetRemainingCount();
+
+        for (int i = 0; i < argCount; i++)
+        {
+            System.TypedReference typedRef = iter.GetNextArg();
+            result += (int)TypedReference.ToObject(typedRef);
+        }
+
+        return new Result(result);
+    }
+
+    public Result InstVtAddASecondBunchOfInts(int a, __arglist)
+    {
+        int result = 0;
+
+        System.ArgIterator iter = new System.ArgIterator(__arglist);
+        int argCount = iter.GetRemainingCount();
+
+        for (int i = 0; i < argCount; i++)
+        {
+            System.TypedReference typedRef = iter.GetNextArg();
+            result += (int)TypedReference.ToObject(typedRef);
+        }
+
+        return new Result(result);
+    }
 }

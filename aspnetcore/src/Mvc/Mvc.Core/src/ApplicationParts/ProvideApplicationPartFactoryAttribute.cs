@@ -20,8 +20,8 @@ public sealed class ProvideApplicationPartFactoryAttribute : Attribute
     /// <param name="factoryType">The factory type.</param>
     public ProvideApplicationPartFactoryAttribute(Type factoryType)
     {
-        _applicationPartFactoryType =
-            factoryType ?? throw new ArgumentNullException(nameof(factoryType));
+        _applicationPartFactoryType = factoryType
+            ?? throw new ArgumentNullException(nameof(factoryType));
     }
 
     /// <summary>

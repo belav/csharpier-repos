@@ -26,9 +26,7 @@ public class EntityQueryable<TResult>
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public EntityQueryable(IAsyncQueryProvider queryProvider, IEntityType entityType)
-        : this(queryProvider, new EntityQueryRootExpression(queryProvider, entityType))
-    {
-    }
+        : this(queryProvider, new EntityQueryRootExpression(queryProvider, entityType)) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -48,8 +46,7 @@ public class EntityQueryable<TResult>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Type ElementType
-        => typeof(TResult);
+    public virtual Type ElementType => typeof(TResult);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -65,8 +62,7 @@ public class EntityQueryable<TResult>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IQueryProvider Provider
-        => _queryProvider;
+    public virtual IQueryProvider Provider => _queryProvider;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -74,8 +70,8 @@ public class EntityQueryable<TResult>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerator<TResult> GetEnumerator()
-        => _queryProvider.Execute<IEnumerable<TResult>>(Expression).GetEnumerator();
+    public virtual IEnumerator<TResult> GetEnumerator() =>
+        _queryProvider.Execute<IEnumerable<TResult>>(Expression).GetEnumerator();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -83,8 +79,8 @@ public class EntityQueryable<TResult>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    IEnumerator IEnumerable.GetEnumerator()
-        => _queryProvider.Execute<IEnumerable>(Expression).GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator() =>
+        _queryProvider.Execute<IEnumerable>(Expression).GetEnumerator();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -92,8 +88,10 @@ public class EntityQueryable<TResult>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IAsyncEnumerator<TResult> GetAsyncEnumerator(CancellationToken cancellationToken = default)
-        => _queryProvider
+    public virtual IAsyncEnumerator<TResult> GetAsyncEnumerator(
+        CancellationToken cancellationToken = default
+    ) =>
+        _queryProvider
             .ExecuteAsync<IAsyncEnumerable<TResult>>(Expression, cancellationToken)
             .GetAsyncEnumerator(cancellationToken);
 
@@ -103,8 +101,8 @@ public class EntityQueryable<TResult>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    IList IListSource.GetList()
-        => throw new NotSupportedException(CoreStrings.DataBindingWithIListSource);
+    IList IListSource.GetList() =>
+        throw new NotSupportedException(CoreStrings.DataBindingWithIListSource);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -112,8 +110,7 @@ public class EntityQueryable<TResult>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    bool IListSource.ContainsListCollection
-        => false;
+    bool IListSource.ContainsListCollection => false;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -121,6 +118,5 @@ public class EntityQueryable<TResult>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual QueryDebugView DebugView
-        => new(() => Expression.Print(), this.ToQueryString);
+    public virtual QueryDebugView DebugView => new(() => Expression.Print(), this.ToQueryString);
 }

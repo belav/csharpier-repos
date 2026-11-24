@@ -1,18 +1,18 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.IO;
-    using System.Drawing;
-    using System.Diagnostics;
     using System.Collections;
-    using System.Windows.Forms;
-    using System.ComponentModel;
-    using System.Drawing.Drawing2D;
     using System.Collections.Generic;
-    using System.ComponentModel.Design;
     using System.Collections.ObjectModel;
-    using System.Workflow.ComponentModel.Design;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
+    using System.IO;
+    using System.Windows.Forms;
+    using System.Workflow.ComponentModel.Design;
     using System.Workflow.ComponentModel.Serialization;
 
     #region Interface IConnectableDesigner
@@ -27,19 +27,21 @@ namespace System.Workflow.ComponentModel.Design
     internal enum ZOrder
     {
         Foreground = 1,
-        Background = 2
+        Background = 2,
     }
     #endregion
 
     #region Class FreeformActivityDesigner
     //
 
-
-
-
     //By default this designer will use the CompositeActivityDesigner theme
-    [DesignerSerializer(typeof(FreeformActivityDesignerLayoutSerializer), typeof(WorkflowMarkupSerializer))]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [DesignerSerializer(
+        typeof(FreeformActivityDesignerLayoutSerializer),
+        typeof(WorkflowMarkupSerializer)
+    )]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class FreeformActivityDesigner : CompositeActivityDesigner
     {
         #region Class FreeformDesignerAccessibleObject
@@ -47,9 +49,7 @@ namespace System.Workflow.ComponentModel.Design
         internal class FreeformDesignerAccessibleObject : CompositeDesignerAccessibleObject
         {
             public FreeformDesignerAccessibleObject(FreeformActivityDesigner activityDesigner)
-                : base(activityDesigner)
-            {
-            }
+                : base(activityDesigner) { }
 
             public override AccessibleObject GetChild(int index)
             {
@@ -60,7 +60,9 @@ namespace System.Workflow.ComponentModel.Design
                     if (index < connectorsCount)
                         return designer.Connectors[index].AccessibilityObject;
                     else
-                        return designer.ContainedDesigners[index - connectorsCount].AccessibilityObject;
+                        return designer
+                            .ContainedDesigners[index - connectorsCount]
+                            .AccessibilityObject;
                 }
                 else
                 {
@@ -68,7 +70,9 @@ namespace System.Workflow.ComponentModel.Design
                     if (index < containedDesignersCount)
                         return designer.ContainedDesigners[index].AccessibilityObject;
                     else
-                        return designer.Connectors[index - containedDesignersCount].AccessibilityObject;
+                        return designer
+                            .Connectors[index - containedDesignersCount]
+                            .AccessibilityObject;
                 }
             }
 
@@ -101,9 +105,7 @@ namespace System.Workflow.ComponentModel.Design
         #endregion
 
         #region Construction / Destruction
-        public FreeformActivityDesigner()
-        {
-        }
+        public FreeformActivityDesigner() { }
         #endregion
 
         #region Properties
@@ -126,11 +128,7 @@ namespace System.Workflow.ComponentModel.Design
         [DefaultValue(true)]
         public bool AutoSize
         {
-            get
-            {
-                return this.autoSize;
-            }
-
+            get { return this.autoSize; }
             set
             {
                 if (this.autoSize == value)
@@ -147,11 +145,7 @@ namespace System.Workflow.ComponentModel.Design
         [DefaultValue(AutoSizeMode.GrowOnly)]
         public AutoSizeMode AutoSizeMode
         {
-            get
-            {
-                return this.autoSizeMode;
-            }
-
+            get { return this.autoSizeMode; }
             set
             {
                 if (this.autoSizeMode == value)
@@ -179,7 +173,6 @@ namespace System.Workflow.ComponentModel.Design
 
                 return margin;
             }
-
             set
             {
                 if (this.autoSizeMargin == value)
@@ -196,23 +189,13 @@ namespace System.Workflow.ComponentModel.Design
         [DefaultValue(true)]
         public bool EnableUserDrawnConnectors
         {
-            get
-            {
-                return (this.enableUserDrawnConnectors && IsEditable);
-            }
-
-            set
-            {
-                this.enableUserDrawnConnectors = value;
-            }
+            get { return (this.enableUserDrawnConnectors && IsEditable); }
+            set { this.enableUserDrawnConnectors = value; }
         }
 
         public override bool CanExpandCollapse
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override object FirstSelectableObject
@@ -229,7 +212,9 @@ namespace System.Workflow.ComponentModel.Design
             get
             {
                 IList<ActivityDesigner> childdesigners = ContainedDesigners;
-                return (childdesigners.Count > 0) ? childdesigners[childdesigners.Count - 1].Activity : null;
+                return (childdesigners.Count > 0)
+                    ? childdesigners[childdesigners.Count - 1].Activity
+                    : null;
             }
         }
 
@@ -240,7 +225,11 @@ namespace System.Workflow.ComponentModel.Design
                 //Now go thru all the activity designers and consider the bottom coordinate + selection size + page separator as the min size
                 Size minimumSize = base.MinimumSize;
 
-                if (Activity != null && ((IComponent)Activity).Site != null && !(ParentDesigner is FreeformActivityDesigner))
+                if (
+                    Activity != null
+                    && ((IComponent)Activity).Site != null
+                    && !(ParentDesigner is FreeformActivityDesigner)
+                )
                 {
                     minimumSize.Width *= 4;
                     minimumSize.Height *= 4;
@@ -250,8 +239,14 @@ namespace System.Workflow.ComponentModel.Design
                 if (IsRootDesigner && InvokingDesigner == null)
                 {
                     WorkflowView workflowView = ParentView;
-                    minimumSize.Width = Math.Max(minimumSize.Width, workflowView.ViewPortSize.Width - 2 * WorkflowRootLayout.Separator.Width);
-                    minimumSize.Height = Math.Max(minimumSize.Height, workflowView.ViewPortSize.Height - 2 * WorkflowRootLayout.Separator.Height);
+                    minimumSize.Width = Math.Max(
+                        minimumSize.Width,
+                        workflowView.ViewPortSize.Width - 2 * WorkflowRootLayout.Separator.Width
+                    );
+                    minimumSize.Height = Math.Max(
+                        minimumSize.Height,
+                        workflowView.ViewPortSize.Height - 2 * WorkflowRootLayout.Separator.Height
+                    );
                 }
 
                 if (AutoSize)
@@ -270,11 +265,7 @@ namespace System.Workflow.ComponentModel.Design
 
         public override Point Location
         {
-            get
-            {
-                return base.Location;
-            }
-
+            get { return base.Location; }
             set
             {
                 if (Location == value)
@@ -300,7 +291,8 @@ namespace System.Workflow.ComponentModel.Design
                             if (connector.RenderingOwner == this)
                                 connectors.Add(connector);
 
-                        freeFormActivityDesigner = freeFormActivityDesigner.ParentDesigner as FreeformActivityDesigner;
+                        freeFormActivityDesigner =
+                            freeFormActivityDesigner.ParentDesigner as FreeformActivityDesigner;
                     }
                     foreach (Connector connector in connectors)
                     {
@@ -310,7 +302,10 @@ namespace System.Workflow.ComponentModel.Design
 
                 base.Location = value;
 
-                if (this.retainContainedDesignerLocations && containedDesigners.Count == containedDesignerLocations.Count)
+                if (
+                    this.retainContainedDesignerLocations
+                    && containedDesigners.Count == containedDesignerLocations.Count
+                )
                 {
                     for (int i = 0; i < containedDesigners.Count; i++)
                         containedDesigners[i].Location = containedDesignerLocations[i];
@@ -325,23 +320,17 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public ReadOnlyCollection<Connector> Connectors
         {
-            get
-            {
-                return this.connectors.AsReadOnly();
-            }
+            get { return this.connectors.AsReadOnly(); }
         }
         #endregion
 
         #region Protected Properties
         /// <summary>
-        /// Get the value indicating if the connectors are drawn in the forground 
+        /// Get the value indicating if the connectors are drawn in the forground
         /// </summary>
         protected virtual bool ShowConnectorsInForeground
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         protected internal override bool EnableVisualResizing
@@ -364,14 +353,21 @@ namespace System.Workflow.ComponentModel.Design
 
                 //Now go thru all the designers and for the designers which are connectable, return connection glyphs
                 //Also return the move glyphs for movable designer
-                ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+                ISelectionService selectionService =
+                    GetService(typeof(ISelectionService)) as ISelectionService;
                 if (selectionService != null)
                 {
                     foreach (object selectedObject in selectionService.GetSelectedComponents())
                     {
-                        ConnectorHitTestInfo connectorHitInfo = selectedObject as ConnectorHitTestInfo;
+                        ConnectorHitTestInfo connectorHitInfo =
+                            selectedObject as ConnectorHitTestInfo;
                         if (connectorHitInfo != null && connectorHitInfo.AssociatedDesigner == this)
-                            glyphs.Add(new FreeFormConnectorSelectionGlyph(connectorHitInfo.MapToIndex(), (connectorHitInfo == selectionService.PrimarySelection)));
+                            glyphs.Add(
+                                new FreeFormConnectorSelectionGlyph(
+                                    connectorHitInfo.MapToIndex(),
+                                    (connectorHitInfo == selectionService.PrimarySelection)
+                                )
+                            );
                     }
                 }
 
@@ -383,10 +379,7 @@ namespace System.Workflow.ComponentModel.Design
         #region Private Properties
         internal override WorkflowLayout SupportedLayout
         {
-            get
-            {
-                return new WorkflowRootLayout(Activity.Site);
-            }
+            get { return new WorkflowRootLayout(Activity.Site); }
         }
 
         #region Properties used during serialization only
@@ -420,22 +413,44 @@ namespace System.Workflow.ComponentModel.Design
                 throw new ArgumentNullException("source");
 
             if (source.AssociatedDesigner == null)
-                throw new ArgumentException("source", SR.GetString(SR.Error_AssociatedDesignerMissing));
+                throw new ArgumentException(
+                    "source",
+                    SR.GetString(SR.Error_AssociatedDesignerMissing)
+                );
 
             if (target == null)
                 throw new ArgumentNullException("target");
 
             if (target.AssociatedDesigner == null)
-                throw new ArgumentException("target", SR.GetString(SR.Error_AssociatedDesignerMissing));
+                throw new ArgumentException(
+                    "target",
+                    SR.GetString(SR.Error_AssociatedDesignerMissing)
+                );
 
             //This check can be eliminated if it slows down connections, this is just to ensure we are adding connectors
             //to correct activity designer
-            FreeformActivityDesigner connectorContainer = ConnectionManager.GetConnectorContainer(source.AssociatedDesigner);
+            FreeformActivityDesigner connectorContainer = ConnectionManager.GetConnectorContainer(
+                source.AssociatedDesigner
+            );
             if (this != connectorContainer)
                 throw new InvalidOperationException(DR.GetString(DR.Error_AddConnector1));
 
-            if ((Activity != source.AssociatedDesigner.Activity && !Helpers.IsChildActivity(Activity as CompositeActivity, source.AssociatedDesigner.Activity)) ||
-                (Activity != target.AssociatedDesigner.Activity && !Helpers.IsChildActivity(Activity as CompositeActivity, target.AssociatedDesigner.Activity)))
+            if (
+                (
+                    Activity != source.AssociatedDesigner.Activity
+                    && !Helpers.IsChildActivity(
+                        Activity as CompositeActivity,
+                        source.AssociatedDesigner.Activity
+                    )
+                )
+                || (
+                    Activity != target.AssociatedDesigner.Activity
+                    && !Helpers.IsChildActivity(
+                        Activity as CompositeActivity,
+                        target.AssociatedDesigner.Activity
+                    )
+                )
+            )
                 throw new ArgumentException(DR.GetString(DR.Error_AddConnector2));
 
             Connector connector = CreateConnector(source, target);
@@ -481,11 +496,12 @@ namespace System.Workflow.ComponentModel.Design
                 throw new ArgumentNullException("containedDesigner");
 
             if (!ContainedDesigners.Contains(containedDesigner))
-                throw new ArgumentException(DR.GetString(DR.InvalidDesignerSpecified, "containedDesigner"));
+                throw new ArgumentException(
+                    DR.GetString(DR.InvalidDesignerSpecified, "containedDesigner")
+                );
 
             UpdateZOrder(containedDesigner, ZOrder.Background);
         }
-
 
         /// <summary>
         /// Brings the contained designer to top of z-order
@@ -497,7 +513,9 @@ namespace System.Workflow.ComponentModel.Design
                 throw new ArgumentNullException("containedDesigner");
 
             if (!ContainedDesigners.Contains(containedDesigner))
-                throw new ArgumentException(DR.GetString(DR.InvalidDesignerSpecified, "containedDesigner"));
+                throw new ArgumentException(
+                    DR.GetString(DR.InvalidDesignerSpecified, "containedDesigner")
+                );
 
             UpdateZOrder(containedDesigner, ZOrder.Foreground);
         }
@@ -513,9 +531,14 @@ namespace System.Workflow.ComponentModel.Design
                 throw new ArgumentNullException("containedDesigner");
 
             if (!ContainedDesigners.Contains(containedDesigner))
-                throw new ArgumentException(DR.GetString(DR.InvalidDesignerSpecified, "containedDesigner"));
+                throw new ArgumentException(
+                    DR.GetString(DR.InvalidDesignerSpecified, "containedDesigner")
+                );
 
-            FreeformActivityDesigner.SetDesignerBounds(containedDesigner, new Rectangle(newLocation, containedDesigner.Size));
+            FreeformActivityDesigner.SetDesignerBounds(
+                containedDesigner,
+                new Rectangle(newLocation, containedDesigner.Size)
+            );
 
             PerformLayout();
             Invalidate();
@@ -532,9 +555,14 @@ namespace System.Workflow.ComponentModel.Design
                 throw new ArgumentNullException("containedDesigner");
 
             if (!ContainedDesigners.Contains(containedDesigner))
-                throw new ArgumentException(DR.GetString(DR.InvalidDesignerSpecified, "containedDesigner"));
+                throw new ArgumentException(
+                    DR.GetString(DR.InvalidDesignerSpecified, "containedDesigner")
+                );
 
-            FreeformActivityDesigner.SetDesignerBounds(containedDesigner, new Rectangle(containedDesigner.Location, newSize));
+            FreeformActivityDesigner.SetDesignerBounds(
+                containedDesigner,
+                new Rectangle(containedDesigner.Location, newSize)
+            );
 
             PerformLayout();
         }
@@ -549,11 +577,16 @@ namespace System.Workflow.ComponentModel.Design
             ReadOnlyCollection<ActivityDesigner> containedDesigners = ContainedDesigners;
 
             WorkflowView workflowView = ParentView;
-            DragDropManager dragDropManager = GetService(typeof(DragDropManager)) as DragDropManager;
-            if (workflowView != null && dragDropManager != null &&
-                workflowView.DragDropInProgress && hitInfo.AssociatedDesigner != null &&
-                dragDropManager.DraggedActivities.Contains(hitInfo.AssociatedDesigner.Activity) &&
-                hitInfo.AssociatedDesigner.Bounds.Contains(point))
+            DragDropManager dragDropManager =
+                GetService(typeof(DragDropManager)) as DragDropManager;
+            if (
+                workflowView != null
+                && dragDropManager != null
+                && workflowView.DragDropInProgress
+                && hitInfo.AssociatedDesigner != null
+                && dragDropManager.DraggedActivities.Contains(hitInfo.AssociatedDesigner.Activity)
+                && hitInfo.AssociatedDesigner.Bounds.Contains(point)
+            )
             {
                 if (Activity == hitInfo.AssociatedDesigner.Activity)
                     return HitTestInfo.Nowhere;
@@ -562,14 +595,24 @@ namespace System.Workflow.ComponentModel.Design
             }
 
             //Now try going through the connectors
-            if (!(hitInfo is ConnectionPointHitTestInfo) &&
-                (hitInfo.HitLocation == HitTestLocations.None || hitInfo.AssociatedDesigner == this || ShowConnectorsInForeground))
+            if (
+                !(hitInfo is ConnectionPointHitTestInfo)
+                && (
+                    hitInfo.HitLocation == HitTestLocations.None
+                    || hitInfo.AssociatedDesigner == this
+                    || ShowConnectorsInForeground
+                )
+            )
             {
                 //Now go thru all the connectors and try to select them
                 for (int i = 0; i < this.connectors.Count; i++)
                 {
                     if (this.connectors[i].HitTest(point))
-                        return new ConnectorHitTestInfo(this, HitTestLocations.Designer | HitTestLocations.Connector, i);
+                        return new ConnectorHitTestInfo(
+                            this,
+                            HitTestLocations.Designer | HitTestLocations.Connector,
+                            i
+                        );
                 }
             }
 
@@ -589,7 +632,10 @@ namespace System.Workflow.ComponentModel.Design
             }
         }
 
-        public override void MoveActivities(HitTestInfo moveLocation, ReadOnlyCollection<Activity> activitiesToMove)
+        public override void MoveActivities(
+            HitTestInfo moveLocation,
+            ReadOnlyCollection<Activity> activitiesToMove
+        )
         {
             if (moveLocation == null)
                 throw new ArgumentNullException("moveLocation");
@@ -597,7 +643,9 @@ namespace System.Workflow.ComponentModel.Design
             if (activitiesToMove == null)
                 throw new ArgumentNullException("activitiesToMove");
 
-            FreeformActivityDesigner connectorContainer = ConnectionManager.GetConnectorContainer(this);
+            FreeformActivityDesigner connectorContainer = ConnectionManager.GetConnectorContainer(
+                this
+            );
             try
             {
                 connectorContainer.MovingActivities.Clear();
@@ -605,8 +653,11 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     foreach (Activity movingActivity in activitiesToMove)
                     {
-                        ActivityDesigner designerToMove = ActivityDesigner.GetDesigner(movingActivity);
-                        FreeformActivityDesigner topMostParentDesigner = ConnectionManager.GetConnectorContainer(designerToMove);
+                        ActivityDesigner designerToMove = ActivityDesigner.GetDesigner(
+                            movingActivity
+                        );
+                        FreeformActivityDesigner topMostParentDesigner =
+                            ConnectionManager.GetConnectorContainer(designerToMove);
 
                         if (topMostParentDesigner == connectorContainer)
                             connectorContainer.MovingActivities.Add(designerToMove);
@@ -621,17 +672,43 @@ namespace System.Workflow.ComponentModel.Design
             }
         }
 
-        public override object GetNextSelectableObject(object current, DesignerNavigationDirection navigate)
+        public override object GetNextSelectableObject(
+            object current,
+            DesignerNavigationDirection navigate
+        )
         {
             object nextObject = null;
 
             ArrayList activityDesigners = new ArrayList(ContainedDesigners);
-            ActivityDesigner activityDesigner = (current is Activity) ? ActivityDesigner.GetDesigner(current as Activity) : ActivityDesigner.GetParentDesigner(current);
-            int index = (activityDesigner != null) ? activityDesigners.IndexOf(activityDesigner) : -1;
-            if ((navigate == DesignerNavigationDirection.Left || navigate == DesignerNavigationDirection.Up) && index >= 0 && index < activityDesigners.Count)
-                nextObject = ((ActivityDesigner)activityDesigners[(index > 0) ? index - 1 : activityDesigners.Count - 1]).Activity;
-            else if ((navigate == DesignerNavigationDirection.Right || navigate == DesignerNavigationDirection.Down) && index <= activityDesigners.Count - 1)
-                nextObject = ((ActivityDesigner)activityDesigners[(index < activityDesigners.Count - 1) ? index + 1 : 0]).Activity;
+            ActivityDesigner activityDesigner =
+                (current is Activity)
+                    ? ActivityDesigner.GetDesigner(current as Activity)
+                    : ActivityDesigner.GetParentDesigner(current);
+            int index =
+                (activityDesigner != null) ? activityDesigners.IndexOf(activityDesigner) : -1;
+            if (
+                (
+                    navigate == DesignerNavigationDirection.Left
+                    || navigate == DesignerNavigationDirection.Up
+                )
+                && index >= 0
+                && index < activityDesigners.Count
+            )
+                nextObject = (
+                    (ActivityDesigner)
+                        activityDesigners[(index > 0) ? index - 1 : activityDesigners.Count - 1]
+                ).Activity;
+            else if (
+                (
+                    navigate == DesignerNavigationDirection.Right
+                    || navigate == DesignerNavigationDirection.Down
+                )
+                && index <= activityDesigners.Count - 1
+            )
+                nextObject = (
+                    (ActivityDesigner)
+                        activityDesigners[(index < activityDesigners.Count - 1) ? index + 1 : 0]
+                ).Activity;
 
             return nextObject;
         }
@@ -659,14 +736,16 @@ namespace System.Workflow.ComponentModel.Design
 
         //
 
-
-        protected override void OnContainedActivitiesChanging(ActivityCollectionChangeEventArgs listChangeArgs)
+        protected override void OnContainedActivitiesChanging(
+            ActivityCollectionChangeEventArgs listChangeArgs
+        )
         {
             base.OnContainedActivitiesChanging(listChangeArgs);
 
             if (listChangeArgs.Action == ActivityCollectionChangeAction.Remove)
             {
-                FreeformActivityDesigner connectorContainer = ConnectionManager.GetConnectorContainer(this);
+                FreeformActivityDesigner connectorContainer =
+                    ConnectionManager.GetConnectorContainer(this);
                 List<Connector> connectorsToDelete = new List<Connector>();
 
                 //check if the removed designer is being moved within the same container
@@ -674,12 +753,15 @@ namespace System.Workflow.ComponentModel.Design
                 ActivityDesigner activityDesigner = this;
                 while (activityDesigner != null)
                 {
-                    FreeformActivityDesigner freeFormDesigner = activityDesigner as FreeformActivityDesigner;
+                    FreeformActivityDesigner freeFormDesigner =
+                        activityDesigner as FreeformActivityDesigner;
                     if (freeFormDesigner != null && freeFormDesigner.Connectors.Count > 0)
                     {
                         foreach (Activity activityToRemove in listChangeArgs.RemovedItems)
                         {
-                            ActivityDesigner designerToRemove = ActivityDesigner.GetDesigner(activityToRemove);
+                            ActivityDesigner designerToRemove = ActivityDesigner.GetDesigner(
+                                activityToRemove
+                            );
 
                             //if the designer is being moved within the same container, ignore it
                             //otherwise remove all related connectors
@@ -687,7 +769,10 @@ namespace System.Workflow.ComponentModel.Design
                             {
                                 foreach (Connector connector in freeFormDesigner.Connectors)
                                 {
-                                    if (designerToRemove == connector.Source.AssociatedDesigner || designerToRemove == connector.Target.AssociatedDesigner)
+                                    if (
+                                        designerToRemove == connector.Source.AssociatedDesigner
+                                        || designerToRemove == connector.Target.AssociatedDesigner
+                                    )
                                         connectorsToDelete.Add(connector);
                                 }
                             }
@@ -711,7 +796,10 @@ namespace System.Workflow.ComponentModel.Design
         /// <param name="source">Source connection point</param>
         /// <param name="target">Target connection point</param>
         /// <returns></returns>
-        protected internal virtual Connector CreateConnector(ConnectionPoint source, ConnectionPoint target)
+        protected internal virtual Connector CreateConnector(
+            ConnectionPoint source,
+            ConnectionPoint target
+        )
         {
             return new Connector(source, target);
         }
@@ -722,10 +810,15 @@ namespace System.Workflow.ComponentModel.Design
         /// <param name="source">Source connection point</param>
         /// <param name="target">Target connection point</param>
         /// <returns></returns>
-        protected internal virtual bool CanConnectContainedDesigners(ConnectionPoint source, ConnectionPoint target)
+        protected internal virtual bool CanConnectContainedDesigners(
+            ConnectionPoint source,
+            ConnectionPoint target
+        )
         {
-            return (((IConnectableDesigner)source.AssociatedDesigner).CanConnect(source, target) &&
-                    ((IConnectableDesigner)target.AssociatedDesigner).CanConnect(source, target));
+            return (
+                ((IConnectableDesigner)source.AssociatedDesigner).CanConnect(source, target)
+                && ((IConnectableDesigner)target.AssociatedDesigner).CanConnect(source, target)
+            );
         }
 
         /// <summary>
@@ -733,7 +826,10 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         /// <param name="source">Source connection point</param>
         /// <param name="target">Target connection point</param>
-        protected internal virtual void OnContainedDesignersConnected(ConnectionPoint source, ConnectionPoint target)
+        protected internal virtual void OnContainedDesignersConnected(
+            ConnectionPoint source,
+            ConnectionPoint target
+        )
         {
             ((IConnectableDesigner)source.AssociatedDesigner).OnConnected(source, target);
             ((IConnectableDesigner)target.AssociatedDesigner).OnConnected(source, target);
@@ -744,7 +840,9 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         /// <param name="containedDesigner">Designer to visually resize</param>
         /// <returns>True if the designer can be visually resize, false otherwise</returns>
-        protected internal virtual bool CanResizeContainedDesigner(ActivityDesigner containedDesigner)
+        protected internal virtual bool CanResizeContainedDesigner(
+            ActivityDesigner containedDesigner
+        )
         {
             return (containedDesigner is FreeformActivityDesigner);
         }
@@ -842,7 +940,9 @@ namespace System.Workflow.ComponentModel.Design
             if (WorkflowTheme.CurrentTheme.AmbientTheme.ShowGrid)
             {
                 foreach (ActivityDesigner containedDesigner in ContainedDesigners)
-                    containedDesigner.Location = DesignerHelpers.SnapToGrid(containedDesigner.Location);
+                    containedDesigner.Location = DesignerHelpers.SnapToGrid(
+                        containedDesigner.Location
+                    );
                 PerformLayout();
             }
         }
@@ -878,12 +978,25 @@ namespace System.Workflow.ComponentModel.Design
                     newActivities.Add(activity);
             }
 
-            //If the component are sited then that means that we are inserting it 
+            //If the component are sited then that means that we are inserting it
             if (activitiesToInsert.Count > 0)
-                CompositeActivityDesigner.InsertActivities(this, new ConnectorHitTestInfo(this, HitTestLocations.Designer, ((CompositeActivity)Activity).Activities.Count), activitiesToInsert.AsReadOnly(), SR.GetString(SR.DragDropActivities));
+                CompositeActivityDesigner.InsertActivities(
+                    this,
+                    new ConnectorHitTestInfo(
+                        this,
+                        HitTestLocations.Designer,
+                        ((CompositeActivity)Activity).Activities.Count
+                    ),
+                    activitiesToInsert.AsReadOnly(),
+                    SR.GetString(SR.DragDropActivities)
+                );
 
             Point dropPoint = new Point(e.X, e.Y);
-            Point[] movedLocations = FreeFormDragDropManager.GetDesignerLocations(e.DragInitiationPoint, dropPoint, e.Activities);
+            Point[] movedLocations = FreeFormDragDropManager.GetDesignerLocations(
+                e.DragInitiationPoint,
+                dropPoint,
+                e.Activities
+            );
             if (movedLocations.Length == e.Activities.Count)
             {
                 for (int i = 0; i < e.Activities.Count; i++)
@@ -891,7 +1004,10 @@ namespace System.Workflow.ComponentModel.Design
                     ActivityDesigner designerToMove = ActivityDesigner.GetDesigner(e.Activities[i]);
                     if (designerToMove != null)
                     {
-                        Point location = (newActivities.Contains(designerToMove.Activity)) ? dropPoint : movedLocations[i];
+                        Point location =
+                            (newActivities.Contains(designerToMove.Activity))
+                                ? dropPoint
+                                : movedLocations[i];
                         MoveContainedDesigner(designerToMove, location);
                     }
                 }
@@ -902,7 +1018,10 @@ namespace System.Workflow.ComponentModel.Design
             }
         }
 
-        public override void InsertActivities(HitTestInfo insertLocation, ReadOnlyCollection<Activity> activitiesToInsert)
+        public override void InsertActivities(
+            HitTestInfo insertLocation,
+            ReadOnlyCollection<Activity> activitiesToInsert
+        )
         {
             base.InsertActivities(insertLocation, activitiesToInsert);
 
@@ -916,7 +1035,10 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     ActivityDesigner designer = ActivityDesigner.GetDesigner(activity);
                     if (designer.Location.IsEmpty)
-                        designer.Location = new Point(location.X + autoSizeMargin.Width, location.Y + autoSizeMargin.Height);
+                        designer.Location = new Point(
+                            location.X + autoSizeMargin.Width,
+                            location.Y + autoSizeMargin.Height
+                        );
                 }
             }
         }
@@ -934,8 +1056,14 @@ namespace System.Workflow.ComponentModel.Design
                         Rectangle bounds = Rectangle.Empty;
                         bounds.X = Math.Min(minRectangle.Left, e.Bounds.Left);
                         bounds.Y = Math.Min(minRectangle.Top, e.Bounds.Top);
-                        bounds.Width = Math.Max(minRectangle.Right - bounds.Left, e.Bounds.Right - bounds.Left);
-                        bounds.Height = Math.Max(minRectangle.Bottom - bounds.Top, e.Bounds.Bottom - bounds.Top);
+                        bounds.Width = Math.Max(
+                            minRectangle.Right - bounds.Left,
+                            e.Bounds.Right - bounds.Left
+                        );
+                        bounds.Height = Math.Max(
+                            minRectangle.Bottom - bounds.Top,
+                            e.Bounds.Bottom - bounds.Top
+                        );
 
                         if (bounds != e.Bounds)
                             e = new ActivityDesignerResizeEventArgs(e.SizingEdge, bounds);
@@ -957,14 +1085,23 @@ namespace System.Workflow.ComponentModel.Design
             if (e == null)
                 throw new ArgumentNullException("e");
 
-            ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
-            object selectedObject = (selectionService != null) ? selectionService.PrimarySelection : null;
+            ISelectionService selectionService =
+                GetService(typeof(ISelectionService)) as ISelectionService;
+            object selectedObject =
+                (selectionService != null) ? selectionService.PrimarySelection : null;
             if (selectedObject == null)
                 return;
 
-            List<Activity> topLevelActivities = new List<Activity>(Helpers.GetTopLevelActivities(selectionService.GetSelectedComponents()));
+            List<Activity> topLevelActivities = new List<Activity>(
+                Helpers.GetTopLevelActivities(selectionService.GetSelectedComponents())
+            );
 
-            if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right || e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)
+            if (
+                e.KeyCode == Keys.Left
+                || e.KeyCode == Keys.Right
+                || e.KeyCode == Keys.Up
+                || e.KeyCode == Keys.Down
+            )
             {
                 Size direction = Size.Empty;
                 const int step = 5;
@@ -985,9 +1122,13 @@ namespace System.Workflow.ComponentModel.Design
                     if (designer != null)
                     {
                         //refresh designer area both before and after move
-                        ParentView.InvalidateClientRectangle(new Rectangle(designer.Location, designer.Size));
+                        ParentView.InvalidateClientRectangle(
+                            new Rectangle(designer.Location, designer.Size)
+                        );
                         designer.Location += direction;
-                        ParentView.InvalidateClientRectangle(new Rectangle(designer.Location, designer.Size));
+                        ParentView.InvalidateClientRectangle(
+                            new Rectangle(designer.Location, designer.Size)
+                        );
                     }
                 }
 
@@ -1005,21 +1146,32 @@ namespace System.Workflow.ComponentModel.Design
                     ConnectorHitTestInfo connector = component as ConnectorHitTestInfo;
                     if (connector != null)
                     {
-                        FreeformActivityDesigner freeformDesigner = connector.AssociatedDesigner as FreeformActivityDesigner;
+                        FreeformActivityDesigner freeformDesigner =
+                            connector.AssociatedDesigner as FreeformActivityDesigner;
                         if (freeformDesigner != null)
                         {
                             ReadOnlyCollection<Connector> connectors = freeformDesigner.Connectors;
                             int connectorIndex = connector.MapToIndex();
                             if (connectorIndex < connectors.Count)
                             {
-                                selectionService.SetSelectedComponents(new object[] { connector }, SelectionTypes.Remove);
+                                selectionService.SetSelectedComponents(
+                                    new object[] { connector },
+                                    SelectionTypes.Remove
+                                );
                                 freeformDesigner.RemoveConnector(connectors[connectorIndex]);
 
                                 object nextSelectableObject = freeformDesigner;
                                 if (connectors.Count > 0)
-                                    nextSelectableObject = new ConnectorHitTestInfo(freeformDesigner, HitTestLocations.Connector | HitTestLocations.Designer, (connectorIndex > 0) ? connectorIndex - 1 : connectorIndex);
+                                    nextSelectableObject = new ConnectorHitTestInfo(
+                                        freeformDesigner,
+                                        HitTestLocations.Connector | HitTestLocations.Designer,
+                                        (connectorIndex > 0) ? connectorIndex - 1 : connectorIndex
+                                    );
 
-                                selectionService.SetSelectedComponents(new object[] { nextSelectableObject }, SelectionTypes.Replace);
+                                selectionService.SetSelectedComponents(
+                                    new object[] { nextSelectableObject },
+                                    SelectionTypes.Replace
+                                );
                             }
                         }
                     }
@@ -1049,13 +1201,15 @@ namespace System.Workflow.ComponentModel.Design
             else
                 designer.Size = bounds.Size;
 
-            PropertyDescriptor locationProperty = (properties != null) ? properties["Location"] : null;
+            PropertyDescriptor locationProperty =
+                (properties != null) ? properties["Location"] : null;
             if (locationProperty != null)
                 locationProperty.SetValue(designer.Activity, bounds.Location);
             else
                 designer.Location = bounds.Location;
 
-            WorkflowView workflowView = designer.Activity.Site.GetService(typeof(WorkflowView)) as WorkflowView;
+            WorkflowView workflowView =
+                designer.Activity.Site.GetService(typeof(WorkflowView)) as WorkflowView;
             if (workflowView != null)
             {
                 if (designer.ParentDesigner != null)
@@ -1070,7 +1224,9 @@ namespace System.Workflow.ComponentModel.Design
             if (ShowConnectorsInForeground)
                 base.OnPaintContainedDesigners(e);
 
-            FreeformActivityDesigner connectorContainer = ConnectionManager.GetConnectorContainer(this);
+            FreeformActivityDesigner connectorContainer = ConnectionManager.GetConnectorContainer(
+                this
+            );
             if (connectorContainer != null && Activity != null && Activity.Site != null)
             {
                 Region clipRegion = null;
@@ -1108,15 +1264,28 @@ namespace System.Workflow.ComponentModel.Design
 
         private Rectangle GetEnclosingRectangle()
         {
-            Point leftTop = new Point(int.MaxValue, int.MaxValue), rightBottom = new Point(int.MinValue, int.MinValue);
+            Point leftTop = new Point(int.MaxValue, int.MaxValue),
+                rightBottom = new Point(int.MinValue, int.MinValue);
             foreach (ActivityDesigner activityDesigner in ContainedDesigners)
             {
                 if (activityDesigner.IsVisible)
                 {
-                    leftTop.X = (activityDesigner.Bounds.Left < leftTop.X) ? activityDesigner.Bounds.Left : leftTop.X;
-                    leftTop.Y = (activityDesigner.Bounds.Top < leftTop.Y) ? activityDesigner.Bounds.Top : leftTop.Y;
-                    rightBottom.X = (rightBottom.X < activityDesigner.Bounds.Right) ? activityDesigner.Bounds.Right : rightBottom.X;
-                    rightBottom.Y = (rightBottom.Y < activityDesigner.Bounds.Bottom) ? activityDesigner.Bounds.Bottom : rightBottom.Y;
+                    leftTop.X =
+                        (activityDesigner.Bounds.Left < leftTop.X)
+                            ? activityDesigner.Bounds.Left
+                            : leftTop.X;
+                    leftTop.Y =
+                        (activityDesigner.Bounds.Top < leftTop.Y)
+                            ? activityDesigner.Bounds.Top
+                            : leftTop.Y;
+                    rightBottom.X =
+                        (rightBottom.X < activityDesigner.Bounds.Right)
+                            ? activityDesigner.Bounds.Right
+                            : rightBottom.X;
+                    rightBottom.Y =
+                        (rightBottom.Y < activityDesigner.Bounds.Bottom)
+                            ? activityDesigner.Bounds.Bottom
+                            : rightBottom.Y;
                 }
             }
 
@@ -1126,10 +1295,18 @@ namespace System.Workflow.ComponentModel.Design
             {
                 foreach (Connector connector in Connectors)
                 {
-                    leftTop.X = (connector.Bounds.Left < leftTop.X) ? connector.Bounds.Left : leftTop.X;
-                    leftTop.Y = (connector.Bounds.Top < leftTop.Y) ? connector.Bounds.Top : leftTop.Y;
-                    rightBottom.X = (rightBottom.X < connector.Bounds.Right) ? connector.Bounds.Right : rightBottom.X;
-                    rightBottom.Y = (rightBottom.Y < connector.Bounds.Bottom) ? connector.Bounds.Bottom : rightBottom.Y;
+                    leftTop.X =
+                        (connector.Bounds.Left < leftTop.X) ? connector.Bounds.Left : leftTop.X;
+                    leftTop.Y =
+                        (connector.Bounds.Top < leftTop.Y) ? connector.Bounds.Top : leftTop.Y;
+                    rightBottom.X =
+                        (rightBottom.X < connector.Bounds.Right)
+                            ? connector.Bounds.Right
+                            : rightBottom.X;
+                    rightBottom.Y =
+                        (rightBottom.Y < connector.Bounds.Bottom)
+                            ? connector.Bounds.Bottom
+                            : rightBottom.Y;
                 }
             }
 
@@ -1160,8 +1337,14 @@ namespace System.Workflow.ComponentModel.Design
             {
                 if (parentDesigner is FreeformActivityDesigner)
                 {
-                    ReadOnlyCollection<ActivityDesigner> containedDesigners = parentDesigner.ContainedDesigners;
-                    if (containedDesigners.Count > 1 && containedDesigners[(zorder == ZOrder.Background) ? 0 : containedDesigners.Count - 1] != childDesigner)
+                    ReadOnlyCollection<ActivityDesigner> containedDesigners =
+                        parentDesigner.ContainedDesigners;
+                    if (
+                        containedDesigners.Count > 1
+                        && containedDesigners[
+                            (zorder == ZOrder.Background) ? 0 : containedDesigners.Count - 1
+                        ] != childDesigner
+                    )
                     {
                         canUpdateZOrder = true;
                         break;
@@ -1180,7 +1363,9 @@ namespace System.Workflow.ComponentModel.Design
             IDesignerHost designerHost = GetService(typeof(IDesignerHost)) as IDesignerHost;
             DesignerTransaction transaction = null;
             if (designerHost != null)
-                transaction = designerHost.CreateTransaction(DR.GetString(DR.ZOrderUndoDescription, activityDesigner.Text));
+                transaction = designerHost.CreateTransaction(
+                    DR.GetString(DR.ZOrderUndoDescription, activityDesigner.Text)
+                );
 
             try
             {
@@ -1191,11 +1376,27 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     if (parentDesigner is FreeformActivityDesigner)
                     {
-                        ReadOnlyCollection<ActivityDesigner> containedDesigners = parentDesigner.ContainedDesigners;
-                        if (containedDesigners.Count > 1 && containedDesigners[(zorder == ZOrder.Background) ? 0 : containedDesigners.Count - 1] != childDesigner)
+                        ReadOnlyCollection<ActivityDesigner> containedDesigners =
+                            parentDesigner.ContainedDesigners;
+                        if (
+                            containedDesigners.Count > 1
+                            && containedDesigners[
+                                (zorder == ZOrder.Background) ? 0 : containedDesigners.Count - 1
+                            ] != childDesigner
+                        )
                         {
-                            int moveIndex = (zorder == ZOrder.Background) ? 0 : containedDesigners.Count;
-                            parentDesigner.MoveActivities(new ConnectorHitTestInfo(this, HitTestLocations.Designer, moveIndex), new List<Activity>(new Activity[] { childDesigner.Activity }).AsReadOnly());
+                            int moveIndex =
+                                (zorder == ZOrder.Background) ? 0 : containedDesigners.Count;
+                            parentDesigner.MoveActivities(
+                                new ConnectorHitTestInfo(
+                                    this,
+                                    HitTestLocations.Designer,
+                                    moveIndex
+                                ),
+                                new List<Activity>(
+                                    new Activity[] { childDesigner.Activity }
+                                ).AsReadOnly()
+                            );
                             zOrderChanged = true;
                         }
                     }
@@ -1222,10 +1423,13 @@ namespace System.Workflow.ComponentModel.Design
         private void EnsureDesignerExtender()
         {
             bool addExtender = true;
-            IExtenderListService extenderListService = GetService(typeof(IExtenderListService)) as IExtenderListService;
+            IExtenderListService extenderListService =
+                GetService(typeof(IExtenderListService)) as IExtenderListService;
             if (extenderListService != null)
             {
-                foreach (IExtenderProvider extenderProvider in extenderListService.GetExtenderProviders())
+                foreach (
+                    IExtenderProvider extenderProvider in extenderListService.GetExtenderProviders()
+                )
                 {
                     if (extenderProvider.GetType() == typeof(FreeFormDesignerPropertyExtender))
                     {
@@ -1237,10 +1441,13 @@ namespace System.Workflow.ComponentModel.Design
 
             if (addExtender)
             {
-                IExtenderProviderService extenderProviderService = GetService(typeof(IExtenderProviderService)) as IExtenderProviderService;
+                IExtenderProviderService extenderProviderService =
+                    GetService(typeof(IExtenderProviderService)) as IExtenderProviderService;
                 if (extenderProviderService != null)
                 {
-                    extenderProviderService.AddExtenderProvider(new FreeFormDesignerPropertyExtender());
+                    extenderProviderService.AddExtenderProvider(
+                        new FreeFormDesignerPropertyExtender()
+                    );
                     TypeDescriptor.Refresh(Activity);
                 }
             }
@@ -1255,10 +1462,11 @@ namespace System.Workflow.ComponentModel.Design
         //
         private sealed class FreeFormConnectorSelectionGlyph : ConnectorSelectionGlyph
         {
-            internal FreeFormConnectorSelectionGlyph(int connectorIndex, bool isPrimarySelectionGlyph)
-                : base(connectorIndex, isPrimarySelectionGlyph)
-            {
-            }
+            internal FreeFormConnectorSelectionGlyph(
+                int connectorIndex,
+                bool isPrimarySelectionGlyph
+            )
+                : base(connectorIndex, isPrimarySelectionGlyph) { }
 
             public override Rectangle GetBounds(ActivityDesigner designer, bool activated)
             {
@@ -1267,7 +1475,12 @@ namespace System.Workflow.ComponentModel.Design
                 return Rectangle.Empty;
             }
 
-            protected override void OnPaint(Graphics graphics, bool activated, AmbientTheme ambientTheme, ActivityDesigner designer)
+            protected override void OnPaint(
+                Graphics graphics,
+                bool activated,
+                AmbientTheme ambientTheme,
+                ActivityDesigner designer
+            )
             {
                 /*IConnectorContainer connectorContainer = designer as IConnectorContainer;
                 if (connectorContainer == null)
@@ -1287,10 +1500,7 @@ namespace System.Workflow.ComponentModel.Design
 
             public override bool IsPrimarySelection
             {
-                get
-                {
-                    return this.isPrimarySelectionGlyph;
-                }
+                get { return this.isPrimarySelectionGlyph; }
             }
         }
         #endregion
@@ -1319,7 +1529,10 @@ namespace System.Workflow.ComponentModel.Design
                 ActivityDesigner designer = ActivityDesigner.GetDesigner(activity);
                 if (designer != null)
                 {
-                    FreeformActivityDesigner freeformDesigner = (designer.ParentDesigner != null) ? designer.ParentDesigner as FreeformActivityDesigner : designer as FreeformActivityDesigner;
+                    FreeformActivityDesigner freeformDesigner =
+                        (designer.ParentDesigner != null)
+                            ? designer.ParentDesigner as FreeformActivityDesigner
+                            : designer as FreeformActivityDesigner;
                     if (freeformDesigner != null)
                     {
                         designer.Location = location;
@@ -1348,7 +1561,10 @@ namespace System.Workflow.ComponentModel.Design
                 ActivityDesigner designer = ActivityDesigner.GetDesigner(activity);
                 if (designer != null)
                 {
-                    FreeformActivityDesigner freeformDesigner = (designer.ParentDesigner != null) ? designer.ParentDesigner as FreeformActivityDesigner : designer as FreeformActivityDesigner;
+                    FreeformActivityDesigner freeformDesigner =
+                        (designer.ParentDesigner != null)
+                            ? designer.ParentDesigner as FreeformActivityDesigner
+                            : designer as FreeformActivityDesigner;
                     if (freeformDesigner != null)
                     {
                         designer.Size = size;
@@ -1370,7 +1586,10 @@ namespace System.Workflow.ComponentModel.Design
                     ActivityDesigner designer = ActivityDesigner.GetDesigner(activity);
                     if (designer != null)
                     {
-                        FreeformActivityDesigner freeformDesigner = (designer.ParentDesigner != null) ? designer.ParentDesigner as FreeformActivityDesigner : designer as FreeformActivityDesigner;
+                        FreeformActivityDesigner freeformDesigner =
+                            (designer.ParentDesigner != null)
+                                ? designer.ParentDesigner as FreeformActivityDesigner
+                                : designer as FreeformActivityDesigner;
                         if (freeformDesigner != null)
                             canExtend = true;
                     }
@@ -1389,15 +1608,29 @@ namespace System.Workflow.ComponentModel.Design
     internal sealed class FreeFormDesignerVerbProvider : IDesignerVerbProvider
     {
         #region IDesignerVerbProvider Members
-        ActivityDesignerVerbCollection IDesignerVerbProvider.GetVerbs(ActivityDesigner activityDesigner)
+        ActivityDesignerVerbCollection IDesignerVerbProvider.GetVerbs(
+            ActivityDesigner activityDesigner
+        )
         {
             ActivityDesignerVerbCollection verbs = new ActivityDesignerVerbCollection();
             if (activityDesigner.ParentDesigner is FreeformActivityDesigner)
             {
-                ActivityDesignerVerb verb = new ActivityDesignerVerb(activityDesigner, DesignerVerbGroup.Actions, DR.GetString(DR.BringToFront), new EventHandler(OnZOrderChanged), new EventHandler(OnZOrderStatusUpdate));
+                ActivityDesignerVerb verb = new ActivityDesignerVerb(
+                    activityDesigner,
+                    DesignerVerbGroup.Actions,
+                    DR.GetString(DR.BringToFront),
+                    new EventHandler(OnZOrderChanged),
+                    new EventHandler(OnZOrderStatusUpdate)
+                );
                 verb.Properties[DesignerUserDataKeys.ZOrderKey] = ZOrder.Foreground;
                 verbs.Add(verb);
-                verb = new ActivityDesignerVerb(activityDesigner, DesignerVerbGroup.Actions, DR.GetString(DR.SendToBack), new EventHandler(OnZOrderChanged), new EventHandler(OnZOrderStatusUpdate));
+                verb = new ActivityDesignerVerb(
+                    activityDesigner,
+                    DesignerVerbGroup.Actions,
+                    DR.GetString(DR.SendToBack),
+                    new EventHandler(OnZOrderChanged),
+                    new EventHandler(OnZOrderStatusUpdate)
+                );
                 verb.Properties[DesignerUserDataKeys.ZOrderKey] = ZOrder.Background;
                 verbs.Add(verb);
             }
@@ -1409,14 +1642,24 @@ namespace System.Workflow.ComponentModel.Design
         private void OnZOrderChanged(object sender, EventArgs e)
         {
             ActivityDesignerVerb designerVerb = sender as ActivityDesignerVerb;
-            if (designerVerb != null && designerVerb.Properties.Contains(DesignerUserDataKeys.ZOrderKey))
+            if (
+                designerVerb != null
+                && designerVerb.Properties.Contains(DesignerUserDataKeys.ZOrderKey)
+            )
             {
-                FreeformActivityDesigner freeformDesigner = designerVerb.ActivityDesigner.ParentDesigner as FreeformActivityDesigner;
+                FreeformActivityDesigner freeformDesigner =
+                    designerVerb.ActivityDesigner.ParentDesigner as FreeformActivityDesigner;
                 if (freeformDesigner != null)
                 {
-                    if ((ZOrder)designerVerb.Properties[DesignerUserDataKeys.ZOrderKey] == ZOrder.Foreground)
+                    if (
+                        (ZOrder)designerVerb.Properties[DesignerUserDataKeys.ZOrderKey]
+                        == ZOrder.Foreground
+                    )
                         freeformDesigner.BringToFront(designerVerb.ActivityDesigner);
-                    else if ((ZOrder)designerVerb.Properties[DesignerUserDataKeys.ZOrderKey] == ZOrder.Background)
+                    else if (
+                        (ZOrder)designerVerb.Properties[DesignerUserDataKeys.ZOrderKey]
+                        == ZOrder.Background
+                    )
                         freeformDesigner.SendToBack(designerVerb.ActivityDesigner);
                 }
             }
@@ -1425,11 +1668,18 @@ namespace System.Workflow.ComponentModel.Design
         private void OnZOrderStatusUpdate(object sender, EventArgs e)
         {
             ActivityDesignerVerb designerVerb = sender as ActivityDesignerVerb;
-            if (designerVerb != null && designerVerb.Properties.Contains(DesignerUserDataKeys.ZOrderKey))
+            if (
+                designerVerb != null
+                && designerVerb.Properties.Contains(DesignerUserDataKeys.ZOrderKey)
+            )
             {
-                FreeformActivityDesigner freeformDesigner = designerVerb.ActivityDesigner.ParentDesigner as FreeformActivityDesigner;
+                FreeformActivityDesigner freeformDesigner =
+                    designerVerb.ActivityDesigner.ParentDesigner as FreeformActivityDesigner;
                 if (freeformDesigner != null)
-                    designerVerb.Enabled = freeformDesigner.CanUpdateZOrder(designerVerb.ActivityDesigner, (ZOrder)designerVerb.Properties[DesignerUserDataKeys.ZOrderKey]);
+                    designerVerb.Enabled = freeformDesigner.CanUpdateZOrder(
+                        designerVerb.ActivityDesigner,
+                        (ZOrder)designerVerb.Properties[DesignerUserDataKeys.ZOrderKey]
+                    );
             }
         }
         #endregion

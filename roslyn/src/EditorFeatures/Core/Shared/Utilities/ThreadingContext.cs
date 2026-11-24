@@ -39,22 +39,13 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
         }
 
         /// <inheritdoc/>
-        public bool HasMainThread
-        {
-            get;
-        }
+        public bool HasMainThread { get; }
 
         /// <inheritdoc/>
-        public JoinableTaskContext JoinableTaskContext
-        {
-            get;
-        }
+        public JoinableTaskContext JoinableTaskContext { get; }
 
         /// <inheritdoc/>
-        public JoinableTaskFactory JoinableTaskFactory
-        {
-            get;
-        }
+        public JoinableTaskFactory JoinableTaskFactory { get; }
 
         public JoinableTaskCollection ShutdownBlockingTasks { get; }
 

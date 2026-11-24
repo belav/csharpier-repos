@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,39 +31,37 @@ using System.Security.Permissions;
 
 namespace System.Web
 {
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[Serializable]
-	public sealed class HttpRequestValidationException : HttpException
-	{
-		public HttpRequestValidationException ()
-		{
-		}
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Serializable]
+    public sealed class HttpRequestValidationException : HttpException
+    {
+        public HttpRequestValidationException() { }
 
-		public HttpRequestValidationException (string message) 
-			: base (message)
-		{
-		}
+        public HttpRequestValidationException(string message)
+            : base(message) { }
 
-		public HttpRequestValidationException (string message, Exception innerException) 
-			: base (message, innerException)
-		{
-		}
+        public HttpRequestValidationException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-		internal override string Description {
-			get {
-				return  "Request validation detected a potentially dangerous input value " +
-					"from the client and aborted the request. This might be an attemp of " +
-					"using cross-site scripting to compromise the security of your site. " +
-					"You can disable request validation using the 'validateRequest=false' " +
-					"attribute in your page or setting it in your machine.config or web.config " +
-					"configuration files. If you disable it, you're encouraged to properly " +
-					"check the input values you get from the client.<br>\r\n" +
-					"You can get more information on input validation " +
-					"<a href=\"http://www.cert.org/tech_tips/malicious_code_mitigation.html\">" +
-					"here</a>.";
-			}
-		}
-	}
+        internal override string Description
+        {
+            get
+            {
+                return "Request validation detected a potentially dangerous input value "
+                    + "from the client and aborted the request. This might be an attemp of "
+                    + "using cross-site scripting to compromise the security of your site. "
+                    + "You can disable request validation using the 'validateRequest=false' "
+                    + "attribute in your page or setting it in your machine.config or web.config "
+                    + "configuration files. If you disable it, you're encouraged to properly "
+                    + "check the input values you get from the client.<br>\r\n"
+                    + "You can get more information on input validation "
+                    + "<a href=\"http://www.cert.org/tech_tips/malicious_code_mitigation.html\">"
+                    + "here</a>.";
+            }
+        }
+    }
 }
-

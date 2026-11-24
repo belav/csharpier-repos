@@ -5,73 +5,73 @@
 
 using System;
 using Xunit;
+
 namespace Test_precise1b_simple_cs
 {
-internal class measure
-{
-    public static int a = 0xCC;
-}
-internal class test
-{
-    public static void f()
+    internal class measure
     {
+        public static int a = 0xCC;
     }
 
-    static test()
+    internal class test
     {
-        if (measure.a != 0xCC)
-        {
-            Console.WriteLine("in .cctor(), measure.a is {0}", measure.a);
-            Console.WriteLine("FAILED");
-            throw new Exception();
-        }
-        Console.WriteLine("in .cctor(), measure.a is {0}", measure.a);
-        measure.a = 8;
-        if (measure.a != 8)
-        {
-            Console.WriteLine("in .cctor() after measure.a=8, measure.a is {0}", measure.a);
-            Console.WriteLine("FAILED");
-            throw new Exception();
-        }
-        Console.WriteLine("in .cctor() after measure.a=8, measure.a is {0}", measure.a);
-    }
-}
+        public static void f() { }
 
-public class Driver
-{
-    [Fact]
-    public static int TestEntryPoint()
-    {
-        try
+        static test()
         {
-            Console.WriteLine("Testing .cctor() invocation by calling static method");
-            Console.WriteLine();
-            Console.WriteLine("Before calling static method");
-            // .cctor should not run yet
             if (measure.a != 0xCC)
             {
-                Console.WriteLine("in Main(), measure.a is {0}", measure.a);
+                Console.WriteLine("in .cctor(), measure.a is {0}", measure.a);
                 Console.WriteLine("FAILED");
-                return 1;
+                throw new Exception();
             }
-            // the next line should trigger .cctor
-            test.f();
-            Console.WriteLine("After calling static method");
+            Console.WriteLine("in .cctor(), measure.a is {0}", measure.a);
+            measure.a = 8;
             if (measure.a != 8)
             {
-                Console.WriteLine("in Main() after f(ref b), measure.a is {0}", measure.a);
+                Console.WriteLine("in .cctor() after measure.a=8, measure.a is {0}", measure.a);
                 Console.WriteLine("FAILED");
+                throw new Exception();
+            }
+            Console.WriteLine("in .cctor() after measure.a=8, measure.a is {0}", measure.a);
+        }
+    }
+
+    public class Driver
+    {
+        [Fact]
+        public static int TestEntryPoint()
+        {
+            try
+            {
+                Console.WriteLine("Testing .cctor() invocation by calling static method");
+                Console.WriteLine();
+                Console.WriteLine("Before calling static method");
+                // .cctor should not run yet
+                if (measure.a != 0xCC)
+                {
+                    Console.WriteLine("in Main(), measure.a is {0}", measure.a);
+                    Console.WriteLine("FAILED");
+                    return 1;
+                }
+                // the next line should trigger .cctor
+                test.f();
+                Console.WriteLine("After calling static method");
+                if (measure.a != 8)
+                {
+                    Console.WriteLine("in Main() after f(ref b), measure.a is {0}", measure.a);
+                    Console.WriteLine("FAILED");
+                    return -1;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
                 return -1;
             }
+            Console.WriteLine();
+            Console.WriteLine("PASSED");
+            return 100;
         }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.StackTrace);
-            return -1;
-        }
-        Console.WriteLine();
-        Console.WriteLine("PASSED");
-        return 100;
     }
-}
 }

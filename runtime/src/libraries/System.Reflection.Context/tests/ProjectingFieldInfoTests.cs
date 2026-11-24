@@ -8,9 +8,11 @@ namespace System.Reflection.Context.Tests
 {
     public class ProjectingFieldInfoTests
     {
-        private readonly CustomReflectionContext _customReflectionContext = new VirtualPropertyInfoCustomReflectionContext();
+        private readonly CustomReflectionContext _customReflectionContext =
+            new VirtualPropertyInfoCustomReflectionContext();
         private TypeInfo _customTypeInfo;
         private FieldInfo _field;
+
         public ProjectingFieldInfoTests()
         {
             TypeInfo typeInfo = typeof(SecondTestObject).GetTypeInfo();

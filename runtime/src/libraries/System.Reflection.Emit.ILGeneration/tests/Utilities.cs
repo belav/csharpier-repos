@@ -43,10 +43,15 @@ namespace System.Reflection.Emit.Tests
         public static int StaticReadonlyField = 4;
 
         public TestAttribute() { }
+
         public TestAttribute(int i) { }
+
         public TestAttribute(object o) { }
+
         public TestAttribute(int i, bool b) { }
+
         private TestAttribute(int i, int j, int k) { }
+
         static TestAttribute() { }
 
         public TestAttribute(string getOnlyString, int getOnlyInt32)
@@ -55,7 +60,12 @@ namespace System.Reflection.Emit.Tests
             GetInt = getOnlyInt32;
         }
 
-        public TestAttribute(string testString, int testInt32, string getOnlyString, int getOnlyInt32)
+        public TestAttribute(
+            string testString,
+            int testInt32,
+            string getOnlyString,
+            int getOnlyInt32
+        )
         {
             TestStringField = testString;
             TestInt = testInt32;
@@ -63,8 +73,22 @@ namespace System.Reflection.Emit.Tests
             GetInt = getOnlyInt32;
         }
 
-        public static FieldInfo[] AllFields => Helpers.GetFields(typeof(TestAttribute), nameof(TestInt), nameof(TestStringField), nameof(GetString), nameof(GetInt));
-        public static PropertyInfo[] AllProperties => Helpers.GetProperties(typeof(TestAttribute), nameof(TestInt32), nameof(TestString), nameof(GetOnlyString), nameof(GetOnlyInt32));
+        public static FieldInfo[] AllFields =>
+            Helpers.GetFields(
+                typeof(TestAttribute),
+                nameof(TestInt),
+                nameof(TestStringField),
+                nameof(GetString),
+                nameof(GetInt)
+            );
+        public static PropertyInfo[] AllProperties =>
+            Helpers.GetProperties(
+                typeof(TestAttribute),
+                nameof(TestInt32),
+                nameof(TestString),
+                nameof(GetOnlyString),
+                nameof(GetOnlyInt32)
+            );
     }
 
     public class SubAttribute : TestAttribute
@@ -78,7 +102,8 @@ namespace System.Reflection.Emit.Tests
         public static FieldInfo[] GetFields(Type type, params string[] fieldNames)
         {
             FieldInfo[] fields = new FieldInfo[fieldNames.Length];
-            const BindingFlags Flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic;
+            const BindingFlags Flags =
+                BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic;
             for (int i = 0; i < fieldNames.Length; i++)
             {
                 string name = fieldNames[i];
@@ -87,10 +112,11 @@ namespace System.Reflection.Emit.Tests
             return fields;
         }
 
-        public static PropertyInfo[] GetProperties(Type type,params string[] propertyNames)
+        public static PropertyInfo[] GetProperties(Type type, params string[] propertyNames)
         {
             PropertyInfo[] properties = new PropertyInfo[propertyNames.Length];
-            const BindingFlags Flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic;
+            const BindingFlags Flags =
+                BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic;
             for (int i = 0; i < propertyNames.Length; i++)
             {
                 string name = propertyNames[i];
@@ -98,18 +124,27 @@ namespace System.Reflection.Emit.Tests
             }
             return properties;
         }
+
         public static AssemblyBuilder DynamicAssembly(string name = "TestAssembly")
         {
             AssemblyName assemblyName = new AssemblyName(name);
             return AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
         }
 
-        public static ModuleBuilder DynamicModule(string assemblyName = "TestAssembly", string moduleName = "TestModule")
+        public static ModuleBuilder DynamicModule(
+            string assemblyName = "TestAssembly",
+            string moduleName = "TestModule"
+        )
         {
             return DynamicAssembly(assemblyName).DefineDynamicModule(moduleName);
         }
 
-        public static TypeBuilder DynamicType(TypeAttributes attributes, string assemblyName = "TestAssembly", string moduleName = "TestModule", string typeName = "TestType")
+        public static TypeBuilder DynamicType(
+            TypeAttributes attributes,
+            string assemblyName = "TestAssembly",
+            string moduleName = "TestModule",
+            string typeName = "TestType"
+        )
         {
             return DynamicModule(assemblyName, moduleName).DefineType(typeName, attributes);
         }

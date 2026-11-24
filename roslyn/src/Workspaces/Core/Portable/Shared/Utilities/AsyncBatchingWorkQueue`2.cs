@@ -39,7 +39,11 @@ namespace Roslyn.Utilities
         /// <summary>
         /// Callback to actually perform the processing of the next batch of work.
         /// </summary>
-        private readonly Func<ImmutableSegmentedList<TItem>, CancellationToken, ValueTask<TResult>> _processBatchAsync;
+        private readonly Func<
+            ImmutableSegmentedList<TItem>,
+            CancellationToken,
+            ValueTask<TResult>
+        > _processBatchAsync;
         private readonly IAsynchronousOperationListener _asyncListener;
 
         /// <summary>
@@ -70,7 +74,8 @@ namespace Roslyn.Utilities
         /// <summary>
         /// Data added that we want to process in our next update task.
         /// </summary>
-        private readonly ImmutableSegmentedList<TItem>.Builder _nextBatch = ImmutableSegmentedList.CreateBuilder<TItem>();
+        private readonly ImmutableSegmentedList<TItem>.Builder _nextBatch =
+            ImmutableSegmentedList.CreateBuilder<TItem>();
 
         /// <summary>
         /// CancellationToken controlling the next batch of items to execute.
@@ -100,10 +105,15 @@ namespace Roslyn.Utilities
 
         public AsyncBatchingWorkQueue(
             TimeSpan delay,
-            Func<ImmutableSegmentedList<TItem>, CancellationToken, ValueTask<TResult>> processBatchAsync,
+            Func<
+                ImmutableSegmentedList<TItem>,
+                CancellationToken,
+                ValueTask<TResult>
+            > processBatchAsync,
             IEqualityComparer<TItem>? equalityComparer,
             IAsynchronousOperationListener asyncListener,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             _delay = delay;
             _processBatchAsync = processBatchAsync;
@@ -203,7 +213,9 @@ namespace Roslyn.Utilities
                 // must be on another thread that runs afterwards, can only grab the thread once we release it and will
                 // then reset that bool back to false
                 await Task.Yield().ConfigureAwait(false);
-                await _asyncListener.Delay(_delay, _entireQueueCancellationToken).ConfigureAwait(false);
+                await _asyncListener
+                    .Delay(_delay, _entireQueueCancellationToken)
+                    .ConfigureAwait(false);
                 return await ProcessNextBatchAsync().ConfigureAwait(false);
             }
         }
@@ -230,13 +242,17 @@ namespace Roslyn.Utilities
                 if (nextBatch.IsEmpty)
                     return default;
 
-                var batchResultTask = _processBatchAsync(nextBatch, batchCancellationToken).Preserve();
+                var batchResultTask = _processBatchAsync(nextBatch, batchCancellationToken)
+                    .Preserve();
                 await batchResultTask.NoThrowAwaitableInternal(false);
                 if (batchResultTask.IsCompletedSuccessfully)
                 {
                     return batchResultTask.Result;
                 }
-                else if (batchResultTask.IsCanceled && !_entireQueueCancellationToken.IsCancellationRequested)
+                else if (
+                    batchResultTask.IsCanceled
+                    && !_entireQueueCancellationToken.IsCancellationRequested
+                )
                 {
                     // Don't bubble up cancellation to the queue for the nested batch cancellation.  Just because we decided
                     // to cancel this batch isn't something that should stop processing further batches.
@@ -249,7 +265,8 @@ namespace Roslyn.Utilities
                     throw ExceptionUtilities.Unreachable();
                 }
             }
-            catch (Exception ex) when (FatalError.ReportAndPropagateUnlessCanceled(ex, ErrorSeverity.Critical))
+            catch (Exception ex)
+                when (FatalError.ReportAndPropagateUnlessCanceled(ex, ErrorSeverity.Critical))
             {
                 // Report an exception if the batch fails for a non-cancellation reason.
                 //
@@ -263,7 +280,10 @@ namespace Roslyn.Utilities
             }
         }
 
-        private (ImmutableSegmentedList<TItem> items, CancellationToken batchCancellationToken) GetNextBatchAndResetQueue()
+        private (
+            ImmutableSegmentedList<TItem> items,
+            CancellationToken batchCancellationToken
+        ) GetNextBatchAndResetQueue()
         {
             lock (_gate)
             {

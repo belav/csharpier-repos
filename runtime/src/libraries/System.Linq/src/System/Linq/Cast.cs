@@ -31,9 +31,9 @@ namespace System.Linq
 
         public static IEnumerable<
 #nullable disable // there's no way to annotate the connection of the nullability of TResult to that of the source
-                TResult
+        TResult
 #nullable restore
-                > Cast<TResult>(this IEnumerable source)
+        > Cast<TResult>(this IEnumerable source)
         {
             if (source is IEnumerable<TResult> typedSource)
             {

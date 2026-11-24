@@ -12,15 +12,12 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         {
             public override bool TryMatch(IList<T> sequence, ref int index)
             {
-                while (matcher.TryMatch(sequence, ref index))
-                {
-                }
+                while (matcher.TryMatch(sequence, ref index)) { }
 
                 return true;
             }
 
-            public override string ToString()
-                => string.Format("({0}*)", matcher);
+            public override string ToString() => string.Format("({0}*)", matcher);
         }
     }
 }

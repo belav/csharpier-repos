@@ -7,7 +7,11 @@ namespace ILCompiler.DependencyAnalysis
 {
     public partial class ReadyToRunGenericHelperNode
     {
-        protected sealed override void EmitCode(NodeFactory factory, ref X86Emitter encoder, bool relocsOnly)
+        protected sealed override void EmitCode(
+            NodeFactory factory,
+            ref X86Emitter encoder,
+            bool relocsOnly
+        )
         {
             encoder.EmitINT3();
         }

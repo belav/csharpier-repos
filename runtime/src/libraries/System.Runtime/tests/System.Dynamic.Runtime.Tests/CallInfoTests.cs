@@ -12,8 +12,12 @@ namespace System.Dynamic.Runtime.Tests
         [Fact]
         public void NullNames()
         {
-            AssertExtensions.Throws<ArgumentNullException>("argNames", () => new CallInfo(0, default(string[])));
-            AssertExtensions.Throws<ArgumentNullException>("argNames", () => new CallInfo(0, default(IEnumerable<string>)));
+            AssertExtensions.Throws<ArgumentNullException>("argNames", () =>
+                new CallInfo(0, default(string[]))
+            );
+            AssertExtensions.Throws<ArgumentNullException>("argNames", () =>
+                new CallInfo(0, default(IEnumerable<string>))
+            );
         }
 
         [Fact]
@@ -25,7 +29,9 @@ namespace System.Dynamic.Runtime.Tests
         [Fact]
         public void NullName()
         {
-            AssertExtensions.Throws<ArgumentNullException>("argNames[1]", () => new CallInfo(3, "a", null, "c"));
+            AssertExtensions.Throws<ArgumentNullException>("argNames[1]", () =>
+                new CallInfo(3, "a", null, "c")
+            );
         }
 
         [Fact]

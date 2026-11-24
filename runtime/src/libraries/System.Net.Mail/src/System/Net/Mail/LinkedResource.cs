@@ -9,44 +9,30 @@ namespace System.Net.Mail
 {
     public class LinkedResource : AttachmentBase
     {
-        internal LinkedResource()
-        { }
+        internal LinkedResource() { }
 
-        public LinkedResource(string fileName) :
-            base(fileName)
-        { }
+        public LinkedResource(string fileName)
+            : base(fileName) { }
 
-        public LinkedResource(string fileName, string? mediaType) :
-            base(fileName, mediaType)
-        { }
+        public LinkedResource(string fileName, string? mediaType)
+            : base(fileName, mediaType) { }
 
-        public LinkedResource(string fileName, ContentType? contentType) :
-            base(fileName, contentType)
-        { }
+        public LinkedResource(string fileName, ContentType? contentType)
+            : base(fileName, contentType) { }
 
-        public LinkedResource(Stream contentStream) :
-            base(contentStream)
-        { }
+        public LinkedResource(Stream contentStream)
+            : base(contentStream) { }
 
-        public LinkedResource(Stream contentStream, string? mediaType) :
-            base(contentStream, mediaType)
-        { }
+        public LinkedResource(Stream contentStream, string? mediaType)
+            : base(contentStream, mediaType) { }
 
-        public LinkedResource(Stream contentStream, ContentType? contentType) :
-            base(contentStream, contentType)
-        { }
+        public LinkedResource(Stream contentStream, ContentType? contentType)
+            : base(contentStream, contentType) { }
 
         public Uri? ContentLink
         {
-            get
-            {
-                return ContentLocation;
-            }
-
-            set
-            {
-                ContentLocation = value;
-            }
+            get { return ContentLocation; }
+            set { ContentLocation = value; }
         }
 
         public static LinkedResource CreateLinkedResourceFromString(string content)
@@ -56,14 +42,21 @@ namespace System.Net.Mail
             return a;
         }
 
-        public static LinkedResource CreateLinkedResourceFromString(string content, Encoding? contentEncoding, string? mediaType)
+        public static LinkedResource CreateLinkedResourceFromString(
+            string content,
+            Encoding? contentEncoding,
+            string? mediaType
+        )
         {
             LinkedResource a = new LinkedResource();
             a.SetContentFromString(content, contentEncoding, mediaType);
             return a;
         }
 
-        public static LinkedResource CreateLinkedResourceFromString(string content, ContentType? contentType)
+        public static LinkedResource CreateLinkedResourceFromString(
+            string content,
+            ContentType? contentType
+        )
         {
             LinkedResource a = new LinkedResource();
             a.SetContentFromString(content, contentType);

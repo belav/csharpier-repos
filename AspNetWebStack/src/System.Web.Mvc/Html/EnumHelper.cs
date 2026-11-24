@@ -89,7 +89,11 @@ namespace System.Web.Mvc.Html
 
             if (!IsValidForEnumHelper(type))
             {
-                throw Error.Argument("type", MvcResources.EnumHelper_InvalidParameterType, type.FullName);
+                throw Error.Argument(
+                    "type",
+                    MvcResources.EnumHelper_InvalidParameterType,
+                    type.FullName
+                );
             }
 
             IList<SelectListItem> selectList = new List<SelectListItem>();
@@ -103,18 +107,27 @@ namespace System.Web.Mvc.Html
             if (checkedType != type)
             {
                 // Underlying type was non-null so handle Nullable<T>; ensure returned list has a spot for null
-                selectList.Add(new SelectListItem { Text = String.Empty, Value = String.Empty, });
+                selectList.Add(new SelectListItem { Text = String.Empty, Value = String.Empty });
             }
 
             // Populate the list
             const BindingFlags BindingFlags =
-                BindingFlags.DeclaredOnly | BindingFlags.GetField | BindingFlags.Public | BindingFlags.Static;
+                BindingFlags.DeclaredOnly
+                | BindingFlags.GetField
+                | BindingFlags.Public
+                | BindingFlags.Static;
             foreach (FieldInfo field in checkedType.GetFields(BindingFlags))
             {
                 // fieldValue will be an numeric type (byte, ...)
                 object fieldValue = field.GetRawConstantValue();
 
-                selectList.Add(new SelectListItem { Text = GetDisplayName(field), Value = fieldValue.ToString(), });
+                selectList.Add(
+                    new SelectListItem
+                    {
+                        Text = GetDisplayName(field),
+                        Value = fieldValue.ToString(),
+                    }
+                );
             }
 
             return selectList;
@@ -144,8 +157,11 @@ namespace System.Web.Mvc.Html
 
             if (!IsValidForEnumHelper(metadata))
             {
-                throw Error.Argument("metadata", MvcResources.EnumHelper_InvalidParameterType,
-                    metadata.ModelType.FullName);
+                throw Error.Argument(
+                    "metadata",
+                    MvcResources.EnumHelper_InvalidParameterType,
+                    metadata.ModelType.FullName
+                );
             }
 
             return GetSelectList(metadata.ModelType);
@@ -173,10 +189,18 @@ namespace System.Web.Mvc.Html
             IList<SelectListItem> selectList = GetSelectList(type);
 
             Type valueType = (value == null) ? null : value.GetType();
-            if (valueType != null && valueType != type && valueType != Nullable.GetUnderlyingType(type))
+            if (
+                valueType != null
+                && valueType != type
+                && valueType != Nullable.GetUnderlyingType(type)
+            )
             {
-                throw Error.Argument("value", MvcResources.EnumHelper_InvalidValueParameter, valueType.FullName,
-                    type.FullName);
+                throw Error.Argument(
+                    "value",
+                    MvcResources.EnumHelper_InvalidValueParameter,
+                    valueType.FullName,
+                    type.FullName
+                );
             }
 
             if (value == null && selectList.Count != 0 && String.IsNullOrEmpty(selectList[0].Value))
@@ -211,8 +235,15 @@ namespace System.Web.Mvc.Html
                     else
                     {
                         // Add new entry which does not display value to user
-                        selectList.Insert(0,
-                            new SelectListItem { Selected = true, Text = String.Empty, Value = valueString, });
+                        selectList.Insert(
+                            0,
+                            new SelectListItem
+                            {
+                                Selected = true,
+                                Text = String.Empty,
+                                Value = valueString,
+                            }
+                        );
                     }
                 }
             }
@@ -251,8 +282,11 @@ namespace System.Web.Mvc.Html
 
             if (!IsValidForEnumHelper(metadata))
             {
-                throw Error.Argument("metadata", MvcResources.EnumHelper_InvalidParameterType,
-                    metadata.ModelType.FullName);
+                throw Error.Argument(
+                    "metadata",
+                    MvcResources.EnumHelper_InvalidParameterType,
+                    metadata.ModelType.FullName
+                );
             }
 
             return GetSelectList(metadata.ModelType, value);

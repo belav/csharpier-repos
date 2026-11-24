@@ -9,7 +9,8 @@ public static class SqlServerTestModelBuilderExtensions
 {
     public static ModelBuilderTest.TestIndexBuilder<TEntity> IsClustered<TEntity>(
         this ModelBuilderTest.TestIndexBuilder<TEntity> builder,
-        bool clustered = true)
+        bool clustered = true
+    )
     {
         switch (builder)
         {
@@ -26,7 +27,8 @@ public static class SqlServerTestModelBuilderExtensions
 
     public static RelationalModelBuilderTest.TestTableBuilder<TEntity> IsMemoryOptimized<TEntity>(
         this RelationalModelBuilderTest.TestTableBuilder<TEntity> builder,
-        bool memoryOptimized = true)
+        bool memoryOptimized = true
+    )
         where TEntity : class
     {
         switch (builder)
@@ -42,16 +44,24 @@ public static class SqlServerTestModelBuilderExtensions
         return builder;
     }
 
-    public static RelationalModelBuilderTest.TestOwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> IsMemoryOptimized<
-        TOwnerEntity, TDependentEntity>(
-        this RelationalModelBuilderTest.TestOwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> builder,
-        bool memoryOptimized = true)
+    public static RelationalModelBuilderTest.TestOwnedNavigationTableBuilder<
+        TOwnerEntity,
+        TDependentEntity
+    > IsMemoryOptimized<TOwnerEntity, TDependentEntity>(
+        this RelationalModelBuilderTest.TestOwnedNavigationTableBuilder<
+            TOwnerEntity,
+            TDependentEntity
+        > builder,
+        bool memoryOptimized = true
+    )
         where TOwnerEntity : class
         where TDependentEntity : class
     {
         switch (builder)
         {
-            case IInfrastructure<OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>> genericBuilder:
+            case IInfrastructure<
+                OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>
+            > genericBuilder:
                 genericBuilder.Instance.IsMemoryOptimized(memoryOptimized);
                 break;
             case IInfrastructure<OwnedNavigationTableBuilder> nongenericBuilder:
@@ -64,7 +74,8 @@ public static class SqlServerTestModelBuilderExtensions
 
     public static RelationalModelBuilderTest.TestTableBuilder<TEntity> IsTemporal<TEntity>(
         this RelationalModelBuilderTest.TestTableBuilder<TEntity> builder,
-        bool temporal = true)
+        bool temporal = true
+    )
         where TEntity : class
     {
         switch (builder)
@@ -82,34 +93,53 @@ public static class SqlServerTestModelBuilderExtensions
 
     public static RelationalModelBuilderTest.TestTableBuilder<TEntity> IsTemporal<TEntity>(
         this RelationalModelBuilderTest.TestTableBuilder<TEntity> builder,
-        Action<SqlServerModelBuilderTestBase.TestTemporalTableBuilder<TEntity>> buildAction)
+        Action<SqlServerModelBuilderTestBase.TestTemporalTableBuilder<TEntity>> buildAction
+    )
         where TEntity : class
     {
         switch (builder)
         {
             case IInfrastructure<TableBuilder<TEntity>> genericBuilder:
-                genericBuilder.Instance.IsTemporal(
-                    b => buildAction(new SqlServerModelBuilderTestBase.GenericTestTemporalTableBuilder<TEntity>(b)));
+                genericBuilder.Instance.IsTemporal(b =>
+                    buildAction(
+                        new SqlServerModelBuilderTestBase.GenericTestTemporalTableBuilder<TEntity>(
+                            b
+                        )
+                    )
+                );
                 break;
             case IInfrastructure<TableBuilder> nongenericBuilder:
-                nongenericBuilder.Instance.IsTemporal(
-                    b => buildAction(new SqlServerModelBuilderTestBase.NonGenericTestTemporalTableBuilder<TEntity>(b)));
+                nongenericBuilder.Instance.IsTemporal(b =>
+                    buildAction(
+                        new SqlServerModelBuilderTestBase.NonGenericTestTemporalTableBuilder<TEntity>(
+                            b
+                        )
+                    )
+                );
                 break;
         }
 
         return builder;
     }
 
-    public static RelationalModelBuilderTest.TestOwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> IsTemporal
-        <TOwnerEntity, TDependentEntity>(
-            this RelationalModelBuilderTest.TestOwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> builder,
-            bool temporal = true)
+    public static RelationalModelBuilderTest.TestOwnedNavigationTableBuilder<
+        TOwnerEntity,
+        TDependentEntity
+    > IsTemporal<TOwnerEntity, TDependentEntity>(
+        this RelationalModelBuilderTest.TestOwnedNavigationTableBuilder<
+            TOwnerEntity,
+            TDependentEntity
+        > builder,
+        bool temporal = true
+    )
         where TOwnerEntity : class
         where TDependentEntity : class
     {
         switch (builder)
         {
-            case IInfrastructure<OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>> genericBuilder:
+            case IInfrastructure<
+                OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>
+            > genericBuilder:
                 genericBuilder.Instance.IsTemporal(temporal);
                 break;
             case IInfrastructure<OwnedNavigationTableBuilder> nongenericBuilder:
@@ -120,26 +150,45 @@ public static class SqlServerTestModelBuilderExtensions
         return builder;
     }
 
-    public static RelationalModelBuilderTest.TestOwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> IsTemporal<
-        TOwnerEntity, TDependentEntity>(
-        this RelationalModelBuilderTest.TestOwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> builder,
-        Action<SqlServerModelBuilderTestBase.TestOwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity>> buildAction)
+    public static RelationalModelBuilderTest.TestOwnedNavigationTableBuilder<
+        TOwnerEntity,
+        TDependentEntity
+    > IsTemporal<TOwnerEntity, TDependentEntity>(
+        this RelationalModelBuilderTest.TestOwnedNavigationTableBuilder<
+            TOwnerEntity,
+            TDependentEntity
+        > builder,
+        Action<SqlServerModelBuilderTestBase.TestOwnedNavigationTemporalTableBuilder<
+            TOwnerEntity,
+            TDependentEntity
+        >> buildAction
+    )
         where TOwnerEntity : class
         where TDependentEntity : class
     {
         switch (builder)
         {
-            case IInfrastructure<OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>> genericBuilder:
-                genericBuilder.Instance.IsTemporal(
-                    b => buildAction(
-                        new SqlServerModelBuilderTestBase.GenericTestOwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity>(
-                            b)));
+            case IInfrastructure<
+                OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>
+            > genericBuilder:
+                genericBuilder.Instance.IsTemporal(b =>
+                    buildAction(
+                        new SqlServerModelBuilderTestBase.GenericTestOwnedNavigationTemporalTableBuilder<
+                            TOwnerEntity,
+                            TDependentEntity
+                        >(b)
+                    )
+                );
                 break;
             case IInfrastructure<OwnedNavigationTableBuilder> nongenericBuilder:
-                nongenericBuilder.Instance.IsTemporal(
-                    b => buildAction(
-                        new SqlServerModelBuilderTestBase.NonGenericTestOwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity>(
-                            b)));
+                nongenericBuilder.Instance.IsTemporal(b =>
+                    buildAction(
+                        new SqlServerModelBuilderTestBase.NonGenericTestOwnedNavigationTemporalTableBuilder<
+                            TOwnerEntity,
+                            TDependentEntity
+                        >(b)
+                    )
+                );
                 break;
         }
 

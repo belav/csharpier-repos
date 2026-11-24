@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Linq;
-using System.Globalization;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 namespace System.Buffers.Text.Tests
 {
@@ -12,9 +12,18 @@ namespace System.Buffers.Text.Tests
     //
     internal static partial class TestData
     {
-        public static readonly IEnumerable<byte> s_precisions = new byte[] { StandardFormat.NoPrecision, 0, 1, 3, 10, StandardFormat.MaxPrecision };
+        public static readonly IEnumerable<byte> s_precisions = new byte[]
+        {
+            StandardFormat.NoPrecision,
+            0,
+            1,
+            3,
+            10,
+            StandardFormat.MaxPrecision,
+        };
 
-        public static IEnumerable<object[]> IntegerTypesTheoryData => IntegerTypes.Select(t => new object[] { t });
+        public static IEnumerable<object[]> IntegerTypesTheoryData =>
+            IntegerTypes.Select(t => new object[] { t });
 
         public static IEnumerable<Type> IntegerTypes
         {
@@ -228,7 +237,15 @@ namespace System.Buffers.Text.Tests
                 yield return decimal.MaxValue;
 
                 // negative 0m. The formatter is expected *not* to emit a minus sign in this case.
-                yield return (new MutableDecimal() { High = 0, Mid = 0, Low = 0, IsNegative = true }).ToDecimal();
+                yield return (
+                    new MutableDecimal()
+                    {
+                        High = 0,
+                        Mid = 0,
+                        Low = 0,
+                        IsNegative = true,
+                    }
+                ).ToDecimal();
 
                 yield return 0.304m; // Round down
                 yield return -0.304m;
@@ -289,28 +306,60 @@ namespace System.Buffers.Text.Tests
                 {
                     // Kind == Unspecified
                     TimeSpan offset = new TimeSpan(hours: 8, minutes: 0, seconds: 0);
-                    DateTimeOffset dto = new DateTimeOffset(year: 2017, month: 1, day: 13, hour: 3, minute: 45, second: 32, offset: offset);
+                    DateTimeOffset dto = new DateTimeOffset(
+                        year: 2017,
+                        month: 1,
+                        day: 13,
+                        hour: 3,
+                        minute: 45,
+                        second: 32,
+                        offset: offset
+                    );
                     yield return dto.DateTime;
                 }
 
                 {
                     // Kind == Utc
                     TimeSpan offset = new TimeSpan(hours: 8, minutes: 0, seconds: 0);
-                    DateTimeOffset dto = new DateTimeOffset(year: 2017, month: 1, day: 13, hour: 3, minute: 45, second: 32, offset: offset);
+                    DateTimeOffset dto = new DateTimeOffset(
+                        year: 2017,
+                        month: 1,
+                        day: 13,
+                        hour: 3,
+                        minute: 45,
+                        second: 32,
+                        offset: offset
+                    );
                     yield return dto.UtcDateTime;
                 }
 
                 {
                     // Kind == Local
                     TimeSpan offset = new TimeSpan(hours: 8, minutes: 0, seconds: 0);
-                    DateTimeOffset dto = new DateTimeOffset(year: 2017, month: 1, day: 13, hour: 3, minute: 45, second: 32, offset: offset);
+                    DateTimeOffset dto = new DateTimeOffset(
+                        year: 2017,
+                        month: 1,
+                        day: 13,
+                        hour: 3,
+                        minute: 45,
+                        second: 32,
+                        offset: offset
+                    );
                     yield return dto.LocalDateTime;
                 }
 
                 {
                     // Kind == Local
                     TimeSpan offset = new TimeSpan(hours: -9, minutes: 0, seconds: 0);
-                    DateTimeOffset dto = new DateTimeOffset(year: 2017, month: 1, day: 13, hour: 3, minute: 45, second: 32, offset: offset);
+                    DateTimeOffset dto = new DateTimeOffset(
+                        year: 2017,
+                        month: 1,
+                        day: 13,
+                        hour: 3,
+                        minute: 45,
+                        second: 32,
+                        offset: offset
+                    );
                     yield return dto.LocalDateTime;
                 }
             }
@@ -322,23 +371,83 @@ namespace System.Buffers.Text.Tests
             {
                 yield return DateTimeOffset.MinValue;
                 yield return DateTimeOffset.MaxValue;
-                yield return new DateTimeOffset(year: 2017, month: 1, day: 13, hour: 3, minute: 45, second: 32, new TimeSpan(hours: 0, minutes: 30, seconds: 0));
-                yield return new DateTimeOffset(year: 2017, month: 1, day: 13, hour: 3, minute: 45, second: 32, new TimeSpan(hours: 0, minutes: -30, seconds: 0));
-                yield return new DateTimeOffset(year: 2017, month: 1, day: 13, hour: 3, minute: 45, second: 32, new TimeSpan(hours: 8, minutes: 0, seconds: 0));
-                yield return new DateTimeOffset(year: 2017, month: 1, day: 13, hour: 3, minute: 45, second: 32, new TimeSpan(hours: -8, minutes: 0, seconds: 0));
-                yield return new DateTimeOffset(year: 2017, month: 12, day: 31, hour: 23, minute: 59, second: 58, new TimeSpan(hours: 14, minutes: 0, seconds: 0));
-                yield return new DateTimeOffset(year: 2017, month: 12, day: 31, hour: 23, minute: 59, second: 58, new TimeSpan(hours: -14, minutes: 0, seconds: 0));
+                yield return new DateTimeOffset(
+                    year: 2017,
+                    month: 1,
+                    day: 13,
+                    hour: 3,
+                    minute: 45,
+                    second: 32,
+                    new TimeSpan(hours: 0, minutes: 30, seconds: 0)
+                );
+                yield return new DateTimeOffset(
+                    year: 2017,
+                    month: 1,
+                    day: 13,
+                    hour: 3,
+                    minute: 45,
+                    second: 32,
+                    new TimeSpan(hours: 0, minutes: -30, seconds: 0)
+                );
+                yield return new DateTimeOffset(
+                    year: 2017,
+                    month: 1,
+                    day: 13,
+                    hour: 3,
+                    minute: 45,
+                    second: 32,
+                    new TimeSpan(hours: 8, minutes: 0, seconds: 0)
+                );
+                yield return new DateTimeOffset(
+                    year: 2017,
+                    month: 1,
+                    day: 13,
+                    hour: 3,
+                    minute: 45,
+                    second: 32,
+                    new TimeSpan(hours: -8, minutes: 0, seconds: 0)
+                );
+                yield return new DateTimeOffset(
+                    year: 2017,
+                    month: 12,
+                    day: 31,
+                    hour: 23,
+                    minute: 59,
+                    second: 58,
+                    new TimeSpan(hours: 14, minutes: 0, seconds: 0)
+                );
+                yield return new DateTimeOffset(
+                    year: 2017,
+                    month: 12,
+                    day: 31,
+                    hour: 23,
+                    minute: 59,
+                    second: 58,
+                    new TimeSpan(hours: -14, minutes: 0, seconds: 0)
+                );
 
                 foreach (PseudoDateTime pseudoDateTime in PseudoDateTimeTestData)
                 {
                     if (pseudoDateTime.ExpectSuccess)
                     {
-                        TimeSpan offset = new TimeSpan(hours: pseudoDateTime.OffsetHours, minutes: pseudoDateTime.OffsetMinutes, seconds: 0);
+                        TimeSpan offset = new TimeSpan(
+                            hours: pseudoDateTime.OffsetHours,
+                            minutes: pseudoDateTime.OffsetMinutes,
+                            seconds: 0
+                        );
                         if (pseudoDateTime.OffsetNegative)
                         {
                             offset = -offset;
                         }
-                        DateTimeOffset dto = new DateTimeOffset(year: pseudoDateTime.Year, month: pseudoDateTime.Month, day: pseudoDateTime.Day, hour: pseudoDateTime.Hour, minute: pseudoDateTime.Minute, second: pseudoDateTime.Second, offset: offset);
+                        DateTimeOffset dto = new DateTimeOffset(
+                            year: pseudoDateTime.Year,
+                            month: pseudoDateTime.Month,
+                            day: pseudoDateTime.Day,
+                            hour: pseudoDateTime.Hour,
+                            minute: pseudoDateTime.Minute,
+                            second: pseudoDateTime.Second,
+                            offset: offset
+                        );
                         if (pseudoDateTime.Fraction != 0)
                         {
                             dto += new TimeSpan(ticks: pseudoDateTime.Fraction);
@@ -360,13 +469,55 @@ namespace System.Buffers.Text.Tests
                 yield return new TimeSpan(ticks: -1);
                 yield return new TimeSpan(ticks: 12345L);
                 yield return new TimeSpan(ticks: -12345L);
-                yield return new TimeSpan(days: 4, hours: 9, minutes: 8, seconds: 6, milliseconds: 0);
-                yield return new TimeSpan(days: -4, hours: 9, minutes: 8, seconds: 6, milliseconds: 0);
-                yield return new TimeSpan(days: 4, hours: 9, minutes: 8, seconds: 6, milliseconds: 5);
-                yield return new TimeSpan(days: -4, hours: 9, minutes: 8, seconds: 6, milliseconds: 5);
-                yield return new TimeSpan(days: 54, hours: 10, minutes: 11, seconds: 12, milliseconds: 13);
-                yield return new TimeSpan(days: -54, hours: 10, minutes: 11, seconds: 12, milliseconds: 13);
-                yield return new TimeSpan(days: 54, hours: 10, minutes: 11, seconds: 12, milliseconds: 999);
+                yield return new TimeSpan(
+                    days: 4,
+                    hours: 9,
+                    minutes: 8,
+                    seconds: 6,
+                    milliseconds: 0
+                );
+                yield return new TimeSpan(
+                    days: -4,
+                    hours: 9,
+                    minutes: 8,
+                    seconds: 6,
+                    milliseconds: 0
+                );
+                yield return new TimeSpan(
+                    days: 4,
+                    hours: 9,
+                    minutes: 8,
+                    seconds: 6,
+                    milliseconds: 5
+                );
+                yield return new TimeSpan(
+                    days: -4,
+                    hours: 9,
+                    minutes: 8,
+                    seconds: 6,
+                    milliseconds: 5
+                );
+                yield return new TimeSpan(
+                    days: 54,
+                    hours: 10,
+                    minutes: 11,
+                    seconds: 12,
+                    milliseconds: 13
+                );
+                yield return new TimeSpan(
+                    days: -54,
+                    hours: 10,
+                    minutes: 11,
+                    seconds: 12,
+                    milliseconds: 13
+                );
+                yield return new TimeSpan(
+                    days: 54,
+                    hours: 10,
+                    minutes: 11,
+                    seconds: 12,
+                    milliseconds: 999
+                );
             }
         }
 
@@ -481,10 +632,10 @@ namespace System.Buffers.Text.Tests
                 yield return "-3.402823E+38"; //Single.MinValue
                 yield return "-3.402824E+38"; //Just under Single.MinValue
 
-                yield return "1.79769313486232E+308";   //Double.MaxValue
-                yield return "1.79769313486233E+308";   //Just over Double.MaxValue
-                yield return "-1.79769313486232E+308";  //Double.MinValue
-                yield return "-1.79769313486233E+308";  //Just under Double.MinValue
+                yield return "1.79769313486232E+308"; //Double.MaxValue
+                yield return "1.79769313486233E+308"; //Just over Double.MaxValue
+                yield return "-1.79769313486232E+308"; //Double.MinValue
+                yield return "-1.79769313486233E+308"; //Just under Double.MinValue
 
                 // Ensures that the NumberBuffer capacity is consistent with Desktop's.
                 yield return ".2222222222222222222222222222500000000000000000001";
@@ -495,54 +646,349 @@ namespace System.Buffers.Text.Tests
         {
             get
             {
-                foreach (int year in new int[] { 2000, 2001, 2002, 2003, 2004, 2010, 2012, 2013, 2014, 2, 9999 })
+                foreach (
+                    int year in new int[]
+                    {
+                        2000,
+                        2001,
+                        2002,
+                        2003,
+                        2004,
+                        2010,
+                        2012,
+                        2013,
+                        2014,
+                        2,
+                        9999,
+                    }
+                )
                 {
                     for (int month = 1; month <= 12; month++)
                     {
                         int daysInMonth = DateTime.DaysInMonth(year: year, month: month);
                         foreach (int day in new int[] { 1, 9, 10, daysInMonth })
                         {
-                            yield return new PseudoDateTime(year: year, month: month, day: day, hour: 3, minute: 15, second: 45, expectSuccess: true);
+                            yield return new PseudoDateTime(
+                                year: year,
+                                month: month,
+                                day: day,
+                                hour: 3,
+                                minute: 15,
+                                second: 45,
+                                expectSuccess: true
+                            );
                         }
 
-                        yield return new PseudoDateTime(year: year, month: month, day: (daysInMonth + 1), hour: 23, minute: 15, second: 45, expectSuccess: false);
+                        yield return new PseudoDateTime(
+                            year: year,
+                            month: month,
+                            day: (daysInMonth + 1),
+                            hour: 23,
+                            minute: 15,
+                            second: 45,
+                            expectSuccess: false
+                        );
                     }
                 }
 
                 // Test data at the edge of the valid ranges.
-                yield return new PseudoDateTime(year: 1, month: 1, day: 1, hour: 14, minute: 0, second: 0, expectSuccess: true);
-                yield return new PseudoDateTime(year: 9999, month: 12, day: 31, hour: 9, minute: 0, second: 0, expectSuccess: true);
-                yield return new PseudoDateTime(year: 2017, month: 1, day: 1, hour: 14, minute: 0, second: 0, expectSuccess: true);
-                yield return new PseudoDateTime(year: 2017, month: 12, day: 1, hour: 14, minute: 0, second: 0, expectSuccess: true);
+                yield return new PseudoDateTime(
+                    year: 1,
+                    month: 1,
+                    day: 1,
+                    hour: 14,
+                    minute: 0,
+                    second: 0,
+                    expectSuccess: true
+                );
+                yield return new PseudoDateTime(
+                    year: 9999,
+                    month: 12,
+                    day: 31,
+                    hour: 9,
+                    minute: 0,
+                    second: 0,
+                    expectSuccess: true
+                );
+                yield return new PseudoDateTime(
+                    year: 2017,
+                    month: 1,
+                    day: 1,
+                    hour: 14,
+                    minute: 0,
+                    second: 0,
+                    expectSuccess: true
+                );
+                yield return new PseudoDateTime(
+                    year: 2017,
+                    month: 12,
+                    day: 1,
+                    hour: 14,
+                    minute: 0,
+                    second: 0,
+                    expectSuccess: true
+                );
                 // Day range is month/year dependent. Was already covered above.
-                yield return new PseudoDateTime(year: 2017, month: 1, day: 1, hour: 14, minute: 0, second: 0, expectSuccess: true);
-                yield return new PseudoDateTime(year: 2017, month: 1, day: 1, hour: 0, minute: 0, second: 0, expectSuccess: true);
-                yield return new PseudoDateTime(year: 2017, month: 1, day: 1, hour: 23, minute: 0, second: 0, expectSuccess: true);
-                yield return new PseudoDateTime(year: 2017, month: 1, day: 1, hour: 0, minute: 59, second: 0, expectSuccess: true);
-                yield return new PseudoDateTime(year: 2017, month: 1, day: 1, hour: 0, minute: 0, second: 59, expectSuccess: true);
-                yield return new PseudoDateTime(year: 2017, month: 1, day: 1, hour: 0, minute: 0, second: 0, fraction: 9999999, offsetNegative: false, offsetHours: 0, offsetMinutes: 0, expectSuccess: true);
-                yield return new PseudoDateTime(year: 2017, month: 1, day: 1, hour: 0, minute: 0, second: 0, fraction: 0, offsetNegative: false, offsetHours: 13, offsetMinutes: 59, expectSuccess: true);
-                yield return new PseudoDateTime(year: 2017, month: 1, day: 1, hour: 0, minute: 0, second: 0, fraction: 0, offsetNegative: false, offsetHours: 14, offsetMinutes: 0, expectSuccess: true);
-                yield return new PseudoDateTime(year: 2017, month: 1, day: 1, hour: 0, minute: 0, second: 0, fraction: 0, offsetNegative: true, offsetHours: 13, offsetMinutes: 59, expectSuccess: true);
-                yield return new PseudoDateTime(year: 2017, month: 1, day: 1, hour: 0, minute: 0, second: 0, fraction: 0, offsetNegative: true, offsetHours: 14, offsetMinutes: 0, expectSuccess: true);
+                yield return new PseudoDateTime(
+                    year: 2017,
+                    month: 1,
+                    day: 1,
+                    hour: 14,
+                    minute: 0,
+                    second: 0,
+                    expectSuccess: true
+                );
+                yield return new PseudoDateTime(
+                    year: 2017,
+                    month: 1,
+                    day: 1,
+                    hour: 0,
+                    minute: 0,
+                    second: 0,
+                    expectSuccess: true
+                );
+                yield return new PseudoDateTime(
+                    year: 2017,
+                    month: 1,
+                    day: 1,
+                    hour: 23,
+                    minute: 0,
+                    second: 0,
+                    expectSuccess: true
+                );
+                yield return new PseudoDateTime(
+                    year: 2017,
+                    month: 1,
+                    day: 1,
+                    hour: 0,
+                    minute: 59,
+                    second: 0,
+                    expectSuccess: true
+                );
+                yield return new PseudoDateTime(
+                    year: 2017,
+                    month: 1,
+                    day: 1,
+                    hour: 0,
+                    minute: 0,
+                    second: 59,
+                    expectSuccess: true
+                );
+                yield return new PseudoDateTime(
+                    year: 2017,
+                    month: 1,
+                    day: 1,
+                    hour: 0,
+                    minute: 0,
+                    second: 0,
+                    fraction: 9999999,
+                    offsetNegative: false,
+                    offsetHours: 0,
+                    offsetMinutes: 0,
+                    expectSuccess: true
+                );
+                yield return new PseudoDateTime(
+                    year: 2017,
+                    month: 1,
+                    day: 1,
+                    hour: 0,
+                    minute: 0,
+                    second: 0,
+                    fraction: 0,
+                    offsetNegative: false,
+                    offsetHours: 13,
+                    offsetMinutes: 59,
+                    expectSuccess: true
+                );
+                yield return new PseudoDateTime(
+                    year: 2017,
+                    month: 1,
+                    day: 1,
+                    hour: 0,
+                    minute: 0,
+                    second: 0,
+                    fraction: 0,
+                    offsetNegative: false,
+                    offsetHours: 14,
+                    offsetMinutes: 0,
+                    expectSuccess: true
+                );
+                yield return new PseudoDateTime(
+                    year: 2017,
+                    month: 1,
+                    day: 1,
+                    hour: 0,
+                    minute: 0,
+                    second: 0,
+                    fraction: 0,
+                    offsetNegative: true,
+                    offsetHours: 13,
+                    offsetMinutes: 59,
+                    expectSuccess: true
+                );
+                yield return new PseudoDateTime(
+                    year: 2017,
+                    month: 1,
+                    day: 1,
+                    hour: 0,
+                    minute: 0,
+                    second: 0,
+                    fraction: 0,
+                    offsetNegative: true,
+                    offsetHours: 14,
+                    offsetMinutes: 0,
+                    expectSuccess: true
+                );
 
                 // Test data outside the valid ranges.
-                yield return new PseudoDateTime(year: 0, month: 1, day: 1, hour: 24, minute: 0, second: 0, expectSuccess: false);
-                yield return new PseudoDateTime(year: 2017, month: 0, day: 1, hour: 24, minute: 0, second: 0, expectSuccess: false);
-                yield return new PseudoDateTime(year: 2017, month: 13, day: 1, hour: 24, minute: 0, second: 0, expectSuccess: false);
+                yield return new PseudoDateTime(
+                    year: 0,
+                    month: 1,
+                    day: 1,
+                    hour: 24,
+                    minute: 0,
+                    second: 0,
+                    expectSuccess: false
+                );
+                yield return new PseudoDateTime(
+                    year: 2017,
+                    month: 0,
+                    day: 1,
+                    hour: 24,
+                    minute: 0,
+                    second: 0,
+                    expectSuccess: false
+                );
+                yield return new PseudoDateTime(
+                    year: 2017,
+                    month: 13,
+                    day: 1,
+                    hour: 24,
+                    minute: 0,
+                    second: 0,
+                    expectSuccess: false
+                );
                 // Day range is month/year dependent. Was already covered above.
-                yield return new PseudoDateTime(year: 2017, month: 1, day: 1, hour: 60, minute: 0, second: 0, expectSuccess: false);
-                yield return new PseudoDateTime(year: 2017, month: 1, day: 1, hour: 0, minute: 60, second: 0, expectSuccess: false);
-                yield return new PseudoDateTime(year: 2017, month: 1, day: 1, hour: 0, minute: 0, second: 60, expectSuccess: false);
-                yield return new PseudoDateTime(year: 2017, month: 1, day: 1, hour: 0, minute: 0, second: 0, fraction: 0, offsetNegative: true, offsetHours: 0, offsetMinutes: 60, expectSuccess: false);
-                yield return new PseudoDateTime(year: 2017, month: 1, day: 1, hour: 0, minute: 0, second: 0, fraction: 0, offsetNegative: false, offsetHours: 14, offsetMinutes: 1, expectSuccess: false);
-                yield return new PseudoDateTime(year: 2017, month: 1, day: 1, hour: 0, minute: 0, second: 0, fraction: 0, offsetNegative: false, offsetHours: 15, offsetMinutes: 0, expectSuccess: false);
-                yield return new PseudoDateTime(year: 2017, month: 1, day: 1, hour: 0, minute: 0, second: 0, fraction: 0, offsetNegative: true, offsetHours: 14, offsetMinutes: 1, expectSuccess: false);
-                yield return new PseudoDateTime(year: 2017, month: 1, day: 1, hour: 0, minute: 0, second: 0, fraction: 0, offsetNegative: true, offsetHours: 15, offsetMinutes: 0, expectSuccess: false);
+                yield return new PseudoDateTime(
+                    year: 2017,
+                    month: 1,
+                    day: 1,
+                    hour: 60,
+                    minute: 0,
+                    second: 0,
+                    expectSuccess: false
+                );
+                yield return new PseudoDateTime(
+                    year: 2017,
+                    month: 1,
+                    day: 1,
+                    hour: 0,
+                    minute: 60,
+                    second: 0,
+                    expectSuccess: false
+                );
+                yield return new PseudoDateTime(
+                    year: 2017,
+                    month: 1,
+                    day: 1,
+                    hour: 0,
+                    minute: 0,
+                    second: 60,
+                    expectSuccess: false
+                );
+                yield return new PseudoDateTime(
+                    year: 2017,
+                    month: 1,
+                    day: 1,
+                    hour: 0,
+                    minute: 0,
+                    second: 0,
+                    fraction: 0,
+                    offsetNegative: true,
+                    offsetHours: 0,
+                    offsetMinutes: 60,
+                    expectSuccess: false
+                );
+                yield return new PseudoDateTime(
+                    year: 2017,
+                    month: 1,
+                    day: 1,
+                    hour: 0,
+                    minute: 0,
+                    second: 0,
+                    fraction: 0,
+                    offsetNegative: false,
+                    offsetHours: 14,
+                    offsetMinutes: 1,
+                    expectSuccess: false
+                );
+                yield return new PseudoDateTime(
+                    year: 2017,
+                    month: 1,
+                    day: 1,
+                    hour: 0,
+                    minute: 0,
+                    second: 0,
+                    fraction: 0,
+                    offsetNegative: false,
+                    offsetHours: 15,
+                    offsetMinutes: 0,
+                    expectSuccess: false
+                );
+                yield return new PseudoDateTime(
+                    year: 2017,
+                    month: 1,
+                    day: 1,
+                    hour: 0,
+                    minute: 0,
+                    second: 0,
+                    fraction: 0,
+                    offsetNegative: true,
+                    offsetHours: 14,
+                    offsetMinutes: 1,
+                    expectSuccess: false
+                );
+                yield return new PseudoDateTime(
+                    year: 2017,
+                    month: 1,
+                    day: 1,
+                    hour: 0,
+                    minute: 0,
+                    second: 0,
+                    fraction: 0,
+                    offsetNegative: true,
+                    offsetHours: 15,
+                    offsetMinutes: 0,
+                    expectSuccess: false
+                );
 
                 // Past the end of time.
-                yield return new PseudoDateTime(year: 9999, month: 12, day: 31, hour: 23, minute: 59, second: 59, fraction: 9999999, offsetNegative: true, offsetHours: 0, offsetMinutes: 1, expectSuccess: false);
-                yield return new PseudoDateTime(year: 1, month: 1, day: 1, hour: 0, minute: 0, second: 0, fraction: 0, offsetNegative: false, offsetHours: 0, offsetMinutes: 1, expectSuccess: false);
+                yield return new PseudoDateTime(
+                    year: 9999,
+                    month: 12,
+                    day: 31,
+                    hour: 23,
+                    minute: 59,
+                    second: 59,
+                    fraction: 9999999,
+                    offsetNegative: true,
+                    offsetHours: 0,
+                    offsetMinutes: 1,
+                    expectSuccess: false
+                );
+                yield return new PseudoDateTime(
+                    year: 1,
+                    month: 1,
+                    day: 1,
+                    hour: 0,
+                    minute: 0,
+                    second: 0,
+                    fraction: 0,
+                    offsetNegative: false,
+                    offsetHours: 0,
+                    offsetMinutes: 1,
+                    expectSuccess: false
+                );
             }
         }
     }

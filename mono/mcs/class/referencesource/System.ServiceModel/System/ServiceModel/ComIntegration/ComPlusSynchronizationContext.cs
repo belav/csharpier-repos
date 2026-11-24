@@ -15,8 +15,7 @@ namespace System.ServiceModel.ComIntegration
         IServiceActivity activity;
         bool postSynchronous;
 
-        public ComPlusSynchronizationContext(IServiceActivity activity,
-                                             bool postSynchronous)
+        public ComPlusSynchronizationContext(IServiceActivity activity, bool postSynchronous)
         {
             this.activity = activity;
             this.postSynchronous = postSynchronous;
@@ -29,8 +28,11 @@ namespace System.ServiceModel.ComIntegration
 
         public override void Post(SendOrPostCallback d, Object state)
         {
-            ComPlusActivityTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationEnteringActivity,
-                        SR.TraceCodeComIntegrationEnteringActivity);
+            ComPlusActivityTrace.Trace(
+                TraceEventType.Verbose,
+                TraceCode.ComIntegrationEnteringActivity,
+                SR.TraceCodeComIntegrationEnteringActivity
+            );
 
             ServiceCall call = new ServiceCall(d, state);
             if (this.postSynchronous)
@@ -41,13 +43,17 @@ namespace System.ServiceModel.ComIntegration
             {
                 this.activity.AsynchronousCall(call);
             }
-            ComPlusActivityTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationLeftActivity,
-                        SR.TraceCodeComIntegrationLeftActivity);
+            ComPlusActivityTrace.Trace(
+                TraceEventType.Verbose,
+                TraceCode.ComIntegrationLeftActivity,
+                SR.TraceCodeComIntegrationLeftActivity
+            );
         }
 
         public void Dispose()
         {
-            while (Marshal.ReleaseComObject(this.activity) > 0);
+            while (Marshal.ReleaseComObject(this.activity) > 0)
+                ;
         }
 
         class ServiceCall : IServiceCall
@@ -55,14 +61,11 @@ namespace System.ServiceModel.ComIntegration
             SendOrPostCallback callback;
             Object state;
 
-            public ServiceCall(SendOrPostCallback callback,
-                               Object state)
+            public ServiceCall(SendOrPostCallback callback, Object state)
             {
                 this.callback = callback;
                 this.state = state;
             }
-
-
 
             public void OnCall()
             {
@@ -74,18 +77,30 @@ namespace System.ServiceModel.ComIntegration
                     if (DiagnosticUtility.ShouldUseActivity)
                     {
                         IComThreadingInfo comThreadingInfo;
-                        comThreadingInfo = (IComThreadingInfo)SafeNativeMethods.CoGetObjectContext(ComPlusActivityTrace.IID_IComThreadingInfo);
+                        comThreadingInfo = (IComThreadingInfo)
+                            SafeNativeMethods.CoGetObjectContext(
+                                ComPlusActivityTrace.IID_IComThreadingInfo
+                            );
 
                         if (comThreadingInfo != null)
                         {
-
                             comThreadingInfo.GetCurrentLogicalThreadId(out guidLogicalThreadID);
 
-                            activity = ServiceModelActivity.CreateBoundedActivity(guidLogicalThreadID);
+                            activity = ServiceModelActivity.CreateBoundedActivity(
+                                guidLogicalThreadID
+                            );
                         }
-                        ServiceModelActivity.Start(activity, SR.GetString(SR.TransferringToComplus, guidLogicalThreadID.ToString()), ActivityType.TransferToComPlus);
+                        ServiceModelActivity.Start(
+                            activity,
+                            SR.GetString(SR.TransferringToComplus, guidLogicalThreadID.ToString()),
+                            ActivityType.TransferToComPlus
+                        );
                     }
-                    ComPlusActivityTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationExecutingCall, SR.TraceCodeComIntegrationExecutingCall);
+                    ComPlusActivityTrace.Trace(
+                        TraceEventType.Verbose,
+                        TraceCode.ComIntegrationExecutingCall,
+                        SR.TraceCodeComIntegrationExecutingCall
+                    );
 
                     this.callback(this.state);
                 }

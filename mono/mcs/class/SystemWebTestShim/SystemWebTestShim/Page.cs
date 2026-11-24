@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,24 +28,28 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using Orig = System.Web.UI;
 using System.Web;
+using Orig = System.Web.UI;
 
-namespace SystemWebTestShim {
-	public class Page : Orig.Page {
-		public new string RawViewState {
+namespace SystemWebTestShim
+{
+    public class Page : Orig.Page
+    {
+        public new string RawViewState
+        {
 #if TARGET_DOTNET
-			set; private get;
+            set;
+            private get;
 #else
-			set { base.RawViewState = value; }
+            set { base.RawViewState = value; }
 #endif
-		}
+        }
 
-		public new void SetContext (HttpContext ctx)
-		{
+        public new void SetContext(HttpContext ctx)
+        {
 #if !TARGET_DOTNET
-			base.SetContext (ctx);
+            base.SetContext(ctx);
 #endif
-		}
-	}
+        }
+    }
 }

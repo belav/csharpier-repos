@@ -5,11 +5,9 @@ namespace Microsoft.EntityFrameworkCore;
 
 public abstract class ManyToManyHeterogeneousQueryTestBase : NonSharedModelTestBase
 {
-    protected override string StoreName
-        => "ManyToManyHeterogeneousQueryTests";
+    protected override string StoreName => "ManyToManyHeterogeneousQueryTests";
 
-    protected virtual void ClearLog()
-        => ListLoggerFactory.Clear();
+    protected virtual void ClearLog() => ListLoggerFactory.Clear();
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -78,18 +76,24 @@ public abstract class ManyToManyHeterogeneousQueryTestBase : NonSharedModelTestB
     protected class Context20277 : DbContext
     {
         public Context20277(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<ManyM_DB>()
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder
+                .Entity<ManyM_DB>()
                 .HasMany(e => e.ManyN_DB)
                 .WithMany(e => e.ManyM_DB)
                 .UsingEntity<ManyMN_DB>(
-                    r => r.HasOne(e => e.ManyN_DB).WithMany(e => e.ManyNM_DB).HasForeignKey(e => e.ManyN_Id),
-                    l => l.HasOne(e => e.ManyM_DB).WithMany(e => e.ManyNM_DB).HasForeignKey(e => e.ManyM_Id),
-                    b => b.HasKey(e => e.Id));
+                    r =>
+                        r.HasOne(e => e.ManyN_DB)
+                            .WithMany(e => e.ManyNM_DB)
+                            .HasForeignKey(e => e.ManyN_Id),
+                    l =>
+                        l.HasOne(e => e.ManyM_DB)
+                            .WithMany(e => e.ManyNM_DB)
+                            .HasForeignKey(e => e.ManyM_Id),
+                    b => b.HasKey(e => e.Id)
+                );
     }
 
     public class ManyM_DB

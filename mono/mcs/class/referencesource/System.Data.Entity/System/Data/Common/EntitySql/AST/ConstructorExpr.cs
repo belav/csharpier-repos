@@ -10,9 +10,9 @@
 namespace System.Data.Common.EntitySql.AST
 {
     using System;
-    using System.Globalization;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Globalization;
 
     /// <summary>
     /// Represents Row contructor expression.

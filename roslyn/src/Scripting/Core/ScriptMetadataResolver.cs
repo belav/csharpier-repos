@@ -14,10 +14,17 @@ namespace Microsoft.CodeAnalysis.Scripting
 {
     using static ParameterValidationHelpers;
 
-    public sealed class ScriptMetadataResolver : MetadataReferenceResolver, IEquatable<ScriptMetadataResolver>
+    public sealed class ScriptMetadataResolver
+        : MetadataReferenceResolver,
+            IEquatable<ScriptMetadataResolver>
     {
-        public static ScriptMetadataResolver Default { get; } = new ScriptMetadataResolver(
-            RuntimeMetadataReferenceResolver.CreateCurrentPlatformResolver(ImmutableArray<string>.Empty, baseDirectory: null));
+        public static ScriptMetadataResolver Default { get; } =
+            new ScriptMetadataResolver(
+                RuntimeMetadataReferenceResolver.CreateCurrentPlatformResolver(
+                    ImmutableArray<string>.Empty,
+                    baseDirectory: null
+                )
+            );
 
         private readonly RuntimeMetadataReferenceResolver _resolver;
 
@@ -29,11 +36,11 @@ namespace Microsoft.CodeAnalysis.Scripting
             _resolver = resolver;
         }
 
-        public ScriptMetadataResolver WithSearchPaths(params string[] searchPaths)
-            => WithSearchPaths(searchPaths.AsImmutableOrEmpty());
+        public ScriptMetadataResolver WithSearchPaths(params string[] searchPaths) =>
+            WithSearchPaths(searchPaths.AsImmutableOrEmpty());
 
-        public ScriptMetadataResolver WithSearchPaths(IEnumerable<string> searchPaths)
-            => WithSearchPaths(searchPaths.AsImmutableOrEmpty());
+        public ScriptMetadataResolver WithSearchPaths(IEnumerable<string> searchPaths) =>
+            WithSearchPaths(searchPaths.AsImmutableOrEmpty());
 
         public ScriptMetadataResolver WithSearchPaths(ImmutableArray<string> searchPaths)
         {
@@ -42,8 +49,13 @@ namespace Microsoft.CodeAnalysis.Scripting
                 return this;
             }
 
-            return new ScriptMetadataResolver(_resolver.WithRelativePathResolver(
-                _resolver.PathResolver.WithSearchPaths(ToImmutableArrayChecked(searchPaths, nameof(searchPaths)))));
+            return new ScriptMetadataResolver(
+                _resolver.WithRelativePathResolver(
+                    _resolver.PathResolver.WithSearchPaths(
+                        ToImmutableArrayChecked(searchPaths, nameof(searchPaths))
+                    )
+                )
+            );
         }
 
         public ScriptMetadataResolver WithBaseDirectory(string? baseDirectory)
@@ -58,20 +70,30 @@ namespace Microsoft.CodeAnalysis.Scripting
                 CompilerPathUtilities.RequireAbsolutePath(baseDirectory, nameof(baseDirectory));
             }
 
-            return new ScriptMetadataResolver(_resolver.WithRelativePathResolver(
-                _resolver.PathResolver.WithBaseDirectory(baseDirectory)));
+            return new ScriptMetadataResolver(
+                _resolver.WithRelativePathResolver(
+                    _resolver.PathResolver.WithBaseDirectory(baseDirectory)
+                )
+            );
         }
 
         public override bool ResolveMissingAssemblies => _resolver.ResolveMissingAssemblies;
 
-        public override PortableExecutableReference? ResolveMissingAssembly(MetadataReference definition, AssemblyIdentity referenceIdentity)
-            => _resolver.ResolveMissingAssembly(definition, referenceIdentity);
+        public override PortableExecutableReference? ResolveMissingAssembly(
+            MetadataReference definition,
+            AssemblyIdentity referenceIdentity
+        ) => _resolver.ResolveMissingAssembly(definition, referenceIdentity);
 
-        public override ImmutableArray<PortableExecutableReference> ResolveReference(string reference, string? baseFilePath, MetadataReferenceProperties properties)
-            => _resolver.ResolveReference(reference, baseFilePath, properties);
+        public override ImmutableArray<PortableExecutableReference> ResolveReference(
+            string reference,
+            string? baseFilePath,
+            MetadataReferenceProperties properties
+        ) => _resolver.ResolveReference(reference, baseFilePath, properties);
 
         public bool Equals(ScriptMetadataResolver? other) => _resolver.Equals(other);
+
         public override bool Equals(object? other) => Equals(other as ScriptMetadataResolver);
+
         public override int GetHashCode() => _resolver.GetHashCode();
     }
 }

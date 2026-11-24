@@ -22,7 +22,11 @@ namespace Microsoft.CodeAnalysis.Telemetry
         private readonly SharedStopwatch _stopwatch;
 #pragma warning restore IDE0052 // Remove unread private members
 
-        public TimedTelemetryLogBlock(KeyValueLogMessage logMessage, int minThresholdMs, ITelemetryLog telemetryLog)
+        public TimedTelemetryLogBlock(
+            KeyValueLogMessage logMessage,
+            int minThresholdMs,
+            ITelemetryLog telemetryLog
+        )
         {
             _logMessage = logMessage;
             _minThresholdMs = minThresholdMs;

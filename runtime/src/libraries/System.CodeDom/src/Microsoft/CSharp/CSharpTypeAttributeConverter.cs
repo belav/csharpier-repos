@@ -9,11 +9,13 @@ namespace Microsoft.CSharp
     {
         private CSharpTypeAttributeConverter() { } // no  need to create an instance; use Default
 
-        public static CSharpTypeAttributeConverter Default { get; } = new CSharpTypeAttributeConverter();
+        public static CSharpTypeAttributeConverter Default { get; } =
+            new CSharpTypeAttributeConverter();
 
         protected override string[] Names { get; } = new[] { "Public", "Internal" };
 
-        protected override object[] Values { get; } = new object[] { TypeAttributes.Public, TypeAttributes.NotPublic };
+        protected override object[] Values { get; } =
+            new object[] { TypeAttributes.Public, TypeAttributes.NotPublic };
 
         protected override object DefaultValue => TypeAttributes.NotPublic;
     }

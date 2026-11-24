@@ -17,11 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSyntaxTriviaServiceFactory()
-        {
-        }
+        public CSharpSyntaxTriviaServiceFactory() { }
 
-        public ILanguageService CreateLanguageService(HostLanguageServices provider)
-            => CSharpSyntaxTriviaService.Instance;
+        public ILanguageService CreateLanguageService(HostLanguageServices provider) =>
+            CSharpSyntaxTriviaService.Instance;
     }
 }

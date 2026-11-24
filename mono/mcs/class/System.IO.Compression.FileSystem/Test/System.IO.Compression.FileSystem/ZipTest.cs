@@ -29,118 +29,150 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Security.Cryptography;
-using NUnit.Framework;
-
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.IO.Compression.FileSystem
 {
-	[TestFixture]
-	public class ZipArchiveTests
-	{
-		string tmpFile;
-		[SetUp]
-		public void SetUp ()
-		{
-			tmpFile = Path.GetTempFileName ();
-		}
+    [TestFixture]
+    public class ZipArchiveTests
+    {
+        string tmpFile;
 
-		[TearDown]
-		public void Dispose()
-		{
-			File.Delete (tmpFile);
-		}
+        [SetUp]
+        public void SetUp()
+        {
+            tmpFile = Path.GetTempFileName();
+        }
 
-		[Test]
-		public void ZipCreateFromDirectory()
-		{
-			if (File.Exists (tmpFile))
-				File.Delete (tmpFile);
+        [TearDown]
+        public void Dispose()
+        {
+            File.Delete(tmpFile);
+        }
 
-			ZipFile.CreateFromDirectory (TestResourceHelper.GetFullPathOfResource ("Test/resources/foo"), tmpFile);
-			Assert.IsTrue(File.Exists(tmpFile));
+        [Test]
+        public void ZipCreateFromDirectory()
+        {
+            if (File.Exists(tmpFile))
+                File.Delete(tmpFile);
 
-			using (var archive = new ZipArchive (File.Open (tmpFile, FileMode.Open),
-				ZipArchiveMode.Read))
-			{
-				Assert.IsNotNull (archive.GetEntry ("foo.txt"));
-				Assert.IsNotNull (archive.GetEntry ("bar.txt"));
+            ZipFile.CreateFromDirectory(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/foo"),
+                tmpFile
+            );
+            Assert.IsTrue(File.Exists(tmpFile));
 
-				Assert.IsNotNull (archive.GetEntry ("foobar/foo.txt"));
-				Assert.IsNotNull (archive.GetEntry ("foobar/bar.txt"));				
-			}
-		}
+            using (
+                var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open), ZipArchiveMode.Read)
+            )
+            {
+                Assert.IsNotNull(archive.GetEntry("foo.txt"));
+                Assert.IsNotNull(archive.GetEntry("bar.txt"));
 
-		[Test]
-		public void ZipCreateFromDirectoryIncludeBase()
-		{
-			if (File.Exists (tmpFile))
-				File.Delete (tmpFile);
+                Assert.IsNotNull(archive.GetEntry("foobar/foo.txt"));
+                Assert.IsNotNull(archive.GetEntry("foobar/bar.txt"));
+            }
+        }
 
-			ZipFile.CreateFromDirectory (TestResourceHelper.GetFullPathOfResource ("Test/resources/foo"), tmpFile, CompressionLevel.Fastest,
-				includeBaseDirectory: true);
-			Assert.IsTrue (File.Exists (tmpFile));
+        [Test]
+        public void ZipCreateFromDirectoryIncludeBase()
+        {
+            if (File.Exists(tmpFile))
+                File.Delete(tmpFile);
 
-			using (var archive = new ZipArchive (File.Open (tmpFile, FileMode.Open),
-				ZipArchiveMode.Read))
-			{
-				Assert.IsNotNull (archive.GetEntry ("foo/foo.txt"));
-				Assert.IsNotNull (archive.GetEntry ("foo/bar.txt"));
+            ZipFile.CreateFromDirectory(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/foo"),
+                tmpFile,
+                CompressionLevel.Fastest,
+                includeBaseDirectory: true
+            );
+            Assert.IsTrue(File.Exists(tmpFile));
 
-				Assert.IsNotNull (archive.GetEntry ("foo/foobar/foo.txt"));
-				Assert.IsNotNull (archive.GetEntry ("foo/foobar/bar.txt"));				
-			}
-		}		
+            using (
+                var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open), ZipArchiveMode.Read)
+            )
+            {
+                Assert.IsNotNull(archive.GetEntry("foo/foo.txt"));
+                Assert.IsNotNull(archive.GetEntry("foo/bar.txt"));
 
-		[Test]
-		public void ZipExtractToDirectory()
-		{
-			var extractDir = Path.Combine (Path.GetTempPath (), "extract");
-			if (Directory.Exists (extractDir))
-				Directory.Delete (extractDir, true);
+                Assert.IsNotNull(archive.GetEntry("foo/foobar/foo.txt"));
+                Assert.IsNotNull(archive.GetEntry("foo/foobar/bar.txt"));
+            }
+        }
 
-			if (File.Exists (tmpFile))
-				File.Delete (tmpFile);
+        [Test]
+        public void ZipExtractToDirectory()
+        {
+            var extractDir = Path.Combine(Path.GetTempPath(), "extract");
+            if (Directory.Exists(extractDir))
+                Directory.Delete(extractDir, true);
 
-			ZipFile.CreateFromDirectory (TestResourceHelper.GetFullPathOfResource ("Test/resources/foo"), tmpFile);
+            if (File.Exists(tmpFile))
+                File.Delete(tmpFile);
 
-			ZipFile.ExtractToDirectory (tmpFile, extractDir);
-			Assert.IsTrue(Directory.Exists (extractDir));
+            ZipFile.CreateFromDirectory(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/foo"),
+                tmpFile
+            );
 
-			Assert.IsTrue (File.Exists (Path.Combine (extractDir, "foo.txt")), Path.Combine (extractDir, "foo.txt"));
-			Assert.IsTrue (File.Exists (Path.Combine (extractDir, "bar.txt")), Path.Combine (extractDir, "bar.txt"));
-			Assert.IsTrue (Directory.Exists (Path.Combine (extractDir, "foobar")), Path.Combine (extractDir, "foobar"));
-			Assert.IsTrue (File.Exists (Path.Combine (extractDir, "foobar", "foo.txt")), Path.Combine (extractDir, "foobar", "foo.txt"));
-			Assert.IsTrue (File.Exists (Path.Combine (extractDir, "foobar", "bar.txt")), Path.Combine (extractDir, "foobar", "bar.txt"));
+            ZipFile.ExtractToDirectory(tmpFile, extractDir);
+            Assert.IsTrue(Directory.Exists(extractDir));
 
-			Directory.Delete (extractDir, true);
-		}
+            Assert.IsTrue(
+                File.Exists(Path.Combine(extractDir, "foo.txt")),
+                Path.Combine(extractDir, "foo.txt")
+            );
+            Assert.IsTrue(
+                File.Exists(Path.Combine(extractDir, "bar.txt")),
+                Path.Combine(extractDir, "bar.txt")
+            );
+            Assert.IsTrue(
+                Directory.Exists(Path.Combine(extractDir, "foobar")),
+                Path.Combine(extractDir, "foobar")
+            );
+            Assert.IsTrue(
+                File.Exists(Path.Combine(extractDir, "foobar", "foo.txt")),
+                Path.Combine(extractDir, "foobar", "foo.txt")
+            );
+            Assert.IsTrue(
+                File.Exists(Path.Combine(extractDir, "foobar", "bar.txt")),
+                Path.Combine(extractDir, "foobar", "bar.txt")
+            );
 
-		[Test]
-		public void ZipCreateFromEntryChangeTimestamp()
-		{
-			if (File.Exists (tmpFile))
-				File.Delete (tmpFile);
+            Directory.Delete(extractDir, true);
+        }
 
-			var file = TestResourceHelper.GetFullPathOfResource ("Test/resources/foo/foo.txt");
-			using (var archive = new ZipArchive(File.Open(tmpFile, FileMode.Create),
-				ZipArchiveMode.Update))
-			{
-				archive.CreateEntryFromFile(file, file);
-			}
+        [Test]
+        public void ZipCreateFromEntryChangeTimestamp()
+        {
+            if (File.Exists(tmpFile))
+                File.Delete(tmpFile);
 
-			var date = File.GetLastWriteTimeUtc(file);
+            var file = TestResourceHelper.GetFullPathOfResource("Test/resources/foo/foo.txt");
+            using (
+                var archive = new ZipArchive(
+                    File.Open(tmpFile, FileMode.Create),
+                    ZipArchiveMode.Update
+                )
+            )
+            {
+                archive.CreateEntryFromFile(file, file);
+            }
 
-			using (var archive = new ZipArchive (File.Open (tmpFile, FileMode.Open),
-				ZipArchiveMode.Read))
-			{
-				var entry = archive.GetEntry (file);
-				Assert.IsNotNull (entry);
-				var lastWriteTimeUtc = entry.LastWriteTime.ToUniversalTime ();
-				Assert.AreEqual (date.Year, lastWriteTimeUtc.Year);
-				Assert.AreEqual (date.Month, lastWriteTimeUtc.Month);
-				Assert.AreEqual (date.Day, lastWriteTimeUtc.Day);
-			}
-		}
-	}
+            var date = File.GetLastWriteTimeUtc(file);
+
+            using (
+                var archive = new ZipArchive(File.Open(tmpFile, FileMode.Open), ZipArchiveMode.Read)
+            )
+            {
+                var entry = archive.GetEntry(file);
+                Assert.IsNotNull(entry);
+                var lastWriteTimeUtc = entry.LastWriteTime.ToUniversalTime();
+                Assert.AreEqual(date.Year, lastWriteTimeUtc.Year);
+                Assert.AreEqual(date.Month, lastWriteTimeUtc.Month);
+                Assert.AreEqual(date.Day, lastWriteTimeUtc.Day);
+            }
+        }
+    }
 }

@@ -1,39 +1,36 @@
-﻿namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc
+{
     using System;
     using System.Text;
     using System.Web;
 
-    public class ContentResult : ActionResult {
+    public class ContentResult : ActionResult
+    {
+        public string Content { get; set; }
 
-        public string Content {
-            get;
-            set;
-        }
+        public Encoding ContentEncoding { get; set; }
 
-        public Encoding ContentEncoding {
-            get;
-            set;
-        }
+        public string ContentType { get; set; }
 
-        public string ContentType {
-            get;
-            set;
-        }
-
-        public override void ExecuteResult(ControllerContext context) {
-            if (context == null) {
+        public override void ExecuteResult(ControllerContext context)
+        {
+            if (context == null)
+            {
                 throw new ArgumentNullException("context");
             }
 
             HttpResponseBase response = context.HttpContext.Response;
 
-            if (!String.IsNullOrEmpty(ContentType)) {
+            if (!String.IsNullOrEmpty(ContentType))
+            {
                 response.ContentType = ContentType;
             }
-            if (ContentEncoding != null) {
+            if (ContentEncoding != null)
+            {
                 response.ContentEncoding = ContentEncoding;
             }
-            if (Content != null) {
+            if (Content != null)
+            {
                 response.Write(Content);
             }
         }

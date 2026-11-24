@@ -20,31 +20,44 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.BraceHighlighting
     [Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
     public class MultiCharacterBraceHighlightingTests : AbstractBraceHighlightingTests
     {
-        protected override TestWorkspace CreateWorkspace(string markup, ParseOptions options)
-            => TestWorkspace.Create(
-                NoCompilationConstants.LanguageName, compilationOptions: null, parseOptions: options, content: markup);
+        protected override TestWorkspace CreateWorkspace(string markup, ParseOptions options) =>
+            TestWorkspace.Create(
+                NoCompilationConstants.LanguageName,
+                compilationOptions: null,
+                parseOptions: options,
+                content: markup
+            );
 
-        internal override IBraceMatchingService GetBraceMatchingService(TestWorkspace workspace)
-            => new TestBraceMatchingService();
+        internal override IBraceMatchingService GetBraceMatchingService(TestWorkspace workspace) =>
+            new TestBraceMatchingService();
 
         private class TestBraceMatchingService : IBraceMatchingService
         {
             public async Task<BraceMatchingResult?> GetMatchingBracesAsync(
-                Document document, int position, BraceMatchingOptions options, CancellationToken cancellationToken)
+                Document document,
+                int position,
+                BraceMatchingOptions options,
+                CancellationToken cancellationToken
+            )
             {
                 var text = (await document.GetTextAsync(cancellationToken)).ToString();
                 var braces = GetMatchingBraces(text, position);
                 if (braces.HasValue)
                 {
-                    Debug.Assert(text.Substring(braces.Value.LeftSpan.Start, braces.Value.LeftSpan.Length) == "<@");
-                    Debug.Assert(text.Substring(braces.Value.RightSpan.Start, braces.Value.RightSpan.Length) == "@>");
+                    Debug.Assert(
+                        text.Substring(braces.Value.LeftSpan.Start, braces.Value.LeftSpan.Length)
+                            == "<@"
+                    );
+                    Debug.Assert(
+                        text.Substring(braces.Value.RightSpan.Start, braces.Value.RightSpan.Length)
+                            == "@>"
+                    );
                 }
 
                 return braces;
             }
 
-            public static BraceMatchingResult? GetMatchingBraces(
-                string text, int position)
+            public static BraceMatchingResult? GetMatchingBraces(string text, int position)
             {
                 if (position < text.Length)
                 {
@@ -57,7 +70,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.BraceHighlighting
                     {
                         Debug.Assert(text[position + 1] == '@');
                         var secondAt = text.IndexOf('@', position + 2);
-                        return new BraceMatchingResult(new TextSpan(position, 2), new TextSpan(secondAt, 2));
+                        return new BraceMatchingResult(
+                            new TextSpan(position, 2),
+                            new TextSpan(secondAt, 2)
+                        );
                     }
 
                     //  <^@    @>     or   <@    ^@>
@@ -66,13 +82,19 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.BraceHighlighting
                         if (text[position - 1] == '<')
                         {
                             var secondAt = text.IndexOf('@', position + 1);
-                            return new BraceMatchingResult(new TextSpan(position - 1, 2), new TextSpan(secondAt, 2));
+                            return new BraceMatchingResult(
+                                new TextSpan(position - 1, 2),
+                                new TextSpan(secondAt, 2)
+                            );
                         }
                         else
                         {
                             Debug.Assert(text[position + 1] == '>');
                             var lessThan = text.LastIndexOf('<', position);
-                            return new BraceMatchingResult(new TextSpan(lessThan, 2), new TextSpan(position, 2));
+                            return new BraceMatchingResult(
+                                new TextSpan(lessThan, 2),
+                                new TextSpan(position, 2)
+                            );
                         }
                     }
 
@@ -81,7 +103,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.BraceHighlighting
                     {
                         Debug.Assert(text[position - 1] == '@');
                         var lessThan = text.LastIndexOf('<', position);
-                        return new BraceMatchingResult(new TextSpan(lessThan, 2), new TextSpan(position - 1, 2));
+                        return new BraceMatchingResult(
+                            new TextSpan(lessThan, 2),
+                            new TextSpan(position - 1, 2)
+                        );
                     }
                 }
 
@@ -93,168 +118,147 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.BraceHighlighting
         [WpfFact]
         public async Task TestNotOnBrace()
         {
-            await TestBraceHighlightingAsync(
-"$$ <@    @>");
+            await TestBraceHighlightingAsync("$$ <@    @>");
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/18050")]
         [WpfFact]
         public async Task TestOnLeftOfStartBrace()
         {
-            await TestBraceHighlightingAsync(
-"$$[|<@|]    [|@>|]");
+            await TestBraceHighlightingAsync("$$[|<@|]    [|@>|]");
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/18050")]
         [WpfFact]
         public async Task TestInsideStartBrace()
         {
-            await TestBraceHighlightingAsync(
-"[|<$$@|]    [|@>|]");
+            await TestBraceHighlightingAsync("[|<$$@|]    [|@>|]");
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/18050")]
         [WpfFact]
         public async Task TestNotOnRightOfStartBrace()
         {
-            await TestBraceHighlightingAsync(
-"<@$$    @>");
+            await TestBraceHighlightingAsync("<@$$    @>");
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/18050")]
         [WpfFact]
         public async Task TestNotOnLeftOfCloseBrace()
         {
-            await TestBraceHighlightingAsync(
-"<@    $$@>");
+            await TestBraceHighlightingAsync("<@    $$@>");
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/18050")]
         [WpfFact]
         public async Task TestInsideCloseBrace()
         {
-            await TestBraceHighlightingAsync(
-"[|<@|]    [|@$$>|]");
+            await TestBraceHighlightingAsync("[|<@|]    [|@$$>|]");
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/18050")]
         [WpfFact]
         public async Task TestOnRightOfCloseBrace()
         {
-            await TestBraceHighlightingAsync(
-"[|<@|]    [|@>$$|]");
+            await TestBraceHighlightingAsync("[|<@|]    [|@>$$|]");
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/18050")]
         [WpfFact]
         public async Task TestNotAfterBrace()
         {
-            await TestBraceHighlightingAsync(
-"<@    @> $$");
+            await TestBraceHighlightingAsync("<@    @> $$");
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/18050")]
         [WpfFact]
         public async Task TestNotOnBrace2()
         {
-            await TestBraceHighlightingAsync(
-"$$ <@    @><@    @>");
+            await TestBraceHighlightingAsync("$$ <@    @><@    @>");
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/18050")]
         [WpfFact]
         public async Task TestOnLeftOfStartBrace2()
         {
-            await TestBraceHighlightingAsync(
-"$$[|<@|]    [|@>|]<@    @>");
+            await TestBraceHighlightingAsync("$$[|<@|]    [|@>|]<@    @>");
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/18050")]
         [WpfFact]
         public async Task TestInsideStartBrace2()
         {
-            await TestBraceHighlightingAsync(
-"[|<$$@|]    [|@>|]<@    @>");
+            await TestBraceHighlightingAsync("[|<$$@|]    [|@>|]<@    @>");
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/18050")]
         [WpfFact]
         public async Task TestNotOnRightOfStartBrace2()
         {
-            await TestBraceHighlightingAsync(
-"<@$$    @><@    @>");
+            await TestBraceHighlightingAsync("<@$$    @><@    @>");
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/18050")]
         [WpfFact]
         public async Task TestNotOnLeftOfCloseBrace2()
         {
-            await TestBraceHighlightingAsync(
-"<@    $$@><@    @>");
+            await TestBraceHighlightingAsync("<@    $$@><@    @>");
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/18050")]
         [WpfFact]
         public async Task TestInsideCloseBrace3()
         {
-            await TestBraceHighlightingAsync(
-"[|<@|]    [|@$$>|]<@    @>");
+            await TestBraceHighlightingAsync("[|<@|]    [|@$$>|]<@    @>");
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/18050")]
         [WpfFact]
         public async Task TestOnRightOfCloseBrace2()
         {
-            await TestBraceHighlightingAsync(
-"[|<@|]    [|@>|]$$[|<@|]    [|@>|]");
+            await TestBraceHighlightingAsync("[|<@|]    [|@>|]$$[|<@|]    [|@>|]");
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/18050")]
         [WpfFact]
         public async Task TestInSecondBracePair()
         {
-            await TestBraceHighlightingAsync(
-"<@    @>[|<$$@|]    [|@>|]");
+            await TestBraceHighlightingAsync("<@    @>[|<$$@|]    [|@>|]");
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/18050")]
         [WpfFact]
         public async Task TestNotAfterSecondBracePairStart()
         {
-            await TestBraceHighlightingAsync(
-"<@    @><@$$    @>");
+            await TestBraceHighlightingAsync("<@    @><@$$    @>");
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/18050")]
         [WpfFact]
         public async Task TestNotBeforeSecondBracePairEnd()
         {
-            await TestBraceHighlightingAsync(
-"<@    @><@    $$@>");
+            await TestBraceHighlightingAsync("<@    @><@    $$@>");
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/18050")]
         [WpfFact]
         public async Task TestInSecondBracePairEnd()
         {
-            await TestBraceHighlightingAsync(
-"<@    @>[|<@|]    [|@$$>|]");
+            await TestBraceHighlightingAsync("<@    @>[|<@|]    [|@$$>|]");
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/18050")]
         [WpfFact]
         public async Task TestAtSecondBracePairEnd()
         {
-            await TestBraceHighlightingAsync(
-"<@    @>[|<@|]    [|@>|]$$");
+            await TestBraceHighlightingAsync("<@    @>[|<@|]    [|@>|]$$");
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/18050")]
         [WpfFact]
         public async Task TestNotAfterSecondBracePairEnd()
         {
-            await TestBraceHighlightingAsync(
-"<@    @><@    @>  $$");
+            await TestBraceHighlightingAsync("<@    @><@    @>  $$");
         }
     }
 }

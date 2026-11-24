@@ -25,9 +25,9 @@ public static class Runtime_94974
         {
             return result;
         }
-        
+
         return result;
     }
-    
+
     public static bool Bar(int x) => true;
 }

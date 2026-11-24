@@ -22,11 +22,7 @@ namespace System.ServiceModel.Channels
             this.encodedClosingFunctionCall = this.encoding.GetBytes(");");
         }
 
-        public JavascriptCallbackResponseMessageProperty JavascriptResponseMessageProperty
-        {
-            get;
-            set;
-        }
+        public JavascriptCallbackResponseMessageProperty JavascriptResponseMessageProperty { get; set; }
 
         public XmlDictionaryWriter XmlJsonWriter
         {
@@ -87,16 +83,33 @@ namespace System.ServiceModel.Channels
         {
             this.xmlJsonWriter.WriteEndDocument();
 
-            if (this.JavascriptResponseMessageProperty != null &&
-                !String.IsNullOrEmpty(this.JavascriptResponseMessageProperty.CallbackFunctionName))
+            if (
+                this.JavascriptResponseMessageProperty != null
+                && !String.IsNullOrEmpty(
+                    this.JavascriptResponseMessageProperty.CallbackFunctionName
+                )
+            )
             {
                 this.xmlJsonWriter.Flush();
-                if (this.JavascriptResponseMessageProperty.StatusCode != null && (int)this.JavascriptResponseMessageProperty.StatusCode != 200)
+                if (
+                    this.JavascriptResponseMessageProperty.StatusCode != null
+                    && (int)this.JavascriptResponseMessageProperty.StatusCode != 200
+                )
                 {
-                    byte[] buffer = this.encoding.GetBytes(String.Format(CultureInfo.InvariantCulture, ",{0}", (int)this.JavascriptResponseMessageProperty.StatusCode));
+                    byte[] buffer = this.encoding.GetBytes(
+                        String.Format(
+                            CultureInfo.InvariantCulture,
+                            ",{0}",
+                            (int)this.JavascriptResponseMessageProperty.StatusCode
+                        )
+                    );
                     this.stream.Write(buffer, 0, buffer.Length);
                 }
-                this.stream.Write(this.encodedClosingFunctionCall, 0, this.encodedClosingFunctionCall.Length);
+                this.stream.Write(
+                    this.encodedClosingFunctionCall,
+                    0,
+                    this.encodedClosingFunctionCall.Length
+                );
             }
         }
 
@@ -149,10 +162,20 @@ namespace System.ServiceModel.Channels
 
         void StartJsonMessage()
         {
-            if (this.JavascriptResponseMessageProperty != null &&
-                !String.IsNullOrEmpty(this.JavascriptResponseMessageProperty.CallbackFunctionName))
+            if (
+                this.JavascriptResponseMessageProperty != null
+                && !String.IsNullOrEmpty(
+                    this.JavascriptResponseMessageProperty.CallbackFunctionName
+                )
+            )
             {
-                byte[] buffer = this.encoding.GetBytes(String.Format(CultureInfo.InvariantCulture, "{0}(", this.JavascriptResponseMessageProperty.CallbackFunctionName));
+                byte[] buffer = this.encoding.GetBytes(
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}(",
+                        this.JavascriptResponseMessageProperty.CallbackFunctionName
+                    )
+                );
                 this.stream.Write(buffer, 0, buffer.Length);
             }
         }

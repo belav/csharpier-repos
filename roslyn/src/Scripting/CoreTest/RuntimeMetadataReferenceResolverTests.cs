@@ -5,11 +5,11 @@
 #nullable disable
 
 extern alias Scripting;
+using System.Collections.Immutable;
 
 using Microsoft.CodeAnalysis.Scripting.Hosting;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
-using System.Collections.Immutable;
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests.Interactive
@@ -29,36 +29,75 @@ namespace Microsoft.CodeAnalysis.UnitTests.Interactive
                 // With NuGetPackageResolver.
                 var resolver = new RuntimeMetadataReferenceResolver(
                     new RelativePathResolver(ImmutableArray.Create(directory.Path), directory.Path),
-                    packageResolver: new PackageResolver(ImmutableDictionary<string, ImmutableArray<string>>.Empty.Add("nuget:N/1.0", ImmutableArray.Create(assembly1.Path, assembly2.Path))),
+                    packageResolver: new PackageResolver(
+                        ImmutableDictionary<string, ImmutableArray<string>>.Empty.Add(
+                            "nuget:N/1.0",
+                            ImmutableArray.Create(assembly1.Path, assembly2.Path)
+                        )
+                    ),
                     gacFileResolver: null,
-                    trustedPlatformAssemblies: ImmutableDictionary<string, string>.Empty);
+                    trustedPlatformAssemblies: ImmutableDictionary<string, string>.Empty
+                );
 
                 // Recognized NuGet reference.
-                var actualReferences = resolver.ResolveReference("nuget:N/1.0", baseFilePath: null, properties: MetadataReferenceProperties.Assembly);
-                AssertEx.SetEqual(actualReferences.SelectAsArray(r => r.FilePath), assembly1.Path, assembly2.Path);
+                var actualReferences = resolver.ResolveReference(
+                    "nuget:N/1.0",
+                    baseFilePath: null,
+                    properties: MetadataReferenceProperties.Assembly
+                );
+                AssertEx.SetEqual(
+                    actualReferences.SelectAsArray(r => r.FilePath),
+                    assembly1.Path,
+                    assembly2.Path
+                );
                 // Unrecognized NuGet reference.
-                actualReferences = resolver.ResolveReference("nuget:N/2.0", baseFilePath: null, properties: MetadataReferenceProperties.Assembly);
+                actualReferences = resolver.ResolveReference(
+                    "nuget:N/2.0",
+                    baseFilePath: null,
+                    properties: MetadataReferenceProperties.Assembly
+                );
                 Assert.True(actualReferences.IsEmpty);
-                // Recognized file path. 
-                actualReferences = resolver.ResolveReference("_2.dll", baseFilePath: null, properties: MetadataReferenceProperties.Assembly);
+                // Recognized file path.
+                actualReferences = resolver.ResolveReference(
+                    "_2.dll",
+                    baseFilePath: null,
+                    properties: MetadataReferenceProperties.Assembly
+                );
                 AssertEx.SetEqual(actualReferences.SelectAsArray(r => r.FilePath), assembly2.Path);
-                // Unrecognized file path. 
-                actualReferences = resolver.ResolveReference("_3.dll", baseFilePath: null, properties: MetadataReferenceProperties.Assembly);
+                // Unrecognized file path.
+                actualReferences = resolver.ResolveReference(
+                    "_3.dll",
+                    baseFilePath: null,
+                    properties: MetadataReferenceProperties.Assembly
+                );
                 Assert.True(actualReferences.IsEmpty);
 
                 // Without NuGetPackageResolver.
                 resolver = new RuntimeMetadataReferenceResolver(
                     searchPaths: ImmutableArray.Create(directory.Path),
-                    baseDirectory: directory.Path);
+                    baseDirectory: directory.Path
+                );
 
                 // Unrecognized NuGet reference.
-                actualReferences = resolver.ResolveReference("nuget:N/1.0", baseFilePath: null, properties: MetadataReferenceProperties.Assembly);
+                actualReferences = resolver.ResolveReference(
+                    "nuget:N/1.0",
+                    baseFilePath: null,
+                    properties: MetadataReferenceProperties.Assembly
+                );
                 Assert.True(actualReferences.IsEmpty);
-                // Recognized file path. 
-                actualReferences = resolver.ResolveReference("_2.dll", baseFilePath: null, properties: MetadataReferenceProperties.Assembly);
+                // Recognized file path.
+                actualReferences = resolver.ResolveReference(
+                    "_2.dll",
+                    baseFilePath: null,
+                    properties: MetadataReferenceProperties.Assembly
+                );
                 AssertEx.SetEqual(actualReferences.SelectAsArray(r => r.FilePath), assembly2.Path);
-                // Unrecognized file path. 
-                actualReferences = resolver.ResolveReference("_3.dll", baseFilePath: null, properties: MetadataReferenceProperties.Assembly);
+                // Unrecognized file path.
+                actualReferences = resolver.ResolveReference(
+                    "_3.dll",
+                    baseFilePath: null,
+                    properties: MetadataReferenceProperties.Assembly
+                );
                 Assert.True(actualReferences.IsEmpty);
             }
         }
@@ -73,7 +112,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Interactive
                 _map = map;
             }
 
-            internal override ImmutableArray<string> ResolveNuGetPackage(string packageName, string packageVersion)
+            internal override ImmutableArray<string> ResolveNuGetPackage(
+                string packageName,
+                string packageVersion
+            )
             {
                 var reference = $"{Prefix}{packageName}/{packageVersion}";
                 ImmutableArray<string> paths;

@@ -846,18 +846,18 @@ public class HttpClientHttp2InteropTests : LoggedTest
         Assert.Equal(HttpVersion.Version20, response.Version);
 
         await serverReset.Task.DefaultTimeout();
-        var responseEx = await Assert.ThrowsAsync<HttpRequestException>(
-            () => response.Content.ReadAsStringAsync().DefaultTimeout()
+        var responseEx = await Assert.ThrowsAsync<HttpRequestException>(() =>
+            response.Content.ReadAsStringAsync().DefaultTimeout()
         );
         Assert.Contains(
             "The HTTP/2 server reset the stream. HTTP/2 error code 'CANCEL' (0x8)",
             responseEx.ToString()
         );
-        await Assert.ThrowsAsync<HttpProtocolException>(
-            () => streamingContent.SendAsync("Hello World").DefaultTimeout()
+        await Assert.ThrowsAsync<HttpProtocolException>(() =>
+            streamingContent.SendAsync("Hello World").DefaultTimeout()
         );
-        await Assert.ThrowsAnyAsync<OperationCanceledException>(
-            () => clientEcho.Task.DefaultTimeout()
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+            clientEcho.Task.DefaultTimeout()
         );
 
         await host.StopAsync().DefaultTimeout();
@@ -924,18 +924,18 @@ public class HttpClientHttp2InteropTests : LoggedTest
         Assert.Equal(HttpVersion.Version20, response.Version);
 
         await serverReset.Task.DefaultTimeout();
-        var responseEx = await Assert.ThrowsAsync<HttpRequestException>(
-            () => response.Content.ReadAsStringAsync().DefaultTimeout()
+        var responseEx = await Assert.ThrowsAsync<HttpRequestException>(() =>
+            response.Content.ReadAsStringAsync().DefaultTimeout()
         );
         Assert.Contains(
             "The HTTP/2 server reset the stream. HTTP/2 error code 'CANCEL' (0x8)",
             responseEx.ToString()
         );
-        await Assert.ThrowsAsync<HttpProtocolException>(
-            () => streamingContent.SendAsync("Hello World").DefaultTimeout()
+        await Assert.ThrowsAsync<HttpProtocolException>(() =>
+            streamingContent.SendAsync("Hello World").DefaultTimeout()
         );
-        await Assert.ThrowsAnyAsync<OperationCanceledException>(
-            () => clientEcho.Task.DefaultTimeout()
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+            clientEcho.Task.DefaultTimeout()
         );
 
         await host.StopAsync().DefaultTimeout();
@@ -1607,8 +1607,8 @@ public class HttpClientHttp2InteropTests : LoggedTest
         {
             request.Headers.Add("header" + i, oneKbString + i);
         }
-        var ex = await Assert.ThrowsAsync<HttpRequestException>(
-            () => client.SendAsync(request).DefaultTimeout()
+        var ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
+            client.SendAsync(request).DefaultTimeout()
         );
         Assert.Equal(
             "The HTTP request headers length exceeded the server limit of 32768 bytes.",
@@ -1882,21 +1882,17 @@ public class HttpClientHttp2InteropTests : LoggedTest
         {
             webHostBuilder.UseKestrel(options =>
             {
-                options.Listen(
-                    IPAddress.Loopback,
-                    0,
-                    listenOptions =>
+                options.Listen(IPAddress.Loopback, 0, listenOptions =>
+                {
+                    listenOptions.Protocols = HttpProtocols.Http2;
+                    listenOptions.UseHttps(httpsOptions =>
                     {
-                        listenOptions.Protocols = HttpProtocols.Http2;
-                        listenOptions.UseHttps(httpsOptions =>
-                        {
-                            httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
-                            httpsOptions.ClientCertificateMode =
-                                ClientCertificateMode.RequireCertificate;
-                            httpsOptions.AllowAnyClientCertificate();
-                        });
-                    }
-                );
+                        httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
+                        httpsOptions.ClientCertificateMode =
+                            ClientCertificateMode.RequireCertificate;
+                        httpsOptions.AllowAnyClientCertificate();
+                    });
+                });
             });
             webHostBuilder
                 .ConfigureServices(AddTestLogging)
@@ -1938,21 +1934,16 @@ public class HttpClientHttp2InteropTests : LoggedTest
         {
             webHostBuilder.UseKestrel(options =>
             {
-                options.Listen(
-                    IPAddress.Loopback,
-                    0,
-                    listenOptions =>
+                options.Listen(IPAddress.Loopback, 0, listenOptions =>
+                {
+                    listenOptions.Protocols = HttpProtocols.Http2;
+                    listenOptions.UseHttps(httpsOptions =>
                     {
-                        listenOptions.Protocols = HttpProtocols.Http2;
-                        listenOptions.UseHttps(httpsOptions =>
-                        {
-                            httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
-                            httpsOptions.ClientCertificateMode =
-                                ClientCertificateMode.DelayCertificate;
-                            httpsOptions.AllowAnyClientCertificate();
-                        });
-                    }
-                );
+                        httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
+                        httpsOptions.ClientCertificateMode = ClientCertificateMode.DelayCertificate;
+                        httpsOptions.AllowAnyClientCertificate();
+                    });
+                });
             });
             webHostBuilder
                 .ConfigureServices(AddTestLogging)
@@ -2011,18 +2002,14 @@ public class HttpClientHttp2InteropTests : LoggedTest
     {
         webHostBuilder.UseKestrel(options =>
         {
-            options.Listen(
-                IPAddress.Loopback,
-                0,
-                listenOptions =>
+            options.Listen(IPAddress.Loopback, 0, listenOptions =>
+            {
+                listenOptions.Protocols = HttpProtocols.Http2;
+                if (scheme == "https")
                 {
-                    listenOptions.Protocols = HttpProtocols.Http2;
-                    if (scheme == "https")
-                    {
-                        listenOptions.UseHttps(TestResources.GetTestCertificate());
-                    }
+                    listenOptions.UseHttps(TestResources.GetTestCertificate());
                 }
-            );
+            });
         });
     }
 

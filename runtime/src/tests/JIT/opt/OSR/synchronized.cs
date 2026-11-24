@@ -14,7 +14,7 @@ struct S
 
 class Z
 {
-    virtual public S F()
+    public virtual S F()
     {
         S s = new S();
         s.x = 100;

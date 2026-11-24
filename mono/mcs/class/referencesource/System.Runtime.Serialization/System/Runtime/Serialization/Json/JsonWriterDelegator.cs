@@ -4,8 +4,8 @@
 
 namespace System.Runtime.Serialization.Json
 {
-    using System.Xml;
     using System.Globalization;
+    using System.Xml;
 #if !MONO
     using System.ServiceModel;
 #endif
@@ -19,9 +19,7 @@ namespace System.Runtime.Serialization.Json
         DateTimeFormat dateTimeFormat;
 
         public JsonWriterDelegator(XmlWriter writer)
-            : base(writer)
-        {
-        }
+            : base(writer) { }
 
         public JsonWriterDelegator(XmlWriter writer, DateTimeFormat dateTimeFormat)
             : this(writer)
@@ -125,11 +123,18 @@ namespace System.Runtime.Serialization.Json
             base.WriteInt(value);
         }
 
-
 #if USE_REFEMIT
-        public void WriteJsonBooleanArray(bool[] value, XmlDictionaryString itemName, XmlDictionaryString itemNamespace)
+        public void WriteJsonBooleanArray(
+            bool[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace
+        )
 #else
-        internal void WriteJsonBooleanArray(bool[] value, XmlDictionaryString itemName, XmlDictionaryString itemNamespace)
+        internal void WriteJsonBooleanArray(
+            bool[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace
+        )
 #endif
         {
             for (int i = 0; i < value.Length; i++)
@@ -139,9 +144,17 @@ namespace System.Runtime.Serialization.Json
         }
 
 #if USE_REFEMIT
-        public void WriteJsonDateTimeArray(DateTime[] value, XmlDictionaryString itemName, XmlDictionaryString itemNamespace)
+        public void WriteJsonDateTimeArray(
+            DateTime[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace
+        )
 #else
-        internal void WriteJsonDateTimeArray(DateTime[] value, XmlDictionaryString itemName, XmlDictionaryString itemNamespace)
+        internal void WriteJsonDateTimeArray(
+            DateTime[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace
+        )
 #endif
         {
             for (int i = 0; i < value.Length; i++)
@@ -151,9 +164,17 @@ namespace System.Runtime.Serialization.Json
         }
 
 #if USE_REFEMIT
-        public void WriteJsonDecimalArray(decimal[] value, XmlDictionaryString itemName, XmlDictionaryString itemNamespace)
+        public void WriteJsonDecimalArray(
+            decimal[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace
+        )
 #else
-        internal void WriteJsonDecimalArray(decimal[] value, XmlDictionaryString itemName, XmlDictionaryString itemNamespace)
+        internal void WriteJsonDecimalArray(
+            decimal[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace
+        )
 #endif
         {
             for (int i = 0; i < value.Length; i++)
@@ -163,9 +184,17 @@ namespace System.Runtime.Serialization.Json
         }
 
 #if USE_REFEMIT
-        public void WriteJsonInt32Array(int[] value, XmlDictionaryString itemName, XmlDictionaryString itemNamespace)
+        public void WriteJsonInt32Array(
+            int[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace
+        )
 #else
-        internal void WriteJsonInt32Array(int[] value, XmlDictionaryString itemName, XmlDictionaryString itemNamespace)
+        internal void WriteJsonInt32Array(
+            int[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace
+        )
 #endif
         {
             for (int i = 0; i < value.Length; i++)
@@ -175,9 +204,17 @@ namespace System.Runtime.Serialization.Json
         }
 
 #if USE_REFEMIT
-        public void WriteJsonInt64Array(long[] value, XmlDictionaryString itemName, XmlDictionaryString itemNamespace)
+        public void WriteJsonInt64Array(
+            long[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace
+        )
 #else
-        internal void WriteJsonInt64Array(long[] value, XmlDictionaryString itemName, XmlDictionaryString itemNamespace)
+        internal void WriteJsonInt64Array(
+            long[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace
+        )
 #endif
         {
             for (int i = 0; i < value.Length; i++)
@@ -194,7 +231,12 @@ namespace System.Runtime.Serialization.Json
             }
             else
             {
-                writer.WriteString(value.ToString(this.dateTimeFormat.FormatString, this.dateTimeFormat.FormatProvider));
+                writer.WriteString(
+                    value.ToString(
+                        this.dateTimeFormat.FormatString,
+                        this.dateTimeFormat.FormatProvider
+                    )
+                );
             }
         }
 
@@ -216,7 +258,11 @@ namespace System.Runtime.Serialization.Json
                 if ((tickCount > DateTime.MaxValue.Ticks) || (tickCount < DateTime.MinValue.Ticks))
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.JsonDateTimeOutOfRange), new ArgumentOutOfRangeException("value")));
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.GetString(SR.JsonDateTimeOutOfRange),
+                            new ArgumentOutOfRangeException("value")
+                        )
+                    );
                 }
             }
 
@@ -246,9 +292,15 @@ namespace System.Runtime.Serialization.Json
                         writer.WriteString("+");
                     }
                     int hours = Math.Abs(ts.Hours);
-                    writer.WriteString((hours < 10) ? "0" + hours : hours.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteString(
+                        (hours < 10) ? "0" + hours : hours.ToString(CultureInfo.InvariantCulture)
+                    );
                     int minutes = Math.Abs(ts.Minutes);
-                    writer.WriteString((minutes < 10) ? "0" + minutes : minutes.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteString(
+                        (minutes < 10)
+                            ? "0" + minutes
+                            : minutes.ToString(CultureInfo.InvariantCulture)
+                    );
                     break;
                 case DateTimeKind.Utc:
                     break;
@@ -257,9 +309,17 @@ namespace System.Runtime.Serialization.Json
         }
 
 #if USE_REFEMIT
-        public void WriteJsonSingleArray(float[] value, XmlDictionaryString itemName, XmlDictionaryString itemNamespace)
+        public void WriteJsonSingleArray(
+            float[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace
+        )
 #else
-        internal void WriteJsonSingleArray(float[] value, XmlDictionaryString itemName, XmlDictionaryString itemNamespace)
+        internal void WriteJsonSingleArray(
+            float[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace
+        )
 #endif
         {
             for (int i = 0; i < value.Length; i++)
@@ -269,9 +329,17 @@ namespace System.Runtime.Serialization.Json
         }
 
 #if USE_REFEMIT
-        public void WriteJsonDoubleArray(double[] value, XmlDictionaryString itemName, XmlDictionaryString itemNamespace)
+        public void WriteJsonDoubleArray(
+            double[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace
+        )
 #else
-        internal void WriteJsonDoubleArray(double[] value, XmlDictionaryString itemName, XmlDictionaryString itemNamespace)
+        internal void WriteJsonDoubleArray(
+            double[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace
+        )
 #endif
         {
             for (int i = 0; i < value.Length; i++)
@@ -283,7 +351,7 @@ namespace System.Runtime.Serialization.Json
         internal override void WriteStartElement(string prefix, string localName, string ns)
         {
             if (localName != null && localName.Length == 0)
-            {                
+            {
                 base.WriteStartElement(JsonGlobals.itemString, JsonGlobals.itemString);
                 base.WriteAttributeString(null, JsonGlobals.itemString, null, localName);
             }
@@ -292,5 +360,5 @@ namespace System.Runtime.Serialization.Json
                 base.WriteStartElement(prefix, localName, ns);
             }
         }
-    }            
+    }
 }

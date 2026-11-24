@@ -128,7 +128,10 @@ namespace System.Reflection.Metadata
             return left._vToken.CompareTo(right._vToken);
         }
 
-        public static readonly ModuleDefinitionHandle ModuleDefinition = new ModuleDefinitionHandle(1);
-        public static readonly AssemblyDefinitionHandle AssemblyDefinition = new AssemblyDefinitionHandle(1);
+        public static readonly ModuleDefinitionHandle ModuleDefinition = new ModuleDefinitionHandle(
+            1
+        );
+        public static readonly AssemblyDefinitionHandle AssemblyDefinition =
+            new AssemblyDefinitionHandle(1);
     }
 }

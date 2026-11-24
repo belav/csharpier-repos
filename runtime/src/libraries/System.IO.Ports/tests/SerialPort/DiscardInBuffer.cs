@@ -23,8 +23,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void InBufferFilled_Discard_Once()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 com1.Open();
                 com2.Open();
@@ -39,10 +47,20 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void InBufferFilled_Discard_Multiple()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
-                Debug.WriteLine("Verifying call Discard method several times after input buffer has been filled");
+                Debug.WriteLine(
+                    "Verifying call Discard method several times after input buffer has been filled"
+                );
                 com1.Open();
                 com2.Open();
                 com2.Write(DEFAULT_STRING);
@@ -57,11 +75,20 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void InBufferFilled_Discard_Cycle()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 Debug.WriteLine(
-                    "Verifying call Discard method after input buffer has been filled discarded and filled again");
+                    "Verifying call Discard method after input buffer has been filled discarded and filled again"
+                );
                 com1.Open();
                 com2.Open();
                 com2.Write(DEFAULT_STRING);
@@ -80,8 +107,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void InAndOutBufferFilled_Discard()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 int origBytesToWrite;
 
@@ -100,7 +135,6 @@ namespace System.IO.Ports.Tests
             }
         }
 
-
         private void WriteRndByteArray(SerialPort com, int byteLength)
         {
             byte[] buffer = new byte[byteLength];
@@ -115,9 +149,7 @@ namespace System.IO.Ports.Tests
             {
                 com.Write(buffer, 0, buffer.Length);
             }
-            catch (TimeoutException)
-            {
-            }
+            catch (TimeoutException) { }
         }
         #endregion
 

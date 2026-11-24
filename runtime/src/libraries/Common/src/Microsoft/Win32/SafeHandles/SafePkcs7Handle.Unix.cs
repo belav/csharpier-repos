@@ -8,10 +8,8 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafePkcs7Handle : SafeHandle
     {
-        public SafePkcs7Handle() :
-            base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafePkcs7Handle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {

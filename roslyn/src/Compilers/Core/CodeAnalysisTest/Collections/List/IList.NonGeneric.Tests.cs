@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         protected virtual bool ExpectedFixedSize => false;
 
-        protected virtual Type IList_NonGeneric_Item_InvalidIndex_ThrowType => typeof(ArgumentOutOfRangeException);
+        protected virtual Type IList_NonGeneric_Item_InvalidIndex_ThrowType =>
+            typeof(ArgumentOutOfRangeException);
 
         protected virtual bool IList_NonGeneric_RemoveNonExistent_Throws => false;
 
@@ -90,7 +91,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         /// If this property is set to true, the tests ensure that the exception is thrown. The default value is
         /// the same as Enumerator_Current_UndefinedOperation_Throws.
         /// </summary>
-        protected virtual bool IList_CurrentAfterAdd_Throws => Enumerator_Current_UndefinedOperation_Throws;
+        protected virtual bool IList_CurrentAfterAdd_Throws =>
+            Enumerator_Current_UndefinedOperation_Throws;
 
         #endregion
 
@@ -98,12 +100,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         protected override ICollection NonGenericICollectionFactory() => NonGenericIListFactory();
 
-        protected override ICollection NonGenericICollectionFactory(int count) => NonGenericIListFactory(count);
+        protected override ICollection NonGenericICollectionFactory(int count) =>
+            NonGenericIListFactory(count);
 
         /// <summary>
         /// Returns a set of ModifyEnumerable delegates that modify the enumerable passed to them.
         /// </summary>
-        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(ModifyOperation operations)
+        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
+            ModifyOperation operations
+        )
         {
             if ((operations & ModifyOperation.Add) == ModifyOperation.Add)
             {
@@ -182,7 +187,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             }
         }
 
-        protected override void AddToCollection(ICollection collection, int numberOfItemsToAdd) => AddToCollection((IList)collection, numberOfItemsToAdd);
+        protected override void AddToCollection(ICollection collection, int numberOfItemsToAdd) =>
+            AddToCollection((IList)collection, numberOfItemsToAdd);
 
         #endregion
 
@@ -251,8 +257,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             {
                 IList list = NonGenericIListFactory(count);
                 object validAdd = CreateT(0);
-                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () => list[-1] = validAdd);
-                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () => list[int.MinValue] = validAdd);
+                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () =>
+                    list[-1] = validAdd
+                );
+                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () =>
+                    list[int.MinValue] = validAdd
+                );
                 Assert.Equal(count, list.Count);
             }
         }
@@ -265,8 +275,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             {
                 IList list = NonGenericIListFactory(count);
                 object validAdd = CreateT(0);
-                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () => list[count] = validAdd);
-                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () => list[count + 1] = validAdd);
+                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () =>
+                    list[count] = validAdd
+                );
+                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () =>
+                    list[count + 1] = validAdd
+                );
                 Assert.Equal(count, list.Count);
             }
         }
@@ -557,7 +571,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void IList_NonGeneric_Contains_ValidValueOnCollectionNotContainingThatValue(int count)
+        public void IList_NonGeneric_Contains_ValidValueOnCollectionNotContainingThatValue(
+            int count
+        )
         {
             IList collection = NonGenericIListFactory(count);
             int seed = 4315;
@@ -569,7 +585,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void IList_NonGeneric_IList_NonGeneric_Contains_ValidValueOnCollectionContainingThatValue(int count)
+        public void IList_NonGeneric_IList_NonGeneric_Contains_ValidValueOnCollectionContainingThatValue(
+            int count
+        )
         {
             IList collection = NonGenericIListFactory(count);
             foreach (object item in collection)
@@ -718,9 +736,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 object[] expected = new object[count * 2];
                 list.CopyTo(expected, 0);
 
-                Assert.All(Enumerable.Range(0, count), (index =>
-                    Assert.Equal(index, list.IndexOf(expected[index]))
-                ));
+                Assert.All(
+                    Enumerable.Range(0, count),
+                    (index => Assert.Equal(index, list.IndexOf(expected[index])))
+                );
             }
         }
 
@@ -736,8 +755,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             {
                 IList list = NonGenericIListFactory(count);
                 object validAdd = CreateT(0);
-                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () => list.Insert(-1, validAdd));
-                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () => list.Insert(int.MinValue, validAdd));
+                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () =>
+                    list.Insert(-1, validAdd)
+                );
+                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () =>
+                    list.Insert(int.MinValue, validAdd)
+                );
                 Assert.Equal(count, list.Count);
             }
         }
@@ -862,7 +885,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void IListNonGeneric_Remove_OnReadOnlyCollection_ThrowsNotSupportedException(int count)
+        public void IListNonGeneric_Remove_OnReadOnlyCollection_ThrowsNotSupportedException(
+            int count
+        )
         {
             if (IsReadOnly || ExpectedFixedSize)
             {
@@ -875,7 +900,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [MemberData(nameof(ValidCollectionSizes))]
         public void IList_NonGeneric_Remove_NullNotContainedInCollection(int count)
         {
-            if (!IsReadOnly && !ExpectedFixedSize && NullAllowed && !Enumerable.Contains(InvalidValues, null))
+            if (
+                !IsReadOnly
+                && !ExpectedFixedSize
+                && NullAllowed
+                && !Enumerable.Contains(InvalidValues, null)
+            )
             {
                 int seed = count * 21;
                 IList collection = NonGenericIListFactory(count);
@@ -918,7 +948,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [MemberData(nameof(ValidCollectionSizes))]
         public void IList_NonGeneric_Remove_NullContainedInCollection(int count)
         {
-            if (!IsReadOnly && !ExpectedFixedSize && NullAllowed && !Enumerable.Contains(InvalidValues, null))
+            if (
+                !IsReadOnly
+                && !ExpectedFixedSize
+                && NullAllowed
+                && !Enumerable.Contains(InvalidValues, null)
+            )
             {
                 int seed = count * 21;
                 IList collection = NonGenericIListFactory(count);
@@ -1014,8 +1049,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             {
                 IList list = NonGenericIListFactory(count);
                 object validAdd = CreateT(0);
-                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () => list.RemoveAt(-1));
-                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () => list.RemoveAt(int.MinValue));
+                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () =>
+                    list.RemoveAt(-1)
+                );
+                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () =>
+                    list.RemoveAt(int.MinValue)
+                );
                 Assert.Equal(count, list.Count);
             }
         }
@@ -1028,8 +1067,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             {
                 IList list = NonGenericIListFactory(count);
                 object validAdd = CreateT(0);
-                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () => list.RemoveAt(count));
-                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () => list.RemoveAt(count + 1));
+                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () =>
+                    list.RemoveAt(count)
+                );
+                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () =>
+                    list.RemoveAt(count + 1)
+                );
                 Assert.Equal(count, list.Count);
             }
         }
@@ -1090,7 +1133,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             {
                 IList collection = NonGenericIListFactory(count);
                 IEnumerator enumerator = collection.GetEnumerator();
-                while (enumerator.MoveNext()) ; // Go to end of enumerator
+                while (enumerator.MoveNext())
+                    ; // Go to end of enumerator
 
                 if (Enumerator_Current_UndefinedOperation_Throws)
                 {

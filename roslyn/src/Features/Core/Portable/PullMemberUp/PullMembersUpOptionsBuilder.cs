@@ -1,6 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
-// See the LICENSE file in the project root for more information.  
+// See the LICENSE file in the project root for more information.
 
 #nullable disable
 
@@ -13,29 +13,39 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
     {
         public static PullMembersUpOptions BuildPullMembersUpOptions(
             INamedTypeSymbol destination,
-            ImmutableArray<(ISymbol member, bool makeAbstract)> members)
+            ImmutableArray<(ISymbol member, bool makeAbstract)> members
+        )
         {
             var membersAnalysisResult = members.SelectAsArray(memberAndMakeAbstract =>
             {
                 if (destination.TypeKind == TypeKind.Interface)
                 {
-                    var changeOriginalToPublic = memberAndMakeAbstract.member.DeclaredAccessibility != Accessibility.Public;
+                    var changeOriginalToPublic =
+                        memberAndMakeAbstract.member.DeclaredAccessibility != Accessibility.Public;
                     var changeOriginalToNonStatic = memberAndMakeAbstract.member.IsStatic;
                     return new MemberAnalysisResult(
                         memberAndMakeAbstract.member,
                         changeOriginalToPublic,
                         changeOriginalToNonStatic,
                         makeMemberDeclarationAbstract: false,
-                        changeDestinationTypeToAbstract: false);
+                        changeDestinationTypeToAbstract: false
+                    );
                 }
                 else
                 {
-                    var changeDestinationToAbstract = !destination.IsAbstract && (memberAndMakeAbstract.makeAbstract || memberAndMakeAbstract.member.IsAbstract);
-                    return new MemberAnalysisResult(memberAndMakeAbstract.member,
+                    var changeDestinationToAbstract =
+                        !destination.IsAbstract
+                        && (
+                            memberAndMakeAbstract.makeAbstract
+                            || memberAndMakeAbstract.member.IsAbstract
+                        );
+                    return new MemberAnalysisResult(
+                        memberAndMakeAbstract.member,
                         changeOriginalToPublic: false,
                         changeOriginalToNonStatic: false,
                         memberAndMakeAbstract.makeAbstract,
-                        changeDestinationTypeToAbstract: changeDestinationToAbstract);
+                        changeDestinationTypeToAbstract: changeDestinationToAbstract
+                    );
                 }
             });
 

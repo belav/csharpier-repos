@@ -27,6 +27,11 @@ namespace System.ComponentModel.Design.Serialization
         /// either return it or return null to prevent an infinite
         /// loop.
         /// </summary>
-        object? GetSerializer(IDesignerSerializationManager manager, object? currentSerializer, Type? objectType, Type serializerType);
+        object? GetSerializer(
+            IDesignerSerializationManager manager,
+            object? currentSerializer,
+            Type? objectType,
+            Type serializerType
+        );
     }
 }

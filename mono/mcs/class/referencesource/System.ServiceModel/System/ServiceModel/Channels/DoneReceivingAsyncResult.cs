@@ -10,9 +10,7 @@ namespace System.ServiceModel.Channels
     class DoneReceivingAsyncResult : CompletedAsyncResult
     {
         internal DoneReceivingAsyncResult(AsyncCallback callback, object state)
-            : base(callback, state)
-        {
-        }
+            : base(callback, state) { }
 
         internal static bool End(DoneReceivingAsyncResult result, out Message message)
         {

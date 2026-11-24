@@ -1,120 +1,176 @@
 /* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Microsoft Public License. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Microsoft Public License, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Microsoft Public License. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Microsoft Public License, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Microsoft Public License.
  *
  * You must not remove this notice, or any other, from this software.
  *
  *
  * ***************************************************************************/
-using System; using Microsoft;
-
-
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection;
+using Microsoft;
 #if CODEPLEX_40
 using System.Linq.Expressions;
 #else
 using Microsoft.Linq.Expressions;
 #endif
-using System.Reflection;
 
 #if CODEPLEX_40
-namespace System.Dynamic {
+namespace System.Dynamic
+{
 #else
-namespace Microsoft.Scripting {
+namespace Microsoft.Scripting
+{
 #endif
 
-    internal static class TypeUtils {
-        private const BindingFlags AnyStatic = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
-        internal const MethodAttributes PublicStatic = MethodAttributes.Public | MethodAttributes.Static;
+    internal static class TypeUtils
+    {
+        private const BindingFlags AnyStatic =
+            BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+        internal const MethodAttributes PublicStatic =
+            MethodAttributes.Public | MethodAttributes.Static;
 
         //CONFORMING
-        internal static Type GetNonNullableType(Type type) {
-            if (IsNullableType(type)) {
+        internal static Type GetNonNullableType(Type type)
+        {
+            if (IsNullableType(type))
+            {
                 return type.GetGenericArguments()[0];
             }
             return type;
         }
 
         //CONFORMING
-        internal static bool IsNullableType(this Type type) {
+        internal static bool IsNullableType(this Type type)
+        {
             return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
 
         //CONFORMING
-        internal static bool AreReferenceAssignable(Type dest, Type src) {
+        internal static bool AreReferenceAssignable(Type dest, Type src)
+        {
             // WARNING: This actually implements "Is this identity assignable and/or reference assignable?"
-            if (dest == src) {
+            if (dest == src)
+            {
                 return true;
             }
-            if (!dest.IsValueType && !src.IsValueType && AreAssignable(dest, src)) {
-                return true;
-            }
-            return false;
-        }
-        //CONFORMING
-        internal static bool AreAssignable(Type dest, Type src) {
-            if (dest == src) {
-                return true;
-            }
-            if (dest.IsAssignableFrom(src)) {
-                return true;
-            }
-            if (dest.IsArray && src.IsArray && dest.GetArrayRank() == src.GetArrayRank() && AreReferenceAssignable(dest.GetElementType(), src.GetElementType())) {
-                return true;
-            }
-            if (src.IsArray && dest.IsGenericType &&
-                (dest.GetGenericTypeDefinition() == typeof(System.Collections.Generic.IEnumerable<>)
-                || dest.GetGenericTypeDefinition() == typeof(System.Collections.Generic.IList<>)
-                || dest.GetGenericTypeDefinition() == typeof(System.Collections.Generic.ICollection<>))
-                && dest.GetGenericArguments()[0] == src.GetElementType()) {
+            if (!dest.IsValueType && !src.IsValueType && AreAssignable(dest, src))
+            {
                 return true;
             }
             return false;
         }
 
         //CONFORMING
-        internal static bool IsImplicitlyConvertible(Type source, Type destination) {
-            return IsIdentityConversion(source, destination) ||
-                IsImplicitNumericConversion(source, destination) ||
-                IsImplicitReferenceConversion(source, destination) ||
-                IsImplicitBoxingConversion(source, destination);
-        }
-
-        internal static bool IsImplicitlyConvertible(Type source, Type destination, bool considerUserDefined) {
-            return IsImplicitlyConvertible(source, destination) ||
-                (considerUserDefined && GetUserDefinedCoercionMethod(source, destination, true) != null);
+        internal static bool AreAssignable(Type dest, Type src)
+        {
+            if (dest == src)
+            {
+                return true;
+            }
+            if (dest.IsAssignableFrom(src))
+            {
+                return true;
+            }
+            if (
+                dest.IsArray
+                && src.IsArray
+                && dest.GetArrayRank() == src.GetArrayRank()
+                && AreReferenceAssignable(dest.GetElementType(), src.GetElementType())
+            )
+            {
+                return true;
+            }
+            if (
+                src.IsArray
+                && dest.IsGenericType
+                && (
+                    dest.GetGenericTypeDefinition()
+                        == typeof(System.Collections.Generic.IEnumerable<>)
+                    || dest.GetGenericTypeDefinition() == typeof(System.Collections.Generic.IList<>)
+                    || dest.GetGenericTypeDefinition()
+                        == typeof(System.Collections.Generic.ICollection<>)
+                )
+                && dest.GetGenericArguments()[0] == src.GetElementType()
+            )
+            {
+                return true;
+            }
+            return false;
         }
 
         //CONFORMING
-        internal static MethodInfo GetUserDefinedCoercionMethod(Type convertFrom, Type convertToType, bool implicitOnly) {
+        internal static bool IsImplicitlyConvertible(Type source, Type destination)
+        {
+            return IsIdentityConversion(source, destination)
+                || IsImplicitNumericConversion(source, destination)
+                || IsImplicitReferenceConversion(source, destination)
+                || IsImplicitBoxingConversion(source, destination);
+        }
+
+        internal static bool IsImplicitlyConvertible(
+            Type source,
+            Type destination,
+            bool considerUserDefined
+        )
+        {
+            return IsImplicitlyConvertible(source, destination)
+                || (
+                    considerUserDefined
+                    && GetUserDefinedCoercionMethod(source, destination, true) != null
+                );
+        }
+
+        //CONFORMING
+        internal static MethodInfo GetUserDefinedCoercionMethod(
+            Type convertFrom,
+            Type convertToType,
+            bool implicitOnly
+        )
+        {
             // check for implicit coercions first
             Type nnExprType = TypeUtils.GetNonNullableType(convertFrom);
             Type nnConvType = TypeUtils.GetNonNullableType(convertToType);
             // try exact match on types
-            MethodInfo[] eMethods = nnExprType.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-            MethodInfo method = FindConversionOperator(eMethods, convertFrom, convertToType, implicitOnly);
-            if (method != null) {
+            MethodInfo[] eMethods = nnExprType.GetMethods(
+                BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic
+            );
+            MethodInfo method = FindConversionOperator(
+                eMethods,
+                convertFrom,
+                convertToType,
+                implicitOnly
+            );
+            if (method != null)
+            {
                 return method;
             }
-            MethodInfo[] cMethods = nnConvType.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+            MethodInfo[] cMethods = nnConvType.GetMethods(
+                BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic
+            );
             method = FindConversionOperator(cMethods, convertFrom, convertToType, implicitOnly);
-            if (method != null) {
+            if (method != null)
+            {
                 return method;
             }
             // try lifted conversion
-            if (nnExprType != convertFrom || nnConvType != convertToType) {
+            if (nnExprType != convertFrom || nnConvType != convertToType)
+            {
                 method = FindConversionOperator(eMethods, nnExprType, nnConvType, implicitOnly);
-                if (method == null) {
+                if (method == null)
+                {
                     method = FindConversionOperator(cMethods, nnExprType, nnConvType, implicitOnly);
                 }
-                if (method != null) {
+                if (method != null)
+                {
                     return method;
                 }
             }
@@ -122,8 +178,15 @@ namespace Microsoft.Scripting {
         }
 
         //CONFORMING
-        internal static MethodInfo FindConversionOperator(MethodInfo[] methods, Type typeFrom, Type typeTo, bool implicitOnly) {
-            foreach (MethodInfo mi in methods) {
+        internal static MethodInfo FindConversionOperator(
+            MethodInfo[] methods,
+            Type typeFrom,
+            Type typeTo,
+            bool implicitOnly
+        )
+        {
+            foreach (MethodInfo mi in methods)
+            {
                 if (mi.Name != "op_Implicit" && (implicitOnly || mi.Name != "op_Explicit"))
                     continue;
                 if (mi.ReturnType != typeTo)
@@ -136,21 +199,27 @@ namespace Microsoft.Scripting {
             return null;
         }
 
-
         //CONFORMING
-        private static bool IsIdentityConversion(Type source, Type destination) {
+        private static bool IsIdentityConversion(Type source, Type destination)
+        {
             return source == destination;
         }
 
         //CONFORMING
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        private static bool IsImplicitNumericConversion(Type source, Type destination) {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Maintainability",
+            "CA1502:AvoidExcessiveComplexity"
+        )]
+        private static bool IsImplicitNumericConversion(Type source, Type destination)
+        {
             TypeCode tcSource = Type.GetTypeCode(source);
             TypeCode tcDest = Type.GetTypeCode(destination);
 
-            switch (tcSource) {
+            switch (tcSource)
+            {
                 case TypeCode.SByte:
-                    switch (tcDest) {
+                    switch (tcDest)
+                    {
                         case TypeCode.Int16:
                         case TypeCode.Int32:
                         case TypeCode.Int64:
@@ -161,7 +230,8 @@ namespace Microsoft.Scripting {
                     }
                     return false;
                 case TypeCode.Byte:
-                    switch (tcDest) {
+                    switch (tcDest)
+                    {
                         case TypeCode.Int16:
                         case TypeCode.UInt16:
                         case TypeCode.Int32:
@@ -175,7 +245,8 @@ namespace Microsoft.Scripting {
                     }
                     return false;
                 case TypeCode.Int16:
-                    switch (tcDest) {
+                    switch (tcDest)
+                    {
                         case TypeCode.Int32:
                         case TypeCode.Int64:
                         case TypeCode.Single:
@@ -185,7 +256,8 @@ namespace Microsoft.Scripting {
                     }
                     return false;
                 case TypeCode.UInt16:
-                    switch (tcDest) {
+                    switch (tcDest)
+                    {
                         case TypeCode.Int32:
                         case TypeCode.UInt32:
                         case TypeCode.Int64:
@@ -197,7 +269,8 @@ namespace Microsoft.Scripting {
                     }
                     return false;
                 case TypeCode.Int32:
-                    switch (tcDest) {
+                    switch (tcDest)
+                    {
                         case TypeCode.Int64:
                         case TypeCode.Single:
                         case TypeCode.Double:
@@ -206,7 +279,8 @@ namespace Microsoft.Scripting {
                     }
                     return false;
                 case TypeCode.UInt32:
-                    switch (tcDest) {
+                    switch (tcDest)
+                    {
                         case TypeCode.UInt32:
                         case TypeCode.UInt64:
                         case TypeCode.Single:
@@ -217,7 +291,8 @@ namespace Microsoft.Scripting {
                     return false;
                 case TypeCode.Int64:
                 case TypeCode.UInt64:
-                    switch (tcDest) {
+                    switch (tcDest)
+                    {
                         case TypeCode.Single:
                         case TypeCode.Double:
                         case TypeCode.Decimal:
@@ -225,7 +300,8 @@ namespace Microsoft.Scripting {
                     }
                     return false;
                 case TypeCode.Char:
-                    switch (tcDest) {
+                    switch (tcDest)
+                    {
                         case TypeCode.UInt16:
                         case TypeCode.Int32:
                         case TypeCode.UInt32:
@@ -244,13 +320,18 @@ namespace Microsoft.Scripting {
         }
 
         //CONFORMING
-        private static bool IsImplicitReferenceConversion(Type source, Type destination) {
+        private static bool IsImplicitReferenceConversion(Type source, Type destination)
+        {
             return AreAssignable(destination, source);
         }
 
         //CONFORMING
-        private static bool IsImplicitBoxingConversion(Type source, Type destination) {
-            if (source.IsValueType && (destination == typeof(object) || destination == typeof(System.ValueType)))
+        private static bool IsImplicitBoxingConversion(Type source, Type destination)
+        {
+            if (
+                source.IsValueType
+                && (destination == typeof(object) || destination == typeof(System.ValueType))
+            )
                 return true;
             if (source.IsEnum && destination == typeof(System.Enum))
                 return true;

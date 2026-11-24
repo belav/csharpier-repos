@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(52543, "https://github.com/dotnet/roslyn/issues/52543")]
         public void TestNormalizePatternInIf()
         {
-            TestNormalizeStatement("""
+            TestNormalizeStatement(
+                """
                 {object x = 1;
                                 if (x is {})
                                 {
@@ -31,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                                 {
                                 }
                 }
-                """, """
+                """,
+                """
                 {
                   object x = 1;
                   if (x is { })
@@ -62,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestNormalizeSwitchExpression()
         {
             TestNormalizeStatement(
-                """var x = (int)1 switch { 1 => "one", 2 => "two", 3 => "three", {} => ">= 4" };""", """
+                """var x = (int)1 switch { 1 => "one", 2 => "two", 3 => "three", {} => ">= 4" };""",
+                """
                 var x = (int)1 switch
                 {
                   1 => "one",
@@ -78,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestNormalizeSwitchExpressionRawStrings()
         {
             TestNormalizeStatement(
-                """"var x = (int)1 switch { 1 => """one""", 2 => """two""", 3 => """three""", {} => """>= 4""" };"""", """"
+                """"var x = (int)1 switch { 1 => """one""", 2 => """two""", 3 => """three""", {} => """>= 4""" };"""",
+                """"
                 var x = (int)1 switch
                 {
                   1 => """one""",
@@ -94,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestNormalizeSwitchExpressionRawStringsUtf8_01()
         {
             TestNormalizeStatement(
-                """"var x = (int)1 switch { 1 => """one"""u8, 2 => """two"""U8, 3 => """three"""u8, {} => """>= 4"""U8 };"""", """"
+                """"var x = (int)1 switch { 1 => """one"""u8, 2 => """two"""U8, 3 => """three"""u8, {} => """>= 4"""U8 };"""",
+                """"
                 var x = (int)1 switch
                 {
                   1 => """one"""u8,
@@ -109,14 +114,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [ConditionalFact(typeof(WindowsOnly))]
         public void TestNormalizeSwitchExpressionRawStringsMultiline()
         {
-            TestNormalizeStatement(""""
+            TestNormalizeStatement(
+                """"
                 var x = (int)1 switch { 1 => """
                        one
                   """, 2 =>
                 """
                    two
                 """ };
-                """", """"
+                """",
+                """"
                 var x = (int)1 switch
                 {
                   1 => """
@@ -133,14 +140,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [ConditionalFact(typeof(WindowsOnly))]
         public void TestNormalizeSwitchExpressionRawStringsMultilineUtf8_01()
         {
-            TestNormalizeStatement(""""
+            TestNormalizeStatement(
+                """"
                 var x = (int)1 switch { 1 => """
                        one
                   """U8, 2 =>
                 """
                    two
                 """u8 };
-                """", """"
+                """",
+                """"
                 var x = (int)1 switch
                 {
                   1 => """
@@ -157,13 +166,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestNormalizeSwitchExpressionStringsUtf8()
         {
-            TestNormalizeStatement("""
+            TestNormalizeStatement(
+                """
                 var x = (int)1 switch { 1 =>
                     "one"u8     , 2 =>
                   @"two"u8   , 3 =>
                  "three"U8  , {} =>
                 @">= 4"U8 };
-                """, """
+                """,
+                """
                 var x = (int)1 switch
                 {
                   1 => "one"u8,
@@ -178,7 +189,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(52543, "https://github.com/dotnet/roslyn/issues/52543")]
         public void TestNormalizeSwitchRecPattern()
         {
-            TestNormalizeStatement("""
+            TestNormalizeStatement(
+                """
                 var x = (object)1 switch {
                 		int { } => "two",
                 		{ } t when t.GetHashCode() == 42 => "42",
@@ -189,7 +201,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 		{ } => "not null",
                 		null => "null",
                 };
-                """, """
+                """,
+                """
                 var x = (object)1 switch
                 {
                   int { } => "two",
@@ -208,7 +221,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(52543, "https://github.com/dotnet/roslyn/issues/52543")]
         public void TestNormalizeSwitchExpressionComplex()
         {
-            TestNormalizeStatement("""
+            TestNormalizeStatement(
+                """
                 var x = vehicle switch
                             {
                                 Car { Passengers: 0 } => 2.00m + 0.50m,
@@ -231,7 +245,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                                 { } => -1, //throw new ArgumentException(message: "Not a known vehicle type", paramName: nameof(vehicle)),
                                 null => 0//throw new ArgumentNullException(nameof(vehicle))
                             };
-                """, """
+                """,
+                """
                 var x = vehicle switch
                 {
                   Car { Passengers: 0 } => 2.00m + 0.50m,
@@ -251,7 +266,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   { } => -1, //throw new ArgumentException(message: "Not a known vehicle type", paramName: nameof(vehicle)),
                   null => 0 //throw new ArgumentNullException(nameof(vehicle))
                 };
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -281,9 +297,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(50742, "https://github.com/dotnet/roslyn/issues/50742")]
         public void TestLineBreakInterpolations()
         {
-            TestNormalizeExpression("""
+            TestNormalizeExpression(
+                """
                 $"Printed: {                    new Printer() { TextToPrint = "Hello world!" }.PrintedText }"
-                """, """
+                """,
+                """
                 $"Printed: {new Printer() { TextToPrint = "Hello world!" }.PrintedText}"
                 """
             );
@@ -292,9 +310,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestLineBreakRawInterpolations()
         {
-            TestNormalizeExpression(""""
+            TestNormalizeExpression(
+                """"
                 $"""Printed: {                    new Printer() { TextToPrint = "Hello world!" }.PrintedText }"""
-                """", """"
+                """",
+                """"
                 $"""Printed: {new Printer() { TextToPrint = "Hello world!" }.PrintedText}"""
                 """"
             );
@@ -303,7 +323,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(50742, "https://github.com/dotnet/roslyn/issues/50742")]
         public void TestVerbatimStringInterpolationWithLineBreaks()
         {
-            TestNormalizeStatement("""
+            TestNormalizeStatement(
+                """
                 Console.WriteLine($@"Test with line
                 breaks
                 {
@@ -312,7 +333,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   }[2]
                 }
                             ");
-                """, """
+                """,
+                """
                 Console.WriteLine($@"Test with line
                 breaks
                 {new[] { 1, 2, 3 }[2]}
@@ -324,7 +346,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestRawStringInterpolationWithLineBreaks()
         {
-            TestNormalizeStatement(""""
+            TestNormalizeStatement(
+                """"
                 Console.WriteLine($"""
                             Test with line
                             breaks
@@ -334,7 +357,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                               }[2]
                             }
                             """);
-                """", """"
+                """",
+                """"
                 Console.WriteLine($"""
                             Test with line
                             breaks
@@ -390,11 +414,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             TestNormalizeExpression("a?b:c", "a ? b : c");
             TestNormalizeExpression(
-                "from a in b where c select d", """
+                "from a in b where c select d",
+                """
                 from a in b
                 where c
                 select d
-                """);
+                """
+            );
 
             TestNormalizeExpression("a().b().c()", "a().b().c()");
             TestNormalizeExpression("a->b->c", "a->b->c");
@@ -402,7 +428,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             TestNormalizeExpression("(IList<int>)args", "(IList<int>)args");
             TestNormalizeExpression("(IList<IList<int>>)args", "(IList<IList<int>>)args");
-            TestNormalizeExpression("(IList<IList<IList<int>>>)args", "(IList<IList<IList<int>>>)args");
+            TestNormalizeExpression(
+                "(IList<IList<IList<int>>>)args",
+                "(IList<IList<IList<int>>>)args"
+            );
 
             TestNormalizeExpression("(IList<string?>)args", "(IList<string?>)args");
         }
@@ -424,132 +453,163 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestNormalizeBlockStatements()
         {
             TestNormalizeStatement(
-                "{a;}", """
+                "{a;}",
+                """
                 {
                   a;
                 }
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "{a;b;}", """
+                "{a;b;}",
+                """
                 {
                   a;
                   b;
                 }
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "\t{a;}", """
+                "\t{a;}",
+                """
                 {
                   a;
                 }
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "\t{a;b;}", """
+                "\t{a;b;}",
+                """
                 {
                   a;
                   b;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestNormalizeIfStatements()
         {
             TestNormalizeStatement(
-                "if(a)b;", """
+                "if(a)b;",
+                """
                 if (a)
                   b;
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "if(a){b;}", """
+                "if(a){b;}",
+                """
                 if (a)
                 {
                   b;
                 }
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "if(a){b;c;}", """
+                "if(a){b;c;}",
+                """
                 if (a)
                 {
                   b;
                   c;
                 }
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "if(a)b;else c;", """
+                "if(a)b;else c;",
+                """
                 if (a)
                   b;
                 else
                   c;
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "if(a)b;else if(c)d;", """
+                "if(a)b;else if(c)d;",
+                """
                 if (a)
                   b;
                 else if (c)
                   d;
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestNormalizeWhileStatements()
         {
             TestNormalizeStatement(
-                "while(a)b;", """
+                "while(a)b;",
+                """
                 while (a)
                   b;
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "while(a){b;}", """
+                "while(a){b;}",
+                """
                 while (a)
                 {
                   b;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestNormalizeDoWhileStatement()
         {
             TestNormalizeStatement(
-                "do{a;}while(b);", """
+                "do{a;}while(b);",
+                """
                 do
                 {
                   a;
                 }
                 while (b);
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestNormalizeForStatements()
         {
             TestNormalizeStatement(
-                "for(a;b;c)d;", """
+                "for(a;b;c)d;",
+                """
                 for (a; b; c)
                   d;
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "for(;;)a;", """
+                "for(;;)a;",
+                """
                 for (;;)
                   a;
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestNormalizeForeachStatement()
         {
             TestNormalizeStatement(
-                "foreach(a in b)c;", """
+                "foreach(a in b)c;",
+                """
                 foreach (a in b)
                   c;
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestNormalizeTryStatements()
         {
             TestNormalizeStatement(
-                "try{a;}catch(b){c;}", """
+                "try{a;}catch(b){c;}",
+                """
                 try
                 {
                   a;
@@ -558,9 +618,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 {
                   c;
                 }
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "try{a;}finally{b;}", """
+                "try{a;}finally{b;}",
+                """
                 try
                 {
                   a;
@@ -569,48 +631,61 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 {
                   b;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestNormalizeOtherStatements()
         {
             TestNormalizeStatement(
-                "lock(a)b;", """
+                "lock(a)b;",
+                """
                 lock (a)
                   b;
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "fixed(a)b;", """
+                "fixed(a)b;",
+                """
                 fixed (a)
                   b;
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "using(a)b;", """
+                "using(a)b;",
+                """
                 using (a)
                   b;
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "checked{a;}", """
+                "checked{a;}",
+                """
                 checked
                 {
                   a;
                 }
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "unchecked{a;}", """
+                "unchecked{a;}",
+                """
                 unchecked
                 {
                   a;
                 }
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "unsafe{a;}", """
+                "unsafe{a;}",
+                """
                 unsafe
                 {
                   a;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -628,27 +703,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             TestNormalizeStatement(";", ";");
             TestNormalizeStatement(
-                "{;;}", """
+                "{;;}",
+                """
                 {
                   ;
                   ;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestNormalizeLabelStatements()
         {
             TestNormalizeStatement(
-                "goo:;", """
+                "goo:;",
+                """
                 goo:
                   ;
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "goo:a;", """
+                "goo:a;",
+                """
                 goo:
                   a;
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -671,15 +752,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestNormalizeSwitchStatements()
         {
             TestNormalizeStatement(
-                "switch(a){case b:c;}", """
+                "switch(a){case b:c;}",
+                """
                 switch (a)
                 {
                   case b:
                     c;
                 }
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "switch(a){case b:c;case d:e;}", """
+                "switch(a){case b:c;case d:e;}",
+                """
                 switch (a)
                 {
                   case b:
@@ -687,9 +771,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   case d:
                     e;
                 }
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "switch(a){case b:c;default:d;}", """
+                "switch(a){case b:c;default:d;}",
+                """
                 switch (a)
                 {
                   case b:
@@ -697,9 +783,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   default:
                     d;
                 }
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "switch(a){case b:{}default:{}}", """
+                "switch(a){case b:{}default:{}}",
+                """
                 switch (a)
                 {
                   case b:
@@ -710,9 +798,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "switch(a){case b:c();d();default:e();f();}", """
+                "switch(a){case b:c();d();default:e();f();}",
+                """
                 switch (a)
                 {
                   case b:
@@ -722,9 +812,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     e();
                     f();
                 }
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "switch(a){case b:{c();}}", """
+                "switch(a){case b:{c();}}",
+                """
                 switch (a)
                 {
                   case b:
@@ -732,14 +824,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     c();
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestNormalizeStatements_Curlies()
         {
             TestNormalizeStatement(
-                "{if(goo){}if(bar){}}", """
+                "{if(goo){}if(bar){}}",
+                """
                 {
                   if (goo)
                   {
@@ -749,42 +843,50 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
-
+                """
+            );
         }
 
         [Fact]
         public void TestNormalizeStatements_Queries()
         {
             TestNormalizeStatement(
-                "int i=from v in vals select v;", """
+                "int i=from v in vals select v;",
+                """
                 int i =
                   from v in vals
                   select v;
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "Goo(from v in vals select v);", """
+                "Goo(from v in vals select v);",
+                """
                 Goo(
                   from v in vals
                   select v);
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "int i=from v in vals select from x in xxx where x > 10 select x;", """
+                "int i=from v in vals select from x in xxx where x > 10 select x;",
+                """
                 int i =
                   from v in vals
                   select
                     from x in xxx
                     where x > 10
                     select x;
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "int i=from v in vals group v by x into g where g > 10 select g;", """
+                "int i=from v in vals group v by x into g where g > 10 select g;",
+                """
                 int i =
                   from v in vals
                   group v by x into g
                     where g > 10
                     select g;
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -797,18 +899,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestLocalFunctionAttributes()
         {
             TestNormalizeStatement(
-                "[ return:A ]void Local( [ B ]object o){}", """
+                "[ return:A ]void Local( [ B ]object o){}",
+                """
                 [return: A]
                 void Local([B] object o)
                 {
                 }
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "[A,B][C]T Local<T>()=>default;", """
+                "[A,B][C]T Local<T>()=>default;",
+                """
                 [A, B]
                 [C]
                 T Local<T>() => default;
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(59653, "https://github.com/dotnet/roslyn/issues/59653")]
@@ -817,25 +923,31 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             TestNormalizeExpression("( [ A ]x)=>x", "([A] x) => x");
             TestNormalizeExpression("( [ A ]int x=1)=>x", "([A] int x = 1) => x");
             TestNormalizeExpression(
-                "[return:A]([B]object o)=>{}", """
+                "[return:A]([B]object o)=>{}",
+                """
                 [return: A]
                 ([B] object o) =>
                 {
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "[ A ,B ] [C]()=>x", """
+                "[ A ,B ] [C]()=>x",
+                """
                 [A, B]
                 [C]
                 () => x
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "[A]B()=>{ }", """
+                "[A]B()=>{ }",
+                """
                 [A]
                 B () =>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(59653, "https://github.com/dotnet/roslyn/issues/59653")]
@@ -843,18 +955,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             TestNormalizeExpression("int( x )=>x", "int (x) => x");
             TestNormalizeExpression(
-                "A( B b )=>{}", """
+                "A( B b )=>{}",
+                """
                 A (B b) =>
                 {
                 }
-                """);
-            TestNormalizeExpression("""
+                """
+            );
+            TestNormalizeExpression(
+                """
                 static
                 async
                 A<int>()=>x
                 """,
-                "static async A<int> () => x");
-            TestNormalizeExpression("(A,B)()=>(new A(),new B())", "(A, B) () => (new A(), new B())");
+                "static async A<int> () => x"
+            );
+            TestNormalizeExpression(
+                "(A,B)()=>(new A(),new B())",
+                "(A, B) () => (new A(), new B())"
+            );
             TestNormalizeExpression("A.B()=>null", "A.B () => null");
             TestNormalizeExpression("A.B.C()=>null", "A.B.C () => null");
             TestNormalizeExpression("int[]()=>null", "int[] () => null");
@@ -870,23 +989,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             TestNormalizeExpression("( int x=1 )=>x", "(int x = 1) => x");
             TestNormalizeExpression(
-                "(int  x  =  1,int y,int z=2)=>{}", """
+                "(int  x  =  1,int y,int z=2)=>{}",
+                """
                 (int x = 1, int y, int z = 2) =>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestLambdaParamsArray()
         {
-            TestNormalizeExpression("( params  int []xs)=>xs.Length", "(params int[] xs) => xs.Length");
             TestNormalizeExpression(
-                "(int  x  =  1,int y,int z=2,params int  []xs)=>{}", """
+                "( params  int []xs)=>xs.Length",
+                "(params int[] xs) => xs.Length"
+            );
+            TestNormalizeExpression(
+                "(int  x  =  1,int y,int z=2,params int  []xs)=>{}",
+                """
                 (int x = 1, int y, int z = 2, params int[] xs) =>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Theory]
@@ -907,33 +1033,39 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(49733, "https://github.com/dotnet/roslyn/issues/49733")]
         public void TestNormalizeAsteriskInPointerReturnTypeOfIndexer()
         {
-            TestNormalizeDeclaration("""
+            TestNormalizeDeclaration(
+                """
                 public unsafe class C
                 {
                   int*this[int x,int y]{get=>(int*)0;}
                 }
-                """, """
+                """,
+                """
                 public unsafe class C
                 {
                   int* this[int x, int y] { get => (int*)0; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestNormalizeAsteriskInVoidPointerCast()
         {
-            TestNormalizeDeclaration("""
+            TestNormalizeDeclaration(
+                """
                 public unsafe class C
                 {
                   void*this[int x,int y]{get   =>  (  void  *   ) 0;}
                 }
-                """, """
+                """,
+                """
                 public unsafe class C
                 {
                   void* this[int x, int y] { get => (void*)0; }
                 }
-                """);
+                """
+            );
         }
 
         private static void TestNormalizeStatement(string text, string expected)
@@ -950,81 +1082,98 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             TestNormalizeDeclaration("using a=b;", "using a = b;");
             TestNormalizeDeclaration("using a.b;", "using a.b;");
             TestNormalizeDeclaration(
-                "using A; using B; class C {}", """
+                "using A; using B; class C {}",
+                """
                 using A;
                 using B;
 
                 class C
                 {
                 }
-                """);
+                """
+            );
 
             TestNormalizeDeclaration("global  using  a;", "global using a;");
             TestNormalizeDeclaration("global  using  a=b;", "global using a = b;");
             TestNormalizeDeclaration("global  using  a.b;", "global using a.b;");
             TestNormalizeDeclaration(
-                "global using A; global using B; class C {}", """
+                "global using A; global using B; class C {}",
+                """
                 global using A;
                 global using B;
 
                 class C
                 {
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "global using A; using B; class C {}", """
+                "global using A; using B; class C {}",
+                """
                 global using A;
                 using B;
 
                 class C
                 {
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "using A; global using B; class C {}", """
+                "using A; global using B; class C {}",
+                """
                 using A;
                 global using B;
 
                 class C
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestNormalizeNamespaceDeclarations()
         {
             TestNormalizeDeclaration(
-                "namespace a{}", """
+                "namespace a{}",
+                """
                 namespace a
                 {
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "namespace a{using b;}", """
+                "namespace a{using b;}",
+                """
                 namespace a
                 {
                   using b;
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "namespace a{global  using  b;}", """
+                "namespace a{global  using  b;}",
+                """
                 namespace a
                 {
                   global using b;
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "namespace a{namespace b{}}", """
+                "namespace a{namespace b{}}",
+                """
                 namespace a
                 {
                   namespace b
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "namespace a{}namespace b{}", """
+                "namespace a{}namespace b{}",
+                """
                 namespace a
                 {
                 }
@@ -1032,63 +1181,77 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 namespace b
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestNormalizeTypeDeclarations()
         {
             TestNormalizeDeclaration(
-                "class a{}", """
+                "class a{}",
+                """
                 class a
                 {
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class a{class b{}}", """
+                "class a{class b{}}",
+                """
                 class a
                 {
                   class b
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class a<b>where a:c{}", """
+                "class a<b>where a:c{}",
+                """
                 class a<b>
                   where a : c
                 {
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class a<b,c>where a:c{}", """
+                "class a<b,c>where a:c{}",
+                """
                 class a<b, c>
                   where a : c
                 {
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class a:b{}", """
+                "class a:b{}",
+                """
                 class a : b
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestNormalizeMethodDeclarations()
         {
             TestNormalizeDeclaration(
-                "class a{void b(){}}", """
+                "class a{void b(){}}",
+                """
                 class a
                 {
                   void b()
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class a{void b(){}void c(){}}", """
+                "class a{void b(){}void c(){}}",
+                """
                 class a
                 {
                   void b()
@@ -1099,146 +1262,177 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class a{a(){}}", """
+                "class a{a(){}}",
+                """
                 class a
                 {
                   a()
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class a{~a(){}}", """
+                "class a{~a(){}}",
+                """
                 class a
                 {
                   ~a()
                   {
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestNormalizeOperatorDeclarations()
         {
             TestNormalizeDeclaration(
-                "class a{b operator    checked-(c d){}}", """
+                "class a{b operator    checked-(c d){}}",
+                """
                 class a
                 {
                   b operator checked -(c d)
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class a{ implicit operator    checked    b(c d){}}", """
+                "class a{ implicit operator    checked    b(c d){}}",
+                """
                 class a
                 {
                   implicit operator checked b(c d)
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class a{ explicit operator    checked    b(c d){}}", """
+                "class a{ explicit operator    checked    b(c d){}}",
+                """
                 class a
                 {
                   explicit operator checked b(c d)
                   {
                   }
                 }
-                """);
+                """
+            );
 
             TestNormalizeDeclaration(
-                "class a{b I1 . operator    checked-(c d){}}", """
+                "class a{b I1 . operator    checked-(c d){}}",
+                """
                 class a
                 {
                   b I1.operator checked -(c d)
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class a{ implicit I1 . operator    checked    b(c d){}}", """
+                "class a{ implicit I1 . operator    checked    b(c d){}}",
+                """
                 class a
                 {
                   implicit I1.operator checked b(c d)
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class a{ explicit I1 . operator    checked    b(c d){}}", """
+                "class a{ explicit I1 . operator    checked    b(c d){}}",
+                """
                 class a
                 {
                   explicit I1.operator checked b(c d)
                   {
                   }
                 }
-                """);
+                """
+            );
 
             TestNormalizeDeclaration(
-                "class a{b operator    >>>  ( c  d , e f ){}}", """
+                "class a{b operator    >>>  ( c  d , e f ){}}",
+                """
                 class a
                 {
                   b operator >>>(c d, e f)
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class a{b I1 . operator    >>>  ( c  d , e f ){}}", """
+                "class a{b I1 . operator    >>>  ( c  d , e f ){}}",
+                """
                 class a
                 {
                   b I1.operator >>>(c d, e f)
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class a{b operator>>>  ( c  d , e f ){}}", """
+                "class a{b operator>>>  ( c  d , e f ){}}",
+                """
                 class a
                 {
                   b operator >>>(c d, e f)
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class a{b I1 . operator>>>  ( c  d , e f ){}}", """
+                "class a{b I1 . operator>>>  ( c  d , e f ){}}",
+                """
                 class a
                 {
                   b I1.operator >>>(c d, e f)
                   {
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestNormalizePropertyDeclarations()
         {
             TestNormalizeDeclaration(
-                "class a{b c{get;}}", """
+                "class a{b c{get;}}",
+                """
                 class a
                 {
                   b c { get; }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class a {
                 int X{get;set;}= 2;
                 }
 
-                """, """
+                """,
+                """
                 class a
                 {
                   int X { get; set; } = 2;
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class a {
                 int Y
                 {get;
@@ -1247,44 +1441,54 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 =99;
                 }
 
-                """, """
+                """,
+                """
                 class a
                 {
                   int Y { get; set; } = 99;
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class a {
                 int Z{get;}
                 }
 
-                """, """
+                """,
+                """
                 class a
                 {
                   int Z { get; }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class a {
                 int T{get;init;}
                 int R{get=>1;}
                 }
 
-                """, """
+                """,
+                """
                 class a
                 {
                   int T { get; init; }
 
                   int R { get => 1; }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class a {
                 int Q{get{return 0;}init{}}
                 int R{get=>1;}
                 }
 
-                """, """
+                """,
+                """
                 class a
                 {
                   int Q
@@ -1301,30 +1505,38 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
                   int R { get => 1; }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class a {
                 int R{get=>1;}
                 }
 
-                """, """
+                """,
+                """
                 class a
                 {
                   int R { get => 1; }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class a {
                 int S=>2;
                 }
 
-                """, """
+                """,
+                """
                 class a
                 {
                   int S => 2;
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class x
                 {
                 int _g;
@@ -1349,7 +1561,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
                 }
 
-                """, """
+                """,
+                """
                 class x
                 {
                   int _g;
@@ -1372,9 +1585,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   }
                 }
-                """);
+                """
+            );
 
-            TestNormalizeDeclaration("""
+            TestNormalizeDeclaration(
+                """
                 class i1
                 {
                 int
@@ -1383,13 +1598,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 get;
                 }
                 }
-                """, """
+                """,
+                """
                 class i1
                 {
                   int p { get; }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i2
                 {
                 int
@@ -1398,13 +1616,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 get=>2;
                 }
                 }
-                """, """
+                """,
+                """
                 class i2
                 {
                   int p { get => 2; }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i2a
                 {
                 int _p;
@@ -1418,14 +1639,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 ;
                 }
                 }
-                """, """
+                """,
+                """
                 class i2a
                 {
                   int _p;
                   int p { get => _p; set => _p = value; }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i3
                 {
                 int
@@ -1434,7 +1658,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 get{}
                 }
                 }
-                """, """
+                """,
+                """
                 class i3
                 {
                   int p
@@ -1444,8 +1669,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i4
                 {
                 int
@@ -1454,13 +1681,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 set;
                 }
                 }
-                """, """
+                """,
+                """
                 class i4
                 {
                   int p { set; }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i5
                 {
                 int
@@ -1469,7 +1699,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 set{}
                 }
                 }
-                """, """
+                """,
+                """
                 class i5
                 {
                   int p
@@ -1479,8 +1710,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i6
                 {
                 int
@@ -1489,13 +1722,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 init;
                 }
                 }
-                """, """
+                """,
+                """
                 class i6
                 {
                   int p { init; }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i7
                 {
                 int
@@ -1504,7 +1740,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 init{}
                 }
                 }
-                """, """
+                """,
+                """
                 class i7
                 {
                   int p
@@ -1514,8 +1751,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i8
                 {
                 int
@@ -1525,7 +1764,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 set{}
                 }
                 }
-                """, """
+                """,
+                """
                 class i8
                 {
                   int p
@@ -1539,8 +1779,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i9
                 {
                 int
@@ -1550,7 +1792,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 set{z=1;}
                 }
                 }
-                """, """
+                """,
+                """
                 class i9
                 {
                   int p
@@ -1562,8 +1805,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class ia
                 {
                 int
@@ -1573,7 +1818,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 set;
                 }
                 }
-                """, """
+                """,
+                """
                 class ia
                 {
                   int p
@@ -1585,8 +1831,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     set;
                   }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class ib
                 {
                 int
@@ -1596,7 +1844,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 set{}
                 }
                 }
-                """, """
+                """,
+                """
                 class ib
                 {
                   int p
@@ -1607,13 +1856,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestNormalizePropertyDeclarations_WithInitializers()
         {
-            TestNormalizeDeclaration("""
+            TestNormalizeDeclaration(
+                """
                 class i4
                 {
                 int
@@ -1622,13 +1873,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 set;
                 }=1;
                 }
-                """, """
+                """,
+                """
                 class i4
                 {
                   int p { set; } = 1;
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i5
                 {
                 int
@@ -1637,7 +1891,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 set{}
                 }=1;
                 }
-                """, """
+                """,
+                """
                 class i5
                 {
                   int p
@@ -1647,8 +1902,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   } = 1;
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i6
                 {
                 int
@@ -1657,13 +1914,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 init;
                 }=1;
                 }
-                """, """
+                """,
+                """
                 class i6
                 {
                   int p { init; } = 1;
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i7
                 {
                 int
@@ -1672,7 +1932,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 init{}
                 }=1;
                 }
-                """, """
+                """,
+                """
                 class i7
                 {
                   int p
@@ -1682,8 +1943,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   } = 1;
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i8
                 {
                 int
@@ -1693,7 +1956,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 set{}
                 }=1;
                 }
-                """, """
+                """,
+                """
                 class i8
                 {
                   int p
@@ -1707,8 +1971,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   } = 1;
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i9
                 {
                 int
@@ -1718,7 +1984,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 set{z=1;}
                 }=1;
                 }
-                """, """
+                """,
+                """
                 class i9
                 {
                   int p
@@ -1730,8 +1997,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   } = 1;
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class ia
                 {
                 int
@@ -1741,7 +2010,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 set;
                 }=1;
                 }
-                """, """
+                """,
+                """
                 class ia
                 {
                   int p
@@ -1753,8 +2023,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     set;
                   } = 1;
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class ib
                 {
                 int
@@ -1764,7 +2036,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 set{}
                 }=1;
                 }
-                """, """
+                """,
+                """
                 class ib
                 {
                   int p
@@ -1775,50 +2048,60 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   } = 1;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestNormalizePropertyDeclarations_LineBreaksBetweenPropertyAndOtherMembers()
         {
             TestNormalizeDeclaration(
-                "class A{public string Prop{get;}public int f;}", """
+                "class A{public string Prop{get;}public int f;}",
+                """
                 class A
                 {
                   public string Prop { get; }
 
                   public int f;
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get;}="xyz";public int f;}""", """
+                """class A{public string Prop{get;}="xyz";public int f;}""",
+                """
                 class A
                 {
                   public string Prop { get; } = "xyz";
 
                   public int f;
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get;set;}public int f;}", """
+                "class A{public string Prop{get;set;}public int f;}",
+                """
                 class A
                 {
                   public string Prop { get; set; }
 
                   public int f;
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get;set;}="xyz";public int f;}""", """
+                """class A{public string Prop{get;set;}="xyz";public int f;}""",
+                """
                 class A
                 {
                   public string Prop { get; set; } = "xyz";
 
                   public int f;
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get{}}public int f;}""", """
+                """class A{public string Prop{get{}}public int f;}""",
+                """
                 class A
                 {
                   public string Prop
@@ -1830,9 +2113,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
                   public int f;
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get{}}="xyz";public int f;}""", """
+                """class A{public string Prop{get{}}="xyz";public int f;}""",
+                """
                 class A
                 {
                   public string Prop
@@ -1844,35 +2129,43 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
                   public int f;
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get=>string.Empty;set=>_=value;}public int f;}", """
+                "class A{public string Prop{get=>string.Empty;set=>_=value;}public int f;}",
+                """
                 class A
                 {
                   public string Prop { get => string.Empty; set => _ = value; }
 
                   public int f;
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop=>"xyz";public int f;}""", """
+                """class A{public string Prop=>"xyz";public int f;}""",
+                """
                 class A
                 {
                   public string Prop => "xyz";
 
                   public int f;
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get;}public int Prop2{get;set;}}", """
+                "class A{public string Prop{get;}public int Prop2{get;set;}}",
+                """
                 class A
                 {
                   public string Prop { get; }
                   public int Prop2 { get; set; }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get;}public int Prop2{get{}}}", """
+                "class A{public string Prop{get;}public int Prop2{get{}}}",
+                """
                 class A
                 {
                   public string Prop { get; }
@@ -1884,17 +2177,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get;}="xyz";public int Prop2{get;set;}}""", """
+                """class A{public string Prop{get;}="xyz";public int Prop2{get;set;}}""",
+                """
                 class A
                 {
                   public string Prop { get; } = "xyz";
                   public int Prop2 { get; set; }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get;}="xyz";public int Prop2{get{}}}""", """
+                """class A{public string Prop{get;}="xyz";public int Prop2{get{}}}""",
+                """
                 class A
                 {
                   public string Prop { get; } = "xyz";
@@ -1906,17 +2203,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get;set;}public int Prop2{get;set;}}", """
+                "class A{public string Prop{get;set;}public int Prop2{get;set;}}",
+                """
                 class A
                 {
                   public string Prop { get; set; }
                   public int Prop2 { get; set; }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get;set;}public int Prop2{get{}}}", """
+                "class A{public string Prop{get;set;}public int Prop2{get{}}}",
+                """
                 class A
                 {
                   public string Prop { get; set; }
@@ -1928,17 +2229,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get;set;}="xyz";public int Prop2{get;set;}}""", """
+                """class A{public string Prop{get;set;}="xyz";public int Prop2{get;set;}}""",
+                """
                 class A
                 {
                   public string Prop { get; set; } = "xyz";
                   public int Prop2 { get; set; }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get;set;}="xyz";public int Prop2{get{}}}""", """
+                """class A{public string Prop{get;set;}="xyz";public int Prop2{get{}}}""",
+                """
                 class A
                 {
                   public string Prop { get; set; } = "xyz";
@@ -1950,9 +2255,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get{}}public int Prop2{get;set;}}", """
+                "class A{public string Prop{get{}}public int Prop2{get;set;}}",
+                """
                 class A
                 {
                   public string Prop
@@ -1964,9 +2271,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
                   public int Prop2 { get; set; }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get{}}public int Prop2{get{}}}", """
+                "class A{public string Prop{get{}}public int Prop2{get{}}}",
+                """
                 class A
                 {
                   public string Prop
@@ -1983,9 +2292,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get{}}="xyz";public int Prop2{get;set;}}""", """
+                """class A{public string Prop{get{}}="xyz";public int Prop2{get;set;}}""",
+                """
                 class A
                 {
                   public string Prop
@@ -1997,9 +2308,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
                   public int Prop2 { get; set; }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get{}}="xyz";public int Prop2{get{}}}""", """
+                """class A{public string Prop{get{}}="xyz";public int Prop2{get{}}}""",
+                """
                 class A
                 {
                   public string Prop
@@ -2016,25 +2329,31 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get=>string.Empty;set=>_=value;}public int Prop2{get;set;}}", """
+                "class A{public string Prop{get=>string.Empty;set=>_=value;}public int Prop2{get;set;}}",
+                """
                 class A
                 {
                   public string Prop { get => string.Empty; set => _ = value; }
                   public int Prop2 { get; set; }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop=>"xyz";public int Prop2{get;set;}}""", """
+                """class A{public string Prop=>"xyz";public int Prop2{get;set;}}""",
+                """
                 class A
                 {
                   public string Prop => "xyz";
                   public int Prop2 { get; set; }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get;}public A(){}}", """
+                "class A{public string Prop{get;}public A(){}}",
+                """
                 class A
                 {
                   public string Prop { get; }
@@ -2043,9 +2362,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get;}="xyz";public A(){}}""", """
+                """class A{public string Prop{get;}="xyz";public A(){}}""",
+                """
                 class A
                 {
                   public string Prop { get; } = "xyz";
@@ -2054,9 +2375,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get;set;}public A(){}}", """
+                "class A{public string Prop{get;set;}public A(){}}",
+                """
                 class A
                 {
                   public string Prop { get; set; }
@@ -2065,9 +2388,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get;set;}="xyz";public A(){}}""", """
+                """class A{public string Prop{get;set;}="xyz";public A(){}}""",
+                """
                 class A
                 {
                   public string Prop { get; set; } = "xyz";
@@ -2076,9 +2401,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get{}}public A(){}}", """
+                "class A{public string Prop{get{}}public A(){}}",
+                """
                 class A
                 {
                   public string Prop
@@ -2092,9 +2419,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get{}}="xyz";public A(){}}""", """
+                """class A{public string Prop{get{}}="xyz";public A(){}}""",
+                """
                 class A
                 {
                   public string Prop
@@ -2108,9 +2437,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get=>string.Empty;set=>_=value;}public A(){}}", """
+                "class A{public string Prop{get=>string.Empty;set=>_=value;}public A(){}}",
+                """
                 class A
                 {
                   public string Prop { get => string.Empty; set => _ = value; }
@@ -2119,9 +2450,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop=>"xyz";public A(){}}""", """
+                """class A{public string Prop=>"xyz";public A(){}}""",
+                """
                 class A
                 {
                   public string Prop => "xyz";
@@ -2130,9 +2463,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get;}public void M(){}}", """
+                "class A{public string Prop{get;}public void M(){}}",
+                """
                 class A
                 {
                   public string Prop { get; }
@@ -2141,9 +2476,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get;}="xyz";public void M(){}}""", """
+                """class A{public string Prop{get;}="xyz";public void M(){}}""",
+                """
                 class A
                 {
                   public string Prop { get; } = "xyz";
@@ -2152,9 +2489,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get;set;}public void M(){}}", """
+                "class A{public string Prop{get;set;}public void M(){}}",
+                """
                 class A
                 {
                   public string Prop { get; set; }
@@ -2163,9 +2502,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get;set;}="xyz";public void M(){}}""", """
+                """class A{public string Prop{get;set;}="xyz";public void M(){}}""",
+                """
                 class A
                 {
                   public string Prop { get; set; } = "xyz";
@@ -2174,9 +2515,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get{}}public void M(){}}", """
+                "class A{public string Prop{get{}}public void M(){}}",
+                """
                 class A
                 {
                   public string Prop
@@ -2190,9 +2533,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get{}}="xyz";public void M(){}}""", """
+                """class A{public string Prop{get{}}="xyz";public void M(){}}""",
+                """
                 class A
                 {
                   public string Prop
@@ -2206,9 +2551,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get=>string.Empty;set=>_=value;}public void M(){}}", """
+                "class A{public string Prop{get=>string.Empty;set=>_=value;}public void M(){}}",
+                """
                 class A
                 {
                   public string Prop { get => string.Empty; set => _ = value; }
@@ -2217,9 +2564,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop=>"xyz";public void M(){}}""", """
+                """class A{public string Prop=>"xyz";public void M(){}}""",
+                """
                 class A
                 {
                   public string Prop => "xyz";
@@ -2228,45 +2577,55 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get;}public event EventHandler E;}", """
+                "class A{public string Prop{get;}public event EventHandler E;}",
+                """
                 class A
                 {
                   public string Prop { get; }
 
                   public event EventHandler E;
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get;}="xyz";public event EventHandler E;}""", """
+                """class A{public string Prop{get;}="xyz";public event EventHandler E;}""",
+                """
                 class A
                 {
                   public string Prop { get; } = "xyz";
 
                   public event EventHandler E;
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get;set;}public event EventHandler E;}", """
+                "class A{public string Prop{get;set;}public event EventHandler E;}",
+                """
                 class A
                 {
                   public string Prop { get; set; }
 
                   public event EventHandler E;
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get;set;}="xyz";public event EventHandler E;}""", """
+                """class A{public string Prop{get;set;}="xyz";public event EventHandler E;}""",
+                """
                 class A
                 {
                   public string Prop { get; set; } = "xyz";
 
                   public event EventHandler E;
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get{}}public event EventHandler E;}", """
+                "class A{public string Prop{get{}}public event EventHandler E;}",
+                """
                 class A
                 {
                   public string Prop
@@ -2278,9 +2637,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
                   public event EventHandler E;
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get{}}="xyz";public event EventHandler E;}""", """
+                """class A{public string Prop{get{}}="xyz";public event EventHandler E;}""",
+                """
                 class A
                 {
                   public string Prop
@@ -2292,27 +2653,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
                   public event EventHandler E;
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get=>string.Empty;set=>_=value;}public event EventHandler E;}", """
+                "class A{public string Prop{get=>string.Empty;set=>_=value;}public event EventHandler E;}",
+                """
                 class A
                 {
                   public string Prop { get => string.Empty; set => _ = value; }
 
                   public event EventHandler E;
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop=>"xyz";public event EventHandler E;}""", """
+                """class A{public string Prop=>"xyz";public event EventHandler E;}""",
+                """
                 class A
                 {
                   public string Prop => "xyz";
 
                   public event EventHandler E;
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get;}public class Nested{}}", """
+                "class A{public string Prop{get;}public class Nested{}}",
+                """
                 class A
                 {
                   public string Prop { get; }
@@ -2321,9 +2688,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get;}="xyz";public class Nested{}}""", """
+                """class A{public string Prop{get;}="xyz";public class Nested{}}""",
+                """
                 class A
                 {
                   public string Prop { get; } = "xyz";
@@ -2332,9 +2701,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get;set;}public class Nested{}}", """
+                "class A{public string Prop{get;set;}public class Nested{}}",
+                """
                 class A
                 {
                   public string Prop { get; set; }
@@ -2343,9 +2714,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get;set;}="xyz";public class Nested{}}""", """
+                """class A{public string Prop{get;set;}="xyz";public class Nested{}}""",
+                """
                 class A
                 {
                   public string Prop { get; set; } = "xyz";
@@ -2354,9 +2727,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get{}}public class Nested{}}", """
+                "class A{public string Prop{get{}}public class Nested{}}",
+                """
                 class A
                 {
                   public string Prop
@@ -2370,9 +2745,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get{}}="xyz";public class Nested{}}""", """
+                """class A{public string Prop{get{}}="xyz";public class Nested{}}""",
+                """
                 class A
                 {
                   public string Prop
@@ -2386,9 +2763,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get=>string.Empty;set=>_=value;}public class Nested{}}", """
+                "class A{public string Prop{get=>string.Empty;set=>_=value;}public class Nested{}}",
+                """
                 class A
                 {
                   public string Prop { get => string.Empty; set => _ = value; }
@@ -2397,9 +2776,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop=>"xyz";public class Nested{}}""", """
+                """class A{public string Prop=>"xyz";public class Nested{}}""",
+                """
                 class A
                 {
                   public string Prop => "xyz";
@@ -2408,45 +2789,55 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get;}public delegate int D();}", """
+                "class A{public string Prop{get;}public delegate int D();}",
+                """
                 class A
                 {
                   public string Prop { get; }
 
                   public delegate int D();
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get;}="xyz";public delegate int D();}""", """
+                """class A{public string Prop{get;}="xyz";public delegate int D();}""",
+                """
                 class A
                 {
                   public string Prop { get; } = "xyz";
 
                   public delegate int D();
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get;set;}public delegate int D();}", """
+                "class A{public string Prop{get;set;}public delegate int D();}",
+                """
                 class A
                 {
                   public string Prop { get; set; }
 
                   public delegate int D();
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get;set;}="xyz";public delegate int D();}""", """
+                """class A{public string Prop{get;set;}="xyz";public delegate int D();}""",
+                """
                 class A
                 {
                   public string Prop { get; set; } = "xyz";
 
                   public delegate int D();
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get{}}public delegate int D();}", """
+                "class A{public string Prop{get{}}public delegate int D();}",
+                """
                 class A
                 {
                   public string Prop
@@ -2458,9 +2849,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
                   public delegate int D();
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop{get{}}="xyz";public delegate int D();}""", """
+                """class A{public string Prop{get{}}="xyz";public delegate int D();}""",
+                """
                 class A
                 {
                   public string Prop
@@ -2472,38 +2865,46 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
                   public delegate int D();
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class A{public string Prop{get=>string.Empty;set=>_=value;}public delegate int D();}", """
+                "class A{public string Prop{get=>string.Empty;set=>_=value;}public delegate int D();}",
+                """
                 class A
                 {
                   public string Prop { get => string.Empty; set => _ = value; }
 
                   public delegate int D();
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                """class A{public string Prop=>"xyz";public delegate int D();}""", """
+                """class A{public string Prop=>"xyz";public delegate int D();}""",
+                """
                 class A
                 {
                   public string Prop => "xyz";
 
                   public delegate int D();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestNormalizeIndexerDeclarations()
         {
             TestNormalizeDeclaration(
-                "class a{b this[c d]{get;}}", """
+                "class a{b this[c d]{get;}}",
+                """
                 class a
                 {
                   b this[c d] { get; }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i1
                 {
                 int
@@ -2512,13 +2913,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 get;
                 }
                 }
-                """, """
+                """,
+                """
                 class i1
                 {
                   int this[b c] { get; }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i2
                 {
                 int
@@ -2527,13 +2931,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 get=>1;
                 }
                 }
-                """, """
+                """,
+                """
                 class i2
                 {
                   int this[b c] { get => 1; }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i3
                 {
                 int
@@ -2542,7 +2949,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 get{}
                 }
                 }
-                """, """
+                """,
+                """
                 class i3
                 {
                   int this[b c]
@@ -2552,8 +2960,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i4
                 {
                 int
@@ -2562,13 +2972,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 set;
                 }
                 }
-                """, """
+                """,
+                """
                 class i4
                 {
                   int this[b c] { set; }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i5
                 {
                 int
@@ -2577,7 +2990,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 set{}
                 }
                 }
-                """, """
+                """,
+                """
                 class i5
                 {
                   int this[b c]
@@ -2587,8 +3001,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i6
                 {
                 int
@@ -2597,13 +3013,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 init;
                 }
                 }
-                """, """
+                """,
+                """
                 class i6
                 {
                   int this[b c] { init; }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i7
                 {
                 int
@@ -2612,7 +3031,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 init{}
                 }
                 }
-                """, """
+                """,
+                """
                 class i7
                 {
                   int this[b c]
@@ -2622,8 +3042,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i8
                 {
                 int
@@ -2633,7 +3055,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 set{}
                 }
                 }
-                """, """
+                """,
+                """
                 class i8
                 {
                   int this[b c]
@@ -2647,8 +3070,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i9
                 {
                 int
@@ -2658,7 +3083,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 set{z=1;}
                 }
                 }
-                """, """
+                """,
+                """
                 class i9
                 {
                   int this[b c]
@@ -2670,8 +3096,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class ia
                 {
                 int
@@ -2681,7 +3109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 set;
                 }
                 }
-                """, """
+                """,
+                """
                 class ia
                 {
                   int this[b c]
@@ -2693,8 +3122,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     set;
                   }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class ib
                 {
                 int
@@ -2704,7 +3135,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 set{}
                 }
                 }
-                """, """
+                """,
+                """
                 class ib
                 {
                   int this[b c]
@@ -2715,13 +3147,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestNormalizeEventDeclarations()
         {
-            TestNormalizeDeclaration("""
+            TestNormalizeDeclaration(
+                """
                 class a
                 {
                 public
@@ -2729,13 +3163,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 w
                 e;
                 }
-                """, """
+                """,
+                """
                 class a
                 {
                   public event w e;
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 abstract class b
                 {
                 event
@@ -2743,13 +3180,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 e
                 ;
                 }
-                """, """
+                """,
+                """
                 abstract class b
                 {
                   event w e;
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 interface c1
                 {
                 event
@@ -2757,13 +3197,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 e
                 ;
                 }
-                """, """
+                """,
+                """
                 interface c1
                 {
                   event w e;
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 interface c2 : c1
                 {
                 abstract
@@ -2774,13 +3217,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 e
                 ;
                 }
-                """, """
+                """,
+                """
                 interface c2 : c1
                 {
                   abstract event w c1.e;
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class d
                 {
                 event w x;
@@ -2797,14 +3243,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 -=
                 value;
                 }}
-                """, """
+                """,
+                """
                 class d
                 {
                   event w x;
                   event w e { add => x += value; remove => x -= value; }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class e
                 {
                 event w e
@@ -2814,7 +3263,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
                 }
                 }
-                """, """
+                """,
+                """
                 class e
                 {
                   event w e
@@ -2828,8 +3278,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class f
                 {
                 event w x;
@@ -2849,7 +3301,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
                 }
                 }
-                """, """
+                """,
+                """
                 class f
                 {
                   event w x;
@@ -2866,8 +3319,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class g
                 {
                 extern
@@ -2878,13 +3333,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 null
                 ;
                 }
-                """, """
+                """,
+                """
                 class g
                 {
                   extern event w e = null;
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class h
                 {
                 public event w e
@@ -2900,13 +3358,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 );
                 }
                 }
-                """, """
+                """,
+                """
                 class h
                 {
                   public event w e { add => c(); remove => d(); }
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
                 class i
                 {
                 event w e
@@ -2915,54 +3376,66 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 remove;
                 }
                 }
-                """, """
+                """,
+                """
                 class i
                 {
                   event w e { add; remove; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestNormalizeFieldDeclarations()
         {
             TestNormalizeDeclaration(
-                "class a{b c;}", """
+                "class a{b c;}",
+                """
                 class a
                 {
                   b c;
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class a{b c;d e;}", """
+                "class a{b c;d e;}",
+                """
                 class a
                 {
                   b c;
                   d e;
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class a{b c=d;}", """
+                "class a{b c=d;}",
+                """
                 class a
                 {
                   b c = d;
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class a{b c=d,e=f;}", """
+                "class a{b c=d,e=f;}",
+                """
                 class a
                 {
                   b c = d, e = f;
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class a{b c=d;e f=g;}", """
+                "class a{b c=d;e f=g;}",
+                """
                 class a
                 {
                   b c = d;
                   e f = g;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2977,33 +3450,41 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestNormalizeEnumDeclarations()
         {
             TestNormalizeDeclaration(
-                "enum a{}", """
+                "enum a{}",
+                """
                 enum a
                 {
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "enum a{b}", """
+                "enum a{b}",
+                """
                 enum a
                 {
                   b
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "enum a{b,c}", """
+                "enum a{b,c}",
+                """
                 enum a
                 {
                   b,
                   c
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "enum a{b=c}", """
+                "enum a{b=c}",
+                """
                 enum a
                 {
                   b = c
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3011,93 +3492,126 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             // declaration attributes
             TestNormalizeDeclaration(
-                "[a]class b{}", """
+                "[a]class b{}",
+                """
                 [a]
                 class b
                 {
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "\t[a]class b{}", """
+                "\t[a]class b{}",
+                """
                 [a]
                 class b
                 {
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "[a,b]class c{}", """
+                "[a,b]class c{}",
+                """
                 [a, b]
                 class c
                 {
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "[a(b)]class c{}", """
+                "[a(b)]class c{}",
+                """
                 [a(b)]
                 class c
                 {
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "[a(b,c)]class d{}", """
+                "[a(b,c)]class d{}",
+                """
                 [a(b, c)]
                 class d
                 {
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "[a][b]class c{}", """
+                "[a][b]class c{}",
+                """
                 [a]
                 [b]
                 class c
                 {
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "[a:b]class c{}", """
+                "[a:b]class c{}",
+                """
                 [a: b]
                 class c
                 {
                 }
-                """);
+                """
+            );
 
             // parameter attributes
             TestNormalizeDeclaration(
-                "class c{void M([a]int x,[b] [c,d]int y){}}", """
+                "class c{void M([a]int x,[b] [c,d]int y){}}",
+                """
                 class c
                 {
                   void M([a] int x, [b][c, d] int y)
                   {
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestFileScopedNamespace()
         {
             TestNormalizeDeclaration(
-                "namespace NS;class C{}", """
+                "namespace NS;class C{}",
+                """
                 namespace NS;
                 class C
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestSpacingOnRecord()
         {
-            TestNormalizeDeclaration("record  class  C(int I, int J);", "record class C(int I, int J);");
-            TestNormalizeDeclaration("record  struct  S(int I, int J);", "record struct S(int I, int J);");
+            TestNormalizeDeclaration(
+                "record  class  C(int I, int J);",
+                "record class C(int I, int J);"
+            );
+            TestNormalizeDeclaration(
+                "record  struct  S(int I, int J);",
+                "record struct S(int I, int J);"
+            );
         }
 
         [Fact]
         public void TestSpacingOnPrimaryConstructor()
         {
-            TestNormalizeDeclaration("class  C     (   int    I   ,    int    J   )   ;    ", "class C(int I, int J);");
-            TestNormalizeDeclaration("struct  S     (   int    I   ,    int    J   )   ;    ", "struct S(int I, int J);");
-            TestNormalizeDeclaration("interface  S     (   int    I   ,    int    J   )   ;    ", "interface S(int I, int J);");
+            TestNormalizeDeclaration(
+                "class  C     (   int    I   ,    int    J   )   ;    ",
+                "class C(int I, int J);"
+            );
+            TestNormalizeDeclaration(
+                "struct  S     (   int    I   ,    int    J   )   ;    ",
+                "struct S(int I, int J);"
+            );
+            TestNormalizeDeclaration(
+                "interface  S     (   int    I   ,    int    J   )   ;    ",
+                "interface S(int I, int J);"
+            );
             TestNormalizeDeclaration("class  C     (   )   ;    ", "class C();");
             TestNormalizeDeclaration("struct   S  (  )  ;    ", "struct S();");
             TestNormalizeDeclaration("interface   S  (  )  ;    ", "interface S();");
@@ -3115,17 +3629,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void RefReadonlyParameters()
         {
-            TestNormalizeDeclaration("""
+            TestNormalizeDeclaration(
+                """
                 class   C  {  int  this  [  ref  readonly   int  x ,  ref  readonly  int  y ]  {  get  ;  } 
                 void  M ( ref  readonly  int  x ,  ref  readonly  int  y ) ; }
-                """, """
+                """,
+                """
                 class C
                 {
                   int this[ref readonly int x, ref readonly int y] { get; }
 
                   void M(ref readonly int x, ref readonly int y);
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(23618, "https://github.com/dotnet/roslyn/issues/23618")]
@@ -3143,34 +3660,40 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             // no space between new and (
             // newline between > and where
             TestNormalizeDeclaration(
-                "class C<T> where T : new() { }", """
+                "class C<T> where T : new() { }",
+                """
                 class C<T>
                   where T : new()
                 {
                 }
-                """);
+                """
+            );
 
             // no space between this and (
             TestNormalizeDeclaration(
-                "class C { C() : this () { } }", """
+                "class C { C() : this () { } }",
+                """
                 class C
                 {
                   C() : this()
                   {
                   }
                 }
-                """);
+                """
+            );
 
             // no space between base and (
             TestNormalizeDeclaration(
-                "class C { C() : base () { } }", """
+                "class C { C() : base () { } }",
+                """
                 class C
                 {
                   C() : base()
                   {
                   }
                 }
-                """);
+                """
+            );
 
             // no space between checked and (
             TestNormalizeExpression("checked (a)", "checked(a)");
@@ -3192,88 +3715,136 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestSpacingOnRawInterpolatedString()
         {
-            TestNormalizeExpression(""""
+            TestNormalizeExpression(
+                """"
                 $"""{3:C}"""
-                """", """"
+                """",
+                """"
                 $"""{3:C}"""
-                """");
-            TestNormalizeExpression(""""
+                """"
+            );
+            TestNormalizeExpression(
+                """"
                 $"""{3: C}"""
-                """", """"
+                """",
+                """"
                 $"""{3: C}"""
-                """");
-            TestNormalizeExpression(""""
+                """"
+            );
+            TestNormalizeExpression(
+                """"
                 $"""{3:C }"""
-                """", """"
+                """",
+                """"
                 $"""{3:C }"""
-                """");
-            TestNormalizeExpression(""""
+                """"
+            );
+            TestNormalizeExpression(
+                """"
                 $"""{3: C }"""
-                """", """"
+                """",
+                """"
                 $"""{3: C }"""
-                """");
+                """"
+            );
 
-            TestNormalizeExpression(""""
+            TestNormalizeExpression(
+                """"
                 $"""{ 3:C}"""
-                """", """"
+                """",
+                """"
                 $"""{3:C}"""
-                """");
-            TestNormalizeExpression(""""
+                """"
+            );
+            TestNormalizeExpression(
+                """"
                 $"""{ 3: C}"""
-                """", """"
+                """",
+                """"
                 $"""{3: C}"""
-                """");
-            TestNormalizeExpression(""""
+                """"
+            );
+            TestNormalizeExpression(
+                """"
                 $"""{ 3:C }"""
-                """", """"
+                """",
+                """"
                 $"""{3:C }"""
-                """");
-            TestNormalizeExpression(""""
+                """"
+            );
+            TestNormalizeExpression(
+                """"
                 $"""{ 3: C }"""
-                """", """"
+                """",
+                """"
                 $"""{3: C }"""
-                """");
-            TestNormalizeExpression(""""
+                """"
+            );
+            TestNormalizeExpression(
+                """"
                 $"""{3 :C}"""
-                """", """"
+                """",
+                """"
                 $"""{3:C}"""
-                """");
-            TestNormalizeExpression(""""
+                """"
+            );
+            TestNormalizeExpression(
+                """"
                 $"""{3 : C}"""
-                """", """"
+                """",
+                """"
                 $"""{3: C}"""
-                """");
-            TestNormalizeExpression(""""
+                """"
+            );
+            TestNormalizeExpression(
+                """"
                 $"""{3 :C }"""
-                """", """"
+                """",
+                """"
                 $"""{3:C }"""
-                """");
-            TestNormalizeExpression(""""
+                """"
+            );
+            TestNormalizeExpression(
+                """"
                 $"""{3 : C }"""
-                """", """"
+                """",
+                """"
                 $"""{3: C }"""
-                """");
+                """"
+            );
 
-            TestNormalizeExpression(""""
+            TestNormalizeExpression(
+                """"
                 $"""{ 3 :C}"""
-                """", """"
+                """",
+                """"
                 $"""{3:C}"""
-                """");
-            TestNormalizeExpression(""""
+                """"
+            );
+            TestNormalizeExpression(
+                """"
                 $"""{ 3 : C}"""
-                """", """"
+                """",
+                """"
                 $"""{3: C}"""
-                """");
-            TestNormalizeExpression(""""
+                """"
+            );
+            TestNormalizeExpression(
+                """"
                 $"""{ 3 :C }"""
-                """", """"
+                """",
+                """"
                 $"""{3:C }"""
-                """");
-            TestNormalizeExpression(""""
+                """"
+            );
+            TestNormalizeExpression(
+                """"
                 $"""{ 3 : C }"""
-                """", """"
+                """",
+                """"
                 $"""{3: C }"""
-                """");
+                """"
+            );
         }
 
         [Fact, WorkItem(23618, "https://github.com/dotnet/roslyn/issues/23618")]
@@ -3281,7 +3852,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             // newline between ) and where
             TestNormalizeDeclaration(
-                "class C { void M<T>() where T : struct { } }", """
+                "class C { void M<T>() where T : struct { } }",
+                """
                 class C
                 {
                   void M<T>()
@@ -3289,7 +3861,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   {
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(541684, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541684")]
@@ -3297,7 +3870,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             // NOTE: the space after the region name is retained, since the text after the space
             // following "#region" is a single, unstructured trivia element.
-            TestNormalizeDeclaration("""
+            TestNormalizeDeclaration(
+                """
 
                 class Class 
                 { 
@@ -3307,7 +3881,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 } 
                 #endregion 
                 }
-                """, """
+                """,
+                """
                 class Class
                 {
                 #region Methods 
@@ -3316,43 +3891,56 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                   }
                 #endregion
                 }
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
 
                 #region
                 #endregion
-                """, """
+                """,
+                """
                 #region
                 #endregion
 
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
 
                 #region  
                 #endregion
-                """, """
+                """,
+                """
                 #region
                 #endregion
 
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
 
                 #region name //comment
                 #endregion
-                """, """
+                """,
+                """
                 #region name //comment
                 #endregion
 
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
 
                 #region /*comment*/
                 #endregion
-                """, """
+                """,
+                """
                 #region /*comment*/
                 #endregion
 
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(2076, "github")]
@@ -3364,17 +3952,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestNormalizeRawInterpolatedString()
         {
-            TestNormalizeExpression(""""
+            TestNormalizeExpression(
+                """"
                 $"""Message is {a}"""
-                """", """"
+                """",
+                """"
                 $"""Message is {a}"""
-                """");
+                """"
+            );
         }
 
         [Fact, WorkItem(528584, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528584")]
         public void TestNormalizeRegion2()
         {
-            TestNormalizeDeclaration("""
+            TestNormalizeDeclaration(
+                """
 
                 #region //comment
                 #endregion
@@ -3386,8 +3978,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
                 #endregion
 
-                """);
-            TestNormalizeDeclaration("""
+                """
+            );
+            TestNormalizeDeclaration(
+                """
 
                 #region //comment
 
@@ -3400,7 +3994,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
                 #endregion
 
-                """);
+                """
+            );
         }
 
         private static void TestNormalizeDeclaration(string text, string expected)
@@ -3415,138 +4010,180 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestNormalizeComments()
         {
             TestNormalizeToken(
-                "a//b", """
+                "a//b",
+                """
                 a //b
 
-                """);
+                """
+            );
             TestNormalizeToken("a/*b*/", "a /*b*/");
-            TestNormalizeToken("""
+            TestNormalizeToken(
+                """
                 //a
                 b
-                """, """
+                """,
+                """
                 //a
                 b
-                """);
+                """
+            );
             TestNormalizeExpression("a/*b*/+c", "a /*b*/ + c");
             TestNormalizeExpression(
-                "/*a*/b", """
+                "/*a*/b",
+                """
                 /*a*/
                 b
-                """);
-            TestNormalizeExpression("""
+                """
+            );
+            TestNormalizeExpression(
+                """
                 /*a
                 */b
-                """, """
+                """,
+                """
                 /*a
                 */
                 b
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "{/*a*/b}", """
+                "{/*a*/b}",
+                """
                 { /*a*/
                   b
                 }
-                """);
-            TestNormalizeStatement("""
+                """
+            );
+            TestNormalizeStatement(
+                """
                 {
                 a//b
                 }
-                """, """
+                """,
+                """
                 {
                   a //b
                 }
-                """);
-            TestNormalizeStatement("""
+                """
+            );
+            TestNormalizeStatement(
+                """
                 {
                 //a
                 }
-                """, """
+                """,
+                """
                 {
                 //a
                 }
-                """);
-            TestNormalizeStatement("""
+                """
+            );
+            TestNormalizeStatement(
+                """
                 {
                 //a
                 b}
-                """, """
+                """,
+                """
                 {
                   //a
                   b
                 }
-                """);
-            TestNormalizeStatement("""
+                """
+            );
+            TestNormalizeStatement(
+                """
                 {
                 /*a*/b}
-                """, """
+                """,
+                """
                 {
                   /*a*/
                   b
                 }
-                """);
-            TestNormalizeStatement("""
+                """
+            );
+            TestNormalizeStatement(
+                """
                 {
                 /// <goo/>
                 a}
-                """, """
+                """,
+                """
                 {
                   /// <goo/>
                   a
                 }
-                """);
-            TestNormalizeStatement("""
+                """
+            );
+            TestNormalizeStatement(
+                """
                 {
                 ///<goo/>
                 a}
-                """, """
+                """,
+                """
                 {
                   ///<goo/>
                   a
                 }
-                """);
-            TestNormalizeStatement("""
+                """
+            );
+            TestNormalizeStatement(
+                """
                 {
                 /// <goo>
                 /// </goo>
                 a}
-                """, """
+                """,
+                """
                 {
                   /// <goo>
                   /// </goo>
                   a
                 }
-                """);
-            TestNormalizeToken("""
+                """
+            );
+            TestNormalizeToken(
+                """
                 /// <goo>
                 /// </goo>
                 a
-                """, """
+                """,
+                """
                 /// <goo>
                 /// </goo>
                 a
-                """);
-            TestNormalizeStatement("""
+                """
+            );
+            TestNormalizeStatement(
+                """
                 {
                 /*** <goo/> ***/
                 a}
-                """, """
+                """,
+                """
                 {
                   /*** <goo/> ***/
                   a
                 }
-                """);
-            TestNormalizeStatement("""
+                """
+            );
+            TestNormalizeStatement(
+                """
                 {
                 /*** <goo/>
                  ***/
                 a}
-                """, """
+                """,
+                """
                 {
                   /*** <goo/>
                  ***/
                   a
                 }
-                """);
+                """
+            );
         }
 
         private static void TestNormalizeToken(string text, string expected)
@@ -3561,70 +4198,92 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             // directive as node
             TestNormalize(
-                SyntaxFactory.DefineDirectiveTrivia(
-                    SyntaxFactory.Identifier("a"), false), """
+                SyntaxFactory.DefineDirectiveTrivia(SyntaxFactory.Identifier("a"), false),
+                """
                 #define a
 
-                """);
+                """
+            );
 
             // directive as trivia
             TestNormalizeTrivia(
-                "  #  define a", """
+                "  #  define a",
+                """
                 #define a
 
-                """);
+                """
+            );
             TestNormalizeTrivia(
-                "#if(a||b)", """
+                "#if(a||b)",
+                """
                 #if (a || b)
 
-                """);
+                """
+            );
             TestNormalizeTrivia(
-                "#if(a&&b)", """
+                "#if(a&&b)",
+                """
                 #if (a && b)
 
-                """);
-            TestNormalizeTrivia("""
+                """
+            );
+            TestNormalizeTrivia(
+                """
                   #if a
                   #endif
-                """, """
+                """,
+                """
                 #if a
                 #endif
 
-                """);
+                """
+            );
 
             TestNormalize(
                 SyntaxFactory.TriviaList(
                     SyntaxFactory.Trivia(
                         SyntaxFactory.IfDirectiveTrivia(
-                            SyntaxFactory.IdentifierName("a"), false, false, false)),
-                    SyntaxFactory.Trivia(
-                        SyntaxFactory.EndIfDirectiveTrivia(false))), """
+                            SyntaxFactory.IdentifierName("a"),
+                            false,
+                            false,
+                            false
+                        )
+                    ),
+                    SyntaxFactory.Trivia(SyntaxFactory.EndIfDirectiveTrivia(false))
+                ),
+                """
                 #if a
                 #endif
 
-                """);
+                """
+            );
 
             TestNormalizeTrivia(
-                "#endregion goo", """
+                "#endregion goo",
+                """
                 #endregion goo
 
-                """);
+                """
+            );
 
-            TestNormalizeDeclaration("""
+            TestNormalizeDeclaration(
+                """
                 #pragma warning disable 123
 
                 namespace goo {
                 }
 
                 #pragma warning restore 123
-                """, """
+                """,
+                """
                 #pragma warning disable 123
                 namespace goo
                 {
                 }
                 #pragma warning restore 123
 
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(531607, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531607")]
@@ -3633,22 +4292,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             TestNormalize(
                 SyntaxFactory.TriviaList(
                     SyntaxFactory.Trivia(
-                        SyntaxFactory.LineDirectiveTrivia(
-                            SyntaxFactory.Literal(1),
-                            true)
-                        .WithEndOfDirectiveToken(
-                            SyntaxFactory.Token(
-                                SyntaxFactory.TriviaList(
-                                    SyntaxFactory.Trivia(
-                                        SyntaxFactory.SkippedTokensTrivia()
-                                        .WithTokens(
-                                            SyntaxFactory.TokenList(
-                                                SyntaxFactory.Literal(@"""a\b"""))))),
-                                SyntaxKind.EndOfDirectiveToken,
-                                default(SyntaxTriviaList))))), """
+                        SyntaxFactory
+                            .LineDirectiveTrivia(SyntaxFactory.Literal(1), true)
+                            .WithEndOfDirectiveToken(
+                                SyntaxFactory.Token(
+                                    SyntaxFactory.TriviaList(
+                                        SyntaxFactory.Trivia(
+                                            SyntaxFactory
+                                                .SkippedTokensTrivia()
+                                                .WithTokens(
+                                                    SyntaxFactory.TokenList(
+                                                        SyntaxFactory.Literal(@"""a\b""")
+                                                    )
+                                                )
+                                        )
+                                    ),
+                                    SyntaxKind.EndOfDirectiveToken,
+                                    default(SyntaxTriviaList)
+                                )
+                            )
+                    )
+                ),
+                """
                 #line 1 "\"a\\b\""
 
-                """);
+                """
+            );
             // Note: without all the escaping, it looks like this '#line 1 @"""a\b"""' (i.e. the string literal has a value of '"a\b"').
             // Note: the literal was formatted as a C# string literal, not as a directive string literal.
         }
@@ -3660,32 +4329,44 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 SyntaxFactory.LineSpanDirectiveTrivia(
                     SyntaxFactory.Token(SyntaxKind.HashToken),
                     SyntaxFactory.Token(SyntaxKind.LineKeyword),
-                    SyntaxFactory.LineDirectivePosition(SyntaxFactory.Literal(1), SyntaxFactory.Literal(2)),
+                    SyntaxFactory.LineDirectivePosition(
+                        SyntaxFactory.Literal(1),
+                        SyntaxFactory.Literal(2)
+                    ),
                     SyntaxFactory.Token(SyntaxKind.MinusToken),
-                    SyntaxFactory.LineDirectivePosition(SyntaxFactory.Literal(3), SyntaxFactory.Literal(4)),
+                    SyntaxFactory.LineDirectivePosition(
+                        SyntaxFactory.Literal(3),
+                        SyntaxFactory.Literal(4)
+                    ),
                     SyntaxFactory.Literal(5),
                     SyntaxFactory.Literal("a.txt"),
                     SyntaxFactory.Token(SyntaxKind.EndOfDirectiveToken),
-                    isActive: true), """
+                    isActive: true
+                ),
+                """
                 #line (1, 2) - (3, 4) 5 "a.txt"
 
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestNormalizeLineSpanDirectiveTrivia()
         {
             TestNormalizeTrivia(
-                "  #  line( 1,2 )-(3,4)5\"a.txt\"", """
+                "  #  line( 1,2 )-(3,4)5\"a.txt\"",
+                """
                 #line (1, 2) - (3, 4) 5 "a.txt"
 
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(538115, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538115")]
         public void TestNormalizeWithinDirectives()
         {
-            TestNormalizeDeclaration("""
+            TestNormalizeDeclaration(
+                """
                 class C
                 {
                 #if true
@@ -3694,7 +4375,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 #endif
                 }
 
-                """, """
+                """,
+                """
                 class C
                 {
                 #if true
@@ -3704,7 +4386,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 #else
                 #endif
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(542887, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542887")]
@@ -3722,7 +4405,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
                 """;
             var tree = SyntaxFactory.ParseSyntaxTree(code);
-            TestNormalize(tree.GetCompilationUnitRoot(), """
+            TestNormalize(
+                tree.GetCompilationUnitRoot(),
+                """
                 class c1
                 {
                   void goo()
@@ -3732,7 +4417,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                   }
                 }
-                """.NormalizeLineEndings());
+                """.NormalizeLineEndings()
+            );
         }
 
         [Fact, WorkItem(1079042, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1079042")]
@@ -3750,18 +4436,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
                 """;
             var tree = SyntaxFactory.ParseSyntaxTree(code);
-            TestNormalize(tree.GetCompilationUnitRoot(),
-"class c1\r\n" +
-"{\r\n"
-+ // The normalizer doesn't change line endings in comments,
-  // see https://github.com/dotnet/roslyn/issues/8536
-$"  ///<summary>{Environment.NewLine}" +
-$"  /// A documentation comment{Environment.NewLine}" +
-$"  ///</summary>{Environment.NewLine}" +
-"  void goo()\r\n" +
-"  {\r\n" +
-"  }\r\n" +
-"}");
+            TestNormalize(
+                tree.GetCompilationUnitRoot(),
+                "class c1\r\n"
+                    + "{\r\n"
+                    + // The normalizer doesn't change line endings in comments,
+                    // see https://github.com/dotnet/roslyn/issues/8536
+                    $"  ///<summary>{Environment.NewLine}"
+                    + $"  /// A documentation comment{Environment.NewLine}"
+                    + $"  ///</summary>{Environment.NewLine}"
+                    + "  void goo()\r\n"
+                    + "  {\r\n"
+                    + "  }\r\n"
+                    + "}"
+            );
         }
 
         [Fact]
@@ -3779,17 +4467,20 @@ $"  ///</summary>{Environment.NewLine}" +
                 }
                 """;
             var tree = SyntaxFactory.ParseSyntaxTree(code);
-            TestNormalize(tree.GetCompilationUnitRoot(),
-"class c1\r\n" +
-"{\r\n" + // The normalizer doesn't change line endings in comments,
-          // see https://github.com/dotnet/roslyn/issues/8536
-$"  ///  <summary>{Environment.NewLine}" +
-$"  ///  A documentation comment{Environment.NewLine}" +
-$"  ///  </summary>{Environment.NewLine}" +
-"  void goo()\r\n" +
-"  {\r\n" +
-"  }\r\n" +
-"}");
+            TestNormalize(
+                tree.GetCompilationUnitRoot(),
+                "class c1\r\n"
+                    + "{\r\n"
+                    + // The normalizer doesn't change line endings in comments,
+                    // see https://github.com/dotnet/roslyn/issues/8536
+                    $"  ///  <summary>{Environment.NewLine}"
+                    + $"  ///  A documentation comment{Environment.NewLine}"
+                    + $"  ///  </summary>{Environment.NewLine}"
+                    + "  void goo()\r\n"
+                    + "  {\r\n"
+                    + "  }\r\n"
+                    + "}"
+            );
         }
 
         [Fact]
@@ -3797,7 +4488,10 @@ $"  ///  </summary>{Environment.NewLine}" +
         {
             var code = "class c{}";
             var expected = "class c\n{\n}";
-            var actual = SyntaxFactory.ParseCompilationUnit(code).NormalizeWhitespace(indentation: "  ", eol: "\n").ToFullString();
+            var actual = SyntaxFactory
+                .ParseCompilationUnit(code)
+                .NormalizeWhitespace(indentation: "  ", eol: "\n")
+                .ToFullString();
             Assert.Equal(expected, actual);
         }
 
@@ -3813,89 +4507,123 @@ $"  ///  </summary>{Environment.NewLine}" +
                 	}
                 }
                 """;
-            var actual = SyntaxFactory.ParseCompilationUnit(code).NormalizeWhitespace(indentation: "	").ToFullString();
+            var actual = SyntaxFactory
+                .ParseCompilationUnit(code)
+                .NormalizeWhitespace(indentation: "	")
+                .ToFullString();
             Assert.Equal(expected.NormalizeLineEndings(), actual);
         }
 
         [Fact, WorkItem(29390, "https://github.com/dotnet/roslyn/issues/29390")]
         public void TestNormalizeTuples()
         {
-            TestNormalizeDeclaration("new(string prefix,string uri)[10]", "new (string prefix, string uri)[10]");
-            TestNormalizeDeclaration("(string prefix,string uri)[]ns", "(string prefix, string uri)[] ns");
-            TestNormalizeDeclaration("(string prefix,(string uri,string help))ns", "(string prefix, (string uri, string help)) ns");
-            TestNormalizeDeclaration("(string prefix,string uri)ns", "(string prefix, string uri) ns");
-            TestNormalizeDeclaration("public void Foo((string prefix,string uri)ns)", "public void Foo((string prefix, string uri) ns)");
-            TestNormalizeDeclaration("public (string prefix,string uri)Foo()", "public (string prefix, string uri) Foo()");
+            TestNormalizeDeclaration(
+                "new(string prefix,string uri)[10]",
+                "new (string prefix, string uri)[10]"
+            );
+            TestNormalizeDeclaration(
+                "(string prefix,string uri)[]ns",
+                "(string prefix, string uri)[] ns"
+            );
+            TestNormalizeDeclaration(
+                "(string prefix,(string uri,string help))ns",
+                "(string prefix, (string uri, string help)) ns"
+            );
+            TestNormalizeDeclaration(
+                "(string prefix,string uri)ns",
+                "(string prefix, string uri) ns"
+            );
+            TestNormalizeDeclaration(
+                "public void Foo((string prefix,string uri)ns)",
+                "public void Foo((string prefix, string uri) ns)"
+            );
+            TestNormalizeDeclaration(
+                "public (string prefix,string uri)Foo()",
+                "public (string prefix, string uri) Foo()"
+            );
         }
 
         [Fact, WorkItem(50664, "https://github.com/dotnet/roslyn/issues/50664")]
         public void TestNormalizeFunctionPointer()
         {
-            TestNormalizeDeclaration("""
+            TestNormalizeDeclaration(
+                """
                 unsafe class C
                 {
                   delegate * < int ,  int > functionPointer;
                 }
-                """, """
+                """,
+                """
                 unsafe class C
                 {
                   delegate*<int, int> functionPointer;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(50664, "https://github.com/dotnet/roslyn/issues/50664")]
         public void TestNormalizeFunctionPointerWithManagedCallingConvention()
         {
-            TestNormalizeDeclaration("""
+            TestNormalizeDeclaration(
+                """
                 unsafe class C
                 {
                   delegate *managed < int ,  int > functionPointer;
                 }
-                """, """
+                """,
+                """
                 unsafe class C
                 {
                   delegate* managed<int, int> functionPointer;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(50664, "https://github.com/dotnet/roslyn/issues/50664")]
         public void TestNormalizeFunctionPointerWithUnmanagedCallingConvention()
         {
-            TestNormalizeDeclaration("""
+            TestNormalizeDeclaration(
+                """
                 unsafe class C
                 {
                   delegate *unmanaged < int ,  int > functionPointer;
                 }
-                """, """
+                """,
+                """
                 unsafe class C
                 {
                   delegate* unmanaged<int, int> functionPointer;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(50664, "https://github.com/dotnet/roslyn/issues/50664")]
         public void TestNormalizeFunctionPointerWithUnmanagedCallingConventionAndSpecifiers()
         {
-            TestNormalizeDeclaration("""
+            TestNormalizeDeclaration(
+                """
                 unsafe class C
                 {
                   delegate *unmanaged [ Cdecl ,  Thiscall ] < int ,  int > functionPointer;
                 }
-                """, """
+                """,
+                """
                 unsafe class C
                 {
                   delegate* unmanaged[Cdecl, Thiscall]<int, int> functionPointer;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(53254, "https://github.com/dotnet/roslyn/issues/53254")]
         public void TestNormalizeColonInConstructorInitializer()
         {
-            TestNormalizeDeclaration("""
+            TestNormalizeDeclaration(
+                """
                 class Base
                 {
                 }
@@ -3904,7 +4632,8 @@ $"  ///  </summary>{Environment.NewLine}" +
                 {
                   public Derived():base(){}
                 }
-                """, """
+                """,
+                """
                 class Base
                 {
                 }
@@ -3915,7 +4644,8 @@ $"  ///  </summary>{Environment.NewLine}" +
                   {
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(49732, "https://github.com/dotnet/roslyn/issues/49732")]
@@ -3933,31 +4663,40 @@ $"  ///  </summary>{Environment.NewLine}" +
         public void TestNormalizeBlockAnonymousFunctions()
         {
             TestNormalizeStatement(
-                "_=()=>{};", """
+                "_=()=>{};",
+                """
                 _ = () =>
                 {
                 };
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "_=x=>{};", """
+                "_=x=>{};",
+                """
                 _ = x =>
                 {
                 };
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "Add(()=>{});", """
+                "Add(()=>{});",
+                """
                 Add(() =>
                 {
                 });
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "Add(delegate(){});", """
+                "Add(delegate(){});",
+                """
                 Add(delegate ()
                 {
                 });
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "Add(()=>{{_=x=>{};}});", """
+                "Add(()=>{{_=x=>{};}});",
+                """
                 Add(() =>
                 {
                   {
@@ -3966,7 +4705,8 @@ $"  ///  </summary>{Environment.NewLine}" +
                     };
                   }
                 });
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3974,7 +4714,8 @@ $"  ///  </summary>{Environment.NewLine}" +
         {
             TestNormalizeStatement(
                 "_ = this is{Property . Property :2};",
-                "_ = this is { Property.Property: 2 };");
+                "_ = this is { Property.Property: 2 };"
+            );
         }
 
         private static void TestNormalize(CSharpSyntaxNode node, string expected)
@@ -4000,7 +4741,8 @@ $"  ///  </summary>{Environment.NewLine}" +
         {
             TestNormalizeDeclaration(
                 """/// Prefix <b    a="x"  b="y" >S_OK</b> suffix""",
-                """/// Prefix <b a="x" b="y">S_OK</b> suffix""");
+                """/// Prefix <b a="x" b="y">S_OK</b> suffix"""
+            );
         }
 
         [Fact, WorkItem(60884, "https://github.com/dotnet/roslyn/issues/60884")]
@@ -4015,7 +4757,8 @@ $"  ///  </summary>{Environment.NewLine}" +
         {
             TestNormalizeDeclaration(
                 """/// Prefix <b a="x" b="y" /> suffix""",
-                """/// Prefix <b a="x" b="y"/> suffix""");
+                """/// Prefix <b a="x" b="y"/> suffix"""
+            );
         }
 
         [Fact, WorkItem(60884, "https://github.com/dotnet/roslyn/issues/60884")]
@@ -4023,7 +4766,8 @@ $"  ///  </summary>{Environment.NewLine}" +
         {
             TestNormalizeDeclaration(
                 """/// Prefix <b    a="x"	>S_OK</b> suffix""",
-                """/// Prefix <b a="x">S_OK</b> suffix""");
+                """/// Prefix <b a="x">S_OK</b> suffix"""
+            );
         }
 
         [Fact, WorkItem(60884, "https://github.com/dotnet/roslyn/issues/60884")]
@@ -4038,7 +4782,8 @@ $"  ///  </summary>{Environment.NewLine}" +
         {
             TestNormalizeDeclaration(
                 """/// Prefix <b a="x"b="y"/> suffix""",
-                """/// Prefix <b a="x" b="y"/> suffix""");
+                """/// Prefix <b a="x" b="y"/> suffix"""
+            );
         }
 
         [Fact, WorkItem(60884, "https://github.com/dotnet/roslyn/issues/60884")]
@@ -4046,7 +4791,8 @@ $"  ///  </summary>{Environment.NewLine}" +
         {
             TestNormalizeDeclaration(
                 """/// Prefix <b    b="y"a="x"	>S_OK</b> suffix""",
-                """/// Prefix <b b="y" a="x">S_OK</b> suffix""");
+                """/// Prefix <b b="y" a="x">S_OK</b> suffix"""
+            );
         }
 
         [Fact]
@@ -4054,71 +4800,87 @@ $"  ///  </summary>{Environment.NewLine}" +
         {
             TestNormalizeDeclaration(
                 "public  required  partial int Field;",
-                "public required partial int Field;");
+                "public required partial int Field;"
+            );
         }
 
         [Fact, WorkItem(61518, "https://github.com/dotnet/roslyn/issues/61518")]
         public void TestNormalizeNestedUsingStatements1()
         {
             TestNormalizeStatement(
-                "using(a)using(b)c;", """
+                "using(a)using(b)c;",
+                """
                 using (a)
                 using (b)
                   c;
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "using(a)using(b){c;}", """
+                "using(a)using(b){c;}",
+                """
                 using (a)
                 using (b)
                 {
                   c;
                 }
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "using(a)using(b)using(c)d;", """
+                "using(a)using(b)using(c)d;",
+                """
                 using (a)
                 using (b)
                 using (c)
                   d;
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "using(a)using(b)using(c){d;}", """
+                "using(a)using(b)using(c){d;}",
+                """
                 using (a)
                 using (b)
                 using (c)
                 {
                   d;
                 }
-                """);
+                """
+            );
 
             TestNormalizeStatement(
-                "using(a){using(b)c;}", """
+                "using(a){using(b)c;}",
+                """
                 using (a)
                 {
                   using (b)
                     c;
                 }
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "using(a){using(b)using(c)d;}", """
+                "using(a){using(b)using(c)d;}",
+                """
                 using (a)
                 {
                   using (b)
                   using (c)
                     d;
                 }
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "using(a)using(b){using(c)d;}", """
+                "using(a)using(b){using(c)d;}",
+                """
                 using (a)
                 using (b)
                 {
                   using (c)
                     d;
                 }
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "using(a){using(b){using(c)d;}}", """
+                "using(a){using(b){using(c)d;}}",
+                """
                 using (a)
                 {
                   using (b)
@@ -4127,71 +4889,87 @@ $"  ///  </summary>{Environment.NewLine}" +
                       d;
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(61518, "https://github.com/dotnet/roslyn/issues/61518")]
         public void TestNormalizeNestedFixedStatements1()
         {
             TestNormalizeStatement(
-                "fixed(int* a = null)fixed(int* b = null)c;", """
+                "fixed(int* a = null)fixed(int* b = null)c;",
+                """
                 fixed (int* a = null)
                 fixed (int* b = null)
                   c;
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "fixed(int* a = null)fixed(int* b = null){c;}", """
+                "fixed(int* a = null)fixed(int* b = null){c;}",
+                """
                 fixed (int* a = null)
                 fixed (int* b = null)
                 {
                   c;
                 }
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "fixed(int* a = null)fixed(int* b = null)fixed(int* c = null)d;", """
+                "fixed(int* a = null)fixed(int* b = null)fixed(int* c = null)d;",
+                """
                 fixed (int* a = null)
                 fixed (int* b = null)
                 fixed (int* c = null)
                   d;
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "fixed(int* a = null)fixed(int* b = null)fixed(int* c = null){d;}", """
+                "fixed(int* a = null)fixed(int* b = null)fixed(int* c = null){d;}",
+                """
                 fixed (int* a = null)
                 fixed (int* b = null)
                 fixed (int* c = null)
                 {
                   d;
                 }
-                """);
+                """
+            );
 
             TestNormalizeStatement(
-                "fixed(int* a = null){fixed(int* b = null)c;}", """
+                "fixed(int* a = null){fixed(int* b = null)c;}",
+                """
                 fixed (int* a = null)
                 {
                   fixed (int* b = null)
                     c;
                 }
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "fixed(int* a = null){fixed(int* b = null)fixed(int* c = null)d;}", """
+                "fixed(int* a = null){fixed(int* b = null)fixed(int* c = null)d;}",
+                """
                 fixed (int* a = null)
                 {
                   fixed (int* b = null)
                   fixed (int* c = null)
                     d;
                 }
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "fixed(int* a = null)fixed(int* b = null){fixed(int* c = null)d;}", """
+                "fixed(int* a = null)fixed(int* b = null){fixed(int* c = null)d;}",
+                """
                 fixed (int* a = null)
                 fixed (int* b = null)
                 {
                   fixed (int* c = null)
                     d;
                 }
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "fixed(int* a = null){fixed(int* b = null){fixed(int* c = null)d;}}", """
+                "fixed(int* a = null){fixed(int* b = null){fixed(int* c = null)d;}}",
+                """
                 fixed (int* a = null)
                 {
                   fixed (int* b = null)
@@ -4200,35 +4978,42 @@ $"  ///  </summary>{Environment.NewLine}" +
                       d;
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(61518, "https://github.com/dotnet/roslyn/issues/61518")]
         public void TestNormalizeNestedFixedUsingStatements1()
         {
             TestNormalizeStatement(
-                "using(a)fixed(int* b = null)c;", """
+                "using(a)fixed(int* b = null)c;",
+                """
                 using (a)
                   fixed (int* b = null)
                     c;
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "fixed(int* b = null)using(a)c;", """
+                "fixed(int* b = null)using(a)c;",
+                """
                 fixed (int* b = null)
                   using (a)
                     c;
-                """);
+                """
+            );
         }
 
         [Fact]
         public void TestNormalizeScopedParameters()
         {
             TestNormalizeStatement(
-                "static  void  F  (  scoped  R  x  ,  scoped  ref  R  y  ,  ref  scoped  R  z  )  {  }", """
+                "static  void  F  (  scoped  R  x  ,  scoped  ref  R  y  ,  ref  scoped  R  z  )  {  }",
+                """
                 static void F(scoped R x, scoped ref R y, ref scoped R z)
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -4242,73 +5027,92 @@ $"  ///  </summary>{Environment.NewLine}" +
         public void TestNormalizeObjectInitializer()
         {
             TestNormalizeExpression(
-                "new{}", """
+                "new{}",
+                """
                 new
                 {
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new{A=1,B=2}", """
+                "new{A=1,B=2}",
+                """
                 new
                 {
                   A = 1,
                   B = 2
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new{A=1,B=2,}", """
+                "new{A=1,B=2,}",
+                """
                 new
                 {
                   A = 1,
                   B = 2,
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass{}", """
+                "new SomeClass{}",
+                """
                 new SomeClass
                 {
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass{A=1,B=2}", """
+                "new SomeClass{A=1,B=2}",
+                """
                 new SomeClass
                 {
                   A = 1,
                   B = 2
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass{A=1,B=2,}", """
+                "new SomeClass{A=1,B=2,}",
+                """
                 new SomeClass
                 {
                   A = 1,
                   B = 2,
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){}", """
+                "new SomeClass(){}",
+                """
                 new SomeClass()
                 {
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2}", """
+                "new SomeClass(){A=1,B=2}",
+                """
                 new SomeClass()
                 {
                   A = 1,
                   B = 2
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,}", """
+                "new SomeClass(){A=1,B=2,}",
+                """
                 new SomeClass()
                 {
                   A = 1,
                   B = 2,
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new{}}", """
+                "new SomeClass(){A=1,B=2,C=new{}}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4317,9 +5121,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new{D=5l,E=2.5f}}", """
+                "new SomeClass(){A=1,B=2,C=new{D=5l,E=2.5f}}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4330,9 +5136,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     E = 2.5f
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new{D=5l,E=2.5f,}}", """
+                "new SomeClass(){A=1,B=2,C=new{D=5l,E=2.5f,}}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4343,9 +5151,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     E = 2.5f,
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new{D=5l,E=2.5f,},}", """
+                "new SomeClass(){A=1,B=2,C=new{D=5l,E=2.5f,},}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4356,9 +5166,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     E = 2.5f,
                   },
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new SomeOtherClass{}}", """
+                "new SomeClass(){A=1,B=2,C=new SomeOtherClass{}}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4367,9 +5179,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new SomeOtherClass{D=5l,E=2.5f}}", """
+                "new SomeClass(){A=1,B=2,C=new SomeOtherClass{D=5l,E=2.5f}}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4380,9 +5194,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     E = 2.5f
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new SomeOtherClass{D=5l,E=2.5f,}}", """
+                "new SomeClass(){A=1,B=2,C=new SomeOtherClass{D=5l,E=2.5f,}}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4393,9 +5209,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     E = 2.5f,
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new SomeOtherClass{D=5l,E=2.5f,},}", """
+                "new SomeClass(){A=1,B=2,C=new SomeOtherClass{D=5l,E=2.5f,},}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4406,9 +5224,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     E = 2.5f,
                   },
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){}}", """
+                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){}}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4417,9 +5237,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f}}", """
+                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f}}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4430,9 +5252,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     E = 2.5f
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,}}", """
+                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,}}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4443,9 +5267,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     E = 2.5f,
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,},}", """
+                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,},}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4456,9 +5282,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     E = 2.5f,
                   },
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new{}}}", """
+                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new{}}}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4472,9 +5300,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     }
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new{G=7u,H=3.72m}}}", """
+                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new{G=7u,H=3.72m}}}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4490,9 +5320,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     }
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new{G=7u,H=3.72m,}}}", """
+                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new{G=7u,H=3.72m,}}}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4508,9 +5340,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     }
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new{G=7u,H=3.72m,},}}", """
+                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new{G=7u,H=3.72m,},}}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4526,9 +5360,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     },
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new{G=7u,H=3.72m,},},}", """
+                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new{G=7u,H=3.72m,},},}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4544,9 +5380,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     },
                   },
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass{}}}", """
+                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass{}}}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4560,9 +5398,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     }
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass{G=7u,H=3.72m}}}", """
+                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass{G=7u,H=3.72m}}}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4578,9 +5418,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     }
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass{G=7u,H=3.72m,}}}", """
+                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass{G=7u,H=3.72m,}}}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4596,9 +5438,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     }
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass{G=7u,H=3.72m,},}}", """
+                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass{G=7u,H=3.72m,},}}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4614,9 +5458,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     },
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass{G=7u,H=3.72m,},},}", """
+                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass{G=7u,H=3.72m,},},}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4632,9 +5478,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     },
                   },
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass(){}}}", """
+                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass(){}}}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4648,9 +5496,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     }
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass(){G=7u,H=3.72m}}}", """
+                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass(){G=7u,H=3.72m}}}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4666,9 +5516,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     }
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass(){G=7u,H=3.72m,}}}", """
+                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass(){G=7u,H=3.72m,}}}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4684,9 +5536,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     }
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass(){G=7u,H=3.72m,},}}", """
+                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass(){G=7u,H=3.72m,},}}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4702,9 +5556,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     },
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass(){G=7u,H=3.72m,},},}", """
+                "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass(){G=7u,H=3.72m,},},}",
+                """
                 new SomeClass()
                 {
                   A = 1,
@@ -4720,585 +5576,688 @@ $"  ///  </summary>{Environment.NewLine}" +
                     },
                   },
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(61204, "https://github.com/dotnet/roslyn/issues/61204")]
         public void TestNormalizeObjectInitializer_SingleLineContext()
         {
-            VerifySingleLineInitializer(
-                "new{}",
-                "new { }");
-            VerifySingleLineInitializer(
-                "new{A=1,B=2}",
-                "new { A = 1, B = 2 }");
-            VerifySingleLineInitializer(
-                "new{A=1,B=2,}",
-                "new { A = 1, B = 2, }");
-            VerifySingleLineInitializer(
-                "new SomeClass{}",
-                "new SomeClass { }");
-            VerifySingleLineInitializer(
-                "new SomeClass{A=1,B=2}",
-                "new SomeClass { A = 1, B = 2 }");
+            VerifySingleLineInitializer("new{}", "new { }");
+            VerifySingleLineInitializer("new{A=1,B=2}", "new { A = 1, B = 2 }");
+            VerifySingleLineInitializer("new{A=1,B=2,}", "new { A = 1, B = 2, }");
+            VerifySingleLineInitializer("new SomeClass{}", "new SomeClass { }");
+            VerifySingleLineInitializer("new SomeClass{A=1,B=2}", "new SomeClass { A = 1, B = 2 }");
             VerifySingleLineInitializer(
                 "new SomeClass{A=1,B=2,}",
-                "new SomeClass { A = 1, B = 2, }");
+                "new SomeClass { A = 1, B = 2, }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass{A=1,B=2,}",
-                "new SomeClass { A = 1, B = 2, }");
-            VerifySingleLineInitializer(
-                "new SomeClass(){}",
-                "new SomeClass() { }");
+                "new SomeClass { A = 1, B = 2, }"
+            );
+            VerifySingleLineInitializer("new SomeClass(){}", "new SomeClass() { }");
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2}",
-                "new SomeClass() { A = 1, B = 2 }");
+                "new SomeClass() { A = 1, B = 2 }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,}",
-                "new SomeClass() { A = 1, B = 2, }");
+                "new SomeClass() { A = 1, B = 2, }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new{}}",
-                "new SomeClass() { A = 1, B = 2, C = new { } }");
+                "new SomeClass() { A = 1, B = 2, C = new { } }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new{D=5l,E=2.5f}}",
-                "new SomeClass() { A = 1, B = 2, C = new { D = 5l, E = 2.5f } }");
+                "new SomeClass() { A = 1, B = 2, C = new { D = 5l, E = 2.5f } }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new{D=5l,E=2.5f,}}",
-                "new SomeClass() { A = 1, B = 2, C = new { D = 5l, E = 2.5f, } }");
+                "new SomeClass() { A = 1, B = 2, C = new { D = 5l, E = 2.5f, } }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new{D=5l,E=2.5f,},}",
-                "new SomeClass() { A = 1, B = 2, C = new { D = 5l, E = 2.5f, }, }");
+                "new SomeClass() { A = 1, B = 2, C = new { D = 5l, E = 2.5f, }, }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new SomeOtherClass{}}",
-                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass { } }");
+                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass { } }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new SomeOtherClass{D=5l,E=2.5f}}",
-                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass { D = 5l, E = 2.5f } }");
+                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass { D = 5l, E = 2.5f } }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new SomeOtherClass{D=5l,E=2.5f,}}",
-                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass { D = 5l, E = 2.5f, } }");
+                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass { D = 5l, E = 2.5f, } }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new SomeOtherClass{D=5l,E=2.5f,},}",
-                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass { D = 5l, E = 2.5f, }, }");
+                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass { D = 5l, E = 2.5f, }, }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){}}",
-                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { } }");
+                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { } }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f}}",
-                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f } }");
+                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f } }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,}}",
-                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, } }");
+                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, } }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,},}",
-                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, }, }");
+                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, }, }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new{}}}",
-                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new { } } }");
+                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new { } } }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new{G=7u,H=3.72m}}}",
-                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new { G = 7u, H = 3.72m } } }");
+                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new { G = 7u, H = 3.72m } } }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new{G=7u,H=3.72m,}}}",
-                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new { G = 7u, H = 3.72m, } } }");
+                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new { G = 7u, H = 3.72m, } } }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new{G=7u,H=3.72m,},}}",
-                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new { G = 7u, H = 3.72m, }, } }");
+                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new { G = 7u, H = 3.72m, }, } }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new{G=7u,H=3.72m,},},}",
-                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new { G = 7u, H = 3.72m, }, }, }");
+                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new { G = 7u, H = 3.72m, }, }, }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass{}}}",
-                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new AndAnotherClass { } } }");
+                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new AndAnotherClass { } } }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass{G=7u,H=3.72m}}}",
-                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new AndAnotherClass { G = 7u, H = 3.72m } } }");
+                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new AndAnotherClass { G = 7u, H = 3.72m } } }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass{G=7u,H=3.72m,}}}",
-                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new AndAnotherClass { G = 7u, H = 3.72m, } } }");
+                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new AndAnotherClass { G = 7u, H = 3.72m, } } }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass{G=7u,H=3.72m,},}}",
-                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new AndAnotherClass { G = 7u, H = 3.72m, }, } }");
+                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new AndAnotherClass { G = 7u, H = 3.72m, }, } }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass{G=7u,H=3.72m,},},}",
-                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new AndAnotherClass { G = 7u, H = 3.72m, }, }, }");
+                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new AndAnotherClass { G = 7u, H = 3.72m, }, }, }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass(){}}}",
-                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new AndAnotherClass() { } } }");
+                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new AndAnotherClass() { } } }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass(){G=7u,H=3.72m}}}",
-                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new AndAnotherClass() { G = 7u, H = 3.72m } } }");
+                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new AndAnotherClass() { G = 7u, H = 3.72m } } }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass(){G=7u,H=3.72m,}}}",
-                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new AndAnotherClass() { G = 7u, H = 3.72m, } } }");
+                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new AndAnotherClass() { G = 7u, H = 3.72m, } } }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass(){G=7u,H=3.72m,},}}",
-                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new AndAnotherClass() { G = 7u, H = 3.72m, }, } }");
+                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new AndAnotherClass() { G = 7u, H = 3.72m, }, } }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass(){A=1,B=2,C=new SomeOtherClass(){D=5l,E=2.5f,F=new AndAnotherClass(){G=7u,H=3.72m,},},}",
-                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new AndAnotherClass() { G = 7u, H = 3.72m, }, }, }");
+                "new SomeClass() { A = 1, B = 2, C = new SomeOtherClass() { D = 5l, E = 2.5f, F = new AndAnotherClass() { G = 7u, H = 3.72m, }, }, }"
+            );
         }
 
         [Fact, WorkItem(61204, "https://github.com/dotnet/roslyn/issues/61204")]
         public void TestNormalizeArrayAndCollectionInitializers()
         {
             TestNormalizeExpression(
-                "new int[]{}", """
+                "new int[]{}",
+                """
                 new int[]
                 {
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new int[]{1,2,3}", """
+                "new int[]{1,2,3}",
+                """
                 new int[]
                 {
                   1,
                   2,
                   3
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new int[]{1,2,3,}", """
+                "new int[]{1,2,3,}",
+                """
                 new int[]
                 {
                   1,
                   2,
                   3,
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new int[]{1,2,3,}.Length", """
+                "new int[]{1,2,3,}.Length",
+                """
                 new int[]
                 {
                   1,
                   2,
                   3,
                 }.Length
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new int[]{1,2,3,}[0]", """
+                "new int[]{1,2,3,}[0]",
+                """
                 new int[]
                 {
                   1,
                   2,
                   3,
                 }[0]
-                """);
+                """
+            );
 
             TestNormalizeExpression(
-                "new List<int>(){}", """
+                "new List<int>(){}",
+                """
                 new List<int>()
                 {
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new List<int>(){1,2,3}", """
+                "new List<int>(){1,2,3}",
+                """
                 new List<int>()
                 {
                   1,
                   2,
                   3
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new List<int>(){1,2,3,}", """
+                "new List<int>(){1,2,3,}",
+                """
                 new List<int>()
                 {
                   1,
                   2,
                   3,
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new List<int>(){1,2,3,}.Count", """
+                "new List<int>(){1,2,3,}.Count",
+                """
                 new List<int>()
                 {
                   1,
                   2,
                   3,
                 }.Count
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new List<int>(){1,2,3,}[0]", """
+                "new List<int>(){1,2,3,}[0]",
+                """
                 new List<int>()
                 {
                   1,
                   2,
                   3,
                 }[0]
-                """);
+                """
+            );
 
             TestNormalizeExpression(
-                "new string[]{\"test1\",\"test2\",\"test3\"}", """
+                "new string[]{\"test1\",\"test2\",\"test3\"}",
+                """
                 new string[]
                 {
                   "test1",
                   "test2",
                   "test3"
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new string[]{\"test1\",\"test2\",\"test3\",}", """
+                "new string[]{\"test1\",\"test2\",\"test3\",}",
+                """
                 new string[]
                 {
                   "test1",
                   "test2",
                   "test3",
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new string[]{\"test1\",\"test2\",\"test3\",}.Length", """
+                "new string[]{\"test1\",\"test2\",\"test3\",}.Length",
+                """
                 new string[]
                 {
                   "test1",
                   "test2",
                   "test3",
                 }.Length
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new string[]{\"test1\",\"test2\",\"test3\",}[0]", """
+                "new string[]{\"test1\",\"test2\",\"test3\",}[0]",
+                """
                 new string[]
                 {
                   "test1",
                   "test2",
                   "test3",
                 }[0]
-                """);
+                """
+            );
 
             TestNormalizeExpression(
-                "new List<string>(){\"test1\",\"test2\",\"test3\"}", """
+                "new List<string>(){\"test1\",\"test2\",\"test3\"}",
+                """
                 new List<string>()
                 {
                   "test1",
                   "test2",
                   "test3"
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new List<string>(){\"test1\",\"test2\",\"test3\",}", """
+                "new List<string>(){\"test1\",\"test2\",\"test3\",}",
+                """
                 new List<string>()
                 {
                   "test1",
                   "test2",
                   "test3",
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new List<string>(){\"test1\",\"test2\",\"test3\",}.Count", """
+                "new List<string>(){\"test1\",\"test2\",\"test3\",}.Count",
+                """
                 new List<string>()
                 {
                   "test1",
                   "test2",
                   "test3",
                 }.Count
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new List<string>(){\"test1\",\"test2\",\"test3\",}[0]", """
+                "new List<string>(){\"test1\",\"test2\",\"test3\",}[0]",
+                """
                 new List<string>()
                 {
                   "test1",
                   "test2",
                   "test3",
                 }[0]
-                """);
+                """
+            );
 
             TestNormalizeExpression(
-                "new SomeClass[]{new SomeClass(),new SomeClass(),new SomeClass()}", """
+                "new SomeClass[]{new SomeClass(),new SomeClass(),new SomeClass()}",
+                """
                 new SomeClass[]
                 {
                   new SomeClass(),
                   new SomeClass(),
                   new SomeClass()
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass[]{new SomeClass(),new SomeClass(),new SomeClass(),}", """
+                "new SomeClass[]{new SomeClass(),new SomeClass(),new SomeClass(),}",
+                """
                 new SomeClass[]
                 {
                   new SomeClass(),
                   new SomeClass(),
                   new SomeClass(),
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass[]{new SomeClass(),new SomeClass(),new SomeClass(),}.Length", """
+                "new SomeClass[]{new SomeClass(),new SomeClass(),new SomeClass(),}.Length",
+                """
                 new SomeClass[]
                 {
                   new SomeClass(),
                   new SomeClass(),
                   new SomeClass(),
                 }.Length
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass[]{new SomeClass(),new SomeClass(),new SomeClass(),}[0]", """
+                "new SomeClass[]{new SomeClass(),new SomeClass(),new SomeClass(),}[0]",
+                """
                 new SomeClass[]
                 {
                   new SomeClass(),
                   new SomeClass(),
                   new SomeClass(),
                 }[0]
-                """);
+                """
+            );
 
             TestNormalizeExpression(
-                "new List<SomeClass>(){new SomeClass(),new SomeClass(),new SomeClass()}", """
+                "new List<SomeClass>(){new SomeClass(),new SomeClass(),new SomeClass()}",
+                """
                 new List<SomeClass>()
                 {
                   new SomeClass(),
                   new SomeClass(),
                   new SomeClass()
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new List<SomeClass>(){new SomeClass(),new SomeClass(),new SomeClass(),}", """
+                "new List<SomeClass>(){new SomeClass(),new SomeClass(),new SomeClass(),}",
+                """
                 new List<SomeClass>()
                 {
                   new SomeClass(),
                   new SomeClass(),
                   new SomeClass(),
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new List<SomeClass>(){new SomeClass(),new SomeClass(),new SomeClass(),}.Count", """
+                "new List<SomeClass>(){new SomeClass(),new SomeClass(),new SomeClass(),}.Count",
+                """
                 new List<SomeClass>()
                 {
                   new SomeClass(),
                   new SomeClass(),
                   new SomeClass(),
                 }.Count
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new List<SomeClass>(){new SomeClass(),new SomeClass(),new SomeClass(),}[0]", """
+                "new List<SomeClass>(){new SomeClass(),new SomeClass(),new SomeClass(),}[0]",
+                """
                 new List<SomeClass>()
                 {
                   new SomeClass(),
                   new SomeClass(),
                   new SomeClass(),
                 }[0]
-                """);
+                """
+            );
 
             TestNormalizeExpression(
-                "new int[]{2+2,2+2*2,arr2[0]}", """
+                "new int[]{2+2,2+2*2,arr2[0]}",
+                """
                 new int[]
                 {
                   2 + 2,
                   2 + 2 * 2,
                   arr2[0]
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new List<int>(){2+2,2+2*2,arr2[0]}", """
+                "new List<int>(){2+2,2+2*2,arr2[0]}",
+                """
                 new List<int>()
                 {
                   2 + 2,
                   2 + 2 * 2,
                   arr2[0]
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(61204, "https://github.com/dotnet/roslyn/issues/61204")]
         public void TestNormalizeArrayAndCollectionInitializers_SingleLineContext()
         {
-            VerifySingleLineInitializer(
-                "new int[]{}",
-                "new int[] { }");
-            VerifySingleLineInitializer(
-                "new int[]{1,2,3}",
-                "new int[] { 1, 2, 3 }");
-            VerifySingleLineInitializer(
-                "new int[]{1,2,3,}",
-                "new int[] { 1, 2, 3, }");
+            VerifySingleLineInitializer("new int[]{}", "new int[] { }");
+            VerifySingleLineInitializer("new int[]{1,2,3}", "new int[] { 1, 2, 3 }");
+            VerifySingleLineInitializer("new int[]{1,2,3,}", "new int[] { 1, 2, 3, }");
             VerifySingleLineInitializer(
                 "new int[]{1,2,3,}.Length",
-                "new int[] { 1, 2, 3, }.Length");
-            VerifySingleLineInitializer(
-                "new int[]{1,2,3,}[0]",
-                "new int[] { 1, 2, 3, }[0]");
+                "new int[] { 1, 2, 3, }.Length"
+            );
+            VerifySingleLineInitializer("new int[]{1,2,3,}[0]", "new int[] { 1, 2, 3, }[0]");
 
-            VerifySingleLineInitializer(
-                "new List<int>(){}",
-                "new List<int>() { }");
-            VerifySingleLineInitializer(
-                "new List<int>(){1,2,3}",
-                "new List<int>() { 1, 2, 3 }");
-            VerifySingleLineInitializer(
-                "new List<int>(){1,2,3,}",
-                "new List<int>() { 1, 2, 3, }");
+            VerifySingleLineInitializer("new List<int>(){}", "new List<int>() { }");
+            VerifySingleLineInitializer("new List<int>(){1,2,3}", "new List<int>() { 1, 2, 3 }");
+            VerifySingleLineInitializer("new List<int>(){1,2,3,}", "new List<int>() { 1, 2, 3, }");
             VerifySingleLineInitializer(
                 "new List<int>(){1,2,3,}.Count",
-                "new List<int>() { 1, 2, 3, }.Count");
+                "new List<int>() { 1, 2, 3, }.Count"
+            );
             VerifySingleLineInitializer(
                 "new List<int>(){1,2,3,}[0]",
-                "new List<int>() { 1, 2, 3, }[0]");
+                "new List<int>() { 1, 2, 3, }[0]"
+            );
 
-            VerifySingleLineInitializer(
-                "new SomeClass[]{}",
-                "new SomeClass[] { }");
+            VerifySingleLineInitializer("new SomeClass[]{}", "new SomeClass[] { }");
             VerifySingleLineInitializer(
                 "new SomeClass[]{new SomeClass(),new SomeClass(),new SomeClass()}",
-                "new SomeClass[] { new SomeClass(), new SomeClass(), new SomeClass() }");
+                "new SomeClass[] { new SomeClass(), new SomeClass(), new SomeClass() }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass[]{new SomeClass(),new SomeClass(),new SomeClass(),}",
-                "new SomeClass[] { new SomeClass(), new SomeClass(), new SomeClass(), }");
+                "new SomeClass[] { new SomeClass(), new SomeClass(), new SomeClass(), }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass[]{new SomeClass(),new SomeClass(),new SomeClass(),}.Length",
-                "new SomeClass[] { new SomeClass(), new SomeClass(), new SomeClass(), }.Length");
+                "new SomeClass[] { new SomeClass(), new SomeClass(), new SomeClass(), }.Length"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass[]{new SomeClass(),new SomeClass(),new SomeClass(),}[0]",
-                "new SomeClass[] { new SomeClass(), new SomeClass(), new SomeClass(), }[0]");
+                "new SomeClass[] { new SomeClass(), new SomeClass(), new SomeClass(), }[0]"
+            );
 
-            VerifySingleLineInitializer(
-                "new List<SomeClass>(){}",
-                "new List<SomeClass>() { }");
+            VerifySingleLineInitializer("new List<SomeClass>(){}", "new List<SomeClass>() { }");
             VerifySingleLineInitializer(
                 "new List<SomeClass>(){new SomeClass(),new SomeClass(),new SomeClass()}",
-                "new List<SomeClass>() { new SomeClass(), new SomeClass(), new SomeClass() }");
+                "new List<SomeClass>() { new SomeClass(), new SomeClass(), new SomeClass() }"
+            );
             VerifySingleLineInitializer(
                 "new List<SomeClass>(){new SomeClass(),new SomeClass(),new SomeClass(),}",
-                "new List<SomeClass>() { new SomeClass(), new SomeClass(), new SomeClass(), }");
+                "new List<SomeClass>() { new SomeClass(), new SomeClass(), new SomeClass(), }"
+            );
             VerifySingleLineInitializer(
                 "new List<SomeClass>(){new SomeClass(),new SomeClass(),new SomeClass(),}.Length",
-                "new List<SomeClass>() { new SomeClass(), new SomeClass(), new SomeClass(), }.Length");
+                "new List<SomeClass>() { new SomeClass(), new SomeClass(), new SomeClass(), }.Length"
+            );
             VerifySingleLineInitializer(
                 "new List<SomeClass>(){new SomeClass(),new SomeClass(),new SomeClass(),}[0]",
-                "new List<SomeClass>() { new SomeClass(), new SomeClass(), new SomeClass(), }[0]");
+                "new List<SomeClass>() { new SomeClass(), new SomeClass(), new SomeClass(), }[0]"
+            );
 
             VerifySingleLineInitializer(
                 "new int[]{2+2,2+2*2,arr2[0]}",
-                "new int[] { 2 + 2, 2 + 2 * 2, arr2[0] }");
+                "new int[] { 2 + 2, 2 + 2 * 2, arr2[0] }"
+            );
             VerifySingleLineInitializer(
                 "new List<int>(){2+2,2+2*2,arr2[0]}",
-                "new List<int>() { 2 + 2, 2 + 2 * 2, arr2[0] }");
+                "new List<int>() { 2 + 2, 2 + 2 * 2, arr2[0] }"
+            );
         }
 
         [Fact, WorkItem(61204, "https://github.com/dotnet/roslyn/issues/61204")]
         public void TestNormalizeIndexerInitializer()
         {
             TestNormalizeExpression(
-                "new Dictionary<int,int>(){}", """
+                "new Dictionary<int,int>(){}",
+                """
                 new Dictionary<int, int>()
                 {
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new Dictionary<int,int>(){[0]=1,[1]=2,[2]=3}", """
+                "new Dictionary<int,int>(){[0]=1,[1]=2,[2]=3}",
+                """
                 new Dictionary<int, int>()
                 {
                   [0] = 1,
                   [1] = 2,
                   [2] = 3
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new Dictionary<int,int>(){[0]=1,[1]=2,[2]=3,}", """
+                "new Dictionary<int,int>(){[0]=1,[1]=2,[2]=3,}",
+                """
                 new Dictionary<int, int>()
                 {
                   [0] = 1,
                   [1] = 2,
                   [2] = 3,
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new Dictionary<int,int>(){[0]=1,[1]=2,[2]=3,}.Count", """
+                "new Dictionary<int,int>(){[0]=1,[1]=2,[2]=3,}.Count",
+                """
                 new Dictionary<int, int>()
                 {
                   [0] = 1,
                   [1] = 2,
                   [2] = 3,
                 }.Count
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new Dictionary<int,int>(){[0]=1,[1]=2,[2]=3,}[0]", """
+                "new Dictionary<int,int>(){[0]=1,[1]=2,[2]=3,}[0]",
+                """
                 new Dictionary<int, int>()
                 {
                   [0] = 1,
                   [1] = 2,
                   [2] = 3,
                 }[0]
-                """);
+                """
+            );
 
             TestNormalizeExpression(
-                "new Dictionary<string,string>(){[\"test0\"]=\"test1\",[\"test1\"]=\"test2\",[\"test2\"]=\"test3\"}", """
+                "new Dictionary<string,string>(){[\"test0\"]=\"test1\",[\"test1\"]=\"test2\",[\"test2\"]=\"test3\"}",
+                """
                 new Dictionary<string, string>()
                 {
                   ["test0"] = "test1",
                   ["test1"] = "test2",
                   ["test2"] = "test3"
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new Dictionary<string,string>(){[\"test0\"]=\"test1\",[\"test1\"]=\"test2\",[\"test2\"]=\"test3\",}", """
+                "new Dictionary<string,string>(){[\"test0\"]=\"test1\",[\"test1\"]=\"test2\",[\"test2\"]=\"test3\",}",
+                """
                 new Dictionary<string, string>()
                 {
                   ["test0"] = "test1",
                   ["test1"] = "test2",
                   ["test2"] = "test3",
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new Dictionary<string,string>(){[\"test0\"]=\"test1\",[\"test1\"]=\"test2\",[\"test2\"]=\"test3\",}.Count", """
+                "new Dictionary<string,string>(){[\"test0\"]=\"test1\",[\"test1\"]=\"test2\",[\"test2\"]=\"test3\",}.Count",
+                """
                 new Dictionary<string, string>()
                 {
                   ["test0"] = "test1",
                   ["test1"] = "test2",
                   ["test2"] = "test3",
                 }.Count
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new Dictionary<string,string>(){[\"test0\"]=\"test1\",[\"test1\"]=\"test2\",[\"test2\"]=\"test3\",}[0]", """
+                "new Dictionary<string,string>(){[\"test0\"]=\"test1\",[\"test1\"]=\"test2\",[\"test2\"]=\"test3\",}[0]",
+                """
                 new Dictionary<string, string>()
                 {
                   ["test0"] = "test1",
                   ["test1"] = "test2",
                   ["test2"] = "test3",
                 }[0]
-                """);
+                """
+            );
 
             TestNormalizeExpression(
-                "new Dictionary<SomeClass,SomeOtherClass>(){[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass()}", """
+                "new Dictionary<SomeClass,SomeOtherClass>(){[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass()}",
+                """
                 new Dictionary<SomeClass, SomeOtherClass>()
                 {
                   [new SomeClass()] = new SomeOtherClass(),
                   [new SomeClass()] = new SomeOtherClass(),
                   [new SomeClass()] = new SomeOtherClass()
                 }
-                """);
-            TestNormalizeExpression("new Dictionary<SomeClass,SomeOtherClass>(){[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass(),}", """
+                """
+            );
+            TestNormalizeExpression(
+                "new Dictionary<SomeClass,SomeOtherClass>(){[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass(),}",
+                """
                 new Dictionary<SomeClass, SomeOtherClass>()
                 {
                   [new SomeClass()] = new SomeOtherClass(),
                   [new SomeClass()] = new SomeOtherClass(),
                   [new SomeClass()] = new SomeOtherClass(),
                 }
-                """);
-            TestNormalizeExpression("new Dictionary<SomeClass,SomeOtherClass>(){[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass(),}.Count", """
+                """
+            );
+            TestNormalizeExpression(
+                "new Dictionary<SomeClass,SomeOtherClass>(){[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass(),}.Count",
+                """
                 new Dictionary<SomeClass, SomeOtherClass>()
                 {
                   [new SomeClass()] = new SomeOtherClass(),
                   [new SomeClass()] = new SomeOtherClass(),
                   [new SomeClass()] = new SomeOtherClass(),
                 }.Count
-                """);
-            TestNormalizeExpression("new Dictionary<SomeClass,SomeOtherClass>(){[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass(),}[0]", """
+                """
+            );
+            TestNormalizeExpression(
+                "new Dictionary<SomeClass,SomeOtherClass>(){[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass(),}[0]",
+                """
                 new Dictionary<SomeClass, SomeOtherClass>()
                 {
                   [new SomeClass()] = new SomeOtherClass(),
                   [new SomeClass()] = new SomeOtherClass(),
                   [new SomeClass()] = new SomeOtherClass(),
                 }[0]
-                """);
+                """
+            );
 
             TestNormalizeExpression(
-                "new Dictionary<int,int>(){[2+2*2]=2+2*2,[2+2*2]=2+2*2,[arr[0]]=arr[0]}", """
+                "new Dictionary<int,int>(){[2+2*2]=2+2*2,[2+2*2]=2+2*2,[arr[0]]=arr[0]}",
+                """
                 new Dictionary<int, int>()
                 {
                   [2 + 2 * 2] = 2 + 2 * 2,
                   [2 + 2 * 2] = 2 + 2 * 2,
                   [arr[0]] = arr[0]
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new Dictionary<int,int>(){{0,1},{1,2},{2,3}}", """
+                "new Dictionary<int,int>(){{0,1},{1,2},{2,3}}",
+                """
                 new Dictionary<int, int>()
                 {
                   {
@@ -5314,7 +6273,8 @@ $"  ///  </summary>{Environment.NewLine}" +
                     3
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(61204, "https://github.com/dotnet/roslyn/issues/61204")]
@@ -5322,68 +6282,86 @@ $"  ///  </summary>{Environment.NewLine}" +
         {
             VerifySingleLineInitializer(
                 "new Dictionary<int,int>(){}",
-                "new Dictionary<int, int>() { }");
+                "new Dictionary<int, int>() { }"
+            );
             VerifySingleLineInitializer(
                 "new Dictionary<int,int>(){[0]=1,[1]=2,[2]=3}",
-                "new Dictionary<int, int>() { [0] = 1, [1] = 2, [2] = 3 }");
+                "new Dictionary<int, int>() { [0] = 1, [1] = 2, [2] = 3 }"
+            );
             VerifySingleLineInitializer(
                 "new Dictionary<int,int>(){[0]=1,[1]=2,[2]=3,}",
-                "new Dictionary<int, int>() { [0] = 1, [1] = 2, [2] = 3, }");
+                "new Dictionary<int, int>() { [0] = 1, [1] = 2, [2] = 3, }"
+            );
             VerifySingleLineInitializer(
                 "new Dictionary<int,int>(){[0]=1,[1]=2,[2]=3,}.Count",
-                "new Dictionary<int, int>() { [0] = 1, [1] = 2, [2] = 3, }.Count");
+                "new Dictionary<int, int>() { [0] = 1, [1] = 2, [2] = 3, }.Count"
+            );
             VerifySingleLineInitializer(
                 "new Dictionary<int,int>(){[0]=1,[1]=2,[2]=3,}[0]",
-                "new Dictionary<int, int>() { [0] = 1, [1] = 2, [2] = 3, }[0]");
+                "new Dictionary<int, int>() { [0] = 1, [1] = 2, [2] = 3, }[0]"
+            );
 
             VerifySingleLineInitializer(
                 "new Dictionary<SomeClass,SomeOtherClass>(){[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass()}",
-                "new Dictionary<SomeClass, SomeOtherClass>() { [new SomeClass()] = new SomeOtherClass(), [new SomeClass()] = new SomeOtherClass(), [new SomeClass()] = new SomeOtherClass() }");
+                "new Dictionary<SomeClass, SomeOtherClass>() { [new SomeClass()] = new SomeOtherClass(), [new SomeClass()] = new SomeOtherClass(), [new SomeClass()] = new SomeOtherClass() }"
+            );
             VerifySingleLineInitializer(
                 "new Dictionary<SomeClass,SomeOtherClass>(){[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass(),}",
-                "new Dictionary<SomeClass, SomeOtherClass>() { [new SomeClass()] = new SomeOtherClass(), [new SomeClass()] = new SomeOtherClass(), [new SomeClass()] = new SomeOtherClass(), }");
+                "new Dictionary<SomeClass, SomeOtherClass>() { [new SomeClass()] = new SomeOtherClass(), [new SomeClass()] = new SomeOtherClass(), [new SomeClass()] = new SomeOtherClass(), }"
+            );
             VerifySingleLineInitializer(
                 "new Dictionary<SomeClass,SomeOtherClass>(){[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass(),}.Count",
-                "new Dictionary<SomeClass, SomeOtherClass>() { [new SomeClass()] = new SomeOtherClass(), [new SomeClass()] = new SomeOtherClass(), [new SomeClass()] = new SomeOtherClass(), }.Count");
+                "new Dictionary<SomeClass, SomeOtherClass>() { [new SomeClass()] = new SomeOtherClass(), [new SomeClass()] = new SomeOtherClass(), [new SomeClass()] = new SomeOtherClass(), }.Count"
+            );
             VerifySingleLineInitializer(
                 "new Dictionary<SomeClass,SomeOtherClass>(){[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass(),[new SomeClass()]=new SomeOtherClass(),}[0]",
-                "new Dictionary<SomeClass, SomeOtherClass>() { [new SomeClass()] = new SomeOtherClass(), [new SomeClass()] = new SomeOtherClass(), [new SomeClass()] = new SomeOtherClass(), }[0]");
+                "new Dictionary<SomeClass, SomeOtherClass>() { [new SomeClass()] = new SomeOtherClass(), [new SomeClass()] = new SomeOtherClass(), [new SomeClass()] = new SomeOtherClass(), }[0]"
+            );
 
             VerifySingleLineInitializer(
                 "new Dictionary<int,int>(){[2+2*2]=2+2*2,[2+2*2]=2+2*2,[arr[0]]=arr[0]}",
-                "new Dictionary<int, int>() { [2 + 2 * 2] = 2 + 2 * 2, [2 + 2 * 2] = 2 + 2 * 2, [arr[0]] = arr[0] }");
+                "new Dictionary<int, int>() { [2 + 2 * 2] = 2 + 2 * 2, [2 + 2 * 2] = 2 + 2 * 2, [arr[0]] = arr[0] }"
+            );
             VerifySingleLineInitializer(
                 "new Dictionary<int,int>(){{0,1},{1,2},{2,3}}",
-                "new Dictionary<int, int>() { { 0, 1 }, { 1, 2 }, { 2, 3 } }");
+                "new Dictionary<int, int>() { { 0, 1 }, { 1, 2 }, { 2, 3 } }"
+            );
         }
 
         [Fact, WorkItem(61204, "https://github.com/dotnet/roslyn/issues/61204")]
         public void TestNormalizeWithInitializer()
         {
             TestNormalizeExpression(
-                "obj with{}", """
+                "obj with{}",
+                """
                 obj with
                 {
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "obj with{A=1,B=2}", """
+                "obj with{A=1,B=2}",
+                """
                 obj with
                 {
                   A = 1,
                   B = 2
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "obj with{A=1,B=2,}", """
+                "obj with{A=1,B=2,}",
+                """
                 obj with
                 {
                   A = 1,
                   B = 2,
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "obj with{A=1,B=2,C=obj2 with{}}", """
+                "obj with{A=1,B=2,C=obj2 with{}}",
+                """
                 obj with
                 {
                   A = 1,
@@ -5392,9 +6370,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f}}", """
+                "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f}}",
+                """
                 obj with
                 {
                   A = 1,
@@ -5405,9 +6385,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     E = 2.5f
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f,}}", """
+                "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f,}}",
+                """
                 obj with
                 {
                   A = 1,
@@ -5418,9 +6400,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     E = 2.5f,
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f,},}", """
+                "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f,},}",
+                """
                 obj with
                 {
                   A = 1,
@@ -5431,9 +6415,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     E = 2.5f,
                   },
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f,F=obj3 with{}}}", """
+                "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f,F=obj3 with{}}}",
+                """
                 obj with
                 {
                   A = 1,
@@ -5447,9 +6433,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     }
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f,F=obj3 with{G=7u,H=3.72m}}}", """
+                "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f,F=obj3 with{G=7u,H=3.72m}}}",
+                """
                 obj with
                 {
                   A = 1,
@@ -5465,9 +6453,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     }
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f,F=obj3 with{G=7u,H=3.72m,}}}", """
+                "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f,F=obj3 with{G=7u,H=3.72m,}}}",
+                """
                 obj with
                 {
                   A = 1,
@@ -5483,9 +6473,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     }
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f,F=obj3 with{G=7u,H=3.72m,},}}", """
+                "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f,F=obj3 with{G=7u,H=3.72m,},}}",
+                """
                 obj with
                 {
                   A = 1,
@@ -5501,9 +6493,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     },
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f,F=obj3 with{G=7u,H=3.72m,},},}", """
+                "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f,F=obj3 with{G=7u,H=3.72m,},},}",
+                """
                 obj with
                 {
                   A = 1,
@@ -5519,71 +6513,79 @@ $"  ///  </summary>{Environment.NewLine}" +
                     },
                   },
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(61204, "https://github.com/dotnet/roslyn/issues/61204")]
         public void TestNormalizeWithInitializer_SingleLineContext()
         {
-            VerifySingleLineInitializer(
-                "obj with{}",
-                "obj with { }");
-            VerifySingleLineInitializer(
-                "obj with{A=1,B=2}",
-                "obj with { A = 1, B = 2 }");
-            VerifySingleLineInitializer(
-                "obj with{A=1,B=2,}",
-                "obj with { A = 1, B = 2, }");
+            VerifySingleLineInitializer("obj with{}", "obj with { }");
+            VerifySingleLineInitializer("obj with{A=1,B=2}", "obj with { A = 1, B = 2 }");
+            VerifySingleLineInitializer("obj with{A=1,B=2,}", "obj with { A = 1, B = 2, }");
             VerifySingleLineInitializer(
                 "obj with{A=1,B=2,C=obj2 with{}}",
-                "obj with { A = 1, B = 2, C = obj2 with { } }");
+                "obj with { A = 1, B = 2, C = obj2 with { } }"
+            );
             VerifySingleLineInitializer(
                 "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f}}",
-                "obj with { A = 1, B = 2, C = obj2 with { D = 5l, E = 2.5f } }");
+                "obj with { A = 1, B = 2, C = obj2 with { D = 5l, E = 2.5f } }"
+            );
             VerifySingleLineInitializer(
                 "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f,}}",
-                "obj with { A = 1, B = 2, C = obj2 with { D = 5l, E = 2.5f, } }");
+                "obj with { A = 1, B = 2, C = obj2 with { D = 5l, E = 2.5f, } }"
+            );
             VerifySingleLineInitializer(
                 "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f,},}",
-                "obj with { A = 1, B = 2, C = obj2 with { D = 5l, E = 2.5f, }, }");
+                "obj with { A = 1, B = 2, C = obj2 with { D = 5l, E = 2.5f, }, }"
+            );
             VerifySingleLineInitializer(
                 "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f,F=obj3 with{}}}",
-                "obj with { A = 1, B = 2, C = obj2 with { D = 5l, E = 2.5f, F = obj3 with { } } }");
+                "obj with { A = 1, B = 2, C = obj2 with { D = 5l, E = 2.5f, F = obj3 with { } } }"
+            );
             VerifySingleLineInitializer(
                 "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f,F=obj3 with{G=7u,H=3.72m}}}",
-                "obj with { A = 1, B = 2, C = obj2 with { D = 5l, E = 2.5f, F = obj3 with { G = 7u, H = 3.72m } } }");
+                "obj with { A = 1, B = 2, C = obj2 with { D = 5l, E = 2.5f, F = obj3 with { G = 7u, H = 3.72m } } }"
+            );
             VerifySingleLineInitializer(
                 "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f,F=obj3 with{G=7u,H=3.72m,}}}",
-                "obj with { A = 1, B = 2, C = obj2 with { D = 5l, E = 2.5f, F = obj3 with { G = 7u, H = 3.72m, } } }");
+                "obj with { A = 1, B = 2, C = obj2 with { D = 5l, E = 2.5f, F = obj3 with { G = 7u, H = 3.72m, } } }"
+            );
             VerifySingleLineInitializer(
                 "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f,F=obj3 with{G=7u,H=3.72m,},}}",
-                "obj with { A = 1, B = 2, C = obj2 with { D = 5l, E = 2.5f, F = obj3 with { G = 7u, H = 3.72m, }, } }");
+                "obj with { A = 1, B = 2, C = obj2 with { D = 5l, E = 2.5f, F = obj3 with { G = 7u, H = 3.72m, }, } }"
+            );
             VerifySingleLineInitializer(
                 "obj with{A=1,B=2,C=obj2 with{D=5l,E=2.5f,F=obj3 with{G=7u,H=3.72m,},},}",
-                "obj with { A = 1, B = 2, C = obj2 with { D = 5l, E = 2.5f, F = obj3 with { G = 7u, H = 3.72m, }, }, }");
+                "obj with { A = 1, B = 2, C = obj2 with { D = 5l, E = 2.5f, F = obj3 with { G = 7u, H = 3.72m, }, }, }"
+            );
         }
 
         [Fact, WorkItem(61204, "https://github.com/dotnet/roslyn/issues/61204")]
         public void TestNormalizeMixedInitializer()
         {
             TestNormalizeExpression(
-                "new SomeClass{A=1,[1]=2,[2,'c']=\"test\"}", """
+                "new SomeClass{A=1,[1]=2,[2,'c']=\"test\"}",
+                """
                 new SomeClass
                 {
                   A = 1,
                   [1] = 2,
                   [2, 'c'] = "test"
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass{A=1,[1]=2,[2,'c']=\"test\",}", """
+                "new SomeClass{A=1,[1]=2,[2,'c']=\"test\",}",
+                """
                 new SomeClass
                 {
                   A = 1,
                   [1] = 2,
                   [2, 'c'] = "test",
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(61204, "https://github.com/dotnet/roslyn/issues/61204")]
@@ -5591,26 +6593,31 @@ $"  ///  </summary>{Environment.NewLine}" +
         {
             VerifySingleLineInitializer(
                 "new SomeClass{A=1,[1]=2,[2,'c']=3.5f}",
-                "new SomeClass { A = 1, [1] = 2, [2, 'c'] = 3.5f }");
+                "new SomeClass { A = 1, [1] = 2, [2, 'c'] = 3.5f }"
+            );
             VerifySingleLineInitializer(
                 "new SomeClass{A=1,[1]=2,[2,'c']=3.5f,}",
-                "new SomeClass { A = 1, [1] = 2, [2, 'c'] = 3.5f, }");
+                "new SomeClass { A = 1, [1] = 2, [2, 'c'] = 3.5f, }"
+            );
         }
 
         [Fact, WorkItem(61204, "https://github.com/dotnet/roslyn/issues/61204")]
         public void TestNormalizeNestedInitializers()
         {
             TestNormalizeExpression(
-                "new{A=new{}}", """
+                "new{A=new{}}",
+                """
                 new
                 {
                   A = new
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new{A=new{B=1,C=2}}", """
+                "new{A=new{B=1,C=2}}",
+                """
                 new
                 {
                   A = new
@@ -5619,18 +6626,22 @@ $"  ///  </summary>{Environment.NewLine}" +
                     C = 2
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new{A=new SomeOtherClass{}}", """
+                "new{A=new SomeOtherClass{}}",
+                """
                 new
                 {
                   A = new SomeOtherClass
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new{A=new SomeOtherClass{B=1,C=2}}", """
+                "new{A=new SomeOtherClass{B=1,C=2}}",
+                """
                 new
                 {
                   A = new SomeOtherClass
@@ -5639,18 +6650,22 @@ $"  ///  </summary>{Environment.NewLine}" +
                     C = 2
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass{A=new{}}", """
+                "new SomeClass{A=new{}}",
+                """
                 new SomeClass
                 {
                   A = new
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass{A=new{B=1,C=2}}", """
+                "new SomeClass{A=new{B=1,C=2}}",
+                """
                 new SomeClass
                 {
                   A = new
@@ -5659,37 +6674,45 @@ $"  ///  </summary>{Environment.NewLine}" +
                     C = 2
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass{A=new SomeOtherClass{}}", """
+                "new SomeClass{A=new SomeOtherClass{}}",
+                """
                 new SomeClass
                 {
                   A = new SomeOtherClass
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass{A=new SomeOtherClass{}}", """
+                "new SomeClass{A=new SomeOtherClass{}}",
+                """
                 new SomeClass
                 {
                   A = new SomeOtherClass
                   {
                   }
                 }
-                """);
+                """
+            );
 
             TestNormalizeExpression(
-                "new{A=new int[]{}}", """
+                "new{A=new int[]{}}",
+                """
                 new
                 {
                   A = new int[]
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new{A=new int[]{1,2,3}}", """
+                "new{A=new int[]{1,2,3}}",
+                """
                 new
                 {
                   A = new int[]
@@ -5699,18 +6722,22 @@ $"  ///  </summary>{Environment.NewLine}" +
                     3
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass{A=new int[]{}}", """
+                "new SomeClass{A=new int[]{}}",
+                """
                 new SomeClass
                 {
                   A = new int[]
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass{A=new int[]{1,2,3}}", """
+                "new SomeClass{A=new int[]{1,2,3}}",
+                """
                 new SomeClass
                 {
                   A = new int[]
@@ -5720,10 +6747,12 @@ $"  ///  </summary>{Environment.NewLine}" +
                     3
                   }
                 }
-                """);
+                """
+            );
 
             TestNormalizeExpression(
-                "new SomeClass[]{new SomeClass{},new SomeClass{},new SomeClass{}}", """
+                "new SomeClass[]{new SomeClass{},new SomeClass{},new SomeClass{}}",
+                """
                 new SomeClass[]
                 {
                   new SomeClass
@@ -5736,9 +6765,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new SomeClass[]{new SomeClass{A=1,B=2,C=3},new SomeClass{A=1,B=2,C=3},new SomeClass{A=1,B=2,C=3}}", """
+                "new SomeClass[]{new SomeClass{A=1,B=2,C=3},new SomeClass{A=1,B=2,C=3},new SomeClass{A=1,B=2,C=3}}",
+                """
                 new SomeClass[]
                 {
                   new SomeClass
@@ -5760,10 +6791,12 @@ $"  ///  </summary>{Environment.NewLine}" +
                     C = 3
                   }
                 }
-                """);
+                """
+            );
 
             TestNormalizeExpression(
-                "new Dictionary<int,SomeClass>{[0]=new SomeClass(){},[1]=new SomeClass(){},[2]=new SomeClass(){}}", """
+                "new Dictionary<int,SomeClass>{[0]=new SomeClass(){},[1]=new SomeClass(){},[2]=new SomeClass(){}}",
+                """
                 new Dictionary<int, SomeClass>
                 {
                   [0] = new SomeClass()
@@ -5776,9 +6809,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                   {
                   }
                 }
-                """);
+                """
+            );
             TestNormalizeExpression(
-                "new Dictionary<int,SomeClass>{[0]=new SomeClass(){A=1,B=2,C=3},[1]=new SomeClass(){A=1,B=2,C=3},[2]=new SomeClass(){A=1,B=2,C=3}}", """
+                "new Dictionary<int,SomeClass>{[0]=new SomeClass(){A=1,B=2,C=3},[1]=new SomeClass(){A=1,B=2,C=3},[2]=new SomeClass(){A=1,B=2,C=3}}",
+                """
                 new Dictionary<int, SomeClass>
                 {
                   [0] = new SomeClass()
@@ -5800,10 +6835,12 @@ $"  ///  </summary>{Environment.NewLine}" +
                     C = 3
                   }
                 }
-                """);
+                """
+            );
 
             TestNormalizeExpression(
-                "new SomeClass{Arr={1,2,3}}", """
+                "new SomeClass{Arr={1,2,3}}",
+                """
                 new SomeClass
                 {
                   Arr =
@@ -5813,10 +6850,12 @@ $"  ///  </summary>{Environment.NewLine}" +
                     3
                   }
                 }
-                """);
+                """
+            );
 
             TestNormalizeExpression(
-                "new SomeClass{A=1,B=new SomeOtherClass(){D=7,E=\"test\",F=new int[]{1,2,3}},C=new{G=new List<AndAnotherClass>{new AndAnotherClass{J=8,K=new Dictionary<int,string>{[1]=\"test1\",[2]=\"test2\",[3]=\"test3\"},L=new List<Whatever>(){}}},H=new{},I=new MixedClass(){[\"test1\"]=new MixedClass{[\"innerTest\"]=new MixedClass{M=5.01m}},M=2.71m,[\"test2\"]=new MixedClass()}}}", """
+                "new SomeClass{A=1,B=new SomeOtherClass(){D=7,E=\"test\",F=new int[]{1,2,3}},C=new{G=new List<AndAnotherClass>{new AndAnotherClass{J=8,K=new Dictionary<int,string>{[1]=\"test1\",[2]=\"test2\",[3]=\"test3\"},L=new List<Whatever>(){}}},H=new{},I=new MixedClass(){[\"test1\"]=new MixedClass{[\"innerTest\"]=new MixedClass{M=5.01m}},M=2.71m,[\"test2\"]=new MixedClass()}}}",
+                """
                 new SomeClass
                 {
                   A = 1,
@@ -5866,7 +6905,8 @@ $"  ///  </summary>{Environment.NewLine}" +
                     }
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(61204, "https://github.com/dotnet/roslyn/issues/61204")]
@@ -5874,23 +6914,27 @@ $"  ///  </summary>{Environment.NewLine}" +
         {
             VerifySingleLineInitializer(
                 "new SomeClass{A=1,B=new SomeOtherClass(){D=7,E=0,F=new int[]{1,2,3}},C=new{G=new List<AndAnotherClass>{new AndAnotherClass{J=8,K=new Dictionary<int,int>{[1]=0,[2]=0,[3]=0},L=new List<Whatever>(){}}},H=new{},I=new MixedClass(){[0]=new MixedClass{[0]=new MixedClass{M=5.01m}},M=2.71m,[0]=new MixedClass()}}}",
-                "new SomeClass { A = 1, B = new SomeOtherClass() { D = 7, E = 0, F = new int[] { 1, 2, 3 } }, C = new { G = new List<AndAnotherClass> { new AndAnotherClass { J = 8, K = new Dictionary<int, int> { [1] = 0, [2] = 0, [3] = 0 }, L = new List<Whatever>() { } } }, H = new { }, I = new MixedClass() { [0] = new MixedClass { [0] = new MixedClass { M = 5.01m } }, M = 2.71m, [0] = new MixedClass() } } }");
+                "new SomeClass { A = 1, B = new SomeOtherClass() { D = 7, E = 0, F = new int[] { 1, 2, 3 } }, C = new { G = new List<AndAnotherClass> { new AndAnotherClass { J = 8, K = new Dictionary<int, int> { [1] = 0, [2] = 0, [3] = 0 }, L = new List<Whatever>() { } } }, H = new { }, I = new MixedClass() { [0] = new MixedClass { [0] = new MixedClass { M = 5.01m } }, M = 2.71m, [0] = new MixedClass() } } }"
+            );
         }
 
         [Fact, WorkItem(61204, "https://github.com/dotnet/roslyn/issues/61204")]
         public void TestNormalizeInitializers_Statements()
         {
             TestNormalizeStatement(
-                "var someVar=new SomeClass{A=1,B=2,C=3};", """
+                "var someVar=new SomeClass{A=1,B=2,C=3};",
+                """
                 var someVar = new SomeClass
                 {
                   A = 1,
                   B = 2,
                   C = 3
                 };
-                """);
+                """
+            );
             TestNormalizeStatement(
-                "if(true){new SomeClass{A=1,B=2,C=3};}", """
+                "if(true){new SomeClass{A=1,B=2,C=3};}",
+                """
                 if (true)
                 {
                   new SomeClass
@@ -5900,9 +6944,11 @@ $"  ///  </summary>{Environment.NewLine}" +
                     C = 3
                   };
                 }
-                """);
+                """
+            );
             TestNormalizeDeclaration(
-                "class C{void M(){new SomeClass{A=1,B=2,C=3};}}", """
+                "class C{void M(){new SomeClass{A=1,B=2,C=3};}}",
+                """
                 class C
                 {
                   void M()
@@ -5915,7 +6961,8 @@ $"  ///  </summary>{Environment.NewLine}" +
                     };
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Theory]
@@ -5936,27 +6983,21 @@ $"  ///  </summary>{Environment.NewLine}" +
 
         private static void VerifySingleLineInitializer(string text, string expected)
         {
-            TestNormalizeExpression(
-                "$\"{" + text + "}\"",
-                "$\"{" + expected + "}\"");
+            TestNormalizeExpression("$\"{" + text + "}\"", "$\"{" + expected + "}\"");
+            TestNormalizeDeclaration($"[SomeAttribute({text})]", $"[SomeAttribute({expected})]");
+            TestNormalizeExpression($"new SomeClass({text})", $"new SomeClass({expected})");
+            TestNormalizeExpression($"Call({text})", $"Call({expected})");
             TestNormalizeDeclaration(
-                $"[SomeAttribute({text})]",
-                $"[SomeAttribute({expected})]");
-            TestNormalizeExpression(
-                $"new SomeClass({text})",
-                $"new SomeClass({expected})");
-            TestNormalizeExpression(
-                $"Call({text})",
-                $"Call({expected})");
-            TestNormalizeDeclaration(
-                $"class C{{C():base({text}){{}}}}", $$"""
+                $"class C{{C():base({text}){{}}}}",
+                $$"""
                 class C
                 {
                   C() : base({{expected}})
                   {
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/70135")]

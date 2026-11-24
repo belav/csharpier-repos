@@ -33,13 +33,23 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         [Fact]
         public void Create_Errors()
         {
-            Assert.Throws<ArgumentNullException>(() => EditAndContinueMethodDebugInfoReader.Create((ISymUnmanagedReader5)null));
-            Assert.Throws<ArgumentNullException>(() => EditAndContinueMethodDebugInfoReader.Create((MetadataReader)null));
-            Assert.Throws<ArgumentNullException>(() => EditAndContinueMethodDebugInfoReader.Create(null, 1));
+            Assert.Throws<ArgumentNullException>(() =>
+                EditAndContinueMethodDebugInfoReader.Create((ISymUnmanagedReader5)null)
+            );
+            Assert.Throws<ArgumentNullException>(() =>
+                EditAndContinueMethodDebugInfoReader.Create((MetadataReader)null)
+            );
+            Assert.Throws<ArgumentNullException>(() =>
+                EditAndContinueMethodDebugInfoReader.Create(null, 1)
+            );
 
             var mockSymReader = new Mock<ISymUnmanagedReader5>(MockBehavior.Strict).Object;
-            Assert.Throws<ArgumentOutOfRangeException>(() => EditAndContinueMethodDebugInfoReader.Create(mockSymReader, 0));
-            Assert.Throws<ArgumentOutOfRangeException>(() => EditAndContinueMethodDebugInfoReader.Create(mockSymReader, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                EditAndContinueMethodDebugInfoReader.Create(mockSymReader, 0)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                EditAndContinueMethodDebugInfoReader.Create(mockSymReader, -1)
+            );
         }
 
         [Theory]
@@ -48,7 +58,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         [InlineData(DebugInformationFormat.Pdb, true)]
         public void DebugInfo(DebugInformationFormat format, bool useSymReader)
         {
-            var source = @"
+            var source =
+                @"
 using System;
 delegate void D();
 class C
@@ -61,11 +72,22 @@ class C
     }
 }
 ";
-            var tree = CSharpTestSource.Parse(source, path: "/a/c.cs", options: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), checksumAlgorithm: SourceHashAlgorithm.Sha1);
-            var compilation = CSharpTestBase.CreateCompilationWithMscorlib40AndSystemCore(tree, options: TestOptions.DebugDll);
+            var tree = CSharpTestSource.Parse(
+                source,
+                path: "/a/c.cs",
+                options: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                checksumAlgorithm: SourceHashAlgorithm.Sha1
+            );
+            var compilation = CSharpTestBase.CreateCompilationWithMscorlib40AndSystemCore(
+                tree,
+                options: TestOptions.DebugDll
+            );
 
             var pdbStream = new MemoryStream();
-            compilation.EmitToArray(new EmitOptions(debugInformationFormat: format), pdbStream: pdbStream);
+            compilation.EmitToArray(
+                new EmitOptions(debugInformationFormat: format),
+                pdbStream: pdbStream
+            );
             pdbStream.Position = 0;
 
             DebugInformationReaderProvider provider;
@@ -75,8 +97,18 @@ class C
             {
                 var pdbStreamCom = SymUnmanagedStreamFactory.CreateStream(pdbStream);
                 var metadataImportProvider = new DummyMetadataImportProvider();
-                Assert.Equal(0, new SymBinder().GetReaderFromPdbStream(metadataImportProvider, pdbStreamCom, out var symReader));
-                reader = EditAndContinueMethodDebugInfoReader.Create((ISymUnmanagedReader5)symReader, version: 1);
+                Assert.Equal(
+                    0,
+                    new SymBinder().GetReaderFromPdbStream(
+                        metadataImportProvider,
+                        pdbStreamCom,
+                        out var symReader
+                    )
+                );
+                reader = EditAndContinueMethodDebugInfoReader.Create(
+                    (ISymUnmanagedReader5)symReader,
+                    version: 1
+                );
             }
             else
             {
@@ -87,7 +119,14 @@ class C
             // Main method
             var debugInfo = reader.GetDebugInfo(MetadataTokens.MethodDefinitionHandle(5));
             Assert.Equal(0, debugInfo.GetMethodOrdinal());
-            AssertEx.Equal(new[] { "Offset=0 Ordinal=0 Kind=LambdaDisplayClass", "Offset=33 Ordinal=0 Kind=UserDefined" }, debugInfo.InspectLocalSlots());
+            AssertEx.Equal(
+                new[]
+                {
+                    "Offset=0 Ordinal=0 Kind=LambdaDisplayClass",
+                    "Offset=33 Ordinal=0 Kind=UserDefined",
+                },
+                debugInfo.InspectLocalSlots()
+            );
             AssertEx.Equal(new[] { "Offset=43 Id=0#0 Closure=0" }, debugInfo.InspectLambdas());
             AssertEx.Equal(new[] { "Offset=0 Id=0#0" }, debugInfo.InspectClosures());
 
@@ -109,8 +148,17 @@ class C
             Assert.False(reader.TryGetDocumentChecksum("/a/d.cs", out _, out _));
             Assert.False(reader.TryGetDocumentChecksum("/A/C.cs", out _, out _));
 
-            Assert.True(reader.TryGetDocumentChecksum("/a/c.cs", out var actualChecksum, out var actualAlgorithm));
-            Assert.Equal("21-C8-B2-D7-A3-6B-49-C7-57-DF-67-B8-1F-75-DF-6A-64-FD-59-22", BitConverter.ToString(actualChecksum.ToArray()));
+            Assert.True(
+                reader.TryGetDocumentChecksum(
+                    "/a/c.cs",
+                    out var actualChecksum,
+                    out var actualAlgorithm
+                )
+            );
+            Assert.Equal(
+                "21-C8-B2-D7-A3-6B-49-C7-57-DF-67-B8-1F-75-DF-6A-64-FD-59-22",
+                BitConverter.ToString(actualChecksum.ToArray())
+            );
             Assert.Equal(new Guid("ff1816ec-aa5e-4d10-87f7-6f4963833460"), actualAlgorithm);
         }
     }

@@ -109,16 +109,25 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             int completedCount = 0;
             var c = new ActionBlock<int>(i => completedCount++);
-            var singleAssignments = Enumerable.Range(0, Iterations).Select(_ =>
-            {
-                var s = new WriteOnceBlock<int>(i => i);
-                s.LinkTo(c);
-                return s;
-            }).ToList();
-            var ignored = Task.WhenAll(singleAssignments.Select(s => s.Completion)).ContinueWith(
-                _ => c.Complete(), CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.Default);
+            var singleAssignments = Enumerable
+                .Range(0, Iterations)
+                .Select(_ =>
+                {
+                    var s = new WriteOnceBlock<int>(i => i);
+                    s.LinkTo(c);
+                    return s;
+                })
+                .ToList();
+            var ignored = Task.WhenAll(singleAssignments.Select(s => s.Completion))
+                .ContinueWith(
+                    _ => c.Complete(),
+                    CancellationToken.None,
+                    TaskContinuationOptions.None,
+                    TaskScheduler.Default
+                );
 
-            foreach (var s in singleAssignments) s.Post(1);
+            foreach (var s in singleAssignments)
+                s.Post(1);
 
             await c.Completion;
             Assert.Equal(expected: Iterations, actual: completedCount);
@@ -135,8 +144,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
             for (int i = 0; i < Iterations; i++)
             {
-                if (i % 2 == 0) b.Target1.Post(i);
-                else b.Target2.Post(i);
+                if (i % 2 == 0)
+                    b.Target1.Post(i);
+                else
+                    b.Target2.Post(i);
             }
             b.Target1.Complete();
             b.Target2.Complete();
@@ -153,16 +164,23 @@ namespace System.Threading.Tasks.Dataflow.Tests
             int completedCount = 0;
             var c = new ActionBlock<int[]>(i => completedCount++);
 
-            foreach (var input in inputs) input.LinkTo(b);
-            var ignored = Task.WhenAll(inputs.Select(s => s.Completion)).ContinueWith(
-                _ => b.Complete(), CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.Default);
+            foreach (var input in inputs)
+                input.LinkTo(b);
+            var ignored = Task.WhenAll(inputs.Select(s => s.Completion))
+                .ContinueWith(
+                    _ => b.Complete(),
+                    CancellationToken.None,
+                    TaskContinuationOptions.None,
+                    TaskScheduler.Default
+                );
             b.LinkTo(c, new DataflowLinkOptions { PropagateCompletion = true });
 
             for (int i = 0; i < Iterations; i++)
             {
                 inputs[i % inputs.Count].Post(i);
             }
-            foreach (var input in inputs) input.Complete();
+            foreach (var input in inputs)
+                input.Complete();
 
             await c.Completion;
             Assert.Equal(expected: Iterations / b.BatchSize, actual: completedCount);
@@ -173,12 +191,15 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             var b = new BroadcastBlock<int>(i => i);
             int completedCount = 0;
-            var tasks = Enumerable.Range(0, 1).Select(_ =>
-            {
-                var c = new ActionBlock<int>(i => Interlocked.Increment(ref completedCount));
-                b.LinkTo(c, new DataflowLinkOptions { PropagateCompletion = true });
-                return c.Completion;
-            }).ToArray();
+            var tasks = Enumerable
+                .Range(0, 1)
+                .Select(_ =>
+                {
+                    var c = new ActionBlock<int>(i => Interlocked.Increment(ref completedCount));
+                    b.LinkTo(c, new DataflowLinkOptions { PropagateCompletion = true });
+                    return c.Completion;
+                })
+                .ToArray();
 
             var posts = Iterations / tasks.Length;
             b.PostRange(0, posts);
@@ -210,11 +231,15 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             var tcs = new TaskCompletionSource<bool>();
 
-            ActionBlock<int> c1 = null, c2 = null;
+            ActionBlock<int> c1 = null,
+                c2 = null;
             c1 = new ActionBlock<int>(i => c2.Post(i + 1));
-            c2 = new ActionBlock<int>(i => {
-                if (i >= Iterations) tcs.SetResult(true);
-                else c1.Post(i + 1);
+            c2 = new ActionBlock<int>(i =>
+            {
+                if (i >= Iterations)
+                    tcs.SetResult(true);
+                else
+                    c1.Post(i + 1);
             });
             c1.Post(0);
 
@@ -224,10 +249,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public async Task TransformPingPong()
         {
-            TransformBlock<int, int> t1 = null, t2 = null;
+            TransformBlock<int, int> t1 = null,
+                t2 = null;
             t1 = new TransformBlock<int, int>(i =>
             {
-                if (i >= Iterations) t2.Complete();
+                if (i >= Iterations)
+                    t2.Complete();
                 return i + 1;
             });
             t2 = new TransformBlock<int, int>(i => i + 1);
@@ -246,7 +273,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var j = new JoinBlock<string, int>(new GroupingDataflowBlockOptions { Greedy = false });
             b1.LinkTo(j.Target1, new DataflowLinkOptions { PropagateCompletion = true });
             b2.LinkTo(j.Target2, new DataflowLinkOptions { PropagateCompletion = true });
-            var a = new ActionBlock<Tuple<string, int>>(t => Assert.True((t.Item1 == t.Item2.ToString())));
+            var a = new ActionBlock<Tuple<string, int>>(t =>
+                Assert.True((t.Item1 == t.Item2.ToString()))
+            );
             j.LinkTo(a, new DataflowLinkOptions { PropagateCompletion = true });
 
             for (int i = 0; i < Iterations; i++)

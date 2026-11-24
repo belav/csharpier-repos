@@ -44,17 +44,16 @@ internal abstract partial class ResourceInvoker
         IList<IValueProviderFactory> valueProviderFactories
     )
     {
-        _diagnosticListener =
-            diagnosticListener ?? throw new ArgumentNullException(nameof(diagnosticListener));
+        _diagnosticListener = diagnosticListener
+            ?? throw new ArgumentNullException(nameof(diagnosticListener));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        _actionContextAccessor =
-            actionContextAccessor ?? throw new ArgumentNullException(nameof(actionContextAccessor));
+        _actionContextAccessor = actionContextAccessor
+            ?? throw new ArgumentNullException(nameof(actionContextAccessor));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         _actionContext = actionContext ?? throw new ArgumentNullException(nameof(actionContext));
 
         _filters = filters ?? throw new ArgumentNullException(nameof(filters));
-        _valueProviderFactories =
-            valueProviderFactories
+        _valueProviderFactories = valueProviderFactories
             ?? throw new ArgumentNullException(nameof(valueProviderFactories));
         _cursor = new FilterCursor(filters);
     }

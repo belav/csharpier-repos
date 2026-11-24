@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Text;
 
-
 namespace System.Data.Metadata.Edm
 {
     /// <summary>
@@ -27,7 +26,11 @@ namespace System.Data.Metadata.Edm
         /// <param name="parentSet">The association set which this belongs to</param>
         /// <param name="endMember">The end member of the association set which this is an instance of</param>
         /// <exception cref="System.ArgumentNullException">Thrown if either the role,entitySet, parentSet or endMember arguments are null </exception>
-        internal AssociationSetEnd(EntitySet entitySet, AssociationSet parentSet, AssociationEndMember endMember)
+        internal AssociationSetEnd(
+            EntitySet entitySet,
+            AssociationSet parentSet,
+            AssociationEndMember endMember
+        )
         {
             _entitySet = EntityUtil.GenericCheckArgumentNull(entitySet, "entitySet");
             _parentSet = EntityUtil.GenericCheckArgumentNull(parentSet, "parentSet");
@@ -45,7 +48,10 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Returns the kind of the type
         /// </summary>
-        public override BuiltInTypeKind BuiltInTypeKind { get { return BuiltInTypeKind.AssociationSetEnd; } }
+        public override BuiltInTypeKind BuiltInTypeKind
+        {
+            get { return BuiltInTypeKind.AssociationSetEnd; }
+        }
 
         /// <summary>
         /// The parent association set for this AssociationSetEnd.
@@ -55,10 +61,7 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(BuiltInTypeKind.AssociationSet, false)]
         public AssociationSet ParentAssociationSet
         {
-            get
-            {
-                return _parentSet;
-            }
+            get { return _parentSet; }
         }
 
         /// <summary>
@@ -69,10 +72,7 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(BuiltInTypeKind.AssociationEndMember, false)]
         public AssociationEndMember CorrespondingAssociationEndMember
         {
-            get
-            {
-                return _endMember;
-            }
+            get { return _endMember; }
         }
 
         /// <summary>
@@ -81,10 +81,7 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(PrimitiveTypeKind.String, false)]
         public string Name
         {
-            get
-            {
-                return CorrespondingAssociationEndMember.Name;
-            }
+            get { return CorrespondingAssociationEndMember.Name; }
         }
 
         /// <summary>
@@ -96,10 +93,7 @@ namespace System.Data.Metadata.Edm
         [Obsolete("This property is going away, please use the Name property instead")]
         public string Role
         {
-            get
-            {
-                return Name;
-            }
+            get { return Name; }
         }
 
         /// <summary>
@@ -108,10 +102,7 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(BuiltInTypeKind.EntitySet, false)]
         public EntitySet EntitySet
         {
-            get
-            {
-                return _entitySet;
-            }
+            get { return _entitySet; }
         }
 
         /// <summary>
@@ -119,16 +110,13 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         internal override string Identity
         {
-            get
-            {
-                return this.Name;
-            }
+            get { return this.Name; }
         }
         #endregion
 
         #region Methods
         /// <summary>
-        /// Overriding System.Object.ToString to provide better String representation 
+        /// Overriding System.Object.ToString to provide better String representation
         /// for this type.
         /// </summary>
         public override string ToString()

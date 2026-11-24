@@ -11,14 +11,19 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-
     public sealed partial class CustomBindingCollectionElement : BindingCollectionElement
     {
-
-        [ConfigurationProperty(ConfigurationStrings.DefaultCollectionName, Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        [ConfigurationProperty(
+            ConfigurationStrings.DefaultCollectionName,
+            Options = ConfigurationPropertyOptions.IsDefaultCollection
+        )]
         public CustomBindingElementCollection Bindings
         {
-            get { return (CustomBindingElementCollection)base[ConfigurationStrings.DefaultCollectionName]; }
+            get
+            {
+                return (CustomBindingElementCollection)
+                    base[ConfigurationStrings.DefaultCollectionName];
+            }
         }
 
         public override Type BindingType
@@ -30,7 +35,8 @@ namespace System.ServiceModel.Configuration
         {
             get
             {
-                List<IBindingConfigurationElement> configuredBindings = new List<IBindingConfigurationElement>();
+                List<IBindingConfigurationElement> configuredBindings =
+                    new List<IBindingConfigurationElement>();
                 foreach (IBindingConfigurationElement configuredBinding in this.Bindings)
                 {
                     configuredBindings.Add(configuredBinding);
@@ -50,33 +56,55 @@ namespace System.ServiceModel.Configuration
         {
             return System.Activator.CreateInstance<CustomBinding>();
         }
+
         internal static CustomBindingCollectionElement GetBindingCollectionElement()
         {
-            return (CustomBindingCollectionElement)ConfigurationHelpers.GetBindingCollectionElement(ConfigurationStrings.CustomBindingCollectionElementName);
+            return (CustomBindingCollectionElement)
+                ConfigurationHelpers.GetBindingCollectionElement(
+                    ConfigurationStrings.CustomBindingCollectionElementName
+                );
         }
 
-        bool TryCreateMatchingExtension(BindingElement bindingElement, ExtensionElementCollection collection, bool allowDerivedTypes, string assemblyName, out BindingElementExtensionElement result)
+        bool TryCreateMatchingExtension(
+            BindingElement bindingElement,
+            ExtensionElementCollection collection,
+            bool allowDerivedTypes,
+            string assemblyName,
+            out BindingElementExtensionElement result
+        )
         {
             result = null;
             foreach (ExtensionElement element in collection)
             {
-                BindingElementExtensionElement bindingElementExtension = Activator.CreateInstance(Type.GetType(element.Type, true)) as BindingElementExtensionElement;
+                BindingElementExtensionElement bindingElementExtension =
+                    Activator.CreateInstance(Type.GetType(element.Type, true))
+                    as BindingElementExtensionElement;
                 if (null == bindingElementExtension)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigInvalidExtensionType,
-                        element.Type,
-                        assemblyName,
-                        ConfigurationStrings.BindingElementExtensions)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigInvalidExtensionType,
+                                element.Type,
+                                assemblyName,
+                                ConfigurationStrings.BindingElementExtensions
+                            )
+                        )
+                    );
                 }
 
                 bool isMatch;
                 if (allowDerivedTypes)
                 {
-                    isMatch = bindingElementExtension.BindingElementType.IsAssignableFrom(bindingElement.GetType());
+                    isMatch = bindingElementExtension.BindingElementType.IsAssignableFrom(
+                        bindingElement.GetType()
+                    );
                 }
                 else
                 {
-                    isMatch = bindingElementExtension.BindingElementType.Equals(bindingElement.GetType());
+                    isMatch = bindingElementExtension.BindingElementType.Equals(
+                        bindingElement.GetType()
+                    );
                 }
 
                 if (isMatch)
@@ -116,10 +144,22 @@ namespace System.ServiceModel.Configuration
             foreach (BindingElement bindingElement in customBinding.Elements)
             {
                 BindingElementExtensionElement bindingElementExtension;
-                bool foundMatch = TryCreateMatchingExtension(bindingElement, collection, false, configElement.CollectionElementBaseType.AssemblyQualifiedName, out bindingElementExtension);
+                bool foundMatch = TryCreateMatchingExtension(
+                    bindingElement,
+                    collection,
+                    false,
+                    configElement.CollectionElementBaseType.AssemblyQualifiedName,
+                    out bindingElementExtension
+                );
                 if (!foundMatch)
                 {
-                    foundMatch = TryCreateMatchingExtension(bindingElement, collection, true, configElement.CollectionElementBaseType.AssemblyQualifiedName, out bindingElementExtension);
+                    foundMatch = TryCreateMatchingExtension(
+                        bindingElement,
+                        collection,
+                        true,
+                        configElement.CollectionElementBaseType.AssemblyQualifiedName,
+                        out bindingElementExtension
+                    );
                 }
                 if (!foundMatch)
                 {
@@ -139,4 +179,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-

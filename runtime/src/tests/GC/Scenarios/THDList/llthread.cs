@@ -1,14 +1,29 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-namespace ThdList {
-    using System.Threading;
+namespace ThdList
+{
     using System;
     using System.IO;
+    using System.Threading;
 
-    public class LLThread {
-
-        internal int [] mA_Count = {10000, -5000, -15000, 3000, -6000, 0, 15000, 0, 10000,0,100,100}; //Action Array +ve add, -ve delete, 0 empty
+    public class LLThread
+    {
+        internal int[] mA_Count =
+        {
+            10000,
+            -5000,
+            -15000,
+            3000,
+            -6000,
+            0,
+            15000,
+            0,
+            10000,
+            0,
+            100,
+            100,
+        }; //Action Array +ve add, -ve delete, 0 empty
         internal int m_id = 0;
         internal LinkedList m_LinkedList;
         internal Thread Mv_Thread;
@@ -18,8 +33,8 @@ namespace ThdList {
             // console synchronization Console.SetOut(TextWriter.Synchronized(Console.Out));
             m_LinkedList = new LinkedList(ThreadId);
             m_id = ThreadId;
-            Mv_Thread = new Thread( new ThreadStart (this.ThreadStart) );
-            Mv_Thread.Start( );
+            Mv_Thread = new Thread(new ThreadStart(this.ThreadStart));
+            Mv_Thread.Start();
             Console.Out.WriteLine("Started Thread: " + m_id);
         }
 
@@ -31,7 +46,7 @@ namespace ThdList {
                 {
                     m_LinkedList.Empty(m_id);
                 }
-                else if (mA_Count[i] > 0 )
+                else if (mA_Count[i] > 0)
                 {
                     m_LinkedList.AddNodes(mA_Count[i], m_id);
                 }
@@ -41,6 +56,5 @@ namespace ThdList {
                 }
             }
         }
-
     }
 }

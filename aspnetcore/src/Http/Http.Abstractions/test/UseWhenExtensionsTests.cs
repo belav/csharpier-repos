@@ -29,21 +29,15 @@ public class UseWhenExtensionsTests
         var context = CreateContext();
         var parent = CreateBuilder();
 
-        parent.UseWhen(
-            TruePredicate,
-            child =>
+        parent.UseWhen(TruePredicate, child =>
+        {
+            child.UseWhen(TruePredicate, grandchild =>
             {
-                child.UseWhen(
-                    TruePredicate,
-                    grandchild =>
-                    {
-                        grandchild.Use(Increment("grandchild"));
-                    }
-                );
+                grandchild.Use(Increment("grandchild"));
+            });
 
-                child.Use(Increment("child"));
-            }
-        );
+            child.Use(Increment("child"));
+        });
 
         parent.Use(Increment("parent"));
 
@@ -63,21 +57,15 @@ public class UseWhenExtensionsTests
         var context = CreateContext();
         var parent = CreateBuilder();
 
-        parent.UseWhen(
-            TruePredicate,
-            child =>
+        parent.UseWhen(TruePredicate, child =>
+        {
+            child.UseWhen(TruePredicate, grandchild =>
             {
-                child.UseWhen(
-                    TruePredicate,
-                    grandchild =>
-                    {
-                        grandchild.Use(Increment("grandchild", terminate: true));
-                    }
-                );
+                grandchild.Use(Increment("grandchild", terminate: true));
+            });
 
-                child.Use(Increment("child"));
-            }
-        );
+            child.Use(Increment("child"));
+        });
 
         parent.Use(Increment("parent"));
 
@@ -97,13 +85,10 @@ public class UseWhenExtensionsTests
         var context = CreateContext();
         var parent = CreateBuilder();
 
-        parent.UseWhen(
-            FalsePredicate,
-            child =>
-            {
-                child.Use(Increment("child"));
-            }
-        );
+        parent.UseWhen(FalsePredicate, child =>
+        {
+            child.Use(Increment("child"));
+        });
 
         parent.Use(Increment("parent"));
 

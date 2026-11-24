@@ -5,11 +5,10 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public abstract class TPTRelationshipsQueryTestBase<TFixture> : InheritanceRelationshipsQueryRelationalTestBase<TFixture>
+public abstract class TPTRelationshipsQueryTestBase<TFixture>
+    : InheritanceRelationshipsQueryRelationalTestBase<TFixture>
     where TFixture : TPTRelationshipsQueryRelationalFixture, new()
 {
     protected TPTRelationshipsQueryTestBase(TFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 }

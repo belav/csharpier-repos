@@ -35,61 +35,71 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Serialization
 {
-	[TestFixture]
-	public class Exceptions
-	{
-		[Serializable]
-		public class SerializableException : Exception
-		{
-			public string Data;
+    [TestFixture]
+    public class Exceptions
+    {
+        [Serializable]
+        public class SerializableException : Exception
+        {
+            public string Data;
 
-			public SerializableException (string data) {
-				Data = data;
+            public SerializableException(string data)
+            {
+                Data = data;
 
-				SerializeObjectState += HandleSerialization;
-			}
+                SerializeObjectState += HandleSerialization;
+            }
 
-			private static void HandleSerialization (object exception, SafeSerializationEventArgs eventArgs) {
-				eventArgs.AddSerializedState (new SerializableExceptionState (exception));
-			}
+            private static void HandleSerialization(
+                object exception,
+                SafeSerializationEventArgs eventArgs
+            )
+            {
+                eventArgs.AddSerializedState(new SerializableExceptionState(exception));
+            }
 
-			[Serializable]
-			private class SerializableExceptionState : ISafeSerializationData {
-				private string Data;
+            [Serializable]
+            private class SerializableExceptionState : ISafeSerializationData
+            {
+                private string Data;
 
-				public SerializableExceptionState (object _exception) {
-					SerializableException exception = (SerializableException)_exception;
+                public SerializableExceptionState(object _exception)
+                {
+                    SerializableException exception = (SerializableException)_exception;
 
-					Data = exception.Data;
-				}
+                    Data = exception.Data;
+                }
 
-				public void CompleteDeserialization (object _exception) {
-					SerializableException exception = (SerializableException)_exception;
-					exception.SerializeObjectState += HandleSerialization;
+                public void CompleteDeserialization(object _exception)
+                {
+                    SerializableException exception = (SerializableException)_exception;
+                    exception.SerializeObjectState += HandleSerialization;
 
-					exception.Data = Data;
-				}
-			}
-		}
+                    exception.Data = Data;
+                }
+            }
+        }
 
-		// Effectively tests SerializeObjectState handler support on System.Exception
-		[Test]
-		public void Exception_SerializeObjectState () {
-			SerializableException exception = new SerializableException ("success");
-			SerializableException deserializedException;
-			BinaryFormatter binaryFormatter = new BinaryFormatter ();
+        // Effectively tests SerializeObjectState handler support on System.Exception
+        [Test]
+        public void Exception_SerializeObjectState()
+        {
+            SerializableException exception = new SerializableException("success");
+            SerializableException deserializedException;
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
 
-			using (MemoryStream memoryStream = new MemoryStream ())
-			{
-				binaryFormatter.Serialize (memoryStream, exception);
-				memoryStream.Flush ();
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                binaryFormatter.Serialize(memoryStream, exception);
+                memoryStream.Flush();
 
-				memoryStream.Seek (0, SeekOrigin.Begin);
+                memoryStream.Seek(0, SeekOrigin.Begin);
 
-				deserializedException = (SerializableException)binaryFormatter.Deserialize (memoryStream);
-			}
+                deserializedException = (SerializableException)
+                    binaryFormatter.Deserialize(memoryStream);
+            }
 
-			Assert.AreEqual ("success", deserializedException.Data);
-		}
-	}
+            Assert.AreEqual("success", deserializedException.Data);
+        }
+    }
 }

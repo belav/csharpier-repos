@@ -111,7 +111,10 @@ namespace System.Xml.Xsl.IlGen
             w.WriteStartDocument();
             w.WriteProcessingInstruction("xml-stylesheet", "href='qilo.xslt' type='text/xsl'");
             w.WriteStartElement("QilOptimizer");
-            w.WriteAttributeString("timestamp", DateTime.Now.ToString(CultureInfo.InvariantCulture));
+            w.WriteAttributeString(
+                "timestamp",
+                DateTime.Now.ToString(CultureInfo.InvariantCulture)
+            );
             WriteQilRewrite(qil, w, null);
 
             try
@@ -119,9 +122,14 @@ namespace System.Xml.Xsl.IlGen
                 // Then, rewrite the graph until "done" or some max value is reached.
                 for (int i = 1; i < MAX_REWRITES; i++)
                 {
-                    QilExpression qilTemp = (QilExpression)(new QilCloneVisitor(qil.Factory).Clone(qil));
+                    QilExpression qilTemp = (QilExpression)(
+                        new QilCloneVisitor(qil.Factory).Clone(qil)
+                    );
 
-                    XmlILOptimizerVisitor visitor = new XmlILOptimizerVisitor(qilTemp, !qilTemp.IsDebug);
+                    XmlILOptimizerVisitor visitor = new XmlILOptimizerVisitor(
+                        qilTemp,
+                        !qilTemp.IsDebug
+                    );
                     visitor.Threshold = i;
                     qilTemp = visitor.Optimize();
 

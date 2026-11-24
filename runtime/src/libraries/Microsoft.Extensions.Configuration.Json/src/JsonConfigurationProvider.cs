@@ -17,7 +17,8 @@ namespace Microsoft.Extensions.Configuration.Json
         /// Initializes a new instance with the specified source.
         /// </summary>
         /// <param name="source">The source settings.</param>
-        public JsonConfigurationProvider(JsonConfigurationSource source) : base(source) { }
+        public JsonConfigurationProvider(JsonConfigurationSource source)
+            : base(source) { }
 
         /// <summary>
         /// Loads the JSON data from a stream.

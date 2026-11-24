@@ -39,7 +39,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
                 if (ExecutionConditionUtil.IsCoreClr)
                 {
                     var dir = temp.CreateDirectory();
-                    File.WriteAllBytes(Path.Combine(dir.Path, "mscorlib.dll"), Net461.References.mscorlib.ImageBytes);
+                    File.WriteAllBytes(
+                        Path.Combine(dir.Path, "mscorlib.dll"),
+                        Net461.References.mscorlib.ImageBytes
+                    );
                     return dir.Path;
                 }
 
@@ -47,21 +50,68 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
             }
         }
 
-        internal CSharpCommandLineArguments DefaultParse(IEnumerable<string> args, string baseDirectory, string? sdkDirectory = null, string? additionalReferenceDirectories = null)
+        internal CSharpCommandLineArguments DefaultParse(
+            IEnumerable<string> args,
+            string baseDirectory,
+            string? sdkDirectory = null,
+            string? additionalReferenceDirectories = null
+        )
         {
             sdkDirectory = sdkDirectory ?? SdkDirectory;
-            return CSharpCommandLineParser.Default.Parse(args, baseDirectory, sdkDirectory, additionalReferenceDirectories);
+            return CSharpCommandLineParser.Default.Parse(
+                args,
+                baseDirectory,
+                sdkDirectory,
+                additionalReferenceDirectories
+            );
         }
 
-        internal MockCSharpCompiler CreateCSharpCompiler(string[] args, DiagnosticAnalyzer[]? analyzers = null, ISourceGenerator[]? generators = null, AnalyzerAssemblyLoader? loader = null, GeneratorDriverCache? driverCache = null, MetadataReference[]? additionalReferences = null)
+        internal MockCSharpCompiler CreateCSharpCompiler(
+            string[] args,
+            DiagnosticAnalyzer[]? analyzers = null,
+            ISourceGenerator[]? generators = null,
+            AnalyzerAssemblyLoader? loader = null,
+            GeneratorDriverCache? driverCache = null,
+            MetadataReference[]? additionalReferences = null
+        )
         {
-            return CreateCSharpCompiler(null, WorkingDirectory, args, analyzers, generators, loader, driverCache, additionalReferences);
+            return CreateCSharpCompiler(
+                null,
+                WorkingDirectory,
+                args,
+                analyzers,
+                generators,
+                loader,
+                driverCache,
+                additionalReferences
+            );
         }
 
-        internal MockCSharpCompiler CreateCSharpCompiler(string? responseFile, string workingDirectory, string[] args, DiagnosticAnalyzer[]? analyzers = null, ISourceGenerator[]? generators = null, AnalyzerAssemblyLoader? loader = null, GeneratorDriverCache? driverCache = null, MetadataReference[]? additionalReferences = null)
+        internal MockCSharpCompiler CreateCSharpCompiler(
+            string? responseFile,
+            string workingDirectory,
+            string[] args,
+            DiagnosticAnalyzer[]? analyzers = null,
+            ISourceGenerator[]? generators = null,
+            AnalyzerAssemblyLoader? loader = null,
+            GeneratorDriverCache? driverCache = null,
+            MetadataReference[]? additionalReferences = null
+        )
         {
-            var buildPaths = RuntimeUtilities.CreateBuildPaths(workingDirectory, sdkDirectory: SdkDirectory);
-            return new MockCSharpCompiler(responseFile, buildPaths, args, analyzers.AsImmutableOrEmpty(), generators.AsImmutableOrEmpty(), loader, driverCache, additionalReferences.AsImmutableOrEmpty());
+            var buildPaths = RuntimeUtilities.CreateBuildPaths(
+                workingDirectory,
+                sdkDirectory: SdkDirectory
+            );
+            return new MockCSharpCompiler(
+                responseFile,
+                buildPaths,
+                args,
+                analyzers.AsImmutableOrEmpty(),
+                generators.AsImmutableOrEmpty(),
+                loader,
+                driverCache,
+                additionalReferences.AsImmutableOrEmpty()
+            );
         }
     }
 }

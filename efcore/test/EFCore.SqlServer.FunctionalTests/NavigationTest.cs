@@ -13,8 +13,16 @@ public class NavigationTest : IClassFixture<NavigationTestFixture>
         using var context = _fixture.CreateContext();
         context.ConfigAction = modelBuilder =>
         {
-            modelBuilder.Entity<GoTPerson>().HasMany(p => p.Siblings).WithOne(p => p.SiblingReverse).IsRequired(false);
-            modelBuilder.Entity<GoTPerson>().HasOne(p => p.Lover).WithOne(p => p.LoverReverse).IsRequired(false);
+            modelBuilder
+                .Entity<GoTPerson>()
+                .HasMany(p => p.Siblings)
+                .WithOne(p => p.SiblingReverse)
+                .IsRequired(false);
+            modelBuilder
+                .Entity<GoTPerson>()
+                .HasOne(p => p.Lover)
+                .WithOne(p => p.LoverReverse)
+                .IsRequired(false);
             return 0;
         };
 
@@ -23,11 +31,13 @@ public class NavigationTest : IClassFixture<NavigationTestFixture>
 
         Assert.Equal(
             "ForeignKey: GoTPerson {'LoverId'} -> GoTPerson {'Id'} Unique ClientSetNull ToDependent: LoverReverse ToPrincipal: Lover",
-            entityType.GetForeignKeys().First().ToString());
+            entityType.GetForeignKeys().First().ToString()
+        );
 
         Assert.Equal(
             "ForeignKey: GoTPerson {'SiblingReverseId'} -> GoTPerson {'Id'} ClientSetNull ToDependent: Siblings ToPrincipal: SiblingReverse",
-            entityType.GetForeignKeys().Skip(1).First().ToString());
+            entityType.GetForeignKeys().Skip(1).First().ToString()
+        );
     }
 
     [ConditionalFact]
@@ -36,8 +46,16 @@ public class NavigationTest : IClassFixture<NavigationTestFixture>
         using var context = _fixture.CreateContext();
         context.ConfigAction = modelBuilder =>
         {
-            modelBuilder.Entity<GoTPerson>().HasOne(p => p.SiblingReverse).WithMany(p => p.Siblings).IsRequired(false);
-            modelBuilder.Entity<GoTPerson>().HasOne(p => p.Lover).WithOne(p => p.LoverReverse).IsRequired(false);
+            modelBuilder
+                .Entity<GoTPerson>()
+                .HasOne(p => p.SiblingReverse)
+                .WithMany(p => p.Siblings)
+                .IsRequired(false);
+            modelBuilder
+                .Entity<GoTPerson>()
+                .HasOne(p => p.Lover)
+                .WithOne(p => p.LoverReverse)
+                .IsRequired(false);
             return 0;
         };
 
@@ -46,11 +64,13 @@ public class NavigationTest : IClassFixture<NavigationTestFixture>
 
         Assert.Equal(
             "ForeignKey: GoTPerson {'LoverId'} -> GoTPerson {'Id'} Unique ClientSetNull ToDependent: LoverReverse ToPrincipal: Lover",
-            entityType.GetForeignKeys().First().ToString());
+            entityType.GetForeignKeys().First().ToString()
+        );
 
         Assert.Equal(
             "ForeignKey: GoTPerson {'SiblingReverseId'} -> GoTPerson {'Id'} ClientSetNull ToDependent: Siblings ToPrincipal: SiblingReverse",
-            entityType.GetForeignKeys().Skip(1).First().ToString());
+            entityType.GetForeignKeys().Skip(1).First().ToString()
+        );
     }
 
     private readonly NavigationTestFixture _fixture;
@@ -75,15 +95,13 @@ public class GoTPerson
 public class GoTContext : DbContext
 {
     public GoTContext(DbContextOptions options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     public DbSet<GoTPerson> People { get; set; }
     public Func<ModelBuilder, int> ConfigAction { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-        => ConfigAction.Invoke(modelBuilder);
+    protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+        ConfigAction.Invoke(modelBuilder);
 }
 
 public class NavigationTestFixture
@@ -100,7 +118,7 @@ public class NavigationTestFixture
         {
             InitialCatalog = "StateManagerBug",
             MultipleActiveResultSets = true,
-            ["Trusted_Connection"] = true
+            ["Trusted_Connection"] = true,
         };
 
         _options = new DbContextOptionsBuilder()
@@ -109,6 +127,5 @@ public class NavigationTestFixture
             .Options;
     }
 
-    public virtual GoTContext CreateContext()
-        => new(_options);
+    public virtual GoTContext CreateContext() => new(_options);
 }

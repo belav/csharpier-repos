@@ -17,16 +17,26 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.MoveType
 {
     [ExportLanguageService(typeof(IMoveTypeService), LanguageNames.CSharp), Shared]
-    internal class CSharpMoveTypeService :
-        AbstractMoveTypeService<CSharpMoveTypeService, BaseTypeDeclarationSyntax, BaseNamespaceDeclarationSyntax, MemberDeclarationSyntax, CompilationUnitSyntax>
+    internal class CSharpMoveTypeService
+        : AbstractMoveTypeService<
+            CSharpMoveTypeService,
+            BaseTypeDeclarationSyntax,
+            BaseNamespaceDeclarationSyntax,
+            MemberDeclarationSyntax,
+            CompilationUnitSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpMoveTypeService()
-        {
-        }
+        public CSharpMoveTypeService() { }
 
-        protected override async Task<BaseTypeDeclarationSyntax> GetRelevantNodeAsync(Document document, TextSpan textSpan, CancellationToken cancellationToken)
-            => await document.TryGetRelevantNodeAsync<BaseTypeDeclarationSyntax>(textSpan, cancellationToken).ConfigureAwait(false);
+        protected override async Task<BaseTypeDeclarationSyntax> GetRelevantNodeAsync(
+            Document document,
+            TextSpan textSpan,
+            CancellationToken cancellationToken
+        ) =>
+            await document
+                .TryGetRelevantNodeAsync<BaseTypeDeclarationSyntax>(textSpan, cancellationToken)
+                .ConfigureAwait(false);
     }
 }

@@ -19,13 +19,23 @@ namespace Microsoft.CodeAnalysis.AddImport
         private class AllSymbolsProjectSearchScope(
             AbstractAddImportFeatureService<TSimpleNameSyntax> provider,
             Project project,
-            bool exact) : ProjectSearchScope(provider, project, exact)
+            bool exact
+        ) : ProjectSearchScope(provider, project, exact)
         {
             protected override async Task<ImmutableArray<ISymbol>> FindDeclarationsAsync(
-                SymbolFilter filter, SearchQuery searchQuery, CancellationToken cancellationToken)
+                SymbolFilter filter,
+                SearchQuery searchQuery,
+                CancellationToken cancellationToken
+            )
             {
-                var declarations = await DeclarationFinder.FindAllDeclarationsWithNormalQueryAsync(
-                    _project, searchQuery, filter, cancellationToken).ConfigureAwait(false);
+                var declarations = await DeclarationFinder
+                    .FindAllDeclarationsWithNormalQueryAsync(
+                        _project,
+                        searchQuery,
+                        filter,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 return declarations;
             }

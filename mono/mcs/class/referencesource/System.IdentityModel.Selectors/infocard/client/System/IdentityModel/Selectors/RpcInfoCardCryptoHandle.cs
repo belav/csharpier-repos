@@ -20,7 +20,7 @@ namespace System.IdentityModel.Selectors
             Asymmetric = 1,
             Symmetric = 2,
             Transform = 3,
-            Hash = 4
+            Hash = 4,
         };
 
         public HandleType type;
@@ -28,4 +28,3 @@ namespace System.IdentityModel.Selectors
         public IntPtr cryptoParameters;
     }
 }
-

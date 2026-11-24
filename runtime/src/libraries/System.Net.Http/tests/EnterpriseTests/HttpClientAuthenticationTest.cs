@@ -8,7 +8,10 @@ using Xunit;
 
 namespace System.Net.Http.Enterprise.Tests
 {
-    [ConditionalClass(typeof(EnterpriseTestConfiguration), nameof(EnterpriseTestConfiguration.Enabled))]
+    [ConditionalClass(
+        typeof(EnterpriseTestConfiguration),
+        nameof(EnterpriseTestConfiguration.Enabled)
+    )]
     public class HttpClientAuthenticationTest
     {
         private const string AppContextSettingName = "System.Net.Http.UsePortInSpn";
@@ -20,22 +23,38 @@ namespace System.Net.Http.Enterprise.Tests
         [InlineData(EnterpriseTestConfiguration.DigestAuthWebServer, true)]
         [InlineData(EnterpriseTestConfiguration.DigestAuthWebServer, false)]
         [InlineData(EnterpriseTestConfiguration.NtlmAuthWebServer, true)]
-        public void HttpClient_ValidAuthentication_Success(string url, bool useDomain, bool useAltPort = false)
+        public void HttpClient_ValidAuthentication_Success(
+            string url,
+            bool useDomain,
+            bool useAltPort = false
+        )
         {
-            RemoteExecutor.Invoke((url, useAltPort, useDomain) =>
-            {
-                // This is safe as we have no parallel tests
-		if (!string.IsNullOrEmpty(useAltPort))
-		{
-                    AppContext.SetSwitch(AppContextSettingName, true);
-                }
-                using var handler = new HttpClientHandler();
-                handler.Credentials = string.IsNullOrEmpty(useDomain) ? EnterpriseTestConfiguration.ValidNetworkCredentials : EnterpriseTestConfiguration.ValidDomainNetworkCredentials;
-                using var client = new HttpClient(handler);
+            RemoteExecutor
+                .Invoke(
+                    (url, useAltPort, useDomain) =>
+                    {
+                        // This is safe as we have no parallel tests
+                        if (!string.IsNullOrEmpty(useAltPort))
+                        {
+                            AppContext.SetSwitch(AppContextSettingName, true);
+                        }
+                        using var handler = new HttpClientHandler();
+                        handler.Credentials = string.IsNullOrEmpty(useDomain)
+                            ? EnterpriseTestConfiguration.ValidNetworkCredentials
+                            : EnterpriseTestConfiguration.ValidDomainNetworkCredentials;
+                        using var client = new HttpClient(handler);
 
-                using HttpResponseMessage response = client.GetAsync(url).GetAwaiter().GetResult();
-                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            }, url, useAltPort ? "true" : "" , useDomain ? "true" : "").Dispose();
+                        using HttpResponseMessage response = client
+                            .GetAsync(url)
+                            .GetAwaiter()
+                            .GetResult();
+                        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                    },
+                    url,
+                    useAltPort ? "true" : "",
+                    useDomain ? "true" : ""
+                )
+                .Dispose();
         }
 
         [Fact]
@@ -45,7 +64,9 @@ namespace System.Net.Http.Enterprise.Tests
             handler.Credentials = EnterpriseTestConfiguration.InvalidNetworkCredentials;
             using var client = new HttpClient(handler);
 
-            using HttpResponseMessage response = await client.GetAsync(EnterpriseTestConfiguration.NegotiateAuthWebServer);
+            using HttpResponseMessage response = await client.GetAsync(
+                EnterpriseTestConfiguration.NegotiateAuthWebServer
+            );
             Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
         }
     }

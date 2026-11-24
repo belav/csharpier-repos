@@ -27,7 +27,10 @@ namespace System.Numerics.Tests
 
             for (int i = 0; i < Reps; i++)
             {
-                string bigInt1 = BigIntTools.Utils.BuildRandomNumber(random.Next() % MaxDigits + 1, random.Next());
+                string bigInt1 = BigIntTools.Utils.BuildRandomNumber(
+                    random.Next() % MaxDigits + 1,
+                    random.Next()
+                );
                 VerifyIsEven(BigInteger.Parse(bigInt1) * 2, true);
             }
 
@@ -35,7 +38,10 @@ namespace System.Numerics.Tests
 
             for (int i = 0; i < Reps; i++)
             {
-                string bigInt1 = BigIntTools.Utils.BuildRandomNumber(random.Next() % MaxDigits + 1, random.Next());
+                string bigInt1 = BigIntTools.Utils.BuildRandomNumber(
+                    random.Next() % MaxDigits + 1,
+                    random.Next()
+                );
                 VerifyIsEven((BigInteger.Parse(bigInt1) * 2) - 1, false);
             }
 
@@ -45,7 +51,6 @@ namespace System.Numerics.Tests
             // Small Odd Number
             VerifyIsEven((BigInteger)short.MaxValue - 2, false);
 
-
             //Negative tests
             // Large Negative Even Number
             VerifyIsEven(((BigInteger)long.MaxValue + 1) * -1, true);
@@ -53,11 +58,13 @@ namespace System.Numerics.Tests
             // Large Negative Odd Number
             VerifyIsEven(((BigInteger)long.MaxValue + 2) * -1, false);
 
-
             // Large Negative Random Even Number
             for (int i = 0; i < Reps; i++)
             {
-                string bigInt2 = BigIntTools.Utils.BuildRandomNumber(random.Next() % MaxDigits + 1, random.Next());
+                string bigInt2 = BigIntTools.Utils.BuildRandomNumber(
+                    random.Next() % MaxDigits + 1,
+                    random.Next()
+                );
                 VerifyIsEven(BigInteger.Parse(bigInt2) * -2, true);
             }
 
@@ -66,7 +73,6 @@ namespace System.Numerics.Tests
 
             // Small Negative Odd Number
             VerifyIsEven(((BigInteger)short.MaxValue - 2) * -1, false);
-
 
             //Zero Case, 1, -1
             // Zero

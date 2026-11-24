@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -19,9 +20,11 @@ namespace Test
             }
             catch (Exception)
             {
-                while (L * L < 0) { };
+                while (L * L < 0) { }
+                ;
             }
-            while (L * L < 0) { };
+            while (L * L < 0) { }
+            ;
             return -1;
         }
     }

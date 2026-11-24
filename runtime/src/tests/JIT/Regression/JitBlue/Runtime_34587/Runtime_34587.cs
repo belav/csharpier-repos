@@ -3,15 +3,14 @@
 
 using System;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.Arm;
 using System.Runtime.Intrinsics.X86;
-using System.Runtime.CompilerServices;
-
+using Xunit;
 using ArmAes = System.Runtime.Intrinsics.Arm.Aes;
 using X86Aes = System.Runtime.Intrinsics.X86.Aes;
-using Xunit;
 
 public class Runtime_34587
 {
@@ -75,10 +74,18 @@ public class Runtime_34587
         TestLibrary.TestFramework.LogInformation($"  Sha256.Arm64:  {Sha256.Arm64.IsSupported}");
 
         TestLibrary.TestFramework.LogInformation("Supported Cross Platform ISAs:");
-        TestLibrary.TestFramework.LogInformation($"  Vector<T>:     {Vector.IsHardwareAccelerated}; {Vector<byte>.Count}");
-        TestLibrary.TestFramework.LogInformation($"  Vector64<T>:   {Vector64.IsHardwareAccelerated}");
-        TestLibrary.TestFramework.LogInformation($"  Vector128<T>:  {Vector128.IsHardwareAccelerated}");
-        TestLibrary.TestFramework.LogInformation($"  Vector256<T>:  {Vector256.IsHardwareAccelerated}");
+        TestLibrary.TestFramework.LogInformation(
+            $"  Vector<T>:     {Vector.IsHardwareAccelerated}; {Vector<byte>.Count}"
+        );
+        TestLibrary.TestFramework.LogInformation(
+            $"  Vector64<T>:   {Vector64.IsHardwareAccelerated}"
+        );
+        TestLibrary.TestFramework.LogInformation(
+            $"  Vector128<T>:  {Vector128.IsHardwareAccelerated}"
+        );
+        TestLibrary.TestFramework.LogInformation(
+            $"  Vector256<T>:  {Vector256.IsHardwareAccelerated}"
+        );
 
         bool succeeded = true;
         bool testSucceeded;
@@ -415,7 +422,7 @@ public class Runtime_34587
         testSucceeded = ValidateVector256();
         Console.WriteLine($"ValidateVector256: {testSucceeded}");
         succeeded &= testSucceeded;
-        
+
         return succeeded;
 
         static bool ValidateX86Base()
@@ -424,7 +431,9 @@ public class Runtime_34587
 
             if (X86BaseIsSupported)
             {
-                succeeded &= (RuntimeInformation.ProcessArchitecture == Architecture.X86) || (RuntimeInformation.ProcessArchitecture == Architecture.X64);
+                succeeded &=
+                    (RuntimeInformation.ProcessArchitecture == Architecture.X86)
+                    || (RuntimeInformation.ProcessArchitecture == Architecture.X64);
             }
 
             if (X86BaseX64IsSupported)
@@ -604,7 +613,9 @@ public class Runtime_34587
 
             if (Bmi1IsSupported)
             {
-                succeeded &= (RuntimeInformation.OSArchitecture == Architecture.X86) || (RuntimeInformation.OSArchitecture == Architecture.X64);
+                succeeded &=
+                    (RuntimeInformation.OSArchitecture == Architecture.X86)
+                    || (RuntimeInformation.OSArchitecture == Architecture.X64);
             }
 
             if (Bmi1X64IsSupported)
@@ -622,7 +633,9 @@ public class Runtime_34587
 
             if (Bmi2IsSupported)
             {
-                succeeded &= (RuntimeInformation.OSArchitecture == Architecture.X86) || (RuntimeInformation.OSArchitecture == Architecture.X64);
+                succeeded &=
+                    (RuntimeInformation.OSArchitecture == Architecture.X86)
+                    || (RuntimeInformation.OSArchitecture == Architecture.X64);
             }
 
             if (Bmi2X64IsSupported)
@@ -658,7 +671,9 @@ public class Runtime_34587
 
             if (LzcntIsSupported)
             {
-                succeeded &= (RuntimeInformation.OSArchitecture == Architecture.X86) || (RuntimeInformation.OSArchitecture == Architecture.X64);
+                succeeded &=
+                    (RuntimeInformation.OSArchitecture == Architecture.X86)
+                    || (RuntimeInformation.OSArchitecture == Architecture.X64);
             }
 
             if (LzcntX64IsSupported)
@@ -720,7 +735,10 @@ public class Runtime_34587
                 succeeded &= VectorIsHardwareAccelerated;
                 succeeded &= VectorByteCount == 16;
             }
-            else if ((RuntimeInformation.ProcessArchitecture == Architecture.X86) || (RuntimeInformation.ProcessArchitecture == Architecture.X64))
+            else if (
+                (RuntimeInformation.ProcessArchitecture == Architecture.X86)
+                || (RuntimeInformation.ProcessArchitecture == Architecture.X64)
+            )
             {
                 succeeded &= !Vector.IsHardwareAccelerated;
                 succeeded &= VectorByteCount == 16;
@@ -733,7 +751,10 @@ public class Runtime_34587
         {
             bool succeeded = true;
 
-            if ((RuntimeInformation.ProcessArchitecture == Architecture.X86) || (RuntimeInformation.ProcessArchitecture == Architecture.X64))
+            if (
+                (RuntimeInformation.ProcessArchitecture == Architecture.X86)
+                || (RuntimeInformation.ProcessArchitecture == Architecture.X64)
+            )
             {
                 succeeded &= !Vector64IsHardwareAccelerated;
                 succeeded &= Vector64ByteCount == 8;
@@ -751,7 +772,10 @@ public class Runtime_34587
                 succeeded &= Vector128IsHardwareAccelerated;
                 succeeded &= Vector128ByteCount == 16;
             }
-            else if ((RuntimeInformation.ProcessArchitecture == Architecture.X86) || (RuntimeInformation.ProcessArchitecture == Architecture.X64))
+            else if (
+                (RuntimeInformation.ProcessArchitecture == Architecture.X86)
+                || (RuntimeInformation.ProcessArchitecture == Architecture.X64)
+            )
             {
                 succeeded &= !Vector128IsHardwareAccelerated;
                 succeeded &= Vector128ByteCount == 16;
@@ -769,7 +793,10 @@ public class Runtime_34587
                 succeeded &= Vector256IsHardwareAccelerated;
                 succeeded &= Vector256ByteCount == 32;
             }
-            else if ((RuntimeInformation.ProcessArchitecture == Architecture.X86) || (RuntimeInformation.ProcessArchitecture == Architecture.X64))
+            else if (
+                (RuntimeInformation.ProcessArchitecture == Architecture.X86)
+                || (RuntimeInformation.ProcessArchitecture == Architecture.X64)
+            )
             {
                 succeeded &= !Vector256IsHardwareAccelerated;
                 succeeded &= Vector256ByteCount == 32;
@@ -786,66 +813,290 @@ public class Runtime_34587
     // placing the checks into helper functions, the test isolates the checks in the jit, so that a single
     // instance of incorrect behavior can be identified.
 
-    static bool X86BaseIsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return X86Base.IsSupported; } }
-    static bool SseIsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Sse.IsSupported; } }
-    static bool Sse2IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Sse2.IsSupported; } }
-    static bool Sse3IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Sse3.IsSupported; } }
-    static bool Ssse3IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Ssse3.IsSupported; } }
-    static bool Sse41IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Sse41.IsSupported; } }
-    static bool Sse42IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Sse42.IsSupported; } }
-    static bool AvxIsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Avx.IsSupported; } }
-    static bool Avx2IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Avx2.IsSupported; } }
+    static bool X86BaseIsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return X86Base.IsSupported; }
+    }
+    static bool SseIsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Sse.IsSupported; }
+    }
+    static bool Sse2IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Sse2.IsSupported; }
+    }
+    static bool Sse3IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Sse3.IsSupported; }
+    }
+    static bool Ssse3IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Ssse3.IsSupported; }
+    }
+    static bool Sse41IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Sse41.IsSupported; }
+    }
+    static bool Sse42IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Sse42.IsSupported; }
+    }
+    static bool AvxIsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Avx.IsSupported; }
+    }
+    static bool Avx2IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Avx2.IsSupported; }
+    }
 
-    static bool X86AesIsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return X86Aes.IsSupported; } }
-    static bool Bmi1IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Bmi1.IsSupported; } }
-    static bool Bmi2IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Bmi2.IsSupported; } }
-    static bool FmaIsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Fma.IsSupported; } }
-    static bool LzcntIsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Lzcnt.IsSupported; } }
-    static bool PclmulqdqIsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Pclmulqdq.IsSupported; } }
-    static bool PopcntIsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Popcnt.IsSupported; } }
+    static bool X86AesIsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return X86Aes.IsSupported; }
+    }
+    static bool Bmi1IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Bmi1.IsSupported; }
+    }
+    static bool Bmi2IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Bmi2.IsSupported; }
+    }
+    static bool FmaIsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Fma.IsSupported; }
+    }
+    static bool LzcntIsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Lzcnt.IsSupported; }
+    }
+    static bool PclmulqdqIsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Pclmulqdq.IsSupported; }
+    }
+    static bool PopcntIsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Popcnt.IsSupported; }
+    }
 
-    static bool X86BaseX64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return X86Base.X64.IsSupported; } }
-    static bool SseX64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Sse.X64.IsSupported; } }
-    static bool Sse2X64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Sse2.X64.IsSupported; } }
-    static bool Sse3X64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Sse3.X64.IsSupported; } }
-    static bool Ssse3X64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Ssse3.X64.IsSupported; } }
-    static bool Sse41X64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Sse41.X64.IsSupported; } }
-    static bool Sse42X64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Sse42.X64.IsSupported; } }
-    static bool AvxX64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Avx.X64.IsSupported; } }
-    static bool Avx2X64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Avx2.X64.IsSupported; } }
+    static bool X86BaseX64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return X86Base.X64.IsSupported; }
+    }
+    static bool SseX64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Sse.X64.IsSupported; }
+    }
+    static bool Sse2X64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Sse2.X64.IsSupported; }
+    }
+    static bool Sse3X64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Sse3.X64.IsSupported; }
+    }
+    static bool Ssse3X64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Ssse3.X64.IsSupported; }
+    }
+    static bool Sse41X64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Sse41.X64.IsSupported; }
+    }
+    static bool Sse42X64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Sse42.X64.IsSupported; }
+    }
+    static bool AvxX64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Avx.X64.IsSupported; }
+    }
+    static bool Avx2X64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Avx2.X64.IsSupported; }
+    }
 
-    static bool X86AesX64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return X86Aes.X64.IsSupported; } }
-    static bool Bmi1X64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Bmi1.X64.IsSupported; } }
-    static bool Bmi2X64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Bmi2.X64.IsSupported; } }
-    static bool FmaX64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Fma.X64.IsSupported; } }
-    static bool LzcntX64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Lzcnt.X64.IsSupported; } }
-    static bool PclmulqdqX64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Pclmulqdq.X64.IsSupported; } }
-    static bool PopcntX64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Popcnt.X64.IsSupported; } }
+    static bool X86AesX64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return X86Aes.X64.IsSupported; }
+    }
+    static bool Bmi1X64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Bmi1.X64.IsSupported; }
+    }
+    static bool Bmi2X64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Bmi2.X64.IsSupported; }
+    }
+    static bool FmaX64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Fma.X64.IsSupported; }
+    }
+    static bool LzcntX64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Lzcnt.X64.IsSupported; }
+    }
+    static bool PclmulqdqX64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Pclmulqdq.X64.IsSupported; }
+    }
+    static bool PopcntX64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Popcnt.X64.IsSupported; }
+    }
 
-    static bool ArmBaseIsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return ArmBase.IsSupported; } }
-    static bool AdvSimdIsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return AdvSimd.IsSupported; } }
-    static bool ArmAesIsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return ArmAes.IsSupported; } }
-    static bool Crc32IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Crc32.IsSupported; } }
-    static bool DpIsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Dp.IsSupported; } }
-    static bool RdmIsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Rdm.IsSupported; } }
-    static bool Sha1IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Sha1.IsSupported; } }
-    static bool Sha256IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Sha256.IsSupported; } }
+    static bool ArmBaseIsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return ArmBase.IsSupported; }
+    }
+    static bool AdvSimdIsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return AdvSimd.IsSupported; }
+    }
+    static bool ArmAesIsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return ArmAes.IsSupported; }
+    }
+    static bool Crc32IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Crc32.IsSupported; }
+    }
+    static bool DpIsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Dp.IsSupported; }
+    }
+    static bool RdmIsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Rdm.IsSupported; }
+    }
+    static bool Sha1IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Sha1.IsSupported; }
+    }
+    static bool Sha256IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Sha256.IsSupported; }
+    }
 
-    static bool ArmBaseArm64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return ArmBase.Arm64.IsSupported; } }
-    static bool AdvSimdArm64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return AdvSimd.Arm64.IsSupported; } }
-    static bool ArmAesArm64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return ArmAes.Arm64.IsSupported; } }
-    static bool Crc32Arm64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Crc32.Arm64.IsSupported; } }
-    static bool DpArm64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Dp.Arm64.IsSupported; } }
-    static bool RdmArm64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Rdm.Arm64.IsSupported; } }
-    static bool Sha1Arm64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Sha1.Arm64.IsSupported; } }
-    static bool Sha256Arm64IsSupported { [MethodImpl(MethodImplOptions.NoInlining)] get { return Sha256.Arm64.IsSupported; } }
+    static bool ArmBaseArm64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return ArmBase.Arm64.IsSupported; }
+    }
+    static bool AdvSimdArm64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return AdvSimd.Arm64.IsSupported; }
+    }
+    static bool ArmAesArm64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return ArmAes.Arm64.IsSupported; }
+    }
+    static bool Crc32Arm64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Crc32.Arm64.IsSupported; }
+    }
+    static bool DpArm64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Dp.Arm64.IsSupported; }
+    }
+    static bool RdmArm64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Rdm.Arm64.IsSupported; }
+    }
+    static bool Sha1Arm64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Sha1.Arm64.IsSupported; }
+    }
+    static bool Sha256Arm64IsSupported
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Sha256.Arm64.IsSupported; }
+    }
 
-    static bool VectorIsHardwareAccelerated { [MethodImpl(MethodImplOptions.NoInlining)] get { return Vector.IsHardwareAccelerated; } }
-    static bool Vector64IsHardwareAccelerated { [MethodImpl(MethodImplOptions.NoInlining)] get { return Vector64.IsHardwareAccelerated; } }
-    static bool Vector128IsHardwareAccelerated { [MethodImpl(MethodImplOptions.NoInlining)] get { return Vector128.IsHardwareAccelerated; } }
-    static bool Vector256IsHardwareAccelerated { [MethodImpl(MethodImplOptions.NoInlining)] get { return Vector256.IsHardwareAccelerated; } }
-    static int VectorByteCount { [MethodImpl(MethodImplOptions.NoInlining)] get { return Vector<byte>.Count; } }
-    static int Vector64ByteCount { [MethodImpl(MethodImplOptions.NoInlining)] get { return Vector64<byte>.Count; } }
-    static int Vector128ByteCount { [MethodImpl(MethodImplOptions.NoInlining)] get { return Vector128<byte>.Count; } }
-    static int Vector256ByteCount { [MethodImpl(MethodImplOptions.NoInlining)] get { return Vector256<byte>.Count; } }
+    static bool VectorIsHardwareAccelerated
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Vector.IsHardwareAccelerated; }
+    }
+    static bool Vector64IsHardwareAccelerated
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Vector64.IsHardwareAccelerated; }
+    }
+    static bool Vector128IsHardwareAccelerated
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Vector128.IsHardwareAccelerated; }
+    }
+    static bool Vector256IsHardwareAccelerated
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Vector256.IsHardwareAccelerated; }
+    }
+    static int VectorByteCount
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Vector<byte>.Count; }
+    }
+    static int Vector64ByteCount
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Vector64<byte>.Count; }
+    }
+    static int Vector128ByteCount
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Vector128<byte>.Count; }
+    }
+    static int Vector256ByteCount
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        get { return Vector256<byte>.Count; }
+    }
 }

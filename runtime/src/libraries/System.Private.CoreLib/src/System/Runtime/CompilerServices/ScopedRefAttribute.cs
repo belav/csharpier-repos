@@ -14,8 +14,6 @@ namespace System.Runtime.CompilerServices
     public sealed class ScopedRefAttribute : Attribute
     {
         /// <summary>Initializes the attribute.</summary>
-        public ScopedRefAttribute()
-        {
-        }
+        public ScopedRefAttribute() { }
     }
 }

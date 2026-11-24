@@ -5,7 +5,7 @@
 //   Duco Fijma (duco@lorentz.xs4all.nl)
 //
 //   (c) 2002 Duco Fijma
-// 
+//
 
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,17 +34,18 @@ using System.Runtime.InteropServices;
 
 namespace System.Diagnostics.SymbolStore
 {
-	[ComVisible (true)]
-	public interface ISymbolVariable {
-		int AddressField1 {get; }
-		int AddressField2 {get; }
-		int AddressField3 {get; }
-		SymAddressKind AddressKind {get ;}
-		object Attributes {get ;}
-		int EndOffset {get; }
-		string Name {get; }
-		int StartOffset {get; }
-	
-		byte[] GetSignature ();
-	}
+    [ComVisible(true)]
+    public interface ISymbolVariable
+    {
+        int AddressField1 { get; }
+        int AddressField2 { get; }
+        int AddressField3 { get; }
+        SymAddressKind AddressKind { get; }
+        object Attributes { get; }
+        int EndOffset { get; }
+        string Name { get; }
+        int StartOffset { get; }
+
+        byte[] GetSignature();
+    }
 }

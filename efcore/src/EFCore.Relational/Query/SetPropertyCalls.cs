@@ -22,9 +22,7 @@ namespace Microsoft.EntityFrameworkCore.Query;
 /// <typeparam name="TSource">The type of source element on which ExecuteUpdate operation is being applied.</typeparam>
 public sealed class SetPropertyCalls<TSource>
 {
-    private SetPropertyCalls()
-    {
-    }
+    private SetPropertyCalls() { }
 
     /// <summary>
     ///     Specifies a property and corresponding value it should be updated to in ExecuteUpdate method.
@@ -39,8 +37,8 @@ public sealed class SetPropertyCalls<TSource>
     /// </returns>
     public SetPropertyCalls<TSource> SetProperty<TProperty>(
         Func<TSource, TProperty> propertyExpression,
-        Func<TSource, TProperty> valueExpression)
-        => throw new InvalidOperationException(RelationalStrings.SetPropertyMethodInvoked);
+        Func<TSource, TProperty> valueExpression
+    ) => throw new InvalidOperationException(RelationalStrings.SetPropertyMethodInvoked);
 
     /// <summary>
     ///     Specifies a property and corresponding value it should be updated to in ExecuteUpdate method.
@@ -54,8 +52,8 @@ public sealed class SetPropertyCalls<TSource>
     /// </returns>
     public SetPropertyCalls<TSource> SetProperty<TProperty>(
         Func<TSource, TProperty> propertyExpression,
-        TProperty valueExpression)
-        => throw new InvalidOperationException(RelationalStrings.SetPropertyMethodInvoked);
+        TProperty valueExpression
+    ) => throw new InvalidOperationException(RelationalStrings.SetPropertyMethodInvoked);
 
     #region Hidden System.Object members
 
@@ -64,8 +62,7 @@ public sealed class SetPropertyCalls<TSource>
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -74,8 +71,7 @@ public sealed class SetPropertyCalls<TSource>
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
@@ -83,8 +79,7 @@ public sealed class SetPropertyCalls<TSource>
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

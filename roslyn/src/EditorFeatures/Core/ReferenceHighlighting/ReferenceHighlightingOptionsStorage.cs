@@ -8,6 +8,9 @@ namespace Microsoft.CodeAnalysis.ReferenceHighlighting
 {
     internal static class ReferenceHighlightingOptionsStorage
     {
-        public static readonly PerLanguageOption2<bool> ReferenceHighlighting = new("dotnet_highlight_references", defaultValue: true);
+        public static readonly PerLanguageOption2<bool> ReferenceHighlighting = new(
+            "dotnet_highlight_references",
+            defaultValue: true
+        );
     }
 }

@@ -20,9 +20,12 @@ namespace System.Data.Objects
     using System.Linq;
 
     /// <summary>
-    ///   This class implements untyped queries at the object-layer. 
+    ///   This class implements untyped queries at the object-layer.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1710:IdentifiersShouldHaveCorrectSuffix"
+    )]
     public abstract class ObjectQuery : IEnumerable, IQueryable, IOrderedQueryable, IListSource
     {
         #region Private Instance Members
@@ -30,7 +33,7 @@ namespace System.Data.Objects
         // -----------------
         // Instance Fields
         // -----------------
-        
+
         /// <summary>
         ///   The underlying implementation of this ObjectQuery as provided by a concrete subclass
         ///   of ObjectQueryImplementation. Implementations currently exist for Entity-SQL- and Linq-to-Entities-based ObjectQueries.
@@ -69,11 +72,11 @@ namespace System.Data.Objects
         internal ObjectQuery(ObjectQueryState queryState)
         {
             Debug.Assert(queryState != null, "ObjectQuery state cannot be null");
-            
+
             // Set the query state.
             this._state = queryState;
         }
-                
+
         #endregion
 
         #region Internal Properties
@@ -81,8 +84,11 @@ namespace System.Data.Objects
         /// <summary>
         /// Gets an untyped instantiation of the underlying ObjectQueryState that implements this ObjectQuery.
         /// </summary>
-        internal ObjectQueryState QueryState { get { return this._state; } }
-                
+        internal ObjectQueryState QueryState
+        {
+            get { return this._state; }
+        }
+
         #endregion
 
         #region IQueryable implementation
@@ -104,14 +110,11 @@ namespace System.Data.Objects
         /// </summary>
         System.Linq.Expressions.Expression IQueryable.Expression
         {
-            get
-            {
-                return this.GetExpression();
-            }
+            get { return this.GetExpression(); }
         }
 
         internal abstract System.Linq.Expressions.Expression GetExpression();
-        
+
         /// <summary>
         /// Gets the IQueryProvider associated with this query instance.
         /// </summary>
@@ -162,7 +165,10 @@ namespace System.Data.Objects
                     return String.Empty;
                 }
 
-                Debug.Assert(commandText != null && commandText.Length != 0, "Invalid Command Text returned");
+                Debug.Assert(
+                    commandText != null && commandText.Length != 0,
+                    "Invalid Command Text returned"
+                );
                 return commandText;
             }
         }
@@ -174,10 +180,7 @@ namespace System.Data.Objects
         /// </summary>
         public ObjectContext Context
         {
-            get
-            {
-                return this._state.ObjectContext;
-            }
+            get { return this._state.ObjectContext; }
         }
 
         /// <summary>
@@ -185,11 +188,7 @@ namespace System.Data.Objects
         /// </summary>
         public MergeOption MergeOption
         {
-            get
-            {
-                return this._state.EffectiveMergeOption;
-            }
-
+            get { return this._state.EffectiveMergeOption; }
             set
             {
                 EntityUtil.CheckArgumentMergeOption(value);
@@ -202,10 +201,7 @@ namespace System.Data.Objects
         /// </summary>
         public ObjectParameterCollection Parameters
         {
-            get
-            {
-                return this._state.EnsureParameters();
-            }
+            get { return this._state.EnsureParameters(); }
         }
 
         /// <summary>
@@ -213,15 +209,8 @@ namespace System.Data.Objects
         /// </summary>
         public bool EnablePlanCaching
         {
-            get
-            {
-                return this._state.PlanCachingEnabled;
-            }
-
-            set
-            {
-                this._state.PlanCachingEnabled = value;
-            }
+            get { return this._state.PlanCachingEnabled; }
+            set { this._state.PlanCachingEnabled = value; }
         }
 
         #endregion
@@ -251,41 +240,48 @@ namespace System.Data.Objects
         /// </summary>
         /// <returns></returns>
         [Browsable(false)]
-        public string ToTraceString() 
+        public string ToTraceString()
         {
             return this._state.GetExecutionPlan(null).ToTraceString();
         }
-                        
+
         /// <summary>
         ///   This method returns information about the result type of the ObjectQuery.
         /// </summary>
         /// <returns>
         ///   The TypeMetadata that describes the shape of the query results.
         /// </returns>
-        public TypeUsage GetResultType ()
+        public TypeUsage GetResultType()
         {
             Context.EnsureMetadata();
             if (null == this._resultType)
             {
                 // Retrieve the result type from the implementation, in terms of C-Space.
                 TypeUsage cSpaceQueryResultType = this._state.ResultType;
-                
+
                 // Determine the 'TResultType' equivalent type usage based on the mapped O-Space type.
                 // If the result type of the query is a collection[something], then
                 // extract out the 'something' (element type) and use that. This
                 // is the equivalent of saying the result type is T, rather than
                 // IEnumerable<T>, which aligns with users' expectations.
                 TypeUsage tResultType;
-                if (!TypeHelpers.TryGetCollectionElementType(cSpaceQueryResultType, out tResultType))
+                if (
+                    !TypeHelpers.TryGetCollectionElementType(cSpaceQueryResultType, out tResultType)
+                )
                 {
                     tResultType = cSpaceQueryResultType;
                 }
 
                 // Map the C-space result type to O-space.
-                tResultType = this._state.ObjectContext.Perspective.MetadataWorkspace.GetOSpaceTypeUsage(tResultType);
+                tResultType =
+                    this._state.ObjectContext.Perspective.MetadataWorkspace.GetOSpaceTypeUsage(
+                        tResultType
+                    );
                 if (null == tResultType)
                 {
-                    throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.ObjectQuery_UnableToMapResultType);
+                    throw EntityUtil.InvalidOperation(
+                        System.Data.Entity.Strings.ObjectQuery_UnableToMapResultType
+                    );
                 }
 
                 this._resultType = tResultType;
@@ -293,7 +289,7 @@ namespace System.Data.Objects
 
             return this._resultType;
         }
-         
+
         /// <summary>
         ///   This method allows explicit query evaluation with a specified merge
         ///   option which will override the merge option property.
@@ -309,7 +305,7 @@ namespace System.Data.Objects
             EntityUtil.CheckArgumentMergeOption(mergeOption);
             return this.ExecuteInternal(mergeOption);
         }
-                
+
         #region IEnumerable implementation
 
         IEnumerator IEnumerable.GetEnumerator()

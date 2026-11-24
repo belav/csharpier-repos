@@ -12,7 +12,11 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 {
     internal class ConsoleIO
     {
-        public static readonly ConsoleIO Default = new ConsoleIO(Console.Out, Console.Error, Console.In);
+        public static readonly ConsoleIO Default = new ConsoleIO(
+            Console.Out,
+            Console.Error,
+            Console.In
+        );
 
         public TextWriter Error { get; }
         public TextWriter Out { get; }
@@ -28,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             In = input;
         }
 
-        public virtual void SetForegroundColor(ConsoleColor consoleColor) => Console.ForegroundColor = consoleColor;
+        public virtual void SetForegroundColor(ConsoleColor consoleColor) =>
+            Console.ForegroundColor = consoleColor;
 
         public virtual void ResetColor() => Console.ResetColor();
     }

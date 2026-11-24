@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,96 +28,108 @@ using System.Security.Permissions;
 
 namespace System.Web.UI
 {
-	public sealed class OutputCacheParameters
-	{
-		#region Fields
+    public sealed class OutputCacheParameters
+    {
+        #region Fields
 
-		string _cacheProfile;
-		int _duration;
-		bool _enabled;
-		OutputCacheLocation _location;
-		bool _noStore;
-		string _sqlDependency;
-		string _varByControl;
-		string _varByCustom;
-		string _varByHeader;
-		string _varByParam;
-		string _varyByContentEncoding;
-		
-		#endregion
+        string _cacheProfile;
+        int _duration;
+        bool _enabled;
+        OutputCacheLocation _location;
+        bool _noStore;
+        string _sqlDependency;
+        string _varByControl;
+        string _varByCustom;
+        string _varByHeader;
+        string _varByParam;
+        string _varyByContentEncoding;
 
-		#region Constructors
+        #endregion
 
-		public OutputCacheParameters () {
-			Duration = 0;
-			Enabled = true;
-			Location = OutputCacheLocation.Any;
-			NoStore = false;
-		}
+        #region Constructors
 
-		#endregion
+        public OutputCacheParameters()
+        {
+            Duration = 0;
+            Enabled = true;
+            Location = OutputCacheLocation.Any;
+            NoStore = false;
+        }
 
-		#region Properties
+        #endregion
 
-		public string CacheProfile {
-			get { return _cacheProfile; }
-			set { _cacheProfile = value; }
-		}
+        #region Properties
 
-		public int Duration {
-			get { return _duration; }
-			set { _duration = value; }
-		}
+        public string CacheProfile
+        {
+            get { return _cacheProfile; }
+            set { _cacheProfile = value; }
+        }
 
-		public bool Enabled {
-			get { return _enabled; }
-			set { _enabled = value; }
-		}
+        public int Duration
+        {
+            get { return _duration; }
+            set { _duration = value; }
+        }
 
-		public OutputCacheLocation Location {
-			get { return _location; }
-			set { _location = value; }
-		}
+        public bool Enabled
+        {
+            get { return _enabled; }
+            set { _enabled = value; }
+        }
 
-		public bool NoStore {
-			get { return _noStore; }
-			set { _noStore = value; }
-		}
+        public OutputCacheLocation Location
+        {
+            get { return _location; }
+            set { _location = value; }
+        }
 
-		public string SqlDependency {
-			get { return _sqlDependency; }
-			set { _sqlDependency = value; }
-		}
+        public bool NoStore
+        {
+            get { return _noStore; }
+            set { _noStore = value; }
+        }
 
-		public string VaryByContentEncoding {
-			get { return _varyByContentEncoding; }
-			set { _varyByContentEncoding = value; }
-		}
-		
-		public string VaryByControl {
-			get { return _varByControl; }
-			set { _varByControl = value; }
-		}
+        public string SqlDependency
+        {
+            get { return _sqlDependency; }
+            set { _sqlDependency = value; }
+        }
 
-		public string VaryByCustom {
-			get { return _varByCustom; }
-			set { _varByCustom = value; }
-		}
+        public string VaryByContentEncoding
+        {
+            get { return _varyByContentEncoding; }
+            set { _varyByContentEncoding = value; }
+        }
 
-		public string VaryByHeader {
-			get { return _varByHeader; }
-			set { _varByHeader = value; }
-		}
+        public string VaryByControl
+        {
+            get { return _varByControl; }
+            set { _varByControl = value; }
+        }
 
-		public string VaryByParam {
-			get { return _varByParam; }
-			set { _varByParam = value; }
-		}
+        public string VaryByCustom
+        {
+            get { return _varByCustom; }
+            set { _varByCustom = value; }
+        }
 
-		#endregion
+        public string VaryByHeader
+        {
+            get { return _varByHeader; }
+            set { _varByHeader = value; }
+        }
 
-		#region Methods
+        public string VaryByParam
+        {
+            get { return _varByParam; }
+            set { _varByParam = value; }
+        }
 
-		#endregion
-	}
+        #endregion
+
+        #region Methods
+
+        #endregion
+    }
 }

@@ -9,7 +9,11 @@ internal static partial class Interop
 {
     internal static partial class Crypt32
     {
-        [LibraryImport(Libraries.Crypt32, SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Crypt32,
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool CryptProtectData(
             in DATA_BLOB pDataIn,
@@ -18,6 +22,7 @@ internal static partial class Interop
             IntPtr pvReserved,
             IntPtr pPromptStruct,
             CryptProtectDataFlags dwFlags,
-            out DATA_BLOB pDataOut);
+            out DATA_BLOB pDataOut
+        );
     }
 }

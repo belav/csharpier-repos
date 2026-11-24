@@ -14,15 +14,15 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders.Snippets
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class CSharpConstructorSnippetCompletionProviderTests : AbstractCSharpSnippetCompletionProviderTests
+    public class CSharpConstructorSnippetCompletionProviderTests
+        : AbstractCSharpSnippetCompletionProviderTests
     {
         protected override string ItemToCommit => "ctor";
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task ConstructorSnippetMissingInNamespace()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 namespace Namespace
                 {
                     $$
@@ -35,8 +35,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task ConstructorSnippetMissingInFilescopedNamespace()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 namespace Namespace;
 
                 $$
@@ -48,8 +47,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task ConstructorSnippetMissingInTopLevelContext()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 System.Console.WriteLine();
                 $$
                 """;
@@ -60,16 +58,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InsertConstructorSnippetInClassTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class MyClass
                 {
                     $$
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 class MyClass
                 {
                     public MyClass()
@@ -78,22 +74,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InsertConstructorSnippetInAbstractClassTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 abstract class MyClass
                 {
                     $$
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 abstract class MyClass
                 {
                     public MyClass()
@@ -102,22 +100,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InsertConstructorSnippetInStructTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 struct MyStruct
                 {
                     $$
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 struct MyStruct
                 {
                     public MyStruct()
@@ -126,22 +126,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InsertConstructorSnippetInRecordTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 record MyRecord
                 {
                     $$
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 record MyRecord
                 {
                     public MyRecord()
@@ -150,14 +152,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task ConstructorSnippetMissingInInterface()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 interface MyInterface
                 {
                     $$
@@ -170,8 +175,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InsertConstructorSnippetInNestedClassTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class MyClass
                 {
                     class MyClass1
@@ -181,8 +185,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 class MyClass
                 {
                     class MyClass1
@@ -194,7 +197,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
     }
 }

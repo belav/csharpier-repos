@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.IntegrationTests.CustomMapFrom;
+
 public class MultipleLevelsSubquery : IntegrationTest<MultipleLevelsSubquery.DatabaseInitializer>
 {
     [Fact]
@@ -8,18 +9,28 @@ public class MultipleLevelsSubquery : IntegrationTest<MultipleLevelsSubquery.Dat
         var resultQuery = ProjectTo<FooModel>(context.Foos);
         resultQuery.Single().MyBar.MyBaz.FirstWidget.Id.ShouldBe(1);
     }
-    protected override MapperConfiguration CreateConfiguration() => new(c =>
-    {
-        c.CreateMap<Foo, FooModel>().ForMember(f => f.MyBar, opts => opts.MapFrom(src => src.Bar));
-        c.CreateMap<Bar, BarModel>().ForMember(f => f.MyBaz, opts => opts.MapFrom(src => src.Baz));
-        c.CreateMap<Baz, BazModel>().ForMember(f => f.FirstWidget, opts => opts.MapFrom(src => src.Widgets.FirstOrDefault()));
-        c.CreateMap<Widget, WidgetModel>();
-    });
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(c =>
+        {
+            c.CreateMap<Foo, FooModel>()
+                .ForMember(f => f.MyBar, opts => opts.MapFrom(src => src.Bar));
+            c.CreateMap<Bar, BarModel>()
+                .ForMember(f => f.MyBaz, opts => opts.MapFrom(src => src.Baz));
+            c.CreateMap<Baz, BazModel>()
+                .ForMember(
+                    f => f.FirstWidget,
+                    opts => opts.MapFrom(src => src.Widgets.FirstOrDefault())
+                );
+            c.CreateMap<Widget, WidgetModel>();
+        });
+
     public class Context : LocalDbContext
     {
         public virtual DbSet<Foo> Foos { get; set; }
         public virtual DbSet<Baz> Bazs { get; set; }
     }
+
     public class DatabaseInitializer : DropCreateDatabaseAlways<Context>
     {
         protected override void Seed(Context context)
@@ -33,20 +44,24 @@ public class MultipleLevelsSubquery : IntegrationTest<MultipleLevelsSubquery.Dat
             context.Bazs.Add(testBaz);
         }
     }
+
     public class Foo
     {
         public int Id { get; set; }
         public int BarId { get; set; }
         public virtual Bar Bar { get; set; }
     }
+
     public class Bar
     {
         public Bar() => Foos = new HashSet<Foo>();
+
         public int Id { get; set; }
         public int BazId { get; set; }
         public virtual Baz Baz { get; set; }
         public virtual ICollection<Foo> Foos { get; set; }
     }
+
     public class Baz
     {
         public Baz()
@@ -54,40 +69,48 @@ public class MultipleLevelsSubquery : IntegrationTest<MultipleLevelsSubquery.Dat
             Bars = new HashSet<Bar>();
             Widgets = new HashSet<Widget>();
         }
+
         public int Id { get; set; }
         public virtual ICollection<Bar> Bars { get; set; }
         public virtual ICollection<Widget> Widgets { get; set; }
     }
+
     public partial class Widget
     {
         public int Id { get; set; }
         public int BazId { get; set; }
         public virtual Baz Baz { get; set; }
     }
+
     public class FooModel
     {
         public int Id { get; set; }
         public int BarId { get; set; }
         public BarModel MyBar { get; set; }
     }
+
     public class BarModel
     {
         public int Id { get; set; }
         public int BazId { get; set; }
         public BazModel MyBaz { get; set; }
     }
+
     public class BazModel
     {
         public int Id { get; set; }
         public WidgetModel FirstWidget { get; set; }
     }
+
     public class WidgetModel
     {
         public int Id { get; set; }
         public int BazId { get; set; }
     }
 }
-public class MemberWithSubQueryProjections : IntegrationTest<MemberWithSubQueryProjections.DatabaseInitializer>
+
+public class MemberWithSubQueryProjections
+    : IntegrationTest<MemberWithSubQueryProjections.DatabaseInitializer>
 {
     public class Customer
     {
@@ -97,51 +120,73 @@ public class MemberWithSubQueryProjections : IntegrationTest<MemberWithSubQueryP
         public string LastName { get; set; }
         public ICollection<Item> Items { get; set; }
     }
+
     public class Item
     {
         public int Id { get; set; }
         public int Code { get; set; }
     }
+
     public class ItemModel
     {
         public int Id { get; set; }
         public int Code { get; set; }
     }
+
     public class CustomerViewModel
     {
         public CustomerNameModel Name { get; set; }
         public ItemModel FirstItem { get; set; }
     }
+
     public class CustomerNameModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }
+
     public class Context : LocalDbContext
     {
         public DbSet<Customer> Customers { get; set; }
     }
+
     public class DatabaseInitializer : DropCreateDatabaseAlways<Context>
     {
         protected override void Seed(Context context)
         {
-            context.Customers.Add(new Customer
-            {
-                FirstName = "Bob",
-                LastName = "Smith",
-                Items = new[] { new Item { Code = 1 }, new Item { Code = 3 }, new Item { Code = 5 } }
-            });
+            context.Customers.Add(
+                new Customer
+                {
+                    FirstName = "Bob",
+                    LastName = "Smith",
+                    Items = new[]
+                    {
+                        new Item { Code = 1 },
+                        new Item { Code = 3 },
+                        new Item { Code = 5 },
+                    },
+                }
+            );
             base.Seed(context);
         }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Customer, CustomerViewModel>()
-            .ForMember(dst => dst.Name, opt => opt.MapFrom(src => src.LastName != null ? src : null))
-            .ForMember(dst => dst.FirstItem, opt => opt.MapFrom(src => src.Items.FirstOrDefault()));
-        cfg.CreateProjection<Customer, CustomerNameModel>();
-        cfg.CreateProjection<Item, ItemModel>();
-    });
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Customer, CustomerViewModel>()
+                .ForMember(
+                    dst => dst.Name,
+                    opt => opt.MapFrom(src => src.LastName != null ? src : null)
+                )
+                .ForMember(
+                    dst => dst.FirstItem,
+                    opt => opt.MapFrom(src => src.Items.FirstOrDefault())
+                );
+            cfg.CreateProjection<Customer, CustomerNameModel>();
+            cfg.CreateProjection<Item, ItemModel>();
+        });
+
     [Fact]
     public void Should_work()
     {
@@ -156,7 +201,9 @@ public class MemberWithSubQueryProjections : IntegrationTest<MemberWithSubQueryP
         }
     }
 }
-public class MemberWithSubQueryProjectionsNoMap : IntegrationTest<MemberWithSubQueryProjectionsNoMap.DatabaseInitializer>
+
+public class MemberWithSubQueryProjectionsNoMap
+    : IntegrationTest<MemberWithSubQueryProjectionsNoMap.DatabaseInitializer>
 {
     public class Customer
     {
@@ -166,45 +213,66 @@ public class MemberWithSubQueryProjectionsNoMap : IntegrationTest<MemberWithSubQ
         public string LastName { get; set; }
         public ICollection<Item> Items { get; set; }
     }
+
     public class Item
     {
         public int Id { get; set; }
         public int Code { get; set; }
     }
+
     public class ItemModel
     {
         public int Id { get; set; }
         public int Code { get; set; }
     }
+
     public class CustomerViewModel
     {
         public string Name { get; set; }
         public ItemModel FirstItem { get; set; }
     }
+
     public class Context : LocalDbContext
     {
         public DbSet<Customer> Customers { get; set; }
     }
+
     public class DatabaseInitializer : DropCreateDatabaseAlways<Context>
     {
         protected override void Seed(Context context)
         {
-            context.Customers.Add(new Customer
-            {
-                FirstName = "Bob",
-                LastName = "Smith",
-                Items = new[] { new Item { Code = 1 }, new Item { Code = 3 }, new Item { Code = 5 } }
-            });
+            context.Customers.Add(
+                new Customer
+                {
+                    FirstName = "Bob",
+                    LastName = "Smith",
+                    Items = new[]
+                    {
+                        new Item { Code = 1 },
+                        new Item { Code = 3 },
+                        new Item { Code = 5 },
+                    },
+                }
+            );
             base.Seed(context);
         }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Customer, CustomerViewModel>()
-            .ForMember(dst => dst.Name, opt => opt.MapFrom(src => src.LastName != null ? src.LastName : null))
-            .ForMember(dst => dst.FirstItem, opt => opt.MapFrom(src => src.Items.FirstOrDefault()));
-        cfg.CreateProjection<Item, ItemModel>();
-    });
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Customer, CustomerViewModel>()
+                .ForMember(
+                    dst => dst.Name,
+                    opt => opt.MapFrom(src => src.LastName != null ? src.LastName : null)
+                )
+                .ForMember(
+                    dst => dst.FirstItem,
+                    opt => opt.MapFrom(src => src.Items.FirstOrDefault())
+                );
+            cfg.CreateProjection<Item, ItemModel>();
+        });
+
     [Fact]
     public void Should_work()
     {
@@ -218,15 +286,28 @@ public class MemberWithSubQueryProjectionsNoMap : IntegrationTest<MemberWithSubQ
         }
     }
 }
-public class MapObjectPropertyFromSubQueryTypeNameMax : IntegrationTest<MapObjectPropertyFromSubQueryTypeNameMax.DatabaseInitializer>
+
+public class MapObjectPropertyFromSubQueryTypeNameMax
+    : IntegrationTest<MapObjectPropertyFromSubQueryTypeNameMax.DatabaseInitializer>
 {
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Product, ProductModel>()
-            .ForMember(d => d.Price, o => o.MapFrom(source => source.Articles.Where(x => x.IsDefault && x.NationId == 1 && source.ECommercePublished).FirstOrDefault()));
-        cfg.CreateProjection<Article, PriceModel>()
-            .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Product, ProductModel>()
+                .ForMember(
+                    d => d.Price,
+                    o =>
+                        o.MapFrom(source =>
+                            source
+                                .Articles.Where(x =>
+                                    x.IsDefault && x.NationId == 1 && source.ECommercePublished
+                                )
+                                .FirstOrDefault()
+                        )
+                );
+            cfg.CreateProjection<Article, PriceModel>()
+                .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
+        });
 
     [Fact]
     public void Should_cache_the_subquery()
@@ -275,6 +356,7 @@ public class MapObjectPropertyFromSubQueryTypeNameMax : IntegrationTest<MapObjec
         public bool ECommercePublished { get; set; }
         public virtual ICollection<Article> Articles { get; set; }
         public int Value { get; }
+
         [NotMapped]
         public int NotMappedValue { get; set; }
         public int VeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnNameVeryLongColumnName1 { get; set; }
@@ -318,7 +400,21 @@ public class MapObjectPropertyFromSubQueryTypeNameMax : IntegrationTest<MapObjec
     {
         protected override void Seed(ClientContext context)
         {
-            context.Products.Add(new Product { ECommercePublished = true, Articles = new[] { new Article { IsDefault = true, NationId = 1, ProductId = 1 } } });
+            context.Products.Add(
+                new Product
+                {
+                    ECommercePublished = true,
+                    Articles = new[]
+                    {
+                        new Article
+                        {
+                            IsDefault = true,
+                            NationId = 1,
+                            ProductId = 1,
+                        },
+                    },
+                }
+            );
         }
     }
 
@@ -328,19 +424,30 @@ public class MapObjectPropertyFromSubQueryTypeNameMax : IntegrationTest<MapObjec
     }
 }
 
-public class MapObjectPropertyFromSubQueryExplicitExpansion : IntegrationTest<MapObjectPropertyFromSubQueryExplicitExpansion.DatabaseInitializer>
+public class MapObjectPropertyFromSubQueryExplicitExpansion
+    : IntegrationTest<MapObjectPropertyFromSubQueryExplicitExpansion.DatabaseInitializer>
 {
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Product, ProductModel>()
-            .ForMember(d => d.Price, o =>
-            {
-                o.MapFrom(source => source.Articles.Where(x => x.IsDefault && x.NationId == 1 && source.ECommercePublished).FirstOrDefault());
-                o.ExplicitExpansion();
-            });
-        cfg.CreateProjection<Article, PriceModel>()
-            .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Product, ProductModel>()
+                .ForMember(
+                    d => d.Price,
+                    o =>
+                    {
+                        o.MapFrom(source =>
+                            source
+                                .Articles.Where(x =>
+                                    x.IsDefault && x.NationId == 1 && source.ECommercePublished
+                                )
+                                .FirstOrDefault()
+                        );
+                        o.ExplicitExpansion();
+                    }
+                );
+            cfg.CreateProjection<Article, PriceModel>()
+                .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
+        });
 
     [Fact]
     public void Should_map_ok()
@@ -406,7 +513,21 @@ public class MapObjectPropertyFromSubQueryExplicitExpansion : IntegrationTest<Ma
     {
         protected override void Seed(ClientContext context)
         {
-            context.Products.Add(new Product { ECommercePublished = true, Articles = new[] { new Article { IsDefault = true, NationId = 1, ProductId = 1 } } });
+            context.Products.Add(
+                new Product
+                {
+                    ECommercePublished = true,
+                    Articles = new[]
+                    {
+                        new Article
+                        {
+                            IsDefault = true,
+                            NationId = 1,
+                            ProductId = 1,
+                        },
+                    },
+                }
+            );
         }
     }
 
@@ -417,15 +538,27 @@ public class MapObjectPropertyFromSubQueryExplicitExpansion : IntegrationTest<Ma
     }
 }
 
-public class MapObjectPropertyFromSubQuery : IntegrationTest<MapObjectPropertyFromSubQuery.DatabaseInitializer>
+public class MapObjectPropertyFromSubQuery
+    : IntegrationTest<MapObjectPropertyFromSubQuery.DatabaseInitializer>
 {
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Product, ProductModel>()
-            .ForMember(d => d.Price, o => o.MapFrom(source => source.Articles.Where(x => x.IsDefault && x.NationId == 1 && source.ECommercePublished).FirstOrDefault()));
-        cfg.CreateProjection<Article, PriceModel>()
-            .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Product, ProductModel>()
+                .ForMember(
+                    d => d.Price,
+                    o =>
+                        o.MapFrom(source =>
+                            source
+                                .Articles.Where(x =>
+                                    x.IsDefault && x.NationId == 1 && source.ECommercePublished
+                                )
+                                .FirstOrDefault()
+                        )
+                );
+            cfg.CreateProjection<Article, PriceModel>()
+                .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
+        });
 
     [Fact]
     public void Should_cache_the_subquery()
@@ -474,6 +607,7 @@ public class MapObjectPropertyFromSubQuery : IntegrationTest<MapObjectPropertyFr
         public bool ECommercePublished { get; set; }
         public virtual ICollection<Article> Articles { get; set; }
         public int Value { get; }
+
         [NotMapped]
         public int NotMappedValue { get; set; }
     }
@@ -495,7 +629,21 @@ public class MapObjectPropertyFromSubQuery : IntegrationTest<MapObjectPropertyFr
     {
         protected override void Seed(ClientContext context)
         {
-            context.Products.Add(new Product { ECommercePublished = true, Articles = new[] { new Article { IsDefault = true, NationId = 1, ProductId = 1 } } });
+            context.Products.Add(
+                new Product
+                {
+                    ECommercePublished = true,
+                    Articles = new[]
+                    {
+                        new Article
+                        {
+                            IsDefault = true,
+                            NationId = 1,
+                            ProductId = 1,
+                        },
+                    },
+                }
+            );
         }
     }
 
@@ -505,16 +653,28 @@ public class MapObjectPropertyFromSubQuery : IntegrationTest<MapObjectPropertyFr
     }
 }
 
-public class MapObjectPropertyFromSubQueryWithInnerObject : IntegrationTest<MapObjectPropertyFromSubQueryWithInnerObject.DatabaseInitializer>
+public class MapObjectPropertyFromSubQueryWithInnerObject
+    : IntegrationTest<MapObjectPropertyFromSubQueryWithInnerObject.DatabaseInitializer>
 {
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<ProductArticle, ProductArticleModel>();
-        cfg.CreateProjection<Product, ProductModel>()
-            .ForMember(d => d.Price, o => o.MapFrom(source => source.Articles.Where(x => x.IsDefault && x.NationId == 1 && source.ECommercePublished).FirstOrDefault()));
-        cfg.CreateProjection<Article, PriceModel>()
-            .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<ProductArticle, ProductArticleModel>();
+            cfg.CreateProjection<Product, ProductModel>()
+                .ForMember(
+                    d => d.Price,
+                    o =>
+                        o.MapFrom(source =>
+                            source
+                                .Articles.Where(x =>
+                                    x.IsDefault && x.NationId == 1 && source.ECommercePublished
+                                )
+                                .FirstOrDefault()
+                        )
+                );
+            cfg.CreateProjection<Article, PriceModel>()
+                .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
+        });
 
     [Fact]
     public void Should_cache_the_subquery()
@@ -587,9 +747,39 @@ public class MapObjectPropertyFromSubQueryWithInnerObject : IntegrationTest<MapO
     {
         protected override void Seed(ClientContext context)
         {
-            var product1 = context.Products.Add(new Product { ECommercePublished = true, Articles = new[] { new Article { IsDefault = true, NationId = 1, ProductId = 1 } } });
-            var product2 = context.Products.Add(new Product { ECommercePublished = true, Articles = new[] { new Article { IsDefault = true, NationId = 1, ProductId = 2 } } });
-            context.ProductArticles.Add(new ProductArticle { Product = product1.Entity, OtherProduct = product2.Entity });
+            var product1 = context.Products.Add(
+                new Product
+                {
+                    ECommercePublished = true,
+                    Articles = new[]
+                    {
+                        new Article
+                        {
+                            IsDefault = true,
+                            NationId = 1,
+                            ProductId = 1,
+                        },
+                    },
+                }
+            );
+            var product2 = context.Products.Add(
+                new Product
+                {
+                    ECommercePublished = true,
+                    Articles = new[]
+                    {
+                        new Article
+                        {
+                            IsDefault = true,
+                            NationId = 1,
+                            ProductId = 2,
+                        },
+                    },
+                }
+            );
+            context.ProductArticles.Add(
+                new ProductArticle { Product = product1.Entity, OtherProduct = product2.Entity }
+            );
         }
     }
 
@@ -600,16 +790,28 @@ public class MapObjectPropertyFromSubQueryWithInnerObject : IntegrationTest<MapO
     }
 }
 
-public class MapObjectPropertyFromSubQueryWithCollection : IntegrationTest<MapObjectPropertyFromSubQueryWithCollection.DatabaseInitializer>
+public class MapObjectPropertyFromSubQueryWithCollection
+    : IntegrationTest<MapObjectPropertyFromSubQueryWithCollection.DatabaseInitializer>
 {
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<ProductArticle, ProductArticleModel>();
-        cfg.CreateProjection<Product, ProductModel>()
-            .ForMember(d => d.Price, o => o.MapFrom(source => source.Articles.Where(x => x.IsDefault && x.NationId == 1 && source.ECommercePublished).FirstOrDefault()));
-        cfg.CreateProjection<Article, PriceModel>()
-            .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<ProductArticle, ProductArticleModel>();
+            cfg.CreateProjection<Product, ProductModel>()
+                .ForMember(
+                    d => d.Price,
+                    o =>
+                        o.MapFrom(source =>
+                            source
+                                .Articles.Where(x =>
+                                    x.IsDefault && x.NationId == 1 && source.ECommercePublished
+                                )
+                                .FirstOrDefault()
+                        )
+                );
+            cfg.CreateProjection<Article, PriceModel>()
+                .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
+        });
 
     [Fact]
     public void Should_cache_the_subquery()
@@ -688,7 +890,21 @@ public class MapObjectPropertyFromSubQueryWithCollection : IntegrationTest<MapOb
     {
         protected override void Seed(ClientContext context)
         {
-            var product = context.Products.Add(new Product { ECommercePublished = true, Articles = new[] { new Article { IsDefault = true, NationId = 1, ProductId = 1 } } });
+            var product = context.Products.Add(
+                new Product
+                {
+                    ECommercePublished = true,
+                    Articles = new[]
+                    {
+                        new Article
+                        {
+                            IsDefault = true,
+                            NationId = 1,
+                            ProductId = 1,
+                        },
+                    },
+                }
+            );
             context.ProductArticles.Add(new ProductArticle { Products = new[] { product.Entity } });
         }
     }
@@ -700,18 +916,31 @@ public class MapObjectPropertyFromSubQueryWithCollection : IntegrationTest<MapOb
     }
 }
 
-public class MapObjectPropertyFromSubQueryWithCollectionSameName : NonValidatingSpecBase, IAsyncLifetime
+public class MapObjectPropertyFromSubQueryWithCollectionSameName
+    : NonValidatingSpecBase,
+        IAsyncLifetime
 {
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<ProductArticle, ProductArticleModel>();
-        cfg.CreateProjection<Product, ProductModel>()
-            .ForMember(d => d.ArticlesModel, o => o.MapFrom(s => s))
-            .ForMember(d => d.Articles, o => o.MapFrom(source => source.Articles.Where(x => x.IsDefault && x.NationId == 1 && source.ECommercePublished).FirstOrDefault()));
-        cfg.CreateProjection<Product, ArticlesModel>();
-        cfg.CreateProjection<Article, PriceModel>()
-            .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<ProductArticle, ProductArticleModel>();
+            cfg.CreateProjection<Product, ProductModel>()
+                .ForMember(d => d.ArticlesModel, o => o.MapFrom(s => s))
+                .ForMember(
+                    d => d.Articles,
+                    o =>
+                        o.MapFrom(source =>
+                            source
+                                .Articles.Where(x =>
+                                    x.IsDefault && x.NationId == 1 && source.ECommercePublished
+                                )
+                                .FirstOrDefault()
+                        )
+                );
+            cfg.CreateProjection<Product, ArticlesModel>();
+            cfg.CreateProjection<Article, PriceModel>()
+                .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
+        });
 
     [Fact]
     public void Should_cache_the_subquery()
@@ -805,7 +1034,21 @@ public class MapObjectPropertyFromSubQueryWithCollectionSameName : NonValidating
     {
         protected override void Seed(ClientContext context)
         {
-            var product = context.Products.Add(new Product { ECommercePublished = true, Articles = new[] { new Article { IsDefault = true, NationId = 1, ProductId = 1 } } });
+            var product = context.Products.Add(
+                new Product
+                {
+                    ECommercePublished = true,
+                    Articles = new[]
+                    {
+                        new Article
+                        {
+                            IsDefault = true,
+                            NationId = 1,
+                            ProductId = 1,
+                        },
+                    },
+                }
+            );
             context.ProductArticles.Add(new ProductArticle { Products = new[] { product.Entity } });
         }
     }
@@ -815,6 +1058,7 @@ public class MapObjectPropertyFromSubQueryWithCollectionSameName : NonValidating
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductArticle> ProductArticles { get; set; }
     }
+
     public async Task InitializeAsync()
     {
         var initializer = new DatabaseInitializer();
@@ -825,7 +1069,8 @@ public class MapObjectPropertyFromSubQueryWithCollectionSameName : NonValidating
     public Task DisposeAsync() => Task.CompletedTask;
 }
 
-public class SubQueryWithMapFromNullable : IntegrationTest<SubQueryWithMapFromNullable.DatabaseInitializer>
+public class SubQueryWithMapFromNullable
+    : IntegrationTest<SubQueryWithMapFromNullable.DatabaseInitializer>
 {
     // Source Types
     public class Cable
@@ -838,10 +1083,13 @@ public class SubQueryWithMapFromNullable : IntegrationTest<SubQueryWithMapFromNu
     {
         [ForeignKey(nameof(CrossConnectId))]
         public virtual Cable CrossConnect { get; set; }
+
         [Column(Order = 0), Key]
         public int CrossConnectId { get; set; }
+
         [Column(Order = 1), Key]
         public string Name { get; set; }
+
         [ForeignKey(nameof(RackId))]
         public virtual Rack Rack { get; set; }
         public int? RackId { get; set; }
@@ -857,6 +1105,7 @@ public class SubQueryWithMapFromNullable : IntegrationTest<SubQueryWithMapFromNu
     public class Rack
     {
         public int RackId { get; set; }
+
         [ForeignKey(nameof(DataHallId))]
         public virtual DataHall DataHall { get; set; }
         public int DataHallId { get; set; }
@@ -898,22 +1147,33 @@ public class SubQueryWithMapFromNullable : IntegrationTest<SubQueryWithMapFromNu
             var cable = new Cable
             {
                 Ends = new List<CableEnd>()
-                    {
-                        new CableEnd { Name = "A", Rack = rack},
-                        new CableEnd { Name = "B" },
-                    }
+                {
+                    new CableEnd { Name = "A", Rack = rack },
+                    new CableEnd { Name = "B" },
+                },
             };
             context.Cables.Add(cable);
         }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<CableEnd, CableEndModel>().ForMember(dest => dest.DataHallId, opt => opt.MapFrom(src => src.Rack.DataHall.DataCentreId));
-        cfg.CreateProjection<Cable, CableListModel>()
-            .ForMember(dest => dest.AEnd, opt => opt.MapFrom(src => src.Ends.FirstOrDefault(x => x.Name == "A")))
-            .ForMember(dest => dest.AnotherEnd, opt => opt.MapFrom(src => src.Ends.FirstOrDefault(x => x.Name == "B")));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<CableEnd, CableEndModel>()
+                .ForMember(
+                    dest => dest.DataHallId,
+                    opt => opt.MapFrom(src => src.Rack.DataHall.DataCentreId)
+                );
+            cfg.CreateProjection<Cable, CableListModel>()
+                .ForMember(
+                    dest => dest.AEnd,
+                    opt => opt.MapFrom(src => src.Ends.FirstOrDefault(x => x.Name == "A"))
+                )
+                .ForMember(
+                    dest => dest.AnotherEnd,
+                    opt => opt.MapFrom(src => src.Ends.FirstOrDefault(x => x.Name == "B"))
+                );
+        });
 
     [Fact]
     public void Should_project_ok()
@@ -928,48 +1188,59 @@ public class SubQueryWithMapFromNullable : IntegrationTest<SubQueryWithMapFromNu
     }
 }
 
-public class MapObjectPropertyFromSubQueryCustomSource : IntegrationTest<MapObjectPropertyFromSubQueryCustomSource.DatabaseInitializer>
+public class MapObjectPropertyFromSubQueryCustomSource
+    : IntegrationTest<MapObjectPropertyFromSubQueryCustomSource.DatabaseInitializer>
 {
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Owner, OwnerDto>();
-        cfg.CreateProjection<Brand, BrandDto>()
-            .ForMember(dest => dest.Owner, opt => opt.MapFrom(src => src.Owners.FirstOrDefault()));
-        cfg.CreateProjection<ProductReview, ProductReviewDto>()
-            .ForMember(dest => dest.Brand, opt => opt.MapFrom(src => src.Product.Brand));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Owner, OwnerDto>();
+            cfg.CreateProjection<Brand, BrandDto>()
+                .ForMember(
+                    dest => dest.Owner,
+                    opt => opt.MapFrom(src => src.Owners.FirstOrDefault())
+                );
+            cfg.CreateProjection<ProductReview, ProductReviewDto>()
+                .ForMember(dest => dest.Brand, opt => opt.MapFrom(src => src.Product.Brand));
+        });
 
     public class Owner
     {
         public int Id { get; set; }
         public string Name { get; set; }
     }
+
     public class Brand
     {
         public int Id { get; set; }
         public List<Owner> Owners { get; set; } = new List<Owner>();
     }
+
     public class Product
     {
         public int Id { get; set; }
         public Brand Brand { get; set; }
     }
+
     public class ProductReview
     {
         public int Id { get; set; }
         public Product Product { get; set; }
     }
+
     /* Destination types */
     public class ProductReviewDto
     {
         public int Id { get; set; }
         public BrandDto Brand { get; set; }
     }
+
     public class BrandDto
     {
         public int Id { get; set; }
         public OwnerDto Owner { get; set; }
     }
+
     public class OwnerDto
     {
         public int Id { get; set; }
@@ -988,10 +1259,21 @@ public class MapObjectPropertyFromSubQueryCustomSource : IntegrationTest<MapObje
     {
         protected override void Seed(ClientContext context)
         {
-            context.ProductReviews.Add(new ProductReview
-            { Product = new Product { Brand = new Brand { Owners = { new Owner { Name = "Owner" } } } } });
-            context.ProductReviews.Add(new ProductReview
-            { Product = new Product { Brand = new Brand { Owners = { new Owner() } } } });
+            context.ProductReviews.Add(
+                new ProductReview
+                {
+                    Product = new Product
+                    {
+                        Brand = new Brand { Owners = { new Owner { Name = "Owner" } } },
+                    },
+                }
+            );
+            context.ProductReviews.Add(
+                new ProductReview
+                {
+                    Product = new Product { Brand = new Brand { Owners = { new Owner() } } },
+                }
+            );
             context.ProductReviews.Add(new ProductReview { Product = new Product() });
         }
     }
@@ -1010,16 +1292,25 @@ public class MapObjectPropertyFromSubQueryCustomSource : IntegrationTest<MapObje
     }
 }
 
-public class MemberWithSubQueryIdentity : IntegrationTest<MemberWithSubQueryIdentity.DatabaseInitializer>
+public class MemberWithSubQueryIdentity
+    : IntegrationTest<MemberWithSubQueryIdentity.DatabaseInitializer>
 {
-    protected override MapperConfiguration CreateConfiguration() => new MapperConfiguration(cfg =>
-    {
-        cfg.CreateProjection<AEntity, Dto>()
-            .ForMember(dst => dst.DtoSubWrapper, opt => opt.MapFrom(src => src));
-        cfg.CreateProjection<AEntity, DtoSubWrapper>()
-            .ForMember(dst => dst.DtoSub, opt => opt.MapFrom(src => src.BEntity.CEntities.FirstOrDefault(x => x.Id == src.CEntityId)));
-        cfg.CreateProjection<CEntity, DtoSub>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new MapperConfiguration(cfg =>
+        {
+            cfg.CreateProjection<AEntity, Dto>()
+                .ForMember(dst => dst.DtoSubWrapper, opt => opt.MapFrom(src => src));
+            cfg.CreateProjection<AEntity, DtoSubWrapper>()
+                .ForMember(
+                    dst => dst.DtoSub,
+                    opt =>
+                        opt.MapFrom(src =>
+                            src.BEntity.CEntities.FirstOrDefault(x => x.Id == src.CEntityId)
+                        )
+                );
+            cfg.CreateProjection<CEntity, DtoSub>();
+        });
+
     [Fact]
     public void Should_work()
     {
@@ -1028,20 +1319,24 @@ public class MemberWithSubQueryIdentity : IntegrationTest<MemberWithSubQueryIden
         result.DtoSubWrapper.DtoSub.ShouldNotBeNull();
         result.DtoSubWrapper.DtoSub.SubString.ShouldBe("Test");
     }
+
     public class Dto
     {
         public int Id { get; set; }
         public DtoSubWrapper DtoSubWrapper { get; set; }
     }
+
     public class DtoSubWrapper
     {
         public DtoSub DtoSub { get; set; }
     }
+
     public class DtoSub
     {
         public int Id { get; set; }
         public string SubString { get; set; }
     }
+
     public class AEntity
     {
         public int Id { get; set; }
@@ -1049,11 +1344,13 @@ public class MemberWithSubQueryIdentity : IntegrationTest<MemberWithSubQueryIden
         public int CEntityId { get; set; }
         public BEntity BEntity { get; set; }
     }
+
     public class BEntity
     {
         public int Id { get; set; }
         public ICollection<CEntity> CEntities { get; set; }
     }
+
     public class CEntity
     {
         public int Id { get; set; }
@@ -1061,46 +1358,51 @@ public class MemberWithSubQueryIdentity : IntegrationTest<MemberWithSubQueryIden
         public string SubString { get; set; }
         public BEntity BEntity { get; set; }
     }
+
     public class DatabaseInitializer : DropCreateDatabaseAlways<ClientContext>
     {
         protected override void Seed(ClientContext context)
         {
-            context.AEntities.Add(new AEntity
-            {
-                CEntityId = 6,
-                BEntity = new BEntity
+            context.AEntities.Add(
+                new AEntity
                 {
-                    CEntities = new List<CEntity>
+                    CEntityId = 6,
+                    BEntity = new BEntity
+                    {
+                        CEntities = new List<CEntity>
                         {
                             new CEntity
                             {
                                 Id = 6,
                                 BEntityId = 1,
-                                SubString = "Test"
-                            }
-                        }
-                },
-            });
+                                SubString = "Test",
+                            },
+                        },
+                    },
+                }
+            );
         }
     }
+
     public class ClientContext : LocalDbContext
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AEntity>()
+            modelBuilder
+                .Entity<AEntity>()
                 .HasOne(x => x.BEntity)
                 .WithMany()
                 .HasForeignKey(x => x.BEntityId);
 
-            modelBuilder.Entity<BEntity>()
+            modelBuilder
+                .Entity<BEntity>()
                 .HasMany(x => x.CEntities)
                 .WithOne(x => x.BEntity)
                 .HasForeignKey(x => x.BEntityId);
 
-            modelBuilder.Entity<CEntity>()
-                .Property(x => x.Id)
-                .ValueGeneratedNever();
+            modelBuilder.Entity<CEntity>().Property(x => x.Id).ValueGeneratedNever();
         }
+
         public DbSet<AEntity> AEntities { get; set; }
     }
 }

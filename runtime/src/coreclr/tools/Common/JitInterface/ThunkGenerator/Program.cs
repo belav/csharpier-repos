@@ -74,6 +74,7 @@ namespace Thunkerator
                 NativeTypeName2 = ThunkTypeName;
             }
         }
+
         public readonly string ThunkTypeName;
         public readonly string NativeTypeName;
         public readonly string NativeTypeName2;
@@ -118,7 +119,11 @@ namespace Thunkerator
 
     internal sealed class FunctionDecl
     {
-        public FunctionDecl(string line, Dictionary<string, TypeReplacement> ThunkReturnTypes, Dictionary<string, TypeReplacement> ThunkTypes)
+        public FunctionDecl(
+            string line,
+            Dictionary<string, TypeReplacement> ThunkReturnTypes,
+            Dictionary<string, TypeReplacement> ThunkTypes
+        )
         {
             if (line.Contains("[ManualNativeWrapper]"))
             {
@@ -129,26 +134,42 @@ namespace Thunkerator
             int indexOfOpenParen = line.IndexOf('(');
             int indexOfCloseParen = line.IndexOf(')');
             string returnTypeAndFunctionName = line.Substring(0, indexOfOpenParen).Canonicalize();
-            int indexOfLastWhitespaceInReturnTypeAndFunctionName = returnTypeAndFunctionName.LastIndexOfAny(new char[] { ' ', '*' });
-            FunctionName = returnTypeAndFunctionName.Substring(indexOfLastWhitespaceInReturnTypeAndFunctionName + 1).Canonicalize();
+            int indexOfLastWhitespaceInReturnTypeAndFunctionName =
+                returnTypeAndFunctionName.LastIndexOfAny(new char[] { ' ', '*' });
+            FunctionName = returnTypeAndFunctionName
+                .Substring(indexOfLastWhitespaceInReturnTypeAndFunctionName + 1)
+                .Canonicalize();
             if (FunctionName.StartsWith("*"))
                 throw new Exception("Names not allowed to start with *");
-            string returnType = returnTypeAndFunctionName.Substring(0, indexOfLastWhitespaceInReturnTypeAndFunctionName + 1).Canonicalize();
+            string returnType = returnTypeAndFunctionName
+                .Substring(0, indexOfLastWhitespaceInReturnTypeAndFunctionName + 1)
+                .Canonicalize();
 
             if (!ThunkReturnTypes.TryGetValue(returnType, out ReturnType))
             {
                 throw new Exception(string.Format("Type {0} unknown", returnType));
             }
 
-            string parameterList = line.Substring(indexOfOpenParen + 1, indexOfCloseParen - indexOfOpenParen - 1).Canonicalize();
-            string[] parametersString = parameterList.Length == 0 ? Array.Empty<string>() : parameterList.Split(',');
+            string parameterList = line.Substring(
+                    indexOfOpenParen + 1,
+                    indexOfCloseParen - indexOfOpenParen - 1
+                )
+                .Canonicalize();
+            string[] parametersString =
+                parameterList.Length == 0 ? Array.Empty<string>() : parameterList.Split(',');
             List<Parameter> parameters = new List<Parameter>();
 
             foreach (string parameterString in parametersString)
             {
-                int indexOfLastWhitespaceInParameter = parameterString.LastIndexOfAny(new char[] { ' ', '*' });
-                string paramName = parameterString.Substring(indexOfLastWhitespaceInParameter + 1).Canonicalize();
-                string paramType = parameterString.Substring(0, indexOfLastWhitespaceInParameter + 1).Canonicalize();
+                int indexOfLastWhitespaceInParameter = parameterString.LastIndexOfAny(
+                    new char[] { ' ', '*' }
+                );
+                string paramName = parameterString
+                    .Substring(indexOfLastWhitespaceInParameter + 1)
+                    .Canonicalize();
+                string paramType = parameterString
+                    .Substring(0, indexOfLastWhitespaceInParameter + 1)
+                    .Canonicalize();
                 TypeReplacement tr;
                 if (!ThunkTypes.TryGetValue(paramType, out tr))
                 {
@@ -173,18 +194,24 @@ namespace Thunkerator
             RETURNTYPES,
             NORMALTYPES,
             FUNCTIONS,
-            IFDEFING
+            IFDEFING,
         }
 
         private static ReadOnlyCollection<FunctionDecl> ParseInput(StreamReader tr)
         {
-            Dictionary<string, TypeReplacement> ThunkReturnTypes = new Dictionary<string, TypeReplacement>();
-            Dictionary<string, TypeReplacement> ThunkTypes = new Dictionary<string, TypeReplacement>();
+            Dictionary<string, TypeReplacement> ThunkReturnTypes =
+                new Dictionary<string, TypeReplacement>();
+            Dictionary<string, TypeReplacement> ThunkTypes =
+                new Dictionary<string, TypeReplacement>();
             ParseMode currentParseMode = ParseMode.FUNCTIONS;
             ParseMode oldParseMode = ParseMode.FUNCTIONS;
             List<FunctionDecl> functions = new List<FunctionDecl>();
             int currentLineIndex = 1;
-            for (string currentLine = tr.ReadLine(); currentLine != null; currentLine = tr.ReadLine(), currentLineIndex++)
+            for (
+                string currentLine = tr.ReadLine();
+                currentLine != null;
+                currentLine = tr.ReadLine(), currentLineIndex++
+            )
             {
                 try
                 {
@@ -248,13 +275,19 @@ namespace Thunkerator
                             break;
 
                         case ParseMode.FUNCTIONS:
-                            functions.Add(new FunctionDecl(currentLine, ThunkReturnTypes, ThunkTypes));
+                            functions.Add(
+                                new FunctionDecl(currentLine, ThunkReturnTypes, ThunkTypes)
+                            );
                             break;
                     }
                 }
                 catch (Exception e)
                 {
-                    Console.Error.WriteLine("Error parsing line {0} : {1}", currentLineIndex, e.Message);
+                    Console.Error.WriteLine(
+                        "Error parsing line {0} : {1}",
+                        currentLineIndex,
+                        e.Message
+                    );
                 }
             }
 
@@ -264,19 +297,25 @@ namespace Thunkerator
         private static void WriteAutogeneratedHeader(TextWriter tw)
         {
             // Write header
-            tw.Write(@"// Licensed to the .NET Foundation under one or more agreements.
+            tw.Write(
+                @"// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // DO NOT EDIT THIS FILE! IT IS AUTOGENERATED
 // To regenerate run the gen script in src/coreclr/tools/Common/JitInterface/ThunkGenerator
 // and follow the instructions in docs/project/updating-jitinterface.md
-");
+"
+            );
         }
 
-        private static void WriteManagedThunkInterface(TextWriter tw, IEnumerable<FunctionDecl> functionData)
+        private static void WriteManagedThunkInterface(
+            TextWriter tw,
+            IEnumerable<FunctionDecl> functionData
+        )
         {
             WriteAutogeneratedHeader(tw);
-            tw.Write(@"
+            tw.Write(
+                @"
 using System;
 using System.Runtime.InteropServices;
 
@@ -284,22 +323,27 @@ namespace Internal.JitInterface
 {
     internal unsafe partial class CorInfoImpl
     {
-");
+"
+            );
 
             foreach (FunctionDecl decl in functionData)
             {
                 tw.WriteLine("        [UnmanagedCallersOnly]");
-                tw.Write($"        private static {decl.ReturnType.UnmanagedTypeName} _{decl.FunctionName}(IntPtr thisHandle, IntPtr* ppException");
+                tw.Write(
+                    $"        private static {decl.ReturnType.UnmanagedTypeName} _{decl.FunctionName}(IntPtr thisHandle, IntPtr* ppException"
+                );
                 foreach (Parameter param in decl.Parameters)
                 {
                     tw.Write($", {param.Type.UnmanagedTypeName} {param.Name}");
                 }
-                tw.Write(@")
+                tw.Write(
+                    @")
         {
             var _this = GetThis(thisHandle);
             try
             {
-");
+"
+                );
                 bool isVoid = decl.ReturnType.ManagedTypeName == "void";
                 tw.Write($"                {(isVoid ? "" : "return ")}_this.{decl.FunctionName}(");
                 bool isFirst = true;
@@ -327,15 +371,19 @@ namespace Internal.JitInterface
                 tw.Write(")");
                 if (decl.ReturnType.IsBOOL || decl.ReturnType.IsBoolean)
                 {
-                    tw.Write($" ? ({decl.ReturnType.UnmanagedTypeName})1 : ({decl.ReturnType.UnmanagedTypeName})0");
+                    tw.Write(
+                        $" ? ({decl.ReturnType.UnmanagedTypeName})1 : ({decl.ReturnType.UnmanagedTypeName})0"
+                    );
                 }
                 tw.Write(";");
-                tw.Write(@"
+                tw.Write(
+                    @"
             }
             catch (Exception ex)
             {
                 *ppException = _this.AllocException(ex);
-");
+"
+                );
                 if (!isVoid)
                 {
                     tw.WriteLine("                return default;");
@@ -346,11 +394,15 @@ namespace Internal.JitInterface
             }
 
             int total = functionData.Count();
-            tw.WriteLine(@"
+            tw.WriteLine(
+                @"
         private static IntPtr GetUnmanagedCallbacks()
         {
-            void** callbacks = (void**)Marshal.AllocCoTaskMem(sizeof(IntPtr) * " + total + @");
-");
+            void** callbacks = (void**)Marshal.AllocCoTaskMem(sizeof(IntPtr) * "
+                    + total
+                    + @");
+"
+            );
 
             int index = 0;
             foreach (FunctionDecl decl in functionData)
@@ -364,28 +416,37 @@ namespace Internal.JitInterface
                 index++;
             }
 
-            tw.WriteLine(@"
+            tw.WriteLine(
+                @"
             return (IntPtr)callbacks;
         }
     }
-}");
+}"
+            );
         }
 
-        private static void WriteNativeWrapperInterface(TextWriter tw, IEnumerable<FunctionDecl> functionData)
+        private static void WriteNativeWrapperInterface(
+            TextWriter tw,
+            IEnumerable<FunctionDecl> functionData
+        )
         {
             WriteAutogeneratedHeader(tw);
-            tw.Write(@"
+            tw.Write(
+                @"
 
 #include ""corinfoexception.h""
 #include ""../../../inc/corjit.h""
 
 struct JitInterfaceCallbacks
 {
-");
+"
+            );
 
             foreach (FunctionDecl decl in functionData)
             {
-                tw.Write($"    {decl.ReturnType.NativeTypeName} (* {decl.FunctionName})(void * thisHandle, CorInfoExceptionClass** ppException");
+                tw.Write(
+                    $"    {decl.ReturnType.NativeTypeName} (* {decl.FunctionName})(void * thisHandle, CorInfoExceptionClass** ppException"
+                );
                 foreach (Parameter param in decl.Parameters)
                 {
                     tw.Write($", {param.Type.NativeTypeName} {param.Name}");
@@ -393,7 +454,8 @@ struct JitInterfaceCallbacks
                 tw.WriteLine(");");
             }
 
-            tw.Write(@"
+            tw.Write(
+                @"
 };
 
 class JitInterfaceWrapper : public ICorJitInfo
@@ -407,16 +469,22 @@ public:
     {
     }
 
-");
+"
+            );
 
-            API_Wrapper_Generic_Core(tw, functionData,
+            API_Wrapper_Generic_Core(
+                tw,
+                functionData,
                 funcNameFunc: (FunctionDecl decl) => $"{decl.FunctionName}",
-                beforeCallFunc: (FunctionDecl) => "    CorInfoExceptionClass* pException = nullptr;",
-                afterCallFunc: (FunctionDecl decl) => "    if (pException != nullptr) throw pException;",
+                beforeCallFunc: (FunctionDecl) =>
+                    "    CorInfoExceptionClass* pException = nullptr;",
+                afterCallFunc: (FunctionDecl decl) =>
+                    "    if (pException != nullptr) throw pException;",
                 wrappedObjectName: "_callbacks",
                 useNativeType2: false,
                 addVirtualPrefix: true,
-                skipManualWrapper: true);
+                skipManualWrapper: true
+            );
 
             tw.WriteLine("};");
         }
@@ -430,12 +498,24 @@ public:
                 tw.WriteLine($"DEF_CLR_API({decl.FunctionName})");
             }
 
-            tw.Write(@"
+            tw.Write(
+                @"
 #undef DEF_CLR_API
-");
+"
+            );
         }
 
-        private static void API_Wrapper_Generic_Core(TextWriter tw, IEnumerable<FunctionDecl> functionData, Func<FunctionDecl, string> funcNameFunc, Func<FunctionDecl, string> beforeCallFunc, Func<FunctionDecl, string> afterCallFunc, string wrappedObjectName, bool useNativeType2, bool addVirtualPrefix, bool skipManualWrapper)
+        private static void API_Wrapper_Generic_Core(
+            TextWriter tw,
+            IEnumerable<FunctionDecl> functionData,
+            Func<FunctionDecl, string> funcNameFunc,
+            Func<FunctionDecl, string> beforeCallFunc,
+            Func<FunctionDecl, string> afterCallFunc,
+            string wrappedObjectName,
+            bool useNativeType2,
+            bool addVirtualPrefix,
+            bool skipManualWrapper
+        )
         {
             foreach (FunctionDecl decl in functionData)
             {
@@ -456,7 +536,13 @@ public:
                     {
                         tw.Write(",");
                     }
-                    tw.Write(Environment.NewLine + "          " + GetNativeType(param.Type) + " " + param.Name);
+                    tw.Write(
+                        Environment.NewLine
+                            + "          "
+                            + GetNativeType(param.Type)
+                            + " "
+                            + param.Name
+                    );
                 }
                 tw.Write(')');
                 if (skipManualWrapper && decl.ManualNativeWrapper)
@@ -519,20 +605,41 @@ public:
             }
         }
 
-        private static void API_Wrapper_Generic(TextWriter tw, IEnumerable<FunctionDecl> functionData, string header, string footer, string cppType, Func<FunctionDecl, string> beforeCallFunc, Func<FunctionDecl, string> afterCallFunc, string wrappedObjectName)
+        private static void API_Wrapper_Generic(
+            TextWriter tw,
+            IEnumerable<FunctionDecl> functionData,
+            string header,
+            string footer,
+            string cppType,
+            Func<FunctionDecl, string> beforeCallFunc,
+            Func<FunctionDecl, string> afterCallFunc,
+            string wrappedObjectName
+        )
         {
             WriteAutogeneratedHeader(tw);
             tw.Write(header);
 
-            API_Wrapper_Generic_Core(tw, functionData, funcNameFunc: (FunctionDecl decl) => $"{cppType}::{decl.FunctionName}", beforeCallFunc: beforeCallFunc, afterCallFunc: afterCallFunc, wrappedObjectName: wrappedObjectName, useNativeType2: true, addVirtualPrefix: false, skipManualWrapper: false);
+            API_Wrapper_Generic_Core(
+                tw,
+                functionData,
+                funcNameFunc: (FunctionDecl decl) => $"{cppType}::{decl.FunctionName}",
+                beforeCallFunc: beforeCallFunc,
+                afterCallFunc: afterCallFunc,
+                wrappedObjectName: wrappedObjectName,
+                useNativeType2: true,
+                addVirtualPrefix: false,
+                skipManualWrapper: false
+            );
 
             tw.Write(footer);
         }
 
         private static void API_Wrapper(TextWriter tw, IEnumerable<FunctionDecl> functionData)
         {
-            API_Wrapper_Generic(tw, functionData,
-                                header: @"
+            API_Wrapper_Generic(
+                tw,
+                functionData,
+                header: @"
 #define API_ENTER(name) wrapComp->CLR_API_Enter(API_##name);
 #define API_LEAVE(name) wrapComp->CLR_API_Leave(API_##name);
 
@@ -540,21 +647,26 @@ public:
 // clang-format off
 /**********************************************************************************/
 ",
-                                footer: @"
+                footer: @"
 /**********************************************************************************/
 // clang-format on
 /**********************************************************************************/
 ",
-                                cppType: "WrapICorJitInfo",
-                                beforeCallFunc: (FunctionDecl decl) => $"    API_ENTER({decl.FunctionName});",
-                                afterCallFunc: (FunctionDecl decl) => $"    API_LEAVE({decl.FunctionName});",
-                                wrappedObjectName: "wrapHnd");
+                cppType: "WrapICorJitInfo",
+                beforeCallFunc: (FunctionDecl decl) => $"    API_ENTER({decl.FunctionName});",
+                afterCallFunc: (FunctionDecl decl) => $"    API_LEAVE({decl.FunctionName});",
+                wrappedObjectName: "wrapHnd"
+            );
         }
 
-        private static void SPMI_ICorJitInfoImpl(TextWriter tw, IEnumerable<FunctionDecl> functionData)
+        private static void SPMI_ICorJitInfoImpl(
+            TextWriter tw,
+            IEnumerable<FunctionDecl> functionData
+        )
         {
             WriteAutogeneratedHeader(tw);
-            tw.Write(@"
+            tw.Write(
+                @"
 
 // ICorJitInfoImpl: declare for implementation all the members of the ICorJitInfo interface (which are
 // specified as pure virtual methods). This is done once, here, and all implementations share it,
@@ -570,11 +682,14 @@ public:
 /**********************************************************************************/
 
 public:
-");
+"
+            );
 
             foreach (FunctionDecl decl in functionData)
             {
-                tw.Write($"{Environment.NewLine}{decl.ReturnType.NativeTypeName2} {decl.FunctionName}(");
+                tw.Write(
+                    $"{Environment.NewLine}{decl.ReturnType.NativeTypeName2} {decl.FunctionName}("
+                );
                 bool isFirst = true;
                 foreach (Parameter param in decl.Parameters)
                 {
@@ -586,22 +701,35 @@ public:
                     {
                         tw.Write(",");
                     }
-                    tw.Write(Environment.NewLine + "          " + param.Type.NativeTypeName2 + " " + param.Name);
+                    tw.Write(
+                        Environment.NewLine
+                            + "          "
+                            + param.Type.NativeTypeName2
+                            + " "
+                            + param.Name
+                    );
                 }
                 tw.WriteLine(") override;");
             }
 
-            tw.Write(@"
+            tw.Write(
+                @"
 /**********************************************************************************/
 // clang-format on
 /**********************************************************************************/
-");
+"
+            );
         }
 
-        private static void SPMI_ShimCounter_ICorJitInfo(TextWriter tw, IEnumerable<FunctionDecl> functionData)
+        private static void SPMI_ShimCounter_ICorJitInfo(
+            TextWriter tw,
+            IEnumerable<FunctionDecl> functionData
+        )
         {
-            API_Wrapper_Generic(tw, functionData,
-                                header: @"
+            API_Wrapper_Generic(
+                tw,
+                functionData,
+                header: @"
 #include ""standardpch.h""
 #include ""icorjitinfo.h""
 #include ""superpmi-shim-counter.h""
@@ -609,17 +737,24 @@ public:
 #include ""spmiutil.h""
 
 ",
-                                footer: Environment.NewLine,
-                                cppType: "interceptor_ICJI",
-                                beforeCallFunc: (FunctionDecl decl) => $"    mcs->AddCall(\"{decl.FunctionName}\");",
-                                afterCallFunc: (FunctionDecl decl) => null,
-                                wrappedObjectName: "original_ICorJitInfo");
+                footer: Environment.NewLine,
+                cppType: "interceptor_ICJI",
+                beforeCallFunc: (FunctionDecl decl) =>
+                    $"    mcs->AddCall(\"{decl.FunctionName}\");",
+                afterCallFunc: (FunctionDecl decl) => null,
+                wrappedObjectName: "original_ICorJitInfo"
+            );
         }
 
-        private static void SPMI_ShimSimple_ICorJitInfo(TextWriter tw, IEnumerable<FunctionDecl> functionData)
+        private static void SPMI_ShimSimple_ICorJitInfo(
+            TextWriter tw,
+            IEnumerable<FunctionDecl> functionData
+        )
         {
-            API_Wrapper_Generic(tw, functionData,
-                                header: @"
+            API_Wrapper_Generic(
+                tw,
+                functionData,
+                header: @"
 #include ""standardpch.h""
 #include ""icorjitinfo.h""
 #include ""superpmi-shim-simple.h""
@@ -627,11 +762,12 @@ public:
 #include ""spmiutil.h""
 
 ",
-                                footer: Environment.NewLine,
-                                cppType: "interceptor_ICJI",
-                                beforeCallFunc: (FunctionDecl decl) => null,
-                                afterCallFunc: (FunctionDecl decl) => null,
-                                wrappedObjectName: "original_ICorJitInfo");
+                footer: Environment.NewLine,
+                cppType: "interceptor_ICJI",
+                beforeCallFunc: (FunctionDecl decl) => null,
+                afterCallFunc: (FunctionDecl decl) => null,
+                wrappedObjectName: "original_ICorJitInfo"
+            );
         }
 
         private static void GenerateNewJitEEVersion(string file)
@@ -647,7 +783,9 @@ constexpr GUID JITEEVersionIdentifier = { /* {{newGuid:D}} */
     {{hex[0]}},
     {{hex[1]}},
     {{hex[2]}},
-    {{{hex[3]}}, {{hex[4]}}, {{hex[5]}}, {{hex[6]}}, {{hex[7]}}, {{hex[8]}}, {{hex[9]}}, {{hex[10]}}}
+    {{{hex[3]}}, {{hex[4]}}, {{hex[5]}}, {{hex[6]}}, {{hex[7]}}, {{hex[8]}}, {{hex[9]}}, {{hex[
+                    10
+                ]}}}
   };
 """;
             string pattern = @"constexpr GUID JITEEVersionIdentifier = .*\n.*\n.*\n.*\n.*\n.*;";
@@ -660,7 +798,9 @@ constexpr GUID JITEEVersionIdentifier = { /* {{newGuid:D}} */
         {
             if (args.Length == 0)
             {
-                Console.WriteLine("ThunkGenerator - Generate thunks for the jit interface and for defining the set of instruction sets supported by the runtime, JIT, and crossgen2. Call by using the gen scripts which are aware of the right set of files generated and command line args.");
+                Console.WriteLine(
+                    "ThunkGenerator - Generate thunks for the jit interface and for defining the set of instruction sets supported by the runtime, JIT, and crossgen2. Call by using the gen scripts which are aware of the right set of files generated and command line args."
+                );
                 return;
             }
 
@@ -668,7 +808,9 @@ constexpr GUID JITEEVersionIdentifier = { /* {{newGuid:D}} */
             {
                 if (args.Length != 2)
                 {
-                    Console.WriteLine("Incorrect number of arguments specified for NewJITEEVersion");
+                    Console.WriteLine(
+                        "Incorrect number of arguments specified for NewJITEEVersion"
+                    );
                     return;
                 }
                 GenerateNewJitEEVersion(args[1]);

@@ -8,6 +8,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 {
     internal static class VirtualMemoryNotificationListenerOptionsStorage
     {
-        public static readonly Option2<bool> BackgroundAnalysisMemoryMonitor = new("dotnet_enable_full_solution_analysis_memory_monitor", defaultValue: true);
+        public static readonly Option2<bool> BackgroundAnalysisMemoryMonitor = new(
+            "dotnet_enable_full_solution_analysis_memory_monitor",
+            defaultValue: true
+        );
     }
 }

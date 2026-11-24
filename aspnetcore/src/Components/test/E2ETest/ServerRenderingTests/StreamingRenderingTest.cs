@@ -153,9 +153,8 @@ public class StreamingRenderingTest
         await Task.Delay(3000); // Doesn't matter if this duration is too short or too long. It's just so the assertions don't start unnecessarily early.
 
         // Note that the tests always run with detailed errors off, so we only see this generic message
-        Browser.Contains(
-            "There was an unhandled exception on the current request.",
-            () => Browser.Exists(By.TagName("html")).Text
+        Browser.Contains("There was an unhandled exception on the current request.", () =>
+            Browser.Exists(By.TagName("html")).Text
         );
 
         // See that 'back' still works
@@ -172,9 +171,8 @@ public class StreamingRenderingTest
         EnhancedNavigationTestUtil.SuppressEnhancedNavigation(this, suppressEnhancedNavigation);
         Navigate($"{ServerPathBase}/streaming-scripts");
 
-        Browser.Equal(
-            "This was set by JS via src",
-            () => Browser.FindElement(By.Id("dynamic-script-output-src")).Text
+        Browser.Equal("This was set by JS via src", () =>
+            Browser.FindElement(By.Id("dynamic-script-output-src")).Text
         );
         Browser.Equal(
             "This was set by JS via inline script asynchronously (special chars: ' \" </script>)",
@@ -320,9 +318,8 @@ public class StreamingRenderingTest
     public void CanStreamDirectlyIntoSectionContentConnectedToNonStreamingOutlet()
     {
         Navigate($"{ServerPathBase}/streaming-with-sections");
-        Browser.Equal(
-            "This is some streaming content",
-            () => Browser.Exists(By.Id("streaming-message")).Text
+        Browser.Equal("This is some streaming content", () =>
+            Browser.Exists(By.Id("streaming-message")).Text
         );
     }
 

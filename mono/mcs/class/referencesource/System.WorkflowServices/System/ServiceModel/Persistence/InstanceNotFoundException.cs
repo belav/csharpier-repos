@@ -8,25 +8,21 @@ namespace System.ServiceModel.Persistence
     using System.Security.Permissions;
 
     [Serializable]
-    [Obsolete("The WF3 types are deprecated.  Instead, please use the new WF4 types from System.Activities.*")]
+    [Obsolete(
+        "The WF3 types are deprecated.  Instead, please use the new WF4 types from System.Activities.*"
+    )]
     public class InstanceNotFoundException : PersistenceException
     {
         Guid id;
 
         public InstanceNotFoundException()
-            : this(SR2.GetString(SR2.InstanceNotFoundDefault), null)
-        {
-        }
+            : this(SR2.GetString(SR2.InstanceNotFoundDefault), null) { }
 
         public InstanceNotFoundException(string message)
-            : this(message, null)
-        {
-        }
+            : this(message, null) { }
 
         public InstanceNotFoundException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         public InstanceNotFoundException(Guid id)
             : this(SR2.GetString(SR2.InstanceNotFoundSpecific, id))
@@ -55,7 +51,7 @@ namespace System.ServiceModel.Persistence
         protected InstanceNotFoundException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
-            this.id = (Guid) info.GetValue("id", typeof(Guid));
+            this.id = (Guid)info.GetValue("id", typeof(Guid));
         }
 
         public Guid InstanceId

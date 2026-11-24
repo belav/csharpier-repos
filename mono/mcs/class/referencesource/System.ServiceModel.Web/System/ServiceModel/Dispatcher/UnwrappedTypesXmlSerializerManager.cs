@@ -50,7 +50,9 @@ namespace System.ServiceModel.Dispatcher
                 {
                     TypeSerializerPair pair = new TypeSerializerPair();
                     pair.Type = operationTypes[i];
-                    pair.Serializer = new XmlSerializerXmlObjectSerializer(serializersMap[operationTypes[i]]);
+                    pair.Serializer = new XmlSerializerXmlObjectSerializer(
+                        serializersMap[operationTypes[i]]
+                    );
                     serializers.Add(pair);
                 }
                 return serializers.ToArray();
@@ -71,8 +73,14 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (this.serializersCreated)
                 {
-                    Fx.Assert("An xml serializer type was added after the serializers were created");
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.XmlSerializersCreatedBeforeRegistration)));
+                    Fx.Assert(
+                        "An xml serializer type was added after the serializers were created"
+                    );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.XmlSerializersCreatedBeforeRegistration)
+                        )
+                    );
                 }
                 for (int i = 0; i < types.Count; ++i)
                 {
@@ -134,7 +142,9 @@ namespace System.ServiceModel.Dispatcher
             public override void WriteEndObject(XmlDictionaryWriter writer)
             {
                 Fx.Assert("This method should never get hit");
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException()
+                );
             }
 
             public override void WriteObject(XmlDictionaryWriter writer, object graph)
@@ -145,15 +155,18 @@ namespace System.ServiceModel.Dispatcher
             public override void WriteObjectContent(XmlDictionaryWriter writer, object graph)
             {
                 Fx.Assert("This method should never get hit");
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException()
+                );
             }
 
             public override void WriteStartObject(XmlDictionaryWriter writer, object graph)
             {
                 Fx.Assert("This method should never get hit");
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException()
+                );
             }
         }
     }
 }
-

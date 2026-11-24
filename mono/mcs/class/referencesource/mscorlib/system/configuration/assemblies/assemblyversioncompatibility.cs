@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -14,15 +14,16 @@
 ** Date:    June 4, 1999
 **
 ===========================================================*/
-namespace System.Configuration.Assemblies {
-    
+namespace System.Configuration.Assemblies
+{
     using System;
-     [Serializable]
-[System.Runtime.InteropServices.ComVisible(true)]
+
+    [Serializable]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public enum AssemblyVersionCompatibility
     {
-        SameMachine         = 1,
-        SameProcess         = 2,
-        SameDomain          = 3,
+        SameMachine = 1,
+        SameProcess = 2,
+        SameDomain = 3,
     }
 }

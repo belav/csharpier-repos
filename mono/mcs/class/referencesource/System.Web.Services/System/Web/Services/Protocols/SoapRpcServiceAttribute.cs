@@ -1,23 +1,24 @@
 //------------------------------------------------------------------------------
 // <copyright file="SoapRpcServiceAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Protocols {
-
+namespace System.Web.Services.Protocols
+{
     using System;
     using System.Reflection;
-    using System.Xml.Serialization;
-    using System.Web.Services.Description;
     using System.Runtime.InteropServices;
+    using System.Web.Services.Description;
+    using System.Xml.Serialization;
 
     /// <include file='doc\SoapRpcServiceAttribute.uex' path='docs/doc[@for="SoapRpcServiceAttribute"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.Class)]
-    public sealed class SoapRpcServiceAttribute : Attribute {
+    public sealed class SoapRpcServiceAttribute : Attribute
+    {
         SoapServiceRoutingStyle routingStyle = SoapServiceRoutingStyle.SoapAction;
         SoapBindingUse use = SoapBindingUse.Encoded;
 
@@ -25,11 +26,11 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapRpcServiceAttribute() {
-        }
+        public SoapRpcServiceAttribute() { }
 
         /// <include file='doc\SoapRpcServiceAttribute.uex' path='docs/doc[@for="SoapRpcServiceAttribute.RoutingStyle"]/*' />
-        public SoapServiceRoutingStyle RoutingStyle {
+        public SoapServiceRoutingStyle RoutingStyle
+        {
             get { return routingStyle; }
             set { routingStyle = value; }
         }
@@ -39,7 +40,8 @@ namespace System.Web.Services.Protocols {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [ComVisible(false)]
-        public SoapBindingUse Use {
+        public SoapBindingUse Use
+        {
             get { return use; }
             set { use = value; }
         }

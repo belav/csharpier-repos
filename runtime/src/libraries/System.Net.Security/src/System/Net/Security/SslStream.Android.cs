@@ -20,7 +20,8 @@ namespace System.Net.Security
                 _sslAuthenticationOptions.CertificateContext?.Trust,
                 ref alertToken,
                 out SslPolicyErrors sslPolicyErrors,
-                out X509ChainStatusFlags chainStatus);
+                out X509ChainStatusFlags chainStatus
+            );
 
             return new()
             {
@@ -31,9 +32,16 @@ namespace System.Net.Security
             };
         }
 
-        private bool TryGetRemoteCertificateValidationResult(out SslPolicyErrors sslPolicyErrors, out X509ChainStatusFlags chainStatus, ref ProtocolToken alertToken, out bool isValid)
+        private bool TryGetRemoteCertificateValidationResult(
+            out SslPolicyErrors sslPolicyErrors,
+            out X509ChainStatusFlags chainStatus,
+            ref ProtocolToken alertToken,
+            out bool isValid
+        )
         {
-            JavaProxy.RemoteCertificateValidationResult? validationResult = _securityContext?.SslStreamProxy.ValidationResult;
+            JavaProxy.RemoteCertificateValidationResult? validationResult = _securityContext
+                ?.SslStreamProxy
+                .ValidationResult;
             sslPolicyErrors = validationResult?.SslPolicyErrors ?? default;
             chainStatus = validationResult?.ChainStatus ?? default;
             isValid = validationResult?.IsValid ?? default;
@@ -48,8 +56,8 @@ namespace System.Net.Security
             private readonly SslStream _sslStream;
             private GCHandle? _handle;
 
-            public IntPtr Handle
-                => _handle is GCHandle handle
+            public IntPtr Handle =>
+                _handle is GCHandle handle
                     ? GCHandle.ToIntPtr(handle)
                     : throw new ObjectDisposedException(nameof(JavaProxy));
 
@@ -74,7 +82,9 @@ namespace System.Net.Security
             {
                 if (!s_initialized)
                 {
-                    Interop.AndroidCrypto.RegisterRemoteCertificateValidationCallback(&VerifyRemoteCertificate);
+                    Interop.AndroidCrypto.RegisterRemoteCertificateValidationCallback(
+                        &VerifyRemoteCertificate
+                    );
                     s_initialized = true;
                 }
             }

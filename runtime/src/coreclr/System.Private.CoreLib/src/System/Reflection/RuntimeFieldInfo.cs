@@ -15,7 +15,11 @@ namespace System.Reflection
         #endregion
 
         #region Constructor
-        protected RuntimeFieldInfo(RuntimeTypeCache reflectedTypeCache, RuntimeType declaringType, BindingFlags bindingFlags)
+        protected RuntimeFieldInfo(
+            RuntimeTypeCache reflectedTypeCache,
+            RuntimeType declaringType,
+            BindingFlags bindingFlags
+        )
         {
             m_bindingFlags = bindingFlags;
             m_declaringType = declaringType;
@@ -32,17 +36,24 @@ namespace System.Reflection
             return m_declaringType;
         }
 
-        internal RuntimeType GetRuntimeType() { return m_declaringType; }
+        internal RuntimeType GetRuntimeType()
+        {
+            return m_declaringType;
+        }
+
         internal abstract RuntimeModule GetRuntimeModule();
         #endregion
 
         #region MemberInfo Overrides
         public override MemberTypes MemberType => MemberTypes.Field;
-        public override Type? ReflectedType => m_reflectedTypeCache.IsGlobal ? null : ReflectedTypeInternal;
+        public override Type? ReflectedType =>
+            m_reflectedTypeCache.IsGlobal ? null : ReflectedTypeInternal;
 
-        public override Type? DeclaringType => m_reflectedTypeCache.IsGlobal ? null : m_declaringType;
+        public override Type? DeclaringType =>
+            m_reflectedTypeCache.IsGlobal ? null : m_declaringType;
 
-        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) => HasSameMetadataDefinitionAsCore<RuntimeFieldInfo>(other);
+        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
+            HasSameMetadataDefinitionAsCore<RuntimeFieldInfo>(other);
 
         public override Module Module => GetRuntimeModule();
         public override bool IsCollectible => m_declaringType.IsCollectible;

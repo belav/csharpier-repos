@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SymbolKeyTests
         public async Task TestUnsupportedVBTypes(string parameterType)
         {
             using var workspace = TestWorkspace.Create(
-@$"<Workspace>
+                @$"<Workspace>
     <Project Language=""C#"" CommonReferences=""true"" Name=""CSProject"">
         <Document>
 public class C
@@ -36,11 +36,16 @@ public class C
         <ProjectReference>CSProject</ProjectReference>
         
     </Project>
-</Workspace>");
+</Workspace>"
+            );
 
             var solution = workspace.CurrentSolution;
-            var csDocument = solution.Projects.Single(p => p.Language == LanguageNames.CSharp).Documents.Single();
-            var semanticModel = await csDocument.GetRequiredSemanticModelAsync(CancellationToken.None);
+            var csDocument = solution
+                .Projects.Single(p => p.Language == LanguageNames.CSharp)
+                .Documents.Single();
+            var semanticModel = await csDocument.GetRequiredSemanticModelAsync(
+                CancellationToken.None
+            );
             var tree = semanticModel.SyntaxTree;
             var root = tree.GetRoot();
 
@@ -50,7 +55,12 @@ public class C
             var vbProject = solution.Projects.Single(p => p.Language == LanguageNames.VisualBasic);
             var vbCompilation = await vbProject.GetRequiredCompilationAsync(CancellationToken.None);
 
-            var resolved = SymbolKey.ResolveString(methodSymbol.GetSymbolKey().ToString(), vbCompilation, out var failureReason, CancellationToken.None);
+            var resolved = SymbolKey.ResolveString(
+                methodSymbol.GetSymbolKey().ToString(),
+                vbCompilation,
+                out var failureReason,
+                CancellationToken.None
+            );
             Assert.NotNull(failureReason);
             Assert.Null(resolved.GetAnySymbol());
         }

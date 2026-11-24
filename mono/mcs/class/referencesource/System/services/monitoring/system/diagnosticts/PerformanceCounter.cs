@@ -4,20 +4,20 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Diagnostics {
-    using System.Runtime.Serialization.Formatters;
-    using System.Runtime.InteropServices;
-    using System.ComponentModel;
-    using System.Diagnostics;
+namespace System.Diagnostics
+{
     using System;
     using System.Collections;
+    using System.ComponentModel;
+    using System.Diagnostics;
     using System.Globalization;
-    using System.Security;
-    using System.Security.Permissions;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization.Formatters;
+    using System.Security;
+    using System.Security.Permissions;
     using System.Threading;
-
 
     /// <devdoc>
     ///     Performance Counter component.
@@ -28,16 +28,21 @@ namespace System.Diagnostics {
     ///     perf service.
     /// </devdoc>
     [
-    InstallerType("System.Diagnostics.PerformanceCounterInstaller," + AssemblyRef.SystemConfigurationInstall),
-    SRDescription(SR.PerformanceCounterDesc),
-    HostProtection(Synchronization = true, SharedState = true)
+        InstallerType(
+            "System.Diagnostics.PerformanceCounterInstaller,"
+                + AssemblyRef.SystemConfigurationInstall
+        ),
+        SRDescription(SR.PerformanceCounterDesc),
+        HostProtection(Synchronization = true, SharedState = true)
     ]
-    public sealed class PerformanceCounter : Component, ISupportInitialize {
+    public sealed class PerformanceCounter : Component, ISupportInitialize
+    {
         private string machineName;
         private string categoryName;
         private string counterName;
         private string instanceName;
-        private PerformanceCounterInstanceLifetime instanceLifetime = PerformanceCounterInstanceLifetime.Global;
+        private PerformanceCounterInstanceLifetime instanceLifetime =
+            PerformanceCounterInstanceLifetime.Global;
 
         private bool isReadOnly;
         private bool initialized = false;
@@ -50,13 +55,18 @@ namespace System.Diagnostics {
         // Cached IP Shared Performanco counter
         private SharedPerformanceCounter sharedCounter;
 
-        [Obsolete("This field has been deprecated and is not used.  Use machine.config or an application configuration file to set the size of the PerformanceCounter file mapping.")]
+        [Obsolete(
+            "This field has been deprecated and is not used.  Use machine.config or an application configuration file to set the size of the PerformanceCounter file mapping."
+        )]
         public static int DefaultFileMappingSize = 524288;
 
         private Object m_InstanceLockObject;
-        private Object InstanceLockObject {
-            get {
-                if (m_InstanceLockObject == null) {
+        private Object InstanceLockObject
+        {
+            get
+            {
+                if (m_InstanceLockObject == null)
+                {
                     Object o = new Object();
                     Interlocked.CompareExchange(ref m_InstanceLockObject, o, null);
                 }
@@ -67,7 +77,8 @@ namespace System.Diagnostics {
         /// <devdoc>
         ///     The defaut constructor. Creates the perf counter object
         /// </devdoc>
-        public PerformanceCounter() {
+        public PerformanceCounter()
+        {
             machineName = ".";
             categoryName = String.Empty;
             counterName = String.Empty;
@@ -79,7 +90,13 @@ namespace System.Diagnostics {
         /// <devdoc>
         ///     Creates the Performance Counter Object
         /// </devdoc>
-        public PerformanceCounter(string categoryName, string counterName, string instanceName, string machineName) {
+        public PerformanceCounter(
+            string categoryName,
+            string counterName,
+            string instanceName,
+            string machineName
+        )
+        {
             this.MachineName = machineName;
             this.CategoryName = categoryName;
             this.CounterName = counterName;
@@ -89,7 +106,14 @@ namespace System.Diagnostics {
             GC.SuppressFinalize(this);
         }
 
-        internal PerformanceCounter(string categoryName, string counterName, string instanceName, string machineName, bool skipInit) {
+        internal PerformanceCounter(
+            string categoryName,
+            string counterName,
+            string instanceName,
+            string machineName,
+            bool skipInit
+        )
+        {
             this.MachineName = machineName;
             this.CategoryName = categoryName;
             this.CounterName = counterName;
@@ -102,15 +126,21 @@ namespace System.Diagnostics {
         /// <devdoc>
         ///     Creates the Performance Counter Object on local machine.
         /// </devdoc>
-        public PerformanceCounter(string categoryName, string counterName, string instanceName) :
-        this(categoryName, counterName, instanceName, true) {
-        }
+        public PerformanceCounter(string categoryName, string counterName, string instanceName)
+            : this(categoryName, counterName, instanceName, true) { }
 
         /// <devdoc>
         ///     Creates the Performance Counter Object on local machine.
         /// </devdoc>
-        public PerformanceCounter(string categoryName, string counterName, string instanceName, bool readOnly) {
-            if(!readOnly) {
+        public PerformanceCounter(
+            string categoryName,
+            string counterName,
+            string instanceName,
+            bool readOnly
+        )
+        {
+            if (!readOnly)
+            {
                 VerifyWriteableCounterAllowed();
             }
             this.MachineName = ".";
@@ -125,36 +155,40 @@ namespace System.Diagnostics {
         /// <devdoc>
         ///     Creates the Performance Counter Object, assumes that it's a single instance
         /// </devdoc>
-        public PerformanceCounter(string categoryName, string counterName) :
-        this(categoryName, counterName, true) {
-        }
+        public PerformanceCounter(string categoryName, string counterName)
+            : this(categoryName, counterName, true) { }
 
         /// <devdoc>
         ///     Creates the Performance Counter Object, assumes that it's a single instance
         /// </devdoc>
-        public PerformanceCounter(string categoryName, string counterName, bool readOnly) :
-        this(categoryName, counterName, "", readOnly) {
-        }
+        public PerformanceCounter(string categoryName, string counterName, bool readOnly)
+            : this(categoryName, counterName, "", readOnly) { }
 
         /// <devdoc>
         ///     Returns the performance category name for this performance counter
         /// </devdoc>
         [
-        ReadOnly(true),
-        DefaultValue(""),
-        TypeConverter("System.Diagnostics.Design.CategoryValueConverter, " + AssemblyRef.SystemDesign),
-        SRDescription(SR.PCCategoryName),
-        SettingsBindable(true)
+            ReadOnly(true),
+            DefaultValue(""),
+            TypeConverter(
+                "System.Diagnostics.Design.CategoryValueConverter, " + AssemblyRef.SystemDesign
+            ),
+            SRDescription(SR.PCCategoryName),
+            SettingsBindable(true)
         ]
-        public string CategoryName {
-            get {
-                return categoryName;
-            }
-            set {
+        public string CategoryName
+        {
+            get { return categoryName; }
+            set
+            {
                 if (value == null)
                     throw new ArgumentNullException("value");
 
-                if (categoryName == null || String.Compare(categoryName, value, StringComparison.OrdinalIgnoreCase) != 0) {
+                if (
+                    categoryName == null
+                    || String.Compare(categoryName, value, StringComparison.OrdinalIgnoreCase) != 0
+                )
+                {
                     categoryName = value;
                     Close();
                 }
@@ -165,21 +199,31 @@ namespace System.Diagnostics {
         ///     Returns the description message for this performance counter
         /// </devdoc>
         [
-        ReadOnly(true),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        MonitoringDescription(SR.PC_CounterHelp)
+            ReadOnly(true),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.PC_CounterHelp)
         ]
-        public string CounterHelp {
-            get {
+        public string CounterHelp
+        {
+            get
+            {
                 string currentCategoryName = categoryName;
                 string currentMachineName = machineName;
-                
-                PerformanceCounterPermission permission = new PerformanceCounterPermission(PerformanceCounterPermissionAccess.Read, currentMachineName, currentCategoryName);
+
+                PerformanceCounterPermission permission = new PerformanceCounterPermission(
+                    PerformanceCounterPermissionAccess.Read,
+                    currentMachineName,
+                    currentCategoryName
+                );
                 permission.Demand();
                 Initialize();
 
                 if (helpMsg == null)
-                    helpMsg = PerformanceCounterLib.GetCounterHelp(currentMachineName, currentCategoryName, this.counterName);
+                    helpMsg = PerformanceCounterLib.GetCounterHelp(
+                        currentMachineName,
+                        currentCategoryName,
+                        this.counterName
+                    );
 
                 return helpMsg;
             }
@@ -189,21 +233,27 @@ namespace System.Diagnostics {
         ///     Sets/returns the performance counter name for this performance counter
         /// </devdoc>
         [
-        ReadOnly(true),
-        DefaultValue(""),
-        TypeConverter("System.Diagnostics.Design.CounterNameConverter, " + AssemblyRef.SystemDesign),
-        SRDescription(SR.PCCounterName),
-        SettingsBindable(true)
+            ReadOnly(true),
+            DefaultValue(""),
+            TypeConverter(
+                "System.Diagnostics.Design.CounterNameConverter, " + AssemblyRef.SystemDesign
+            ),
+            SRDescription(SR.PCCounterName),
+            SettingsBindable(true)
         ]
-        public string CounterName {
-            get {
-                return counterName;
-            }
-            set {
+        public string CounterName
+        {
+            get { return counterName; }
+            set
+            {
                 if (value == null)
                     throw new ArgumentNullException("value");
 
-                if (counterName == null || String.Compare(counterName, value, StringComparison.OrdinalIgnoreCase) != 0) {
+                if (
+                    counterName == null
+                    || String.Compare(counterName, value, StringComparison.OrdinalIgnoreCase) != 0
+                )
+                {
                     counterName = value;
                     Close();
                 }
@@ -214,27 +264,38 @@ namespace System.Diagnostics {
         ///     Sets/Returns the counter type for this performance counter
         /// </devdoc>
         [
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        MonitoringDescription(SR.PC_CounterType)
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.PC_CounterType)
         ]
-        public PerformanceCounterType CounterType {
-            get {
-                if (counterType == -1) {
+        public PerformanceCounterType CounterType
+        {
+            get
+            {
+                if (counterType == -1)
+                {
                     string currentCategoryName = categoryName;
                     string currentMachineName = machineName;
-                    
+
                     // This is the same thing that NextSample does, except that it doesn't try to get the actual counter
-                    // value.  If we wanted the counter value, we would need to have an instance name. 
-                    PerformanceCounterPermission permission = new PerformanceCounterPermission(PerformanceCounterPermissionAccess.Read, currentMachineName, currentCategoryName);
+                    // value.  If we wanted the counter value, we would need to have an instance name.
+                    PerformanceCounterPermission permission = new PerformanceCounterPermission(
+                        PerformanceCounterPermissionAccess.Read,
+                        currentMachineName,
+                        currentCategoryName
+                    );
                     permission.Demand();
-                    
+
                     Initialize();
-                    CategorySample categorySample = PerformanceCounterLib.GetCategorySample(currentMachineName, currentCategoryName);
-                    CounterDefinitionSample counterSample = categorySample.GetCounterDefinitionSample(this.counterName);
+                    CategorySample categorySample = PerformanceCounterLib.GetCategorySample(
+                        currentMachineName,
+                        currentCategoryName
+                    );
+                    CounterDefinitionSample counterSample =
+                        categorySample.GetCounterDefinitionSample(this.counterName);
                     this.counterType = counterSample.CounterType;
                 }
 
-                return(PerformanceCounterType) counterType;
+                return (PerformanceCounterType)counterType;
             }
         }
 
@@ -242,40 +303,52 @@ namespace System.Diagnostics {
             DefaultValue(PerformanceCounterInstanceLifetime.Global),
             SRDescription(SR.PCInstanceLifetime),
         ]
-        public PerformanceCounterInstanceLifetime InstanceLifetime {
+        public PerformanceCounterInstanceLifetime InstanceLifetime
+        {
             get { return instanceLifetime; }
-            set { 
-                if (value > PerformanceCounterInstanceLifetime.Process || value < PerformanceCounterInstanceLifetime.Global)
+            set
+            {
+                if (
+                    value > PerformanceCounterInstanceLifetime.Process
+                    || value < PerformanceCounterInstanceLifetime.Global
+                )
                     throw new ArgumentOutOfRangeException("value");
 
                 if (initialized)
-                    throw new InvalidOperationException(SR.GetString(SR.CantSetLifetimeAfterInitialized));
-                
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.CantSetLifetimeAfterInitialized)
+                    );
+
                 instanceLifetime = value;
             }
         }
-        
+
         /// <devdoc>
         ///     Sets/returns an instance name for this performance counter
         /// </devdoc>
         [
-        ReadOnly(true),
-        DefaultValue(""),
-        TypeConverter("System.Diagnostics.Design.InstanceNameConverter, " + AssemblyRef.SystemDesign),
-        SRDescription(SR.PCInstanceName),
-        SettingsBindable(true)
+            ReadOnly(true),
+            DefaultValue(""),
+            TypeConverter(
+                "System.Diagnostics.Design.InstanceNameConverter, " + AssemblyRef.SystemDesign
+            ),
+            SRDescription(SR.PCInstanceName),
+            SettingsBindable(true)
         ]
-        public string InstanceName {
-            get {
-                return instanceName;
-            }
-            set {
+        public string InstanceName
+        {
+            get { return instanceName; }
+            set
+            {
                 if (value == null && instanceName == null)
                     return;
 
-                if ((value == null && instanceName != null) ||
-                      (value != null && instanceName == null) ||
-                      String.Compare(instanceName, value, StringComparison.OrdinalIgnoreCase) != 0) {
+                if (
+                    (value == null && instanceName != null)
+                    || (value != null && instanceName == null)
+                    || String.Compare(instanceName, value, StringComparison.OrdinalIgnoreCase) != 0
+                )
+                {
                     instanceName = value;
                     Close();
                 }
@@ -285,19 +358,16 @@ namespace System.Diagnostics {
         /// <devdoc>
         ///     Returns true if counter is read only (system counter, foreign extensible counter or remote counter)
         /// </devdoc>
-        [
-        Browsable(false),
-        DefaultValue(true),
-        MonitoringDescription(SR.PC_ReadOnly)
-        ]
-        public bool ReadOnly {
-            get {
-                return isReadOnly;
-            }
-
-            set {
-                if (value != this.isReadOnly) {
-                    if(value == false) {
+        [Browsable(false), DefaultValue(true), MonitoringDescription(SR.PC_ReadOnly)]
+        public bool ReadOnly
+        {
+            get { return isReadOnly; }
+            set
+            {
+                if (value != this.isReadOnly)
+                {
+                    if (value == false)
+                    {
                         VerifyWriteableCounterAllowed();
                     }
                     this.isReadOnly = value;
@@ -306,25 +376,27 @@ namespace System.Diagnostics {
             }
         }
 
-
         /// <devdoc>
         ///     Set/returns the machine name for this performance counter
         /// </devdoc>
         [
-        Browsable(false),
-        DefaultValue("."),
-        SRDescription(SR.PCMachineName),
-        SettingsBindable(true)
+            Browsable(false),
+            DefaultValue("."),
+            SRDescription(SR.PCMachineName),
+            SettingsBindable(true)
         ]
-        public string MachineName {
-            get {
-                return machineName;
-            }
-            set {
+        public string MachineName
+        {
+            get { return machineName; }
+            set
+            {
                 if (!SyntaxCheck.CheckMachineName(value))
-                    throw new ArgumentException(SR.GetString(SR.InvalidParameter, "machineName", value));
+                    throw new ArgumentException(
+                        SR.GetString(SR.InvalidParameter, "machineName", value)
+                    );
 
-                if (machineName != value) {
+                if (machineName != value)
+                {
                     machineName = value;
                     Close();
                 }
@@ -338,23 +410,28 @@ namespace System.Diagnostics {
         ///     this component,  non-custom counters will throw an exception if this property is accessed.
         /// </devdoc>
         [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        MonitoringDescription(SR.PC_RawValue)
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            MonitoringDescription(SR.PC_RawValue)
         ]
-        public long RawValue {
-            get {
-                if (ReadOnly) {
+        public long RawValue
+        {
+            get
+            {
+                if (ReadOnly)
+                {
                     //No need to initialize or Demand, since NextSample already does.
                     return NextSample().RawValue;
                 }
-                else {
+                else
+                {
                     Initialize();
 
                     return this.sharedCounter.Value;
                 }
             }
-            set {
+            set
+            {
                 if (ReadOnly)
                     ThrowReadOnly();
 
@@ -366,14 +443,16 @@ namespace System.Diagnostics {
 
         /// <devdoc>
         /// </devdoc>
-        public void BeginInit() {
+        public void BeginInit()
+        {
             this.Close();
         }
 
         /// <devdoc>
         ///     Frees all the resources allocated by this counter
         /// </devdoc>
-        public void Close() {
+        public void Close()
+        {
             this.helpMsg = null;
             this.oldSample = CounterSample.Empty;
             this.sharedCounter = null;
@@ -386,8 +465,13 @@ namespace System.Diagnostics {
         ///     counters, frees File Mapping used by extensible counters,
         ///     unloads dll's used to read counters.
         /// </devdoc>
-        public static void CloseSharedResources() {
-            PerformanceCounterPermission permission = new PerformanceCounterPermission(PerformanceCounterPermissionAccess.Read, ".", "*");
+        public static void CloseSharedResources()
+        {
+            PerformanceCounterPermission permission = new PerformanceCounterPermission(
+                PerformanceCounterPermissionAccess.Read,
+                ".",
+                "*"
+            );
             permission.Demand();
             PerformanceCounterLib.CloseAllLibraries();
         }
@@ -395,10 +479,12 @@ namespace System.Diagnostics {
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected override void Dispose(bool disposing) {
+        protected override void Dispose(bool disposing)
+        {
             // safe to call while finalizing or disposing
             //
-            if (disposing) {
+            if (disposing)
+            {
                 //Dispose managed and unmanaged resources
                 Close();
             }
@@ -409,7 +495,8 @@ namespace System.Diagnostics {
         /// <devdoc>
         ///     Decrements counter by one using an efficient atomic operation.
         /// </devdoc>
-        public long Decrement() {
+        public long Decrement()
+        {
             if (ReadOnly)
                 ThrowReadOnly();
 
@@ -420,7 +507,8 @@ namespace System.Diagnostics {
 
         /// <devdoc>
         /// </devdoc>
-        public void EndInit() {
+        public void EndInit()
+        {
             Initialize();
         }
 
@@ -431,7 +519,8 @@ namespace System.Diagnostics {
         ///     impact on performance due to creation of the mutex.
         /// </devdoc>
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-        public long IncrementBy(long value) {
+        public long IncrementBy(long value)
+        {
             if (isReadOnly)
                 ThrowReadOnly();
 
@@ -443,7 +532,8 @@ namespace System.Diagnostics {
         /// <devdoc>
         ///     Increments counter by one using an efficient atomic operation.
         /// </devdoc>
-        public long Increment() {
+        public long Increment()
+        {
             if (isReadOnly)
                 ThrowReadOnly();
 
@@ -452,19 +542,24 @@ namespace System.Diagnostics {
             return this.sharedCounter.Increment();
         }
 
-        private void ThrowReadOnly() {
+        private void ThrowReadOnly()
+        {
             throw new InvalidOperationException(SR.GetString(SR.ReadOnlyCounter));
         }
-        
-        private static void VerifyWriteableCounterAllowed() {
-            if(EnvironmentHelpers.IsAppContainerProcess) {
+
+        private static void VerifyWriteableCounterAllowed()
+        {
+            if (EnvironmentHelpers.IsAppContainerProcess)
+            {
                 throw new NotSupportedException(SR.GetString(SR.PCNotSupportedUnderAppContainer));
             }
         }
 
-        private void Initialize() {
+        private void Initialize()
+        {
             // Keep this method small so the JIT will inline it.
-            if (!initialized && !DesignMode) {
+            if (!initialized && !DesignMode)
+            {
                 InitializeImpl();
             }
         }
@@ -473,13 +568,16 @@ namespace System.Diagnostics {
         ///     Intializes required resources
         /// </devdoc>
         //[ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-        private void InitializeImpl() {
+        private void InitializeImpl()
+        {
             bool tookLock = false;
             RuntimeHelpers.PrepareConstrainedRegions();
-            try {
+            try
+            {
                 Monitor.Enter(InstanceLockObject, ref tookLock);
 
-                if (!initialized) {
+                if (!initialized)
+                {
                     string currentCategoryName = categoryName;
                     string currentMachineName = machineName;
 
@@ -488,85 +586,165 @@ namespace System.Diagnostics {
                     if (this.counterName == String.Empty)
                         throw new InvalidOperationException(SR.GetString(SR.CounterNameMissing));
 
-                    if (this.ReadOnly) {
-                        PerformanceCounterPermission permission = new PerformanceCounterPermission(PerformanceCounterPermissionAccess.Read, currentMachineName, currentCategoryName);
+                    if (this.ReadOnly)
+                    {
+                        PerformanceCounterPermission permission = new PerformanceCounterPermission(
+                            PerformanceCounterPermissionAccess.Read,
+                            currentMachineName,
+                            currentCategoryName
+                        );
 
                         permission.Demand();
 
-                        if (!PerformanceCounterLib.CounterExists(currentMachineName, currentCategoryName, counterName))
-                            throw new InvalidOperationException(SR.GetString(SR.CounterExists, currentCategoryName, counterName));
+                        if (
+                            !PerformanceCounterLib.CounterExists(
+                                currentMachineName,
+                                currentCategoryName,
+                                counterName
+                            )
+                        )
+                            throw new InvalidOperationException(
+                                SR.GetString(SR.CounterExists, currentCategoryName, counterName)
+                            );
 
-                        PerformanceCounterCategoryType categoryType = PerformanceCounterLib.GetCategoryType(currentMachineName, currentCategoryName);
-                        if (categoryType == PerformanceCounterCategoryType.MultiInstance) {
+                        PerformanceCounterCategoryType categoryType =
+                            PerformanceCounterLib.GetCategoryType(
+                                currentMachineName,
+                                currentCategoryName
+                            );
+                        if (categoryType == PerformanceCounterCategoryType.MultiInstance)
+                        {
                             if (String.IsNullOrEmpty(instanceName))
-                                throw new InvalidOperationException(SR.GetString(SR.MultiInstanceOnly, currentCategoryName));
-                        } else if (categoryType == PerformanceCounterCategoryType.SingleInstance) {
+                                throw new InvalidOperationException(
+                                    SR.GetString(SR.MultiInstanceOnly, currentCategoryName)
+                                );
+                        }
+                        else if (categoryType == PerformanceCounterCategoryType.SingleInstance)
+                        {
                             if (!String.IsNullOrEmpty(instanceName))
-                                throw new InvalidOperationException(SR.GetString(SR.SingleInstanceOnly, currentCategoryName));
+                                throw new InvalidOperationException(
+                                    SR.GetString(SR.SingleInstanceOnly, currentCategoryName)
+                                );
                         }
 
                         if (instanceLifetime != PerformanceCounterInstanceLifetime.Global)
-                            throw new InvalidOperationException(SR.GetString(SR.InstanceLifetimeProcessonReadOnly));
+                            throw new InvalidOperationException(
+                                SR.GetString(SR.InstanceLifetimeProcessonReadOnly)
+                            );
 
                         this.initialized = true;
-                    } else {
-                        PerformanceCounterPermission permission = new PerformanceCounterPermission(PerformanceCounterPermissionAccess.Write, currentMachineName, currentCategoryName);
+                    }
+                    else
+                    {
+                        PerformanceCounterPermission permission = new PerformanceCounterPermission(
+                            PerformanceCounterPermissionAccess.Write,
+                            currentMachineName,
+                            currentCategoryName
+                        );
                         permission.Demand();
 
-                        if (currentMachineName != "." && String.Compare(currentMachineName, PerformanceCounterLib.ComputerName, StringComparison.OrdinalIgnoreCase) != 0)
+                        if (
+                            currentMachineName != "."
+                            && String.Compare(
+                                currentMachineName,
+                                PerformanceCounterLib.ComputerName,
+                                StringComparison.OrdinalIgnoreCase
+                            ) != 0
+                        )
                             throw new InvalidOperationException(SR.GetString(SR.RemoteWriting));
 
                         SharedUtils.CheckNtEnvironment();
 
-                        if (!PerformanceCounterLib.IsCustomCategory(currentMachineName, currentCategoryName))
+                        if (
+                            !PerformanceCounterLib.IsCustomCategory(
+                                currentMachineName,
+                                currentCategoryName
+                            )
+                        )
                             throw new InvalidOperationException(SR.GetString(SR.NotCustomCounter));
 
                         // check category type
-                        PerformanceCounterCategoryType categoryType = PerformanceCounterLib.GetCategoryType(currentMachineName, currentCategoryName);
-                        if (categoryType == PerformanceCounterCategoryType.MultiInstance) {
+                        PerformanceCounterCategoryType categoryType =
+                            PerformanceCounterLib.GetCategoryType(
+                                currentMachineName,
+                                currentCategoryName
+                            );
+                        if (categoryType == PerformanceCounterCategoryType.MultiInstance)
+                        {
                             if (String.IsNullOrEmpty(instanceName))
-                                throw new InvalidOperationException(SR.GetString(SR.MultiInstanceOnly, currentCategoryName));
-                        } else if (categoryType == PerformanceCounterCategoryType.SingleInstance) {
+                                throw new InvalidOperationException(
+                                    SR.GetString(SR.MultiInstanceOnly, currentCategoryName)
+                                );
+                        }
+                        else if (categoryType == PerformanceCounterCategoryType.SingleInstance)
+                        {
                             if (!String.IsNullOrEmpty(instanceName))
-                                throw new InvalidOperationException(SR.GetString(SR.SingleInstanceOnly, currentCategoryName));
+                                throw new InvalidOperationException(
+                                    SR.GetString(SR.SingleInstanceOnly, currentCategoryName)
+                                );
                         }
 
-                        if (String.IsNullOrEmpty(instanceName) && InstanceLifetime == PerformanceCounterInstanceLifetime.Process)
-                            throw new InvalidOperationException(SR.GetString(SR.InstanceLifetimeProcessforSingleInstance));
+                        if (
+                            String.IsNullOrEmpty(instanceName)
+                            && InstanceLifetime == PerformanceCounterInstanceLifetime.Process
+                        )
+                            throw new InvalidOperationException(
+                                SR.GetString(SR.InstanceLifetimeProcessforSingleInstance)
+                            );
 
-                        this.sharedCounter = new SharedPerformanceCounter(currentCategoryName.ToLower(CultureInfo.InvariantCulture), counterName.ToLower(CultureInfo.InvariantCulture), instanceName.ToLower(CultureInfo.InvariantCulture), instanceLifetime);
+                        this.sharedCounter = new SharedPerformanceCounter(
+                            currentCategoryName.ToLower(CultureInfo.InvariantCulture),
+                            counterName.ToLower(CultureInfo.InvariantCulture),
+                            instanceName.ToLower(CultureInfo.InvariantCulture),
+                            instanceLifetime
+                        );
                         this.initialized = true;
                     }
                 }
-            } finally {
+            }
+            finally
+            {
                 if (tookLock)
                     Monitor.Exit(InstanceLockObject);
             }
-
         }
 
-         // Will cause an update, raw value
+        // Will cause an update, raw value
         /// <devdoc>
         ///     Obtains a counter sample and returns the raw value for it.
         /// </devdoc>
-        public CounterSample NextSample() {
+        public CounterSample NextSample()
+        {
             string currentCategoryName = categoryName;
             string currentMachineName = machineName;
-             
-            PerformanceCounterPermission permission = new PerformanceCounterPermission(PerformanceCounterPermissionAccess.Read, currentMachineName, currentCategoryName);
+
+            PerformanceCounterPermission permission = new PerformanceCounterPermission(
+                PerformanceCounterPermissionAccess.Read,
+                currentMachineName,
+                currentCategoryName
+            );
             permission.Demand();
 
             Initialize();
-            CategorySample categorySample = PerformanceCounterLib.GetCategorySample(currentMachineName, currentCategoryName);
-            CounterDefinitionSample counterSample = categorySample.GetCounterDefinitionSample(this.counterName);
+            CategorySample categorySample = PerformanceCounterLib.GetCategorySample(
+                currentMachineName,
+                currentCategoryName
+            );
+            CounterDefinitionSample counterSample = categorySample.GetCounterDefinitionSample(
+                this.counterName
+            );
             this.counterType = counterSample.CounterType;
-            if (!categorySample.IsMultiInstance) {
+            if (!categorySample.IsMultiInstance)
+            {
                 if (instanceName != null && instanceName.Length != 0)
-                    throw new InvalidOperationException(SR.GetString(SR.InstanceNameProhibited, this.instanceName));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.InstanceNameProhibited, this.instanceName)
+                    );
 
                 return counterSample.GetSingleValue();
             }
-            else {
+            else
+            {
                 if (instanceName == null || instanceName.Length == 0)
                     throw new InvalidOperationException(SR.GetString(SR.InstanceNameRequired));
 
@@ -579,7 +757,8 @@ namespace System.Diagnostics {
         ///     NOTE: For counters whose calculated value depend upon 2 counter reads,
         ///           the very first read will return 0.0.
         /// </devdoc>
-        public float NextValue() {
+        public float NextValue()
+        {
             //No need to initialize or Demand, since NextSample already does.
             CounterSample newSample = NextSample();
             float retVal = 0.0f;
@@ -594,12 +773,16 @@ namespace System.Diagnostics {
         ///     Removes this counter instance from the shared memory
         /// </devdoc>
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-        public void RemoveInstance() {
+        public void RemoveInstance()
+        {
             if (isReadOnly)
                 throw new InvalidOperationException(SR.GetString(SR.ReadOnlyRemoveInstance));
 
             Initialize();
-            sharedCounter.RemoveInstance(this.instanceName.ToLower(CultureInfo.InvariantCulture), instanceLifetime);
+            sharedCounter.RemoveInstance(
+                this.instanceName.ToLower(CultureInfo.InvariantCulture),
+                instanceLifetime
+            );
         }
     }
 }

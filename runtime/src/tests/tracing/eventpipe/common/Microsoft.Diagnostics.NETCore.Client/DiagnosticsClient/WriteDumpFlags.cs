@@ -8,6 +8,6 @@ namespace Microsoft.Diagnostics.NETCore.Client
         None = 0x00,
         LoggingEnabled = 0x01,
         VerboseLoggingEnabled = 0x02,
-        CrashReportEnabled = 0x04
+        CrashReportEnabled = 0x04,
     }
 }

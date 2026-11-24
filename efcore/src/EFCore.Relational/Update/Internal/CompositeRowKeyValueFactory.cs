@@ -40,7 +40,9 @@ public class CompositeRowKeyValueFactory : CompositeRowValueFactory, IRowKeyValu
             throw new InvalidOperationException(
                 RelationalStrings.NullKeyValue(
                     _constraint.Table.SchemaQualifiedName,
-                    FindNullColumnInKeyValues(keyValues).Name));
+                    FindNullColumnInKeyValues(keyValues).Name
+                )
+            );
         }
 
         return keyValues;
@@ -59,7 +61,9 @@ public class CompositeRowKeyValueFactory : CompositeRowValueFactory, IRowKeyValu
             throw new InvalidOperationException(
                 RelationalStrings.NullKeyValue(
                     _constraint.Table.SchemaQualifiedName,
-                    FindNullColumnInKeyValues(key).Name));
+                    FindNullColumnInKeyValues(key).Name
+                )
+            );
         }
 
         return key;
@@ -71,14 +75,19 @@ public class CompositeRowKeyValueFactory : CompositeRowValueFactory, IRowKeyValu
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual object?[] CreateKeyValue(IReadOnlyModificationCommand command, bool fromOriginalValues = false)
+    public virtual object?[] CreateKeyValue(
+        IReadOnlyModificationCommand command,
+        bool fromOriginalValues = false
+    )
     {
         if (!TryCreateDependentKeyValue(command, fromOriginalValues, out var keyValue))
         {
             throw new InvalidOperationException(
                 RelationalStrings.NullKeyValue(
                     _constraint.Table.SchemaQualifiedName,
-                    FindNullColumnInKeyValues(keyValue).Name));
+                    FindNullColumnInKeyValues(keyValue).Name
+                )
+            );
         }
 
         return keyValue;
@@ -108,11 +117,15 @@ public class CompositeRowKeyValueFactory : CompositeRowValueFactory, IRowKeyValu
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual object CreateEquatableKeyValue(IReadOnlyModificationCommand command, bool fromOriginalValues = false)
-        => new EquatableKeyValue<object?[]>(
+    public virtual object CreateEquatableKeyValue(
+        IReadOnlyModificationCommand command,
+        bool fromOriginalValues = false
+    ) =>
+        new EquatableKeyValue<object?[]>(
             _constraint,
             CreateKeyValue(command, fromOriginalValues),
-            EqualityComparer);
+            EqualityComparer
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -120,6 +133,8 @@ public class CompositeRowKeyValueFactory : CompositeRowValueFactory, IRowKeyValu
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    object[] IRowKeyValueFactory.CreateKeyValue(IReadOnlyModificationCommand command, bool fromOriginalValues)
-        => CreateKeyValue(command, fromOriginalValues)!;
+    object[] IRowKeyValueFactory.CreateKeyValue(
+        IReadOnlyModificationCommand command,
+        bool fromOriginalValues
+    ) => CreateKeyValue(command, fromOriginalValues)!;
 }

@@ -2,7 +2,5 @@
 
 public class TestClass
 {
-	public static void Foo (E e)
-	{
-	}
+    public static void Foo(E e) { }
 }

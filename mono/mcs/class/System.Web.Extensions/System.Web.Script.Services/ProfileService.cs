@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,128 +29,160 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Web.Services;
 using System.Configuration;
+using System.Text;
 using System.Web.Configuration;
-using System.Web.Script.Serialization;
 using System.Web.Profile;
+using System.Web.Script.Serialization;
+using System.Web.Services;
 
 namespace System.Web.Script.Services
 {
-	sealed class ProfileService
-	{
-		public const string DefaultWebServicePath = "/Profile_JSON_AppService.axd";
+    sealed class ProfileService
+    {
+        public const string DefaultWebServicePath = "/Profile_JSON_AppService.axd";
 
-		readonly ScriptingProfileServiceSection _section;
+        readonly ScriptingProfileServiceSection _section;
 
-		public ProfileService () {
-			_section = (ScriptingProfileServiceSection) WebConfigurationManager.GetSection ("system.web.extensions/scripting/webServices/profileService");
-		}
+        public ProfileService()
+        {
+            _section = (ScriptingProfileServiceSection)
+                WebConfigurationManager.GetSection(
+                    "system.web.extensions/scripting/webServices/profileService"
+                );
+        }
 
-		ScriptingProfileServiceSection ScriptingProfileServiceSection {
-			get {
-				if (_section == null || !_section.Enabled)
-					throw new InvalidOperationException ("Profile service is disabled.");
+        ScriptingProfileServiceSection ScriptingProfileServiceSection
+        {
+            get
+            {
+                if (_section == null || !_section.Enabled)
+                    throw new InvalidOperationException("Profile service is disabled.");
 
-				return _section;
-			}
-		}
+                return _section;
+            }
+        }
 
-		public IDictionary <string, object> GetProfileDictionary (string[] properties)
-		{
-			var ret = new Dictionary <string, object> ();
+        public IDictionary<string, object> GetProfileDictionary(string[] properties)
+        {
+            var ret = new Dictionary<string, object>();
 
-			int len = properties != null ? properties.Length : 0;
-			if (len <= 0)
-				return ret;
+            int len = properties != null ? properties.Length : 0;
+            if (len <= 0)
+                return ret;
 
-			ProfileBase profile = HttpContext.Current.Profile;
-			string name;
-			int dot;
-			object value;
-			
-			for (int i = 0; i < len; i++) {
-				name = properties [i];
-				dot = name.IndexOf ('.');
-				value = (dot > 0) ? profile.GetProfileGroup (name.Substring (0, dot)).GetPropertyValue (name.Substring (dot + 1)) : profile.GetPropertyValue (name);
-				ret.Add (name, value);
-			}
+            ProfileBase profile = HttpContext.Current.Profile;
+            string name;
+            int dot;
+            object value;
 
-			return ret;
-		}
-		
-		[WebMethod()]
-		public IDictionary<string, object> GetAllPropertiesForCurrentUser (bool authenticatedUserOnly) {
-			return GetProfileDictionary (ScriptingProfileServiceSection.ReadAccessProperties);
-		}
+            for (int i = 0; i < len; i++)
+            {
+                name = properties[i];
+                dot = name.IndexOf('.');
+                value =
+                    (dot > 0)
+                        ? profile
+                            .GetProfileGroup(name.Substring(0, dot))
+                            .GetPropertyValue(name.Substring(dot + 1))
+                        : profile.GetPropertyValue(name);
+                ret.Add(name, value);
+            }
 
-		[WebMethod ()]
-		public IDictionary<string, object> GetPropertiesForCurrentUser (string [] properties, bool authenticatedUserOnly) {
-			if (properties == null)
-				return GetAllPropertiesForCurrentUser (authenticatedUserOnly);
+            return ret;
+        }
 
-			string [] raProps = ScriptingProfileServiceSection.ReadAccessPropertiesNoCopy;
+        [WebMethod()]
+        public IDictionary<string, object> GetAllPropertiesForCurrentUser(
+            bool authenticatedUserOnly
+        )
+        {
+            return GetProfileDictionary(ScriptingProfileServiceSection.ReadAccessProperties);
+        }
 
-			List<string> list = null;
-			for (int i = 0; i < properties.Length; i++) {
-				string prop = properties [i];
-				if (prop == null)
-					throw new ArgumentNullException ("properties[" + i + "]");
+        [WebMethod()]
+        public IDictionary<string, object> GetPropertiesForCurrentUser(
+            string[] properties,
+            bool authenticatedUserOnly
+        )
+        {
+            if (properties == null)
+                return GetAllPropertiesForCurrentUser(authenticatedUserOnly);
 
-				if (IsPropertyConfigured(raProps, prop)) {
-					if (list != null)
-						list.Add(prop);
-				}
-				else if (list == null) {
-					list = new List<string> (properties.Length - 1);
-					for (int k = 0; k < i; k++)
-						list.Add (properties [k]);
-				}
-			}
+            string[] raProps = ScriptingProfileServiceSection.ReadAccessPropertiesNoCopy;
 
-			return GetProfileDictionary (list != null ? list.ToArray () : properties);
-		}
+            List<string> list = null;
+            for (int i = 0; i < properties.Length; i++)
+            {
+                string prop = properties[i];
+                if (prop == null)
+                    throw new ArgumentNullException("properties[" + i + "]");
 
-		[WebMethod ()]
-		public string [] SetPropertiesForCurrentUser (Dictionary<string, object> values, bool authenticatedUserOnly) {
-			if (values == null)
-				return new string [] { };
+                if (IsPropertyConfigured(raProps, prop))
+                {
+                    if (list != null)
+                        list.Add(prop);
+                }
+                else if (list == null)
+                {
+                    list = new List<string>(properties.Length - 1);
+                    for (int k = 0; k < i; k++)
+                        list.Add(properties[k]);
+                }
+            }
 
-			string [] waProps = ScriptingProfileServiceSection.WriteAccessPropertiesNoCopy;
+            return GetProfileDictionary(list != null ? list.ToArray() : properties);
+        }
 
-			List<string> list = new List<string> ();
-			ProfileBase profile = HttpContext.Current.Profile;
-			foreach (KeyValuePair<string, object> pair in values) {
-				try {
-					string name = pair.Key;
-					if (!IsPropertyConfigured (waProps, name))
-						continue;
+        [WebMethod()]
+        public string[] SetPropertiesForCurrentUser(
+            Dictionary<string, object> values,
+            bool authenticatedUserOnly
+        )
+        {
+            if (values == null)
+                return new string[] { };
 
-					int dot = name.IndexOf ('.');
-					if (dot > 0)
-						profile.GetProfileGroup (name.Substring (0, dot))
-							.SetPropertyValue (name.Substring (dot + 1), pair.Value);
-					else
-						profile.SetPropertyValue (name, pair.Value);
-				}
-				catch {
-					list.Add (pair.Key);
-				}
-			}
+            string[] waProps = ScriptingProfileServiceSection.WriteAccessPropertiesNoCopy;
 
-			return list.ToArray ();
-		}
+            List<string> list = new List<string>();
+            ProfileBase profile = HttpContext.Current.Profile;
+            foreach (KeyValuePair<string, object> pair in values)
+            {
+                try
+                {
+                    string name = pair.Key;
+                    if (!IsPropertyConfigured(waProps, name))
+                        continue;
 
-		static bool IsPropertyConfigured (string [] configuredProperties, string propertyToCheck) {
-			if (configuredProperties == null)
-				return false;
+                    int dot = name.IndexOf('.');
+                    if (dot > 0)
+                        profile
+                            .GetProfileGroup(name.Substring(0, dot))
+                            .SetPropertyValue(name.Substring(dot + 1), pair.Value);
+                    else
+                        profile.SetPropertyValue(name, pair.Value);
+                }
+                catch
+                {
+                    list.Add(pair.Key);
+                }
+            }
 
-			bool found = false;
-			for (int i = 0; !found && i < configuredProperties.Length; i++)
-				found = configuredProperties [i].Equals (propertyToCheck, StringComparison.OrdinalIgnoreCase);
+            return list.ToArray();
+        }
 
-			return found;
-		}
-	}
+        static bool IsPropertyConfigured(string[] configuredProperties, string propertyToCheck)
+        {
+            if (configuredProperties == null)
+                return false;
+
+            bool found = false;
+            for (int i = 0; !found && i < configuredProperties.Length; i++)
+                found = configuredProperties[i]
+                    .Equals(propertyToCheck, StringComparison.OrdinalIgnoreCase);
+
+            return found;
+        }
+    }
 }

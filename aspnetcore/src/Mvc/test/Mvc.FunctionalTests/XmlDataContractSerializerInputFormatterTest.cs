@@ -100,9 +100,8 @@ public class XmlDataContractSerializerInputFormatterTest : IClassFixture<MvcTest
         Assert.Equal(expectedErrorMessages.Count(), modelBindingInfo.ModelStateErrorMessages.Count);
         foreach (var expectedErrorMessage in expectedErrorMessages)
         {
-            Assert.Contains(
-                modelBindingInfo.ModelStateErrorMessages,
-                (actualErrorMessage) => actualErrorMessage.Equals(expectedErrorMessage)
+            Assert.Contains(modelBindingInfo.ModelStateErrorMessages, (actualErrorMessage) =>
+                actualErrorMessage.Equals(expectedErrorMessage)
             );
         }
     }

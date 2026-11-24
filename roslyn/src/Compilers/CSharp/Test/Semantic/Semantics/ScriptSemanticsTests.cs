@@ -21,9 +21,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
     public class ScriptSemanticsTests : CSharpTestBase
     {
-        private static CompilationReference TaskFacadeAssembly(bool includeNamespaceAroundTaskExtension = true)
+        private static CompilationReference TaskFacadeAssembly(
+            bool includeNamespaceAroundTaskExtension = true
+        )
         {
-            var taskAssembly = @"
+            var taskAssembly =
+                @"
 namespace System.Runtime.CompilerServices {
     public interface IAsyncStateMachine {
         void MoveNext();
@@ -67,7 +70,8 @@ namespace System.Threading.Tasks {
     public class Task<T> {}
 }
 ";
-            var extensionSource = @"
+            var extensionSource =
+                @"
     public static class MyExtensions {
         public static System.Threading.Tasks.Awaiter<T> GetAwaiter<T>(this System.Threading.Tasks.Task<T> task) {
             return null;
@@ -84,7 +88,10 @@ namespace System.Threading.Tasks {
                 taskAssembly = taskAssembly + "\n" + extensionSource;
             }
 
-            var taskCompilation = CreateEmptyCompilation(taskAssembly, references: new[] { MscorlibRef_v20 });
+            var taskCompilation = CreateEmptyCompilation(
+                taskAssembly,
+                references: new[] { MscorlibRef_v20 }
+            );
             taskCompilation.VerifyDiagnostics();
             return taskCompilation.ToMetadataReference();
         }
@@ -93,33 +100,37 @@ namespace System.Threading.Tasks {
         [Fact]
         public void NonStandardTaskImplementation_NoGlobalUsing_NoScriptUsing()
         {
-
             var script = CreateEmptyCompilation(
                 source: @" System.Console.Write(""complete"");",
                 parseOptions: TestOptions.Script,
                 options: TestOptions.DebugExe,
-                references: new MetadataReference[] { TaskFacadeAssembly(), MscorlibRef_v20 });
+                references: new MetadataReference[] { TaskFacadeAssembly(), MscorlibRef_v20 }
+            );
 
             script.VerifyEmitDiagnostics(
                 // error CS1061: 'Task<object>' does not contain a definition for 'GetAwaiter' and no extension method 'GetAwaiter' accepting a first argument of type 'Task<object>' could be found (are you missing a using directive or an assembly reference?)
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "").WithArguments("System.Threading.Tasks.Task<object>", "GetAwaiter").WithLocation(1, 1));
-
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "")
+                    .WithArguments("System.Threading.Tasks.Task<object>", "GetAwaiter")
+                    .WithLocation(1, 1)
+            );
         }
 
         [WorkItem(19048, "https://github.com/dotnet/roslyn/pull/19623")]
         [Fact]
         public void NonStandardTaskImplementation_NoGlobalUsing_NoScriptUsing_NoNamespace()
         {
-
             var script = CreateEmptyCompilation(
                 source: @" System.Console.Write(""complete"");",
                 parseOptions: TestOptions.Script,
                 options: TestOptions.DebugExe,
-                references: new MetadataReference[] { TaskFacadeAssembly(false), MscorlibRef_v20 });
+                references: new MetadataReference[] { TaskFacadeAssembly(false), MscorlibRef_v20 }
+            );
 
             script.VerifyEmitDiagnostics();
             var compiled = CompileAndVerify(script);
-            compiled.VerifyIL("<Main>", @"
+            compiled.VerifyIL(
+                "<Main>",
+                @"
 {
   // Code size       22 (0x16)
   .maxstack  1
@@ -129,7 +140,8 @@ namespace System.Threading.Tasks {
   IL_000f:  callvirt   ""object System.Threading.Tasks.Awaiter<object>.GetResult()""
   IL_0014:  pop
   IL_0015:  ret
-}");
+}"
+            );
         }
 
         [WorkItem(19048, "https://github.com/dotnet/roslyn/pull/19623")]
@@ -140,16 +152,22 @@ namespace System.Threading.Tasks {
                 source: @"interface I {}",
                 parseOptions: TestOptions.Script.WithNoRefSafetyRulesAttribute(),
                 options: TestOptions.DebugExe.WithUsings("Hidden"),
-                references: new MetadataReference[] { TaskFacadeAssembly() });
+                references: new MetadataReference[] { TaskFacadeAssembly() }
+            );
             script.VerifyEmitDiagnostics(
                 // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
                 Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
                 // (1,1): error CS0518: Predefined type 'System.Object' is not defined or imported
                 // interface I {}
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "interface I {}").WithArguments("System.Object").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "interface I {}")
+                    .WithArguments("System.Object")
+                    .WithLocation(1, 1),
                 // error CS0518: Predefined type 'System.Void' is not defined or imported
                 //
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "").WithArguments("System.Void").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "")
+                    .WithArguments("System.Void")
+                    .WithLocation(1, 1)
+            );
         }
 
         [WorkItem(19048, "https://github.com/dotnet/roslyn/pull/19623")]
@@ -160,12 +178,15 @@ namespace System.Threading.Tasks {
                 source: @" System.Console.Write(""complete"");",
                 parseOptions: TestOptions.Script,
                 options: TestOptions.DebugExe.WithUsings("Hidden"),
-                references: new MetadataReference[] { TaskFacadeAssembly(), MscorlibRef_v20 });
+                references: new MetadataReference[] { TaskFacadeAssembly(), MscorlibRef_v20 }
+            );
 
             script.VerifyEmitDiagnostics();
 
             var compiled = CompileAndVerify(script);
-            compiled.VerifyIL("<Main>", @"
+            compiled.VerifyIL(
+                "<Main>",
+                @"
 {
   // Code size       22 (0x16)
   .maxstack  1
@@ -175,7 +196,8 @@ namespace System.Threading.Tasks {
   IL_000f:  callvirt   ""object System.Threading.Tasks.Awaiter<object>.GetResult()""
   IL_0014:  pop
   IL_0015:  ret
-}");
+}"
+            );
         }
 
         [WorkItem(19048, "https://github.com/dotnet/roslyn/pull/19623")]
@@ -189,12 +211,15 @@ new System.Threading.Tasks.Task<int>().GetAwaiter();
 System.Console.Write(""complete"");",
                 parseOptions: TestOptions.Script,
                 options: TestOptions.DebugExe,
-                references: new MetadataReference[] { TaskFacadeAssembly(), MscorlibRef_v20 });
+                references: new MetadataReference[] { TaskFacadeAssembly(), MscorlibRef_v20 }
+            );
 
             script.VerifyEmitDiagnostics(
                 // error CS1061: 'Task<object>' does not contain a definition for 'GetAwaiter' and no extension method 'GetAwaiter' accepting a first argument of type 'Task<object>' could be found (are you missing a using directive or an assembly reference?)
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "").WithArguments("System.Threading.Tasks.Task<object>", "GetAwaiter").WithLocation(1, 1));
-
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "")
+                    .WithArguments("System.Threading.Tasks.Task<object>", "GetAwaiter")
+                    .WithLocation(1, 1)
+            );
         }
 
         [WorkItem(19048, "https://github.com/dotnet/roslyn/pull/19623")]
@@ -208,10 +233,13 @@ new System.Threading.Tasks.Task<int>().GetAwaiter();
 System.Console.Write(""complete"");",
                 parseOptions: TestOptions.Script,
                 options: TestOptions.DebugExe.WithUsings("Hidden"),
-                references: new MetadataReference[] { TaskFacadeAssembly(), MscorlibRef_v20 });
+                references: new MetadataReference[] { TaskFacadeAssembly(), MscorlibRef_v20 }
+            );
 
             var compiled = CompileAndVerify(script);
-            compiled.VerifyIL("<Main>", @"
+            compiled.VerifyIL(
+                "<Main>",
+                @"
 {
   // Code size       22 (0x16)
   .maxstack  1
@@ -221,27 +249,35 @@ System.Console.Write(""complete"");",
   IL_000f:  callvirt   ""object System.Threading.Tasks.Awaiter<object>.GetResult()""
   IL_0014:  pop
   IL_0015:  ret
-}");
-
+}"
+            );
         }
 
         [WorkItem(543890, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543890")]
         [Fact]
         public void ThisIndexerAccessInScript()
         {
-            string test = @"
+            string test =
+                @"
 this[1]
 ";
-            var compilation = CreateCompilationWithMscorlib45(test, parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                test,
+                parseOptions: TestOptions.Script
+            );
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
             compilation.VerifyDiagnostics(
                 // (2,1): error CS0027: Keyword 'this' is not available in the current context
                 // this[1]
-                Diagnostic(ErrorCode.ERR_ThisInBadContext, "this"));
+                Diagnostic(ErrorCode.ERR_ThisInBadContext, "this")
+            );
 
-            var syntax = tree.GetCompilationUnitRoot().DescendantNodes().OfType<ExpressionSyntax>().First();
+            var syntax = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<ExpressionSyntax>()
+                .First();
             Assert.Equal(SyntaxKind.ElementAccessExpression, syntax.Kind());
 
             var summary = model.GetSemanticInfoSummary(syntax);
@@ -262,11 +298,15 @@ this[1]
 
             var tree = SyntaxFactory.ParseSyntaxTree(text, options: TestOptions.Script);
 
-            var compilation = CreateCompilationWithMscorlib45(new[] { tree }, options: TestOptions.ReleaseExe.WithScriptClassName("Script"));
+            var compilation = CreateCompilationWithMscorlib45(
+                new[] { tree },
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script")
+            );
 
             compilation.VerifyDiagnostics(
                 // (1,13): warning CS7022: The entry point of the program is global script code; ignoring 'Main()' entry point.
-                Diagnostic(ErrorCode.WRN_MainIgnored, "Main").WithArguments("Main()"));
+                Diagnostic(ErrorCode.WRN_MainIgnored, "Main").WithArguments("Main()")
+            );
         }
 
         [Fact]
@@ -285,48 +325,77 @@ this[1]
 
             var tree = SyntaxFactory.ParseSyntaxTree(text, options: TestOptions.Script);
 
-            var compilation = CreateCompilationWithMscorlib45(new[] { tree }, options: TestOptions.ReleaseExe.WithScriptClassName("Script"));
+            var compilation = CreateCompilationWithMscorlib45(
+                new[] { tree },
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script")
+            );
 
             compilation.VerifyDiagnostics(
                 // (1,13): warning CS7022: The entry point of the program is global script code; ignoring 'Main()' entry point.
-                Diagnostic(ErrorCode.WRN_MainIgnored, "Main").WithArguments("Main()"));
+                Diagnostic(ErrorCode.WRN_MainIgnored, "Main").WithArguments("Main()")
+            );
         }
 
-        [ConditionalFact(typeof(DesktopOnly), Reason = "https://github.com/dotnet/roslyn/issues/28001")]
+        [ConditionalFact(
+            typeof(DesktopOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/28001"
+        )]
         public void NoReferences()
         {
-            var submission = CSharpCompilation.CreateScriptCompilation("test", syntaxTree: SyntaxFactory.ParseSyntaxTree("1", options: TestOptions.Script), returnType: typeof(int));
+            var submission = CSharpCompilation.CreateScriptCompilation(
+                "test",
+                syntaxTree: SyntaxFactory.ParseSyntaxTree("1", options: TestOptions.Script),
+                returnType: typeof(int)
+            );
             submission.VerifyDiagnostics(
                 // (1,1): error CS0518: Predefined type 'System.Object' is not defined or imported
                 // 1
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "1").WithArguments("System.Object").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "1")
+                    .WithArguments("System.Object")
+                    .WithLocation(1, 1),
                 // error CS0518: Predefined type 'System.Object' is not defined or imported
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound).WithArguments("System.Object").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound)
+                    .WithArguments("System.Object")
+                    .WithLocation(1, 1),
                 // error CS0518: Predefined type 'System.Threading.Tasks.Task`1' is not defined or imported
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound).WithArguments("System.Threading.Tasks.Task`1").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound)
+                    .WithArguments("System.Threading.Tasks.Task`1")
+                    .WithLocation(1, 1),
                 // error CS0400: The type or namespace name 'System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' could not be found in the global namespace (are you missing an assembly reference?)
-                Diagnostic(ErrorCode.ERR_GlobalSingleTypeNameNotFound).WithArguments("System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_GlobalSingleTypeNameNotFound)
+                    .WithArguments(
+                        "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )
+                    .WithLocation(1, 1),
                 // error CS0518: Predefined type 'System.Object' is not defined or imported
                 //
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "").WithArguments("System.Object").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "")
+                    .WithArguments("System.Object")
+                    .WithLocation(1, 1),
                 // error CS0518: Predefined type 'System.Object' is not defined or imported
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound).WithArguments("System.Object").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound)
+                    .WithArguments("System.Object")
+                    .WithLocation(1, 1),
                 // (1,1): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 // 1
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "1").WithArguments("System.Int32").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "1")
+                    .WithArguments("System.Int32")
+                    .WithLocation(1, 1)
+            );
         }
 
         [Fact]
         public void Namespaces()
         {
-            var c = CreateSubmission(@"
+            var c = CreateSubmission(
+                @"
 namespace N1
 {
    class A { public int Goo() { return 2; }}
 }
-");
-            c.VerifyDiagnostics(
-                Diagnostic(ErrorCode.ERR_NamespaceNotAllowedInScript, "namespace"));
+"
+            );
+            c.VerifyDiagnostics(Diagnostic(ErrorCode.ERR_NamespaceNotAllowedInScript, "namespace"));
         }
 
         [Fact]
@@ -355,7 +424,8 @@ namespace N1
             //   * Goo.Script.A
             //   * Goo.B : Goo.Script.A
 
-            string test = @"
+            string test =
+                @"
 public class A { }
 namespace Goo
 {
@@ -367,7 +437,8 @@ namespace Goo
             var compilation = CSharpCompilation.Create(
                 assemblyName: "Test",
                 options: TestOptions.ReleaseExe.WithScriptClassName("Goo.Script"),
-                syntaxTrees: new[] { tree });
+                syntaxTrees: new[] { tree }
+            );
 
             var global = compilation.GlobalNamespace;
 
@@ -388,7 +459,8 @@ namespace Goo
         [Fact]
         public void NamespaceWithBothInteractiveAndNoninteractiveImplicitTypes()
         {
-            string test = @"
+            string test =
+                @"
 namespace Goo { void F() { } }
 void G() { }
 G();
@@ -398,7 +470,8 @@ G();
             var compilation = CSharpCompilation.Create(
                 assemblyName: "Test",
                 options: TestOptions.ReleaseExe.WithScriptClassName("Goo.Script"),
-                syntaxTrees: new[] { tree });
+                syntaxTrees: new[] { tree }
+            );
 
             var global = compilation.GlobalNamespace;
             var members = global.GetMembers().Where(m => !m.IsImplicitlyDeclared).AsImmutable();
@@ -417,7 +490,10 @@ G();
                 if (cls.IsScriptClass)
                 {
                     Assert.False(cls.IsImplicitClass);
-                    AssertEx.SetEqual(new[] { "<Initialize>", "G", ".ctor", "<Main>" }, methods.Select(m => m.Name));
+                    AssertEx.SetEqual(
+                        new[] { "<Initialize>", "G", ".ctor", "<Main>" },
+                        methods.Select(m => m.Name)
+                    );
                 }
                 else
                 {
@@ -432,7 +508,8 @@ G();
         [Fact]
         public void TopLevelTypesShouldBeNestedInScriptClass()
         {
-            string test = @"
+            string test =
+                @"
 partial class C { }
 partial class C { }
 interface D { }
@@ -444,7 +521,8 @@ delegate void G();
 
             var compilation = CreateCompilationWithMscorlib45(
                 new[] { tree },
-                options: TestOptions.ReleaseExe.WithScriptClassName("Script"));
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script")
+            );
 
             var global = compilation.GlobalNamespace;
             ImmutableArray<NamedTypeSymbol> members;
@@ -478,26 +556,35 @@ delegate void G();
         [Fact]
         public void UsingStaticClass()
         {
-            string test = @"
+            string test =
+                @"
 using static System.Console;
 WriteLine(""hello"");
 ";
-            var tree = SyntaxFactory.ParseSyntaxTree(test, options: TestOptions.Script.WithLanguageVersion(LanguageVersion.CSharp6));
+            var tree = SyntaxFactory.ParseSyntaxTree(
+                test,
+                options: TestOptions.Script.WithLanguageVersion(LanguageVersion.CSharp6)
+            );
 
             var compilation = CreateCompilationWithMscorlib45(
                 new[] { tree },
-                options: TestOptions.ReleaseExe.WithScriptClassName("Script"));
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script")
+            );
 
-            var expr = (((tree.
-                GetCompilationUnitRoot() as CompilationUnitSyntax).
-                Members[0] as GlobalStatementSyntax).
-                Statement as ExpressionStatementSyntax).
-                Expression;
+            var expr = (
+                (
+                    (tree.GetCompilationUnitRoot() as CompilationUnitSyntax).Members[0]
+                    as GlobalStatementSyntax
+                ).Statement as ExpressionStatementSyntax
+            ).Expression;
 
             var model = compilation.GetSemanticModel(tree);
             var info = model.GetSymbolInfo(expr);
             Assert.NotNull(info.Symbol);
-            Assert.Equal("void System.Console.WriteLine(System.String value)", info.Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "void System.Console.WriteLine(System.String value)",
+                info.Symbol.ToTestDisplayString()
+            );
         }
 
         [WorkItem(3817, "https://github.com/dotnet/roslyn/issues/3817")]
@@ -514,15 +601,20 @@ WriteLine(""hello"");
         public void Labels()
         {
             string source =
-@"L0: ;
+                @"L0: ;
 goto L0;";
             var tree = Parse(source, options: TestOptions.Script);
-            var model = CreateCompilationWithMscorlib45(new[] { tree }).GetSemanticModel(tree, ignoreAccessibility: false);
+            var model = CreateCompilationWithMscorlib45(new[] { tree })
+                .GetSemanticModel(tree, ignoreAccessibility: false);
             var root = tree.GetCompilationUnitRoot();
-            var statements = root.ChildNodes().Select(n => ((GlobalStatementSyntax)n).Statement).ToArray();
+            var statements = root.ChildNodes()
+                .Select(n => ((GlobalStatementSyntax)n).Statement)
+                .ToArray();
             var symbol0 = model.GetDeclaredSymbol((LabeledStatementSyntax)statements[0]);
             Assert.NotNull(symbol0);
-            var symbol1 = model.GetSymbolInfo(((GotoStatementSyntax)statements[1]).Expression).Symbol;
+            var symbol1 = model
+                .GetSymbolInfo(((GotoStatementSyntax)statements[1]).Expression)
+                .Symbol;
             Assert.Same(symbol0, symbol1);
         }
 
@@ -530,12 +622,15 @@ goto L0;";
         public void Variables()
         {
             string source =
-@"int x = 1;
+                @"int x = 1;
 object y = x;";
             var tree = Parse(source, options: TestOptions.Script);
-            var model = CreateCompilationWithMscorlib45(new[] { tree }).GetSemanticModel(tree, ignoreAccessibility: false);
+            var model = CreateCompilationWithMscorlib45(new[] { tree })
+                .GetSemanticModel(tree, ignoreAccessibility: false);
             var root = tree.GetCompilationUnitRoot();
-            var declarations = root.ChildNodes().Select(n => ((FieldDeclarationSyntax)n).Declaration.Variables[0]).ToArray();
+            var declarations = root.ChildNodes()
+                .Select(n => ((FieldDeclarationSyntax)n).Declaration.Variables[0])
+                .ToArray();
             var symbol0 = model.GetDeclaredSymbol(declarations[0]);
             Assert.NotNull(symbol0);
             var symbol1 = model.GetSymbolInfo(declarations[1].Initializer.Value).Symbol;
@@ -546,7 +641,8 @@ object y = x;";
         [Fact]
         public void ThisIndexerAccessInSubmission()
         {
-            string test = @"
+            string test =
+                @"
 this[1]
 ";
             var compilation = CreateSubmission(test);
@@ -556,9 +652,13 @@ this[1]
             compilation.VerifyDiagnostics(
                 // (2,1): error CS0027: Keyword 'this' is not available in the current context
                 // this[1]
-                Diagnostic(ErrorCode.ERR_ThisInBadContext, "this"));
+                Diagnostic(ErrorCode.ERR_ThisInBadContext, "this")
+            );
 
-            var syntax = tree.GetCompilationUnitRoot().DescendantNodes().OfType<ExpressionSyntax>().First();
+            var syntax = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<ExpressionSyntax>()
+                .First();
             Assert.Equal(SyntaxKind.ElementAccessExpression, syntax.Kind());
 
             var summary = model.GetSemanticInfoSummary(syntax);
@@ -584,7 +684,8 @@ this[1]
 
             compilation.VerifyDiagnostics(
                 // (1,5): error CS1733: Expected expression
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, ""));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "")
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -609,9 +710,14 @@ this[1]
         [Fact]
         public void HostObjectBinding_Diagnostics()
         {
-            var submission = CreateSubmission("x",
-                new[] { MetadataReference.CreateFromAssemblyInternal(typeof(B2).GetTypeInfo().Assembly) },
-                hostObjectType: typeof(B2));
+            var submission = CreateSubmission(
+                "x",
+                new[]
+                {
+                    MetadataReference.CreateFromAssemblyInternal(typeof(B2).GetTypeInfo().Assembly),
+                },
+                hostObjectType: typeof(B2)
+            );
 
             submission.VerifyDiagnostics();
         }
@@ -620,11 +726,14 @@ this[1]
         [Fact]
         public void CheckedDecimalAddition()
         {
-            string source = @"
+            string source =
+                @"
 decimal d = checked(2M + 1M);
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(new[] { Parse(source, options: TestOptions.Script) });
+            var compilation = CreateCompilationWithMscorlib45(
+                new[] { Parse(source, options: TestOptions.Script) }
+            );
             compilation.VerifyDiagnostics();
         }
 
@@ -632,12 +741,15 @@ decimal d = checked(2M + 1M);
         [Fact]
         public void CheckedEnumAddition()
         {
-            string source = @"
+            string source =
+                @"
 using System.IO;
 FileAccess fa = checked(FileAccess.Read + 1);
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(new[] { Parse(source, options: TestOptions.Script) });
+            var compilation = CreateCompilationWithMscorlib45(
+                new[] { Parse(source, options: TestOptions.Script) }
+            );
             compilation.VerifyDiagnostics();
         }
 
@@ -645,11 +757,14 @@ FileAccess fa = checked(FileAccess.Read + 1);
         [Fact]
         public void DelegateAddition()
         {
-            string source = @"
+            string source =
+                @"
 System.Action a = null;
 a += null;
 ";
-            var compilation = CreateCompilationWithMscorlib45(new[] { Parse(source, options: TestOptions.Script) });
+            var compilation = CreateCompilationWithMscorlib45(
+                new[] { Parse(source, options: TestOptions.Script) }
+            );
             compilation.VerifyDiagnostics();
         }
 
@@ -663,14 +778,16 @@ a += null;
             compilation.VerifyDiagnostics(
                 // (1,5): error CS7019: Type of 'o' cannot be inferred since its initializer directly or indirectly refers to the definition.
                 // var o = o.F;
-                Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "o").WithArguments("o"));
+                Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "o").WithArguments("o")
+            );
         }
 
         [WorkItem(949595, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/949595")]
         [Fact]
         public void GlobalAttributes()
         {
-            var source = @"
+            var source =
+                @"
 [assembly: System.Reflection.AssemblyVersion(""4.0.0.0"")]
 [module: System.Security.UnverifiableCode]";
 
@@ -680,13 +797,15 @@ a += null;
                 // (2,2): error CS7026: Assembly and module attributes are not allowed in this context
                 Diagnostic(ErrorCode.ERR_GlobalAttributesNotAllowed, "assembly"),
                 // (3,2): error CS7026: Assembly and module attributes are not allowed in this context
-                Diagnostic(ErrorCode.ERR_GlobalAttributesNotAllowed, "module"));
+                Diagnostic(ErrorCode.ERR_GlobalAttributesNotAllowed, "module")
+            );
         }
 
         [Fact]
         public void SealedOverride()
         {
-            var source0 = @"
+            var source0 =
+                @"
 class M
 {
     protected virtual void F() { }
@@ -694,7 +813,8 @@ class M
 ";
             var c0 = CreateSubmission(source0);
 
-            var source1 = @"
+            var source1 =
+                @"
 class Y : M
 {
     sealed protected override void F() {  }
@@ -714,21 +834,25 @@ class Y : M
 
             c1.VerifyDiagnostics(
                 // error CS0122: '{0}' is inaccessible due to its protection level
-                Diagnostic(ErrorCode.ERR_BadAccess, "goo").WithArguments("C.goo()"));
+                Diagnostic(ErrorCode.ERR_BadAccess, "goo").WithArguments("C.goo()")
+            );
         }
 
         [Fact]
         public void InconsistentAccessibilityChecks()
         {
-            var c0 = CreateSubmission(@"
+            var c0 = CreateSubmission(
+                @"
 private class A { }
 protected class B { }
 internal class C { }
 internal protected class D { }
 public class E { }
-");
+"
+            );
 
-            var c1 = CreateSubmission(@"
+            var c1 = CreateSubmission(
+                @"
 private A a0;
 
 private B b0;
@@ -751,50 +875,71 @@ protected E e1;
 internal E e2;
 internal protected E e3;
 public E e4;
-", previous: c0);
+",
+                previous: c0
+            );
 
-            CreateSubmission(@"protected A x;", previous: c1).VerifyDiagnostics(
-                // (1,10): error CS0052: Inconsistent accessibility: field type 'A' is less accessible than field 'x'
-                Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "A"),
-                // (1,13): warning CS0628: 'x': new protected member declared in sealed type
-                Diagnostic(ErrorCode.WRN_ProtectedInSealed, "x").WithArguments("x"));
+            CreateSubmission(@"protected A x;", previous: c1)
+                .VerifyDiagnostics(
+                    // (1,10): error CS0052: Inconsistent accessibility: field type 'A' is less accessible than field 'x'
+                    Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "A"),
+                    // (1,13): warning CS0628: 'x': new protected member declared in sealed type
+                    Diagnostic(ErrorCode.WRN_ProtectedInSealed, "x").WithArguments("x")
+                );
 
-            CreateSubmission(@"internal A x;", previous: c1).VerifyDiagnostics(
-                // (1,10): error CS0052: Inconsistent accessibility: field type 'A' is less accessible than field 'x'
-                Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "A"));
+            CreateSubmission(@"internal A x;", previous: c1)
+                .VerifyDiagnostics(
+                    // (1,10): error CS0052: Inconsistent accessibility: field type 'A' is less accessible than field 'x'
+                    Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "A")
+                );
 
-            CreateSubmission(@"internal protected A x;", previous: c1).VerifyDiagnostics(
-                // (1,10): error CS0052: Inconsistent accessibility: field type 'A' is less accessible than field 'x'
-                Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "A"),
-                // (1,13): warning CS0628: 'x': new protected member declared in sealed type
-                Diagnostic(ErrorCode.WRN_ProtectedInSealed, "x").WithArguments("x"));
+            CreateSubmission(@"internal protected A x;", previous: c1)
+                .VerifyDiagnostics(
+                    // (1,10): error CS0052: Inconsistent accessibility: field type 'A' is less accessible than field 'x'
+                    Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "A"),
+                    // (1,13): warning CS0628: 'x': new protected member declared in sealed type
+                    Diagnostic(ErrorCode.WRN_ProtectedInSealed, "x").WithArguments("x")
+                );
 
-            CreateSubmission(@"public A x;", previous: c1).VerifyDiagnostics(
-                // (1,10): error CS0052: Inconsistent accessibility: field type 'A' is less accessible than field 'x'
-                Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "A"));
+            CreateSubmission(@"public A x;", previous: c1)
+                .VerifyDiagnostics(
+                    // (1,10): error CS0052: Inconsistent accessibility: field type 'A' is less accessible than field 'x'
+                    Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "A")
+                );
 
-            CreateSubmission(@"internal B x;", previous: c1).VerifyDiagnostics(
-                // (1,10): error CS0052: Inconsistent accessibility: field type 'B' is less accessible than field 'x'
-                Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "B"));
+            CreateSubmission(@"internal B x;", previous: c1)
+                .VerifyDiagnostics(
+                    // (1,10): error CS0052: Inconsistent accessibility: field type 'B' is less accessible than field 'x'
+                    Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "B")
+                );
 
-            CreateSubmission(@"internal protected B x;", previous: c1).VerifyDiagnostics(
-                // (1,10): error CS0052: Inconsistent accessibility: field type 'B' is less accessible than field 'x'
-                Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "B"),
-                // (1,13): warning CS0628: 'x': new protected member declared in sealed type
-                Diagnostic(ErrorCode.WRN_ProtectedInSealed, "x").WithArguments("x"));
+            CreateSubmission(@"internal protected B x;", previous: c1)
+                .VerifyDiagnostics(
+                    // (1,10): error CS0052: Inconsistent accessibility: field type 'B' is less accessible than field 'x'
+                    Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "B"),
+                    // (1,13): warning CS0628: 'x': new protected member declared in sealed type
+                    Diagnostic(ErrorCode.WRN_ProtectedInSealed, "x").WithArguments("x")
+                );
 
-            CreateSubmission(@"public B x;", previous: c1).VerifyDiagnostics(
-                // (1,10): error CS0052: Inconsistent accessibility: field type 'B' is less accessible than field 'x'
-                Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "B"));
+            CreateSubmission(@"public B x;", previous: c1)
+                .VerifyDiagnostics(
+                    // (1,10): error CS0052: Inconsistent accessibility: field type 'B' is less accessible than field 'x'
+                    Diagnostic(ErrorCode.ERR_BadVisFieldType, "x").WithArguments("x", "B")
+                );
         }
 
-        [ConditionalFact(typeof(DesktopOnly), Reason = "https://github.com/dotnet/roslyn/issues/28001")]
+        [ConditionalFact(
+            typeof(DesktopOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/28001"
+        )]
         public void CompilationChain_Fields()
         {
-            var c0 = CreateSubmission(@"
+            var c0 = CreateSubmission(
+                @"
 static int s = 1;
 int i = 2;
-");
+"
+            );
 
             var c1 = CreateSubmission("s + i", previous: c0, returnType: typeof(int));
             var c2 = CreateSubmission("static int t = i;", previous: c1);
@@ -805,59 +950,74 @@ int i = 2;
         [Fact]
         public void CompilationChain_InStaticContext()
         {
-            var c0 = CreateSubmission(@"
+            var c0 = CreateSubmission(
+                @"
 int x = 1;
 int y = 2;
 int z() { return 3; }
 int w = 4;
-");
-            var c1 = CreateSubmission(@"
+"
+            );
+            var c1 = CreateSubmission(
+                @"
 static int Goo() { return x; }
 static int Bar { get { return y; } set { return z(); } }
 static int Baz = w;
-", previous: c0);
+",
+                previous: c0
+            );
 
             c1.VerifyDiagnostics(
                 // error CS0120: An object reference is required for the non-static field, method, or property '{0}'
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "w").WithArguments("w"),
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "x").WithArguments("x"),
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "y").WithArguments("y"),
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "z").WithArguments("z()"));
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "z").WithArguments("z()")
+            );
         }
 
         [Fact]
         public void AccessToGlobalMemberFromNestedClass1()
         {
-            var c0 = CreateSubmission(@"
+            var c0 = CreateSubmission(
+                @"
 int goo() { return 1; }
 
 class D 
 {
     int bar() { return goo(); }
 }
-");
+"
+            );
 
             c0.VerifyDiagnostics(
                 // (6,24): error CS0120: An object reference is required for the non-static field, method, or property 'goo()'
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "goo").WithArguments("goo()"));
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "goo").WithArguments("goo()")
+            );
         }
 
         [Fact]
         public void AccessToGlobalMemberFromNestedClass2()
         {
-            var c0 = CreateSubmission(@"
+            var c0 = CreateSubmission(
+                @"
 int goo() { return 1; }
-");
-            var c1 = CreateSubmission(@"
+"
+            );
+            var c1 = CreateSubmission(
+                @"
 class D 
 {
     int bar() { return goo(); }
 }
-", previous: c0);
+",
+                previous: c0
+            );
 
             c1.VerifyDiagnostics(
                 // (4,24): error CS0120: An object reference is required for the non-static field, method, or property 'goo()'
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "goo").WithArguments("goo()"));
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "goo").WithArguments("goo()")
+            );
         }
 
         /// <summary>
@@ -869,7 +1029,8 @@ class D
             var s0 = CreateSubmission("int a = \"x\";");
             s0.VerifyDiagnostics(
                 // (1,9): error CS0029: Cannot implicitly convert type 'string' to 'int'
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""x""").WithArguments("string", "int"));
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""x""").WithArguments("string", "int")
+            );
 
             Assert.Throws<InvalidOperationException>(() => CreateSubmission("a + 1", previous: s0));
         }
@@ -883,11 +1044,15 @@ class D
             submission.VerifyDiagnostics(
                 // (1,7): error CS0246: The type or namespace name 'Unknown' could not be found (are you missing a using directive or an assembly reference?)
                 // using Unknown;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unknown").WithArguments("Unknown"));
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unknown")
+                    .WithArguments("Unknown")
+            );
 
             submission.VerifyEmitDiagnostics(
                 // (1,7): error CS0246: The type or namespace name 'Unknown' could not be found (are you missing a using directive or an assembly reference?)
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unknown").WithArguments("Unknown"));
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unknown")
+                    .WithArguments("Unknown")
+            );
         }
 
         [Fact]
@@ -897,13 +1062,18 @@ class D
 
             c.VerifyDiagnostics(
                 // (1,1): error CS0103: The name 'z' does not exist in the current context
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "Z").WithArguments("Z"));
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "Z").WithArguments("Z")
+            );
         }
 
-        [ConditionalFact(typeof(DesktopOnly), Reason = "https://github.com/dotnet/roslyn/issues/28001")]
+        [ConditionalFact(
+            typeof(DesktopOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/28001"
+        )]
         public void HostObjectBinding_InStaticContext()
         {
-            var source = @"
+            var source =
+                @"
 static int Goo() { return x; }
 static int Bar { get { return Y; } set { return Z(); } }
 static int Baz = w;
@@ -921,8 +1091,8 @@ static int Baz = w;
                 // (3,31): error CS0120: An object reference is required for the non-static field, method, or property 'Roslyn.Compilers.CSharp.UnitTests.Symbols.Source.InteractiveSessionTests.C.Y'
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "Y").WithArguments(typeName + ".C.Y"),
                 // (3,49): error CS0120: An object reference is required for the non-static field, method, or property 'Roslyn.Compilers.CSharp.UnitTests.Symbols.Source.InteractiveSessionTests.C.Z()'
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "Z").WithArguments(typeName + ".C.Z()"));
-
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "Z").WithArguments(typeName + ".C.Z()")
+            );
         }
 
         [Fact]
@@ -934,7 +1104,8 @@ static int Baz = w;
                 // (1,11): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
                 Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l"),
                 // (1,9): error CS0266: Cannot implicitly convert type 'long' to 'int'. An explicit conversion exists (are you missing a cast?)
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "42l").WithArguments("long", "int"));
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "42l").WithArguments("long", "int")
+            );
         }
 
         [Fact]
@@ -944,7 +1115,8 @@ static int Baz = w;
 
             c.VerifyDiagnostics(
                 // (1,5): error CS7019: Type of 'x' cannot be inferred since its initializer directly or indirectly refers to the definition.
-                Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "x").WithArguments("x"));
+                Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "x").WithArguments("x")
+            );
         }
 
         [Fact]
@@ -954,8 +1126,10 @@ static int Baz = w;
             c.VerifyDiagnostics(
                 // (1,22): error CS0841: Cannot use local variable 'x' before it is declared
                 // var x = 1; { var x = x;}
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x").WithArguments("x").WithLocation(1, 22)
-                );
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x")
+                    .WithArguments("x")
+                    .WithLocation(1, 22)
+            );
         }
 
         [WorkItem(550, "https://github.com/dotnet/roslyn/issues/550")]
@@ -963,7 +1137,7 @@ static int Baz = w;
         public void ERR_VariableUsedBeforeDeclaration_02()
         {
             var c = CreateSubmission(
-@"object b = a;
+                @"object b = a;
 object a;
 void F()
 {
@@ -973,14 +1147,20 @@ void F()
 {
     object f = e;
     object e;
-}");
+}"
+            );
             c.VerifyDiagnostics(
                 // (9,16): error CS0841: Cannot use local variable 'e' before it is declared
                 //     object f = e;
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "e").WithArguments("e").WithLocation(9, 16),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "e")
+                    .WithArguments("e")
+                    .WithLocation(9, 16),
                 // (5,16): error CS0841: Cannot use local variable 'c' before it is declared
                 //     object d = c;
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "c").WithArguments("c").WithLocation(5, 16));
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "c")
+                    .WithArguments("c")
+                    .WithLocation(5, 16)
+            );
         }
 
         [WorkItem(550, "https://github.com/dotnet/roslyn/issues/550")]
@@ -988,7 +1168,7 @@ void F()
         public void ERR_UseDefViolation()
         {
             var c = CreateSubmission(
-@"int a;
+                @"int a;
 int b = a;
 void F()
 {
@@ -998,31 +1178,43 @@ void F()
 {
     int e;
     int f = e;
-}");
+}"
+            );
             c.VerifyDiagnostics(
                 // (10,13): error CS0165: Use of unassigned local variable 'e'
                 //     int f = e;
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "e").WithArguments("e").WithLocation(10, 13),
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "e")
+                    .WithArguments("e")
+                    .WithLocation(10, 13),
                 // (6,13): error CS0165: Use of unassigned local variable 'c'
                 //     int d = c;
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "c").WithArguments("c").WithLocation(6, 13));
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "c")
+                    .WithArguments("c")
+                    .WithLocation(6, 13)
+            );
         }
 
         [Fact]
         public void ERR_FieldCantBeRefAny()
         {
-            var c = CreateSubmission(@"
+            var c = CreateSubmission(
+                @"
 System.RuntimeArgumentHandle a;
 System.ArgIterator b;
 System.TypedReference c;
-");
+"
+            );
             c.VerifyDiagnostics(
                 // (2,1): error CS0610: Field or property cannot be of type 'System.RuntimeArgumentHandle'
-                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.RuntimeArgumentHandle").WithArguments("System.RuntimeArgumentHandle"),
+                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.RuntimeArgumentHandle")
+                    .WithArguments("System.RuntimeArgumentHandle"),
                 // (3,1): error CS0610: Field or property cannot be of type 'System.ArgIterator'
-                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.ArgIterator").WithArguments("System.ArgIterator"),
+                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.ArgIterator")
+                    .WithArguments("System.ArgIterator"),
                 // (4,1): error CS0610: Field or property cannot be of type 'System.TypedReference'
-                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.TypedReference").WithArguments("System.TypedReference"));
+                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.TypedReference")
+                    .WithArguments("System.TypedReference")
+            );
         }
 
         [WorkItem(529387, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529387")]
@@ -1035,7 +1227,8 @@ System.TypedReference c;
             c1.VerifyDiagnostics(
                 // (1,1): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
                 // &x
-                Diagnostic(ErrorCode.ERR_FixedNeeded, "&x").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_FixedNeeded, "&x").WithLocation(1, 1)
+            );
         }
 
         [Fact]
@@ -1046,20 +1239,24 @@ System.TypedReference c;
             c0.VerifyDiagnostics(
                 // (1,1): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
                 // &x
-                Diagnostic(ErrorCode.ERR_FixedNeeded, "&x").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_FixedNeeded, "&x").WithLocation(1, 1)
+            );
         }
 
         [WorkItem(530404, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530404")]
         [Fact]
         public void DiagnosticsPass()
         {
-            var source = "(System.Linq.Expressions.Expression<System.Func<object>>)(() => null ?? new object())";
+            var source =
+                "(System.Linq.Expressions.Expression<System.Func<object>>)(() => null ?? new object())";
 
             var c0 = CreateSubmission(source, new[] { SystemCoreRef });
 
             c0.VerifyDiagnostics(
                 // (1,65): error CS0845: An expression tree lambda may not contain a coalescing operator with a null literal left-hand side
-                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsBadCoalesce, "null").WithLocation(1, 65));
+                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsBadCoalesce, "null")
+                    .WithLocation(1, 65)
+            );
         }
 
         [WorkItem(527850, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527850")]
@@ -1074,7 +1271,8 @@ System.TypedReference c;
 
             s2.VerifyDiagnostics(
                 // (1,1): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
-                Diagnostic(ErrorCode.ERR_IllegalStatement, "i* i"));
+                Diagnostic(ErrorCode.ERR_IllegalStatement, "i* i")
+            );
         }
 
         [WorkItem(527850, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527850")]
@@ -1083,9 +1281,11 @@ System.TypedReference c;
         [Fact(Skip = "4737")]
         public void TopLevelLabel()
         {
-            var s0 = CreateSubmission(@"
+            var s0 = CreateSubmission(
+                @"
 Label: ; 
-goto Label;");
+goto Label;"
+            );
 
             s0.VerifyDiagnostics();
         }
@@ -1098,7 +1298,8 @@ goto Label;");
 
             s0.VerifyDiagnostics(
                 // (1,1): error CS0159: No such label 'Object' within the scope of the goto statement
-                Diagnostic(ErrorCode.ERR_LabelNotFound, "Object").WithArguments("Object"));
+                Diagnostic(ErrorCode.ERR_LabelNotFound, "Object").WithArguments("Object")
+            );
         }
 
         [WorkItem(541166, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541166")]
@@ -1115,13 +1316,19 @@ goto Label;");
             s1.VerifyDiagnostics(
                 // (1,6): error CS1105: Extension method must be static
                 // void F(this object o) { }
-                Diagnostic(ErrorCode.ERR_BadExtensionMeth, "F"));
+                Diagnostic(ErrorCode.ERR_BadExtensionMeth, "F")
+            );
 
-            var s2 = CreateSubmission("static void G(this dynamic o) { }", references, previous: s0);
+            var s2 = CreateSubmission(
+                "static void G(this dynamic o) { }",
+                references,
+                previous: s0
+            );
 
             s2.VerifyDiagnostics(
                 // error CS1103: The first parameter of an extension method cannot be of type 'dynamic'
-                Diagnostic(ErrorCode.ERR_BadTypeforThis, "dynamic").WithArguments("dynamic"));
+                Diagnostic(ErrorCode.ERR_BadTypeforThis, "dynamic").WithArguments("dynamic")
+            );
         }
 
         [Fact]
@@ -1129,7 +1336,7 @@ goto Label;");
         public void FixedBuffer_01()
         {
             string source =
-@"fixed int x[3];
+                @"fixed int x[3];
 ";
             var tree = Parse(source, options: TestOptions.Script);
             var compilation = CreateCompilationWithMscorlib45(new[] { tree });
@@ -1141,7 +1348,7 @@ goto Label;");
                 // (1,11): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 // fixed int x[3];
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "x[3]").WithLocation(1, 11)
-                );
+            );
         }
 
         [Fact]
@@ -1149,7 +1356,7 @@ goto Label;");
         public void FixedBuffer_02()
         {
             string source =
-@"fixed var x[3] = 1;
+                @"fixed var x[3] = 1;
 ";
             var tree = Parse(source, options: TestOptions.Script);
             var compilation = CreateCompilationWithMscorlib45(new[] { tree });
@@ -1167,7 +1374,7 @@ goto Label;");
                 // (1,11): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 // fixed var x[3] = 1;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "x[3]").WithLocation(1, 11)
-                );
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/44418")]
@@ -1176,7 +1383,10 @@ goto Label;");
         public void Errors_01()
         {
             var code = "System.Console.WriteLine(1);";
-            var compilationUnit = CSharp.SyntaxFactory.ParseCompilationUnit(code, options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script));
+            var compilationUnit = CSharp.SyntaxFactory.ParseCompilationUnit(
+                code,
+                options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
+            );
             var syntaxTree = compilationUnit.SyntaxTree;
             var compilation = CreateCompilationWithMscorlib45(new[] { syntaxTree });
             var semanticModel = compilation.GetSemanticModel(syntaxTree, true);
@@ -1187,10 +1397,14 @@ goto Label;");
             compilation.VerifyDiagnostics(
                 // (1,1): error CS7006: Expressions and statements can only occur in a method body
                 // System.Console.WriteLine(1);
-                Diagnostic(ErrorCode.ERR_GlobalStatement, "System.Console.WriteLine(1);").WithLocation(1, 1)
-                );
+                Diagnostic(ErrorCode.ERR_GlobalStatement, "System.Console.WriteLine(1);")
+                    .WithLocation(1, 1)
+            );
 
-            compilation = CreateCompilationWithMscorlib45(new[] { syntaxTree }, options: TestOptions.ReleaseExe.WithScriptClassName("Script"));
+            compilation = CreateCompilationWithMscorlib45(
+                new[] { syntaxTree },
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script")
+            );
             semanticModel = compilation.GetSemanticModel(syntaxTree, true);
             node5 = ErrorTestsGetNode(syntaxTree);
             Assert.Equal("WriteLine", node5.Name.ToString());
@@ -1199,64 +1413,114 @@ goto Label;");
             compilation.VerifyDiagnostics(
                 // (1,1): error CS7006: Expressions and statements can only occur in a method body
                 // System.Console.WriteLine(1);
-                Diagnostic(ErrorCode.ERR_GlobalStatement, "System.Console.WriteLine(1);").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_GlobalStatement, "System.Console.WriteLine(1);")
+                    .WithLocation(1, 1),
                 // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
                 Diagnostic(ErrorCode.ERR_NoEntryPoint).WithLocation(1, 1)
-                );
+            );
 
-            syntaxTree = SyntaxFactory.ParseSyntaxTree(code, options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script));
-            compilation = CreateCompilationWithMscorlib45(new[] { syntaxTree }, options: TestOptions.ReleaseExe);
+            syntaxTree = SyntaxFactory.ParseSyntaxTree(
+                code,
+                options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
+            );
+            compilation = CreateCompilationWithMscorlib45(
+                new[] { syntaxTree },
+                options: TestOptions.ReleaseExe
+            );
             semanticModel = compilation.GetSemanticModel(syntaxTree, true);
             node5 = ErrorTestsGetNode(syntaxTree);
             Assert.Equal("WriteLine", node5.Name.ToString());
-            Assert.Equal("void System.Console.WriteLine(System.Int32 value)", semanticModel.GetSymbolInfo(node5.Name).Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "void System.Console.WriteLine(System.Int32 value)",
+                semanticModel.GetSymbolInfo(node5.Name).Symbol.ToTestDisplayString()
+            );
 
             CompileAndVerify(compilation, expectedOutput: "1").VerifyDiagnostics();
 
-            syntaxTree = SyntaxFactory.ParseSyntaxTree(code, options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script));
-            compilation = CreateCompilationWithMscorlib45(new[] { syntaxTree }, options: TestOptions.ReleaseExe.WithScriptClassName("Script"));
+            syntaxTree = SyntaxFactory.ParseSyntaxTree(
+                code,
+                options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
+            );
+            compilation = CreateCompilationWithMscorlib45(
+                new[] { syntaxTree },
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script")
+            );
             semanticModel = compilation.GetSemanticModel(syntaxTree, true);
             node5 = ErrorTestsGetNode(syntaxTree);
             Assert.Equal("WriteLine", node5.Name.ToString());
-            Assert.Equal("void System.Console.WriteLine(System.Int32 value)", semanticModel.GetSymbolInfo(node5.Name).Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "void System.Console.WriteLine(System.Int32 value)",
+                semanticModel.GetSymbolInfo(node5.Name).Symbol.ToTestDisplayString()
+            );
 
             CompileAndVerify(compilation, expectedOutput: "1").VerifyDiagnostics();
 
-            syntaxTree = SyntaxFactory.ParseSyntaxTree(code, options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script));
-            compilation = CreateCompilationWithMscorlib45(new[] { syntaxTree }, options: TestOptions.ReleaseExe.WithScriptClassName(""));
+            syntaxTree = SyntaxFactory.ParseSyntaxTree(
+                code,
+                options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
+            );
+            compilation = CreateCompilationWithMscorlib45(
+                new[] { syntaxTree },
+                options: TestOptions.ReleaseExe.WithScriptClassName("")
+            );
             semanticModel = compilation.GetSemanticModel(syntaxTree, true);
             node5 = ErrorTestsGetNode(syntaxTree);
             Assert.Equal("WriteLine", node5.Name.ToString());
-            Assert.Equal("void System.Console.WriteLine(System.Int32 value)", semanticModel.GetSymbolInfo(node5.Name).Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "void System.Console.WriteLine(System.Int32 value)",
+                semanticModel.GetSymbolInfo(node5.Name).Symbol.ToTestDisplayString()
+            );
 
             compilation.VerifyDiagnostics(
                 // error CS7088: Invalid 'ScriptClassName' value: ''.
-                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue).WithArguments("ScriptClassName", "").WithLocation(1, 1)
-                );
+                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
+                    .WithArguments("ScriptClassName", "")
+                    .WithLocation(1, 1)
+            );
 
-            syntaxTree = SyntaxFactory.ParseSyntaxTree(code, options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script));
-            compilation = CreateCompilationWithMscorlib45(new[] { syntaxTree }, options: TestOptions.ReleaseExe.WithScriptClassName(null));
+            syntaxTree = SyntaxFactory.ParseSyntaxTree(
+                code,
+                options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
+            );
+            compilation = CreateCompilationWithMscorlib45(
+                new[] { syntaxTree },
+                options: TestOptions.ReleaseExe.WithScriptClassName(null)
+            );
             semanticModel = compilation.GetSemanticModel(syntaxTree, true);
             node5 = ErrorTestsGetNode(syntaxTree);
             Assert.Equal("WriteLine", node5.Name.ToString());
-            Assert.Equal("void System.Console.WriteLine(System.Int32 value)", semanticModel.GetSymbolInfo(node5.Name).Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "void System.Console.WriteLine(System.Int32 value)",
+                semanticModel.GetSymbolInfo(node5.Name).Symbol.ToTestDisplayString()
+            );
 
             compilation.VerifyDiagnostics(
                 // error CS7088: Invalid 'ScriptClassName' value: 'null'.
-                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue).WithArguments("ScriptClassName", "null")
-                );
+                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
+                    .WithArguments("ScriptClassName", "null")
+            );
 
-            syntaxTree = SyntaxFactory.ParseSyntaxTree(code, options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script));
-            compilation = CreateCompilationWithMscorlib45(new[] { syntaxTree }, options: TestOptions.ReleaseExe.WithScriptClassName("a\0b"));
+            syntaxTree = SyntaxFactory.ParseSyntaxTree(
+                code,
+                options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
+            );
+            compilation = CreateCompilationWithMscorlib45(
+                new[] { syntaxTree },
+                options: TestOptions.ReleaseExe.WithScriptClassName("a\0b")
+            );
             semanticModel = compilation.GetSemanticModel(syntaxTree, true);
             node5 = ErrorTestsGetNode(syntaxTree);
             Assert.Equal("WriteLine", node5.Name.ToString());
-            Assert.Equal("void System.Console.WriteLine(System.Int32 value)", semanticModel.GetSymbolInfo(node5.Name).Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "void System.Console.WriteLine(System.Int32 value)",
+                semanticModel.GetSymbolInfo(node5.Name).Symbol.ToTestDisplayString()
+            );
 
             compilation.VerifyDiagnostics(
                 // error CS7088: Invalid 'ScriptClassName' value: 'a\0b'.
-                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue).WithArguments("ScriptClassName", "a\0b")
-                );
+                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
+                    .WithArguments("ScriptClassName", "a\0b")
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/44418")]
@@ -1264,9 +1528,15 @@ goto Label;");
         [WorkItem(44418, "https://github.com/dotnet/roslyn/issues/44418")]
         public void Errors_02()
         {
-            var compilationUnit = CSharp.SyntaxFactory.ParseCompilationUnit("\nSystem.Console.WriteLine(1);", options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script));
+            var compilationUnit = CSharp.SyntaxFactory.ParseCompilationUnit(
+                "\nSystem.Console.WriteLine(1);",
+                options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
+            );
             var syntaxTree1 = compilationUnit.SyntaxTree;
-            var syntaxTree2 = SyntaxFactory.ParseSyntaxTree("System.Console.WriteLine(2);", options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script));
+            var syntaxTree2 = SyntaxFactory.ParseSyntaxTree(
+                "System.Console.WriteLine(2);",
+                options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
+            );
             MemberAccessExpressionSyntax node1 = ErrorTestsGetNode(syntaxTree1);
             MemberAccessExpressionSyntax node2 = ErrorTestsGetNode(syntaxTree2);
             Assert.Equal("WriteLine", node1.Name.ToString());
@@ -1276,25 +1546,33 @@ goto Label;");
             var semanticModel1 = compilation.GetSemanticModel(syntaxTree1, true);
             var semanticModel2 = compilation.GetSemanticModel(syntaxTree2, true);
             Assert.Null(semanticModel1.GetSymbolInfo(node1.Name).Symbol);
-            Assert.Equal("void System.Console.WriteLine(System.Int32 value)", semanticModel2.GetSymbolInfo(node2.Name).Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "void System.Console.WriteLine(System.Int32 value)",
+                semanticModel2.GetSymbolInfo(node2.Name).Symbol.ToTestDisplayString()
+            );
 
             compilation.VerifyDiagnostics(
                 // (2,1): error CS7006: Expressions and statements can only occur in a method body
                 // System.Console.WriteLine(1);
-                Diagnostic(ErrorCode.ERR_GlobalStatement, "System.Console.WriteLine(1);").WithLocation(2, 1)
-                );
+                Diagnostic(ErrorCode.ERR_GlobalStatement, "System.Console.WriteLine(1);")
+                    .WithLocation(2, 1)
+            );
 
             compilation = CreateCompilationWithMscorlib45(new[] { syntaxTree2, syntaxTree1 });
             semanticModel1 = compilation.GetSemanticModel(syntaxTree1, true);
             semanticModel2 = compilation.GetSemanticModel(syntaxTree2, true);
             Assert.Null(semanticModel1.GetSymbolInfo(node1.Name).Symbol);
-            Assert.Equal("void System.Console.WriteLine(System.Int32 value)", semanticModel2.GetSymbolInfo(node2.Name).Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "void System.Console.WriteLine(System.Int32 value)",
+                semanticModel2.GetSymbolInfo(node2.Name).Symbol.ToTestDisplayString()
+            );
 
             compilation.VerifyDiagnostics(
                 // (2,1): error CS7006: Expressions and statements can only occur in a method body
                 // System.Console.WriteLine(1);
-                Diagnostic(ErrorCode.ERR_GlobalStatement, "System.Console.WriteLine(1);").WithLocation(2, 1)
-                );
+                Diagnostic(ErrorCode.ERR_GlobalStatement, "System.Console.WriteLine(1);")
+                    .WithLocation(2, 1)
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/44418")]
@@ -1303,23 +1581,35 @@ goto Label;");
         public void Errors_03()
         {
             var code = "System.Console.WriteLine(out var x, x);";
-            var compilationUnit = CSharp.SyntaxFactory.ParseCompilationUnit(code, options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script));
+            var compilationUnit = CSharp.SyntaxFactory.ParseCompilationUnit(
+                code,
+                options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
+            );
             var syntaxTree = compilationUnit.SyntaxTree;
             var compilation = CreateCompilationWithMscorlib45(new[] { syntaxTree });
             var semanticModel = compilation.GetSemanticModel(syntaxTree, true);
             MemberAccessExpressionSyntax node5 = ErrorTestsGetNode(syntaxTree);
             Assert.Equal("WriteLine", node5.Name.ToString());
             Assert.Null(semanticModel.GetSymbolInfo(node5.Name).Symbol);
-            var x = syntaxTree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x").Single();
+            var x = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x")
+                .Single();
             Assert.Null(semanticModel.GetSymbolInfo(x).Symbol);
 
             compilation.VerifyDiagnostics(
                 // (1,1): error CS7006: Expressions and statements can only occur in a method body
                 // System.Console.WriteLine(out var x, x);
-                Diagnostic(ErrorCode.ERR_GlobalStatement, "System.Console.WriteLine(out var x, x);").WithLocation(1, 1)
-                );
+                Diagnostic(ErrorCode.ERR_GlobalStatement, "System.Console.WriteLine(out var x, x);")
+                    .WithLocation(1, 1)
+            );
 
-            compilation = CreateCompilationWithMscorlib45(new[] { syntaxTree }, options: TestOptions.ReleaseExe.WithScriptClassName("Script1"));
+            compilation = CreateCompilationWithMscorlib45(
+                new[] { syntaxTree },
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script1")
+            );
             semanticModel = compilation.GetSemanticModel(syntaxTree, true);
             node5 = ErrorTestsGetNode(syntaxTree);
             Assert.Equal("WriteLine", node5.Name.ToString());
@@ -1328,40 +1618,70 @@ goto Label;");
             compilation.VerifyDiagnostics(
                 // (1,1): error CS7006: Expressions and statements can only occur in a method body
                 // System.Console.WriteLine(out var x, x);
-                Diagnostic(ErrorCode.ERR_GlobalStatement, "System.Console.WriteLine(out var x, x);").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_GlobalStatement, "System.Console.WriteLine(out var x, x);")
+                    .WithLocation(1, 1),
                 // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
                 Diagnostic(ErrorCode.ERR_NoEntryPoint).WithLocation(1, 1)
-                );
+            );
 
-            syntaxTree = SyntaxFactory.ParseSyntaxTree(code, options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script));
+            syntaxTree = SyntaxFactory.ParseSyntaxTree(
+                code,
+                options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
+            );
             compilation = CreateCompilationWithMscorlib45(new[] { syntaxTree });
             semanticModel = compilation.GetSemanticModel(syntaxTree, true);
             node5 = ErrorTestsGetNode(syntaxTree);
             Assert.Equal("WriteLine", node5.Name.ToString());
             Assert.Null(semanticModel.GetSymbolInfo(node5.Name).Symbol);
-            x = syntaxTree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x").Single();
-            Assert.Equal("var Script.x", semanticModel.GetSymbolInfo(x).Symbol.ToTestDisplayString());
+            x = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x")
+                .Single();
+            Assert.Equal(
+                "var Script.x",
+                semanticModel.GetSymbolInfo(x).Symbol.ToTestDisplayString()
+            );
 
             compilation.VerifyDiagnostics(
                 // (1,34): error CS7019: Type of 'x' cannot be inferred since its initializer directly or indirectly refers to the definition.
                 // System.Console.WriteLine(out var x, x);
-                Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "x").WithArguments("x").WithLocation(1, 34)
-                );
+                Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "x")
+                    .WithArguments("x")
+                    .WithLocation(1, 34)
+            );
 
-            syntaxTree = SyntaxFactory.ParseSyntaxTree(code, options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script));
-            compilation = CreateCompilationWithMscorlib45(new[] { syntaxTree }, options: TestOptions.ReleaseExe.WithScriptClassName("Script1"));
+            syntaxTree = SyntaxFactory.ParseSyntaxTree(
+                code,
+                options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
+            );
+            compilation = CreateCompilationWithMscorlib45(
+                new[] { syntaxTree },
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script1")
+            );
             semanticModel = compilation.GetSemanticModel(syntaxTree, true);
             node5 = ErrorTestsGetNode(syntaxTree);
             Assert.Equal("WriteLine", node5.Name.ToString());
             Assert.Null(semanticModel.GetSymbolInfo(node5.Name).Symbol);
-            x = syntaxTree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x").Single();
-            Assert.Equal("var Script1.x", semanticModel.GetSymbolInfo(x).Symbol.ToTestDisplayString());
+            x = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x")
+                .Single();
+            Assert.Equal(
+                "var Script1.x",
+                semanticModel.GetSymbolInfo(x).Symbol.ToTestDisplayString()
+            );
 
             compilation.VerifyDiagnostics(
                 // (1,34): error CS7019: Type of 'x' cannot be inferred since its initializer directly or indirectly refers to the definition.
                 // System.Console.WriteLine(out var x, x);
-                Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "x").WithArguments("x").WithLocation(1, 34)
-                );
+                Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "x")
+                    .WithArguments("x")
+                    .WithLocation(1, 34)
+            );
         }
 
         [Fact]
@@ -1372,16 +1692,20 @@ goto Label;");
                 source: @"string F() => null; const var x = F();",
                 parseOptions: TestOptions.Script,
                 options: TestOptions.DebugExe,
-                references: new MetadataReference[] { TaskFacadeAssembly(), MscorlibRef_v20 });
+                references: new MetadataReference[] { TaskFacadeAssembly(), MscorlibRef_v20 }
+            );
 
             script.VerifyDiagnostics(
                 // (1,27): error CS0822: Implicitly-typed variables cannot be constant
                 // string F() => null; const var x = F();
-                Diagnostic(ErrorCode.ERR_ImplicitlyTypedVariableCannotBeConst, "var").WithLocation(1, 27),
+                Diagnostic(ErrorCode.ERR_ImplicitlyTypedVariableCannotBeConst, "var")
+                    .WithLocation(1, 27),
                 // (1,35): error CS0236: A field initializer cannot reference the non-static field, method, or property 'F()'
                 // string F() => null; const var x = F();
-                Diagnostic(ErrorCode.ERR_FieldInitRefNonstatic, "F").WithArguments("F()").WithLocation(1, 35)
-                );
+                Diagnostic(ErrorCode.ERR_FieldInitRefNonstatic, "F")
+                    .WithArguments("F()")
+                    .WithLocation(1, 35)
+            );
         }
 
         private static MemberAccessExpressionSyntax ErrorTestsGetNode(SyntaxTree syntaxTree)

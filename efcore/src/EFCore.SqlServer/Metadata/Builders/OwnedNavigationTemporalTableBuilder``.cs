@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 /// </summary>
 /// <typeparam name="TOwnerEntity">The entity type owning the relationship.</typeparam>
 /// <typeparam name="TDependentEntity">The dependent entity type of the relationship.</typeparam>
-public class OwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity> : OwnedNavigationTemporalTableBuilder
+public class OwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity>
+    : OwnedNavigationTemporalTableBuilder
     where TOwnerEntity : class
     where TDependentEntity : class
 {
@@ -21,9 +22,7 @@ public class OwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity>
     /// </summary>
     [EntityFrameworkInternal]
     public OwnedNavigationTemporalTableBuilder(OwnedNavigationBuilder referenceOwnershipBuilder)
-        : base(referenceOwnershipBuilder)
-    {
-    }
+        : base(referenceOwnershipBuilder) { }
 
     /// <summary>
     ///     Configures a history table for the entity mapped to a temporal table.
@@ -34,8 +33,12 @@ public class OwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity>
     /// </remarks>
     /// <param name="name">The name of the history table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual OwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity> UseHistoryTable(string name)
-        => (OwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity>)base.UseHistoryTable(name);
+    public new virtual OwnedNavigationTemporalTableBuilder<
+        TOwnerEntity,
+        TDependentEntity
+    > UseHistoryTable(string name) =>
+        (OwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity>)
+            base.UseHistoryTable(name);
 
     /// <summary>
     ///     Configures a history table for the entity mapped to a temporal table.
@@ -47,6 +50,10 @@ public class OwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity>
     /// <param name="name">The name of the history table.</param>
     /// <param name="schema">The schema of the history table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual OwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity> UseHistoryTable(string name, string? schema)
-        => (OwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity>)base.UseHistoryTable(name, schema);
+    public new virtual OwnedNavigationTemporalTableBuilder<
+        TOwnerEntity,
+        TDependentEntity
+    > UseHistoryTable(string name, string? schema) =>
+        (OwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity>)
+            base.UseHistoryTable(name, schema);
 }

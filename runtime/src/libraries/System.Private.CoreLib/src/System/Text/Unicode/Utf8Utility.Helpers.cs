@@ -42,7 +42,10 @@ namespace System.Text.Unicode
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static uint ExtractCharFromFirstTwoByteSequence(uint value)
         {
-            Debug.Assert(UInt32BeginsWithUtf8TwoByteMask(value) && !UInt32BeginsWithOverlongUtf8TwoByteSequence(value));
+            Debug.Assert(
+                UInt32BeginsWithUtf8TwoByteMask(value)
+                    && !UInt32BeginsWithOverlongUtf8TwoByteSequence(value)
+            );
 
             if (BitConverter.IsLittleEndian)
             {
@@ -299,7 +302,10 @@ namespace System.Text.Unicode
             // Return statement is written this way to work around https://github.com/dotnet/runtime/issues/4207.
 
             return (BitConverter.IsLittleEndian && ((value - 0x0080u) & 0xFFFFu) < 0x0780u)
-                || (!BitConverter.IsLittleEndian && UnicodeUtility.IsInRangeInclusive(value, 0x0080_0000u, 0x07FF_FFFFu));
+                || (
+                    !BitConverter.IsLittleEndian
+                    && UnicodeUtility.IsInRangeInclusive(value, 0x0080_0000u, 0x07FF_FFFFu)
+                );
         }
 
         /// <summary>
@@ -381,8 +387,10 @@ namespace System.Text.Unicode
 
             // Return statement is written this way to work around https://github.com/dotnet/runtime/issues/4207.
 
-            return (BitConverter.IsLittleEndian && UnicodeUtility.IsInRangeInclusive(value, 0x0080_0000u, 0x07FF_FFFFu))
-                || (!BitConverter.IsLittleEndian && ((value - 0x0080u) & 0xFFFFu) < 0x0780u);
+            return (
+                    BitConverter.IsLittleEndian
+                    && UnicodeUtility.IsInRangeInclusive(value, 0x0080_0000u, 0x07FF_FFFFu)
+                ) || (!BitConverter.IsLittleEndian && ((value - 0x0080u) & 0xFFFFu) < 0x0780u);
         }
 
         /// <summary>
@@ -640,8 +648,10 @@ namespace System.Text.Unicode
 
             // Return statement is written this way to work around https://github.com/dotnet/runtime/issues/4207.
 
-            return (BitConverter.IsLittleEndian && UnicodeUtility.IsInRangeInclusive(value & 0xC0FFu, 0x80C2u, 0x80DFu))
-                || (!BitConverter.IsLittleEndian && false);
+            return (
+                    BitConverter.IsLittleEndian
+                    && UnicodeUtility.IsInRangeInclusive(value & 0xC0FFu, 0x80C2u, 0x80DFu)
+                ) || (!BitConverter.IsLittleEndian && false);
         }
 
         /// <summary>
@@ -659,8 +669,14 @@ namespace System.Text.Unicode
 
             // Return statement is written this way to work around https://github.com/dotnet/runtime/issues/4207.
 
-            return (BitConverter.IsLittleEndian && UnicodeUtility.IsInRangeInclusive(value & 0xC0FF_0000u, 0x80C2_0000u, 0x80DF_0000u))
-                || (!BitConverter.IsLittleEndian && false);
+            return (
+                    BitConverter.IsLittleEndian
+                    && UnicodeUtility.IsInRangeInclusive(
+                        value & 0xC0FF_0000u,
+                        0x80C2_0000u,
+                        0x80DF_0000u
+                    )
+                ) || (!BitConverter.IsLittleEndian && false);
         }
 
         /// <summary>
@@ -721,10 +737,19 @@ namespace System.Text.Unicode
         /// resulting 6 bytes to the destination buffer.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void WriteTwoUtf16CharsAsTwoUtf8ThreeByteSequences(ref byte outputBuffer, uint value)
+        private static void WriteTwoUtf16CharsAsTwoUtf8ThreeByteSequences(
+            ref byte outputBuffer,
+            uint value
+        )
         {
-            Debug.Assert(IsFirstCharAtLeastThreeUtf8Bytes(value) && !IsFirstCharSurrogate(value), "First half of value should've been 0800..D7FF or E000..FFFF");
-            Debug.Assert(IsSecondCharAtLeastThreeUtf8Bytes(value) && !IsSecondCharSurrogate(value), "Second half of value should've been 0800..D7FF or E000..FFFF");
+            Debug.Assert(
+                IsFirstCharAtLeastThreeUtf8Bytes(value) && !IsFirstCharSurrogate(value),
+                "First half of value should've been 0800..D7FF or E000..FFFF"
+            );
+            Debug.Assert(
+                IsSecondCharAtLeastThreeUtf8Bytes(value) && !IsSecondCharSurrogate(value),
+                "Second half of value should've been 0800..D7FF or E000..FFFF"
+            );
 
             if (BitConverter.IsLittleEndian)
             {
@@ -734,7 +759,10 @@ namespace System.Text.Unicode
                 uint tempA = ((value << 2) & 0x3F00u) | ((value & 0x3Fu) << 16); // = [ 00000000 00xxxxxx 00yyyyyy 00000000 ]
                 uint tempB = ((value >> 4) & 0x0F00_0000u) | ((value >> 12) & 0x0Fu); // = [ 0000ZZZZ 00000000 00000000 0000zzzz ]
                 Unsafe.WriteUnaligned(ref outputBuffer, tempA + tempB + 0xE080_80E0u); // = [ 1110ZZZZ 10xxxxxx 10yyyyyy 1110zzzz ]
-                Unsafe.WriteUnaligned(ref Unsafe.Add(ref outputBuffer, 4), (ushort)(((value >> 22) & 0x3Fu) + ((value >> 8) & 0x3F00u) + 0x8080u)); // = [ 10XXXXXX 10YYYYYY ]
+                Unsafe.WriteUnaligned(
+                    ref Unsafe.Add(ref outputBuffer, 4),
+                    (ushort)(((value >> 22) & 0x3Fu) + ((value >> 8) & 0x3F00u) + 0x8080u)
+                ); // = [ 10XXXXXX 10YYYYYY ]
             }
             else
             {
@@ -756,9 +784,15 @@ namespace System.Text.Unicode
         /// resulting 3 bytes to the destination buffer.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void WriteFirstUtf16CharAsUtf8ThreeByteSequence(ref byte outputBuffer, uint value)
+        private static void WriteFirstUtf16CharAsUtf8ThreeByteSequence(
+            ref byte outputBuffer,
+            uint value
+        )
         {
-            Debug.Assert(IsFirstCharAtLeastThreeUtf8Bytes(value) && !IsFirstCharSurrogate(value), "First half of value should've been 0800..D7FF or E000..FFFF");
+            Debug.Assert(
+                IsFirstCharAtLeastThreeUtf8Bytes(value) && !IsFirstCharSurrogate(value),
+                "First half of value should've been 0800..D7FF or E000..FFFF"
+            );
 
             if (BitConverter.IsLittleEndian)
             {

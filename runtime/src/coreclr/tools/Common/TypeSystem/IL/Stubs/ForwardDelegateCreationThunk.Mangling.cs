@@ -12,18 +12,12 @@ namespace Internal.IL.Stubs
     {
         TypeDesc IPrefixMangledType.BaseType
         {
-            get
-            {
-                return _delegateType;
-            }
+            get { return _delegateType; }
         }
 
         string IPrefixMangledType.Prefix
         {
-            get
-            {
-                return "ForwardDelegateCreationStub";
-            }
+            get { return "ForwardDelegateCreationStub"; }
         }
     }
 }

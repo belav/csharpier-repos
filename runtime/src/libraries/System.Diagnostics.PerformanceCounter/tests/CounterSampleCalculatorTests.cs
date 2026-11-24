@@ -10,12 +10,18 @@ namespace System.Diagnostics.Tests
 {
     public static class CounterSampleCalculatorTests
     {
-        [ConditionalFact(typeof(Helpers), nameof(Helpers.IsElevatedAndCanWriteAndReadNetPerfCounters))]
+        [ConditionalFact(
+            typeof(Helpers),
+            nameof(Helpers.IsElevatedAndCanWriteAndReadNetPerfCounters)
+        )]
         public static void CounterSampleCalculator_ElapsedTime()
         {
             string categoryName = nameof(CounterSampleCalculator_ElapsedTime) + "_Category";
 
-            PerformanceCounter counterSample = CreateCounter(categoryName, PerformanceCounterType.ElapsedTime);
+            PerformanceCounter counterSample = CreateCounter(
+                categoryName,
+                PerformanceCounterType.ElapsedTime
+            );
 
             counterSample.RawValue = Stopwatch.GetTimestamp();
             DateTime Start = DateTime.Now;
@@ -29,7 +35,10 @@ namespace System.Diagnostics.Tests
             Assert.True(Math.Abs(dateTimeVal - counterVal) < .3);
         }
 
-        public static PerformanceCounter CreateCounter(string categoryName, PerformanceCounterType counterType)
+        public static PerformanceCounter CreateCounter(
+            string categoryName,
+            PerformanceCounterType counterType
+        )
         {
             string counterName = categoryName + "_Counter";
 
@@ -40,11 +49,16 @@ namespace System.Diagnostics.Tests
             ccdc.Add(ccd);
 
             Helpers.DeleteCategory(categoryName);
-            PerformanceCounterCategory.Create(categoryName, "description", PerformanceCounterCategoryType.SingleInstance, ccdc);
+            PerformanceCounterCategory.Create(
+                categoryName,
+                "description",
+                PerformanceCounterCategoryType.SingleInstance,
+                ccdc
+            );
 
             Helpers.VerifyPerformanceCounterCategoryCreated(categoryName);
 
-            return new PerformanceCounter(categoryName, counterName, readOnly:false);
+            return new PerformanceCounter(categoryName, counterName, readOnly: false);
         }
     }
 }

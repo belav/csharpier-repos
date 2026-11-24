@@ -7,7 +7,8 @@ namespace System.Globalization.Tests
 {
     public class GregorianCalendarTwoDigitYearMax
     {
-        private static readonly RandomDataGenerator s_randomDataGenerator = new RandomDataGenerator();
+        private static readonly RandomDataGenerator s_randomDataGenerator =
+            new RandomDataGenerator();
 
         private const int MaxYear = 9999;
         private const int MinTwoDigitYear = 99;
@@ -22,9 +23,14 @@ namespace System.Globalization.Tests
         public void TwoDigitYearMax(GregorianCalendarTypes calendarType)
         {
             Calendar calendar = new GregorianCalendar(calendarType);
-            Assert.True(calendar.TwoDigitYearMax == 2029 || calendar.TwoDigitYearMax == 2049, $"Unexpected calendar.TwoDigitYearMax {calendar.TwoDigitYearMax}");
+            Assert.True(
+                calendar.TwoDigitYearMax == 2029 || calendar.TwoDigitYearMax == 2049,
+                $"Unexpected calendar.TwoDigitYearMax {calendar.TwoDigitYearMax}"
+            );
 
-            int randomTwoDigitYearMax = MinTwoDigitYear + s_randomDataGenerator.GetInt32(-55) % (MaxYear - MinTwoDigitYear + 1);
+            int randomTwoDigitYearMax =
+                MinTwoDigitYear
+                + s_randomDataGenerator.GetInt32(-55) % (MaxYear - MinTwoDigitYear + 1);
             calendar.TwoDigitYearMax = randomTwoDigitYearMax;
             Assert.Equal(randomTwoDigitYearMax, calendar.TwoDigitYearMax);
         }

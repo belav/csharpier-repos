@@ -11,16 +11,14 @@ public abstract class OptimisticConcurrencyRelationalTestBase<TFixture, TRowVers
     where TFixture : F1RelationalFixture<TRowVersion>, new()
 {
     protected OptimisticConcurrencyRelationalTestBase(TFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [ConditionalFact]
     public virtual void Property_entry_original_value_is_set()
     {
         using var c = CreateF1Context();
-        c.Database.CreateExecutionStrategy().Execute(
-            c, context =>
+        c.Database.CreateExecutionStrategy()
+            .Execute(c, context =>
             {
                 using (context.Database.BeginTransaction())
                 {
@@ -31,7 +29,10 @@ public abstract class OptimisticConcurrencyRelationalTestBase<TFixture, TRowVers
 
                     Assert.Equal(
                         RelationalStrings.UpdateConcurrencyException("1", "0"),
-                        Assert.Throws<DbUpdateConcurrencyException>(() => context.SaveChanges()).Message);
+                        Assert
+                            .Throws<DbUpdateConcurrencyException>(() => context.SaveChanges())
+                            .Message
+                    );
                 }
             });
     }

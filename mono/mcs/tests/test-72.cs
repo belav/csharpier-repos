@@ -4,18 +4,20 @@
 
 using System;
 
-public class outer {
-        public class inner {
-                public void meth(Object o) {
-                        inner inst = (inner)o;
-                }
+public class outer
+{
+    public class inner
+    {
+        public void meth(Object o)
+        {
+            inner inst = (inner)o;
         }
-	
-	public static int Main ()
-	{
-		// We only test that this compiles.
-		
-		return 0;
-	}
-  }
+    }
 
+    public static int Main()
+    {
+        // We only test that this compiles.
+
+        return 0;
+    }
+}

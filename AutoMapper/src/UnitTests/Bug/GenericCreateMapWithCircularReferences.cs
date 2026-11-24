@@ -2,30 +2,26 @@
 
 public class GenericCreateMapsWithCircularReference : AutoMapperSpecBase
 {
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap(typeof(User<>), typeof(UserPoco<>));
-        cfg.CreateMap(typeof(Role<>), typeof(RolePoco<>));
-        cfg.CreateMap(typeof(UsersInRole<>), typeof(UsersInRolePoco<>));
-        cfg.ForAllMaps((t, c) =>
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
         {
-            c.PreserveReferences();
+            cfg.CreateMap(typeof(User<>), typeof(UserPoco<>));
+            cfg.CreateMap(typeof(Role<>), typeof(RolePoco<>));
+            cfg.CreateMap(typeof(UsersInRole<>), typeof(UsersInRolePoco<>));
+            cfg.ForAllMaps(
+                (t, c) =>
+                {
+                    c.PreserveReferences();
+                }
+            );
         });
-    });
 
     [Fact]
     public void Main()
     {
         var role = new Role<int>();
-        var user = new User<int>()
-        {
-            UsersInRoles = new List<UsersInRole<int>>()
-        };
-        user.UsersInRoles.Add(new UsersInRole<int>()
-        {
-            Role = role,
-            User = user
-        });
+        var user = new User<int>() { UsersInRoles = new List<UsersInRole<int>>() };
+        user.UsersInRoles.Add(new UsersInRole<int>() { Role = role, User = user });
 
         var result = Mapper.Map<UserPoco<int>>(user);
     }
@@ -36,6 +32,7 @@ public class GenericCreateMapsWithCircularReference : AutoMapperSpecBase
         {
             this.UsersInRoles = new List<UsersInRole<T>>();
         }
+
         public virtual IList<UsersInRole<T>> UsersInRoles { get; set; }
     }
 
@@ -45,6 +42,7 @@ public class GenericCreateMapsWithCircularReference : AutoMapperSpecBase
         {
             this.UsersInRoles = new List<UsersInRolePoco<T>>();
         }
+
         public virtual IList<UsersInRolePoco<T>> UsersInRoles { get; set; }
     }
 
@@ -54,6 +52,7 @@ public class GenericCreateMapsWithCircularReference : AutoMapperSpecBase
         {
             this.UsersInRoles = new List<UsersInRole<T>>();
         }
+
         public virtual IList<UsersInRole<T>> UsersInRoles { get; set; }
     }
 
@@ -63,6 +62,7 @@ public class GenericCreateMapsWithCircularReference : AutoMapperSpecBase
         {
             this.UsersInRoles = new List<UsersInRolePoco<T>>();
         }
+
         public virtual IList<UsersInRolePoco<T>> UsersInRoles { get; set; }
     }
 
@@ -77,5 +77,4 @@ public class GenericCreateMapsWithCircularReference : AutoMapperSpecBase
         public virtual RolePoco<T> Role { get; set; }
         public virtual UserPoco<T> User { get; set; }
     }
-
 }

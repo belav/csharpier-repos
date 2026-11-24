@@ -8,8 +8,5 @@ using System.Runtime.Intrinsics.X86;
 
 namespace JIT.HardwareIntrinsics.X86
 {
-    public static partial class Program
-    {
-
-    }
+    public static partial class Program { }
 }

@@ -10,16 +10,16 @@
 namespace System.Data.Common.QueryCache
 {
     using System;
+    using System.Collections.Concurrent;
     using System.Data.Metadata.Edm;
     using System.Data.Objects;
     using System.Data.Objects.Internal;
     using System.Diagnostics;
     using System.Threading;
-    using System.Collections.Concurrent;
 
-    /// <summary> 
+    /// <summary>
     /// Represents a compiled LINQ ObjectQuery cache entry
-    /// </summary> 
+    /// </summary>
     internal sealed class CompiledQueryCacheEntry : QueryCacheEntry
     {
         /// <summary>
@@ -34,29 +34,32 @@ namespace System.Data.Common.QueryCache
         private ConcurrentDictionary<String, ObjectQueryExecutionPlan> _plans;
 
         #region Constructors
-        /// <summary> 
-        /// constructor 
-        /// </summary> 
+        /// <summary>
+        /// constructor
+        /// </summary>
         /// <param name="queryCacheKey">The cache key that targets this cache entry</param>
         /// <param name="mergeOption">The inferred merge option that applies to this cached query</param>
         internal CompiledQueryCacheEntry(QueryCacheKey queryCacheKey, MergeOption? mergeOption)
             : base(queryCacheKey, null)
         {
             this.PropagatedMergeOption = mergeOption;
-            _plans = new ConcurrentDictionary<string,ObjectQueryExecutionPlan>();
+            _plans = new ConcurrentDictionary<string, ObjectQueryExecutionPlan>();
         }
         #endregion
 
         #region Methods/Properties
 
         /// <summary>
-        /// Retrieves the execution plan for the specified merge option and UseCSharpNullComparisonBehavior flag. May return null if the 
+        /// Retrieves the execution plan for the specified merge option and UseCSharpNullComparisonBehavior flag. May return null if the
         /// plan for the given merge option and useCSharpNullComparisonBehavior flag is not present.
         /// </summary>
         /// <param name="mergeOption">The merge option for which an execution plan is required.</param>
         /// <param name="useCSharpNullComparisonBehavior">Flag indicating if C# behavior should be used for null comparisons.</param>
         /// <returns>The corresponding execution plan, if it exists; otherwise <c>null</c>.</returns>
-        internal ObjectQueryExecutionPlan GetExecutionPlan(MergeOption mergeOption, bool useCSharpNullComparisonBehavior)
+        internal ObjectQueryExecutionPlan GetExecutionPlan(
+            MergeOption mergeOption,
+            bool useCSharpNullComparisonBehavior
+        )
         {
             string key = GenerateLocalCacheKey(mergeOption, useCSharpNullComparisonBehavior);
             ObjectQueryExecutionPlan plan;
@@ -65,18 +68,24 @@ namespace System.Data.Common.QueryCache
         }
 
         /// <summary>
-        /// Attempts to set the execution plan for <paramref name="newPlan"/>'s merge option and <paramref name="useCSharpNullComparisonBehavior"/> flag on 
-        /// this cache entry to <paramref name="newPlan"/>. If a plan already exists for that merge option and UseCSharpNullComparisonBehavior flag, the 
+        /// Attempts to set the execution plan for <paramref name="newPlan"/>'s merge option and <paramref name="useCSharpNullComparisonBehavior"/> flag on
+        /// this cache entry to <paramref name="newPlan"/>. If a plan already exists for that merge option and UseCSharpNullComparisonBehavior flag, the
         /// current value is not changed but is returned to the caller. Otherwise <paramref name="newPlan"/> is returned to the caller.
         /// </summary>
         /// <param name="newPlan">The new execution plan to add to this cache entry.</param>
         /// <param name="useCSharpNullComparisonBehavior">Flag indicating if C# behavior should be used for null comparisons.</param>
         /// <returns>The execution plan that corresponds to <paramref name="newPlan"/>'s merge option, which may be <paramref name="newPlan"/> or may be a previously added execution plan.</returns>
-        internal ObjectQueryExecutionPlan SetExecutionPlan(ObjectQueryExecutionPlan newPlan, bool useCSharpNullComparisonBehavior)
+        internal ObjectQueryExecutionPlan SetExecutionPlan(
+            ObjectQueryExecutionPlan newPlan,
+            bool useCSharpNullComparisonBehavior
+        )
         {
             Debug.Assert(newPlan != null, "New plan cannot be null");
 
-            string planKey = GenerateLocalCacheKey(newPlan.MergeOption, useCSharpNullComparisonBehavior);
+            string planKey = GenerateLocalCacheKey(
+                newPlan.MergeOption,
+                useCSharpNullComparisonBehavior
+            );
             // Get the value if it is there. If not, add it and get it.
             return (_plans.GetOrAdd(planKey, newPlan));
         }
@@ -104,7 +113,10 @@ namespace System.Data.Common.QueryCache
             return this;
         }
 
-        private string GenerateLocalCacheKey(MergeOption mergeOption, bool useCSharpNullComparisonBehavior)
+        private string GenerateLocalCacheKey(
+            MergeOption mergeOption,
+            bool useCSharpNullComparisonBehavior
+        )
         {
             switch (mergeOption)
             {
@@ -112,7 +124,11 @@ namespace System.Data.Common.QueryCache
                 case MergeOption.NoTracking:
                 case MergeOption.OverwriteChanges:
                 case MergeOption.PreserveChanges:
-                    return string.Join("", Enum.GetName(typeof(MergeOption), mergeOption), useCSharpNullComparisonBehavior);
+                    return string.Join(
+                        "",
+                        Enum.GetName(typeof(MergeOption), mergeOption),
+                        useCSharpNullComparisonBehavior
+                    );
                 default:
                     throw EntityUtil.ArgumentOutOfRange("newPlan.MergeOption");
             }

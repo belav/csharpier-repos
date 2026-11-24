@@ -54,8 +54,8 @@ public class UnmappedEmployee
     [MaxLength(255)]
     public string PhotoPath { get; set; }
 
-    public static UnmappedEmployee FromEmployee(Employee employee)
-        => new()
+    public static UnmappedEmployee FromEmployee(Employee employee) =>
+        new()
         {
             EmployeeID = (int)employee.EmployeeID,
             LastName = employee.LastName,

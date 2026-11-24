@@ -41,12 +41,11 @@ internal sealed class TimeLimitedDataProtector : ITimeLimitedDataProtector
         if (retVal == null)
         {
             var newValue = _innerProtector.CreateProtector(MyPurposeString); // we always append our purpose to the end of the chain
-            retVal =
-                Interlocked.CompareExchange(
-                    ref _innerProtectorWithTimeLimitedPurpose,
-                    newValue,
-                    null
-                ) ?? newValue;
+            retVal = Interlocked.CompareExchange(
+                ref _innerProtectorWithTimeLimitedPurpose,
+                newValue,
+                null
+            ) ?? newValue;
         }
         return retVal;
     }

@@ -26,7 +26,10 @@ namespace System.Threading
                 }
 
                 CountsOfThreadsProcessingUserCallbacks countsBeforeUpdate =
-                    _countsOfThreadsProcessingUserCallbacks.InterlockedCompareExchange(newCounts, counts);
+                    _countsOfThreadsProcessingUserCallbacks.InterlockedCompareExchange(
+                        newCounts,
+                        counts
+                    );
                 if (countsBeforeUpdate == counts)
                 {
                     break;
@@ -45,8 +48,14 @@ namespace System.Threading
                 newCounts.ResetHighWatermark();
 
                 CountsOfThreadsProcessingUserCallbacks countsBeforeUpdate =
-                    _countsOfThreadsProcessingUserCallbacks.InterlockedCompareExchange(newCounts, counts);
-                if (countsBeforeUpdate == counts || countsBeforeUpdate.HighWatermark == countsBeforeUpdate.Current)
+                    _countsOfThreadsProcessingUserCallbacks.InterlockedCompareExchange(
+                        newCounts,
+                        counts
+                    );
+                if (
+                    countsBeforeUpdate == counts
+                    || countsBeforeUpdate.HighWatermark == countsBeforeUpdate.Current
+                )
                 {
                     return countsBeforeUpdate.HighWatermark;
                 }
@@ -58,7 +67,8 @@ namespace System.Threading
         /// <summary>
         /// Tracks thread count information that is used when the <code>EnableWorkerTracking</code> config option is enabled.
         /// </summary>
-        private struct CountsOfThreadsProcessingUserCallbacks : IEquatable<CountsOfThreadsProcessingUserCallbacks>
+        private struct CountsOfThreadsProcessingUserCallbacks
+            : IEquatable<CountsOfThreadsProcessingUserCallbacks>
         {
             private const byte CurrentShift = 0;
             private const byte HighWatermarkShift = 16;
@@ -68,8 +78,10 @@ namespace System.Threading
             private CountsOfThreadsProcessingUserCallbacks(uint data) => _data = data;
 
             private short GetInt16Value(byte shift) => (short)(_data >> shift);
+
             private void SetInt16Value(short value, byte shift) =>
-                _data = (_data & ~((uint)ushort.MaxValue << shift)) | ((uint)(ushort)value << shift);
+                _data =
+                    (_data & ~((uint)ushort.MaxValue << shift)) | ((uint)(ushort)value << shift);
 
             /// <summary>
             /// Number of threads currently processing user callbacks
@@ -105,24 +117,29 @@ namespace System.Threading
 
             public CountsOfThreadsProcessingUserCallbacks InterlockedCompareExchange(
                 CountsOfThreadsProcessingUserCallbacks newCounts,
-                CountsOfThreadsProcessingUserCallbacks oldCounts)
+                CountsOfThreadsProcessingUserCallbacks oldCounts
+            )
             {
-                return
-                    new CountsOfThreadsProcessingUserCallbacks(
-                        Interlocked.CompareExchange(ref _data, newCounts._data, oldCounts._data));
+                return new CountsOfThreadsProcessingUserCallbacks(
+                    Interlocked.CompareExchange(ref _data, newCounts._data, oldCounts._data)
+                );
             }
 
             public static bool operator ==(
                 CountsOfThreadsProcessingUserCallbacks lhs,
-                CountsOfThreadsProcessingUserCallbacks rhs) => lhs.Equals(rhs);
+                CountsOfThreadsProcessingUserCallbacks rhs
+            ) => lhs.Equals(rhs);
+
             public static bool operator !=(
                 CountsOfThreadsProcessingUserCallbacks lhs,
-                CountsOfThreadsProcessingUserCallbacks rhs) => !lhs.Equals(rhs);
+                CountsOfThreadsProcessingUserCallbacks rhs
+            ) => !lhs.Equals(rhs);
 
             public override bool Equals([NotNullWhen(true)] object? obj) =>
                 obj is CountsOfThreadsProcessingUserCallbacks other && Equals(other);
 
-            public bool Equals(CountsOfThreadsProcessingUserCallbacks other) => _data == other._data;
+            public bool Equals(CountsOfThreadsProcessingUserCallbacks other) =>
+                _data == other._data;
 
             public override int GetHashCode() => (int)_data;
         }

@@ -16,7 +16,7 @@ namespace System.IdentityModel.Selectors
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("userName");
             }
-            
+
             this.userNameToken = new UserNameSecurityToken(userName, password);
         }
 

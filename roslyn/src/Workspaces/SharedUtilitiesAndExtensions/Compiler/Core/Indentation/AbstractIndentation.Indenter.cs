@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Indentation
                 IndentationOptions options,
                 TextLine lineToBeIndented,
                 ISmartTokenFormatter smartTokenFormatter,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 _service = service;
                 _syntaxFacts = service.SyntaxFacts;
@@ -64,10 +65,13 @@ namespace Microsoft.CodeAnalysis.Indentation
                     _tabSize,
                     options.FormattingOptions.IndentationSize,
                     tokenStream: null,
-                    service.HeaderFacts);
+                    service.HeaderFacts
+                );
             }
 
-            public IndentationResult? GetDesiredIndentation(FormattingOptions2.IndentStyle indentStyle)
+            public IndentationResult? GetDesiredIndentation(
+                FormattingOptions2.IndentStyle indentStyle
+            )
             {
                 // If the caller wants no indent, then we'll return an effective '0' indent.
                 if (indentStyle == FormattingOptions2.IndentStyle.None)
@@ -75,8 +79,14 @@ namespace Microsoft.CodeAnalysis.Indentation
 
                 // If the user has explicitly set 'block' indentation, or they're in an inactive preprocessor region,
                 // then just do simple block indentation.
-                if (indentStyle == FormattingOptions2.IndentStyle.Block ||
-                    _syntaxFacts.IsInInactiveRegion(this.Tree, LineToBeIndented.Start, this.CancellationToken))
+                if (
+                    indentStyle == FormattingOptions2.IndentStyle.Block
+                    || _syntaxFacts.IsInInactiveRegion(
+                        this.Tree,
+                        LineToBeIndented.Start,
+                        this.CancellationToken
+                    )
+                )
                 {
                     return GetDesiredBlockIndentation();
                 }
@@ -92,7 +102,7 @@ namespace Microsoft.CodeAnalysis.Indentation
                 var token = TryGetPrecedingVisibleToken();
 
                 // Look to see if we're immediately following some visible piece of trivia.  There may
-                // be some cases where we'll base our indent off of that.  However, we only do this as 
+                // be some cases where we'll base our indent off of that.  However, we only do this as
                 // long as we're immediately after the trivia.  If there are any blank lines between us
                 // then we consider that unimportant for indentation.
                 var trivia = TryGetImmediatelyPrecedingVisibleTrivia();
@@ -148,7 +158,11 @@ namespace Microsoft.CodeAnalysis.Indentation
             {
                 // Block indentation is simple, we keep walking back lines until we find a line with any sort of
                 // text on it.  We then set our indentation to whatever the indentation of that line was.
-                for (var currentLine = this.LineToBeIndented.LineNumber - 1; currentLine >= 0; currentLine--)
+                for (
+                    var currentLine = this.LineToBeIndented.LineNumber - 1;
+                    currentLine >= 0;
+                    currentLine--
+                )
                 {
                     var line = this.Text.Lines[currentLine];
                     var offset = line.GetFirstNonWhitespaceOffset();
@@ -156,7 +170,10 @@ namespace Microsoft.CodeAnalysis.Indentation
                         continue;
 
                     // Found the previous non-blank line.  indent to the same level that it is at
-                    return new IndentationResult(basePosition: line.Start + offset.Value, offset: 0);
+                    return new IndentationResult(
+                        basePosition: line.Start + offset.Value,
+                        offset: 0
+                    );
                 }
 
                 // Couldn't find a previous non-blank line.
@@ -186,10 +203,16 @@ namespace Microsoft.CodeAnalysis.Indentation
                             // to actually put the caret and what whitespace needs to proceed it.
                             //
                             // This can be computed with GetColumnFromLineOffset which again looks
-                            // at the contents of the line, but this time evaluates how \t characters 
+                            // at the contents of the line, but this time evaluates how \t characters
                             // should translate to column chars.
-                            var offset = updatedLine.GetColumnFromLineOffset(nonWhitespaceOffset.Value, _tabSize);
-                            indentationResult = new IndentationResult(basePosition: LineToBeIndented.Start, offset: offset);
+                            var offset = updatedLine.GetColumnFromLineOffset(
+                                nonWhitespaceOffset.Value,
+                                _tabSize
+                            );
+                            indentationResult = new IndentationResult(
+                                basePosition: LineToBeIndented.Start,
+                                offset: offset
+                            );
                             return true;
                         }
                     }
@@ -199,17 +222,17 @@ namespace Microsoft.CodeAnalysis.Indentation
                 return false;
             }
 
-            public IndentationResult IndentFromStartOfLine(int addedSpaces)
-                => new(this.LineToBeIndented.Start, addedSpaces);
+            public IndentationResult IndentFromStartOfLine(int addedSpaces) =>
+                new(this.LineToBeIndented.Start, addedSpaces);
 
-            public IndentationResult GetIndentationOfToken(SyntaxToken token)
-                => GetIndentationOfToken(token, addedSpaces: 0);
+            public IndentationResult GetIndentationOfToken(SyntaxToken token) =>
+                GetIndentationOfToken(token, addedSpaces: 0);
 
-            public IndentationResult GetIndentationOfToken(SyntaxToken token, int addedSpaces)
-                => GetIndentationOfPosition(token.SpanStart, addedSpaces);
+            public IndentationResult GetIndentationOfToken(SyntaxToken token, int addedSpaces) =>
+                GetIndentationOfPosition(token.SpanStart, addedSpaces);
 
-            public IndentationResult GetIndentationOfLine(TextLine lineToMatch)
-                => GetIndentationOfLine(lineToMatch, addedSpaces: 0);
+            public IndentationResult GetIndentationOfLine(TextLine lineToMatch) =>
+                GetIndentationOfLine(lineToMatch, addedSpaces: 0);
 
             public IndentationResult GetIndentationOfLine(TextLine lineToMatch, int addedSpaces)
             {
@@ -221,12 +244,19 @@ namespace Microsoft.CodeAnalysis.Indentation
 
             private IndentationResult GetIndentationOfPosition(int position, int addedSpaces)
             {
-                if (this.Tree.OverlapsHiddenPosition(GetNormalizedSpan(position), CancellationToken))
+                if (
+                    this.Tree.OverlapsHiddenPosition(GetNormalizedSpan(position), CancellationToken)
+                )
                 {
                     // Oops, the line we want to line up to is either hidden, or is in a different
                     // visible region.
                     var token = Root.FindTokenFromEnd(LineToBeIndented.Start);
-                    var indentation = Finder.GetIndentationOfCurrentPosition(this.Tree, token, LineToBeIndented.Start, CancellationToken.None);
+                    var indentation = Finder.GetIndentationOfCurrentPosition(
+                        this.Tree,
+                        token,
+                        LineToBeIndented.Start,
+                        CancellationToken.None
+                    );
 
                     return new IndentationResult(LineToBeIndented.Start, indentation);
                 }
@@ -244,8 +274,8 @@ namespace Microsoft.CodeAnalysis.Indentation
                 return TextSpan.FromBounds(position, LineToBeIndented.Start);
             }
 
-            public int GetCurrentPositionNotBelongToEndOfFileToken(int position)
-                => Math.Min(Root.EndOfFileToken.FullSpan.Start, position);
+            public int GetCurrentPositionNotBelongToEndOfFileToken(int position) =>
+                Math.Min(Root.EndOfFileToken.FullSpan.Start, position);
         }
     }
 }

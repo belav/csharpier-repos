@@ -14,7 +14,8 @@ namespace Functions
 
         public static void AbsDoubleTest()
         {
-            var result = 0.0; var value = -1.0;
+            var result = 0.0;
+            var value = -1.0;
 
             for (var iteration = 0; iteration < iterations; iteration++)
             {
@@ -26,9 +27,10 @@ namespace Functions
 
             if (diff > doubleEpsilon)
             {
-                throw new Exception($"Expected Result {absDoubleExpectedResult,20:g17}; Actual Result {result,20:g17}");
+                throw new Exception(
+                    $"Expected Result {absDoubleExpectedResult, 20:g17}; Actual Result {result, 20:g17}"
+                );
             }
         }
     }
-
 }

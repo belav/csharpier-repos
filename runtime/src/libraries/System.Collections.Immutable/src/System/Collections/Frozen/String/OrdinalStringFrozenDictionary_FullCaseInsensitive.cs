@@ -5,24 +5,28 @@ using System.Collections.Generic;
 
 namespace System.Collections.Frozen
 {
-    internal sealed class OrdinalStringFrozenDictionary_FullCaseInsensitive<TValue> : OrdinalStringFrozenDictionary<TValue>
+    internal sealed class OrdinalStringFrozenDictionary_FullCaseInsensitive<TValue>
+        : OrdinalStringFrozenDictionary<TValue>
     {
         internal OrdinalStringFrozenDictionary_FullCaseInsensitive(
             string[] keys,
             TValue[] values,
             IEqualityComparer<string> comparer,
             int minimumLength,
-            int maximumLengthDiff)
-            : base(keys, values, comparer, minimumLength, maximumLengthDiff)
-        {
-        }
+            int maximumLengthDiff
+        )
+            : base(keys, values, comparer, minimumLength, maximumLengthDiff) { }
 
         // This override is necessary to force the jit to emit the code in such a way that it
         // avoids virtual dispatch overhead when calling the Equals/GetHashCode methods. Don't
         // remove this, or you'll tank performance.
-        private protected override ref readonly TValue GetValueRefOrNullRefCore(string key) => ref base.GetValueRefOrNullRefCore(key);
+        private protected override ref readonly TValue GetValueRefOrNullRefCore(string key) =>
+            ref base.GetValueRefOrNullRefCore(key);
 
-        private protected override bool Equals(string? x, string? y) => StringComparer.OrdinalIgnoreCase.Equals(x, y);
-        private protected override int GetHashCode(string s) => Hashing.GetHashCodeOrdinalIgnoreCase(s.AsSpan());
+        private protected override bool Equals(string? x, string? y) =>
+            StringComparer.OrdinalIgnoreCase.Equals(x, y);
+
+        private protected override int GetHashCode(string s) =>
+            Hashing.GetHashCodeOrdinalIgnoreCase(s.AsSpan());
     }
 }

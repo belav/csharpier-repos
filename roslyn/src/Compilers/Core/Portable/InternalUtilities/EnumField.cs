@@ -4,8 +4,8 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
-using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Roslyn.Utilities
 {
@@ -74,9 +74,7 @@ namespace Roslyn.Utilities
             {
                 // Sort order is descending value, then ascending name.
                 int diff = unchecked(((long)field2.Value).CompareTo((long)field1.Value));
-                return diff == 0
-                    ? string.CompareOrdinal(field1.Name, field2.Name)
-                    : diff;
+                return diff == 0 ? string.CompareOrdinal(field1.Name, field2.Name) : diff;
             }
         }
     }

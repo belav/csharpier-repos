@@ -75,6 +75,6 @@ public interface IStoredProcedure : IReadOnlyStoredProcedure, IAnnotatable
     ///     Returns the store identifier of this stored procedure.
     /// </summary>
     /// <returns>The store identifier.</returns>
-    new StoreObjectIdentifier GetStoreIdentifier()
-        => ((IReadOnlyStoredProcedure)this).GetStoreIdentifier()!.Value;
+    new StoreObjectIdentifier GetStoreIdentifier() =>
+        ((IReadOnlyStoredProcedure)this).GetStoreIdentifier()!.Value;
 }

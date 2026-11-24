@@ -27,7 +27,14 @@ namespace System.Text.Json
         /// <remarks>
         /// Note that the <paramref name="bytePositionInLine"/> counts the number of bytes (i.e. UTF-8 code units) and not characters or scalars.
         /// </remarks>
-        public JsonException(string? message, string? path, long? lineNumber, long? bytePositionInLine, Exception? innerException) : base(message, innerException)
+        public JsonException(
+            string? message,
+            string? path,
+            long? lineNumber,
+            long? bytePositionInLine,
+            Exception? innerException
+        )
+            : base(message, innerException)
         {
             _message = message;
             LineNumber = lineNumber;
@@ -45,7 +52,13 @@ namespace System.Text.Json
         /// <remarks>
         /// Note that the <paramref name="bytePositionInLine"/> counts the number of bytes (i.e. UTF-8 code units) and not characters or scalars.
         /// </remarks>
-        public JsonException(string? message, string? path, long? lineNumber, long? bytePositionInLine) : base(message)
+        public JsonException(
+            string? message,
+            string? path,
+            long? lineNumber,
+            long? bytePositionInLine
+        )
+            : base(message)
         {
             _message = message;
             LineNumber = lineNumber;
@@ -58,7 +71,8 @@ namespace System.Text.Json
         /// </summary>
         /// <param name="message">The context specific error message.</param>
         /// <param name="innerException">The exception that caused the current exception.</param>
-        public JsonException(string? message, Exception? innerException) : base(message, innerException)
+        public JsonException(string? message, Exception? innerException)
+            : base(message, innerException)
         {
             _message = message;
         }
@@ -67,7 +81,8 @@ namespace System.Text.Json
         /// Creates a new exception object to relay error information to the user.
         /// </summary>
         /// <param name="message">The context specific error message.</param>
-        public JsonException(string? message) : base(message)
+        public JsonException(string? message)
+            : base(message)
         {
             _message = message;
         }
@@ -75,7 +90,8 @@ namespace System.Text.Json
         /// <summary>
         /// Creates a new exception object to relay error information to the user.
         /// </summary>
-        public JsonException() : base() { }
+        public JsonException()
+            : base() { }
 
         /// <summary>
         /// Creates a new exception object with serialized data.
@@ -86,10 +102,15 @@ namespace System.Text.Json
         /// Thrown when <paramref name="info"/> is <see langword="null" />.
         /// </exception>
 #if NET8_0_OR_GREATER
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
-        protected JsonException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected JsonException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             LineNumber = (long?)info.GetValue("LineNumber", typeof(long?));
             BytePositionInLine = (long?)info.GetValue("BytePositionInLine", typeof(long?));
@@ -108,7 +129,11 @@ namespace System.Text.Json
         /// <param name="info">The <see cref="SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
         /// <param name="context">The <see cref="StreamingContext"/> that contains contextual information about the source or destination.</param>
 #if NET8_0_OR_GREATER
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -140,10 +165,7 @@ namespace System.Text.Json
         /// </summary>
         public override string Message
         {
-            get
-            {
-                return _message ?? base.Message;
-            }
+            get { return _message ?? base.Message; }
         }
 
         internal void SetMessage(string? message)

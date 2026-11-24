@@ -19,17 +19,32 @@ namespace System.ServiceModel.Discovery
             this.innerCallbackBehavior.UseSynchronizationContext = false;
         }
 
-        void IEndpointBehavior.AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
+        void IEndpointBehavior.AddBindingParameters(
+            ServiceEndpoint endpoint,
+            BindingParameterCollection bindingParameters
+        )
         {
-            ((IEndpointBehavior)this.innerCallbackBehavior).AddBindingParameters(endpoint, bindingParameters);
+            ((IEndpointBehavior)this.innerCallbackBehavior).AddBindingParameters(
+                endpoint,
+                bindingParameters
+            );
         }
 
-        void IEndpointBehavior.ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
+        void IEndpointBehavior.ApplyClientBehavior(
+            ServiceEndpoint endpoint,
+            ClientRuntime clientRuntime
+        )
         {
-            ((IEndpointBehavior)this.innerCallbackBehavior).ApplyClientBehavior(endpoint, clientRuntime);
+            ((IEndpointBehavior)this.innerCallbackBehavior).ApplyClientBehavior(
+                endpoint,
+                clientRuntime
+            );
         }
 
-        void IEndpointBehavior.ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
+        void IEndpointBehavior.ApplyDispatchBehavior(
+            ServiceEndpoint endpoint,
+            EndpointDispatcher endpointDispatcher
+        )
         {
             // no-op on the service side - the InnerCallbackBehavior throws on the service side.
         }

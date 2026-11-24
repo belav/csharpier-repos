@@ -14,10 +14,12 @@ namespace Microsoft.CodeAnalysis.Syntax
             private SyntaxNode? _child1;
             private SyntaxNode? _child2;
 
-            internal WithThreeChildren(InternalSyntax.SyntaxList green, SyntaxNode? parent, int position)
-                : base(green, parent, position)
-            {
-            }
+            internal WithThreeChildren(
+                InternalSyntax.SyntaxList green,
+                SyntaxNode? parent,
+                int position
+            )
+                : base(green, parent, position) { }
 
             internal override SyntaxNode? GetNodeSlot(int index)
             {

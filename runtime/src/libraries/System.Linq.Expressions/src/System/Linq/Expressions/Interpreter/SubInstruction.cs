@@ -8,7 +8,14 @@ namespace System.Linq.Expressions.Interpreter
 {
     internal abstract class SubInstruction : Instruction
     {
-        private static Instruction? s_Int16, s_Int32, s_Int64, s_UInt16, s_UInt32, s_UInt64, s_Single, s_Double;
+        private static Instruction? s_Int16,
+            s_Int32,
+            s_Int64,
+            s_UInt16,
+            s_UInt32,
+            s_UInt64,
+            s_Single,
+            s_Double;
 
         public override int ConsumedStack => 2;
         public override int ProducedStack => 1;
@@ -26,7 +33,10 @@ namespace System.Linq.Expressions.Interpreter
                 if (left != null)
                 {
                     object? right = stack[index - 1];
-                    stack[index - 2] = right == null ? null : (object)unchecked((short)((short)left - (short)right));
+                    stack[index - 2] =
+                        right == null
+                            ? null
+                            : (object)unchecked((short)((short)left - (short)right));
                 }
 
                 frame.StackIndex = index - 1;
@@ -44,7 +54,12 @@ namespace System.Linq.Expressions.Interpreter
                 if (left != null)
                 {
                     object? right = stack[index - 1];
-                    stack[index - 2] = right == null ? null : ScriptingRuntimeHelpers.Int32ToObject(unchecked((int)left - (int)right));
+                    stack[index - 2] =
+                        right == null
+                            ? null
+                            : ScriptingRuntimeHelpers.Int32ToObject(
+                                unchecked((int)left - (int)right)
+                            );
                 }
 
                 frame.StackIndex = index - 1;
@@ -62,7 +77,8 @@ namespace System.Linq.Expressions.Interpreter
                 if (left != null)
                 {
                     object? right = stack[index - 1];
-                    stack[index - 2] = right == null ? null : (object)unchecked((long)left - (long)right);
+                    stack[index - 2] =
+                        right == null ? null : (object)unchecked((long)left - (long)right);
                 }
 
                 frame.StackIndex = index - 1;
@@ -80,7 +96,10 @@ namespace System.Linq.Expressions.Interpreter
                 if (left != null)
                 {
                     object? right = stack[index - 1];
-                    stack[index - 2] = right == null ? null : (object)unchecked((ushort)((ushort)left - (ushort)right));
+                    stack[index - 2] =
+                        right == null
+                            ? null
+                            : (object)unchecked((ushort)((ushort)left - (ushort)right));
                 }
 
                 frame.StackIndex = index - 1;
@@ -98,7 +117,8 @@ namespace System.Linq.Expressions.Interpreter
                 if (left != null)
                 {
                     object? right = stack[index - 1];
-                    stack[index - 2] = right == null ? null : (object)unchecked((uint)left - (uint)right);
+                    stack[index - 2] =
+                        right == null ? null : (object)unchecked((uint)left - (uint)right);
                 }
 
                 frame.StackIndex = index - 1;
@@ -116,7 +136,8 @@ namespace System.Linq.Expressions.Interpreter
                 if (left != null)
                 {
                     object? right = stack[index - 1];
-                    stack[index - 2] = right == null ? null : (object)unchecked((ulong)left - (ulong)right);
+                    stack[index - 2] =
+                        right == null ? null : (object)unchecked((ulong)left - (ulong)right);
                 }
 
                 frame.StackIndex = index - 1;
@@ -152,7 +173,8 @@ namespace System.Linq.Expressions.Interpreter
                 if (left != null)
                 {
                     object? right = stack[index - 1];
-                    stack[index - 2] = right == null ? null : (object)((double)left - (double)right);
+                    stack[index - 2] =
+                        right == null ? null : (object)((double)left - (double)right);
                 }
 
                 frame.StackIndex = index - 1;
@@ -180,7 +202,12 @@ namespace System.Linq.Expressions.Interpreter
 
     internal abstract class SubOvfInstruction : Instruction
     {
-        private static Instruction? s_Int16, s_Int32, s_Int64, s_UInt16, s_UInt32, s_UInt64;
+        private static Instruction? s_Int16,
+            s_Int32,
+            s_Int64,
+            s_UInt16,
+            s_UInt32,
+            s_UInt64;
 
         public override int ConsumedStack => 2;
         public override int ProducedStack => 1;
@@ -198,7 +225,8 @@ namespace System.Linq.Expressions.Interpreter
                 if (left != null)
                 {
                     object? right = stack[index - 1];
-                    stack[index - 2] = right == null ? null : (object)checked((short)((short)left - (short)right));
+                    stack[index - 2] =
+                        right == null ? null : (object)checked((short)((short)left - (short)right));
                 }
 
                 frame.StackIndex = index - 1;
@@ -216,7 +244,12 @@ namespace System.Linq.Expressions.Interpreter
                 if (left != null)
                 {
                     object? right = stack[index - 1];
-                    stack[index - 2] = right == null ? null : ScriptingRuntimeHelpers.Int32ToObject(checked((int)left - (int)right));
+                    stack[index - 2] =
+                        right == null
+                            ? null
+                            : ScriptingRuntimeHelpers.Int32ToObject(
+                                checked((int)left - (int)right)
+                            );
                 }
 
                 frame.StackIndex = index - 1;
@@ -234,7 +267,8 @@ namespace System.Linq.Expressions.Interpreter
                 if (left != null)
                 {
                     object? right = stack[index - 1];
-                    stack[index - 2] = right == null ? null : (object)checked((long)left - (long)right);
+                    stack[index - 2] =
+                        right == null ? null : (object)checked((long)left - (long)right);
                 }
 
                 frame.StackIndex = index - 1;
@@ -252,7 +286,10 @@ namespace System.Linq.Expressions.Interpreter
                 if (left != null)
                 {
                     object? right = stack[index - 1];
-                    stack[index - 2] = right == null ? null : (object)checked((ushort)((ushort)left - (ushort)right));
+                    stack[index - 2] =
+                        right == null
+                            ? null
+                            : (object)checked((ushort)((ushort)left - (ushort)right));
                 }
 
                 frame.StackIndex = index - 1;
@@ -270,7 +307,8 @@ namespace System.Linq.Expressions.Interpreter
                 if (left != null)
                 {
                     object? right = stack[index - 1];
-                    stack[index - 2] = right == null ? null : (object)checked((uint)left - (uint)right);
+                    stack[index - 2] =
+                        right == null ? null : (object)checked((uint)left - (uint)right);
                 }
 
                 frame.StackIndex = index - 1;
@@ -288,7 +326,8 @@ namespace System.Linq.Expressions.Interpreter
                 if (left != null)
                 {
                     object? right = stack[index - 1];
-                    stack[index - 2] = right == null ? null : (object)checked((ulong)left - (ulong)right);
+                    stack[index - 2] =
+                        right == null ? null : (object)checked((ulong)left - (ulong)right);
                 }
 
                 frame.StackIndex = index - 1;

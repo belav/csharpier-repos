@@ -14,7 +14,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
         private readonly TelemetrySession _session;
         private readonly ILogger _telemetryLogger;
 
-        private ImmutableDictionary<FunctionId, VisualStudioTelemetryLog> _logs = ImmutableDictionary<FunctionId, VisualStudioTelemetryLog>.Empty;
+        private ImmutableDictionary<FunctionId, VisualStudioTelemetryLog> _logs =
+            ImmutableDictionary<FunctionId, VisualStudioTelemetryLog>.Empty;
 
         public VisualStudioTelemetryLogManager(TelemetrySession session, ILogger telemetryLogger)
         {
@@ -27,7 +28,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
             if (!_session.IsOptedIn)
                 return null;
 
-            return ImmutableInterlocked.GetOrAdd(ref _logs, functionId, functionId => new VisualStudioTelemetryLog(_telemetryLogger, functionId));
+            return ImmutableInterlocked.GetOrAdd(
+                ref _logs,
+                functionId,
+                functionId => new VisualStudioTelemetryLog(_telemetryLogger, functionId)
+            );
         }
     }
 }

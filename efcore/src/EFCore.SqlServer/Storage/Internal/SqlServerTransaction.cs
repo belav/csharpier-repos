@@ -25,10 +25,16 @@ public class SqlServerTransaction : RelationalTransaction
         Guid transactionId,
         IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> logger,
         bool transactionOwned,
-        ISqlGenerationHelper sqlGenerationHelper)
-        : base(connection, transaction, transactionId, logger, transactionOwned, sqlGenerationHelper)
-    {
-    }
+        ISqlGenerationHelper sqlGenerationHelper
+    )
+        : base(
+            connection,
+            transaction,
+            transactionId,
+            logger,
+            transactionOwned,
+            sqlGenerationHelper
+        ) { }
 
     /// <inheritdoc />
     public override bool SupportsSavepoints
@@ -49,11 +55,11 @@ public class SqlServerTransaction : RelationalTransaction
     // SQL Server doesn't support releasing savepoints. Override to do nothing.
 
     /// <inheritdoc />
-    public override void ReleaseSavepoint(string name)
-    {
-    }
+    public override void ReleaseSavepoint(string name) { }
 
     /// <inheritdoc />
-    public override Task ReleaseSavepointAsync(string name, CancellationToken cancellationToken = default)
-        => Task.CompletedTask;
+    public override Task ReleaseSavepointAsync(
+        string name,
+        CancellationToken cancellationToken = default
+    ) => Task.CompletedTask;
 }

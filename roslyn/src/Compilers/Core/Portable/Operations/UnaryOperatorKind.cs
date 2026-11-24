@@ -50,4 +50,3 @@ namespace Microsoft.CodeAnalysis.Operations
         Hat = 0x7,
     }
 }
-

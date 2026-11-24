@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,36 +33,34 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Security;
 using System.ServiceModel.Security.Tokens;
+using NUnit.Framework;
 #if !MOBILE
 using System.Security.Cryptography.Xml;
 #endif
-using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Security
 {
-	[TestFixture]
-	public class ChannelProtectionRequirementsTest
-	{
-		[Test]
-		public void DefaultValues ()
-		{
-			ChannelProtectionRequirements r =
-				new ChannelProtectionRequirements ();
-			Assert.AreEqual (false, r.IsReadOnly, "#1");
-			Assert.IsNotNull (r.IncomingSignatureParts, "#2");
-			Assert.IsNotNull (r.IncomingEncryptionParts, "#3");
-			Assert.IsNotNull (r.OutgoingSignatureParts, "#4");
-			Assert.IsNotNull (r.OutgoingEncryptionParts, "#5");
-		}
+    [TestFixture]
+    public class ChannelProtectionRequirementsTest
+    {
+        [Test]
+        public void DefaultValues()
+        {
+            ChannelProtectionRequirements r = new ChannelProtectionRequirements();
+            Assert.AreEqual(false, r.IsReadOnly, "#1");
+            Assert.IsNotNull(r.IncomingSignatureParts, "#2");
+            Assert.IsNotNull(r.IncomingEncryptionParts, "#3");
+            Assert.IsNotNull(r.OutgoingSignatureParts, "#4");
+            Assert.IsNotNull(r.OutgoingEncryptionParts, "#5");
+        }
 
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))]
-		public void AddToReadOnly ()
-		{
-			ChannelProtectionRequirements r =
-				new ChannelProtectionRequirements ();
-			r.MakeReadOnly ();
-			r.Add (new ChannelProtectionRequirements ());
-		}
-	}
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void AddToReadOnly()
+        {
+            ChannelProtectionRequirements r = new ChannelProtectionRequirements();
+            r.MakeReadOnly();
+            r.Add(new ChannelProtectionRequirements());
+        }
+    }
 }

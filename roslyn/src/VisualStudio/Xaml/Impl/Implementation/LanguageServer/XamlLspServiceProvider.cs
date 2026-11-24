@@ -17,10 +17,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public XamlLspServiceProvider(
-            [ImportMany(StringConstants.XamlLspLanguagesContract)] IEnumerable<Lazy<ILspService, LspServiceMetadataView>> lspServices,
-            [ImportMany(StringConstants.XamlLspLanguagesContract)] IEnumerable<Lazy<ILspServiceFactory, LspServiceMetadataView>> lspServiceFactories)
-        : base(lspServices, lspServiceFactories)
-        {
-        }
+            [ImportMany(StringConstants.XamlLspLanguagesContract)]
+                IEnumerable<Lazy<ILspService, LspServiceMetadataView>> lspServices,
+            [ImportMany(StringConstants.XamlLspLanguagesContract)]
+                IEnumerable<Lazy<ILspServiceFactory, LspServiceMetadataView>> lspServiceFactories
+        )
+            : base(lspServices, lspServiceFactories) { }
     }
 }

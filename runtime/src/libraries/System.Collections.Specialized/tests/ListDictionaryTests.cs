@@ -20,8 +20,16 @@ namespace System.Collections.Specialized.Tests
         public static IEnumerable<object[]> ListDictionary_Data()
         {
             yield return new object[] { new ListDictionary(), new KeyValuePair<string, string>[0] };
-            yield return new object[] { Fill(new ListDictionary(), s_dictionaryData), s_dictionaryData };
-            yield return new object[] { Fill(new ListDictionary(StringComparer.Ordinal), s_dictionaryData), s_dictionaryData };
+            yield return new object[]
+            {
+                Fill(new ListDictionary(), s_dictionaryData),
+                s_dictionaryData,
+            };
+            yield return new object[]
+            {
+                Fill(new ListDictionary(StringComparer.Ordinal), s_dictionaryData),
+                s_dictionaryData,
+            };
         }
 
         private static ListDictionary Fill(ListDictionary ld, KeyValuePair<string, string>[] data)
@@ -35,12 +43,22 @@ namespace System.Collections.Specialized.Tests
 
         private const string Key = "key";
 
-        private static readonly KeyValuePair<string, string>[] s_dictionaryData = new[] {
-            new KeyValuePair<string, string>(Key, Key+"-value"),
-            new KeyValuePair<string, string>(Key.Replace('k', 'K'), Key.Replace('k', 'K')+"-value"),
-            new KeyValuePair<string, string>(Key.Replace('e', 'E'), Key.Replace('e', 'E')+"-value"),
-            new KeyValuePair<string, string>(Key.Replace('y', 'Y'), Key.Replace('y', 'Y')+"-value"),
-            new KeyValuePair<string, string>(Key.ToUpper(), Key.ToUpper()+"-value"),
+        private static readonly KeyValuePair<string, string>[] s_dictionaryData = new[]
+        {
+            new KeyValuePair<string, string>(Key, Key + "-value"),
+            new KeyValuePair<string, string>(
+                Key.Replace('k', 'K'),
+                Key.Replace('k', 'K') + "-value"
+            ),
+            new KeyValuePair<string, string>(
+                Key.Replace('e', 'E'),
+                Key.Replace('e', 'E') + "-value"
+            ),
+            new KeyValuePair<string, string>(
+                Key.Replace('y', 'Y'),
+                Key.Replace('y', 'Y') + "-value"
+            ),
+            new KeyValuePair<string, string>(Key.ToUpper(), Key.ToUpper() + "-value"),
             new KeyValuePair<string, string>("otherkey", "otherkey-value"),
             new KeyValuePair<string, string>("nullvaluekey", null),
         };
@@ -95,7 +113,11 @@ namespace System.Collections.Specialized.Tests
                 comparer.AssertCompared(i + 1, () => Assert.Equal(value, added[key]));
                 comparer.AssertCompared(i + 1, () => Assert.True(added.Contains(key)));
                 Assert.Equal(i + 1, added.Count);
-                comparer.AssertCompared(i + 1, () => AssertExtensions.Throws<ArgumentException>(null, () => added.Add(key, "duplicate")));
+                comparer.AssertCompared(i + 1, () =>
+                    AssertExtensions.Throws<ArgumentException>(null, () =>
+                        added.Add(key, "duplicate")
+                    )
+                );
             }
             Assert.Equal(s_dictionaryData.Length, added.Count);
 
@@ -109,7 +131,11 @@ namespace System.Collections.Specialized.Tests
             Assert.True(added.Contains(middleKey));
             // Index is 0-based, count is 1-based
             //  ... Add throws exception
-            comparer.AssertCompared(middleIndex + 1, () => AssertExtensions.Throws<ArgumentException>(null, () => added.Add(middleKey, "middleValue")));
+            comparer.AssertCompared(middleIndex + 1, () =>
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    added.Add(middleKey, "middleValue")
+                )
+            );
             Assert.Equal(middleValue, added[middleKey]);
             Assert.True(added.Contains(middleKey));
         }
@@ -167,8 +193,10 @@ namespace System.Collections.Specialized.Tests
 
         private static void Add(this ListDictionary ld, bool addViaSet, object key, object value)
         {
-            if (addViaSet) ld[key] = value;
-            else ld.Add(key, value);
+            if (addViaSet)
+                ld[key] = value;
+            else
+                ld.Add(key, value);
         }
 
         private class ObservableStringComparer : IComparer

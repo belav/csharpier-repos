@@ -15,12 +15,17 @@ namespace System.IO.Hashing
     internal static class VectorHelper
     {
         // Pclmulqdq implies support for SSE2
-        public static bool IsSupported => Pclmulqdq.IsSupported || (Aes.IsSupported && AdvSimd.IsSupported);
+        public static bool IsSupported =>
+            Pclmulqdq.IsSupported || (Aes.IsSupported && AdvSimd.IsSupported);
 
         // Performs carryless multiplication of the upper pairs of source and constants and the lower pairs of source and constants,
         // then folds them into target using carryless addition.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<ulong> FoldPolynomialPair(Vector128<ulong> target, Vector128<ulong> source, Vector128<ulong> constants)
+        public static Vector128<ulong> FoldPolynomialPair(
+            Vector128<ulong> target,
+            Vector128<ulong> source,
+            Vector128<ulong> constants
+        )
         {
             target ^= CarrylessMultiplyUpper(source, constants);
             target ^= CarrylessMultiplyLower(source, constants);
@@ -29,7 +34,10 @@ namespace System.IO.Hashing
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<ulong> CarrylessMultiplyLower(Vector128<ulong> left, Vector128<ulong> right)
+        public static Vector128<ulong> CarrylessMultiplyLower(
+            Vector128<ulong> left,
+            Vector128<ulong> right
+        )
         {
             if (Pclmulqdq.IsSupported)
             {
@@ -46,7 +54,10 @@ namespace System.IO.Hashing
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<ulong> CarrylessMultiplyUpper(Vector128<ulong> left, Vector128<ulong> right)
+        public static Vector128<ulong> CarrylessMultiplyUpper(
+            Vector128<ulong> left,
+            Vector128<ulong> right
+        )
         {
             if (Pclmulqdq.IsSupported)
             {
@@ -63,7 +74,10 @@ namespace System.IO.Hashing
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<ulong> CarrylessMultiplyLeftUpperRightLower(Vector128<ulong> left, Vector128<ulong> right)
+        public static Vector128<ulong> CarrylessMultiplyLeftUpperRightLower(
+            Vector128<ulong> left,
+            Vector128<ulong> right
+        )
         {
             if (Pclmulqdq.IsSupported)
             {
@@ -80,7 +94,10 @@ namespace System.IO.Hashing
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<ulong> CarrylessMultiplyLeftLowerRightUpper(Vector128<ulong> left, Vector128<ulong> right)
+        public static Vector128<ulong> CarrylessMultiplyLeftLowerRightUpper(
+            Vector128<ulong> left,
+            Vector128<ulong> right
+        )
         {
             if (Pclmulqdq.IsSupported)
             {
@@ -97,8 +114,10 @@ namespace System.IO.Hashing
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<ulong> ShiftRightBytesInVector(Vector128<ulong> operand,
-            [ConstantExpected(Max = (byte)15)] byte numBytesToShift)
+        public static Vector128<ulong> ShiftRightBytesInVector(
+            Vector128<ulong> operand,
+            [ConstantExpected(Max = (byte)15)] byte numBytesToShift
+        )
         {
             if (Sse2.IsSupported)
             {
@@ -107,7 +126,9 @@ namespace System.IO.Hashing
 
             if (AdvSimd.IsSupported)
             {
-                return AdvSimd.ExtractVector128(operand.AsByte(), Vector128<byte>.Zero, numBytesToShift).AsUInt64();
+                return AdvSimd
+                    .ExtractVector128(operand.AsByte(), Vector128<byte>.Zero, numBytesToShift)
+                    .AsUInt64();
             }
 
             ThrowHelper.ThrowUnreachableException();
@@ -124,7 +145,9 @@ namespace System.IO.Hashing
 
             if (AdvSimd.IsSupported)
             {
-                return AdvSimd.ExtractVector128(Vector128<byte>.Zero, operand.AsByte(), 8).AsUInt64();
+                return AdvSimd
+                    .ExtractVector128(Vector128<byte>.Zero, operand.AsByte(), 8)
+                    .AsUInt64();
             }
 
             ThrowHelper.ThrowUnreachableException();

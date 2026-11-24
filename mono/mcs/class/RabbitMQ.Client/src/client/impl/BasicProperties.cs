@@ -59,7 +59,7 @@ using System.Collections;
 
 namespace RabbitMQ.Client.Impl
 {
-    public abstract class BasicProperties: ContentHeaderBase, IBasicProperties
+    public abstract class BasicProperties : ContentHeaderBase, IBasicProperties
     {
         public abstract string ContentType { get; set; }
         public abstract string ContentEncoding { get; set; }
@@ -108,14 +108,8 @@ namespace RabbitMQ.Client.Impl
 
         public PublicationAddress ReplyToAddress
         {
-            get
-            {
-                return PublicationAddress.Parse(ReplyTo);
-            }
-            set
-            {
-                ReplyTo = value.ToString();
-            }
+            get { return PublicationAddress.Parse(ReplyTo); }
+            set { ReplyTo = value.ToString(); }
         }
 
         public void SetPersistent(bool persistent)

@@ -9,22 +9,30 @@
 
 using System;
 using System.Collections.Generic;
-
-using System.Data.Metadata.Edm;
 using System.Data.Common.CommandTrees.Internal;
 using System.Data.Common.Utils;
+using System.Data.Metadata.Edm;
 
 namespace System.Data.Common.CommandTrees
 {
     /// <summary>
     /// Represents a single row delete operation expressed as a canonical command tree.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Db")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1709:IdentifiersShouldBeCasedCorrectly",
+        MessageId = "Db"
+    )]
     public sealed class DbDeleteCommandTree : DbModificationCommandTree
     {
         private readonly DbExpression _predicate;
 
-        internal DbDeleteCommandTree(MetadataWorkspace metadata, DataSpace dataSpace, DbExpressionBinding target, DbExpression predicate)
+        internal DbDeleteCommandTree(
+            MetadataWorkspace metadata,
+            DataSpace dataSpace,
+            DbExpressionBinding target,
+            DbExpression predicate
+        )
             : base(metadata, dataSpace, target)
         {
             EntityUtil.CheckArgumentNull(predicate, "predicate");
@@ -49,11 +57,8 @@ namespace System.Data.Common.CommandTrees
         /// </list>
         /// </remarks>
         public DbExpression Predicate
-        {   
-            get
-            {
-                return _predicate;
-            }
+        {
+            get { return _predicate; }
         }
 
         internal override DbCommandTreeKind CommandTreeKind
@@ -63,11 +68,11 @@ namespace System.Data.Common.CommandTrees
 
         internal override bool HasReader
         {
-            get 
+            get
             {
                 // a delete command never returns server-gen values, and
                 // therefore never returns a reader
-                return false; 
+                return false;
             }
         }
 
@@ -83,7 +88,7 @@ namespace System.Data.Common.CommandTrees
 
         internal override string PrintTree(ExpressionPrinter printer)
         {
-            return printer.Print(this); 
+            return printer.Print(this);
         }
     }
 }

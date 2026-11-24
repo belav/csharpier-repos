@@ -3,8 +3,8 @@
 //------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Collections.ObjectModel;
+using System.Text;
 
 namespace System.IdentityModel.Metadata
 {
@@ -24,9 +24,7 @@ namespace System.IdentityModel.Metadata
         /// Empty constructor.
         /// </summary>
         protected RoleDescriptor()
-            : this(new Collection<Uri>())
-        {
-        }
+            : this(new Collection<Uri>()) { }
 
         /// <summary>
         /// Constructs a role descriptor with a collection of supported protocols.
@@ -87,6 +85,5 @@ namespace System.IdentityModel.Metadata
             get { return this.validUntil; }
             set { this.validUntil = value; }
         }
-
     }
 }

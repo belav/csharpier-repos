@@ -12,27 +12,29 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
 [Trait(Traits.Feature, Traits.Features.Outlining)]
-public class AnonymousObjectCreationExpressionStructureTests : AbstractCSharpSyntaxNodeStructureTests<AnonymousObjectCreationExpressionSyntax>
+public class AnonymousObjectCreationExpressionStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<AnonymousObjectCreationExpressionSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider()
-        => new AnonymousObjectCreationExpressionStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new AnonymousObjectCreationExpressionStructureProvider();
 
     [Fact]
     public async Task TestAnonymousObjectCreation()
     {
         await VerifyBlockSpansAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = {|hint:new{|textspan: $${
-                            Name = "John",
-                            Age = 19
-                        }|}|};
-                    }
+                    var v = {|hint:new{|textspan: $${
+                        Name = "John",
+                        Age = 19
+                    }|}|};
                 }
-                """,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            }
+            """,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 }

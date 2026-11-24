@@ -1,26 +1,25 @@
 using System;
-using System.Text;
-using System.Reflection;
-using System.ComponentModel;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Xml;
-using System.Xml.XPath;
-using System.Xml.Schema;
 using System.IO;
+using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Cryptography;
+using System.Security.Permissions;
+using System.Text;
 using System.Threading;
 using System.Timers;
-using System.Security.Permissions;
-using System.Security.Cryptography;
-
-using System.Workflow.Runtime;
 using System.Workflow.ComponentModel;
+using System.Workflow.Runtime;
 using System.Workflow.Runtime.Hosting;
 using System.Workflow.Runtime.Tracking;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.XPath;
 
 namespace System.Workflow.Runtime
 {
@@ -39,16 +38,15 @@ namespace System.Workflow.Runtime
 
         private TrackingProfileManager _profileManager = new TrackingProfileManager();
 
-        internal TrackingListenerFactory()
-        {
-        }
+        internal TrackingListenerFactory() { }
 
         internal TrackingProfileManager TrackingProfileManager
         {
             get { return _profileManager; }
         }
+
         /// <summary>
-        /// Must be called 
+        /// Must be called
         /// </summary>
         /// <param name="skedExec"></param>
         internal void Initialize(WorkflowRuntime runtime)
@@ -87,12 +85,16 @@ namespace System.Workflow.Runtime
                 _timer = null;
             }
         }
+
         /// <summary>
         /// Callback for associating tracking listeners to in memory instances.  Fires for new and loading instances.
         /// </summary>
         /// <param name="sender">WorkflowExecutor</param>
         /// <param name="e"></param>
-        void WorkflowExecutorInitializing(object sender, WorkflowRuntime.WorkflowExecutorInitializingEventArgs e)
+        void WorkflowExecutorInitializing(
+            object sender,
+            WorkflowRuntime.WorkflowExecutorInitializingEventArgs e
+        )
         {
             if (null == sender)
                 throw new ArgumentNullException("sender");
@@ -106,9 +108,13 @@ namespace System.Workflow.Runtime
             WorkflowExecutor exec = (WorkflowExecutor)sender;
             //
             // Add an event to clean up the WeakRef entry
-            exec.WorkflowExecutionEvent += new EventHandler<WorkflowExecutor.WorkflowExecutionEventArgs>(WorkflowExecutionEvent);
+            exec.WorkflowExecutionEvent +=
+                new EventHandler<WorkflowExecutor.WorkflowExecutionEventArgs>(
+                    WorkflowExecutionEvent
+                );
             TrackingCallingState trackingCallingState = exec.TrackingCallingState;
-            TrackingListenerBroker listenerBroker = (TrackingListenerBroker)exec.RootActivity.GetValue(WorkflowExecutor.TrackingListenerBrokerProperty);
+            TrackingListenerBroker listenerBroker = (TrackingListenerBroker)
+                exec.RootActivity.GetValue(WorkflowExecutor.TrackingListenerBrokerProperty);
             if (listenerBroker != null)
             {
                 listenerBroker.ReplaceServices(exec.WorkflowRuntime.TrackingServiceReplacement);
@@ -128,7 +134,7 @@ namespace System.Workflow.Runtime
                 {
                     try
                     {
-                        // 
+                        //
                         // Instead of checking IsAlive take a ref to the Target
                         //  so that it isn't GC'd underneath us.
                         listener = weakref.Target as TrackingListener;
@@ -136,13 +142,13 @@ namespace System.Workflow.Runtime
                     catch (InvalidOperationException)
                     {
                         //
-                        // This seems weird but according to msdn 
+                        // This seems weird but according to msdn
                         // accessing Target can throw ???
                         // Ignore because it's the same as a null target.
                     }
                 }
                 //
-                // If listener is null because we didn't find the wr in the cache 
+                // If listener is null because we didn't find the wr in the cache
                 // or because the Target has been GC'd create a new listener
                 if (null != listener)
                 {
@@ -150,7 +156,10 @@ namespace System.Workflow.Runtime
                 }
                 else
                 {
-                    Debug.Assert(null != listenerBroker, "TrackingListenerBroker should not be null during loading");
+                    Debug.Assert(
+                        null != listenerBroker,
+                        "TrackingListenerBroker should not be null during loading"
+                    );
                     listener = GetTrackingListener(exec.WorkflowDefinition, exec, listenerBroker);
                     if (null != listener)
                     {
@@ -174,21 +183,29 @@ namespace System.Workflow.Runtime
 
                 if (null != listener)
                 {
-                    exec.RootActivity.SetValue(WorkflowExecutor.TrackingListenerBrokerProperty, listener.Broker);
+                    exec.RootActivity.SetValue(
+                        WorkflowExecutor.TrackingListenerBrokerProperty,
+                        listener.Broker
+                    );
                     lock (_listenerLock)
                     {
                         _listeners.Add(exec.ID, new WeakReference(listener));
                     }
                 }
                 else
-                    exec.RootActivity.SetValue(WorkflowExecutor.TrackingListenerBrokerProperty, new TrackingListenerBroker());
+                    exec.RootActivity.SetValue(
+                        WorkflowExecutor.TrackingListenerBrokerProperty,
+                        new TrackingListenerBroker()
+                    );
             }
 
             if (null != listener)
             {
-                exec.WorkflowExecutionEvent += new EventHandler<WorkflowExecutor.WorkflowExecutionEventArgs>(listener.WorkflowExecutionEvent);
+                exec.WorkflowExecutionEvent +=
+                    new EventHandler<WorkflowExecutor.WorkflowExecutionEventArgs>(
+                        listener.WorkflowExecutionEvent
+                    );
             }
-
         }
 
         void WorkflowExecutionEvent(object sender, WorkflowExecutor.WorkflowExecutionEventArgs e)
@@ -199,7 +216,7 @@ namespace System.Workflow.Runtime
                 case WorkflowEventInternal.Completed:
                 case WorkflowEventInternal.Terminated:
                     //
-                    // The instance is done - remove 
+                    // The instance is done - remove
                     // the WeakRef from our list
                     WorkflowExecutor exec = (WorkflowExecutor)sender;
                     lock (_listenerLock)
@@ -262,14 +279,22 @@ namespace System.Workflow.Runtime
         /// <param name="skedExec">ScheduleExecutor for the schedule instance</param>
         /// <param name="broker">TrackingListenerBroker</param>
         /// <returns>New TrackingListener instance</returns>
-        internal TrackingListener GetTrackingListener(Activity sked, WorkflowExecutor skedExec, TrackingListenerBroker broker)
+        internal TrackingListener GetTrackingListener(
+            Activity sked,
+            WorkflowExecutor skedExec,
+            TrackingListenerBroker broker
+        )
         {
             if (!_initialized)
                 Initialize(skedExec.WorkflowRuntime);
 
             if (null == broker)
             {
-                WorkflowTrace.Tracking.TraceEvent(TraceEventType.Error, 0, ExecutionStringManager.NullTrackingBroker);
+                WorkflowTrace.Tracking.TraceEvent(
+                    TraceEventType.Error,
+                    0,
+                    ExecutionStringManager.NullTrackingBroker
+                );
                 return null;
             }
 
@@ -283,12 +308,24 @@ namespace System.Workflow.Runtime
             lock (_listenerLock)
             {
                 if (!_listeners.TryGetValue(instanceId, out wr))
-                    throw new InvalidOperationException(string.Format(System.Globalization.CultureInfo.InvariantCulture, ExecutionStringManager.ListenerNotInCache, instanceId));
+                    throw new InvalidOperationException(
+                        string.Format(
+                            System.Globalization.CultureInfo.InvariantCulture,
+                            ExecutionStringManager.ListenerNotInCache,
+                            instanceId
+                        )
+                    );
 
                 listener = wr.Target as TrackingListener;
 
                 if (null == listener)
-                    throw new ObjectDisposedException(string.Format(System.Globalization.CultureInfo.InvariantCulture, ExecutionStringManager.ListenerNotInCacheDisposed, instanceId));
+                    throw new ObjectDisposedException(
+                        string.Format(
+                            System.Globalization.CultureInfo.InvariantCulture,
+                            ExecutionStringManager.ListenerNotInCacheDisposed,
+                            instanceId
+                        )
+                    );
             }
 
             return listener;
@@ -303,7 +340,9 @@ namespace System.Workflow.Runtime
                 {
                     // check if this is a valid in-memory instance
                     if (!exec.IsInstanceValid)
-                        throw new InvalidOperationException(ExecutionStringManager.WorkflowNotValid);
+                        throw new InvalidOperationException(
+                            ExecutionStringManager.WorkflowNotValid
+                        );
 
                     // suspend the instance
                     bool localSuspend = exec.Suspend(ExecutionStringManager.TrackingProfileUpdate);
@@ -327,7 +366,12 @@ namespace System.Workflow.Runtime
             }
         }
 
-        internal void ReloadProfiles(WorkflowExecutor exec, Guid instanceId, ref TrackingListenerBroker broker, ref List<TrackingChannelWrapper> channels)
+        internal void ReloadProfiles(
+            WorkflowExecutor exec,
+            Guid instanceId,
+            ref TrackingListenerBroker broker,
+            ref List<TrackingChannelWrapper> channels
+        )
         {
             Type workflowType = exec.WorkflowDefinition.GetType();
             //
@@ -365,7 +409,11 @@ namespace System.Workflow.Runtime
                     }
                     //
                     // Parse the new profile - instance only, the cache is not involved
-                    RTTrackingProfile rtp = new RTTrackingProfile(profile, exec.WorkflowDefinition, workflowType);
+                    RTTrackingProfile rtp = new RTTrackingProfile(
+                        profile,
+                        exec.WorkflowDefinition,
+                        workflowType
+                    );
                     rtp.IsPrivate = true;
 
                     if (!found)
@@ -377,7 +425,9 @@ namespace System.Workflow.Runtime
                         TrackingCallingState trackingCallingState = exec.TrackingCallingState;
                         Debug.Assert((null != trackingCallingState), "WorkflowState is null");
                         IList<string> path = null;
-                        Guid context = GetContext(exec.RootActivity), callerContext = Guid.Empty, callerParentContext = Guid.Empty;
+                        Guid context = GetContext(exec.RootActivity),
+                            callerContext = Guid.Empty,
+                            callerParentContext = Guid.Empty;
                         //
                         // Use CallerActivityPathProxy to determine if this is an invoked instance
                         if (trackingCallingState != null)
@@ -387,7 +437,10 @@ namespace System.Workflow.Runtime
                             {
                                 activityCallPath = new List<string>(path);
 
-                                Debug.Assert(Guid.Empty != trackingCallingState.CallerWorkflowInstanceId, "Instance has an ActivityCallPath but CallerInstanceId is empty");
+                                Debug.Assert(
+                                    Guid.Empty != trackingCallingState.CallerWorkflowInstanceId,
+                                    "Instance has an ActivityCallPath but CallerInstanceId is empty"
+                                );
                                 callerInstanceId = trackingCallingState.CallerWorkflowInstanceId;
 
                                 callerContext = trackingCallingState.CallerContextGuid;
@@ -395,10 +448,24 @@ namespace System.Workflow.Runtime
                             }
                         }
 
-                        TrackingParameters tp = new TrackingParameters(instanceId, workflowType, exec.WorkflowDefinition, activityCallPath, callerInstanceId, context, callerContext, callerParentContext);
+                        TrackingParameters tp = new TrackingParameters(
+                            instanceId,
+                            workflowType,
+                            exec.WorkflowDefinition,
+                            activityCallPath,
+                            callerInstanceId,
+                            context,
+                            callerContext,
+                            callerParentContext
+                        );
                         TrackingChannel channel = service.GetTrackingChannel(tp);
 
-                        TrackingChannelWrapper wrapper = new TrackingChannelWrapper(channel, service.GetType(), workflowType, rtp);
+                        TrackingChannelWrapper wrapper = new TrackingChannelWrapper(
+                            channel,
+                            service.GetType(),
+                            workflowType,
+                            rtp
+                        );
                         channels.Add(wrapper);
 
                         Type t = service.GetType();
@@ -421,14 +488,27 @@ namespace System.Workflow.Runtime
 
         internal Guid GetContext(Activity activity)
         {
-            return ((ActivityExecutionContextInfo)ContextActivityUtils.ContextActivity(activity).GetValue(Activity.ActivityExecutionContextInfoProperty)).ContextGuid;
+            return (
+                (ActivityExecutionContextInfo)
+                    ContextActivityUtils
+                        .ContextActivity(activity)
+                        .GetValue(Activity.ActivityExecutionContextInfoProperty)
+            ).ContextGuid;
         }
 
-        private TrackingListener GetListener(Activity sked, WorkflowExecutor skedExec, TrackingListenerBroker broker)
+        private TrackingListener GetListener(
+            Activity sked,
+            WorkflowExecutor skedExec,
+            TrackingListenerBroker broker
+        )
         {
             if ((null == sked) || (null == skedExec))
             {
-                WorkflowTrace.Tracking.TraceEvent(TraceEventType.Error, 0, ExecutionStringManager.NullParameters);
+                WorkflowTrace.Tracking.TraceEvent(
+                    TraceEventType.Error,
+                    0,
+                    ExecutionStringManager.NullParameters
+                );
                 return null;
             }
 
@@ -437,7 +517,13 @@ namespace System.Workflow.Runtime
 
             bool load = (null != broker);
 
-            List<TrackingChannelWrapper> channels = GetChannels(sked, skedExec, skedExec.InstanceId, sked.GetType(), ref broker);
+            List<TrackingChannelWrapper> channels = GetChannels(
+                sked,
+                skedExec,
+                skedExec.InstanceId,
+                sked.GetType(),
+                ref broker
+            );
 
             if ((null == channels) || (0 == channels.Count))
                 return null;
@@ -445,7 +531,13 @@ namespace System.Workflow.Runtime
             return new TrackingListener(this, sked, skedExec, channels, broker, load);
         }
 
-        private List<TrackingChannelWrapper> GetChannels(Activity schedule, WorkflowExecutor exec, Guid instanceID, Type workflowType, ref TrackingListenerBroker broker)
+        private List<TrackingChannelWrapper> GetChannels(
+            Activity schedule,
+            WorkflowExecutor exec,
+            Guid instanceID,
+            Type workflowType,
+            ref TrackingListenerBroker broker
+        )
         {
             if (null == _services)
                 return null;
@@ -461,26 +553,42 @@ namespace System.Workflow.Runtime
 
             List<string> activityCallPath = null;
             Guid callerInstanceId = Guid.Empty;
-            Guid context = GetContext(exec.RootActivity), callerContext = Guid.Empty, callerParentContext = Guid.Empty;
+            Guid context = GetContext(exec.RootActivity),
+                callerContext = Guid.Empty,
+                callerParentContext = Guid.Empty;
 
             Debug.Assert(exec is WorkflowExecutor, "Executor is not WorkflowExecutor");
             TrackingCallingState trackingCallingState = exec.TrackingCallingState;
-            TrackingListenerBroker trackingListenerBroker = (TrackingListenerBroker)exec.RootActivity.GetValue(WorkflowExecutor.TrackingListenerBrokerProperty);
-            IList<string> path = trackingCallingState != null ? trackingCallingState.CallerActivityPathProxy : null;
+            TrackingListenerBroker trackingListenerBroker = (TrackingListenerBroker)
+                exec.RootActivity.GetValue(WorkflowExecutor.TrackingListenerBrokerProperty);
+            IList<string> path =
+                trackingCallingState != null ? trackingCallingState.CallerActivityPathProxy : null;
             //
             // Use CallerActivityPathProxy to determine if this is an invoked instance
             if ((null != path) && (path.Count > 0))
             {
                 activityCallPath = new List<string>(path);
 
-                Debug.Assert(Guid.Empty != trackingCallingState.CallerWorkflowInstanceId, "Instance has an ActivityCallPath but CallerInstanceId is empty");
+                Debug.Assert(
+                    Guid.Empty != trackingCallingState.CallerWorkflowInstanceId,
+                    "Instance has an ActivityCallPath but CallerInstanceId is empty"
+                );
                 callerInstanceId = trackingCallingState.CallerWorkflowInstanceId;
 
                 callerContext = trackingCallingState.CallerContextGuid;
                 callerParentContext = trackingCallingState.CallerParentContextGuid;
             }
 
-            TrackingParameters parameters = new TrackingParameters(instanceID, workflowType, exec.WorkflowDefinition, activityCallPath, callerInstanceId, context, callerContext, callerParentContext);
+            TrackingParameters parameters = new TrackingParameters(
+                instanceID,
+                workflowType,
+                exec.WorkflowDefinition,
+                activityCallPath,
+                callerInstanceId,
+                context,
+                callerContext,
+                callerParentContext
+            );
 
             for (int i = 0; i < _services.Count; i++)
             {
@@ -490,7 +598,7 @@ namespace System.Workflow.Runtime
                 //
                 // See if the service has a profile for this schedule type
                 // If not we don't do any tracking for the service
-                // 
+                //
                 RTTrackingProfile profile = null;
 
                 //
@@ -518,7 +626,10 @@ namespace System.Workflow.Runtime
                         profile = _profileManager.GetProfile(_services[i], schedule, instanceID);
 
                         if (null == profile)
-                            throw new InvalidOperationException(ExecutionStringManager.MissingProfileForService + serviceType.ToString());
+                            throw new InvalidOperationException(
+                                ExecutionStringManager.MissingProfileForService
+                                    + serviceType.ToString()
+                            );
 
                         profile.IsPrivate = true;
                     }
@@ -530,7 +641,12 @@ namespace System.Workflow.Runtime
                             profile = _profileManager.GetProfile(_services[i], schedule, versionId);
 
                             if (null == profile)
-                                throw new InvalidOperationException(ExecutionStringManager.MissingProfileForService + serviceType.ToString() + ExecutionStringManager.MissingProfileForVersion + versionId.ToString());
+                                throw new InvalidOperationException(
+                                    ExecutionStringManager.MissingProfileForService
+                                        + serviceType.ToString()
+                                        + ExecutionStringManager.MissingProfileForVersion
+                                        + versionId.ToString()
+                                );
                             //
                             // If the profile is marked as private clone the instance we got from the cache
                             // The cloned instance is marked as private during the cloning
@@ -552,7 +668,14 @@ namespace System.Workflow.Runtime
                 if (null == channel)
                     throw new InvalidOperationException(ExecutionStringManager.NullChannel);
 
-                channels.Add(new TrackingChannelWrapper(channel, _services[i].GetType(), workflowType, profile));
+                channels.Add(
+                    new TrackingChannelWrapper(
+                        channel,
+                        _services[i].GetType(),
+                        workflowType,
+                        profile
+                    )
+                );
             }
 
             return channels;
@@ -568,15 +691,24 @@ namespace System.Workflow.Runtime
         private TrackingListenerBroker _broker = null;
         private TrackingListenerFactory _factory = null;
 
-        protected TrackingListener()
-        {
-        }
+        protected TrackingListener() { }
 
-        internal TrackingListener(TrackingListenerFactory factory, Activity sked, WorkflowExecutor exec, List<TrackingChannelWrapper> channels, TrackingListenerBroker broker, bool load)
+        internal TrackingListener(
+            TrackingListenerFactory factory,
+            Activity sked,
+            WorkflowExecutor exec,
+            List<TrackingChannelWrapper> channels,
+            TrackingListenerBroker broker,
+            bool load
+        )
         {
             if ((null == sked) || (null == broker))
             {
-                WorkflowTrace.Tracking.TraceEvent(TraceEventType.Error, 0, ExecutionStringManager.NullParameters);
+                WorkflowTrace.Tracking.TraceEvent(
+                    TraceEventType.Error,
+                    0,
+                    ExecutionStringManager.NullParameters
+                );
                 return;
             }
             _factory = factory;
@@ -602,12 +734,17 @@ namespace System.Workflow.Runtime
             _factory.ReloadProfiles(exec, instanceId, ref _broker, ref _channels);
         }
 
-
         #region Event Handlers
 
-        internal void ActivityStatusChange(object sender, WorkflowExecutor.ActivityStatusChangeEventArgs e)
+        internal void ActivityStatusChange(
+            object sender,
+            WorkflowExecutor.ActivityStatusChangeEventArgs e
+        )
         {
-            WorkflowTrace.Tracking.TraceInformation("TrackingListener::ActivityStatusChange - Received Activity Status Change Event for activity {0}", e.Activity.QualifiedName);
+            WorkflowTrace.Tracking.TraceInformation(
+                "TrackingListener::ActivityStatusChange - Received Activity Status Change Event for activity {0}",
+                e.Activity.QualifiedName
+            );
 
             if (null == sender)
                 throw new ArgumentNullException("sender");
@@ -622,7 +759,11 @@ namespace System.Workflow.Runtime
 
             if ((null == _channels) || (_channels.Count <= 0))
             {
-                WorkflowTrace.Tracking.TraceEvent(TraceEventType.Error, 0, ExecutionStringManager.NoChannels);
+                WorkflowTrace.Tracking.TraceEvent(
+                    TraceEventType.Error,
+                    0,
+                    ExecutionStringManager.NoChannels
+                );
                 return;
             }
 
@@ -632,7 +773,8 @@ namespace System.Workflow.Runtime
                 return;
             //
             // Get the shared data that is the same for each tracking channel that gets a record
-            Guid parentContextGuid = Guid.Empty, contextGuid = Guid.Empty;
+            Guid parentContextGuid = Guid.Empty,
+                contextGuid = Guid.Empty;
             GetContext(activity, exec, out contextGuid, out parentContextGuid);
 
             DateTime dt = DateTime.UtcNow;
@@ -643,12 +785,23 @@ namespace System.Workflow.Runtime
                 //
                 // Create a record for each tracking channel
                 // Each channel gets a distinct record because extract data will almost always be different.
-                ActivityTrackingRecord record = new ActivityTrackingRecord(activity.GetType(), activity.QualifiedName, contextGuid, parentContextGuid, activity.ExecutionStatus, dt, eventOrderId, null);
+                ActivityTrackingRecord record = new ActivityTrackingRecord(
+                    activity.GetType(),
+                    activity.QualifiedName,
+                    contextGuid,
+                    parentContextGuid,
+                    activity.ExecutionStatus,
+                    dt,
+                    eventOrderId,
+                    null
+                );
 
-                bool extracted = wrapper.GetTrackingProfile(exec).TryTrackActivityEvent(activity, activity.ExecutionStatus, exec, record);
+                bool extracted = wrapper
+                    .GetTrackingProfile(exec)
+                    .TryTrackActivityEvent(activity, activity.ExecutionStatus, exec, record);
                 //
                 // Only send the record to the channel if the profile indicates that it is interested
-                // This doesn't mean that the Body will always have data in it, 
+                // This doesn't mean that the Body will always have data in it,
                 // it may be an empty extraction (just header info)
                 if (extracted)
                     wrapper.TrackingChannel.Send(record);
@@ -666,19 +819,36 @@ namespace System.Workflow.Runtime
             DateTime dt = DateTime.UtcNow;
             int eventOrderId = _broker.GetNextEventOrderId();
 
-            Guid parentContextGuid, contextGuid;
+            Guid parentContextGuid,
+                contextGuid;
             GetContext(activity, exec, out contextGuid, out parentContextGuid);
 
             foreach (TrackingChannelWrapper wrapper in _channels)
             {
-                UserTrackingRecord record = new UserTrackingRecord(activity.GetType(), activity.QualifiedName, contextGuid, parentContextGuid, dt, eventOrderId, e.Key, e.Args);
+                UserTrackingRecord record = new UserTrackingRecord(
+                    activity.GetType(),
+                    activity.QualifiedName,
+                    contextGuid,
+                    parentContextGuid,
+                    dt,
+                    eventOrderId,
+                    e.Key,
+                    e.Args
+                );
 
-                if (wrapper.GetTrackingProfile(exec).TryTrackUserEvent(activity, e.Key, e.Args, exec, record))
+                if (
+                    wrapper
+                        .GetTrackingProfile(exec)
+                        .TryTrackUserEvent(activity, e.Key, e.Args, exec, record)
+                )
                     wrapper.TrackingChannel.Send(record);
             }
         }
 
-        internal void WorkflowExecutionEvent(object sender, WorkflowExecutor.WorkflowExecutionEventArgs e)
+        internal void WorkflowExecutionEvent(
+            object sender,
+            WorkflowExecutor.WorkflowExecutionEventArgs e
+        )
         {
             if (null == sender)
                 throw new ArgumentNullException("sender");
@@ -687,10 +857,10 @@ namespace System.Workflow.Runtime
             if (null == exec)
                 throw new ArgumentException(ExecutionStringManager.InvalidSenderWorkflowExecutor);
             //
-            // Many events are mapped "forward" and sent to tracking services 
+            // Many events are mapped "forward" and sent to tracking services
             // (Persisting->Persisted, SchedulerEmpty->Idle)
-            // This is so that a batch is always available when a tracking service gets an event.  
-            // Without this tracking data could be inconsistent with the state of the instance. 
+            // This is so that a batch is always available when a tracking service gets an event.
+            // Without this tracking data could be inconsistent with the state of the instance.
             switch (e.EventType)
             {
                 case WorkflowEventInternal.Creating:
@@ -777,7 +947,10 @@ namespace System.Workflow.Runtime
             }
         }
 
-        internal void DynamicUpdateRollback(object sender, WorkflowExecutor.DynamicUpdateEventArgs e)
+        internal void DynamicUpdateRollback(
+            object sender,
+            WorkflowExecutor.DynamicUpdateEventArgs e
+        )
         {
             if (null == sender)
                 throw new ArgumentNullException("sender");
@@ -814,8 +987,17 @@ namespace System.Workflow.Runtime
 
             foreach (TrackingChannelWrapper wrapper in _channels)
             {
-                WorkflowTrackingRecord rec = new WorkflowTrackingRecord(TrackingWorkflowEvent.Changed, dt, eventOrderId, new TrackingWorkflowChangedEventArgs(e.ChangeActions, exec.WorkflowDefinition));
-                if (wrapper.GetTrackingProfile(exec).TryTrackInstanceEvent(TrackingWorkflowEvent.Changed, rec))
+                WorkflowTrackingRecord rec = new WorkflowTrackingRecord(
+                    TrackingWorkflowEvent.Changed,
+                    dt,
+                    eventOrderId,
+                    new TrackingWorkflowChangedEventArgs(e.ChangeActions, exec.WorkflowDefinition)
+                );
+                if (
+                    wrapper
+                        .GetTrackingProfile(exec)
+                        .TryTrackInstanceEvent(TrackingWorkflowEvent.Changed, rec)
+                )
                     wrapper.TrackingChannel.Send(rec);
             }
         }
@@ -824,7 +1006,11 @@ namespace System.Workflow.Runtime
 
         #region Private Methods
 
-        private void NotifyChannels(TrackingWorkflowEvent evt, WorkflowExecutor.WorkflowExecutionEventArgs e, WorkflowExecutor exec)
+        private void NotifyChannels(
+            TrackingWorkflowEvent evt,
+            WorkflowExecutor.WorkflowExecutionEventArgs e,
+            WorkflowExecutor exec
+        )
         {
             DateTime dt = DateTime.UtcNow;
             int eventOrderId = _broker.GetNextEventOrderId();
@@ -835,21 +1021,36 @@ namespace System.Workflow.Runtime
                 switch (evt)
                 {
                     case TrackingWorkflowEvent.Suspended:
-                        args = new TrackingWorkflowSuspendedEventArgs(((WorkflowExecutor.WorkflowExecutionSuspendingEventArgs)e).Error);
+                        args = new TrackingWorkflowSuspendedEventArgs(
+                            ((WorkflowExecutor.WorkflowExecutionSuspendingEventArgs)e).Error
+                        );
                         break;
                     case TrackingWorkflowEvent.Terminated:
-                        WorkflowExecutor.WorkflowExecutionTerminatingEventArgs wtea = (WorkflowExecutor.WorkflowExecutionTerminatingEventArgs)e;
+                        WorkflowExecutor.WorkflowExecutionTerminatingEventArgs wtea =
+                            (WorkflowExecutor.WorkflowExecutionTerminatingEventArgs)e;
                         if (null != wtea.Exception)
                             args = new TrackingWorkflowTerminatedEventArgs(wtea.Exception);
                         else
                             args = new TrackingWorkflowTerminatedEventArgs(wtea.Error);
                         break;
                     case TrackingWorkflowEvent.Exception:
-                        WorkflowExecutor.WorkflowExecutionExceptionEventArgs weea = (WorkflowExecutor.WorkflowExecutionExceptionEventArgs)e;
-                        args = new TrackingWorkflowExceptionEventArgs(weea.Exception, weea.CurrentPath, weea.OriginalPath, weea.ContextGuid, weea.ParentContextGuid);
+                        WorkflowExecutor.WorkflowExecutionExceptionEventArgs weea =
+                            (WorkflowExecutor.WorkflowExecutionExceptionEventArgs)e;
+                        args = new TrackingWorkflowExceptionEventArgs(
+                            weea.Exception,
+                            weea.CurrentPath,
+                            weea.OriginalPath,
+                            weea.ContextGuid,
+                            weea.ParentContextGuid
+                        );
                         break;
                 }
-                WorkflowTrackingRecord rec = new WorkflowTrackingRecord(evt, dt, eventOrderId, args);
+                WorkflowTrackingRecord rec = new WorkflowTrackingRecord(
+                    evt,
+                    dt,
+                    eventOrderId,
+                    args
+                );
                 if (wrapper.GetTrackingProfile(exec).TryTrackInstanceEvent(evt, rec))
                     wrapper.TrackingChannel.Send(rec);
             }
@@ -861,7 +1062,12 @@ namespace System.Workflow.Runtime
                 wrapper.TrackingChannel.InstanceCompletedOrTerminated();
         }
 
-        private void GetContext(Activity activity, WorkflowExecutor exec, out Guid contextGuid, out Guid parentContextGuid)
+        private void GetContext(
+            Activity activity,
+            WorkflowExecutor exec,
+            out Guid contextGuid,
+            out Guid parentContextGuid
+        )
         {
             contextGuid = _factory.GetContext(activity);
 
@@ -885,6 +1091,7 @@ namespace System.Workflow.Runtime
                 _broker.MakeProfilePrivate(channel.TrackingServiceType);
             }
         }
+
         /// <summary>
         /// Determine if subscriptions are needed
         /// </summary>
@@ -898,7 +1105,10 @@ namespace System.Workflow.Runtime
 
             foreach (TrackingChannelWrapper channel in _channels)
             {
-                if ((channel.GetTrackingProfile(exec).ActivitySubscriptionNeeded(activity)) && (!needed))
+                if (
+                    (channel.GetTrackingProfile(exec).ActivitySubscriptionNeeded(activity))
+                    && (!needed)
+                )
                     needed = true;
             }
 
@@ -910,7 +1120,7 @@ namespace System.Workflow.Runtime
 
     /// <summary>
     /// This is a lightweight class that is serialized so that the TrackingListener doesn't have to be.
-    /// Every subscription that the listener adds holds a reference to this class.  
+    /// Every subscription that the listener adds holds a reference to this class.
     /// When an instance is loaded the broker is given to the listener factory and the listener factory
     /// gives the broker the new listener.  This saves us from having to persist the listener itself which
     /// means that while we do need to persist a list of service types and their profile version we don't
@@ -922,11 +1132,10 @@ namespace System.Workflow.Runtime
         [NonSerialized]
         private TrackingListener _listener = null;
         private int _eventOrderId = 0;
-        private Dictionary<Guid, ServiceProfileContainer> _services = new Dictionary<Guid, ServiceProfileContainer>();
+        private Dictionary<Guid, ServiceProfileContainer> _services =
+            new Dictionary<Guid, ServiceProfileContainer>();
 
-        internal TrackingListenerBroker()
-        {
-        }
+        internal TrackingListenerBroker() { }
 
         internal TrackingListenerBroker(TrackingListener listener)
         {
@@ -936,9 +1145,9 @@ namespace System.Workflow.Runtime
         internal TrackingListener TrackingListener
         {
             //
-            // FxCops minbar complains because this isn't used.  
+            // FxCops minbar complains because this isn't used.
             // The Setter is required; seems weird not to have a getter.
-            //get { return _listener; } 
+            //get { return _listener; }
             set { _listener = value; }
         }
 
@@ -949,7 +1158,10 @@ namespace System.Workflow.Runtime
 
         internal void AddService(Type trackingServiceType, Version profileVersionId)
         {
-            _services.Add(HashHelper.HashServiceType(trackingServiceType), new ServiceProfileContainer(profileVersionId));
+            _services.Add(
+                HashHelper.HashServiceType(trackingServiceType),
+                new ServiceProfileContainer(profileVersionId)
+            );
         }
 
         internal void ReplaceServices(Dictionary<string, Type> replacements)
@@ -994,7 +1206,9 @@ namespace System.Workflow.Runtime
         internal void MakeProfilePrivate(Type trackingServiceType)
         {
             ServiceProfileContainer service = null;
-            if (!_services.TryGetValue(HashHelper.HashServiceType(trackingServiceType), out service))
+            if (
+                !_services.TryGetValue(HashHelper.HashServiceType(trackingServiceType), out service)
+            )
                 throw new ArgumentException(ExecutionStringManager.InvalidTrackingService);
 
             service.IsPrivate = true;
@@ -1003,7 +1217,9 @@ namespace System.Workflow.Runtime
         internal bool IsProfilePrivate(Type trackingServiceType)
         {
             ServiceProfileContainer service = null;
-            if (!_services.TryGetValue(HashHelper.HashServiceType(trackingServiceType), out service))
+            if (
+                !_services.TryGetValue(HashHelper.HashServiceType(trackingServiceType), out service)
+            )
                 throw new ArgumentException(ExecutionStringManager.InvalidTrackingService);
 
             return service.IsPrivate;
@@ -1012,7 +1228,9 @@ namespace System.Workflow.Runtime
         internal void MakeProfileInstance(Type trackingServiceType)
         {
             ServiceProfileContainer service = null;
-            if (!_services.TryGetValue(HashHelper.HashServiceType(trackingServiceType), out service))
+            if (
+                !_services.TryGetValue(HashHelper.HashServiceType(trackingServiceType), out service)
+            )
                 throw new ArgumentException(ExecutionStringManager.InvalidTrackingService);
             //
             // Can't be instance without being private
@@ -1023,7 +1241,9 @@ namespace System.Workflow.Runtime
         internal bool IsProfileInstance(Type trackingServiceType)
         {
             ServiceProfileContainer service = null;
-            if (!_services.TryGetValue(HashHelper.HashServiceType(trackingServiceType), out service))
+            if (
+                !_services.TryGetValue(HashHelper.HashServiceType(trackingServiceType), out service)
+            )
                 throw new ArgumentException(ExecutionStringManager.InvalidTrackingService);
 
             return service.IsInstance;
@@ -1072,15 +1292,24 @@ namespace System.Workflow.Runtime
         #region ISerializable Members
 
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
-        public void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
+        public void GetObjectData(
+            System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context
+        )
         {
             info.AddValue("eventOrderId", this._eventOrderId);
             info.AddValue("services", this._services.Count == 0 ? null : this._services);
         }
-        private TrackingListenerBroker(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
+
+        private TrackingListenerBroker(
+            System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context
+        )
         {
             this._eventOrderId = info.GetInt32("eventOrderId");
-            this._services = (Dictionary<Guid, ServiceProfileContainer>)info.GetValue("services", typeof(Dictionary<Guid, ServiceProfileContainer>));
+            this._services =
+                (Dictionary<Guid, ServiceProfileContainer>)
+                    info.GetValue("services", typeof(Dictionary<Guid, ServiceProfileContainer>));
             if (this._services == null)
                 this._services = new Dictionary<Guid, ServiceProfileContainer>();
         }
@@ -1094,23 +1323,24 @@ namespace System.Workflow.Runtime
     internal class TrackingProfileManager
     {
         //
-        // This is a dictionary keyed by tracking service type 
+        // This is a dictionary keyed by tracking service type
         // that returns a dictionary that is key by schedule type
         // that returns a Set of profile versions for that schedule type
         // The set is constrained by VersionId
         private Dictionary<Type, Dictionary<Type, ProfileList>> _cacheLookup;
+
         //
         // Protects _cacheLookup
         private object _cacheLock = new object();
+
         //
         // Values assigned in Initialize
         private bool _init = false;
         private List<TrackingService> _services = null;
         private WorkflowRuntime _runtime = null;
 
-        internal TrackingProfileManager()
-        {
-        }
+        internal TrackingProfileManager() { }
+
         /// <summary>
         /// Clears all entries from the cache by reinitializing the member
         /// </summary>
@@ -1126,6 +1356,7 @@ namespace System.Workflow.Runtime
                 _cacheLookup = new Dictionary<Type, Dictionary<Type, ProfileList>>();
             }
         }
+
         /// <summary>
         /// Create static state
         /// </summary>
@@ -1140,7 +1371,7 @@ namespace System.Workflow.Runtime
                 _runtime = runtime;
                 //
                 // Initialize the cache
-                // Do this every time the runtime starts/stops to make life easier 
+                // Do this every time the runtime starts/stops to make life easier
                 // for IProfileNotification tracking services that might have updated
                 // profiles while we were stopped - we'll go get new versions since nothing is cached
                 // without them having to fire updated events.
@@ -1152,14 +1383,17 @@ namespace System.Workflow.Runtime
                     {
                         if (service is IProfileNotification)
                         {
-                            ((IProfileNotification)service).ProfileUpdated += new EventHandler<ProfileUpdatedEventArgs>(ProfileUpdated);
-                            ((IProfileNotification)service).ProfileRemoved += new EventHandler<ProfileRemovedEventArgs>(ProfileRemoved);
+                            ((IProfileNotification)service).ProfileUpdated +=
+                                new EventHandler<ProfileUpdatedEventArgs>(ProfileUpdated);
+                            ((IProfileNotification)service).ProfileRemoved +=
+                                new EventHandler<ProfileRemovedEventArgs>(ProfileRemoved);
                         }
                     }
                 }
                 _init = true;
             }
         }
+
         /// <summary>
         /// Clean up static state
         /// </summary>
@@ -1173,8 +1407,10 @@ namespace System.Workflow.Runtime
                     {
                         if (service is IProfileNotification)
                         {
-                            ((IProfileNotification)service).ProfileUpdated -= new EventHandler<ProfileUpdatedEventArgs>(ProfileUpdated);
-                            ((IProfileNotification)service).ProfileRemoved -= new EventHandler<ProfileRemovedEventArgs>(ProfileRemoved);
+                            ((IProfileNotification)service).ProfileUpdated -=
+                                new EventHandler<ProfileUpdatedEventArgs>(ProfileUpdated);
+                            ((IProfileNotification)service).ProfileRemoved -=
+                                new EventHandler<ProfileRemovedEventArgs>(ProfileRemoved);
                         }
                     }
                 }
@@ -1183,17 +1419,24 @@ namespace System.Workflow.Runtime
                 _init = false;
             }
         }
+
         /// <summary>
         /// Retrieves the current version of a profile from the specified service
         /// </summary>
         internal RTTrackingProfile GetProfile(TrackingService service, Activity schedule)
         {
             if (!_init)
-                throw new ApplicationException(ExecutionStringManager.TrackingProfileManagerNotInitialized);
+                throw new ApplicationException(
+                    ExecutionStringManager.TrackingProfileManagerNotInitialized
+                );
 
             if ((null == service) || (null == schedule))
             {
-                WorkflowTrace.Tracking.TraceEvent(TraceEventType.Error, 0, ExecutionStringManager.NullParameters);
+                WorkflowTrace.Tracking.TraceEvent(
+                    TraceEventType.Error,
+                    0,
+                    ExecutionStringManager.NullParameters
+                );
                 return null;
             }
 
@@ -1202,7 +1445,7 @@ namespace System.Workflow.Runtime
             if (service is IProfileNotification)
             {
                 //
-                // If we found the profile in the cache return it, it may be null, this is OK 
+                // If we found the profile in the cache return it, it may be null, this is OK
                 // (no profile for this service type/schedule type combination)
                 if (TryGetFromCache(service.GetType(), workflowType, out tp))
                     return tp;
@@ -1224,8 +1467,8 @@ namespace System.Workflow.Runtime
             //
             // Check the cache to see if we already have this version
             // For TrackingService types this is necessary.
-            // For IProfileNotification types this is a bit redundant 
-            // but another threadcould have inserted the profile into the cache 
+            // For IProfileNotification types this is a bit redundant
+            // but another threadcould have inserted the profile into the cache
             // so check again before acquiring the writer lock
             if (TryGetFromCache(service.GetType(), workflowType, profile.Version, out tp))
                 return tp;
@@ -1254,15 +1497,22 @@ namespace System.Workflow.Runtime
                 //
                 // Add it to the cache
                 if (!AddToCache(tp, service.GetType()))
-                    throw new ApplicationException(ExecutionStringManager.ProfileCacheInsertFailure);
+                    throw new ApplicationException(
+                        ExecutionStringManager.ProfileCacheInsertFailure
+                    );
 
                 return tp;
             }
         }
+
         /// <summary>
         /// Retrieves the specified version of a profile from the specified service
         /// </summary>
-        internal RTTrackingProfile GetProfile(TrackingService service, Activity workflow, Version versionId)
+        internal RTTrackingProfile GetProfile(
+            TrackingService service,
+            Activity workflow,
+            Version versionId
+        )
         {
             if (null == service)
                 throw new ArgumentNullException("service");
@@ -1270,7 +1520,9 @@ namespace System.Workflow.Runtime
                 throw new ArgumentNullException("workflow");
 
             if (!_init)
-                throw new InvalidOperationException(ExecutionStringManager.TrackingProfileManagerNotInitialized);
+                throw new InvalidOperationException(
+                    ExecutionStringManager.TrackingProfileManagerNotInitialized
+                );
 
             Type workflowType = workflow.GetType();
             RTTrackingProfile tp = null;
@@ -1305,13 +1557,19 @@ namespace System.Workflow.Runtime
                 //
                 // Add it to the cache
                 if (!AddToCache(tp, service.GetType()))
-                    throw new ApplicationException(ExecutionStringManager.ProfileCacheInsertFailure);
+                    throw new ApplicationException(
+                        ExecutionStringManager.ProfileCacheInsertFailure
+                    );
 
                 return tp;
             }
         }
 
-        internal RTTrackingProfile GetProfile(TrackingService service, Activity workflow, Guid instanceId)
+        internal RTTrackingProfile GetProfile(
+            TrackingService service,
+            Activity workflow,
+            Guid instanceId
+        )
         {
             //
             // An instance based profile will never be in the cache
@@ -1325,7 +1583,11 @@ namespace System.Workflow.Runtime
 
         #region Private Methods
 
-        private RTTrackingProfile CreateProfile(TrackingProfile profile, Type workflowType, Type serviceType)
+        private RTTrackingProfile CreateProfile(
+            TrackingProfile profile,
+            Type workflowType,
+            Type serviceType
+        )
         {
             //
             // Can't use the activity definition that we have here, it may have been updated
@@ -1333,12 +1595,18 @@ namespace System.Workflow.Runtime
             Activity tmpSchedule = _runtime.GetWorkflowDefinition(workflowType);
             return new RTTrackingProfile(profile, tmpSchedule, serviceType);
         }
-        private RTTrackingProfile CreateProfile(TrackingProfile profile, Activity schedule, Type serviceType)
+
+        private RTTrackingProfile CreateProfile(
+            TrackingProfile profile,
+            Activity schedule,
+            Type serviceType
+        )
         {
             //
             // This is called for Xaml only workflows
             return new RTTrackingProfile(profile, schedule, serviceType);
         }
+
         /// <summary>
         /// Add a profile to the cache but do not reset the NoProfiles flag for the schedule type
         /// </summary>
@@ -1349,6 +1617,7 @@ namespace System.Workflow.Runtime
         {
             return AddToCache(profile, serviceType, false);
         }
+
         /// <summary>
         /// Adds a profile to the cache and optionally resets the NoProfiles flag for the schedule type
         /// </summary>
@@ -1388,17 +1657,28 @@ namespace System.Workflow.Runtime
                 return profiles.Profiles.TryAdd(new CacheItem(profile));
             }
         }
+
         /// <summary>
         /// Gets a profile from the cache
         /// </summary>
-        private bool TryGetFromCache(Type serviceType, Type workflowType, out RTTrackingProfile profile)
+        private bool TryGetFromCache(
+            Type serviceType,
+            Type workflowType,
+            out RTTrackingProfile profile
+        )
         {
             return TryGetFromCache(serviceType, workflowType, new Version(0, 0), out profile); // 0 is an internal signal to get the most current
         }
+
         /// <summary>
         /// Gets a profile from the cache
         /// </summary>
-        private bool TryGetFromCache(Type serviceType, Type workflowType, Version versionId, out RTTrackingProfile profile)
+        private bool TryGetFromCache(
+            Type serviceType,
+            Type workflowType,
+            Version versionId,
+            out RTTrackingProfile profile
+        )
         {
             profile = null;
             CacheItem item = null;
@@ -1441,7 +1721,12 @@ namespace System.Workflow.Runtime
                     if ((null == profiles.Profiles) || (0 == profiles.Profiles.Count))
                         return false;
 
-                    if (profiles.Profiles.TryGetValue(new CacheItem(workflowType, versionId), out item))
+                    if (
+                        profiles.Profiles.TryGetValue(
+                            new CacheItem(workflowType, versionId),
+                            out item
+                        )
+                    )
                     {
                         profile = item.TrackingProfile;
                         return true;
@@ -1530,15 +1815,14 @@ namespace System.Workflow.Runtime
         {
             internal RTTrackingProfile TrackingProfile = null;
             internal DateTime LastAccess = DateTime.UtcNow;
+
             //
             // VersionId and ScheduleType are stored separately from the profile so that they
             // can be used to identify the profile if it has been pushed from the cache.
             internal Version VersionId = new Version(0, 0);
             internal Type ScheduleType = null;
 
-            internal CacheItem()
-            {
-            }
+            internal CacheItem() { }
 
             internal CacheItem(RTTrackingProfile profile)
             {
@@ -1574,22 +1858,29 @@ namespace System.Workflow.Runtime
             #endregion
         }
         #endregion
-
     }
+
     /// <summary>
     /// Represents a wrapper around a channel and its artifacts, such as its tracking service type and profile
     /// </summary>
     internal class TrackingChannelWrapper
     {
-        private Type _serviceType = null, _scheduleType = null;
+        private Type _serviceType = null,
+            _scheduleType = null;
         private TrackingChannel _channel = null;
+
         [NonSerialized]
         private RTTrackingProfile _profile = null;
         private Version _profileVersionId;
 
         private TrackingChannelWrapper() { }
 
-        public TrackingChannelWrapper(TrackingChannel channel, Type serviceType, Type workflowType, RTTrackingProfile profile)
+        public TrackingChannelWrapper(
+            TrackingChannel channel,
+            Type serviceType,
+            Type workflowType,
+            RTTrackingProfile profile
+        )
         {
             _serviceType = serviceType;
             _scheduleType = workflowType;
@@ -1607,6 +1898,7 @@ namespace System.Workflow.Runtime
         {
             get { return _channel; }
         }
+
         /// <summary>
         /// Get the tracking profile for the channel
         /// </summary>
@@ -1617,7 +1909,13 @@ namespace System.Workflow.Runtime
             if (null != _profile)
                 return _profile;
             else
-                throw new InvalidOperationException(String.Format(System.Globalization.CultureInfo.CurrentCulture, ExecutionStringManager.NullProfileForChannel, this._scheduleType.AssemblyQualifiedName));
+                throw new InvalidOperationException(
+                    String.Format(
+                        System.Globalization.CultureInfo.CurrentCulture,
+                        ExecutionStringManager.NullProfileForChannel,
+                        this._scheduleType.AssemblyQualifiedName
+                    )
+                );
         }
 
         internal void SetTrackingProfile(RTTrackingProfile profile)
@@ -1626,7 +1924,7 @@ namespace System.Workflow.Runtime
         }
 
         /// <summary>
-        /// Clone the tracking profile stored in the cache and 
+        /// Clone the tracking profile stored in the cache and
         /// </summary>
         /// <param name="exec"></param>
         internal void MakeProfilePrivate(WorkflowExecutor exec)
@@ -1652,7 +1950,9 @@ namespace System.Workflow.Runtime
             }
         }
     }
-    internal class Set<T> : IEnumerable<T> where T : IComparable
+
+    internal class Set<T> : IEnumerable<T>
+        where T : IComparable
     {
         List<T> list = null;
 
@@ -1771,7 +2071,7 @@ namespace System.Workflow.Runtime
     }
 
     /// <summary>
-    /// Persisted tracking State pertaining to workflow invoking for an individual schedule.  There could be multiple called schedules under 
+    /// Persisted tracking State pertaining to workflow invoking for an individual schedule.  There could be multiple called schedules under
     /// an instance.
     /// </summary>
     [Serializable]
@@ -1807,6 +2107,7 @@ namespace System.Workflow.Runtime
             get { return callerInstanceId; }
             set { callerInstanceId = value; }
         }
+
         /// <summary>
         /// Context of the caller's invoke activity
         /// </summary>
@@ -1816,6 +2117,7 @@ namespace System.Workflow.Runtime
             get { return callerContextGuid; }
             set { callerContextGuid = value; }
         }
+
         /// <summary>
         /// ParentContext of the caller's invoke activity
         /// </summary>
@@ -1827,7 +2129,6 @@ namespace System.Workflow.Runtime
         }
 
         #endregion Property accessors
-
     }
 
     internal static class HashHelper
@@ -1837,8 +2138,11 @@ namespace System.Workflow.Runtime
             return HashServiceType(serviceType.AssemblyQualifiedName);
         }
 
-        [SuppressMessage("Microsoft.Cryptographic.Standard", "CA5350:MD5CannotBeUsed",
-            Justification = "Design has been approved.  We are not using MD5 for any security or cryptography purposes but rather as a hash.")]
+        [SuppressMessage(
+            "Microsoft.Cryptographic.Standard",
+            "CA5350:MD5CannotBeUsed",
+            Justification = "Design has been approved.  We are not using MD5 for any security or cryptography purposes but rather as a hash."
+        )]
         internal static Guid HashServiceType(String serviceFullTypeName)
         {
             byte[] data;

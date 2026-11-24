@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,53 +34,58 @@ using System.Web.Services.Description;
 
 namespace System.ServiceModel.Description
 {
-	public class ServiceContractGenerationContext
-	{
-		public ServiceContractGenerationContext (
-			ServiceContractGenerator serviceContractGenerator,
-			ContractDescription contract,
-			CodeTypeDeclaration contractType)
-			: this (serviceContractGenerator, contract, contractType, null)
-		{
-		}
+    public class ServiceContractGenerationContext
+    {
+        public ServiceContractGenerationContext(
+            ServiceContractGenerator serviceContractGenerator,
+            ContractDescription contract,
+            CodeTypeDeclaration contractType
+        )
+            : this(serviceContractGenerator, contract, contractType, null) { }
 
-		public ServiceContractGenerationContext (
-			ServiceContractGenerator serviceContractGenerator,
-			ContractDescription contract,
-			CodeTypeDeclaration contractType,
-			CodeTypeDeclaration duplexCallbackType)
-		{
-			generator = serviceContractGenerator;
-			this.contract = contract;
-			contract_type = contractType;
-			duplex_callback_type = duplexCallbackType;
-		}
+        public ServiceContractGenerationContext(
+            ServiceContractGenerator serviceContractGenerator,
+            ContractDescription contract,
+            CodeTypeDeclaration contractType,
+            CodeTypeDeclaration duplexCallbackType
+        )
+        {
+            generator = serviceContractGenerator;
+            this.contract = contract;
+            contract_type = contractType;
+            duplex_callback_type = duplexCallbackType;
+        }
 
-		ServiceContractGenerator generator;
-		ContractDescription contract;
-		CodeTypeDeclaration contract_type;
-		CodeTypeDeclaration duplex_callback_type;
-		Collection<OperationContractGenerationContext> operations
-			= new Collection<OperationContractGenerationContext> ();
+        ServiceContractGenerator generator;
+        ContractDescription contract;
+        CodeTypeDeclaration contract_type;
+        CodeTypeDeclaration duplex_callback_type;
+        Collection<OperationContractGenerationContext> operations =
+            new Collection<OperationContractGenerationContext>();
 
-		public ServiceContractGenerator ServiceContractGenerator {
-			get { return generator; }
-		}
+        public ServiceContractGenerator ServiceContractGenerator
+        {
+            get { return generator; }
+        }
 
-		public ContractDescription Contract {
-			get { return contract; }
-		}
+        public ContractDescription Contract
+        {
+            get { return contract; }
+        }
 
-		public CodeTypeDeclaration ContractType {
-			get { return contract_type; }
-		}
+        public CodeTypeDeclaration ContractType
+        {
+            get { return contract_type; }
+        }
 
-		public CodeTypeDeclaration DuplexCallbackType {
-			get { return duplex_callback_type; }
-		}
+        public CodeTypeDeclaration DuplexCallbackType
+        {
+            get { return duplex_callback_type; }
+        }
 
-		public Collection<OperationContractGenerationContext> Operations {
-			get { return operations; }
-		}
-	}
+        public Collection<OperationContractGenerationContext> Operations
+        {
+            get { return operations; }
+        }
+    }
 }

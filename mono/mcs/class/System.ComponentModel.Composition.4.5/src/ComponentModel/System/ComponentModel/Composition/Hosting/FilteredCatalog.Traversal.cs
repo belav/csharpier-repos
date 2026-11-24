@@ -26,7 +26,7 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="FilteredCatalog"/> that conatains all the parts from the orignal filtered catalog and all their dependencies that 
+        /// Creates a new instance of the <see cref="FilteredCatalog"/> that conatains all the parts from the orignal filtered catalog and all their dependencies that
         /// can be reached via imports that match the specified filter.
         /// </summary>
         /// <param name="importFilter">The import filter.</param>
@@ -49,7 +49,7 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="FilteredCatalog"/> that conatains all the parts from the orignal filtered catalog and all their dependents that 
+        /// Creates a new instance of the <see cref="FilteredCatalog"/> that conatains all the parts from the orignal filtered catalog and all their dependents that
         /// can be reached via imports that match the specified filter.
         /// </summary>
         /// <param name="importFilter">The import filter.</param>
@@ -67,14 +67,17 @@ namespace System.ComponentModel.Composition.Hosting
             Assumes.NotNull(traversal);
 
             // we make sure that the underlyiong catalog cannot change while we are doing the trasversal
-            // After thaty traversal is done, the freeze is lifted, and the catalog is free to change, but the changes 
-            // cannot affect partitioning 
+            // After thaty traversal is done, the freeze is lifted, and the catalog is free to change, but the changes
+            // cannot affect partitioning
             this.FreezeInnerCatalog();
 
             try
             {
                 traversal.Initialize();
-                var traversalClosure = GetTraversalClosure(this._innerCatalog.Where(this._filter), traversal);
+                var traversalClosure = GetTraversalClosure(
+                    this._innerCatalog.Where(this._filter),
+                    traversal
+                );
                 return new FilteredCatalog(this._innerCatalog, p => traversalClosure.Contains(p));
             }
             finally
@@ -83,7 +86,10 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        private static HashSet<ComposablePartDefinition> GetTraversalClosure(IEnumerable<ComposablePartDefinition> parts, IComposablePartCatalogTraversal traversal)
+        private static HashSet<ComposablePartDefinition> GetTraversalClosure(
+            IEnumerable<ComposablePartDefinition> parts,
+            IComposablePartCatalogTraversal traversal
+        )
         {
             Assumes.NotNull(traversal);
 
@@ -92,7 +98,11 @@ namespace System.ComponentModel.Composition.Hosting
             return traversedParts;
         }
 
-        private static void GetTraversalClosure(IEnumerable<ComposablePartDefinition> parts, HashSet<ComposablePartDefinition> traversedParts, IComposablePartCatalogTraversal traversal)
+        private static void GetTraversalClosure(
+            IEnumerable<ComposablePartDefinition> parts,
+            HashSet<ComposablePartDefinition> traversedParts,
+            IComposablePartCatalogTraversal traversal
+        )
         {
             foreach (var part in parts)
             {
@@ -107,10 +117,10 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-
         private void FreezeInnerCatalog()
         {
-            INotifyComposablePartCatalogChanged innerNotifyCatalog = this._innerCatalog as INotifyComposablePartCatalogChanged;
+            INotifyComposablePartCatalogChanged innerNotifyCatalog =
+                this._innerCatalog as INotifyComposablePartCatalogChanged;
             if (innerNotifyCatalog != null)
             {
                 innerNotifyCatalog.Changing += ThrowOnRecomposition;
@@ -119,14 +129,18 @@ namespace System.ComponentModel.Composition.Hosting
 
         private void UnfreezeInnerCatalog()
         {
-            INotifyComposablePartCatalogChanged innerNotifyCatalog = this._innerCatalog as INotifyComposablePartCatalogChanged;
+            INotifyComposablePartCatalogChanged innerNotifyCatalog =
+                this._innerCatalog as INotifyComposablePartCatalogChanged;
             if (innerNotifyCatalog != null)
             {
                 innerNotifyCatalog.Changing -= ThrowOnRecomposition;
             }
         }
 
-        private static void ThrowOnRecomposition(object sender, ComposablePartCatalogChangeEventArgs e)
+        private static void ThrowOnRecomposition(
+            object sender,
+            ComposablePartCatalogChangeEventArgs e
+        )
         {
             throw new ChangeRejectedException(); // TODO - text
         }

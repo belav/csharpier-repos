@@ -12,8 +12,8 @@ namespace Microsoft.CodeAnalysis.Formatting
 {
     internal partial class FormatCommandHandler
     {
-        public CommandState GetCommandState(FormatDocumentCommandArgs args)
-            => GetCommandState(args.SubjectBuffer);
+        public CommandState GetCommandState(FormatDocumentCommandArgs args) =>
+            GetCommandState(args.SubjectBuffer);
 
         public bool ExecuteCommand(FormatDocumentCommandArgs args, CommandExecutionContext context)
         {
@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 return false;
             }
 
-            var document = args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return false;
@@ -34,9 +35,20 @@ namespace Microsoft.CodeAnalysis.Formatting
                 return false;
             }
 
-            using (context.OperationContext.AddScope(allowCancellation: true, EditorFeaturesResources.Formatting_document))
+            using (
+                context.OperationContext.AddScope(
+                    allowCancellation: true,
+                    EditorFeaturesResources.Formatting_document
+                )
+            )
             {
-                Format(args.TextView, args.SubjectBuffer, document, selectionOpt: null, context.OperationContext.UserCancellationToken);
+                Format(
+                    args.TextView,
+                    args.SubjectBuffer,
+                    document,
+                    selectionOpt: null,
+                    context.OperationContext.UserCancellationToken
+                );
             }
 
             return true;

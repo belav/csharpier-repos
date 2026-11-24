@@ -8,16 +8,15 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Collections.Specialized;
 using System.Collections.Generic;
-using System.Text;
+using System.Collections.Specialized;
 using System.Data;
-using System.Data.Metadata.Edm;
-using System.Data.EntityModel.SchemaObjectModel;
 using System.Data.Entity.Design.Common;
+using System.Data.EntityModel.SchemaObjectModel;
+using System.Data.Metadata.Edm;
 using System.Diagnostics;
 using System.Reflection;
-
+using System.Text;
 
 namespace System.Data.EntityModel.Emitters
 {
@@ -39,9 +38,10 @@ namespace System.Data.EntityModel.Emitters
         public const string GetValidValueMethodName = "GetValidValue";
         public const string VerifyComplexObjectIsNotNullName = "VerifyComplexObjectIsNotNull";
 
-
         // to guarantee uniqueness these must all be unique, begin with and end with an underscore and not contain internal underscores
-        private static string[] _privateMemberPrefixes = new string[(int)PrivateMemberPrefixId.Count]
+        private static string[] _privateMemberPrefixes = new string[
+            (int)PrivateMemberPrefixId.Count
+        ]
         {
             "_",
             "_Initialize_",
@@ -50,19 +50,28 @@ namespace System.Data.EntityModel.Emitters
         };
 
         // suffix that is added to field names to create a boolean field used to indicate whether or
-        // not a complex property has been explicitly initialized 
+        // not a complex property has been explicitly initialized
         private static string _complexPropertyInitializedSuffix = "Initialized";
-        private static List<KeyValuePair<string, Type>> _typeReservedNames = InitializeTypeReservedNames();
+        private static List<KeyValuePair<string, Type>> _typeReservedNames =
+            InitializeTypeReservedNames();
 
         /// <summary>
         /// Initialize some statics that cannot be initialized in member declaration...
         /// </summary>
         static List<KeyValuePair<string, Type>> InitializeTypeReservedNames()
         {
-            Dictionary<string, Type> typeReservedNames = new Dictionary<string, Type>(StringComparer.Ordinal);
-            BindingFlags bindingFlags = BindingFlags.FlattenHierarchy | BindingFlags.NonPublic | BindingFlags.Public 
-                    | BindingFlags.Instance | BindingFlags.Static;
-            foreach (MemberInfo member in TypeReference.ComplexTypeBaseClassType.GetMembers(bindingFlags))
+            Dictionary<string, Type> typeReservedNames = new Dictionary<string, Type>(
+                StringComparer.Ordinal
+            );
+            BindingFlags bindingFlags =
+                BindingFlags.FlattenHierarchy
+                | BindingFlags.NonPublic
+                | BindingFlags.Public
+                | BindingFlags.Instance
+                | BindingFlags.Static;
+            foreach (
+                MemberInfo member in TypeReference.ComplexTypeBaseClassType.GetMembers(bindingFlags)
+            )
             {
                 if (ShouldReserveName(member))
                 {
@@ -73,7 +82,9 @@ namespace System.Data.EntityModel.Emitters
                 }
             }
 
-            foreach (MemberInfo member in TypeReference.EntityTypeBaseClassType.GetMembers(bindingFlags))
+            foreach (
+                MemberInfo member in TypeReference.EntityTypeBaseClassType.GetMembers(bindingFlags)
+            )
             {
                 if (ShouldReserveName(member))
                 {
@@ -107,15 +118,15 @@ namespace System.Data.EntityModel.Emitters
             {
                 return ShouldReserveName((EventInfo)member);
             }
-            else if(member is FieldInfo)
+            else if (member is FieldInfo)
             {
                 return ShouldReserveName((FieldInfo)member);
             }
-            else if(member is MethodBase)
+            else if (member is MethodBase)
             {
                 return ShouldReserveName((MethodBase)member);
             }
-            else if(member is PropertyInfo)
+            else if (member is PropertyInfo)
             {
                 return ShouldReserveName((PropertyInfo)member);
             }
@@ -124,7 +135,6 @@ namespace System.Data.EntityModel.Emitters
                 Debug.Assert(member is Type, "Did you add a new type of member?");
                 return ShouldReserveName((Type)member);
             }
-
         }
 
         private static bool ShouldReserveName(EventInfo member)
@@ -167,14 +177,14 @@ namespace System.Data.EntityModel.Emitters
 
         private static bool ShouldReserveName(FieldInfo member)
         {
-            return !member.IsPrivate && !member.IsAssembly && 
-                !member.IsSpecialName;
+            return !member.IsPrivate && !member.IsAssembly && !member.IsSpecialName;
         }
 
         private static bool ShouldReserveName(MethodBase member, bool checkForSpecial)
         {
-            return !member.IsPrivate && !member.IsAssembly &&
-                (!checkForSpecial || !member.IsSpecialName);
+            return !member.IsPrivate
+                && !member.IsAssembly
+                && (!checkForSpecial || !member.IsSpecialName);
         }
 
         private static bool ShouldReserveName(MethodBase member)
@@ -191,20 +201,27 @@ namespace System.Data.EntityModel.Emitters
 
         #region Public Methods
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase"
+        )]
         public static string CamelCase(string text)
         {
-            if ( string.IsNullOrEmpty(text) )
+            if (string.IsNullOrEmpty(text))
                 return text;
 
-            if ( text.Length == 1 )
-                return text[0].ToString(System.Globalization.CultureInfo.InvariantCulture).ToLowerInvariant();
+            if (text.Length == 1)
+                return text[0]
+                    .ToString(System.Globalization.CultureInfo.InvariantCulture)
+                    .ToLowerInvariant();
 
-            return text[0].ToString(System.Globalization.CultureInfo.InvariantCulture).ToLowerInvariant()+text.Substring(1);
+            return text[0]
+                    .ToString(System.Globalization.CultureInfo.InvariantCulture)
+                    .ToLowerInvariant() + text.Substring(1);
         }
 
         public static string FixParameterName(string name)
@@ -219,13 +236,13 @@ namespace System.Data.EntityModel.Emitters
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="propName"></param>
         /// <returns></returns>
         public static string FieldNameFromPropName(string propName)
         {
-            return PrivateMemberPrefix(PrivateMemberPrefixId.Field)+propName;
+            return PrivateMemberPrefix(PrivateMemberPrefixId.Field) + propName;
         }
 
         /// <summary>
@@ -237,7 +254,7 @@ namespace System.Data.EntityModel.Emitters
         {
             return FieldNameFromPropName(propName) + _complexPropertyInitializedSuffix;
         }
-        
+
         /// <summary>
         /// get the prefix ussed for a private member
         /// </summary>
@@ -249,27 +266,27 @@ namespace System.Data.EntityModel.Emitters
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static string FQAdoFrameworkName( string name )
+        public static string FQAdoFrameworkName(string name)
         {
             return AdoFrameworkNamespace + "." + name;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static string FQAdoFrameworkDataClassesName( string name )
+        public static string FQAdoFrameworkDataClassesName(string name)
         {
             return AdoFrameworkDataClassesNamespace + "." + name;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="name">unqualifed name of the type</param>
         /// <returns></returns>
@@ -279,7 +296,7 @@ namespace System.Data.EntityModel.Emitters
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
@@ -289,12 +306,12 @@ namespace System.Data.EntityModel.Emitters
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="element"></param>
         /// <param name="modelType"></param>
         /// <returns></returns>
-        public static bool TryGetPrimitiveTypeKind(EdmType type, out PrimitiveTypeKind modelType )
+        public static bool TryGetPrimitiveTypeKind(EdmType type, out PrimitiveTypeKind modelType)
         {
             if (!MetadataUtil.IsPrimitiveType(type))
             {
@@ -308,7 +325,7 @@ namespace System.Data.EntityModel.Emitters
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
@@ -316,7 +333,7 @@ namespace System.Data.EntityModel.Emitters
         {
             Debug.Assert(!string.IsNullOrEmpty(name), "name parameter is null or empty");
 
-            if ( name.Length > 0 && name[0] == '.' )
+            if (name.Length > 0 && name[0] == '.')
                 return name.Substring(1).Split('.');
 
             return name.Split('.');
@@ -333,10 +350,14 @@ namespace System.Data.EntityModel.Emitters
         /// <param name="type">the object representing the schema type being defined</param>
         /// <param name="name">the member name</param>
         /// <returns>true if the name is reserved by the type</returns>
-        public static bool DoesTypeReserveMemberName(StructuralType type, string name, StringComparison comparison)
+        public static bool DoesTypeReserveMemberName(
+            StructuralType type,
+            string name,
+            StringComparison comparison
+        )
         {
             Type reservingType = null;
-            if (!TryGetReservedName(name,comparison, out reservingType))
+            if (!TryGetReservedName(name, comparison, out reservingType))
             {
                 return false;
             }
@@ -350,10 +371,14 @@ namespace System.Data.EntityModel.Emitters
             return (reservingType == type.GetType());
         }
 
-        public static bool TryGetReservedName(string name, StringComparison comparison, out Type applyToSpecificType)
+        public static bool TryGetReservedName(
+            string name,
+            StringComparison comparison,
+            out Type applyToSpecificType
+        )
         {
             applyToSpecificType = null;
-            foreach(KeyValuePair<string, Type> pair in _typeReservedNames)
+            foreach (KeyValuePair<string, Type> pair in _typeReservedNames)
             {
                 if (pair.Key.Equals(name, comparison))
                 {
@@ -364,7 +389,6 @@ namespace System.Data.EntityModel.Emitters
 
             return false;
         }
-
 
         #endregion
     }

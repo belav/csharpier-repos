@@ -47,9 +47,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             var firstOffset = lineText.GetFirstNonWhitespaceOffset();
 
-            return firstOffset.HasValue
-                ? lineText[..firstOffset.Value]
-                : lineText;
+            return firstOffset.HasValue ? lineText[..firstOffset.Value] : lineText;
         }
 
         public static string GetTrailingWhitespace(this string lineText)
@@ -74,7 +72,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return text.ConvertTabToSpace(tabSize, initialColumn, text.Length) + initialColumn;
         }
 
-        public static int ConvertTabToSpace(this string textSnippet, int tabSize, int initialColumn, int endPosition)
+        public static int ConvertTabToSpace(
+            this string textSnippet,
+            int tabSize,
+            int initialColumn,
+            int endPosition
+        )
         {
             Debug.Assert(tabSize > 0);
             Debug.Assert(endPosition >= 0 && endPosition <= textSnippet.Length);
@@ -185,10 +188,13 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return false;
         }
 
-        public static ImmutableArray<SymbolDisplayPart> ToSymbolDisplayParts(this string text)
-            => ImmutableArray.Create(new SymbolDisplayPart(SymbolDisplayPartKind.Text, null, text));
+        public static ImmutableArray<SymbolDisplayPart> ToSymbolDisplayParts(this string text) =>
+            ImmutableArray.Create(new SymbolDisplayPart(SymbolDisplayPartKind.Text, null, text));
 
-        public static int GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(this string line, int tabSize)
+        public static int GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(
+            this string line,
+            int tabSize
+        )
         {
             var firstNonWhitespaceChar = line.GetFirstNonWhitespaceOffset();
 
@@ -241,7 +247,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return line.Length;
         }
 
-        public static void AppendToAliasNameSet(this string? alias, ImmutableHashSet<string>.Builder builder)
+        public static void AppendToAliasNameSet(
+            this string? alias,
+            ImmutableHashSet<string>.Builder builder
+        )
         {
             if (RoslynString.IsNullOrWhiteSpace(alias))
             {
@@ -251,7 +260,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             builder.Add(alias);
 
             var caseSensitive = builder.KeyComparer == StringComparer.Ordinal;
-            Debug.Assert(builder.KeyComparer == StringComparer.Ordinal || builder.KeyComparer == StringComparer.OrdinalIgnoreCase);
+            Debug.Assert(
+                builder.KeyComparer == StringComparer.Ordinal
+                    || builder.KeyComparer == StringComparer.OrdinalIgnoreCase
+            );
             if (alias.TryGetWithoutAttributeSuffix(caseSensitive, out var aliasWithoutAttribute))
             {
                 builder.Add(aliasWithoutAttribute);

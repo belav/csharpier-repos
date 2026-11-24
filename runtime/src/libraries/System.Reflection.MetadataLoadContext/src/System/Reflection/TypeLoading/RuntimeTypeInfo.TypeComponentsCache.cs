@@ -18,18 +18,33 @@ namespace System.Reflection.TypeLoading
         /// Note that it is possible that two threads racing to query the same TypeInfo may allocate and query two different
         /// cache objects. Thus, this object must not be relied upon to preserve object identity.
         /// </summary>
-
         private sealed class TypeComponentsCache
         {
             public TypeComponentsCache(RuntimeTypeInfo type)
             {
                 _type = type;
 
-                _perNameQueryCaches_CaseSensitive = CreatePerNameQueryCaches(type, ignoreCase: false, immediateTypeOnly: false);
-                _perNameQueryCaches_CaseInsensitive = CreatePerNameQueryCaches(type, ignoreCase: true, immediateTypeOnly: false);
+                _perNameQueryCaches_CaseSensitive = CreatePerNameQueryCaches(
+                    type,
+                    ignoreCase: false,
+                    immediateTypeOnly: false
+                );
+                _perNameQueryCaches_CaseInsensitive = CreatePerNameQueryCaches(
+                    type,
+                    ignoreCase: true,
+                    immediateTypeOnly: false
+                );
 
-                _perNameQueryCaches_CaseSensitive_ImmediateTypeOnly = CreatePerNameQueryCaches(type, ignoreCase: false, immediateTypeOnly: true);
-                _perNameQueryCaches_CaseInsensitive_ImmediateTypeOnly = CreatePerNameQueryCaches(type, ignoreCase: true, immediateTypeOnly: true);
+                _perNameQueryCaches_CaseSensitive_ImmediateTypeOnly = CreatePerNameQueryCaches(
+                    type,
+                    ignoreCase: false,
+                    immediateTypeOnly: true
+                );
+                _perNameQueryCaches_CaseInsensitive_ImmediateTypeOnly = CreatePerNameQueryCaches(
+                    type,
+                    ignoreCase: true,
+                    immediateTypeOnly: true
+                );
 
                 _nameAgnosticQueryCaches = new object[MemberTypeIndex.Count];
             }
@@ -40,12 +55,25 @@ namespace System.Reflection.TypeLoading
             //  BindingFlags == Public | NonPublic | Instance | Static | FlattenHierarchy  (immediateTypeOnly == false)
             //                  Public | NonPublic | Instance | Static | DeclaredOnly      (immediateTypeOnly == true)
             //
-            public QueriedMemberList<M> GetQueriedMembers<M>(string name, bool ignoreCase, bool immediateTypeOnly) where M : MemberInfo
+            public QueriedMemberList<M> GetQueriedMembers<M>(
+                string name,
+                bool ignoreCase,
+                bool immediateTypeOnly
+            )
+                where M : MemberInfo
             {
                 int index = MemberPolicies<M>.MemberTypeIndex;
-                object[] cacheArray = ignoreCase ?
-                    (immediateTypeOnly ? _perNameQueryCaches_CaseInsensitive_ImmediateTypeOnly : _perNameQueryCaches_CaseInsensitive) :
-                    (immediateTypeOnly ? _perNameQueryCaches_CaseSensitive_ImmediateTypeOnly : _perNameQueryCaches_CaseSensitive);
+                object[] cacheArray = ignoreCase
+                    ? (
+                        immediateTypeOnly
+                            ? _perNameQueryCaches_CaseInsensitive_ImmediateTypeOnly
+                            : _perNameQueryCaches_CaseInsensitive
+                    )
+                    : (
+                        immediateTypeOnly
+                            ? _perNameQueryCaches_CaseSensitive_ImmediateTypeOnly
+                            : _perNameQueryCaches_CaseSensitive
+                    );
 
                 object unifierAsObject = cacheArray[index];
                 PerNameQueryCache<M> unifier = (PerNameQueryCache<M>)unifierAsObject;
@@ -59,13 +87,19 @@ namespace System.Reflection.TypeLoading
             //  BindingFlags == Public | NonPublic | Instance | Static | FlattenHierarchy  (immediateTypeOnly == false)
             //                  Public | NonPublic | Instance | Static | DeclaredOnly      (immediateTypeOnly == true)
             //
-            public QueriedMemberList<M> GetQueriedMembers<M>(bool immediateTypeOnly) where M : MemberInfo
+            public QueriedMemberList<M> GetQueriedMembers<M>(bool immediateTypeOnly)
+                where M : MemberInfo
             {
                 int index = MemberPolicies<M>.MemberTypeIndex;
                 object result = Volatile.Read(ref _nameAgnosticQueryCaches[index]);
                 if (result == null)
                 {
-                    QueriedMemberList<M> newResult = QueriedMemberList<M>.Create(_type, filter: null, ignoreCase: false, immediateTypeOnly: immediateTypeOnly);
+                    QueriedMemberList<M> newResult = QueriedMemberList<M>.Create(
+                        _type,
+                        filter: null,
+                        ignoreCase: false,
+                        immediateTypeOnly: immediateTypeOnly
+                    );
                     newResult.Compact();
                     Volatile.Write(ref _nameAgnosticQueryCaches[index], newResult);
                     return newResult;
@@ -73,7 +107,12 @@ namespace System.Reflection.TypeLoading
                 QueriedMemberList<M> list = (QueriedMemberList<M>)result;
                 if (list.ImmediateTypeOnly && !immediateTypeOnly)
                 {
-                    QueriedMemberList<M> newResult = QueriedMemberList<M>.Create(_type, filter: null, ignoreCase: false, immediateTypeOnly: false);
+                    QueriedMemberList<M> newResult = QueriedMemberList<M>.Create(
+                        _type,
+                        filter: null,
+                        ignoreCase: false,
+                        immediateTypeOnly: false
+                    );
                     newResult.Compact();
                     Volatile.Write(ref _nameAgnosticQueryCaches[index], newResult);
                     return newResult;
@@ -81,15 +120,43 @@ namespace System.Reflection.TypeLoading
                 return list;
             }
 
-            private static object[] CreatePerNameQueryCaches(RuntimeTypeInfo type, bool ignoreCase, bool immediateTypeOnly)
+            private static object[] CreatePerNameQueryCaches(
+                RuntimeTypeInfo type,
+                bool ignoreCase,
+                bool immediateTypeOnly
+            )
             {
                 object[] perNameCaches = new object[MemberTypeIndex.Count];
-                perNameCaches[MemberTypeIndex.Constructor] = new PerNameQueryCache<ConstructorInfo>(type, ignoreCase: ignoreCase, immediateTypeOnly: immediateTypeOnly);
-                perNameCaches[MemberTypeIndex.Event] = new PerNameQueryCache<EventInfo>(type, ignoreCase: ignoreCase, immediateTypeOnly: immediateTypeOnly);
-                perNameCaches[MemberTypeIndex.Field] = new PerNameQueryCache<FieldInfo>(type, ignoreCase: ignoreCase, immediateTypeOnly: immediateTypeOnly);
-                perNameCaches[MemberTypeIndex.Method] = new PerNameQueryCache<MethodInfo>(type, ignoreCase: ignoreCase, immediateTypeOnly: immediateTypeOnly);
-                perNameCaches[MemberTypeIndex.Property] = new PerNameQueryCache<PropertyInfo>(type, ignoreCase: ignoreCase, immediateTypeOnly: immediateTypeOnly);
-                perNameCaches[MemberTypeIndex.NestedType] = new PerNameQueryCache<Type>(type, ignoreCase: ignoreCase, immediateTypeOnly: immediateTypeOnly);
+                perNameCaches[MemberTypeIndex.Constructor] = new PerNameQueryCache<ConstructorInfo>(
+                    type,
+                    ignoreCase: ignoreCase,
+                    immediateTypeOnly: immediateTypeOnly
+                );
+                perNameCaches[MemberTypeIndex.Event] = new PerNameQueryCache<EventInfo>(
+                    type,
+                    ignoreCase: ignoreCase,
+                    immediateTypeOnly: immediateTypeOnly
+                );
+                perNameCaches[MemberTypeIndex.Field] = new PerNameQueryCache<FieldInfo>(
+                    type,
+                    ignoreCase: ignoreCase,
+                    immediateTypeOnly: immediateTypeOnly
+                );
+                perNameCaches[MemberTypeIndex.Method] = new PerNameQueryCache<MethodInfo>(
+                    type,
+                    ignoreCase: ignoreCase,
+                    immediateTypeOnly: immediateTypeOnly
+                );
+                perNameCaches[MemberTypeIndex.Property] = new PerNameQueryCache<PropertyInfo>(
+                    type,
+                    ignoreCase: ignoreCase,
+                    immediateTypeOnly: immediateTypeOnly
+                );
+                perNameCaches[MemberTypeIndex.NestedType] = new PerNameQueryCache<Type>(
+                    type,
+                    ignoreCase: ignoreCase,
+                    immediateTypeOnly: immediateTypeOnly
+                );
                 return perNameCaches;
             }
 
@@ -123,9 +190,15 @@ namespace System.Reflection.TypeLoading
             //
             // In addition, if "ignoreCase" was passed to the constructor, BindingFlags.IgnoreCase is also in effect.
             //
-            private sealed class PerNameQueryCache<M> : ConcurrentUnifier<string, QueriedMemberList<M>> where M : MemberInfo
+            private sealed class PerNameQueryCache<M>
+                : ConcurrentUnifier<string, QueriedMemberList<M>>
+                where M : MemberInfo
             {
-                public PerNameQueryCache(RuntimeTypeInfo type, bool ignoreCase, bool immediateTypeOnly)
+                public PerNameQueryCache(
+                    RuntimeTypeInfo type,
+                    bool ignoreCase,
+                    bool immediateTypeOnly
+                )
                 {
                     _type = type;
                     _ignoreCase = ignoreCase;
@@ -134,7 +207,12 @@ namespace System.Reflection.TypeLoading
 
                 protected sealed override QueriedMemberList<M> Factory(string key)
                 {
-                    QueriedMemberList<M> result = QueriedMemberList<M>.Create(_type, key, ignoreCase: _ignoreCase, immediateTypeOnly: _immediateTypeOnly);
+                    QueriedMemberList<M> result = QueriedMemberList<M>.Create(
+                        _type,
+                        key,
+                        ignoreCase: _ignoreCase,
+                        immediateTypeOnly: _immediateTypeOnly
+                    );
                     result.Compact();
                     return result;
                 }

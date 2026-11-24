@@ -1,10 +1,10 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Xunit;
 using System.IO;
 using ApprovalTests;
 using ApprovalTests.Reporters;
+using Xunit;
 
 namespace System.CommandLine.Tests.Help
 {
@@ -28,27 +28,28 @@ namespace System.CommandLine.Tests.Help
                 new CliArgument<string>("the-root-arg")
                 {
                     DefaultValueFactory = (_) => "the-root-arg-one-value",
-                    Description = "the-root-arg-description"
+                    Description = "the-root-arg-description",
                 },
                 new CliArgument<FileAccess>("the-root-arg-enum-default")
                 {
                     DefaultValueFactory = (_) => FileAccess.Read,
-                    Description = "the-root-arg-enum-default-description"
+                    Description = "the-root-arg-enum-default-description",
                 },
-                new CliOption<bool>("--the-root-option-no-arg", "-trna") 
+                new CliOption<bool>("--the-root-option-no-arg", "-trna")
                 {
                     Description = "the-root-option-no-arg-description",
-                    Required = true
+                    Required = true,
                 },
                 new CliOption<string>("--the-root-option-no-description-default-arg", "-trondda")
                 {
-                    DefaultValueFactory = (_) => "the-root-option--no-description-default-arg-value",
+                    DefaultValueFactory = (_) =>
+                        "the-root-option--no-description-default-arg-value",
                 },
                 new CliOption<string>("--the-root-option-no-default-arg", "-tronda")
                 {
                     Description = "the-root-option-no-default-description",
                     HelpName = "the-root-option-arg-no-default-arg",
-                    Required = true
+                    Required = true,
                 },
                 new CliOption<string>("--the-root-option-default-arg", "-troda")
                 {
@@ -65,11 +66,11 @@ namespace System.CommandLine.Tests.Help
                 {
                     DefaultValueFactory = (_) => FileAccess.Read,
                     Description = "the-root-option-description",
-                    Required = true
+                    Required = true,
                 },
                 new CliOption<bool>("--the-root-option-multi-line-description", "-tromld")
                 {
-                    Description = "the-root-option\r\nmulti-line\ndescription"
+                    Description = "the-root-option\r\nmulti-line\ndescription",
                 },
             };
 

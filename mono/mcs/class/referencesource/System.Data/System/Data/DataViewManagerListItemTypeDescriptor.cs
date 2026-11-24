@@ -1,42 +1,47 @@
 //------------------------------------------------------------------------------
 // <copyright file="DataViewManagerListItemTypeDescriptor.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">Microsoft</owner>
 // <owner current="true" primary="false">Microsoft</owner>
 // <owner current="false" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
     using System.ComponentModel;
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    internal sealed class DataViewManagerListItemTypeDescriptor : ICustomTypeDescriptor {
-
+    internal sealed class DataViewManagerListItemTypeDescriptor : ICustomTypeDescriptor
+    {
         private DataViewManager dataViewManager;
         private PropertyDescriptorCollection propsCollection;
 
-        internal DataViewManagerListItemTypeDescriptor(DataViewManager dataViewManager) {
+        internal DataViewManagerListItemTypeDescriptor(DataViewManager dataViewManager)
+        {
             this.dataViewManager = dataViewManager;
         }
 
-        internal void Reset() {
+        internal void Reset()
+        {
             propsCollection = null;
         }
 
-        internal DataView GetDataView(DataTable table) {
+        internal DataView GetDataView(DataTable table)
+        {
             DataView dataView = new DataView(table);
             dataView.SetDataViewManager(dataViewManager);
             return dataView;
-        }        
+        }
 
         /// <devdoc>
         ///     Retrieves an array of member attributes for the given object.
         /// </devdoc>
-        AttributeCollection ICustomTypeDescriptor.GetAttributes() {
+        AttributeCollection ICustomTypeDescriptor.GetAttributes()
+        {
             return new AttributeCollection((Attribute[])null);
         }
 
@@ -44,7 +49,8 @@ namespace System.Data {
         ///     Retrieves the class name for this object.  If null is returned,
         ///     the type name is used.
         /// </devdoc>
-        string ICustomTypeDescriptor.GetClassName() {
+        string ICustomTypeDescriptor.GetClassName()
+        {
             return null;
         }
 
@@ -52,36 +58,40 @@ namespace System.Data {
         ///     Retrieves the name for this object.  If null is returned,
         ///     the default is used.
         /// </devdoc>
-        string ICustomTypeDescriptor.GetComponentName() {
+        string ICustomTypeDescriptor.GetComponentName()
+        {
             return null;
         }
 
         /// <devdoc>
         ///      Retrieves the type converter for this object.
         /// </devdoc>
-        TypeConverter ICustomTypeDescriptor.GetConverter() {
+        TypeConverter ICustomTypeDescriptor.GetConverter()
+        {
             return null;
         }
 
         /// <devdoc>
         ///     Retrieves the default event.
         /// </devdoc>
-        EventDescriptor ICustomTypeDescriptor.GetDefaultEvent() {
+        EventDescriptor ICustomTypeDescriptor.GetDefaultEvent()
+        {
             return null;
         }
-
 
         /// <devdoc>
         ///     Retrieves the default property.
         /// </devdoc>
-        PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty() {
+        PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty()
+        {
             return null;
         }
 
         /// <devdoc>
         ///      Retrieves the an editor for this object.
         /// </devdoc>
-        object ICustomTypeDescriptor.GetEditor(Type editorBaseType) {
+        object ICustomTypeDescriptor.GetEditor(Type editorBaseType)
+        {
             return null;
         }
 
@@ -91,7 +101,8 @@ namespace System.Data {
         ///     provides.  If the component is sited, the site may add or remove
         ///     additional events.
         /// </devdoc>
-        EventDescriptorCollection ICustomTypeDescriptor.GetEvents() {
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents()
+        {
             return new EventDescriptorCollection(null);
         }
 
@@ -102,7 +113,8 @@ namespace System.Data {
         ///     additional events.  The returned array of events will be
         ///     filtered by the given set of attributes.
         /// </devdoc>
-        EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[] attributes) {
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[] attributes)
+        {
             return new EventDescriptorCollection(null);
         }
 
@@ -112,8 +124,9 @@ namespace System.Data {
         ///     provides.  If the component is sited, the site may add or remove
         ///     additional properties.
         /// </devdoc>
-        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties() {
-            return((ICustomTypeDescriptor)this).GetProperties(null);
+        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties()
+        {
+            return ((ICustomTypeDescriptor)this).GetProperties(null);
         }
 
         /// <devdoc>
@@ -123,17 +136,21 @@ namespace System.Data {
         ///     additional properties.  The returned array of properties will be
         ///     filtered by the given set of attributes.
         /// </devdoc>
-        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes) {
-            if (propsCollection == null) {
+        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes)
+        {
+            if (propsCollection == null)
+            {
                 PropertyDescriptor[] props = null;
                 DataSet dataSet = dataViewManager.DataSet;
-                if (dataSet != null) {
+                if (dataSet != null)
+                {
                     int tableCount = dataSet.Tables.Count;
                     props = new PropertyDescriptor[tableCount];
-                    for (int i = 0; i < tableCount; i++) {
+                    for (int i = 0; i < tableCount; i++)
+                    {
                         props[i] = new DataTablePropertyDescriptor(dataSet.Tables[i]);
                     }
-                }                                
+                }
                 propsCollection = new PropertyDescriptorCollection(props);
             }
             return propsCollection;
@@ -146,8 +163,9 @@ namespace System.Data {
         ///     descripotor implemementation should return the default object, that is the main
         ///     object that exposes the properties and attributes,
         /// </devdoc>
-        object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor pd) {
+        object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor pd)
+        {
             return this;
         }
-    }   
+    }
 }

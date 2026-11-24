@@ -11,7 +11,8 @@ namespace System.ServiceModel.Configuration
     using System.Runtime.Diagnostics;
     using System.ServiceModel.Diagnostics;
 
-    public abstract class ServiceModelEnhancedConfigurationElementCollection<TConfigurationElement> : ServiceModelConfigurationElementCollection<TConfigurationElement>
+    public abstract class ServiceModelEnhancedConfigurationElementCollection<TConfigurationElement>
+        : ServiceModelConfigurationElementCollection<TConfigurationElement>
         where TConfigurationElement : ConfigurationElement, new()
     {
         internal ServiceModelEnhancedConfigurationElementCollection(string elementName)
@@ -38,8 +39,15 @@ namespace System.ServiceModel.Configuration
                     // being manipulated (i.e. duplicate in same config file)
                     if (oldElement.ElementInformation.IsPresent)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                            SR.GetString(SR.ConfigDuplicateKeyAtSameScope, this.ElementName, newElementKey)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigDuplicateKeyAtSameScope,
+                                    this.ElementName,
+                                    newElementKey
+                                )
+                            )
+                        );
                     }
                     else if (DiagnosticUtility.ShouldTraceWarning)
                     {
@@ -47,17 +55,29 @@ namespace System.ServiceModel.Configuration
                         values.Add("ElementName", this.ElementName);
                         values.Add("Name", newElementKey.ToString());
                         values.Add("OldElementLocation", oldElement.ElementInformation.Source);
-                        values.Add("OldElementLineNumber", oldElement.ElementInformation.LineNumber.ToString(NumberFormatInfo.CurrentInfo));
+                        values.Add(
+                            "OldElementLineNumber",
+                            oldElement.ElementInformation.LineNumber.ToString(
+                                NumberFormatInfo.CurrentInfo
+                            )
+                        );
                         values.Add("NewElementLocation", element.ElementInformation.Source);
-                        values.Add("NewElementLineNumber", element.ElementInformation.LineNumber.ToString(NumberFormatInfo.CurrentInfo));
+                        values.Add(
+                            "NewElementLineNumber",
+                            element.ElementInformation.LineNumber.ToString(
+                                NumberFormatInfo.CurrentInfo
+                            )
+                        );
 
                         DictionaryTraceRecord traceRecord = new DictionaryTraceRecord(values);
-                        TraceUtility.TraceEvent(TraceEventType.Warning,
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Warning,
                             TraceCode.OverridingDuplicateConfigurationKey,
                             SR.GetString(SR.TraceCodeOverridingDuplicateConfigurationKey),
                             traceRecord,
                             this,
-                            null);
+                            null
+                        );
                     }
                 }
             }

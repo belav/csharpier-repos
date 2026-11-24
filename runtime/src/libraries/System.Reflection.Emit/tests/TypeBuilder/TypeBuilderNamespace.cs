@@ -13,7 +13,10 @@ namespace System.Reflection.Emit.Tests
         [InlineData("Namespace1.Namespace2.TestType", "Namespace1.Namespace2")]
         public void Namespace(string typeName, string expectedNamespace)
         {
-            TypeBuilder nonGenericType = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public, typeName: typeName);
+            TypeBuilder nonGenericType = Helpers.DynamicType(
+                TypeAttributes.Class | TypeAttributes.Public,
+                typeName: typeName
+            );
             Assert.Equal(expectedNamespace, nonGenericType.Namespace);
 
             nonGenericType.DefineGenericParameters("T", "U");

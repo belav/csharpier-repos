@@ -21,7 +21,8 @@ public sealed class TableValuedFunctionQueryRootExpression : EntityQueryRootExpr
     public TableValuedFunctionQueryRootExpression(
         IEntityType entityType,
         IStoreFunction function,
-        IReadOnlyCollection<Expression> arguments)
+        IReadOnlyCollection<Expression> arguments
+    )
         : base(entityType)
     {
         Function = function;
@@ -72,11 +73,12 @@ public sealed class TableValuedFunctionQueryRootExpression : EntityQueryRootExpr
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override EntityQueryRootExpression UpdateEntityType(IEntityType entityType)
-        => entityType.ClrType != EntityType.ClrType
-            || entityType.Name != EntityType.Name
-                ? throw new InvalidOperationException(CoreStrings.QueryRootDifferentEntityType(entityType.DisplayName()))
-                : new TableValuedFunctionQueryRootExpression(entityType, Function, Arguments);
+    public override EntityQueryRootExpression UpdateEntityType(IEntityType entityType) =>
+        entityType.ClrType != EntityType.ClrType || entityType.Name != EntityType.Name
+            ? throw new InvalidOperationException(
+                CoreStrings.QueryRootDifferentEntityType(entityType.DisplayName())
+            )
+            : new TableValuedFunctionQueryRootExpression(entityType, Function, Arguments);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -98,16 +100,21 @@ public sealed class TableValuedFunctionQueryRootExpression : EntityQueryRootExpr
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is TableValuedFunctionQueryRootExpression queryRootExpression
-                && Equals(queryRootExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is TableValuedFunctionQueryRootExpression queryRootExpression
+                && Equals(queryRootExpression)
+        );
 
-    private bool Equals(TableValuedFunctionQueryRootExpression queryRootExpression)
-        => base.Equals(queryRootExpression)
-            && Equals(Function, queryRootExpression.Function)
-            && Arguments.SequenceEqual(queryRootExpression.Arguments, ExpressionEqualityComparer.Instance);
+    private bool Equals(TableValuedFunctionQueryRootExpression queryRootExpression) =>
+        base.Equals(queryRootExpression)
+        && Equals(Function, queryRootExpression.Function)
+        && Arguments.SequenceEqual(
+            queryRootExpression.Arguments,
+            ExpressionEqualityComparer.Instance
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

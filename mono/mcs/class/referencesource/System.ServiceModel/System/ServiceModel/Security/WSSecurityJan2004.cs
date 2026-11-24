@@ -27,7 +27,10 @@ namespace System.ServiceModel.Security
         WSSecurityTokenSerializer tokenSerializer;
         SamlSerializer samlSerializer;
 
-        public WSSecurityJan2004(WSSecurityTokenSerializer tokenSerializer, SamlSerializer samlSerializer)
+        public WSSecurityJan2004(
+            WSSecurityTokenSerializer tokenSerializer,
+            SamlSerializer samlSerializer
+        )
         {
             this.tokenSerializer = tokenSerializer;
             this.samlSerializer = samlSerializer;
@@ -60,27 +63,40 @@ namespace System.ServiceModel.Security
 
         internal abstract class BinaryTokenEntry : TokenEntry
         {
-            internal static readonly XmlDictionaryString ElementName = XD.SecurityJan2004Dictionary.BinarySecurityToken;
-            internal static readonly XmlDictionaryString EncodingTypeAttribute = XD.SecurityJan2004Dictionary.EncodingType;
+            internal static readonly XmlDictionaryString ElementName =
+                XD.SecurityJan2004Dictionary.BinarySecurityToken;
+            internal static readonly XmlDictionaryString EncodingTypeAttribute =
+                XD.SecurityJan2004Dictionary.EncodingType;
             internal const string EncodingTypeAttributeString = SecurityJan2004Strings.EncodingType;
-            internal const string EncodingTypeValueBase64Binary = SecurityJan2004Strings.EncodingTypeValueBase64Binary;
-            internal const string EncodingTypeValueHexBinary = SecurityJan2004Strings.EncodingTypeValueHexBinary;
-            internal static readonly XmlDictionaryString ValueTypeAttribute = XD.SecurityJan2004Dictionary.ValueType;
+            internal const string EncodingTypeValueBase64Binary =
+                SecurityJan2004Strings.EncodingTypeValueBase64Binary;
+            internal const string EncodingTypeValueHexBinary =
+                SecurityJan2004Strings.EncodingTypeValueHexBinary;
+            internal static readonly XmlDictionaryString ValueTypeAttribute =
+                XD.SecurityJan2004Dictionary.ValueType;
 
             WSSecurityTokenSerializer tokenSerializer;
             string[] valueTypeUris = null;
 
-            protected BinaryTokenEntry(WSSecurityTokenSerializer tokenSerializer, string valueTypeUri)
+            protected BinaryTokenEntry(
+                WSSecurityTokenSerializer tokenSerializer,
+                string valueTypeUri
+            )
             {
                 this.tokenSerializer = tokenSerializer;
                 this.valueTypeUris = new string[1];
                 this.valueTypeUris[0] = valueTypeUri;
             }
 
-            protected BinaryTokenEntry(WSSecurityTokenSerializer tokenSerializer, string[] valueTypeUris)
+            protected BinaryTokenEntry(
+                WSSecurityTokenSerializer tokenSerializer,
+                string[] valueTypeUris
+            )
             {
                 if (valueTypeUris == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("valueTypeUris");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "valueTypeUris"
+                    );
 
                 this.tokenSerializer = tokenSerializer;
                 this.valueTypeUris = new string[valueTypeUris.GetLength(0)];
@@ -88,10 +104,23 @@ namespace System.ServiceModel.Security
                     this.valueTypeUris[i] = valueTypeUris[i];
             }
 
-            protected override XmlDictionaryString LocalName { get { return ElementName; } }
-            protected override XmlDictionaryString NamespaceUri { get { return XD.SecurityJan2004Dictionary.Namespace; } }
-            public override string TokenTypeUri { get { return this.valueTypeUris[0]; } }
-            protected override string ValueTypeUri { get { return this.valueTypeUris[0]; } }
+            protected override XmlDictionaryString LocalName
+            {
+                get { return ElementName; }
+            }
+            protected override XmlDictionaryString NamespaceUri
+            {
+                get { return XD.SecurityJan2004Dictionary.Namespace; }
+            }
+            public override string TokenTypeUri
+            {
+                get { return this.valueTypeUris[0]; }
+            }
+            protected override string ValueTypeUri
+            {
+                get { return this.valueTypeUris[0]; }
+            }
+
             public override bool SupportsTokenTypeUri(string tokenTypeUri)
             {
                 for (int i = 0; i < this.valueTypeUris.GetLength(0); ++i)
@@ -103,19 +132,31 @@ namespace System.ServiceModel.Security
                 return false;
             }
 
-            public abstract SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromBinaryCore(byte[] rawData);
+            public abstract SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromBinaryCore(
+                byte[] rawData
+            );
 
-            public override SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromTokenXmlCore(XmlElement issuedTokenXml,
-                SecurityTokenReferenceStyle tokenReferenceStyle)
+            public override SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromTokenXmlCore(
+                XmlElement issuedTokenXml,
+                SecurityTokenReferenceStyle tokenReferenceStyle
+            )
             {
                 TokenReferenceStyleHelper.Validate(tokenReferenceStyle);
 
                 switch (tokenReferenceStyle)
                 {
                     case SecurityTokenReferenceStyle.Internal:
-                        return CreateDirectReference(issuedTokenXml, UtilityStrings.IdAttribute, UtilityStrings.Namespace, this.TokenType);
+                        return CreateDirectReference(
+                            issuedTokenXml,
+                            UtilityStrings.IdAttribute,
+                            UtilityStrings.Namespace,
+                            this.TokenType
+                        );
                     case SecurityTokenReferenceStyle.External:
-                        string encoding = issuedTokenXml.GetAttribute(EncodingTypeAttributeString, null);
+                        string encoding = issuedTokenXml.GetAttribute(
+                            EncodingTypeAttributeString,
+                            null
+                        );
                         string encodedData = issuedTokenXml.InnerText;
 
                         byte[] binaryData;
@@ -129,20 +170,36 @@ namespace System.ServiceModel.Security
                         }
                         else
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.UnknownEncodingInBinarySecurityToken)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new MessageSecurityException(
+                                    SR.GetString(SR.UnknownEncodingInBinarySecurityToken)
+                                )
+                            );
                         }
 
                         return CreateKeyIdentifierClauseFromBinaryCore(binaryData);
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("tokenReferenceStyle"));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentOutOfRangeException("tokenReferenceStyle")
+                        );
                 }
             }
 
-            public abstract SecurityToken ReadBinaryCore(string id, string valueTypeUri, byte[] rawData);
+            public abstract SecurityToken ReadBinaryCore(
+                string id,
+                string valueTypeUri,
+                byte[] rawData
+            );
 
-            public override SecurityToken ReadTokenCore(XmlDictionaryReader reader, SecurityTokenResolver tokenResolver)
+            public override SecurityToken ReadTokenCore(
+                XmlDictionaryReader reader,
+                SecurityTokenResolver tokenResolver
+            )
             {
-                string wsuId = reader.GetAttribute(XD.UtilityDictionary.IdAttribute, XD.UtilityDictionary.Namespace);
+                string wsuId = reader.GetAttribute(
+                    XD.UtilityDictionary.IdAttribute,
+                    XD.UtilityDictionary.Namespace
+                );
                 string valueTypeUri = reader.GetAttribute(ValueTypeAttribute, null);
                 string encoding = reader.GetAttribute(EncodingTypeAttribute, null);
 
@@ -157,13 +214,21 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.UnknownEncodingInBinarySecurityToken)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(SR.UnknownEncodingInBinarySecurityToken)
+                        )
+                    );
                 }
 
                 return ReadBinaryCore(wsuId, valueTypeUri, binaryData);
             }
 
-            public abstract void WriteBinaryCore(SecurityToken token, out string id, out byte[] rawData);
+            public abstract void WriteBinaryCore(
+                SecurityToken token,
+                out string id,
+                out byte[] rawData
+            );
 
             public override void WriteTokenCore(XmlDictionaryWriter writer, SecurityToken token)
             {
@@ -177,10 +242,19 @@ namespace System.ServiceModel.Security
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("rawData");
                 }
 
-                writer.WriteStartElement(XD.SecurityJan2004Dictionary.Prefix.Value, ElementName, XD.SecurityJan2004Dictionary.Namespace);
+                writer.WriteStartElement(
+                    XD.SecurityJan2004Dictionary.Prefix.Value,
+                    ElementName,
+                    XD.SecurityJan2004Dictionary.Namespace
+                );
                 if (id != null)
                 {
-                    writer.WriteAttributeString(XD.UtilityDictionary.Prefix.Value, XD.UtilityDictionary.IdAttribute, XD.UtilityDictionary.Namespace, id);
+                    writer.WriteAttributeString(
+                        XD.UtilityDictionary.Prefix.Value,
+                        XD.UtilityDictionary.IdAttribute,
+                        XD.UtilityDictionary.Namespace,
+                        id
+                    );
                 }
                 if (valueTypeUris != null)
                 {
@@ -188,7 +262,11 @@ namespace System.ServiceModel.Security
                 }
                 if (this.tokenSerializer.EmitBspRequiredAttributes)
                 {
-                    writer.WriteAttributeString(EncodingTypeAttribute, null, EncodingTypeValueBase64Binary);
+                    writer.WriteAttributeString(
+                        EncodingTypeAttribute,
+                        null,
+                        EncodingTypeValueBase64Binary
+                    );
                 }
                 writer.WriteBase64(rawData, 0, rawData.Length);
                 writer.WriteEndElement(); // BinarySecurityToken
@@ -197,16 +275,30 @@ namespace System.ServiceModel.Security
 
         class GenericXmlTokenEntry : TokenEntry
         {
-            protected override XmlDictionaryString LocalName { get { return null; } }
-            protected override XmlDictionaryString NamespaceUri { get { return null; } }
-            protected override Type[] GetTokenTypesCore() { return new Type[] { typeof(GenericXmlSecurityToken) }; }
-            public override string TokenTypeUri { get { return null; } }
-            protected override string ValueTypeUri { get { return null; } }
-
-            public GenericXmlTokenEntry()
+            protected override XmlDictionaryString LocalName
             {
+                get { return null; }
+            }
+            protected override XmlDictionaryString NamespaceUri
+            {
+                get { return null; }
             }
 
+            protected override Type[] GetTokenTypesCore()
+            {
+                return new Type[] { typeof(GenericXmlSecurityToken) };
+            }
+
+            public override string TokenTypeUri
+            {
+                get { return null; }
+            }
+            protected override string ValueTypeUri
+            {
+                get { return null; }
+            }
+
+            public GenericXmlTokenEntry() { }
 
             public override bool CanReadTokenCore(XmlElement element)
             {
@@ -218,23 +310,35 @@ namespace System.ServiceModel.Security
                 return false;
             }
 
-            public override SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromTokenXmlCore(XmlElement issuedTokenXml,
-                SecurityTokenReferenceStyle tokenReferenceStyle)
+            public override SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromTokenXmlCore(
+                XmlElement issuedTokenXml,
+                SecurityTokenReferenceStyle tokenReferenceStyle
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException()
+                );
             }
 
-            public override SecurityToken ReadTokenCore(XmlDictionaryReader reader, SecurityTokenResolver tokenResolver)
+            public override SecurityToken ReadTokenCore(
+                XmlDictionaryReader reader,
+                SecurityTokenResolver tokenResolver
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException()
+                );
             }
 
             public override void WriteTokenCore(XmlDictionaryWriter writer, SecurityToken token)
             {
-                BufferedGenericXmlSecurityToken bufferedXmlToken = token as BufferedGenericXmlSecurityToken;
+                BufferedGenericXmlSecurityToken bufferedXmlToken =
+                    token as BufferedGenericXmlSecurityToken;
                 if (bufferedXmlToken != null && bufferedXmlToken.TokenXmlBuffer != null)
                 {
-                    using (XmlDictionaryReader reader = bufferedXmlToken.TokenXmlBuffer.GetReader(0))
+                    using (
+                        XmlDictionaryReader reader = bufferedXmlToken.TokenXmlBuffer.GetReader(0)
+                    )
                     {
                         writer.WriteNode(reader, false);
                     }
@@ -250,13 +354,27 @@ namespace System.ServiceModel.Security
         class KerberosTokenEntry : BinaryTokenEntry
         {
             public KerberosTokenEntry(WSSecurityTokenSerializer tokenSerializer)
-                : base(tokenSerializer, new string[] { SecurityJan2004Strings.KerberosTokenTypeGSS, SecurityJan2004Strings.KerberosTokenType1510 })
+                : base(
+                    tokenSerializer,
+                    new string[]
+                    {
+                        SecurityJan2004Strings.KerberosTokenTypeGSS,
+                        SecurityJan2004Strings.KerberosTokenType1510,
+                    }
+                ) { }
+
+            protected override Type[] GetTokenTypesCore()
             {
+                return new Type[]
+                {
+                    typeof(KerberosReceiverSecurityToken),
+                    typeof(KerberosRequestorSecurityToken),
+                };
             }
 
-            protected override Type[] GetTokenTypesCore() { return new Type[] { typeof(KerberosReceiverSecurityToken), typeof(KerberosRequestorSecurityToken) }; }
-
-            public override SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromBinaryCore(byte[] rawData)
+            public override SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromBinaryCore(
+                byte[] rawData
+            )
             {
                 byte[] tokenHash;
                 using (HashAlgorithm hasher = CryptoHelper.NewSha1HashAlgorithm())
@@ -266,12 +384,20 @@ namespace System.ServiceModel.Security
                 return new KerberosTicketHashKeyIdentifierClause(tokenHash);
             }
 
-            public override SecurityToken ReadBinaryCore(string id, string valueTypeUri, byte[] rawData)
+            public override SecurityToken ReadBinaryCore(
+                string id,
+                string valueTypeUri,
+                byte[] rawData
+            )
             {
                 return new KerberosReceiverSecurityToken(rawData, id, false, valueTypeUri);
             }
 
-            public override void WriteBinaryCore(SecurityToken token, out string id, out byte[] rawData)
+            public override void WriteBinaryCore(
+                SecurityToken token,
+                out string id,
+                out byte[] rawData
+            )
             {
                 KerberosRequestorSecurityToken kerbToken = (KerberosRequestorSecurityToken)token;
                 id = token.Id;
@@ -285,7 +411,10 @@ namespace System.ServiceModel.Security
             SamlSerializer samlSerializer;
             SecurityTokenSerializer tokenSerializer;
 
-            public SamlTokenEntry(SecurityTokenSerializer tokenSerializer, SamlSerializer samlSerializer)
+            public SamlTokenEntry(
+                SecurityTokenSerializer tokenSerializer,
+                SamlSerializer samlSerializer
+            )
             {
                 this.tokenSerializer = tokenSerializer;
                 if (samlSerializer != null)
@@ -299,14 +428,33 @@ namespace System.ServiceModel.Security
                 this.samlSerializer.PopulateDictionary(BinaryMessageEncoderFactory.XmlDictionary);
             }
 
-            protected override XmlDictionaryString LocalName { get { return XD.SecurityJan2004Dictionary.SamlAssertion; } }
-            protected override XmlDictionaryString NamespaceUri { get { return XD.SecurityJan2004Dictionary.SamlUri; } }
-            protected override Type[] GetTokenTypesCore() { return new Type[] { typeof(SamlSecurityToken) }; }
-            public override string TokenTypeUri { get { return null; } }
-            protected override string ValueTypeUri { get { return null; } }
+            protected override XmlDictionaryString LocalName
+            {
+                get { return XD.SecurityJan2004Dictionary.SamlAssertion; }
+            }
+            protected override XmlDictionaryString NamespaceUri
+            {
+                get { return XD.SecurityJan2004Dictionary.SamlUri; }
+            }
 
-            public override SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromTokenXmlCore(XmlElement issuedTokenXml,
-                SecurityTokenReferenceStyle tokenReferenceStyle)
+            protected override Type[] GetTokenTypesCore()
+            {
+                return new Type[] { typeof(SamlSecurityToken) };
+            }
+
+            public override string TokenTypeUri
+            {
+                get { return null; }
+            }
+            protected override string ValueTypeUri
+            {
+                get { return null; }
+            }
+
+            public override SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromTokenXmlCore(
+                XmlElement issuedTokenXml,
+                SecurityTokenReferenceStyle tokenReferenceStyle
+            )
             {
                 TokenReferenceStyleHelper.Validate(tokenReferenceStyle);
 
@@ -318,13 +466,22 @@ namespace System.ServiceModel.Security
                         string assertionId = issuedTokenXml.GetAttribute(samlAssertionId);
                         return new SamlAssertionKeyIdentifierClause(assertionId);
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("tokenReferenceStyle"));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentOutOfRangeException("tokenReferenceStyle")
+                        );
                 }
             }
 
-            public override SecurityToken ReadTokenCore(XmlDictionaryReader reader, SecurityTokenResolver tokenResolver)
+            public override SecurityToken ReadTokenCore(
+                XmlDictionaryReader reader,
+                SecurityTokenResolver tokenResolver
+            )
             {
-                SamlSecurityToken samlToken = this.samlSerializer.ReadToken(reader, this.tokenSerializer, tokenResolver);
+                SamlSecurityToken samlToken = this.samlSerializer.ReadToken(
+                    reader,
+                    this.tokenSerializer,
+                    tokenResolver
+                );
                 return samlToken;
             }
 
@@ -344,13 +501,35 @@ namespace System.ServiceModel.Security
                 this.tokenSerializer = tokenSerializer;
             }
 
-            protected override XmlDictionaryString LocalName { get { return XD.SecurityJan2004Dictionary.UserNameTokenElement; } }
-            protected override XmlDictionaryString NamespaceUri { get { return XD.SecurityJan2004Dictionary.Namespace; } }
-            protected override Type[] GetTokenTypesCore() { return new Type[] { typeof(UserNameSecurityToken) }; }
-            public override string TokenTypeUri { get { return SecurityJan2004Strings.UPTokenType; } }
-            protected override string ValueTypeUri { get { return null; } }
+            protected override XmlDictionaryString LocalName
+            {
+                get { return XD.SecurityJan2004Dictionary.UserNameTokenElement; }
+            }
+            protected override XmlDictionaryString NamespaceUri
+            {
+                get { return XD.SecurityJan2004Dictionary.Namespace; }
+            }
 
-            public override IAsyncResult BeginReadTokenCore(XmlDictionaryReader reader, SecurityTokenResolver tokenResolver, AsyncCallback callback, object state)
+            protected override Type[] GetTokenTypesCore()
+            {
+                return new Type[] { typeof(UserNameSecurityToken) };
+            }
+
+            public override string TokenTypeUri
+            {
+                get { return SecurityJan2004Strings.UPTokenType; }
+            }
+            protected override string ValueTypeUri
+            {
+                get { return null; }
+            }
+
+            public override IAsyncResult BeginReadTokenCore(
+                XmlDictionaryReader reader,
+                SecurityTokenResolver tokenResolver,
+                AsyncCallback callback,
+                object state
+            )
             {
                 string id;
                 string userName;
@@ -362,20 +541,29 @@ namespace System.ServiceModel.Security
                 return new CompletedAsyncResult<SecurityToken>(token, callback, state);
             }
 
-            public override SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromTokenXmlCore(XmlElement issuedTokenXml,
-                SecurityTokenReferenceStyle tokenReferenceStyle)
+            public override SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromTokenXmlCore(
+                XmlElement issuedTokenXml,
+                SecurityTokenReferenceStyle tokenReferenceStyle
+            )
             {
                 TokenReferenceStyleHelper.Validate(tokenReferenceStyle);
 
                 switch (tokenReferenceStyle)
                 {
                     case SecurityTokenReferenceStyle.Internal:
-                        return CreateDirectReference(issuedTokenXml, UtilityStrings.IdAttribute, UtilityStrings.Namespace, typeof(UserNameSecurityToken));
+                        return CreateDirectReference(
+                            issuedTokenXml,
+                            UtilityStrings.IdAttribute,
+                            UtilityStrings.Namespace,
+                            typeof(UserNameSecurityToken)
+                        );
                     case SecurityTokenReferenceStyle.External:
                         // UP tokens aren't referred to externally
                         return null;
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("tokenReferenceStyle"));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentOutOfRangeException("tokenReferenceStyle")
+                        );
                 }
             }
 
@@ -384,7 +572,10 @@ namespace System.ServiceModel.Security
                 return CompletedAsyncResult<SecurityToken>.End(result);
             }
 
-            public override SecurityToken ReadTokenCore(XmlDictionaryReader reader, SecurityTokenResolver tokenResolver)
+            public override SecurityToken ReadTokenCore(
+                XmlDictionaryReader reader,
+                SecurityTokenResolver tokenResolver
+            )
             {
                 string id;
                 string userName;
@@ -404,21 +595,44 @@ namespace System.ServiceModel.Security
                 WriteUserNamePassword(writer, upToken.Id, upToken.UserName, upToken.Password);
             }
 
-            void WriteUserNamePassword(XmlDictionaryWriter writer, string id, string userName, string password)
+            void WriteUserNamePassword(
+                XmlDictionaryWriter writer,
+                string id,
+                string userName,
+                string password
+            )
             {
-                writer.WriteStartElement(XD.SecurityJan2004Dictionary.Prefix.Value, XD.SecurityJan2004Dictionary.UserNameTokenElement,
-                    XD.SecurityJan2004Dictionary.Namespace); // <wsse:UsernameToken
-                writer.WriteAttributeString(XD.UtilityDictionary.Prefix.Value, XD.UtilityDictionary.IdAttribute,
-                    XD.UtilityDictionary.Namespace, id); // wsu:Id="..."
-                writer.WriteElementString(XD.SecurityJan2004Dictionary.Prefix.Value, XD.SecurityJan2004Dictionary.UserNameElement,
-                    XD.SecurityJan2004Dictionary.Namespace, userName); // ><wsse:Username>...</wsse:Username>
+                writer.WriteStartElement(
+                    XD.SecurityJan2004Dictionary.Prefix.Value,
+                    XD.SecurityJan2004Dictionary.UserNameTokenElement,
+                    XD.SecurityJan2004Dictionary.Namespace
+                ); // <wsse:UsernameToken
+                writer.WriteAttributeString(
+                    XD.UtilityDictionary.Prefix.Value,
+                    XD.UtilityDictionary.IdAttribute,
+                    XD.UtilityDictionary.Namespace,
+                    id
+                ); // wsu:Id="..."
+                writer.WriteElementString(
+                    XD.SecurityJan2004Dictionary.Prefix.Value,
+                    XD.SecurityJan2004Dictionary.UserNameElement,
+                    XD.SecurityJan2004Dictionary.Namespace,
+                    userName
+                ); // ><wsse:Username>...</wsse:Username>
                 if (password != null)
                 {
-                    writer.WriteStartElement(XD.SecurityJan2004Dictionary.Prefix.Value, XD.SecurityJan2004Dictionary.PasswordElement,
-                        XD.SecurityJan2004Dictionary.Namespace);
+                    writer.WriteStartElement(
+                        XD.SecurityJan2004Dictionary.Prefix.Value,
+                        XD.SecurityJan2004Dictionary.PasswordElement,
+                        XD.SecurityJan2004Dictionary.Namespace
+                    );
                     if (this.tokenSerializer.EmitBspRequiredAttributes)
                     {
-                        writer.WriteAttributeString(XD.SecurityJan2004Dictionary.TypeAttribute, null, SecurityJan2004Strings.UPTokenPasswordTextValue);
+                        writer.WriteAttributeString(
+                            XD.SecurityJan2004Dictionary.TypeAttribute,
+                            null,
+                            SecurityJan2004Strings.UPTokenPasswordTextValue
+                        );
                     }
                     writer.WriteString(password); // <wsse:Password>...</wsse:Password>
                     writer.WriteEndElement();
@@ -429,53 +643,96 @@ namespace System.ServiceModel.Security
             static string ParsePassword(XmlDictionaryReader reader)
             {
                 string type = reader.GetAttribute(XD.SecurityJan2004Dictionary.TypeAttribute, null);
-                if (type != null && type.Length > 0 && type != SecurityJan2004Strings.UPTokenPasswordTextValue)
+                if (
+                    type != null
+                    && type.Length > 0
+                    && type != SecurityJan2004Strings.UPTokenPasswordTextValue
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.UnsupportedPasswordType, type)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(SR.GetString(SR.UnsupportedPasswordType, type))
+                    );
                 }
 
                 return reader.ReadElementString();
             }
 
-            static void ParseToken(XmlDictionaryReader reader, out string id, out string userName, out string password)
+            static void ParseToken(
+                XmlDictionaryReader reader,
+                out string id,
+                out string userName,
+                out string password
+            )
             {
                 id = null;
                 userName = null;
                 password = null;
 
                 reader.MoveToContent();
-                id = reader.GetAttribute(XD.UtilityDictionary.IdAttribute, XD.UtilityDictionary.Namespace);
+                id = reader.GetAttribute(
+                    XD.UtilityDictionary.IdAttribute,
+                    XD.UtilityDictionary.Namespace
+                );
 
-                reader.ReadStartElement(XD.SecurityJan2004Dictionary.UserNameTokenElement, XD.SecurityJan2004Dictionary.Namespace);
+                reader.ReadStartElement(
+                    XD.SecurityJan2004Dictionary.UserNameTokenElement,
+                    XD.SecurityJan2004Dictionary.Namespace
+                );
                 while (reader.IsStartElement())
                 {
-                    if (reader.IsStartElement(XD.SecurityJan2004Dictionary.UserNameElement, XD.SecurityJan2004Dictionary.Namespace))
+                    if (
+                        reader.IsStartElement(
+                            XD.SecurityJan2004Dictionary.UserNameElement,
+                            XD.SecurityJan2004Dictionary.Namespace
+                        )
+                    )
                     {
                         userName = reader.ReadElementString();
                     }
-                    else if (reader.IsStartElement(XD.SecurityJan2004Dictionary.PasswordElement, XD.SecurityJan2004Dictionary.Namespace))
+                    else if (
+                        reader.IsStartElement(
+                            XD.SecurityJan2004Dictionary.PasswordElement,
+                            XD.SecurityJan2004Dictionary.Namespace
+                        )
+                    )
                     {
                         password = ParsePassword(reader);
                     }
-                    else if (reader.IsStartElement(XD.SecurityJan2004Dictionary.NonceElement, XD.SecurityJan2004Dictionary.Namespace))
+                    else if (
+                        reader.IsStartElement(
+                            XD.SecurityJan2004Dictionary.NonceElement,
+                            XD.SecurityJan2004Dictionary.Namespace
+                        )
+                    )
                     {
                         // Nonce can be safely ignored
                         reader.Skip();
                     }
-                    else if (reader.IsStartElement(XD.UtilityDictionary.CreatedElement, XD.UtilityDictionary.Namespace))
+                    else if (
+                        reader.IsStartElement(
+                            XD.UtilityDictionary.CreatedElement,
+                            XD.UtilityDictionary.Namespace
+                        )
+                    )
                     {
                         // wsu:Created can be safely ignored
                         reader.Skip();
                     }
                     else
                     {
-                        XmlHelper.OnUnexpectedChildNodeError(SecurityJan2004Strings.UserNameTokenElement, reader);
+                        XmlHelper.OnUnexpectedChildNodeError(
+                            SecurityJan2004Strings.UserNameTokenElement,
+                            reader
+                        );
                     }
                 }
                 reader.ReadEndElement();
 
                 if (userName == null)
-                    XmlHelper.OnRequiredElementMissing(SecurityJan2004Strings.UserNameElement, SecurityJan2004Strings.Namespace);
+                    XmlHelper.OnRequiredElementMissing(
+                        SecurityJan2004Strings.UserNameElement,
+                        SecurityJan2004Strings.Namespace
+                    );
             }
         }
 
@@ -488,45 +745,92 @@ namespace System.ServiceModel.Security
                 this.tokenSerializer = tokenSerializer;
             }
 
-            protected override XmlDictionaryString LocalName { get { return EncryptedKey.ElementName; } }
-            protected override XmlDictionaryString NamespaceUri { get { return XD.XmlEncryptionDictionary.Namespace; } }
-            protected override Type[] GetTokenTypesCore() { return new Type[] { typeof(WrappedKeySecurityToken) }; }
-            public override string TokenTypeUri { get { return null; } }
-            protected override string ValueTypeUri { get { return null; } }
-
-            public override SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromTokenXmlCore(XmlElement issuedTokenXml,
-                SecurityTokenReferenceStyle tokenReferenceStyle)
+            protected override XmlDictionaryString LocalName
             {
+                get { return EncryptedKey.ElementName; }
+            }
+            protected override XmlDictionaryString NamespaceUri
+            {
+                get { return XD.XmlEncryptionDictionary.Namespace; }
+            }
 
+            protected override Type[] GetTokenTypesCore()
+            {
+                return new Type[] { typeof(WrappedKeySecurityToken) };
+            }
+
+            public override string TokenTypeUri
+            {
+                get { return null; }
+            }
+            protected override string ValueTypeUri
+            {
+                get { return null; }
+            }
+
+            public override SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromTokenXmlCore(
+                XmlElement issuedTokenXml,
+                SecurityTokenReferenceStyle tokenReferenceStyle
+            )
+            {
                 TokenReferenceStyleHelper.Validate(tokenReferenceStyle);
 
                 switch (tokenReferenceStyle)
                 {
                     case SecurityTokenReferenceStyle.Internal:
-                        return CreateDirectReference(issuedTokenXml, XmlEncryptionStrings.Id, null, null);
+                        return CreateDirectReference(
+                            issuedTokenXml,
+                            XmlEncryptionStrings.Id,
+                            null,
+                            null
+                        );
                     case SecurityTokenReferenceStyle.External:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.CantInferReferenceForToken, EncryptedKey.ElementName.Value)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new XmlException(
+                                SR.GetString(
+                                    SR.CantInferReferenceForToken,
+                                    EncryptedKey.ElementName.Value
+                                )
+                            )
+                        );
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("tokenReferenceStyle"));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentOutOfRangeException("tokenReferenceStyle")
+                        );
                 }
             }
 
-            public override SecurityToken ReadTokenCore(XmlDictionaryReader reader, SecurityTokenResolver tokenResolver)
+            public override SecurityToken ReadTokenCore(
+                XmlDictionaryReader reader,
+                SecurityTokenResolver tokenResolver
+            )
             {
                 EncryptedKey encryptedKey = new EncryptedKey();
                 encryptedKey.SecurityTokenSerializer = this.tokenSerializer;
                 encryptedKey.ReadFrom(reader);
                 SecurityKeyIdentifier unwrappingTokenIdentifier = encryptedKey.KeyIdentifier;
                 byte[] wrappedKey = encryptedKey.GetWrappedKey();
-                WrappedKeySecurityToken wrappedKeyToken = CreateWrappedKeyToken(encryptedKey.Id, encryptedKey.EncryptionMethod,
-                    encryptedKey.CarriedKeyName, unwrappingTokenIdentifier, wrappedKey, tokenResolver);
+                WrappedKeySecurityToken wrappedKeyToken = CreateWrappedKeyToken(
+                    encryptedKey.Id,
+                    encryptedKey.EncryptionMethod,
+                    encryptedKey.CarriedKeyName,
+                    unwrappingTokenIdentifier,
+                    wrappedKey,
+                    tokenResolver
+                );
                 wrappedKeyToken.EncryptedKey = encryptedKey;
 
                 return wrappedKeyToken;
             }
 
-            WrappedKeySecurityToken CreateWrappedKeyToken(string id, string encryptionMethod, string carriedKeyName,
-                SecurityKeyIdentifier unwrappingTokenIdentifier, byte[] wrappedKey, SecurityTokenResolver tokenResolver)
+            WrappedKeySecurityToken CreateWrappedKeyToken(
+                string id,
+                string encryptionMethod,
+                string carriedKeyName,
+                SecurityKeyIdentifier unwrappingTokenIdentifier,
+                byte[] wrappedKey,
+                SecurityTokenResolver tokenResolver
+            )
             {
                 ISspiNegotiationInfo sspiResolver = tokenResolver as ISspiNegotiationInfo;
                 if (sspiResolver != null)
@@ -535,24 +839,41 @@ namespace System.ServiceModel.Security
                     // ensure that the encryption algorithm is compatible
                     if (encryptionMethod != unwrappingSspiContext.KeyEncryptionAlgorithm)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.BadKeyEncryptionAlgorithm, encryptionMethod)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MessageSecurityException(
+                                SR.GetString(SR.BadKeyEncryptionAlgorithm, encryptionMethod)
+                            )
+                        );
                     }
                     byte[] unwrappedKey = unwrappingSspiContext.Decrypt(wrappedKey);
-                    return new WrappedKeySecurityToken(id, unwrappedKey, encryptionMethod, unwrappingSspiContext, unwrappedKey);
+                    return new WrappedKeySecurityToken(
+                        id,
+                        unwrappedKey,
+                        encryptionMethod,
+                        unwrappingSspiContext,
+                        unwrappedKey
+                    );
                 }
                 else
                 {
                     if (tokenResolver == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("tokenResolver"));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentNullException("tokenResolver")
+                        );
                     }
                     if (unwrappingTokenIdentifier == null || unwrappingTokenIdentifier.Count == 0)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.MissingKeyInfoInEncryptedKey)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MessageSecurityException(
+                                SR.GetString(SR.MissingKeyInfoInEncryptedKey)
+                            )
+                        );
                     }
 
                     SecurityToken unwrappingToken;
-                    SecurityHeaderTokenResolver resolver = tokenResolver as SecurityHeaderTokenResolver;
+                    SecurityHeaderTokenResolver resolver =
+                        tokenResolver as SecurityHeaderTokenResolver;
                     if (resolver != null)
                     {
                         unwrappingToken = resolver.ExpectedWrapper;
@@ -560,14 +881,27 @@ namespace System.ServiceModel.Security
                         {
                             if (!resolver.CheckExternalWrapperMatch(unwrappingTokenIdentifier))
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(
-                                    SR.GetString(SR.EncryptedKeyWasNotEncryptedWithTheRequiredEncryptingToken, unwrappingToken)));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new MessageSecurityException(
+                                        SR.GetString(
+                                            SR.EncryptedKeyWasNotEncryptedWithTheRequiredEncryptingToken,
+                                            unwrappingToken
+                                        )
+                                    )
+                                );
                             }
                         }
                         else
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(
-                                SR.GetString(SR.UnableToResolveKeyInfoForUnwrappingToken, unwrappingTokenIdentifier, resolver)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new MessageSecurityException(
+                                    SR.GetString(
+                                        SR.UnableToResolveKeyInfoForUnwrappingToken,
+                                        unwrappingTokenIdentifier,
+                                        resolver
+                                    )
+                                )
+                            );
                         }
                     }
                     else
@@ -581,13 +915,34 @@ namespace System.ServiceModel.Security
                             if (exception is MessageSecurityException)
                                 throw;
 
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(
-                                SR.GetString(SR.UnableToResolveKeyInfoForUnwrappingToken, unwrappingTokenIdentifier, tokenResolver), exception));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new MessageSecurityException(
+                                    SR.GetString(
+                                        SR.UnableToResolveKeyInfoForUnwrappingToken,
+                                        unwrappingTokenIdentifier,
+                                        tokenResolver
+                                    ),
+                                    exception
+                                )
+                            );
                         }
                     }
                     SecurityKey unwrappingSecurityKey;
-                    byte[] unwrappedKey = SecurityUtils.DecryptKey(unwrappingToken, encryptionMethod, wrappedKey, out unwrappingSecurityKey);
-                    return new WrappedKeySecurityToken(id, unwrappedKey, encryptionMethod, unwrappingToken, unwrappingTokenIdentifier, wrappedKey, unwrappingSecurityKey);
+                    byte[] unwrappedKey = SecurityUtils.DecryptKey(
+                        unwrappingToken,
+                        encryptionMethod,
+                        wrappedKey,
+                        out unwrappingSecurityKey
+                    );
+                    return new WrappedKeySecurityToken(
+                        id,
+                        unwrappedKey,
+                        encryptionMethod,
+                        unwrappingToken,
+                        unwrappingTokenIdentifier,
+                        wrappedKey,
+                        unwrappingSecurityKey
+                    );
                 }
             }
 
@@ -596,7 +951,10 @@ namespace System.ServiceModel.Security
                 WrappedKeySecurityToken wrappedKeyToken = token as WrappedKeySecurityToken;
                 wrappedKeyToken.EnsureEncryptedKeySetUp();
                 wrappedKeyToken.EncryptedKey.SecurityTokenSerializer = this.tokenSerializer;
-                wrappedKeyToken.EncryptedKey.WriteTo(writer, ServiceModelDictionaryManager.Instance);
+                wrappedKeyToken.EncryptedKey.WriteTo(
+                    writer,
+                    ServiceModelDictionaryManager.Instance
+                );
             }
         }
 
@@ -605,28 +963,45 @@ namespace System.ServiceModel.Security
             internal const string ValueTypeAbsoluteUri = SecurityJan2004Strings.X509TokenType;
 
             public X509TokenEntry(WSSecurityTokenSerializer tokenSerializer)
-                : base(tokenSerializer, ValueTypeAbsoluteUri)
+                : base(tokenSerializer, ValueTypeAbsoluteUri) { }
+
+            protected override Type[] GetTokenTypesCore()
             {
+                return new Type[] { typeof(X509SecurityToken), typeof(X509WindowsSecurityToken) };
             }
 
-            protected override Type[] GetTokenTypesCore() { return new Type[] { typeof(X509SecurityToken), typeof(X509WindowsSecurityToken) }; }
-
-            public override SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromBinaryCore(byte[] rawData)
+            public override SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromBinaryCore(
+                byte[] rawData
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.CantInferReferenceForToken, ValueTypeAbsoluteUri)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(SR.CantInferReferenceForToken, ValueTypeAbsoluteUri)
+                    )
+                );
             }
 
-            public override SecurityToken ReadBinaryCore(string id, string valueTypeUri, byte[] rawData)
+            public override SecurityToken ReadBinaryCore(
+                string id,
+                string valueTypeUri,
+                byte[] rawData
+            )
             {
                 X509Certificate2 certificate;
                 if (!SecurityUtils.TryCreateX509CertificateFromRawData(rawData, out certificate))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.InvalidX509RawData)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MessageSecurityException(SR.GetString(SR.InvalidX509RawData))
+                    );
                 }
                 return new X509SecurityToken(certificate, id, false);
             }
 
-            public override void WriteBinaryCore(SecurityToken token, out string id, out byte[] rawData)
+            public override void WriteBinaryCore(
+                SecurityToken token,
+                out string id,
+                out byte[] rawData
+            )
             {
                 id = token.Id;
                 X509SecurityToken x509Token = token as X509SecurityToken;
@@ -645,9 +1020,7 @@ namespace System.ServiceModel.Security
         {
             static readonly IdManager instance = new IdManager();
 
-            IdManager()
-            {
-            }
+            IdManager() { }
 
             public override string DefaultIdNamespacePrefix
             {
@@ -669,13 +1042,21 @@ namespace System.ServiceModel.Security
                 if (reader == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
 
-                if (reader.IsStartElement(EncryptedData.ElementName, XD.XmlEncryptionDictionary.Namespace))
+                if (
+                    reader.IsStartElement(
+                        EncryptedData.ElementName,
+                        XD.XmlEncryptionDictionary.Namespace
+                    )
+                )
                 {
                     return reader.GetAttribute(XD.XmlEncryptionDictionary.Id, null);
                 }
                 else
                 {
-                    return reader.GetAttribute(XD.UtilityDictionary.IdAttribute, XD.UtilityDictionary.Namespace);
+                    return reader.GetAttribute(
+                        XD.UtilityDictionary.IdAttribute,
+                        XD.UtilityDictionary.Namespace
+                    );
                 }
             }
 
@@ -684,7 +1065,12 @@ namespace System.ServiceModel.Security
                 if (writer == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("writer");
 
-                writer.WriteAttributeString(XD.UtilityDictionary.Prefix.Value, XD.UtilityDictionary.IdAttribute, XD.UtilityDictionary.Namespace, id);
+                writer.WriteAttributeString(
+                    XD.UtilityDictionary.Prefix.Value,
+                    XD.UtilityDictionary.IdAttribute,
+                    XD.UtilityDictionary.Namespace,
+                    id
+                );
             }
         }
     }

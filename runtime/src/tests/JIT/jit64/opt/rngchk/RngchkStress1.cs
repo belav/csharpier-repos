@@ -8,6 +8,7 @@ using Xunit;
 namespace SimpleArray_01
 {
     public delegate void RngTest();
+
     public class Class1
     {
         [Fact]
@@ -52,11 +53,12 @@ namespace SimpleArray_01
             return bResult;
         }
     }
+
     internal class Test
     {
         /********************************************************************************************
-		* Stress Test 1
-		*********************************************************************************************/
+        * Stress Test 1
+        *********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test1()
         {

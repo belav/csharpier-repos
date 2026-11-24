@@ -1,12 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="IServiceObjectContainer.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel.Design {
+namespace System.ComponentModel.Design
+{
     using System;
 
     /// <devdoc>
@@ -15,8 +16,8 @@ namespace System.ComponentModel.Design {
     ///     it also provides a mechanism for adding and removing services.
     /// </devdoc>
     [System.Runtime.InteropServices.ComVisible(true)]
-    public interface IServiceContainer : IServiceProvider {
-
+    public interface IServiceContainer : IServiceProvider
+    {
         /// <devdoc>
         ///     Adds the given service to the service container.
         /// </devdoc>
@@ -46,6 +47,5 @@ namespace System.ComponentModel.Design {
         ///     Removes the given service type from the service container.
         /// </devdoc>
         void RemoveService(Type serviceType, bool promote);
-   }
+    }
 }
-

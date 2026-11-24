@@ -51,107 +51,95 @@ public class Program
             app.VersionOptionFromAssemblyAttributes(typeof(Program).Assembly);
             var verbose = app.VerboseOption();
 
-            app.Command(
-                "create",
-                command =>
+            app.Command("create", command =>
+            {
+                command.Description = "Adds table and indexes to the database.";
+
+                var connectionStringArg = command.Argument(
+                    "[connectionString]",
+                    "The connection string to connect to the database."
+                );
+
+                var schemaNameArg = command.Argument("[schemaName]", "Name of the table schema.");
+
+                var tableNameArg = command.Argument(
+                    "[tableName]",
+                    "Name of the table to be created."
+                );
+
+                command.HelpOption();
+
+                command.OnExecute(() =>
                 {
-                    command.Description = "Adds table and indexes to the database.";
-
-                    var connectionStringArg = command.Argument(
-                        "[connectionString]",
-                        "The connection string to connect to the database."
-                    );
-
-                    var schemaNameArg = command.Argument(
-                        "[schemaName]",
-                        "Name of the table schema."
-                    );
-
-                    var tableNameArg = command.Argument(
-                        "[tableName]",
-                        "Name of the table to be created."
-                    );
-
-                    command.HelpOption();
-
-                    command.OnExecute(() =>
+                    var reporter = CreateReporter(verbose.HasValue());
+                    if (
+                        string.IsNullOrEmpty(connectionStringArg.Value)
+                        || string.IsNullOrEmpty(schemaNameArg.Value)
+                        || string.IsNullOrEmpty(tableNameArg.Value)
+                    )
                     {
-                        var reporter = CreateReporter(verbose.HasValue());
-                        if (
-                            string.IsNullOrEmpty(connectionStringArg.Value)
-                            || string.IsNullOrEmpty(schemaNameArg.Value)
-                            || string.IsNullOrEmpty(tableNameArg.Value)
-                        )
-                        {
-                            reporter.Error("Invalid input");
-                            command.ShowHelp();
-                            return 2;
-                        }
+                        reporter.Error("Invalid input");
+                        command.ShowHelp();
+                        return 2;
+                    }
 
-                        _connectionString = connectionStringArg.Value;
-                        _schemaName = schemaNameArg.Value;
-                        _tableName = tableNameArg.Value;
+                    _connectionString = connectionStringArg.Value;
+                    _schemaName = schemaNameArg.Value;
+                    _tableName = tableNameArg.Value;
 
-                        return CreateTableAndIndexes(reporter);
-                    });
-                }
-            );
+                    return CreateTableAndIndexes(reporter);
+                });
+            });
 
-            app.Command(
-                "script",
-                command =>
+            app.Command("script", command =>
+            {
+                command.Description = "Generates a SQL script for the table and indexes.";
+
+                var schemaNameArg = command.Argument("[schemaName]", "Name of the table schema.");
+
+                var tableNameArg = command.Argument(
+                    "[tableName]",
+                    "Name of the table to be created."
+                );
+
+                var outputOption = command.Option(
+                    "-o|--output",
+                    "The file to write the result to.",
+                    CommandOptionType.SingleValue
+                );
+
+                var idempotentOption = command.Option(
+                    "-i|--idempotent",
+                    "Generates a script that can be used on a database that already has the table.",
+                    CommandOptionType.NoValue
+                );
+
+                command.HelpOption();
+
+                command.OnExecute(() =>
                 {
-                    command.Description = "Generates a SQL script for the table and indexes.";
-
-                    var schemaNameArg = command.Argument(
-                        "[schemaName]",
-                        "Name of the table schema."
-                    );
-
-                    var tableNameArg = command.Argument(
-                        "[tableName]",
-                        "Name of the table to be created."
-                    );
-
-                    var outputOption = command.Option(
-                        "-o|--output",
-                        "The file to write the result to.",
-                        CommandOptionType.SingleValue
-                    );
-
-                    var idempotentOption = command.Option(
-                        "-i|--idempotent",
-                        "Generates a script that can be used on a database that already has the table.",
-                        CommandOptionType.NoValue
-                    );
-
-                    command.HelpOption();
-
-                    command.OnExecute(() =>
+                    var reporter = CreateReporter(verbose.HasValue());
+                    if (
+                        string.IsNullOrEmpty(schemaNameArg.Value)
+                        || string.IsNullOrEmpty(tableNameArg.Value)
+                    )
                     {
-                        var reporter = CreateReporter(verbose.HasValue());
-                        if (
-                            string.IsNullOrEmpty(schemaNameArg.Value)
-                            || string.IsNullOrEmpty(tableNameArg.Value)
-                        )
-                        {
-                            reporter.Error("Invalid input");
-                            command.ShowHelp();
-                            return 2;
-                        }
+                        reporter.Error("Invalid input");
+                        command.ShowHelp();
+                        return 2;
+                    }
 
-                        _schemaName = schemaNameArg.Value;
-                        _tableName = tableNameArg.Value;
-                        _idempotent = idempotentOption.HasValue();
-                        if (outputOption.HasValue())
-                        {
-                            _outputPath = outputOption.Value();
-                        }
+                    _schemaName = schemaNameArg.Value;
+                    _tableName = tableNameArg.Value;
+                    _idempotent = idempotentOption.HasValue();
+                    if (outputOption.HasValue())
+                    {
+                        _outputPath = outputOption.Value();
+                    }
 
-                        return ScriptTableAndIndexes(reporter);
-                    });
-                }
-            );
+                    return ScriptTableAndIndexes(reporter);
+                });
+            });
 
             // Show help information if no subcommand/option was specified.
             app.OnExecute(() =>

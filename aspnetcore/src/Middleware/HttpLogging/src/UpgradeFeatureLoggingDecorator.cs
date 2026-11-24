@@ -24,8 +24,8 @@ internal sealed class UpgradeFeatureLoggingDecorator : IHttpUpgradeFeature
         ILogger logger
     )
     {
-        _innerUpgradeFeature =
-            innerUpgradeFeature ?? throw new ArgumentNullException(nameof(innerUpgradeFeature));
+        _innerUpgradeFeature = innerUpgradeFeature
+            ?? throw new ArgumentNullException(nameof(innerUpgradeFeature));
         _logContext = logContext ?? throw new ArgumentNullException(nameof(logContext));
         _options = options ?? throw new ArgumentNullException(nameof(options));
         _interceptors = interceptors;

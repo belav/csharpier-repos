@@ -4,9 +4,9 @@
 namespace System.ServiceModel
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Configuration;
     using System.Globalization;
     using System.Net;
@@ -16,13 +16,13 @@ namespace System.ServiceModel
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Security;
-
+    using System.Text;
     using System.Xml;
-    using System.ComponentModel;
 
     public class WSFederationHttpBinding : WSHttpBindingBase
     {
-        static readonly MessageSecurityVersion WSMessageSecurityVersion = MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10;
+        static readonly MessageSecurityVersion WSMessageSecurityVersion =
+            MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10;
 
         Uri privacyNoticeAt;
         int privacyNoticeVersion;
@@ -35,23 +35,25 @@ namespace System.ServiceModel
         }
 
         public WSFederationHttpBinding()
-            : base()
-        {
-        }
+            : base() { }
 
         public WSFederationHttpBinding(WSFederationHttpSecurityMode securityMode)
-            : this(securityMode, false)
-        {
-        }
+            : this(securityMode, false) { }
 
-        public WSFederationHttpBinding(WSFederationHttpSecurityMode securityMode, bool reliableSessionEnabled)
+        public WSFederationHttpBinding(
+            WSFederationHttpSecurityMode securityMode,
+            bool reliableSessionEnabled
+        )
             : base(reliableSessionEnabled)
         {
             security.Mode = securityMode;
         }
 
-
-        internal WSFederationHttpBinding(WSFederationHttpSecurity security, PrivacyNoticeBindingElement privacy, bool reliableSessionEnabled)
+        internal WSFederationHttpBinding(
+            WSFederationHttpSecurity security,
+            PrivacyNoticeBindingElement privacy,
+            bool reliableSessionEnabled
+        )
             : base(reliableSessionEnabled)
         {
             this.security = security;
@@ -89,14 +91,20 @@ namespace System.ServiceModel
 
         void ApplyConfiguration(string configurationName)
         {
-            WSFederationHttpBindingCollectionElement section = WSFederationHttpBindingCollectionElement.GetBindingCollectionElement();
+            WSFederationHttpBindingCollectionElement section =
+                WSFederationHttpBindingCollectionElement.GetBindingCollectionElement();
             WSFederationHttpBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                    SR.GetString(SR.ConfigInvalidBindingConfigurationName,
-                                 configurationName,
-                                 ConfigurationStrings.WSFederationHttpBindingCollectionElementName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigInvalidBindingConfigurationName,
+                            configurationName,
+                            ConfigurationStrings.WSFederationHttpBindingCollectionElementName
+                        )
+                    )
+                );
             }
             else
             {
@@ -119,7 +127,14 @@ namespace System.ServiceModel
         }
 
         // if you make changes here, see also WS2007FederationHttpBinding.TryCreate()
-        internal static bool TryCreate(SecurityBindingElement sbe, TransportBindingElement transport, PrivacyNoticeBindingElement privacy, ReliableSessionBindingElement rsbe, TransactionFlowBindingElement tfbe, out Binding binding)
+        internal static bool TryCreate(
+            SecurityBindingElement sbe,
+            TransportBindingElement transport,
+            PrivacyNoticeBindingElement privacy,
+            ReliableSessionBindingElement rsbe,
+            TransactionFlowBindingElement tfbe,
+            out Binding binding
+        )
         {
             bool isReliableSession = (rsbe != null);
             binding = null;
@@ -135,7 +150,10 @@ namespace System.ServiceModel
             HttpsTransportBindingElement httpsBinding = transport as HttpsTransportBindingElement;
             if (httpsBinding != null && httpsBinding.MessageSecurityVersion != null)
             {
-                if (httpsBinding.MessageSecurityVersion.SecurityPolicyVersion != WSMessageSecurityVersion.SecurityPolicyVersion)
+                if (
+                    httpsBinding.MessageSecurityVersion.SecurityPolicyVersion
+                    != WSMessageSecurityVersion.SecurityPolicyVersion
+                )
                 {
                     return false;
                 }
@@ -147,12 +165,19 @@ namespace System.ServiceModel
                 binding = new WSFederationHttpBinding(security, privacy, isReliableSession);
             }
 
-            if (rsbe != null && rsbe.ReliableMessagingVersion != ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+            if (
+                rsbe != null
+                && rsbe.ReliableMessagingVersion
+                    != ReliableMessagingVersion.WSReliableMessagingFebruary2005
+            )
             {
                 return false;
             }
 
-            if (tfbe != null && tfbe.TransactionProtocol != TransactionProtocol.WSAtomicTransactionOctober2004)
+            if (
+                tfbe != null
+                && tfbe.TransactionProtocol != TransactionProtocol.WSAtomicTransactionOctober2004
+            )
             {
                 return false;
             }
@@ -162,7 +187,10 @@ namespace System.ServiceModel
 
         protected override TransportBindingElement GetTransport()
         {
-            if (security.Mode == WSFederationHttpSecurityMode.None || security.Mode == WSFederationHttpSecurityMode.Message)
+            if (
+                security.Mode == WSFederationHttpSecurityMode.None
+                || security.Mode == WSFederationHttpSecurityMode.Message
+            )
             {
                 return this.HttpTransport;
             }
@@ -172,9 +200,16 @@ namespace System.ServiceModel
             }
         }
 
-        internal static bool GetSecurityModeFromTransport(TransportBindingElement transport, HttpTransportSecurity transportSecurity, out WSFederationHttpSecurityMode mode)
+        internal static bool GetSecurityModeFromTransport(
+            TransportBindingElement transport,
+            HttpTransportSecurity transportSecurity,
+            out WSFederationHttpSecurityMode mode
+        )
         {
-            mode = WSFederationHttpSecurityMode.None | WSFederationHttpSecurityMode.Message | WSFederationHttpSecurityMode.TransportWithMessageCredential;
+            mode =
+                WSFederationHttpSecurityMode.None
+                | WSFederationHttpSecurityMode.Message
+                | WSFederationHttpSecurityMode.TransportWithMessageCredential;
             if (transport is HttpsTransportBindingElement)
             {
                 mode = WSFederationHttpSecurityMode.TransportWithMessageCredential;
@@ -192,21 +227,41 @@ namespace System.ServiceModel
 
         protected override SecurityBindingElement CreateMessageSecurity()
         {
-            return security.CreateMessageSecurity(this.ReliableSession.Enabled, WSMessageSecurityVersion);
+            return security.CreateMessageSecurity(
+                this.ReliableSession.Enabled,
+                WSMessageSecurityVersion
+            );
         }
 
         // if you make changes here, see also WS2007FederationHttpBinding.TryCreateSecurity()
-        static bool TryCreateSecurity(SecurityBindingElement sbe, WSFederationHttpSecurityMode mode, HttpTransportSecurity transportSecurity, bool isReliableSession, out WSFederationHttpSecurity security)
+        static bool TryCreateSecurity(
+            SecurityBindingElement sbe,
+            WSFederationHttpSecurityMode mode,
+            HttpTransportSecurity transportSecurity,
+            bool isReliableSession,
+            out WSFederationHttpSecurity security
+        )
         {
-            if (!WSFederationHttpSecurity.TryCreate(sbe, mode, transportSecurity, isReliableSession, WSMessageSecurityVersion, out security))
+            if (
+                !WSFederationHttpSecurity.TryCreate(
+                    sbe,
+                    mode,
+                    transportSecurity,
+                    isReliableSession,
+                    WSMessageSecurityVersion,
+                    out security
+                )
+            )
                 return false;
             // the last check: make sure that security binding element match the incoming security
-            return SecurityElement.AreBindingsMatching(security.CreateMessageSecurity(isReliableSession, WSMessageSecurityVersion), sbe);
+            return SecurityElement.AreBindingsMatching(
+                security.CreateMessageSecurity(isReliableSession, WSMessageSecurityVersion),
+                sbe
+            );
         }
 
         public override BindingElementCollection CreateBindingElements()
-        {   // return collection of BindingElements
-
+        { // return collection of BindingElements
             BindingElementCollection bindingElements = base.CreateBindingElements();
             // order of BindingElements is important
 

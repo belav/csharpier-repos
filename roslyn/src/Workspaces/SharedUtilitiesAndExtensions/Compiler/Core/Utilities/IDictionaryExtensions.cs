@@ -13,7 +13,11 @@ namespace Roslyn.Utilities
     internal static class IDictionaryExtensions
     {
         // Copied from ConcurrentDictionary since IDictionary doesn't have this useful method
-        public static V GetOrAdd<K, V>(this IDictionary<K, V> dictionary, K key, Func<K, V> function)
+        public static V GetOrAdd<K, V>(
+            this IDictionary<K, V> dictionary,
+            K key,
+            Func<K, V> function
+        )
             where K : notnull
         {
             if (!dictionary.TryGetValue(key, out var value))
@@ -25,7 +29,12 @@ namespace Roslyn.Utilities
             return value;
         }
 
-        public static V GetOrAdd<K, V, TArg>(this IDictionary<K, V> dictionary, K key, Func<K, TArg, V> function, TArg arg)
+        public static V GetOrAdd<K, V, TArg>(
+            this IDictionary<K, V> dictionary,
+            K key,
+            Func<K, TArg, V> function,
+            TArg arg
+        )
             where K : notnull
         {
             if (!dictionary.TryGetValue(key, out var value))
@@ -37,7 +46,10 @@ namespace Roslyn.Utilities
             return value;
         }
 
-        public static TValue? GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
+        public static TValue? GetValueOrDefault<TKey, TValue>(
+            this IDictionary<TKey, TValue> dictionary,
+            TKey key
+        )
             where TKey : notnull
         {
             if (dictionary.TryGetValue(key, out var value))
@@ -49,7 +61,11 @@ namespace Roslyn.Utilities
         }
 
         [return: NotNullIfNotNull(nameof(defaultValue))]
-        public static TValue? GetValueOrDefault<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key, TValue? defaultValue)
+        public static TValue? GetValueOrDefault<TKey, TValue>(
+            this Dictionary<TKey, TValue> dictionary,
+            TKey key,
+            TValue? defaultValue
+        )
             where TKey : notnull
         {
             if (dictionary.TryGetValue(key, out var value))
@@ -60,7 +76,11 @@ namespace Roslyn.Utilities
             return defaultValue;
         }
 
-        public static void MultiAdd<TKey, TValue, TCollection>(this IDictionary<TKey, TCollection> dictionary, TKey key, TValue value)
+        public static void MultiAdd<TKey, TValue, TCollection>(
+            this IDictionary<TKey, TCollection> dictionary,
+            TKey key,
+            TValue value
+        )
             where TKey : notnull
             where TCollection : ICollection<TValue>, new()
         {
@@ -73,7 +93,11 @@ namespace Roslyn.Utilities
             collection.Add(value);
         }
 
-        public static void MultiAdd<TKey, TValue>(this IDictionary<TKey, ArrayBuilder<TValue>> dictionary, TKey key, TValue value)
+        public static void MultiAdd<TKey, TValue>(
+            this IDictionary<TKey, ArrayBuilder<TValue>> dictionary,
+            TKey key,
+            TValue value
+        )
             where TKey : notnull
         {
             if (!dictionary.TryGetValue(key, out var builder))
@@ -85,7 +109,11 @@ namespace Roslyn.Utilities
             builder.Add(value);
         }
 
-        public static void MultiAddRange<TKey, TValue>(this IDictionary<TKey, ArrayBuilder<TValue>> dictionary, TKey key, IEnumerable<TValue> values)
+        public static void MultiAddRange<TKey, TValue>(
+            this IDictionary<TKey, ArrayBuilder<TValue>> dictionary,
+            TKey key,
+            IEnumerable<TValue> values
+        )
             where TKey : notnull
         {
             if (!dictionary.TryGetValue(key, out var builder))
@@ -97,7 +125,12 @@ namespace Roslyn.Utilities
             builder.AddRange(values);
         }
 
-        public static bool MultiAdd<TKey, TValue>(this IDictionary<TKey, ImmutableHashSet<TValue>> dictionary, TKey key, TValue value, IEqualityComparer<TValue>? comparer = null)
+        public static bool MultiAdd<TKey, TValue>(
+            this IDictionary<TKey, ImmutableHashSet<TValue>> dictionary,
+            TKey key,
+            TValue value,
+            IEqualityComparer<TValue>? comparer = null
+        )
             where TKey : notnull
         {
             if (dictionary.TryGetValue(key, out var set))
@@ -116,7 +149,11 @@ namespace Roslyn.Utilities
             }
         }
 
-        public static void MultiAdd<TKey, TValue>(this IDictionary<TKey, ImmutableArray<TValue>> dictionary, TKey key, TValue value)
+        public static void MultiAdd<TKey, TValue>(
+            this IDictionary<TKey, ImmutableArray<TValue>> dictionary,
+            TKey key,
+            TValue value
+        )
             where TKey : notnull
             where TValue : IEquatable<TValue>
         {
@@ -128,7 +165,12 @@ namespace Roslyn.Utilities
             dictionary[key] = existingArray.Add(value);
         }
 
-        public static void MultiAdd<TKey, TValue>(this IDictionary<TKey, ImmutableArray<TValue>> dictionary, TKey key, TValue value, ImmutableArray<TValue> defaultArray)
+        public static void MultiAdd<TKey, TValue>(
+            this IDictionary<TKey, ImmutableArray<TValue>> dictionary,
+            TKey key,
+            TValue value,
+            ImmutableArray<TValue> defaultArray
+        )
             where TKey : notnull
             where TValue : IEquatable<TValue>
         {
@@ -137,10 +179,17 @@ namespace Roslyn.Utilities
                 existingArray = ImmutableArray<TValue>.Empty;
             }
 
-            dictionary[key] = existingArray.IsEmpty && value.Equals(defaultArray[0]) ? defaultArray : existingArray.Add(value);
+            dictionary[key] =
+                existingArray.IsEmpty && value.Equals(defaultArray[0])
+                    ? defaultArray
+                    : existingArray.Add(value);
         }
 
-        public static void MultiRemove<TKey, TValue, TCollection>(this IDictionary<TKey, TCollection> dictionary, TKey key, TValue value)
+        public static void MultiRemove<TKey, TValue, TCollection>(
+            this IDictionary<TKey, TCollection> dictionary,
+            TKey key,
+            TValue value
+        )
             where TKey : notnull
             where TCollection : ICollection<TValue>
         {
@@ -155,7 +204,11 @@ namespace Roslyn.Utilities
             }
         }
 
-        public static ImmutableDictionary<TKey, ImmutableHashSet<TValue>> MultiRemove<TKey, TValue>(this ImmutableDictionary<TKey, ImmutableHashSet<TValue>> dictionary, TKey key, TValue value)
+        public static ImmutableDictionary<TKey, ImmutableHashSet<TValue>> MultiRemove<TKey, TValue>(
+            this ImmutableDictionary<TKey, ImmutableHashSet<TValue>> dictionary,
+            TKey key,
+            TValue value
+        )
             where TKey : notnull
         {
             if (dictionary.TryGetValue(key, out var collection))
@@ -179,7 +232,11 @@ namespace Roslyn.Utilities
         /// This must be a different name as overloads are not resolved based on constraints
         /// and would conflict with <see cref="MultiRemove{TKey, TValue, TCollection}(IDictionary{TKey, TCollection}, TKey, TValue)"/>
         /// </summary>
-        private static void MultiRemoveSet<TKey, TValue, TSet>(this IDictionary<TKey, TSet> dictionary, TKey key, TValue value)
+        private static void MultiRemoveSet<TKey, TValue, TSet>(
+            this IDictionary<TKey, TSet> dictionary,
+            TKey key,
+            TValue value
+        )
             where TKey : notnull
             where TSet : IImmutableSet<TValue>
         {
@@ -197,19 +254,31 @@ namespace Roslyn.Utilities
             }
         }
 
-        public static void MultiRemove<TKey, TValue>(this IDictionary<TKey, ImmutableHashSet<TValue>> dictionary, TKey key, TValue value)
+        public static void MultiRemove<TKey, TValue>(
+            this IDictionary<TKey, ImmutableHashSet<TValue>> dictionary,
+            TKey key,
+            TValue value
+        )
             where TKey : notnull
         {
             MultiRemoveSet(dictionary, key, value);
         }
 
-        public static void MultiRemove<TKey, TValue>(this IDictionary<TKey, ImmutableSortedSet<TValue>> dictionary, TKey key, TValue value)
+        public static void MultiRemove<TKey, TValue>(
+            this IDictionary<TKey, ImmutableSortedSet<TValue>> dictionary,
+            TKey key,
+            TValue value
+        )
             where TKey : notnull
         {
             MultiRemoveSet(dictionary, key, value);
         }
 
-        public static void MultiRemove<TKey, TValue>(this IDictionary<TKey, ImmutableArray<TValue>> dictionary, TKey key, TValue value)
+        public static void MultiRemove<TKey, TValue>(
+            this IDictionary<TKey, ImmutableArray<TValue>> dictionary,
+            TKey key,
+            TValue value
+        )
             where TKey : notnull
         {
             if (dictionary.TryGetValue(key, out var collection))

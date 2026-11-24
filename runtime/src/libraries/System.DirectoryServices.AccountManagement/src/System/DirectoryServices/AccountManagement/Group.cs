@@ -22,7 +22,8 @@ namespace System.DirectoryServices.AccountManagement
             this.unpersisted = true;
         }
 
-        public GroupPrincipal(PrincipalContext context, string samAccountName) : this(context)
+        public GroupPrincipal(PrincipalContext context, string samAccountName)
+            : this(context)
         {
             if (samAccountName == null)
                 throw new ArgumentException(SR.NullArguments);
@@ -38,8 +39,8 @@ namespace System.DirectoryServices.AccountManagement
         //
 
         // IsSecurityGroup property
-        private bool _isSecurityGroup;          // the actual property value
-        private LoadState _isSecurityGroupChanged = LoadState.NotSet;   // change-tracking
+        private bool _isSecurityGroup; // the actual property value
+        private LoadState _isSecurityGroupChanged = LoadState.NotSet; // change-tracking
 
         public Nullable<bool> IsSecurityGroup
         {
@@ -57,17 +58,21 @@ namespace System.DirectoryServices.AccountManagement
                 if (this.unpersisted && (_isSecurityGroupChanged != LoadState.Changed))
                 {
                     GlobalDebug.WriteLineIf(
-                                    GlobalDebug.Info,
-                                    "Group",
-                                    "Enabled: returning null, unpersisted={0}, enabledChanged={1}",
-                                    this.unpersisted,
-                                    _isSecurityGroupChanged);
+                        GlobalDebug.Info,
+                        "Group",
+                        "Enabled: returning null, unpersisted={0}, enabledChanged={1}",
+                        this.unpersisted,
+                        _isSecurityGroupChanged
+                    );
                     return null;
                 }
 
-                return HandleGet<bool>(ref _isSecurityGroup, PropertyNames.GroupIsSecurityGroup, ref _isSecurityGroupChanged);
+                return HandleGet<bool>(
+                    ref _isSecurityGroup,
+                    PropertyNames.GroupIsSecurityGroup,
+                    ref _isSecurityGroupChanged
+                );
             }
-
             set
             {
                 // Make sure we're not disposed or deleted.  Although HandleGet/HandleSet will check this,
@@ -78,13 +83,22 @@ namespace System.DirectoryServices.AccountManagement
                 if (!value.HasValue)
                     throw new ArgumentNullException(nameof(value));
 
-                HandleSet<bool>(ref _isSecurityGroup, value.Value, ref _isSecurityGroupChanged, PropertyNames.GroupIsSecurityGroup);
+                HandleSet<bool>(
+                    ref _isSecurityGroup,
+                    value.Value,
+                    ref _isSecurityGroupChanged,
+                    PropertyNames.GroupIsSecurityGroup
+                );
             }
         }
 
         // GroupScope property
-        private GroupScope _groupScope = System.DirectoryServices.AccountManagement.GroupScope.Local;      // the actual property value
-        private LoadState _groupScopeChanged = LoadState.NotSet;              // change-tracking
+        private GroupScope _groupScope = System
+            .DirectoryServices
+            .AccountManagement
+            .GroupScope
+            .Local; // the actual property value
+        private LoadState _groupScopeChanged = LoadState.NotSet; // change-tracking
 
         public Nullable<GroupScope> GroupScope
         {
@@ -102,18 +116,22 @@ namespace System.DirectoryServices.AccountManagement
                 if (this.unpersisted && (_groupScopeChanged != LoadState.Changed))
                 {
                     GlobalDebug.WriteLineIf(
-                                    GlobalDebug.Info,
-                                    "Group",
-                                    "GroupScope: returning null, unpersisted={0}, groupScopeChanged={1}",
-                                    this.unpersisted,
-                                    _groupScopeChanged);
+                        GlobalDebug.Info,
+                        "Group",
+                        "GroupScope: returning null, unpersisted={0}, groupScopeChanged={1}",
+                        this.unpersisted,
+                        _groupScopeChanged
+                    );
 
                     return null;
                 }
 
-                return HandleGet<GroupScope>(ref _groupScope, PropertyNames.GroupGroupScope, ref _groupScopeChanged);
+                return HandleGet<GroupScope>(
+                    ref _groupScope,
+                    PropertyNames.GroupGroupScope,
+                    ref _groupScopeChanged
+                );
             }
-
             set
             {
                 // Make sure we're not disposed or deleted.  Although HandleGet/HandleSet will check this,
@@ -124,7 +142,12 @@ namespace System.DirectoryServices.AccountManagement
                 if (!value.HasValue)
                     throw new ArgumentNullException(nameof(value));
 
-                HandleSet<GroupScope>(ref _groupScope, value.Value, ref _groupScopeChanged, PropertyNames.GroupGroupScope);
+                HandleSet<GroupScope>(
+                    ref _groupScope,
+                    value.Value,
+                    ref _groupScopeChanged,
+                    PropertyNames.GroupGroupScope
+                );
             }
         }
 
@@ -146,22 +169,37 @@ namespace System.DirectoryServices.AccountManagement
 
                 if (_members == null)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "Group", "Members: creating fresh PrincipalCollection");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "Group",
+                        "Members: creating fresh PrincipalCollection"
+                    );
 
                     if (!this.unpersisted)
                     {
                         // Retrieve the members from the store.
                         // QueryCtx because when this group was retrieved, it was
                         // assigned a _specific_ context for its store
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "Group", "Members: persisted, querying group membership");
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "Group",
+                            "Members: persisted, querying group membership"
+                        );
 
-                        BookmarkableResultSet refs = ContextRaw.QueryCtx.GetGroupMembership(this, false);
+                        BookmarkableResultSet refs = ContextRaw.QueryCtx.GetGroupMembership(
+                            this,
+                            false
+                        );
                         _members = new PrincipalCollection(refs, this);
                     }
                     else
                     {
                         // unpersisted means there's no values to retrieve from the store
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "Group", "Members: unpersisted, creating empty PrincipalCollection");
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "Group",
+                            "Members: unpersisted, creating empty PrincipalCollection"
+                        );
                         _members = new PrincipalCollection(new EmptySet(), this);
                     }
                 }
@@ -173,14 +211,30 @@ namespace System.DirectoryServices.AccountManagement
         //
         // Public methods
         //
-        public static new GroupPrincipal FindByIdentity(PrincipalContext context, string identityValue)
+        public static new GroupPrincipal FindByIdentity(
+            PrincipalContext context,
+            string identityValue
+        )
         {
-            return (GroupPrincipal)FindByIdentityWithType(context, typeof(GroupPrincipal), identityValue);
+            return (GroupPrincipal)FindByIdentityWithType(
+                context,
+                typeof(GroupPrincipal),
+                identityValue
+            );
         }
 
-        public static new GroupPrincipal FindByIdentity(PrincipalContext context, IdentityType identityType, string identityValue)
+        public static new GroupPrincipal FindByIdentity(
+            PrincipalContext context,
+            IdentityType identityType,
+            string identityValue
+        )
         {
-            return (GroupPrincipal)FindByIdentityWithType(context, typeof(GroupPrincipal), identityType, identityValue);
+            return (GroupPrincipal)FindByIdentityWithType(
+                context,
+                typeof(GroupPrincipal),
+                identityType,
+                identityValue
+            );
         }
 
         public PrincipalSearchResult<Principal> GetMembers()
@@ -198,14 +252,25 @@ namespace System.DirectoryServices.AccountManagement
                 // Retrieve the members from the store.
                 // QueryCtx because when this group was retrieved, it was
                 // assigned a _specific_ context for its store
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "Group", "GetMembers: persisted, querying for members (recursive={0}", recursive);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "Group",
+                    "GetMembers: persisted, querying for members (recursive={0}",
+                    recursive
+                );
 
-                return new PrincipalSearchResult<Principal>(ContextRaw.QueryCtx.GetGroupMembership(this, recursive));
+                return new PrincipalSearchResult<Principal>(
+                    ContextRaw.QueryCtx.GetGroupMembership(this, recursive)
+                );
             }
             else
             {
                 // unpersisted means there's no values to retrieve from the store
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "Group", "GetMembers: unpersisted, creating empty PrincipalSearchResult");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "Group",
+                    "GetMembers: unpersisted, creating empty PrincipalSearchResult"
+                );
 
                 return new PrincipalSearchResult<Principal>(null);
             }
@@ -254,7 +319,14 @@ namespace System.DirectoryServices.AccountManagement
 
         internal override void LoadValueIntoProperty(string propertyName, object value)
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "Group", "LoadValueIntoProperty: name=" + propertyName + " value=" + (value != null ? value.ToString() : "null"));
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "Group",
+                "LoadValueIntoProperty: name="
+                    + propertyName
+                    + " value="
+                    + (value != null ? value.ToString() : "null")
+            );
 
             switch (propertyName)
             {
@@ -269,7 +341,9 @@ namespace System.DirectoryServices.AccountManagement
                     break;
 
                 case PropertyNames.GroupMembers:
-                    Debug.Fail("Group.LoadValueIntoProperty: Trying to load Members, but Members is demand-loaded.");
+                    Debug.Fail(
+                        "Group.LoadValueIntoProperty: Trying to load Members, but Members is demand-loaded."
+                    );
                     break;
 
                 default:
@@ -285,7 +359,11 @@ namespace System.DirectoryServices.AccountManagement
         // Given a property name, returns true if that property has changed since it was loaded, false otherwise.
         internal override bool GetChangeStatusForProperty(string propertyName)
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "Group", "GetChangeStatusForProperty: name=" + propertyName);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "Group",
+                "GetChangeStatusForProperty: name=" + propertyName
+            );
 
             switch (propertyName)
             {
@@ -301,7 +379,11 @@ namespace System.DirectoryServices.AccountManagement
                         return _members.Changed;
                     else
                     {
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "Group", "GetChangeStatusForProperty: members was never loaded");
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "Group",
+                            "GetChangeStatusForProperty: members was never loaded"
+                        );
                         return false;
                     }
 
@@ -313,7 +395,11 @@ namespace System.DirectoryServices.AccountManagement
         // Given a property name, returns the current value for the property.
         internal override object GetValueForProperty(string propertyName)
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "Group", "GetValueForProperty: name=" + propertyName);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "Group",
+                "GetValueForProperty: name=" + propertyName
+            );
 
             return propertyName switch
             {
@@ -329,8 +415,12 @@ namespace System.DirectoryServices.AccountManagement
         {
             GlobalDebug.WriteLineIf(GlobalDebug.Info, "Group", "ResetAllChangeStatus");
 
-            _groupScopeChanged = (_groupScopeChanged == LoadState.Changed) ? LoadState.Loaded : LoadState.NotSet;
-            _isSecurityGroupChanged = (_isSecurityGroupChanged == LoadState.Changed) ? LoadState.Loaded : LoadState.NotSet;
+            _groupScopeChanged =
+                (_groupScopeChanged == LoadState.Changed) ? LoadState.Loaded : LoadState.NotSet;
+            _isSecurityGroupChanged =
+                (_isSecurityGroupChanged == LoadState.Changed)
+                    ? LoadState.Loaded
+                    : LoadState.NotSet;
 
             _members?.ResetTracking();
 
@@ -368,7 +458,14 @@ namespace System.DirectoryServices.AccountManagement
             Debug.Assert(de != null);
             if (de != null)
             {
-                using (DirectorySearcher ds = new DirectorySearcher(de, "(objectClass=*)", s_member, SearchScope.Base))
+                using (
+                    DirectorySearcher ds = new DirectorySearcher(
+                        de,
+                        "(objectClass=*)",
+                        s_member,
+                        SearchScope.Base
+                    )
+                )
                 {
                     SearchResult sr = ds.FindOne();
                     if (sr != null)
@@ -376,7 +473,12 @@ namespace System.DirectoryServices.AccountManagement
                         bool rangePropertyFound = false;
                         foreach (string propName in sr.Properties.PropertyNames)
                         {
-                            if (propName.StartsWith("member;range=", StringComparison.OrdinalIgnoreCase))
+                            if (
+                                propName.StartsWith(
+                                    "member;range=",
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            )
                             {
                                 rangePropertyFound = true;
                                 break;

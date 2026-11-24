@@ -7,14 +7,12 @@ using System.Runtime.InteropServices;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
-
 using Xunit;
 using Xunit.Abstractions;
 
 namespace System.Net.Http.Functional.Tests
 {
     using Configuration = System.Net.Test.Common.Configuration;
-
 #if WINHTTPHANDLER_TEST
     using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
 #endif
@@ -22,21 +20,29 @@ namespace System.Net.Http.Functional.Tests
     public abstract class HttpClientEKUTest : HttpClientHandlerTestBase
     {
         private static bool CanTestCertificates =>
-            Capability.IsTrustedRootCertificateInstalled() && Capability.AreHostsFileNamesInstalled();
+            Capability.IsTrustedRootCertificateInstalled()
+            && Capability.AreHostsFileNamesInstalled();
 
         public const int TestTimeoutMilliseconds = 15 * 1000;
 
-        public static X509Certificate2 serverCertificateServerEku = Configuration.Certificates.GetServerCertificate();
-        public static X509Certificate2 serverCertificateNoEku = Configuration.Certificates.GetNoEKUCertificate();
-        public static X509Certificate2 serverCertificateWrongEku = Configuration.Certificates.GetClientCertificate();
+        public static X509Certificate2 serverCertificateServerEku =
+            Configuration.Certificates.GetServerCertificate();
+        public static X509Certificate2 serverCertificateNoEku =
+            Configuration.Certificates.GetNoEKUCertificate();
+        public static X509Certificate2 serverCertificateWrongEku =
+            Configuration.Certificates.GetClientCertificate();
 
-        public static X509Certificate2 clientCertificateWrongEku = Configuration.Certificates.GetServerCertificate();
-        public static X509Certificate2 clientCertificateNoEku = Configuration.Certificates.GetNoEKUCertificate();
-        public static X509Certificate2 clientCertificateClientEku = Configuration.Certificates.GetClientCertificate();
+        public static X509Certificate2 clientCertificateWrongEku =
+            Configuration.Certificates.GetServerCertificate();
+        public static X509Certificate2 clientCertificateNoEku =
+            Configuration.Certificates.GetNoEKUCertificate();
+        public static X509Certificate2 clientCertificateClientEku =
+            Configuration.Certificates.GetClientCertificate();
 
         private VerboseTestLogging _log = VerboseTestLogging.GetInstance();
 
-        public HttpClientEKUTest(ITestOutputHelper output) : base(output) { }
+        public HttpClientEKUTest(ITestOutputHelper output)
+            : base(output) { }
 
         [ConditionalFact(nameof(CanTestCertificates))]
         public async Task HttpClient_NoEKUServerAuth_Ok()
@@ -133,24 +139,39 @@ namespace System.Net.Http.Functional.Tests
             }
         }
 
-        private string GetUriStringAndConfigureHandler(HttpsTestServer.Options options, HttpsTestServer server, HttpClientHandler handler)
+        private string GetUriStringAndConfigureHandler(
+            HttpsTestServer.Options options,
+            HttpsTestServer server,
+            HttpClientHandler handler
+        )
         {
             if (Capability.AreHostsFileNamesInstalled())
             {
-                string hostName =
-                    (new UriBuilder("https", options.ServerCertificate.GetNameInfo(X509NameType.SimpleName, false), server.Port)).ToString();
+                string hostName = (
+                    new UriBuilder(
+                        "https",
+                        options.ServerCertificate.GetNameInfo(X509NameType.SimpleName, false),
+                        server.Port
+                    )
+                ).ToString();
 
                 Console.WriteLine("[E2E testing] - Using hostname {0}", hostName);
                 return hostName;
             }
             else
             {
-                handler.ServerCertificateCustomValidationCallback = AllowRemoteCertificateNameMismatch;
+                handler.ServerCertificateCustomValidationCallback =
+                    AllowRemoteCertificateNameMismatch;
                 return "https://localhost:" + server.Port.ToString();
             }
         }
 
-        private bool AllowRemoteCertificateNameMismatch(HttpRequestMessage httpMessage, X509Certificate2 certificate, X509Chain chain, SslPolicyErrors errors)
+        private bool AllowRemoteCertificateNameMismatch(
+            HttpRequestMessage httpMessage,
+            X509Certificate2 certificate,
+            X509Chain chain,
+            SslPolicyErrors errors
+        )
         {
             if (errors == SslPolicyErrors.RemoteCertificateNameMismatch)
             {

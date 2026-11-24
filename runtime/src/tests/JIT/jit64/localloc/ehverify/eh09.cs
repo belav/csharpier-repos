@@ -12,6 +12,7 @@ using Xunit;
 public class LocallocTest
 {
     private static int s_locallocSize = 0;
+
     [Fact]
     public static unsafe int TestEntryPoint()
     {
@@ -22,13 +23,13 @@ public class LocallocTest
         Int32* intArray2 = stackalloc Int32[1];
         s_locallocSize = 1;
 #elif LOCALLOC_LARGE
-		Int32* intArray1 = stackalloc Int32[0x1000];
-		Int32* intArray2 = stackalloc Int32[0x1000];
-		locallocSize = 0x1000;
+        Int32* intArray1 = stackalloc Int32[0x1000];
+        Int32* intArray2 = stackalloc Int32[0x1000];
+        locallocSize = 0x1000;
 #else
-		Int32* intArray1 = stackalloc Int32[Global.stackAllocSize];
-		Int32* intArray2 = stackalloc Int32[Global.stackAllocSize];
-		locallocSize = Global.stackAllocSize;
+        Int32* intArray1 = stackalloc Int32[Global.stackAllocSize];
+        Int32* intArray2 = stackalloc Int32[Global.stackAllocSize];
+        locallocSize = Global.stackAllocSize;
 #endif
         try
         {
@@ -54,7 +55,6 @@ public class LocallocTest
                 }
             }
         }
-
 
         if (!Global.verifyStack("intArray1", intArray1, s_locallocSize, 1000))
         {

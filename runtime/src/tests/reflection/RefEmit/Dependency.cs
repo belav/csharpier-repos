@@ -5,6 +5,4 @@ using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("EmittingIgnoresAccessChecksToAttributeIsRespected")]
 
-internal class BaseClass2
-{
-}
+internal class BaseClass2 { }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,86 +27,77 @@
 //
 
 using System;
-using System.Threading;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Threading;
 using NUnit.Framework;
 
-namespace MonoTests.System.Reflection {
-
-	/// <summary>
-	/// Summary description for AssemblyCompanyAttributeTest.
-	/// </summary>
-	[TestFixture]
-	public class AssemblyCompanyAttributeTest
-	{
+namespace MonoTests.System.Reflection
+{
+    /// <summary>
+    /// Summary description for AssemblyCompanyAttributeTest.
+    /// </summary>
+    [TestFixture]
+    public class AssemblyCompanyAttributeTest
+    {
 #if !MOBILE
-		private AssemblyBuilder dynAssembly;
-		AssemblyName dynAsmName = new AssemblyName ();
-		AssemblyCompanyAttribute attr;
-		
-		public AssemblyCompanyAttributeTest ()
-		{
-			//create a dynamic assembly with the required attribute
-			//and check for the validity
+        private AssemblyBuilder dynAssembly;
+        AssemblyName dynAsmName = new AssemblyName();
+        AssemblyCompanyAttribute attr;
 
-			dynAsmName.Name = "TestAssembly";
+        public AssemblyCompanyAttributeTest()
+        {
+            //create a dynamic assembly with the required attribute
+            //and check for the validity
 
-			dynAssembly = Thread.GetDomain ().DefineDynamicAssembly (
-				dynAsmName,AssemblyBuilderAccess.Run
-				);
+            dynAsmName.Name = "TestAssembly";
 
-			// Set the required Attribute of the assembly.
-			Type attribute = typeof (AssemblyCompanyAttribute);
-			ConstructorInfo ctrInfo = attribute.GetConstructor (
-				new Type [] { typeof (string) }
-				);
-			CustomAttributeBuilder attrBuilder =
-				new CustomAttributeBuilder (ctrInfo, new object [1] { "Xamarin" });
-			dynAssembly.SetCustomAttribute (attrBuilder);
-			object [] attributes = dynAssembly.GetCustomAttributes (true);
-			attr = attributes [0] as AssemblyCompanyAttribute;
-		}
+            dynAssembly = Thread
+                .GetDomain()
+                .DefineDynamicAssembly(dynAsmName, AssemblyBuilderAccess.Run);
 
-		[Test]
-		public void CompanyTest ()
-		{
-			Assert.AreEqual (
-				attr.Company,
-				"Xamarin", "#1");
-		}
+            // Set the required Attribute of the assembly.
+            Type attribute = typeof(AssemblyCompanyAttribute);
+            ConstructorInfo ctrInfo = attribute.GetConstructor(new Type[] { typeof(string) });
+            CustomAttributeBuilder attrBuilder = new CustomAttributeBuilder(
+                ctrInfo,
+                new object[1] { "Xamarin" }
+            );
+            dynAssembly.SetCustomAttribute(attrBuilder);
+            object[] attributes = dynAssembly.GetCustomAttributes(true);
+            attr = attributes[0] as AssemblyCompanyAttribute;
+        }
 
-		[Test]
-		public void TypeIdTest ()
-		{
-			Assert.AreEqual (
-				attr.TypeId,
-				typeof (AssemblyCompanyAttribute), "#1"
-				);
-		}
+        [Test]
+        public void CompanyTest()
+        {
+            Assert.AreEqual(attr.Company, "Xamarin", "#1");
+        }
 
-		[Test]
-		public void MatchTestForTrue ()
-		{
-			Assert.AreEqual (
-				attr.Match (attr),
-				true, "#1");
-		}
+        [Test]
+        public void TypeIdTest()
+        {
+            Assert.AreEqual(attr.TypeId, typeof(AssemblyCompanyAttribute), "#1");
+        }
 
-		[Test]
-		public void MatchTestForFalse ()
-		{
-			Assert.AreEqual (
-				attr.Match (new AssemblyCompanyAttribute ("Microsoft")),
-				false, "#1");
-		}
+        [Test]
+        public void MatchTestForTrue()
+        {
+            Assert.AreEqual(attr.Match(attr), true, "#1");
+        }
+
+        [Test]
+        public void MatchTestForFalse()
+        {
+            Assert.AreEqual(attr.Match(new AssemblyCompanyAttribute("Microsoft")), false, "#1");
+        }
 #endif
-		[Test]
-		public void CtorTest ()
-		{
-			var a = new AssemblyCompanyAttribute ("some text");
-			Assert.AreEqual ("some text", a.Company);
-		}
-	}
-}
 
+        [Test]
+        public void CtorTest()
+        {
+            var a = new AssemblyCompanyAttribute("some text");
+            Assert.AreEqual("some text", a.Company);
+        }
+    }
+}

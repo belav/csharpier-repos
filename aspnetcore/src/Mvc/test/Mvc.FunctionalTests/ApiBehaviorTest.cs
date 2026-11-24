@@ -19,8 +19,7 @@ public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixtu
 {
     protected ApiBehaviorTestBase(MvcTestFixture<TStartup> fixture)
     {
-        var factory =
-            fixture.Factories.FirstOrDefault()
+        var factory = fixture.Factories.FirstOrDefault()
             ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = factory.CreateDefaultClient();
     }
@@ -87,14 +86,11 @@ public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixtu
                 }
             );
 
-            Assert.Collection(
-                problemDetails.Extensions,
-                kvp =>
-                {
-                    Assert.Equal("traceId", kvp.Key);
-                    Assert.NotNull(kvp.Value);
-                }
-            );
+            Assert.Collection(problemDetails.Extensions, kvp =>
+            {
+                Assert.Equal("traceId", kvp.Key);
+                Assert.NotNull(kvp.Value);
+            });
         }
     }
 
@@ -315,14 +311,11 @@ public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixtu
                 new JsonSerializerSettings { Converters = { new ProblemDetailsConverter() } }
             );
             Assert.Equal(404, problemDetails.Status);
-            Assert.Collection(
-                problemDetails.Extensions,
-                kvp =>
-                {
-                    Assert.Equal("traceId", kvp.Key);
-                    Assert.NotNull(kvp.Value);
-                }
-            );
+            Assert.Collection(problemDetails.Extensions, kvp =>
+            {
+                Assert.Equal("traceId", kvp.Key);
+                Assert.NotNull(kvp.Value);
+            });
         }
     }
 
@@ -376,23 +369,17 @@ public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixtu
 
         Assert.Equal("Error", validationProblemDetails.Title);
         Assert.Equal(400, validationProblemDetails.Status);
-        Assert.Collection(
-            validationProblemDetails.Extensions,
-            kvp =>
-            {
-                Assert.Equal("tracking-id", kvp.Key);
-                Assert.Equal("27", kvp.Value);
-            }
-        );
+        Assert.Collection(validationProblemDetails.Extensions, kvp =>
+        {
+            Assert.Equal("tracking-id", kvp.Key);
+            Assert.Equal("27", kvp.Value);
+        });
 
-        Assert.Collection(
-            validationProblemDetails.Errors,
-            kvp =>
-            {
-                Assert.Equal("Error1", kvp.Key);
-                Assert.Equal(new[] { "Error Message" }, kvp.Value);
-            }
-        );
+        Assert.Collection(validationProblemDetails.Errors, kvp =>
+        {
+            Assert.Equal("Error1", kvp.Key);
+            Assert.Equal(new[] { "Error Message" }, kvp.Value);
+        });
     }
 }
 

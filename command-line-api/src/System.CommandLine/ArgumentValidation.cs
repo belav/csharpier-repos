@@ -28,7 +28,9 @@ namespace System.CommandLine
         /// </summary>
         /// <param name="argument">The argument to configure.</param>
         /// <returns>The configured argument.</returns>
-        public static CliArgument<DirectoryInfo> AcceptExistingOnly(this CliArgument<DirectoryInfo> argument)
+        public static CliArgument<DirectoryInfo> AcceptExistingOnly(
+            this CliArgument<DirectoryInfo> argument
+        )
         {
             argument.Validators.Add(FileOrDirectoryExists<DirectoryInfo>);
             return argument;
@@ -39,7 +41,9 @@ namespace System.CommandLine
         /// </summary>
         /// <param name="argument">The argument to configure.</param>
         /// <returns>The configured argument.</returns>
-        public static CliArgument<FileSystemInfo> AcceptExistingOnly(this CliArgument<FileSystemInfo> argument)
+        public static CliArgument<FileSystemInfo> AcceptExistingOnly(
+            this CliArgument<FileSystemInfo> argument
+        )
         {
             argument.Validators.Add(FileOrDirectoryExists<FileSystemInfo>);
             return argument;
@@ -88,7 +92,9 @@ namespace System.CommandLine
                     if (!Directory.Exists(token.Value) && !File.Exists(token.Value))
 #endif
                     {
-                        result.AddError(LocalizationResources.FileOrDirectoryDoesNotExist(token.Value));
+                        result.AddError(
+                            LocalizationResources.FileOrDirectoryDoesNotExist(token.Value)
+                        );
                     }
                 }
                 else if (checkDirectory && !Directory.Exists(token.Value))

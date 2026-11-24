@@ -3,4 +3,9 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", Scope = "namespace", Target = "Microsoft.Web.WebPages.OAuth")]
+[assembly: SuppressMessage(
+    "Microsoft.Design",
+    "CA1020:AvoidNamespacesWithFewTypes",
+    Scope = "namespace",
+    Target = "Microsoft.Web.WebPages.OAuth"
+)]

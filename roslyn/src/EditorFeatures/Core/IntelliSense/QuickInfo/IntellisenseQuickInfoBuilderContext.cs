@@ -3,12 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using Microsoft.CodeAnalysis.Classification;
 using Microsoft.CodeAnalysis.Editor.Host;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
-using Microsoft.CodeAnalysis.Shared.TestHooks;
-using Microsoft.CodeAnalysis.Classification;
-using Microsoft.VisualStudio.Utilities;
 using Microsoft.CodeAnalysis.Formatting;
+using Microsoft.CodeAnalysis.Shared.TestHooks;
+using Microsoft.VisualStudio.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
 {
@@ -22,14 +22,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
         IThreadingContext? threadingContext,
         IUIThreadOperationExecutor? operationExecutor,
         IAsynchronousOperationListener? asynchronousOperationListener,
-        Lazy<IStreamingFindUsagesPresenter>? streamingPresenter)
+        Lazy<IStreamingFindUsagesPresenter>? streamingPresenter
+    )
     {
         public Document Document { get; } = document;
         public ClassificationOptions ClassificationOptions { get; } = classificationOptions;
         public LineFormattingOptions LineFormattingOptions { get; } = lineFormattingOptions;
         public IThreadingContext? ThreadingContext { get; } = threadingContext;
         public IUIThreadOperationExecutor? OperationExecutor { get; } = operationExecutor;
-        public IAsynchronousOperationListener? AsynchronousOperationListener { get; } = asynchronousOperationListener;
-        public Lazy<IStreamingFindUsagesPresenter>? StreamingPresenter { get; } = streamingPresenter;
+        public IAsynchronousOperationListener? AsynchronousOperationListener { get; } =
+            asynchronousOperationListener;
+        public Lazy<IStreamingFindUsagesPresenter>? StreamingPresenter { get; } =
+            streamingPresenter;
     }
 }

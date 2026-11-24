@@ -80,17 +80,10 @@ public class MapSignalRTests
     public void MapHubFindsAuthAttributeOnHub()
     {
         var authCount = 0;
-        using (
-            var host = BuildWebHost(routes =>
-                routes.MapHub<AuthHub>(
-                    "/path",
-                    options =>
-                    {
-                        authCount += options.AuthorizationData.Count;
-                    }
-                )
-            )
-        )
+        using (var host = BuildWebHost(routes => routes.MapHub<AuthHub>("/path", options =>
+                {
+                    authCount += options.AuthorizationData.Count;
+                })))
         {
             host.Start();
 
@@ -123,13 +116,10 @@ public class MapSignalRTests
         using (
             var host = BuildWebHost(routes =>
                 routes
-                    .MapHub<AuthHub>(
-                        "/path",
-                        options =>
-                        {
-                            authCount += options.AuthorizationData.Count;
-                        }
-                    )
+                    .MapHub<AuthHub>("/path", options =>
+                    {
+                        authCount += options.AuthorizationData.Count;
+                    })
                     .RequireAuthorization(policy1)
                     .RequireAuthorization(policy => policy.AddRequirements(req))
             )
@@ -171,17 +161,10 @@ public class MapSignalRTests
     public void MapHubFindsAuthAttributeOnInheritedHub()
     {
         var authCount = 0;
-        using (
-            var host = BuildWebHost(routes =>
-                routes.MapHub<InheritedAuthHub>(
-                    "/path",
-                    options =>
-                    {
-                        authCount += options.AuthorizationData.Count;
-                    }
-                )
-            )
-        )
+        using (var host = BuildWebHost(routes => routes.MapHub<InheritedAuthHub>("/path", options =>
+                {
+                    authCount += options.AuthorizationData.Count;
+                })))
         {
             host.Start();
 
@@ -209,17 +192,10 @@ public class MapSignalRTests
     public void MapHubFindsMultipleAuthAttributesOnDoubleAuthHub()
     {
         var authCount = 0;
-        using (
-            var host = BuildWebHost(routes =>
-                routes.MapHub<DoubleAuthHub>(
-                    "/path",
-                    options =>
-                    {
-                        authCount += options.AuthorizationData.Count;
-                    }
-                )
-            )
-        )
+        using (var host = BuildWebHost(routes => routes.MapHub<DoubleAuthHub>("/path", options =>
+                {
+                    authCount += options.AuthorizationData.Count;
+                })))
         {
             host.Start();
 
@@ -247,17 +223,10 @@ public class MapSignalRTests
     public void MapHubEndPointRoutingFindsAttributesOnHub()
     {
         var authCount = 0;
-        using (
-            var host = BuildWebHost(routes =>
-                routes.MapHub<AuthHub>(
-                    "/path",
-                    options =>
-                    {
-                        authCount += options.AuthorizationData.Count;
-                    }
-                )
-            )
-        )
+        using (var host = BuildWebHost(routes => routes.MapHub<AuthHub>("/path", options =>
+                {
+                    authCount += options.AuthorizationData.Count;
+                })))
         {
             host.Start();
 
@@ -286,19 +255,12 @@ public class MapSignalRTests
     {
         var authCount = 0;
         HttpConnectionDispatcherOptions configuredOptions = null;
-        using (
-            var host = BuildWebHost(routes =>
-                routes.MapHub<AuthHub>(
-                    "/path",
-                    options =>
-                    {
-                        authCount += options.AuthorizationData.Count;
-                        options.AuthorizationData.Add(new AuthorizeAttribute());
-                        configuredOptions = options;
-                    }
-                )
-            )
-        )
+        using (var host = BuildWebHost(routes => routes.MapHub<AuthHub>("/path", options =>
+                {
+                    authCount += options.AuthorizationData.Count;
+                    options.AuthorizationData.Add(new AuthorizeAttribute());
+                    configuredOptions = options;
+                })))
         {
             host.Start();
 

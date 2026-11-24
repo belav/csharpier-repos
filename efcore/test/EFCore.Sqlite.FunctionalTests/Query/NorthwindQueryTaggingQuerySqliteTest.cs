@@ -3,12 +3,12 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class NorthwindQueryTaggingQuerySqliteTest : NorthwindQueryTaggingQueryTestBase<NorthwindQuerySqliteFixture<NoopModelCustomizer>>
+public class NorthwindQueryTaggingQuerySqliteTest
+    : NorthwindQueryTaggingQueryTestBase<NorthwindQuerySqliteFixture<NoopModelCustomizer>>
 {
     public NorthwindQueryTaggingQuerySqliteTest(
         NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture,
-        ITestOutputHelper testOutputHelper)
-        : base(fixture)
-    {
-    }
+        ITestOutputHelper testOutputHelper
+    )
+        : base(fixture) { }
 }

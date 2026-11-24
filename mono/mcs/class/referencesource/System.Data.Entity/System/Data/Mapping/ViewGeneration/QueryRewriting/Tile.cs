@@ -8,12 +8,12 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
-using System.Text;
 using System.Collections.ObjectModel;
-using System.Linq;
+using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.QueryRewriting
 {
@@ -22,8 +22,9 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         Union,
         Join,
         AntiSemiJoin,
+
         // Project,
-        Named
+        Named,
     }
 
     internal interface ITileQuery
@@ -31,7 +32,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         string Description { get; }
     }
 
-    internal abstract class TileQueryProcessor<T_Query> where T_Query : ITileQuery
+    internal abstract class TileQueryProcessor<T_Query>
+        where T_Query : ITileQuery
     {
         internal abstract T_Query Intersect(T_Query arg1, T_Query arg2);
         internal abstract T_Query Difference(T_Query arg1, T_Query arg2);
@@ -40,7 +42,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         internal abstract T_Query CreateDerivedViewBySelectingConstantAttributes(T_Query query);
     }
 
-    internal class DefaultTileProcessor<T_Query> : TileProcessor<Tile<T_Query>> where T_Query : ITileQuery
+    internal class DefaultTileProcessor<T_Query> : TileProcessor<Tile<T_Query>>
+        where T_Query : ITileQuery
     {
         private readonly TileQueryProcessor<T_Query> _tileQueryProcessor;
 
@@ -61,17 +64,32 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
 
         internal override Tile<T_Query> Union(Tile<T_Query> arg1, Tile<T_Query> arg2)
         {
-            return new TileBinaryOperator<T_Query>(arg1, arg2, TileOpKind.Union, _tileQueryProcessor.Union(arg1.Query, arg2.Query));
+            return new TileBinaryOperator<T_Query>(
+                arg1,
+                arg2,
+                TileOpKind.Union,
+                _tileQueryProcessor.Union(arg1.Query, arg2.Query)
+            );
         }
 
         internal override Tile<T_Query> Join(Tile<T_Query> arg1, Tile<T_Query> arg2)
         {
-            return new TileBinaryOperator<T_Query>(arg1, arg2, TileOpKind.Join, _tileQueryProcessor.Intersect(arg1.Query, arg2.Query));
+            return new TileBinaryOperator<T_Query>(
+                arg1,
+                arg2,
+                TileOpKind.Join,
+                _tileQueryProcessor.Intersect(arg1.Query, arg2.Query)
+            );
         }
 
         internal override Tile<T_Query> AntiSemiJoin(Tile<T_Query> arg1, Tile<T_Query> arg2)
         {
-            return new TileBinaryOperator<T_Query>(arg1, arg2, TileOpKind.AntiSemiJoin, _tileQueryProcessor.Difference(arg1.Query, arg2.Query));
+            return new TileBinaryOperator<T_Query>(
+                arg1,
+                arg2,
+                TileOpKind.AntiSemiJoin,
+                _tileQueryProcessor.Difference(arg1.Query, arg2.Query)
+            );
         }
 
         internal override Tile<T_Query> GetArg1(Tile<T_Query> tile)
@@ -100,7 +118,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         }
     }
 
-    internal abstract class Tile<T_Query> where T_Query : ITileQuery
+    internal abstract class Tile<T_Query>
+        where T_Query : ITileQuery
     {
         private readonly T_Query m_query;
         private readonly TileOpKind m_opKind;
@@ -123,6 +142,7 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         {
             return GetNamedQueries(this);
         }
+
         private static IEnumerable<T_Query> GetNamedQueries(Tile<T_Query> rewriting)
         {
             if (rewriting != null)
@@ -150,7 +170,12 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             string formattedQuery = this.Description;
             if (formattedQuery != null)
             {
-                return String.Format(CultureInfo.InvariantCulture, "{0}: [{1}]", this.Description, this.Query);
+                return String.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}: [{1}]",
+                    this.Description,
+                    this.Query
+                );
             }
             else
             {
@@ -158,15 +183,9 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             }
         }
 
-        public abstract Tile<T_Query> Arg1
-        {
-            get;
-        }
+        public abstract Tile<T_Query> Arg1 { get; }
 
-        public abstract Tile<T_Query> Arg2
-        {
-            get;
-        }
+        public abstract Tile<T_Query> Arg2 { get; }
 
         public TileOpKind OpKind
         {
@@ -176,7 +195,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         internal abstract Tile<T_Query> Replace(Tile<T_Query> oldTile, Tile<T_Query> newTile);
     }
 
-    internal class TileNamed<T_Query> : Tile<T_Query> where T_Query : ITileQuery
+    internal class TileNamed<T_Query> : Tile<T_Query>
+        where T_Query : ITileQuery
     {
         public TileNamed(T_Query namedQuery)
             : base(TileOpKind.Named, namedQuery)
@@ -189,8 +209,14 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             get { return this.Query; }
         }
 
-        public override Tile<T_Query> Arg1 { get { return null; } }
-        public override Tile<T_Query> Arg2 { get { return null; } }
+        public override Tile<T_Query> Arg1
+        {
+            get { return null; }
+        }
+        public override Tile<T_Query> Arg2
+        {
+            get { return null; }
+        }
 
         public override string Description
         {
@@ -208,12 +234,18 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         }
     }
 
-    internal class TileBinaryOperator<T_Query> : Tile<T_Query> where T_Query : ITileQuery
+    internal class TileBinaryOperator<T_Query> : Tile<T_Query>
+        where T_Query : ITileQuery
     {
         private readonly Tile<T_Query> m_arg1;
         private readonly Tile<T_Query> m_arg2;
 
-        public TileBinaryOperator(Tile<T_Query> arg1, Tile<T_Query> arg2, TileOpKind opKind, T_Query query)
+        public TileBinaryOperator(
+            Tile<T_Query> arg1,
+            Tile<T_Query> arg2,
+            TileOpKind opKind,
+            T_Query query
+        )
             : base(opKind, query)
         {
             Debug.Assert(arg1 != null && arg2 != null);
@@ -221,8 +253,14 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             m_arg2 = arg2;
         }
 
-        public override Tile<T_Query> Arg1 { get { return m_arg1; } }
-        public override Tile<T_Query> Arg2 { get { return m_arg2; } }
+        public override Tile<T_Query> Arg1
+        {
+            get { return m_arg1; }
+        }
+        public override Tile<T_Query> Arg2
+        {
+            get { return m_arg2; }
+        }
 
         public override string Description
         {
@@ -231,12 +269,25 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 string descriptionFormat = null;
                 switch (OpKind)
                 {
-                    case TileOpKind.Join: descriptionFormat = "({0} & {1})"; break;
-                    case TileOpKind.AntiSemiJoin: descriptionFormat = "({0} - {1})"; break;
-                    case TileOpKind.Union: descriptionFormat = "({0} | {1})"; break;
-                    default: Debug.Fail("Unexpected binary operator"); break;
+                    case TileOpKind.Join:
+                        descriptionFormat = "({0} & {1})";
+                        break;
+                    case TileOpKind.AntiSemiJoin:
+                        descriptionFormat = "({0} - {1})";
+                        break;
+                    case TileOpKind.Union:
+                        descriptionFormat = "({0} | {1})";
+                        break;
+                    default:
+                        Debug.Fail("Unexpected binary operator");
+                        break;
                 }
-                return String.Format(CultureInfo.InvariantCulture, descriptionFormat, this.Arg1.Description, this.Arg2.Description);
+                return String.Format(
+                    CultureInfo.InvariantCulture,
+                    descriptionFormat,
+                    this.Arg1.Description,
+                    this.Arg2.Description
+                );
             }
         }
 

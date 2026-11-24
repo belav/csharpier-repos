@@ -18,23 +18,15 @@ namespace System.Net.Http
                     new List<DelegatingHandler>()
                     {
                         new MockDelegatingHandler(),
-                        new MockDelegatingHandler(new HttpClientHandler())
+                        new MockDelegatingHandler(new HttpClientHandler()),
                     },
                     new List<DelegatingHandler>()
                     {
                         new MockDelegatingHandler(new HttpClientHandler()),
                         new MockDelegatingHandler(),
                     },
-                    new List<DelegatingHandler>()
-                    {
-                        null,
-                        new MockDelegatingHandler(),
-                    },
-                    new List<DelegatingHandler>()
-                    {
-                        new MockDelegatingHandler(),
-                        null,
-                    },
+                    new List<DelegatingHandler>() { null, new MockDelegatingHandler() },
+                    new List<DelegatingHandler>() { new MockDelegatingHandler(), null },
                 };
             }
         }
@@ -55,7 +47,10 @@ namespace System.Net.Http
         [Fact]
         public void Create2_ThrowsOnNullInnerHandler()
         {
-            Assert.ThrowsArgumentNull(() => HttpClientFactory.Create(null, new DelegatingHandler[0]), "innerHandler");
+            Assert.ThrowsArgumentNull(
+                () => HttpClientFactory.Create(null, new DelegatingHandler[0]),
+                "innerHandler"
+            );
         }
 
         [Fact]
@@ -76,7 +71,10 @@ namespace System.Net.Http
         [PropertyData("InvalidPipelines")]
         public void CreatePipeline_ThrowsOnInvalidPipeline(IEnumerable<DelegatingHandler> handlers)
         {
-            Assert.ThrowsArgument(() => HttpClientFactory.CreatePipeline(new HttpClientHandler(), handlers), "handlers");
+            Assert.ThrowsArgument(
+                () => HttpClientFactory.CreatePipeline(new HttpClientHandler(), handlers),
+                "handlers"
+            );
         }
 
         [Fact]
@@ -109,7 +107,8 @@ namespace System.Net.Http
             HttpClientHandler innerHandler = new HttpClientHandler();
 
             // Act
-            DelegatingHandler pipeline = HttpClientFactory.CreatePipeline(innerHandler, handlers) as DelegatingHandler;
+            DelegatingHandler pipeline =
+                HttpClientFactory.CreatePipeline(innerHandler, handlers) as DelegatingHandler;
 
             // Assert
             for (int index = 0; index < handlers.Count - 1; index++)

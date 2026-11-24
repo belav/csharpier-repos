@@ -14,17 +14,17 @@ using Microsoft.CodeAnalysis.Organizing.Organizers;
 namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
 {
     [ExportSyntaxNodeOrganizer(LanguageNames.CSharp), Shared]
-    internal class PropertyDeclarationOrganizer : AbstractSyntaxNodeOrganizer<PropertyDeclarationSyntax>
+    internal class PropertyDeclarationOrganizer
+        : AbstractSyntaxNodeOrganizer<PropertyDeclarationSyntax>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PropertyDeclarationOrganizer()
-        {
-        }
+        public PropertyDeclarationOrganizer() { }
 
         protected override PropertyDeclarationSyntax Organize(
             PropertyDeclarationSyntax syntax,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return syntax.WithModifiers(ModifiersOrganizer.Organize(syntax.Modifiers));
         }

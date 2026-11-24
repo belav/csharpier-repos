@@ -4,13 +4,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics;
+using System.Text;
 using System.Workflow.ComponentModel;
 
 namespace System.Workflow.Runtime
 {
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class WorkflowQueue
     {
         IComparable queueName;
@@ -32,33 +34,65 @@ namespace System.Workflow.Runtime
                 lock (qService.SyncRoot)
                 {
                     EventQueueState qState = qService.GetQueueState(this.queueName);
-                    ActivityExecutorDelegateInfo<QueueEventArgs> subscriber = new ActivityExecutorDelegateInfo<QueueEventArgs>(value, qService.CallingActivity);
+                    ActivityExecutorDelegateInfo<QueueEventArgs> subscriber =
+                        new ActivityExecutorDelegateInfo<QueueEventArgs>(
+                            value,
+                            qService.CallingActivity
+                        );
                     qState.AsynchronousListeners.Add(subscriber);
-                    WorkflowTrace.Runtime.TraceEvent(TraceEventType.Information, 0, "WorkflowQueue:QueueItemAvailable subscribe for activity '{0}' with context Id {1}", subscriber.ActivityQualifiedName, subscriber.ContextId);
+                    WorkflowTrace.Runtime.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "WorkflowQueue:QueueItemAvailable subscribe for activity '{0}' with context Id {1}",
+                        subscriber.ActivityQualifiedName,
+                        subscriber.ContextId
+                    );
 
                     if (qState.AsynchronousListeners.Count == 1)
-                        qService.NotifyAsynchronousSubscribers(this.queueName, qState, qState.Messages.Count); 
+                        qService.NotifyAsynchronousSubscribers(
+                            this.queueName,
+                            qState,
+                            qState.Messages.Count
+                        );
                 }
             }
             remove
             {
                 lock (qService.SyncRoot)
                 {
-                    ActivityExecutorDelegateInfo<QueueEventArgs> subscriber = new ActivityExecutorDelegateInfo<QueueEventArgs>(value, qService.CallingActivity);
-                    bool removed = qService.GetQueueState(this.queueName).AsynchronousListeners.Remove(subscriber);
+                    ActivityExecutorDelegateInfo<QueueEventArgs> subscriber =
+                        new ActivityExecutorDelegateInfo<QueueEventArgs>(
+                            value,
+                            qService.CallingActivity
+                        );
+                    bool removed = qService
+                        .GetQueueState(this.queueName)
+                        .AsynchronousListeners.Remove(subscriber);
                     if (!removed)
                     {
-                        WorkflowTrace.Runtime.TraceEvent(TraceEventType.Information, 0, "WorkflowQueue:QueueItemAvailable unsubscribe failed for activity '{0}' with context Id {1} ", subscriber.ActivityQualifiedName, subscriber.ContextId);
+                        WorkflowTrace.Runtime.TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "WorkflowQueue:QueueItemAvailable unsubscribe failed for activity '{0}' with context Id {1} ",
+                            subscriber.ActivityQualifiedName,
+                            subscriber.ContextId
+                        );
                     }
                 }
             }
         }
 
-        public void RegisterForQueueItemAvailable(IActivityEventListener<QueueEventArgs> eventListener)
+        public void RegisterForQueueItemAvailable(
+            IActivityEventListener<QueueEventArgs> eventListener
+        )
         {
             RegisterForQueueItemAvailable(eventListener, null);
         }
-        public void RegisterForQueueItemAvailable(IActivityEventListener<QueueEventArgs> eventListener, string subscriberQualifiedName)
+
+        public void RegisterForQueueItemAvailable(
+            IActivityEventListener<QueueEventArgs> eventListener,
+            string subscriberQualifiedName
+        )
         {
             if (eventListener == null)
                 throw new ArgumentNullException("eventListener");
@@ -66,30 +100,59 @@ namespace System.Workflow.Runtime
             lock (qService.SyncRoot)
             {
                 EventQueueState qState = qService.GetQueueState(this.queueName);
-                ActivityExecutorDelegateInfo<QueueEventArgs> subscriber = new ActivityExecutorDelegateInfo<QueueEventArgs>(eventListener, qService.CallingActivity);
+                ActivityExecutorDelegateInfo<QueueEventArgs> subscriber =
+                    new ActivityExecutorDelegateInfo<QueueEventArgs>(
+                        eventListener,
+                        qService.CallingActivity
+                    );
                 if (subscriberQualifiedName != null)
                 {
                     subscriber.SubscribedActivityQualifiedName = subscriberQualifiedName;
                 }
                 qState.AsynchronousListeners.Add(subscriber);
-                WorkflowTrace.Runtime.TraceEvent(TraceEventType.Information, 0, "WorkflowQueue:QueueItemAvailable subscribe for activity '{0}' with context Id {1}", subscriber.ActivityQualifiedName, subscriber.ContextId);
+                WorkflowTrace.Runtime.TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "WorkflowQueue:QueueItemAvailable subscribe for activity '{0}' with context Id {1}",
+                    subscriber.ActivityQualifiedName,
+                    subscriber.ContextId
+                );
 
                 if (qState.AsynchronousListeners.Count == 1)
-                    qService.NotifyAsynchronousSubscribers(this.queueName, qState, qState.Messages.Count);
+                    qService.NotifyAsynchronousSubscribers(
+                        this.queueName,
+                        qState,
+                        qState.Messages.Count
+                    );
             }
         }
-        public void UnregisterForQueueItemAvailable(IActivityEventListener<QueueEventArgs> eventListener)
+
+        public void UnregisterForQueueItemAvailable(
+            IActivityEventListener<QueueEventArgs> eventListener
+        )
         {
             if (eventListener == null)
                 throw new ArgumentNullException("eventListener");
-        
+
             lock (qService.SyncRoot)
             {
-                ActivityExecutorDelegateInfo<QueueEventArgs> subscriber = new ActivityExecutorDelegateInfo<QueueEventArgs>(eventListener, qService.CallingActivity);
-                bool removed = qService.GetQueueState(this.queueName).AsynchronousListeners.Remove(subscriber);
+                ActivityExecutorDelegateInfo<QueueEventArgs> subscriber =
+                    new ActivityExecutorDelegateInfo<QueueEventArgs>(
+                        eventListener,
+                        qService.CallingActivity
+                    );
+                bool removed = qService
+                    .GetQueueState(this.queueName)
+                    .AsynchronousListeners.Remove(subscriber);
                 if (!removed)
                 {
-                    WorkflowTrace.Runtime.TraceEvent(TraceEventType.Information, 0, "WorkflowQueue:QueueItemAvailable unsubscribe failed for activity '{0}' with context Id {1}", subscriber.ActivityQualifiedName, subscriber.ContextId);
+                    WorkflowTrace.Runtime.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "WorkflowQueue:QueueItemAvailable unsubscribe failed for activity '{0}' with context Id {1}",
+                        subscriber.ActivityQualifiedName,
+                        subscriber.ContextId
+                    );
                 }
             }
         }
@@ -103,7 +166,14 @@ namespace System.Workflow.Runtime
 
                 lock (qService.SyncRoot)
                 {
-                    qService.GetQueueState(this.queueName).SynchronousListeners.Add(new ActivityExecutorDelegateInfo<QueueEventArgs>(value, qService.CallingActivity));
+                    qService
+                        .GetQueueState(this.queueName)
+                        .SynchronousListeners.Add(
+                            new ActivityExecutorDelegateInfo<QueueEventArgs>(
+                                value,
+                                qService.CallingActivity
+                            )
+                        );
                 }
             }
             remove
@@ -113,46 +183,67 @@ namespace System.Workflow.Runtime
 
                 lock (qService.SyncRoot)
                 {
-                    qService.GetQueueState(this.queueName).SynchronousListeners.Remove(new ActivityExecutorDelegateInfo<QueueEventArgs>(value, qService.CallingActivity));                                                           
+                    qService
+                        .GetQueueState(this.queueName)
+                        .SynchronousListeners.Remove(
+                            new ActivityExecutorDelegateInfo<QueueEventArgs>(
+                                value,
+                                qService.CallingActivity
+                            )
+                        );
                 }
             }
         }
-        public void RegisterForQueueItemArrived(IActivityEventListener<QueueEventArgs> eventListener)
+
+        public void RegisterForQueueItemArrived(
+            IActivityEventListener<QueueEventArgs> eventListener
+        )
         {
             if (eventListener == null)
                 throw new ArgumentNullException("eventListener");
 
             lock (qService.SyncRoot)
             {
-                qService.GetQueueState(this.queueName).SynchronousListeners.Add(new ActivityExecutorDelegateInfo<QueueEventArgs>(eventListener, qService.CallingActivity));
+                qService
+                    .GetQueueState(this.queueName)
+                    .SynchronousListeners.Add(
+                        new ActivityExecutorDelegateInfo<QueueEventArgs>(
+                            eventListener,
+                            qService.CallingActivity
+                        )
+                    );
             }
         }
-        public void UnregisterForQueueItemArrived(IActivityEventListener<QueueEventArgs> eventListener)
+
+        public void UnregisterForQueueItemArrived(
+            IActivityEventListener<QueueEventArgs> eventListener
+        )
         {
             if (eventListener == null)
                 throw new ArgumentNullException("eventListener");
 
             lock (qService.SyncRoot)
             {
-                qService.GetQueueState(this.queueName).SynchronousListeners.Remove(new ActivityExecutorDelegateInfo<QueueEventArgs>(eventListener, qService.CallingActivity));
+                qService
+                    .GetQueueState(this.queueName)
+                    .SynchronousListeners.Remove(
+                        new ActivityExecutorDelegateInfo<QueueEventArgs>(
+                            eventListener,
+                            qService.CallingActivity
+                        )
+                    );
             }
         }
 
         public IComparable QueueName
         {
-            get
-            {
-                return this.queueName;
-            }
+            get { return this.queueName; }
         }
 
         public WorkflowQueuingService QueuingService
         {
-            get
-            {
-                return this.qService;
-            }
-        }      
+            get { return this.qService; }
+        }
 
         public void Enqueue(object item)
         {
@@ -162,7 +253,7 @@ namespace System.Workflow.Runtime
             }
         }
 
-        public object Dequeue() 
+        public object Dequeue()
         {
             lock (qService.SyncRoot)
             {
@@ -189,7 +280,7 @@ namespace System.Workflow.Runtime
                 lock (qService.SyncRoot)
                 {
                     return this.qService.GetQueueState(this.queueName).Messages.Count;
-                } 
+                }
             }
         }
 
@@ -208,8 +299,7 @@ namespace System.Workflow.Runtime
                 {
                     this.qService.GetQueueState(this.queueName).Enabled = value;
                 }
-            }           
+            }
         }
     }
 }
-

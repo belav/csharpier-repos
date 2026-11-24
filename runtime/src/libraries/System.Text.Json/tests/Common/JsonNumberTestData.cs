@@ -54,23 +54,9 @@ namespace System.Text.Json.Tests
             // Make sure we have 1_005 values in each numeric list.
 
             #region generate bytes and sbytes
-            Bytes = new List<byte>
-            {
-                byte.MinValue,
-                byte.MaxValue,
-                64,
-                128,
-                144
-            };
+            Bytes = new List<byte> { byte.MinValue, byte.MaxValue, 64, 128, 144 };
 
-            SBytes = new List<sbyte>
-            {
-                0,
-                64,
-                -64,
-                sbyte.MinValue,
-                sbyte.MaxValue
-            };
+            SBytes = new List<sbyte> { 0, 64, -64, sbyte.MinValue, sbyte.MaxValue };
 
             byte[] byteArr = new byte[numberOfItems];
             random.NextBytes(byteArr);
@@ -84,14 +70,7 @@ namespace System.Text.Json.Tests
             #endregion
 
             #region generate shorts
-            Shorts = new List<short>
-            {
-                0,
-                20123,
-                -20123,
-                short.MaxValue,
-                short.MinValue
-            };
+            Shorts = new List<short> { 0, 20123, -20123, short.MaxValue, short.MinValue };
             byte[] b16 = new byte[2 * numberOfItems];
             random.NextBytes(b16);
             for (int i = 0; i < numberOfItems; i++)
@@ -101,14 +80,7 @@ namespace System.Text.Json.Tests
             #endregion
 
             #region generate ints
-            Ints = new List<int>
-            {
-                0,
-                12345,
-                -12345,
-                int.MaxValue,
-                int.MinValue
-            };
+            Ints = new List<int> { 0, 12345, -12345, int.MaxValue, int.MinValue };
             for (int i = 0; i < numberOfItems; i++)
             {
                 int value = random.Next(int.MinValue, int.MaxValue);
@@ -117,14 +89,7 @@ namespace System.Text.Json.Tests
             #endregion
 
             #region generate longs
-            Longs = new List<long>
-            {
-                0,
-                12345678901,
-                -12345678901,
-                long.MaxValue,
-                long.MinValue
-            };
+            Longs = new List<long> { 0, 12345678901, -12345678901, long.MaxValue, long.MinValue };
             for (int i = 0; i < numberOfItems; i++)
             {
                 long value = random.Next(int.MinValue, int.MaxValue);
@@ -137,14 +102,7 @@ namespace System.Text.Json.Tests
             #endregion
 
             #region generate ushorts
-            UShorts = new List<ushort>
-            {
-                ushort.MaxValue,
-                ushort.MinValue,
-                12345,
-                34567,
-                64321
-            };
+            UShorts = new List<ushort> { ushort.MaxValue, ushort.MinValue, 12345, 34567, 64321 };
             byte[] ub16 = new byte[2 * numberOfItems];
             random.NextBytes(ub16);
             for (int i = 0; i < numberOfItems; i++)
@@ -161,7 +119,7 @@ namespace System.Text.Json.Tests
                 12345,
                 // next two values are just to satisfy requirement of having 5 values in the list
                 67890,
-                98989
+                98989,
             };
             byte[] b32 = new byte[4];
             for (int i = 0; i < numberOfItems; i++)
@@ -179,7 +137,7 @@ namespace System.Text.Json.Tests
                 12345,
                 // next two values are just to satisfy requirement of having 5 values in the list
                 67890,
-                98989
+                98989,
             };
             byte[] b64 = new byte[8];
             for (int i = 0; i < numberOfItems; i++)
@@ -196,11 +154,15 @@ namespace System.Text.Json.Tests
                 1.1234e1,
                 -1.1234e1,
                 double.MaxValue,
-                double.MinValue
+                double.MinValue,
             };
             for (int i = 0; i < numberOfItems / 2; i++)
             {
-                double value = JsonTestHelper.NextDouble(random, double.MinValue / 10, double.MaxValue / 10);
+                double value = JsonTestHelper.NextDouble(
+                    random,
+                    double.MinValue / 10,
+                    double.MaxValue / 10
+                );
                 Doubles.Add(value);
             }
             for (int i = 0; i < numberOfItems / 2; i++)
@@ -217,7 +179,7 @@ namespace System.Text.Json.Tests
                 1.1234e1f,
                 -1.1234e1f,
                 float.MaxValue,
-                float.MinValue
+                float.MinValue,
             };
             for (int i = 0; i < numberOfItems; i++)
             {
@@ -233,7 +195,7 @@ namespace System.Text.Json.Tests
                 (decimal)1.1234e1,
                 (decimal)-1.1234e1,
                 decimal.MaxValue,
-                decimal.MinValue
+                decimal.MinValue,
             };
             for (int i = 0; i < numberOfItems / 2; i++)
             {
@@ -255,7 +217,7 @@ namespace System.Text.Json.Tests
                 (Int128)long.MaxValue + 1,
                 (Int128)long.MinValue - 1,
                 Int128.MaxValue,
-                Int128.MinValue
+                Int128.MinValue,
             };
             for (int i = 0; i < numberOfItems; i++)
             {
@@ -273,7 +235,7 @@ namespace System.Text.Json.Tests
             {
                 (UInt128)ulong.MaxValue + 1,
                 UInt128.MaxValue,
-                UInt128.MinValue
+                UInt128.MinValue,
             };
             for (int i = 0; i < numberOfItems; i++)
             {
@@ -289,7 +251,7 @@ namespace System.Text.Json.Tests
                 (Half)1.1234e1,
                 (Half)(-1.1234e1),
                 Half.MaxValue,
-                Half.MinValue
+                Half.MinValue,
             };
             for (int i = 0; i < numberOfItems; i++)
             {

@@ -11,7 +11,9 @@ namespace Microsoft.AspNet.Facebook.ModelBinders
     {
         public override IModelBinder GetBinder()
         {
-            return new FacebookRedirectContextModelBinder(GlobalFacebookConfiguration.Configuration);
+            return new FacebookRedirectContextModelBinder(
+                GlobalFacebookConfiguration.Configuration
+            );
         }
     }
 }

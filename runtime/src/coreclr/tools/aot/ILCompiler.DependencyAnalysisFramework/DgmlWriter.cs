@@ -3,21 +3,32 @@
 
 using System;
 using System.Collections.Generic;
-using System.Xml;
-using System.IO;
 using System.Diagnostics;
+using System.IO;
+using System.Xml;
 
 namespace ILCompiler.DependencyAnalysisFramework
 {
     public class DgmlWriter
     {
-        public static void WriteDependencyGraphToStream<DependencyContextType>(Stream stream, DependencyAnalyzerBase<DependencyContextType> analysis, DependencyContextType context)
+        public static void WriteDependencyGraphToStream<DependencyContextType>(
+            Stream stream,
+            DependencyAnalyzerBase<DependencyContextType> analysis,
+            DependencyContextType context
+        )
         {
-            DgmlWriter<DependencyContextType>.WriteDependencyGraphToStream(stream, analysis, context);
+            DgmlWriter<DependencyContextType>.WriteDependencyGraphToStream(
+                stream,
+                analysis,
+                context
+            );
         }
     }
 
-    internal sealed class DgmlWriter<DependencyContextType> : IDisposable, IDependencyAnalyzerLogEdgeVisitor<DependencyContextType>, IDependencyAnalyzerLogNodeVisitor<DependencyContextType>
+    internal sealed class DgmlWriter<DependencyContextType>
+        : IDisposable,
+            IDependencyAnalyzerLogEdgeVisitor<DependencyContextType>,
+            IDependencyAnalyzerLogNodeVisitor<DependencyContextType>
     {
         private XmlWriter _xmlWrite;
         private bool _done;
@@ -27,7 +38,10 @@ namespace ILCompiler.DependencyAnalysisFramework
         {
             _xmlWrite = xmlWrite;
             _xmlWrite.WriteStartDocument();
-            _xmlWrite.WriteStartElement("DirectedGraph", "http://schemas.microsoft.com/vs/2009/dgml");
+            _xmlWrite.WriteStartElement(
+                "DirectedGraph",
+                "http://schemas.microsoft.com/vs/2009/dgml"
+            );
             _context = context;
         }
 
@@ -46,7 +60,11 @@ namespace ILCompiler.DependencyAnalysisFramework
             _xmlWrite.WriteEndElement();
         }
 
-        public static void WriteDependencyGraphToStream(Stream stream, DependencyAnalyzerBase<DependencyContextType> analysis, DependencyContextType context)
+        public static void WriteDependencyGraphToStream(
+            Stream stream,
+            DependencyAnalyzerBase<DependencyContextType> analysis,
+            DependencyContextType context
+        )
         {
             XmlWriterSettings writerSettings = new XmlWriterSettings();
             writerSettings.Indent = true;
@@ -56,14 +74,15 @@ namespace ILCompiler.DependencyAnalysisFramework
             {
                 using (var dgmlWriter = new DgmlWriter<DependencyContextType>(xmlWriter, context))
                 {
-                    dgmlWriter.WriteNodesAndEdges(() =>
-                    {
-                        analysis.VisitLogNodes(dgmlWriter);
-                    },
-                    () =>
-                    {
-                        analysis.VisitLogEdges(dgmlWriter);
-                    }
+                    dgmlWriter.WriteNodesAndEdges(
+                        () =>
+                        {
+                            analysis.VisitLogNodes(dgmlWriter);
+                        },
+                        () =>
+                        {
+                            analysis.VisitLogEdges(dgmlWriter);
+                        }
                     );
                 }
             }
@@ -130,7 +149,11 @@ namespace ILCompiler.DependencyAnalysisFramework
             _xmlWrite.WriteEndElement();
         }
 
-        void IDependencyAnalyzerLogEdgeVisitor<DependencyContextType>.VisitEdge(DependencyNodeCore<DependencyContextType> nodeDepender, DependencyNodeCore<DependencyContextType> nodeDependedOn, string reason)
+        void IDependencyAnalyzerLogEdgeVisitor<DependencyContextType>.VisitEdge(
+            DependencyNodeCore<DependencyContextType> nodeDepender,
+            DependencyNodeCore<DependencyContextType> nodeDependedOn,
+            string reason
+        )
         {
             _xmlWrite.WriteStartElement("Link");
             _xmlWrite.WriteAttributeString("Source", _nodeMappings[nodeDepender].ToString());
@@ -140,12 +163,20 @@ namespace ILCompiler.DependencyAnalysisFramework
             _xmlWrite.WriteEndElement();
         }
 
-        void IDependencyAnalyzerLogEdgeVisitor<DependencyContextType>.VisitEdge(string root, DependencyNodeCore<DependencyContextType> dependedOn)
+        void IDependencyAnalyzerLogEdgeVisitor<DependencyContextType>.VisitEdge(
+            string root,
+            DependencyNodeCore<DependencyContextType> dependedOn
+        )
         {
             AddReason(root, dependedOn, null);
         }
 
-        void IDependencyAnalyzerLogNodeVisitor<DependencyContextType>.VisitCombinedNode(Tuple<DependencyNodeCore<DependencyContextType>, DependencyNodeCore<DependencyContextType>> node)
+        void IDependencyAnalyzerLogNodeVisitor<DependencyContextType>.VisitCombinedNode(
+            Tuple<
+                DependencyNodeCore<DependencyContextType>,
+                DependencyNodeCore<DependencyContextType>
+            > node
+        )
         {
             string label1 = node.Item1.GetNameInternal(_context);
             string label2 = node.Item2.GetNameInternal(_context);
@@ -153,11 +184,30 @@ namespace ILCompiler.DependencyAnalysisFramework
             AddNode(node, string.Concat("(", label1, ", ", label2, ")"));
         }
 
-        private HashSet<Tuple<DependencyNodeCore<DependencyContextType>, DependencyNodeCore<DependencyContextType>>> _combinedNodesEdgeVisited = new HashSet<Tuple<DependencyNodeCore<DependencyContextType>, DependencyNodeCore<DependencyContextType>>>();
+        private HashSet<
+            Tuple<
+                DependencyNodeCore<DependencyContextType>,
+                DependencyNodeCore<DependencyContextType>
+            >
+        > _combinedNodesEdgeVisited =
+            new HashSet<
+                Tuple<
+                    DependencyNodeCore<DependencyContextType>,
+                    DependencyNodeCore<DependencyContextType>
+                >
+            >();
 
-        void IDependencyAnalyzerLogEdgeVisitor<DependencyContextType>.VisitEdge(DependencyNodeCore<DependencyContextType> nodeDepender, DependencyNodeCore<DependencyContextType> nodeDependerOther, DependencyNodeCore<DependencyContextType> nodeDependedOn, string reason)
+        void IDependencyAnalyzerLogEdgeVisitor<DependencyContextType>.VisitEdge(
+            DependencyNodeCore<DependencyContextType> nodeDepender,
+            DependencyNodeCore<DependencyContextType> nodeDependerOther,
+            DependencyNodeCore<DependencyContextType> nodeDependedOn,
+            string reason
+        )
         {
-            var combinedNode = new Tuple<DependencyNodeCore<DependencyContextType>, DependencyNodeCore<DependencyContextType>>(nodeDepender, nodeDependerOther);
+            var combinedNode = new Tuple<
+                DependencyNodeCore<DependencyContextType>,
+                DependencyNodeCore<DependencyContextType>
+            >(nodeDepender, nodeDependerOther);
             if (_combinedNodesEdgeVisited.Add(combinedNode))
             {
                 _xmlWrite.WriteStartElement("Link");
@@ -168,7 +218,10 @@ namespace ILCompiler.DependencyAnalysisFramework
                 _xmlWrite.WriteEndElement();
 
                 _xmlWrite.WriteStartElement("Link");
-                _xmlWrite.WriteAttributeString("Source", _nodeMappings[nodeDependerOther].ToString());
+                _xmlWrite.WriteAttributeString(
+                    "Source",
+                    _nodeMappings[nodeDependerOther].ToString()
+                );
                 _xmlWrite.WriteAttributeString("Target", _nodeMappings[combinedNode].ToString());
                 _xmlWrite.WriteAttributeString("Reason", "Secondary");
                 _xmlWrite.WriteAttributeString("Stroke", "#00FF00");
@@ -183,7 +236,9 @@ namespace ILCompiler.DependencyAnalysisFramework
             _xmlWrite.WriteEndElement();
         }
 
-        void IDependencyAnalyzerLogNodeVisitor<DependencyContextType>.VisitNode(DependencyNodeCore<DependencyContextType> node)
+        void IDependencyAnalyzerLogNodeVisitor<DependencyContextType>.VisitNode(
+            DependencyNodeCore<DependencyContextType> node
+        )
         {
             AddNode(node);
         }

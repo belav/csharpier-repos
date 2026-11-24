@@ -33,5 +33,5 @@ public enum ConfigurationSource
     /// <summary>
     ///     Indicates that the model element was specified by convention via the EF Core model building conventions.
     /// </summary>
-    Convention
+    Convention,
 }

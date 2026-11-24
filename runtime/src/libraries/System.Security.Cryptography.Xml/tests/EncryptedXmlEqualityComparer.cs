@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace System.Security.Cryptography.Xml.Tests
 {
-    public class EncryptedXmlEqualityComparer: IEqualityComparer<EncryptedXml>
+    public class EncryptedXmlEqualityComparer : IEqualityComparer<EncryptedXml>
     {
         /// <summary>
         /// Are the two <see cref="EncryptedXml"/> objects equal?
@@ -29,8 +29,7 @@ namespace System.Security.Cryptography.Xml.Tests
             {
                 return true;
             }
-            else if ((x == null && y != null)
-                     || (x != null && y == null))
+            else if ((x == null && y != null) || (x != null && y == null))
             {
                 return false;
             }

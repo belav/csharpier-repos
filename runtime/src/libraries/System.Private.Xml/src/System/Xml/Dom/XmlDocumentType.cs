@@ -20,7 +20,14 @@ namespace System.Xml
         // parsed DTD
         private SchemaInfo? _schemaInfo;
 
-        protected internal XmlDocumentType(string name, string? publicId, string? systemId, string? internalSubset, XmlDocument doc) : base(doc)
+        protected internal XmlDocumentType(
+            string name,
+            string? publicId,
+            string? systemId,
+            string? internalSubset,
+            XmlDocument doc
+        )
+            : base(doc)
         {
             _name = name;
             _publicId = publicId;
@@ -71,7 +78,7 @@ namespace System.Xml
         {
             get
             {
-                return true;        // Make entities and notations readonly
+                return true; // Make entities and notations readonly
             }
         }
 
@@ -125,14 +132,8 @@ namespace System.Xml
 
         internal SchemaInfo? DtdSchemaInfo
         {
-            get
-            {
-                return _schemaInfo;
-            }
-            set
-            {
-                _schemaInfo = value;
-            }
+            get { return _schemaInfo; }
+            set { _schemaInfo = value; }
         }
     }
 }

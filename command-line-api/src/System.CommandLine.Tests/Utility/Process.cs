@@ -11,7 +11,8 @@ public static class Process
         Action<string> stdOut = null,
         Action<string> stdErr = null,
         string workingDirectory = null,
-        params (string key, string value)[] environmentVariables)
+        params (string key, string value)[] environmentVariables
+    )
     {
         args ??= "";
 
@@ -24,8 +25,8 @@ public static class Process
                 RedirectStandardError = true,
                 RedirectStandardOutput = true,
                 RedirectStandardInput = true,
-                UseShellExecute = false
-            }
+                UseShellExecute = false,
+            },
         };
 
         if (!string.IsNullOrWhiteSpace(workingDirectory))

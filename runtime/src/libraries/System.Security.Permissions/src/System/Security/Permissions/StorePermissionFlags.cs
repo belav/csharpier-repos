@@ -4,7 +4,11 @@
 namespace System.Security.Permissions
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     [Flags]
     public enum StorePermissionFlags
@@ -20,6 +24,6 @@ namespace System.Security.Permissions
         RemoveFromStore = 0x40,
         EnumerateCertificates = 0x80,
 
-        AllFlags = 0xF7
+        AllFlags = 0xF7,
     }
 }

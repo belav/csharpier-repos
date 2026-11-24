@@ -14,7 +14,10 @@ namespace System.Security.Cryptography.X509Certificates
             private readonly SafeCFArrayHandle _collectionHandle;
             private readonly SafeTemporaryKeychainHandle? _tmpKeychain;
 
-            public AppleCertLoader(SafeCFArrayHandle collectionHandle, SafeTemporaryKeychainHandle? tmpKeychain)
+            public AppleCertLoader(
+                SafeCFArrayHandle collectionHandle,
+                SafeTemporaryKeychainHandle? tmpKeychain
+            )
             {
                 _collectionHandle = collectionHandle;
                 _tmpKeychain = tmpKeychain;
@@ -38,11 +41,17 @@ namespace System.Security.Cryptography.X509Certificates
                 // Apple returns things in the opposite order from Windows, so read backwards.
                 for (int i = count - 1; i >= 0; i--)
                 {
-                    IntPtr handle = Interop.CoreFoundation.CFArrayGetValueAtIndex(_collectionHandle, i);
+                    IntPtr handle = Interop.CoreFoundation.CFArrayGetValueAtIndex(
+                        _collectionHandle,
+                        i
+                    );
 
                     if (handle != IntPtr.Zero)
                     {
-                        ICertificatePal? certPal = AppleCertificatePal.FromHandle(handle, throwOnFail: false);
+                        ICertificatePal? certPal = AppleCertificatePal.FromHandle(
+                            handle,
+                            throwOnFail: false
+                        );
 
                         if (certPal != null)
                         {
@@ -65,7 +74,8 @@ namespace System.Security.Cryptography.X509Certificates
                 ApplePkcs12Reader pkcs12,
                 SafeKeychainHandle keychain,
                 SafePasswordHandle password,
-                bool exportable)
+                bool exportable
+            )
             {
                 _pkcs12 = pkcs12;
                 _keychain = keychain;
@@ -92,8 +102,9 @@ namespace System.Security.Cryptography.X509Certificates
                 foreach (UnixPkcs12Reader.CertAndKey certAndKey in _pkcs12.EnumerateAll())
                 {
                     AppleCertificatePal pal = (AppleCertificatePal)certAndKey.Cert!;
-                    SafeSecKeyRefHandle? safeSecKeyRefHandle =
-                        ApplePkcs12Reader.GetPrivateKey(certAndKey.Key);
+                    SafeSecKeyRefHandle? safeSecKeyRefHandle = ApplePkcs12Reader.GetPrivateKey(
+                        certAndKey.Key
+                    );
 
                     using (safeSecKeyRefHandle)
                     {
@@ -110,7 +121,8 @@ namespace System.Security.Cryptography.X509Certificates
                                 pal,
                                 safeSecKeyRefHandle,
                                 _password,
-                                _keychain);
+                                _keychain
+                            );
                         }
                         else
                         {

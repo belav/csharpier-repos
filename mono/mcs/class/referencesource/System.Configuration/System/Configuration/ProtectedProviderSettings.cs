@@ -8,14 +8,18 @@ namespace System.Configuration
 {
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Xml;
     using System.Globalization;
+    using System.Xml;
 
     public class ProtectedProviderSettings : ConfigurationElement
     {
         private ConfigurationPropertyCollection _properties;
-        private readonly ConfigurationProperty _propProviders =
-            new ConfigurationProperty(null, typeof(ProviderSettingsCollection), null, ConfigurationPropertyOptions.IsDefaultCollection);
+        private readonly ConfigurationProperty _propProviders = new ConfigurationProperty(
+            null,
+            typeof(ProviderSettingsCollection),
+            null,
+            ConfigurationPropertyOptions.IsDefaultCollection
+        );
 
         public ProtectedProviderSettings()
         {
@@ -26,20 +30,17 @@ namespace System.Configuration
 
         protected internal override ConfigurationPropertyCollection Properties
         {
-            get
-            {
-                return _properties;
-            }
+            get { return _properties; }
         }
 
-
-        [ConfigurationProperty("", IsDefaultCollection = true, Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        [ConfigurationProperty(
+            "",
+            IsDefaultCollection = true,
+            Options = ConfigurationPropertyOptions.IsDefaultCollection
+        )]
         public ProviderSettingsCollection Providers
         {
-            get
-            {
-                return (ProviderSettingsCollection)base[_propProviders];
-            }
+            get { return (ProviderSettingsCollection)base[_propProviders]; }
         }
     }
 }

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.Interop;
 using Microsoft.Interop.Analyzers;
 using Xunit;
-
 using VerifyCS = Microsoft.Interop.UnitTests.Verifiers.CSharpAnalyzerVerifier<Microsoft.Interop.Analyzers.GeneratedComInterfaceAttributeAnalyzer>;
 
 namespace ComInterfaceGenerator.Unit.Tests
@@ -53,90 +52,84 @@ namespace ComInterfaceGenerator.Unit.Tests
             [Fact]
             public async Task IDispatch()
             {
-                string snippet =
-                    $$$"""
+                string snippet = $$$"""
 
-                [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIDispatch)]
-                interface IFoo
-                {
-                    void Bar() {}
-                }
-                """;
+                    [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIDispatch)]
+                    interface IFoo
+                    {
+                        void Bar() {}
+                    }
+                    """;
                 await VerifyCS.VerifyAnalyzerAsync(_usings + snippet);
             }
 
             [Fact]
             public async Task IDispatchShort()
             {
-                string snippet =
-                    $$$"""
+                string snippet = $$$"""
 
-                [InterfaceTypeAttribute((short)2)]
-                interface IFoo
-                {
-                    void Bar() {}
-                }
-                """;
+                    [InterfaceTypeAttribute((short)2)]
+                    interface IFoo
+                    {
+                        void Bar() {}
+                    }
+                    """;
                 await VerifyCS.VerifyAnalyzerAsync(_usings + snippet);
             }
 
             [Fact]
             public async Task IInspectable()
             {
-                string snippet =
-                    $$$"""
+                string snippet = $$$"""
 
-                [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIInspectable)]
-                interface IFoo
-                {
-                    void Bar() {}
-                }
-                """;
+                    [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIInspectable)]
+                    interface IFoo
+                    {
+                        void Bar() {}
+                    }
+                    """;
                 await VerifyCS.VerifyAnalyzerAsync(_usings + snippet);
             }
 
             [Fact]
             public async Task IInspectableShort()
             {
-                string snippet =
-                    $$$"""
+                string snippet = $$$"""
 
-                [InterfaceTypeAttribute((short)3)]
-                interface IFoo
-                {
-                    void Bar() {}
-                }
-                """;
+                    [InterfaceTypeAttribute((short)3)]
+                    interface IFoo
+                    {
+                        void Bar() {}
+                    }
+                    """;
                 await VerifyCS.VerifyAnalyzerAsync(_usings + snippet);
             }
 
             [Fact]
             public async Task IDual()
             {
-                string snippet =
-                    $$$"""
+                string snippet = $$$"""
 
-                [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)]
-                interface IFoo
-                {
-                    void Bar() {}
-                }
-                """;
+                    [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)]
+                    interface IFoo
+                    {
+                        void Bar() {}
+                    }
+                    """;
                 await VerifyCS.VerifyAnalyzerAsync(_usings + snippet);
             }
 
             [Fact]
             public async Task IDualShort()
             {
-                string snippet =
-                    $$$"""
+                string snippet = $$$"""
 
-                [InterfaceTypeAttribute((short)0)]
-                interface IFoo
-                {
-                    void Bar() {}
-                }
-                """;
+                    [InterfaceTypeAttribute((short)0)]
+                    interface IFoo
+                    {
+                        void Bar() {}
+                    }
+                    """;
                 await VerifyCS.VerifyAnalyzerAsync(_usings + snippet);
             }
         }
@@ -146,15 +139,14 @@ namespace ComInterfaceGenerator.Unit.Tests
             [Fact]
             public async Task Test()
             {
-                string snippet =
-                    $$$"""
+                string snippet = $$$"""
 
-                [GeneratedComInterface]
-                interface IFoo
-                {
-                    void Bar() {}
-                }
-                """;
+                    [GeneratedComInterface]
+                    interface IFoo
+                    {
+                        void Bar() {}
+                    }
+                    """;
                 await VerifyCS.VerifyAnalyzerAsync(_usings + snippet);
             }
         }
@@ -164,153 +156,169 @@ namespace ComInterfaceGenerator.Unit.Tests
             [Fact]
             public async Task IUnknown()
             {
-                string snippet =
-                    $$$"""
+                string snippet = $$$"""
 
-                [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
-                [GeneratedComInterface]
-                interface IFoo
-                {
-                    void Bar() {}
-                }
-                """;
+                    [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+                    [GeneratedComInterface]
+                    interface IFoo
+                    {
+                        void Bar() {}
+                    }
+                    """;
                 await VerifyCS.VerifyAnalyzerAsync(_usings + snippet);
             }
 
             [Fact]
             public async Task IUnknownShort()
             {
-                string snippet =
-                    $$$"""
+                string snippet = $$$"""
 
-                [InterfaceTypeAttribute((short)1)]
-                [GeneratedComInterface]
-                interface IFoo
-                {
-                    void Bar() {}
-                }
-                """;
+                    [InterfaceTypeAttribute((short)1)]
+                    [GeneratedComInterface]
+                    interface IFoo
+                    {
+                        void Bar() {}
+                    }
+                    """;
                 await VerifyCS.VerifyAnalyzerAsync(_usings + snippet);
             }
 
             [Fact]
             public async Task IDispatch()
             {
-                string snippet =
-                    $$$"""
+                string snippet = $$$"""
 
-                [{|#0:InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIDispatch)|}]
-                [GeneratedComInterface]
-                interface IFoo
-                {
-                    void Bar() {}
-                }
-                """;
+                    [{|#0:InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIDispatch)|}]
+                    [GeneratedComInterface]
+                    interface IFoo
+                    {
+                        void Bar() {}
+                    }
+                    """;
                 await VerifyCS.VerifyAnalyzerAsync(
                     _usings + snippet,
-                    VerifyCS.Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
+                    VerifyCS
+                        .Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
                         .WithLocation(0)
-                        .WithArguments(TypeNames.ComInterfaceType + "." + nameof(ComInterfaceType.InterfaceIsIDispatch)));
+                        .WithArguments(
+                            TypeNames.ComInterfaceType
+                                + "."
+                                + nameof(ComInterfaceType.InterfaceIsIDispatch)
+                        )
+                );
             }
 
             [Fact]
             public async Task IDispatchShort()
             {
-                string snippet =
-                    $$$"""
+                string snippet = $$$"""
 
-                [{|#0:InterfaceTypeAttribute((short)2)|}]
-                [GeneratedComInterface]
-                interface IFoo
-                {
-                    void Bar() {}
-                }
-                """;
+                    [{|#0:InterfaceTypeAttribute((short)2)|}]
+                    [GeneratedComInterface]
+                    interface IFoo
+                    {
+                        void Bar() {}
+                    }
+                    """;
                 await VerifyCS.VerifyAnalyzerAsync(
                     _usings + snippet,
-                    VerifyCS.Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
+                    VerifyCS
+                        .Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
                         .WithLocation(0)
-                        .WithArguments("2"));
+                        .WithArguments("2")
+                );
             }
 
             [Fact]
             public async Task IInspectable()
             {
-                string snippet =
-                    $$$"""
+                string snippet = $$$"""
 
-                [{|#0:InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIInspectable)|}]
-                [GeneratedComInterface]
-                interface IFoo
-                {
-                    void Bar() {}
-                }
-                """;
+                    [{|#0:InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIInspectable)|}]
+                    [GeneratedComInterface]
+                    interface IFoo
+                    {
+                        void Bar() {}
+                    }
+                    """;
                 await VerifyCS.VerifyAnalyzerAsync(
                     _usings + snippet,
-                    VerifyCS.Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
+                    VerifyCS
+                        .Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
                         .WithLocation(0)
-                        .WithArguments(TypeNames.ComInterfaceType + "." + nameof(ComInterfaceType.InterfaceIsIInspectable)));
+                        .WithArguments(
+                            TypeNames.ComInterfaceType
+                                + "."
+                                + nameof(ComInterfaceType.InterfaceIsIInspectable)
+                        )
+                );
             }
 
             [Fact]
             public async Task IInspectableShort()
             {
-                string snippet =
-                    $$$"""
+                string snippet = $$$"""
 
-                [{|#0:InterfaceTypeAttribute((short)3)|}]
-                [GeneratedComInterface]
-                interface IFoo
-                {
-                    void Bar() {}
-                }
-                """;
+                    [{|#0:InterfaceTypeAttribute((short)3)|}]
+                    [GeneratedComInterface]
+                    interface IFoo
+                    {
+                        void Bar() {}
+                    }
+                    """;
                 await VerifyCS.VerifyAnalyzerAsync(
                     _usings + snippet,
-                    VerifyCS.Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
+                    VerifyCS
+                        .Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
                         .WithLocation(0)
-                        .WithArguments("3"));
+                        .WithArguments("3")
+                );
             }
 
             [Fact]
             public async Task IDual()
             {
-                string snippet =
-                    $$$"""
+                string snippet = $$$"""
 
-                [{|#0:InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)|}]
-                [GeneratedComInterface]
-                interface IFoo
-                {
-                    void Bar() {}
-                }
-                """;
+                    [{|#0:InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)|}]
+                    [GeneratedComInterface]
+                    interface IFoo
+                    {
+                        void Bar() {}
+                    }
+                    """;
                 await VerifyCS.VerifyAnalyzerAsync(
                     _usings + snippet,
-                    VerifyCS.Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
+                    VerifyCS
+                        .Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
                         .WithLocation(0)
-                        .WithArguments(TypeNames.ComInterfaceType + "." + nameof(ComInterfaceType.InterfaceIsDual)));
+                        .WithArguments(
+                            TypeNames.ComInterfaceType
+                                + "."
+                                + nameof(ComInterfaceType.InterfaceIsDual)
+                        )
+                );
             }
 
             [Fact]
             public async Task IDualShort()
             {
-                string snippet =
-                    $$$"""
+                string snippet = $$$"""
 
-                [{|#0:InterfaceTypeAttribute((short)0)|}]
-                [GeneratedComInterface]
-                interface IFoo
-                {
-                    void Bar() {}
-                }
-                """;
+                    [{|#0:InterfaceTypeAttribute((short)0)|}]
+                    [GeneratedComInterface]
+                    interface IFoo
+                    {
+                        void Bar() {}
+                    }
+                    """;
                 await VerifyCS.VerifyAnalyzerAsync(
                     _usings + snippet,
-                    VerifyCS.Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
+                    VerifyCS
+                        .Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
                         .WithLocation(0)
-                        .WithArguments("0"));
+                        .WithArguments("0")
+                );
             }
         }
 
@@ -319,169 +327,185 @@ namespace ComInterfaceGenerator.Unit.Tests
             [Fact]
             public async Task IUnknown()
             {
-                string snippet =
-                    $$$"""
+                string snippet = $$$"""
 
-                [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
-                partial interface IFoo
-                {
-                    void Bar() {}
-                }
+                    [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+                    partial interface IFoo
+                    {
+                        void Bar() {}
+                    }
 
-                [GeneratedComInterface]
-                partial interface IFoo { }
-                """;
+                    [GeneratedComInterface]
+                    partial interface IFoo { }
+                    """;
                 await VerifyCS.VerifyAnalyzerAsync(_usings + snippet);
             }
 
             [Fact]
             public async Task IUnknownShort()
             {
-                string snippet =
-                    $$$"""
+                string snippet = $$$"""
 
-                [InterfaceTypeAttribute((short)1)]
-                partial interface IFoo
-                {
-                    void Bar() {}
-                }
+                    [InterfaceTypeAttribute((short)1)]
+                    partial interface IFoo
+                    {
+                        void Bar() {}
+                    }
 
-                [GeneratedComInterface]
-                partial interface IFoo { }
-                """;
+                    [GeneratedComInterface]
+                    partial interface IFoo { }
+                    """;
                 await VerifyCS.VerifyAnalyzerAsync(_usings + snippet);
             }
 
             [Fact]
             public async Task IDispatch()
             {
-                string snippet =
-                    $$$"""
+                string snippet = $$$"""
 
-                [{|#0:InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIDispatch)|}]
-                partial interface IFoo
-                {
-                    void Bar() {}
-                }
+                    [{|#0:InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIDispatch)|}]
+                    partial interface IFoo
+                    {
+                        void Bar() {}
+                    }
 
-                [GeneratedComInterface]
-                partial interface IFoo { }
-                """;
+                    [GeneratedComInterface]
+                    partial interface IFoo { }
+                    """;
                 await VerifyCS.VerifyAnalyzerAsync(
                     _usings + snippet,
-                    VerifyCS.Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
+                    VerifyCS
+                        .Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
                         .WithLocation(0)
-                        .WithArguments(TypeNames.ComInterfaceType + "." + nameof(ComInterfaceType.InterfaceIsIDispatch)));
+                        .WithArguments(
+                            TypeNames.ComInterfaceType
+                                + "."
+                                + nameof(ComInterfaceType.InterfaceIsIDispatch)
+                        )
+                );
             }
 
             [Fact]
             public async Task IDispatchShort()
             {
-                string snippet =
-                    $$$"""
+                string snippet = $$$"""
 
-                [{|#0:InterfaceTypeAttribute((short)2)|}]
-                partial interface IFoo
-                {
-                    void Bar() {}
-                }
+                    [{|#0:InterfaceTypeAttribute((short)2)|}]
+                    partial interface IFoo
+                    {
+                        void Bar() {}
+                    }
 
-                [GeneratedComInterface]
-                partial interface IFoo { }
-                """;
+                    [GeneratedComInterface]
+                    partial interface IFoo { }
+                    """;
                 await VerifyCS.VerifyAnalyzerAsync(
                     _usings + snippet,
-                    VerifyCS.Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
+                    VerifyCS
+                        .Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
                         .WithLocation(0)
-                        .WithArguments("2"));
+                        .WithArguments("2")
+                );
             }
 
             [Fact]
             public async Task IInspectable()
             {
-                string snippet =
-                    $$$"""
+                string snippet = $$$"""
 
-                [{|#0:InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIInspectable)|}]
-                partial interface IFoo
-                {
-                    void Bar() {}
-                }
+                    [{|#0:InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIInspectable)|}]
+                    partial interface IFoo
+                    {
+                        void Bar() {}
+                    }
 
-                [GeneratedComInterface]
-                partial interface IFoo { }
-                """;
+                    [GeneratedComInterface]
+                    partial interface IFoo { }
+                    """;
                 await VerifyCS.VerifyAnalyzerAsync(
                     _usings + snippet,
-                    VerifyCS.Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
+                    VerifyCS
+                        .Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
                         .WithLocation(0)
-                        .WithArguments(TypeNames.ComInterfaceType + "." + nameof(ComInterfaceType.InterfaceIsIInspectable)));
+                        .WithArguments(
+                            TypeNames.ComInterfaceType
+                                + "."
+                                + nameof(ComInterfaceType.InterfaceIsIInspectable)
+                        )
+                );
             }
 
             [Fact]
             public async Task IInspectableShort()
             {
-                string snippet =
-                    $$$"""
+                string snippet = $$$"""
 
-                [{|#0:InterfaceTypeAttribute((short)3)|}]
-                partial interface IFoo
-                {
-                    void Bar() {}
-                }
+                    [{|#0:InterfaceTypeAttribute((short)3)|}]
+                    partial interface IFoo
+                    {
+                        void Bar() {}
+                    }
 
-                [GeneratedComInterface]
-                partial interface IFoo { }
-                """;
+                    [GeneratedComInterface]
+                    partial interface IFoo { }
+                    """;
                 await VerifyCS.VerifyAnalyzerAsync(
                     _usings + snippet,
-                    VerifyCS.Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
+                    VerifyCS
+                        .Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
                         .WithLocation(0)
-                        .WithArguments("3"));
+                        .WithArguments("3")
+                );
             }
 
             [Fact]
             public async Task IDual()
             {
-                string snippet =
-                    $$$"""
+                string snippet = $$$"""
 
-                [{|#0:InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)|}]
-                partial interface IFoo
-                {
-                    void Bar() {}
-                }
+                    [{|#0:InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)|}]
+                    partial interface IFoo
+                    {
+                        void Bar() {}
+                    }
 
-                [GeneratedComInterface]
-                partial interface IFoo { }
-                """;
+                    [GeneratedComInterface]
+                    partial interface IFoo { }
+                    """;
                 await VerifyCS.VerifyAnalyzerAsync(
                     _usings + snippet,
-                    VerifyCS.Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
+                    VerifyCS
+                        .Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
                         .WithLocation(0)
-                        .WithArguments(TypeNames.ComInterfaceType + "." + nameof(ComInterfaceType.InterfaceIsDual)));
+                        .WithArguments(
+                            TypeNames.ComInterfaceType
+                                + "."
+                                + nameof(ComInterfaceType.InterfaceIsDual)
+                        )
+                );
             }
 
             [Fact]
             public async Task IDualShort()
             {
-                string snippet =
-                    $$$"""
+                string snippet = $$$"""
 
-                [{|#0:InterfaceTypeAttribute((short)0)|}]
-                partial interface IFoo
-                {
-                    void Bar() {}
-                }
+                    [{|#0:InterfaceTypeAttribute((short)0)|}]
+                    partial interface IFoo
+                    {
+                        void Bar() {}
+                    }
 
-                [GeneratedComInterface]
-                partial interface IFoo { }
-                """;
+                    [GeneratedComInterface]
+                    partial interface IFoo { }
+                    """;
                 await VerifyCS.VerifyAnalyzerAsync(
                     _usings + snippet,
-                    VerifyCS.Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
+                    VerifyCS
+                        .Diagnostic(GeneratorDiagnostics.InterfaceTypeNotSupported)
                         .WithLocation(0)
-                        .WithArguments("0"));
+                        .WithArguments("0")
+                );
             }
         }
     }

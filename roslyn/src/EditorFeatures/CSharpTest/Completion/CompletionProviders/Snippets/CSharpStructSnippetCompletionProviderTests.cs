@@ -10,23 +10,22 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders.Snippets
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class CSharpStructSnippetCompletionProviderTests : AbstractCSharpSnippetCompletionProviderTests
+    public class CSharpStructSnippetCompletionProviderTests
+        : AbstractCSharpSnippetCompletionProviderTests
     {
         protected override string ItemToCommit => "struct";
 
         [WpfFact]
         public async Task InsertStructSnippetInNamespaceTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 namespace Namespace
                 {
                     $$
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 namespace Namespace
                 {
                     struct MyStruct
@@ -35,84 +34,88 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertStructSnippetInFileScopedNamespaceTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 namespace Namespace;
 
                 $$
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 namespace Namespace;
 
                 struct MyStruct
                 {
                     $$
                 }
-                """
-;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+                """;
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertStructSnippetTest()
         {
-            var markupBeforeCommit =
-@"$$";
+            var markupBeforeCommit = @"$$";
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 struct MyStruct
                 {
                     $$
                 }
-                """
-;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+                """;
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertStructTopLevelSnippetTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 System.Console.WriteLine();
                 $$
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 System.Console.WriteLine();
                 struct MyStruct
                 {
                     $$
                 }
-                """
-;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+                """;
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertStructSnippetInClassTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 struct MyClass
                 {
                     $$
                 }
-                """
-;
+                """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 struct MyClass
                 {
                     struct MyStruct
@@ -120,24 +123,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         $$
                     }
                 }
-                """
-;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+                """;
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertStructSnippetInRecordTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 record MyRecord
                 {
                     $$
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 record MyRecord
                 {
                     struct MyStruct
@@ -145,24 +149,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         $$
                     }
                 }
-                """
-;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+                """;
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertStructSnippetInStructTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 struct MyStruct
                 {
                     $$
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 struct MyStruct
                 {
                     struct MyStruct1
@@ -170,24 +175,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         $$
                     }
                 }
-                """
-;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+                """;
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertStructSnippetInInterfaceTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 interface MyInterface
                 {
                     $$
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 interface MyInterface
                 {
                     struct MyStruct
@@ -195,9 +201,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         $$
                     }
                 }
-                """
-;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+                """;
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -227,14 +236,17 @@ public struct MyStruct
 }}
 ";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task NoStructSnippetInEnumTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 enum MyEnum
                 {
                     $$
@@ -247,8 +259,7 @@ public struct MyStruct
         [WpfFact]
         public async Task NoStructSnippetInMethodTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 struct Program
                 {
                     public void Method()
@@ -256,16 +267,14 @@ public struct MyStruct
                         $$
                     }
                 }
-                """
-;
+                """;
             await VerifyItemIsAbsentAsync(markupBeforeCommit, ItemToCommit);
         }
 
         [WpfFact]
         public async Task NoStructSnippetInConstructorTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 struct Program
                 {
                     public Program()
@@ -273,8 +282,7 @@ public struct MyStruct
                         $$
                     }
                 }
-                """
-;
+                """;
             await VerifyItemIsAbsentAsync(markupBeforeCommit, ItemToCommit);
         }
 
@@ -295,7 +303,11 @@ public struct MyStruct
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
@@ -328,7 +340,11 @@ public struct MyStruct
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
@@ -346,7 +362,11 @@ public struct MyStruct
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
@@ -366,7 +386,9 @@ public struct MyStruct
         [InlineData("protected")]
         [InlineData("private protected")]
         [InlineData("protected internal")]
-        public async Task NoAdditionalAccessibilityModifiersIfAfterPartialKeywordTest(string modifier)
+        public async Task NoAdditionalAccessibilityModifiersIfAfterPartialKeywordTest(
+            string modifier
+        )
         {
             var markupBeforeCommit = $$"""
                 <Workspace>
@@ -390,7 +412,11 @@ public struct MyStruct
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/69600")]
@@ -418,7 +444,11 @@ public struct MyStruct
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/69600")]
@@ -445,7 +475,11 @@ public struct MyStruct
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -472,7 +506,11 @@ public struct MyStruct
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -499,7 +537,11 @@ public struct MyStruct
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -526,7 +568,11 @@ public struct MyStruct
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -553,7 +599,11 @@ public struct MyStruct
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
     }
 }

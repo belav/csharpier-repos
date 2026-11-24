@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,50 +34,39 @@ using System.Security.Permissions;
 
 namespace System.DirectoryServices.Protocols
 {
-	[Serializable]
-	public class TlsOperationException : DirectoryOperationException
-	{
-		const string default_message = "Directory response error";
+    [Serializable]
+    public class TlsOperationException : DirectoryOperationException
+    {
+        const string default_message = "Directory response error";
 
-		public TlsOperationException ()
-			: this (default_message)
-		{
-		}
+        public TlsOperationException()
+            : this(default_message) { }
 
-		public TlsOperationException (string message)
-			: base (message)
-		{
-		}
+        public TlsOperationException(string message)
+            : base(message) { }
 
-		public TlsOperationException (string message, Exception inner)
-			: base (message, inner)
-		{
-		}
+        public TlsOperationException(string message, Exception inner)
+            : base(message, inner) { }
 
-		public TlsOperationException (DirectoryResponse response)
-			: base (response, default_message)
-		{
-		}
+        public TlsOperationException(DirectoryResponse response)
+            : base(response, default_message) { }
 
-		public TlsOperationException (DirectoryResponse response, string message)
-			: this (response, message, null)
-		{
-		}
+        public TlsOperationException(DirectoryResponse response, string message)
+            : this(response, message, null) { }
 
-		public TlsOperationException (DirectoryResponse response, string message, Exception inner)
-			: base (response, message, inner)
-		{
-		}
+        public TlsOperationException(DirectoryResponse response, string message, Exception inner)
+            : base(response, message, inner) { }
 
-		protected TlsOperationException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-		}
+        protected TlsOperationException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
-		[SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
-		public override void GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
-		{
-			base.GetObjectData (serializationInfo, streamingContext);
-		}
-	}
+        [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
+        public override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+        {
+            base.GetObjectData(serializationInfo, streamingContext);
+        }
+    }
 }

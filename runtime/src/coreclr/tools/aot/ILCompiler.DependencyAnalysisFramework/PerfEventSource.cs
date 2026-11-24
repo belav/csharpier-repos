@@ -51,17 +51,33 @@ namespace ILCompiler.DependencyAnalysisFramework
 
         // The event IDs here must not collide with the ones used by ReadyToRunPerfEventSource.cs
         [Event(1001, Level = EventLevel.Informational)]
-        private void GraphProcessingStart() { WriteEvent(1001); }
+        private void GraphProcessingStart()
+        {
+            WriteEvent(1001);
+        }
+
         [Event(1002, Level = EventLevel.Informational)]
-        private void GraphProcessingStop() { WriteEvent(1002); }
+        private void GraphProcessingStop()
+        {
+            WriteEvent(1002);
+        }
 
         [Event(1003, Level = EventLevel.Informational)]
-        private void DependencyAnalysisStart() { WriteEvent(1003); }
+        private void DependencyAnalysisStart()
+        {
+            WriteEvent(1003);
+        }
+
         [Event(1004, Level = EventLevel.Informational)]
-        private void DependencyAnalysisStop() { WriteEvent(1004); }
+        private void DependencyAnalysisStop()
+        {
+            WriteEvent(1004);
+        }
 
         [Event(1005, Level = EventLevel.Informational)]
-        public void AddedNodeToMarkStack() { WriteEvent(1005); }
+        public void AddedNodeToMarkStack()
+        {
+            WriteEvent(1005);
+        }
     }
-
 }

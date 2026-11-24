@@ -13,12 +13,30 @@ namespace System.Json
     /// </summary>
     internal class JsonValueDynamicMetaObject : DynamicMetaObject
     {
-        private static readonly MethodInfo _getValueByIndexMethodInfo = typeof(JsonValue).GetMethod("GetValue", new Type[] { typeof(int) });
-        private static readonly MethodInfo _getValueByKeyMethodInfo = typeof(JsonValue).GetMethod("GetValue", new Type[] { typeof(string) });
-        private static readonly MethodInfo _setValueByIndexMethodInfo = typeof(JsonValue).GetMethod("SetValue", new Type[] { typeof(int), typeof(object) });
-        private static readonly MethodInfo _setValueByKeyMethodInfo = typeof(JsonValue).GetMethod("SetValue", new Type[] { typeof(string), typeof(object) });
-        private static readonly MethodInfo _castValueMethodInfo = typeof(JsonValue).GetMethod("CastValue", new Type[] { typeof(JsonValue) });
-        private static readonly MethodInfo _changeTypeMethodInfo = typeof(Convert).GetMethod("ChangeType", new Type[] { typeof(object), typeof(Type) });
+        private static readonly MethodInfo _getValueByIndexMethodInfo = typeof(JsonValue).GetMethod(
+            "GetValue",
+            new Type[] { typeof(int) }
+        );
+        private static readonly MethodInfo _getValueByKeyMethodInfo = typeof(JsonValue).GetMethod(
+            "GetValue",
+            new Type[] { typeof(string) }
+        );
+        private static readonly MethodInfo _setValueByIndexMethodInfo = typeof(JsonValue).GetMethod(
+            "SetValue",
+            new Type[] { typeof(int), typeof(object) }
+        );
+        private static readonly MethodInfo _setValueByKeyMethodInfo = typeof(JsonValue).GetMethod(
+            "SetValue",
+            new Type[] { typeof(string), typeof(object) }
+        );
+        private static readonly MethodInfo _castValueMethodInfo = typeof(JsonValue).GetMethod(
+            "CastValue",
+            new Type[] { typeof(JsonValue) }
+        );
+        private static readonly MethodInfo _changeTypeMethodInfo = typeof(Convert).GetMethod(
+            "ChangeType",
+            new Type[] { typeof(object), typeof(Type) }
+        );
 
         /// <summary>
         /// Class constructor.
@@ -26,9 +44,7 @@ namespace System.Json
         /// <param name="parameter">The expression representing this <see cref="DynamicMetaObject"/> during the dynamic binding process.</param>
         /// <param name="value">The runtime value represented by the <see cref="DynamicMetaObject"/>.</param>
         internal JsonValueDynamicMetaObject(Expression parameter, JsonValue value)
-            : base(parameter, BindingRestrictions.Empty, value)
-        {
-        }
+            : base(parameter, BindingRestrictions.Empty, value) { }
 
         /// <summary>
         /// Gets the default binding restrictions for this type.
@@ -53,22 +69,32 @@ namespace System.Json
             Expression expression = Expression;
 
             bool implicitCastSupported =
-                binder.Type.IsAssignableFrom(LimitType) ||
-                binder.Type == typeof(IEnumerable<KeyValuePair<string, JsonValue>>) ||
-                binder.Type == typeof(IDynamicMetaObjectProvider) ||
-                binder.Type == typeof(object);
+                binder.Type.IsAssignableFrom(LimitType)
+                || binder.Type == typeof(IEnumerable<KeyValuePair<string, JsonValue>>)
+                || binder.Type == typeof(IDynamicMetaObjectProvider)
+                || binder.Type == typeof(object);
 
             if (!implicitCastSupported)
             {
                 if (JsonValue.IsSupportedExplicitCastType(binder.Type))
                 {
                     Expression instance = Expression.Convert(Expression, LimitType);
-                    expression = Expression.Call(_castValueMethodInfo.MakeGenericMethod(binder.Type), new Expression[] { instance });
+                    expression = Expression.Call(
+                        _castValueMethodInfo.MakeGenericMethod(binder.Type),
+                        new Expression[] { instance }
+                    );
                 }
                 else
                 {
-                    string exceptionMessage = RS.Format(Properties.Resources.CannotCastJsonValue, LimitType.FullName, binder.Type.FullName);
-                    expression = Expression.Throw(Expression.Constant(new InvalidCastException(exceptionMessage)), typeof(object));
+                    string exceptionMessage = RS.Format(
+                        Properties.Resources.CannotCastJsonValue,
+                        LimitType.FullName,
+                        binder.Type.FullName
+                    );
+                    expression = Expression.Throw(
+                        Expression.Constant(new InvalidCastException(exceptionMessage)),
+                        typeof(object)
+                    );
                 }
             }
 
@@ -83,7 +109,10 @@ namespace System.Json
         /// <param name="binder">An instance of the <see cref="GetIndexBinder"/> that represents the details of the dynamic operation.</param>
         /// <param name="indexes">An array of <see cref="DynamicMetaObject"/> instances - indexes for the get index operation.</param>
         /// <returns>The new <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        public override DynamicMetaObject BindGetIndex(GetIndexBinder binder, DynamicMetaObject[] indexes)
+        public override DynamicMetaObject BindGetIndex(
+            GetIndexBinder binder,
+            DynamicMetaObject[] indexes
+        )
         {
             if (binder == null)
             {
@@ -101,7 +130,10 @@ namespace System.Json
                 return new DynamicMetaObject(indexExpression, DefaultRestrictions);
             }
 
-            MethodInfo methodInfo = indexExpression.Type == typeof(string) ? _getValueByKeyMethodInfo : _getValueByIndexMethodInfo;
+            MethodInfo methodInfo =
+                indexExpression.Type == typeof(string)
+                    ? _getValueByKeyMethodInfo
+                    : _getValueByIndexMethodInfo;
             Expression[] args = new Expression[] { indexExpression };
 
             return GetMethodMetaObject(methodInfo, args);
@@ -114,7 +146,11 @@ namespace System.Json
         /// <param name="indexes">An array of <see cref="DynamicMetaObject"/> instances - indexes for the set index operation.</param>
         /// <param name="value">The <see cref="DynamicMetaObject"/> representing the value for the set index operation.</param>
         /// <returns>The new <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        public override DynamicMetaObject BindSetIndex(SetIndexBinder binder, DynamicMetaObject[] indexes, DynamicMetaObject value)
+        public override DynamicMetaObject BindSetIndex(
+            SetIndexBinder binder,
+            DynamicMetaObject[] indexes,
+            DynamicMetaObject value
+        )
         {
             if (binder == null)
             {
@@ -137,8 +173,15 @@ namespace System.Json
                 return new DynamicMetaObject(indexExpression, DefaultRestrictions);
             }
 
-            MethodInfo methodInfo = indexExpression.Type == typeof(string) ? _setValueByKeyMethodInfo : _setValueByIndexMethodInfo;
-            Expression[] args = new Expression[] { indexExpression, Expression.Convert(value.Expression, typeof(object)) };
+            MethodInfo methodInfo =
+                indexExpression.Type == typeof(string)
+                    ? _setValueByKeyMethodInfo
+                    : _setValueByIndexMethodInfo;
+            Expression[] args = new Expression[]
+            {
+                indexExpression,
+                Expression.Convert(value.Expression, typeof(object)),
+            };
 
             return GetMethodMetaObject(methodInfo, args);
         }
@@ -155,7 +198,10 @@ namespace System.Json
                 throw new ArgumentNullException("binder");
             }
 
-            PropertyInfo propInfo = LimitType.GetProperty(binder.Name, BindingFlags.Instance | BindingFlags.Public);
+            PropertyInfo propInfo = LimitType.GetProperty(
+                binder.Name,
+                BindingFlags.Instance | BindingFlags.Public
+            );
 
             if (propInfo != null)
             {
@@ -173,7 +219,10 @@ namespace System.Json
         /// <param name="binder">An instance of the <see cref="SetMemberBinder"/> that represents the details of the dynamic operation.</param>
         /// <param name="value">The <see cref="DynamicMetaObject"/> representing the value for the set member operation.</param>
         /// <returns>The new <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        public override DynamicMetaObject BindSetMember(SetMemberBinder binder, DynamicMetaObject value)
+        public override DynamicMetaObject BindSetMember(
+            SetMemberBinder binder,
+            DynamicMetaObject value
+        )
         {
             if (binder == null)
             {
@@ -185,7 +234,11 @@ namespace System.Json
                 throw new ArgumentNullException("value");
             }
 
-            Expression[] args = new Expression[] { Expression.Constant(binder.Name), Expression.Convert(value.Expression, typeof(object)) };
+            Expression[] args = new Expression[]
+            {
+                Expression.Constant(binder.Name),
+                Expression.Convert(value.Expression, typeof(object)),
+            };
 
             return GetMethodMetaObject(_setValueByKeyMethodInfo, args);
         }
@@ -197,7 +250,10 @@ namespace System.Json
         /// <param name="binder">An instance of the InvokeMemberBinder that represents the details of the dynamic operation.</param>
         /// <param name="args">An array of DynamicMetaObject instances - arguments to the invoke member operation.</param>
         /// <returns>The new DynamicMetaObject representing the result of the binding.</returns>
-        public override DynamicMetaObject BindInvokeMember(InvokeMemberBinder binder, DynamicMetaObject[] args)
+        public override DynamicMetaObject BindInvokeMember(
+            InvokeMemberBinder binder,
+            DynamicMetaObject[] args
+        )
         {
             if (binder == null)
             {
@@ -224,7 +280,11 @@ namespace System.Json
 
                 Type[] argTypes = argTypeList.ToArray();
 
-                methodInfo = JsonValueDynamicMetaObject.GetExtensionMethod(typeof(JsonValueExtensions), binder.Name, argTypes);
+                methodInfo = JsonValueDynamicMetaObject.GetExtensionMethod(
+                    typeof(JsonValueExtensions),
+                    binder.Name,
+                    argTypes
+                );
 
                 if (methodInfo != null)
                 {
@@ -241,11 +301,17 @@ namespace System.Json
 
                     if (methodInfo.ReturnType == typeof(void))
                     {
-                        callExpression = Expression.Block(callExpression, Expression.Default(binder.ReturnType));
+                        callExpression = Expression.Block(
+                            callExpression,
+                            Expression.Default(binder.ReturnType)
+                        );
                     }
                     else
                     {
-                        callExpression = Expression.Convert(Expression.Call(methodInfo, argsExpression), binder.ReturnType);
+                        callExpression = Expression.Convert(
+                            Expression.Call(methodInfo, argsExpression),
+                            binder.ReturnType
+                        );
                     }
 
                     return new DynamicMetaObject(callExpression, DefaultRestrictions);
@@ -285,7 +351,11 @@ namespace System.Json
         /// <param name="methodName">The name of the method to get the info for.</param>
         /// <param name="argTypes">The types of the method arguments.</param>
         /// <returns>A <see cref="MethodInfo"/>instance or null if the method cannot be resolved.</returns>
-        private static MethodInfo GetExtensionMethod(Type extensionProviderType, string methodName, Type[] argTypes)
+        private static MethodInfo GetExtensionMethod(
+            Type extensionProviderType,
+            string methodName,
+            Type[] argTypes
+        )
         {
             MethodInfo methodInfo = null;
             MethodInfo[] methods = extensionProviderType.GetMethods();
@@ -330,7 +400,10 @@ namespace System.Json
         /// <param name="indexes">The operation indexes parameter.</param>
         /// <param name="expression">A <see cref="Expression"/> to be initialized to the index expression if the operation is successful, otherwise an error expression.</param>
         /// <returns>true the operation is successful, false otherwise.</returns>
-        private static bool TryGetIndexExpression(DynamicMetaObject[] indexes, out Expression expression)
+        private static bool TryGetIndexExpression(
+            DynamicMetaObject[] indexes,
+            out Expression expression
+        )
         {
             if (indexes.Length == 1 && indexes[0] != null && indexes[0].Value != null)
             {
@@ -346,7 +419,13 @@ namespace System.Json
                     case TypeCode.SByte:
                         Expression argExp = Expression.Convert(index.Expression, typeof(object));
                         Expression typeExp = Expression.Constant(typeof(int));
-                        expression = Expression.Convert(Expression.Call(_changeTypeMethodInfo, new Expression[] { argExp, typeExp }), typeof(int));
+                        expression = Expression.Convert(
+                            Expression.Call(
+                                _changeTypeMethodInfo,
+                                new Expression[] { argExp, typeExp }
+                            ),
+                            typeof(int)
+                        );
                         return true;
 
                     case TypeCode.Int32:
@@ -355,11 +434,23 @@ namespace System.Json
                         return true;
                 }
 
-                expression = Expression.Throw(Expression.Constant(new ArgumentException(RS.Format(Properties.Resources.InvalidIndexType, indexType))), typeof(object));
+                expression = Expression.Throw(
+                    Expression.Constant(
+                        new ArgumentException(
+                            RS.Format(Properties.Resources.InvalidIndexType, indexType)
+                        )
+                    ),
+                    typeof(object)
+                );
                 return false;
             }
 
-            expression = Expression.Throw(Expression.Constant(new ArgumentException(Properties.Resources.NonSingleNonNullIndexNotSupported)), typeof(object));
+            expression = Expression.Throw(
+                Expression.Constant(
+                    new ArgumentException(Properties.Resources.NonSingleNonNullIndexNotSupported)
+                ),
+                typeof(object)
+            );
             return false;
         }
 

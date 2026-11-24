@@ -13,13 +13,30 @@ namespace Microsoft.CodeAnalysis.ValueTracking
 {
     internal interface IValueTrackingService : IWorkspaceService
     {
-        Task<ImmutableArray<ValueTrackedItem>> TrackValueSourceAsync(TextSpan selection, Document document, CancellationToken cancellationToken);
-        Task<ImmutableArray<ValueTrackedItem>> TrackValueSourceAsync(Solution solution, ValueTrackedItem previousTrackedItem, CancellationToken cancellationToken);
+        Task<ImmutableArray<ValueTrackedItem>> TrackValueSourceAsync(
+            TextSpan selection,
+            Document document,
+            CancellationToken cancellationToken
+        );
+        Task<ImmutableArray<ValueTrackedItem>> TrackValueSourceAsync(
+            Solution solution,
+            ValueTrackedItem previousTrackedItem,
+            CancellationToken cancellationToken
+        );
     }
 
     internal interface IRemoteValueTrackingService
     {
-        ValueTask<ImmutableArray<SerializableValueTrackedItem>> TrackValueSourceAsync(Checksum solutionChecksum, TextSpan selection, DocumentId document, CancellationToken cancellationToken);
-        ValueTask<ImmutableArray<SerializableValueTrackedItem>> TrackValueSourceAsync(Checksum solutionChecksum, SerializableValueTrackedItem previousTrackedItem, CancellationToken cancellationToken);
+        ValueTask<ImmutableArray<SerializableValueTrackedItem>> TrackValueSourceAsync(
+            Checksum solutionChecksum,
+            TextSpan selection,
+            DocumentId document,
+            CancellationToken cancellationToken
+        );
+        ValueTask<ImmutableArray<SerializableValueTrackedItem>> TrackValueSourceAsync(
+            Checksum solutionChecksum,
+            SerializableValueTrackedItem previousTrackedItem,
+            CancellationToken cancellationToken
+        );
     }
 }

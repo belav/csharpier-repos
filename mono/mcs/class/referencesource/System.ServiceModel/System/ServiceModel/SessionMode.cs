@@ -17,9 +17,11 @@ namespace System.ServiceModel
     {
         public static bool IsDefined(SessionMode sessionMode)
         {
-            return (sessionMode == SessionMode.NotAllowed ||
-                    sessionMode == SessionMode.Allowed ||
-                    sessionMode == SessionMode.Required);
+            return (
+                sessionMode == SessionMode.NotAllowed
+                || sessionMode == SessionMode.Allowed
+                || sessionMode == SessionMode.Required
+            );
         }
     }
 }

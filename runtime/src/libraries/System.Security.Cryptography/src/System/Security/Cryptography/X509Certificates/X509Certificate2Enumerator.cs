@@ -47,8 +47,7 @@ namespace System.Security.Cryptography.X509Certificates
         {
             Reset();
         }
-        void IDisposable.Dispose()
-        {
-        }
+
+        void IDisposable.Dispose() { }
     }
 }

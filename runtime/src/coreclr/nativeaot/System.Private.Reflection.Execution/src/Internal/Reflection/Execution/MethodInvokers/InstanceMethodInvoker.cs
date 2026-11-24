@@ -3,10 +3,9 @@
 
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
+using global::System;
 using global::Internal.Runtime.Augments;
 using global::Internal.Runtime.CompilerServices;
-using global::System;
 using global::System.Diagnostics;
 using global::System.Reflection;
 
@@ -17,7 +16,10 @@ namespace Internal.Reflection.Execution.MethodInvokers
     //
     internal sealed unsafe class InstanceMethodInvoker : MethodInvokerWithMethodInvokeInfo
     {
-        public InstanceMethodInvoker(MethodInvokeInfo methodInvokeInfo, RuntimeTypeHandle declaringTypeHandle)
+        public InstanceMethodInvoker(
+            MethodInvokeInfo methodInvokeInfo,
+            RuntimeTypeHandle declaringTypeHandle
+        )
             : base(methodInvokeInfo)
         {
             _declaringTypeHandle = declaringTypeHandle;
@@ -30,7 +32,8 @@ namespace Internal.Reflection.Execution.MethodInvokers
                 }
                 else
                 {
-                    _allocatorMethod = (delegate*<nint, object>)RuntimeAugments.GetAllocateObjectHelperForType(declaringTypeHandle);
+                    _allocatorMethod = (delegate* <nint, object>)
+                        RuntimeAugments.GetAllocateObjectHelperForType(declaringTypeHandle);
                 }
             }
         }
@@ -41,7 +44,12 @@ namespace Internal.Reflection.Execution.MethodInvokers
         }
 
         [DebuggerGuidedStepThrough]
-        protected sealed override object? Invoke(object? thisObject, object?[]? arguments, BinderBundle binderBundle, bool wrapInTargetInvocationException)
+        protected sealed override object? Invoke(
+            object? thisObject,
+            object?[]? arguments,
+            BinderBundle binderBundle,
+            bool wrapInTargetInvocationException
+        )
         {
             if (MethodInvokeInfo.IsSupportedSignature) // Workaround to match expected argument validation order
             {
@@ -53,7 +61,8 @@ namespace Internal.Reflection.Execution.MethodInvokers
                 MethodInvokeInfo.LdFtnResult,
                 arguments,
                 binderBundle,
-                wrapInTargetInvocationException);
+                wrapInTargetInvocationException
+            );
             DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return result;
         }
@@ -69,13 +78,17 @@ namespace Internal.Reflection.Execution.MethodInvokers
             object? result = MethodInvokeInfo.Invoke(
                 thisObject,
                 MethodInvokeInfo.LdFtnResult,
-                arguments);
+                arguments
+            );
             DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return result;
         }
 
         [DebuggerGuidedStepThrough]
-        protected sealed override object? InvokeDirectWithFewArgs(object? thisObject, Span<object?> arguments)
+        protected sealed override object? InvokeDirectWithFewArgs(
+            object? thisObject,
+            Span<object?> arguments
+        )
         {
             if (MethodInvokeInfo.IsSupportedSignature) // Workaround to match expected argument validation order
             {
@@ -85,21 +98,30 @@ namespace Internal.Reflection.Execution.MethodInvokers
             object? result = MethodInvokeInfo.InvokeDirectWithFewArgs(
                 thisObject,
                 MethodInvokeInfo.LdFtnResult,
-                arguments);
+                arguments
+            );
             DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return result;
         }
 
         [DebuggerGuidedStepThroughAttribute]
-        protected sealed override object CreateInstance(object[] arguments, BinderBundle binderBundle, bool wrapInTargetInvocationException)
+        protected sealed override object CreateInstance(
+            object[] arguments,
+            BinderBundle binderBundle,
+            bool wrapInTargetInvocationException
+        )
         {
-            object thisObject = RawCalliHelper.Call<object>(_allocatorMethod, _declaringTypeHandle.Value);
+            object thisObject = RawCalliHelper.Call<object>(
+                _allocatorMethod,
+                _declaringTypeHandle.Value
+            );
             MethodInvokeInfo.Invoke(
                 thisObject,
                 MethodInvokeInfo.LdFtnResult,
                 arguments,
                 binderBundle,
-                wrapInTargetInvocationException);
+                wrapInTargetInvocationException
+            );
             System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return thisObject;
         }
@@ -118,7 +140,13 @@ namespace Internal.Reflection.Execution.MethodInvokers
             return thisObject;
         }
 
-        public sealed override Delegate CreateDelegate(RuntimeTypeHandle delegateType, object target, bool isStatic, bool isVirtual, bool isOpen)
+        public sealed override Delegate CreateDelegate(
+            RuntimeTypeHandle delegateType,
+            object target,
+            bool isStatic,
+            bool isVirtual,
+            bool isOpen
+        )
         {
             if (isOpen)
             {
@@ -134,10 +162,17 @@ namespace Internal.Reflection.Execution.MethodInvokers
 
                 return RuntimeAugments.CreateDelegate(
                     delegateType,
-                    new OpenMethodResolver(_declaringTypeHandle, MethodInvokeInfo.LdFtnResult, default(GCHandle), 0, resolveType).ToIntPtr(),
+                    new OpenMethodResolver(
+                        _declaringTypeHandle,
+                        MethodInvokeInfo.LdFtnResult,
+                        default(GCHandle),
+                        0,
+                        resolveType
+                    ).ToIntPtr(),
                     target,
                     isStatic: isStatic,
-                    isOpen: isOpen);
+                    isOpen: isOpen
+                );
             }
             else
             {
@@ -148,13 +183,12 @@ namespace Internal.Reflection.Execution.MethodInvokers
         public sealed override IntPtr LdFtnResult => MethodInvokeInfo.LdFtnResult;
 
         private RuntimeTypeHandle _declaringTypeHandle;
-        private delegate*<nint, object> _allocatorMethod;
+        private delegate* <nint, object> _allocatorMethod;
 
         private static class RawCalliHelper
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static T Call<T>(delegate*<IntPtr, T> pfn, IntPtr arg)
-            => pfn(arg);
+            public static T Call<T>(delegate* <IntPtr, T> pfn, IntPtr arg) => pfn(arg);
         }
     }
 }

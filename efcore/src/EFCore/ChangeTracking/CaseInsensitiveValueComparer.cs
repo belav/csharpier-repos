@@ -14,7 +14,6 @@ public class CaseInsensitiveValueComparer : ValueComparer<string?>
     public CaseInsensitiveValueComparer()
         : base(
             (l, r) => string.Equals(l, r, StringComparison.OrdinalIgnoreCase),
-            v => v == null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(v))
-    {
-    }
+            v => v == null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(v)
+        ) { }
 }

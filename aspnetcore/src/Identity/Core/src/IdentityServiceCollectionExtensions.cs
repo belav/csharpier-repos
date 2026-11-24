@@ -65,49 +65,37 @@ public static class IdentityServiceCollectionExtensions
                 options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
                 options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
             })
-            .AddCookie(
-                IdentityConstants.ApplicationScheme,
-                o =>
+            .AddCookie(IdentityConstants.ApplicationScheme, o =>
+            {
+                o.LoginPath = new PathString("/Account/Login");
+                o.Events = new CookieAuthenticationEvents
                 {
-                    o.LoginPath = new PathString("/Account/Login");
-                    o.Events = new CookieAuthenticationEvents
-                    {
-                        OnValidatePrincipal = SecurityStampValidator.ValidatePrincipalAsync,
-                    };
-                }
-            )
-            .AddCookie(
-                IdentityConstants.ExternalScheme,
-                o =>
+                    OnValidatePrincipal = SecurityStampValidator.ValidatePrincipalAsync,
+                };
+            })
+            .AddCookie(IdentityConstants.ExternalScheme, o =>
+            {
+                o.Cookie.Name = IdentityConstants.ExternalScheme;
+                o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+            })
+            .AddCookie(IdentityConstants.TwoFactorRememberMeScheme, o =>
+            {
+                o.Cookie.Name = IdentityConstants.TwoFactorRememberMeScheme;
+                o.Events = new CookieAuthenticationEvents
                 {
-                    o.Cookie.Name = IdentityConstants.ExternalScheme;
-                    o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-                }
-            )
-            .AddCookie(
-                IdentityConstants.TwoFactorRememberMeScheme,
-                o =>
+                    OnValidatePrincipal =
+                        SecurityStampValidator.ValidateAsync<ITwoFactorSecurityStampValidator>,
+                };
+            })
+            .AddCookie(IdentityConstants.TwoFactorUserIdScheme, o =>
+            {
+                o.Cookie.Name = IdentityConstants.TwoFactorUserIdScheme;
+                o.Events = new CookieAuthenticationEvents
                 {
-                    o.Cookie.Name = IdentityConstants.TwoFactorRememberMeScheme;
-                    o.Events = new CookieAuthenticationEvents
-                    {
-                        OnValidatePrincipal =
-                            SecurityStampValidator.ValidateAsync<ITwoFactorSecurityStampValidator>,
-                    };
-                }
-            )
-            .AddCookie(
-                IdentityConstants.TwoFactorUserIdScheme,
-                o =>
-                {
-                    o.Cookie.Name = IdentityConstants.TwoFactorUserIdScheme;
-                    o.Events = new CookieAuthenticationEvents
-                    {
-                        OnRedirectToReturnUrl = _ => Task.CompletedTask,
-                    };
-                    o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-                }
-            );
+                    OnRedirectToReturnUrl = _ => Task.CompletedTask,
+                };
+                o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+            });
 
         // Hosting doesn't add IHttpContextAccessor by default
         services.AddHttpContextAccessor();

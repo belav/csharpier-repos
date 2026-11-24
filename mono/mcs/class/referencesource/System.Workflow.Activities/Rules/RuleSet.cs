@@ -4,9 +4,9 @@
 
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Workflow.Activities.Common;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Compiler;
-using System.Workflow.Activities.Common;
 
 namespace System.Workflow.Activities.Rules
 {
@@ -14,7 +14,7 @@ namespace System.Workflow.Activities.Rules
     {
         None,
         UpdateOnly,
-        Full
+        Full,
     };
 
     [Serializable]
@@ -31,6 +31,7 @@ namespace System.Workflow.Activities.Rules
         // keep track of cached data
         [NonSerialized]
         private RuleEngine cachedEngine;
+
         [NonSerialized]
         private RuleValidation cachedValidation;
 
@@ -57,7 +58,9 @@ namespace System.Workflow.Activities.Rules
             set
             {
                 if (runtimeInitialized)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_CanNotChangeAtRuntime));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_CanNotChangeAtRuntime)
+                    );
                 name = value;
             }
         }
@@ -68,7 +71,9 @@ namespace System.Workflow.Activities.Rules
             set
             {
                 if (runtimeInitialized)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_CanNotChangeAtRuntime));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_CanNotChangeAtRuntime)
+                    );
                 description = value;
             }
         }
@@ -79,7 +84,9 @@ namespace System.Workflow.Activities.Rules
             set
             {
                 if (runtimeInitialized)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_CanNotChangeAtRuntime));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_CanNotChangeAtRuntime)
+                    );
                 behavior = value;
             }
         }
@@ -99,12 +106,15 @@ namespace System.Workflow.Activities.Rules
             Dictionary<string, object> ruleNames = new Dictionary<string, object>();
             foreach (Rule r in rules)
             {
-                if (!string.IsNullOrEmpty(r.Name))  // invalid names caught when validating the rule
+                if (!string.IsNullOrEmpty(r.Name)) // invalid names caught when validating the rule
                 {
                     if (ruleNames.ContainsKey(r.Name))
                     {
                         // Duplicate rule name found.
-                        ValidationError error = new ValidationError(Messages.Error_DuplicateRuleName, ErrorNumbers.Error_DuplicateConditions);
+                        ValidationError error = new ValidationError(
+                            Messages.Error_DuplicateRuleName,
+                            ErrorNumbers.Error_DuplicateConditions
+                        );
                         error.UserData[RuleUserDataKeys.ErrorObject] = r;
                         validation.AddError(error);
                     }
@@ -129,15 +139,22 @@ namespace System.Workflow.Activities.Rules
             if (ruleExecution == null)
                 throw new ArgumentNullException("ruleExecution");
             if (ruleExecution.Validation == null)
-                throw new ArgumentException(SR.GetString(SR.Error_MissingValidationProperty), "ruleExecution");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_MissingValidationProperty),
+                    "ruleExecution"
+                );
 
-            RuleEngine engine = new RuleEngine(this, ruleExecution.Validation, ruleExecution.ActivityExecutionContext);
+            RuleEngine engine = new RuleEngine(
+                this,
+                ruleExecution.Validation,
+                ruleExecution.ActivityExecutionContext
+            );
             engine.Execute(ruleExecution);
         }
 
         internal void Execute(Activity activity, ActivityExecutionContext executionContext)
         {
-            // this can be called from multiple threads if multiple workflows are 
+            // this can be called from multiple threads if multiple workflows are
             // running at the same time (only a single workflow is single-threaded)
             // we want to only lock around the validation and preprocessing, so that
             // execution can run in parallel.
@@ -150,7 +167,11 @@ namespace System.Workflow.Activities.Rules
             lock (syncLock)
             {
                 // do we have something useable cached?
-                if ((cachedEngine == null) || (cachedValidation == null) || (cachedValidation.ThisType != activityType))
+                if (
+                    (cachedEngine == null)
+                    || (cachedValidation == null)
+                    || (cachedValidation.ThisType != activityType)
+                )
                 {
                     // no cache (or its invalid)
                     RuleValidation validation = new RuleValidation(activityType, null);
@@ -191,10 +212,12 @@ namespace System.Workflow.Activities.Rules
             RuleSet other = obj as RuleSet;
             if (other == null)
                 return false;
-            if ((this.Name != other.Name)
+            if (
+                (this.Name != other.Name)
                 || (this.Description != other.Description)
                 || (this.ChainingBehavior != other.ChainingBehavior)
-                || (this.Rules.Count != other.Rules.Count))
+                || (this.Rules.Count != other.Rules.Count)
+            )
                 return false;
             // look similar, compare each rule
             for (int i = 0; i < this.rules.Count; ++i)

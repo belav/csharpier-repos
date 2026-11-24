@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void RegularMethodBody_01()
         {
             // No block or expression body
-            string source = @"
+            string source =
+                @"
 abstract class C
 {
     public abstract void M();
@@ -32,7 +33,10 @@ abstract class C
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var node1 = tree.GetRoot().DescendantNodes().OfType<BaseMethodDeclarationSyntax>().Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BaseMethodDeclarationSyntax>()
+                .Single();
             Assert.Null(model.GetOperation(node1));
         }
 
@@ -41,7 +45,8 @@ abstract class C
         public void RegularMethodBody_02()
         {
             // Block body with throw
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void M()
@@ -53,10 +58,14 @@ class C
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
-            var node1 = tree.GetRoot().DescendantNodes().OfType<BaseMethodDeclarationSyntax>().Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BaseMethodDeclarationSyntax>()
+                .Single();
 
-            compilation.VerifyOperationTree(node1, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node1,
+                expectedOperationTree: @"
     IMethodBodyOperation (OperationKind.MethodBody, Type: null) (Syntax: 'public void ... row null; }')
       BlockBody: 
         IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ throw null; }')
@@ -67,10 +76,13 @@ class C
                 ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
       ExpressionBody: 
         null
-");
+"
+            );
 
-            VerifyFlowGraph(compilation, node1, expectedFlowGraph:
-@"
+            VerifyFlowGraph(
+                compilation,
+                node1,
+                expectedFlowGraph: @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -86,7 +98,8 @@ class C
     Block[B2] - Exit [UnReachable]
         Predecessors (0)
         Statements (0)
-");
+"
+            );
         }
 
         [CompilerTrait(CompilerFeature.Dataflow)]
@@ -94,7 +107,8 @@ class C
         public void RegularMethodBody_03()
         {
             // Expression body with throw
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void M() 
@@ -106,10 +120,14 @@ class C
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
-            var node1 = tree.GetRoot().DescendantNodes().OfType<BaseMethodDeclarationSyntax>().Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BaseMethodDeclarationSyntax>()
+                .Single();
 
-            compilation.VerifyOperationTree(node1, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node1,
+                expectedOperationTree: @"
     IMethodBodyOperation (OperationKind.MethodBody, Type: null) (Syntax: 'public void ... throw null;')
       BlockBody: 
         null
@@ -122,10 +140,13 @@ class C
                   Conversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: False, IsReference: True, IsUserDefined: False) (MethodSymbol: null)
                   Operand: 
                     ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
-");
+"
+            );
 
-            VerifyFlowGraph(compilation, node1, expectedFlowGraph:
-@"
+            VerifyFlowGraph(
+                compilation,
+                node1,
+                expectedFlowGraph: @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -141,7 +162,8 @@ class C
     Block[B2] - Exit [UnReachable]
         Predecessors (0)
         Statements (0)
-");
+"
+            );
         }
 
         [CompilerTrait(CompilerFeature.Dataflow)]
@@ -149,7 +171,8 @@ class C
         public void RegularMethodBody_04()
         {
             // Block and expression body with throw
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void M()
@@ -162,16 +185,24 @@ class C
             compilation.VerifyDiagnostics(
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     public void M()
-                Diagnostic(ErrorCode.ERR_BlockBodyAndExpressionBody, @"public void M()
+                Diagnostic(
+                        ErrorCode.ERR_BlockBodyAndExpressionBody,
+                        @"public void M()
     { throw null; }
-    => throw null;").WithLocation(4, 5)
-                );
+    => throw null;"
+                    )
+                    .WithLocation(4, 5)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
-            var node1 = tree.GetRoot().DescendantNodes().OfType<BaseMethodDeclarationSyntax>().Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BaseMethodDeclarationSyntax>()
+                .Single();
 
-            compilation.VerifyOperationTree(node1, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node1,
+                expectedOperationTree: @"
     IMethodBodyOperation (OperationKind.MethodBody, Type: null, IsInvalid) (Syntax: 'public void ... throw null;')
       BlockBody: 
         IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ throw null; }')
@@ -189,10 +220,13 @@ class C
                   Conversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: False, IsReference: True, IsUserDefined: False) (MethodSymbol: null)
                   Operand: 
                     ILiteralOperation (OperationKind.Literal, Type: null, Constant: null, IsInvalid) (Syntax: 'null')
-");
+"
+            );
 
-            VerifyFlowGraph(compilation, node1, expectedFlowGraph:
-@"
+            VerifyFlowGraph(
+                compilation,
+                node1,
+                expectedFlowGraph: @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -220,7 +254,8 @@ class C
     Block[B3] - Exit [UnReachable]
         Predecessors (0)
         Statements (0)
-");
+"
+            );
         }
 
         [CompilerTrait(CompilerFeature.Dataflow)]
@@ -228,7 +263,8 @@ class C
         public void RegularMethodBody_05()
         {
             // Block body with non-exceptional flow
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void M(int i, int j)
@@ -240,10 +276,15 @@ class C
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
-            var node1 = tree.GetRoot().DescendantNodes().OfType<BaseMethodDeclarationSyntax>().Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BaseMethodDeclarationSyntax>()
+                .Single();
 
-            VerifyFlowGraph(compilation, node1, expectedFlowGraph:
-@"
+            VerifyFlowGraph(
+                compilation,
+                node1,
+                expectedFlowGraph: @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -262,7 +303,8 @@ Block[B1] - Block
 Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
-");
+"
+            );
         }
 
         [CompilerTrait(CompilerFeature.Dataflow)]
@@ -270,7 +312,8 @@ Block[B2] - Exit
         public void RegularMethodBody_06()
         {
             // Expression body with non-exceptional flow
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void M(int i, int j)
@@ -282,10 +325,15 @@ class C
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
-            var node1 = tree.GetRoot().DescendantNodes().OfType<BaseMethodDeclarationSyntax>().Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BaseMethodDeclarationSyntax>()
+                .Single();
 
-            VerifyFlowGraph(compilation, node1, expectedFlowGraph:
-@"
+            VerifyFlowGraph(
+                compilation,
+                node1,
+                expectedFlowGraph: @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -304,7 +352,8 @@ Block[B1] - Block
 Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
-");
+"
+            );
         }
 
         [CompilerTrait(CompilerFeature.Dataflow)]
@@ -312,7 +361,8 @@ Block[B2] - Exit
         public void RegularMethodBody_07()
         {
             // Block and expression body with non-exceptional flow
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void M(int i1, int i2, int j1, int j2)
@@ -325,15 +375,25 @@ class C
             compilation.VerifyDiagnostics(
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     public void M(int i, int j)
-                Diagnostic(ErrorCode.ERR_BlockBodyAndExpressionBody, @"public void M(int i1, int i2, int j1, int j2)
+                Diagnostic(
+                        ErrorCode.ERR_BlockBodyAndExpressionBody,
+                        @"public void M(int i1, int i2, int j1, int j2)
     { i1 = j1; }
-    => i2 = j2;").WithLocation(4, 5));
+    => i2 = j2;"
+                    )
+                    .WithLocation(4, 5)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
-            var node1 = tree.GetRoot().DescendantNodes().OfType<BaseMethodDeclarationSyntax>().Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BaseMethodDeclarationSyntax>()
+                .Single();
 
-            VerifyFlowGraph(compilation, node1, expectedFlowGraph:
-@"
+            VerifyFlowGraph(
+                compilation,
+                node1,
+                expectedFlowGraph: @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -370,7 +430,8 @@ Block[B1] - Block
 Block[B3] - Exit
     Predecessors: [B1] [B2]
     Statements (0)
-");
+"
+            );
         }
 
         [CompilerTrait(CompilerFeature.Dataflow)]
@@ -379,7 +440,8 @@ Block[B3] - Exit
         {
             // Verify block body with a return statement, followed by throw in expression body.
             // This caught an assert when attempting to link current basic block which was already linked to exit.
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void M()
@@ -392,15 +454,25 @@ class C
             compilation.VerifyDiagnostics(
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     public void M()
-                Diagnostic(ErrorCode.ERR_BlockBodyAndExpressionBody, @"public void M()
+                Diagnostic(
+                        ErrorCode.ERR_BlockBodyAndExpressionBody,
+                        @"public void M()
     { return; }
-    => throw null;").WithLocation(4, 5));
+    => throw null;"
+                    )
+                    .WithLocation(4, 5)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
-            var node1 = tree.GetRoot().DescendantNodes().OfType<BaseMethodDeclarationSyntax>().Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BaseMethodDeclarationSyntax>()
+                .Single();
 
-            VerifyFlowGraph(compilation, node1, expectedFlowGraph:
-@"
+            VerifyFlowGraph(
+                compilation,
+                node1,
+                expectedFlowGraph: @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B2]
@@ -419,7 +491,8 @@ class C
     Block[B2] - Exit
         Predecessors: [B0]
         Statements (0)
-");
+"
+            );
         }
 
         [CompilerTrait(CompilerFeature.Dataflow)]
@@ -427,7 +500,8 @@ class C
         public void RegularMethodBody_09()
         {
             // Expression body with local declarations.
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void M()
@@ -441,10 +515,15 @@ class C
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
-            var node1 = tree.GetRoot().DescendantNodes().OfType<BaseMethodDeclarationSyntax>().First();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BaseMethodDeclarationSyntax>()
+                .First();
 
-            VerifyFlowGraph(compilation, node1, expectedFlowGraph:
-@"
+            VerifyFlowGraph(
+                compilation,
+                node1,
+                expectedFlowGraph: @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -475,7 +554,8 @@ Block[B0] - Entry
 Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
-");
+"
+            );
         }
 
         [CompilerTrait(CompilerFeature.Dataflow)]
@@ -483,7 +563,8 @@ Block[B2] - Exit
         public void RegularMethodBody_10()
         {
             // Block body and expression body with local declarations.
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void M()
@@ -498,15 +579,25 @@ class C
             compilation.VerifyDiagnostics(
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     public void M()
-                Diagnostic(ErrorCode.ERR_BlockBodyAndExpressionBody, @"public void M()
+                Diagnostic(
+                        ErrorCode.ERR_BlockBodyAndExpressionBody,
+                        @"public void M()
     { }
-    => M2(out int x);").WithLocation(4, 5));
+    => M2(out int x);"
+                    )
+                    .WithLocation(4, 5)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
-            var node1 = tree.GetRoot().DescendantNodes().OfType<BaseMethodDeclarationSyntax>().First();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BaseMethodDeclarationSyntax>()
+                .First();
 
-            VerifyFlowGraph(compilation, node1, expectedFlowGraph:
-@"
+            VerifyFlowGraph(
+                compilation,
+                node1,
+                expectedFlowGraph: @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B2]
@@ -536,13 +627,15 @@ Block[B0] - Entry
 Block[B2] - Exit
     Predecessors: [B0] [B1]
     Statements (0)
-");
+"
+            );
         }
 
         [Fact]
         public void OperatorBody_01()
         {
-            string source = @"
+            string source =
+                @"
 abstract class C
 {
     public static C operator ! (C x);
@@ -553,20 +646,26 @@ abstract class C
             compilation.VerifyDiagnostics(
                 // (4,30): error CS0501: 'C.operator !(C)' must declare a body because it is not marked abstract, extern, or partial
                 //     public static C operator ! (C x);
-                Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "!").WithArguments("C.operator !(C)").WithLocation(4, 30)
-                );
+                Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "!")
+                    .WithArguments("C.operator !(C)")
+                    .WithLocation(4, 30)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var node1 = tree.GetRoot().DescendantNodes().OfType<BaseMethodDeclarationSyntax>().Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BaseMethodDeclarationSyntax>()
+                .Single();
             Assert.Null(model.GetOperation(node1));
         }
 
         [Fact]
         public void OperatorMethodBody_02()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public static C operator ! (C x)
@@ -578,10 +677,14 @@ class C
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
-            var node1 = tree.GetRoot().DescendantNodes().OfType<BaseMethodDeclarationSyntax>().Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BaseMethodDeclarationSyntax>()
+                .Single();
 
-            compilation.VerifyOperationTree(node1, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node1,
+                expectedOperationTree: @"
     IMethodBodyOperation (OperationKind.MethodBody, Type: null) (Syntax: 'public stat ... row null; }')
       BlockBody: 
         IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ throw null; }')
@@ -592,13 +695,15 @@ class C
                 ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
       ExpressionBody: 
         null
-");
+"
+            );
         }
 
         [Fact]
         public void OperatorMethodBody_03()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public static C operator ! (C x)
@@ -610,10 +715,14 @@ class C
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
-            var node1 = tree.GetRoot().DescendantNodes().OfType<BaseMethodDeclarationSyntax>().Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BaseMethodDeclarationSyntax>()
+                .Single();
 
-            compilation.VerifyOperationTree(node1, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node1,
+                expectedOperationTree: @"
     IMethodBodyOperation (OperationKind.MethodBody, Type: null) (Syntax: 'public stat ... throw null;')
       BlockBody: 
         null
@@ -629,13 +738,15 @@ class C
                       Conversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: False, IsReference: True, IsUserDefined: False) (MethodSymbol: null)
                       Operand: 
                         ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
-");
+"
+            );
         }
 
         [Fact]
         public void OperatorMethodBody_04()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public static C operator ! (C x)
@@ -648,16 +759,24 @@ class C
             compilation.VerifyDiagnostics(
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     public static C operator ! (C x)
-                Diagnostic(ErrorCode.ERR_BlockBodyAndExpressionBody, @"public static C operator ! (C x)
+                Diagnostic(
+                        ErrorCode.ERR_BlockBodyAndExpressionBody,
+                        @"public static C operator ! (C x)
     { throw null; }
-    => throw null;").WithLocation(4, 5)
-                );
+    => throw null;"
+                    )
+                    .WithLocation(4, 5)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
-            var node1 = tree.GetRoot().DescendantNodes().OfType<BaseMethodDeclarationSyntax>().Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BaseMethodDeclarationSyntax>()
+                .Single();
 
-            compilation.VerifyOperationTree(node1, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node1,
+                expectedOperationTree: @"
     IMethodBodyOperation (OperationKind.MethodBody, Type: null, IsInvalid) (Syntax: 'public stat ... throw null;')
       BlockBody: 
         IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ throw null; }')
@@ -678,13 +797,15 @@ class C
                       Conversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: False, IsReference: True, IsUserDefined: False) (MethodSymbol: null)
                       Operand: 
                         ILiteralOperation (OperationKind.Literal, Type: null, Constant: null, IsInvalid) (Syntax: 'null')
-");
+"
+            );
         }
 
         [Fact]
         public void ConversionBody_01()
         {
-            string source = @"
+            string source =
+                @"
 abstract class C
 {
     public static implicit operator int(C x);
@@ -695,20 +816,26 @@ abstract class C
             compilation.VerifyDiagnostics(
                 // (4,37): error CS0501: 'C.implicit operator int(C)' must declare a body because it is not marked abstract, extern, or partial
                 //     public static implicit operator int(C x);
-                Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "int").WithArguments("C.implicit operator int(C)").WithLocation(4, 37)
-                );
+                Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "int")
+                    .WithArguments("C.implicit operator int(C)")
+                    .WithLocation(4, 37)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var node1 = tree.GetRoot().DescendantNodes().OfType<BaseMethodDeclarationSyntax>().Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BaseMethodDeclarationSyntax>()
+                .Single();
             Assert.Null(model.GetOperation(node1));
         }
 
         [Fact]
         public void ConversionMethodBody_02()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public static implicit operator int(C x)
@@ -720,10 +847,14 @@ class C
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
-            var node1 = tree.GetRoot().DescendantNodes().OfType<BaseMethodDeclarationSyntax>().Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BaseMethodDeclarationSyntax>()
+                .Single();
 
-            compilation.VerifyOperationTree(node1, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node1,
+                expectedOperationTree: @"
 IMethodBodyOperation (OperationKind.MethodBody, Type: null) (Syntax: 'public stat ... row null; }')
     BlockBody: 
     IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ throw null; }')
@@ -734,13 +865,15 @@ IMethodBodyOperation (OperationKind.MethodBody, Type: null) (Syntax: 'public sta
             ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
     ExpressionBody: 
     null
-");
+"
+            );
         }
 
         [Fact]
         public void ConversionMethodBody_03()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public static implicit operator int(C x)
@@ -752,10 +885,14 @@ class C
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
-            var node1 = tree.GetRoot().DescendantNodes().OfType<BaseMethodDeclarationSyntax>().Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BaseMethodDeclarationSyntax>()
+                .Single();
 
-            compilation.VerifyOperationTree(node1, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node1,
+                expectedOperationTree: @"
 IMethodBodyOperation (OperationKind.MethodBody, Type: null) (Syntax: 'public stat ... throw null;')
     BlockBody: 
     null
@@ -771,13 +908,15 @@ IMethodBodyOperation (OperationKind.MethodBody, Type: null) (Syntax: 'public sta
                     Conversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: False, IsReference: True, IsUserDefined: False) (MethodSymbol: null)
                     Operand: 
                     ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
-");
+"
+            );
         }
 
         [Fact]
         public void ConversionMethodBody_04()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public static implicit operator int(C x)
@@ -790,16 +929,24 @@ class C
             compilation.VerifyDiagnostics(
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     public static implicit operator int(C x)
-                Diagnostic(ErrorCode.ERR_BlockBodyAndExpressionBody, @"public static implicit operator int(C x)
+                Diagnostic(
+                        ErrorCode.ERR_BlockBodyAndExpressionBody,
+                        @"public static implicit operator int(C x)
     { throw null; }
-    => throw null;").WithLocation(4, 5)
-                );
+    => throw null;"
+                    )
+                    .WithLocation(4, 5)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
-            var node1 = tree.GetRoot().DescendantNodes().OfType<BaseMethodDeclarationSyntax>().Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BaseMethodDeclarationSyntax>()
+                .Single();
 
-            compilation.VerifyOperationTree(node1, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node1,
+                expectedOperationTree: @"
 IMethodBodyOperation (OperationKind.MethodBody, Type: null, IsInvalid) (Syntax: 'public stat ... throw null;')
     BlockBody: 
     IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ throw null; }')
@@ -820,13 +967,15 @@ IMethodBodyOperation (OperationKind.MethodBody, Type: null, IsInvalid) (Syntax: 
                     Conversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: False, IsReference: True, IsUserDefined: False) (MethodSymbol: null)
                     Operand: 
                     ILiteralOperation (OperationKind.Literal, Type: null, Constant: null, IsInvalid) (Syntax: 'null')
-");
+"
+            );
         }
 
         [Fact]
         public void DestructorBody_01()
         {
-            string source = @"
+            string source =
+                @"
 abstract class C
 {
     ~C();
@@ -837,20 +986,26 @@ abstract class C
             compilation.VerifyDiagnostics(
                 // (4,6): error CS0501: 'C.~C()' must declare a body because it is not marked abstract, extern, or partial
                 //     ~C();
-                Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "C").WithArguments("C.~C()").WithLocation(4, 6)
-                );
+                Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "C")
+                    .WithArguments("C.~C()")
+                    .WithLocation(4, 6)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var node1 = tree.GetRoot().DescendantNodes().OfType<BaseMethodDeclarationSyntax>().Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BaseMethodDeclarationSyntax>()
+                .Single();
             Assert.Null(model.GetOperation(node1));
         }
 
         [Fact]
         public void DestructorBody_02()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     ~C()
@@ -862,10 +1017,14 @@ class C
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
-            var node1 = tree.GetRoot().DescendantNodes().OfType<BaseMethodDeclarationSyntax>().Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BaseMethodDeclarationSyntax>()
+                .Single();
 
-            compilation.VerifyOperationTree(node1, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node1,
+                expectedOperationTree: @"
 IMethodBodyOperation (OperationKind.MethodBody, Type: null) (Syntax: '~C() ... row null; }')
     BlockBody: 
     IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ throw null; }')
@@ -876,13 +1035,15 @@ IMethodBodyOperation (OperationKind.MethodBody, Type: null) (Syntax: '~C() ... r
             ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
     ExpressionBody: 
     null
-");
+"
+            );
         }
 
         [Fact]
         public void DestructorBody_03()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     ~C()
@@ -894,10 +1055,14 @@ class C
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
-            var node1 = tree.GetRoot().DescendantNodes().OfType<BaseMethodDeclarationSyntax>().Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BaseMethodDeclarationSyntax>()
+                .Single();
 
-            compilation.VerifyOperationTree(node1, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node1,
+                expectedOperationTree: @"
 IMethodBodyOperation (OperationKind.MethodBody, Type: null) (Syntax: '~C() ... throw null;')
     BlockBody: 
     null
@@ -910,13 +1075,15 @@ IMethodBodyOperation (OperationKind.MethodBody, Type: null) (Syntax: '~C() ... t
                 Conversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: False, IsReference: True, IsUserDefined: False) (MethodSymbol: null)
                 Operand: 
                 ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
-");
+"
+            );
         }
 
         [Fact]
         public void DestructorBody_04()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     ~C()
@@ -929,16 +1096,24 @@ class C
             compilation.VerifyDiagnostics(
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     ~C()
-                Diagnostic(ErrorCode.ERR_BlockBodyAndExpressionBody, @"~C()
+                Diagnostic(
+                        ErrorCode.ERR_BlockBodyAndExpressionBody,
+                        @"~C()
     { throw null; }
-    => throw null;").WithLocation(4, 5)
-                );
+    => throw null;"
+                    )
+                    .WithLocation(4, 5)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
-            var node1 = tree.GetRoot().DescendantNodes().OfType<BaseMethodDeclarationSyntax>().Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BaseMethodDeclarationSyntax>()
+                .Single();
 
-            compilation.VerifyOperationTree(node1, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node1,
+                expectedOperationTree: @"
 IMethodBodyOperation (OperationKind.MethodBody, Type: null, IsInvalid) (Syntax: '~C() ... throw null;')
     BlockBody: 
     IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ throw null; }')
@@ -956,13 +1131,15 @@ IMethodBodyOperation (OperationKind.MethodBody, Type: null, IsInvalid) (Syntax: 
                 Conversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: False, IsReference: True, IsUserDefined: False) (MethodSymbol: null)
                 Operand: 
                 ILiteralOperation (OperationKind.Literal, Type: null, Constant: null, IsInvalid) (Syntax: 'null')
-");
+"
+            );
         }
 
         [Fact]
         public void AccessorBody_01()
         {
-            string source = @"
+            string source =
+                @"
 abstract class C
 {
     abstract protected int P { get; }
@@ -975,14 +1152,18 @@ abstract class C
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var node1 = tree.GetRoot().DescendantNodes().OfType<AccessorDeclarationSyntax>().Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<AccessorDeclarationSyntax>()
+                .Single();
             Assert.Null(model.GetOperation(node1));
         }
 
         [Fact]
         public void AccessorBody_02()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     int P 
@@ -997,10 +1178,14 @@ class C
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
-            var node1 = tree.GetRoot().DescendantNodes().OfType<AccessorDeclarationSyntax>().Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<AccessorDeclarationSyntax>()
+                .Single();
 
-            compilation.VerifyOperationTree(node1, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node1,
+                expectedOperationTree: @"
 IMethodBodyOperation (OperationKind.MethodBody, Type: null) (Syntax: 'set ... row null; }')
     BlockBody: 
     IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ throw null; }')
@@ -1011,13 +1196,15 @@ IMethodBodyOperation (OperationKind.MethodBody, Type: null) (Syntax: 'set ... ro
             ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
     ExpressionBody: 
     null
-");
+"
+            );
         }
 
         [Fact]
         public void AccessorBody_03()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     event System.Action E
@@ -1032,10 +1219,14 @@ class C
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
-            var node1 = tree.GetRoot().DescendantNodes().OfType<AccessorDeclarationSyntax>().First();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<AccessorDeclarationSyntax>()
+                .First();
 
-            compilation.VerifyOperationTree(node1, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node1,
+                expectedOperationTree: @"
 IMethodBodyOperation (OperationKind.MethodBody, Type: null) (Syntax: 'add => throw null;')
     BlockBody: 
     null
@@ -1048,13 +1239,15 @@ IMethodBodyOperation (OperationKind.MethodBody, Type: null) (Syntax: 'add => thr
                 Conversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: False, IsReference: True, IsUserDefined: False) (MethodSymbol: null)
                 Operand: 
                 ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
-");
+"
+            );
         }
 
         [Fact]
         public void AccessorBody_04()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     event System.Action E
@@ -1070,17 +1263,25 @@ class C
 
             compilation.VerifyDiagnostics(
                 // (6,9): error CS8057: Block bodies and expression bodies cannot both be provided.
-                //         remove 
-                Diagnostic(ErrorCode.ERR_BlockBodyAndExpressionBody, @"remove 
+                //         remove
+                Diagnostic(
+                        ErrorCode.ERR_BlockBodyAndExpressionBody,
+                        @"remove 
         { throw null; }
-        => throw null;").WithLocation(6, 9)
-                );
+        => throw null;"
+                    )
+                    .WithLocation(6, 9)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
-            var node1 = tree.GetRoot().DescendantNodes().OfType<AccessorDeclarationSyntax>().First();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<AccessorDeclarationSyntax>()
+                .First();
 
-            compilation.VerifyOperationTree(node1, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node1,
+                expectedOperationTree: @"
 IMethodBodyOperation (OperationKind.MethodBody, Type: null, IsInvalid) (Syntax: 'remove ... throw null;')
     BlockBody: 
     IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ throw null; }')
@@ -1098,13 +1299,15 @@ IMethodBodyOperation (OperationKind.MethodBody, Type: null, IsInvalid) (Syntax: 
                 Conversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: False, IsReference: True, IsUserDefined: False) (MethodSymbol: null)
                 Operand: 
                 ILiteralOperation (OperationKind.Literal, Type: null, Constant: null, IsInvalid) (Syntax: 'null')
-");
+"
+            );
         }
 
         [Fact]
         public void AccessorBody_05()
         {
-            string source = @"
+            string source =
+                @"
 abstract class C
 {
     int P { get; } => throw null;
@@ -1115,13 +1318,20 @@ abstract class C
             compilation.VerifyDiagnostics(
                 // (4,5): error CS8057: Block bodies and expression bodies cannot both be provided.
                 //     int P { get; } => throw null;
-                Diagnostic(ErrorCode.ERR_BlockBodyAndExpressionBody, "int P { get; } => throw null;").WithLocation(4, 5)
-                );
+                Diagnostic(
+                        ErrorCode.ERR_BlockBodyAndExpressionBody,
+                        "int P { get; } => throw null;"
+                    )
+                    .WithLocation(4, 5)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var node1 = tree.GetRoot().DescendantNodes().OfType<AccessorDeclarationSyntax>().Single();
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<AccessorDeclarationSyntax>()
+                .Single();
             Assert.Null(model.GetOperation(node1));
         }
     }

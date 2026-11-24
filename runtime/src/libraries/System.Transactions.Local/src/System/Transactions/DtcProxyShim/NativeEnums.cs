@@ -15,7 +15,7 @@ internal enum ShimNotificationType
     AbortedNotify = 7,
     InDoubtNotify = 8,
     EnlistmentTmDownNotify = 9,
-    ResourceManagerTmDownNotify = 10
+    ResourceManagerTmDownNotify = 10,
 }
 
 internal enum OletxPrepareVoteType
@@ -24,14 +24,14 @@ internal enum OletxPrepareVoteType
     SinglePhase = 1,
     Prepared = 2,
     Failed = 3,
-    InDoubt = 4
+    InDoubt = 4,
 }
 
 internal enum OletxTransactionOutcome
 {
     NotKnownYet = 0,
     Committed = 1,
-    Aborted = 2
+    Aborted = 2,
 }
 
 internal enum OletxTransactionIsolationLevel
@@ -44,7 +44,7 @@ internal enum OletxTransactionIsolationLevel
     ISOLATIONLEVEL_READCOMMITTED = 0x1000,
     ISOLATIONLEVEL_REPEATABLEREAD = 0x10000,
     ISOLATIONLEVEL_SERIALIZABLE = 0x100000,
-    ISOLATIONLEVEL_ISOLATED = 0x100000
+    ISOLATIONLEVEL_ISOLATED = 0x100000,
 }
 
 [Flags]
@@ -61,7 +61,7 @@ internal enum OletxTransactionIsoFlags
     ISOFLAG_RETAIN_BOTH = ISOFLAG_RETAIN_COMMIT | ISOFLAG_RETAIN_ABORT,
     ISOFLAG_RETAIN_NONE = ISOFLAG_RETAIN_COMMIT_NO | ISOFLAG_RETAIN_ABORT_NO,
     ISOFLAG_OPTIMISTIC = 16,
-    ISOFLAG_READONLY = 32
+    ISOFLAG_READONLY = 32,
 }
 
 internal enum OletxXacttc : uint
@@ -71,13 +71,13 @@ internal enum OletxXacttc : uint
     XACTTC_SYNC_PHASETWO = 2,
     XACTTC_SYNC = 2,
     XACTTC_ASYNC_PHASEONE = 4,
-    XACTTC_ASYNC = 4
+    XACTTC_ASYNC = 4,
 }
 
 internal enum OletxXactRm : uint
 {
     XACTRM_OPTIMISTICLASTWINS = 1,
-    XACTRM_NOREADONLYPREPARES = 2
+    XACTRM_NOREADONLYPREPARES = 2,
 }
 
 internal enum OletxTransactionStatus
@@ -104,7 +104,7 @@ internal enum OletxTransactionStatus
     OLETX_TRANSACTION_STATUS_CLOSED = 0x40000,
     OLETX_TRANSACTION_STATUS_OPEN = 0x3,
     OLETX_TRANSACTION_STATUS_NOTPREPARED = 0x7ffc3,
-    OLETX_TRANSACTION_STATUS_ALL = 0x7ffff
+    OLETX_TRANSACTION_STATUS_ALL = 0x7ffff,
 }
 
 internal enum OletxTransactionHeuristic : uint
@@ -112,7 +112,7 @@ internal enum OletxTransactionHeuristic : uint
     XACTHEURISTIC_ABORT = 1,
     XACTHEURISTIC_COMMIT = 2,
     XACTHEURISTIC_DAMAGE = 3,
-    XACTHEURISTIC_DANGER = 4
+    XACTHEURISTIC_DANGER = 4,
 }
 
 internal enum OletxXactStat : int
@@ -139,5 +139,5 @@ internal enum OletxXactStat : int
     XACTSTAT_CLOSED = 0x40000,
     XACTSTAT_OPEN = 0x3,
     XACTSTAT_NOTPREPARED = 0x7ffc3,
-    XACTSTAT_ALL = 0x7ffff
+    XACTSTAT_ALL = 0x7ffff,
 }

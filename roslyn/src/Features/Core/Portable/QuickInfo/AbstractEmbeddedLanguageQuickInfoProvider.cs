@@ -21,19 +21,34 @@ internal abstract class AbstractEmbeddedLanguageQuickInfoProvider : CommonQuickI
         string languageName,
         EmbeddedLanguageInfo info,
         ISyntaxKinds syntaxKinds,
-        IEnumerable<Lazy<IEmbeddedLanguageQuickInfoProvider, EmbeddedLanguageMetadata>> allServices)
+        IEnumerable<Lazy<IEmbeddedLanguageQuickInfoProvider, EmbeddedLanguageMetadata>> allServices
+    )
     {
-        _embeddedLanguageProviderFeature = new EmbeddedLanguageProviderFeatureService(languageName, info, syntaxKinds, allServices);
+        _embeddedLanguageProviderFeature = new EmbeddedLanguageProviderFeatureService(
+            languageName,
+            info,
+            syntaxKinds,
+            allServices
+        );
     }
 
-    protected override async Task<QuickInfoItem?> BuildQuickInfoAsync(QuickInfoContext context, SyntaxToken token)
+    protected override async Task<QuickInfoItem?> BuildQuickInfoAsync(
+        QuickInfoContext context,
+        SyntaxToken token
+    )
     {
         if (!_embeddedLanguageProviderFeature.SyntaxTokenKinds.Contains(token.RawKind))
             return null;
 
-        var semanticModel = await context.Document.GetRequiredSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
+        var semanticModel = await context
+            .Document.GetRequiredSemanticModelAsync(context.CancellationToken)
+            .ConfigureAwait(false);
 
-        var quickInfoProviders = _embeddedLanguageProviderFeature.GetServices(semanticModel, token, context.CancellationToken);
+        var quickInfoProviders = _embeddedLanguageProviderFeature.GetServices(
+            semanticModel,
+            token,
+            context.CancellationToken
+        );
         foreach (var quickInfoProvider in quickInfoProviders)
         {
             // If this service added values then need to check the other ones.
@@ -45,7 +60,10 @@ internal abstract class AbstractEmbeddedLanguageQuickInfoProvider : CommonQuickI
         return null;
     }
 
-    protected override Task<QuickInfoItem?> BuildQuickInfoAsync(CommonQuickInfoContext context, SyntaxToken token)
+    protected override Task<QuickInfoItem?> BuildQuickInfoAsync(
+        CommonQuickInfoContext context,
+        SyntaxToken token
+    )
     {
         // Not implemented as this entrypoint appears to be dead code.
         throw new NotImplementedException();
@@ -58,18 +76,26 @@ internal abstract class AbstractEmbeddedLanguageQuickInfoProvider : CommonQuickI
     /// have multiple inheritance, we'll create a separate class here and delegate to the protected methods. We can remove this if we
     /// switch Quick Info over to a pattern like the rest of our features.
     /// </summary>
-    private class EmbeddedLanguageProviderFeatureService :
-        AbstractEmbeddedLanguageFeatureService<IEmbeddedLanguageQuickInfoProvider>
+    private class EmbeddedLanguageProviderFeatureService
+        : AbstractEmbeddedLanguageFeatureService<IEmbeddedLanguageQuickInfoProvider>
     {
-        public EmbeddedLanguageProviderFeatureService(string languageName, EmbeddedLanguageInfo info, ISyntaxKinds syntaxKinds, IEnumerable<Lazy<IEmbeddedLanguageQuickInfoProvider, EmbeddedLanguageMetadata>> allServices)
-            : base(languageName, info, syntaxKinds, allServices)
-        {
-        }
+        public EmbeddedLanguageProviderFeatureService(
+            string languageName,
+            EmbeddedLanguageInfo info,
+            ISyntaxKinds syntaxKinds,
+            IEnumerable<
+                Lazy<IEmbeddedLanguageQuickInfoProvider, EmbeddedLanguageMetadata>
+            > allServices
+        )
+            : base(languageName, info, syntaxKinds, allServices) { }
 
-        public new ImmutableArray<Lazy<IEmbeddedLanguageQuickInfoProvider, EmbeddedLanguageMetadata>> GetServices(
+        public new ImmutableArray<
+            Lazy<IEmbeddedLanguageQuickInfoProvider, EmbeddedLanguageMetadata>
+        > GetServices(
             SemanticModel semanticModel,
             SyntaxToken token,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return base.GetServices(semanticModel, token, cancellationToken);
         }

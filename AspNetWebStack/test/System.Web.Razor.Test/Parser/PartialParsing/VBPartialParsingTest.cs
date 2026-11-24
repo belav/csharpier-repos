@@ -18,16 +18,21 @@ namespace System.Web.Razor.Test.Parser.PartialParsing
             var factory = SpanFactory.CreateVbHtml();
             StringTextBuffer changed = new StringTextBuffer("foo @User. baz");
             StringTextBuffer old = new StringTextBuffer("foo @User.Name baz");
-            RunPartialParseTest(new TextChange(10, 4, old, 0, changed),
+            RunPartialParseTest(
+                new TextChange(10, 4, old, 0, changed),
                 new MarkupBlock(
                     factory.Markup("foo "),
                     new ExpressionBlock(
                         factory.CodeTransition(),
-                        factory.Code("User.")
-                               .AsImplicitExpression(VBCodeParser.DefaultKeywords)
-                               .Accepts(AcceptedCharacters.NonWhiteSpace)),
-                    factory.Markup(" baz")),
-                additionalFlags: PartialParseResult.Provisional);
+                        factory
+                            .Code("User.")
+                            .AsImplicitExpression(VBCodeParser.DefaultKeywords)
+                            .Accepts(AcceptedCharacters.NonWhiteSpace)
+                    ),
+                    factory.Markup(" baz")
+                ),
+                additionalFlags: PartialParseResult.Provisional
+            );
         }
 
         [Fact]
@@ -36,15 +41,20 @@ namespace System.Web.Razor.Test.Parser.PartialParsing
             var factory = SpanFactory.CreateVbHtml();
             StringTextBuffer changed = new StringTextBuffer("foo @Us baz");
             StringTextBuffer old = new StringTextBuffer("foo @User baz");
-            RunPartialParseTest(new TextChange(7, 2, old, 0, changed),
+            RunPartialParseTest(
+                new TextChange(7, 2, old, 0, changed),
                 new MarkupBlock(
                     factory.Markup("foo "),
                     new ExpressionBlock(
                         factory.CodeTransition(),
-                        factory.Code("Us")
-                               .AsImplicitExpression(VBCodeParser.DefaultKeywords)
-                               .Accepts(AcceptedCharacters.NonWhiteSpace)),
-                    factory.Markup(" baz")));
+                        factory
+                            .Code("Us")
+                            .AsImplicitExpression(VBCodeParser.DefaultKeywords)
+                            .Accepts(AcceptedCharacters.NonWhiteSpace)
+                    ),
+                    factory.Markup(" baz")
+                )
+            );
         }
 
         [Fact]
@@ -53,16 +63,21 @@ namespace System.Web.Razor.Test.Parser.PartialParsing
             var factory = SpanFactory.CreateVbHtml();
             StringTextBuffer changed = new StringTextBuffer("foo @User. baz");
             StringTextBuffer old = new StringTextBuffer("foo @U baz");
-            RunPartialParseTest(new TextChange(6, 0, old, 4, changed),
+            RunPartialParseTest(
+                new TextChange(6, 0, old, 4, changed),
                 new MarkupBlock(
                     factory.Markup("foo "),
                     new ExpressionBlock(
                         factory.CodeTransition(),
-                        factory.Code("User.")
-                               .AsImplicitExpression(VBCodeParser.DefaultKeywords)
-                               .Accepts(AcceptedCharacters.NonWhiteSpace)),
-                    factory.Markup(" baz")),
-                additionalFlags: PartialParseResult.Provisional);
+                        factory
+                            .Code("User.")
+                            .AsImplicitExpression(VBCodeParser.DefaultKeywords)
+                            .Accepts(AcceptedCharacters.NonWhiteSpace)
+                    ),
+                    factory.Markup(" baz")
+                ),
+                additionalFlags: PartialParseResult.Provisional
+            );
         }
 
         [Fact]
@@ -71,15 +86,20 @@ namespace System.Web.Razor.Test.Parser.PartialParsing
             var factory = SpanFactory.CreateVbHtml();
             StringTextBuffer changed = new StringTextBuffer("foo @barbiz baz");
             StringTextBuffer old = new StringTextBuffer("foo @bar baz");
-            RunPartialParseTest(new TextChange(8, 0, old, 3, changed),
+            RunPartialParseTest(
+                new TextChange(8, 0, old, 3, changed),
                 new MarkupBlock(
                     factory.Markup("foo "),
                     new ExpressionBlock(
                         factory.CodeTransition(),
-                        factory.Code("barbiz")
-                               .AsImplicitExpression(VBCodeParser.DefaultKeywords)
-                               .Accepts(AcceptedCharacters.NonWhiteSpace)),
-                    factory.Markup(" baz")));
+                        factory
+                            .Code("barbiz")
+                            .AsImplicitExpression(VBCodeParser.DefaultKeywords)
+                            .Accepts(AcceptedCharacters.NonWhiteSpace)
+                    ),
+                    factory.Markup(" baz")
+                )
+            );
         }
 
         [Fact]
@@ -88,36 +108,61 @@ namespace System.Web.Razor.Test.Parser.PartialParsing
             var factory = SpanFactory.CreateVbHtml();
 
             // Arrange
-            TextChange dotTyped = new TextChange(8, 0, new StringTextBuffer("foo @foo @bar"), 1, new StringTextBuffer("foo @foo. @bar"));
-            TextChange charTyped = new TextChange(14, 0, new StringTextBuffer("foo @foo. @barb"), 1, new StringTextBuffer("foo @foo. @barb"));
+            TextChange dotTyped = new TextChange(
+                8,
+                0,
+                new StringTextBuffer("foo @foo @bar"),
+                1,
+                new StringTextBuffer("foo @foo. @bar")
+            );
+            TextChange charTyped = new TextChange(
+                14,
+                0,
+                new StringTextBuffer("foo @foo. @barb"),
+                1,
+                new StringTextBuffer("foo @foo. @barb")
+            );
             using (TestParserManager manager = CreateParserManager())
             {
                 manager.InitializeWithDocument(dotTyped.OldBuffer);
 
                 // Apply the dot change
-                Assert.Equal(PartialParseResult.Provisional | PartialParseResult.Accepted, manager.CheckForStructureChangesAndWait(dotTyped));
+                Assert.Equal(
+                    PartialParseResult.Provisional | PartialParseResult.Accepted,
+                    manager.CheckForStructureChangesAndWait(dotTyped)
+                );
 
                 // Act (apply the identifier start char change)
                 PartialParseResult result = manager.CheckForStructureChangesAndWait(charTyped);
 
                 // Assert
                 Assert.Equal(PartialParseResult.Rejected, result);
-                Assert.False(manager.Parser.LastResultProvisional, "LastResultProvisional flag should have been cleared but it was not");
-                ParserTestBase.EvaluateParseTree(manager.Parser.CurrentParseTree,
+                Assert.False(
+                    manager.Parser.LastResultProvisional,
+                    "LastResultProvisional flag should have been cleared but it was not"
+                );
+                ParserTestBase.EvaluateParseTree(
+                    manager.Parser.CurrentParseTree,
                     new MarkupBlock(
                         factory.Markup("foo "),
                         new ExpressionBlock(
                             factory.CodeTransition(),
-                            factory.Code("foo")
-                                   .AsImplicitExpression(VBCodeParser.DefaultKeywords)
-                                   .Accepts(AcceptedCharacters.NonWhiteSpace)),
+                            factory
+                                .Code("foo")
+                                .AsImplicitExpression(VBCodeParser.DefaultKeywords)
+                                .Accepts(AcceptedCharacters.NonWhiteSpace)
+                        ),
                         factory.Markup(". "),
                         new ExpressionBlock(
                             factory.CodeTransition(),
-                            factory.Code("barb")
-                                   .AsImplicitExpression(VBCodeParser.DefaultKeywords)
-                                   .Accepts(AcceptedCharacters.NonWhiteSpace)),
-                        factory.EmptyHtml()));
+                            factory
+                                .Code("barb")
+                                .AsImplicitExpression(VBCodeParser.DefaultKeywords)
+                                .Accepts(AcceptedCharacters.NonWhiteSpace)
+                        ),
+                        factory.EmptyHtml()
+                    )
+                );
             }
         }
 
@@ -127,58 +172,90 @@ namespace System.Web.Razor.Test.Parser.PartialParsing
             var factory = SpanFactory.CreateVbHtml();
 
             // Arrange
-            TextChange dotTyped = new TextChange(8, 0, new StringTextBuffer("foo @foo bar"), 1, new StringTextBuffer("foo @foo. bar"));
-            TextChange charTyped = new TextChange(9, 0, new StringTextBuffer("foo @foo. bar"), 1, new StringTextBuffer("foo @foo.b bar"));
+            TextChange dotTyped = new TextChange(
+                8,
+                0,
+                new StringTextBuffer("foo @foo bar"),
+                1,
+                new StringTextBuffer("foo @foo. bar")
+            );
+            TextChange charTyped = new TextChange(
+                9,
+                0,
+                new StringTextBuffer("foo @foo. bar"),
+                1,
+                new StringTextBuffer("foo @foo.b bar")
+            );
             using (TestParserManager manager = CreateParserManager())
             {
                 manager.InitializeWithDocument(dotTyped.OldBuffer);
 
                 // Apply the dot change
-                Assert.Equal(PartialParseResult.Provisional | PartialParseResult.Accepted, manager.CheckForStructureChangesAndWait(dotTyped));
+                Assert.Equal(
+                    PartialParseResult.Provisional | PartialParseResult.Accepted,
+                    manager.CheckForStructureChangesAndWait(dotTyped)
+                );
 
                 // Act (apply the identifier start char change)
                 PartialParseResult result = manager.CheckForStructureChangesAndWait(charTyped);
 
                 // Assert
                 Assert.Equal(PartialParseResult.Accepted, result);
-                Assert.False(manager.Parser.LastResultProvisional, "LastResultProvisional flag should have been cleared but it was not");
-                ParserTestBase.EvaluateParseTree(manager.Parser.CurrentParseTree,
+                Assert.False(
+                    manager.Parser.LastResultProvisional,
+                    "LastResultProvisional flag should have been cleared but it was not"
+                );
+                ParserTestBase.EvaluateParseTree(
+                    manager.Parser.CurrentParseTree,
                     new MarkupBlock(
                         factory.Markup("foo "),
                         new ExpressionBlock(
                             factory.CodeTransition(),
-                            factory.Code("foo.b")
-                                   .AsImplicitExpression(VBCodeParser.DefaultKeywords)
-                                   .Accepts(AcceptedCharacters.NonWhiteSpace)),
-                        factory.Markup(" bar")));
+                            factory
+                                .Code("foo.b")
+                                .AsImplicitExpression(VBCodeParser.DefaultKeywords)
+                                .Accepts(AcceptedCharacters.NonWhiteSpace)
+                        ),
+                        factory.Markup(" bar")
+                    )
+                );
             }
         }
+
         [Fact]
         public void ImplicitExpressionAcceptsIdentifierExpansionAtEndOfNonWhitespaceCharacters()
         {
             var factory = SpanFactory.CreateVbHtml();
-            StringTextBuffer changed = new StringTextBuffer("@Code" + Environment.NewLine
-                                                          + "    @food" + Environment.NewLine
-                                                          + "End Code");
-            StringTextBuffer old = new StringTextBuffer("@Code" + Environment.NewLine
-                                                      + "    @foo" + Environment.NewLine
-                                                      + "End Code");
-            RunPartialParseTest(new TextChange(15, 0, old, 1, changed),
+            StringTextBuffer changed = new StringTextBuffer(
+                "@Code" + Environment.NewLine + "    @food" + Environment.NewLine + "End Code"
+            );
+            StringTextBuffer old = new StringTextBuffer(
+                "@Code" + Environment.NewLine + "    @foo" + Environment.NewLine + "End Code"
+            );
+            RunPartialParseTest(
+                new TextChange(15, 0, old, 1, changed),
                 new MarkupBlock(
                     factory.EmptyHtml(),
                     new StatementBlock(
                         factory.CodeTransition(),
-                        factory.MetaCode("Code")
-                               .Accepts(AcceptedCharacters.None),
+                        factory.MetaCode("Code").Accepts(AcceptedCharacters.None),
                         factory.Code("\r\n    ").AsStatement(),
                         new ExpressionBlock(
                             factory.CodeTransition(),
-                            factory.Code("food")
-                                   .AsImplicitExpression(VBCodeParser.DefaultKeywords, acceptTrailingDot: true)
-                                   .Accepts(AcceptedCharacters.NonWhiteSpace)),
+                            factory
+                                .Code("food")
+                                .AsImplicitExpression(
+                                    VBCodeParser.DefaultKeywords,
+                                    acceptTrailingDot: true
+                                )
+                                .Accepts(AcceptedCharacters.NonWhiteSpace)
+                        ),
                         factory.Code("\r\n").AsStatement(),
-                        factory.MetaCode("End Code").Accepts(AcceptedCharacters.None)),
-                    factory.EmptyHtml()));
+                        factory.MetaCode("End Code").Accepts(AcceptedCharacters.None)
+                    ),
+                    factory.EmptyHtml()
+                )
+            );
         }
 
         [Fact]
@@ -187,16 +264,21 @@ namespace System.Web.Razor.Test.Parser.PartialParsing
             var factory = SpanFactory.CreateVbHtml();
             StringTextBuffer changed = new StringTextBuffer("foo @foo. bar");
             StringTextBuffer old = new StringTextBuffer("foo @foo bar");
-            RunPartialParseTest(new TextChange(8, 0, old, 1, changed),
+            RunPartialParseTest(
+                new TextChange(8, 0, old, 1, changed),
                 new MarkupBlock(
                     factory.Markup("foo "),
                     new ExpressionBlock(
                         factory.CodeTransition(),
-                        factory.Code("foo.")
-                               .AsImplicitExpression(VBCodeParser.DefaultKeywords)
-                               .Accepts(AcceptedCharacters.NonWhiteSpace)),
-                    factory.Markup(" bar")),
-                additionalFlags: PartialParseResult.Provisional);
+                        factory
+                            .Code("foo.")
+                            .AsImplicitExpression(VBCodeParser.DefaultKeywords)
+                            .Accepts(AcceptedCharacters.NonWhiteSpace)
+                    ),
+                    factory.Markup(" bar")
+                ),
+                additionalFlags: PartialParseResult.Provisional
+            );
         }
 
         [Fact]
@@ -205,15 +287,20 @@ namespace System.Web.Razor.Test.Parser.PartialParsing
             var factory = SpanFactory.CreateVbHtml();
             StringTextBuffer changed = new StringTextBuffer("foo @foob baz");
             StringTextBuffer old = new StringTextBuffer("foo @foo bar");
-            RunPartialParseTest(new TextChange(8, 0, old, 1, changed),
+            RunPartialParseTest(
+                new TextChange(8, 0, old, 1, changed),
                 new MarkupBlock(
                     factory.Markup("foo "),
                     new ExpressionBlock(
                         factory.CodeTransition(),
-                        factory.Code("foob")
-                               .AsImplicitExpression(VBCodeParser.DefaultKeywords)
-                               .Accepts(AcceptedCharacters.NonWhiteSpace)),
-                    factory.Markup(" bar")));
+                        factory
+                            .Code("foob")
+                            .AsImplicitExpression(VBCodeParser.DefaultKeywords)
+                            .Accepts(AcceptedCharacters.NonWhiteSpace)
+                    ),
+                    factory.Markup(" bar")
+                )
+            );
         }
 
         [Fact]
@@ -222,7 +309,8 @@ namespace System.Web.Razor.Test.Parser.PartialParsing
             var factory = SpanFactory.CreateVbHtml();
             StringTextBuffer changed = new StringTextBuffer("@Code @foo.b End Code");
             StringTextBuffer old = new StringTextBuffer("@Code @foo. End Code");
-            RunPartialParseTest(new TextChange(11, 0, old, 1, changed),
+            RunPartialParseTest(
+                new TextChange(11, 0, old, 1, changed),
                 new MarkupBlock(
                     factory.EmptyHtml(),
                     new StatementBlock(
@@ -231,12 +319,20 @@ namespace System.Web.Razor.Test.Parser.PartialParsing
                         factory.Code(" ").AsStatement(),
                         new ExpressionBlock(
                             factory.CodeTransition(),
-                            factory.Code("foo.b")
-                                   .AsImplicitExpression(VBCodeParser.DefaultKeywords, acceptTrailingDot: true)
-                                   .Accepts(AcceptedCharacters.NonWhiteSpace)),
+                            factory
+                                .Code("foo.b")
+                                .AsImplicitExpression(
+                                    VBCodeParser.DefaultKeywords,
+                                    acceptTrailingDot: true
+                                )
+                                .Accepts(AcceptedCharacters.NonWhiteSpace)
+                        ),
                         factory.Code(" ").AsStatement(),
-                        factory.MetaCode("End Code").Accepts(AcceptedCharacters.None)),
-                    factory.EmptyHtml()));
+                        factory.MetaCode("End Code").Accepts(AcceptedCharacters.None)
+                    ),
+                    factory.EmptyHtml()
+                )
+            );
         }
 
         [Fact]
@@ -245,7 +341,8 @@ namespace System.Web.Razor.Test.Parser.PartialParsing
             var factory = SpanFactory.CreateVbHtml();
             StringTextBuffer changed = new StringTextBuffer("@Code @foo. End Code");
             StringTextBuffer old = new StringTextBuffer("@Code @foo End Code");
-            RunPartialParseTest(new TextChange(10, 0, old, 1, changed),
+            RunPartialParseTest(
+                new TextChange(10, 0, old, 1, changed),
                 new MarkupBlock(
                     factory.EmptyHtml(),
                     new StatementBlock(
@@ -254,12 +351,20 @@ namespace System.Web.Razor.Test.Parser.PartialParsing
                         factory.Code(" ").AsStatement(),
                         new ExpressionBlock(
                             factory.CodeTransition(),
-                            factory.Code("foo.")
-                                   .AsImplicitExpression(VBCodeParser.DefaultKeywords, acceptTrailingDot: true)
-                                   .Accepts(AcceptedCharacters.NonWhiteSpace)),
+                            factory
+                                .Code("foo.")
+                                .AsImplicitExpression(
+                                    VBCodeParser.DefaultKeywords,
+                                    acceptTrailingDot: true
+                                )
+                                .Accepts(AcceptedCharacters.NonWhiteSpace)
+                        ),
                         factory.Code(" ").AsStatement(),
-                        factory.MetaCode("End Code").Accepts(AcceptedCharacters.None)),
-                    factory.EmptyHtml()));
+                        factory.MetaCode("End Code").Accepts(AcceptedCharacters.None)
+                    ),
+                    factory.EmptyHtml()
+                )
+            );
         }
 
         [Fact]

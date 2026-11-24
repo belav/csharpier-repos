@@ -25,10 +25,7 @@ namespace Microsoft.CodeAnalysis.Syntax
 
         public int Count
         {
-            get
-            {
-                return _count;
-            }
+            get { return _count; }
         }
 
         public void Add(SyntaxToken item)
@@ -97,14 +94,29 @@ namespace Microsoft.CodeAnalysis.Syntax
                     case 2:
                         Debug.Assert(_nodes[0] is object);
                         Debug.Assert(_nodes[1] is object);
-                        return new SyntaxTokenList(null, InternalSyntax.SyntaxList.List(_nodes[0]!, _nodes[1]!), 0, 0);
+                        return new SyntaxTokenList(
+                            null,
+                            InternalSyntax.SyntaxList.List(_nodes[0]!, _nodes[1]!),
+                            0,
+                            0
+                        );
                     case 3:
                         Debug.Assert(_nodes[0] is object);
                         Debug.Assert(_nodes[1] is object);
                         Debug.Assert(_nodes[2] is object);
-                        return new SyntaxTokenList(null, InternalSyntax.SyntaxList.List(_nodes[0]!, _nodes[1]!, _nodes[2]!), 0, 0);
+                        return new SyntaxTokenList(
+                            null,
+                            InternalSyntax.SyntaxList.List(_nodes[0]!, _nodes[1]!, _nodes[2]!),
+                            0,
+                            0
+                        );
                     default:
-                        return new SyntaxTokenList(null, InternalSyntax.SyntaxList.List(_nodes, _count), 0, 0);
+                        return new SyntaxTokenList(
+                            null,
+                            InternalSyntax.SyntaxList.List(_nodes, _count),
+                            0,
+                            0
+                        );
                 }
             }
             else

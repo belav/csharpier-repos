@@ -44,7 +44,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static ImportedCollection Import(
             byte[] data,
             string password,
-            X509KeyStorageFlags keyStorageFlags)
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             X509Certificate2Collection coll = new X509Certificate2Collection();
             coll.Import(data, password, keyStorageFlags);

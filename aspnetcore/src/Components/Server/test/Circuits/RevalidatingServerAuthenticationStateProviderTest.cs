@@ -122,9 +122,8 @@ public class RevalidatingServerAuthenticationStateProviderTest
         provider.SetAuthenticationState(CreateAuthenticationStateTask("test user"));
         provider.NextValidationResult = Task.FromResult(true);
         await provider.NextValidateAuthenticationStateAsyncCall;
-        Assert.Collection(
-            provider.RevalidationCallLog,
-            call => Assert.Equal("test user", call.AuthenticationState.User.Identity.Name)
+        Assert.Collection(provider.RevalidationCallLog, call =>
+            Assert.Equal("test user", call.AuthenticationState.User.Identity.Name)
         );
 
         // Act/Assert 1: Can become signed out
@@ -136,9 +135,8 @@ public class RevalidatingServerAuthenticationStateProviderTest
         // Act/Assert 2: Can become a different user; resumes revalidation
         provider.SetAuthenticationState(CreateAuthenticationStateTask("different user"));
         await provider.NextValidateAuthenticationStateAsyncCall;
-        Assert.Collection(
-            provider.RevalidationCallLog.Skip(1),
-            call => Assert.Equal("different user", call.AuthenticationState.User.Identity.Name)
+        Assert.Collection(provider.RevalidationCallLog.Skip(1), call =>
+            Assert.Equal("different user", call.AuthenticationState.User.Identity.Name)
         );
     }
 
@@ -183,8 +181,8 @@ public class RevalidatingServerAuthenticationStateProviderTest
         Assert.Equal(0, authenticationStateChangedCount);
 
         // Have the task throw a TCE to show this doesn't get treated as a failure
-        firstRevalidationCall.CancellationToken.Register(
-            () => validationTcs.TrySetCanceled(firstRevalidationCall.CancellationToken)
+        firstRevalidationCall.CancellationToken.Register(() =>
+            validationTcs.TrySetCanceled(firstRevalidationCall.CancellationToken)
         );
 
         // Act/Assert 2: token is cancelled when the loop is superseded
@@ -202,9 +200,8 @@ public class RevalidatingServerAuthenticationStateProviderTest
 
         // Subsequent revalidation can complete successfully
         await provider.NextValidateAuthenticationStateAsyncCall;
-        Assert.Collection(
-            provider.RevalidationCallLog.Skip(1),
-            call => Assert.Equal("different user", call.AuthenticationState.User.Identity.Name)
+        Assert.Collection(provider.RevalidationCallLog.Skip(1), call =>
+            Assert.Equal("different user", call.AuthenticationState.User.Identity.Name)
         );
     }
 

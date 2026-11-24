@@ -17,13 +17,18 @@ namespace Microsoft.CodeAnalysis.CodeFixes
     internal abstract partial class SyntaxEditorBasedCodeFixProvider : CodeFixProvider
     {
         private static readonly ImmutableArray<FixAllScope> s_defaultSupportedFixAllScopes =
-            ImmutableArray.Create(FixAllScope.Document, FixAllScope.Project, FixAllScope.Solution,
-                FixAllScope.ContainingMember, FixAllScope.ContainingType);
+            ImmutableArray.Create(
+                FixAllScope.Document,
+                FixAllScope.Project,
+                FixAllScope.Solution,
+                FixAllScope.ContainingMember,
+                FixAllScope.ContainingType
+            );
 
         private readonly bool _supportsFixAll;
 
-        protected SyntaxEditorBasedCodeFixProvider(bool supportsFixAll = true)
-            => _supportsFixAll = supportsFixAll;
+        protected SyntaxEditorBasedCodeFixProvider(bool supportsFixAll = true) =>
+            _supportsFixAll = supportsFixAll;
 
         public sealed override FixAllProvider? GetFixAllProvider()
         {
@@ -33,52 +38,111 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             return FixAllProvider.Create(
                 async (fixAllContext, document, diagnostics) =>
                 {
-                    var model = await document.GetRequiredSemanticModelAsync(fixAllContext.CancellationToken).ConfigureAwait(false);
+                    var model = await document
+                        .GetRequiredSemanticModelAsync(fixAllContext.CancellationToken)
+                        .ConfigureAwait(false);
 
                     // Ensure that diagnostics for this document are always in document location order.  This provides a
                     // consistent and deterministic order for fixers that want to update a document.
                     //
                     // Also ensure that we do not pass in duplicates by invoking Distinct.  See
                     // https://github.com/dotnet/roslyn/issues/31381, that seems to be causing duplicate diagnostics.
-                    var filteredDiagnostics = diagnostics.Distinct()
-                                                         .WhereAsArray(d => this.IncludeDiagnosticDuringFixAll(d, document, model, fixAllContext.CodeActionEquivalenceKey, fixAllContext.CancellationToken))
-                                                         .Sort((d1, d2) => d1.Location.SourceSpan.Start - d2.Location.SourceSpan.Start);
+                    var filteredDiagnostics = diagnostics
+                        .Distinct()
+                        .WhereAsArray(d =>
+                            this.IncludeDiagnosticDuringFixAll(
+                                d,
+                                document,
+                                model,
+                                fixAllContext.CodeActionEquivalenceKey,
+                                fixAllContext.CancellationToken
+                            )
+                        )
+                        .Sort(
+                            (d1, d2) => d1.Location.SourceSpan.Start - d2.Location.SourceSpan.Start
+                        );
 
                     if (filteredDiagnostics.Length == 0)
                         return document;
 
-                    return await FixAllAsync(document, filteredDiagnostics, fixAllContext.GetOptionsProvider(), fixAllContext.CancellationToken).ConfigureAwait(false);
+                    return await FixAllAsync(
+                            document,
+                            filteredDiagnostics,
+                            fixAllContext.GetOptionsProvider(),
+                            fixAllContext.CancellationToken
+                        )
+                        .ConfigureAwait(false);
                 },
-                s_defaultSupportedFixAllScopes);
+                s_defaultSupportedFixAllScopes
+            );
         }
 
-        protected void RegisterCodeFix(CodeFixContext context, string title, string equivalenceKey, Diagnostic? diagnostic = null)
-            => context.RegisterCodeFix(CodeAction.Create(title, GetDocumentUpdater(context, diagnostic), equivalenceKey), context.Diagnostics);
+        protected void RegisterCodeFix(
+            CodeFixContext context,
+            string title,
+            string equivalenceKey,
+            Diagnostic? diagnostic = null
+        ) =>
+            context.RegisterCodeFix(
+                CodeAction.Create(title, GetDocumentUpdater(context, diagnostic), equivalenceKey),
+                context.Diagnostics
+            );
 
-        protected void RegisterCodeFix(CodeFixContext context, string title, string equivalenceKey, CodeActionPriority priority, Diagnostic? diagnostic = null)
-            => context.RegisterCodeFix(CodeAction.Create(title, GetDocumentUpdater(context, diagnostic), equivalenceKey, priority), context.Diagnostics);
+        protected void RegisterCodeFix(
+            CodeFixContext context,
+            string title,
+            string equivalenceKey,
+            CodeActionPriority priority,
+            Diagnostic? diagnostic = null
+        ) =>
+            context.RegisterCodeFix(
+                CodeAction.Create(
+                    title,
+                    GetDocumentUpdater(context, diagnostic),
+                    equivalenceKey,
+                    priority
+                ),
+                context.Diagnostics
+            );
 
-        protected Func<CancellationToken, Task<Document>> GetDocumentUpdater(CodeFixContext context, Diagnostic? diagnostic = null)
+        protected Func<CancellationToken, Task<Document>> GetDocumentUpdater(
+            CodeFixContext context,
+            Diagnostic? diagnostic = null
+        )
         {
             var diagnostics = ImmutableArray.Create(diagnostic ?? context.Diagnostics[0]);
-            return cancellationToken => FixAllAsync(context.Document, diagnostics, context.GetOptionsProvider(), cancellationToken);
+            return cancellationToken =>
+                FixAllAsync(
+                    context.Document,
+                    diagnostics,
+                    context.GetOptionsProvider(),
+                    cancellationToken
+                );
         }
 
         private Task<Document> FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics, CodeActionOptionsProvider options, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            CodeActionOptionsProvider options,
+            CancellationToken cancellationToken
+        )
         {
             return FixAllWithEditorAsync(
                 document,
                 editor => FixAllAsync(document, diagnostics, editor, options, cancellationToken),
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         internal static async Task<Document> FixAllWithEditorAsync(
             Document document,
             Func<SyntaxEditor, Task> editAsync,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var editor = new SyntaxEditor(root, document.Project.Solution.Services);
 
             await editAsync(editor).ConfigureAwait(false);
@@ -94,7 +158,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         /// with <paramref name="fallbackOptions"/> providing default values for options not specified explicitly in the corresponding editorconfig.
         /// </summary>
         protected abstract Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics, SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken);
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Whether or not this diagnostic should be included when performing a FixAll.  This is
@@ -113,11 +182,20 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         /// Only one of these three overloads needs to be overridden if you want to customize
         /// behavior.
         /// </summary>
-        protected virtual bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic, Document document, SemanticModel model, string? equivalenceKey, CancellationToken cancellationToken)
-            => IncludeDiagnosticDuringFixAll(diagnostic, document, equivalenceKey, cancellationToken);
+        protected virtual bool IncludeDiagnosticDuringFixAll(
+            Diagnostic diagnostic,
+            Document document,
+            SemanticModel model,
+            string? equivalenceKey,
+            CancellationToken cancellationToken
+        ) => IncludeDiagnosticDuringFixAll(diagnostic, document, equivalenceKey, cancellationToken);
 
-        protected virtual bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic, Document document, string? equivalenceKey, CancellationToken cancellationToken)
-            => IncludeDiagnosticDuringFixAll(diagnostic);
+        protected virtual bool IncludeDiagnosticDuringFixAll(
+            Diagnostic diagnostic,
+            Document document,
+            string? equivalenceKey,
+            CancellationToken cancellationToken
+        ) => IncludeDiagnosticDuringFixAll(diagnostic);
 
         /// <summary>
         /// Whether or not this diagnostic should be included when performing a FixAll.  This is
@@ -136,7 +214,6 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         /// Only one of these two overloads needs to be overridden if you want to customize
         /// behavior.
         /// </summary>
-        protected virtual bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic)
-            => true;
+        protected virtual bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic) => true;
     }
 }

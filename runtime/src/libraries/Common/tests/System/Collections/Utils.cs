@@ -7,10 +7,7 @@ namespace Tests.Collections
 {
     public static class ArrayExtensions
     {
-        public static T[] Slice<T>(
-            this T[] array,
-            int startIndex,
-            int length = -1)
+        public static T[] Slice<T>(this T[] array, int startIndex, int length = -1)
         {
             if (length == -1)
                 length = array.Length - startIndex;
@@ -27,12 +24,7 @@ namespace Tests.Collections
                 throw new ArgumentNullException(nameof(arguments));
             var ret = new T[array.Length + arguments.Length];
             Array.Copy(array, ret, array.Length);
-            Array.Copy(
-                arguments,
-                0,
-                ret,
-                array.Length,
-                arguments.Length);
+            Array.Copy(arguments, 0, ret, array.Length, arguments.Length);
             return ret;
         }
 
@@ -40,12 +32,7 @@ namespace Tests.Collections
         {
             var ret = new T[array.Length - 1];
             Array.Copy(array, ret, removeIndex);
-            Array.Copy(
-                array,
-                removeIndex + 1,
-                ret,
-                removeIndex,
-                array.Length - 1 - removeIndex);
+            Array.Copy(array, removeIndex + 1, ret, removeIndex, array.Length - 1 - removeIndex);
             return ret;
         }
     }

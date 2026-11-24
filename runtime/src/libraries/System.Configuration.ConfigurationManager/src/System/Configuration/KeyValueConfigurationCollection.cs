@@ -6,10 +6,11 @@ namespace System.Configuration
     [ConfigurationCollection(typeof(KeyValueConfigurationElement))]
     public class KeyValueConfigurationCollection : ConfigurationElementCollection
     {
-        private static readonly ConfigurationPropertyCollection s_properties = new ConfigurationPropertyCollection();
+        private static readonly ConfigurationPropertyCollection s_properties =
+            new ConfigurationPropertyCollection();
 
-        public KeyValueConfigurationCollection() :
-            base(StringComparer.OrdinalIgnoreCase)
+        public KeyValueConfigurationCollection()
+            : base(StringComparer.OrdinalIgnoreCase)
         {
             InternalAddToEnd = true;
         }
@@ -18,7 +19,8 @@ namespace System.Configuration
 
         protected override bool ThrowOnDuplicate => false;
 
-        public new KeyValueConfigurationElement this[string key] => (KeyValueConfigurationElement)BaseGet(key);
+        public new KeyValueConfigurationElement this[string key] =>
+            (KeyValueConfigurationElement)BaseGet(key);
 
         public string[] AllKeys => StringUtil.ObjectArrayToStringArray(BaseGetAllKeys());
 
@@ -29,7 +31,9 @@ namespace System.Configuration
 
             // the appsettings add works more like a namevalue collection add in that it appends values
             // when add is called and teh key already exists.
-            KeyValueConfigurationElement oldValue = (KeyValueConfigurationElement)BaseGet(keyValue.Key);
+            KeyValueConfigurationElement oldValue = (KeyValueConfigurationElement)BaseGet(
+                keyValue.Key
+            );
             if (oldValue == null)
             {
                 BaseAdd(keyValue);

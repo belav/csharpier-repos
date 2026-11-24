@@ -25,10 +25,7 @@ namespace Microsoft.Win32
         /// </devdoc>
         public UserPreferenceCategory Category
         {
-            get
-            {
-                return _category;
-            }
+            get { return _category; }
         }
     }
 }

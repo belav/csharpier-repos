@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="CompileLiteralTextParser.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -21,7 +21,9 @@ namespace System.Web.UI.MobileControls
      * Copyright (c) 2000 Microsoft Corporation
      */
 
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class CompileLiteralTextParser : LiteralTextParser
     {
         TemplateParser _parser;
@@ -30,10 +32,12 @@ namespace System.Web.UI.MobileControls
         int _lineNumber;
         IList _tagInnerTextElements = null;
 
-        internal CompileLiteralTextParser(TemplateParser parser, 
-                                        ControlBuilder parentBuilder, 
-                                        String fileName, 
-                                        int lineNumber)
+        internal CompileLiteralTextParser(
+            TemplateParser parser,
+            ControlBuilder parentBuilder,
+            String fileName,
+            int lineNumber
+        )
         {
             _parser = parser;
             _parentBuilder = parentBuilder;
@@ -50,22 +54,30 @@ namespace System.Web.UI.MobileControls
                 case LiteralElementType.Text:
                     Debug.Assert(_tagInnerTextElements == null);
                     subBuilder = ControlBuilder.CreateBuilderFromType(
-                                        _parser, _parentBuilder,
-                                        typeof(LiteralText), typeof(LiteralText).Name,
-                                        null, 
-                                        GetPropertyDictionary(element.Format, element.BreakAfter, null),
-                                        _lineNumber, _fileName);
+                        _parser,
+                        _parentBuilder,
+                        typeof(LiteralText),
+                        typeof(LiteralText).Name,
+                        null,
+                        GetPropertyDictionary(element.Format, element.BreakAfter, null),
+                        _lineNumber,
+                        _fileName
+                    );
                     break;
 
                 case LiteralElementType.Anchor:
                 {
                     String linkUrl = (String)element.GetAttribute("href");
                     subBuilder = ControlBuilder.CreateBuilderFromType(
-                                        _parser, _parentBuilder,
-                                        typeof(LiteralLink), typeof(LiteralLink).Name,
-                                        null, 
-                                        GetPropertyDictionary(element.Format, element.BreakAfter, linkUrl),
-                                        _lineNumber, _fileName);
+                        _parser,
+                        _parentBuilder,
+                        typeof(LiteralLink),
+                        typeof(LiteralLink).Name,
+                        null,
+                        GetPropertyDictionary(element.Format, element.BreakAfter, linkUrl),
+                        _lineNumber,
+                        _fileName
+                    );
                     AddTagInnerTextElements(subBuilder);
                     break;
                 }
@@ -98,7 +110,7 @@ namespace System.Web.UI.MobileControls
         {
             if (_tagInnerTextElements != null)
             {
-                foreach(Object o in _tagInnerTextElements)
+                foreach (Object o in _tagInnerTextElements)
                 {
                     if (o is String)
                     {
@@ -121,7 +133,8 @@ namespace System.Web.UI.MobileControls
             TagInnerTextElements.Add(text);
         }
 
-        internal /*public*/ void AddDataBinding(ControlBuilder builder)
+        internal /*public*/
+        void AddDataBinding(ControlBuilder builder)
         {
             if (IsInTag)
             {
@@ -130,11 +143,15 @@ namespace System.Web.UI.MobileControls
             else
             {
                 ControlBuilder newBuilder = ControlBuilder.CreateBuilderFromType(
-                                              _parser, _parentBuilder,
-                                              typeof(LiteralText), typeof(LiteralText).Name,
-                                            null, 
-                                            GetPropertyDictionary(CurrentFormat, false, null),
-                                            _lineNumber, _fileName);
+                    _parser,
+                    _parentBuilder,
+                    typeof(LiteralText),
+                    typeof(LiteralText).Name,
+                    null,
+                    GetPropertyDictionary(CurrentFormat, false, null),
+                    _lineNumber,
+                    _fileName
+                );
                 _parentBuilder.AppendSubBuilder(newBuilder);
                 newBuilder.AppendSubBuilder(builder);
                 OnAfterDataBoundLiteral();
@@ -144,7 +161,11 @@ namespace System.Web.UI.MobileControls
         // Convert formatting and other options into a set of properties, just as if they had been
         // specified in persistence format.
 
-        private ListDictionary GetPropertyDictionary(LiteralFormat format, bool breakAfter, String linkUrl)
+        private ListDictionary GetPropertyDictionary(
+            LiteralFormat format,
+            bool breakAfter,
+            String linkUrl
+        )
         {
             ListDictionary dictionary = null;
             if (format != LiteralFormat.None || !breakAfter || linkUrl != null)
@@ -158,7 +179,7 @@ namespace System.Web.UI.MobileControls
                 {
                     dictionary.Add("Font-Italic", "True");
                 }
-                if(!breakAfter)
+                if (!breakAfter)
                 {
                     dictionary.Add("BreakAfter", "False");
                 }
@@ -171,6 +192,4 @@ namespace System.Web.UI.MobileControls
             return dictionary;
         }
     }
-
 }
-

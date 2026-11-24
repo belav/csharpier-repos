@@ -11,13 +11,13 @@ public class FixupSqlServerTests : FixupTests
 {
     public class ChildVariations : ChildVariationsBase
     {
-        public override OrdersFixtureBase CreateFixture()
-            => new OrdersSqlServerFixture("Perf_ChangeTracker_Fixup");
+        public override OrdersFixtureBase CreateFixture() =>
+            new OrdersSqlServerFixture("Perf_ChangeTracker_Fixup");
     }
 
     public class ParentVariations : ParentVariationsBase
     {
-        public override OrdersFixtureBase CreateFixture()
-            => new OrdersSqlServerFixture("Perf_ChangeTracker_Fixup");
+        public override OrdersFixtureBase CreateFixture() =>
+            new OrdersSqlServerFixture("Perf_ChangeTracker_Fixup");
     }
 }

@@ -6,24 +6,17 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
 
-    public interface IDataAdapter {
+    public interface IDataAdapter
+    {
+        MissingMappingAction MissingMappingAction { get; set; }
 
-        MissingMappingAction MissingMappingAction {
-            get;
-            set;
-        }
+        MissingSchemaAction MissingSchemaAction { get; set; }
 
-        MissingSchemaAction MissingSchemaAction {
-            get;
-            set;
-        }
-
-        ITableMappingCollection TableMappings {
-            get;
-        }
+        ITableMappingCollection TableMappings { get; }
 
         DataTable[] FillSchema(DataSet dataSet, SchemaType schemaType);
 

@@ -13,11 +13,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class ByKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public ByKeywordRecommender()
-            : base(SyntaxKind.ByKeyword)
-        {
-        }
+            : base(SyntaxKind.ByKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             // cases:
             //   group e |
@@ -34,16 +36,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             var lastToken = group.GroupExpression.GetLastToken(includeSkipped: true);
 
             // group e |
-            if (!token.IntersectsWith(position) &&
-                token == lastToken)
+            if (!token.IntersectsWith(position) && token == lastToken)
             {
                 return true;
             }
 
             // group e b|
-            if (token.IntersectsWith(position) &&
-                token.Kind() == SyntaxKind.IdentifierToken &&
-                token.GetPreviousToken(includeSkipped: true) == lastToken)
+            if (
+                token.IntersectsWith(position)
+                && token.Kind() == SyntaxKind.IdentifierToken
+                && token.GetPreviousToken(includeSkipped: true) == lastToken
+            )
             {
                 return true;
             }

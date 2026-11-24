@@ -22,7 +22,7 @@ namespace System.Data.Objects
     /// </summary>
     /// <remarks>
     /// This class provides an implementation of ITypedList that returns property descriptors
-    /// for each column of results in a data record.  
+    /// for each column of results in a data record.
     /// </remarks>
     internal sealed class DataRecordObjectView : ObjectView<DbDataRecord>, ITypedList
     {
@@ -36,7 +36,12 @@ namespace System.Data.Objects
         /// </summary>
         private RowType _rowType;
 
-        internal DataRecordObjectView(IObjectViewData<DbDataRecord> viewData, object eventDataSource, RowType rowType, Type propertyComponentType)
+        internal DataRecordObjectView(
+            IObjectViewData<DbDataRecord> viewData,
+            object eventDataSource,
+            RowType rowType,
+            Type propertyComponentType
+        )
             : base(viewData, eventDataSource)
         {
             if (!typeof(IDataRecord).IsAssignableFrom(propertyComponentType))
@@ -45,7 +50,11 @@ namespace System.Data.Objects
             }
 
             _rowType = rowType;
-            _propertyDescriptorsCache = MaterializedDataRecord.CreatePropertyDescriptorCollection(_rowType, propertyComponentType, true);
+            _propertyDescriptorsCache = MaterializedDataRecord.CreatePropertyDescriptorCollection(
+                _rowType,
+                propertyComponentType,
+                true
+            );
         }
 
         /// <summary>
@@ -71,15 +80,22 @@ namespace System.Data.Objects
         {
             PropertyInfo indexer = null;
 
-            if (typeof(IList).IsAssignableFrom(type) ||
-                typeof(ITypedList).IsAssignableFrom(type) ||
-                typeof(IListSource).IsAssignableFrom(type))
+            if (
+                typeof(IList).IsAssignableFrom(type)
+                || typeof(ITypedList).IsAssignableFrom(type)
+                || typeof(IListSource).IsAssignableFrom(type)
+            )
             {
-                System.Reflection.PropertyInfo[] props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                System.Reflection.PropertyInfo[] props = type.GetProperties(
+                    BindingFlags.Public | BindingFlags.Instance
+                );
 
                 for (int idx = 0; idx < props.Length; idx++)
                 {
-                    if (props[idx].GetIndexParameters().Length > 0 && props[idx].PropertyType != typeof(object))
+                    if (
+                        props[idx].GetIndexParameters().Length > 0
+                        && props[idx].PropertyType != typeof(object)
+                    )
                     {
                         indexer = props[idx];
                         //Prefer the standard indexer, if there is one
@@ -137,7 +153,9 @@ namespace System.Data.Objects
 
         #region ITypedList Members
 
-        PropertyDescriptorCollection System.ComponentModel.ITypedList.GetItemProperties(PropertyDescriptor[] listAccessors)
+        PropertyDescriptorCollection System.ComponentModel.ITypedList.GetItemProperties(
+            PropertyDescriptor[] listAccessors
+        )
         {
             PropertyDescriptorCollection propertyDescriptors;
 
@@ -155,15 +173,26 @@ namespace System.Data.Objects
                 // If the property descriptor describes a data record with the EDM type of RowType,
                 // construct the collection of property descriptors from the property's EDM metadata.
                 // Otherwise use the CLR type of the property.
-                if (fieldDescriptor != null && fieldDescriptor.EdmProperty != null && fieldDescriptor.EdmProperty.TypeUsage.EdmType.BuiltInTypeKind == BuiltInTypeKind.RowType)
+                if (
+                    fieldDescriptor != null
+                    && fieldDescriptor.EdmProperty != null
+                    && fieldDescriptor.EdmProperty.TypeUsage.EdmType.BuiltInTypeKind
+                        == BuiltInTypeKind.RowType
+                )
                 {
                     // Retrieve property descriptors from EDM metadata.
-                    propertyDescriptors = MaterializedDataRecord.CreatePropertyDescriptorCollection((RowType)fieldDescriptor.EdmProperty.TypeUsage.EdmType, typeof(IDataRecord), true);
+                    propertyDescriptors = MaterializedDataRecord.CreatePropertyDescriptorCollection(
+                        (RowType)fieldDescriptor.EdmProperty.TypeUsage.EdmType,
+                        typeof(IDataRecord),
+                        true
+                    );
                 }
                 else
                 {
                     // Use the CLR type.
-                    propertyDescriptors = TypeDescriptor.GetProperties(GetListItemType(propertyDescriptor.PropertyType));
+                    propertyDescriptors = TypeDescriptor.GetProperties(
+                        GetListItemType(propertyDescriptor.PropertyType)
+                    );
                 }
             }
 

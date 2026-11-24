@@ -6,14 +6,14 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 {
-    internal abstract class ChangeSignatureViewModelFactoryService : IChangeSignatureViewModelFactoryService
+    internal abstract class ChangeSignatureViewModelFactoryService
+        : IChangeSignatureViewModelFactoryService
     {
-        public ChangeSignatureViewModelFactoryService()
-        {
-        }
+        public ChangeSignatureViewModelFactoryService() { }
 
         public abstract SymbolDisplayPart[] GeneratePreviewDisplayParts(
-            ChangeSignatureDialogViewModel.AddedParameterViewModel addedParameterViewModel);
+            ChangeSignatureDialogViewModel.AddedParameterViewModel addedParameterViewModel
+        );
 
         public abstract bool IsTypeNameValid(string typeName);
 

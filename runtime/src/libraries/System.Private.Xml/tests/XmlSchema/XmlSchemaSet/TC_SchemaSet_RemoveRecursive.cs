@@ -19,7 +19,6 @@ namespace System.Xml.XmlSchemaTests
             _output = output;
         }
 
-
         public bool bWarningCallback = false;
         public bool bErrorCallback = false;
 
@@ -76,7 +75,8 @@ namespace System.Xml.XmlSchemaTests
             sc.RemoveRecursive(Schema1);
             CError.Compare(sc.Count, 0, "Count");
             Col = sc.Schemas();
-            CError.Compare(Col.Count, 0, "ICollection.Count"); return;
+            CError.Compare(Col.Count, 0, "ICollection.Count");
+            return;
         }
 
         //-----------------------------------------------------------------------------------
@@ -428,7 +428,7 @@ namespace System.Xml.XmlSchemaTests
                 sc.Compile();
                 CError.Compare(sc.Count, 0, "Count");
                 CError.Compare(sc.GlobalElements.Count, 0, "Global Elements Count");
-                CError.Compare(sc.GlobalTypes.Count, 0, "Global Types Count");//should contain xs:anyType
+                CError.Compare(sc.GlobalTypes.Count, 0, "Global Types Count"); //should contain xs:anyType
 
                 //before compile
                 Schema1 = sc.Add(null, Path.Combine(TestData._Root, param0.ToString()));

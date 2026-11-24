@@ -11,7 +11,14 @@ namespace System.Xml.XmlConvertTests
 
         public override void AddChildren()
         {
-            AddChild(new CVariation(v2) { Attribute = new Variation("v2 - XmlConvert.ToDouble does not handle -0 correctly") });
+            AddChild(
+                new CVariation(v2)
+                {
+                    Attribute = new Variation(
+                        "v2 - XmlConvert.ToDouble does not handle -0 correctly"
+                    ),
+                }
+            );
         }
 
         /// <summary>
@@ -24,8 +31,16 @@ namespace System.Xml.XmlConvertTests
             double d2 = -0;
             CError.Compare(XmlConvert.ToString(d1), "-0", "ToString1 failed");
             CError.Compare(XmlConvert.ToString(d2), "0", "ToString2 failed");
-            CError.Compare(XmlConvert.ToString(XmlConvert.ToDouble("-0e0")), "-0", "ToDouble1 failed");
-            CError.Compare(XmlConvert.ToString(XmlConvert.ToDouble("-0")), "-0", "ToDouble2 failed");
+            CError.Compare(
+                XmlConvert.ToString(XmlConvert.ToDouble("-0e0")),
+                "-0",
+                "ToDouble1 failed"
+            );
+            CError.Compare(
+                XmlConvert.ToString(XmlConvert.ToDouble("-0")),
+                "-0",
+                "ToDouble2 failed"
+            );
             return TEST_PASS;
         }
         #endregion

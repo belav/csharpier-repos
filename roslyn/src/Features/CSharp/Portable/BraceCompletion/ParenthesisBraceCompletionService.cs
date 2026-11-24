@@ -20,26 +20,34 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ParenthesisBraceCompletionService()
-        {
-        }
+        public ParenthesisBraceCompletionService() { }
 
         protected override char OpeningBrace => Parenthesis.OpenCharacter;
         protected override char ClosingBrace => Parenthesis.CloseCharacter;
 
-        public override bool AllowOverType(BraceCompletionContext context, CancellationToken cancellationToken)
-            => AllowOverTypeInUserCodeWithValidClosingToken(context, cancellationToken);
+        public override bool AllowOverType(
+            BraceCompletionContext context,
+            CancellationToken cancellationToken
+        ) => AllowOverTypeInUserCodeWithValidClosingToken(context, cancellationToken);
 
-        protected override bool IsValidOpeningBraceToken(SyntaxToken token) => token.IsKind(SyntaxKind.OpenParenToken);
+        protected override bool IsValidOpeningBraceToken(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.OpenParenToken);
 
-        protected override bool IsValidClosingBraceToken(SyntaxToken token) => token.IsKind(SyntaxKind.CloseParenToken);
+        protected override bool IsValidClosingBraceToken(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.CloseParenToken);
 
-        protected override bool IsValidOpenBraceTokenAtPosition(SourceText text, SyntaxToken token, int position)
+        protected override bool IsValidOpenBraceTokenAtPosition(
+            SourceText text,
+            SyntaxToken token,
+            int position
+        )
         {
-            if (ParentIsSkippedTokensTriviaOrNull(this.SyntaxFacts, token)
+            if (
+                ParentIsSkippedTokensTriviaOrNull(this.SyntaxFacts, token)
                 || !IsValidOpeningBraceToken(token)
                 || token.SpanStart != position
-                || token.Parent == null)
+                || token.Parent == null
+            )
             {
                 return false;
             }
@@ -56,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             // If the completed pair is on the same line, then the closing parenthesis must belong to a different
             // brace completion session higher up on the stack.  If that's the case then we can
             // complete the opening brace here, so return this as valid for completion.
-            return text.Lines.GetLineFromPosition(openParen.SpanStart).LineNumber == text.Lines.GetLineFromPosition(closeParen.Span.End).LineNumber;
+            return text.Lines.GetLineFromPosition(openParen.SpanStart).LineNumber
+                == text.Lines.GetLineFromPosition(closeParen.Span.End).LineNumber;
         }
     }
 }

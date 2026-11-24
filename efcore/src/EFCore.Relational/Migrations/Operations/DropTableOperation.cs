@@ -32,6 +32,5 @@ public class DropTableOperation : MigrationOperation, ITableMigrationOperation
     public virtual string? Schema { get; set; }
 
     /// <inheritdoc />
-    string ITableMigrationOperation.Table
-        => Name;
+    string ITableMigrationOperation.Table => Name;
 }

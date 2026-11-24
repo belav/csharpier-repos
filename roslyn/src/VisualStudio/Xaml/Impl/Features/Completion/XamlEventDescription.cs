@@ -11,6 +11,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Features.Completion
         public string ClassName { get; set; }
         public string EventName { get; set; }
         public string ReturnType { get; set; }
-        public ImmutableArray<(string Name, string ParameterType, string Modifier)> Parameters { get; set; }
+        public ImmutableArray<(
+            string Name,
+            string ParameterType,
+            string Modifier
+        )> Parameters { get; set; }
     }
 }

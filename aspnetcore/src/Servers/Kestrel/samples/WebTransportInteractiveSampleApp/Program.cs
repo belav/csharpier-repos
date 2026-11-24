@@ -23,26 +23,18 @@ builder.WebHost.ConfigureKestrel(
     (context, options) =>
     {
         // website configured port
-        options.Listen(
-            IPAddress.Any,
-            5001,
-            listenOptions =>
-            {
-                listenOptions.UseHttps();
-                listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
-            }
-        );
+        options.Listen(IPAddress.Any, 5001, listenOptions =>
+        {
+            listenOptions.UseHttps();
+            listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
+        });
         // webtransport configured port
-        options.Listen(
-            IPAddress.Any,
-            5002,
-            listenOptions =>
-            {
-                listenOptions.UseHttps(certificate);
-                listenOptions.UseConnectionLogging();
-                listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
-            }
-        );
+        options.Listen(IPAddress.Any, 5002, listenOptions =>
+        {
+            listenOptions.UseHttps(certificate);
+            listenOptions.UseConnectionLogging();
+            listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
+        });
     }
 );
 

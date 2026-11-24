@@ -4,12 +4,14 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net {
+namespace System.Net
+{
     //
     // this class is used by the BeginMultipleSend() API
     // to allow a user to send multiple buffers on a socket
     //
-    internal class BufferOffsetSize {
+    internal class BufferOffsetSize
+    {
         //
         // internal members
         //
@@ -17,17 +19,23 @@ namespace System.Net {
         internal int Offset;
         internal int Size;
 
-        internal BufferOffsetSize(byte[] buffer, int offset, int size, bool copyBuffer) {
-            GlobalLog.Assert(buffer != null && buffer.Length >= size + offset, "BufferOffsetSize::.ctor|Illegal parameters.");
-            if (copyBuffer) {
+        internal BufferOffsetSize(byte[] buffer, int offset, int size, bool copyBuffer)
+        {
+            GlobalLog.Assert(
+                buffer != null && buffer.Length >= size + offset,
+                "BufferOffsetSize::.ctor|Illegal parameters."
+            );
+            if (copyBuffer)
+            {
                 byte[] newBuffer = new byte[size];
 
                 System.Buffer.BlockCopy(
-                    buffer,     // src
-                    offset,     // src index
-                    newBuffer,  // dest
-                    0,          // dest index
-                    size );     // total size to copy
+                    buffer, // src
+                    offset, // src index
+                    newBuffer, // dest
+                    0, // dest index
+                    size
+                ); // total size to copy
 
                 offset = 0;
                 buffer = newBuffer;
@@ -35,7 +43,15 @@ namespace System.Net {
             Buffer = buffer;
             Offset = offset;
             Size = size;
-            GlobalLog.Print("BufferOffsetSize#" + ValidationHelper.HashString(this) + "::.ctor() copyBuffer:" + copyBuffer.ToString() + " this:[" + ToString() + "]");
+            GlobalLog.Print(
+                "BufferOffsetSize#"
+                    + ValidationHelper.HashString(this)
+                    + "::.ctor() copyBuffer:"
+                    + copyBuffer.ToString()
+                    + " this:["
+                    + ToString()
+                    + "]"
+            );
         }
 
         /*
@@ -53,17 +69,20 @@ namespace System.Net {
         */
 
         internal BufferOffsetSize(byte[] buffer, bool copyBuffer)
-            : this(buffer, 0, buffer.Length, copyBuffer) {
-        }
+            : this(buffer, 0, buffer.Length, copyBuffer) { }
 
 #if TRAVE
-        public override string ToString() {
-            return "BufferOffsetSize#" + ValidationHelper.HashString(this) + " Buffer#" + ValidationHelper.HashString(Buffer) + " Offset:" + Offset.ToString() + " Size:" + Size.ToString();
+        public override string ToString()
+        {
+            return "BufferOffsetSize#"
+                + ValidationHelper.HashString(this)
+                + " Buffer#"
+                + ValidationHelper.HashString(Buffer)
+                + " Offset:"
+                + Offset.ToString()
+                + " Size:"
+                + Size.ToString();
         }
 #endif
-
     } // class BufferOffsetSize
-
-
-
 } // namespace System.Net

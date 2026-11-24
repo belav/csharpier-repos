@@ -45,14 +45,31 @@ namespace System.Configuration
             throw new PlatformNotSupportedException();
         }
 
-        public string KeyContainerName { get { throw new PlatformNotSupportedException(); } }
-        public string CspProviderName { get { throw new PlatformNotSupportedException(); } }
-        public bool UseMachineContainer { get { throw new PlatformNotSupportedException(); } }
-        public bool UseOAEP { get { throw new PlatformNotSupportedException(); } }
-        public bool UseFIPS { get { throw new PlatformNotSupportedException(); } }
-        public RSAParameters RsaPublicKey { get { throw new PlatformNotSupportedException(); } }
+        public string KeyContainerName
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public string CspProviderName
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public bool UseMachineContainer
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public bool UseOAEP
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public bool UseFIPS
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+        public RSAParameters RsaPublicKey
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
     }
-
 
 #if FALSE
     public sealed class RsaProtectedConfigurationProvider : ProtectedConfigurationProvider

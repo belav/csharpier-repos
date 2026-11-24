@@ -10,11 +10,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class WarningKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public WarningKeywordRecommender()
-            : base(SyntaxKind.WarningKeyword, isValidInPreprocessorContext: true)
-        {
-        }
+            : base(SyntaxKind.WarningKeyword, isValidInPreprocessorContext: true) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             // # warning
             if (context.IsPreProcessorKeywordContext)
@@ -27,9 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             var previousToken1 = context.TargetToken;
             var previousToken2 = previousToken1.GetPreviousToken(includeSkipped: true);
 
-            return
-                previousToken1.Kind() == SyntaxKind.PragmaKeyword &&
-                previousToken2.Kind() == SyntaxKind.HashToken;
+            return previousToken1.Kind() == SyntaxKind.PragmaKeyword
+                && previousToken2.Kind() == SyntaxKind.HashToken;
         }
     }
 }

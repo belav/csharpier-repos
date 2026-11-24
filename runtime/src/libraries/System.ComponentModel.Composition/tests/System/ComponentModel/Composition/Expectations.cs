@@ -20,21 +20,21 @@ namespace System.ComponentModel.Composition
     {
         public static IEnumerable<CultureInfo> GetCulturesForFormatting()
         {
-            yield return new CultureInfo("en-US");      // English (US)
-            yield return new CultureInfo("en-AU");      // English (Australian)
-            yield return new CultureInfo("en-CA");      // English (Canada)
-            yield return new CultureInfo("en-NZ");      // English (Great Britain)
-            yield return new CultureInfo("en-JM");      // English (Jamaica)
-            yield return new CultureInfo("pt-BR");      // Portuguese (Brazil)
-            yield return new CultureInfo("es-AR");      // Spanish (Argentina)
-            yield return new CultureInfo("ja-JP");      // Japanese (Japan)
-            yield return new CultureInfo("fr-FR");      // French (France)
-            yield return new CultureInfo("it-IT");      // Italian (Italy)
-            yield return new CultureInfo("de-DE");      // German (Germany)
-            yield return new CultureInfo("es-ES");      // Spanish (Spain)
-            yield return new CultureInfo("ko-KR");      // Korean (Korea)
-            yield return new CultureInfo("zh-TW");      // Chinese (Taiwan)
-            yield return new CultureInfo("zh-CN");      // Chinese (People's Republic of China)
+            yield return new CultureInfo("en-US"); // English (US)
+            yield return new CultureInfo("en-AU"); // English (Australian)
+            yield return new CultureInfo("en-CA"); // English (Canada)
+            yield return new CultureInfo("en-NZ"); // English (Great Britain)
+            yield return new CultureInfo("en-JM"); // English (Jamaica)
+            yield return new CultureInfo("pt-BR"); // Portuguese (Brazil)
+            yield return new CultureInfo("es-AR"); // Spanish (Argentina)
+            yield return new CultureInfo("ja-JP"); // Japanese (Japan)
+            yield return new CultureInfo("fr-FR"); // French (France)
+            yield return new CultureInfo("it-IT"); // Italian (Italy)
+            yield return new CultureInfo("de-DE"); // German (Germany)
+            yield return new CultureInfo("es-ES"); // Spanish (Spain)
+            yield return new CultureInfo("ko-KR"); // Korean (Korea)
+            yield return new CultureInfo("zh-TW"); // Chinese (Taiwan)
+            yield return new CultureInfo("zh-CN"); // Chinese (People's Republic of China)
         }
 
         public static IEnumerable<Assembly> GetAssemblies()
@@ -85,8 +85,22 @@ namespace System.ComponentModel.Composition
             }
 
             yield return new CompositionError[] { new CompositionError("") };
-            yield return new CompositionError[] { new CompositionError(""), new CompositionError("Description") };
-            yield return new CompositionError[] { new CompositionError(""), new CompositionError("Description"), ErrorFactory.Create(CompositionErrorId.InvalidExportMetadata, "Description", (Exception)null), ErrorFactory.Create(CompositionErrorId.Unknown, "Description", new Exception()) };
+            yield return new CompositionError[]
+            {
+                new CompositionError(""),
+                new CompositionError("Description"),
+            };
+            yield return new CompositionError[]
+            {
+                new CompositionError(""),
+                new CompositionError("Description"),
+                ErrorFactory.Create(
+                    CompositionErrorId.InvalidExportMetadata,
+                    "Description",
+                    (Exception)null
+                ),
+                ErrorFactory.Create(CompositionErrorId.Unknown, "Description", new Exception()),
+            };
         }
 
         public static IEnumerable<string> GetContractNames()
@@ -152,12 +166,35 @@ namespace System.ComponentModel.Composition
             yield return new Dictionary<string, Type> { { "  ", typeof(object) } };
             yield return new Dictionary<string, Type> { { "   ", typeof(object) } };
             yield return new Dictionary<string, Type> { { "A", typeof(object) } };
-            yield return new Dictionary<string, Type> { { "A", typeof(object) }, { "B", typeof(object) } };
-            yield return new Dictionary<string, Type> { { "A", typeof(object) }, { "B", typeof(object) }, { "C", typeof(object) } };
+            yield return new Dictionary<string, Type>
+            {
+                { "A", typeof(object) },
+                { "B", typeof(object) },
+            };
+            yield return new Dictionary<string, Type>
+            {
+                { "A", typeof(object) },
+                { "B", typeof(object) },
+                { "C", typeof(object) },
+            };
             yield return new Dictionary<string, Type> { { "a", typeof(object) } };
-            yield return new Dictionary<string, Type> { { "a", typeof(object) }, { "b", typeof(object) } };
-            yield return new Dictionary<string, Type> { { "a", typeof(object) }, { "b", typeof(object) }, { "c", typeof(object) } };
-            yield return new Dictionary<string, Type> { { "Metadata1", typeof(object) }, { "Metadata2", typeof(object) }, { "Metadata3", typeof(object) } };
+            yield return new Dictionary<string, Type>
+            {
+                { "a", typeof(object) },
+                { "b", typeof(object) },
+            };
+            yield return new Dictionary<string, Type>
+            {
+                { "a", typeof(object) },
+                { "b", typeof(object) },
+                { "c", typeof(object) },
+            };
+            yield return new Dictionary<string, Type>
+            {
+                { "Metadata1", typeof(object) },
+                { "Metadata2", typeof(object) },
+                { "Metadata3", typeof(object) },
+            };
         }
 
         public static IEnumerable<Dictionary<string, Type>> GetRequiredMetadataWithEmpty()
@@ -246,12 +283,14 @@ namespace System.ComponentModel.Composition
         {
             foreach (Type type in typeof(Expectations).Assembly.GetTypes())
             {
-                var definition = AttributedModelDiscovery.CreatePartDefinitionIfDiscoverable(type, (ICompositionElement)null);
+                var definition = AttributedModelDiscovery.CreatePartDefinitionIfDiscoverable(
+                    type,
+                    (ICompositionElement)null
+                );
                 if (definition != null)
                 {
                     yield return type;
                 }
-
             }
         }
 
@@ -261,7 +300,8 @@ namespace System.ComponentModel.Composition
             yield return typeof(Int32).GetSingleMember("MaxValue");
         }
 
-        public static IEnumerable<TEnum> GetEnumValues<TEnum>() where TEnum : struct
+        public static IEnumerable<TEnum> GetEnumValues<TEnum>()
+            where TEnum : struct
         {
             var values = TestServices.GetEnumValues<TEnum>();
 
@@ -271,7 +311,8 @@ namespace System.ComponentModel.Composition
             }
         }
 
-        public static IEnumerable<TEnum> GetInvalidEnumValues<TEnum>() where TEnum : struct
+        public static IEnumerable<TEnum> GetInvalidEnumValues<TEnum>()
+            where TEnum : struct
         {
             var bounds = GetEnumBounds<TEnum>();
 
@@ -299,14 +340,16 @@ namespace System.ComponentModel.Composition
             yield return new string[] { "1", "2", "3" };
         }
 
-        private static TEnum AddEnum<TEnum>(TEnum left, int right) where TEnum : struct
+        private static TEnum AddEnum<TEnum>(TEnum left, int right)
+            where TEnum : struct
         {
             int intRight = (int)(object)left;
 
             return (TEnum)(object)(intRight + right);
         }
 
-        private static Tuple<TEnum, TEnum> GetEnumBounds<TEnum>() where TEnum : struct
+        private static Tuple<TEnum, TEnum> GetEnumBounds<TEnum>()
+            where TEnum : struct
         {
             var values = TestServices.GetEnumValues<TEnum>();
 

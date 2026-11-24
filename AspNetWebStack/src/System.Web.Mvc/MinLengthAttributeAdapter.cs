@@ -8,10 +8,12 @@ namespace System.Web.Mvc
 {
     public class MinLengthAttributeAdapter : DataAnnotationsModelValidator<MinLengthAttribute>
     {
-        public MinLengthAttributeAdapter(ModelMetadata metadata, ControllerContext context, MinLengthAttribute attribute)
-            : base(metadata, context, attribute)
-        {
-        }
+        public MinLengthAttributeAdapter(
+            ModelMetadata metadata,
+            ControllerContext context,
+            MinLengthAttribute attribute
+        )
+            : base(metadata, context, attribute) { }
 
         public override IEnumerable<ModelClientValidationRule> GetClientValidationRules()
         {

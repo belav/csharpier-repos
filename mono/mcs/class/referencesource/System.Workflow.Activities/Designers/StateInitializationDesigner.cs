@@ -1,17 +1,17 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Text;
-    using System.Reflection;
-    using System.Collections;
     using System.CodeDom;
+    using System.Collections;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Drawing;
     using System.Drawing.Drawing2D;
+    using System.Reflection;
+    using System.Text;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
-    using System.Collections.ObjectModel;
 
     #region StateInitializationDesigner
     [ActivityDesignerTheme(typeof(StateInitializationDesignerTheme))]
@@ -37,13 +37,13 @@ namespace System.Workflow.Activities
 
         public override bool CanExpandCollapse
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
-        public override bool CanInsertActivities(HitTestInfo insertLocation, ReadOnlyCollection<Activity> activitiesToInsert)
+        public override bool CanInsertActivities(
+            HitTestInfo insertLocation,
+            ReadOnlyCollection<Activity> activitiesToInsert
+        )
         {
             foreach (Activity activity in activitiesToInsert)
             {

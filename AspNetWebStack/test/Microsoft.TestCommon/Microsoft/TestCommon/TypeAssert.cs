@@ -90,13 +90,24 @@ namespace Microsoft.TestCommon
             /// <summary>
             /// Indicates that the type must be a public, visible class.
             /// </summary>
-            IsPublicVisibleClass = TypeAssert.TypeProperties.IsClass | TypeAssert.TypeProperties.IsPublic | TypeAssert.TypeProperties.IsVisible
+            IsPublicVisibleClass =
+                TypeAssert.TypeProperties.IsClass
+                | TypeAssert.TypeProperties.IsPublic
+                | TypeAssert.TypeProperties.IsVisible,
         }
 
         private static void CheckProperty(Type type, bool expected, bool actual, string property)
         {
             Assert.NotNull(type);
-            Assert.True(expected == actual, String.Format("Type '{0}' should{1} be {2}.", type.FullName, expected ? "" : " NOT", property));
+            Assert.True(
+                expected == actual,
+                String.Format(
+                    "Type '{0}' should{1} be {2}.",
+                    type.FullName,
+                    expected ? "" : " NOT",
+                    property
+                )
+            );
         }
 
         /// <summary>
@@ -142,22 +153,92 @@ namespace Microsoft.TestCommon
         /// <param name="isAssignableFrom">Verify that the type to test is assignable from this type.</param>
         public void HasProperties(Type type, TypeProperties typeProperties, Type isAssignableFrom)
         {
-            TypeAssert.CheckProperty(type, (typeProperties & TypeProperties.IsAbstract) > 0, type.IsAbstract, "abstract");
-            TypeAssert.CheckProperty(type, (typeProperties & TypeProperties.IsClass) > 0, type.IsClass, "a class");
-            TypeAssert.CheckProperty(type, (typeProperties & TypeProperties.IsComObject) > 0, type.IsCOMObject, "a COM object");
-            TypeAssert.CheckProperty(type, (typeProperties & TypeProperties.IsDisposable) > 0, typeof(IDisposable).IsAssignableFrom(type), "disposable");
-            TypeAssert.CheckProperty(type, (typeProperties & TypeProperties.IsEnum) > 0, type.IsEnum, "an enum");
-            TypeAssert.CheckProperty(type, (typeProperties & TypeProperties.IsGenericType) > 0, type.IsGenericType, "a generic type");
-            TypeAssert.CheckProperty(type, (typeProperties & TypeProperties.IsGenericTypeDefinition) > 0, type.IsGenericTypeDefinition, "a generic type definition");
-            TypeAssert.CheckProperty(type, (typeProperties & TypeProperties.IsInterface) > 0, type.IsInterface, "an interface");
-            TypeAssert.CheckProperty(type, (typeProperties & TypeProperties.IsNestedPrivate) > 0, type.IsNestedPrivate, "nested private");
-            TypeAssert.CheckProperty(type, (typeProperties & TypeProperties.IsNestedPublic) > 0, type.IsNestedPublic, "nested public");
-            TypeAssert.CheckProperty(type, (typeProperties & TypeProperties.IsPublic) > 0, type.IsPublic, "public");
-            TypeAssert.CheckProperty(type, (typeProperties & TypeProperties.IsSealed) > 0, type.IsSealed, "sealed");
-            TypeAssert.CheckProperty(type, (typeProperties & TypeProperties.IsVisible) > 0, type.IsVisible, "visible");
+            TypeAssert.CheckProperty(
+                type,
+                (typeProperties & TypeProperties.IsAbstract) > 0,
+                type.IsAbstract,
+                "abstract"
+            );
+            TypeAssert.CheckProperty(
+                type,
+                (typeProperties & TypeProperties.IsClass) > 0,
+                type.IsClass,
+                "a class"
+            );
+            TypeAssert.CheckProperty(
+                type,
+                (typeProperties & TypeProperties.IsComObject) > 0,
+                type.IsCOMObject,
+                "a COM object"
+            );
+            TypeAssert.CheckProperty(
+                type,
+                (typeProperties & TypeProperties.IsDisposable) > 0,
+                typeof(IDisposable).IsAssignableFrom(type),
+                "disposable"
+            );
+            TypeAssert.CheckProperty(
+                type,
+                (typeProperties & TypeProperties.IsEnum) > 0,
+                type.IsEnum,
+                "an enum"
+            );
+            TypeAssert.CheckProperty(
+                type,
+                (typeProperties & TypeProperties.IsGenericType) > 0,
+                type.IsGenericType,
+                "a generic type"
+            );
+            TypeAssert.CheckProperty(
+                type,
+                (typeProperties & TypeProperties.IsGenericTypeDefinition) > 0,
+                type.IsGenericTypeDefinition,
+                "a generic type definition"
+            );
+            TypeAssert.CheckProperty(
+                type,
+                (typeProperties & TypeProperties.IsInterface) > 0,
+                type.IsInterface,
+                "an interface"
+            );
+            TypeAssert.CheckProperty(
+                type,
+                (typeProperties & TypeProperties.IsNestedPrivate) > 0,
+                type.IsNestedPrivate,
+                "nested private"
+            );
+            TypeAssert.CheckProperty(
+                type,
+                (typeProperties & TypeProperties.IsNestedPublic) > 0,
+                type.IsNestedPublic,
+                "nested public"
+            );
+            TypeAssert.CheckProperty(
+                type,
+                (typeProperties & TypeProperties.IsPublic) > 0,
+                type.IsPublic,
+                "public"
+            );
+            TypeAssert.CheckProperty(
+                type,
+                (typeProperties & TypeProperties.IsSealed) > 0,
+                type.IsSealed,
+                "sealed"
+            );
+            TypeAssert.CheckProperty(
+                type,
+                (typeProperties & TypeProperties.IsVisible) > 0,
+                type.IsVisible,
+                "visible"
+            );
             if (isAssignableFrom != null)
             {
-                TypeAssert.CheckProperty(type, true, isAssignableFrom.IsAssignableFrom(type), String.Format("assignable from {0}", isAssignableFrom.FullName));
+                TypeAssert.CheckProperty(
+                    type,
+                    true,
+                    isAssignableFrom.IsAssignableFrom(type),
+                    String.Format("assignable from {0}", isAssignableFrom.FullName)
+                );
             }
         }
     }

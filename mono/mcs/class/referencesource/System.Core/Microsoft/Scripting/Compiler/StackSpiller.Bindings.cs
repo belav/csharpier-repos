@@ -1,11 +1,11 @@
 ﻿/* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Apache License, Version 2.0, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Apache License, Version 2.0, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Apache License, Version 2.0.
  *
  * You must not remove this notice, or any other, from this software.
@@ -16,38 +16,48 @@
 using System.Collections.ObjectModel;
 using System.Dynamic.Utils;
 using System.Runtime.CompilerServices;
-
 #if SILVERLIGHT
 using System.Core;
 #endif
 
 #if CLR2
-namespace Microsoft.Scripting.Ast.Compiler {
+namespace Microsoft.Scripting.Ast.Compiler
+{
 #else
-namespace System.Linq.Expressions.Compiler {
+namespace System.Linq.Expressions.Compiler
+{
 #endif
 
-    internal partial class StackSpiller {
-
-        private abstract class BindingRewriter {
+    internal partial class StackSpiller
+    {
+        private abstract class BindingRewriter
+        {
             protected MemberBinding _binding;
             protected RewriteAction _action;
             protected StackSpiller _spiller;
 
-            internal BindingRewriter(MemberBinding binding, StackSpiller spiller) {
+            internal BindingRewriter(MemberBinding binding, StackSpiller spiller)
+            {
                 _binding = binding;
                 _spiller = spiller;
             }
 
-            internal RewriteAction Action {
+            internal RewriteAction Action
+            {
                 get { return _action; }
             }
 
             internal abstract MemberBinding AsBinding();
             internal abstract Expression AsExpression(Expression target);
 
-            internal static BindingRewriter Create(MemberBinding binding, StackSpiller spiller, Stack stack) {
-                switch (binding.BindingType) {
+            internal static BindingRewriter Create(
+                MemberBinding binding,
+                StackSpiller spiller,
+                Stack stack
+            )
+            {
+                switch (binding.BindingType)
+                {
                     case MemberBindingType.Assignment:
                         MemberAssignment assign = (MemberAssignment)binding;
                         return new MemberAssignmentRewriter(assign, spiller, stack);
@@ -62,38 +72,52 @@ namespace System.Linq.Expressions.Compiler {
             }
         }
 
-        private class MemberMemberBindingRewriter : BindingRewriter {
+        private class MemberMemberBindingRewriter : BindingRewriter
+        {
             ReadOnlyCollection<MemberBinding> _bindings;
             BindingRewriter[] _bindingRewriters;
 
-            internal MemberMemberBindingRewriter(MemberMemberBinding binding, StackSpiller spiller, Stack stack) :
-                base(binding, spiller) {
-
+            internal MemberMemberBindingRewriter(
+                MemberMemberBinding binding,
+                StackSpiller spiller,
+                Stack stack
+            )
+                : base(binding, spiller)
+            {
                 _bindings = binding.Bindings;
                 _bindingRewriters = new BindingRewriter[_bindings.Count];
-                for (int i = 0; i < _bindings.Count; i++) {
+                for (int i = 0; i < _bindings.Count; i++)
+                {
                     BindingRewriter br = BindingRewriter.Create(_bindings[i], spiller, stack);
                     _action |= br.Action;
                     _bindingRewriters[i] = br;
                 }
             }
 
-            internal override MemberBinding AsBinding() {
-                switch (_action) {
+            internal override MemberBinding AsBinding()
+            {
+                switch (_action)
+                {
                     case RewriteAction.None:
                         return _binding;
                     case RewriteAction.Copy:
                         MemberBinding[] newBindings = new MemberBinding[_bindings.Count];
-                        for (int i = 0; i < _bindings.Count; i++) {
+                        for (int i = 0; i < _bindings.Count; i++)
+                        {
                             newBindings[i] = _bindingRewriters[i].AsBinding();
                         }
-                        return Expression.MemberBind(_binding.Member, new TrueReadOnlyCollection<MemberBinding>(newBindings));
+                        return Expression.MemberBind(
+                            _binding.Member,
+                            new TrueReadOnlyCollection<MemberBinding>(newBindings)
+                        );
                 }
                 throw ContractUtils.Unreachable;
             }
 
-            internal override Expression AsExpression(Expression target) {
-                if (target.Type.IsValueType && _binding.Member is System.Reflection.PropertyInfo) {
+            internal override Expression AsExpression(Expression target)
+            {
+                if (target.Type.IsValueType && _binding.Member is System.Reflection.PropertyInfo)
+                {
                     throw Error.CannotAutoInitializeValueTypeMemberThroughProperty(_binding.Member);
                 }
                 RequireNotRefInstance(target);
@@ -104,35 +128,48 @@ namespace System.Linq.Expressions.Compiler {
                 Expression[] block = new Expression[_bindings.Count + 2];
                 block[0] = Expression.Assign(memberTemp, member);
 
-                for (int i = 0; i < _bindings.Count; i++) {
+                for (int i = 0; i < _bindings.Count; i++)
+                {
                     BindingRewriter br = _bindingRewriters[i];
                     block[i + 1] = br.AsExpression(memberTemp);
                 }
 
                 // We need to copy back value types
-                if (memberTemp.Type.IsValueType) {
+                if (memberTemp.Type.IsValueType)
+                {
                     block[_bindings.Count + 1] = Expression.Block(
                         typeof(void),
-                        Expression.Assign(Expression.MakeMemberAccess(target, _binding.Member), memberTemp)
+                        Expression.Assign(
+                            Expression.MakeMemberAccess(target, _binding.Member),
+                            memberTemp
+                        )
                     );
-                } else {
+                }
+                else
+                {
                     block[_bindings.Count + 1] = Expression.Empty();
                 }
                 return MakeBlock(block);
             }
         }
 
-        private class ListBindingRewriter : BindingRewriter {
+        private class ListBindingRewriter : BindingRewriter
+        {
             ReadOnlyCollection<ElementInit> _inits;
             ChildRewriter[] _childRewriters;
 
-            internal ListBindingRewriter(MemberListBinding binding, StackSpiller spiller, Stack stack) :
-                base(binding, spiller) {
-
+            internal ListBindingRewriter(
+                MemberListBinding binding,
+                StackSpiller spiller,
+                Stack stack
+            )
+                : base(binding, spiller)
+            {
                 _inits = binding.Initializers;
 
                 _childRewriters = new ChildRewriter[_inits.Count];
-                for (int i = 0; i < _inits.Count; i++) {
+                for (int i = 0; i < _inits.Count; i++)
+                {
                     ElementInit init = _inits[i];
 
                     ChildRewriter cr = new ChildRewriter(spiller, stack, init.Arguments.Count);
@@ -143,28 +180,44 @@ namespace System.Linq.Expressions.Compiler {
                 }
             }
 
-            internal override MemberBinding AsBinding() {
-                switch (_action) {
+            internal override MemberBinding AsBinding()
+            {
+                switch (_action)
+                {
                     case RewriteAction.None:
                         return _binding;
                     case RewriteAction.Copy:
                         ElementInit[] newInits = new ElementInit[_inits.Count];
-                        for (int i = 0; i < _inits.Count; i++) {
+                        for (int i = 0; i < _inits.Count; i++)
+                        {
                             ChildRewriter cr = _childRewriters[i];
-                            if (cr.Action == RewriteAction.None) {
+                            if (cr.Action == RewriteAction.None)
+                            {
                                 newInits[i] = _inits[i];
-                            } else {
-                                newInits[i] = Expression.ElementInit(_inits[i].AddMethod, cr[0, -1]);
+                            }
+                            else
+                            {
+                                newInits[i] = Expression.ElementInit(
+                                    _inits[i].AddMethod,
+                                    cr[0, -1]
+                                );
                             }
                         }
-                        return Expression.ListBind(_binding.Member, new TrueReadOnlyCollection<ElementInit>(newInits));
+                        return Expression.ListBind(
+                            _binding.Member,
+                            new TrueReadOnlyCollection<ElementInit>(newInits)
+                        );
                 }
                 throw ContractUtils.Unreachable;
             }
 
-            internal override Expression AsExpression(Expression target) {
-                if (target.Type.IsValueType && _binding.Member is System.Reflection.PropertyInfo) {
-                    throw Error.CannotAutoInitializeValueTypeElementThroughProperty(_binding.Member);
+            internal override Expression AsExpression(Expression target)
+            {
+                if (target.Type.IsValueType && _binding.Member is System.Reflection.PropertyInfo)
+                {
+                    throw Error.CannotAutoInitializeValueTypeElementThroughProperty(
+                        _binding.Member
+                    );
                 }
                 RequireNotRefInstance(target);
 
@@ -174,38 +227,54 @@ namespace System.Linq.Expressions.Compiler {
                 Expression[] block = new Expression[_inits.Count + 2];
                 block[0] = Expression.Assign(memberTemp, member);
 
-                for (int i = 0; i < _inits.Count; i++) {
+                for (int i = 0; i < _inits.Count; i++)
+                {
                     ChildRewriter cr = _childRewriters[i];
-                    Result add = cr.Finish(Expression.Call(memberTemp, _inits[i].AddMethod, cr[0, -1]));
+                    Result add = cr.Finish(
+                        Expression.Call(memberTemp, _inits[i].AddMethod, cr[0, -1])
+                    );
                     block[i + 1] = add.Node;
                 }
 
                 // We need to copy back value types
-                if (memberTemp.Type.IsValueType) {
+                if (memberTemp.Type.IsValueType)
+                {
                     block[_inits.Count + 1] = Expression.Block(
                         typeof(void),
-                        Expression.Assign(Expression.MakeMemberAccess(target, _binding.Member), memberTemp)
+                        Expression.Assign(
+                            Expression.MakeMemberAccess(target, _binding.Member),
+                            memberTemp
+                        )
                     );
-                } else {
+                }
+                else
+                {
                     block[_inits.Count + 1] = Expression.Empty();
                 }
                 return MakeBlock(block);
             }
         }
 
-        private class MemberAssignmentRewriter : BindingRewriter {
+        private class MemberAssignmentRewriter : BindingRewriter
+        {
             Expression _rhs;
 
-            internal MemberAssignmentRewriter(MemberAssignment binding, StackSpiller spiller, Stack stack) :
-                base(binding, spiller) {
-
+            internal MemberAssignmentRewriter(
+                MemberAssignment binding,
+                StackSpiller spiller,
+                Stack stack
+            )
+                : base(binding, spiller)
+            {
                 Result result = spiller.RewriteExpression(binding.Expression, stack);
                 _action = result.Action;
                 _rhs = result.Node;
             }
 
-            internal override MemberBinding AsBinding() {
-                switch (_action) {
+            internal override MemberBinding AsBinding()
+            {
+                switch (_action)
+                {
                     case RewriteAction.None:
                         return _binding;
                     case RewriteAction.Copy:
@@ -214,7 +283,8 @@ namespace System.Linq.Expressions.Compiler {
                 throw ContractUtils.Unreachable;
             }
 
-            internal override Expression AsExpression(Expression target) {
+            internal override Expression AsExpression(Expression target)
+            {
                 RequireNotRefInstance(target);
 
                 MemberExpression member = Expression.MakeMemberAccess(target, _binding.Member);
@@ -227,6 +297,5 @@ namespace System.Linq.Expressions.Compiler {
                 );
             }
         }
-
     }
 }

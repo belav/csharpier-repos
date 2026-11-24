@@ -5,8 +5,8 @@
 // <owner current="true" primary="true">helenak</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml {
-
+namespace System.Xml
+{
     /// <include file='doc\XmlNameTable.uex' path='docs/doc[@for="XmlNameTable"]/*' />
     /// <devdoc>
     ///    <para> Table of atomized string objects. This provides an
@@ -15,7 +15,8 @@ namespace System.Xml {
     ///    <see langword='abstract'/>
     ///    .</para>
     /// </devdoc>
-    public abstract class XmlNameTable {
+    public abstract class XmlNameTable
+    {
         /// <include file='doc\XmlNameTable.uex' path='docs/doc[@for="XmlNameTable.Get"]/*' />
         /// <devdoc>
         ///    <para>Gets the atomized String object containing the same

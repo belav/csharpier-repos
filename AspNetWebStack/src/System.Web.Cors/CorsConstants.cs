@@ -31,7 +31,8 @@ namespace System.Web.Cors
         /// <summary>
         /// The Access-Control-Request-Headers request header.
         /// </summary>
-        public static readonly string AccessControlRequestHeaders = "Access-Control-Request-Headers";
+        public static readonly string AccessControlRequestHeaders =
+            "Access-Control-Request-Headers";
 
         /// <summary>
         /// The Access-Control-Allow-Origin response header.
@@ -56,7 +57,8 @@ namespace System.Web.Cors
         /// <summary>
         /// The Access-Control-Allow-Credentials response header.
         /// </summary>
-        public static readonly string AccessControlAllowCredentials = "Access-Control-Allow-Credentials";
+        public static readonly string AccessControlAllowCredentials =
+            "Access-Control-Allow-Credentials";
 
         /// <summary>
         /// The Access-Control-Max-Age response header.
@@ -78,14 +80,9 @@ namespace System.Web.Cors
             "Content-Type",
             "Expires",
             "Last-Modified",
-            "Pragma"
+            "Pragma",
         };
 
-        internal static readonly string[] SimpleMethods =
-        {
-            "GET",
-            "HEAD",
-            "POST"
-        };
+        internal static readonly string[] SimpleMethods = { "GET", "HEAD", "POST" };
     }
 }

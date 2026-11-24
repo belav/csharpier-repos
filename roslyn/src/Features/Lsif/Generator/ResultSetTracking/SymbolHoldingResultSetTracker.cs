@@ -13,8 +13,11 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.ResultSetTr
 {
     internal sealed class SymbolHoldingResultSetTracker : IResultSetTracker
     {
-        private readonly Dictionary<ISymbol, TrackedResultSet> _symbolToResultSetId = new Dictionary<ISymbol, TrackedResultSet>();
-        private readonly ReaderWriterLockSlim _readerWriterLock = new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
+        private readonly Dictionary<ISymbol, TrackedResultSet> _symbolToResultSetId =
+            new Dictionary<ISymbol, TrackedResultSet>();
+        private readonly ReaderWriterLockSlim _readerWriterLock = new ReaderWriterLockSlim(
+            LockRecursionPolicy.NoRecursion
+        );
         private readonly ILsifJsonWriter _lsifJsonWriter;
         private readonly IdFactory _idFactory;
 
@@ -26,7 +29,11 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.ResultSetTr
         /// </summary>
         private readonly Compilation _sourceCompilation;
 
-        public SymbolHoldingResultSetTracker(ILsifJsonWriter lsifJsonWriter, Compilation sourceCompilation, IdFactory idFactory)
+        public SymbolHoldingResultSetTracker(
+            ILsifJsonWriter lsifJsonWriter,
+            Compilation sourceCompilation,
+            IdFactory idFactory
+        )
         {
             _lsifJsonWriter = lsifJsonWriter;
             _sourceCompilation = sourceCompilation;
@@ -85,9 +92,15 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.ResultSetTr
             return GetTrackedResultSet(symbol).Id;
         }
 
-        public Id<T> GetResultIdForSymbol<T>(ISymbol symbol, string edgeKind, Func<IdFactory, T> vertexCreator) where T : Vertex
+        public Id<T> GetResultIdForSymbol<T>(
+            ISymbol symbol,
+            string edgeKind,
+            Func<IdFactory, T> vertexCreator
+        )
+            where T : Vertex
         {
-            return GetTrackedResultSet(symbol).GetResultId(edgeKind, vertexCreator, _lsifJsonWriter, _idFactory);
+            return GetTrackedResultSet(symbol)
+                .GetResultId(edgeKind, vertexCreator, _lsifJsonWriter, _idFactory);
         }
 
         public bool ResultSetNeedsInformationalEdgeAdded(ISymbol symbol, string edgeKind)
@@ -106,23 +119,30 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.ResultSetTr
             /// </summary>
             /// <remarks>
             /// This class assumes that we more or less have two kinds of edges in the LSIF world:
-            /// 
+            ///
             /// 1. the resultSet might point to a node that doesn't really have any data, but simply points to other data like referenceResults.
             ///    In this case, it's important for clients to get to that Id.
             /// 2. the resultSet points to a node that itself has data, but nobody needs to know the ID, like a hover result. In this case, those results
             ///    are often expensive to compute, but we do want to record that somebody is adding them somewhere.
-            /// 
+            ///
             /// We record the first kind of this in this dictionary with a non-null Id, and the second kind with a null ID. We could conceptually store
             /// two dictionaries for this, but that will add memory pressure and also limit the catching of mistakes if people cross these two APIs.
             /// </remarks>
-            private readonly Dictionary<string, Id<Vertex>?> _edgeKindToVertexId = new Dictionary<string, Id<Vertex>?>();
+            private readonly Dictionary<string, Id<Vertex>?> _edgeKindToVertexId =
+                new Dictionary<string, Id<Vertex>?>();
 
             public TrackedResultSet(Id<ResultSet> id)
             {
                 Id = id;
             }
 
-            public Id<T> GetResultId<T>(string edgeLabel, Func<IdFactory, T> vertexCreator, ILsifJsonWriter lsifJsonWriter, IdFactory idFactory) where T : Vertex
+            public Id<T> GetResultId<T>(
+                string edgeLabel,
+                Func<IdFactory, T> vertexCreator,
+                ILsifJsonWriter lsifJsonWriter,
+                IdFactory idFactory
+            )
+                where T : Vertex
             {
                 lock (_edgeKindToVertexId)
                 {
@@ -130,7 +150,9 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.ResultSetTr
                     {
                         if (!existingId.HasValue)
                         {
-                            throw new Exception($"This ResultSet already has an edge of {edgeLabel} as {nameof(ResultSetNeedsInformationalEdgeAdded)} was called with this edge label.");
+                            throw new Exception(
+                                $"This ResultSet already has an edge of {edgeLabel} as {nameof(ResultSetNeedsInformationalEdgeAdded)} was called with this edge label."
+                            );
                         }
 
                         // TODO: this is a violation of the type system here, really: we're assuming that all calls to this function with the same edge kind
@@ -156,7 +178,9 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.ResultSetTr
                     {
                         if (existingId.HasValue)
                         {
-                            throw new InvalidOperationException($"This edge kind was already called with a call to {nameof(GetResultId)} which would imply we are mixing edge types incorrectly.");
+                            throw new InvalidOperationException(
+                                $"This edge kind was already called with a call to {nameof(GetResultId)} which would imply we are mixing edge types incorrectly."
+                            );
                         }
 
                         return false;

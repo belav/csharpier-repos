@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,81 +31,86 @@
 
 using System.Collections;
 
-namespace System.Security.Cryptography.X509Certificates {
+namespace System.Security.Cryptography.X509Certificates
+{
+    public sealed class X509ChainElementCollection : ICollection, IEnumerable
+    {
+        private ArrayList _list;
 
-	public sealed class X509ChainElementCollection : ICollection, IEnumerable {
+        // constructors
 
-		private ArrayList _list;
+        // only accessible from X509Chain
+        internal X509ChainElementCollection()
+        {
+            _list = new ArrayList();
+        }
 
-		// constructors
+        // properties
 
-		// only accessible from X509Chain
-		internal X509ChainElementCollection () 
-		{
-			_list = new ArrayList ();
-		}
+        public int Count
+        {
+            get { return _list.Count; }
+        }
 
-		// properties
+        public bool IsSynchronized
+        {
+            get { return _list.IsSynchronized; }
+        }
 
-		public int Count {
-			get { return _list.Count; }
-		}
+        public X509ChainElement this[int index]
+        {
+            get { return (X509ChainElement)_list[index]; }
+        }
 
-		public bool IsSynchronized {
-			get { return _list.IsSynchronized; }
-		}
+        public object SyncRoot
+        {
+            get { return _list.SyncRoot; }
+        }
 
-		public X509ChainElement this [int index] {
-			get { return (X509ChainElement) _list [index]; }
-		}
+        // methods
 
-		public object SyncRoot {
-			get { return _list.SyncRoot; }
-		}
+        public void CopyTo(X509ChainElement[] array, int index)
+        {
+            _list.CopyTo((Array)array, index);
+        }
 
-		// methods
+        void ICollection.CopyTo(Array array, int index)
+        {
+            _list.CopyTo(array, index);
+        }
 
-		public void CopyTo (X509ChainElement[] array, int index) 
-		{
-			_list.CopyTo ((Array)array, index);
-		}
+        public X509ChainElementEnumerator GetEnumerator()
+        {
+            return new X509ChainElementEnumerator(_list);
+        }
 
-		void ICollection.CopyTo (Array array, int index) 
-		{
-			_list.CopyTo (array, index);
-		}
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return new X509ChainElementEnumerator(_list);
+        }
 
-		public X509ChainElementEnumerator GetEnumerator ()
-		{
-			return new X509ChainElementEnumerator (_list);
-		}
+        // private stuff
 
-		IEnumerator IEnumerable.GetEnumerator ()
-		{
-			return new X509ChainElementEnumerator (_list);
-		}
+        internal void Add(X509Certificate2 certificate)
+        {
+            _list.Add(new X509ChainElement(certificate));
+        }
 
-		// private stuff
+        internal void Clear()
+        {
+            _list.Clear();
+        }
 
-		internal void Add (X509Certificate2 certificate)
-		{
-			_list.Add (new X509ChainElement (certificate));
-		}
-
-		internal void Clear ()
-		{
-			_list.Clear ();
-		}
-
-		internal bool Contains (X509Certificate2 certificate)
-		{
-			for (int i=0; i < _list.Count; i++) {
-				if (certificate.Equals (( _list [i] as X509ChainElement).Certificate))
-					return true;
-			}
-			return false;
-		}
-	}
+        internal bool Contains(X509Certificate2 certificate)
+        {
+            for (int i = 0; i < _list.Count; i++)
+            {
+                if (certificate.Equals((_list[i] as X509ChainElement).Certificate))
+                    return true;
+            }
+            return false;
+        }
+    }
 }
 
 #endif

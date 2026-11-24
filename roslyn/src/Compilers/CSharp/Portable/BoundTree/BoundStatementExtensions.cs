@@ -25,7 +25,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         [Conditional("DEBUG")]
-        internal static void AssertIsLabeledStatementWithLabel(this BoundStatement node, LabelSymbol label)
+        internal static void AssertIsLabeledStatementWithLabel(
+            this BoundStatement node,
+            LabelSymbol label
+        )
         {
             Debug.Assert(node != null);
 

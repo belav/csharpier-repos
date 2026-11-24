@@ -31,9 +31,7 @@ namespace System.Linq.Parallel
 
         // Private constructor. MergeExecutor should only be constructed via the
         // MergeExecutor.Execute static method.
-        private MergeExecutor()
-        {
-        }
+        private MergeExecutor() { }
 
         //-----------------------------------------------------------------------------------
         // Creates and executes a new merge executor object.
@@ -47,46 +45,88 @@ namespace System.Linq.Parallel
         //
 
         internal static MergeExecutor<TInputOutput> Execute<TKey>(
-            PartitionedStream<TInputOutput, TKey> partitions, bool ignoreOutput, ParallelMergeOptions options, TaskScheduler taskScheduler, bool isOrdered,
-            CancellationState cancellationState, int queryId)
+            PartitionedStream<TInputOutput, TKey> partitions,
+            bool ignoreOutput,
+            ParallelMergeOptions options,
+            TaskScheduler taskScheduler,
+            bool isOrdered,
+            CancellationState cancellationState,
+            int queryId
+        )
         {
             Debug.Assert(partitions != null);
             Debug.Assert(partitions.PartitionCount > 0);
-            Debug.Assert(!ignoreOutput || options == ParallelMergeOptions.FullyBuffered, "Pipelining with no output is not supported.");
+            Debug.Assert(
+                !ignoreOutput || options == ParallelMergeOptions.FullyBuffered,
+                "Pipelining with no output is not supported."
+            );
 
             MergeExecutor<TInputOutput> mergeExecutor = new MergeExecutor<TInputOutput>();
             if (isOrdered && !ignoreOutput)
             {
-                if (options != ParallelMergeOptions.FullyBuffered && !partitions.OrdinalIndexState.IsWorseThan(OrdinalIndexState.Increasing))
+                if (
+                    options != ParallelMergeOptions.FullyBuffered
+                    && !partitions.OrdinalIndexState.IsWorseThan(OrdinalIndexState.Increasing)
+                )
                 {
-                    Debug.Assert(options == ParallelMergeOptions.NotBuffered || options == ParallelMergeOptions.AutoBuffered);
+                    Debug.Assert(
+                        options == ParallelMergeOptions.NotBuffered
+                            || options == ParallelMergeOptions.AutoBuffered
+                    );
                     bool autoBuffered = (options == ParallelMergeOptions.AutoBuffered);
 
                     if (partitions.PartitionCount > 1)
                     {
                         Debug.Assert(!ParallelEnumerable.SinglePartitionMode);
                         // We use a pipelining ordered merge
-                        mergeExecutor._mergeHelper = new OrderPreservingPipeliningMergeHelper<TInputOutput, TKey>(
-                            partitions, taskScheduler, cancellationState, autoBuffered, queryId, partitions.KeyComparer);
+                        mergeExecutor._mergeHelper = new OrderPreservingPipeliningMergeHelper<
+                            TInputOutput,
+                            TKey
+                        >(
+                            partitions,
+                            taskScheduler,
+                            cancellationState,
+                            autoBuffered,
+                            queryId,
+                            partitions.KeyComparer
+                        );
                     }
                     else
                     {
                         // When DOP=1, the default merge simply returns the single producer enumerator to the consumer. This way, ordering
                         // does not add any extra overhead, and no producer task needs to be scheduled.
                         mergeExecutor._mergeHelper = new DefaultMergeHelper<TInputOutput, TKey>(
-                            partitions, false, options, taskScheduler, cancellationState, queryId);
+                            partitions,
+                            false,
+                            options,
+                            taskScheduler,
+                            cancellationState,
+                            queryId
+                        );
                     }
                 }
                 else
                 {
                     // We use a stop-and-go ordered merge helper
-                    mergeExecutor._mergeHelper = new OrderPreservingMergeHelper<TInputOutput, TKey>(partitions, taskScheduler, cancellationState, queryId);
+                    mergeExecutor._mergeHelper = new OrderPreservingMergeHelper<TInputOutput, TKey>(
+                        partitions,
+                        taskScheduler,
+                        cancellationState,
+                        queryId
+                    );
                 }
             }
             else
             {
                 // We use a default - unordered - merge helper.
-                mergeExecutor._mergeHelper = new DefaultMergeHelper<TInputOutput, TKey>(partitions, ignoreOutput, options, taskScheduler, cancellationState, queryId);
+                mergeExecutor._mergeHelper = new DefaultMergeHelper<TInputOutput, TKey>(
+                    partitions,
+                    ignoreOutput,
+                    options,
+                    taskScheduler,
+                    cancellationState,
+                    queryId
+                );
             }
 
             mergeExecutor.Execute();
@@ -142,12 +182,25 @@ namespace System.Linq.Parallel
         //
 
         [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
-        internal static AsynchronousChannel<TInputOutput>[] MakeAsynchronousChannels(int partitionCount, ParallelMergeOptions options, IntValueEvent? consumerEvent, CancellationToken cancellationToken)
+        internal static AsynchronousChannel<TInputOutput>[] MakeAsynchronousChannels(
+            int partitionCount,
+            ParallelMergeOptions options,
+            IntValueEvent? consumerEvent,
+            CancellationToken cancellationToken
+        )
         {
-            AsynchronousChannel<TInputOutput>[] channels = new AsynchronousChannel<TInputOutput>[partitionCount];
+            AsynchronousChannel<TInputOutput>[] channels = new AsynchronousChannel<TInputOutput>[
+                partitionCount
+            ];
 
-            Debug.Assert(options == ParallelMergeOptions.NotBuffered || options == ParallelMergeOptions.AutoBuffered);
-            TraceHelpers.TraceInfo("MergeExecutor::MakeChannels: setting up {0} async channels in prep for pipeline", partitionCount);
+            Debug.Assert(
+                options == ParallelMergeOptions.NotBuffered
+                    || options == ParallelMergeOptions.AutoBuffered
+            );
+            TraceHelpers.TraceInfo(
+                "MergeExecutor::MakeChannels: setting up {0} async channels in prep for pipeline",
+                partitionCount
+            );
 
             // If we are pipelining, we need a channel that contains the necessary synchronization
             // in it. We choose a bounded/blocking channel data structure: bounded so that we can
@@ -163,7 +216,12 @@ namespace System.Linq.Parallel
 
             for (int i = 0; i < channels.Length; i++)
             {
-                channels[i] = new AsynchronousChannel<TInputOutput>(i, chunkSize, cancellationToken, consumerEvent);
+                channels[i] = new AsynchronousChannel<TInputOutput>(
+                    i,
+                    chunkSize,
+                    cancellationToken,
+                    consumerEvent
+                );
             }
 
             return channels;
@@ -181,11 +239,18 @@ namespace System.Linq.Parallel
         //     An array of synchronous channels, one for each partition.
         //
 
-        internal static SynchronousChannel<TInputOutput>[] MakeSynchronousChannels(int partitionCount)
+        internal static SynchronousChannel<TInputOutput>[] MakeSynchronousChannels(
+            int partitionCount
+        )
         {
-            SynchronousChannel<TInputOutput>[] channels = new SynchronousChannel<TInputOutput>[partitionCount];
+            SynchronousChannel<TInputOutput>[] channels = new SynchronousChannel<TInputOutput>[
+                partitionCount
+            ];
 
-            TraceHelpers.TraceInfo("MergeExecutor::MakeChannels: setting up {0} channels in prep for stop-and-go", partitionCount);
+            TraceHelpers.TraceInfo(
+                "MergeExecutor::MakeChannels: setting up {0} channels in prep for stop-and-go",
+                partitionCount
+            );
 
             // We just build up the results in memory using simple, dynamically growable FIFO queues.
             for (int i = 0; i < channels.Length; i++)

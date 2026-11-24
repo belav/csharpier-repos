@@ -29,7 +29,9 @@ namespace Microsoft.Web.Mvc.Resources
         public ResourceErrorActionResult(HttpException httpException, ContentType responseFormat)
         {
             this.statusCode = (HttpStatusCode)httpException.GetHttpCode();
-            this.details = httpException.Data.Contains("details") ? httpException.Data["details"] : httpException.ToString();
+            this.details = httpException.Data.Contains("details")
+                ? httpException.Data["details"]
+                : httpException.ToString();
             this.responseFormat = responseFormat;
         }
 
@@ -37,7 +39,11 @@ namespace Microsoft.Web.Mvc.Resources
         {
             if (this.details != null)
             {
-                MultiFormatActionResult rar = new MultiFormatActionResult(this.details, this.responseFormat, this.statusCode);
+                MultiFormatActionResult rar = new MultiFormatActionResult(
+                    this.details,
+                    this.responseFormat,
+                    this.statusCode
+                );
                 if (rar.TryExecuteResult(context, this.details, this.responseFormat))
                 {
                     return;

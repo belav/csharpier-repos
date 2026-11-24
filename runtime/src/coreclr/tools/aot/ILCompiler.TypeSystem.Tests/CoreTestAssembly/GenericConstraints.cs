@@ -40,32 +40,47 @@ namespace GenericConstraints
         public ClassArgWithoutDefaultCtor(int argument) { }
     }
 
-    public class ReferenceTypeConstraint<T> where T : class { }
+    public class ReferenceTypeConstraint<T>
+        where T : class { }
 
-    public class DefaultConstructorConstraint<T> where T : new() { }
+    public class DefaultConstructorConstraint<T>
+        where T : new() { }
 
-    public class NotNullableValueTypeConstraint<T> where T : struct { }
+    public class NotNullableValueTypeConstraint<T>
+        where T : struct { }
 
-    public class SimpleTypeConstraint<T> where T : Arg1 { }
+    public class SimpleTypeConstraint<T>
+        where T : Arg1 { }
 
-    public class DoubleSimpleTypeConstraint<T> where T : Arg1, INonGen { }
+    public class DoubleSimpleTypeConstraint<T>
+        where T : Arg1, INonGen { }
 
-    public class SimpleGenericConstraint<T, U> where T : U { }
+    public class SimpleGenericConstraint<T, U>
+        where T : U { }
 
-    public class ComplexGenericConstraint1<T, U> where T : Arg2<int> { }
+    public class ComplexGenericConstraint1<T, U>
+        where T : Arg2<int> { }
 
-    public class ComplexGenericConstraint2<T, U> where T : Arg2<Arg2<U>> { }
+    public class ComplexGenericConstraint2<T, U>
+        where T : Arg2<Arg2<U>> { }
 
-    public class ComplexGenericConstraint3<T, U> where T : IGen<U> { }
+    public class ComplexGenericConstraint3<T, U>
+        where T : IGen<U> { }
 
-    public class ComplexGenericConstraint4<T, U> where T : U where U : IGen<T> { }
+    public class ComplexGenericConstraint4<T, U>
+        where T : U
+        where U : IGen<T> { }
 
-    public class MultipleConstraints<T, U> where T : class, IGen<U>, new() { }
+    public class MultipleConstraints<T, U>
+        where T : class, IGen<U>, new() { }
 
     public class GenericMethods
     {
-        public static void SimpleGenericConstraintMethod<T, U>() where T : U { }
+        public static void SimpleGenericConstraintMethod<T, U>()
+            where T : U { }
 
-        public static void ComplexGenericConstraintMethod<T, U>() where T : U where U : IGen<T> { }
+        public static void ComplexGenericConstraintMethod<T, U>()
+            where T : U
+            where U : IGen<T> { }
     }
 }

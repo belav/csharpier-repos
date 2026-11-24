@@ -2,15 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
-using Internal.TypeSystem;
-using Internal.Metadata.NativeFormat.Writer;
-
-using ILCompiler.Metadata;
 using ILCompiler.DependencyAnalysis;
-
+using ILCompiler.Metadata;
+using Internal.Metadata.NativeFormat.Writer;
+using Internal.TypeSystem;
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler
@@ -24,10 +22,22 @@ namespace ILCompiler
         protected readonly StackTraceEmissionPolicy _stackTraceEmissionPolicy;
         private readonly ModuleDesc _generatedAssembly;
 
-        public GeneratingMetadataManager(CompilerTypeSystemContext typeSystemContext, MetadataBlockingPolicy blockingPolicy,
-            ManifestResourceBlockingPolicy resourceBlockingPolicy, string logFile, StackTraceEmissionPolicy stackTracePolicy,
-            DynamicInvokeThunkGenerationPolicy invokeThunkGenerationPolicy, MetadataManagerOptions options)
-            : base(typeSystemContext, blockingPolicy, resourceBlockingPolicy, invokeThunkGenerationPolicy, options)
+        public GeneratingMetadataManager(
+            CompilerTypeSystemContext typeSystemContext,
+            MetadataBlockingPolicy blockingPolicy,
+            ManifestResourceBlockingPolicy resourceBlockingPolicy,
+            string logFile,
+            StackTraceEmissionPolicy stackTracePolicy,
+            DynamicInvokeThunkGenerationPolicy invokeThunkGenerationPolicy,
+            MetadataManagerOptions options
+        )
+            : base(
+                typeSystemContext,
+                blockingPolicy,
+                resourceBlockingPolicy,
+                invokeThunkGenerationPolicy,
+                options
+            )
         {
             _metadataLogFile = logFile;
             _stackTraceEmissionPolicy = stackTracePolicy;
@@ -51,7 +61,9 @@ namespace ILCompiler
             out List<MetadataMapping<MetadataType>> typeMappings,
             out List<MetadataMapping<MethodDesc>> methodMappings,
             out List<MetadataMapping<FieldDesc>> fieldMappings,
-            out List<StackTraceMapping> stackTraceMapping) where TPolicy : struct, IMetadataPolicy
+            out List<StackTraceMapping> stackTraceMapping
+        )
+            where TPolicy : struct, IMetadataPolicy
         {
             var transformed = MetadataTransform.Run(policy, GetCompilationModulesWithMetadata());
             MetadataTransform transform = transformed.Transform;
@@ -70,17 +82,24 @@ namespace ILCompiler
 
                 // Methods that will end up in the reflection invoke table should not have an entry in stack trace table
                 // We'll try looking them up in reflection data at runtime.
-                if (transformed.GetTransformedMethodDefinition(typicalMethod) != null &&
-                    ShouldMethodBeInInvokeMap(method) &&
-                    (GetMetadataCategory(method) & MetadataCategory.RuntimeMapping) != 0)
+                if (
+                    transformed.GetTransformedMethodDefinition(typicalMethod) != null
+                    && ShouldMethodBeInInvokeMap(method)
+                    && (GetMetadataCategory(method) & MetadataCategory.RuntimeMapping) != 0
+                )
                     continue;
 
-                MethodStackTraceVisibilityFlags stackVisibility = _stackTraceEmissionPolicy.GetMethodVisibility(method);
+                MethodStackTraceVisibilityFlags stackVisibility =
+                    _stackTraceEmissionPolicy.GetMethodVisibility(method);
                 bool isHidden = (stackVisibility & MethodStackTraceVisibilityFlags.IsHidden) != 0;
 
                 if ((stackVisibility & MethodStackTraceVisibilityFlags.HasMetadata) != 0)
                 {
-                    StackTraceRecordData record = CreateStackTraceRecord(transform, method, isHidden);
+                    StackTraceRecordData record = CreateStackTraceRecord(
+                        transform,
+                        method,
+                        isHidden
+                    );
 
                     stackTraceRecords.Add(record);
 
@@ -91,7 +110,9 @@ namespace ILCompiler
                 }
                 else if (isHidden)
                 {
-                    stackTraceRecords.Add(new StackTraceRecordData(method, null, null, null, null, isHidden));
+                    stackTraceRecords.Add(
+                        new StackTraceRecordData(method, null, null, null, null, isHidden)
+                    );
                 }
             }
 
@@ -100,7 +121,20 @@ namespace ILCompiler
             // .NET metadata is UTF-16 and UTF-16 contains code points that don't translate to UTF-8.
             var noThrowUtf8Encoding = new UTF8Encoding(false, false);
 
-            using (var logWriter = _metadataLogFile != null ? new StreamWriter(File.Open(_metadataLogFile, FileMode.Create, FileAccess.Write, FileShare.Read), noThrowUtf8Encoding) : null)
+            using (
+                var logWriter =
+                    _metadataLogFile != null
+                        ? new StreamWriter(
+                            File.Open(
+                                _metadataLogFile,
+                                FileMode.Create,
+                                FileAccess.Write,
+                                FileShare.Read
+                            ),
+                            noThrowUtf8Encoding
+                        )
+                        : null
+            )
             {
                 writer.LogWriter = logWriter;
                 writer.Write(ms);
@@ -112,7 +146,9 @@ namespace ILCompiler
             if (metadataBlob.Length > MaxAllowedMetadataOffset)
             {
                 // Offset portion of metadata handles is limited to 16 MB.
-                throw new InvalidOperationException($"Metadata blob exceeded the addressing range (allowed: {MaxAllowedMetadataOffset}, actual: {metadataBlob.Length})");
+                throw new InvalidOperationException(
+                    $"Metadata blob exceeded the addressing range (allowed: {MaxAllowedMetadataOffset}, actual: {metadataBlob.Length})"
+                );
             }
 
             typeMappings = new List<MetadataMapping<MetadataType>>();
@@ -134,7 +170,12 @@ namespace ILCompiler
                 record ??= transformed.GetTransformedTypeReference(definition);
 
                 if (record != null)
-                    typeMappings.Add(new MetadataMapping<MetadataType>(definition, writer.GetRecordHandle(record)));
+                    typeMappings.Add(
+                        new MetadataMapping<MetadataType>(
+                            definition,
+                            writer.GetRecordHandle(record)
+                        )
+                    );
             }
 
             foreach (var method in GetReflectableMethods())
@@ -151,26 +192,38 @@ namespace ILCompiler
                     continue;
                 }
 
-                if (IsReflectionBlocked(method.Instantiation) || IsReflectionBlocked(method.OwningType.Instantiation))
+                if (
+                    IsReflectionBlocked(method.Instantiation)
+                    || IsReflectionBlocked(method.OwningType.Instantiation)
+                )
                     continue;
 
                 if ((GetMetadataCategory(method) & MetadataCategory.RuntimeMapping) == 0)
                     continue;
 
-                MetadataRecord record = transformed.GetTransformedMethodDefinition(method.GetTypicalMethodDefinition());
+                MetadataRecord record = transformed.GetTransformedMethodDefinition(
+                    method.GetTypicalMethodDefinition()
+                );
 
                 if (record != null)
-                    methodMappings.Add(new MetadataMapping<MethodDesc>(method, writer.GetRecordHandle(record)));
+                    methodMappings.Add(
+                        new MetadataMapping<MethodDesc>(method, writer.GetRecordHandle(record))
+                    );
             }
 
             HashSet<FieldDesc> canonicalFields = new HashSet<FieldDesc>();
             foreach (var field in GetFieldsWithRuntimeMapping())
             {
                 FieldDesc fieldToAdd = field;
-                TypeDesc canonOwningType = field.OwningType.ConvertToCanonForm(CanonicalFormKind.Specific);
+                TypeDesc canonOwningType = field.OwningType.ConvertToCanonForm(
+                    CanonicalFormKind.Specific
+                );
                 if (canonOwningType.IsCanonicalSubtype(CanonicalFormKind.Any))
                 {
-                    FieldDesc canonField = _typeSystemContext.GetFieldForInstantiatedType(field.GetTypicalFieldDefinition(), (InstantiatedType)canonOwningType);
+                    FieldDesc canonField = _typeSystemContext.GetFieldForInstantiatedType(
+                        field.GetTypicalFieldDefinition(),
+                        (InstantiatedType)canonOwningType
+                    );
 
                     // If we already added a canonically equivalent field, skip this one.
                     if (!canonicalFields.Add(canonField))
@@ -179,9 +232,13 @@ namespace ILCompiler
                     fieldToAdd = canonField;
                 }
 
-                Field record = transformed.GetTransformedFieldDefinition(fieldToAdd.GetTypicalFieldDefinition());
+                Field record = transformed.GetTransformedFieldDefinition(
+                    fieldToAdd.GetTypicalFieldDefinition()
+                );
                 if (record != null)
-                    fieldMappings.Add(new MetadataMapping<FieldDesc>(fieldToAdd, writer.GetRecordHandle(record)));
+                    fieldMappings.Add(
+                        new MetadataMapping<FieldDesc>(fieldToAdd, writer.GetRecordHandle(record))
+                    );
             }
 
             // Generate stack trace metadata mapping
@@ -194,14 +251,28 @@ namespace ILCompiler
                         writer.GetRecordHandle(stackTraceRecord.OwningType),
                         writer.GetRecordHandle(stackTraceRecord.MethodSignature),
                         writer.GetRecordHandle(stackTraceRecord.MethodName),
-                        stackTraceRecord.MethodInstantiationArgumentCollection != null ? writer.GetRecordHandle(stackTraceRecord.MethodInstantiationArgumentCollection) : 0,
-                        stackTraceRecord.IsHidden);
+                        stackTraceRecord.MethodInstantiationArgumentCollection != null
+                            ? writer.GetRecordHandle(
+                                stackTraceRecord.MethodInstantiationArgumentCollection
+                            )
+                            : 0,
+                        stackTraceRecord.IsHidden
+                    );
                     stackTraceMapping.Add(mapping);
                 }
                 else
                 {
                     Debug.Assert(stackTraceRecord.IsHidden);
-                    stackTraceMapping.Add(new StackTraceMapping(stackTraceRecord.Method, 0, 0, 0, 0, stackTraceRecord.IsHidden));
+                    stackTraceMapping.Add(
+                        new StackTraceMapping(
+                            stackTraceRecord.Method,
+                            0,
+                            0,
+                            0,
+                            0,
+                            stackTraceRecord.IsHidden
+                        )
+                    );
                 }
             }
         }
@@ -217,8 +288,10 @@ namespace ILCompiler
         /// </summary>
         public sealed override MethodDesc GetReflectionInvokeStub(MethodDesc method)
         {
-            return _typeSystemContext.GetDynamicInvokeThunk(method.Signature,
-                !method.Signature.IsStatic && method.OwningType.IsValueType);
+            return _typeSystemContext.GetDynamicInvokeThunk(
+                method.Signature,
+                !method.Signature.IsStatic && method.OwningType.IsValueType
+            );
         }
     }
 }

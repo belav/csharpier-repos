@@ -1,22 +1,22 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Text;
-    using System.Reflection;
-    using System.Collections;
     using System.CodeDom;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Diagnostics;
     using System.Drawing;
     using System.Drawing.Design;
+    using System.Reflection;
     using System.Security;
     using System.Security.Permissions;
-    using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
-    using System.Collections.Generic;
-    using System.Workflow.ComponentModel.Compiler;
+    using System.Text;
     using System.Workflow.Activities.Common;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
 
     [SRDescription(SR.SetStateActivityDescription)]
     [ToolboxItem(typeof(ActivityToolboxItem))]
@@ -25,24 +25,32 @@ namespace System.Workflow.Activities
     [ActivityValidator(typeof(SetStateValidator))]
     [SRCategory(SR.Standard)]
     [System.Runtime.InteropServices.ComVisible(false)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class SetStateActivity : Activity
     {
         internal const string TargetStateNamePropertyName = "TargetStateName";
 
         //metadata property
-        public static readonly DependencyProperty TargetStateNameProperty = DependencyProperty.Register(TargetStateNamePropertyName, typeof(string), typeof(SetStateActivity), new PropertyMetadata("", DependencyPropertyOptions.Metadata, new ValidationOptionAttribute(ValidationOption.Optional)));
+        public static readonly DependencyProperty TargetStateNameProperty =
+            DependencyProperty.Register(
+                TargetStateNamePropertyName,
+                typeof(string),
+                typeof(SetStateActivity),
+                new PropertyMetadata(
+                    "",
+                    DependencyPropertyOptions.Metadata,
+                    new ValidationOptionAttribute(ValidationOption.Optional)
+                )
+            );
 
         #region Constructors
 
-        public SetStateActivity()
-        {
-        }
+        public SetStateActivity() { }
 
         public SetStateActivity(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         #endregion
         [SRDescription(SR.TargetStateDescription)]
@@ -50,22 +58,20 @@ namespace System.Workflow.Activities
         [DefaultValue((string)null)]
         public string TargetStateName
         {
-            get
-            {
-                return base.GetValue(TargetStateNameProperty) as string;
-            }
-            set
-            {
-                base.SetValue(TargetStateNameProperty, value);
-            }
+            get { return base.GetValue(TargetStateNameProperty) as string; }
+            set { base.SetValue(TargetStateNameProperty, value); }
         }
 
-        protected override ActivityExecutionStatus Execute(ActivityExecutionContext executionContext)
+        protected override ActivityExecutionStatus Execute(
+            ActivityExecutionContext executionContext
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
 
-            StateActivity parentState = StateMachineHelpers.FindEnclosingState(executionContext.Activity);
+            StateActivity parentState = StateMachineHelpers.FindEnclosingState(
+                executionContext.Activity
+            );
             StateActivity rootState = StateMachineHelpers.GetRootState(parentState);
             StateMachineExecutionState executionState = StateMachineExecutionState.Get(rootState);
             executionState.NextStateName = this.TargetStateName;
@@ -78,21 +84,33 @@ namespace System.Workflow.Activities
     {
         public override ValidationErrorCollection Validate(ValidationManager manager, object obj)
         {
-            ValidationErrorCollection validationErrors = new ValidationErrorCollection(base.Validate(manager, obj));
+            ValidationErrorCollection validationErrors = new ValidationErrorCollection(
+                base.Validate(manager, obj)
+            );
 
             SetStateActivity setState = obj as SetStateActivity;
             if (setState == null)
-                throw new ArgumentException(SR.GetString(SR.Error_UnexpectedArgumentType, typeof(StateActivity).FullName), "obj");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_UnexpectedArgumentType, typeof(StateActivity).FullName),
+                    "obj"
+                );
 
             if (!SetStateContainment.Validate(setState, validationErrors))
                 return validationErrors; // could not find a valid parent
 
             if (String.IsNullOrEmpty(setState.TargetStateName))
             {
-                validationErrors.Add(new ValidationError(
-                    SR.GetString(SR.Error_PropertyNotSet, SetStateActivity.TargetStateNamePropertyName),
-                    ErrorNumbers.Error_PropertyNotSet, false,
-                    SetStateActivity.TargetStateNamePropertyName));
+                validationErrors.Add(
+                    new ValidationError(
+                        SR.GetString(
+                            SR.Error_PropertyNotSet,
+                            SetStateActivity.TargetStateNamePropertyName
+                        ),
+                        ErrorNumbers.Error_PropertyNotSet,
+                        false,
+                        SetStateActivity.TargetStateNamePropertyName
+                    )
+                );
             }
             else
             {
@@ -103,17 +121,32 @@ namespace System.Workflow.Activities
 
                 StateActivity targetActivity = StateMachineHelpers.FindStateByName(
                     rootState,
-                    setState.TargetStateName);
+                    setState.TargetStateName
+                );
                 StateActivity targetState = targetActivity as StateActivity;
                 if (targetState == null)
                 {
-                    validationErrors.Add(new ValidationError(SR.GetError_SetStateMustPointToAState(), ErrorNumbers.Error_SetStateMustPointToAState, false, SetStateActivity.TargetStateNamePropertyName));
+                    validationErrors.Add(
+                        new ValidationError(
+                            SR.GetError_SetStateMustPointToAState(),
+                            ErrorNumbers.Error_SetStateMustPointToAState,
+                            false,
+                            SetStateActivity.TargetStateNamePropertyName
+                        )
+                    );
                 }
                 else
                 {
                     if (!StateMachineHelpers.IsLeafState(targetState))
                     {
-                        validationErrors.Add(new ValidationError(SR.GetError_SetStateMustPointToALeafNodeState(), ErrorNumbers.Error_SetStateMustPointToALeafNodeState, false, SetStateActivity.TargetStateNamePropertyName));
+                        validationErrors.Add(
+                            new ValidationError(
+                                SR.GetError_SetStateMustPointToALeafNodeState(),
+                                ErrorNumbers.Error_SetStateMustPointToALeafNodeState,
+                                false,
+                                SetStateActivity.TargetStateNamePropertyName
+                            )
+                        );
                     }
                 }
             }
@@ -128,25 +161,33 @@ namespace System.Workflow.Activities
             private bool validParentFound = true;
             private bool validParentStateFound;
 
-            private SetStateContainment()
-            {
-            }
+            private SetStateContainment() { }
 
-            public static bool Validate(SetStateActivity setState, ValidationErrorCollection validationErrors)
+            public static bool Validate(
+                SetStateActivity setState,
+                ValidationErrorCollection validationErrors
+            )
             {
                 SetStateContainment containment = new SetStateContainment();
                 ValidateContainment(containment, setState);
 
-                if (!containment.validParentFound ||
-                    !containment.validParentStateFound)
+                if (!containment.validParentFound || !containment.validParentStateFound)
                 {
-                    validationErrors.Add(new ValidationError(SR.GetError_SetStateOnlyWorksOnStateMachineWorkflow(), ErrorNumbers.Error_SetStateOnlyWorksOnStateMachineWorkflow));
+                    validationErrors.Add(
+                        new ValidationError(
+                            SR.GetError_SetStateOnlyWorksOnStateMachineWorkflow(),
+                            ErrorNumbers.Error_SetStateOnlyWorksOnStateMachineWorkflow
+                        )
+                    );
                     return false;
                 }
                 return true;
             }
 
-            private static void ValidateContainment(SetStateContainment containment, Activity activity)
+            private static void ValidateContainment(
+                SetStateContainment containment,
+                Activity activity
+            )
             {
                 Debug.Assert(activity != null);
                 if (activity.Parent == null || activity.Parent == activity)
@@ -164,7 +205,10 @@ namespace System.Workflow.Activities
                 ValidateContainment(containment, activity.Parent);
             }
 
-            private static void ValidateParentState(SetStateContainment containment, CompositeActivity activity)
+            private static void ValidateParentState(
+                SetStateContainment containment,
+                CompositeActivity activity
+            )
             {
                 Debug.Assert(activity != null);
                 if (activity.Parent == null)

@@ -23,32 +23,49 @@ namespace Microsoft.CodeAnalysis
         // data from Security attributes:
         // Array of decoded security actions corresponding to source security attributes, null if there are no security attributes in source.
         private byte[] _lazySecurityActions;
+
         // Array of resolved file paths corresponding to source PermissionSet security attributes needing fixup, null if there are no security attributes in source.
         // Fixup involves reading the file contents of the resolved file and emitting it in the permission set.
         private string[] _lazyPathsForPermissionSetFixup;
 
-        public void SetSecurityAttribute(int attributeIndex, DeclarativeSecurityAction action, int totalSourceAttributes)
+        public void SetSecurityAttribute(
+            int attributeIndex,
+            DeclarativeSecurityAction action,
+            int totalSourceAttributes
+        )
         {
             Debug.Assert(attributeIndex >= 0 && attributeIndex < totalSourceAttributes);
             Debug.Assert(action != 0);
 
             if (_lazySecurityActions == null)
             {
-                Interlocked.CompareExchange(ref _lazySecurityActions, new byte[totalSourceAttributes], null);
+                Interlocked.CompareExchange(
+                    ref _lazySecurityActions,
+                    new byte[totalSourceAttributes],
+                    null
+                );
             }
 
             Debug.Assert(_lazySecurityActions.Length == totalSourceAttributes);
             _lazySecurityActions[attributeIndex] = (byte)action;
         }
 
-        public void SetPathForPermissionSetAttributeFixup(int attributeIndex, string resolvedFilePath, int totalSourceAttributes)
+        public void SetPathForPermissionSetAttributeFixup(
+            int attributeIndex,
+            string resolvedFilePath,
+            int totalSourceAttributes
+        )
         {
             Debug.Assert(attributeIndex >= 0 && attributeIndex < totalSourceAttributes);
             Debug.Assert(resolvedFilePath != null);
 
             if (_lazyPathsForPermissionSetFixup == null)
             {
-                Interlocked.CompareExchange(ref _lazyPathsForPermissionSetFixup, new string[totalSourceAttributes], null);
+                Interlocked.CompareExchange(
+                    ref _lazyPathsForPermissionSetFixup,
+                    new string[totalSourceAttributes],
+                    null
+                );
             }
 
             Debug.Assert(_lazyPathsForPermissionSetFixup.Length == totalSourceAttributes);
@@ -58,11 +75,17 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Used for retrieving applied source security attributes, i.e. attributes derived from well-known SecurityAttribute.
         /// </summary>
-        public IEnumerable<Cci.SecurityAttribute> GetSecurityAttributes<T>(ImmutableArray<T> customAttributes)
+        public IEnumerable<Cci.SecurityAttribute> GetSecurityAttributes<T>(
+            ImmutableArray<T> customAttributes
+        )
             where T : Cci.ICustomAttribute
         {
             Debug.Assert(!customAttributes.IsDefault);
-            Debug.Assert(_lazyPathsForPermissionSetFixup == null || _lazySecurityActions != null && _lazyPathsForPermissionSetFixup.Length == _lazySecurityActions.Length);
+            Debug.Assert(
+                _lazyPathsForPermissionSetFixup == null
+                    || _lazySecurityActions != null
+                        && _lazyPathsForPermissionSetFixup.Length == _lazySecurityActions.Length
+            );
 
             if (_lazySecurityActions != null)
             {
@@ -78,7 +101,10 @@ namespace Microsoft.CodeAnalysis
 
                         if (_lazyPathsForPermissionSetFixup?[i] != null)
                         {
-                            attribute = new PermissionSetAttributeWithFileReference(attribute, _lazyPathsForPermissionSetFixup[i]);
+                            attribute = new PermissionSetAttributeWithFileReference(
+                                attribute,
+                                _lazyPathsForPermissionSetFixup[i]
+                            );
                         }
 
                         yield return new Cci.SecurityAttribute(action, attribute);

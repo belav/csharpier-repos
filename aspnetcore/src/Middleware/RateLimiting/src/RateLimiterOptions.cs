@@ -163,10 +163,8 @@ public sealed class RateLimiterOptions
                 partition.PartitionKey,
                 partition.Factory
             );
-            return new RateLimitPartition<DefaultKeyType>(
-                partitionKey,
-                static key =>
-                    ((Func<TPartitionKey, RateLimiter>)key.Factory!)((TPartitionKey)key.Key!)
+            return new RateLimitPartition<DefaultKeyType>(partitionKey, static key =>
+                ((Func<TPartitionKey, RateLimiter>)key.Factory!)((TPartitionKey)key.Key!)
             );
         };
     }

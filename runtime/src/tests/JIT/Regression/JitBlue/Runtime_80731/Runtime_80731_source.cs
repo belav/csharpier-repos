@@ -1,6 +1,6 @@
-using InlineIL;
 using System;
 using System.Runtime.CompilerServices;
+using InlineIL;
 
 // Tests that we properly account for local uses of GT_JMP nodes when omitting
 // copies for implicit byrefs and when forward substituting.
@@ -43,9 +43,7 @@ class Runtime_80731
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Consume<T>(T val)
-    {
-    }
+    private static void Consume<T>(T val) { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int ImplicitByrefCallee(S16 s)
@@ -70,6 +68,9 @@ class Runtime_80731
 
     private struct S16
     {
-        public int A, B, C, D;
+        public int A,
+            B,
+            C,
+            D;
     }
 }

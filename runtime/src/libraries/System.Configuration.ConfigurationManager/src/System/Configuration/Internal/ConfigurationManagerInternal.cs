@@ -7,28 +7,37 @@ namespace System.Configuration.Internal
     {
         internal ConfigurationManagerInternal() { }
 
-        bool IConfigurationManagerInternal.SupportsUserConfig => ConfigurationManager.SupportsUserConfig;
+        bool IConfigurationManagerInternal.SupportsUserConfig =>
+            ConfigurationManager.SupportsUserConfig;
 
-        bool IConfigurationManagerInternal.SetConfigurationSystemInProgress
-            => ConfigurationManager.SetConfigurationSystemInProgress;
+        bool IConfigurationManagerInternal.SetConfigurationSystemInProgress =>
+            ConfigurationManager.SetConfigurationSystemInProgress;
 
-        string IConfigurationManagerInternal.MachineConfigPath => ClientConfigurationHost.MachineConfigFilePath;
+        string IConfigurationManagerInternal.MachineConfigPath =>
+            ClientConfigurationHost.MachineConfigFilePath;
 
-        string IConfigurationManagerInternal.ApplicationConfigUri => ClientConfigPaths.Current.ApplicationConfigUri;
+        string IConfigurationManagerInternal.ApplicationConfigUri =>
+            ClientConfigPaths.Current.ApplicationConfigUri;
 
-        string IConfigurationManagerInternal.ExeProductName => ClientConfigPaths.Current.ProductName;
+        string IConfigurationManagerInternal.ExeProductName =>
+            ClientConfigPaths.Current.ProductName;
 
-        string IConfigurationManagerInternal.ExeProductVersion => ClientConfigPaths.Current.ProductVersion;
+        string IConfigurationManagerInternal.ExeProductVersion =>
+            ClientConfigPaths.Current.ProductVersion;
 
-        string IConfigurationManagerInternal.ExeRoamingConfigDirectory
-            => ClientConfigPaths.Current.RoamingConfigDirectory;
+        string IConfigurationManagerInternal.ExeRoamingConfigDirectory =>
+            ClientConfigPaths.Current.RoamingConfigDirectory;
 
-        string IConfigurationManagerInternal.ExeRoamingConfigPath => ClientConfigPaths.Current.RoamingConfigFilename;
+        string IConfigurationManagerInternal.ExeRoamingConfigPath =>
+            ClientConfigPaths.Current.RoamingConfigFilename;
 
-        string IConfigurationManagerInternal.ExeLocalConfigDirectory => ClientConfigPaths.Current.LocalConfigDirectory;
+        string IConfigurationManagerInternal.ExeLocalConfigDirectory =>
+            ClientConfigPaths.Current.LocalConfigDirectory;
 
-        string IConfigurationManagerInternal.ExeLocalConfigPath => ClientConfigPaths.Current.LocalConfigFilename;
+        string IConfigurationManagerInternal.ExeLocalConfigPath =>
+            ClientConfigPaths.Current.LocalConfigFilename;
 
-        string IConfigurationManagerInternal.UserConfigFilename => ClientConfigPaths.UserConfigFilename;
+        string IConfigurationManagerInternal.UserConfigFilename =>
+            ClientConfigPaths.UserConfigFilename;
     }
 }

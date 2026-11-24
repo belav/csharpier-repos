@@ -24,12 +24,12 @@ using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-[assembly: AssemblyTitle ("System.Net.Http.Rtc")]
-[assembly: AssemblyDescription ("System.Net.Http.Rtc")]
-[assembly: AssemblyDefaultAlias ("System.Net.Http.Rtc")]
-[assembly: AssemblyCompany ("Mono development team")]
-[assembly: AssemblyProduct ("Mono Common Language Infrastructure")]
-[assembly: AssemblyCopyright ("(c) Various Mono authors")]
-[assembly: AssemblyVersion ("4.0.0.0")]
-[assembly: AssemblyInformationalVersion ("4.0.0.0")]
-[assembly: AssemblyFileVersion ("4.0.0.0")]
+[assembly: AssemblyTitle("System.Net.Http.Rtc")]
+[assembly: AssemblyDescription("System.Net.Http.Rtc")]
+[assembly: AssemblyDefaultAlias("System.Net.Http.Rtc")]
+[assembly: AssemblyCompany("Mono development team")]
+[assembly: AssemblyProduct("Mono Common Language Infrastructure")]
+[assembly: AssemblyCopyright("(c) Various Mono authors")]
+[assembly: AssemblyVersion("4.0.0.0")]
+[assembly: AssemblyInformationalVersion("4.0.0.0")]
+[assembly: AssemblyFileVersion("4.0.0.0")]

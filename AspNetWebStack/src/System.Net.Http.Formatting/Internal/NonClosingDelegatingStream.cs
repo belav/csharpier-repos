@@ -16,18 +16,12 @@ namespace System.Net.Http.Internal
     internal class NonClosingDelegatingStream : DelegatingStream
     {
         public NonClosingDelegatingStream(Stream innerStream)
-            : base(innerStream)
-        {
-        }
+            : base(innerStream) { }
 
 #if NETSTANDARD1_3
-        protected override void Dispose(bool disposing)
-        {
-        }
+        protected override void Dispose(bool disposing) { }
 #else
-        public override void Close()
-        {
-        }
+        public override void Close() { }
 #endif
     }
 }

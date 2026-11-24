@@ -5,14 +5,19 @@ namespace System.Web.Mvc
 {
     public class ByteArrayModelBinder : IModelBinder
     {
-        public virtual object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+        public virtual object BindModel(
+            ControllerContext controllerContext,
+            ModelBindingContext bindingContext
+        )
         {
             if (bindingContext == null)
             {
                 throw new ArgumentNullException("bindingContext");
             }
 
-            ValueProviderResult valueResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+            ValueProviderResult valueResult = bindingContext.ValueProvider.GetValue(
+                bindingContext.ModelName
+            );
 
             // case 1: there was no <input ... /> element containing this data
             if (valueResult == null)

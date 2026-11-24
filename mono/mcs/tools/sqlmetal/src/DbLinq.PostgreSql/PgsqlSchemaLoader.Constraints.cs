@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System.Collections.Generic;
@@ -46,7 +46,14 @@ namespace DbLinq.PostgreSql
 
             public override string ToString()
             {
-                return "ForKeyXR " + ConstraintName + ": " + ConstraintType + "  " + TableName + "->" + ReferencedTableName;
+                return "ForKeyXR "
+                    + ConstraintName
+                    + ": "
+                    + ConstraintType
+                    + "  "
+                    + TableName
+                    + "->"
+                    + ReferencedTableName;
             }
         }
 
@@ -63,9 +70,13 @@ namespace DbLinq.PostgreSql
             return t;
         }
 
-        protected virtual List<DataForeignConstraint> ReadForeignConstraints(IDbConnection conn, string db)
+        protected virtual List<DataForeignConstraint> ReadForeignConstraints(
+            IDbConnection conn,
+            string db
+        )
         {
-            string sql = @"
+            string sql =
+                @"
 SELECT t.constraint_name, t.table_name, t.constraint_type,
     c.table_schema, c.table_name, c.column_name
 FROM information_schema.table_constraints t,
@@ -73,9 +84,14 @@ FROM information_schema.table_constraints t,
 WHERE t.constraint_name = c.constraint_name
     and t.constraint_type IN  ('FOREIGN KEY','PRIMARY KEY')";
 
-            return DataCommand.Find<DataForeignConstraint>(conn, sql, ":db", db, ReadForeignConstraint);
+            return DataCommand.Find<DataForeignConstraint>(
+                conn,
+                sql,
+                ":db",
+                db,
+                ReadForeignConstraint
+            );
         }
-
 
         /// <summary>
         /// represents one row from Postgres' information_schema.`Key_Column_Usage` table
@@ -106,7 +122,8 @@ WHERE t.constraint_name = c.constraint_name
 
         protected virtual List<DataConstraint> ReadConstraints(IDbConnection conn, string db)
         {
-            string sql = @"
+            string sql =
+                @"
 SELECT constraint_name,table_schema,table_name
     ,column_name
 FROM information_schema.KEY_COLUMN_USAGE
@@ -114,6 +131,5 @@ WHERE constraint_catalog=:db";
 
             return DataCommand.Find<DataConstraint>(conn, sql, ":db", db, ReadConstraint);
         }
-
     }
 }

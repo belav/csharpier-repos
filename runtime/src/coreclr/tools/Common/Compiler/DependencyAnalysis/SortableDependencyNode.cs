@@ -5,12 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-
 using ILCompiler.DependencyAnalysisFramework;
 
 namespace ILCompiler.DependencyAnalysis
 {
-    public abstract partial class SortableDependencyNode : DependencyNodeCore<NodeFactory>, ISortableNode
+    public abstract partial class SortableDependencyNode
+        : DependencyNodeCore<NodeFactory>,
+            ISortableNode
     {
 #if !SUPPORT_JIT
         /// <summary>
@@ -63,7 +64,6 @@ namespace ILCompiler.DependencyAnalysis
             ImportSectionsTableNode,
             ImportSectionNode,
             MethodEntrypointTableNode,
-
 
             //
             // NativeAOT Nodes
@@ -127,7 +127,10 @@ namespace ILCompiler.DependencyAnalysis
                 _comparer = comparer;
             }
 
-            public int Compare(DependencyNodeCore<NodeFactory> x1, DependencyNodeCore<NodeFactory> y1)
+            public int Compare(
+                DependencyNodeCore<NodeFactory> x1,
+                DependencyNodeCore<NodeFactory> y1
+            )
             {
                 ObjectNode x = x1 as ObjectNode;
                 ObjectNode y = y1 as ObjectNode;
@@ -148,10 +151,18 @@ namespace ILCompiler.DependencyAnalysis
             }
         }
 
-        static partial void ApplyCustomSort(SortableDependencyNode x, SortableDependencyNode y, ref int result);
+        static partial void ApplyCustomSort(
+            SortableDependencyNode x,
+            SortableDependencyNode y,
+            ref int result
+        );
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int CompareImpl(SortableDependencyNode x, SortableDependencyNode y, CompilerComparer comparer)
+        public static int CompareImpl(
+            SortableDependencyNode x,
+            SortableDependencyNode y,
+            CompilerComparer comparer
+        )
         {
             int phaseX = x.Phase;
             int phaseY = y.Phase;
@@ -167,9 +178,15 @@ namespace ILCompiler.DependencyAnalysis
                 int codeY = y.ClassCode;
                 if (codeX == codeY)
                 {
-                    Debug.Assert(x.GetType() == y.GetType() ||
-                        (x.GetType().IsConstructedGenericType && y.GetType().IsConstructedGenericType
-                        && x.GetType().GetGenericTypeDefinition() == y.GetType().GetGenericTypeDefinition()));
+                    Debug.Assert(
+                        x.GetType() == y.GetType()
+                            || (
+                                x.GetType().IsConstructedGenericType
+                                && y.GetType().IsConstructedGenericType
+                                && x.GetType().GetGenericTypeDefinition()
+                                    == y.GetType().GetGenericTypeDefinition()
+                            )
+                    );
 
                     int result = x.CompareToImpl(y, comparer);
 

@@ -3,8 +3,8 @@
 
 using System;
 using System.IO;
-using System.Text.Json;
 using System.Runtime.InteropServices.JavaScript;
+using System.Text.Json;
 
 public partial class AppSettingsTest
 {
@@ -18,5 +18,6 @@ public partial class AppSettingsTest
     }
 
     // Synchronize with AppSettingsTests
-    private static void PrintFileExistence(string path) => TestOutput.WriteLine($"'{path}' exists '{File.Exists(path)}'");
+    private static void PrintFileExistence(string path) =>
+        TestOutput.WriteLine($"'{path}' exists '{File.Exists(path)}'");
 }

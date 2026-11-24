@@ -4,18 +4,22 @@
 
 #nullable disable
 
-using Moq;
 using System.Linq;
+using Moq;
 
 namespace Roslyn.Test.Utilities
 {
     public static class MoqExtensions
     {
-        public static void VerifyAndClear(this IInvocationList invocations, params (string Name, object[] Args)[] expectedInvocations)
+        public static void VerifyAndClear(
+            this IInvocationList invocations,
+            params (string Name, object[] Args)[] expectedInvocations
+        )
         {
             AssertEx.Equal(
                 expectedInvocations.Select(i => $"{i.Name}: {string.Join(",", i.Args)}"),
-                invocations.Select(i => $"{i.Method.Name}: {string.Join(",", i.Arguments)}"));
+                invocations.Select(i => $"{i.Method.Name}: {string.Join(",", i.Arguments)}")
+            );
 
             for (int i = 0; i < expectedInvocations.Length; i++)
             {

@@ -1,22 +1,21 @@
 //------------------------------------------------------------------------------
 // <copyright file="RenamedEventArgs.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-
-namespace System.IO {
-
-    using System.Diagnostics;
-    using System.Security.Permissions;
+namespace System.IO
+{
     using System;
+    using System.Diagnostics;
     using System.Runtime.Versioning;
-
+    using System.Security.Permissions;
 
     /// <devdoc>
     /// <para>Provides data for the <see cref='System.IO.FileSystemWatcher.Renamed'/> event.</para>
     /// </devdoc>
-    public class RenamedEventArgs : FileSystemEventArgs {
+    public class RenamedEventArgs : FileSystemEventArgs
+    {
         private string oldName;
         private string oldFullPath;
 
@@ -26,14 +25,20 @@ namespace System.IO {
         ///       class.
         ///    </para>
         /// </devdoc>
-        public RenamedEventArgs(WatcherChangeTypes changeType, string directory, string name, string oldName)
-            : base(changeType, directory, name) {
-
+        public RenamedEventArgs(
+            WatcherChangeTypes changeType,
+            string directory,
+            string name,
+            string oldName
+        )
+            : base(changeType, directory, name)
+        {
             // Ensure that the directory name ends with a "\"
-            if (!directory.EndsWith("\\", StringComparison.Ordinal)) {
+            if (!directory.EndsWith("\\", StringComparison.Ordinal))
+            {
                 directory = directory + "\\";
             }
-            
+
             this.oldName = oldName;
             this.oldFullPath = directory + oldName;
         }
@@ -44,11 +49,16 @@ namespace System.IO {
         ///       the previous fully qualified path of the affected file or directory.
         ///    </para>
         /// </devdoc>
-        public string OldFullPath {
+        public string OldFullPath
+        {
             [ResourceExposure(ResourceScope.Machine)]
             [ResourceConsumption(ResourceScope.Machine)]
-            get {
-                new FileIOPermission(FileIOPermissionAccess.Read, Path.GetPathRoot(oldFullPath)).Demand();
+            get
+            {
+                new FileIOPermission(
+                    FileIOPermissionAccess.Read,
+                    Path.GetPathRoot(oldFullPath)
+                ).Demand();
                 return oldFullPath;
             }
         }
@@ -59,12 +69,9 @@ namespace System.IO {
         ///       the old name of the affected file or directory.
         ///    </para>
         /// </devdoc>
-        public string OldName {
-            get {
-                return oldName;
-            }
+        public string OldName
+        {
+            get { return oldName; }
         }
     }
-
-
 }

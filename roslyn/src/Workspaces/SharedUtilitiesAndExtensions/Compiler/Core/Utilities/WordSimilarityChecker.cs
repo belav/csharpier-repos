@@ -9,7 +9,11 @@ namespace Roslyn.Utilities
 {
     internal struct WordSimilarityChecker : IDisposable
     {
-        private readonly struct CacheResult(string candidate, bool areSimilar, double similarityWeight)
+        private readonly struct CacheResult(
+            string candidate,
+            bool areSimilar,
+            double similarityWeight
+        )
         {
             public readonly string CandidateText = candidate;
             public readonly bool AreSimilar = areSimilar;
@@ -50,17 +54,27 @@ namespace Roslyn.Utilities
             _editDistance.Dispose();
         }
 
-        public static bool AreSimilar(string originalText, string candidateText)
-            => AreSimilar(originalText, candidateText, substringsAreSimilar: false);
+        public static bool AreSimilar(string originalText, string candidateText) =>
+            AreSimilar(originalText, candidateText, substringsAreSimilar: false);
 
-        public static bool AreSimilar(string originalText, string candidateText, bool substringsAreSimilar)
-            => AreSimilar(originalText, candidateText, substringsAreSimilar, out _);
+        public static bool AreSimilar(
+            string originalText,
+            string candidateText,
+            bool substringsAreSimilar
+        ) => AreSimilar(originalText, candidateText, substringsAreSimilar, out _);
 
-        public static bool AreSimilar(string originalText, string candidateText, out double similarityWeight)
+        public static bool AreSimilar(
+            string originalText,
+            string candidateText,
+            out double similarityWeight
+        )
         {
             return AreSimilar(
-                originalText, candidateText,
-                substringsAreSimilar: false, similarityWeight: out similarityWeight);
+                originalText,
+                candidateText,
+                substringsAreSimilar: false,
+                similarityWeight: out similarityWeight
+            );
         }
 
         /// <summary>
@@ -68,7 +82,12 @@ namespace Roslyn.Utilities
         /// Returns false otherwise.  If it is a likely misspelling a similarityWeight is provided
         /// to help rank the match.  Lower costs mean it was a better match.
         /// </summary>
-        public static bool AreSimilar(string originalText, string candidateText, bool substringsAreSimilar, out double similarityWeight)
+        public static bool AreSimilar(
+            string originalText,
+            string candidateText,
+            bool substringsAreSimilar,
+            out double similarityWeight
+        )
         {
             using var checker = new WordSimilarityChecker(originalText, substringsAreSimilar);
             var result = checker.AreSimilar(candidateText, out similarityWeight);
@@ -76,17 +95,15 @@ namespace Roslyn.Utilities
             return result;
         }
 
-        internal static int GetThreshold(string value)
-            => value.Length <= 4 ? 1 : 2;
+        internal static int GetThreshold(string value) => value.Length <= 4 ? 1 : 2;
 
-        public bool AreSimilar(string candidateText)
-            => AreSimilar(candidateText, out _);
+        public bool AreSimilar(string candidateText) => AreSimilar(candidateText, out _);
 
         public bool AreSimilar(string candidateText, out double similarityWeight)
         {
             if (_source.Length < 3)
             {
-                // If we're comparing strings that are too short, we'll find 
+                // If we're comparing strings that are too short, we'll find
                 // far too many spurious hits.  Don't even bother in this case.
                 similarityWeight = double.MaxValue;
                 return false;
@@ -107,7 +124,7 @@ namespace Roslyn.Utilities
         {
             similarityWeight = double.MaxValue;
 
-            // If the two strings differ by more characters than the cost threshold, then there's 
+            // If the two strings differ by more characters than the cost threshold, then there's
             // no point in even computing the edit distance as it would necessarily take at least
             // that many additions/deletions.
             if (Math.Abs(_source.Length - candidateText.Length) <= _threshold)
@@ -121,7 +138,10 @@ namespace Roslyn.Utilities
                 // in the string we're currently looking at.  That's enough to consider it
                 // although we place it just at the threshold (i.e. it's worse than all
                 // other matches).
-                if (_substringsAreSimilar && candidateText.IndexOf(_source, StringComparison.OrdinalIgnoreCase) >= 0)
+                if (
+                    _substringsAreSimilar
+                    && candidateText.IndexOf(_source, StringComparison.OrdinalIgnoreCase) >= 0
+                )
                 {
                     similarityWeight = _threshold;
                 }
@@ -142,12 +162,12 @@ namespace Roslyn.Utilities
             var lengthDifference = Math.Abs(originalText.Length - candidateText.Length);
             if (lengthDifference != 0)
             {
-                // For all items of the same edit cost, we penalize those that are 
-                // much longer than the original text versus those that are only 
+                // For all items of the same edit cost, we penalize those that are
+                // much longer than the original text versus those that are only
                 // a little longer.
                 //
                 // Note: even with this penalty, all matches of cost 'X' will all still
-                // cost less than matches of cost 'X + 1'.  i.e. the penalty is in the 
+                // cost less than matches of cost 'X + 1'.  i.e. the penalty is in the
                 // range [0, 1) and only serves to order matches of the same cost.
                 //
                 // Here's the relation of the first few values of length diff and penalty:
@@ -164,7 +184,8 @@ namespace Roslyn.Utilities
             return 0;
         }
 
-        public readonly bool LastCacheResultIs(bool areSimilar, string candidateText)
-            => _lastAreSimilarResult.AreSimilar == areSimilar && _lastAreSimilarResult.CandidateText == candidateText;
+        public readonly bool LastCacheResultIs(bool areSimilar, string candidateText) =>
+            _lastAreSimilarResult.AreSimilar == areSimilar
+            && _lastAreSimilarResult.CandidateText == candidateText;
     }
 }

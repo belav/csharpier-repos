@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,66 +32,72 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security;
 
-namespace System.Security.Principal {
+namespace System.Security.Principal
+{
+    [ComVisible(true)]
+    public class WindowsImpersonationContext : IDisposable
+    {
+        private IntPtr _token;
+        private bool undo;
 
-	[ComVisible (true)]
-	public class WindowsImpersonationContext : IDisposable {
+        internal WindowsImpersonationContext(IntPtr token)
+        {
+            // we get a copy to control it's lifetime
+            _token = DuplicateToken(token);
+            if (!SetCurrentToken(token))
+            {
+                throw new SecurityException("Couldn't impersonate token.");
+            }
+            undo = false;
+        }
 
-		private IntPtr _token;
-		private bool undo;
+        [ComVisible(false)]
+        public void Dispose()
+        {
+            if (!undo)
+            {
+                Undo();
+            }
+        }
 
-		internal WindowsImpersonationContext (IntPtr token)
-		{
-			// we get a copy to control it's lifetime
-			_token = DuplicateToken (token);
-			if (!SetCurrentToken (token)) {
-				throw new SecurityException ("Couldn't impersonate token.");
-			}
-			undo = false;
-		}
-		[ComVisible (false)]
-		public void Dispose ()
-		{
-			if (!undo) {
-				Undo ();
-			}
-		}
-		
-		[ComVisible (false)]
-		protected virtual void Dispose (bool disposing)
-		{
-			if (!undo) {
-				Undo ();
-			}
-			if (disposing){
-				// If we are explicitly disposed, we can avoid finalization.
-				GC.SuppressFinalize (this);
-			}
-		}
+        [ComVisible(false)]
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!undo)
+            {
+                Undo();
+            }
+            if (disposing)
+            {
+                // If we are explicitly disposed, we can avoid finalization.
+                GC.SuppressFinalize(this);
+            }
+        }
 
-		public void Undo ()
-		{
-			if (!RevertToSelf ()) {
-				CloseToken (_token);
-				throw new SecurityException ("Couldn't switch back to original token.");
-			}
-			CloseToken (_token);
-			undo = true;
-			GC.SuppressFinalize (this);
-		}
+        public void Undo()
+        {
+            if (!RevertToSelf())
+            {
+                CloseToken(_token);
+                throw new SecurityException("Couldn't switch back to original token.");
+            }
+            CloseToken(_token);
+            undo = true;
+            GC.SuppressFinalize(this);
+        }
 
-		// see mono/mono/metadata/security.c for implementation
+        // see mono/mono/metadata/security.c for implementation
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		private extern static bool CloseToken (IntPtr token);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private static extern bool CloseToken(IntPtr token);
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		private extern static IntPtr DuplicateToken (IntPtr token);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private static extern IntPtr DuplicateToken(IntPtr token);
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		private extern static bool SetCurrentToken (IntPtr token);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private static extern bool SetCurrentToken(IntPtr token);
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		private extern static bool RevertToSelf ();
-	}
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private static extern bool RevertToSelf();
+    }
 }

@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
     [ExportCSharpVisualBasicStatelessLspService(typeof(FindImplementationsHandler)), Shared]
     [Method(LSP.Methods.TextDocumentImplementationName)]
-    internal sealed class FindImplementationsHandler : ILspServiceDocumentRequestHandler<LSP.TextDocumentPositionParams, LSP.Location[]>
+    internal sealed class FindImplementationsHandler
+        : ILspServiceDocumentRequestHandler<LSP.TextDocumentPositionParams, LSP.Location[]>
     {
         private readonly IGlobalOptionService _globalOptions;
 
@@ -31,9 +32,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public bool MutatesSolutionState => false;
         public bool RequiresLSPSolution => true;
 
-        public LSP.TextDocumentIdentifier GetTextDocumentIdentifier(LSP.TextDocumentPositionParams request) => request.TextDocument;
+        public LSP.TextDocumentIdentifier GetTextDocumentIdentifier(
+            LSP.TextDocumentPositionParams request
+        ) => request.TextDocument;
 
-        public async Task<LSP.Location[]> HandleRequestAsync(LSP.TextDocumentPositionParams request, RequestContext context, CancellationToken cancellationToken)
+        public async Task<LSP.Location[]> HandleRequestAsync(
+            LSP.TextDocumentPositionParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var document = context.GetRequiredDocument();
             var clientCapabilities = context.GetRequiredClientCapabilities();
@@ -41,10 +48,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var locations = ArrayBuilder<LSP.Location>.GetInstance();
 
             var findUsagesService = document.GetRequiredLanguageService<IFindUsagesLSPService>();
-            var position = await document.GetPositionFromLinePositionAsync(ProtocolConversions.PositionToLinePosition(request.Position), cancellationToken).ConfigureAwait(false);
+            var position = await document
+                .GetPositionFromLinePositionAsync(
+                    ProtocolConversions.PositionToLinePosition(request.Position),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             var findUsagesContext = new SimpleFindUsagesContext(_globalOptions);
-            await findUsagesService.FindImplementationsAsync(findUsagesContext, document, position, cancellationToken).ConfigureAwait(false);
+            await findUsagesService
+                .FindImplementationsAsync(findUsagesContext, document, position, cancellationToken)
+                .ConfigureAwait(false);
 
             foreach (var definition in findUsagesContext.GetDefinitions())
             {
@@ -53,11 +67,23 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 {
                     if (clientCapabilities.HasVisualStudioLspCapability() == true)
                     {
-                        locations.AddIfNotNull(await ProtocolConversions.DocumentSpanToLocationWithTextAsync(sourceSpan, text, cancellationToken).ConfigureAwait(false));
+                        locations.AddIfNotNull(
+                            await ProtocolConversions
+                                .DocumentSpanToLocationWithTextAsync(
+                                    sourceSpan,
+                                    text,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false)
+                        );
                     }
                     else
                     {
-                        locations.AddIfNotNull(await ProtocolConversions.DocumentSpanToLocationAsync(sourceSpan, cancellationToken).ConfigureAwait(false));
+                        locations.AddIfNotNull(
+                            await ProtocolConversions
+                                .DocumentSpanToLocationAsync(sourceSpan, cancellationToken)
+                                .ConfigureAwait(false)
+                        );
                     }
                 }
             }

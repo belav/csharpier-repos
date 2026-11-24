@@ -53,44 +53,136 @@ namespace System.Xml.Tests
                 }
                 qname = "foo:" + n;
                 CError.WriteLine(qname);
-                CError.Compare(DataReader[i], DataReader.GetAttribute(i), "Compare this with GetAttribute");
+                CError.Compare(
+                    DataReader[i],
+                    DataReader.GetAttribute(i),
+                    "Compare this with GetAttribute"
+                );
                 DataReader.MoveToAttribute(i);
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(i), "Compare MoveToAttribute(i) with GetAttribute");
-                CError.WriteLine(i + " GetAttribute(i)=" + DataReader.GetAttribute(i) + " this[i]=" + DataReader[i] + " Value=" + DataReader.Value);
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(i),
+                    "Compare MoveToAttribute(i) with GetAttribute"
+                );
+                CError.WriteLine(
+                    i
+                        + " GetAttribute(i)="
+                        + DataReader.GetAttribute(i)
+                        + " this[i]="
+                        + DataReader[i]
+                        + " Value="
+                        + DataReader.Value
+                );
 
-                CError.Compare(DataReader[n, strNamespace], DataReader.GetAttribute(n, strNamespace), "Compare this(name,strNamespace) with GetAttribute(name,strNamespace)");
+                CError.Compare(
+                    DataReader[n, strNamespace],
+                    DataReader.GetAttribute(n, strNamespace),
+                    "Compare this(name,strNamespace) with GetAttribute(name,strNamespace)"
+                );
 
-                CError.Compare(DataReader[i], DataReader[n, strNamespace], "Compare this(i) with this(name,strNamespace)");
-                CError.Compare(DataReader.MoveToAttribute(n, strNamespace), true, "MoveToAttribute(name,strNamespace)");
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(n, strNamespace), "Compare MoveToAttribute(name,strNamespace) with GetAttribute(name,strNamespace)");
+                CError.Compare(
+                    DataReader[i],
+                    DataReader[n, strNamespace],
+                    "Compare this(i) with this(name,strNamespace)"
+                );
+                CError.Compare(
+                    DataReader.MoveToAttribute(n, strNamespace),
+                    true,
+                    "MoveToAttribute(name,strNamespace)"
+                );
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(n, strNamespace),
+                    "Compare MoveToAttribute(name,strNamespace) with GetAttribute(name,strNamespace)"
+                );
 
-                CError.WriteLine(i + " GetAttribute(n,strNamespace)=" + DataReader.GetAttribute(n, strNamespace) + " this[n,strNamespace]=" + DataReader[n, strNamespace] + " Value=" + DataReader.Value);
+                CError.WriteLine(
+                    i
+                        + " GetAttribute(n,strNamespace)="
+                        + DataReader.GetAttribute(n, strNamespace)
+                        + " this[n,strNamespace]="
+                        + DataReader[n, strNamespace]
+                        + " Value="
+                        + DataReader.Value
+                );
 
-                CError.Compare(DataReader[i], DataReader[qname], "Compare this(i) with this(qname)");
+                CError.Compare(
+                    DataReader[i],
+                    DataReader[qname],
+                    "Compare this(i) with this(qname)"
+                );
                 CError.Compare(DataReader.MoveToAttribute(qname), true, "MoveToAttribute(qname)");
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(qname), "Compare MoveToAttribute(qname) with GetAttribute(qname)");
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(qname),
+                    "Compare MoveToAttribute(qname) with GetAttribute(qname)"
+                );
 
-                CError.WriteLine(i + " GetAttribute(qname)=" + DataReader.GetAttribute(qname) + " this[qname]=" + DataReader[qname] + " Value=" + DataReader.Value);
+                CError.WriteLine(
+                    i
+                        + " GetAttribute(qname)="
+                        + DataReader.GetAttribute(qname)
+                        + " this[qname]="
+                        + DataReader[qname]
+                        + " Value="
+                        + DataReader.Value
+                );
             }
 
             DataReader.PositionOnElement("ACT1");
             CError.WriteLine("============Without Namespace");
             for (int i = 0; i < DataReader.AttributeCount; i++)
             {
-                CError.Compare(astr[i], DataReader.GetAttribute(i), "Compare value with GetAttribute");
-                CError.Compare(DataReader[i], DataReader.GetAttribute(i), "Compare this with GetAttribute");
+                CError.Compare(
+                    astr[i],
+                    DataReader.GetAttribute(i),
+                    "Compare value with GetAttribute"
+                );
+                CError.Compare(
+                    DataReader[i],
+                    DataReader.GetAttribute(i),
+                    "Compare this with GetAttribute"
+                );
                 DataReader.MoveToAttribute(i);
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(i), "Compare MoveToAttribute(i) with GetAttribute");
-                CError.WriteLine(i + " GetAttribute(i)=" + DataReader.GetAttribute(i) + " this[i]=" + DataReader[i] + " Value=" + DataReader.Value);
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(i),
+                    "Compare MoveToAttribute(i) with GetAttribute"
+                );
+                CError.WriteLine(
+                    i
+                        + " GetAttribute(i)="
+                        + DataReader.GetAttribute(i)
+                        + " this[i]="
+                        + DataReader[i]
+                        + " Value="
+                        + DataReader.Value
+                );
 
                 n = strAttr + i;
-                CError.Compare(DataReader[n], DataReader.GetAttribute(n), "Compare this(name) with GetAttribute(name)");
+                CError.Compare(
+                    DataReader[n],
+                    DataReader.GetAttribute(n),
+                    "Compare this(name) with GetAttribute(name)"
+                );
 
                 CError.Compare(DataReader[i], DataReader[n], "Compare this(i) with this(name)");
                 CError.Compare(DataReader.MoveToAttribute(n), true, "MoveToAttribute(name)");
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(n), "Compare MoveToAttribute(name) with GetAttribute(name)");
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(n),
+                    "Compare MoveToAttribute(name) with GetAttribute(name)"
+                );
 
-                CError.WriteLine(i + " GetAttribute(n)=" + DataReader.GetAttribute(n) + " this[n]=" + DataReader[n] + " Value=" + DataReader.Value);
+                CError.WriteLine(
+                    i
+                        + " GetAttribute(n)="
+                        + DataReader.GetAttribute(n)
+                        + " this[n]="
+                        + DataReader[n]
+                        + " Value="
+                        + DataReader.Value
+                );
             }
 
             return TEST_PASS;
@@ -133,24 +225,84 @@ namespace System.Xml.Tests
                 }
                 qname = "foo:" + n;
 
-                CError.Compare(DataReader[i], DataReader.GetAttribute(i), "Compare this with GetAttribute");
+                CError.Compare(
+                    DataReader[i],
+                    DataReader.GetAttribute(i),
+                    "Compare this with GetAttribute"
+                );
                 DataReader.MoveToAttribute(i);
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(i), "Compare MoveToAttribute(i) with GetAttribute");
-                CError.WriteLine(i + " GetAttribute(i)=" + DataReader.GetAttribute(i) + " this[i]=" + DataReader[i] + " Value=" + DataReader.Value);
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(i),
+                    "Compare MoveToAttribute(i) with GetAttribute"
+                );
+                CError.WriteLine(
+                    i
+                        + " GetAttribute(i)="
+                        + DataReader.GetAttribute(i)
+                        + " this[i]="
+                        + DataReader[i]
+                        + " Value="
+                        + DataReader.Value
+                );
 
-                CError.Compare(DataReader[n, strNamespace], DataReader.GetAttribute(n, strNamespace), "Compare this(name,strNamespace) with GetAttribute(name,strNamespace)");
+                CError.Compare(
+                    DataReader[n, strNamespace],
+                    DataReader.GetAttribute(n, strNamespace),
+                    "Compare this(name,strNamespace) with GetAttribute(name,strNamespace)"
+                );
 
-                CError.Compare(DataReader[i], DataReader[n, strNamespace], "Compare this(i) with this(name,strNamespace)");
-                CError.Compare(DataReader.MoveToAttribute(n, strNamespace), true, "MoveToAttribute(name,strNamespace)");
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(n, strNamespace), "Compare MoveToAttribute(name,strNamespace) with GetAttribute(name,strNamespace)");
-                CError.WriteLine(i + " GetAttribute(n,strNamespace)=" + DataReader.GetAttribute(n, strNamespace) + " this[n,strNamespace]=" + DataReader[n, strNamespace] + " Value=" + DataReader.Value);
+                CError.Compare(
+                    DataReader[i],
+                    DataReader[n, strNamespace],
+                    "Compare this(i) with this(name,strNamespace)"
+                );
+                CError.Compare(
+                    DataReader.MoveToAttribute(n, strNamespace),
+                    true,
+                    "MoveToAttribute(name,strNamespace)"
+                );
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(n, strNamespace),
+                    "Compare MoveToAttribute(name,strNamespace) with GetAttribute(name,strNamespace)"
+                );
+                CError.WriteLine(
+                    i
+                        + " GetAttribute(n,strNamespace)="
+                        + DataReader.GetAttribute(n, strNamespace)
+                        + " this[n,strNamespace]="
+                        + DataReader[n, strNamespace]
+                        + " Value="
+                        + DataReader.Value
+                );
 
-                CError.Compare(DataReader[qname], DataReader.GetAttribute(qname), "Compare this(qname) with GetAttribute(qname)");
+                CError.Compare(
+                    DataReader[qname],
+                    DataReader.GetAttribute(qname),
+                    "Compare this(qname) with GetAttribute(qname)"
+                );
 
-                CError.Compare(DataReader[i], DataReader[qname], "Compare this(i) with this(qname)");
+                CError.Compare(
+                    DataReader[i],
+                    DataReader[qname],
+                    "Compare this(i) with this(qname)"
+                );
                 CError.Compare(DataReader.MoveToAttribute(qname), true, "MoveToAttribute(qname)");
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(qname), "Compare MoveToAttribute(qname) with GetAttribute(qname)");
-                CError.WriteLine(i + " GetAttribute(qname)=" + DataReader.GetAttribute(qname) + " this[qname]=" + DataReader[qname] + " Value=" + DataReader.Value);
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(qname),
+                    "Compare MoveToAttribute(qname) with GetAttribute(qname)"
+                );
+                CError.WriteLine(
+                    i
+                        + " GetAttribute(qname)="
+                        + DataReader.GetAttribute(qname)
+                        + " this[qname]="
+                        + DataReader[qname]
+                        + " Value="
+                        + DataReader.Value
+                );
             }
 
             DataReader.PositionOnElement("ACT1");
@@ -159,20 +311,58 @@ namespace System.Xml.Tests
             {
                 n = strAttr + i;
 
-                CError.WriteLine(i + " " + astr[i] + " GetAttribute(i)=" + DataReader.GetAttribute(i));
-                CError.Compare(astr[i], DataReader.GetAttribute(i), "Compare value with GetAttribute");
-                CError.Compare(DataReader[i], DataReader.GetAttribute(i), "Compare this with GetAttribute");
+                CError.WriteLine(
+                    i + " " + astr[i] + " GetAttribute(i)=" + DataReader.GetAttribute(i)
+                );
+                CError.Compare(
+                    astr[i],
+                    DataReader.GetAttribute(i),
+                    "Compare value with GetAttribute"
+                );
+                CError.Compare(
+                    DataReader[i],
+                    DataReader.GetAttribute(i),
+                    "Compare this with GetAttribute"
+                );
                 DataReader.MoveToAttribute(i);
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(i), "Compare MoveToAttribute(i) with GetAttribute");
-                CError.WriteLine(i + " GetAttribute(i)=" + DataReader.GetAttribute(i) + " this[i]=" + DataReader[i] + " Value=" + DataReader.Value);
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(i),
+                    "Compare MoveToAttribute(i) with GetAttribute"
+                );
+                CError.WriteLine(
+                    i
+                        + " GetAttribute(i)="
+                        + DataReader.GetAttribute(i)
+                        + " this[i]="
+                        + DataReader[i]
+                        + " Value="
+                        + DataReader.Value
+                );
 
-                CError.Compare(DataReader[n], DataReader.GetAttribute(n), "Compare this(name) with GetAttribute(name)");
+                CError.Compare(
+                    DataReader[n],
+                    DataReader.GetAttribute(n),
+                    "Compare this(name) with GetAttribute(name)"
+                );
 
                 CError.Compare(DataReader[i], DataReader[n], "Compare this(i) with this(name)");
                 CError.Compare(DataReader.MoveToAttribute(n), true, "MoveToAttribute(name)");
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(n), "Compare MoveToAttribute(name) with GetAttribute(name)");
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(n),
+                    "Compare MoveToAttribute(name) with GetAttribute(name)"
+                );
 
-                CError.WriteLine(i + " GetAttribute(n)=" + DataReader.GetAttribute(n) + " this[n]=" + DataReader[n] + " Value=" + DataReader.Value);
+                CError.WriteLine(
+                    i
+                        + " GetAttribute(n)="
+                        + DataReader.GetAttribute(n)
+                        + " this[n]="
+                        + DataReader[n]
+                        + " Value="
+                        + DataReader.Value
+                );
             }
 
             return TEST_PASS;
@@ -216,45 +406,141 @@ namespace System.Xml.Tests
                 }
                 qname = "foo:" + n;
 
-                CError.Compare(DataReader[i], DataReader.GetAttribute(i), "Compare this with GetAttribute");
+                CError.Compare(
+                    DataReader[i],
+                    DataReader.GetAttribute(i),
+                    "Compare this with GetAttribute"
+                );
                 DataReader.MoveToAttribute(i);
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(i), "Compare MoveToAttribute(i) with GetAttribute");
-                CError.WriteLine(i + " GetAttribute(i)=" + DataReader.GetAttribute(i) + " this[i]=" + DataReader[i] + " Value=" + DataReader.Value);
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(i),
+                    "Compare MoveToAttribute(i) with GetAttribute"
+                );
+                CError.WriteLine(
+                    i
+                        + " GetAttribute(i)="
+                        + DataReader.GetAttribute(i)
+                        + " this[i]="
+                        + DataReader[i]
+                        + " Value="
+                        + DataReader.Value
+                );
 
-                CError.Compare(DataReader[n, strNamespace], DataReader.GetAttribute(n, strNamespace), "Compare this(name,strNamespace) with GetAttribute(name,strNamespace)");
+                CError.Compare(
+                    DataReader[n, strNamespace],
+                    DataReader.GetAttribute(n, strNamespace),
+                    "Compare this(name,strNamespace) with GetAttribute(name,strNamespace)"
+                );
 
-                CError.Compare(DataReader[i], DataReader[n, strNamespace], "Compare this(i) with this(name,strNamespace)");
-                CError.Compare(DataReader.MoveToAttribute(n, strNamespace), true, "MoveToAttribute(name,strNamespace)");
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(n, strNamespace), "Compare MoveToAttribute(name,strNamespace) with GetAttribute(name,strNamespace)");
+                CError.Compare(
+                    DataReader[i],
+                    DataReader[n, strNamespace],
+                    "Compare this(i) with this(name,strNamespace)"
+                );
+                CError.Compare(
+                    DataReader.MoveToAttribute(n, strNamespace),
+                    true,
+                    "MoveToAttribute(name,strNamespace)"
+                );
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(n, strNamespace),
+                    "Compare MoveToAttribute(name,strNamespace) with GetAttribute(name,strNamespace)"
+                );
 
-                CError.WriteLine(i + " GetAttribute(n,strNamespace)=" + DataReader.GetAttribute(n, strNamespace) + " this[n,strNamespace]=" + DataReader[n, strNamespace] + " Value=" + DataReader.Value);
-                CError.Compare(DataReader[qname], DataReader.GetAttribute(qname), "Compare this(qname) with GetAttribute(qname)");
+                CError.WriteLine(
+                    i
+                        + " GetAttribute(n,strNamespace)="
+                        + DataReader.GetAttribute(n, strNamespace)
+                        + " this[n,strNamespace]="
+                        + DataReader[n, strNamespace]
+                        + " Value="
+                        + DataReader.Value
+                );
+                CError.Compare(
+                    DataReader[qname],
+                    DataReader.GetAttribute(qname),
+                    "Compare this(qname) with GetAttribute(qname)"
+                );
 
-                CError.Compare(DataReader[i], DataReader[qname], "Compare this(i) with this(qname)");
+                CError.Compare(
+                    DataReader[i],
+                    DataReader[qname],
+                    "Compare this(i) with this(qname)"
+                );
                 CError.Compare(DataReader.MoveToAttribute(qname), true, "MoveToAttribute(qname)");
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(qname), "Compare MoveToAttribute(qname) with GetAttribute(qname)");
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(qname),
+                    "Compare MoveToAttribute(qname) with GetAttribute(qname)"
+                );
 
-                CError.WriteLine(i + " GetAttribute(qname)=" + DataReader.GetAttribute(qname) + " this[qname]=" + DataReader[qname] + " Value=" + DataReader.Value);
+                CError.WriteLine(
+                    i
+                        + " GetAttribute(qname)="
+                        + DataReader.GetAttribute(qname)
+                        + " this[qname]="
+                        + DataReader[qname]
+                        + " Value="
+                        + DataReader.Value
+                );
             }
 
             DataReader.PositionOnElement("ACT1");
             CError.WriteLine("============Without Namespace");
             for (int i = 0; i < DataReader.AttributeCount; i += 2)
             {
-                CError.Compare(astr[i], DataReader.GetAttribute(i), "Compare value with GetAttribute");
-                CError.Compare(DataReader[i], DataReader.GetAttribute(i), "Compare this with GetAttribute");
+                CError.Compare(
+                    astr[i],
+                    DataReader.GetAttribute(i),
+                    "Compare value with GetAttribute"
+                );
+                CError.Compare(
+                    DataReader[i],
+                    DataReader.GetAttribute(i),
+                    "Compare this with GetAttribute"
+                );
                 DataReader.MoveToAttribute(i);
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(i), "Compare MoveToAttribute(i) with GetAttribute");
-                CError.WriteLine(i + " GetAttribute(i)=" + DataReader.GetAttribute(i) + " this[i]=" + DataReader[i] + " Value=" + DataReader.Value);
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(i),
+                    "Compare MoveToAttribute(i) with GetAttribute"
+                );
+                CError.WriteLine(
+                    i
+                        + " GetAttribute(i)="
+                        + DataReader.GetAttribute(i)
+                        + " this[i]="
+                        + DataReader[i]
+                        + " Value="
+                        + DataReader.Value
+                );
 
                 n = strAttr + i;
-                CError.Compare(DataReader[n], DataReader.GetAttribute(n), "Compare this(name) with GetAttribute(name)");
+                CError.Compare(
+                    DataReader[n],
+                    DataReader.GetAttribute(n),
+                    "Compare this(name) with GetAttribute(name)"
+                );
 
                 CError.Compare(DataReader[i], DataReader[n], "Compare this(i) with this(name)");
                 CError.Compare(DataReader.MoveToAttribute(n), true, "MoveToAttribute(name)");
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(n), "Compare MoveToAttribute(name) with GetAttribute(name)");
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(n),
+                    "Compare MoveToAttribute(name) with GetAttribute(name)"
+                );
 
-                CError.WriteLine(i + " GetAttribute(n)=" + DataReader.GetAttribute(n) + " this[n]=" + DataReader[n] + " Value=" + DataReader.Value);
+                CError.WriteLine(
+                    i
+                        + " GetAttribute(n)="
+                        + DataReader.GetAttribute(n)
+                        + " this[n]="
+                        + DataReader[n]
+                        + " Value="
+                        + DataReader.Value
+                );
             }
 
             return TEST_PASS;
@@ -264,7 +550,8 @@ namespace System.Xml.Tests
         public int TestAttributeAccess4()
         {
             if (IsXPathNavigatorReader())
-                return TEST_SKIPPED; ReloadSource();
+                return TEST_SKIPPED;
+            ReloadSource();
             string[] astr = new string[10];
             string n;
             string qname;
@@ -296,45 +583,141 @@ namespace System.Xml.Tests
                 }
                 qname = "foo:" + n;
 
-                CError.Compare(DataReader[i], DataReader.GetAttribute(i), "Compare this with GetAttribute");
+                CError.Compare(
+                    DataReader[i],
+                    DataReader.GetAttribute(i),
+                    "Compare this with GetAttribute"
+                );
                 DataReader.MoveToAttribute(i);
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(i), "Compare MoveToAttribute(i) with GetAttribute");
-                CError.WriteLine(i + " GetAttribute(i)=" + DataReader.GetAttribute(i) + " this[i]=" + DataReader[i] + " Value=" + DataReader.Value);
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(i),
+                    "Compare MoveToAttribute(i) with GetAttribute"
+                );
+                CError.WriteLine(
+                    i
+                        + " GetAttribute(i)="
+                        + DataReader.GetAttribute(i)
+                        + " this[i]="
+                        + DataReader[i]
+                        + " Value="
+                        + DataReader.Value
+                );
 
-                CError.Compare(DataReader[n, strNamespace], DataReader.GetAttribute(n, strNamespace), "Compare this(name,strNamespace) with GetAttribute(name,strNamespace)");
+                CError.Compare(
+                    DataReader[n, strNamespace],
+                    DataReader.GetAttribute(n, strNamespace),
+                    "Compare this(name,strNamespace) with GetAttribute(name,strNamespace)"
+                );
 
-                CError.Compare(DataReader[i], DataReader[n, strNamespace], "Compare this(i) with this(name,strNamespace)");
-                CError.Compare(DataReader.MoveToAttribute(n, strNamespace), true, "MoveToAttribute(name,strNamespace)");
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(n, strNamespace), "Compare MoveToAttribute(name,strNamespace) with GetAttribute(name,strNamespace)");
+                CError.Compare(
+                    DataReader[i],
+                    DataReader[n, strNamespace],
+                    "Compare this(i) with this(name,strNamespace)"
+                );
+                CError.Compare(
+                    DataReader.MoveToAttribute(n, strNamespace),
+                    true,
+                    "MoveToAttribute(name,strNamespace)"
+                );
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(n, strNamespace),
+                    "Compare MoveToAttribute(name,strNamespace) with GetAttribute(name,strNamespace)"
+                );
 
-                CError.WriteLine(i + " GetAttribute(n,strNamespace)=" + DataReader.GetAttribute(n, strNamespace) + " this[n,strNamespace]=" + DataReader[n, strNamespace] + " Value=" + DataReader.Value);
-                CError.Compare(DataReader[qname], DataReader.GetAttribute(qname), "Compare this(qname) with GetAttribute(qname)");
+                CError.WriteLine(
+                    i
+                        + " GetAttribute(n,strNamespace)="
+                        + DataReader.GetAttribute(n, strNamespace)
+                        + " this[n,strNamespace]="
+                        + DataReader[n, strNamespace]
+                        + " Value="
+                        + DataReader.Value
+                );
+                CError.Compare(
+                    DataReader[qname],
+                    DataReader.GetAttribute(qname),
+                    "Compare this(qname) with GetAttribute(qname)"
+                );
 
-                CError.Compare(DataReader[i], DataReader[qname], "Compare this(i) with this(qname)");
+                CError.Compare(
+                    DataReader[i],
+                    DataReader[qname],
+                    "Compare this(i) with this(qname)"
+                );
                 CError.Compare(DataReader.MoveToAttribute(qname), true, "MoveToAttribute(qname)");
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(qname), "Compare MoveToAttribute(qname) with GetAttribute(qname)");
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(qname),
+                    "Compare MoveToAttribute(qname) with GetAttribute(qname)"
+                );
 
-                CError.WriteLine(i + " GetAttribute(qname)=" + DataReader.GetAttribute(qname) + " this[qname]=" + DataReader[qname] + " Value=" + DataReader.Value);
+                CError.WriteLine(
+                    i
+                        + " GetAttribute(qname)="
+                        + DataReader.GetAttribute(qname)
+                        + " this[qname]="
+                        + DataReader[qname]
+                        + " Value="
+                        + DataReader.Value
+                );
             }
 
             DataReader.PositionOnElement("ACT1");
             CError.WriteLine("============Without Namespace");
             for (int i = 0; i < DataReader.AttributeCount; i += 3)
             {
-                CError.Compare(astr[i], DataReader.GetAttribute(i), "Compare value with GetAttribute");
-                CError.Compare(DataReader[i], DataReader.GetAttribute(i), "Compare this with GetAttribute");
+                CError.Compare(
+                    astr[i],
+                    DataReader.GetAttribute(i),
+                    "Compare value with GetAttribute"
+                );
+                CError.Compare(
+                    DataReader[i],
+                    DataReader.GetAttribute(i),
+                    "Compare this with GetAttribute"
+                );
                 DataReader.MoveToAttribute(i);
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(i), "Compare MoveToAttribute(i) with GetAttribute");
-                CError.WriteLine(i + " GetAttribute(i)=" + DataReader.GetAttribute(i) + " this[i]=" + DataReader[i] + " Value=" + DataReader.Value);
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(i),
+                    "Compare MoveToAttribute(i) with GetAttribute"
+                );
+                CError.WriteLine(
+                    i
+                        + " GetAttribute(i)="
+                        + DataReader.GetAttribute(i)
+                        + " this[i]="
+                        + DataReader[i]
+                        + " Value="
+                        + DataReader.Value
+                );
 
                 n = strAttr + i;
-                CError.Compare(DataReader[n], DataReader.GetAttribute(n), "Compare this(name) with GetAttribute(name)");
+                CError.Compare(
+                    DataReader[n],
+                    DataReader.GetAttribute(n),
+                    "Compare this(name) with GetAttribute(name)"
+                );
 
                 CError.Compare(DataReader[i], DataReader[n], "Compare this(i) with this(name)");
                 CError.Compare(DataReader.MoveToAttribute(n), true, "MoveToAttribute(name)");
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(n), "Compare MoveToAttribute(name) with GetAttribute(name)");
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(n),
+                    "Compare MoveToAttribute(name) with GetAttribute(name)"
+                );
 
-                CError.WriteLine(i + " GetAttribute(n)=" + DataReader.GetAttribute(n) + " this[n]=" + DataReader[n] + " Value=" + DataReader.Value);
+                CError.WriteLine(
+                    i
+                        + " GetAttribute(n)="
+                        + DataReader.GetAttribute(n)
+                        + " this[n]="
+                        + DataReader[n]
+                        + " Value="
+                        + DataReader.Value
+                );
             }
 
             return TEST_PASS;
@@ -349,7 +732,6 @@ namespace System.Xml.Tests
             CError.Compare(DataReader[strAttr + 1, null], "1111111101", "Item");
             CError.Compare(DataReader.GetAttribute(strAttr + 1, null), "1111111101", "GA");
             CError.Compare(DataReader.MoveToAttribute(strAttr + 1, null), "MTA");
-
 
             return TEST_PASS;
         }
@@ -371,7 +753,11 @@ namespace System.Xml.Tests
             for (int i = 0; i < DataReader.AttributeCount; i++)
             {
                 strName = strAttr + i;
-                CError.Compare(DataReader[strName], DataReader.GetAttribute(strName), "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]");
+                CError.Compare(
+                    DataReader[strName],
+                    DataReader.GetAttribute(strName),
+                    "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]"
+                );
             }
             return TEST_PASS;
         }
@@ -385,7 +771,11 @@ namespace System.Xml.Tests
             for (int i = 0; i < DataReader.AttributeCount; i++)
             {
                 strName = strAttr + i;
-                CError.Compare(DataReader[strName, null], DataReader.GetAttribute(strName), "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]");
+                CError.Compare(
+                    DataReader[strName, null],
+                    DataReader.GetAttribute(strName),
+                    "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]"
+                );
             }
             return TEST_PASS;
         }
@@ -399,12 +789,19 @@ namespace System.Xml.Tests
             for (int i = 0; i < DataReader.AttributeCount; i++)
             {
                 strName = strAttr + i;
-                CError.Compare(DataReader[strName], DataReader.GetAttribute(strName, null), "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]");
+                CError.Compare(
+                    DataReader[strName],
+                    DataReader.GetAttribute(strName, null),
+                    "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]"
+                );
             }
             return TEST_PASS;
         }
 
-        [Variation("This[Name, NamespaceURI] Verify with GetAttribute(Name, NamespaceURI)", Pri = 0)]
+        [Variation(
+            "This[Name, NamespaceURI] Verify with GetAttribute(Name, NamespaceURI)",
+            Pri = 0
+        )]
         public int ThisWithName4()
         {
             string strName;
@@ -414,7 +811,13 @@ namespace System.Xml.Tests
             for (int i = 1; i < DataReader.AttributeCount; i++)
             {
                 strName = strAttr + i;
-                CError.Compare(DataReader[strName, strNamespace], DataReader.GetAttribute(strName, strNamespace), "Ordinal (" + i + "): Compare GetAttribute(strName,strNamespace) and this[strName,strNamespace]");
+                CError.Compare(
+                    DataReader[strName, strNamespace],
+                    DataReader.GetAttribute(strName, strNamespace),
+                    "Ordinal ("
+                        + i
+                        + "): Compare GetAttribute(strName,strNamespace) and this[strName,strNamespace]"
+                );
             }
             return TEST_PASS;
         }
@@ -464,7 +867,11 @@ namespace System.Xml.Tests
             {
                 strName = strAttr + i;
                 DataReader.MoveToAttribute(strName);
-                CError.Compare(DataReader.Value, DataReader[strName], "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]");
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader[strName],
+                    "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]"
+                );
             }
             return TEST_PASS;
         }
@@ -480,7 +887,11 @@ namespace System.Xml.Tests
             {
                 strName = strAttr + i;
                 DataReader.MoveToAttribute(strName);
-                CError.Compare(DataReader.Value, DataReader[strName, null], "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]");
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader[strName, null],
+                    "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]"
+                );
             }
             return TEST_PASS;
         }
@@ -496,12 +907,19 @@ namespace System.Xml.Tests
             {
                 strName = strAttr + i;
                 DataReader.MoveToAttribute(strName, null);
-                CError.Compare(DataReader.Value, DataReader[strName], "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]");
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader[strName],
+                    "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]"
+                );
             }
             return TEST_PASS;
         }
 
-        [Variation("This[Name, NamespaceURI] Verify not the same as MoveToAttribute(Name, null)", Pri = 0)]
+        [Variation(
+            "This[Name, NamespaceURI] Verify not the same as MoveToAttribute(Name, null)",
+            Pri = 0
+        )]
         public int ThisWithName10()
         {
             string strName;
@@ -546,8 +964,20 @@ namespace System.Xml.Tests
             {
                 strName = strAttr + (i - 1);
                 DataReader.MoveToAttribute(strName, strNamespace);
-                CError.WriteLine(strName + " " + strNamespace + " DataReader.Value=" + DataReader.Value + " DataReader[strName, strNamespace]=" + DataReader[strName, strNamespace]);
-                CError.Compare(DataReader.Value, DataReader[strName, strNamespace], "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]");
+                CError.WriteLine(
+                    strName
+                        + " "
+                        + strNamespace
+                        + " DataReader.Value="
+                        + DataReader.Value
+                        + " DataReader[strName, strNamespace]="
+                        + DataReader[strName, strNamespace]
+                );
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader[strName, strNamespace],
+                    "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]"
+                );
             }
             return TEST_PASS;
         }
@@ -566,7 +996,11 @@ namespace System.Xml.Tests
         {
             ReloadSource();
             DataReader.PositionOnElement("EMPTY1");
-            CError.Compare(DataReader[string.Empty, string.Empty], null, "Compare GetAttribute(strName) and this[strName]");
+            CError.Compare(
+                DataReader[string.Empty, string.Empty],
+                null,
+                "Compare GetAttribute(strName) and this[strName]"
+            );
             return TEST_PASS;
         }
 
@@ -582,8 +1016,18 @@ namespace System.Xml.Tests
             {
                 strName = strAttr + i;
                 qname = "foo:" + strName;
-                CError.Compare(DataReader[qname], DataReader.GetAttribute(strName, strNamespace), "Ordinal (" + i + "): Compare GetAttribute(strName,strNamespace) and this[qname]");
-                CError.Compare(DataReader[qname], DataReader.GetAttribute(qname), "Ordinal (" + i + "): Compare GetAttribute(qname) and this[qname]");
+                CError.Compare(
+                    DataReader[qname],
+                    DataReader.GetAttribute(strName, strNamespace),
+                    "Ordinal ("
+                        + i
+                        + "): Compare GetAttribute(strName,strNamespace) and this[qname]"
+                );
+                CError.Compare(
+                    DataReader[qname],
+                    DataReader.GetAttribute(qname),
+                    "Ordinal (" + i + "): Compare GetAttribute(qname) and this[qname]"
+                );
             }
             return TEST_PASS;
         }
@@ -600,9 +1044,17 @@ namespace System.Xml.Tests
             int i = 1;
             strName = strAttr + i;
             qname = "foo1:" + strName;
-            CError.Compare(DataReader.MoveToAttribute(qname), false, "MoveToAttribute(invalid qname)");
+            CError.Compare(
+                DataReader.MoveToAttribute(qname),
+                false,
+                "MoveToAttribute(invalid qname)"
+            );
             CError.Compare(DataReader[qname], null, "Compare this[invalid qname] with null");
-            CError.Compare(DataReader.GetAttribute(qname), null, "Compare GetAttribute(invalid qname) with null");
+            CError.Compare(
+                DataReader.GetAttribute(qname),
+                null,
+                "Compare GetAttribute(invalid qname) with null"
+            );
 
             return TEST_PASS;
         }
@@ -620,8 +1072,16 @@ namespace System.Xml.Tests
         {
             ReloadSource();
             DataReader.PositionOnElement("EMPTY1");
-            CError.Compare(DataReader.MoveToAttribute(string.Empty), false, "Compare the call to MoveToAttribute");
-            CError.Compare(DataReader.Value, string.Empty, "Compare MoveToAttribute with String.Empty");
+            CError.Compare(
+                DataReader.MoveToAttribute(string.Empty),
+                false,
+                "Compare the call to MoveToAttribute"
+            );
+            CError.Compare(
+                DataReader.Value,
+                string.Empty,
+                "Compare MoveToAttribute with String.Empty"
+            );
             return TEST_PASS;
         }
 
@@ -630,7 +1090,11 @@ namespace System.Xml.Tests
         {
             ReloadSource();
             DataReader.PositionOnElement("EMPTY1");
-            CError.Compare(DataReader.MoveToAttribute(string.Empty, string.Empty), false, "Compare the call to MoveToAttribute");
+            CError.Compare(
+                DataReader.MoveToAttribute(string.Empty, string.Empty),
+                false,
+                "Compare the call to MoveToAttribute"
+            );
             CError.Compare(DataReader.Value, string.Empty, "Compare MoveToAttribute(strName)");
             return TEST_PASS;
         }
@@ -650,7 +1114,11 @@ namespace System.Xml.Tests
             DataReader.PositionOnElement("ACT0");
             for (int i = 0; i < DataReader.AttributeCount; i++)
             {
-                CError.Compare(DataReader[i], DataReader.GetAttribute(i), "Ordinal (" + i + "): Compare GetAttribute(i) and this[i]");
+                CError.Compare(
+                    DataReader[i],
+                    DataReader.GetAttribute(i),
+                    "Ordinal (" + i + "): Compare GetAttribute(i) and this[i]"
+                );
             }
             return TEST_PASS;
         }
@@ -662,7 +1130,11 @@ namespace System.Xml.Tests
             DataReader.PositionOnElement("ACT1");
             for (int i = 0; i < DataReader.AttributeCount; i++)
             {
-                CError.Compare(DataReader[i], DataReader.GetAttribute(i), "Ordinal (" + i + "): Compare GetAttribute(i) and this[i]");
+                CError.Compare(
+                    DataReader[i],
+                    DataReader.GetAttribute(i),
+                    "Ordinal (" + i + "): Compare GetAttribute(i) and this[i]"
+                );
             }
             return TEST_PASS;
         }
@@ -677,8 +1149,16 @@ namespace System.Xml.Tests
                 string str = DataReader.GetAttribute(i);
 
                 DataReader.MoveToAttribute(i);
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(i), "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]");
-                CError.Compare(str, DataReader.Value, "Ordinal (" + i + "): Compare MoveToAttribute[i] and string");
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(i),
+                    "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]"
+                );
+                CError.Compare(
+                    str,
+                    DataReader.Value,
+                    "Ordinal (" + i + "): Compare MoveToAttribute[i] and string"
+                );
             }
             return TEST_PASS;
         }
@@ -693,8 +1173,16 @@ namespace System.Xml.Tests
                 string str = DataReader.GetAttribute(i);
 
                 DataReader.MoveToAttribute(i);
-                CError.Compare(DataReader.Value, DataReader[i], "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]");
-                CError.Compare(str, DataReader.Value, "Ordinal (" + i + "): Compare MoveToAttribute[i] and string");
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader[i],
+                    "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]"
+                );
+                CError.Compare(
+                    str,
+                    DataReader.Value,
+                    "Ordinal (" + i + "): Compare MoveToAttribute[i] and string"
+                );
             }
             return TEST_PASS;
         }
@@ -796,7 +1284,11 @@ namespace System.Xml.Tests
             for (int i = 0; i < DataReader.AttributeCount; i++)
             {
                 strName = strAttr + i;
-                CError.Compare(DataReader[strName], DataReader.GetAttribute(strName), "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]");
+                CError.Compare(
+                    DataReader[strName],
+                    DataReader.GetAttribute(strName),
+                    "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]"
+                );
             }
             return TEST_PASS;
         }
@@ -810,7 +1302,11 @@ namespace System.Xml.Tests
             for (int i = 0; i < DataReader.AttributeCount; i++)
             {
                 strName = strAttr + i;
-                CError.Compare(DataReader[strName], DataReader.GetAttribute(strName, null), "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]");
+                CError.Compare(
+                    DataReader[strName],
+                    DataReader.GetAttribute(strName, null),
+                    "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]"
+                );
             }
             return TEST_PASS;
         }
@@ -824,12 +1320,19 @@ namespace System.Xml.Tests
             for (int i = 0; i < DataReader.AttributeCount; i++)
             {
                 strName = strAttr + i;
-                CError.Compare(DataReader[strName, null], DataReader.GetAttribute(strName), "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]");
+                CError.Compare(
+                    DataReader[strName, null],
+                    DataReader.GetAttribute(strName),
+                    "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]"
+                );
             }
             return TEST_PASS;
         }
 
-        [Variation("GetAttribute(Name, NamespaceURI) Verify with This[Name, NamespaceURI]", Pri = 0)]
+        [Variation(
+            "GetAttribute(Name, NamespaceURI) Verify with This[Name, NamespaceURI]",
+            Pri = 0
+        )]
         public int GetAttributeWithName4()
         {
             string strName;
@@ -841,9 +1344,25 @@ namespace System.Xml.Tests
             {
                 strName = strAttr + i;
                 qname = "foo:" + strName;
-                CError.Compare(DataReader[strName, strNamespace], DataReader.GetAttribute(strName, strNamespace), "Ordinal (" + i + "): Compare GetAttribute(strName,strNamespace) and this[strName,strNamespace]");
-                CError.Compare(DataReader[qname], DataReader.GetAttribute(strName, strNamespace), "Ordinal (" + i + "): Compare GetAttribute(strName,strNamespace) and this[strName,strNamespace]");
-                CError.Compare(DataReader[qname], DataReader.GetAttribute(qname), "Ordinal (" + i + "): Compare GetAttribute(qname) and this[qname]");
+                CError.Compare(
+                    DataReader[strName, strNamespace],
+                    DataReader.GetAttribute(strName, strNamespace),
+                    "Ordinal ("
+                        + i
+                        + "): Compare GetAttribute(strName,strNamespace) and this[strName,strNamespace]"
+                );
+                CError.Compare(
+                    DataReader[qname],
+                    DataReader.GetAttribute(strName, strNamespace),
+                    "Ordinal ("
+                        + i
+                        + "): Compare GetAttribute(strName,strNamespace) and this[strName,strNamespace]"
+                );
+                CError.Compare(
+                    DataReader[qname],
+                    DataReader.GetAttribute(qname),
+                    "Ordinal (" + i + "): Compare GetAttribute(qname) and this[qname]"
+                );
             }
             return TEST_PASS;
         }
@@ -895,7 +1414,11 @@ namespace System.Xml.Tests
             {
                 strName = strAttr + i;
                 DataReader.MoveToAttribute(strName);
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(strName), "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]");
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(strName),
+                    "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]"
+                );
             }
             return TEST_PASS;
         }
@@ -911,7 +1434,11 @@ namespace System.Xml.Tests
             {
                 strName = strAttr + i;
                 DataReader.MoveToAttribute(strName);
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(strName, null), "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]");
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(strName, null),
+                    "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]"
+                );
             }
             return TEST_PASS;
         }
@@ -927,12 +1454,18 @@ namespace System.Xml.Tests
             {
                 strName = strAttr + i;
                 DataReader.MoveToAttribute(strName, null);
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(strName), "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]");
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(strName),
+                    "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]"
+                );
             }
             return TEST_PASS;
         }
 
-        [Variation("GetAttribute(Name, NamespaceURI) Verify not the same as MoveToAttribute(Name, null)")]
+        [Variation(
+            "GetAttribute(Name, NamespaceURI) Verify not the same as MoveToAttribute(Name, null)"
+        )]
         public int GetAttributeWithName10()
         {
             string strName;
@@ -949,7 +1482,9 @@ namespace System.Xml.Tests
             return TEST_PASS;
         }
 
-        [Variation("GetAttribute(Name, null) Verify not the same as MoveToAttribute(Name, NamespaceURI)")]
+        [Variation(
+            "GetAttribute(Name, null) Verify not the same as MoveToAttribute(Name, NamespaceURI)"
+        )]
         public int GetAttributeWithName11()
         {
             string strName;
@@ -966,7 +1501,9 @@ namespace System.Xml.Tests
             return TEST_PASS;
         }
 
-        [Variation("GetAttribute(Name, namespace) Verify not the same as MoveToAttribute(Name, namespace)")]
+        [Variation(
+            "GetAttribute(Name, namespace) Verify not the same as MoveToAttribute(Name, namespace)"
+        )]
         public int GetAttributeWithName12()
         {
             string strName;
@@ -977,7 +1514,11 @@ namespace System.Xml.Tests
             {
                 strName = strAttr + (i - 1);
                 DataReader.MoveToAttribute(strName, strNamespace);
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(strName, strNamespace), "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]");
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(strName, strNamespace),
+                    "Ordinal (" + i + "): Compare GetAttribute(strName) and this[strName]"
+                );
             }
             return TEST_PASS;
         }
@@ -987,7 +1528,11 @@ namespace System.Xml.Tests
         {
             ReloadSource();
             DataReader.PositionOnElement("ACT1");
-            CError.Compare(DataReader.GetAttribute(string.Empty), null, "Compare GetAttribute(strName) and this[strName]");
+            CError.Compare(
+                DataReader.GetAttribute(string.Empty),
+                null,
+                "Compare GetAttribute(strName) and this[strName]"
+            );
             return TEST_PASS;
         }
 
@@ -996,7 +1541,11 @@ namespace System.Xml.Tests
         {
             ReloadSource();
             DataReader.PositionOnElement("ACT0");
-            CError.Compare(DataReader.GetAttribute(string.Empty, string.Empty), null, "Compare GetAttribute(strName) and this[strName]");
+            CError.Compare(
+                DataReader.GetAttribute(string.Empty, string.Empty),
+                null,
+                "Compare GetAttribute(strName) and this[strName]"
+            );
             return TEST_PASS;
         }
     }
@@ -1015,7 +1564,11 @@ namespace System.Xml.Tests
             DataReader.PositionOnElement("ACT0");
             for (int i = 0; i < DataReader.AttributeCount; i++)
             {
-                CError.Compare(DataReader[i], DataReader.GetAttribute(i), "Ordinal (" + i + "): Compare GetAttribute[i] and this[i]");
+                CError.Compare(
+                    DataReader[i],
+                    DataReader.GetAttribute(i),
+                    "Ordinal (" + i + "): Compare GetAttribute[i] and this[i]"
+                );
             }
             return TEST_PASS;
         }
@@ -1027,7 +1580,11 @@ namespace System.Xml.Tests
             DataReader.PositionOnElement("ACT1");
             for (int i = 0; i < DataReader.AttributeCount; i++)
             {
-                CError.Compare(DataReader[i], DataReader.GetAttribute(i), "Ordinal (" + i + "): Compare GetAttribute[i] and this[i]");
+                CError.Compare(
+                    DataReader[i],
+                    DataReader.GetAttribute(i),
+                    "Ordinal (" + i + "): Compare GetAttribute[i] and this[i]"
+                );
             }
             return TEST_PASS;
         }
@@ -1042,8 +1599,16 @@ namespace System.Xml.Tests
                 string str = DataReader[i];
 
                 DataReader.MoveToAttribute(i);
-                CError.Compare(DataReader.Value, DataReader[i], "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]");
-                CError.Compare(str, DataReader.Value, "Ordinal (" + i + "): Compare MoveToAttribute[i] and string");
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader[i],
+                    "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]"
+                );
+                CError.Compare(
+                    str,
+                    DataReader.Value,
+                    "Ordinal (" + i + "): Compare MoveToAttribute[i] and string"
+                );
             }
             return TEST_PASS;
         }
@@ -1058,8 +1623,16 @@ namespace System.Xml.Tests
                 string str = DataReader[i];
 
                 DataReader.MoveToAttribute(i);
-                CError.Compare(DataReader.Value, DataReader[i], "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]");
-                CError.Compare(str, DataReader.Value, "Ordinal (" + i + "): Compare MoveToAttribute[i] and string");
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader[i],
+                    "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]"
+                );
+                CError.Compare(
+                    str,
+                    DataReader.Value,
+                    "Ordinal (" + i + "): Compare MoveToAttribute[i] and string"
+                );
             }
             return TEST_PASS;
         }
@@ -1145,7 +1718,6 @@ namespace System.Xml.Tests
         }
     }
 
-
     ////////////////////////////////////////////////////////////////
     // TestCase TCXML MoveToAttribute(Ordinal)
     //
@@ -1161,7 +1733,11 @@ namespace System.Xml.Tests
             for (int i = 0; i < DataReader.AttributeCount; i++)
             {
                 DataReader.MoveToAttribute(i);
-                CError.Compare(DataReader[i], DataReader.Value, "Ordinal (" + i + "): Compare GetAttribute(i) and this[i]");
+                CError.Compare(
+                    DataReader[i],
+                    DataReader.Value,
+                    "Ordinal (" + i + "): Compare GetAttribute(i) and this[i]"
+                );
             }
             return TEST_PASS;
         }
@@ -1174,7 +1750,11 @@ namespace System.Xml.Tests
             for (int i = 0; i < DataReader.AttributeCount; i++)
             {
                 DataReader.MoveToAttribute(i);
-                CError.Compare(DataReader[i], DataReader.Value, "Ordinal (" + i + "): Compare GetAttribute(i) and this[i]");
+                CError.Compare(
+                    DataReader[i],
+                    DataReader.Value,
+                    "Ordinal (" + i + "): Compare GetAttribute(i) and this[i]"
+                );
             }
             return TEST_PASS;
         }
@@ -1189,8 +1769,16 @@ namespace System.Xml.Tests
                 string str = DataReader.GetAttribute(i);
 
                 DataReader.MoveToAttribute(i);
-                CError.Compare(DataReader.Value, DataReader.GetAttribute(i), "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]");
-                CError.Compare(str, DataReader.Value, "Ordinal (" + i + "): Compare MoveToAttribute[i] and string");
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader.GetAttribute(i),
+                    "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]"
+                );
+                CError.Compare(
+                    str,
+                    DataReader.Value,
+                    "Ordinal (" + i + "): Compare MoveToAttribute[i] and string"
+                );
             }
             return TEST_PASS;
         }
@@ -1205,8 +1793,16 @@ namespace System.Xml.Tests
                 string str = DataReader.GetAttribute(i);
 
                 DataReader.MoveToAttribute(i);
-                CError.Compare(DataReader.Value, DataReader[i], "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]");
-                CError.Compare(str, DataReader.Value, "Ordinal (" + i + "): Compare MoveToAttribute[i] and string");
+                CError.Compare(
+                    DataReader.Value,
+                    DataReader[i],
+                    "Ordinal (" + i + "): Compare MoveToAttribute[i] and this[i]"
+                );
+                CError.Compare(
+                    str,
+                    DataReader.Value,
+                    "Ordinal (" + i + "): Compare MoveToAttribute[i] and string"
+                );
             }
             return TEST_PASS;
         }
@@ -1590,8 +2186,16 @@ namespace System.Xml.Tests
             {
                 CError.Compare(DataReader.AttributeCount, 0, "Checking AttributeCount");
                 CError.Compare(DataReader.HasAttributes, false, "Checking HasAttributes");
-                CError.Compare(DataReader.MoveToFirstAttribute(), false, "Checking MoveToFirstAttribute");
-                CError.Compare(DataReader.MoveToNextAttribute(), false, "Checking MoveToNextAttribute");
+                CError.Compare(
+                    DataReader.MoveToFirstAttribute(),
+                    false,
+                    "Checking MoveToFirstAttribute"
+                );
+                CError.Compare(
+                    DataReader.MoveToNextAttribute(),
+                    false,
+                    "Checking MoveToNextAttribute"
+                );
             }
             return TEST_PASS;
         }
@@ -1604,8 +2208,16 @@ namespace System.Xml.Tests
             {
                 CError.Compare(DataReader.AttributeCount, 0, "Checking AttributeCoung");
                 CError.Compare(DataReader.HasAttributes, false, "Checking HasAttributes");
-                CError.Compare(DataReader.MoveToFirstAttribute(), false, "Checking MoveToFirstAttribute");
-                CError.Compare(DataReader.MoveToNextAttribute(), false, "Checking MoveToNextAttribute");
+                CError.Compare(
+                    DataReader.MoveToFirstAttribute(),
+                    false,
+                    "Checking MoveToFirstAttribute"
+                );
+                CError.Compare(
+                    DataReader.MoveToNextAttribute(),
+                    false,
+                    "Checking MoveToNextAttribute"
+                );
             }
             return TEST_PASS;
         }
@@ -1618,8 +2230,16 @@ namespace System.Xml.Tests
             {
                 CError.Compare(DataReader.AttributeCount, 0, "Checking AttributeCoung");
                 CError.Compare(DataReader.HasAttributes, false, "Checking HasAttributes");
-                CError.Compare(DataReader.MoveToFirstAttribute(), false, "Checking MoveToFirstAttribute");
-                CError.Compare(DataReader.MoveToNextAttribute(), false, "Checking MoveToNextAttribute");
+                CError.Compare(
+                    DataReader.MoveToFirstAttribute(),
+                    false,
+                    "Checking MoveToFirstAttribute"
+                );
+                CError.Compare(
+                    DataReader.MoveToNextAttribute(),
+                    false,
+                    "Checking MoveToNextAttribute"
+                );
             }
             return TEST_PASS;
         }
@@ -1641,8 +2261,16 @@ namespace System.Xml.Tests
             {
                 CError.Compare(DataReader.AttributeCount, 0, "Checking AttributeCoung");
                 CError.Compare(DataReader.HasAttributes, false, "Checking HasAttributes");
-                CError.Compare(DataReader.MoveToFirstAttribute(), false, "Checking MoveToFirstAttribute");
-                CError.Compare(DataReader.MoveToNextAttribute(), false, "Checking MoveToNextAttribute");
+                CError.Compare(
+                    DataReader.MoveToFirstAttribute(),
+                    false,
+                    "Checking MoveToFirstAttribute"
+                );
+                CError.Compare(
+                    DataReader.MoveToNextAttribute(),
+                    false,
+                    "Checking MoveToNextAttribute"
+                );
             }
             return TEST_PASS;
         }
@@ -1655,8 +2283,16 @@ namespace System.Xml.Tests
             {
                 CError.Compare(DataReader.AttributeCount, 0, "Checking AttributeCoung");
                 CError.Compare(DataReader.HasAttributes, false, "Checking HasAttributes");
-                CError.Compare(DataReader.MoveToFirstAttribute(), false, "Checking MoveToFirstAttribute");
-                CError.Compare(DataReader.MoveToNextAttribute(), false, "Checking MoveToNextAttribute");
+                CError.Compare(
+                    DataReader.MoveToFirstAttribute(),
+                    false,
+                    "Checking MoveToFirstAttribute"
+                );
+                CError.Compare(
+                    DataReader.MoveToNextAttribute(),
+                    false,
+                    "Checking MoveToNextAttribute"
+                );
             }
             return TEST_PASS;
         }
@@ -1669,8 +2305,16 @@ namespace System.Xml.Tests
             {
                 CError.Compare(DataReader.AttributeCount, 0, "Checking AttributeCoung");
                 CError.Compare(DataReader.HasAttributes, false, "Checking HasAttributes");
-                CError.Compare(DataReader.MoveToFirstAttribute(), false, "Checking MoveToFirstAttribute");
-                CError.Compare(DataReader.MoveToNextAttribute(), false, "Checking MoveToNextAttribute");
+                CError.Compare(
+                    DataReader.MoveToFirstAttribute(),
+                    false,
+                    "Checking MoveToFirstAttribute"
+                );
+                CError.Compare(
+                    DataReader.MoveToNextAttribute(),
+                    false,
+                    "Checking MoveToNextAttribute"
+                );
             }
             return TEST_PASS;
         }
@@ -1683,8 +2327,16 @@ namespace System.Xml.Tests
             {
                 CError.Compare(DataReader.AttributeCount, 1, "Checking AttributeCoung");
                 CError.Compare(DataReader.HasAttributes, true, "Checking HasAttributes");
-                CError.Compare(DataReader.MoveToFirstAttribute(), true, "Checking MoveToFirstAttribute");
-                CError.Compare(DataReader.MoveToNextAttribute(), false, "Checking MoveToNextAttribute");
+                CError.Compare(
+                    DataReader.MoveToFirstAttribute(),
+                    true,
+                    "Checking MoveToFirstAttribute"
+                );
+                CError.Compare(
+                    DataReader.MoveToNextAttribute(),
+                    false,
+                    "Checking MoveToNextAttribute"
+                );
             }
             return TEST_PASS;
         }
@@ -1697,8 +2349,16 @@ namespace System.Xml.Tests
             {
                 CError.Compare(DataReader.AttributeCount, 0, "Checking AttributeCoung");
                 CError.Compare(DataReader.HasAttributes, false, "Checking HasAttributes");
-                CError.Compare(DataReader.MoveToFirstAttribute(), false, "Checking MoveToFirstAttribute");
-                CError.Compare(DataReader.MoveToNextAttribute(), false, "Checking MoveToNextAttribute");
+                CError.Compare(
+                    DataReader.MoveToFirstAttribute(),
+                    false,
+                    "Checking MoveToFirstAttribute"
+                );
+                CError.Compare(
+                    DataReader.MoveToNextAttribute(),
+                    false,
+                    "Checking MoveToNextAttribute"
+                );
             }
             return TEST_PASS;
         }
@@ -1711,8 +2371,16 @@ namespace System.Xml.Tests
             {
                 CError.Compare(DataReader.AttributeCount, 0, "Checking AttributeCount");
                 CError.Compare(DataReader.HasAttributes, false, "Checking HasAttributes");
-                CError.Compare(DataReader.MoveToFirstAttribute(), false, "Checking MoveToFirstAttribute");
-                CError.Compare(DataReader.MoveToNextAttribute(), false, "Checking MoveToNextAttribute");
+                CError.Compare(
+                    DataReader.MoveToFirstAttribute(),
+                    false,
+                    "Checking MoveToFirstAttribute"
+                );
+                CError.Compare(
+                    DataReader.MoveToNextAttribute(),
+                    false,
+                    "Checking MoveToNextAttribute"
+                );
             }
             return TEST_PASS;
         }
@@ -1726,10 +2394,18 @@ namespace System.Xml.Tests
                 int nCount = (IsXsltReader() || IsXPathNavigatorReader()) ? 1 : 3;
                 CError.Compare(DataReader.AttributeCount, nCount, "Checking AttributeCount");
                 CError.Compare(DataReader.HasAttributes, true, "Checking HasAttributes");
-                CError.Compare(DataReader.MoveToFirstAttribute(), true, "Checking MoveToFirstAttribute");
+                CError.Compare(
+                    DataReader.MoveToFirstAttribute(),
+                    true,
+                    "Checking MoveToFirstAttribute"
+                );
 
                 bool bNext = !(IsXsltReader() || IsXPathNavigatorReader()); // XsltReader has only one attribute for XmlDeclaration
-                CError.Compare(DataReader.MoveToNextAttribute(), bNext, "Checking MoveToNextAttribute");
+                CError.Compare(
+                    DataReader.MoveToNextAttribute(),
+                    bNext,
+                    "Checking MoveToNextAttribute"
+                );
             }
             return TEST_PASS;
         }
@@ -1745,8 +2421,16 @@ namespace System.Xml.Tests
             {
                 CError.Compare(DataReader.AttributeCount, 0, "Checking AttributeCoung");
                 CError.Compare(DataReader.HasAttributes, false, "Checking HasAttributes");
-                CError.Compare(DataReader.MoveToFirstAttribute(), false, "Checking MoveToFirstAttribute");
-                CError.Compare(DataReader.MoveToNextAttribute(), false, "Checking MoveToNextAttribute");
+                CError.Compare(
+                    DataReader.MoveToFirstAttribute(),
+                    false,
+                    "Checking MoveToFirstAttribute"
+                );
+                CError.Compare(
+                    DataReader.MoveToNextAttribute(),
+                    false,
+                    "Checking MoveToNextAttribute"
+                );
                 return TEST_PASS;
             }
             return TEST_FAIL;
@@ -1763,7 +2447,11 @@ namespace System.Xml.Tests
 
             CError.Compare(DataReader.AttributeCount, 0, "Checking AttributeCount");
             CError.Compare(DataReader.HasAttributes, false, "Checking HasAttributes");
-            CError.Compare(DataReader.MoveToFirstAttribute(), false, "Checking MoveToFirstAttribute");
+            CError.Compare(
+                DataReader.MoveToFirstAttribute(),
+                false,
+                "Checking MoveToFirstAttribute"
+            );
             CError.Compare(DataReader.MoveToNextAttribute(), false, "Checking MoveToNextAttribute");
 
             return TEST_PASS;
@@ -1802,7 +2490,11 @@ namespace System.Xml.Tests
 
         private void CheckAttribute(int nPos, XmlNodeType nt)
         {
-            CError.Compare(DataReader.VerifyNode(nt, s_attrNames[nPos], s_attrValues[nPos]), true, "CheckAttribute");
+            CError.Compare(
+                DataReader.VerifyNode(nt, s_attrNames[nPos], s_attrValues[nPos]),
+                true,
+                "CheckAttribute"
+            );
         }
 
         [Variation("AttributeCount and HasAttributes", Pri = 0)]
@@ -1925,7 +2617,11 @@ namespace System.Xml.Tests
             // Name & Namespace access
             for (int i = s_attrCount - 1; i >= 0; i--)
             {
-                CError.Compare(DataReader.MoveToAttribute(s_attrNames[i], string.Empty), true, "MTA");
+                CError.Compare(
+                    DataReader.MoveToAttribute(s_attrNames[i], string.Empty),
+                    true,
+                    "MTA"
+                );
                 CheckAttribute(i);
             }
 
@@ -1948,9 +2644,7 @@ namespace System.Xml.Tests
                 DataReader.MoveToAttribute(-1);
                 return TEST_FAIL;
             }
-            catch (ArgumentOutOfRangeException)
-            {
-            }
+            catch (ArgumentOutOfRangeException) { }
 
             return TEST_PASS;
         }
@@ -1974,10 +2668,18 @@ namespace System.Xml.Tests
                 CError.Compare(DataReader.GetAttribute(s_attrNames[i]), s_attrValues[i], "GA name");
 
                 // Name & Namespace access
-                CError.Compare(DataReader.GetAttribute(s_attrNames[i], null), s_attrValues[i], "GA name & namespace");
+                CError.Compare(
+                    DataReader.GetAttribute(s_attrNames[i], null),
+                    s_attrValues[i],
+                    "GA name & namespace"
+                );
 
                 // Name & Namespace access
-                CError.Compare(DataReader.GetAttribute(s_attrNames[i], string.Empty), s_attrValues[i], "GA name & namespace");
+                CError.Compare(
+                    DataReader.GetAttribute(s_attrNames[i], string.Empty),
+                    s_attrValues[i],
+                    "GA name & namespace"
+                );
             }
 
             // reader on middle attribute
@@ -1992,10 +2694,18 @@ namespace System.Xml.Tests
                 CError.Compare(DataReader.GetAttribute(s_attrNames[i]), s_attrValues[i], "GA name");
 
                 // Name & Namespace access
-                CError.Compare(DataReader.GetAttribute(s_attrNames[i], null), s_attrValues[i], "GA name & namespace");
+                CError.Compare(
+                    DataReader.GetAttribute(s_attrNames[i], null),
+                    s_attrValues[i],
+                    "GA name & namespace"
+                );
 
                 // Name & Namespace access
-                CError.Compare(DataReader.GetAttribute(s_attrNames[i], string.Empty), s_attrValues[i], "GA name & namespace");
+                CError.Compare(
+                    DataReader.GetAttribute(s_attrNames[i], string.Empty),
+                    s_attrValues[i],
+                    "GA name & namespace"
+                );
             }
 
             return TEST_PASS;
@@ -2016,18 +2726,14 @@ namespace System.Xml.Tests
                 DataReader.GetAttribute(-1);
                 return TEST_FAIL;
             }
-            catch (ArgumentOutOfRangeException)
-            {
-            }
+            catch (ArgumentOutOfRangeException) { }
 
             try
             {
                 DataReader.GetAttribute(s_attrCount);
                 return TEST_FAIL;
             }
-            catch (ArgumentOutOfRangeException)
-            {
-            }
+            catch (ArgumentOutOfRangeException) { }
 
             // Invalid name
             CError.Compare(DataReader.GetAttribute("s"), null, "GA");
@@ -2057,10 +2763,18 @@ namespace System.Xml.Tests
                 CError.Compare(DataReader[s_attrNames[i]], s_attrValues[i], "[] name");
 
                 // Name & Namespace access
-                CError.Compare(DataReader[s_attrNames[i], null], s_attrValues[i], "[] name & namespace");
+                CError.Compare(
+                    DataReader[s_attrNames[i], null],
+                    s_attrValues[i],
+                    "[] name & namespace"
+                );
 
                 // Name & Namespace access
-                CError.Compare(DataReader[s_attrNames[i], string.Empty], s_attrValues[i], "[] name & namespace");
+                CError.Compare(
+                    DataReader[s_attrNames[i], string.Empty],
+                    s_attrValues[i],
+                    "[] name & namespace"
+                );
             }
 
             // reader on middle attribute
@@ -2075,10 +2789,18 @@ namespace System.Xml.Tests
                 CError.Compare(DataReader[s_attrNames[i]], s_attrValues[i], "[] name");
 
                 // Name & Namespace access
-                CError.Compare(DataReader[s_attrNames[i], null], s_attrValues[i], "[] name & namespace");
+                CError.Compare(
+                    DataReader[s_attrNames[i], null],
+                    s_attrValues[i],
+                    "[] name & namespace"
+                );
 
                 // Name & Namespace access
-                CError.Compare(DataReader[s_attrNames[i], string.Empty], s_attrValues[i], "[] name & namespace");
+                CError.Compare(
+                    DataReader[s_attrNames[i], string.Empty],
+                    s_attrValues[i],
+                    "[] name & namespace"
+                );
             }
 
             return TEST_PASS;
@@ -2097,17 +2819,13 @@ namespace System.Xml.Tests
                 string s = DataReader[-1];
                 return TEST_FAIL;
             }
-            catch (ArgumentOutOfRangeException)
-            {
-            }
+            catch (ArgumentOutOfRangeException) { }
             try
             {
                 string s = DataReader[s_attrCount];
                 return TEST_FAIL;
             }
-            catch (ArgumentOutOfRangeException)
-            {
-            }
+            catch (ArgumentOutOfRangeException) { }
 
             // Invalid name
             CError.Compare(DataReader["s"], null, "[]");
@@ -2133,7 +2851,11 @@ namespace System.Xml.Tests
 
                 // Ordinal access
                 CError.Compare(DataReader.ReadAttributeValue(), true, "RAV");
-                CError.Compare(DataReader.VerifyNode(XmlNodeType.Text, string.Empty, s_attrValues[i]), true, "Attribute");
+                CError.Compare(
+                    DataReader.VerifyNode(XmlNodeType.Text, string.Empty, s_attrValues[i]),
+                    true,
+                    "Attribute"
+                );
                 CError.Compare(DataReader.ReadAttributeValue(), false, "RAV");
             }
 
@@ -2165,7 +2887,12 @@ namespace System.Xml.Tests
         [Variation("Whitespace between XmlDecl attributes")]
         public int TAXmlDecl_12()
         {
-            if (IsXmlNodeReader() || IsXmlNodeReaderDataDoc() || IsXPathNavigatorReader() || IsBinaryReader())
+            if (
+                IsXmlNodeReader()
+                || IsXmlNodeReaderDataDoc()
+                || IsXPathNavigatorReader()
+                || IsBinaryReader()
+            )
                 return TEST_SKIPPED;
 
             string strxml = "<?xml version='1.0'          standalone='yes'?><ROOT/>";
@@ -2183,7 +2910,10 @@ namespace System.Xml.Tests
             PositionOnNodeType(XmlNodeType.XmlDeclaration);
 
             DataReader.MoveToFirstAttribute();
-            CError.Compare(DataReader.VerifyNode(XmlNodeType.Attribute, s_attrNames[0], s_attrValues[0]), "Attribute");
+            CError.Compare(
+                DataReader.VerifyNode(XmlNodeType.Attribute, s_attrNames[0], s_attrValues[0]),
+                "Attribute"
+            );
 
             DataReader.MoveToElement();
             CError.Compare(DataReader.NodeType, XmlNodeType.XmlDeclaration, "nt");
@@ -2243,7 +2973,11 @@ namespace System.Xml.Tests
             DataReader.PositionOnElement(_ST_ENS1);
             DataReader.MoveToAttribute(1);
 
-            CError.Compare(DataReader.LookupNamespace("xmlns"), "http://www.w3.org/2000/xmlns/", "ln");
+            CError.Compare(
+                DataReader.LookupNamespace("xmlns"),
+                "http://www.w3.org/2000/xmlns/",
+                "ln"
+            );
 
             return TEST_PASS;
         }
@@ -2272,7 +3006,11 @@ namespace System.Xml.Tests
             CError.Compare(DataReader.Value, "14", "v");
 
             DataReader.MoveToElement();
-            CError.Compare(DataReader.MoveToAttribute("xmlns", "http://www.w3.org/2000/xmlns/"), true, "mta(str, str)");
+            CError.Compare(
+                DataReader.MoveToAttribute("xmlns", "http://www.w3.org/2000/xmlns/"),
+                true,
+                "mta(str, str)"
+            );
 
             CError.Compare(DataReader.LocalName, "xmlns", "ln");
             CError.Compare(DataReader.Name, "xmlns", "n");
@@ -2295,7 +3033,11 @@ namespace System.Xml.Tests
             DataReader.PositionOnElement(_ST_ENS1);
             CError.Compare(DataReader.GetAttribute(1), "14", "ga(i)");
             CError.Compare(DataReader.GetAttribute("xmlns"), "14", "ga(str)");
-            CError.Compare(DataReader.GetAttribute("xmlns", "http://www.w3.org/2000/xmlns/"), "14", "ga(str, str)");
+            CError.Compare(
+                DataReader.GetAttribute("xmlns", "http://www.w3.org/2000/xmlns/"),
+                "14",
+                "ga(str, str)"
+            );
             CError.Compare(DataReader.GetAttribute("xmlns", "14"), null, "ga inv");
 
             return TEST_PASS;
@@ -2311,7 +3053,11 @@ namespace System.Xml.Tests
             DataReader.PositionOnElement(_ST_ENS1);
             CError.Compare(DataReader[1], "14", "this[i]");
             CError.Compare(DataReader["xmlns"], "14", "this[str]");
-            CError.Compare(DataReader["xmlns", "http://www.w3.org/2000/xmlns/"], "14", "this[str, str]");
+            CError.Compare(
+                DataReader["xmlns", "http://www.w3.org/2000/xmlns/"],
+                "14",
+                "this[str, str]"
+            );
             CError.Compare(DataReader["xmlns", "14"], null, "this inv");
 
             return TEST_PASS;
@@ -2431,9 +3177,11 @@ namespace System.Xml.Tests
             w.Flush();
             FilePathUtil.addStream(xml, ms);
             ReloadSource(xml);
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             return TEST_PASS;
         }
+
         public void WriteAttribute(XmlWriter w, bool param, string name, string value)
         {
             if (param)

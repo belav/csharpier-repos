@@ -18,15 +18,17 @@ namespace ILCompiler
 
         public SingleMethodCompilationModuleGroup(
             ReadyToRunCompilationModuleGroupConfig config,
-            MethodDesc method) :
-                base(config)
+            MethodDesc method
+        )
+            : base(config)
         {
             _method = method;
         }
 
         public override bool ContainsMethodBody(MethodDesc method, bool unboxingStub)
         {
-            return (method == _method) || (method == _method.GetCanonMethodTarget(CanonicalFormKind.Specific));
+            return (method == _method)
+                || (method == _method.GetCanonMethodTarget(CanonicalFormKind.Specific));
         }
 
         public override ReadyToRunFlags GetReadyToRunFlags()

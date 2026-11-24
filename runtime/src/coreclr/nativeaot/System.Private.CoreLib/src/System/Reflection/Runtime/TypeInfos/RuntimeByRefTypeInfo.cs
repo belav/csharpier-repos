@@ -15,18 +15,13 @@ namespace System.Reflection.Runtime.TypeInfos
     internal sealed partial class RuntimeByRefTypeInfo : RuntimeHasElementTypeInfo
     {
         private RuntimeByRefTypeInfo(UnificationKey key)
-            : base(key)
-        {
-        }
+            : base(key) { }
 
         public override bool IsByRef => true;
 
         protected override string Suffix
         {
-            get
-            {
-                return "&";
-            }
+            get { return "&"; }
         }
     }
 }

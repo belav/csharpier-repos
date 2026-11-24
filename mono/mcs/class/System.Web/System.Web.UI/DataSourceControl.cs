@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,130 +33,137 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Text;
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
+    [DesignerAttribute(
+        "System.Web.UI.Design.DataSourceDesigner, " + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.IDesigner"
+    )]
+    [ControlBuilderAttribute(typeof(DataSourceControlBuilder))]
+    [NonVisualControlAttribute]
+    [BindableAttribute(false)]
+    public abstract class DataSourceControl
+        : Control,
+            IDataSource,
+            System.ComponentModel.IListSource
+    {
+        protected DataSourceControl() { }
 
-	[DesignerAttribute ("System.Web.UI.Design.DataSourceDesigner, " + Consts.AssemblySystem_Design,
-			    "System.ComponentModel.Design.IDesigner")]
-	[ControlBuilderAttribute (typeof (DataSourceControlBuilder))]
-	[NonVisualControlAttribute]
-	[BindableAttribute (false)]
-	public abstract class DataSourceControl : Control, IDataSource, System.ComponentModel.IListSource {
+        [MonoTODO("Not implemented")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override void ApplyStyleSheetSkin(Page page)
+        {
+            throw new NotImplementedException();
+        }
 
+        protected override ControlCollection CreateControlCollection()
+        {
+            return new EmptyControlCollection(this);
+        }
 
-		protected DataSourceControl()
-		{
-		}
-		
-		[MonoTODO ("Not implemented")]
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public override void ApplyStyleSheetSkin (Page page)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO("why override?")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override Control FindControl(string id)
+        {
+            return base.FindControl(id);
+        }
 
-		protected override ControlCollection CreateControlCollection ()
-		{
-			return new EmptyControlCollection (this);
-		}
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override void Focus()
+        {
+            throw new NotSupportedException();
+        }
 
-		[MonoTODO ("why override?")]
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public override Control FindControl (string id)
-		{
-			return base.FindControl (id);
-		}
+        protected abstract DataSourceView GetView(string viewName);
 
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public override void Focus ()
-		{
-			throw new NotSupportedException ();
-		}
+        DataSourceView IDataSource.GetView(string viewName)
+        {
+            return GetView(viewName);
+        }
 
-		protected abstract DataSourceView GetView (string viewName);
-		
-		DataSourceView IDataSource.GetView (string viewName)
-		{
-			return GetView (viewName);
-		}
-		
-		protected virtual ICollection GetViewNames ()
-		{
-			return null;
-		}
-		
-		ICollection IDataSource.GetViewNames ()
-		{
-			return GetViewNames ();
-		}
+        protected virtual ICollection GetViewNames()
+        {
+            return null;
+        }
 
-		IList System.ComponentModel.IListSource.GetList ()
-		{
-			return ListSourceHelper.GetList (this);
-		}
-		
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public override bool HasControls ()
-		{
-			return base.HasControls ();
-		}
+        ICollection IDataSource.GetViewNames()
+        {
+            return GetViewNames();
+        }
 
-		protected virtual void RaiseDataSourceChangedEvent (EventArgs e)
-		{
-			EventHandler eh = Events [dataSourceChanged] as EventHandler;
-			if (eh != null)
-				eh (this, e);
-		}
+        IList System.ComponentModel.IListSource.GetList()
+        {
+            return ListSourceHelper.GetList(this);
+        }
 
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public override void RenderControl (HtmlTextWriter writer)
-		{
-			base.RenderControl (writer);
-		}
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override bool HasControls()
+        {
+            return base.HasControls();
+        }
 
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public override string ClientID {
-			get { return base.ClientID; }
-		}
+        protected virtual void RaiseDataSourceChangedEvent(EventArgs e)
+        {
+            EventHandler eh = Events[dataSourceChanged] as EventHandler;
+            if (eh != null)
+                eh(this, e);
+        }
 
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public override ControlCollection Controls {
-			get { return base.Controls; }
-		}
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override void RenderControl(HtmlTextWriter writer)
+        {
+            base.RenderControl(writer);
+        }
 
-		[DefaultValue (false)]
-		[Browsable (false)]
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public override bool EnableTheming {
-			get { return false; }
-			set { throw new NotSupportedException (); }
-		}
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override string ClientID
+        {
+            get { return base.ClientID; }
+        }
 
-		[DefaultValue ("")]
-		[Browsable (false)]
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public override string SkinID {
-			get { return base.SkinID; }
-			set { base.SkinID = value; }
-		}
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override ControlCollection Controls
+        {
+            get { return base.Controls; }
+        }
 
-		bool System.ComponentModel.IListSource.ContainsListCollection {
-			get { return ListSourceHelper.ContainsListCollection (this); }
-		}
+        [DefaultValue(false)]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override bool EnableTheming
+        {
+            get { return false; }
+            set { throw new NotSupportedException(); }
+        }
 
-		[Browsable (false)]
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		[DefaultValue (false)]
-		public override bool Visible { 
-			get { return false; }
-			set { throw new NotSupportedException (); }
-		}
+        [DefaultValue("")]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override string SkinID
+        {
+            get { return base.SkinID; }
+            set { base.SkinID = value; }
+        }
 
-		static object dataSourceChanged = new object ();
-		event EventHandler System.Web.UI.IDataSource.DataSourceChanged {
-			add { Events.AddHandler (dataSourceChanged, value); }
-			remove { Events.RemoveHandler (dataSourceChanged, value); }
-		}
+        bool System.ComponentModel.IListSource.ContainsListCollection
+        {
+            get { return ListSourceHelper.ContainsListCollection(this); }
+        }
 
-	}
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DefaultValue(false)]
+        public override bool Visible
+        {
+            get { return false; }
+            set { throw new NotSupportedException(); }
+        }
+
+        static object dataSourceChanged = new object();
+        event EventHandler System.Web.UI.IDataSource.DataSourceChanged
+        {
+            add { Events.AddHandler(dataSourceChanged, value); }
+            remove { Events.RemoveHandler(dataSourceChanged, value); }
+        }
+    }
 }
-

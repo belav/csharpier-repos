@@ -9,7 +9,10 @@ namespace System.ServiceModel.Activities
     [ServiceContract(Namespace = Description.WorkflowRuntimeEndpoint.ExternalDataExchangeNamespace)]
     interface IExternalDataExchange
     {
-        [OperationContract(IsOneWay = true, Action = Description.WorkflowRuntimeEndpoint.RaiseEventAction)]
+        [OperationContract(
+            IsOneWay = true,
+            Action = Description.WorkflowRuntimeEndpoint.RaiseEventAction
+        )]
         void RaiseEvent(EventArgs eventArgs, IComparable queueName, object message);
     }
 }

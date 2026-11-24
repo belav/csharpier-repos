@@ -1,12 +1,12 @@
-
 //------------------------------------------------------------------------------
 // <copyright file="XmlSchemaProviderAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">Microsoft</owner>                                                                
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Serialization {
+namespace System.Xml.Serialization
+{
     using System;
     using System.Xml.Schema;
 
@@ -15,23 +15,26 @@ namespace System.Xml.Serialization {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct)]
-    public sealed class XmlSchemaProviderAttribute : System.Attribute {
+    public sealed class XmlSchemaProviderAttribute : System.Attribute
+    {
         string methodName;
         bool any;
-        
+
         /// <include file='doc\XmlSchemaProviderAttribute.uex' path='docs/doc[@for="XmlSchemaProviderAttribute.XmlSchemaProviderAttribute"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlSchemaProviderAttribute(string methodName) {
+        public XmlSchemaProviderAttribute(string methodName)
+        {
             this.methodName = methodName;
         }
-        
+
         /// <include file='doc\XmlSchemaProviderAttribute.uex' path='docs/doc[@for="XmlSchemaProviderAttribute.MethodName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string MethodName {
+        public string MethodName
+        {
             get { return methodName; }
         }
 
@@ -39,9 +42,10 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool IsAny {
+        public bool IsAny
+        {
             get { return any; }
-            set {  any = value; }
+            set { any = value; }
         }
     }
 }

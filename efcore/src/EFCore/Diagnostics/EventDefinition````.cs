@@ -30,7 +30,11 @@ public class EventDefinition<TParam1, TParam2, TParam3, TParam4> : EventDefiniti
         EventId eventId,
         LogLevel level,
         string eventIdCode,
-        Func<LogLevel, Action<ILogger, TParam1, TParam2, TParam3, TParam4, Exception?>> logActionFunc)
+        Func<
+            LogLevel,
+            Action<ILogger, TParam1, TParam2, TParam3, TParam4, Exception?>
+        > logActionFunc
+    )
         : base(loggingOptions, eventId, level, eventIdCode)
     {
         _logAction = logActionFunc(Level);
@@ -45,11 +49,7 @@ public class EventDefinition<TParam1, TParam2, TParam3, TParam4> : EventDefiniti
     /// <param name="arg3">The third message argument.</param>
     /// <param name="arg4">The fourth message argument.</param>
     /// <returns>The message string.</returns>
-    public virtual string GenerateMessage(
-        TParam1 arg1,
-        TParam2 arg2,
-        TParam3 arg3,
-        TParam4 arg4)
+    public virtual string GenerateMessage(TParam1 arg1, TParam2 arg2, TParam3 arg3, TParam4 arg4)
     {
         var extractor = new MessageExtractingLogger();
         _logAction(extractor, arg1, arg2, arg3, arg4, null);
@@ -70,7 +70,8 @@ public class EventDefinition<TParam1, TParam2, TParam3, TParam4> : EventDefiniti
         TParam1 arg1,
         TParam2 arg2,
         TParam3 arg3,
-        TParam4 arg4)
+        TParam4 arg4
+    )
         where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
     {
         switch (WarningBehavior)

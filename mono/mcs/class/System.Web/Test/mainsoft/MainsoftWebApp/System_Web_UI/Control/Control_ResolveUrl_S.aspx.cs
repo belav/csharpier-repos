@@ -30,191 +30,189 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI
 {
-	public class Control_ResolveUrl_S
-		: GHTControlBase
-	{
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
+    public class Control_ResolveUrl_S : GHTControlBase
+    {
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
-			GHTTestBegin(frm);
-			foreach (Type currentType in TypesToTest)
-			{
-				GHTHeader(currentType.ToString());
-				Test(currentType);
-			}
-			GHTTestEnd();
-		}
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
-		private void Test(Type ctrlType)
-		{
-			// Absolute url with protocol.
-			try 
-			{
-				GHTSubTestBegin(ctrlType, "Absolute url with protocol:", false);
-				AddToForm(TestedControl);
-				GHTSubTestAddResult(TestedControl.ResolveUrl("http://localhost/GHTTests/"));
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
+            GHTTestBegin(frm);
+            foreach (Type currentType in TypesToTest)
+            {
+                GHTHeader(currentType.ToString());
+                Test(currentType);
+            }
+            GHTTestEnd();
+        }
 
-			// Absolute url without protocol.
-			try 
-			{
-				GHTSubTestBegin(ctrlType, "Absolute url without protocol:", false);
-				AddToForm(TestedControl);
-				GHTSubTestAddResult(TestedControl.ResolveUrl("/GHTTests/"));
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+        private void Test(Type ctrlType)
+        {
+            // Absolute url with protocol.
+            try
+            {
+                GHTSubTestBegin(ctrlType, "Absolute url with protocol:", false);
+                AddToForm(TestedControl);
+                GHTSubTestAddResult(TestedControl.ResolveUrl("http://localhost/GHTTests/"));
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			// Relative url.
-			try 
-			{
-				GHTSubTestBegin(ctrlType, "Relative url:", false);
-				AddToForm(TestedControl);
-				GHTSubTestAddResult(TestedControl.ResolveUrl("aa/bb"));
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+            // Absolute url without protocol.
+            try
+            {
+                GHTSubTestBegin(ctrlType, "Absolute url without protocol:", false);
+                AddToForm(TestedControl);
+                GHTSubTestAddResult(TestedControl.ResolveUrl("/GHTTests/"));
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			// Relative url with a leading ../.
-			try 
-			{
-				GHTSubTestBegin(ctrlType, "Relative url with a leading ../:", false);
-				AddToForm(TestedControl);
-				GHTSubTestAddResult(TestedControl.ResolveUrl("../aa/bb"));
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+            // Relative url.
+            try
+            {
+                GHTSubTestBegin(ctrlType, "Relative url:", false);
+                AddToForm(TestedControl);
+                GHTSubTestAddResult(TestedControl.ResolveUrl("aa/bb"));
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			// Relative url only  ../.
-			try 
-			{
-				GHTSubTestBegin(ctrlType, "Relative url only  ../:", false);
-				AddToForm(TestedControl);
-				GHTSubTestAddResult(TestedControl.ResolveUrl("../"));
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+            // Relative url with a leading ../.
+            try
+            {
+                GHTSubTestBegin(ctrlType, "Relative url with a leading ../:", false);
+                AddToForm(TestedControl);
+                GHTSubTestAddResult(TestedControl.ResolveUrl("../aa/bb"));
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			// Relative url higher then root.
-			try 
-			{
-				GHTSubTestBegin(ctrlType, "Relative url higher then root:", false);
-				AddToForm(TestedControl);
-				GHTSubTestAddResult(TestedControl.ResolveUrl("../../../../../"));
-				GHTSubTestExpectedExceptionNotCaught("HttpException");
-			}
-			catch (HttpException ex) 
-			{
-				GHTSubTestExpectedExceptionCaught(ex);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+            // Relative url only  ../.
+            try
+            {
+                GHTSubTestBegin(ctrlType, "Relative url only  ../:", false);
+                AddToForm(TestedControl);
+                GHTSubTestAddResult(TestedControl.ResolveUrl("../"));
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			// A url  that uses \.
-			try 
-			{
-				GHTSubTestBegin(ctrlType, "A url  that uses \\:", false);
-				AddToForm(TestedControl);
-				GHTSubTestAddResult(TestedControl.ResolveUrl("aa\\bb\\cc"));
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+            // Relative url higher then root.
+            try
+            {
+                GHTSubTestBegin(ctrlType, "Relative url higher then root:", false);
+                AddToForm(TestedControl);
+                GHTSubTestAddResult(TestedControl.ResolveUrl("../../../../../"));
+                GHTSubTestExpectedExceptionNotCaught("HttpException");
+            }
+            catch (HttpException ex)
+            {
+                GHTSubTestExpectedExceptionCaught(ex);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			// A file path
-			try 
-			{
-				GHTSubTestBegin(ctrlType, "A file path:", false);
-				AddToForm(TestedControl);
-				GHTSubTestAddResult(TestedControl.ResolveUrl("c:\\GHTests\\file.vb"));
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+            // A url  that uses \.
+            try
+            {
+                GHTSubTestBegin(ctrlType, "A url  that uses \\:", false);
+                AddToForm(TestedControl);
+                GHTSubTestAddResult(TestedControl.ResolveUrl("aa\\bb\\cc"));
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			// Empty string
-			try 
-			{
-				GHTSubTestBegin(ctrlType, "Empty string:", false);
-				AddToForm(TestedControl);
-				GHTSubTestAddResult(TestedControl.ResolveUrl(String.Empty));
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+            // A file path
+            try
+            {
+                GHTSubTestBegin(ctrlType, "A file path:", false);
+                AddToForm(TestedControl);
+                GHTSubTestAddResult(TestedControl.ResolveUrl("c:\\GHTests\\file.vb"));
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			// 'A url that contains invalid charachters.
-			try 
-			{
-				GHTSubTestBegin(ctrlType, "A url that contains invalid charachters:", false);
-				AddToForm(TestedControl);
-				GHTSubTestAddResult(TestedControl.ResolveUrl("~!@#$%^&*()_+-=[]\\{}|;':,./<>?"));
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
-		}
+            // Empty string
+            try
+            {
+                GHTSubTestBegin(ctrlType, "Empty string:", false);
+                AddToForm(TestedControl);
+                GHTSubTestAddResult(TestedControl.ResolveUrl(String.Empty));
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-		private void AddToForm(System.Web.UI.Control a_toAdd)
-		{
-			if (a_toAdd.Parent == null)
-				GHTActiveForm.Controls.Add(a_toAdd);
-			else
-				AddToForm(a_toAdd.Parent);
+            // 'A url that contains invalid charachters.
+            try
+            {
+                GHTSubTestBegin(ctrlType, "A url that contains invalid charachters:", false);
+                AddToForm(TestedControl);
+                GHTSubTestAddResult(TestedControl.ResolveUrl("~!@#$%^&*()_+-=[]\\{}|;':,./<>?"));
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
+        }
 
-		}
-	}
+        private void AddToForm(System.Web.UI.Control a_toAdd)
+        {
+            if (a_toAdd.Parent == null)
+                GHTActiveForm.Controls.Add(a_toAdd);
+            else
+                AddToForm(a_toAdd.Parent);
+        }
+    }
 }

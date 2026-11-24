@@ -24,7 +24,13 @@ namespace System.Net.Http.Json
         /// <exception cref="ArgumentNullException">The <paramref name="client"/> is null.</exception>
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(HttpContentJsonExtensions.SerializationDynamicCodeMessage)]
-        public static Task<HttpResponseMessage> PatchAsJsonAsync<TValue>(this HttpClient client, [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri, TValue value, JsonSerializerOptions? options = null, CancellationToken cancellationToken = default)
+        public static Task<HttpResponseMessage> PatchAsJsonAsync<TValue>(
+            this HttpClient client,
+            [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri,
+            TValue value,
+            JsonSerializerOptions? options = null,
+            CancellationToken cancellationToken = default
+        )
         {
             if (client is null)
             {
@@ -48,7 +54,13 @@ namespace System.Net.Http.Json
         /// <exception cref="ArgumentNullException">The <paramref name="client"/> is null.</exception>
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(HttpContentJsonExtensions.SerializationDynamicCodeMessage)]
-        public static Task<HttpResponseMessage> PatchAsJsonAsync<TValue>(this HttpClient client, Uri? requestUri, TValue value, JsonSerializerOptions? options = null, CancellationToken cancellationToken = default)
+        public static Task<HttpResponseMessage> PatchAsJsonAsync<TValue>(
+            this HttpClient client,
+            Uri? requestUri,
+            TValue value,
+            JsonSerializerOptions? options = null,
+            CancellationToken cancellationToken = default
+        )
         {
             if (client is null)
             {
@@ -71,8 +83,12 @@ namespace System.Net.Http.Json
         /// <exception cref="ArgumentNullException">The <paramref name="client"/> is null.</exception>
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(HttpContentJsonExtensions.SerializationDynamicCodeMessage)]
-        public static Task<HttpResponseMessage> PatchAsJsonAsync<TValue>(this HttpClient client, [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri, TValue value, CancellationToken cancellationToken)
-            => client.PatchAsJsonAsync(requestUri, value, options: null, cancellationToken);
+        public static Task<HttpResponseMessage> PatchAsJsonAsync<TValue>(
+            this HttpClient client,
+            [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri,
+            TValue value,
+            CancellationToken cancellationToken
+        ) => client.PatchAsJsonAsync(requestUri, value, options: null, cancellationToken);
 
         /// <summary>
         /// Sends a PATCH request to the specified Uri containing the <paramref name="value"/> serialized as JSON in the request body.
@@ -86,8 +102,12 @@ namespace System.Net.Http.Json
         /// <exception cref="ArgumentNullException">The <paramref name="client"/> is null.</exception>
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(HttpContentJsonExtensions.SerializationDynamicCodeMessage)]
-        public static Task<HttpResponseMessage> PatchAsJsonAsync<TValue>(this HttpClient client, Uri? requestUri, TValue value, CancellationToken cancellationToken)
-            => client.PatchAsJsonAsync(requestUri, value, options: null, cancellationToken);
+        public static Task<HttpResponseMessage> PatchAsJsonAsync<TValue>(
+            this HttpClient client,
+            Uri? requestUri,
+            TValue value,
+            CancellationToken cancellationToken
+        ) => client.PatchAsJsonAsync(requestUri, value, options: null, cancellationToken);
 
         /// <summary>
         /// Sends a PATCH request to the specified Uri containing the <paramref name="value"/> serialized as JSON in the request body.
@@ -100,7 +120,13 @@ namespace System.Net.Http.Json
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="client"/> is null.</exception>
-        public static Task<HttpResponseMessage> PatchAsJsonAsync<TValue>(this HttpClient client, [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri, TValue value, JsonTypeInfo<TValue> jsonTypeInfo, CancellationToken cancellationToken = default)
+        public static Task<HttpResponseMessage> PatchAsJsonAsync<TValue>(
+            this HttpClient client,
+            [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri,
+            TValue value,
+            JsonTypeInfo<TValue> jsonTypeInfo,
+            CancellationToken cancellationToken = default
+        )
         {
             if (client is null)
             {
@@ -122,7 +148,13 @@ namespace System.Net.Http.Json
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="client"/> is null.</exception>
-        public static Task<HttpResponseMessage> PatchAsJsonAsync<TValue>(this HttpClient client, Uri? requestUri, TValue value, JsonTypeInfo<TValue> jsonTypeInfo, CancellationToken cancellationToken = default)
+        public static Task<HttpResponseMessage> PatchAsJsonAsync<TValue>(
+            this HttpClient client,
+            Uri? requestUri,
+            TValue value,
+            JsonTypeInfo<TValue> jsonTypeInfo,
+            CancellationToken cancellationToken = default
+        )
         {
             if (client is null)
             {

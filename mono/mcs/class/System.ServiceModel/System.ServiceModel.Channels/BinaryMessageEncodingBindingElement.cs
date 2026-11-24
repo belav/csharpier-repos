@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,131 +33,148 @@ using System.Xml;
 
 namespace System.ServiceModel.Channels
 {
-	[MonoTODO]
-	public sealed class BinaryMessageEncodingBindingElement
-		: MessageEncodingBindingElement,
-		  IWsdlExportExtension, IPolicyExportExtension
-	{
-		int max_session_size;
-		// FIXME: they might be configurable.
-		int max_read_pool_size = 64;
-		int max_write_pool_size = 16;
-		XmlDictionaryReaderQuotas quotas =
-			new XmlDictionaryReaderQuotas ();
-		MessageVersion version = MessageVersion.Default;
+    [MonoTODO]
+    public sealed class BinaryMessageEncodingBindingElement
+        : MessageEncodingBindingElement,
+            IWsdlExportExtension,
+            IPolicyExportExtension
+    {
+        int max_session_size;
 
-		public BinaryMessageEncodingBindingElement ()
-		{
-		}
+        // FIXME: they might be configurable.
+        int max_read_pool_size = 64;
+        int max_write_pool_size = 16;
+        XmlDictionaryReaderQuotas quotas = new XmlDictionaryReaderQuotas();
+        MessageVersion version = MessageVersion.Default;
 
-		private BinaryMessageEncodingBindingElement (
-			BinaryMessageEncodingBindingElement other)
-		{
-			throw new NotImplementedException ();
-		}
+        public BinaryMessageEncodingBindingElement() { }
 
-		public override MessageVersion MessageVersion {
-			get { return version; }
-			set {
-				if (!version.Envelope.Equals (EnvelopeVersion.Soap12))
-					throw new InvalidOperationException ("Binary message encoding binding element only supports SOAP 1.2.");
-				version = value;
-			}
-		}
+        private BinaryMessageEncodingBindingElement(BinaryMessageEncodingBindingElement other)
+        {
+            throw new NotImplementedException();
+        }
 
-		public int MaxSessionSize {
-			get { return max_session_size; }
-			set { max_session_size = value; }
-		}
+        public override MessageVersion MessageVersion
+        {
+            get { return version; }
+            set
+            {
+                if (!version.Envelope.Equals(EnvelopeVersion.Soap12))
+                    throw new InvalidOperationException(
+                        "Binary message encoding binding element only supports SOAP 1.2."
+                    );
+                version = value;
+            }
+        }
 
-		public int MaxReadPoolSize {
-			get { return max_read_pool_size; }
-			set { max_read_pool_size = value; }
-		}
+        public int MaxSessionSize
+        {
+            get { return max_session_size; }
+            set { max_session_size = value; }
+        }
 
-		public int MaxWritePoolSize {
-			get { return max_write_pool_size; }
-			set { max_write_pool_size = value; }
-		}
+        public int MaxReadPoolSize
+        {
+            get { return max_read_pool_size; }
+            set { max_read_pool_size = value; }
+        }
 
-		public XmlDictionaryReaderQuotas ReaderQuotas {
-			get { return quotas; }
-			set { quotas = value; }
-		}
+        public int MaxWritePoolSize
+        {
+            get { return max_write_pool_size; }
+            set { max_write_pool_size = value; }
+        }
 
-		public override IChannelFactory<TChannel> BuildChannelFactory<TChannel> (
-			BindingContext context)
-		{
-			if (context == null)
-				throw new ArgumentNullException ("context");
-			//context.RemainingBindingElements.Add (this);
-			return base.BuildChannelFactory<TChannel> (context);
-		}
+        public XmlDictionaryReaderQuotas ReaderQuotas
+        {
+            get { return quotas; }
+            set { quotas = value; }
+        }
+
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
+        {
+            if (context == null)
+                throw new ArgumentNullException("context");
+            //context.RemainingBindingElements.Add (this);
+            return base.BuildChannelFactory<TChannel>(context);
+        }
 
 #if !MOBILE
-		public override IChannelListener<TChannel> BuildChannelListener<TChannel> (
-			BindingContext context)
-		{
-			if (context == null)
-				throw new ArgumentNullException ("context");
-			//context.RemainingBindingElements.Add (this);
-			return base.BuildChannelListener<TChannel> (context);
-		}
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
+        {
+            if (context == null)
+                throw new ArgumentNullException("context");
+            //context.RemainingBindingElements.Add (this);
+            return base.BuildChannelListener<TChannel>(context);
+        }
 
-		public override bool CanBuildChannelListener<TChannel> (
-			BindingContext context)
-		{
-			if (context == null)
-				throw new ArgumentNullException ("context");
-			return context.CanBuildInnerChannelListener<TChannel> ();
-		}
+        public override bool CanBuildChannelListener<TChannel>(BindingContext context)
+        {
+            if (context == null)
+                throw new ArgumentNullException("context");
+            return context.CanBuildInnerChannelListener<TChannel>();
+        }
 #endif
 
-		public override BindingElement Clone ()
-		{
-			return new BinaryMessageEncodingBindingElement (this);
-		}
+        public override BindingElement Clone()
+        {
+            return new BinaryMessageEncodingBindingElement(this);
+        }
 
-		public override T GetProperty<T> (BindingContext context)
-		{
-			if (typeof (T) == typeof (MessageVersion))
-				return (T) (object) MessageVersion;
-			return null;
-		}
+        public override T GetProperty<T>(BindingContext context)
+        {
+            if (typeof(T) == typeof(MessageVersion))
+                return (T)(object)MessageVersion;
+            return null;
+        }
 
-		public override MessageEncoderFactory
-			CreateMessageEncoderFactory ()
-		{
-			return new BinaryMessageEncoderFactory (this);
-		}
+        public override MessageEncoderFactory CreateMessageEncoderFactory()
+        {
+            return new BinaryMessageEncoderFactory(this);
+        }
 
 #if !MOBILE && !XAMMAC_4_5
-		[MonoTODO]
-		void IWsdlExportExtension.ExportContract (WsdlExporter exporter,
-			WsdlContractConversionContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        void IWsdlExportExtension.ExportContract(
+            WsdlExporter exporter,
+            WsdlContractConversionContext context
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		void IWsdlExportExtension.ExportEndpoint (WsdlExporter exporter,
-			WsdlEndpointConversionContext context)
-		{
-		}
+        void IWsdlExportExtension.ExportEndpoint(
+            WsdlExporter exporter,
+            WsdlEndpointConversionContext context
+        ) { }
 
-		void IPolicyExportExtension.ExportPolicy (MetadataExporter exporter,
-			PolicyConversionContext context)
-		{
-			PolicyAssertionCollection assertions = context.GetBindingAssertions ();
-			XmlDocument doc = new XmlDocument ();
+        void IPolicyExportExtension.ExportPolicy(
+            MetadataExporter exporter,
+            PolicyConversionContext context
+        )
+        {
+            PolicyAssertionCollection assertions = context.GetBindingAssertions();
+            XmlDocument doc = new XmlDocument();
 
-			assertions.Add (doc.CreateElement ("msb", "BinaryEncoding", "http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1"));
-		}
+            assertions.Add(
+                doc.CreateElement(
+                    "msb",
+                    "BinaryEncoding",
+                    "http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1"
+                )
+            );
+        }
 #endif
 
-		[MonoTODO]
-		public CompressionFormat CompressionFormat {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
-	}
+        [MonoTODO]
+        public CompressionFormat CompressionFormat
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
+    }
 }

@@ -13,7 +13,7 @@ internal static partial class Interop
         {
             MULTICAST_ADD = 0,
             MULTICAST_DROP = 1,
-            MULTICAST_IF = 2
+            MULTICAST_IF = 2,
         }
 
         internal struct IPv4MulticastOption
@@ -32,15 +32,31 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetIPv4MulticastOption")]
-        internal static unsafe partial Error GetIPv4MulticastOption(SafeHandle socket, MulticastOption multicastOption, IPv4MulticastOption* option);
+        internal static unsafe partial Error GetIPv4MulticastOption(
+            SafeHandle socket,
+            MulticastOption multicastOption,
+            IPv4MulticastOption* option
+        );
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_SetIPv4MulticastOption")]
-        internal static unsafe partial Error SetIPv4MulticastOption(SafeHandle socket, MulticastOption multicastOption, IPv4MulticastOption* option);
+        internal static unsafe partial Error SetIPv4MulticastOption(
+            SafeHandle socket,
+            MulticastOption multicastOption,
+            IPv4MulticastOption* option
+        );
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetIPv6MulticastOption")]
-        internal static unsafe partial Error GetIPv6MulticastOption(SafeHandle socket, MulticastOption multicastOption, IPv6MulticastOption* option);
+        internal static unsafe partial Error GetIPv6MulticastOption(
+            SafeHandle socket,
+            MulticastOption multicastOption,
+            IPv6MulticastOption* option
+        );
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_SetIPv6MulticastOption")]
-        internal static unsafe partial Error SetIPv6MulticastOption(SafeHandle socket, MulticastOption multicastOption, IPv6MulticastOption* option);
+        internal static unsafe partial Error SetIPv6MulticastOption(
+            SafeHandle socket,
+            MulticastOption multicastOption,
+            IPv6MulticastOption* option
+        );
     }
 }

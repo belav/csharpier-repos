@@ -23,9 +23,7 @@ namespace System.Xml.Serialization
         private SoapEnumAttribute? _soapEnum;
         private object? _soapDefaultValue;
 
-        public SoapAttributes()
-        {
-        }
+        public SoapAttributes() { }
 
         public SoapAttributes(ICustomAttributeProvider provider)
         {
@@ -73,10 +71,14 @@ namespace System.Xml.Serialization
             get
             {
                 SoapAttributeFlags flags = 0;
-                if (_soapElement != null) flags |= SoapAttributeFlags.Element;
-                if (_soapAttribute != null) flags |= SoapAttributeFlags.Attribute;
-                if (_soapEnum != null) flags |= SoapAttributeFlags.Enum;
-                if (_soapType != null) flags |= SoapAttributeFlags.Type;
+                if (_soapElement != null)
+                    flags |= SoapAttributeFlags.Element;
+                if (_soapAttribute != null)
+                    flags |= SoapAttributeFlags.Attribute;
+                if (_soapEnum != null)
+                    flags |= SoapAttributeFlags.Enum;
+                if (_soapType != null)
+                    flags |= SoapAttributeFlags.Type;
                 return flags;
             }
         }

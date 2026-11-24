@@ -104,6 +104,7 @@ namespace System
             Seed = newSeed;
             return GetSingle();
         }
+
         public float GetSingle()
         {
             return (float)_rand.NextDouble();
@@ -115,6 +116,7 @@ namespace System
             Seed = newSeed;
             return GetCharLetter();
         }
+
         public char GetCharLetter()
         {
             return GetCharLetter(allowSurrogate: true);
@@ -158,13 +160,16 @@ namespace System
 
                 if (false == allowNoWeight)
                 {
-                    throw new NotSupportedException("allownoweight = false is not supported in TestLibrary with FEATURE_NOPINVOKES");
+                    throw new NotSupportedException(
+                        "allownoweight = false is not supported in TestLibrary with FEATURE_NOPINVOKES"
+                    );
                 }
 
                 c = Convert.ToChar(iVal);
-                loopCondition = allowSurrogate ? (!char.IsLetter(c)) : (!char.IsLetter(c) || char.IsSurrogate(c));
-            }
-            while (loopCondition && 0 < counter);
+                loopCondition = allowSurrogate
+                    ? (!char.IsLetter(c))
+                    : (!char.IsLetter(c) || char.IsSurrogate(c));
+            } while (loopCondition && 0 < counter);
 
             if (!char.IsLetter(c))
             {
@@ -212,13 +217,14 @@ namespace System
 
                 if (false == allowNoWeight)
                 {
-                    throw new InvalidOperationException("allownoweight = false is not supported in TestLibrary with FEATURE_NOPINVOKES");
+                    throw new InvalidOperationException(
+                        "allownoweight = false is not supported in TestLibrary with FEATURE_NOPINVOKES"
+                    );
                 }
 
                 c = Convert.ToChar(iVal);
                 loopCondition = !char.IsNumber(c);
-            }
-            while (loopCondition && 0 < counter);
+            } while (loopCondition && 0 < counter);
 
             if (!char.IsNumber(c))
             {
@@ -293,7 +299,13 @@ namespace System
             return GetString(validPath, true, true, minLength, maxLength);
         }
 
-        public string GetString(int newSeed, bool validPath, bool allowNulls, int minLength, int maxLength)
+        public string GetString(
+            int newSeed,
+            bool validPath,
+            bool allowNulls,
+            int minLength,
+            int maxLength
+        )
         {
             Seed = newSeed;
             return GetString(validPath, allowNulls, minLength, maxLength);
@@ -304,20 +316,35 @@ namespace System
             return GetString(validPath, allowNulls, true, minLength, maxLength);
         }
 
-        public string GetString(int newSeed, bool validPath, bool allowNulls, bool allowNoWeight, int minLength, int maxLength)
+        public string GetString(
+            int newSeed,
+            bool validPath,
+            bool allowNulls,
+            bool allowNoWeight,
+            int minLength,
+            int maxLength
+        )
         {
             Seed = newSeed;
             return GetString(validPath, allowNulls, allowNoWeight, minLength, maxLength);
         }
 
-        public string GetString(bool validPath, bool allowNulls, bool allowNoWeight, int minLength, int maxLength)
+        public string GetString(
+            bool validPath,
+            bool allowNulls,
+            bool allowNoWeight,
+            int minLength,
+            int maxLength
+        )
         {
             StringBuilder sVal = new StringBuilder();
             char c;
             int length;
 
-            if (0 == minLength && 0 == maxLength) return string.Empty;
-            if (minLength > maxLength) return null;
+            if (0 == minLength && 0 == maxLength)
+                return string.Empty;
+            if (minLength > maxLength)
+                return null;
 
             length = minLength;
 
@@ -400,7 +427,8 @@ namespace System
             return retStrings;
         }
 
-        public DateTime GetDateTime(int newSeed) => new DateTime(GetInt64(newSeed) % (DateTime.MaxValue.Ticks + 1));
+        public DateTime GetDateTime(int newSeed) =>
+            new DateTime(GetInt64(newSeed) % (DateTime.MaxValue.Ticks + 1));
 
         public static void VerifyRandomDistribution(byte[] random)
         {
@@ -411,7 +439,8 @@ namespace System
 
         private static void VerifyNeutralParity(byte[] random)
         {
-            int zeroCount = 0, oneCount = 0;
+            int zeroCount = 0,
+                oneCount = 0;
 
             for (int i = 0; i < random.Length; i++)
             {
@@ -435,7 +464,9 @@ namespace System
             const double AllowedTolerance = 0.07;
             if (bitDifference > AllowedTolerance)
             {
-                throw new InvalidOperationException("Expected bitDifference < " + AllowedTolerance + ", got " + bitDifference + ".");
+                throw new InvalidOperationException(
+                    "Expected bitDifference < " + AllowedTolerance + ", got " + bitDifference + "."
+                );
             }
         }
     }

@@ -20,8 +20,8 @@ internal sealed class SpaProxyStartupFilter : IStartupFilter
         ILogger<SpaProxyStartupFilter> logger
     )
     {
-        _spaProxyLaunchManager =
-            spaProxyLaunchManager ?? throw new ArgumentNullException(nameof(spaProxyLaunchManager));
+        _spaProxyLaunchManager = spaProxyLaunchManager
+            ?? throw new ArgumentNullException(nameof(spaProxyLaunchManager));
         _hostLifetime = hostLifetime ?? throw new ArgumentNullException(nameof(hostLifetime));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }

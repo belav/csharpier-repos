@@ -8,9 +8,18 @@ namespace System.Reflection.Context.Custom
 {
     internal static class AttributeUtils
     {
-        public static object[] GetCustomAttributes(CustomReflectionContext context, CustomType type, Type attributeFilterType, bool inherit)
+        public static object[] GetCustomAttributes(
+            CustomReflectionContext context,
+            CustomType type,
+            Type attributeFilterType,
+            bool inherit
+        )
         {
-            IEnumerable<object> attributes = GetFilteredAttributes(context, type.UnderlyingType, attributeFilterType);
+            IEnumerable<object> attributes = GetFilteredAttributes(
+                context,
+                type.UnderlyingType,
+                attributeFilterType
+            );
 
             if (!inherit)
                 return CollectionServices.IEnumerableToArray(attributes, attributeFilterType);
@@ -39,8 +48,18 @@ namespace System.Reflection.Context.Custom
 
                 type = baseMember;
 
-                IEnumerable<object> inheritedAttributes = GetFilteredAttributes(context, type.UnderlyingType, attributeFilterType);
-                CombineCustomAttributes(results, inheritedAttributes, attributeFilterType, inherited, allowMultiple);
+                IEnumerable<object> inheritedAttributes = GetFilteredAttributes(
+                    context,
+                    type.UnderlyingType,
+                    attributeFilterType
+                );
+                CombineCustomAttributes(
+                    results,
+                    inheritedAttributes,
+                    attributeFilterType,
+                    inherited,
+                    allowMultiple
+                );
 
                 baseMember = type.BaseType as CustomType;
             } while (baseMember != null);
@@ -48,9 +67,18 @@ namespace System.Reflection.Context.Custom
             return CollectionServices.ConvertListToArray(results, attributeFilterType);
         }
 
-        public static object[] GetCustomAttributes(CustomReflectionContext context, CustomMethodInfo method, Type attributeFilterType, bool inherit)
+        public static object[] GetCustomAttributes(
+            CustomReflectionContext context,
+            CustomMethodInfo method,
+            Type attributeFilterType,
+            bool inherit
+        )
         {
-            IEnumerable<object> attributes = GetFilteredAttributes(context, method.UnderlyingMethod, attributeFilterType);
+            IEnumerable<object> attributes = GetFilteredAttributes(
+                context,
+                method.UnderlyingMethod,
+                attributeFilterType
+            );
 
             if (!inherit)
                 return CollectionServices.IEnumerableToArray(attributes, attributeFilterType);
@@ -79,8 +107,18 @@ namespace System.Reflection.Context.Custom
 
                 method = baseMember;
 
-                IEnumerable<object> inheritedAttributes = GetFilteredAttributes(context, method.UnderlyingMethod, attributeFilterType);
-                CombineCustomAttributes(results, inheritedAttributes, attributeFilterType, inherited, allowMultiple);
+                IEnumerable<object> inheritedAttributes = GetFilteredAttributes(
+                    context,
+                    method.UnderlyingMethod,
+                    attributeFilterType
+                );
+                CombineCustomAttributes(
+                    results,
+                    inheritedAttributes,
+                    attributeFilterType,
+                    inherited,
+                    allowMultiple
+                );
 
                 baseMember = method.GetBaseDefinition() as CustomMethodInfo;
             } while (baseMember != null && !baseMember.Equals(method));
@@ -88,67 +126,125 @@ namespace System.Reflection.Context.Custom
             return CollectionServices.ConvertListToArray(results, attributeFilterType);
         }
 
-        public static object[] GetCustomAttributes(CustomReflectionContext context, CustomConstructorInfo constructor, Type attributeFilterType)
+        public static object[] GetCustomAttributes(
+            CustomReflectionContext context,
+            CustomConstructorInfo constructor,
+            Type attributeFilterType
+        )
         {
             ConstructorInfo provider = constructor.UnderlyingConstructor;
-            IEnumerable<object> attributes = GetFilteredAttributes(context, provider, attributeFilterType);
+            IEnumerable<object> attributes = GetFilteredAttributes(
+                context,
+                provider,
+                attributeFilterType
+            );
 
             return CollectionServices.IEnumerableToArray(attributes, attributeFilterType);
         }
 
-        public static object[] GetCustomAttributes(CustomReflectionContext context, CustomPropertyInfo property, Type attributeFilterType)
+        public static object[] GetCustomAttributes(
+            CustomReflectionContext context,
+            CustomPropertyInfo property,
+            Type attributeFilterType
+        )
         {
             PropertyInfo provider = property.UnderlyingProperty;
-            IEnumerable<object> attributes = GetFilteredAttributes(context, provider, attributeFilterType);
+            IEnumerable<object> attributes = GetFilteredAttributes(
+                context,
+                provider,
+                attributeFilterType
+            );
 
             return CollectionServices.IEnumerableToArray(attributes, attributeFilterType);
         }
 
-        public static object[] GetCustomAttributes(CustomReflectionContext context, CustomEventInfo evnt, Type attributeFilterType)
+        public static object[] GetCustomAttributes(
+            CustomReflectionContext context,
+            CustomEventInfo evnt,
+            Type attributeFilterType
+        )
         {
             EventInfo provider = evnt.UnderlyingEvent;
-            IEnumerable<object> attributes = GetFilteredAttributes(context, provider, attributeFilterType);
+            IEnumerable<object> attributes = GetFilteredAttributes(
+                context,
+                provider,
+                attributeFilterType
+            );
 
             return CollectionServices.IEnumerableToArray(attributes, attributeFilterType);
         }
 
-        public static object[] GetCustomAttributes(CustomReflectionContext context, CustomFieldInfo field, Type attributeFilterType)
+        public static object[] GetCustomAttributes(
+            CustomReflectionContext context,
+            CustomFieldInfo field,
+            Type attributeFilterType
+        )
         {
             FieldInfo provider = field.UnderlyingField;
-            IEnumerable<object> attributes = GetFilteredAttributes(context, provider, attributeFilterType);
+            IEnumerable<object> attributes = GetFilteredAttributes(
+                context,
+                provider,
+                attributeFilterType
+            );
 
             return CollectionServices.IEnumerableToArray(attributes, attributeFilterType);
         }
 
-        public static object[] GetCustomAttributes(CustomReflectionContext context, CustomParameterInfo parameter, Type attributeFilterType)
+        public static object[] GetCustomAttributes(
+            CustomReflectionContext context,
+            CustomParameterInfo parameter,
+            Type attributeFilterType
+        )
         {
             ParameterInfo provider = parameter.UnderlyingParameter;
-            IEnumerable<object> attributes = GetFilteredAttributes(context, provider, attributeFilterType);
+            IEnumerable<object> attributes = GetFilteredAttributes(
+                context,
+                provider,
+                attributeFilterType
+            );
 
             return CollectionServices.IEnumerableToArray(attributes, attributeFilterType);
         }
 
-        public static bool IsDefined(ICustomAttributeProvider provider, Type attributeType, bool inherit)
+        public static bool IsDefined(
+            ICustomAttributeProvider provider,
+            Type attributeType,
+            bool inherit
+        )
         {
             object[] attributes = provider.GetCustomAttributes(attributeType, inherit);
             return attributes != null && attributes.Length > 0;
         }
 
-        private static IEnumerable<object> GetFilteredAttributes(CustomReflectionContext context, MemberInfo member, Type attributeFilterType)
+        private static IEnumerable<object> GetFilteredAttributes(
+            CustomReflectionContext context,
+            MemberInfo member,
+            Type attributeFilterType
+        )
         {
             object[] objects = member.GetCustomAttributes(attributeFilterType, false);
 
             return context.GetCustomAttributesOnMember(member, objects, attributeFilterType);
         }
 
-        private static IEnumerable<object> GetFilteredAttributes(CustomReflectionContext context, ParameterInfo parameter, Type attributeFilterType)
+        private static IEnumerable<object> GetFilteredAttributes(
+            CustomReflectionContext context,
+            ParameterInfo parameter,
+            Type attributeFilterType
+        )
         {
             object[] objects = parameter.GetCustomAttributes(attributeFilterType, false);
 
             return context.GetCustomAttributesOnParameter(parameter, objects, attributeFilterType);
         }
 
-        private static void CombineCustomAttributes(List<object> declaredAttributes, IEnumerable<object> inheritedAttributes, Type attributeFilterType, bool inherited, bool allowMultiple)
+        private static void CombineCustomAttributes(
+            List<object> declaredAttributes,
+            IEnumerable<object> inheritedAttributes,
+            Type attributeFilterType,
+            bool inherited,
+            bool allowMultiple
+        )
         {
             foreach (object newAttribute in inheritedAttributes)
             {
@@ -165,18 +261,27 @@ namespace System.Reflection.Context.Custom
 
                 // Don't add duplicate attributes whose AllowMultiple is false.
                 // Note that duplicates declared on the same type won't be filtered out.
-                if (inherited &&
-                    (allowMultiple ||
-                     declaredAttributes.FindIndex((obj) => obj.GetType() == attributeType) < 0))
+                if (
+                    inherited
+                    && (
+                        allowMultiple
+                        || declaredAttributes.FindIndex((obj) => obj.GetType() == attributeType) < 0
+                    )
+                )
                 {
                     declaredAttributes.Add(newAttribute);
                 }
             }
         }
 
-        private static void GetAttributeUsage(Type attributeFilterType, out bool inherited, out bool allowMultiple)
+        private static void GetAttributeUsage(
+            Type attributeFilterType,
+            out bool inherited,
+            out bool allowMultiple
+        )
         {
-            AttributeUsageAttribute[] usageAttributes = (AttributeUsageAttribute[])attributeFilterType.GetCustomAttributes(typeof(AttributeUsageAttribute), false);
+            AttributeUsageAttribute[] usageAttributes = (AttributeUsageAttribute[])
+                attributeFilterType.GetCustomAttributes(typeof(AttributeUsageAttribute), false);
 
             if (usageAttributes == null || usageAttributes.Length == 0)
             {
@@ -194,7 +299,10 @@ namespace System.Reflection.Context.Custom
                 throw new FormatException(SR.Format(SR.Format_AttributeUsage, attributeFilterType));
         }
 
-        internal static IEnumerable<object> FilterCustomAttributes(IEnumerable<object> attributes, Type attributeFilterType)
+        internal static IEnumerable<object> FilterCustomAttributes(
+            IEnumerable<object> attributes,
+            Type attributeFilterType
+        )
         {
             foreach (object attr in attributes)
             {

@@ -16,46 +16,94 @@ namespace Microsoft.CodeAnalysis.Host
         /// <see langword="true"/> if the data we have for the solution with the given <paramref name="name"/> has the
         /// provided <paramref name="checksum"/>.
         /// </summary>
-        Task<bool> ChecksumMatchesAsync(string name, Checksum checksum, CancellationToken cancellationToken = default);
+        Task<bool> ChecksumMatchesAsync(
+            string name,
+            Checksum checksum,
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         /// <see langword="true"/> if the data we have for the given <paramref name="project"/> with the given <paramref
         /// name="name"/> has the provided <paramref name="checksum"/>.
         /// </summary>
-        Task<bool> ChecksumMatchesAsync(Project project, string name, Checksum checksum, CancellationToken cancellationToken = default);
+        Task<bool> ChecksumMatchesAsync(
+            Project project,
+            string name,
+            Checksum checksum,
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         /// <see langword="true"/> if the data we have for the given <paramref name="document"/> with the given <paramref
         /// name="name"/> has the provided <paramref name="checksum"/>.
         /// </summary>
-        Task<bool> ChecksumMatchesAsync(Document document, string name, Checksum checksum, CancellationToken cancellationToken = default);
+        Task<bool> ChecksumMatchesAsync(
+            Document document,
+            string name,
+            Checksum checksum,
+            CancellationToken cancellationToken = default
+        );
 
-        Task<bool> ChecksumMatchesAsync(ProjectKey project, string name, Checksum checksum, CancellationToken cancellationToken = default);
-        Task<bool> ChecksumMatchesAsync(DocumentKey document, string name, Checksum checksum, CancellationToken cancellationToken = default);
+        Task<bool> ChecksumMatchesAsync(
+            ProjectKey project,
+            string name,
+            Checksum checksum,
+            CancellationToken cancellationToken = default
+        );
+        Task<bool> ChecksumMatchesAsync(
+            DocumentKey document,
+            string name,
+            Checksum checksum,
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         /// Reads the stream for the solution with the given <paramref name="name"/>.  If <paramref name="checksum"/>
         /// is provided, the persisted checksum must match it.  If there is no such stream with that name, or the
         /// checksums do not match, then <see langword="null"/> will be returned.
         /// </summary>
-        Task<Stream?> ReadStreamAsync(string name, Checksum? checksum = null, CancellationToken cancellationToken = default);
+        Task<Stream?> ReadStreamAsync(
+            string name,
+            Checksum? checksum = null,
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         /// Reads the stream for the <paramref name="project"/> with the given <paramref name="name"/>.  If <paramref name="checksum"/>
         /// is provided, the persisted checksum must match it.  If there is no such stream with that name, or the
         /// checksums do not match, then <see langword="null"/> will be returned.
         /// </summary>
-        Task<Stream?> ReadStreamAsync(Project project, string name, Checksum? checksum = null, CancellationToken cancellationToken = default);
+        Task<Stream?> ReadStreamAsync(
+            Project project,
+            string name,
+            Checksum? checksum = null,
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         /// Reads the stream for the <paramref name="document"/> with the given <paramref name="name"/>.  If <paramref name="checksum"/>
         /// is provided, the persisted checksum must match it.  If there is no such stream with that name, or the
         /// checksums do not match, then <see langword="null"/> will be returned.
         /// </summary>
-        Task<Stream?> ReadStreamAsync(Document document, string name, Checksum? checksum = null, CancellationToken cancellationToken = default);
+        Task<Stream?> ReadStreamAsync(
+            Document document,
+            string name,
+            Checksum? checksum = null,
+            CancellationToken cancellationToken = default
+        );
 
-        Task<Stream?> ReadStreamAsync(ProjectKey project, string name, Checksum? checksum = null, CancellationToken cancellationToken = default);
-        Task<Stream?> ReadStreamAsync(DocumentKey document, string name, Checksum? checksum = null, CancellationToken cancellationToken = default);
+        Task<Stream?> ReadStreamAsync(
+            ProjectKey project,
+            string name,
+            Checksum? checksum = null,
+            CancellationToken cancellationToken = default
+        );
+        Task<Stream?> ReadStreamAsync(
+            DocumentKey document,
+            string name,
+            Checksum? checksum = null,
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         /// Reads the stream for the solution with the given <paramref name="name"/>.  An optional <paramref
@@ -66,7 +114,12 @@ namespace Microsoft.CodeAnalysis.Host
         /// calls to read the same keys should succeed if called within the same session.
         /// </para>
         /// </summary>
-        Task<bool> WriteStreamAsync(string name, Stream stream, Checksum? checksum = null, CancellationToken cancellationToken = default);
+        Task<bool> WriteStreamAsync(
+            string name,
+            Stream stream,
+            Checksum? checksum = null,
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         /// Reads the stream for the <paramref name="project"/> with the given <paramref name="name"/>.  An optional
@@ -77,7 +130,13 @@ namespace Microsoft.CodeAnalysis.Host
         /// calls to read the same keys should succeed if called within the same session.
         /// </para>
         /// </summary>
-        Task<bool> WriteStreamAsync(Project project, string name, Stream stream, Checksum? checksum = null, CancellationToken cancellationToken = default);
+        Task<bool> WriteStreamAsync(
+            Project project,
+            string name,
+            Stream stream,
+            Checksum? checksum = null,
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         /// Reads the stream for the <paramref name="document"/> with the given <paramref name="name"/>.  An optional
@@ -88,18 +147,36 @@ namespace Microsoft.CodeAnalysis.Host
         /// calls to read the same keys should succeed if called within the same session.
         /// </para>
         /// </summary>
-        Task<bool> WriteStreamAsync(Document document, string name, Stream stream, Checksum? checksum = null, CancellationToken cancellationToken = default);
+        Task<bool> WriteStreamAsync(
+            Document document,
+            string name,
+            Stream stream,
+            Checksum? checksum = null,
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         /// Returns <see langword="true"/> if the data was successfully persisted to the storage subsystem.  Subsequent
         /// calls to read the same keys should succeed if called within the same session.
         /// </summary>
-        Task<bool> WriteStreamAsync(ProjectKey projectKey, string name, Stream stream, Checksum? checksum = null, CancellationToken cancellationToken = default);
+        Task<bool> WriteStreamAsync(
+            ProjectKey projectKey,
+            string name,
+            Stream stream,
+            Checksum? checksum = null,
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         /// Returns <see langword="true"/> if the data was successfully persisted to the storage subsystem.  Subsequent
         /// calls to read the same keys should succeed if called within the same session.
         /// </summary>
-        Task<bool> WriteStreamAsync(DocumentKey documentKey, string name, Stream stream, Checksum? checksum = null, CancellationToken cancellationToken = default);
+        Task<bool> WriteStreamAsync(
+            DocumentKey documentKey,
+            string name,
+            Stream stream,
+            Checksum? checksum = null,
+            CancellationToken cancellationToken = default
+        );
     }
 }

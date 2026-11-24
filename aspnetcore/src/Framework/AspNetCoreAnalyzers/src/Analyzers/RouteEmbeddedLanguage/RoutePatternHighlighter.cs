@@ -157,10 +157,8 @@ internal class RoutePatternHighlighter : IAspNetCoreEmbeddedLanguageDocumentHigh
         RoutePatternNode node,
         VirtualChar ch
     ) =>
-        FindNode<RoutePatternNameParameterPartNode>(
-            node,
-            ch,
-            (parameter, c) => parameter.ParameterNameToken.VirtualChars.Contains(c)
+        FindNode<RoutePatternNameParameterPartNode>(node, ch, (parameter, c) =>
+            parameter.ParameterNameToken.VirtualChars.Contains(c)
         );
 
     private static TNode? FindNode<TNode>(

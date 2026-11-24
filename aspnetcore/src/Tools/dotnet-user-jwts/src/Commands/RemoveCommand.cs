@@ -10,29 +10,23 @@ internal sealed class RemoveCommand
 {
     public static void Register(ProjectCommandLineApplication app)
     {
-        app.Command(
-            "remove",
-            cmd =>
+        app.Command("remove", cmd =>
+        {
+            cmd.Description = Resources.RemoveCommand_Description;
+
+            var idArgument = cmd.Argument("[id]", Resources.RemoveCommand_IdArgument_Description);
+            cmd.HelpOption("-h|--help");
+
+            cmd.OnExecute(() =>
             {
-                cmd.Description = Resources.RemoveCommand_Description;
-
-                var idArgument = cmd.Argument(
-                    "[id]",
-                    Resources.RemoveCommand_IdArgument_Description
-                );
-                cmd.HelpOption("-h|--help");
-
-                cmd.OnExecute(() =>
+                if (idArgument.Value is null)
                 {
-                    if (idArgument.Value is null)
-                    {
-                        cmd.ShowHelp();
-                        return 0;
-                    }
-                    return Execute(cmd.Reporter, cmd.ProjectOption.Value(), idArgument.Value);
-                });
-            }
-        );
+                    cmd.ShowHelp();
+                    return 0;
+                }
+                return Execute(cmd.Reporter, cmd.ProjectOption.Value(), idArgument.Value);
+            });
+        });
     }
 
     private static int Execute(IReporter reporter, string projectPath, string id)

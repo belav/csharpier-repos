@@ -6,8 +6,8 @@
 
 using System.Collections.Immutable;
 using System.Runtime.InteropServices;
-using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.ExternalElements;
 using Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Interop;
 using Microsoft.VisualStudio.LanguageServices.Implementation.Interop;
@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
         internal static EnvDTE.CodeElements Create(
             CodeModelState state,
             ExternalCodeFunction parent,
-            ProjectId projectId)
+            ProjectId projectId
+        )
         {
             var collection = new ExternalOverloadsCollection(state, parent, projectId);
             return (EnvDTE.CodeElements)ComAggregate.CreateAggregatedObject(collection);
@@ -32,7 +33,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
         private ExternalOverloadsCollection(
             CodeModelState state,
             ExternalCodeFunction parent,
-            ProjectId projectId)
+            ProjectId projectId
+        )
             : base(state, parent)
         {
             _projectId = projectId;
@@ -50,8 +52,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             // Only methods and constructors can be overloaded.  However, all functions
             // can successfully return a collection of overloaded functions; if not
             // really overloaded, the collection contains just the original function.
-            if (symbol.MethodKind is not MethodKind.Ordinary and
-                not MethodKind.Constructor)
+            if (symbol.MethodKind is not MethodKind.Ordinary and not MethodKind.Constructor)
             {
                 return ImmutableArray.Create((EnvDTE.CodeElement)Parent);
             }
@@ -64,7 +65,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                     continue;
                 }
 
-                var element = ExternalCodeFunction.Create(this.State, _projectId, (IMethodSymbol)method);
+                var element = ExternalCodeFunction.Create(
+                    this.State,
+                    _projectId,
+                    (IMethodSymbol)method
+                );
                 if (element != null)
                 {
                     overloadsBuilder.Add((EnvDTE.CodeElement)element);
@@ -76,10 +81,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
 
         public override int Count
         {
-            get
-            {
-                return EnumerateOverloads().Length;
-            }
+            get { return EnumerateOverloads().Length; }
         }
 
         protected override bool TryGetItemByIndex(int index, out EnvDTE.CodeElement element)

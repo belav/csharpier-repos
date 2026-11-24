@@ -7,23 +7,22 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-
-namespace System.Data.EntityClient {
-
+namespace System.Data.EntityClient
+{
     using System;
     using System.ComponentModel;
     using System.Data;
     using System.Data.Common;
     using System.Data.Entity;
 
-    public sealed partial class EntityParameter : DbParameter { 
+    public sealed partial class EntityParameter : DbParameter
+    {
         private object _value;
 
         private object _parent;
 
         private ParameterDirection _direction;
         private int? _size;
-
 
         private string _sourceColumn;
         private DataRowVersion _sourceVersion;
@@ -33,220 +32,248 @@ namespace System.Data.EntityClient {
 
         private object _coercedValue;
 
-        private EntityParameter(EntityParameter source) : this() { 
+        private EntityParameter(EntityParameter source)
+            : this()
+        {
             EntityUtil.CheckArgumentNull(source, "source");
 
             source.CloneHelper(this);
 
             ICloneable cloneable = (_value as ICloneable);
-            if (null != cloneable) { 
+            if (null != cloneable)
+            {
                 _value = cloneable.Clone();
             }
         }
 
-        private object CoercedValue { 
-            get {
-                return _coercedValue;
-            }
-            set {
-                _coercedValue = value;
-            }
+        private object CoercedValue
+        {
+            get { return _coercedValue; }
+            set { _coercedValue = value; }
         }
 
         [
-        RefreshProperties(RefreshProperties.All),
-        EntityResCategoryAttribute(EntityRes.DataCategory_Data),
-        EntityResDescriptionAttribute(EntityRes.DbParameter_Direction),
+            RefreshProperties(RefreshProperties.All),
+            EntityResCategoryAttribute(EntityRes.DataCategory_Data),
+            EntityResDescriptionAttribute(EntityRes.DbParameter_Direction),
         ]
-        override public ParameterDirection Direction { 
-            get {
+        public override ParameterDirection Direction
+        {
+            get
+            {
                 ParameterDirection direction = _direction;
                 return ((0 != direction) ? direction : ParameterDirection.Input);
             }
-            set {
-                if (_direction != value) {
-                    switch (value) { 
-                    case ParameterDirection.Input:
-                    case ParameterDirection.Output:
-                    case ParameterDirection.InputOutput:
-                    case ParameterDirection.ReturnValue:
-                        PropertyChanging();
-                        _direction = value;
-                        break;
-                    default:
-                        throw EntityUtil.InvalidParameterDirection(value);
+            set
+            {
+                if (_direction != value)
+                {
+                    switch (value)
+                    {
+                        case ParameterDirection.Input:
+                        case ParameterDirection.Output:
+                        case ParameterDirection.InputOutput:
+                        case ParameterDirection.ReturnValue:
+                            PropertyChanging();
+                            _direction = value;
+                            break;
+                        default:
+                            throw EntityUtil.InvalidParameterDirection(value);
                     }
                 }
             }
         }
 
-        override public bool IsNullable { 
-            get {
+        public override bool IsNullable
+        {
+            get
+            {
                 bool result = this._isNullable.HasValue ? this._isNullable.Value : true;
                 return result;
             }
-            set {
-                _isNullable = value;
-            }
+            set { _isNullable = value; }
         }
 
-        internal int Offset {
-            get {
-                return 0;
-            }
+        internal int Offset
+        {
+            get { return 0; }
         }
 
         [
-        EntityResCategoryAttribute(EntityRes.DataCategory_Data),
-        EntityResDescriptionAttribute(EntityRes.DbParameter_Size),
+            EntityResCategoryAttribute(EntityRes.DataCategory_Data),
+            EntityResDescriptionAttribute(EntityRes.DbParameter_Size),
         ]
-        override public int Size { 
-            get {
+        public override int Size
+        {
+            get
+            {
                 int size = _size.HasValue ? _size.Value : 0;
-                if (0 == size) {
+                if (0 == size)
+                {
                     size = ValueSize(Value);
                 }
                 return size;
             }
-            set {
-                if (!_size.HasValue || _size.Value != value) {
-                    if (value < -1) {
+            set
+            {
+                if (!_size.HasValue || _size.Value != value)
+                {
+                    if (value < -1)
+                    {
                         throw EntityUtil.InvalidSizeValue(value);
                     }
                     PropertyChanging();
-                    if (0 == value) {
+                    if (0 == value)
+                    {
                         _size = null;
                     }
-                    else {
+                    else
+                    {
                         _size = value;
                     }
                 }
             }
         }
 
-        private void ResetSize() {
-            if (_size.HasValue) {
+        private void ResetSize()
+        {
+            if (_size.HasValue)
+            {
                 PropertyChanging();
                 _size = null;
             }
         }
 
-        private bool ShouldSerializeSize() { 
+        private bool ShouldSerializeSize()
+        {
             return (_size.HasValue && _size.Value != 0);
         }
 
         [
-        EntityResCategoryAttribute(EntityRes.DataCategory_Update),
-        EntityResDescriptionAttribute(EntityRes.DbParameter_SourceColumn),
+            EntityResCategoryAttribute(EntityRes.DataCategory_Update),
+            EntityResDescriptionAttribute(EntityRes.DbParameter_SourceColumn),
         ]
-        override public string SourceColumn { 
-            get {
+        public override string SourceColumn
+        {
+            get
+            {
                 string sourceColumn = _sourceColumn;
                 return ((null != sourceColumn) ? sourceColumn : string.Empty);
             }
-            set {
-                _sourceColumn = value;
-            }
+            set { _sourceColumn = value; }
         }
 
-        public override bool SourceColumnNullMapping {
-            get {
-                return _sourceColumnNullMapping;
-            }
-            set {
-                _sourceColumnNullMapping = value;
-            }
+        public override bool SourceColumnNullMapping
+        {
+            get { return _sourceColumnNullMapping; }
+            set { _sourceColumnNullMapping = value; }
         }
 
         [
-        EntityResCategoryAttribute(EntityRes.DataCategory_Update),
-        EntityResDescriptionAttribute(EntityRes.DbParameter_SourceVersion),
+            EntityResCategoryAttribute(EntityRes.DataCategory_Update),
+            EntityResDescriptionAttribute(EntityRes.DbParameter_SourceVersion),
         ]
-        override public DataRowVersion SourceVersion { 
-            get {
+        public override DataRowVersion SourceVersion
+        {
+            get
+            {
                 DataRowVersion sourceVersion = _sourceVersion;
                 return ((0 != sourceVersion) ? sourceVersion : DataRowVersion.Current);
             }
-            set {
-                switch(value) { 
-                case DataRowVersion.Original:
-                case DataRowVersion.Current:
-                case DataRowVersion.Proposed:
-                case DataRowVersion.Default:
-                    _sourceVersion = value;
-                    break;
-                default:
-                    throw EntityUtil.InvalidDataRowVersion(value);
+            set
+            {
+                switch (value)
+                {
+                    case DataRowVersion.Original:
+                    case DataRowVersion.Current:
+                    case DataRowVersion.Proposed:
+                    case DataRowVersion.Default:
+                        _sourceVersion = value;
+                        break;
+                    default:
+                        throw EntityUtil.InvalidDataRowVersion(value);
                 }
             }
         }
 
-        private void CloneHelperCore(EntityParameter destination) {
-            destination._value                     = _value;
-            
-            destination._direction                 = _direction;
-            destination._size                      = _size;
+        private void CloneHelperCore(EntityParameter destination)
+        {
+            destination._value = _value;
 
-            destination._sourceColumn              = _sourceColumn;
-            destination._sourceVersion             = _sourceVersion;
-            destination._sourceColumnNullMapping   = _sourceColumnNullMapping;
-            destination._isNullable                = _isNullable;
+            destination._direction = _direction;
+            destination._size = _size;
+
+            destination._sourceColumn = _sourceColumn;
+            destination._sourceVersion = _sourceVersion;
+            destination._sourceColumnNullMapping = _sourceColumnNullMapping;
+            destination._isNullable = _isNullable;
         }
-        
-        internal void CopyTo(DbParameter destination) {
+
+        internal void CopyTo(DbParameter destination)
+        {
             EntityUtil.CheckArgumentNull(destination, "destination");
             CloneHelper((EntityParameter)destination);
         }
 
-        internal object CompareExchangeParent(object value, object comparand) {
-            
-            
-            
-            
+        internal object CompareExchangeParent(object value, object comparand)
+        {
             object parent = _parent;
-            if (comparand == parent) {
+            if (comparand == parent)
+            {
                 _parent = value;
             }
             return parent;
         }
 
-        internal void ResetParent() {
+        internal void ResetParent()
+        {
             _parent = null;
         }
 
-        override public string ToString() { 
+        public override string ToString()
+        {
             return ParameterName;
         }
 
-        private byte ValuePrecisionCore(object value) { 
-            if (value is Decimal) {
-                return ((System.Data.SqlTypes.SqlDecimal)(Decimal) value).Precision; 
+        private byte ValuePrecisionCore(object value)
+        {
+            if (value is Decimal)
+            {
+                return ((System.Data.SqlTypes.SqlDecimal)(Decimal)value).Precision;
             }
             return 0;
         }
 
-        private  byte ValueScaleCore(object value) { 
-            if (value is Decimal) {
+        private byte ValueScaleCore(object value)
+        {
+            if (value is Decimal)
+            {
                 return (byte)((Decimal.GetBits((Decimal)value)[3] & 0x00ff0000) >> 0x10);
             }
             return 0;
         }
 
-        private  int ValueSizeCore(object value) { 
-            if (!EntityUtil.IsNull(value)) {
+        private int ValueSizeCore(object value)
+        {
+            if (!EntityUtil.IsNull(value))
+            {
                 string svalue = (value as string);
-                if (null != svalue) {
+                if (null != svalue)
+                {
                     return svalue.Length;
                 }
                 byte[] bvalue = (value as byte[]);
-                if (null != bvalue) {
+                if (null != bvalue)
+                {
                     return bvalue.Length;
                 }
                 char[] cvalue = (value as char[]);
-                if (null != cvalue) {
+                if (null != cvalue)
+                {
                     return cvalue.Length;
                 }
-                if ((value is byte) || (value is char)) {
+                if ((value is byte) || (value is char))
+                {
                     return 1;
                 }
             }

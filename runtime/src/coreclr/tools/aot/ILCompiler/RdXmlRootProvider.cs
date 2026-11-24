@@ -5,10 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
 using AssemblyName = System.Reflection.AssemblyName;
 
 namespace ILCompiler
@@ -33,11 +31,18 @@ namespace ILCompiler
         {
             var libraryOrApplication = _documentRoot.Elements().Single();
 
-            if (libraryOrApplication.Name.LocalName != "Library" && libraryOrApplication.Name.LocalName != "Application")
-                throw new NotSupportedException($"{libraryOrApplication.Name.LocalName} is not a supported top level Runtime Directive. Supported top level Runtime Directives are \"Library\" and \"Application\".");
+            if (
+                libraryOrApplication.Name.LocalName != "Library"
+                && libraryOrApplication.Name.LocalName != "Application"
+            )
+                throw new NotSupportedException(
+                    $"{libraryOrApplication.Name.LocalName} is not a supported top level Runtime Directive. Supported top level Runtime Directives are \"Library\" and \"Application\"."
+                );
 
             if (libraryOrApplication.Attributes().Any())
-                throw new NotSupportedException($"The {libraryOrApplication.Name.LocalName} Runtime Directive does not support any attributes");
+                throw new NotSupportedException(
+                    $"The {libraryOrApplication.Name.LocalName} Runtime Directive does not support any attributes"
+                );
 
             foreach (var element in libraryOrApplication.Elements())
             {
@@ -48,18 +53,27 @@ namespace ILCompiler
                         break;
 
                     default:
-                        throw new NotSupportedException($"\"{element.Name.LocalName}\" is not a supported Runtime Directive.");
+                        throw new NotSupportedException(
+                            $"\"{element.Name.LocalName}\" is not a supported Runtime Directive."
+                        );
                 }
             }
         }
 
-        private void ProcessAssemblyDirective(IRootingServiceProvider rootProvider, XElement assemblyElement)
+        private void ProcessAssemblyDirective(
+            IRootingServiceProvider rootProvider,
+            XElement assemblyElement
+        )
         {
             var assemblyNameAttribute = assemblyElement.Attribute("Name");
             if (assemblyNameAttribute == null)
-                throw new Exception("The \"Name\" attribute is required on the \"Assembly\" Runtime Directive.");
+                throw new Exception(
+                    "The \"Name\" attribute is required on the \"Assembly\" Runtime Directive."
+                );
 
-            ModuleDesc assembly = _context.ResolveAssembly(new AssemblyName(assemblyNameAttribute.Value));
+            ModuleDesc assembly = _context.ResolveAssembly(
+                new AssemblyName(assemblyNameAttribute.Value)
+            );
 
             rootProvider.RootModuleMetadata(assembly, "RD.XML root");
 
@@ -67,11 +81,18 @@ namespace ILCompiler
             if (dynamicDegreeAttribute != null)
             {
                 if (dynamicDegreeAttribute.Value != "Required All")
-                    throw new NotSupportedException($"\"{dynamicDegreeAttribute.Value}\" is not a supported value for the \"Dynamic\" attribute of the \"Assembly\" Runtime Directive. Supported values are \"Required All\".");
+                    throw new NotSupportedException(
+                        $"\"{dynamicDegreeAttribute.Value}\" is not a supported value for the \"Dynamic\" attribute of the \"Assembly\" Runtime Directive. Supported values are \"Required All\"."
+                    );
 
                 foreach (TypeDesc type in ((EcmaModule)assembly).GetAllTypes())
                 {
-                    RootingHelpers.TryRootType(rootProvider, type, rootBaseTypes: true, "RD.XML root");
+                    RootingHelpers.TryRootType(
+                        rootProvider,
+                        type,
+                        rootBaseTypes: true,
+                        "RD.XML root"
+                    );
                 }
             }
 
@@ -83,16 +104,24 @@ namespace ILCompiler
                         ProcessTypeDirective(rootProvider, assembly, element);
                         break;
                     default:
-                        throw new NotSupportedException($"\"{element.Name.LocalName}\" is not a supported Runtime Directive.");
+                        throw new NotSupportedException(
+                            $"\"{element.Name.LocalName}\" is not a supported Runtime Directive."
+                        );
                 }
             }
         }
 
-        private static void ProcessTypeDirective(IRootingServiceProvider rootProvider, ModuleDesc containingModule, XElement typeElement)
+        private static void ProcessTypeDirective(
+            IRootingServiceProvider rootProvider,
+            ModuleDesc containingModule,
+            XElement typeElement
+        )
         {
             var typeNameAttribute = typeElement.Attribute("Name");
             if (typeNameAttribute == null)
-                throw new Exception("The \"Name\" attribute is required on the \"Type\" Runtime Directive.");
+                throw new Exception(
+                    "The \"Name\" attribute is required on the \"Type\" Runtime Directive."
+                );
 
             string typeName = typeNameAttribute.Value;
             TypeDesc type = containingModule.GetTypeByCustomAttributeTypeName(typeName);
@@ -101,7 +130,9 @@ namespace ILCompiler
             if (dynamicDegreeAttribute != null)
             {
                 if (dynamicDegreeAttribute.Value != "Required All")
-                    throw new NotSupportedException($"\"{dynamicDegreeAttribute.Value}\" is not a supported value for the \"Dynamic\" attribute of the \"Type\" Runtime Directive. Supported values are \"Required All\".");
+                    throw new NotSupportedException(
+                        $"\"{dynamicDegreeAttribute.Value}\" is not a supported value for the \"Dynamic\" attribute of the \"Type\" Runtime Directive. Supported values are \"Required All\"."
+                    );
 
                 RootingHelpers.RootType(rootProvider, type, rootBaseTypes: true, "RD.XML root");
             }
@@ -110,7 +141,9 @@ namespace ILCompiler
             if (marshalStructureDegreeAttribute != null && type is DefType defType)
             {
                 if (marshalStructureDegreeAttribute.Value != "Required All")
-                    throw new NotSupportedException($"\"{marshalStructureDegreeAttribute.Value}\" is not a supported value for the \"MarshalStructure\" attribute of the \"Type\" Runtime Directive. Supported values are \"Required All\".");
+                    throw new NotSupportedException(
+                        $"\"{marshalStructureDegreeAttribute.Value}\" is not a supported value for the \"MarshalStructure\" attribute of the \"Type\" Runtime Directive. Supported values are \"Required All\"."
+                    );
 
                 rootProvider.RootStructMarshallingData(defType, "RD.XML root");
             }
@@ -119,7 +152,9 @@ namespace ILCompiler
             if (marshalDelegateDegreeAttribute != null && type.IsDelegate)
             {
                 if (marshalDelegateDegreeAttribute.Value != "Required All")
-                    throw new NotSupportedException($"\"{marshalDelegateDegreeAttribute.Value}\" is not a supported value for the \"MarshalDelegate\" attribute of the \"Type\" Runtime Directive. Supported values are \"Required All\".");
+                    throw new NotSupportedException(
+                        $"\"{marshalDelegateDegreeAttribute.Value}\" is not a supported value for the \"MarshalDelegate\" attribute of the \"Type\" Runtime Directive. Supported values are \"Required All\"."
+                    );
 
                 rootProvider.RootDelegateMarshallingData((DefType)type, "RD.XML root");
             }
@@ -132,16 +167,25 @@ namespace ILCompiler
                         ProcessMethodDirective(rootProvider, containingModule, type, element);
                         break;
                     default:
-                        throw new NotSupportedException($"\"{element.Name.LocalName}\" is not a supported Runtime Directive.");
+                        throw new NotSupportedException(
+                            $"\"{element.Name.LocalName}\" is not a supported Runtime Directive."
+                        );
                 }
             }
         }
 
-        private static void ProcessMethodDirective(IRootingServiceProvider rootProvider, ModuleDesc containingModule, TypeDesc containingType, XElement methodElement)
+        private static void ProcessMethodDirective(
+            IRootingServiceProvider rootProvider,
+            ModuleDesc containingModule,
+            TypeDesc containingType,
+            XElement methodElement
+        )
         {
             var methodNameAttribute = methodElement.Attribute("Name");
             if (methodNameAttribute == null)
-                throw new Exception("The \"Name\" attribute is required on the \"Method\" Runtime Directive.");
+                throw new Exception(
+                    "The \"Name\" attribute is required on the \"Method\" Runtime Directive."
+                );
 
             var parameter = new List<TypeDesc>();
             var instArgs = new List<TypeDesc>();
@@ -155,10 +199,14 @@ namespace ILCompiler
                         break;
                     case "GenericArgument":
                         string instArgName = element.Attribute("Name").Value;
-                        instArgs.Add(containingModule.GetTypeByCustomAttributeTypeName(instArgName));
+                        instArgs.Add(
+                            containingModule.GetTypeByCustomAttributeTypeName(instArgName)
+                        );
                         break;
                     default:
-                        throw new NotSupportedException($"\"{element.Name.LocalName}\" is not a supported Runtime Directive.");
+                        throw new NotSupportedException(
+                            $"\"{element.Name.LocalName}\" is not a supported Runtime Directive."
+                        );
                 }
             }
 
@@ -202,9 +250,13 @@ namespace ILCompiler
 
             if (!rootedAnyMethod)
             {
-                string parameterString = parameter.Count > 0 ? "(" + string.Join(", ", parameter) + ")" : null;
-                string instantiationString = instArgs.Count > 0 ? "<" + string.Join(", ", instArgs) + ">" : null;
-                throw new Exception($"Could not find Method(s) {containingType}.{methodName}{instantiationString}{parameterString} specified by a Runtime Directive.");
+                string parameterString =
+                    parameter.Count > 0 ? "(" + string.Join(", ", parameter) + ")" : null;
+                string instantiationString =
+                    instArgs.Count > 0 ? "<" + string.Join(", ", instArgs) + ">" : null;
+                throw new Exception(
+                    $"Could not find Method(s) {containingType}.{methodName}{instantiationString}{parameterString} specified by a Runtime Directive."
+                );
             }
         }
     }

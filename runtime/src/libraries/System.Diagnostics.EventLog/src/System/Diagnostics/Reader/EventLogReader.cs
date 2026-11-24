@@ -26,10 +26,12 @@ namespace System.Diagnostics.Eventing.Reader
         /// events buffer holds batched event (handles).
         /// </summary>
         private IntPtr[] _eventsBuffer;
+
         /// <summary>
         /// The current index where the function GetNextEvent is (inside the eventsBuffer).
         /// </summary>
         private int _currentIndex;
+
         /// <summary>
         /// The number of events read from the batch into the eventsBuffer
         /// </summary>
@@ -48,19 +50,13 @@ namespace System.Diagnostics.Eventing.Reader
         private readonly ProviderMetadataCachedInformation _cachedMetadataInformation;
 
         public EventLogReader(string path)
-            : this(new EventLogQuery(path, PathType.LogName), null)
-        {
-        }
+            : this(new EventLogQuery(path, PathType.LogName), null) { }
 
         public EventLogReader(string path, PathType pathType)
-            : this(new EventLogQuery(path, pathType), null)
-        {
-        }
+            : this(new EventLogQuery(path, pathType), null) { }
 
         public EventLogReader(EventLogQuery eventQuery)
-            : this(eventQuery, null)
-        {
-        }
+            : this(eventQuery, null) { }
 
         public EventLogReader(EventLogQuery eventQuery, EventBookmark bookmark)
         {
@@ -70,7 +66,11 @@ namespace System.Diagnostics.Eventing.Reader
             if (eventQuery.ThePathType == PathType.FilePath)
                 logfile = eventQuery.Path;
 
-            _cachedMetadataInformation = new ProviderMetadataCachedInformation(eventQuery.Session, logfile, 50);
+            _cachedMetadataInformation = new ProviderMetadataCachedInformation(
+                eventQuery.Session,
+                logfile,
+                50
+            );
 
             // Explicit data
             _eventQuery = eventQuery;
@@ -95,9 +95,12 @@ namespace System.Diagnostics.Eventing.Reader
             if (_eventQuery.TolerateQueryErrors)
                 flag |= (int)UnsafeNativeMethods.EvtQueryFlags.EvtQueryTolerateQueryErrors;
 
-            _handle = NativeWrapper.EvtQuery(_eventQuery.Session.Handle,
-                _eventQuery.Path, _eventQuery.Query,
-                flag);
+            _handle = NativeWrapper.EvtQuery(
+                _eventQuery.Session.Handle,
+                _eventQuery.Path,
+                _eventQuery.Query,
+                flag
+            );
 
             EventLogHandle bookmarkHandle = EventLogRecord.GetBookmarkHandleFromBookmark(bookmark);
 
@@ -105,17 +108,20 @@ namespace System.Diagnostics.Eventing.Reader
             {
                 using (bookmarkHandle)
                 {
-                    NativeWrapper.EvtSeek(_handle, 1, bookmarkHandle, 0, UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToBookmark);
+                    NativeWrapper.EvtSeek(
+                        _handle,
+                        1,
+                        bookmarkHandle,
+                        0,
+                        UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToBookmark
+                    );
                 }
             }
         }
 
         public int BatchSize
         {
-            get
-            {
-                return _batchSize;
-            }
+            get { return _batchSize; }
             set
             {
                 if (value < 1)
@@ -135,7 +141,14 @@ namespace System.Diagnostics.Eventing.Reader
                 _eventsBuffer = new IntPtr[_batchSize];
 
             int newEventCount = 0;
-            bool results = NativeWrapper.EvtNext(_handle, _batchSize, _eventsBuffer, timeout, 0, ref newEventCount);
+            bool results = NativeWrapper.EvtNext(
+                _handle,
+                _batchSize,
+                _eventsBuffer,
+                timeout,
+                0,
+                ref newEventCount
+            );
 
             if (!results)
             {
@@ -171,7 +184,11 @@ namespace System.Diagnostics.Eventing.Reader
                 }
             }
 
-            EventLogRecord eventInstance = new EventLogRecord(new EventLogHandle(_eventsBuffer[_currentIndex], true), _eventQuery.Session, _cachedMetadataInformation);
+            EventLogRecord eventInstance = new EventLogRecord(
+                new EventLogHandle(_eventsBuffer[_currentIndex], true),
+                _eventQuery.Session,
+                _cachedMetadataInformation
+            );
             _currentIndex++;
             return eventInstance;
         }
@@ -222,7 +239,13 @@ namespace System.Diagnostics.Eventing.Reader
 
             SeekReset();
 
-            NativeWrapper.EvtSeek(_handle, offset, EventLogHandle.Zero, 0, UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToCurrent);
+            NativeWrapper.EvtSeek(
+                _handle,
+                offset,
+                EventLogHandle.Zero,
+                0,
+                UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToCurrent
+            );
         }
 
         public void Seek(EventBookmark bookmark)
@@ -235,9 +258,19 @@ namespace System.Diagnostics.Eventing.Reader
             ArgumentNullException.ThrowIfNull(bookmark);
 
             SeekReset();
-            using (EventLogHandle bookmarkHandle = EventLogRecord.GetBookmarkHandleFromBookmark(bookmark))
+            using (
+                EventLogHandle bookmarkHandle = EventLogRecord.GetBookmarkHandleFromBookmark(
+                    bookmark
+                )
+            )
             {
-                NativeWrapper.EvtSeek(_handle, offset, bookmarkHandle, 0, UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToBookmark);
+                NativeWrapper.EvtSeek(
+                    _handle,
+                    offset,
+                    bookmarkHandle,
+                    0,
+                    UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToBookmark
+                );
             }
         }
 
@@ -248,13 +281,25 @@ namespace System.Diagnostics.Eventing.Reader
                 case SeekOrigin.Begin:
 
                     SeekReset();
-                    NativeWrapper.EvtSeek(_handle, offset, EventLogHandle.Zero, 0, UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToFirst);
+                    NativeWrapper.EvtSeek(
+                        _handle,
+                        offset,
+                        EventLogHandle.Zero,
+                        0,
+                        UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToFirst
+                    );
                     return;
 
                 case SeekOrigin.End:
 
                     SeekReset();
-                    NativeWrapper.EvtSeek(_handle, offset, EventLogHandle.Zero, 0, UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToLast);
+                    NativeWrapper.EvtSeek(
+                        _handle,
+                        offset,
+                        EventLogHandle.Zero,
+                        0,
+                        UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToLast
+                    );
                     return;
 
                 case SeekOrigin.Current:
@@ -306,8 +351,16 @@ namespace System.Diagnostics.Eventing.Reader
                 if (queryHandle.IsInvalid)
                     throw new InvalidOperationException();
 
-                string[] channelNames = (string[])NativeWrapper.EvtGetQueryInfo(queryHandle, UnsafeNativeMethods.EvtQueryPropertyId.EvtQueryNames);
-                int[] errorStatuses = (int[])NativeWrapper.EvtGetQueryInfo(queryHandle, UnsafeNativeMethods.EvtQueryPropertyId.EvtQueryStatuses);
+                string[] channelNames = (string[])
+                    NativeWrapper.EvtGetQueryInfo(
+                        queryHandle,
+                        UnsafeNativeMethods.EvtQueryPropertyId.EvtQueryNames
+                    );
+                int[] errorStatuses = (int[])
+                    NativeWrapper.EvtGetQueryInfo(
+                        queryHandle,
+                        UnsafeNativeMethods.EvtQueryPropertyId.EvtQueryStatuses
+                    );
 
                 if (channelNames.Length != errorStatuses.Length)
                     throw new InvalidOperationException();

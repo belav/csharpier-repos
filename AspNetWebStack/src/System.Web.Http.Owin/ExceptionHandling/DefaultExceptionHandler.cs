@@ -15,14 +15,20 @@ namespace System.Web.Http.Owin.ExceptionHandling
 {
     internal class DefaultExceptionHandler : IExceptionHandler
     {
-        public Task HandleAsync(ExceptionHandlerContext context, CancellationToken cancellationToken)
+        public Task HandleAsync(
+            ExceptionHandlerContext context,
+            CancellationToken cancellationToken
+        )
         {
             Handle(context);
             return TaskHelpers.Completed();
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope",
-            Justification = "We already shipped this code; avoiding even minor breaking changes in error handling.")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "We already shipped this code; avoiding even minor breaking changes in error handling."
+        )]
         private static void Handle(ExceptionHandlerContext context)
         {
             if (context == null)
@@ -37,12 +43,22 @@ namespace System.Web.Http.Owin.ExceptionHandling
 
             if (request == null)
             {
-                throw new ArgumentException(Error.Format(OwinResources.TypePropertyMustNotBeNull,
-                    typeof(ExceptionContext).Name, "Request"), "context");
+                throw new ArgumentException(
+                    Error.Format(
+                        OwinResources.TypePropertyMustNotBeNull,
+                        typeof(ExceptionContext).Name,
+                        "Request"
+                    ),
+                    "context"
+                );
             }
 
-            context.Result = new ResponseMessageResult(request.CreateErrorResponse(HttpStatusCode.InternalServerError,
-                exceptionContext.Exception));
+            context.Result = new ResponseMessageResult(
+                request.CreateErrorResponse(
+                    HttpStatusCode.InternalServerError,
+                    exceptionContext.Exception
+                )
+            );
         }
     }
 }

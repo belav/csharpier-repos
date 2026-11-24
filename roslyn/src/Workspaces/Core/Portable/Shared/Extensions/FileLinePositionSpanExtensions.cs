@@ -11,12 +11,16 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
     internal static class FileLinePositionSpanExtensions
     {
         /// <inheritdoc cref="LinePositionSpanExtensions.GetClampedTextSpan"/>
-        public static TextSpan GetClampedTextSpan(this FileLinePositionSpan span, SourceText text)
-            => span.Span.GetClampedTextSpan(text);
+        public static TextSpan GetClampedTextSpan(
+            this FileLinePositionSpan span,
+            SourceText text
+        ) => span.Span.GetClampedTextSpan(text);
 
         /// <inheritdoc cref="LinePositionSpanExtensions.GetClampedSpan"/>
-        public static LinePositionSpan GetClampedSpan(this FileLinePositionSpan span, SourceText text)
-            => span.Span.GetClampedSpan(text);
+        public static LinePositionSpan GetClampedSpan(
+            this FileLinePositionSpan span,
+            SourceText text
+        ) => span.Span.GetClampedSpan(text);
     }
 
     internal static class LinePositionSpanExtensions

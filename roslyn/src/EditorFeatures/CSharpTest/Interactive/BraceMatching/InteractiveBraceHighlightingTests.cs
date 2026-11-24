@@ -27,24 +27,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
     [Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
     public class InteractiveBraceHighlightingTests
     {
-        private static IEnumerable<T> Enumerable<T>(params T[] array)
-            => array;
+        private static IEnumerable<T> Enumerable<T>(params T[] array) => array;
 
         private static async Task<IEnumerable<ITagSpan<BraceHighlightTag>>> ProduceTagsAsync(
             TestWorkspace workspace,
             ITextBuffer buffer,
-            int position)
+            int position
+        )
         {
             var producer = new BraceHighlightingViewTaggerProvider(
                 workspace.ExportProvider.GetExportedValue<IThreadingContext>(),
                 workspace.GetService<IBraceMatchingService>(),
                 workspace.GetService<IGlobalOptionService>(),
                 visibilityTracker: null,
-                AsynchronousOperationListenerProvider.NullProvider);
+                AsynchronousOperationListenerProvider.NullProvider
+            );
 
             var context = new TaggerContext<BraceHighlightTag>(
                 buffer.CurrentSnapshot.GetRelatedDocumentsWithChanges().FirstOrDefault(),
-                buffer.CurrentSnapshot, new SnapshotPoint(buffer.CurrentSnapshot, position));
+                buffer.CurrentSnapshot,
+                new SnapshotPoint(buffer.CurrentSnapshot, position)
+            );
             await producer.GetTestAccessor().ProduceTagsAsync(context);
 
             return context.TagSpans;
@@ -63,7 +66,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
 
             // At open curly
             result = await ProduceTagsAsync(workspace, buffer, 15);
-            Assert.True(result.Select(ts => ts.Span.Span).SetEquals(Enumerable(Span.FromBounds(15, 16), Span.FromBounds(18, 19))));
+            Assert.True(
+                result
+                    .Select(ts => ts.Span.Span)
+                    .SetEquals(Enumerable(Span.FromBounds(15, 16), Span.FromBounds(18, 19)))
+            );
 
             // After open curly
             result = await ProduceTagsAsync(workspace, buffer, 16);
@@ -75,7 +82,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
 
             // After close curly
             result = await ProduceTagsAsync(workspace, buffer, 19);
-            Assert.True(result.Select(ts => ts.Span.Span).SetEquals(Enumerable(Span.FromBounds(15, 16), Span.FromBounds(18, 19))));
+            Assert.True(
+                result
+                    .Select(ts => ts.Span.Span)
+                    .SetEquals(Enumerable(Span.FromBounds(15, 16), Span.FromBounds(18, 19)))
+            );
         }
 
         [WpfFact]
@@ -87,7 +98,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
 
             // Before open curly
             var result = await ProduceTagsAsync(workspace, buffer, 35);
-            Assert.True(result.Select(ts => ts.Span.Span).SetEquals(Enumerable(Span.FromBounds(35, 36), Span.FromBounds(36, 37))));
+            Assert.True(
+                result
+                    .Select(ts => ts.Span.Span)
+                    .SetEquals(Enumerable(Span.FromBounds(35, 36), Span.FromBounds(36, 37)))
+            );
 
             // At open curly
             result = await ProduceTagsAsync(workspace, buffer, 36);
@@ -95,8 +110,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
 
             // After open curly
             result = await ProduceTagsAsync(workspace, buffer, 37);
-            Assert.True(result.Select(ts => ts.Span.Span).SetEquals(
-                Enumerable(Span.FromBounds(35, 36), Span.FromBounds(36, 37), Span.FromBounds(37, 38), Span.FromBounds(38, 39))));
+            Assert.True(
+                result
+                    .Select(ts => ts.Span.Span)
+                    .SetEquals(
+                        Enumerable(
+                            Span.FromBounds(35, 36),
+                            Span.FromBounds(36, 37),
+                            Span.FromBounds(37, 38),
+                            Span.FromBounds(38, 39)
+                        )
+                    )
+            );
 
             // At close curly
             result = await ProduceTagsAsync(workspace, buffer, 38);
@@ -110,17 +135,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         [WpfFact]
         public async Task TestAngles()
         {
-            var code = "/// <summary>Goo</summary>\r\npublic class C<T> {\r\n  void Goo() {\r\n    bool a = b < c;\r\n    bool d = e > f;\r\n  }\r\n} ";
+            var code =
+                "/// <summary>Goo</summary>\r\npublic class C<T> {\r\n  void Goo() {\r\n    bool a = b < c;\r\n    bool d = e > f;\r\n  }\r\n} ";
             using var workspace = TestWorkspace.CreateCSharp(code, parseOptions: Options.Script);
             var buffer = workspace.Documents.First().GetTextBuffer();
 
             // Before open angle of generic
             var result = await ProduceTagsAsync(workspace, buffer, 42);
-            Assert.True(result.Select(ts => ts.Span.Span).SetEquals(Enumerable(Span.FromBounds(42, 43), Span.FromBounds(44, 45))));
+            Assert.True(
+                result
+                    .Select(ts => ts.Span.Span)
+                    .SetEquals(Enumerable(Span.FromBounds(42, 43), Span.FromBounds(44, 45)))
+            );
 
             // After close angle of generic
             result = await ProduceTagsAsync(workspace, buffer, 45);
-            Assert.True(result.Select(ts => ts.Span.Span).SetEquals(Enumerable(Span.FromBounds(42, 43), Span.FromBounds(44, 45))));
+            Assert.True(
+                result
+                    .Select(ts => ts.Span.Span)
+                    .SetEquals(Enumerable(Span.FromBounds(42, 43), Span.FromBounds(44, 45)))
+            );
 
             async Task assertNoTags(int position, char expectedChar)
             {
@@ -155,7 +189,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         [WpfFact]
         public async Task TestSwitch()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M(int variable)
@@ -172,7 +207,10 @@ class C
 
             // At switch open paren
             var result = await ProduceTagsAsync(workspace, buffer, 62);
-            AssertEx.Equal(Enumerable(new Span(62, 1), new Span(71, 1)), result.Select(ts => ts.Span.Span).OrderBy(s => s.Start));
+            AssertEx.Equal(
+                Enumerable(new Span(62, 1), new Span(71, 1)),
+                result.Select(ts => ts.Span.Span).OrderBy(s => s.Start)
+            );
 
             // After switch open paren
             result = await ProduceTagsAsync(workspace, buffer, 83);
@@ -184,11 +222,17 @@ class C
 
             // After switch close paren
             result = await ProduceTagsAsync(workspace, buffer, 72);
-            AssertEx.Equal(Enumerable(new Span(62, 1), new Span(71, 1)), result.Select(ts => ts.Span.Span).OrderBy(s => s.Start));
+            AssertEx.Equal(
+                Enumerable(new Span(62, 1), new Span(71, 1)),
+                result.Select(ts => ts.Span.Span).OrderBy(s => s.Start)
+            );
 
             // At switch open curly
             result = await ProduceTagsAsync(workspace, buffer, 82);
-            AssertEx.Equal(Enumerable(new Span(82, 1), new Span(138, 1)), result.Select(ts => ts.Span.Span).OrderBy(s => s.Start));
+            AssertEx.Equal(
+                Enumerable(new Span(82, 1), new Span(138, 1)),
+                result.Select(ts => ts.Span.Span).OrderBy(s => s.Start)
+            );
 
             // After switch open curly
             result = await ProduceTagsAsync(workspace, buffer, 83);
@@ -200,7 +244,10 @@ class C
 
             // After switch close curly
             result = await ProduceTagsAsync(workspace, buffer, 139);
-            AssertEx.Equal(Enumerable(new Span(82, 1), new Span(138, 1)), result.Select(ts => ts.Span.Span).OrderBy(s => s.Start));
+            AssertEx.Equal(
+                Enumerable(new Span(82, 1), new Span(138, 1)),
+                result.Select(ts => ts.Span.Span).OrderBy(s => s.Start)
+            );
         }
     }
 }

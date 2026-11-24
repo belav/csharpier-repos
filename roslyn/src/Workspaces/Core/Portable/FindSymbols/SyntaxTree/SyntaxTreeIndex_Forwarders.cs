@@ -10,29 +10,43 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 {
     internal sealed partial class SyntaxTreeIndex
     {
-        public bool ProbablyContainsIdentifier(string identifier) => _identifierInfo.ProbablyContainsIdentifier(identifier);
-        public bool ProbablyContainsEscapedIdentifier(string identifier) => _identifierInfo.ProbablyContainsEscapedIdentifier(identifier);
+        public bool ProbablyContainsIdentifier(string identifier) =>
+            _identifierInfo.ProbablyContainsIdentifier(identifier);
 
-        public bool ContainsPredefinedType(PredefinedType type) => _contextInfo.ContainsPredefinedType(type);
-        public bool ContainsPredefinedOperator(PredefinedOperator op) => _contextInfo.ContainsPredefinedOperator(op);
+        public bool ProbablyContainsEscapedIdentifier(string identifier) =>
+            _identifierInfo.ProbablyContainsEscapedIdentifier(identifier);
 
-        public bool ProbablyContainsStringValue(string value) => _literalInfo.ProbablyContainsStringValue(value);
-        public bool ProbablyContainsInt64Value(long value) => _literalInfo.ProbablyContainsInt64Value(value);
+        public bool ContainsPredefinedType(PredefinedType type) =>
+            _contextInfo.ContainsPredefinedType(type);
+
+        public bool ContainsPredefinedOperator(PredefinedOperator op) =>
+            _contextInfo.ContainsPredefinedOperator(op);
+
+        public bool ProbablyContainsStringValue(string value) =>
+            _literalInfo.ProbablyContainsStringValue(value);
+
+        public bool ProbablyContainsInt64Value(long value) =>
+            _literalInfo.ProbablyContainsInt64Value(value);
 
         public bool ContainsAwait => _contextInfo.ContainsAwait;
-        public bool ContainsBaseConstructorInitializer => _contextInfo.ContainsBaseConstructorInitializer;
+        public bool ContainsBaseConstructorInitializer =>
+            _contextInfo.ContainsBaseConstructorInitializer;
         public bool ContainsConversion => _contextInfo.ContainsConversion;
         public bool ContainsDeconstruction => _contextInfo.ContainsDeconstruction;
-        public bool ContainsExplicitOrImplicitElementAccessExpression => _contextInfo.ContainsExplicitOrImplicitElementAccessExpression;
+        public bool ContainsExplicitOrImplicitElementAccessExpression =>
+            _contextInfo.ContainsExplicitOrImplicitElementAccessExpression;
         public bool ContainsForEachStatement => _contextInfo.ContainsForEachStatement;
         public bool ContainsGlobalKeyword => _contextInfo.ContainsGlobalKeyword;
-        public bool ContainsGlobalSuppressMessageAttribute => _contextInfo.ContainsGlobalSuppressMessageAttribute;
+        public bool ContainsGlobalSuppressMessageAttribute =>
+            _contextInfo.ContainsGlobalSuppressMessageAttribute;
         public bool ContainsImplicitObjectCreation => _contextInfo.ContainsImplicitObjectCreation;
         public bool ContainsIndexerMemberCref => _contextInfo.ContainsIndexerMemberCref;
         public bool ContainsLockStatement => _contextInfo.ContainsLockStatement;
         public bool ContainsQueryExpression => _contextInfo.ContainsQueryExpression;
-        public bool ContainsThisConstructorInitializer => _contextInfo.ContainsThisConstructorInitializer;
-        public bool ContainsTupleExpressionOrTupleType => _contextInfo.ContainsTupleExpressionOrTupleType;
+        public bool ContainsThisConstructorInitializer =>
+            _contextInfo.ContainsThisConstructorInitializer;
+        public bool ContainsTupleExpressionOrTupleType =>
+            _contextInfo.ContainsTupleExpressionOrTupleType;
         public bool ContainsUsingStatement => _contextInfo.ContainsUsingStatement;
         public bool ContainsCollectionInitializer => _contextInfo.ContainsCollectionInitializer;
 

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public static SourceEnumConstantSymbol CreateExplicitValuedConstant(
             SourceMemberContainerTypeSymbol containingEnum,
             EnumMemberDeclarationSyntax syntax,
-            BindingDiagnosticBag diagnostics)
+            BindingDiagnosticBag diagnostics
+        )
         {
             return new ExplicitValuedEnumConstantSymbol(containingEnum, syntax, diagnostics);
         }
@@ -31,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             EnumMemberDeclarationSyntax syntax,
             SourceEnumConstantSymbol otherConstant,
             int otherConstantOffset,
-            BindingDiagnosticBag diagnostics)
+            BindingDiagnosticBag diagnostics
+        )
         {
             if ((object)otherConstant == null)
             {
@@ -41,16 +43,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             else
             {
                 Debug.Assert(otherConstantOffset > 0);
-                return new ImplicitValuedEnumConstantSymbol(containingEnum, syntax, otherConstant, (uint)otherConstantOffset, diagnostics);
+                return new ImplicitValuedEnumConstantSymbol(
+                    containingEnum,
+                    syntax,
+                    otherConstant,
+                    (uint)otherConstantOffset,
+                    diagnostics
+                );
             }
         }
 
-        protected SourceEnumConstantSymbol(SourceMemberContainerTypeSymbol containingEnum, EnumMemberDeclarationSyntax syntax, BindingDiagnosticBag diagnostics)
-            : base(containingEnum, syntax.Identifier.ValueText, syntax.GetReference(), syntax.Identifier.Span)
+        protected SourceEnumConstantSymbol(
+            SourceMemberContainerTypeSymbol containingEnum,
+            EnumMemberDeclarationSyntax syntax,
+            BindingDiagnosticBag diagnostics
+        )
+            : base(
+                containingEnum,
+                syntax.Identifier.ValueText,
+                syntax.GetReference(),
+                syntax.Identifier.Span
+            )
         {
             if (this.Name == WellKnownMemberNames.EnumBackingFieldName)
             {
-                diagnostics.Add(ErrorCode.ERR_ReservedEnumerator, this.ErrorLocation, WellKnownMemberNames.EnumBackingFieldName);
+                diagnostics.Add(
+                    ErrorCode.ERR_ReservedEnumerator,
+                    this.ErrorLocation,
+                    WellKnownMemberNames.EnumBackingFieldName
+                );
             }
         }
 
@@ -63,26 +84,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override Symbol AssociatedSymbol
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         protected sealed override DeclarationModifiers Modifiers
         {
             get
             {
-                return DeclarationModifiers.Const | DeclarationModifiers.Static | DeclarationModifiers.Public;
+                return DeclarationModifiers.Const
+                    | DeclarationModifiers.Static
+                    | DeclarationModifiers.Public;
             }
         }
 
         public new EnumMemberDeclarationSyntax SyntaxNode
         {
-            get
-            {
-                return (EnumMemberDeclarationSyntax)base.SyntaxNode;
-            }
+            get { return (EnumMemberDeclarationSyntax)base.SyntaxNode; }
         }
 
         protected override SyntaxList<AttributeListSyntax> AttributeDeclarationSyntaxList
@@ -98,7 +115,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal sealed override void ForceComplete(SourceLocation locationOpt, CancellationToken cancellationToken)
+        internal sealed override void ForceComplete(
+            SourceLocation locationOpt,
+            CancellationToken cancellationToken
+        )
         {
             while (true)
             {
@@ -120,7 +140,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         break;
 
                     case CompletionPart.ConstantValue:
-                        GetConstantValue(ConstantFieldsInProgress.Empty, earlyDecodingWellKnownAttributes: false);
+                        GetConstantValue(
+                            ConstantFieldsInProgress.Empty,
+                            earlyDecodingWellKnownAttributes: false
+                        );
                         break;
 
                     case CompletionPart.None:
@@ -141,12 +164,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             public ZeroValuedEnumConstantSymbol(
                 SourceMemberContainerTypeSymbol containingEnum,
                 EnumMemberDeclarationSyntax syntax,
-                BindingDiagnosticBag diagnostics)
-                : base(containingEnum, syntax, diagnostics)
-            {
-            }
+                BindingDiagnosticBag diagnostics
+            )
+                : base(containingEnum, syntax, diagnostics) { }
 
-            protected override ConstantValue MakeConstantValue(HashSet<SourceFieldSymbolWithSyntaxReference> dependencies, bool earlyDecodingWellKnownAttributes, BindingDiagnosticBag diagnostics)
+            protected override ConstantValue MakeConstantValue(
+                HashSet<SourceFieldSymbolWithSyntaxReference> dependencies,
+                bool earlyDecodingWellKnownAttributes,
+                BindingDiagnosticBag diagnostics
+            )
             {
                 var constantType = this.ContainingType.EnumUnderlyingType.SpecialType;
                 return Microsoft.CodeAnalysis.ConstantValue.Default(constantType);
@@ -158,18 +184,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             public ExplicitValuedEnumConstantSymbol(
                 SourceMemberContainerTypeSymbol containingEnum,
                 EnumMemberDeclarationSyntax syntax,
-                BindingDiagnosticBag diagnostics) :
-                base(containingEnum, syntax, diagnostics)
+                BindingDiagnosticBag diagnostics
+            )
+                : base(containingEnum, syntax, diagnostics)
             {
                 Debug.Assert(syntax.EqualsValue != null);
             }
 
-            protected override ConstantValue MakeConstantValue(HashSet<SourceFieldSymbolWithSyntaxReference> dependencies, bool earlyDecodingWellKnownAttributes, BindingDiagnosticBag diagnostics)
+            protected override ConstantValue MakeConstantValue(
+                HashSet<SourceFieldSymbolWithSyntaxReference> dependencies,
+                bool earlyDecodingWellKnownAttributes,
+                BindingDiagnosticBag diagnostics
+            )
             {
                 var syntax = this.SyntaxNode;
                 Debug.Assert(syntax.EqualsValue != null);
 
-                return ConstantValueUtils.EvaluateFieldConstant(this, syntax.EqualsValue, dependencies, earlyDecodingWellKnownAttributes, diagnostics);
+                return ConstantValueUtils.EvaluateFieldConstant(
+                    this,
+                    syntax.EqualsValue,
+                    dependencies,
+                    earlyDecodingWellKnownAttributes,
+                    diagnostics
+                );
             }
         }
 
@@ -183,8 +220,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 EnumMemberDeclarationSyntax syntax,
                 SourceEnumConstantSymbol otherConstant,
                 uint otherConstantOffset,
-                BindingDiagnosticBag diagnostics) :
-                base(containingEnum, syntax, diagnostics)
+                BindingDiagnosticBag diagnostics
+            )
+                : base(containingEnum, syntax, diagnostics)
             {
                 Debug.Assert((object)otherConstant != null);
                 Debug.Assert(otherConstantOffset > 0);
@@ -193,9 +231,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 _otherConstantOffset = otherConstantOffset;
             }
 
-            protected override ConstantValue MakeConstantValue(HashSet<SourceFieldSymbolWithSyntaxReference> dependencies, bool earlyDecodingWellKnownAttributes, BindingDiagnosticBag diagnostics)
+            protected override ConstantValue MakeConstantValue(
+                HashSet<SourceFieldSymbolWithSyntaxReference> dependencies,
+                bool earlyDecodingWellKnownAttributes,
+                BindingDiagnosticBag diagnostics
+            )
             {
-                var otherValue = _otherConstant.GetConstantValue(new ConstantFieldsInProgress(this, dependencies), earlyDecodingWellKnownAttributes);
+                var otherValue = _otherConstant.GetConstantValue(
+                    new ConstantFieldsInProgress(this, dependencies),
+                    earlyDecodingWellKnownAttributes
+                );
                 // Value may be Unset if there are dependencies
                 // that must be evaluated first.
                 if (otherValue == Microsoft.CodeAnalysis.ConstantValue.Unset)
@@ -207,12 +252,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return Microsoft.CodeAnalysis.ConstantValue.Bad;
                 }
                 ConstantValue value;
-                var overflowKind = EnumConstantHelper.OffsetValue(otherValue, _otherConstantOffset, out value);
+                var overflowKind = EnumConstantHelper.OffsetValue(
+                    otherValue,
+                    _otherConstantOffset,
+                    out value
+                );
                 if (overflowKind == EnumOverflowKind.OverflowReport)
                 {
                     // Report an error if the value is immediately
                     // outside the range, but not otherwise.
-                    diagnostics.Add(ErrorCode.ERR_EnumeratorOverflow, this.GetFirstLocation(), this);
+                    diagnostics.Add(
+                        ErrorCode.ERR_EnumeratorOverflow,
+                        this.GetFirstLocation(),
+                        this
+                    );
                 }
                 return value;
             }

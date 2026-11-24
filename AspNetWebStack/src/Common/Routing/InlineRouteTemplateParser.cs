@@ -39,9 +39,15 @@ namespace System.Web.Mvc.Routing
 
         private static readonly Regex _parameterRegex = new Regex(
             "{" + ParameterNameRegex + ConstraintRegex + DefaultValueRegex + "}",
-            RegexOptions.Compiled);
+            RegexOptions.Compiled
+        );
 
-        public static string ParseRouteTemplate(string routeTemplate, IDictionary<string, object> defaults, IDictionary<string, object> constraints, IInlineConstraintResolver constraintResolver)
+        public static string ParseRouteTemplate(
+            string routeTemplate,
+            IDictionary<string, object> defaults,
+            IDictionary<string, object> constraints,
+            IInlineConstraintResolver constraintResolver
+        )
         {
             Contract.Assert(defaults != null);
             Contract.Assert(constraints != null);
@@ -72,7 +78,11 @@ namespace System.Web.Mvc.Routing
 #else
                 bool isOptional = defaultValue == UrlParameter.Optional;
 #endif
-                var constraint = GetInlineConstraint(constraintGroup, isOptional, constraintResolver);
+                var constraint = GetInlineConstraint(
+                    constraintGroup,
+                    isOptional,
+                    constraintResolver
+                );
                 if (constraint != null)
                 {
                     constraints.Add(parameterName, constraint);
@@ -108,9 +118,17 @@ namespace System.Web.Mvc.Routing
         }
 
 #if ASPNETWEBAPI
-        private static IHttpRouteConstraint GetInlineConstraint(Group constraintGroup, bool isOptional, IInlineConstraintResolver constraintResolver)
+        private static IHttpRouteConstraint GetInlineConstraint(
+            Group constraintGroup,
+            bool isOptional,
+            IInlineConstraintResolver constraintResolver
+        )
 #else
-        private static IRouteConstraint GetInlineConstraint(Group constraintGroup, bool isOptional, IInlineConstraintResolver constraintResolver)
+        private static IRouteConstraint GetInlineConstraint(
+            Group constraintGroup,
+            bool isOptional,
+            IInlineConstraintResolver constraintResolver
+        )
 #endif
         {
 #if ASPNETWEBAPI
@@ -124,16 +142,21 @@ namespace System.Web.Mvc.Routing
                 var constraint = constraintResolver.ResolveConstraint(inlineConstraint);
                 if (constraint == null)
                 {
-                    throw Error.InvalidOperation(ErrorResources.HttpRouteBuilder_CouldNotResolveConstraint, constraintResolver.GetType().Name, inlineConstraint);
+                    throw Error.InvalidOperation(
+                        ErrorResources.HttpRouteBuilder_CouldNotResolveConstraint,
+                        constraintResolver.GetType().Name,
+                        inlineConstraint
+                    );
                 }
                 parameterConstraints.Add(constraint);
             }
 
             if (parameterConstraints.Count > 0)
             {
-                var constraint = parameterConstraints.Count == 1 ?
-                    parameterConstraints[0] :
-                    new CompoundRouteConstraint(parameterConstraints);
+                var constraint =
+                    parameterConstraints.Count == 1
+                        ? parameterConstraints[0]
+                        : new CompoundRouteConstraint(parameterConstraints);
 
                 if (isOptional)
                 {

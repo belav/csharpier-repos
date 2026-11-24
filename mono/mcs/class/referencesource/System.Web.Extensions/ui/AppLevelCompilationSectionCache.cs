@@ -3,8 +3,9 @@
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------------
- 
-namespace System.Web.UI {
+
+namespace System.Web.UI
+{
     using System;
     using System.Configuration;
     using System.Security;
@@ -13,24 +14,27 @@ namespace System.Web.UI {
 
     // The compilation section can be defined below the application level, but ScriptManager only considers the
     // application-level debug setting.
-    internal sealed class AppLevelCompilationSectionCache : ICompilationSection {
-        private static readonly AppLevelCompilationSectionCache _instance = new AppLevelCompilationSectionCache();
+    internal sealed class AppLevelCompilationSectionCache : ICompilationSection
+    {
+        private static readonly AppLevelCompilationSectionCache _instance =
+            new AppLevelCompilationSectionCache();
 
         // Value is cached statically, because AppLevelCompilationSectionCache is a Singleton.
         private bool? _debug;
 
-        private AppLevelCompilationSectionCache() {
+        private AppLevelCompilationSectionCache() { }
+
+        public static AppLevelCompilationSectionCache Instance
+        {
+            get { return _instance; }
         }
 
-        public static AppLevelCompilationSectionCache Instance {
-            get {
-                return _instance;
-            }
-        }
-
-        public bool Debug {
-            get {
-                if (_debug == null) {
+        public bool Debug
+        {
+            get
+            {
+                if (_debug == null)
+                {
                     _debug = GetDebugFromConfig();
                 }
                 return _debug.Value;
@@ -38,12 +42,13 @@ namespace System.Web.UI {
         }
 
         [
-        ConfigurationPermission(SecurityAction.Assert, Unrestricted = true),
-        SecuritySafeCritical(),
+            ConfigurationPermission(SecurityAction.Assert, Unrestricted = true),
+            SecuritySafeCritical(),
         ]
-        private static bool GetDebugFromConfig() {
-            CompilationSection section =
-                (CompilationSection)WebConfigurationManager.GetWebApplicationSection("system.web/compilation");
+        private static bool GetDebugFromConfig()
+        {
+            CompilationSection section = (CompilationSection)
+                WebConfigurationManager.GetWebApplicationSection("system.web/compilation");
             return section.Debug;
         }
     }

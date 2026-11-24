@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-using Internal.TypeSystem;
 using Internal.IL.Stubs.StartupCode;
+using Internal.TypeSystem;
 
 namespace ILCompiler
 {
@@ -20,7 +20,10 @@ namespace ILCompiler
         private ModuleDesc _module;
         private IReadOnlyCollection<MethodDesc> _libraryInitializers;
 
-        public NativeLibraryInitializerRootProvider(ModuleDesc module, IReadOnlyCollection<MethodDesc> libraryInitializers)
+        public NativeLibraryInitializerRootProvider(
+            ModuleDesc module,
+            IReadOnlyCollection<MethodDesc> libraryInitializers
+        )
         {
             _module = module;
             _libraryInitializers = libraryInitializers;
@@ -29,8 +32,15 @@ namespace ILCompiler
         public void AddCompilationRoots(IRootingServiceProvider rootProvider)
         {
             TypeDesc owningType = _module.GetGlobalModuleType();
-            NativeLibraryStartupMethod nativeLibStartupCode = new NativeLibraryStartupMethod(owningType, _libraryInitializers);
-            rootProvider.AddCompilationRoot(nativeLibStartupCode, "Startup Code Main Method", ManagedEntryPointMethodName);
+            NativeLibraryStartupMethod nativeLibStartupCode = new NativeLibraryStartupMethod(
+                owningType,
+                _libraryInitializers
+            );
+            rootProvider.AddCompilationRoot(
+                nativeLibStartupCode,
+                "Startup Code Main Method",
+                ManagedEntryPointMethodName
+            );
         }
     }
 }

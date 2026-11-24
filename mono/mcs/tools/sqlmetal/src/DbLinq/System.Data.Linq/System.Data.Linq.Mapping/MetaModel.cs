@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,17 +33,17 @@ using System.Reflection;
 
 namespace System.Data.Linq.Mapping
 {
-	public abstract class MetaModel
-	{
-		public abstract Type ContextType { get; }
-		public abstract string DatabaseName { get; }
-		public abstract MappingSource MappingSource { get; }
-		public abstract Type ProviderType { get; }
+    public abstract class MetaModel
+    {
+        public abstract Type ContextType { get; }
+        public abstract string DatabaseName { get; }
+        public abstract MappingSource MappingSource { get; }
+        public abstract Type ProviderType { get; }
 
-		public abstract MetaFunction GetFunction (MethodInfo method);
-		public abstract IEnumerable<MetaFunction> GetFunctions ();
-		public abstract MetaType GetMetaType (Type type);
-		public abstract MetaTable GetTable (Type rowType);
-		public abstract IEnumerable<MetaTable> GetTables ();
-	}
+        public abstract MetaFunction GetFunction(MethodInfo method);
+        public abstract IEnumerable<MetaFunction> GetFunctions();
+        public abstract MetaType GetMetaType(Type type);
+        public abstract MetaTable GetTable(Type rowType);
+        public abstract IEnumerable<MetaTable> GetTables();
+    }
 }

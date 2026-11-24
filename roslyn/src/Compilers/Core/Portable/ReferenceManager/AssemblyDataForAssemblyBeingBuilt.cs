@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis
             public AssemblyDataForAssemblyBeingBuilt(
                 AssemblyIdentity identity,
                 ImmutableArray<AssemblyData> referencedAssemblyData,
-                ImmutableArray<PEModule> modules)
+                ImmutableArray<PEModule> modules
+            )
             {
                 Debug.Assert(identity != null);
                 Debug.Assert(!referencedAssemblyData.IsDefault);
@@ -35,7 +36,9 @@ namespace Microsoft.CodeAnalysis
 
                 _referencedAssemblyData = referencedAssemblyData;
 
-                var refs = ArrayBuilder<AssemblyIdentity>.GetInstance(referencedAssemblyData.Length + modules.Length); //approximate size
+                var refs = ArrayBuilder<AssemblyIdentity>.GetInstance(
+                    referencedAssemblyData.Length + modules.Length
+                ); //approximate size
                 foreach (AssemblyData data in referencedAssemblyData)
                 {
                     refs.Add(data.Identity);
@@ -52,38 +55,39 @@ namespace Microsoft.CodeAnalysis
 
             public override AssemblyIdentity Identity
             {
-                get
-                {
-                    return _assemblyIdentity;
-                }
+                get { return _assemblyIdentity; }
             }
 
             public override ImmutableArray<AssemblyIdentity> AssemblyReferences
             {
-                get
-                {
-                    return _referencedAssemblies;
-                }
+                get { return _referencedAssemblies; }
             }
 
             public override ImmutableArray<TAssemblySymbol> AvailableSymbols
             {
-                get
-                {
-                    throw ExceptionUtilities.Unreachable();
-                }
+                get { throw ExceptionUtilities.Unreachable(); }
             }
 
             public override AssemblyReferenceBinding[] BindAssemblyReferences(
-                MultiDictionary<string, (AssemblyData DefinitionData, int DefinitionIndex)> assemblies,
-                AssemblyIdentityComparer assemblyIdentityComparer)
+                MultiDictionary<
+                    string,
+                    (AssemblyData DefinitionData, int DefinitionIndex)
+                > assemblies,
+                AssemblyIdentityComparer assemblyIdentityComparer
+            )
             {
                 var boundReferences = new AssemblyReferenceBinding[_referencedAssemblies.Length];
 
                 for (int i = 0; i < _referencedAssemblyData.Length; i++)
                 {
-                    Debug.Assert(assemblies[_referencedAssemblyData[i].Identity.Name].Contains((_referencedAssemblyData[i], i + 1)));
-                    boundReferences[i] = new AssemblyReferenceBinding(_referencedAssemblyData[i].Identity, i + 1);
+                    Debug.Assert(
+                        assemblies[_referencedAssemblyData[i].Identity.Name]
+                            .Contains((_referencedAssemblyData[i], i + 1))
+                    );
+                    boundReferences[i] = new AssemblyReferenceBinding(
+                        _referencedAssemblyData[i].Identity,
+                        i + 1
+                    );
                 }
 
                 // resolve references coming from linked modules:
@@ -93,7 +97,8 @@ namespace Microsoft.CodeAnalysis
                         _referencedAssemblies[i],
                         assemblies,
                         resolveAgainstAssemblyBeingBuilt: false, // references from added modules shouldn't resolve against the assembly being built (definition #0)
-                        assemblyIdentityComparer);
+                        assemblyIdentityComparer
+                    );
                 }
 
                 return boundReferences;
@@ -106,26 +111,17 @@ namespace Microsoft.CodeAnalysis
 
             public override bool ContainsNoPiaLocalTypes
             {
-                get
-                {
-                    throw ExceptionUtilities.Unreachable();
-                }
+                get { throw ExceptionUtilities.Unreachable(); }
             }
 
             public override bool IsLinked
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public override bool DeclaresTheObjectClass
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public override Compilation? SourceCompilation => null;

@@ -26,17 +26,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpForLoopSnippetProvider()
-        {
-        }
+        public CSharpForLoopSnippetProvider() { }
 
-        protected override ExpressionSyntax GenerateInitializerValue(SyntaxGenerator generator, SyntaxNode? inlineExpression)
-            => (ExpressionSyntax)generator.LiteralExpression(0);
+        protected override ExpressionSyntax GenerateInitializerValue(
+            SyntaxGenerator generator,
+            SyntaxNode? inlineExpression
+        ) => (ExpressionSyntax)generator.LiteralExpression(0);
 
-        protected override ExpressionSyntax GenerateRightSideOfCondition(SyntaxGenerator generator, SyntaxNode? inlineExpression)
-            => (ExpressionSyntax)(inlineExpression ?? generator.IdentifierName("length"));
+        protected override ExpressionSyntax GenerateRightSideOfCondition(
+            SyntaxGenerator generator,
+            SyntaxNode? inlineExpression
+        ) => (ExpressionSyntax)(inlineExpression ?? generator.IdentifierName("length"));
 
-        protected override void AddSpecificPlaceholders(MultiDictionary<string, int> placeholderBuilder, ExpressionSyntax initializer, ExpressionSyntax rightOfCondition)
+        protected override void AddSpecificPlaceholders(
+            MultiDictionary<string, int> placeholderBuilder,
+            ExpressionSyntax initializer,
+            ExpressionSyntax rightOfCondition
+        )
         {
             if (!ConstructedFromInlineExpression)
                 placeholderBuilder.Add(rightOfCondition.ToString(), rightOfCondition.SpanStart);

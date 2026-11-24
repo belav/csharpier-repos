@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis
         public DocumentSpan(
             Document document,
             TextSpan sourceSpan,
-            ImmutableDictionary<string, object>? properties)
+            ImmutableDictionary<string, object>? properties
+        )
         {
             Document = document;
             SourceSpan = sourceSpan;
@@ -33,16 +34,11 @@ namespace Microsoft.CodeAnalysis
         }
 
         public DocumentSpan(Document document, TextSpan sourceSpan)
-            : this(document, sourceSpan, properties: null)
-        {
-        }
+            : this(document, sourceSpan, properties: null) { }
 
-        public bool Equals(DocumentSpan obj)
-            => Document == obj.Document && SourceSpan == obj.SourceSpan;
+        public bool Equals(DocumentSpan obj) =>
+            Document == obj.Document && SourceSpan == obj.SourceSpan;
 
-        public override int GetHashCode()
-            => Hash.Combine(
-                Document,
-                SourceSpan.GetHashCode());
+        public override int GetHashCode() => Hash.Combine(Document, SourceSpan.GetHashCode());
     }
 }

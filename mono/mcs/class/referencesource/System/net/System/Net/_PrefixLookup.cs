@@ -23,13 +23,12 @@ namespace System.Net
 
     internal class PrefixLookup
     {
-
         // Do not go over this limit.  Discard old data elements
         // Longer lists suffer a search penalty
         private const int defaultCapacity = 100;
         private volatile int capacity;
 
-        // LRU list - Least Recently Used.  
+        // LRU list - Least Recently Used.
         // Add new items to the front.  Drop items from the end if beyond capacity.
         // Promote used items to the top.
         private readonly LinkedList<PrefixValuePair> lruList = new LinkedList<PrefixValuePair>();
@@ -46,9 +45,8 @@ namespace System.Net
             }
         }
 
-        public PrefixLookup() : this(defaultCapacity)
-        {
-        }
+        public PrefixLookup()
+            : this(defaultCapacity) { }
 
         public PrefixLookup(int capacity)
         {
@@ -115,7 +113,6 @@ namespace System.Net
                         lruList.RemoveLast();
                     }
                 }
-
             }
         }
 
@@ -140,8 +137,11 @@ namespace System.Net
                 // Oh well, do it the slow way, search for the longest partial match
                 string prefix;
                 int longestMatchPrefix = 0;
-                for (LinkedListNode<PrefixValuePair> pairNode = lruList.First;
-                    pairNode != null; pairNode = pairNode.Next)
+                for (
+                    LinkedListNode<PrefixValuePair> pairNode = lruList.First;
+                    pairNode != null;
+                    pairNode = pairNode.Next
+                )
                 {
                     //
                     // check if the match is better than the current-most-specific match

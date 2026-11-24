@@ -20,7 +20,8 @@ namespace System.Threading.RateLimiting
         /// <returns></returns>
         public static RateLimitPartition<TKey> Get<TKey>(
             TKey partitionKey,
-            Func<TKey, RateLimiter> factory)
+            Func<TKey, RateLimiter> factory
+        )
         {
             return new RateLimitPartition<TKey>(partitionKey, factory);
         }
@@ -34,7 +35,8 @@ namespace System.Threading.RateLimiting
         /// <returns></returns>
         public static RateLimitPartition<TKey> GetConcurrencyLimiter<TKey>(
             TKey partitionKey,
-            Func<TKey, ConcurrencyLimiterOptions> factory)
+            Func<TKey, ConcurrencyLimiterOptions> factory
+        )
         {
             return Get(partitionKey, key => new ConcurrencyLimiter(factory(key)));
         }
@@ -63,7 +65,8 @@ namespace System.Threading.RateLimiting
         /// <returns></returns>
         public static RateLimitPartition<TKey> GetTokenBucketLimiter<TKey>(
             TKey partitionKey,
-            Func<TKey, TokenBucketRateLimiterOptions> factory)
+            Func<TKey, TokenBucketRateLimiterOptions> factory
+        )
         {
             return Get(partitionKey, key =>
             {
@@ -78,7 +81,7 @@ namespace System.Threading.RateLimiting
                         QueueLimit = options.QueueLimit,
                         ReplenishmentPeriod = options.ReplenishmentPeriod,
                         TokensPerPeriod = options.TokensPerPeriod,
-                        AutoReplenishment = false
+                        AutoReplenishment = false,
                     };
                 }
                 return new TokenBucketRateLimiter(options);
@@ -97,7 +100,8 @@ namespace System.Threading.RateLimiting
         /// <returns></returns>
         public static RateLimitPartition<TKey> GetSlidingWindowLimiter<TKey>(
             TKey partitionKey,
-            Func<TKey, SlidingWindowRateLimiterOptions> factory)
+            Func<TKey, SlidingWindowRateLimiterOptions> factory
+        )
         {
             return Get(partitionKey, key =>
             {
@@ -112,7 +116,7 @@ namespace System.Threading.RateLimiting
                         QueueLimit = options.QueueLimit,
                         Window = options.Window,
                         SegmentsPerWindow = options.SegmentsPerWindow,
-                        AutoReplenishment = false
+                        AutoReplenishment = false,
                     };
                 }
                 return new SlidingWindowRateLimiter(options);
@@ -131,7 +135,8 @@ namespace System.Threading.RateLimiting
         /// <returns></returns>
         public static RateLimitPartition<TKey> GetFixedWindowLimiter<TKey>(
             TKey partitionKey,
-            Func<TKey, FixedWindowRateLimiterOptions> factory)
+            Func<TKey, FixedWindowRateLimiterOptions> factory
+        )
         {
             return Get(partitionKey, key =>
             {
@@ -145,7 +150,7 @@ namespace System.Threading.RateLimiting
                         QueueProcessingOrder = options.QueueProcessingOrder,
                         QueueLimit = options.QueueLimit,
                         Window = options.Window,
-                        AutoReplenishment = false
+                        AutoReplenishment = false,
                     };
                 }
                 return new FixedWindowRateLimiter(options);

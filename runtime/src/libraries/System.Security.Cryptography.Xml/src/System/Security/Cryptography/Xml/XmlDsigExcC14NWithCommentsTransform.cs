@@ -9,12 +9,14 @@ namespace System.Security.Cryptography.Xml
 
     public class XmlDsigExcC14NWithCommentsTransform : XmlDsigExcC14NTransform
     {
-        public XmlDsigExcC14NWithCommentsTransform() : base(true)
+        public XmlDsigExcC14NWithCommentsTransform()
+            : base(true)
         {
             Algorithm = SignedXml.XmlDsigExcC14NWithCommentsTransformUrl;
         }
 
-        public XmlDsigExcC14NWithCommentsTransform(string inclusiveNamespacesPrefixList) : base(true, inclusiveNamespacesPrefixList)
+        public XmlDsigExcC14NWithCommentsTransform(string inclusiveNamespacesPrefixList)
+            : base(true, inclusiveNamespacesPrefixList)
         {
             Algorithm = SignedXml.XmlDsigExcC14NWithCommentsTransformUrl;
         }

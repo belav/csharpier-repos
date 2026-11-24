@@ -13,7 +13,13 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
 {
-    internal abstract partial class AbstractMoveTypeService<TService, TTypeDeclarationSyntax, TNamespaceDeclarationSyntax, TMemberDeclarationSyntax, TCompilationUnitSyntax>
+    internal abstract partial class AbstractMoveTypeService<
+        TService,
+        TTypeDeclarationSyntax,
+        TNamespaceDeclarationSyntax,
+        TMemberDeclarationSyntax,
+        TCompilationUnitSyntax
+    >
     {
         private sealed class MoveTypeCodeAction : CodeAction
         {
@@ -27,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 TService service,
                 State state,
                 MoveTypeOperationKind operationKind,
-                string fileName)
+                string fileName
+            )
             {
                 _state = state;
                 _service = service;
@@ -36,22 +43,41 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 _title = CreateDisplayText();
             }
 
-            private string CreateDisplayText()
-                => _operationKind switch
+            private string CreateDisplayText() =>
+                _operationKind switch
                 {
-                    MoveTypeOperationKind.MoveType => string.Format(FeaturesResources.Move_type_to_0, _fileName),
-                    MoveTypeOperationKind.RenameType => string.Format(FeaturesResources.Rename_type_to_0, _state.DocumentNameWithoutExtension),
-                    MoveTypeOperationKind.RenameFile => string.Format(FeaturesResources.Rename_file_to_0, _fileName),
+                    MoveTypeOperationKind.MoveType => string.Format(
+                        FeaturesResources.Move_type_to_0,
+                        _fileName
+                    ),
+                    MoveTypeOperationKind.RenameType => string.Format(
+                        FeaturesResources.Rename_type_to_0,
+                        _state.DocumentNameWithoutExtension
+                    ),
+                    MoveTypeOperationKind.RenameFile => string.Format(
+                        FeaturesResources.Rename_file_to_0,
+                        _fileName
+                    ),
                     MoveTypeOperationKind.MoveTypeNamespaceScope => string.Empty,
                     _ => throw ExceptionUtilities.UnexpectedValue(_operationKind),
                 };
 
             public override string Title => _title;
 
-            protected override async Task<ImmutableArray<CodeActionOperation>> ComputeOperationsAsync(
-                IProgress<CodeAnalysisProgress> progress, CancellationToken cancellationToken)
+            protected override async Task<
+                ImmutableArray<CodeActionOperation>
+            > ComputeOperationsAsync(
+                IProgress<CodeAnalysisProgress> progress,
+                CancellationToken cancellationToken
+            )
             {
-                var editor = Editor.GetEditor(_operationKind, _service, _state, _fileName, cancellationToken);
+                var editor = Editor.GetEditor(
+                    _operationKind,
+                    _service,
+                    _state,
+                    _fileName,
+                    cancellationToken
+                );
                 return await editor.GetOperationsAsync().ConfigureAwait(false);
             }
         }

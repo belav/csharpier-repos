@@ -601,13 +601,13 @@ public static partial class RequestDelegateFactory
             return cachedFactoryContext;
         }
 
-        var serviceProvider =
-            options?.ServiceProvider
+        var serviceProvider = options?.ServiceProvider
             ?? options?.EndpointBuilder?.ApplicationServices
             ?? EmptyServiceProvider.Instance;
         var endpointBuilder = options?.EndpointBuilder ?? new RdfEndpointBuilder(serviceProvider);
-        var jsonSerializerOptions =
-            serviceProvider.GetService<IOptions<JsonOptions>>()?.Value.SerializerOptions
+        var jsonSerializerOptions = serviceProvider
+            .GetService<IOptions<JsonOptions>>()
+            ?.Value.SerializerOptions
             ?? JsonOptions.DefaultSerializerOptions;
         var formDataMapperOptions = new FormDataMapperOptions();
         ;
@@ -3106,14 +3106,12 @@ public static partial class RequestDelegateFactory
             factoryContext.EndpointBuilder.Metadata.OfType<FormMappingOptionsMetadata>();
         foreach (var formMappingOptionsMetadata in formMappingOptionsMetadatas)
         {
-            formDataMapperOptions.MaxRecursionDepth =
-                formMappingOptionsMetadata.MaxRecursionDepth
+            formDataMapperOptions.MaxRecursionDepth = formMappingOptionsMetadata.MaxRecursionDepth
                 ?? formDataMapperOptions.MaxRecursionDepth;
-            formDataMapperOptions.MaxCollectionSize =
-                formMappingOptionsMetadata.MaxCollectionSize
+            formDataMapperOptions.MaxCollectionSize = formMappingOptionsMetadata.MaxCollectionSize
                 ?? formDataMapperOptions.MaxCollectionSize;
-            formDataMapperOptions.MaxKeyBufferSize =
-                formMappingOptionsMetadata.MaxKeySize ?? formDataMapperOptions.MaxKeyBufferSize;
+            formDataMapperOptions.MaxKeyBufferSize = formMappingOptionsMetadata.MaxKeySize
+                ?? formDataMapperOptions.MaxKeyBufferSize;
         }
 
         // var name_reader;

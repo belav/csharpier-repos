@@ -10,7 +10,11 @@ namespace System.Net.NetworkInformation
     {
         // /proc/net/route contains some information about gateway addresses,
         // and separates the information about by each interface.
-        internal static List<GatewayIPAddressInformation> ParseIPv4GatewayAddressesFromRouteFile(List<GatewayIPAddressInformation> collection, string[] fileLines, string interfaceName)
+        internal static List<GatewayIPAddressInformation> ParseIPv4GatewayAddressesFromRouteFile(
+            List<GatewayIPAddressInformation> collection,
+            string[] fileLines,
+            string interfaceName
+        )
         {
             // Columns are as follows (first-line header):
             // Iface  Destination  Gateway  Flags  RefCnt  Use  Metric  Mask  MTU  Window  IRTT
@@ -35,7 +39,12 @@ namespace System.Net.NetworkInformation
             return collection;
         }
 
-        internal static void ParseIPv6GatewayAddressesFromRouteFile(List<GatewayIPAddressInformation> collection, string[] fileLines, string interfaceName, long scopeId)
+        internal static void ParseIPv6GatewayAddressesFromRouteFile(
+            List<GatewayIPAddressInformation> collection,
+            string[] fileLines,
+            string interfaceName,
+            long scopeId
+        )
         {
             // Columns are as follows (first-line header):
             // 00000000000000000000000000000000 00 00000000000000000000000000000000 00 00000000000000000000000000000000 ffffffff 00000001 00000001 00200200 lo
@@ -57,9 +66,9 @@ namespace System.Net.NetworkInformation
             {
                 if (line.StartsWith("00000000000000000000000000000000", StringComparison.Ordinal))
                 {
-                   string[] token = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                   if (token.Length > 9 && token[4] != "00000000000000000000000000000000")
-                   {
+                    string[] token = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                    if (token.Length > 9 && token[4] != "00000000000000000000000000000000")
+                    {
                         if (!string.IsNullOrEmpty(interfaceName) && interfaceName != token[9])
                         {
                             continue;
@@ -77,7 +86,11 @@ namespace System.Net.NetworkInformation
             }
         }
 
-        internal static void ParseDhcpServerAddressesFromLeasesFile(List<IPAddress> collection, string filePath, string name)
+        internal static void ParseDhcpServerAddressesFromLeasesFile(
+            List<IPAddress> collection,
+            string filePath,
+            string name
+        )
         {
             // Parse the /var/lib/dhcp/dhclient.leases file, if it exists.
             // If any errors occur, like the file not existing or being
@@ -89,25 +102,49 @@ namespace System.Net.NetworkInformation
                     string fileContents = ReadAllText(filePath);
                     int leaseIndex = -1;
                     int secondBrace = -1;
-                    while ((leaseIndex = fileContents.IndexOf("lease", leaseIndex + 1, StringComparison.Ordinal)) != -1)
+                    while (
+                        (
+                            leaseIndex = fileContents.IndexOf(
+                                "lease",
+                                leaseIndex + 1,
+                                StringComparison.Ordinal
+                            )
+                        ) != -1
+                    )
                     {
                         int firstBrace = fileContents.IndexOf('{', leaseIndex);
                         secondBrace = fileContents.IndexOf('}', leaseIndex);
                         int blockLength = secondBrace - firstBrace;
 
-                        int interfaceIndex = fileContents.IndexOf("interface", firstBrace, blockLength, StringComparison.Ordinal);
+                        int interfaceIndex = fileContents.IndexOf(
+                            "interface",
+                            firstBrace,
+                            blockLength,
+                            StringComparison.Ordinal
+                        );
                         int afterName = fileContents.IndexOf(';', interfaceIndex);
                         int beforeName = fileContents.LastIndexOf(' ', afterName);
-                        ReadOnlySpan<char> interfaceName = fileContents.AsSpan(beforeName + 2, afterName - beforeName - 3);
+                        ReadOnlySpan<char> interfaceName = fileContents.AsSpan(
+                            beforeName + 2,
+                            afterName - beforeName - 3
+                        );
                         if (!interfaceName.SequenceEqual(name))
                         {
                             continue;
                         }
 
-                        int indexOfDhcp = fileContents.IndexOf("dhcp-server-identifier", firstBrace, blockLength, StringComparison.Ordinal);
+                        int indexOfDhcp = fileContents.IndexOf(
+                            "dhcp-server-identifier",
+                            firstBrace,
+                            blockLength,
+                            StringComparison.Ordinal
+                        );
                         int afterAddress = fileContents.IndexOf(';', indexOfDhcp);
                         int beforeAddress = fileContents.LastIndexOf(' ', afterAddress);
-                        ReadOnlySpan<char> dhcpAddressSpan = fileContents.AsSpan(beforeAddress + 1, afterAddress - beforeAddress - 1);
+                        ReadOnlySpan<char> dhcpAddressSpan = fileContents.AsSpan(
+                            beforeAddress + 1,
+                            afterAddress - beforeAddress - 1
+                        );
                         if (IPAddress.TryParse(dhcpAddressSpan, out IPAddress? dhcpAddress))
                         {
                             collection.Add(dhcpAddress);
@@ -121,7 +158,9 @@ namespace System.Net.NetworkInformation
             }
         }
 
-        internal static List<IPAddress> ParseWinsServerAddressesFromSmbConfFile(string smbConfFilePath)
+        internal static List<IPAddress> ParseWinsServerAddressesFromSmbConfFile(
+            string smbConfFilePath
+        )
         {
             List<IPAddress> collection = new List<IPAddress>();
             try
@@ -131,17 +170,32 @@ namespace System.Net.NetworkInformation
                     string fileContents = ReadAllText(smbConfFilePath);
                     string label = "wins server = ";
                     int labelIndex = fileContents.IndexOf(label);
-                    int labelLineStart = fileContents.LastIndexOf(Environment.NewLine, labelIndex, StringComparison.Ordinal);
+                    int labelLineStart = fileContents.LastIndexOf(
+                        Environment.NewLine,
+                        labelIndex,
+                        StringComparison.Ordinal
+                    );
                     if (labelLineStart < labelIndex)
                     {
-                        int commentIndex = fileContents.IndexOf(';', labelLineStart, labelIndex - labelLineStart);
+                        int commentIndex = fileContents.IndexOf(
+                            ';',
+                            labelLineStart,
+                            labelIndex - labelLineStart
+                        );
                         if (commentIndex != -1)
                         {
                             return collection;
                         }
                     }
-                    int endOfLine = fileContents.IndexOf(Environment.NewLine, labelIndex, StringComparison.Ordinal);
-                    ReadOnlySpan<char> addressSpan = fileContents.AsSpan(labelIndex + label.Length, endOfLine - (labelIndex + label.Length));
+                    int endOfLine = fileContents.IndexOf(
+                        Environment.NewLine,
+                        labelIndex,
+                        StringComparison.Ordinal
+                    );
+                    ReadOnlySpan<char> addressSpan = fileContents.AsSpan(
+                        labelIndex + label.Length,
+                        endOfLine - (labelIndex + label.Length)
+                    );
                     IPAddress address = IPAddress.Parse(addressSpan);
                     collection.Add(address);
                 }
@@ -153,6 +207,5 @@ namespace System.Net.NetworkInformation
 
             return collection;
         }
-
     }
 }

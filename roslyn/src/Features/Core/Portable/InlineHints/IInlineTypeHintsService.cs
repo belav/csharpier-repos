@@ -23,6 +23,7 @@ namespace Microsoft.CodeAnalysis.InlineHints
             InlineTypeHintsOptions options,
             SymbolDescriptionOptions displayOptions,
             bool displayAllOverride,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

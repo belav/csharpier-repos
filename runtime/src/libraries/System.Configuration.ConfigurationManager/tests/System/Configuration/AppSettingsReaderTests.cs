@@ -13,13 +13,17 @@ namespace System.Configuration
         [Fact]
         public void GetValue_KeyNull()
         {
-            Assert.Throws<ArgumentNullException>(() => _appSettingsReader.GetValue(null, typeof(object)));
+            Assert.Throws<ArgumentNullException>(() =>
+                _appSettingsReader.GetValue(null, typeof(object))
+            );
         }
 
         [Fact]
         public void GetValue_TypeNull()
         {
-            Assert.Throws<ArgumentNullException>(() => _appSettingsReader.GetValue(string.Empty, null));
+            Assert.Throws<ArgumentNullException>(() =>
+                _appSettingsReader.GetValue(string.Empty, null)
+            );
         }
     }
 }

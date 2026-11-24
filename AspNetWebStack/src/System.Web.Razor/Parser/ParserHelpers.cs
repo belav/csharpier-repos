@@ -13,30 +13,41 @@ namespace System.Web.Razor.Parser
         public static bool IsNewLine(char value)
         {
             return value == '\r' // Carriage return
-                   || value == '\n' // Linefeed
-                   || value == '\u0085' // Next Line
-                   || value == '\u2028' // Line separator
-                   || value == '\u2029'; // Paragraph separator
+                || value == '\n' // Linefeed
+                || value == '\u0085' // Next Line
+                || value == '\u2028' // Line separator
+                || value == '\u2029'; // Paragraph separator
         }
 
         public static bool IsNewLine(string value)
         {
-            return (value.Length == 1 && (IsNewLine(value[0]))) ||
-                   (String.Equals(value, "\r\n", StringComparison.Ordinal));
+            return (value.Length == 1 && (IsNewLine(value[0])))
+                || (String.Equals(value, "\r\n", StringComparison.Ordinal));
         }
 
         // Returns true if the character is Whitespace and NOT a newline
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "Whitespace", Justification = "This would be a breaking change in a shipping API")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "Whitespace",
+            Justification = "This would be a breaking change in a shipping API"
+        )]
         public static bool IsWhitespace(char value)
         {
-            return value == ' ' ||
-                   value == '\f' ||
-                   value == '\t' ||
-                   value == '\u000B' || // Vertical Tab
-                   Char.GetUnicodeCategory(value) == UnicodeCategory.SpaceSeparator;
+            return value == ' '
+                || value == '\f'
+                || value == '\t'
+                || value == '\u000B'
+                || // Vertical Tab
+                Char.GetUnicodeCategory(value) == UnicodeCategory.SpaceSeparator;
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "Whitespace", Justification = "This would be a breaking change in a shipping API")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "Whitespace",
+            Justification = "This would be a breaking change in a shipping API"
+        )]
         public static bool IsWhitespaceOrNewLine(char value)
         {
             return IsWhitespace(value) || IsNewLine(value);
@@ -54,12 +65,15 @@ namespace System.Web.Razor.Parser
             {
                 identifierPart = identifierPart.Skip(1);
             }
-            return (!requireIdentifierStart || IsIdentifierStart(value[0])) && identifierPart.All(IsIdentifierPart);
+            return (!requireIdentifierStart || IsIdentifierStart(value[0]))
+                && identifierPart.All(IsIdentifierPart);
         }
 
         public static bool IsHexDigit(char value)
         {
-            return (value >= '0' && value <= '9') || (value >= 'A' && value <= 'F') || (value >= 'a' && value <= 'f');
+            return (value >= '0' && value <= '9')
+                || (value >= 'A' && value <= 'F')
+                || (value >= 'a' && value <= 'f');
         }
 
         public static bool IsIdentifierStart(char value)
@@ -70,10 +84,10 @@ namespace System.Web.Razor.Parser
         public static bool IsIdentifierPart(char value)
         {
             return IsLetter(value)
-                   || IsDecimalDigit(value)
-                   || IsConnecting(value)
-                   || IsCombining(value)
-                   || IsFormatting(value);
+                || IsDecimalDigit(value)
+                || IsConnecting(value)
+                || IsCombining(value)
+                || IsFormatting(value);
         }
 
         public static bool IsTerminatingCharToken(char value)
@@ -100,11 +114,11 @@ namespace System.Web.Razor.Parser
         {
             var cat = Char.GetUnicodeCategory(value);
             return cat == UnicodeCategory.UppercaseLetter
-                   || cat == UnicodeCategory.LowercaseLetter
-                   || cat == UnicodeCategory.TitlecaseLetter
-                   || cat == UnicodeCategory.ModifierLetter
-                   || cat == UnicodeCategory.OtherLetter
-                   || cat == UnicodeCategory.LetterNumber;
+                || cat == UnicodeCategory.LowercaseLetter
+                || cat == UnicodeCategory.TitlecaseLetter
+                || cat == UnicodeCategory.ModifierLetter
+                || cat == UnicodeCategory.OtherLetter
+                || cat == UnicodeCategory.LetterNumber;
         }
 
         public static bool IsFormatting(char value)
@@ -115,7 +129,8 @@ namespace System.Web.Razor.Parser
         public static bool IsCombining(char value)
         {
             var cat = Char.GetUnicodeCategory(value);
-            return cat == UnicodeCategory.SpacingCombiningMark || cat == UnicodeCategory.NonSpacingMark;
+            return cat == UnicodeCategory.SpacingCombiningMark
+                || cat == UnicodeCategory.NonSpacingMark;
         }
 
         public static bool IsConnecting(char value)
@@ -130,9 +145,9 @@ namespace System.Web.Razor.Parser
                 inputName = "_" + inputName;
             }
 
-            return new String((from value in inputName
-                               select IsIdentifierPart(value) ? value : '_')
-                                  .ToArray());
+            return new String(
+                (from value in inputName select IsIdentifierPart(value) ? value : '_').ToArray()
+            );
         }
 
         public static bool IsEmailPart(char character)

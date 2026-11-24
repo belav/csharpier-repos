@@ -10,6 +10,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
     {
         public static bool IsTopLevelProgram(this CompilationUnitSyntax compilationUnit)
             // Only need to check first member as having any other member type before a global statement is not legal.
-            => compilationUnit.Members is [GlobalStatementSyntax, ..];
+            =>
+            compilationUnit.Members is [GlobalStatementSyntax, ..];
     }
 }

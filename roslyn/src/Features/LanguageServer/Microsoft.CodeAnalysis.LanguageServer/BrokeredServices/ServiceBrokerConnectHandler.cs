@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.BrokeredServices;
 
 [ExportCSharpVisualBasicStatelessLspService(typeof(ServiceBrokerConnectHandler)), Shared]
 [Method("serviceBroker/connect")]
-internal class ServiceBrokerConnectHandler : ILspServiceNotificationHandler<ServiceBrokerConnectHandler.NotificationParams>
+internal class ServiceBrokerConnectHandler
+    : ILspServiceNotificationHandler<ServiceBrokerConnectHandler.NotificationParams>
 {
     private readonly ServiceBrokerFactory _serviceBrokerFactory;
 
@@ -33,7 +34,11 @@ internal class ServiceBrokerConnectHandler : ILspServiceNotificationHandler<Serv
 
     public bool RequiresLSPSolution => false;
 
-    Task INotificationHandler<NotificationParams, RequestContext>.HandleNotificationAsync(NotificationParams request, RequestContext requestContext, CancellationToken cancellationToken)
+    Task INotificationHandler<NotificationParams, RequestContext>.HandleNotificationAsync(
+        NotificationParams request,
+        RequestContext requestContext,
+        CancellationToken cancellationToken
+    )
     {
         return _serviceBrokerFactory.CreateAndConnectAsync(request.PipeName);
     }

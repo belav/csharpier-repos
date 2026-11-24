@@ -22,7 +22,7 @@ namespace System.IdentityModel
         NameUserPrincipalName = 8,
         NameCanonicalEx = 9,
         NameServicePrincipalName = 10,
-        NameDnsDomainName = 12
+        NameDnsDomainName = 12,
     }
 
     enum TokenInformationClass : uint
@@ -41,7 +41,7 @@ namespace System.IdentityModel
         TokenSessionId,
         TokenGroupsAndPrivileges,
         TokenSessionReference,
-        TokenSandBoxInert
+        TokenSandBoxInert,
     }
 
     enum Win32Error
@@ -137,6 +137,7 @@ namespace System.IdentityModel
             this.MaxLength = (ushort)maximumLength;
             this.Buffer = buffer;
         }
+
         internal ushort Length;
         internal ushort MaxLength;
         internal IntPtr Buffer;
@@ -148,11 +149,13 @@ namespace System.IdentityModel
         internal KERB_LOGON_SUBMIT_TYPE MessageType;
         internal uint Flags;
         internal UNICODE_INTPTR_STRING UserPrincipalName;
+
         // OPTIONAL, certificate mapping hints: username or username@domain
         internal UNICODE_INTPTR_STRING DomainName; // used to locate the forest
+
         // OPTIONAL, certificate mapping hints: if missing, using the local machine's domain
-        internal uint CertificateLength;   // for the client certificate 
-        internal IntPtr Certificate;        // for the client certificate, BER encoded
+        internal uint CertificateLength; // for the client certificate
+        internal IntPtr Certificate; // for the client certificate, BER encoded
 
         internal static int Size = Marshal.SizeOf(typeof(KERB_CERTIFICATE_S4U_LOGON));
     }
@@ -176,14 +179,16 @@ namespace System.IdentityModel
         KerbProxyLogon = 9,
         KerbTicketLogon = 10,
         KerbTicketUnlockLogon = 11,
+
         //#if (_WIN32_WINNT >= 0x0501) -- Disabled until IIS fixes their target version.
         KerbS4ULogon = 12,
+
         //#endif
-        //#if (_WIN32_WINNT >= 0x0600)     
+        //#if (_WIN32_WINNT >= 0x0600)
         KerbCertificateLogon = 13,
         KerbCertificateS4ULogon = 14,
         KerbCertificateUnlockLogon = 15,
-        //#endif    
+        //#endif
     }
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
@@ -208,7 +213,7 @@ namespace System.IdentityModel
     internal enum TokenType : int
     {
         TokenPrimary = 1,
-        TokenImpersonation
+        TokenImpersonation,
     }
 
     internal enum SecurityLogonType : int
@@ -218,7 +223,7 @@ namespace System.IdentityModel
         Batch,
         Service,
         Proxy,
-        Unlock
+        Unlock,
     }
 
     [SuppressUnmanagedCodeSecurity]
@@ -229,11 +234,10 @@ namespace System.IdentityModel
         const string SECUR32 = "secur32.dll";
         const string CREDUI = "credui.dll";
 
-
-
         // Error codes from ntstatus.h
         //internal const uint STATUS_SOME_NOT_MAPPED = 0x00000107;
         internal const uint STATUS_NO_MEMORY = 0xC0000017;
+
         //internal const uint STATUS_NONE_MAPPED = 0xC0000073;
         internal const uint STATUS_INSUFFICIENT_RESOURCES = 0xC000009A;
         internal const uint STATUS_ACCESS_DENIED = 0xC0000022;
@@ -242,7 +246,17 @@ namespace System.IdentityModel
         internal const uint STATUS_ACCOUNT_RESTRICTION = 0xC000006E;
 
         internal static byte[] LsaSourceName = new byte[] { (byte)'W', (byte)'C', (byte)'F' }; // we set the source name to "WCF".
-        internal static byte[] LsaKerberosName = new byte[] { (byte)'K', (byte)'e', (byte)'r', (byte)'b', (byte)'e', (byte)'r', (byte)'o', (byte)'s' };
+        internal static byte[] LsaKerberosName = new byte[]
+        {
+            (byte)'K',
+            (byte)'e',
+            (byte)'r',
+            (byte)'b',
+            (byte)'e',
+            (byte)'r',
+            (byte)'o',
+            (byte)'s',
+        };
 
         internal const uint KERB_CERTIFICATE_S4U_LOGON_FLAG_CHECK_DUPLICATES = 0x1;
         internal const uint KERB_CERTIFICATE_S4U_LOGON_FLAG_CHECK_LOGONHOURS = 0x2;
@@ -278,7 +292,7 @@ namespace System.IdentityModel
             [In] uint dwLogonType,
             [In] uint dwLogonProvider,
             [Out] out SafeCloseHandle phToken
-            );
+        );
 
         [DllImport(ADVAPI32, CharSet = CharSet.Auto, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
@@ -287,7 +301,8 @@ namespace System.IdentityModel
             [In] uint tokenInformationClass,
             [In] SafeHGlobalHandle tokenInformation,
             [In] uint tokenInformationLength,
-            [Out] out uint returnLength);
+            [Out] out uint returnLength
+        );
 
         [DllImport(ADVAPI32, CharSet = CharSet.Unicode, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
@@ -297,76 +312,71 @@ namespace System.IdentityModel
             [In] string pszProvider,
             [In] uint dwProvType,
             [In] uint dwFlags
-            );
+        );
 
         [DllImport(ADVAPI32, CharSet = CharSet.Auto, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal unsafe static extern bool CryptImportKey(
-          [In] SafeProvHandle hProv,
-          [In] void* pbData,
-          [In] uint dwDataLen,
-          [In] IntPtr hPubKey,
-          [In] uint dwFlags,
-          [Out] out SafeKeyHandle phKey
+        internal static extern unsafe bool CryptImportKey(
+            [In] SafeProvHandle hProv,
+            [In] void* pbData,
+            [In] uint dwDataLen,
+            [In] IntPtr hPubKey,
+            [In] uint dwFlags,
+            [Out] out SafeKeyHandle phKey
         );
 
         [DllImport(ADVAPI32, CharSet = CharSet.Auto, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern bool CryptGetKeyParam(
-          [In] SafeKeyHandle phKey,
-          [In] uint dwParam,
-          [In] IntPtr pbData,
-          [In, Out] ref uint dwDataLen,
-          [In] uint dwFlags
-        );
-
-        [DllImport(ADVAPI32, CharSet = CharSet.Auto, SetLastError = true)]
-        [ResourceExposure(ResourceScope.None)]
-        internal unsafe static extern bool CryptSetKeyParam(
-          [In] SafeKeyHandle phKey,
-          [In] uint dwParam,
-          [In] void* pbData,
-          [In] uint dwFlags
-        );
-
-        [DllImport(ADVAPI32, CharSet = CharSet.Auto, SetLastError = true)]
-        [ResourceExposure(ResourceScope.None)]
-        unsafe internal static extern bool CryptEncrypt(
-          [In] SafeKeyHandle phKey,
-          [In] IntPtr hHash,
-          [In] bool final,
-          [In] uint dwFlags,
-          [In] void* pbData,
-          [In, Out] ref int dwDataLen,
-          [In] int dwBufLen
-        );
-
-        [DllImport(ADVAPI32, CharSet = CharSet.Auto, SetLastError = true)]
-        [ResourceExposure(ResourceScope.None)]
-        unsafe internal static extern bool CryptDecrypt(
-          [In] SafeKeyHandle phKey,
-          [In] IntPtr hHash,
-          [In] bool final,
-          [In] uint dwFlags,
-          [In] void* pbData,
-          [In, Out] ref int dwDataLen
-        );
-
-        [DllImport(ADVAPI32, CharSet = CharSet.Auto, SetLastError = true)]
-        [ResourceExposure(ResourceScope.None)]
-        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal static extern bool CryptDestroyKey(
-            [In] IntPtr phKey
-            );
-
-        [DllImport(ADVAPI32, CharSet = CharSet.Auto, SetLastError = true)]
-        [ResourceExposure(ResourceScope.None)]
-        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal static extern bool CryptReleaseContext(
-            [In] IntPtr hProv,
+            [In] SafeKeyHandle phKey,
+            [In] uint dwParam,
+            [In] IntPtr pbData,
+            [In, Out] ref uint dwDataLen,
             [In] uint dwFlags
-            );
+        );
+
+        [DllImport(ADVAPI32, CharSet = CharSet.Auto, SetLastError = true)]
+        [ResourceExposure(ResourceScope.None)]
+        internal static extern unsafe bool CryptSetKeyParam(
+            [In] SafeKeyHandle phKey,
+            [In] uint dwParam,
+            [In] void* pbData,
+            [In] uint dwFlags
+        );
+
+        [DllImport(ADVAPI32, CharSet = CharSet.Auto, SetLastError = true)]
+        [ResourceExposure(ResourceScope.None)]
+        internal static extern unsafe bool CryptEncrypt(
+            [In] SafeKeyHandle phKey,
+            [In] IntPtr hHash,
+            [In] bool final,
+            [In] uint dwFlags,
+            [In] void* pbData,
+            [In, Out] ref int dwDataLen,
+            [In] int dwBufLen
+        );
+
+        [DllImport(ADVAPI32, CharSet = CharSet.Auto, SetLastError = true)]
+        [ResourceExposure(ResourceScope.None)]
+        internal static extern unsafe bool CryptDecrypt(
+            [In] SafeKeyHandle phKey,
+            [In] IntPtr hHash,
+            [In] bool final,
+            [In] uint dwFlags,
+            [In] void* pbData,
+            [In, Out] ref int dwDataLen
+        );
+
+        [DllImport(ADVAPI32, CharSet = CharSet.Auto, SetLastError = true)]
+        [ResourceExposure(ResourceScope.None)]
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        internal static extern bool CryptDestroyKey([In] IntPtr phKey);
+
+        [DllImport(ADVAPI32, CharSet = CharSet.Auto, SetLastError = true)]
+        [ResourceExposure(ResourceScope.None)]
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        internal static extern bool CryptReleaseContext([In] IntPtr hProv, [In] uint dwFlags);
 
         [DllImport(ADVAPI32, ExactSpelling = true, CharSet = CharSet.Unicode, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
@@ -374,7 +384,7 @@ namespace System.IdentityModel
             [In] string lpSystemName,
             [In] string lpName,
             [Out] out LUID Luid
-            );
+        );
 
         [DllImport(ADVAPI32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
@@ -386,7 +396,7 @@ namespace System.IdentityModel
             [In] uint bufferLength,
             [Out] out TOKEN_PRIVILEGE previousState,
             [Out] out uint returnLength
-            );
+        );
 
         [DllImport(ADVAPI32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
@@ -400,7 +410,7 @@ namespace System.IdentityModel
             [In] IntPtr processToken,
             [In] TokenAccessLevels desiredAccess,
             [Out] out SafeCloseHandle tokenHandle
-            );
+        );
 
         [DllImport(ADVAPI32, CharSet = CharSet.Auto, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
@@ -409,7 +419,7 @@ namespace System.IdentityModel
             [In] TokenAccessLevels desiredAccess,
             [In] bool openAsSelf,
             [Out] out SafeCloseHandle tokenHandle
-            );
+        );
 
         [DllImport(KERNEL32, CharSet = CharSet.Auto, SetLastError = true)]
         [ResourceExposure(ResourceScope.Process)]
@@ -428,7 +438,7 @@ namespace System.IdentityModel
             [In] SECURITY_IMPERSONATION_LEVEL impersonationLevel,
             [In] TokenType tokenType,
             [Out] out SafeCloseHandle duplicateTokenHandle
-            );
+        );
 
         [DllImport(ADVAPI32, CharSet = CharSet.Auto, SetLastError = true)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
@@ -436,8 +446,7 @@ namespace System.IdentityModel
         internal static extern bool SetThreadToken(
             [In] IntPtr threadHandle,
             [In] SafeCloseHandle threadToken
-            );
-
+        );
 
         [DllImport(SECUR32, CharSet = CharSet.Auto, SetLastError = false)]
         [ResourceExposure(ResourceScope.None)]
@@ -445,19 +454,17 @@ namespace System.IdentityModel
             [In] ref UNICODE_INTPTR_STRING logonProcessName,
             [Out] out SafeLsaLogonProcessHandle lsaHandle,
             [Out] out IntPtr securityMode
-            );
+        );
 
         [DllImport(SECUR32, CharSet = CharSet.Auto, SetLastError = false)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern int LsaConnectUntrusted(
             [Out] out SafeLsaLogonProcessHandle lsaHandle
-            );
+        );
 
         [DllImport(ADVAPI32, CharSet = CharSet.Unicode, SetLastError = false)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern int LsaNtStatusToWinError(
-            [In] int status
-            );
+        internal static extern int LsaNtStatusToWinError([In] int status);
 
         [DllImport(SECUR32, CharSet = CharSet.Auto, SetLastError = false)]
         [ResourceExposure(ResourceScope.None)]
@@ -465,20 +472,16 @@ namespace System.IdentityModel
             [In] SafeLsaLogonProcessHandle lsaHandle,
             [In] ref UNICODE_INTPTR_STRING packageName,
             [Out] out uint authenticationPackage
-            );
+        );
 
         [DllImport(ADVAPI32, CharSet = CharSet.Unicode, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern bool AllocateLocallyUniqueId(
-            [Out] out LUID Luid
-            );
+        internal static extern bool AllocateLocallyUniqueId([Out] out LUID Luid);
 
         [DllImport(SECUR32, SetLastError = false)]
         [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal static extern int LsaFreeReturnBuffer(
-            IntPtr handle
-            );
+        internal static extern int LsaFreeReturnBuffer(IntPtr handle);
 
         [DllImport(SECUR32, CharSet = CharSet.Auto, SetLastError = false)]
         [ResourceExposure(ResourceScope.None)]
@@ -497,43 +500,39 @@ namespace System.IdentityModel
             [Out] out SafeCloseHandle Token,
             [Out] out QUOTA_LIMITS Quotas,
             [Out] out int SubStatus
-            );
+        );
 
         [DllImport(SECUR32, CharSet = CharSet.Auto, SetLastError = false)]
         [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal static extern int LsaDeregisterLogonProcess(
-            [In] IntPtr handle
-            );
-
+        internal static extern int LsaDeregisterLogonProcess([In] IntPtr handle);
 
         [DllImport(CREDUI, CharSet = CharSet.Unicode, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal unsafe static extern uint SspiPromptForCredentials(
-           string pszTargetName,
-           ref CREDUI_INFO pUiInfo,
-           uint dwAuthError,
-           string pszPackage,
-           IntPtr authIdentity,
-           out IntPtr ppAuthIdentity,
-           [MarshalAs(UnmanagedType.Bool)] ref bool pfSave,
-           uint dwFlags
-            );
+        internal static extern unsafe uint SspiPromptForCredentials(
+            string pszTargetName,
+            ref CREDUI_INFO pUiInfo,
+            uint dwAuthError,
+            string pszPackage,
+            IntPtr authIdentity,
+            out IntPtr ppAuthIdentity,
+            [MarshalAs(UnmanagedType.Bool)] ref bool pfSave,
+            uint dwFlags
+        );
 
         [DllImport(CREDUI, CharSet = CharSet.Unicode, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
         [return: MarshalAs(UnmanagedType.U1)]
-        internal unsafe static extern bool SspiIsPromptingNeeded(uint ErrorOrNtStatus);
+        internal static extern unsafe bool SspiIsPromptingNeeded(uint ErrorOrNtStatus);
 
         [DllImport(SECUR32, CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        internal extern static bool TranslateName( 
-            string input, 
-            EXTENDED_NAME_FORMAT inputFormat, 
-            EXTENDED_NAME_FORMAT outputFormat, 
-            StringBuilder outputString, 
-            out uint size 
-            );
-
+        internal static extern bool TranslateName(
+            string input,
+            EXTENDED_NAME_FORMAT inputFormat,
+            EXTENDED_NAME_FORMAT outputFormat,
+            StringBuilder outputString,
+            out uint size
+        );
     }
 }

@@ -2,15 +2,15 @@
 
 struct Foo
 {
-	public int i;
+    public int i;
 }
 
 public unsafe class test
 {
-	static Foo* pFoo;
+    static Foo* pFoo;
 
-	public static void Main ()
-	{
-		int* pi = &pFoo->i;
-	}
+    public static void Main()
+    {
+        int* pi = &pFoo->i;
+    }
 }

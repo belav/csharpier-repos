@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,156 +37,178 @@ using System.Security.Permissions;
 
 namespace System.Diagnostics
 {
+    [Serializable]
+    [ToolboxItem(false), DesignTimeVisible(false)]
+    [PermissionSet(SecurityAction.LinkDemand, Unrestricted = true)]
+    public sealed class EventLogEntry : Component, ISerializable
+    {
+        private string category;
+        private short categoryNumber;
+        private byte[] data;
+        private EventLogEntryType entryType;
+        private int eventID;
+        private int index;
+        private string machineName;
+        private string message;
+        private string[] replacementStrings;
+        private string source;
+        private DateTime timeGenerated;
+        private DateTime timeWritten;
+        private string userName;
+        private long instanceId;
 
-	[Serializable]
-	[ToolboxItem (false), DesignTimeVisible (false)]
-	[PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
-	public sealed class EventLogEntry : Component, ISerializable
-	{
+        internal EventLogEntry(
+            string category,
+            short categoryNumber,
+            int index,
+            int eventID,
+            string source,
+            string message,
+            string userName,
+            string machineName,
+            EventLogEntryType entryType,
+            DateTime timeGenerated,
+            DateTime timeWritten,
+            byte[] data,
+            string[] replacementStrings,
+            long instanceId
+        )
+        {
+            this.category = category;
+            this.categoryNumber = categoryNumber;
+            this.data = data;
+            this.entryType = entryType;
+            this.eventID = eventID;
+            this.index = index;
+            this.machineName = machineName;
+            this.message = message;
+            this.replacementStrings = replacementStrings;
+            this.source = source;
+            this.timeGenerated = timeGenerated;
+            this.timeWritten = timeWritten;
+            this.userName = userName;
+            this.instanceId = instanceId;
+        }
 
-		private string category;
-		private short categoryNumber;
-		private byte[] data;
-		private EventLogEntryType entryType;
-		private int eventID;
-		private int index;
-		private string machineName;
-		private string message;
-		private string[] replacementStrings;
-		private string source;
-		private DateTime timeGenerated;
-		private DateTime timeWritten;
-		private string userName;
-		private long instanceId;
+        [MonoTODO]
+        private EventLogEntry(SerializationInfo info, StreamingContext context) { }
 
-		internal EventLogEntry (string category, short categoryNumber, int index, 
-					int eventID, string source, string message, string userName, 
-					string machineName, EventLogEntryType entryType, 
-					DateTime timeGenerated, DateTime timeWritten, byte[] data, 
-					string[] replacementStrings, long instanceId)
-		{
-			this.category = category;
-			this.categoryNumber = categoryNumber;
-			this.data = data;
-			this.entryType = entryType;
-			this.eventID = eventID;
-			this.index = index;
-			this.machineName = machineName;
-			this.message = message;
-			this.replacementStrings = replacementStrings;
-			this.source = source;
-			this.timeGenerated = timeGenerated;
-			this.timeWritten = timeWritten;
-			this.userName = userName;
-			this.instanceId = instanceId;
-		}
+        [MonitoringDescription("The category of this event entry.")]
+        public string Category
+        {
+            get { return category; }
+        }
 
-		[MonoTODO]
-		private EventLogEntry (SerializationInfo info, StreamingContext context)
-		{
-		}
+        [MonitoringDescription("An ID for the category of this event entry.")]
+        public short CategoryNumber
+        {
+            get { return categoryNumber; }
+        }
 
-		[MonitoringDescription ("The category of this event entry.")]
-		public string Category {
-			get { return category; }
-		}
+        [MonitoringDescription("Binary data associated with this event entry.")]
+        public byte[] Data
+        {
+            get { return data; }
+        }
 
-		[MonitoringDescription ("An ID for the category of this event entry.")]
-		public short CategoryNumber {
-			get { return categoryNumber; }
-		}
+        [MonitoringDescription("The type of this event entry.")]
+        public EventLogEntryType EntryType
+        {
+            get { return entryType; }
+        }
 
-		[MonitoringDescription ("Binary data associated with this event entry.")]
-		public byte[] Data {
-			get { return data; }
-		}
+        [Obsolete("Use InstanceId")]
+        [MonitoringDescription("An ID number for this event entry.")]
+        public int EventID
+        {
+            get { return eventID; }
+        }
 
-		[MonitoringDescription ("The type of this event entry.")]
-		public EventLogEntryType EntryType {
-			get { return entryType; }
-		}
+        [MonitoringDescription("Sequence numer of this event entry.")]
+        public int Index
+        {
+            get { return index; }
+        }
 
-		[Obsolete ("Use InstanceId")]
-		[MonitoringDescription ("An ID number for this event entry.")]
-		public int EventID {
-			get { return eventID; }
-		}
+        [ComVisible(false)]
+        [MonitoringDescription("The instance ID for this event entry.")]
+        public long InstanceId
+        {
+            get { return instanceId; }
+        }
 
-		[MonitoringDescription ("Sequence numer of this event entry.")]
-		public int Index {
-			get { return index; }
-		}
+        [MonitoringDescription("The Computer on which this event entry occured.")]
+        public string MachineName
+        {
+            get { return machineName; }
+        }
 
-		[ComVisible (false)]
-		[MonitoringDescription ("The instance ID for this event entry.")]
-		public long InstanceId {
-			get { return instanceId; }
-		}
+        [Editor(
+            "System.ComponentModel.Design.BinaryEditor, " + Consts.AssemblySystem_Design,
+            "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+        )]
+        [MonitoringDescription("The message of this event entry.")]
+        public string Message
+        {
+            get { return message; }
+        }
 
-		[MonitoringDescription ("The Computer on which this event entry occured.")]
-		public string MachineName {
-			get { return machineName; }
-		}
+        [MonitoringDescription("Application strings for this event entry.")]
+        public string[] ReplacementStrings
+        {
+            get { return replacementStrings; }
+        }
 
-		[Editor ("System.ComponentModel.Design.BinaryEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-		[MonitoringDescription ("The message of this event entry.")]
-		public string Message {
-			get { return message; }
-		}
+        [MonitoringDescription("The source application of this event entry.")]
+        public string Source
+        {
+            get { return source; }
+        }
 
-		[MonitoringDescription ("Application strings for this event entry.")]
-		public string[] ReplacementStrings {
-			get { return replacementStrings; }
-		}
+        [MonitoringDescription("Generation time of this event entry.")]
+        public DateTime TimeGenerated
+        {
+            get { return timeGenerated; }
+        }
 
-		[MonitoringDescription ("The source application of this event entry.")]
-		public string Source {
-			get { return source; }
-		}
+        [MonitoringDescription("The time at which this event entry was written to the logfile.")]
+        public DateTime TimeWritten
+        {
+            get { return timeWritten; }
+        }
 
-		[MonitoringDescription ("Generation time of this event entry.")]
-		public DateTime TimeGenerated {
-			get { return timeGenerated; }
-		}
+        [MonitoringDescription("The name of a user associated with this event entry.")]
+        public string UserName
+        {
+            get { return userName; }
+        }
 
-		[MonitoringDescription ("The time at which this event entry was written to the logfile.")]
-		public DateTime TimeWritten {
-			get { return timeWritten; }
-		}
+        public bool Equals(EventLogEntry otherEntry)
+        {
+            if (otherEntry == this)
+                return true;
 
-		[MonitoringDescription ("The name of a user associated with this event entry.")]
-		public string UserName {
-			get { return userName; }
-		}
+            return (
+                (otherEntry.Category == category)
+                && (otherEntry.CategoryNumber == categoryNumber)
+                && (otherEntry.Data.Equals(data))
+                && (otherEntry.EntryType == entryType)
+                && (otherEntry.InstanceId == instanceId)
+                && (otherEntry.Index == index)
+                && (otherEntry.MachineName == machineName)
+                && (otherEntry.Message == message)
+                && (otherEntry.ReplacementStrings.Equals(replacementStrings))
+                && (otherEntry.Source == source)
+                && (otherEntry.TimeGenerated.Equals(timeGenerated))
+                && (otherEntry.TimeWritten.Equals(timeWritten))
+                && (otherEntry.UserName == userName)
+            );
+        }
 
-		public bool Equals (EventLogEntry otherEntry)
-		{
-			if (otherEntry == this)
-				return true;
-
-			return (
-				(otherEntry.Category == category) &&
-				(otherEntry.CategoryNumber == categoryNumber) &&
-				(otherEntry.Data.Equals (data)) &&
-				(otherEntry.EntryType == entryType) &&
-				(otherEntry.InstanceId == instanceId) &&
-				(otherEntry.Index == index) &&
-				(otherEntry.MachineName == machineName) &&
-				(otherEntry.Message == message) &&
-				(otherEntry.ReplacementStrings.Equals (replacementStrings)) &&
-				(otherEntry.Source == source) &&
-				(otherEntry.TimeGenerated.Equals (timeGenerated)) &&
-				(otherEntry.TimeWritten.Equals (timeWritten)) &&
-				(otherEntry.UserName == userName)
-				);
-		}
-
-		[MonoTODO ("Needs serialization support")]
-		void ISerializable.GetObjectData (SerializationInfo info, 
-			StreamingContext context)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO("Needs serialization support")]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
-

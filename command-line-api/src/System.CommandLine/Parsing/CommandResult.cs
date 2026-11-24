@@ -15,8 +15,9 @@ namespace System.CommandLine.Parsing
             CliCommand command,
             CliToken token,
             SymbolResultTree symbolResultTree,
-            CommandResult? parent = null) :
-            base(symbolResultTree, parent)
+            CommandResult? parent = null
+        )
+            : base(symbolResultTree, parent)
         {
             Command = command ?? throw new ArgumentNullException(nameof(command));
             IdentifierToken = token ?? throw new ArgumentNullException(nameof(token));
@@ -38,10 +39,11 @@ namespace System.CommandLine.Parsing
         public IEnumerable<SymbolResult> Children => SymbolResultTree.GetChildren(this);
 
         /// <inheritdoc/>
-        public override string ToString() => $"{nameof(CommandResult)}: {IdentifierToken.Value} {string.Join(" ", Tokens.Select(t => t.Value))}";
+        public override string ToString() =>
+            $"{nameof(CommandResult)}: {IdentifierToken.Value} {string.Join(" ", Tokens.Select(t => t.Value))}";
 
-        internal override bool UseDefaultValueFor(ArgumentResult argumentResult)
-            => argumentResult.Argument.HasDefaultValue && argumentResult.Tokens.Count == 0;
+        internal override bool UseDefaultValueFor(ArgumentResult argumentResult) =>
+            argumentResult.Argument.HasDefaultValue && argumentResult.Tokens.Count == 0;
 
         /// <param name="completeValidation">Only the inner most command goes through complete validation.</param>
         internal void Validate(bool completeValidation)
@@ -51,7 +53,8 @@ namespace System.CommandLine.Parsing
                 if (Command.Action is null && Command.HasSubcommands)
                 {
                     SymbolResultTree.InsertFirstError(
-                        new ParseError(LocalizationResources.RequiredCommandWasNotProvided(), this));
+                        new ParseError(LocalizationResources.RequiredCommandWasNotProvided(), this)
+                    );
                 }
 
                 if (Command.HasValidators)
@@ -87,7 +90,14 @@ namespace System.CommandLine.Parsing
             {
                 var option = options[i];
 
-                if (!completeValidation && !(option.Recursive || option.Argument.HasDefaultValue || option is VersionOption))
+                if (
+                    !completeValidation
+                    && !(
+                        option.Recursive
+                        || option.Argument.HasDefaultValue
+                        || option is VersionOption
+                    )
+                )
                 {
                     continue;
                 }
@@ -102,12 +112,18 @@ namespace System.CommandLine.Parsing
                         optionResult = new(option, SymbolResultTree, null, this);
                         SymbolResultTree.Add(optionResult.Option, optionResult);
 
-                        argumentResult = new(optionResult.Option.Argument, SymbolResultTree, optionResult);
+                        argumentResult = new(
+                            optionResult.Option.Argument,
+                            SymbolResultTree,
+                            optionResult
+                        );
                         SymbolResultTree.Add(optionResult.Option.Argument, argumentResult);
 
                         if (option.Required && !option.Argument.HasDefaultValue)
                         {
-                            argumentResult.AddError(LocalizationResources.RequiredOptionWasNotProvided(option.Name));
+                            argumentResult.AddError(
+                                LocalizationResources.RequiredOptionWasNotProvided(option.Name)
+                            );
                             continue;
                         }
                     }
@@ -172,7 +188,9 @@ namespace System.CommandLine.Parsing
 
                     if (!argument.HasDefaultValue && argument.Arity.MinimumNumberOfValues > 0)
                     {
-                        argumentResult.AddError(LocalizationResources.RequiredArgumentMissing(argumentResult));
+                        argumentResult.AddError(
+                            LocalizationResources.RequiredArgumentMissing(argumentResult)
+                        );
                         continue;
                     }
                 }

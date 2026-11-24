@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public partial class DeclarationParsingTests : ParsingTests
     {
-        public DeclarationParsingTests(ITestOutputHelper output) : base(output) { }
+        public DeclarationParsingTests(ITestOutputHelper output)
+            : base(output) { }
 
         protected override SyntaxTree ParseTree(string text, CSharpParseOptions options)
         {
@@ -479,8 +480,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal("b = c", ad.Attributes[0].ArgumentList.Arguments[0].ToString());
             Assert.NotNull(ad.Attributes[0].ArgumentList.Arguments[0].NameEquals);
             Assert.NotNull(ad.Attributes[0].ArgumentList.Arguments[0].NameEquals.Name);
-            Assert.Equal("b", ad.Attributes[0].ArgumentList.Arguments[0].NameEquals.Name.ToString());
-            Assert.NotEqual(default, ad.Attributes[0].ArgumentList.Arguments[0].NameEquals.EqualsToken);
+            Assert.Equal(
+                "b",
+                ad.Attributes[0].ArgumentList.Arguments[0].NameEquals.Name.ToString()
+            );
+            Assert.NotEqual(
+                default,
+                ad.Attributes[0].ArgumentList.Arguments[0].NameEquals.EqualsToken
+            );
             Assert.NotNull(ad.Attributes[0].ArgumentList.Arguments[0].Expression);
             Assert.Equal("c", ad.Attributes[0].ArgumentList.Arguments[0].Expression.ToString());
             Assert.NotEqual(default, ad.Attributes[0].ArgumentList.CloseParenToken);
@@ -582,7 +589,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestFileScopedNamespace()
         {
             var text = "namespace a;";
-            var file = this.ParseFile(text, CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Preview));
+            var file = this.ParseFile(
+                text,
+                CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Preview)
+            );
 
             Assert.NotNull(file);
             Assert.Equal(1, file.Members.Count);
@@ -648,7 +658,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestFileScopedNamespaceWithUsing()
         {
             var text = "namespace a; using b.c;";
-            var file = this.ParseFile(text, CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Preview));
+            var file = this.ParseFile(
+                text,
+                CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Preview)
+            );
 
             Assert.NotNull(file);
             Assert.Equal(1, file.Members.Count);
@@ -693,7 +706,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestFileScopedNamespaceWithExternAlias()
         {
             var text = "namespace a; extern alias b;";
-            var file = this.ParseFile(text, CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Preview));
+            var file = this.ParseFile(
+                text,
+                CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Preview)
+            );
 
             Assert.NotNull(file);
             Assert.Equal(1, file.Members.Count);
@@ -1179,13 +1195,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(0, cs.Members.Count);
             Assert.NotEqual(default, cs.CloseBraceToken);
 
-            CreateCompilation(text).GetDeclarationDiagnostics().Verify(
-                // (1,7): warning CS8981: The type name 'a' only contains lower-cased ascii characters. Such names may become reserved for the language.
-                // class a where b : c { }
-                Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "a").WithArguments("a").WithLocation(1, 7),
-                // (1,9): error CS0080: Constraints are not allowed on non-generic declarations
-                // class a where b : c { }
-                Diagnostic(ErrorCode.ERR_ConstraintOnlyAllowedOnGenericDecl, "where").WithLocation(1, 9));
+            CreateCompilation(text)
+                .GetDeclarationDiagnostics()
+                .Verify(
+                    // (1,7): warning CS8981: The type name 'a' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                    // class a where b : c { }
+                    Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "a")
+                        .WithArguments("a")
+                        .WithLocation(1, 7),
+                    // (1,9): error CS0080: Constraints are not allowed on non-generic declarations
+                    // class a where b : c { }
+                    Diagnostic(ErrorCode.ERR_ConstraintOnlyAllowedOnGenericDecl, "where")
+                        .WithLocation(1, 9)
+                );
         }
 
         [Fact]
@@ -1193,13 +1215,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             var text = "class a { void M() where b : c { } }";
 
-            CreateCompilation(text).GetDeclarationDiagnostics().Verify(
-                // (1,7): warning CS8981: The type name 'a' only contains lower-cased ascii characters. Such names may become reserved for the language.
-                // class a { void M() where b : c { } }
-                Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "a").WithArguments("a").WithLocation(1, 7),
-                // (1,20): error CS0080: Constraints are not allowed on non-generic declarations
-                // class a { void M() where b : c { } }
-                Diagnostic(ErrorCode.ERR_ConstraintOnlyAllowedOnGenericDecl, "where").WithLocation(1, 20));
+            CreateCompilation(text)
+                .GetDeclarationDiagnostics()
+                .Verify(
+                    // (1,7): warning CS8981: The type name 'a' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                    // class a { void M() where b : c { } }
+                    Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "a")
+                        .WithArguments("a")
+                        .WithLocation(1, 7),
+                    // (1,20): error CS0080: Constraints are not allowed on non-generic declarations
+                    // class a { void M() where b : c { } }
+                    Diagnostic(ErrorCode.ERR_ConstraintOnlyAllowedOnGenericDecl, "where")
+                        .WithLocation(1, 20)
+                );
         }
 
         [Fact]
@@ -1232,7 +1260,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.NotEqual(default, cs.ConstraintClauses[0].ColonToken);
             Assert.False(cs.ConstraintClauses[0].ColonToken.IsMissing);
             Assert.Equal(1, cs.ConstraintClauses[0].Constraints.Count);
-            Assert.Equal(SyntaxKind.ConstructorConstraint, cs.ConstraintClauses[0].Constraints[0].Kind());
+            Assert.Equal(
+                SyntaxKind.ConstructorConstraint,
+                cs.ConstraintClauses[0].Constraints[0].Kind()
+            );
             var bound = (ConstructorConstraintSyntax)cs.ConstraintClauses[0].Constraints[0];
             Assert.NotEqual(default, bound.NewKeyword);
             Assert.False(bound.NewKeyword.IsMissing);
@@ -1317,7 +1348,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.NotEqual(default, cs.ConstraintClauses[0].ColonToken);
             Assert.False(cs.ConstraintClauses[0].ColonToken.IsMissing);
             Assert.Equal(1, cs.ConstraintClauses[0].Constraints.Count);
-            Assert.Equal(SyntaxKind.StructConstraint, cs.ConstraintClauses[0].Constraints[0].Kind());
+            Assert.Equal(
+                SyntaxKind.StructConstraint,
+                cs.ConstraintClauses[0].Constraints[0].Kind()
+            );
             var bound = (ClassOrStructConstraintSyntax)cs.ConstraintClauses[0].Constraints[0];
             Assert.NotEqual(default, bound.ClassOrStructKeyword);
             Assert.False(bound.ClassOrStructKeyword.IsMissing);
@@ -1370,7 +1404,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.NotNull(typeBound.Type);
             Assert.Equal("c", typeBound.Type.ToString());
 
-            Assert.Equal(SyntaxKind.ConstructorConstraint, cs.ConstraintClauses[0].Constraints[2].Kind());
+            Assert.Equal(
+                SyntaxKind.ConstructorConstraint,
+                cs.ConstraintClauses[0].Constraints[2].Kind()
+            );
             var bound = (ConstructorConstraintSyntax)cs.ConstraintClauses[0].Constraints[2];
             Assert.NotEqual(default, bound.NewKeyword);
             Assert.False(bound.NewKeyword.IsMissing);
@@ -1425,7 +1462,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.NotEqual(default, cs.ConstraintClauses[1].ColonToken);
             Assert.False(cs.ConstraintClauses[1].ColonToken.IsMissing);
             Assert.Equal(1, cs.ConstraintClauses[1].Constraints.Count);
-            Assert.Equal(SyntaxKind.ConstructorConstraint, cs.ConstraintClauses[1].Constraints[0].Kind());
+            Assert.Equal(
+                SyntaxKind.ConstructorConstraint,
+                cs.ConstraintClauses[1].Constraints[0].Kind()
+            );
             var bound = (ConstructorConstraintSyntax)cs.ConstraintClauses[1].Constraints[0];
             Assert.NotEqual(default, bound.NewKeyword);
             Assert.False(bound.NewKeyword.IsMissing);
@@ -1575,7 +1615,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.NotNull(typeBound.Type);
             Assert.Equal("e", typeBound.Type.ToString());
 
-            Assert.Equal(SyntaxKind.ConstructorConstraint, cs.ConstraintClauses[0].Constraints[2].Kind());
+            Assert.Equal(
+                SyntaxKind.ConstructorConstraint,
+                cs.ConstraintClauses[0].Constraints[2].Kind()
+            );
             var bound = (ConstructorConstraintSyntax)cs.ConstraintClauses[0].Constraints[2];
             Assert.NotEqual(default, bound.NewKeyword);
             Assert.False(bound.NewKeyword.IsMissing);
@@ -2345,7 +2388,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(1, ds.ParameterList.Parameters.Count);
             Assert.Equal(0, ds.ParameterList.Parameters[0].AttributeLists.Count);
             Assert.Equal(1, ds.ParameterList.Parameters[0].Modifiers.Count);
-            Assert.Equal(SyntaxKind.ParamsKeyword, ds.ParameterList.Parameters[0].Modifiers[0].Kind());
+            Assert.Equal(
+                SyntaxKind.ParamsKeyword,
+                ds.ParameterList.Parameters[0].Modifiers[0].Kind()
+            );
             Assert.NotNull(ds.ParameterList.Parameters[0].Type);
             Assert.Equal("c", ds.ParameterList.Parameters[0].Type.ToString());
             Assert.NotEqual(default, ds.ParameterList.Parameters[0].Identifier);
@@ -2667,7 +2713,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         private void TestClassMethodModifiers(params SyntaxKind[] modifiers)
         {
-            var text = "class a { " + string.Join(" ", modifiers.Select(SyntaxFacts.GetText)) + " b X() { } }";
+            var text =
+                "class a { "
+                + string.Join(" ", modifiers.Select(SyntaxFacts.GetText))
+                + " b X() { } }";
             var file = this.ParseFile(text);
 
             Assert.NotNull(file);
@@ -2728,8 +2777,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             TestClassMethodModifiers(SyntaxKind.PublicKeyword, SyntaxKind.VirtualKeyword);
             TestClassMethodModifiers(SyntaxKind.VirtualKeyword, SyntaxKind.PublicKeyword);
-            TestClassMethodModifiers(SyntaxKind.InternalKeyword, SyntaxKind.ProtectedKeyword, SyntaxKind.VirtualKeyword);
-            TestClassMethodModifiers(SyntaxKind.InternalKeyword, SyntaxKind.VirtualKeyword, SyntaxKind.ProtectedKeyword);
+            TestClassMethodModifiers(
+                SyntaxKind.InternalKeyword,
+                SyntaxKind.ProtectedKeyword,
+                SyntaxKind.VirtualKeyword
+            );
+            TestClassMethodModifiers(
+                SyntaxKind.InternalKeyword,
+                SyntaxKind.VirtualKeyword,
+                SyntaxKind.ProtectedKeyword
+            );
         }
 
         [Fact]
@@ -2961,7 +3018,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestStructBadExpressionProperty()
         {
             var text =
-@"public struct S
+                @"public struct S
 {
     public int P readonly => 0;
 }
@@ -3199,7 +3256,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(0, ms.ParameterList.Parameters[0].Modifiers.Count);
             Assert.Null(ms.ParameterList.Parameters[0].Type);
             Assert.NotEqual(default, ms.ParameterList.Parameters[0].Identifier);
-            Assert.Equal(SyntaxKind.ArgListKeyword, ms.ParameterList.Parameters[0].Identifier.Kind());
+            Assert.Equal(
+                SyntaxKind.ArgListKeyword,
+                ms.ParameterList.Parameters[0].Identifier.Kind()
+            );
 
             Assert.NotEqual(default, ms.ParameterList.CloseParenToken);
             Assert.False(ms.ParameterList.CloseParenToken.IsMissing);
@@ -3457,7 +3517,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestGenericClassConstructor()
         {
-            var text = @"
+            var text =
+                @"
 class Class1<T>{
     public Class1() { }
 }
@@ -3931,7 +3992,10 @@ class Class1<T>{
             Assert.NotNull(fs.Declaration.Variables[0].Initializer);
             Assert.NotEqual(default, fs.Declaration.Variables[0].Initializer.EqualsToken);
             Assert.NotNull(fs.Declaration.Variables[0].Initializer.Value);
-            Assert.Equal(SyntaxKind.ArrayInitializerExpression, fs.Declaration.Variables[0].Initializer.Value.Kind());
+            Assert.Equal(
+                SyntaxKind.ArrayInitializerExpression,
+                fs.Declaration.Variables[0].Initializer.Value.Kind()
+            );
             Assert.Equal("{ }", fs.Declaration.Variables[0].Initializer.Value.ToString());
             Assert.NotEqual(default, fs.SemicolonToken);
             Assert.False(fs.SemicolonToken.IsMissing);
@@ -4468,16 +4532,43 @@ class Class1<T>{
         [Fact]
         public void TestClassPropertyOrEventWithValue()
         {
-            TestClassPropertyWithValue(SyntaxKind.GetAccessorDeclaration, SyntaxKind.GetKeyword, SyntaxKind.IdentifierToken);
-            TestClassPropertyWithValue(SyntaxKind.SetAccessorDeclaration, SyntaxKind.SetKeyword, SyntaxKind.IdentifierToken);
-            TestClassEventWithValue(SyntaxKind.AddAccessorDeclaration, SyntaxKind.AddKeyword, SyntaxKind.IdentifierToken);
-            TestClassEventWithValue(SyntaxKind.RemoveAccessorDeclaration, SyntaxKind.RemoveKeyword, SyntaxKind.IdentifierToken);
+            TestClassPropertyWithValue(
+                SyntaxKind.GetAccessorDeclaration,
+                SyntaxKind.GetKeyword,
+                SyntaxKind.IdentifierToken
+            );
+            TestClassPropertyWithValue(
+                SyntaxKind.SetAccessorDeclaration,
+                SyntaxKind.SetKeyword,
+                SyntaxKind.IdentifierToken
+            );
+            TestClassEventWithValue(
+                SyntaxKind.AddAccessorDeclaration,
+                SyntaxKind.AddKeyword,
+                SyntaxKind.IdentifierToken
+            );
+            TestClassEventWithValue(
+                SyntaxKind.RemoveAccessorDeclaration,
+                SyntaxKind.RemoveKeyword,
+                SyntaxKind.IdentifierToken
+            );
         }
 
-        private void TestClassPropertyWithValue(SyntaxKind accessorKind, SyntaxKind accessorKeyword, SyntaxKind tokenKind)
+        private void TestClassPropertyWithValue(
+            SyntaxKind accessorKind,
+            SyntaxKind accessorKeyword,
+            SyntaxKind tokenKind
+        )
         {
-            bool isEvent = accessorKeyword == SyntaxKind.AddKeyword || accessorKeyword == SyntaxKind.RemoveKeyword;
-            var text = "class a { " + (isEvent ? "event" : string.Empty) + " b c { " + SyntaxFacts.GetText(accessorKeyword) + " { x = value; } } }";
+            bool isEvent =
+                accessorKeyword == SyntaxKind.AddKeyword
+                || accessorKeyword == SyntaxKind.RemoveKeyword;
+            var text =
+                "class a { "
+                + (isEvent ? "event" : string.Empty)
+                + " b c { "
+                + SyntaxFacts.GetText(accessorKeyword)
+                + " { x = value; } } }";
             var file = this.ParseFile(text);
 
             Assert.NotNull(file);
@@ -4500,7 +4591,10 @@ class Class1<T>{
 
             Assert.Equal(1, cs.Members.Count);
 
-            Assert.Equal(isEvent ? SyntaxKind.EventDeclaration : SyntaxKind.PropertyDeclaration, cs.Members[0].Kind());
+            Assert.Equal(
+                isEvent ? SyntaxKind.EventDeclaration : SyntaxKind.PropertyDeclaration,
+                cs.Members[0].Kind()
+            );
             var ps = (PropertyDeclarationSyntax)cs.Members[0];
             Assert.Equal(0, ps.AttributeLists.Count);
             Assert.Equal(0, ps.Modifiers.Count);
@@ -4531,9 +4625,16 @@ class Class1<T>{
             Assert.Equal(tokenKind, ((IdentifierNameSyntax)bx.Right).Identifier.Kind());
         }
 
-        private void TestClassEventWithValue(SyntaxKind accessorKind, SyntaxKind accessorKeyword, SyntaxKind tokenKind)
+        private void TestClassEventWithValue(
+            SyntaxKind accessorKind,
+            SyntaxKind accessorKeyword,
+            SyntaxKind tokenKind
+        )
         {
-            var text = "class a { event b c { " + SyntaxFacts.GetText(accessorKeyword) + " { x = value; } } }";
+            var text =
+                "class a { event b c { "
+                + SyntaxFacts.GetText(accessorKeyword)
+                + " { x = value; } } }";
             var file = this.ParseFile(text);
 
             Assert.NotNull(file);
@@ -4783,7 +4884,8 @@ class Class1<T>{
 
         private void TestClassEventPropertyWithModifier(SyntaxKind mod)
         {
-            var text = "class a { " + SyntaxFacts.GetText(mod) + " event b c { add { } remove { } } }";
+            var text =
+                "class a { " + SyntaxFacts.GetText(mod) + " event b c { add { } remove { } } }";
             var file = this.ParseFile(text);
 
             Assert.NotNull(file);
@@ -5663,37 +5765,44 @@ class Class1<T>{
         public void TestNamespaceDeclarationsBadNames1()
         {
             var text = @"namespace A::B { }";
-            CreateCompilation(text).VerifyDiagnostics(
-                // (1,11): error CS7000: Unexpected use of an aliased name
-                // namespace A::B { }
-                Diagnostic(ErrorCode.ERR_UnexpectedAliasedName, "A::B").WithLocation(1, 11));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (1,11): error CS7000: Unexpected use of an aliased name
+                    // namespace A::B { }
+                    Diagnostic(ErrorCode.ERR_UnexpectedAliasedName, "A::B").WithLocation(1, 11)
+                );
         }
 
         [Fact]
         public void TestNamespaceDeclarationsBadNames2()
         {
             var text = @"namespace A<B> { }";
-            CreateCompilation(text).VerifyDiagnostics(
-                // (1,11): error CS7002: Unexpected use of a generic name
-                // namespace A<B> { }
-                Diagnostic(ErrorCode.ERR_UnexpectedGenericName, "A<B>").WithLocation(1, 11));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (1,11): error CS7002: Unexpected use of a generic name
+                    // namespace A<B> { }
+                    Diagnostic(ErrorCode.ERR_UnexpectedGenericName, "A<B>").WithLocation(1, 11)
+                );
         }
 
         [Fact]
         public void TestNamespaceDeclarationsBadNames3()
         {
             var text = @"namespace A<,> { }";
-            CreateCompilation(text).VerifyDiagnostics(
-                // (1,11): error CS7002: Unexpected use of a generic name
-                // namespace A<,> { }
-                Diagnostic(ErrorCode.ERR_UnexpectedGenericName, "A<,>").WithLocation(1, 11));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (1,11): error CS7002: Unexpected use of a generic name
+                    // namespace A<,> { }
+                    Diagnostic(ErrorCode.ERR_UnexpectedGenericName, "A<,>").WithLocation(1, 11)
+                );
         }
 
         [WorkItem(537690, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537690")]
         [Fact]
         public void TestMissingSemicolonAfterListInitializer()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 using System.Linq;
 class Program {
   static void Main() {
@@ -5710,7 +5819,8 @@ class Program {
         [Fact]
         public void TestPartialPartial()
         {
-            var text = @"
+            var text =
+                @"
 partial class PartialPartial
 {
     int i = 1;
@@ -5728,45 +5838,60 @@ partial class PartialPartial
 }
 ";
             // These errors aren't great.  Ideally we can improve things in the future.
-            CreateCompilation(text).VerifyDiagnostics(
-                // (5,13): error CS1525: Invalid expression term 'partial'
-                //     partial partial void PM();
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "partial").WithArguments("partial").WithLocation(5, 13),
-                // (5,13): error CS1002: ; expected
-                //     partial partial void PM();
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "partial").WithLocation(5, 13),
-                // (6,13): error CS1525: Invalid expression term 'partial'
-                //     partial partial void PM()
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "partial").WithArguments("partial").WithLocation(6, 13),
-                // (6,13): error CS1002: ; expected
-                //     partial partial void PM()
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "partial").WithLocation(6, 13),
-                // (6,13): error CS0102: The type 'PartialPartial' already contains a definition for ''
-                //     partial partial void PM()
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "").WithArguments("PartialPartial", "").WithLocation(6, 13),
-                // (5,5): error CS0246: The type or namespace name 'partial' could not be found (are you missing a using directive or an assembly reference?)
-                //     partial partial void PM();
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "partial").WithArguments("partial").WithLocation(5, 5),
-                // (6,5): error CS0246: The type or namespace name 'partial' could not be found (are you missing a using directive or an assembly reference?)
-                //     partial partial void PM()
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "partial").WithArguments("partial").WithLocation(6, 5));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (5,13): error CS1525: Invalid expression term 'partial'
+                    //     partial partial void PM();
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "partial")
+                        .WithArguments("partial")
+                        .WithLocation(5, 13),
+                    // (5,13): error CS1002: ; expected
+                    //     partial partial void PM();
+                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "partial").WithLocation(5, 13),
+                    // (6,13): error CS1525: Invalid expression term 'partial'
+                    //     partial partial void PM()
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "partial")
+                        .WithArguments("partial")
+                        .WithLocation(6, 13),
+                    // (6,13): error CS1002: ; expected
+                    //     partial partial void PM()
+                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "partial").WithLocation(6, 13),
+                    // (6,13): error CS0102: The type 'PartialPartial' already contains a definition for ''
+                    //     partial partial void PM()
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "")
+                        .WithArguments("PartialPartial", "")
+                        .WithLocation(6, 13),
+                    // (5,5): error CS0246: The type or namespace name 'partial' could not be found (are you missing a using directive or an assembly reference?)
+                    //     partial partial void PM();
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "partial")
+                        .WithArguments("partial")
+                        .WithLocation(5, 5),
+                    // (6,5): error CS0246: The type or namespace name 'partial' could not be found (are you missing a using directive or an assembly reference?)
+                    //     partial partial void PM()
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "partial")
+                        .WithArguments("partial")
+                        .WithLocation(6, 5)
+                );
         }
 
         [Fact]
         public void TestPartialEnum()
         {
             var text = @"partial enum E{}";
-            CreateCompilationWithMscorlib45(text).VerifyDiagnostics(
-                // (1,14): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
-                // partial enum E{}
-                Diagnostic(ErrorCode.ERR_PartialMisplaced, "E").WithLocation(1, 14));
+            CreateCompilationWithMscorlib45(text)
+                .VerifyDiagnostics(
+                    // (1,14): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                    // partial enum E{}
+                    Diagnostic(ErrorCode.ERR_PartialMisplaced, "E").WithLocation(1, 14)
+                );
         }
 
         [WorkItem(539120, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539120")]
         [Fact]
         public void TestEscapedConstructor()
         {
-            var text = @"
+            var text =
+                @"
 class @class
 {
     public @class()
@@ -5782,7 +5907,8 @@ class @class
         [Fact]
         public void TestAnonymousMethodWithDefaultParameter()
         {
-            var text = @"
+            var text =
+                @"
 delegate void F(int x);
 class C {
    void M() {
@@ -5795,17 +5921,20 @@ class C {
             Assert.NotNull(file);
             Assert.Equal(0, file.Errors().Length);
 
-            CreateCompilation(text).VerifyDiagnostics(
-                // (5,28): error CS1065: Default values are not valid in this context.
-                //      F f = delegate (int x = 0) { };
-                Diagnostic(ErrorCode.ERR_DefaultValueNotAllowed, "=").WithLocation(5, 28));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (5,28): error CS1065: Default values are not valid in this context.
+                    //      F f = delegate (int x = 0) { };
+                    Diagnostic(ErrorCode.ERR_DefaultValueNotAllowed, "=").WithLocation(5, 28)
+                );
         }
 
         [WorkItem(537865, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537865")]
         [Fact]
         public void RegressIfDevTrueUnicode()
         {
-            var text = @"
+            var text =
+                @"
 class P
 {
 static void Main()
@@ -5826,7 +5955,8 @@ System.Console.WriteLine(""Bad, breaking change"");
         [Fact]
         public void RegressLongDirectiveIdentifierDefn()
         {
-            var text = @"
+            var text =
+                @"
 //130 chars (max is 128)
 #define A234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
 class P
@@ -5850,7 +5980,8 @@ System.Console.WriteLine(""Bad, breaking change"");
         [Fact]
         public void RegressLongDirectiveIdentifierUse()
         {
-            var text = @"
+            var text =
+                @"
 //128 chars (max)
 #define A2345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678
 class P
@@ -5872,7 +6003,11 @@ System.Console.WriteLine(""Bad, breaking change"");
 
         //Expects a single class, containing a single method, containing a single statement.
         //Presumably, the statement depends on a conditional compilation directive.
-        private void TestConditionalCompilation(string text, string desiredText, string undesiredText)
+        private void TestConditionalCompilation(
+            string text,
+            string desiredText,
+            string undesiredText
+        )
         {
             var file = this.ParseFile(text);
 
@@ -5898,31 +6033,38 @@ System.Console.WriteLine(""Bad, breaking change"");
         [Fact]
         public void TestBadlyPlacedParams()
         {
-            var text1 = @"
+            var text1 =
+                @"
 class C 
 {
    void M(params int[] i, int j)  {}
 }";
-            var text2 = @"
+            var text2 =
+                @"
 class C 
 {
    void M(__arglist, int j)  {}
 }";
 
-            CreateCompilation(text1).VerifyDiagnostics(
-                // (4,11): error CS0231: A params parameter must be the last parameter in a parameter list
-                //    void M(params int[] i, int j)  {}
-                Diagnostic(ErrorCode.ERR_ParamsLast, "params int[] i").WithLocation(4, 11));
-            CreateCompilation(text2).VerifyDiagnostics(
-                // (4,11): error CS0257: An __arglist parameter must be the last parameter in a parameter list
-                //    void M(__arglist, int j)  {}
-                Diagnostic(ErrorCode.ERR_VarargsLast, "__arglist").WithLocation(4, 11));
+            CreateCompilation(text1)
+                .VerifyDiagnostics(
+                    // (4,11): error CS0231: A params parameter must be the last parameter in a parameter list
+                    //    void M(params int[] i, int j)  {}
+                    Diagnostic(ErrorCode.ERR_ParamsLast, "params int[] i").WithLocation(4, 11)
+                );
+            CreateCompilation(text2)
+                .VerifyDiagnostics(
+                    // (4,11): error CS0257: An __arglist parameter must be the last parameter in a parameter list
+                    //    void M(__arglist, int j)  {}
+                    Diagnostic(ErrorCode.ERR_VarargsLast, "__arglist").WithLocation(4, 11)
+                );
         }
 
         [Fact]
         public void ValidFixedBufferTypes()
         {
-            var text = @"
+            var text =
+                @"
 unsafe struct s
 {
     public fixed bool _Type1[10];
@@ -5939,7 +6081,8 @@ unsafe struct s
         [Fact]
         public void ValidFixedBufferTypesMultipleDeclarationsOnSameLine()
         {
-            var text = @"
+            var text =
+                @"
 unsafe struct s
 {
     public fixed bool _Type1[10], _Type2[10], _Type3[20];
@@ -5952,7 +6095,8 @@ unsafe struct s
         [Fact]
         public void ValidFixedBufferTypesWithCountFromConstantOrLiteral()
         {
-            var text = @"
+            var text =
+                @"
 unsafe struct s
 {
     public const int abc = 10;
@@ -5967,7 +6111,8 @@ unsafe struct s
         [Fact]
         public void ValidFixedBufferTypesAllValidTypes()
         {
-            var text = @"
+            var text =
+                @"
 unsafe struct s
 {
     public fixed bool _Type1[10]; 
@@ -5993,13 +6138,15 @@ unsafe struct s
         [Fact]
         public void CS0071_01()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 public interface I2 { }
 public interface I1
 {
     event System.Action I2.P10;
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.InterfaceDeclaration);
@@ -6052,14 +6199,16 @@ public interface I1
         [Fact]
         public void CS0071_02()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 public interface I2 { }
 public interface I1
 {
     event System.Action I2.
 P10;
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.InterfaceDeclaration);
@@ -6112,7 +6261,8 @@ P10;
         [Fact]
         public void CS0071_03()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 public interface I2 { }
 public interface I1
 {
@@ -6125,7 +6275,10 @@ P10
                 Diagnostic(ErrorCode.ERR_ExplicitEventFieldImpl, ".").WithLocation(5, 27),
                 // (7,1): error CS1519: Invalid token '}' in class, record, struct, or interface member declaration
                 // }
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "}").WithArguments("}").WithLocation(7, 1));
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "}")
+                    .WithArguments("}")
+                    .WithLocation(7, 1)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.InterfaceDeclaration);
@@ -6189,7 +6342,8 @@ P10
         [Fact]
         public void CS0071_04()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 public interface I2 { }
 public interface I1
 {
@@ -6198,7 +6352,8 @@ public interface I1
 ",
                 // (5,27): error CS0071: An explicit interface implementation of an event must use event accessor syntax
                 //     event System.Action I2.P10
-                Diagnostic(ErrorCode.ERR_ExplicitEventFieldImpl, ".").WithLocation(5, 27));
+                Diagnostic(ErrorCode.ERR_ExplicitEventFieldImpl, ".").WithLocation(5, 27)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.InterfaceDeclaration);
@@ -6256,7 +6411,8 @@ public interface I1
         [WorkItem(4826, "https://github.com/dotnet/roslyn/pull/4826")]
         public void NonAccessorAfterIncompleteProperty()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     int A { get { return this.
@@ -6274,7 +6430,8 @@ class C
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 31),
                 // (4,31): error CS1513: } expected
                 //     int A { get { return this.
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 31));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 31)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -6348,7 +6505,8 @@ class C
         [Fact]
         public void TupleArgument01()
         {
-            var text = @"
+            var text =
+                @"
 class C1
 {
     static (T, T) Test1<T>(int a, (byte, byte) arg0)
@@ -6369,7 +6527,8 @@ class C1
         [Fact]
         public void TupleArgument02()
         {
-            var text = @"
+            var text =
+                @"
 class C1
 {
     static (T, T) Test3<T>((byte, byte) arg0)
@@ -6392,7 +6551,8 @@ class C1
         [CompilerTrait(CompilerFeature.ExpressionBody)]
         public void ExpressionBodiedCtorDtorProp()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     C() : base() => M();
@@ -6400,7 +6560,8 @@ class C
     ~C() => M();
     int P { set => M(); }
 }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -6541,14 +6702,17 @@ class C
         [Fact]
         public void ParseOutVar()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     void Goo()
     {
         M(out var x);
     }
-}", options: TestOptions.Regular.WithTuplesFeature());
+}",
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -6615,7 +6779,8 @@ class C
         [Fact]
         public void TestPartiallyWrittenConstraintClauseInBaseList1()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C<T> : where
 ",
                 // (2,19): error CS1514: { expected
@@ -6623,7 +6788,8 @@ class C<T> : where
                 Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(2, 19),
                 // (2,19): error CS1513: } expected
                 // class C<T> : where
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(2, 19));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(2, 19)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -6661,7 +6827,8 @@ class C<T> : where
         [Fact]
         public void TestPartiallyWrittenConstraintClauseInBaseList2()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C<T> : where T
 ",
                 // (2,20): error CS1003: Syntax error, ',' expected
@@ -6672,7 +6839,8 @@ class C<T> : where T
                 Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(2, 21),
                 // (2,21): error CS1513: } expected
                 // class C<T> : where T
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(2, 21));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(2, 21)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -6718,7 +6886,8 @@ class C<T> : where T
         [Fact]
         public void TestPartiallyWrittenConstraintClauseInBaseList3()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C<T> : where T :
 ",
                 // (2,14): error CS1031: Type expected
@@ -6732,7 +6901,8 @@ class C<T> : where T :
                 Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(2, 23),
                 // (2,23): error CS1513: } expected
                 // class C<T> : where T :
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(2, 23));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(2, 23)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -6786,7 +6956,8 @@ class C<T> : where T :
         [Fact]
         public void TestPartiallyWrittenConstraintClauseInBaseList4()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C<T> : where T : X
 ",
                 // (2,14): error CS1031: Type expected
@@ -6797,7 +6968,8 @@ class C<T> : where T : X
                 Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(2, 25),
                 // (2,25): error CS1513: } expected
                 // class C<T> : where T : X
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(2, 25));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(2, 25)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -6852,7 +7024,8 @@ class C<T> : where T : X
         [WorkItem(23833, "https://github.com/dotnet/roslyn/issues/23833")]
         public void ProduceErrorsOnRef_Properties_Ref_Get()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     public int P
@@ -6861,17 +7034,22 @@ class Program
     }
 }";
 
-            CreateCompilation(code).VerifyDiagnostics(
-                // (6,13): error CS0106: The modifier 'ref' is not valid for this item
-                //         ref get => throw null;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "get").WithArguments("ref").WithLocation(6, 13));
+            CreateCompilation(code)
+                .VerifyDiagnostics(
+                    // (6,13): error CS0106: The modifier 'ref' is not valid for this item
+                    //         ref get => throw null;
+                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "get")
+                        .WithArguments("ref")
+                        .WithLocation(6, 13)
+                );
         }
 
         [Fact]
         [WorkItem(23833, "https://github.com/dotnet/roslyn/issues/23833")]
         public void ProduceErrorsOnRef_Properties_Ref_Get_SecondModifier()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     public int P
@@ -6880,20 +7058,27 @@ class Program
     }
 }";
 
-            CreateCompilation(code).VerifyDiagnostics(
-                // (6,22): error CS0106: The modifier 'abstract' is not valid for this item
-                //         abstract ref get => throw null;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "get").WithArguments("abstract").WithLocation(6, 22),
-                // (6,22): error CS0106: The modifier 'ref' is not valid for this item
-                //         abstract ref get => throw null;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "get").WithArguments("ref").WithLocation(6, 22));
+            CreateCompilation(code)
+                .VerifyDiagnostics(
+                    // (6,22): error CS0106: The modifier 'abstract' is not valid for this item
+                    //         abstract ref get => throw null;
+                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "get")
+                        .WithArguments("abstract")
+                        .WithLocation(6, 22),
+                    // (6,22): error CS0106: The modifier 'ref' is not valid for this item
+                    //         abstract ref get => throw null;
+                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "get")
+                        .WithArguments("ref")
+                        .WithLocation(6, 22)
+                );
         }
 
         [Fact]
         [WorkItem(23833, "https://github.com/dotnet/roslyn/issues/23833")]
         public void ProduceErrorsOnRef_Properties_Ref_Set()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     public int P
@@ -6902,17 +7087,22 @@ class Program
     }
 }";
 
-            CreateCompilation(code).VerifyDiagnostics(
-                // (6,13): error CS0106: The modifier 'ref' is not valid for this item
-                //         ref set => throw null;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "set").WithArguments("ref").WithLocation(6, 13));
+            CreateCompilation(code)
+                .VerifyDiagnostics(
+                    // (6,13): error CS0106: The modifier 'ref' is not valid for this item
+                    //         ref set => throw null;
+                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "set")
+                        .WithArguments("ref")
+                        .WithLocation(6, 13)
+                );
         }
 
         [Fact]
         [WorkItem(23833, "https://github.com/dotnet/roslyn/issues/23833")]
         public void ProduceErrorsOnRef_Properties_Ref_Set_SecondModifier()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     public int P
@@ -6921,20 +7111,27 @@ class Program
     }
 }";
 
-            CreateCompilation(code).VerifyDiagnostics(
-                // (6,22): error CS0106: The modifier 'abstract' is not valid for this item
-                //         abstract ref set => throw null;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "set").WithArguments("abstract").WithLocation(6, 22),
-                // (6,22): error CS0106: The modifier 'ref' is not valid for this item
-                //         abstract ref set => throw null;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "set").WithArguments("ref").WithLocation(6, 22));
+            CreateCompilation(code)
+                .VerifyDiagnostics(
+                    // (6,22): error CS0106: The modifier 'abstract' is not valid for this item
+                    //         abstract ref set => throw null;
+                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "set")
+                        .WithArguments("abstract")
+                        .WithLocation(6, 22),
+                    // (6,22): error CS0106: The modifier 'ref' is not valid for this item
+                    //         abstract ref set => throw null;
+                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "set")
+                        .WithArguments("ref")
+                        .WithLocation(6, 22)
+                );
         }
 
         [Fact]
         [WorkItem(23833, "https://github.com/dotnet/roslyn/issues/23833")]
         public void ProduceErrorsOnRef_Events_Ref()
         {
-            var code = @"
+            var code =
+                @"
 public class Program
 {
     event System.EventHandler E
@@ -6944,20 +7141,23 @@ public class Program
     }
 }";
 
-            CreateCompilation(code).VerifyDiagnostics(
-                // (6,9): error CS1609: Modifiers cannot be placed on event accessor declarations
-                //         ref add => throw null; 
-                Diagnostic(ErrorCode.ERR_NoModifiersOnAccessor, "ref").WithLocation(6, 9),
-                // (7,9): error CS1609: Modifiers cannot be placed on event accessor declarations
-                //         ref remove => throw null; 
-                Diagnostic(ErrorCode.ERR_NoModifiersOnAccessor, "ref").WithLocation(7, 9));
+            CreateCompilation(code)
+                .VerifyDiagnostics(
+                    // (6,9): error CS1609: Modifiers cannot be placed on event accessor declarations
+                    //         ref add => throw null;
+                    Diagnostic(ErrorCode.ERR_NoModifiersOnAccessor, "ref").WithLocation(6, 9),
+                    // (7,9): error CS1609: Modifiers cannot be placed on event accessor declarations
+                    //         ref remove => throw null;
+                    Diagnostic(ErrorCode.ERR_NoModifiersOnAccessor, "ref").WithLocation(7, 9)
+                );
         }
 
         [Fact]
         [WorkItem(23833, "https://github.com/dotnet/roslyn/issues/23833")]
         public void ProduceErrorsOnRef_Events_Ref_SecondModifier()
         {
-            var code = @"
+            var code =
+                @"
 public class Program
 {
     event System.EventHandler E
@@ -6967,21 +7167,26 @@ public class Program
     }
 }";
 
-            CreateCompilation(code).VerifyDiagnostics(
-                // (6,9): error CS1609: Modifiers cannot be placed on event accessor declarations
-                //         abstract ref add => throw null; 
-                Diagnostic(ErrorCode.ERR_NoModifiersOnAccessor, "abstract").WithLocation(6, 9),
-                // (7,9): error CS1609: Modifiers cannot be placed on event accessor declarations
-                //         abstract ref remove => throw null; 
-                Diagnostic(ErrorCode.ERR_NoModifiersOnAccessor, "abstract").WithLocation(7, 9));
+            CreateCompilation(code)
+                .VerifyDiagnostics(
+                    // (6,9): error CS1609: Modifiers cannot be placed on event accessor declarations
+                    //         abstract ref add => throw null;
+                    Diagnostic(ErrorCode.ERR_NoModifiersOnAccessor, "abstract")
+                        .WithLocation(6, 9),
+                    // (7,9): error CS1609: Modifiers cannot be placed on event accessor declarations
+                    //         abstract ref remove => throw null;
+                    Diagnostic(ErrorCode.ERR_NoModifiersOnAccessor, "abstract").WithLocation(7, 9)
+                );
         }
 
         [Fact]
         public void NullableClassConstraint_01()
         {
-            var tree = UsingNode(@"
+            var tree = UsingNode(
+                @"
 class C<T> where T : class {}
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -7022,9 +7227,11 @@ class C<T> where T : class {}
         [Fact]
         public void NullableClassConstraint_02()
         {
-            var tree = UsingNode(@"
+            var tree = UsingNode(
+                @"
 class C<T> where T : struct {}
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -7065,9 +7272,11 @@ class C<T> where T : struct {}
         [Fact]
         public void NullableClassConstraint_03()
         {
-            var tree = UsingNode(@"
+            var tree = UsingNode(
+                @"
 class C<T> where T : class? {}
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -7109,13 +7318,17 @@ class C<T> where T : class? {}
         [Fact]
         public void NullableClassConstraint_04()
         {
-            var tree = UsingNode(@"
+            var tree = UsingNode(
+                @"
 class C<T> where T : struct? {}
-", TestOptions.Regular,
+",
+                TestOptions.Regular,
                 // (2,28): error CS1073: Unexpected token '?'
                 // class C<T> where T : struct? {}
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "?").WithArguments("?").WithLocation(2, 28)
-);
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "?")
+                    .WithArguments("?")
+                    .WithLocation(2, 28)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -7157,9 +7370,12 @@ class C<T> where T : struct? {}
         [Fact]
         public void NullableClassConstraint_05()
         {
-            var tree = UsingNode(@"
+            var tree = UsingNode(
+                @"
 class C<T> where T : class? {}
-", TestOptions.Regular7_3);
+",
+                TestOptions.Regular7_3
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -7201,13 +7417,17 @@ class C<T> where T : class? {}
         [Fact]
         public void NullableClassConstraint_06()
         {
-            var tree = UsingNode(@"
+            var tree = UsingNode(
+                @"
 class C<T> where T : struct? {}
-", TestOptions.Regular7_3,
+",
+                TestOptions.Regular7_3,
                 // (2,28): error CS1073: Unexpected token '?'
                 // class C<T> where T : struct? {}
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "?").WithArguments("?").WithLocation(2, 28)
-);
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "?")
+                    .WithArguments("?")
+                    .WithLocation(2, 28)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -7249,10 +7469,14 @@ class C<T> where T : struct? {}
         [Fact]
         public void TestMethodDeclarationNullValidation()
         {
-            UsingStatement(@"void M(string name!!) { }", options: TestOptions.RegularPreview,
+            UsingStatement(
+                @"void M(string name!!) { }",
+                options: TestOptions.RegularPreview,
                 // (1,19): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name!!) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 19));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 19)
+            );
             N(SyntaxKind.LocalFunctionStatement);
             {
                 N(SyntaxKind.PredefinedType);
@@ -7284,10 +7508,14 @@ class C<T> where T : struct? {}
         [Fact]
         public void TestMethodDeclarationNullValidation_SingleExclamation()
         {
-            UsingStatement(@"void M(string name!) { }", options: TestOptions.RegularPreview,
+            UsingStatement(
+                @"void M(string name!) { }",
+                options: TestOptions.RegularPreview,
                 // (1,19): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name!) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 19));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 19)
+            );
 
             N(SyntaxKind.LocalFunctionStatement);
             {
@@ -7321,11 +7549,15 @@ class C<T> where T : struct? {}
         [Fact]
         public void TestMethodDeclarationNullValidation_SingleExclamation_ExtraTrivia()
         {
-            UsingStatement(@"void M(string name
-                /*comment1*/!/*comment2*/) { }", options: TestOptions.RegularPreview,
+            UsingStatement(
+                @"void M(string name
+                /*comment1*/!/*comment2*/) { }",
+                options: TestOptions.RegularPreview,
                 // (2,29): error CS8989: The 'parameter null-checking' feature is not supported.
                 //                 /*comment1*/!/*comment2*/) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(2, 29));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(2, 29)
+            );
 
             N(SyntaxKind.LocalFunctionStatement);
             {
@@ -7359,10 +7591,14 @@ class C<T> where T : struct? {}
         [Fact]
         public void TestOptParamMethodDeclarationWithNullValidation()
         {
-            UsingStatement(@"void M(string name!! = null) { }", options: TestOptions.RegularPreview,
+            UsingStatement(
+                @"void M(string name!! = null) { }",
+                options: TestOptions.RegularPreview,
                 // (1,19): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name!! = null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 19));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 19)
+            );
             N(SyntaxKind.LocalFunctionStatement);
             {
                 N(SyntaxKind.PredefinedType);
@@ -7402,10 +7638,14 @@ class C<T> where T : struct? {}
         [Fact]
         public void TestOptParamMethodDeclarationWithNullValidationNoSpaces()
         {
-            UsingStatement(@"void M(string name!!=null) { }", options: TestOptions.RegularPreview,
+            UsingStatement(
+                @"void M(string name!!=null) { }",
+                options: TestOptions.RegularPreview,
                 // (1,19): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name!!=null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 19));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 19)
+            );
             N(SyntaxKind.LocalFunctionStatement);
             {
                 N(SyntaxKind.PredefinedType);
@@ -7445,10 +7685,13 @@ class C<T> where T : struct? {}
         [Fact]
         public void TestNullCheckedArgList1()
         {
-            UsingStatement(@"void M(__arglist!) { }", options: TestOptions.RegularPreview,
-                    // (1,17): error CS1003: Syntax error, ',' expected
-                    // void M(__arglist!) { }
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "!").WithArguments(",").WithLocation(1, 17));
+            UsingStatement(
+                @"void M(__arglist!) { }",
+                options: TestOptions.RegularPreview,
+                // (1,17): error CS1003: Syntax error, ',' expected
+                // void M(__arglist!) { }
+                Diagnostic(ErrorCode.ERR_SyntaxError, "!").WithArguments(",").WithLocation(1, 17)
+            );
             N(SyntaxKind.LocalFunctionStatement);
             {
                 N(SyntaxKind.PredefinedType);
@@ -7477,10 +7720,13 @@ class C<T> where T : struct? {}
         [Fact]
         public void TestNullCheckedArgList2()
         {
-            UsingStatement(@"void M(__arglist!!) { }", options: TestOptions.RegularPreview,
-                    // (1,17): error CS1003: Syntax error, ',' expected
-                    // void M(__arglist!!) { }
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "!").WithArguments(",").WithLocation(1, 17));
+            UsingStatement(
+                @"void M(__arglist!!) { }",
+                options: TestOptions.RegularPreview,
+                // (1,17): error CS1003: Syntax error, ',' expected
+                // void M(__arglist!!) { }
+                Diagnostic(ErrorCode.ERR_SyntaxError, "!").WithArguments(",").WithLocation(1, 17)
+            );
             N(SyntaxKind.LocalFunctionStatement);
             {
                 N(SyntaxKind.PredefinedType);
@@ -7509,10 +7755,13 @@ class C<T> where T : struct? {}
         [Fact]
         public void TestNullCheckedArgList3()
         {
-            UsingStatement(@"void M(__arglist!! = null) { }", options: TestOptions.RegularPreview,
-                    // (1,17): error CS1003: Syntax error, ',' expected
-                    // void M(__arglist!! = null) { }
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "!").WithArguments(",").WithLocation(1, 17));
+            UsingStatement(
+                @"void M(__arglist!! = null) { }",
+                options: TestOptions.RegularPreview,
+                // (1,17): error CS1003: Syntax error, ',' expected
+                // void M(__arglist!! = null) { }
+                Diagnostic(ErrorCode.ERR_SyntaxError, "!").WithArguments(",").WithLocation(1, 17)
+            );
             N(SyntaxKind.LocalFunctionStatement);
             {
                 N(SyntaxKind.PredefinedType);
@@ -7541,10 +7790,13 @@ class C<T> where T : struct? {}
         [Fact]
         public void TestNullCheckedArgList4()
         {
-            UsingStatement(@"void M(__arglist!!= null) { }", options: TestOptions.RegularPreview,
-                    // (1,17): error CS1003: Syntax error, ',' expected
-                    // void M(__arglist!!= null) { }
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "!").WithArguments(",").WithLocation(1, 17));
+            UsingStatement(
+                @"void M(__arglist!!= null) { }",
+                options: TestOptions.RegularPreview,
+                // (1,17): error CS1003: Syntax error, ',' expected
+                // void M(__arglist!!= null) { }
+                Diagnostic(ErrorCode.ERR_SyntaxError, "!").WithArguments(",").WithLocation(1, 17)
+            );
             N(SyntaxKind.LocalFunctionStatement);
             {
                 N(SyntaxKind.PredefinedType);
@@ -7573,7 +7825,9 @@ class C<T> where T : struct? {}
         [Fact]
         public void TestNullCheckedArgList5()
         {
-            UsingStatement(@"void M(__arglist[]!!= null) { }", options: TestOptions.RegularPreview,
+            UsingStatement(
+                @"void M(__arglist[]!!= null) { }",
+                options: TestOptions.RegularPreview,
                 // (1,17): error CS1003: Syntax error, ',' expected
                 // void M(__arglist[]!!= null) { }
                 Diagnostic(ErrorCode.ERR_SyntaxError, "[").WithArguments(",").WithLocation(1, 17),
@@ -7588,7 +7842,9 @@ class C<T> where T : struct? {}
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "!").WithLocation(1, 19),
                 // (1,19): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(__arglist[]!!= null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 19));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 19)
+            );
             N(SyntaxKind.LocalFunctionStatement);
             {
                 N(SyntaxKind.PredefinedType);
@@ -7646,19 +7902,22 @@ class C<T> where T : struct? {}
         [Fact]
         public void TestArgListWithBrackets()
         {
-            UsingStatement(@"void M(__arglist[]) { }", options: TestOptions.RegularPreview,
-                    // (1,17): error CS1003: Syntax error, ',' expected
-                    // void M(__arglist[]) { }
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "[").WithArguments(",").WithLocation(1, 17),
-                    // (1,18): error CS1001: Identifier expected
-                    // void M(__arglist[]) { }
-                    Diagnostic(ErrorCode.ERR_IdentifierExpected, "]").WithLocation(1, 18),
-                    // (1,19): error CS1031: Type expected
-                    // void M(__arglist[]) { }
-                    Diagnostic(ErrorCode.ERR_TypeExpected, ")").WithLocation(1, 19),
-                    // (1,19): error CS1001: Identifier expected
-                    // void M(__arglist[]) { }
-                    Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(1, 19));
+            UsingStatement(
+                @"void M(__arglist[]) { }",
+                options: TestOptions.RegularPreview,
+                // (1,17): error CS1003: Syntax error, ',' expected
+                // void M(__arglist[]) { }
+                Diagnostic(ErrorCode.ERR_SyntaxError, "[").WithArguments(",").WithLocation(1, 17),
+                // (1,18): error CS1001: Identifier expected
+                // void M(__arglist[]) { }
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "]").WithLocation(1, 18),
+                // (1,19): error CS1031: Type expected
+                // void M(__arglist[]) { }
+                Diagnostic(ErrorCode.ERR_TypeExpected, ")").WithLocation(1, 19),
+                // (1,19): error CS1001: Identifier expected
+                // void M(__arglist[]) { }
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(1, 19)
+            );
             N(SyntaxKind.LocalFunctionStatement);
             {
                 N(SyntaxKind.PredefinedType);
@@ -7708,10 +7967,13 @@ class C<T> where T : struct? {}
         [Fact]
         public void TestArgListWithDefaultValue()
         {
-            UsingStatement(@"void M(__arglist = null) { }", options: TestOptions.RegularPreview,
-                    // (1,18): error CS1003: Syntax error, ',' expected
-                    // void M(__arglist = null) { }
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "=").WithArguments(",").WithLocation(1, 18));
+            UsingStatement(
+                @"void M(__arglist = null) { }",
+                options: TestOptions.RegularPreview,
+                // (1,18): error CS1003: Syntax error, ',' expected
+                // void M(__arglist = null) { }
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=").WithArguments(",").WithLocation(1, 18)
+            );
             N(SyntaxKind.LocalFunctionStatement);
             {
                 N(SyntaxKind.PredefinedType);
@@ -7740,10 +8002,14 @@ class C<T> where T : struct? {}
         [Fact]
         public void TestNullCheckedArgWithLeadingSpace()
         {
-            UsingStatement(@"void M(string name !!=null) { }", options: TestOptions.RegularPreview,
+            UsingStatement(
+                @"void M(string name !!=null) { }",
+                options: TestOptions.RegularPreview,
                 // (1,20): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name !!=null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 20));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 20)
+            );
             N(SyntaxKind.LocalFunctionStatement);
             {
                 N(SyntaxKind.PredefinedType);
@@ -7783,10 +8049,14 @@ class C<T> where T : struct? {}
         [Fact]
         public void TestNullCheckedArgWithLeadingNewLine()
         {
-            UsingStatement(@"void M(string name!!=null) { }", options: TestOptions.RegularPreview,
+            UsingStatement(
+                @"void M(string name!!=null) { }",
+                options: TestOptions.RegularPreview,
                 // (1,19): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name!!=null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 19));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 19)
+            );
             N(SyntaxKind.LocalFunctionStatement);
             {
                 N(SyntaxKind.PredefinedType);
@@ -7826,10 +8096,14 @@ class C<T> where T : struct? {}
         [Fact]
         public void TestNullCheckedArgWithTrailingSpace()
         {
-            UsingStatement(@"void M(string name!!= null) { }", options: TestOptions.RegularPreview,
+            UsingStatement(
+                @"void M(string name!!= null) { }",
+                options: TestOptions.RegularPreview,
                 // (1,19): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name!!= null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 19));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 19)
+            );
             N(SyntaxKind.LocalFunctionStatement);
             {
                 N(SyntaxKind.PredefinedType);
@@ -7869,10 +8143,14 @@ class C<T> where T : struct? {}
         [Fact]
         public void TestNullCheckedArgWithTrailingNewLine()
         {
-            UsingStatement(@"void M(string name!!=null) { }", options: TestOptions.RegularPreview,
+            UsingStatement(
+                @"void M(string name!!=null) { }",
+                options: TestOptions.RegularPreview,
                 // (1,19): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name!!=null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 19));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 19)
+            );
             N(SyntaxKind.LocalFunctionStatement);
             {
                 N(SyntaxKind.PredefinedType);
@@ -7912,10 +8190,14 @@ class C<T> where T : struct? {}
         [Fact]
         public void TestNullCheckedArgWithSpaceInbetween()
         {
-            UsingStatement(@"void M(string name! !=null) { }", options: TestOptions.RegularPreview,
+            UsingStatement(
+                @"void M(string name! !=null) { }",
+                options: TestOptions.RegularPreview,
                 // (1,19): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name! !=null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 19));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 19)
+            );
             N(SyntaxKind.LocalFunctionStatement);
             {
                 N(SyntaxKind.PredefinedType);
@@ -7956,10 +8238,14 @@ class C<T> where T : struct? {}
         [Fact]
         public void TestNullCheckedArgWithSpaceAfterParam()
         {
-            UsingStatement(@"void M(string name !!=null) { }", options: TestOptions.RegularPreview,
+            UsingStatement(
+                @"void M(string name !!=null) { }",
+                options: TestOptions.RegularPreview,
                 // (1,20): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name !!=null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 20));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 20)
+            );
             N(SyntaxKind.LocalFunctionStatement);
             {
                 N(SyntaxKind.PredefinedType);
@@ -7999,10 +8285,14 @@ class C<T> where T : struct? {}
         [Fact]
         public void TestNullCheckedArgWithSpaceAfterBangs()
         {
-            UsingStatement(@"void M(string name! ! =null) { }", options: TestOptions.RegularPreview,
+            UsingStatement(
+                @"void M(string name! ! =null) { }",
+                options: TestOptions.RegularPreview,
                 // (1,19): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name! ! =null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 19));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 19)
+            );
             N(SyntaxKind.LocalFunctionStatement);
             {
                 N(SyntaxKind.PredefinedType);
@@ -8043,10 +8333,14 @@ class C<T> where T : struct? {}
         [Fact]
         public void TestNullCheckedArgWithSpaceBeforeBangs()
         {
-            UsingStatement(@"void M(string name ! !=null) { }", options: TestOptions.RegularPreview,
+            UsingStatement(
+                @"void M(string name ! !=null) { }",
+                options: TestOptions.RegularPreview,
                 // (1,20): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name ! !=null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 20));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 20)
+            );
             N(SyntaxKind.LocalFunctionStatement);
             {
                 N(SyntaxKind.PredefinedType);
@@ -8087,10 +8381,14 @@ class C<T> where T : struct? {}
         [Fact]
         public void TestNullCheckedArgWithSpaceAfterEquals()
         {
-            UsingStatement(@"void M(string name!!= null) { }", options: TestOptions.RegularPreview,
+            UsingStatement(
+                @"void M(string name!!= null) { }",
+                options: TestOptions.RegularPreview,
                 // (1,19): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name!!= null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 19));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 19)
+            );
             N(SyntaxKind.LocalFunctionStatement);
             {
                 N(SyntaxKind.PredefinedType);
@@ -8130,13 +8428,19 @@ class C<T> where T : struct? {}
         [Fact]
         public void TestMethodDeclarationNullValidation_ExtraEquals()
         {
-            UsingStatement(@"void M(string name!!= = null) { }", options: TestOptions.RegularPreview,
+            UsingStatement(
+                @"void M(string name!!= = null) { }",
+                options: TestOptions.RegularPreview,
                 // (1,19): error CS8989: The 'parameter null-checking' feature is not supported.
                 // void M(string name!!= = null) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 19),
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 19),
                 // (1,23): error CS1525: Invalid expression term '='
                 // void M(string name!!= = null) { }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "=").WithArguments("=").WithLocation(1, 23));
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "=")
+                    .WithArguments("=")
+                    .WithLocation(1, 23)
+            );
 
             N(SyntaxKind.LocalFunctionStatement);
             {
@@ -8186,14 +8490,18 @@ class C<T> where T : struct? {}
         [Fact]
         public void TestNullCheckedMethod()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     public void M(string x!!) { }
-}", options: TestOptions.RegularPreview,
+}",
+                options: TestOptions.RegularPreview,
                 // (4,27): error CS8989: The 'parameter null-checking' feature is not supported.
                 //     public void M(string x!!) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(4, 27));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(4, 27)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -8237,14 +8545,18 @@ class C
         [Fact]
         public void TestNullCheckedConstructor()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     public C(string x!!) { }
-}", options: TestOptions.RegularPreview,
+}",
+                options: TestOptions.RegularPreview,
                 // (4,22): error CS8989: The 'parameter null-checking' feature is not supported.
                 //     public C(string x!!) { }
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(4, 22));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(4, 22)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -8284,17 +8596,21 @@ class C
         [Fact]
         public void TestNullCheckedOperator()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class Box
 {
     public static int operator+ (Box b!!, Box c) 
     {
         return 2;
     }
-}", options: TestOptions.RegularPreview,
+}",
+                options: TestOptions.RegularPreview,
                 // (4,39): error CS8989: The 'parameter null-checking' feature is not supported.
-                //     public static int operator+ (Box b!!, Box c) 
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(4, 39));
+                //     public static int operator+ (Box b!!, Box c)
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(4, 39)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -8359,18 +8675,27 @@ class Box
         [Fact]
         public void TestAnonymousDelegateNullChecking()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 delegate void Del(int x!!);
-Del d = delegate(int k!!) { /* ... */ };", options: TestOptions.RegularPreview,
+Del d = delegate(int k!!) { /* ... */ };",
+                options: TestOptions.RegularPreview,
                 // (2,24): error CS8989: The 'parameter null-checking' feature is not supported.
                 // delegate void Del(int x!!);
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(2, 24),
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(2, 24),
                 // (3,1): error CS8803: Top-level statements must precede namespace and type declarations.
                 // Del d = delegate(int k!!) { /* ... */ };
-                Diagnostic(ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType, "Del d = delegate(int k!!) { /* ... */ };").WithLocation(3, 1),
+                Diagnostic(
+                        ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType,
+                        "Del d = delegate(int k!!) { /* ... */ };"
+                    )
+                    .WithLocation(3, 1),
                 // (3,23): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Del d = delegate(int k!!) { /* ... */ };
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(3, 23));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(3, 23)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.DelegateDeclaration);
@@ -8447,14 +8772,17 @@ Del d = delegate(int k!!) { /* ... */ };", options: TestOptions.RegularPreview,
         [Fact, WorkItem(30102, "https://github.com/dotnet/roslyn/issues/30102")]
         public void IncompleteGenericInBaseList1()
         {
-            var tree = UsingNode(@"
+            var tree = UsingNode(
+                @"
 class B : A<int
 {
 }
-", TestOptions.Regular7_3,
+",
+                TestOptions.Regular7_3,
                 // (2,16): error CS1003: Syntax error, '>' expected
                 // class B : A<int
-                Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(">").WithLocation(2, 16));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(">").WithLocation(2, 16)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -8495,10 +8823,12 @@ class B : A<int
         {
             var text = @"namespace a..b { }";
             var tree = UsingNode(
-                text, TestOptions.Regular7_3,
+                text,
+                TestOptions.Regular7_3,
                 // (1,13): error CS1001: Identifier expected
                 // namespace a..b { }
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ".").WithLocation(1, 13));
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, ".").WithLocation(1, 13)
+            );
 
             // verify that we can roundtrip
             Assert.Equal(text, tree.ToFullString());
@@ -8539,15 +8869,18 @@ class B : A<int
         [Fact, WorkItem(30102, "https://github.com/dotnet/roslyn/issues/30102")]
         public void IncompleteGenericInBaseList2()
         {
-            var tree = UsingNode(@"
+            var tree = UsingNode(
+                @"
 class B<X, Y> : A<int
     where X : Y
 {
 }
-", TestOptions.Regular7_3,
+",
+                TestOptions.Regular7_3,
                 // (2,22): error CS1003: Syntax error, '>' expected
                 // class B<X, Y> : A<int
-                Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(">").WithLocation(2, 22));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(">").WithLocation(2, 22)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -8616,51 +8949,71 @@ class B<X, Y> : A<int
         [Fact, WorkItem(30102, "https://github.com/dotnet/roslyn/issues/30102")]
         public void TestExtraneousColonInBaseList()
         {
-            var text = @"
+            var text =
+                @"
 class A : B : C
 {
 }
 ";
-            CreateCompilation(text, parseOptions: TestOptions.Regular7_3).VerifyDiagnostics(
-                // (2,11): error CS0246: The type or namespace name 'B' could not be found (are you missing a using directive or an assembly reference?)
-                // class A : B : C
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "B").WithArguments("B").WithLocation(2, 11),
-                // (2,13): error CS1514: { expected
-                // class A : B : C
-                Diagnostic(ErrorCode.ERR_LbraceExpected, ":").WithLocation(2, 13),
-                // (2,13): error CS1513: } expected
-                // class A : B : C
-                Diagnostic(ErrorCode.ERR_RbraceExpected, ":").WithLocation(2, 13),
-                // (2,13): error CS1022: Type or namespace definition, or end-of-file expected
-                // class A : B : C
-                Diagnostic(ErrorCode.ERR_EOFExpected, ":").WithLocation(2, 13),
-                // (2,15): error CS8803: Top-level statements must precede namespace and type declarations.
-                // class A : B : C
-                Diagnostic(ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType, @"C
+            CreateCompilation(text, parseOptions: TestOptions.Regular7_3)
+                .VerifyDiagnostics(
+                    // (2,11): error CS0246: The type or namespace name 'B' could not be found (are you missing a using directive or an assembly reference?)
+                    // class A : B : C
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "B")
+                        .WithArguments("B")
+                        .WithLocation(2, 11),
+                    // (2,13): error CS1514: { expected
+                    // class A : B : C
+                    Diagnostic(ErrorCode.ERR_LbraceExpected, ":").WithLocation(2, 13),
+                    // (2,13): error CS1513: } expected
+                    // class A : B : C
+                    Diagnostic(ErrorCode.ERR_RbraceExpected, ":").WithLocation(2, 13),
+                    // (2,13): error CS1022: Type or namespace definition, or end-of-file expected
+                    // class A : B : C
+                    Diagnostic(ErrorCode.ERR_EOFExpected, ":").WithLocation(2, 13),
+                    // (2,15): error CS8803: Top-level statements must precede namespace and type declarations.
+                    // class A : B : C
+                    Diagnostic(
+                            ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType,
+                            @"C
 {
-").WithLocation(2, 15),
-                // (2,15): error CS8370: Feature 'top-level statements' is not available in C# 7.3. Please use language version 9.0 or greater.
-                // class A : B : C
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, @"C
+"
+                        )
+                        .WithLocation(2, 15),
+                    // (2,15): error CS8370: Feature 'top-level statements' is not available in C# 7.3. Please use language version 9.0 or greater.
+                    // class A : B : C
+                    Diagnostic(
+                            ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
+                            @"C
 {
-").WithArguments("top-level statements", "9.0").WithLocation(2, 15),
-                // (2,15): error CS0246: The type or namespace name 'C' could not be found (are you missing a using directive or an assembly reference?)
-                // class A : B : C
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "C").WithArguments("C").WithLocation(2, 15),
-                // (2,16): error CS1001: Identifier expected
-                // class A : B : C
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(2, 16),
-                // (2,16): error CS1003: Syntax error, ',' expected
-                // class A : B : C
-                Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(",").WithLocation(2, 16),
-                // (3,2): error CS1002: ; expected
-                // {
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(3, 2),
-                // (4,1): error CS1022: Type or namespace definition, or end-of-file expected
-                // }
-                Diagnostic(ErrorCode.ERR_EOFExpected, "}").WithLocation(4, 1));
+"
+                        )
+                        .WithArguments("top-level statements", "9.0")
+                        .WithLocation(2, 15),
+                    // (2,15): error CS0246: The type or namespace name 'C' could not be found (are you missing a using directive or an assembly reference?)
+                    // class A : B : C
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "C")
+                        .WithArguments("C")
+                        .WithLocation(2, 15),
+                    // (2,16): error CS1001: Identifier expected
+                    // class A : B : C
+                    Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(2, 16),
+                    // (2,16): error CS1003: Syntax error, ',' expected
+                    // class A : B : C
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "")
+                        .WithArguments(",")
+                        .WithLocation(2, 16),
+                    // (3,2): error CS1002: ; expected
+                    // {
+                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(3, 2),
+                    // (4,1): error CS1022: Type or namespace definition, or end-of-file expected
+                    // }
+                    Diagnostic(ErrorCode.ERR_EOFExpected, "}").WithLocation(4, 1)
+                );
 
-            var tree = UsingNode(text, TestOptions.Regular7_3,
+            var tree = UsingNode(
+                text,
+                TestOptions.Regular7_3,
                 // (2,13): error CS1514: { expected
                 // class A : B : C
                 Diagnostic(ErrorCode.ERR_LbraceExpected, ":").WithLocation(2, 13),
@@ -8672,9 +9025,13 @@ class A : B : C
                 Diagnostic(ErrorCode.ERR_EOFExpected, ":").WithLocation(2, 13),
                 // (2,15): error CS8803: Top-level statements must precede namespace and type declarations.
                 // class A : B : C
-                Diagnostic(ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType, @"C
+                Diagnostic(
+                        ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType,
+                        @"C
 {
-").WithLocation(2, 15),
+"
+                    )
+                    .WithLocation(2, 15),
                 // (2,16): error CS1001: Identifier expected
                 // class A : B : C
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(2, 16),
@@ -8686,7 +9043,8 @@ class A : B : C
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(3, 2),
                 // (4,1): error CS1022: Type or namespace definition, or end-of-file expected
                 // }
-                Diagnostic(ErrorCode.ERR_EOFExpected, "}").WithLocation(4, 1));
+                Diagnostic(ErrorCode.ERR_EOFExpected, "}").WithLocation(4, 1)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -8734,14 +9092,17 @@ class A : B : C
         [Fact, WorkItem(35236, "https://github.com/dotnet/roslyn/issues/35236")]
         public void TestNamespaceWithDotDot2()
         {
-            var text = @"namespace a
+            var text =
+                @"namespace a
                     ..b { }";
 
             var tree = UsingNode(
-                text, TestOptions.Regular7_3,
+                text,
+                TestOptions.Regular7_3,
                 // (2,22): error CS1001: Identifier expected
                 //                     ..b { }
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ".").WithLocation(2, 22));
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, ".").WithLocation(2, 22)
+            );
 
             // verify that we can roundtrip
             Assert.Equal(text, tree.ToFullString());
@@ -8782,13 +9143,16 @@ class A : B : C
         [Fact, WorkItem(35236, "https://github.com/dotnet/roslyn/issues/35236")]
         public void TestNamespaceWithDotDot3()
         {
-            var text = @"namespace a..
+            var text =
+                @"namespace a..
 b { }";
             var tree = UsingNode(
-                text, TestOptions.Regular7_3,
+                text,
+                TestOptions.Regular7_3,
                 // (1,13): error CS1001: Identifier expected
                 // namespace a..
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ".").WithLocation(1, 13));
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, ".").WithLocation(1, 13)
+            );
 
             // verify that we can roundtrip
             Assert.Equal(text, tree.ToFullString());
@@ -8829,14 +9193,17 @@ b { }";
         [Fact, WorkItem(35236, "https://github.com/dotnet/roslyn/issues/35236")]
         public void TestNamespaceWithDotDot4()
         {
-            var text = @"namespace a
+            var text =
+                @"namespace a
                     ..
 b { }";
             var tree = UsingNode(
-                text, TestOptions.Regular7_3,
+                text,
+                TestOptions.Regular7_3,
                 // (2,22): error CS1001: Identifier expected
                 //                     ..
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ".").WithLocation(2, 22));
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, ".").WithLocation(2, 22)
+            );
 
             // verify that we can roundtrip
             Assert.Equal(text, tree.ToFullString());
@@ -8879,27 +9246,34 @@ b { }";
         {
             var test = @"class C<T> where T : default { }";
 
-            CreateCompilation(test, parseOptions: useCSharp8 ? TestOptions.Regular8 : TestOptions.Regular9).VerifyDiagnostics(
-                useCSharp8
-                    ? new[]
-                    {
-                        // (1,22): error CS8400: Feature 'default type parameter constraints' is not available in C# 8.0. Please use language version 9.0 or greater.
-                        // class C<T> where T : default { }
-                        Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "default").WithArguments("default type parameter constraints", "9.0").WithLocation(1, 22),
-                        // (1,22): error CS8823: The 'default' constraint is valid on override and explicit interface implementation methods only.
-                        // class C<T> where T : default { }
-                        Diagnostic(ErrorCode.ERR_DefaultConstraintOverrideOnly, "default").WithLocation(1, 22)
-                    }
-                    : new[]
-                    {
-                        // (1,22): error CS8823: The 'default' constraint is valid on override and explicit interface implementation methods only.
-                        // class C<T> where T : default { }
-                        Diagnostic(ErrorCode.ERR_DefaultConstraintOverrideOnly, "default").WithLocation(1, 22)
-                    });
+            CreateCompilation(
+                    test,
+                    parseOptions: useCSharp8 ? TestOptions.Regular8 : TestOptions.Regular9
+                )
+                .VerifyDiagnostics(
+                    useCSharp8
+                        ? new[]
+                        {
+                            // (1,22): error CS8400: Feature 'default type parameter constraints' is not available in C# 8.0. Please use language version 9.0 or greater.
+                            // class C<T> where T : default { }
+                            Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "default")
+                                .WithArguments("default type parameter constraints", "9.0")
+                                .WithLocation(1, 22),
+                            // (1,22): error CS8823: The 'default' constraint is valid on override and explicit interface implementation methods only.
+                            // class C<T> where T : default { }
+                            Diagnostic(ErrorCode.ERR_DefaultConstraintOverrideOnly, "default")
+                                .WithLocation(1, 22),
+                        }
+                        : new[]
+                        {
+                            // (1,22): error CS8823: The 'default' constraint is valid on override and explicit interface implementation methods only.
+                            // class C<T> where T : default { }
+                            Diagnostic(ErrorCode.ERR_DefaultConstraintOverrideOnly, "default")
+                                .WithLocation(1, 22),
+                        }
+                );
 
-            UsingNode(
-                test,
-                useCSharp8 ? TestOptions.Regular8 : TestOptions.Regular9);
+            UsingNode(test, useCSharp8 ? TestOptions.Regular8 : TestOptions.Regular9);
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -8941,9 +9315,10 @@ b { }";
         public void DefaultConstraint_02()
         {
             UsingNode(
-@"class C<T, U>
+                @"class C<T, U>
     where T : default
-    where U : default { }");
+    where U : default { }"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -9004,47 +9379,67 @@ b { }";
         public void DefaultConstraint_03(bool useCSharp8)
         {
             var test =
-@"class C<T, U>
+                @"class C<T, U>
     where T : struct, default
     where U : default, class { }";
 
-            CreateCompilation(test, parseOptions: useCSharp8 ? TestOptions.Regular8 : TestOptions.Regular9).VerifyDiagnostics(
-                useCSharp8
-                ? new[] {
-                    // (2,23): error CS8400: Feature 'default type parameter constraints' is not available in C# 8.0. Please use language version 9.0 or greater.
-                    //     where T : struct, default
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "default").WithArguments("default type parameter constraints", "9.0").WithLocation(2, 23),
-                    // (2,23): error CS8823: The 'default' constraint is valid on override and explicit interface implementation methods only.
-                    //     where T : struct, default
-                    Diagnostic(ErrorCode.ERR_DefaultConstraintOverrideOnly, "default").WithLocation(2, 23),
-                    // (2,23): error CS0449: The 'class', 'struct', 'unmanaged', 'notnull', and 'default' constraints cannot be combined or duplicated, and must be specified first in the constraints list.
-                    //     where T : struct, default
-                    Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "default").WithLocation(2, 23),
-                    // (3,15): error CS8400: Feature 'default type parameter constraints' is not available in C# 8.0. Please use language version 9.0 or greater.
-                    //     where U : default, class { }
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "default").WithArguments("default type parameter constraints", "9.0").WithLocation(3, 15),
-                    // (3,15): error CS8823: The 'default' constraint is valid on override and explicit interface implementation methods only.
-                    //     where U : default, class { }
-                    Diagnostic(ErrorCode.ERR_DefaultConstraintOverrideOnly, "default").WithLocation(3, 15),
-                    // (3,24): error CS0449: The 'class', 'struct', 'unmanaged', 'notnull', and 'default' constraints cannot be combined or duplicated, and must be specified first in the constraints list.
-                    //     where U : default, class { }
-                    Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "class").WithLocation(3, 24) }
-                : new[] {
-                    // (2,23): error CS8823: The 'default' constraint is valid on override and explicit interface implementation methods only.
-                    //     where T : struct, default
-                    Diagnostic(ErrorCode.ERR_DefaultConstraintOverrideOnly, "default").WithLocation(2, 23),
-                    // (2,23): error CS0449: The 'class', 'struct', 'unmanaged', 'notnull', and 'default' constraints cannot be combined or duplicated, and must be specified first in the constraints list.
-                    //     where T : struct, default
-                    Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "default").WithLocation(2, 23),
-                    // (3,15): error CS8823: The 'default' constraint is valid on override and explicit interface implementation methods only.
-                    //     where U : default, class { }
-                    Diagnostic(ErrorCode.ERR_DefaultConstraintOverrideOnly, "default").WithLocation(3, 15),
-                    // (3,24): error CS0449: The 'class', 'struct', 'unmanaged', 'notnull', and 'default' constraints cannot be combined or duplicated, and must be specified first in the constraints list.
-                    //     where U : default, class { }
-                    Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "class").WithLocation(3, 24) });
+            CreateCompilation(
+                    test,
+                    parseOptions: useCSharp8 ? TestOptions.Regular8 : TestOptions.Regular9
+                )
+                .VerifyDiagnostics(
+                    useCSharp8
+                        ? new[]
+                        {
+                            // (2,23): error CS8400: Feature 'default type parameter constraints' is not available in C# 8.0. Please use language version 9.0 or greater.
+                            //     where T : struct, default
+                            Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "default")
+                                .WithArguments("default type parameter constraints", "9.0")
+                                .WithLocation(2, 23),
+                            // (2,23): error CS8823: The 'default' constraint is valid on override and explicit interface implementation methods only.
+                            //     where T : struct, default
+                            Diagnostic(ErrorCode.ERR_DefaultConstraintOverrideOnly, "default")
+                                .WithLocation(2, 23),
+                            // (2,23): error CS0449: The 'class', 'struct', 'unmanaged', 'notnull', and 'default' constraints cannot be combined or duplicated, and must be specified first in the constraints list.
+                            //     where T : struct, default
+                            Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "default")
+                                .WithLocation(2, 23),
+                            // (3,15): error CS8400: Feature 'default type parameter constraints' is not available in C# 8.0. Please use language version 9.0 or greater.
+                            //     where U : default, class { }
+                            Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "default")
+                                .WithArguments("default type parameter constraints", "9.0")
+                                .WithLocation(3, 15),
+                            // (3,15): error CS8823: The 'default' constraint is valid on override and explicit interface implementation methods only.
+                            //     where U : default, class { }
+                            Diagnostic(ErrorCode.ERR_DefaultConstraintOverrideOnly, "default")
+                                .WithLocation(3, 15),
+                            // (3,24): error CS0449: The 'class', 'struct', 'unmanaged', 'notnull', and 'default' constraints cannot be combined or duplicated, and must be specified first in the constraints list.
+                            //     where U : default, class { }
+                            Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "class")
+                                .WithLocation(3, 24),
+                        }
+                        : new[]
+                        {
+                            // (2,23): error CS8823: The 'default' constraint is valid on override and explicit interface implementation methods only.
+                            //     where T : struct, default
+                            Diagnostic(ErrorCode.ERR_DefaultConstraintOverrideOnly, "default")
+                                .WithLocation(2, 23),
+                            // (2,23): error CS0449: The 'class', 'struct', 'unmanaged', 'notnull', and 'default' constraints cannot be combined or duplicated, and must be specified first in the constraints list.
+                            //     where T : struct, default
+                            Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "default")
+                                .WithLocation(2, 23),
+                            // (3,15): error CS8823: The 'default' constraint is valid on override and explicit interface implementation methods only.
+                            //     where U : default, class { }
+                            Diagnostic(ErrorCode.ERR_DefaultConstraintOverrideOnly, "default")
+                                .WithLocation(3, 15),
+                            // (3,24): error CS0449: The 'class', 'struct', 'unmanaged', 'notnull', and 'default' constraints cannot be combined or duplicated, and must be specified first in the constraints list.
+                            //     where U : default, class { }
+                            Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "class")
+                                .WithLocation(3, 24),
+                        }
+                );
 
-            UsingNode(test,
-                useCSharp8 ? TestOptions.Regular8 : TestOptions.Regular9);
+            UsingNode(test, useCSharp8 ? TestOptions.Regular8 : TestOptions.Regular9);
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -9114,9 +9509,10 @@ b { }";
         public void DefaultConstraint_04()
         {
             UsingNode(
-@"class C<T, U>
+                @"class C<T, U>
     where T : struct default
-    where U : default class { }");
+    where U : default class { }"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -9185,16 +9581,18 @@ b { }";
         [Fact]
         public void Interface_NoBody()
         {
-            var text = @"
+            var text =
+                @"
 interface C";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (2,12): error CS1514: { expected
                 // interface C
                 Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(2, 12),
                 // (2,12): error CS1513: } expected
                 // interface C
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(2, 12)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -9213,7 +9611,8 @@ interface C";
         [Fact]
         public void Interface_SemicolonBody()
         {
-            var text = @"
+            var text =
+                @"
 interface C
 ;";
             UsingTree(text);
@@ -9234,7 +9633,8 @@ interface C
         [Fact]
         public void Interface_SemicolonBodyAfterBase_01()
         {
-            var text = @"
+            var text =
+                @"
 interface C : I1
 ;";
             UsingTree(text);
@@ -9266,7 +9666,8 @@ interface C : I1
         [Fact]
         public void Interface_SemicolonBodyAfterBase_02()
         {
-            var text = @"
+            var text =
+                @"
 interface C : I1, I2
 ;";
             UsingTree(text);
@@ -9306,7 +9707,8 @@ interface C : I1, I2
         [Fact]
         public void Interface_SemicolonBodyAfterConstraint_01()
         {
-            var text = @"
+            var text =
+                @"
 interface C where T1 : U1
 ;";
             UsingTree(text);
@@ -9343,7 +9745,8 @@ interface C where T1 : U1
         [Fact]
         public void Interface_SemicolonBodyAfterConstraint_02()
         {
-            var text = @"
+            var text =
+                @"
 interface C where T1 : U1 where T2 : U2
 ;";
             UsingTree(text);
@@ -9397,17 +9800,21 @@ interface C where T1 : U1 where T2 : U2
         [CombinatorialData]
         public void Class_NoBody_01(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @"
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @"
 C";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (3,2): error CS1514: { expected
                 // C
                 Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(3, 2),
                 // (3,2): error CS1513: } expected
                 // C
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(3, 2)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -9427,17 +9834,21 @@ C";
         [CombinatorialData]
         public void Class_NoBody_02(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @"
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @"
 C<T>";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (3,5): error CS1514: { expected
                 // C<T>
                 Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(3, 5),
                 // (3,5): error CS1513: } expected
                 // C<T>
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(3, 5)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -9469,8 +9880,11 @@ C<T>";
         [InlineDataAttribute(SyntaxKind.EnumDeclaration, SyntaxKind.EnumKeyword)]
         public void Class_SemicolonBody_01(SyntaxKind declKind, SyntaxKind keywordKind)
         {
-            var text = @"
-" + SyntaxFacts.GetText(keywordKind) + @" C;";
+            var text =
+                @"
+"
+                + SyntaxFacts.GetText(keywordKind)
+                + @" C;";
             UsingTree(text);
 
             N(SyntaxKind.CompilationUnit);
@@ -9492,8 +9906,11 @@ C<T>";
         [InlineDataAttribute(SyntaxKind.InterfaceDeclaration, SyntaxKind.InterfaceKeyword)]
         public void Class_SemicolonBody_02(SyntaxKind declKind, SyntaxKind keywordKind)
         {
-            var text = @"
-" + SyntaxFacts.GetText(keywordKind) + @" C<T>;";
+            var text =
+                @"
+"
+                + SyntaxFacts.GetText(keywordKind)
+                + @" C<T>;";
             UsingTree(text);
 
             N(SyntaxKind.CompilationUnit);
@@ -9524,14 +9941,18 @@ C<T>";
         [InlineDataAttribute(SyntaxKind.InterfaceDeclaration, SyntaxKind.InterfaceKeyword)]
         public void Class_SemicolonBody_03(SyntaxKind declKind, SyntaxKind keywordKind)
         {
-            var text = @"
-" + SyntaxFacts.GetText(keywordKind) + @"
+            var text =
+                @"
+"
+                + SyntaxFacts.GetText(keywordKind)
+                + @"
 C<>;";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (3,3): error CS1001: Identifier expected
                 // C<>;
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ">").WithLocation(3, 3)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -9562,14 +9983,19 @@ C<>;";
         [InlineDataAttribute(SyntaxKind.EnumDeclaration, SyntaxKind.EnumKeyword)]
         public void Class_SemicolonAfterSemicolonBody(SyntaxKind declKind, SyntaxKind keywordKind)
         {
-            var text = @"
-" + SyntaxFacts.GetText(keywordKind) + @" C;
+            var text =
+                @"
+"
+                + SyntaxFacts.GetText(keywordKind)
+                + @" C;
 ;";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (3,1): error CS8803: Top-level statements must precede namespace and type declarations.
                 // ;
-                Diagnostic(ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType, ";").WithLocation(3, 1)
-                );
+                Diagnostic(ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType, ";")
+                    .WithLocation(3, 1)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -9598,8 +10024,11 @@ C<>;";
         [InlineDataAttribute(SyntaxKind.EnumDeclaration, SyntaxKind.EnumKeyword)]
         public void Class_SemicolonBodyAfterBase_01(SyntaxKind declKind, SyntaxKind keywordKind)
         {
-            var text = @"
-" + SyntaxFacts.GetText(keywordKind) + @" C : Base;";
+            var text =
+                @"
+"
+                + SyntaxFacts.GetText(keywordKind)
+                + @" C : Base;";
             UsingTree(text);
 
             N(SyntaxKind.CompilationUnit);
@@ -9632,8 +10061,11 @@ C<>;";
         [InlineDataAttribute(SyntaxKind.InterfaceDeclaration, SyntaxKind.InterfaceKeyword)]
         public void Class_SemicolonBodyAfterBase_02(SyntaxKind declKind, SyntaxKind keywordKind)
         {
-            var text = @"
-" + SyntaxFacts.GetText(keywordKind) + @" C : Base, I1;";
+            var text =
+                @"
+"
+                + SyntaxFacts.GetText(keywordKind)
+                + @" C : Base, I1;";
             UsingTree(text);
 
             N(SyntaxKind.CompilationUnit);
@@ -9672,10 +10104,16 @@ C<>;";
         [InlineDataAttribute(SyntaxKind.StructDeclaration, SyntaxKind.StructKeyword)]
         [InlineDataAttribute(SyntaxKind.ClassDeclaration, SyntaxKind.ClassKeyword)]
         [InlineDataAttribute(SyntaxKind.InterfaceDeclaration, SyntaxKind.InterfaceKeyword)]
-        public void Class_SemicolonBodyAfterConstraint_01(SyntaxKind declKind, SyntaxKind keywordKind)
+        public void Class_SemicolonBodyAfterConstraint_01(
+            SyntaxKind declKind,
+            SyntaxKind keywordKind
+        )
         {
-            var text = @"
-" + SyntaxFacts.GetText(keywordKind) + @" C where T1 : U1 ;";
+            var text =
+                @"
+"
+                + SyntaxFacts.GetText(keywordKind)
+                + @" C where T1 : U1 ;";
             UsingTree(text);
 
             N(SyntaxKind.CompilationUnit);
@@ -9711,10 +10149,16 @@ C<>;";
         [InlineDataAttribute(SyntaxKind.StructDeclaration, SyntaxKind.StructKeyword)]
         [InlineDataAttribute(SyntaxKind.ClassDeclaration, SyntaxKind.ClassKeyword)]
         [InlineDataAttribute(SyntaxKind.InterfaceDeclaration, SyntaxKind.InterfaceKeyword)]
-        public void Class_SemicolonBodyAfterConstraint_02(SyntaxKind declKind, SyntaxKind keywordKind)
+        public void Class_SemicolonBodyAfterConstraint_02(
+            SyntaxKind declKind,
+            SyntaxKind keywordKind
+        )
         {
-            var text = @"
-" + SyntaxFacts.GetText(keywordKind) + @" C where T1 : U1 where T2 : U2 ;";
+            var text =
+                @"
+"
+                + SyntaxFacts.GetText(keywordKind)
+                + @" C where T1 : U1 where T2 : U2 ;";
             UsingTree(text);
 
             N(SyntaxKind.CompilationUnit);
@@ -9766,10 +10210,16 @@ C<>;";
         [InlineDataAttribute(SyntaxKind.StructDeclaration, SyntaxKind.StructKeyword)]
         [InlineDataAttribute(SyntaxKind.ClassDeclaration, SyntaxKind.ClassKeyword)]
         [InlineDataAttribute(SyntaxKind.InterfaceDeclaration, SyntaxKind.InterfaceKeyword)]
-        public void Class_SemicolonBodyAfterConstraint_03(SyntaxKind declKind, SyntaxKind keywordKind)
+        public void Class_SemicolonBodyAfterConstraint_03(
+            SyntaxKind declKind,
+            SyntaxKind keywordKind
+        )
         {
-            var text = @"
-" + SyntaxFacts.GetText(keywordKind) + @" C<T1> where T1 : U1 ;";
+            var text =
+                @"
+"
+                + SyntaxFacts.GetText(keywordKind)
+                + @" C<T1> where T1 : U1 ;";
             UsingTree(text);
 
             N(SyntaxKind.CompilationUnit);
@@ -9817,8 +10267,11 @@ C<>;";
         [InlineDataAttribute(SyntaxKind.EnumDeclaration, SyntaxKind.EnumKeyword)]
         public void Class_SemicolonAfterBlock(SyntaxKind declKind, SyntaxKind keywordKind)
         {
-            var text = @"
-" + SyntaxFacts.GetText(keywordKind) + @" C { };";
+            var text =
+                @"
+"
+                + SyntaxFacts.GetText(keywordKind)
+                + @" C { };";
             UsingTree(text);
 
             N(SyntaxKind.CompilationUnit);
@@ -9840,8 +10293,11 @@ C<>;";
         [CombinatorialData]
         public void Class_ParameterListAfterIdentifier_01(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C(int x);";
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C(int x);";
             UsingTree(text);
 
             N(SyntaxKind.CompilationUnit);
@@ -9874,8 +10330,11 @@ C<>;";
         [CombinatorialData]
         public void Class_ParameterListAfterIdentifier_02(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C(){}";
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C(){}";
             UsingTree(text);
 
             N(SyntaxKind.CompilationUnit);
@@ -9901,8 +10360,11 @@ C<>;";
         [CombinatorialData]
         public void Class_ParameterListAfterTypeParameters_01(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C<T>();";
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C<T>();";
             UsingTree(text);
 
             N(SyntaxKind.CompilationUnit);
@@ -9936,14 +10398,18 @@ C<>;";
         [CombinatorialData]
         public void Class_ParameterListAfterTypeParameters_02(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @"
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @"
 C<>();";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (3,3): error CS1001: Identifier expected
                 // C<>();
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ">").WithLocation(3, 3)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -9976,14 +10442,18 @@ C<>();";
         [CombinatorialData]
         public void Class_IncompleteParameterList_01(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C
 (;";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (3,2): error CS1026: ) expected
                 // (;
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, ";").WithLocation(3, 2)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -10007,14 +10477,18 @@ C<>();";
         [CombinatorialData]
         public void Class_IncompleteParameterList_02(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C
 (int x ;";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (3,8): error CS1026: ) expected
                 // (int x ;
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, ";").WithLocation(3, 8)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -10046,10 +10520,14 @@ C<>();";
         [CombinatorialData]
         public void Class_IncompleteParameterList_03(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C
 (int x, ;";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (3,9): error CS1031: Type expected
                 // (int x, ;
                 Diagnostic(ErrorCode.ERR_TypeExpected, ";").WithLocation(3, 9),
@@ -10059,7 +10537,7 @@ C<>();";
                 // (3,9): error CS1026: ) expected
                 // (int x, ;
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, ";").WithLocation(3, 9)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -10100,15 +10578,19 @@ C<>();";
         [CombinatorialData]
         public void Class_IncompleteParameterList_04(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C
 (
 : Base;";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (3,2): error CS1026: ) expected
                 // (
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(3, 2)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -10143,15 +10625,19 @@ C<>();";
         [CombinatorialData]
         public void Class_IncompleteParameterList_05(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C
 (int x
 : Base;";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (3,7): error CS1026: ) expected
                 // (int x
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(3, 7)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -10194,11 +10680,15 @@ C<>();";
         [CombinatorialData]
         public void Class_IncompleteParameterList_06(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C
 (int x,
 : Base;";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (3,8): error CS1031: Type expected
                 // (int x,
                 Diagnostic(ErrorCode.ERR_TypeExpected, "").WithLocation(3, 8),
@@ -10208,7 +10698,7 @@ C<>();";
                 // (3,8): error CS1026: ) expected
                 // (int x,
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(3, 8)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -10260,15 +10750,19 @@ C<>();";
         [CombinatorialData]
         public void Class_IncompleteParameterList_07(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C<T>
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C<T>
 (
 where T : class;";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (3,2): error CS1026: ) expected
                 // (
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(3, 2)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -10314,15 +10808,19 @@ where T : class;";
         [CombinatorialData]
         public void Class_IncompleteParameterList_08(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C<T>
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C<T>
 (T x
 where T : class;";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (3,5): error CS1026: ) expected
                 // (T x
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(3, 5)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -10376,11 +10874,15 @@ where T : class;";
         [CombinatorialData]
         public void Class_IncompleteParameterList_09(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C<T>
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C<T>
 (T x,
 where T : class;";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (3,6): error CS1031: Type expected
                 // (T x,
                 Diagnostic(ErrorCode.ERR_TypeExpected, "").WithLocation(3, 6),
@@ -10390,7 +10892,7 @@ where T : class;";
                 // (3,6): error CS1026: ) expected
                 // (T x,
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(3, 6)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -10453,8 +10955,11 @@ where T : class;";
         [CombinatorialData]
         public void Class_ParameterListAfterGenericTypeParameters_01(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C<T>(T x);";
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C<T>(T x);";
             UsingTree(text);
 
             N(SyntaxKind.CompilationUnit);
@@ -10496,18 +11001,22 @@ where T : class;";
         [CombinatorialData]
         public void Class_ParameterListAfterIncompleteGenericTypeParameters_01(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C
 <
 (T x);";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (3,2): error CS1001: Identifier expected
                 // <
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(3, 2),
                 // (3,2): error CS1003: Syntax error, '>' expected
                 // <
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(">").WithLocation(3, 2)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -10548,15 +11057,19 @@ where T : class;";
         [CombinatorialData]
         public void Class_ParameterListAfterIncompleteGenericTypeParameters_02(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C
 <T
 (T x);";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (3,3): error CS1003: Syntax error, '>' expected
                 // <T
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(">").WithLocation(3, 3)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -10597,18 +11110,22 @@ where T : class;";
         [CombinatorialData]
         public void Class_ParameterListAfterIncompleteGenericTypeParameters_03(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C
 <T,
 (T x);";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (3,4): error CS1001: Identifier expected
                 // <T,
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(3, 4),
                 // (3,4): error CS1003: Syntax error, '>' expected
                 // <T,
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(">").WithLocation(3, 4)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -10654,14 +11171,18 @@ where T : class;";
         [CombinatorialData]
         public void Class_ParameterListAfterMissingIdentifier_01(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" 
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" 
 (T x);";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (2,6): error CS1001: Identifier expected
-                // class 
+                // class
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(2, @struct ? 7 : 6)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -10693,8 +11214,11 @@ where T : class;";
         [CombinatorialData]
         public void Class_ArgumentList_01(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C : Base(x);";
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C : Base(x);";
             UsingTree(text);
 
             N(SyntaxKind.CompilationUnit);
@@ -10737,8 +11261,11 @@ where T : class;";
         [CombinatorialData]
         public void Class_ArgumentList_02(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C : Base() {}";
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C : Base() {}";
             UsingTree(text);
 
             N(SyntaxKind.CompilationUnit);
@@ -10775,10 +11302,14 @@ where T : class;";
         [CombinatorialData]
         public void Class_ArgumentList_03(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C : Base,
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C : Base,
 I1(x);";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (3,3): error CS1003: Syntax error, ',' expected
                 // I1(x);
                 Diagnostic(ErrorCode.ERR_SyntaxError, "(").WithArguments(",").WithLocation(3, 3),
@@ -10788,7 +11319,7 @@ I1(x);";
                 // (3,5): error CS1003: Syntax error, ',' expected
                 // I1(x);
                 Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments(",").WithLocation(3, 5)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -10834,8 +11365,11 @@ I1(x);";
         [CombinatorialData]
         public void Class_ArgumentList_04(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C(int x) : Base(x);";
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C(int x) : Base(x);";
             UsingTree(text);
 
             N(SyntaxKind.CompilationUnit);
@@ -10891,14 +11425,18 @@ I1(x);";
         [CombinatorialData]
         public void Class_IncompleteArgumentList_01(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C
 : Base(;";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (3,8): error CS1026: ) expected
                 // : Base(;
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, ";").WithLocation(3, 8)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -10933,14 +11471,18 @@ I1(x);";
         [CombinatorialData]
         public void Class_IncompleteArgumentList_02(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C
 : Base(x;";
-            UsingTree(text,
-                    // (3,9): error CS1026: ) expected
-                    // : Base(x;
-                    Diagnostic(ErrorCode.ERR_CloseParenExpected, ";").WithLocation(3, 9)
-                );
+            UsingTree(
+                text,
+                // (3,9): error CS1026: ) expected
+                // : Base(x;
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, ";").WithLocation(3, 9)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -10982,17 +11524,23 @@ I1(x);";
         [CombinatorialData]
         public void Class_IncompleteArgumentList_03(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C
 : Base(x,;";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (3,10): error CS1525: Invalid expression term ';'
                 // : Base(x,;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";").WithArguments(";").WithLocation(3, 10),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
+                    .WithArguments(";")
+                    .WithLocation(3, 10),
                 // (3,10): error CS1026: ) expected
                 // : Base(x,;
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, ";").WithLocation(3, 10)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -11042,14 +11590,18 @@ I1(x);";
         [CombinatorialData]
         public void Class_IncompleteArgumentList_04(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C
 : Base( where T : class;";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (3,9): error CS1026: ) expected
                 // : Base( where T : class;
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "where").WithLocation(3, 9)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -11097,14 +11649,18 @@ I1(x);";
         [CombinatorialData]
         public void Class_IncompleteArgumentList_05(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C
 : Base(x where T : class;";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (3,10): error CS1026: ) expected
                 // : Base(x where T : class;
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "where").WithLocation(3, 10)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -11159,17 +11715,23 @@ I1(x);";
         [CombinatorialData]
         public void Class_IncompleteArgumentList_06(bool @struct)
         {
-            var text = @"
-" + (@struct ? "struct" : "class") + @" C
+            var text =
+                @"
+"
+                + (@struct ? "struct" : "class")
+                + @" C
 : Base(x, where T : class;";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (3,11): error CS1525: Invalid expression term 'where'
                 // : Base(x, where T : class;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "where").WithArguments("where").WithLocation(3, 11),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "where")
+                    .WithArguments("where")
+                    .WithLocation(3, 11),
                 // (3,11): error CS1026: ) expected
                 // : Base(x, where T : class;
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "where").WithLocation(3, 11)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {

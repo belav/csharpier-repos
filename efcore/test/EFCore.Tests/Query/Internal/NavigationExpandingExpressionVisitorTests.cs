@@ -11,8 +11,7 @@ public class NavigationExpandingExpressionVisitorTests
     private class TestInterceptors : IInterceptors
     {
         public TInterceptor Aggregate<TInterceptor>()
-            where TInterceptor : class, IInterceptor
-            => null;
+            where TInterceptor : class, IInterceptor => null;
     }
 
     private class TestNavigationExpandingExpressionVisitor : NavigationExpandingExpressionVisitor
@@ -32,35 +31,35 @@ public class NavigationExpandingExpressionVisitorTests
                         null,
                         null,
                         new TestInterceptors()
-                    ), false),
+                    ),
+                    false
+                ),
                 null,
-                null)
-        {
-        }
+                null
+            ) { }
 
-        public Expression TestVisitExtension(Expression extensionExpression)
-            => base.VisitExtension(extensionExpression);
+        public Expression TestVisitExtension(Expression extensionExpression) =>
+            base.VisitExtension(extensionExpression);
     }
 
     private class MyDemoContext : DbContext
     {
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseInMemoryDatabase(databaseName: "test");
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseInMemoryDatabase(databaseName: "test");
     }
 
     private class TestEntityQueryRootExpression : EntityQueryRootExpression
     {
         public int VisitCounter;
 
-        public TestEntityQueryRootExpression(IAsyncQueryProvider asyncQueryProvider, IEntityType entityType)
-            : base(asyncQueryProvider, entityType)
-        {
-        }
+        public TestEntityQueryRootExpression(
+            IAsyncQueryProvider asyncQueryProvider,
+            IEntityType entityType
+        )
+            : base(asyncQueryProvider, entityType) { }
 
         public TestEntityQueryRootExpression(IEntityType entityType)
-            : base(entityType)
-        {
-        }
+            : base(entityType) { }
 
         protected override Expression VisitChildren(ExpressionVisitor visitor)
         {

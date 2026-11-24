@@ -38,14 +38,11 @@ public class ApiResponseTypeProviderTest
                 Assert.Equal(200, responseType.StatusCode);
                 Assert.Equal(typeof(BaseModel), responseType.Type);
                 Assert.False(responseType.IsDefaultResponse);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format =>
-                    {
-                        Assert.Equal("application/json", format.MediaType);
-                        Assert.IsType<TestOutputFormatter>(format.Formatter);
-                    }
-                );
+                Assert.Collection(responseType.ApiResponseFormats, format =>
+                {
+                    Assert.Equal("application/json", format.MediaType);
+                    Assert.IsType<TestOutputFormatter>(format.Formatter);
+                });
             },
             responseType =>
             {
@@ -120,28 +117,22 @@ public class ApiResponseTypeProviderTest
                 Assert.Equal(201, responseType.StatusCode);
                 Assert.Equal(typeof(BaseModel), responseType.Type);
                 Assert.False(responseType.IsDefaultResponse);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format =>
-                    {
-                        Assert.Equal("application/json", format.MediaType);
-                        Assert.IsType<TestOutputFormatter>(format.Formatter);
-                    }
-                );
+                Assert.Collection(responseType.ApiResponseFormats, format =>
+                {
+                    Assert.Equal("application/json", format.MediaType);
+                    Assert.IsType<TestOutputFormatter>(format.Formatter);
+                });
             },
             responseType =>
             {
                 Assert.Equal(400, responseType.StatusCode);
                 Assert.Equal(typeof(ProblemDetails), responseType.Type);
                 Assert.False(responseType.IsDefaultResponse);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format =>
-                    {
-                        Assert.Equal("application/json", format.MediaType);
-                        Assert.IsType<TestOutputFormatter>(format.Formatter);
-                    }
-                );
+                Assert.Collection(responseType.ApiResponseFormats, format =>
+                {
+                    Assert.Equal("application/json", format.MediaType);
+                    Assert.IsType<TestOutputFormatter>(format.Formatter);
+                });
             },
             responseType =>
             {
@@ -186,14 +177,11 @@ public class ApiResponseTypeProviderTest
                 Assert.Equal(200, responseType.StatusCode);
                 Assert.Equal(typeof(BaseModel), responseType.Type);
                 Assert.False(responseType.IsDefaultResponse);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format =>
-                    {
-                        Assert.Equal("application/json", format.MediaType);
-                        Assert.IsType<TestOutputFormatter>(format.Formatter);
-                    }
-                );
+                Assert.Collection(responseType.ApiResponseFormats, format =>
+                {
+                    Assert.Equal("application/json", format.MediaType);
+                    Assert.IsType<TestOutputFormatter>(format.Formatter);
+                });
             },
             responseType =>
             {
@@ -236,19 +224,15 @@ public class ApiResponseTypeProviderTest
         var result = provider.GetApiResponseTypes(actionDescriptor);
 
         // Assert
-        Assert.Collection(
-            result.OrderBy(r => r.StatusCode),
-            responseType =>
-            {
-                Assert.Equal(200, responseType.StatusCode);
-                Assert.Equal(typeof(BaseModel), responseType.Type);
-                Assert.False(responseType.IsDefaultResponse);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format => Assert.Equal("application/json", format.MediaType)
-                );
-            }
-        );
+        Assert.Collection(result.OrderBy(r => r.StatusCode), responseType =>
+        {
+            Assert.Equal(200, responseType.StatusCode);
+            Assert.Equal(typeof(BaseModel), responseType.Type);
+            Assert.False(responseType.IsDefaultResponse);
+            Assert.Collection(responseType.ApiResponseFormats, format =>
+                Assert.Equal("application/json", format.MediaType)
+            );
+        });
     }
 
     [ApiConventionType(typeof(DefaultApiConventions))]
@@ -289,9 +273,8 @@ public class ApiResponseTypeProviderTest
             {
                 Assert.True(responseType.IsDefaultResponse);
                 Assert.Equal(typeof(SerializableError), responseType.Type);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format => Assert.Equal("application/json", format.MediaType)
+                Assert.Collection(responseType.ApiResponseFormats, format =>
+                    Assert.Equal("application/json", format.MediaType)
                 );
             },
             responseType =>
@@ -299,9 +282,8 @@ public class ApiResponseTypeProviderTest
                 Assert.Equal(201, responseType.StatusCode);
                 Assert.Equal(typeof(BaseModel), responseType.Type);
                 Assert.False(responseType.IsDefaultResponse);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format => Assert.Equal("application/json", format.MediaType)
+                Assert.Collection(responseType.ApiResponseFormats, format =>
+                    Assert.Equal("application/json", format.MediaType)
                 );
             },
             responseType =>
@@ -352,9 +334,8 @@ public class ApiResponseTypeProviderTest
                 Assert.Equal(201, responseType.StatusCode);
                 Assert.Equal(typeof(BaseModel), responseType.Type);
                 Assert.False(responseType.IsDefaultResponse);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format => Assert.Equal("application/json", format.MediaType)
+                Assert.Collection(responseType.ApiResponseFormats, format =>
+                    Assert.Equal("application/json", format.MediaType)
                 );
             },
             responseType =>
@@ -402,9 +383,8 @@ public class ApiResponseTypeProviderTest
             {
                 Assert.Equal(200, responseType.StatusCode);
                 Assert.Equal(typeof(BaseModel), responseType.Type);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format => Assert.Equal("application/json", format.MediaType)
+                Assert.Collection(responseType.ApiResponseFormats, format =>
+                    Assert.Equal("application/json", format.MediaType)
                 );
             },
             responseType =>
@@ -412,9 +392,8 @@ public class ApiResponseTypeProviderTest
                 Assert.Equal(404, responseType.StatusCode);
                 Assert.Equal(errorType, responseType.Type);
                 Assert.False(responseType.IsDefaultResponse);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format => Assert.Equal("application/json", format.MediaType)
+                Assert.Collection(responseType.ApiResponseFormats, format =>
+                    Assert.Equal("application/json", format.MediaType)
                 );
             },
             responseType =>
@@ -422,9 +401,8 @@ public class ApiResponseTypeProviderTest
                 Assert.Equal(415, responseType.StatusCode);
                 Assert.Equal(errorType, responseType.Type);
                 Assert.False(responseType.IsDefaultResponse);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format => Assert.Equal("application/json", format.MediaType)
+                Assert.Collection(responseType.ApiResponseFormats, format =>
+                    Assert.Equal("application/json", format.MediaType)
                 );
             }
         );
@@ -464,18 +442,16 @@ public class ApiResponseTypeProviderTest
             {
                 Assert.Equal(errorType, responseType.Type);
                 Assert.True(responseType.IsDefaultResponse);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format => Assert.Equal("application/json", format.MediaType)
+                Assert.Collection(responseType.ApiResponseFormats, format =>
+                    Assert.Equal("application/json", format.MediaType)
                 );
             },
             responseType =>
             {
                 Assert.Equal(200, responseType.StatusCode);
                 Assert.Equal(typeof(BaseModel), responseType.Type);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format => Assert.Equal("application/json", format.MediaType)
+                Assert.Collection(responseType.ApiResponseFormats, format =>
+                    Assert.Equal("application/json", format.MediaType)
                 );
             }
         );
@@ -516,18 +492,16 @@ public class ApiResponseTypeProviderTest
             {
                 Assert.Equal(typeof(DivideByZeroException), responseType.Type);
                 Assert.True(responseType.IsDefaultResponse);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format => Assert.Equal("application/json", format.MediaType)
+                Assert.Collection(responseType.ApiResponseFormats, format =>
+                    Assert.Equal("application/json", format.MediaType)
                 );
             },
             responseType =>
             {
                 Assert.Equal(200, responseType.StatusCode);
                 Assert.Equal(typeof(BaseModel), responseType.Type);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format => Assert.Equal("application/json", format.MediaType)
+                Assert.Collection(responseType.ApiResponseFormats, format =>
+                    Assert.Equal("application/json", format.MediaType)
                 );
             },
             responseType =>
@@ -535,9 +509,8 @@ public class ApiResponseTypeProviderTest
                 Assert.Equal(415, responseType.StatusCode);
                 Assert.Equal(typeof(DivideByZeroException), responseType.Type);
                 Assert.False(responseType.IsDefaultResponse);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format => Assert.Equal("application/json", format.MediaType)
+                Assert.Collection(responseType.ApiResponseFormats, format =>
+                    Assert.Equal("application/json", format.MediaType)
                 );
             }
         );
@@ -577,9 +550,8 @@ public class ApiResponseTypeProviderTest
             {
                 Assert.Equal(201, responseType.StatusCode);
                 Assert.Equal(typeof(BaseModel), responseType.Type);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format => Assert.Equal("application/json", format.MediaType)
+                Assert.Collection(responseType.ApiResponseFormats, format =>
+                    Assert.Equal("application/json", format.MediaType)
                 );
             },
             responseType =>
@@ -638,9 +610,8 @@ public class ApiResponseTypeProviderTest
                 Assert.Equal(400, responseType.StatusCode);
                 Assert.Equal(typeof(InvalidCastException), responseType.Type);
                 Assert.False(responseType.IsDefaultResponse);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format => Assert.Equal("application/json", format.MediaType)
+                Assert.Collection(responseType.ApiResponseFormats, format =>
+                    Assert.Equal("application/json", format.MediaType)
                 );
             },
             responseType =>
@@ -687,9 +658,8 @@ public class ApiResponseTypeProviderTest
             {
                 Assert.True(responseType.IsDefaultResponse);
                 Assert.Equal(typeof(ProblemDetails), responseType.Type);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format => Assert.Equal("application/json", format.MediaType)
+                Assert.Collection(responseType.ApiResponseFormats, format =>
+                    Assert.Equal("application/json", format.MediaType)
                 );
             },
             responseType =>
@@ -697,9 +667,8 @@ public class ApiResponseTypeProviderTest
                 Assert.Equal(200, responseType.StatusCode);
                 Assert.Equal(typeof(DerivedModel), responseType.Type);
                 Assert.False(responseType.IsDefaultResponse);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format => Assert.Equal("application/json", format.MediaType)
+                Assert.Collection(responseType.ApiResponseFormats, format =>
+                    Assert.Equal("application/json", format.MediaType)
                 );
             },
             responseType =>
@@ -707,9 +676,8 @@ public class ApiResponseTypeProviderTest
                 Assert.Equal(400, responseType.StatusCode);
                 Assert.Equal(typeof(ProblemDetails), responseType.Type);
                 Assert.False(responseType.IsDefaultResponse);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format => Assert.Equal("application/json", format.MediaType)
+                Assert.Collection(responseType.ApiResponseFormats, format =>
+                    Assert.Equal("application/json", format.MediaType)
                 );
             }
         );
@@ -746,19 +714,15 @@ public class ApiResponseTypeProviderTest
         var result = provider.GetApiResponseTypes(actionDescriptor);
 
         // Assert
-        Assert.Collection(
-            result.OrderBy(r => r.StatusCode),
-            responseType =>
-            {
-                Assert.Equal(200, responseType.StatusCode);
-                Assert.Equal(typeof(string), responseType.Type);
-                Assert.False(responseType.IsDefaultResponse);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format => Assert.Equal("application/json", format.MediaType)
-                );
-            }
-        );
+        Assert.Collection(result.OrderBy(r => r.StatusCode), responseType =>
+        {
+            Assert.Equal(200, responseType.StatusCode);
+            Assert.Equal(typeof(string), responseType.Type);
+            Assert.False(responseType.IsDefaultResponse);
+            Assert.Collection(responseType.ApiResponseFormats, format =>
+                Assert.Equal("application/json", format.MediaType)
+            );
+        });
     }
 
     [Fact]
@@ -781,19 +745,15 @@ public class ApiResponseTypeProviderTest
         var result = provider.GetApiResponseTypes(actionDescriptor);
 
         // Assert
-        Assert.Collection(
-            result.OrderBy(r => r.StatusCode),
-            responseType =>
-            {
-                Assert.Equal(200, responseType.StatusCode);
-                Assert.Equal(typeof(DerivedModel), responseType.Type);
-                Assert.False(responseType.IsDefaultResponse);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format => Assert.Equal("application/json", format.MediaType)
-                );
-            }
-        );
+        Assert.Collection(result.OrderBy(r => r.StatusCode), responseType =>
+        {
+            Assert.Equal(200, responseType.StatusCode);
+            Assert.Equal(typeof(DerivedModel), responseType.Type);
+            Assert.False(responseType.IsDefaultResponse);
+            Assert.Collection(responseType.ApiResponseFormats, format =>
+                Assert.Equal("application/json", format.MediaType)
+            );
+        });
     }
 
     [Fact]
@@ -814,23 +774,17 @@ public class ApiResponseTypeProviderTest
         var result = provider.GetApiResponseTypes(actionDescriptor);
 
         // Assert
-        Assert.Collection(
-            result.OrderBy(r => r.StatusCode),
-            responseType =>
+        Assert.Collection(result.OrderBy(r => r.StatusCode), responseType =>
+        {
+            Assert.Equal(200, responseType.StatusCode);
+            Assert.Equal(typeof(DerivedModel), responseType.Type);
+            Assert.False(responseType.IsDefaultResponse);
+            Assert.Collection(responseType.ApiResponseFormats, format =>
             {
-                Assert.Equal(200, responseType.StatusCode);
-                Assert.Equal(typeof(DerivedModel), responseType.Type);
-                Assert.False(responseType.IsDefaultResponse);
-                Assert.Collection(
-                    responseType.ApiResponseFormats,
-                    format =>
-                    {
-                        Assert.Equal("application/pdf", format.MediaType);
-                        Assert.Null(format.Formatter);
-                    }
-                );
-            }
-        );
+                Assert.Equal("application/pdf", format.MediaType);
+                Assert.Null(format.Formatter);
+            });
+        });
     }
 
     [Fact]

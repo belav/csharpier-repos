@@ -23,8 +23,16 @@ namespace System.Security.AccessControl.Tests
             Assert.Throws<ArgumentNullException>(() =>
             {
                 rAcl = new RawAcl(GenericAcl.AclRevision, 1);
-                gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1,
-                    new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                    ),
+                    false,
+                    null
+                );
                 rAcl.InsertAce(0, gAce);
                 sAcl = new SystemAcl(false, false, rAcl);
                 sAcl.GetBinaryForm(binaryForm, 0);
@@ -35,8 +43,16 @@ namespace System.Security.AccessControl.Tests
             {
                 binaryForm = new byte[100];
                 rAcl = new RawAcl(GenericAcl.AclRevision, 1);
-                gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1,
-                    new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                    ),
+                    false,
+                    null
+                );
                 rAcl.InsertAce(0, gAce);
                 sAcl = new SystemAcl(false, false, rAcl);
                 sAcl.GetBinaryForm(binaryForm, -1);
@@ -47,8 +63,16 @@ namespace System.Security.AccessControl.Tests
             {
                 binaryForm = new byte[100];
                 rAcl = new RawAcl(GenericAcl.AclRevision, 1);
-                gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1,
-                    new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                    ),
+                    false,
+                    null
+                );
                 rAcl.InsertAce(0, gAce);
                 sAcl = new SystemAcl(false, false, rAcl);
                 sAcl.GetBinaryForm(binaryForm, binaryForm.Length);
@@ -56,8 +80,16 @@ namespace System.Security.AccessControl.Tests
             //Case 4, offset is a big positive number
 
             rAcl = new RawAcl(GenericAcl.AclRevision, 1);
-            gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+            gAce = new CommonAce(
+                AceFlags.SuccessfulAccess,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                ),
+                false,
+                null
+            );
             rAcl.InsertAce(0, gAce);
             sAcl = new SystemAcl(false, false, rAcl);
             binaryForm = new byte[sAcl.BinaryLength + 10000];
@@ -73,8 +105,16 @@ namespace System.Security.AccessControl.Tests
             {
                 binaryForm = new byte[4];
                 rAcl = new RawAcl(GenericAcl.AclRevision, 1);
-                gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1,
-                    new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                    ),
+                    false,
+                    null
+                );
                 rAcl.InsertAce(0, gAce);
                 sAcl = new SystemAcl(false, false, rAcl);
                 sAcl.GetBinaryForm(binaryForm, 0);

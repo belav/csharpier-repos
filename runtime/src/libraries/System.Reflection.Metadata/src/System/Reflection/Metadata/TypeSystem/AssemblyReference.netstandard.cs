@@ -7,7 +7,14 @@ namespace System.Reflection.Metadata
     {
         public AssemblyName GetAssemblyName()
         {
-            return _reader.GetAssemblyName(Name, Version, Culture, PublicKeyOrToken, AssemblyHashAlgorithm.None, Flags);
+            return _reader.GetAssemblyName(
+                Name,
+                Version,
+                Culture,
+                PublicKeyOrToken,
+                AssemblyHashAlgorithm.None,
+                Flags
+            );
         }
     }
 }

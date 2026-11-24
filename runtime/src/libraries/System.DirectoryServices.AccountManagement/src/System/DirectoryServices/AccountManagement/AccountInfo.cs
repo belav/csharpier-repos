@@ -26,7 +26,11 @@ namespace System.DirectoryServices.AccountManagement
         {
             get
             {
-                return _owningPrincipal.HandleGet<Nullable<DateTime>>(ref _accountLockoutTime, PropertyNames.AcctInfoAcctLockoutTime, ref _accountLockoutTimeLoaded);
+                return _owningPrincipal.HandleGet<Nullable<DateTime>>(
+                    ref _accountLockoutTime,
+                    PropertyNames.AcctInfoAcctLockoutTime,
+                    ref _accountLockoutTimeLoaded
+                );
             }
         }
 
@@ -38,22 +42,38 @@ namespace System.DirectoryServices.AccountManagement
         {
             get
             {
-                return _owningPrincipal.HandleGet<Nullable<DateTime>>(ref _lastLogon, PropertyNames.AcctInfoLastLogon, ref _lastLogonLoaded);
+                return _owningPrincipal.HandleGet<Nullable<DateTime>>(
+                    ref _lastLogon,
+                    PropertyNames.AcctInfoLastLogon,
+                    ref _lastLogonLoaded
+                );
             }
         }
 
         // PermittedWorkstations
-        private PrincipalValueCollection<string> _permittedWorkstations = new PrincipalValueCollection<string>();
+        private PrincipalValueCollection<string> _permittedWorkstations =
+            new PrincipalValueCollection<string>();
         private LoadState _permittedWorkstationsLoaded = LoadState.NotSet;
 
         public PrincipalValueCollection<string> PermittedWorkstations
         {
             get
             {
-                if (!_owningPrincipal.GetStoreCtxToUse().IsValidProperty(_owningPrincipal, PropertyNames.AcctInfoPermittedWorkstations))
+                if (
+                    !_owningPrincipal
+                        .GetStoreCtxToUse()
+                        .IsValidProperty(
+                            _owningPrincipal,
+                            PropertyNames.AcctInfoPermittedWorkstations
+                        )
+                )
                     throw new InvalidOperationException(SR.InvalidPropertyForStore);
 
-                return _owningPrincipal.HandleGet<PrincipalValueCollection<string>>(ref _permittedWorkstations, PropertyNames.AcctInfoPermittedWorkstations, ref _permittedWorkstationsLoaded);
+                return _owningPrincipal.HandleGet<PrincipalValueCollection<string>>(
+                    ref _permittedWorkstations,
+                    PropertyNames.AcctInfoPermittedWorkstations,
+                    ref _permittedWorkstationsLoaded
+                );
             }
         }
 
@@ -71,9 +91,12 @@ namespace System.DirectoryServices.AccountManagement
         {
             get
             {
-                return _owningPrincipal.HandleGet<byte[]>(ref _permittedLogonTimes, PropertyNames.AcctInfoPermittedLogonTimes, ref _permittedLogonTimesLoaded);
+                return _owningPrincipal.HandleGet<byte[]>(
+                    ref _permittedLogonTimes,
+                    PropertyNames.AcctInfoPermittedLogonTimes,
+                    ref _permittedLogonTimesLoaded
+                );
             }
-
             set
             {
                 // We don't use HandleSet<T> here because of the slightly non-standard implementation of the change-tracking
@@ -82,7 +105,14 @@ namespace System.DirectoryServices.AccountManagement
                 // Check that we actually support this property in our store
                 //this.owningPrincipal.CheckSupportedProperty(PropertyNames.AcctInfoPermittedLogonTimes);
 
-                if (!_owningPrincipal.GetStoreCtxToUse().IsValidProperty(_owningPrincipal, PropertyNames.AcctInfoPermittedLogonTimes))
+                if (
+                    !_owningPrincipal
+                        .GetStoreCtxToUse()
+                        .IsValidProperty(
+                            _owningPrincipal,
+                            PropertyNames.AcctInfoPermittedLogonTimes
+                        )
+                )
                     throw new InvalidOperationException(SR.InvalidPropertyForStore);
 
                 // If we get to this point we know that the value of the property has changed and we should not load it from the store.
@@ -105,16 +135,27 @@ namespace System.DirectoryServices.AccountManagement
         {
             get
             {
-                return _owningPrincipal.HandleGet<Nullable<DateTime>>(ref _expirationDate, PropertyNames.AcctInfoExpirationDate, ref _expirationDateChanged);
+                return _owningPrincipal.HandleGet<Nullable<DateTime>>(
+                    ref _expirationDate,
+                    PropertyNames.AcctInfoExpirationDate,
+                    ref _expirationDateChanged
+                );
             }
-
             set
             {
-                if (!_owningPrincipal.GetStoreCtxToUse().IsValidProperty(_owningPrincipal, PropertyNames.AcctInfoExpirationDate))
+                if (
+                    !_owningPrincipal
+                        .GetStoreCtxToUse()
+                        .IsValidProperty(_owningPrincipal, PropertyNames.AcctInfoExpirationDate)
+                )
                     throw new InvalidOperationException(SR.InvalidPropertyForStore);
 
-                _owningPrincipal.HandleSet<Nullable<DateTime>>(ref _expirationDate, value, ref _expirationDateChanged,
-                                               PropertyNames.AcctInfoExpirationDate);
+                _owningPrincipal.HandleSet<Nullable<DateTime>>(
+                    ref _expirationDate,
+                    value,
+                    ref _expirationDateChanged,
+                    PropertyNames.AcctInfoExpirationDate
+                );
             }
         }
 
@@ -126,16 +167,27 @@ namespace System.DirectoryServices.AccountManagement
         {
             get
             {
-                return _owningPrincipal.HandleGet<bool>(ref _smartcardLogonRequired, PropertyNames.AcctInfoSmartcardRequired, ref _smartcardLogonRequiredChanged);
+                return _owningPrincipal.HandleGet<bool>(
+                    ref _smartcardLogonRequired,
+                    PropertyNames.AcctInfoSmartcardRequired,
+                    ref _smartcardLogonRequiredChanged
+                );
             }
-
             set
             {
-                if (!_owningPrincipal.GetStoreCtxToUse().IsValidProperty(_owningPrincipal, PropertyNames.AcctInfoSmartcardRequired))
+                if (
+                    !_owningPrincipal
+                        .GetStoreCtxToUse()
+                        .IsValidProperty(_owningPrincipal, PropertyNames.AcctInfoSmartcardRequired)
+                )
                     throw new InvalidOperationException(SR.InvalidPropertyForStore);
 
-                _owningPrincipal.HandleSet<bool>(ref _smartcardLogonRequired, value, ref _smartcardLogonRequiredChanged,
-                                 PropertyNames.AcctInfoSmartcardRequired);
+                _owningPrincipal.HandleSet<bool>(
+                    ref _smartcardLogonRequired,
+                    value,
+                    ref _smartcardLogonRequiredChanged,
+                    PropertyNames.AcctInfoSmartcardRequired
+                );
             }
         }
 
@@ -147,16 +199,30 @@ namespace System.DirectoryServices.AccountManagement
         {
             get
             {
-                return _owningPrincipal.HandleGet<bool>(ref _delegationPermitted, PropertyNames.AcctInfoDelegationPermitted, ref _delegationPermittedChanged);
+                return _owningPrincipal.HandleGet<bool>(
+                    ref _delegationPermitted,
+                    PropertyNames.AcctInfoDelegationPermitted,
+                    ref _delegationPermittedChanged
+                );
             }
-
             set
             {
-                if (!_owningPrincipal.GetStoreCtxToUse().IsValidProperty(_owningPrincipal, PropertyNames.AcctInfoDelegationPermitted))
+                if (
+                    !_owningPrincipal
+                        .GetStoreCtxToUse()
+                        .IsValidProperty(
+                            _owningPrincipal,
+                            PropertyNames.AcctInfoDelegationPermitted
+                        )
+                )
                     throw new InvalidOperationException(SR.InvalidPropertyForStore);
 
-                _owningPrincipal.HandleSet<bool>(ref _delegationPermitted, value, ref _delegationPermittedChanged,
-                                 PropertyNames.AcctInfoDelegationPermitted);
+                _owningPrincipal.HandleSet<bool>(
+                    ref _delegationPermitted,
+                    value,
+                    ref _delegationPermittedChanged,
+                    PropertyNames.AcctInfoDelegationPermitted
+                );
             }
         }
 
@@ -168,7 +234,11 @@ namespace System.DirectoryServices.AccountManagement
         {
             get
             {
-                return _owningPrincipal.HandleGet<int>(ref _badLogonCount, PropertyNames.AcctInfoBadLogonCount, ref _badLogonCountChanged);
+                return _owningPrincipal.HandleGet<int>(
+                    ref _badLogonCount,
+                    PropertyNames.AcctInfoBadLogonCount,
+                    ref _badLogonCountChanged
+                );
             }
         }
 
@@ -180,16 +250,27 @@ namespace System.DirectoryServices.AccountManagement
         {
             get
             {
-                return _owningPrincipal.HandleGet<string>(ref _homeDirectory, PropertyNames.AcctInfoHomeDirectory, ref _homeDirectoryChanged);
+                return _owningPrincipal.HandleGet<string>(
+                    ref _homeDirectory,
+                    PropertyNames.AcctInfoHomeDirectory,
+                    ref _homeDirectoryChanged
+                );
             }
-
             set
             {
-                if (!_owningPrincipal.GetStoreCtxToUse().IsValidProperty(_owningPrincipal, PropertyNames.AcctInfoHomeDirectory))
+                if (
+                    !_owningPrincipal
+                        .GetStoreCtxToUse()
+                        .IsValidProperty(_owningPrincipal, PropertyNames.AcctInfoHomeDirectory)
+                )
                     throw new InvalidOperationException(SR.InvalidPropertyForStore);
 
-                _owningPrincipal.HandleSet<string>(ref _homeDirectory, value, ref _homeDirectoryChanged,
-                                   PropertyNames.AcctInfoHomeDirectory);
+                _owningPrincipal.HandleSet<string>(
+                    ref _homeDirectory,
+                    value,
+                    ref _homeDirectoryChanged,
+                    PropertyNames.AcctInfoHomeDirectory
+                );
             }
         }
 
@@ -201,16 +282,27 @@ namespace System.DirectoryServices.AccountManagement
         {
             get
             {
-                return _owningPrincipal.HandleGet<string>(ref _homeDrive, PropertyNames.AcctInfoHomeDrive, ref _homeDriveChanged);
+                return _owningPrincipal.HandleGet<string>(
+                    ref _homeDrive,
+                    PropertyNames.AcctInfoHomeDrive,
+                    ref _homeDriveChanged
+                );
             }
-
             set
             {
-                if (!_owningPrincipal.GetStoreCtxToUse().IsValidProperty(_owningPrincipal, PropertyNames.AcctInfoHomeDrive))
+                if (
+                    !_owningPrincipal
+                        .GetStoreCtxToUse()
+                        .IsValidProperty(_owningPrincipal, PropertyNames.AcctInfoHomeDrive)
+                )
                     throw new InvalidOperationException(SR.InvalidPropertyForStore);
 
-                _owningPrincipal.HandleSet<string>(ref _homeDrive, value, ref _homeDriveChanged,
-                                   PropertyNames.AcctInfoHomeDrive);
+                _owningPrincipal.HandleSet<string>(
+                    ref _homeDrive,
+                    value,
+                    ref _homeDriveChanged,
+                    PropertyNames.AcctInfoHomeDrive
+                );
             }
         }
 
@@ -222,16 +314,27 @@ namespace System.DirectoryServices.AccountManagement
         {
             get
             {
-                return _owningPrincipal.HandleGet<string>(ref _scriptPath, PropertyNames.AcctInfoScriptPath, ref _scriptPathChanged);
+                return _owningPrincipal.HandleGet<string>(
+                    ref _scriptPath,
+                    PropertyNames.AcctInfoScriptPath,
+                    ref _scriptPathChanged
+                );
             }
-
             set
             {
-                if (!_owningPrincipal.GetStoreCtxToUse().IsValidProperty(_owningPrincipal, PropertyNames.AcctInfoScriptPath))
+                if (
+                    !_owningPrincipal
+                        .GetStoreCtxToUse()
+                        .IsValidProperty(_owningPrincipal, PropertyNames.AcctInfoScriptPath)
+                )
                     throw new InvalidOperationException(SR.InvalidPropertyForStore);
 
-                _owningPrincipal.HandleSet<string>(ref _scriptPath, value, ref _scriptPathChanged,
-                                   PropertyNames.AcctInfoScriptPath);
+                _owningPrincipal.HandleSet<string>(
+                    ref _scriptPath,
+                    value,
+                    ref _scriptPathChanged,
+                    PropertyNames.AcctInfoScriptPath
+                );
             }
         }
 
@@ -242,7 +345,11 @@ namespace System.DirectoryServices.AccountManagement
         {
             if (!_owningPrincipal.unpersisted)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "AccountInfo", "IsAccountLockedOut: sending lockout query");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "AccountInfo",
+                    "IsAccountLockedOut: sending lockout query"
+                );
 
                 Debug.Assert(_owningPrincipal.Context != null);
 
@@ -259,7 +366,11 @@ namespace System.DirectoryServices.AccountManagement
         {
             if (!_owningPrincipal.unpersisted)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "AccountInfo", "UnlockAccount: sending unlock request");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "AccountInfo",
+                    "UnlockAccount: sending unlock request"
+                );
 
                 Debug.Assert(_owningPrincipal.Context != null);
 
@@ -354,7 +465,9 @@ namespace System.DirectoryServices.AccountManagement
                     break;
 
                 default:
-                    Debug.Fail($"AccountInfo.LoadValueIntoProperty: fell off end looking for {propertyName}");
+                    Debug.Fail(
+                        $"AccountInfo.LoadValueIntoProperty: fell off end looking for {propertyName}"
+                    );
                     break;
             }
         }
@@ -366,7 +479,11 @@ namespace System.DirectoryServices.AccountManagement
         // Given a property name, returns true if that property has changed since it was loaded, false otherwise.
         internal bool GetChangeStatusForProperty(string propertyName)
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "AccountInfo", "GetChangeStatusForProperty: name=" + propertyName);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "AccountInfo",
+                "GetChangeStatusForProperty: name=" + propertyName
+            );
 
             switch (propertyName)
             {
@@ -402,7 +519,9 @@ namespace System.DirectoryServices.AccountManagement
                     return _scriptPathChanged == LoadState.Changed;
 
                 default:
-                    Debug.Fail($"AccountInfo.GetChangeStatusForProperty: fell off end looking for {propertyName}");
+                    Debug.Fail(
+                        $"AccountInfo.GetChangeStatusForProperty: fell off end looking for {propertyName}"
+                    );
                     return false;
             }
         }
@@ -410,7 +529,11 @@ namespace System.DirectoryServices.AccountManagement
         // Given a property name, returns the current value for the property.
         internal object GetValueForProperty(string propertyName)
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "AccountInfo", "GetValueForProperty: name=" + propertyName);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "AccountInfo",
+                "GetValueForProperty: name=" + propertyName
+            );
 
             switch (propertyName)
             {
@@ -439,7 +562,9 @@ namespace System.DirectoryServices.AccountManagement
                     return _scriptPath;
 
                 default:
-                    Debug.Fail($"AccountInfo.GetValueForProperty: fell off end looking for {propertyName}");
+                    Debug.Fail(
+                        $"AccountInfo.GetValueForProperty: fell off end looking for {propertyName}"
+                    );
                     return null;
             }
         }
@@ -451,15 +576,24 @@ namespace System.DirectoryServices.AccountManagement
 
             _permittedWorkstations.ResetTracking();
 
-            _permittedLogonTimesOriginal = (_permittedLogonTimes != null) ?
-                                                            (byte[])_permittedLogonTimes.Clone() :
-                                                            null;
-            _expirationDateChanged = (_expirationDateChanged == LoadState.Changed) ? LoadState.Loaded : LoadState.NotSet;
-            _smartcardLogonRequiredChanged = (_smartcardLogonRequiredChanged == LoadState.Changed) ? LoadState.Loaded : LoadState.NotSet;
-            _delegationPermittedChanged = (_delegationPermittedChanged == LoadState.Changed) ? LoadState.Loaded : LoadState.NotSet;
-            _homeDirectoryChanged = (_homeDirectoryChanged == LoadState.Changed) ? LoadState.Loaded : LoadState.NotSet;
-            _homeDriveChanged = (_homeDriveChanged == LoadState.Changed) ? LoadState.Loaded : LoadState.NotSet;
-            _scriptPathChanged = (_scriptPathChanged == LoadState.Changed) ? LoadState.Loaded : LoadState.NotSet;
+            _permittedLogonTimesOriginal =
+                (_permittedLogonTimes != null) ? (byte[])_permittedLogonTimes.Clone() : null;
+            _expirationDateChanged =
+                (_expirationDateChanged == LoadState.Changed) ? LoadState.Loaded : LoadState.NotSet;
+            _smartcardLogonRequiredChanged =
+                (_smartcardLogonRequiredChanged == LoadState.Changed)
+                    ? LoadState.Loaded
+                    : LoadState.NotSet;
+            _delegationPermittedChanged =
+                (_delegationPermittedChanged == LoadState.Changed)
+                    ? LoadState.Loaded
+                    : LoadState.NotSet;
+            _homeDirectoryChanged =
+                (_homeDirectoryChanged == LoadState.Changed) ? LoadState.Loaded : LoadState.NotSet;
+            _homeDriveChanged =
+                (_homeDriveChanged == LoadState.Changed) ? LoadState.Loaded : LoadState.NotSet;
+            _scriptPathChanged =
+                (_scriptPathChanged == LoadState.Changed) ? LoadState.Loaded : LoadState.NotSet;
         }
     }
 }

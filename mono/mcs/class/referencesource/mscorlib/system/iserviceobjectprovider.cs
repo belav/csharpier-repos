@@ -1,13 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
-namespace System {
-    
+namespace System
+{
     using System;
     using System.Runtime.InteropServices;
-
 
     public interface IServiceProvider
     {

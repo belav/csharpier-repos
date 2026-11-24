@@ -12,11 +12,12 @@ namespace System.Web.Http.Validation.Validators
     public class ValidatableObjectAdapter : ModelValidator
     {
         public ValidatableObjectAdapter(IEnumerable<ModelValidatorProvider> validatorProviders)
-            : base(validatorProviders)
-        {
-        }
+            : base(validatorProviders) { }
 
-        public override IEnumerable<ModelValidationResult> Validate(ModelMetadata metadata, object container)
+        public override IEnumerable<ModelValidationResult> Validate(
+            ModelMetadata metadata,
+            object container
+        )
         {
             // NOTE: Container is never used here, because IValidatableObject doesn't give you
             // any way to get access to your container.
@@ -30,14 +31,19 @@ namespace System.Web.Http.Validation.Validators
             IValidatableObject validatable = model as IValidatableObject;
             if (validatable == null)
             {
-                throw Error.InvalidOperation(SRResources.ValidatableObjectAdapter_IncompatibleType, model.GetType());
+                throw Error.InvalidOperation(
+                    SRResources.ValidatableObjectAdapter_IncompatibleType,
+                    model.GetType()
+                );
             }
 
             ValidationContext validationContext = new ValidationContext(validatable, null, null);
             return ConvertResults(validatable.Validate(validationContext));
         }
 
-        private static IEnumerable<ModelValidationResult> ConvertResults(IEnumerable<ValidationResult> results)
+        private static IEnumerable<ModelValidationResult> ConvertResults(
+            IEnumerable<ValidationResult> results
+        )
         {
             foreach (ValidationResult result in results)
             {
@@ -51,7 +57,11 @@ namespace System.Web.Http.Validation.Validators
                     {
                         foreach (string memberName in result.MemberNames)
                         {
-                            yield return new ModelValidationResult { Message = result.ErrorMessage, MemberName = memberName };
+                            yield return new ModelValidationResult
+                            {
+                                Message = result.ErrorMessage,
+                                MemberName = memberName,
+                            };
                         }
                     }
                 }

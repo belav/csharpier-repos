@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // <copyright file="XmlSchemaAnnotation.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright> 
-// <owner current="true" primary="true">Microsoft</owner>                                                               
+// </copyright>
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Schema {
-
+namespace System.Xml.Schema
+{
     using System.Collections;
     using System.Xml.Serialization;
 
@@ -14,7 +14,8 @@ namespace System.Xml.Schema {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public class XmlSchemaAnnotation : XmlSchemaObject {
+    public class XmlSchemaAnnotation : XmlSchemaObject
+    {
         string id;
         XmlSchemaObjectCollection items = new XmlSchemaObjectCollection();
         XmlAttribute[] moreAttributes;
@@ -24,7 +25,8 @@ namespace System.Xml.Schema {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlAttribute("id", DataType = "ID")]
-        public string Id {
+        public string Id
+        {
             get { return id; }
             set { id = value; }
         }
@@ -33,9 +35,12 @@ namespace System.Xml.Schema {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        [XmlElement("documentation", typeof(XmlSchemaDocumentation)),
-         XmlElement("appinfo", typeof(XmlSchemaAppInfo))]
-        public XmlSchemaObjectCollection Items {
+        [
+            XmlElement("documentation", typeof(XmlSchemaDocumentation)),
+            XmlElement("appinfo", typeof(XmlSchemaAppInfo))
+        ]
+        public XmlSchemaObjectCollection Items
+        {
             get { return items; }
         }
 
@@ -44,18 +49,21 @@ namespace System.Xml.Schema {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlAnyAttribute]
-        public XmlAttribute[] UnhandledAttributes {
+        public XmlAttribute[] UnhandledAttributes
+        {
             get { return moreAttributes; }
             set { moreAttributes = value; }
         }
 
         [XmlIgnore]
-        internal override string IdAttribute {
+        internal override string IdAttribute
+        {
             get { return Id; }
             set { Id = value; }
         }
 
-        internal override void SetUnhandledAttributes(XmlAttribute[] moreAttributes) {
+        internal override void SetUnhandledAttributes(XmlAttribute[] moreAttributes)
+        {
             this.moreAttributes = moreAttributes;
         }
     }

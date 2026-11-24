@@ -8,6 +8,6 @@ namespace Microsoft.CodeAnalysis.MSBuild
     {
         Throw,
         Log,
-        Ignore
+        Ignore,
     }
 }

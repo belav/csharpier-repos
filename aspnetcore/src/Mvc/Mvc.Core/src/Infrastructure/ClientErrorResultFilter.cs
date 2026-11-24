@@ -17,8 +17,8 @@ internal sealed partial class ClientErrorResultFilter : IAlwaysRunResultFilter, 
         ILogger<ClientErrorResultFilter> logger
     )
     {
-        _clientErrorFactory =
-            clientErrorFactory ?? throw new ArgumentNullException(nameof(clientErrorFactory));
+        _clientErrorFactory = clientErrorFactory
+            ?? throw new ArgumentNullException(nameof(clientErrorFactory));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 

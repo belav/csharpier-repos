@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,47 +29,48 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel;
+using System.Text;
 
 namespace System.Web.UI
 {
-	public abstract class UpdatePanelControlTrigger : UpdatePanelTrigger
-	{
-		string _controlID;
+    public abstract class UpdatePanelControlTrigger : UpdatePanelTrigger
+    {
+        string _controlID;
 
-		protected UpdatePanelControlTrigger () { }
+        protected UpdatePanelControlTrigger() { }
 
-		[IDReferenceProperty]
-		[DefaultValue ("")]
-		[Category ("Behavior")]
-		public string ControlID {
-			get {
-				if(_controlID==null)
-					return String.Empty;
-				return _controlID;
-			}
-			set {
-				_controlID = value;
-			}
-		}
+        [IDReferenceProperty]
+        [DefaultValue("")]
+        [Category("Behavior")]
+        public string ControlID
+        {
+            get
+            {
+                if (_controlID == null)
+                    return String.Empty;
+                return _controlID;
+            }
+            set { _controlID = value; }
+        }
 
-		protected Control FindTargetControl (bool searchNamingContainers) {
-			if (String.IsNullOrEmpty (ControlID))
-				throw new InvalidOperationException ();
+        protected Control FindTargetControl(bool searchNamingContainers)
+        {
+            if (String.IsNullOrEmpty(ControlID))
+                throw new InvalidOperationException();
 
-			Control nc = Owner.NamingContainer;
-			Control c = null;
-			do {
-				c = nc.FindControl (ControlID);
-				nc = nc.NamingContainer;
-			}
-			while (searchNamingContainers && c == null && nc != null);
+            Control nc = Owner.NamingContainer;
+            Control c = null;
+            do
+            {
+                c = nc.FindControl(ControlID);
+                nc = nc.NamingContainer;
+            } while (searchNamingContainers && c == null && nc != null);
 
-			if (c == null)
-				throw new InvalidOperationException ();
+            if (c == null)
+                throw new InvalidOperationException();
 
-			return c;
-		}
-	}
+            return c;
+        }
+    }
 }

@@ -16,7 +16,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         private ITestOutputHelper _output;
         private ExceptionVerifier _exVerifier;
 
-        public TCValidateElement(ITestOutputHelper output): base(output)
+        public TCValidateElement(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
             _exVerifier = new ExceptionVerifier("System.Xml", _output);
@@ -27,7 +28,10 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         [InlineData("name", "second")]
         [InlineData("ns", "first")]
         [InlineData("ns", "second")]
-        public void PassNull_LocalName_NamespaceUri_Invalid_First_Second_Overload(string type, string overload)
+        public void PassNull_LocalName_NamespaceUri_Invalid_First_Second_Overload(
+            string type,
+            string overload
+        )
         {
             XmlSchemaValidator val = CreateValidator(CreateSchemaSetFromXml("<root />"));
             string name = "root";
@@ -105,7 +109,11 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         [InlineData("ElementOnlyElement", XmlSchemaContentType.ElementOnly, "second")]
         [InlineData("EmptyElement", XmlSchemaContentType.Empty, "second")]
         [InlineData("MixedElement", XmlSchemaContentType.Mixed, "second")]
-        public void CallValidateElementAndCHeckXmlSchemaInfoFOr_Simple_Complex_Empty_Mixed_Element_First_Second_Overload(string elemType, XmlSchemaContentType schemaContentType, string overload)
+        public void CallValidateElementAndCHeckXmlSchemaInfoFOr_Simple_Complex_Empty_Mixed_Element_First_Second_Overload(
+            string elemType,
+            XmlSchemaContentType schemaContentType,
+            string overload
+        )
         {
             XmlSchemaValidator val;
             XmlSchemaSet schemas = new XmlSchemaSet();
@@ -168,9 +176,20 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         // ====== second overload ======
 
         [Theory]
-        [InlineData(XmlSchemaValidationFlags.ReportValidationWarnings | XmlSchemaValidationFlags.ProcessIdentityConstraints | XmlSchemaValidationFlags.ProcessInlineSchema | XmlSchemaValidationFlags.ProcessSchemaLocation)]
-        [InlineData(XmlSchemaValidationFlags.ReportValidationWarnings | XmlSchemaValidationFlags.ProcessIdentityConstraints | XmlSchemaValidationFlags.ProcessInlineSchema)]
-        public void CheckSchemaLocationIs_UsedWhenSpecified_NotUsedWhenFlagIsNotSet(XmlSchemaValidationFlags allFlags)
+        [InlineData(
+            XmlSchemaValidationFlags.ReportValidationWarnings
+                | XmlSchemaValidationFlags.ProcessIdentityConstraints
+                | XmlSchemaValidationFlags.ProcessInlineSchema
+                | XmlSchemaValidationFlags.ProcessSchemaLocation
+        )]
+        [InlineData(
+            XmlSchemaValidationFlags.ReportValidationWarnings
+                | XmlSchemaValidationFlags.ProcessIdentityConstraints
+                | XmlSchemaValidationFlags.ProcessInlineSchema
+        )]
+        public void CheckSchemaLocationIs_UsedWhenSpecified_NotUsedWhenFlagIsNotSet(
+            XmlSchemaValidationFlags allFlags
+        )
         {
             XmlSchemaValidator val;
             XmlNamespaceManager ns = new XmlNamespaceManager(new NameTable());
@@ -178,17 +197,32 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             XmlSchemaInfo info = new XmlSchemaInfo();
             CValidationEventHolder holder = new CValidationEventHolder();
 
-            schemas.Add("", XmlReader.Create(new StringReader("<?xml version=\"1.0\" ?>\n" +
-                                                              "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n" +
-                                                              "    <xs:element name=\"root\" />\n" +
-                                                              "</xs:schema>")));
+            schemas.Add(
+                "",
+                XmlReader.Create(
+                    new StringReader(
+                        "<?xml version=\"1.0\" ?>\n"
+                            + "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n"
+                            + "    <xs:element name=\"root\" />\n"
+                            + "</xs:schema>"
+                    )
+                )
+            );
             val = CreateValidator(schemas, ns, allFlags);
             val.XmlResolver = new XmlUrlResolver();
             val.ValidationEventHandler += new ValidationEventHandler(holder.CallbackA);
             ns.AddNamespace("t", "uri:tempuri");
 
             val.Initialize();
-            val.ValidateElement("root", "", info, "t:type1", null, "uri:tempuri " + Path.Combine(TestData, XSDFILE_TARGET_NAMESPACE), null);
+            val.ValidateElement(
+                "root",
+                "",
+                info,
+                "t:type1",
+                null,
+                "uri:tempuri " + Path.Combine(TestData, XSDFILE_TARGET_NAMESPACE),
+                null
+            );
 
             if ((int)allFlags == (int)AllFlags)
             {
@@ -198,32 +232,62 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             else
             {
                 Assert.True(holder.IsCalledA);
-                _exVerifier.IsExceptionOk(holder.lastException, "Sch_XsiTypeNotFound", new string[] { "uri:tempuri:type1" });
+                _exVerifier.IsExceptionOk(
+                    holder.lastException,
+                    "Sch_XsiTypeNotFound",
+                    new string[] { "uri:tempuri:type1" }
+                );
             }
 
             return;
         }
 
         [Theory]
-        [InlineData(XmlSchemaValidationFlags.ReportValidationWarnings | XmlSchemaValidationFlags.ProcessIdentityConstraints | XmlSchemaValidationFlags.ProcessInlineSchema | XmlSchemaValidationFlags.ProcessSchemaLocation)]
-        [InlineData(XmlSchemaValidationFlags.ReportValidationWarnings | XmlSchemaValidationFlags.ProcessIdentityConstraints | XmlSchemaValidationFlags.ProcessInlineSchema)]
-        public void CheckNoNamespaceSchemaLocationIs_UsedWhenSpecified_NotUsedWhenFlagIsSet(XmlSchemaValidationFlags allFlags)
+        [InlineData(
+            XmlSchemaValidationFlags.ReportValidationWarnings
+                | XmlSchemaValidationFlags.ProcessIdentityConstraints
+                | XmlSchemaValidationFlags.ProcessInlineSchema
+                | XmlSchemaValidationFlags.ProcessSchemaLocation
+        )]
+        [InlineData(
+            XmlSchemaValidationFlags.ReportValidationWarnings
+                | XmlSchemaValidationFlags.ProcessIdentityConstraints
+                | XmlSchemaValidationFlags.ProcessInlineSchema
+        )]
+        public void CheckNoNamespaceSchemaLocationIs_UsedWhenSpecified_NotUsedWhenFlagIsSet(
+            XmlSchemaValidationFlags allFlags
+        )
         {
             XmlSchemaValidator val;
             XmlSchemaSet schemas = new XmlSchemaSet();
             XmlSchemaInfo info = new XmlSchemaInfo();
             CValidationEventHolder holder = new CValidationEventHolder();
 
-            schemas.Add("", XmlReader.Create(new StringReader("<?xml version=\"1.0\" ?>\n" +
-                                                              "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n" +
-                                                              "    <xs:element name=\"root\" />\n" +
-                                                              "</xs:schema>")));
+            schemas.Add(
+                "",
+                XmlReader.Create(
+                    new StringReader(
+                        "<?xml version=\"1.0\" ?>\n"
+                            + "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n"
+                            + "    <xs:element name=\"root\" />\n"
+                            + "</xs:schema>"
+                    )
+                )
+            );
             val = CreateValidator(schemas, allFlags);
             val.XmlResolver = new XmlUrlResolver();
             val.ValidationEventHandler += new ValidationEventHandler(holder.CallbackA);
 
             val.Initialize();
-            val.ValidateElement("root", "", info, "type1", null, null, Path.Combine(TestData, XSDFILE_NO_TARGET_NAMESPACE));
+            val.ValidateElement(
+                "root",
+                "",
+                info,
+                "type1",
+                null,
+                null,
+                Path.Combine(TestData, XSDFILE_NO_TARGET_NAMESPACE)
+            );
 
             if ((int)allFlags == (int)AllFlags)
             {
@@ -233,7 +297,11 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             else
             {
                 Assert.True(holder.IsCalledA);
-                _exVerifier.IsExceptionOk(holder.lastException, "Sch_XsiTypeNotFound", new string[] { "type1" });
+                _exVerifier.IsExceptionOk(
+                    holder.lastException,
+                    "Sch_XsiTypeNotFound",
+                    new string[] { "type1" }
+                );
             }
 
             return;
@@ -259,9 +327,15 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             }
             catch (XmlSchemaValidationException e)
             {
-                _exVerifier.IsExceptionOk(e, new object[] { "Sch_IncompleteContentExpecting",
-                    new object[] { "Sch_ElementName", "NillableElement" },
-                    new object[] { "Sch_ElementName", "foo" } });
+                _exVerifier.IsExceptionOk(
+                    e,
+                    new object[]
+                    {
+                        "Sch_IncompleteContentExpecting",
+                        new object[] { "Sch_ElementName", "NillableElement" },
+                        new object[] { "Sch_ElementName", "foo" },
+                    }
+                );
                 return;
             }
 
@@ -337,24 +411,43 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             CValidationEventHolder holder = new CValidationEventHolder();
             XmlNamespaceManager ns = new XmlNamespaceManager(new NameTable());
 
-            schemas.Add("uri:tempuri", XmlReader.Create(new StringReader("<?xml version=\"1.0\" ?>\n" +
-                                                              "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" +
-                                                              "           targetNamespace=\"uri:tempuri\">\n" +
-                                                              "    <xs:complexType name=\"rootType\">\n" +
-                                                              "        <xs:sequence />\n" +
-                                                              "    </xs:complexType>\n" +
-                                                              "</xs:schema>")));
+            schemas.Add(
+                "uri:tempuri",
+                XmlReader.Create(
+                    new StringReader(
+                        "<?xml version=\"1.0\" ?>\n"
+                            + "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n"
+                            + "           targetNamespace=\"uri:tempuri\">\n"
+                            + "    <xs:complexType name=\"rootType\">\n"
+                            + "        <xs:sequence />\n"
+                            + "    </xs:complexType>\n"
+                            + "</xs:schema>"
+                    )
+                )
+            );
             val = CreateValidator(schemas, ns, AllFlags);
             val.XmlResolver = new XmlUrlResolver();
             val.ValidationEventHandler += new ValidationEventHandler(holder.CallbackA);
             ns.AddNamespace("t", "uri:tempuri");
 
             val.Initialize();
-            val.ValidateElement("root", "", info, "t:rootType", null, "uri:tempuri " + Path.Combine(TestData, "__NonExistingFile__.xsd"), null);
+            val.ValidateElement(
+                "root",
+                "",
+                info,
+                "t:rootType",
+                null,
+                "uri:tempuri " + Path.Combine(TestData, "__NonExistingFile__.xsd"),
+                null
+            );
 
             Assert.True(holder.IsCalledA);
             Assert.Equal(XmlSeverityType.Warning, holder.lastSeverity);
-            _exVerifier.IsExceptionOk(holder.lastException, "Sch_CannotLoadSchema", new string[] { "uri:tempuri", null });
+            _exVerifier.IsExceptionOk(
+                holder.lastException,
+                "Sch_CannotLoadSchema",
+                new string[] { "uri:tempuri", null }
+            );
 
             return;
         }
@@ -367,22 +460,41 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             XmlSchemaInfo info = new XmlSchemaInfo();
             CValidationEventHolder holder = new CValidationEventHolder();
 
-            schemas.Add("", XmlReader.Create(new StringReader("<?xml version=\"1.0\" ?>\n" +
-                                                              "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n" +
-                                                              "    <xs:complexType name=\"rootType\">\n" +
-                                                              "        <xs:sequence />\n" +
-                                                              "    </xs:complexType>\n" +
-                                                              "</xs:schema>")));
+            schemas.Add(
+                "",
+                XmlReader.Create(
+                    new StringReader(
+                        "<?xml version=\"1.0\" ?>\n"
+                            + "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n"
+                            + "    <xs:complexType name=\"rootType\">\n"
+                            + "        <xs:sequence />\n"
+                            + "    </xs:complexType>\n"
+                            + "</xs:schema>"
+                    )
+                )
+            );
             val = CreateValidator(schemas);
             val.XmlResolver = new XmlUrlResolver();
             val.ValidationEventHandler += new ValidationEventHandler(holder.CallbackA);
 
             val.Initialize();
-            val.ValidateElement("root", "", info, "rootType", null, null, Path.Combine(TestData, "__NonExistingFile__.xsd"));
+            val.ValidateElement(
+                "root",
+                "",
+                info,
+                "rootType",
+                null,
+                null,
+                Path.Combine(TestData, "__NonExistingFile__.xsd")
+            );
 
             Assert.True(holder.IsCalledA);
             Assert.Equal(XmlSeverityType.Warning, holder.lastSeverity);
-            _exVerifier.IsExceptionOk(holder.lastException, "Sch_CannotLoadSchema", new string[] { "", null });
+            _exVerifier.IsExceptionOk(
+                holder.lastException,
+                "Sch_CannotLoadSchema",
+                new string[] { "", null }
+            );
 
             return;
         }
@@ -403,7 +515,11 @@ namespace System.Xml.XmlSchemaValidatorApiTests
 
             Assert.True(holder.IsCalledA);
             Assert.Equal(XmlSeverityType.Warning, holder.lastSeverity);
-            _exVerifier.IsExceptionOk(holder.lastException, "Sch_NoElementSchemaFound", new string[] { "undefined" });
+            _exVerifier.IsExceptionOk(
+                holder.lastException,
+                "Sch_NoElementSchemaFound",
+                new string[] { "undefined" }
+            );
 
             return;
         }
@@ -414,7 +530,13 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             XmlSchemaValidator val;
             CValidationEventHolder holder = new CValidationEventHolder();
 
-            val = CreateValidator(XSDFILE_VALIDATE_END_ELEMENT, "", XmlSchemaValidationFlags.ProcessIdentityConstraints | XmlSchemaValidationFlags.ProcessInlineSchema | XmlSchemaValidationFlags.ProcessSchemaLocation);
+            val = CreateValidator(
+                XSDFILE_VALIDATE_END_ELEMENT,
+                "",
+                XmlSchemaValidationFlags.ProcessIdentityConstraints
+                    | XmlSchemaValidationFlags.ProcessInlineSchema
+                    | XmlSchemaValidationFlags.ProcessSchemaLocation
+            );
             val.ValidationEventHandler += new ValidationEventHandler(holder.CallbackA);
 
             val.Initialize();
@@ -459,13 +581,13 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         {
             Initialize();
             string xsd =
-                "<xs:schema targetNamespace='http://tempuri.org/XMLSchema.xsd' elementFormDefault='qualified' xmlns='http://tempuri.org/XMLSchema.xsd' xmlns:mstns='http://tempuri.org/XMLSchema.xsd' xmlns:xs='http://www.w3.org/2001/XMLSchema'>" +
-                    "<xs:element name='root'>" +
-                        "<xs:complexType> <xs:sequence> <xs:element name='B' type='mstns:B'/> </xs:sequence> </xs:complexType>" +
-                        "<xs:unique name='pNumKey'><xs:selector xpath='mstns:B/mstns:part'/><xs:field xpath='.'/></xs:unique>" +
-                    "</xs:element>" +
-                    "<xs:complexType name='B'><xs:sequence><xs:element name='part' maxOccurs='unbounded' type='xs:string'></xs:element></xs:sequence></xs:complexType>" +
-                "</xs:schema>";
+                "<xs:schema targetNamespace='http://tempuri.org/XMLSchema.xsd' elementFormDefault='qualified' xmlns='http://tempuri.org/XMLSchema.xsd' xmlns:mstns='http://tempuri.org/XMLSchema.xsd' xmlns:xs='http://www.w3.org/2001/XMLSchema'>"
+                + "<xs:element name='root'>"
+                + "<xs:complexType> <xs:sequence> <xs:element name='B' type='mstns:B'/> </xs:sequence> </xs:complexType>"
+                + "<xs:unique name='pNumKey'><xs:selector xpath='mstns:B/mstns:part'/><xs:field xpath='.'/></xs:unique>"
+                + "</xs:element>"
+                + "<xs:complexType name='B'><xs:sequence><xs:element name='part' maxOccurs='unbounded' type='xs:string'></xs:element></xs:sequence></xs:complexType>"
+                + "</xs:schema>";
 
             XmlSchemaSet ss = new XmlSchemaSet();
             ss.Add(XmlSchema.Read(new StringReader(xsd), ValidationCallback));
@@ -473,7 +595,12 @@ namespace System.Xml.XmlSchemaValidatorApiTests
 
             string ns = "http://tempuri.org/XMLSchema.xsd";
             XmlNamespaceManager nsmgr = new XmlNamespaceManager(ss.NameTable);
-            XmlSchemaValidator val = new XmlSchemaValidator(ss.NameTable, ss, nsmgr, XmlSchemaValidationFlags.ProcessIdentityConstraints);
+            XmlSchemaValidator val = new XmlSchemaValidator(
+                ss.NameTable,
+                ss,
+                nsmgr,
+                XmlSchemaValidationFlags.ProcessIdentityConstraints
+            );
             val.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
             val.Initialize();
             XmlSchemaInfo si = new XmlSchemaInfo();
@@ -509,11 +636,13 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         public void XmlSchemaValidatorDoesNotEnforceIdentityConstraintsOnDefaultAttributesInSomeCases()
         {
             Initialize();
-            string xml = @"<?xml version='1.0'?>
+            string xml =
+                @"<?xml version='1.0'?>
 <root xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='idF016.xsd'>
 	<uid val='test'/>	<uid/></root>";
 
-            string xsd = @"<?xml version='1.0'?>
+            string xsd =
+                @"<?xml version='1.0'?>
 <xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema' elementFormDefault='qualified'>
 	<xsd:element name='root'>
 		<xsd:complexType>
@@ -537,9 +666,15 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             XmlSchemaSet schemas = new XmlSchemaSet();
             schemas.Add(null, XmlReader.Create(new StringReader(xsd)));
             schemas.Compile();
-            XmlSchemaValidationFlags validationFlags = XmlSchemaValidationFlags.ProcessIdentityConstraints |
-            XmlSchemaValidationFlags.AllowXmlAttributes;
-            XmlSchemaValidator validator = new XmlSchemaValidator(namespaceManager.NameTable, schemas, namespaceManager, validationFlags);
+            XmlSchemaValidationFlags validationFlags =
+                XmlSchemaValidationFlags.ProcessIdentityConstraints
+                | XmlSchemaValidationFlags.AllowXmlAttributes;
+            XmlSchemaValidator validator = new XmlSchemaValidator(
+                namespaceManager.NameTable,
+                schemas,
+                namespaceManager,
+                validationFlags
+            );
             validator.Initialize();
             using (XmlReader r = XmlReader.Create(new StringReader(xsd)))
             {
@@ -560,20 +695,34 @@ namespace System.Xml.XmlSchemaValidatorApiTests
                                 } while (r.MoveToNextAttribute());
                                 r.MoveToElement();
                             }
-                            validator.ValidateElement(r.LocalName, r.NamespaceURI, null, null, null, null, null);
+                            validator.ValidateElement(
+                                r.LocalName,
+                                r.NamespaceURI,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null
+                            );
                             if (r.MoveToFirstAttribute())
                             {
                                 do
                                 {
                                     if (r.NamespaceURI != "http://www.w3.org/2000/xmlns/")
                                     {
-                                        validator.ValidateAttribute(r.LocalName, r.NamespaceURI, r.Value, null);
+                                        validator.ValidateAttribute(
+                                            r.LocalName,
+                                            r.NamespaceURI,
+                                            r.Value,
+                                            null
+                                        );
                                     }
                                 } while (r.MoveToNextAttribute());
                                 r.MoveToElement();
                             }
                             validator.ValidateEndOfAttributes(null);
-                            if (r.IsEmptyElement) goto case XmlNodeType.EndElement;
+                            if (r.IsEmptyElement)
+                                goto case XmlNodeType.EndElement;
                             break;
 
                         case XmlNodeType.EndElement:
@@ -604,9 +753,14 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             {
                 try
                 {
-                    while (r.Read()) ;
+                    while (r.Read())
+                        ;
                 }
-                catch (XmlSchemaValidationException e) { _output.WriteLine(e.Message); return; }
+                catch (XmlSchemaValidationException e)
+                {
+                    _output.WriteLine(e.Message);
+                    return;
+                }
             }
             Assert.Fail();
         }

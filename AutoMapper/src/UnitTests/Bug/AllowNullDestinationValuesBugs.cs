@@ -19,13 +19,15 @@ public class When_mapping_to_an_assignable_object_with_nullable_off : AutoMapper
         public string Name { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(config =>
-    {
-        config.AllowNullDestinationValues = false;
-        config.CreateMap<Inner, Inner>();
-        config.CreateMap<Source, Destination>()
-            .ForMember(dest => dest.SomeOtherProperty, opt => opt.MapFrom(src => src.Property));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(config =>
+        {
+            config.AllowNullDestinationValues = false;
+            config.CreateMap<Inner, Inner>();
+            config
+                .CreateMap<Source, Destination>()
+                .ForMember(dest => dest.SomeOtherProperty, opt => opt.MapFrom(src => src.Property));
+        });
 
     protected override void Because_of()
     {
@@ -41,19 +43,20 @@ public class When_mapping_to_an_assignable_object_with_nullable_off : AutoMapper
         _destination.SomeOtherProperty.ShouldNotBeNull();
     }
 }
+
 public class When_AllowNullDestinationValues_is_false : AutoMapperSpecBase
 {
-    public class Source
-    {
-    }
-    public class Destination
-    {
-    }
-    protected override MapperConfiguration CreateConfiguration() => new(config =>
-    {
-        config.AllowNullDestinationValues = false;
-        config.CreateMap<Source, Destination>();
-    });
+    public class Source { }
+
+    public class Destination { }
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(config =>
+        {
+            config.AllowNullDestinationValues = false;
+            config.CreateMap<Source, Destination>();
+        });
+
     [Fact]
     public void Null_should_map_to_non_null() => Mapper.Map<Destination>(null).ShouldNotBeNull();
 }

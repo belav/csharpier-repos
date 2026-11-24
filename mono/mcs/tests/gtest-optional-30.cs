@@ -2,11 +2,11 @@
 
 public static class Program
 {
-	public static int Main()
-	{
-		if (Lib.Foo<object>() != null)
-			return 1;
+    public static int Main()
+    {
+        if (Lib.Foo<object>() != null)
+            return 1;
 
-		return 0;
-	}
+        return 0;
+    }
 }

@@ -53,15 +53,13 @@ public class JSRootComponentsTest : ServerTestBase<ToggleExecutionModeServerFixt
         {
             dynamicRootContainer = GetShadowRoot(dynamicRootContainer);
         }
-        Browser.Equal(
-            "0",
-            () => dynamicRootContainer.FindElement(By.ClassName("click-count")).Text
+        Browser.Equal("0", () =>
+            dynamicRootContainer.FindElement(By.ClassName("click-count")).Text
         );
         dynamicRootContainer.FindElement(By.ClassName("increment")).Click();
         dynamicRootContainer.FindElement(By.ClassName("increment")).Click();
-        Browser.Equal(
-            "2",
-            () => dynamicRootContainer.FindElement(By.ClassName("click-count")).Text
+        Browser.Equal("2", () =>
+            dynamicRootContainer.FindElement(By.ClassName("click-count")).Text
         );
 
         // We can dispose the root component
@@ -87,15 +85,13 @@ public class JSRootComponentsTest : ServerTestBase<ToggleExecutionModeServerFixt
 
         // It functions
         var dynamicRootContainer = Browser.FindElement(By.Id("container-rendered-by-blazor"));
-        Browser.Equal(
-            "0",
-            () => dynamicRootContainer.FindElement(By.ClassName("click-count")).Text
+        Browser.Equal("0", () =>
+            dynamicRootContainer.FindElement(By.ClassName("click-count")).Text
         );
         dynamicRootContainer.FindElement(By.ClassName("increment")).Click();
         dynamicRootContainer.FindElement(By.ClassName("increment")).Click();
-        Browser.Equal(
-            "2",
-            () => dynamicRootContainer.FindElement(By.ClassName("click-count")).Text
+        Browser.Equal("2", () =>
+            dynamicRootContainer.FindElement(By.ClassName("click-count")).Text
         );
 
         AssertGlobalErrorState(false);
@@ -128,25 +124,20 @@ public class JSRootComponentsTest : ServerTestBase<ToggleExecutionModeServerFixt
         app.FindElement(By.Id("set-complex-params")).Click();
 
         var dynamicRootContainer = Browser.FindElement(By.Id("root-container-1"));
-        Browser.Equal(
-            "123",
-            () => dynamicRootContainer.FindElement(By.ClassName("increment-amount-value")).Text
+        Browser.Equal("123", () =>
+            dynamicRootContainer.FindElement(By.ClassName("increment-amount-value")).Text
         );
-        Browser.Equal(
-            "Person is Bert, age 123.456",
-            () => dynamicRootContainer.FindElement(By.ClassName("person-info")).Text
+        Browser.Equal("Person is Bert, age 123.456", () =>
+            dynamicRootContainer.FindElement(By.ClassName("person-info")).Text
         );
-        Browser.Equal(
-            "Value from JS object reference: You've added 1 components.",
-            () => dynamicRootContainer.FindElement(By.ClassName("value-from-js")).Text
+        Browser.Equal("Value from JS object reference: You've added 1 components.", () =>
+            dynamicRootContainer.FindElement(By.ClassName("value-from-js")).Text
         );
-        Browser.Equal(
-            "Value from .NET object reference: This is correct",
-            () => dynamicRootContainer.FindElement(By.ClassName("value-from-dotnetobject")).Text
+        Browser.Equal("Value from .NET object reference: This is correct", () =>
+            dynamicRootContainer.FindElement(By.ClassName("value-from-dotnetobject")).Text
         );
-        Browser.Equal(
-            "Byte array value: 2,3,5,7,11,13,17",
-            () => dynamicRootContainer.FindElement(By.ClassName("value-from-bytearray")).Text
+        Browser.Equal("Byte array value: 2,3,5,7,11,13,17", () =>
+            dynamicRootContainer.FindElement(By.ClassName("value-from-bytearray")).Text
         );
     }
 
@@ -157,24 +148,21 @@ public class JSRootComponentsTest : ServerTestBase<ToggleExecutionModeServerFixt
         app.FindElement(By.Id("set-complex-params")).Click();
 
         var dynamicRootContainer = Browser.FindElement(By.Id("root-container-1"));
-        Browser.Equal(
-            "123",
-            () => dynamicRootContainer.FindElement(By.ClassName("increment-amount-value")).Text
+        Browser.Equal("123", () =>
+            dynamicRootContainer.FindElement(By.ClassName("increment-amount-value")).Text
         );
 
         // Supply updated parameters
         app.FindElement(By.Id("set-increment-amount")).Click();
 
         // This parameter was provided explicitly
-        Browser.Equal(
-            "1",
-            () => dynamicRootContainer.FindElement(By.ClassName("increment-amount-value")).Text
+        Browser.Equal("1", () =>
+            dynamicRootContainer.FindElement(By.ClassName("increment-amount-value")).Text
         );
 
         // ... but this one remains from before
-        Browser.Equal(
-            "Person is Bert, age 123.456",
-            () => dynamicRootContainer.FindElement(By.ClassName("person-info")).Text
+        Browser.Equal("Person is Bert, age 123.456", () =>
+            dynamicRootContainer.FindElement(By.ClassName("person-info")).Text
         );
     }
 
@@ -191,9 +179,8 @@ public class JSRootComponentsTest : ServerTestBase<ToggleExecutionModeServerFixt
     {
         app.FindElement(By.Id("add-root-component")).Click();
         app.FindElement(By.Id("set-catchall-params")).Click();
-        Browser.Equal(
-            "Finished setting catchall parameters on component in root-container-1",
-            () => Browser.FindElement(By.Id("message")).Text
+        Browser.Equal("Finished setting catchall parameters on component in root-container-1", () =>
+            Browser.FindElement(By.Id("message")).Text
         );
 
         var dynamicRootContainer = Browser.FindElement(By.Id("root-container-1"));
@@ -287,18 +274,16 @@ public class JSRootComponentsTest : ServerTestBase<ToggleExecutionModeServerFixt
 
         app.FindElement(By.Id("add-root-component")).Click();
         app.FindElement(By.Id("set-callback-params")).Click();
-        Browser.Equal(
-            $"Finished setting callback parameters on component in {containerId}",
-            () => app.FindElement(By.Id("message")).Text
+        Browser.Equal($"Finished setting callback parameters on component in {containerId}", () =>
+            app.FindElement(By.Id("message")).Text
         );
 
         var container = Browser.FindElement(By.Id(containerId));
 
         // Invoke the callback without params.
         container.FindElement(By.ClassName("js-callback")).Click();
-        Browser.Equal(
-            $"JavaScript button callback invoked (id=0)",
-            () => app.FindElement(By.Id("message")).Text
+        Browser.Equal($"JavaScript button callback invoked (id=0)", () =>
+            app.FindElement(By.Id("message")).Text
         );
 
         // Invoke the callback with params.
@@ -313,23 +298,20 @@ public class JSRootComponentsTest : ServerTestBase<ToggleExecutionModeServerFixt
 
         // Invoke callback without params (id=1).
         container.FindElement(By.ClassName("js-callback")).Click();
-        Browser.Equal(
-            $"JavaScript button callback invoked (id=1)",
-            () => app.FindElement(By.Id("message")).Text
+        Browser.Equal($"JavaScript button callback invoked (id=1)", () =>
+            app.FindElement(By.Id("message")).Text
         );
 
         // Remove all callbacks.
         app.FindElement(By.Id("remove-callback-params")).Click();
-        Browser.Equal(
-            $"Finished removing callback parameters on component in {containerId}",
-            () => app.FindElement(By.Id("message")).Text
+        Browser.Equal($"Finished removing callback parameters on component in {containerId}", () =>
+            app.FindElement(By.Id("message")).Text
         );
 
         // Invoke the callback without params, assert that it no-ops.
         container.FindElement(By.ClassName("js-callback-with-params")).Click();
-        Browser.Equal(
-            $"Finished removing callback parameters on component in {containerId}",
-            () => app.FindElement(By.Id("message")).Text
+        Browser.Equal($"Finished removing callback parameters on component in {containerId}", () =>
+            app.FindElement(By.Id("message")).Text
         );
     }
 
@@ -364,9 +346,8 @@ public class JSRootComponentsTest : ServerTestBase<ToggleExecutionModeServerFixt
     void AssertGlobalErrorState(bool hasGlobalError)
     {
         var globalErrorUi = Browser.Exists(By.Id("blazor-error-ui"));
-        Browser.Equal(
-            hasGlobalError ? "block" : "none",
-            () => globalErrorUi.GetCssValue("display")
+        Browser.Equal(hasGlobalError ? "block" : "none", () =>
+            globalErrorUi.GetCssValue("display")
         );
     }
 

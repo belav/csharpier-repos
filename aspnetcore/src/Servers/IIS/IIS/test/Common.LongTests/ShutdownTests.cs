@@ -371,26 +371,19 @@ public class ShutdownTests : IISFunctionalTestBase
     {
         var deploymentResult = await AssertStarts(hostingModel);
 
-        var load = Helpers.StressLoad(
-            deploymentResult.HttpClient,
-            "/HelloWorld",
-            response =>
+        var load = Helpers.StressLoad(deploymentResult.HttpClient, "/HelloWorld", response =>
+        {
+            var statusCode = (int)response.StatusCode;
+            // Test failure involves the stress load receiving a 400 Bad Request.
+            // We think it is due to IIS returning the 400 itself, but need to confirm the hypothesis.
+            if (statusCode == 400)
             {
-                var statusCode = (int)response.StatusCode;
-                // Test failure involves the stress load receiving a 400 Bad Request.
-                // We think it is due to IIS returning the 400 itself, but need to confirm the hypothesis.
-                if (statusCode == 400)
-                {
-                    Logger.LogError(
-                        $"Status code was a bad request. Content: {response.Content.ReadAsStringAsync().GetAwaiter().GetResult()}"
-                    );
-                }
-                Assert.True(
-                    statusCode == 200 || statusCode == 503,
-                    "Status code was " + statusCode
+                Logger.LogError(
+                    $"Status code was a bad request. Content: {response.Content.ReadAsStringAsync().GetAwaiter().GetResult()}"
                 );
             }
-        );
+            Assert.True(statusCode == 200 || statusCode == 503, "Status code was " + statusCode);
+        });
 
         for (int i = 0; i < 5; i++)
         {
@@ -449,9 +442,8 @@ public class ShutdownTests : IISFunctionalTestBase
 
         // Have to retry here to allow ANCM to receive notification and react to it
         // Verify that worker process gets restarted with new process id
-        await deploymentResult.HttpClient.RetryRequestAsync(
-            "/ProcessId",
-            async r => await r.Content.ReadAsStringAsync() != processBefore
+        await deploymentResult.HttpClient.RetryRequestAsync("/ProcessId", async r =>
+            await r.Content.ReadAsStringAsync() != processBefore
         );
     }
 
@@ -472,9 +464,8 @@ public class ShutdownTests : IISFunctionalTestBase
 
         // Have to retry here to allow ANCM to receive notification and react to it
         // Verify that worker process does not get restarted with new process id
-        await deploymentResult.HttpClient.RetryRequestAsync(
-            "/ProcessId",
-            async r => await r.Content.ReadAsStringAsync() == processBefore
+        await deploymentResult.HttpClient.RetryRequestAsync("/ProcessId", async r =>
+            await r.Content.ReadAsStringAsync() == processBefore
         );
     }
 
@@ -495,9 +486,8 @@ public class ShutdownTests : IISFunctionalTestBase
 
         // Have to retry here to allow ANCM to receive notification and react to it
         // Verify that worker process does not get restarted with new process id
-        await deploymentResult.HttpClient.RetryRequestAsync(
-            "/ProcessId",
-            async r => await r.Content.ReadAsStringAsync() == processBefore
+        await deploymentResult.HttpClient.RetryRequestAsync("/ProcessId", async r =>
+            await r.Content.ReadAsStringAsync() == processBefore
         );
     }
 
@@ -517,9 +507,8 @@ public class ShutdownTests : IISFunctionalTestBase
 
         // Have to retry here to allow ANCM to receive notification and react to it
         // Verify that worker process does not get restarted with new process id
-        await deploymentResult.HttpClient.RetryRequestAsync(
-            "/ProcessId",
-            async r => await r.Content.ReadAsStringAsync() == processBefore
+        await deploymentResult.HttpClient.RetryRequestAsync("/ProcessId", async r =>
+            await r.Content.ReadAsStringAsync() == processBefore
         );
     }
 
@@ -543,9 +532,8 @@ public class ShutdownTests : IISFunctionalTestBase
         // Have to retry here to allow ANCM to receive notification and react to it
         // Verify that inprocess application was created and started, checking the server
         // header to see that it is running inprocess
-        await deploymentResult.HttpClient.RetryRequestAsync(
-            "/HelloWorld",
-            r => r.Headers.Server.ToString().StartsWith("Microsoft", StringComparison.Ordinal)
+        await deploymentResult.HttpClient.RetryRequestAsync("/HelloWorld", r =>
+            r.Headers.Server.ToString().StartsWith("Microsoft", StringComparison.Ordinal)
         );
     }
 
@@ -561,18 +549,11 @@ public class ShutdownTests : IISFunctionalTestBase
         var deploymentResult = await DeployAsync(Fixture.GetBaseDeploymentParameters(hostingModel));
 
         await deploymentResult.AssertStarts();
-        var load = Helpers.StressLoad(
-            deploymentResult.HttpClient,
-            "/HelloWorld",
-            response =>
-            {
-                var statusCode = (int)response.StatusCode;
-                Assert.True(
-                    statusCode == 200 || statusCode == 503,
-                    "Status code was " + statusCode
-                );
-            }
-        );
+        var load = Helpers.StressLoad(deploymentResult.HttpClient, "/HelloWorld", response =>
+        {
+            var statusCode = (int)response.StatusCode;
+            Assert.True(statusCode == 200 || statusCode == 503, "Status code was " + statusCode);
+        });
 
         for (var i = 0; i < 100; i++)
         {

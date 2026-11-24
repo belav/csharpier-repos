@@ -82,7 +82,10 @@ namespace System.Linq.Expressions.Compiler
                 }
                 else
                 {
-                    flags = UpdateEmitExpressionStartFlag(flags, CompilationFlags.EmitExpressionStart);
+                    flags = UpdateEmitExpressionStartFlag(
+                        flags,
+                        CompilationFlags.EmitExpressionStart
+                    );
                     EmitExpression(node.DefaultValue, flags);
                 }
             }
@@ -102,7 +105,9 @@ namespace System.Linq.Expressions.Compiler
                 // means the goto will be emitted as Ret. Therefore we can emit the goto's
                 // default value with tail call. This can be improved by detecting if the
                 // target label is equivalent to the return label.
-                tailCall = labelInfo.CanReturn ? CompilationFlags.EmitAsTail : CompilationFlags.EmitAsNoTail;
+                tailCall = labelInfo.CanReturn
+                    ? CompilationFlags.EmitAsTail
+                    : CompilationFlags.EmitAsNoTail;
                 flags = UpdateEmitAsTailCallFlag(flags, tailCall);
             }
 
@@ -114,7 +119,10 @@ namespace System.Linq.Expressions.Compiler
                 }
                 else
                 {
-                    flags = UpdateEmitExpressionStartFlag(flags, CompilationFlags.EmitExpressionStart);
+                    flags = UpdateEmitExpressionStartFlag(
+                        flags,
+                        CompilationFlags.EmitExpressionStart
+                    );
                     EmitExpression(node.Value, flags);
                 }
             }
@@ -164,8 +172,10 @@ namespace System.Linq.Expressions.Compiler
                         {
                             return false;
                         }
-                        if (_labelBlock.Parent!.Kind == LabelScopeKind.Switch &&
-                            _labelBlock.Parent.ContainsTarget(label))
+                        if (
+                            _labelBlock.Parent!.Kind == LabelScopeKind.Switch
+                            && _labelBlock.Parent.ContainsTarget(label)
+                        )
                         {
                             return false;
                         }
@@ -255,7 +265,14 @@ namespace System.Linq.Expressions.Compiler
                         // Found the label. We can directly return from this place
                         // only if the label type is reference assignable to the lambda return type.
                         LabelTarget label = ((LabelExpression)expression).Target;
-                        _labelInfo.Add(label, new LabelInfo(_ilg, label, TypeUtils.AreReferenceAssignable(lambda.ReturnType, label.Type)));
+                        _labelInfo.Add(
+                            label,
+                            new LabelInfo(
+                                _ilg,
+                                label,
+                                TypeUtils.AreReferenceAssignable(lambda.ReturnType, label.Type)
+                            )
+                        );
                         return;
                     case ExpressionType.Block:
                         // Look in the last significant expression of a block

@@ -14,20 +14,19 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue;
 ///   T P { [|set;|] }
 ///   T P { [|init;|] }
 /// </summary>
-internal sealed class ExplicitAutoPropertyAccessorDeclarationBody(AccessorDeclarationSyntax accessor) : PropertyOrIndexerAccessorDeclarationBody
+internal sealed class ExplicitAutoPropertyAccessorDeclarationBody(
+    AccessorDeclarationSyntax accessor
+) : PropertyOrIndexerAccessorDeclarationBody
 {
-    public override SyntaxNode? ExplicitBody
-        => null;
+    public override SyntaxNode? ExplicitBody => null;
 
-    public override SyntaxNode? HeaderActiveStatement
-        => accessor;
+    public override SyntaxNode? HeaderActiveStatement => accessor;
 
-    public override TextSpan HeaderActiveStatementSpan
-        => BreakpointSpans.CreateSpanForAutoPropertyAccessor(accessor);
+    public override TextSpan HeaderActiveStatementSpan =>
+        BreakpointSpans.CreateSpanForAutoPropertyAccessor(accessor);
 
-    public override IEnumerable<SyntaxToken>? GetActiveTokens()
-        => BreakpointSpans.GetActiveTokensForAutoPropertyAccessor(accessor);
+    public override IEnumerable<SyntaxToken>? GetActiveTokens() =>
+        BreakpointSpans.GetActiveTokensForAutoPropertyAccessor(accessor);
 
-    public override SyntaxNode? MatchRoot
-        => null;
+    public override SyntaxNode? MatchRoot => null;
 }

@@ -139,11 +139,16 @@ namespace System.Xml.XmlDocumentTests
         public static void ElementWithMoreThanOneChild()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<root><child1/><child2>Some Text</child2><!-- comment --><?PI pi comments?></root>");
+            xmlDocument.LoadXml(
+                "<root><child1/><child2>Some Text</child2><!-- comment --><?PI pi comments?></root>"
+            );
 
             Assert.Equal(4, xmlDocument.DocumentElement.ChildNodes.Count);
             Assert.NotNull(xmlDocument.DocumentElement.LastChild);
-            Assert.Equal(XmlNodeType.ProcessingInstruction, xmlDocument.DocumentElement.LastChild.NodeType);
+            Assert.Equal(
+                XmlNodeType.ProcessingInstruction,
+                xmlDocument.DocumentElement.LastChild.NodeType
+            );
         }
 
         [Fact]
@@ -155,7 +160,6 @@ namespace System.Xml.XmlDocumentTests
             Assert.Equal(XmlNodeType.Text, xmlDocument.DocumentElement.LastChild.NodeType);
             Assert.Equal("content", xmlDocument.DocumentElement.LastChild.Value);
         }
-
 
         [Fact]
         public static void NewlyCreatedElement()

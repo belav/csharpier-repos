@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Data.Linq.SqlClient {
-
+namespace System.Data.Linq.SqlClient
+{
     /// <summary>
     /// Abstracts the provider side type system. Encapsulates:
     /// - Mapping from runtime types to provider types.
@@ -12,11 +12,18 @@ namespace System.Data.Linq.SqlClient {
     /// - Type coercion precedence rules.
     /// - Type family organization.
     /// </summary>
-    internal abstract class TypeSystemProvider {
+    internal abstract class TypeSystemProvider
+    {
+        internal abstract ProviderType PredictTypeForUnary(
+            SqlNodeType unaryOp,
+            ProviderType operandType
+        );
 
-        internal abstract ProviderType PredictTypeForUnary(SqlNodeType unaryOp, ProviderType operandType);
-
-        internal abstract ProviderType PredictTypeForBinary(SqlNodeType binaryOp, ProviderType leftType, ProviderType rightType);
+        internal abstract ProviderType PredictTypeForBinary(
+            SqlNodeType binaryOp,
+            ProviderType leftType,
+            ProviderType rightType
+        );
 
         /// <summary>
         /// Return the provider type corresponding to the given clr type.
@@ -74,25 +81,33 @@ namespace System.Data.Linq.SqlClient {
         /// </summary>
         /// <param name="toType">Type of the target type family</param>
         /// <returns>Smallest type of target type family that can hold equivalent information</returns>
-        internal abstract ProviderType ChangeTypeFamilyTo(ProviderType type, ProviderType typeWithFamily);
+        internal abstract ProviderType ChangeTypeFamilyTo(
+            ProviderType type,
+            ProviderType typeWithFamily
+        );
 
-        internal abstract void InitializeParameter(ProviderType type, System.Data.Common.DbParameter parameter, object value);
+        internal abstract void InitializeParameter(
+            ProviderType type,
+            System.Data.Common.DbParameter parameter,
+            object value
+        );
     }
 
     /// <summary>
     /// Flags control the format of string returned by ToQueryString().
     /// </summary>
     [Flags]
-    internal enum QueryFormatOptions {
+    internal enum QueryFormatOptions
+    {
         None = 0,
-        SuppressSize = 1
+        SuppressSize = 1,
     }
 
     /// <summary>
     /// An abstract type exposed by the TypeSystemProvider.
     /// </summary>
-    internal abstract class ProviderType {
-
+    internal abstract class ProviderType
+    {
         /// <summary>
         /// True if this type is a Unicode type (eg, ntext, etc).
         /// </summary>
@@ -145,7 +160,7 @@ namespace System.Data.Linq.SqlClient {
         internal abstract bool SupportsComparison { get; }
 
         /// <summary>
-        /// Used to indicate if the types supports Length function (LEN in T-SQL).  
+        /// Used to indicate if the types supports Length function (LEN in T-SQL).
         /// </summary>
         /// <returns>Returns true if type supports use of length function on the type.</returns>
         internal abstract bool SupportsLength { get; }
@@ -234,9 +249,10 @@ namespace System.Data.Linq.SqlClient {
         /// all these types have length less than the default sized used by SqlServer,
         /// so the length specification can be omitted without fear of truncation.
         /// </summary>
-        internal abstract bool CanSuppressSizeForConversionToString{ get; }
+        internal abstract bool CanSuppressSizeForConversionToString { get; }
 
-        public static bool operator ==(ProviderType typeA, ProviderType typeB) {
+        public static bool operator ==(ProviderType typeA, ProviderType typeB)
+        {
             if ((object)typeA == (object)typeB)
                 return true;
             if ((object)typeA != null)
@@ -244,7 +260,8 @@ namespace System.Data.Linq.SqlClient {
             return false;
         }
 
-        public static bool operator != (ProviderType typeA, ProviderType typeB) {
+        public static bool operator !=(ProviderType typeA, ProviderType typeB)
+        {
             if ((object)typeA == (object)typeB)
                 return false;
             if ((object)typeA != null)
@@ -252,11 +269,13 @@ namespace System.Data.Linq.SqlClient {
             return true;
         }
 
-        public override bool Equals(object obj) {
+        public override bool Equals(object obj)
+        {
             return base.Equals(obj);
         }
 
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return base.GetHashCode();
         }
     }

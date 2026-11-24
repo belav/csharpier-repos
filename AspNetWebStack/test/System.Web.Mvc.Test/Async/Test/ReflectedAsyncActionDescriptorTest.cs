@@ -13,7 +13,9 @@ namespace System.Web.Mvc.Async.Test
     public class ReflectedAsyncActionDescriptorTest
     {
         private readonly MethodInfo _asyncMethod = typeof(ExecuteController).GetMethod("FooAsync");
-        private readonly MethodInfo _completedMethod = typeof(ExecuteController).GetMethod("FooCompleted");
+        private readonly MethodInfo _completedMethod = typeof(ExecuteController).GetMethod(
+            "FooCompleted"
+        );
 
         [Fact]
         public void Constructor_SetsProperties()
@@ -23,7 +25,12 @@ namespace System.Web.Mvc.Async.Test
             ControllerDescriptor cd = new Mock<ControllerDescriptor>().Object;
 
             // Act
-            ReflectedAsyncActionDescriptor ad = new ReflectedAsyncActionDescriptor(_asyncMethod, _completedMethod, actionName, cd);
+            ReflectedAsyncActionDescriptor ad = new ReflectedAsyncActionDescriptor(
+                _asyncMethod,
+                _completedMethod,
+                actionName,
+                cd
+            );
 
             // Assert
             Assert.Equal(_asyncMethod, ad.AsyncMethodInfo);
@@ -40,7 +47,12 @@ namespace System.Web.Mvc.Async.Test
 
             // Act & assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { new ReflectedAsyncActionDescriptor(_asyncMethod, _completedMethod, "", cd); }, "actionName");
+                delegate
+                {
+                    new ReflectedAsyncActionDescriptor(_asyncMethod, _completedMethod, "", cd);
+                },
+                "actionName"
+            );
         }
 
         [Fact]
@@ -51,7 +63,12 @@ namespace System.Web.Mvc.Async.Test
 
             // Act & assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { new ReflectedAsyncActionDescriptor(_asyncMethod, _completedMethod, null, cd); }, "actionName");
+                delegate
+                {
+                    new ReflectedAsyncActionDescriptor(_asyncMethod, _completedMethod, null, cd);
+                },
+                "actionName"
+            );
         }
 
         [Fact]
@@ -63,9 +80,19 @@ namespace System.Web.Mvc.Async.Test
 
             // Act & assert
             Assert.Throws<ArgumentException>(
-                delegate { new ReflectedAsyncActionDescriptor(getHashCodeMethod, _completedMethod, "SomeAction", cd); },
-                "Cannot create a descriptor for instance method 'Int32 GetHashCode()' on type 'System.Object' because the type does not derive from ControllerBase." + Environment.NewLine
-              + "Parameter name: asyncMethodInfo");
+                delegate
+                {
+                    new ReflectedAsyncActionDescriptor(
+                        getHashCodeMethod,
+                        _completedMethod,
+                        "SomeAction",
+                        cd
+                    );
+                },
+                "Cannot create a descriptor for instance method 'Int32 GetHashCode()' on type 'System.Object' because the type does not derive from ControllerBase."
+                    + Environment.NewLine
+                    + "Parameter name: asyncMethodInfo"
+            );
         }
 
         [Fact]
@@ -76,7 +103,12 @@ namespace System.Web.Mvc.Async.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new ReflectedAsyncActionDescriptor(null, _completedMethod, "SomeAction", cd); }, "asyncMethodInfo");
+                delegate
+                {
+                    new ReflectedAsyncActionDescriptor(null, _completedMethod, "SomeAction", cd);
+                },
+                "asyncMethodInfo"
+            );
         }
 
         [Fact]
@@ -88,9 +120,19 @@ namespace System.Web.Mvc.Async.Test
 
             // Act & assert
             Assert.Throws<ArgumentException>(
-                delegate { new ReflectedAsyncActionDescriptor(_asyncMethod, getHashCodeMethod, "SomeAction", cd); },
-                "Cannot create a descriptor for instance method 'Int32 GetHashCode()' on type 'System.Object' because the type does not derive from ControllerBase." + Environment.NewLine
-              + "Parameter name: completedMethodInfo");
+                delegate
+                {
+                    new ReflectedAsyncActionDescriptor(
+                        _asyncMethod,
+                        getHashCodeMethod,
+                        "SomeAction",
+                        cd
+                    );
+                },
+                "Cannot create a descriptor for instance method 'Int32 GetHashCode()' on type 'System.Object' because the type does not derive from ControllerBase."
+                    + Environment.NewLine
+                    + "Parameter name: completedMethodInfo"
+            );
         }
 
         [Fact]
@@ -101,7 +143,12 @@ namespace System.Web.Mvc.Async.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new ReflectedAsyncActionDescriptor(_asyncMethod, null, "SomeAction", cd); }, "completedMethodInfo");
+                delegate
+                {
+                    new ReflectedAsyncActionDescriptor(_asyncMethod, null, "SomeAction", cd);
+                },
+                "completedMethodInfo"
+            );
         }
 
         [Fact]
@@ -109,7 +156,17 @@ namespace System.Web.Mvc.Async.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new ReflectedAsyncActionDescriptor(_asyncMethod, _completedMethod, "SomeAction", null); }, "controllerDescriptor");
+                delegate
+                {
+                    new ReflectedAsyncActionDescriptor(
+                        _asyncMethod,
+                        _completedMethod,
+                        "SomeAction",
+                        null
+                    );
+                },
+                "controllerDescriptor"
+            );
         }
 
         [Fact]
@@ -122,7 +179,7 @@ namespace System.Web.Mvc.Async.Test
 
             Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
-                { "id1", 42 }
+                { "id1", 42 },
             };
 
             ReflectedAsyncActionDescriptor ad = GetActionDescriptor(_asyncMethod, _completedMethod);
@@ -152,7 +209,12 @@ namespace System.Web.Mvc.Async.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { ad.BeginExecute(null, new Dictionary<string, object>(), null, null); }, "controllerContext");
+                delegate
+                {
+                    ad.BeginExecute(null, new Dictionary<string, object>(), null, null);
+                },
+                "controllerContext"
+            );
         }
 
         [Fact]
@@ -162,13 +224,22 @@ namespace System.Web.Mvc.Async.Test
             ReflectedAsyncActionDescriptor ad = GetActionDescriptor(_asyncMethod, _completedMethod);
             ControllerContext controllerContext = new ControllerContext()
             {
-                Controller = new RegularSyncController()
+                Controller = new RegularSyncController(),
             };
 
             // Act & assert
             Assert.Throws<InvalidOperationException>(
-                delegate { ad.BeginExecute(controllerContext, new Dictionary<string, object>(), null, null); },
-                "The controller of type 'System.Web.Mvc.Async.Test.ReflectedAsyncActionDescriptorTest+RegularSyncController' must subclass AsyncController or implement the IAsyncManagerContainer interface.");
+                delegate
+                {
+                    ad.BeginExecute(
+                        controllerContext,
+                        new Dictionary<string, object>(),
+                        null,
+                        null
+                    );
+                },
+                "The controller of type 'System.Web.Mvc.Async.Test.ReflectedAsyncActionDescriptorTest+RegularSyncController' must subclass AsyncController or implement the IAsyncManagerContainer interface."
+            );
         }
 
         [Fact]
@@ -179,7 +250,12 @@ namespace System.Web.Mvc.Async.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { ad.BeginExecute(new ControllerContext(), null, null, null); }, "parameters");
+                delegate
+                {
+                    ad.BeginExecute(new ControllerContext(), null, null, null);
+                },
+                "parameters"
+            );
         }
 
         [Fact]
@@ -189,7 +265,9 @@ namespace System.Web.Mvc.Async.Test
             ReflectedAsyncActionDescriptor ad = GetActionDescriptor(_asyncMethod, _completedMethod);
 
             // Act
-            object[] attributes = ad.GetCustomAttributes(true /* inherit */);
+            object[] attributes = ad.GetCustomAttributes(
+                true /* inherit */
+            );
 
             // Assert
             object attribute = Assert.Single(attributes);
@@ -205,7 +283,10 @@ namespace System.Web.Mvc.Async.Test
             ReflectedAsyncActionDescriptor ad = GetActionDescriptor(_asyncMethod, _completedMethod);
 
             // Act
-            object[] attributes = ad.GetCustomAttributes(typeof(OutputCacheAttribute), true /* inherit */);
+            object[] attributes = ad.GetCustomAttributes(
+                typeof(OutputCacheAttribute),
+                true /* inherit */
+            );
 
             // Assert
             Assert.Empty(attributes);
@@ -227,7 +308,9 @@ namespace System.Web.Mvc.Async.Test
             Assert.Equal(pDescsFirstCall, pDescsSecondCall);
 
             ParameterDescriptor parameterDescriptor = Assert.Single(pDescsFirstCall);
-            ReflectedParameterDescriptor pDesc = Assert.IsType<ReflectedParameterDescriptor>(parameterDescriptor);
+            ReflectedParameterDescriptor pDesc = Assert.IsType<ReflectedParameterDescriptor>(
+                parameterDescriptor
+            );
 
             Assert.NotNull(pDesc);
             Assert.Same(ad, pDesc.ActionDescriptor);
@@ -241,11 +324,20 @@ namespace System.Web.Mvc.Async.Test
             ControllerContext controllerContext = new Mock<ControllerContext>().Object;
             Mock<MethodInfo> mockMethod = new Mock<MethodInfo>();
 
-            Mock<ActionMethodSelectorAttribute> mockAttr = new Mock<ActionMethodSelectorAttribute>();
-            mockAttr.Setup(attr => attr.IsValidForRequest(controllerContext, mockMethod.Object)).Returns(true).Verifiable();
-            mockMethod.Setup(m => m.GetCustomAttributes(typeof(ActionMethodSelectorAttribute), true)).Returns(new ActionMethodSelectorAttribute[] { mockAttr.Object });
+            Mock<ActionMethodSelectorAttribute> mockAttr =
+                new Mock<ActionMethodSelectorAttribute>();
+            mockAttr
+                .Setup(attr => attr.IsValidForRequest(controllerContext, mockMethod.Object))
+                .Returns(true)
+                .Verifiable();
+            mockMethod
+                .Setup(m => m.GetCustomAttributes(typeof(ActionMethodSelectorAttribute), true))
+                .Returns(new ActionMethodSelectorAttribute[] { mockAttr.Object });
 
-            ReflectedAsyncActionDescriptor ad = GetActionDescriptor(mockMethod.Object, _completedMethod);
+            ReflectedAsyncActionDescriptor ad = GetActionDescriptor(
+                mockMethod.Object,
+                _completedMethod
+            );
 
             // Act
             ICollection<ActionSelector> selectors = ad.GetSelectors();
@@ -264,17 +356,29 @@ namespace System.Web.Mvc.Async.Test
             ReflectedAsyncActionDescriptor ad = GetActionDescriptor(_asyncMethod, _completedMethod);
 
             // Act
-            bool isDefined = ad.IsDefined(typeof(AuthorizeAttribute), true /* inherit */);
+            bool isDefined = ad.IsDefined(
+                typeof(AuthorizeAttribute),
+                true /* inherit */
+            );
 
             // Assert
             Assert.True(isDefined);
         }
 
-        private static ReflectedAsyncActionDescriptor GetActionDescriptor(MethodInfo asyncMethod, MethodInfo completedMethod)
+        private static ReflectedAsyncActionDescriptor GetActionDescriptor(
+            MethodInfo asyncMethod,
+            MethodInfo completedMethod
+        )
         {
-            return new ReflectedAsyncActionDescriptor(asyncMethod, completedMethod, "someName", new Mock<ControllerDescriptor>().Object, false /* validateMethod */)
+            return new ReflectedAsyncActionDescriptor(
+                asyncMethod,
+                completedMethod,
+                "someName",
+                new Mock<ControllerDescriptor>().Object,
+                false /* validateMethod */
+            )
             {
-                DispatcherCache = new ActionMethodDispatcherCache()
+                DispatcherCache = new ActionMethodDispatcherCache(),
             };
         }
 
@@ -285,7 +389,9 @@ namespace System.Web.Mvc.Async.Test
             [Authorize]
             public void FooAsync(int id1)
             {
-                _func = o => Convert.ToString(o, CultureInfo.InvariantCulture) + id1.ToString(CultureInfo.InvariantCulture);
+                _func = o =>
+                    Convert.ToString(o, CultureInfo.InvariantCulture)
+                    + id1.ToString(CultureInfo.InvariantCulture);
                 AsyncManager.Parameters["id2"] = "Hello world: ";
                 AsyncManager.Finish();
             }

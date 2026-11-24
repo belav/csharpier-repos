@@ -47,7 +47,6 @@ namespace System.Xml.Xsl.Qil
             this.xmlType = xmlType;
         }
 
-
         //-----------------------------------------------
         // QilNode methods
         //-----------------------------------------------
@@ -106,7 +105,6 @@ namespace System.Xml.Xsl.Qil
             return n;
         }
 
-
         //-----------------------------------------------
         // IList<QilNode> methods -- override
         //-----------------------------------------------
@@ -131,7 +129,6 @@ namespace System.Xml.Xsl.Qil
         {
             throw new NotSupportedException();
         }
-
 
         //-----------------------------------------------
         // IList<QilNode> methods -- no need to override
@@ -208,12 +205,14 @@ namespace System.Xml.Xsl.Qil
         private int nodeId;
         private string nodeLoc;
 
-        public int NodeId {
+        public int NodeId
+        {
             get { return nodeId; }
             set { nodeId = value; }
         }
 
-        public string NodeLocation {
+        public string NodeLocation
+        {
             get { return nodeLoc; }
             set { nodeLoc = value; }
         }

@@ -739,21 +739,14 @@ public class StartupTests : IISFunctionalTestBase
         var dictionary = new Dictionary<string, (string, Action<XElement>)>();
         dictionary.Add(
             "Empty process path",
-            (
-                "Attribute 'processPath' is required.",
-                element =>
-                    element.Descendants("aspNetCore").Single().SetAttributeValue("processPath", "")
+            ("Attribute 'processPath' is required.", element =>
+                element.Descendants("aspNetCore").Single().SetAttributeValue("processPath", "")
             )
         );
         dictionary.Add(
             "Unknown hostingModel",
-            (
-                "Unknown hosting model 'asdf'.",
-                element =>
-                    element
-                        .Descendants("aspNetCore")
-                        .Single()
-                        .SetAttributeValue("hostingModel", "asdf")
+            ("Unknown hosting model 'asdf'.", element =>
+                element.Descendants("aspNetCore").Single().SetAttributeValue("hostingModel", "asdf")
             )
         );
         dictionary.Add(
@@ -809,29 +802,23 @@ public class StartupTests : IISFunctionalTestBase
             }
         );
 
-        dictionary.Add(
-            "App in subdirectory with space",
-            parameters =>
-            {
-                MoveApplication(parameters, pathWithSpace);
-                parameters.TransformArguments(
-                    (arguments, root) => Path.Combine(pathWithSpace, arguments)
-                );
-                return "";
-            }
-        );
+        dictionary.Add("App in subdirectory with space", parameters =>
+        {
+            MoveApplication(parameters, pathWithSpace);
+            parameters.TransformArguments(
+                (arguments, root) => Path.Combine(pathWithSpace, arguments)
+            );
+            return "";
+        });
 
-        dictionary.Add(
-            "App in subdirectory with space and full path to dll",
-            parameters =>
-            {
-                MoveApplication(parameters, pathWithSpace);
-                parameters.TransformArguments(
-                    (arguments, root) => Path.Combine(root, pathWithSpace, arguments)
-                );
-                return "";
-            }
-        );
+        dictionary.Add("App in subdirectory with space and full path to dll", parameters =>
+        {
+            MoveApplication(parameters, pathWithSpace);
+            parameters.TransformArguments(
+                (arguments, root) => Path.Combine(root, pathWithSpace, arguments)
+            );
+            return "";
+        });
 
         dictionary.Add(
             "App in bin subdirectory with space full path to dll using exec and quotes",
@@ -848,29 +835,23 @@ public class StartupTests : IISFunctionalTestBase
             }
         );
 
-        dictionary.Add(
-            "App in bin subdirectory and quoted argument",
-            parameters =>
-            {
-                MoveApplication(parameters, "bin");
-                parameters.TransformArguments(
-                    (arguments, root) => Path.Combine("bin", arguments) + " \"extra argument\""
-                );
-                return "extra argument";
-            }
-        );
+        dictionary.Add("App in bin subdirectory and quoted argument", parameters =>
+        {
+            MoveApplication(parameters, "bin");
+            parameters.TransformArguments(
+                (arguments, root) => Path.Combine("bin", arguments) + " \"extra argument\""
+            );
+            return "extra argument";
+        });
 
-        dictionary.Add(
-            "App in bin subdirectory full path to dll",
-            parameters =>
-            {
-                MoveApplication(parameters, "bin");
-                parameters.TransformArguments(
-                    (arguments, root) => Path.Combine(root, "bin", arguments) + " extra arguments"
-                );
-                return "extra|arguments";
-            }
-        );
+        dictionary.Add("App in bin subdirectory full path to dll", parameters =>
+        {
+            MoveApplication(parameters, "bin");
+            parameters.TransformArguments(
+                (arguments, root) => Path.Combine(root, "bin", arguments) + " extra arguments"
+            );
+            return "extra|arguments";
+        });
         return dictionary;
     }
 
@@ -902,27 +883,21 @@ public class StartupTests : IISFunctionalTestBase
         var dictionary = new Dictionary<string, Func<IISDeploymentParameters, string>>();
         var pathWithSpace = "\u03c0 \u2260 3\u00b714";
 
-        dictionary.Add(
-            "App in subdirectory",
-            parameters =>
-            {
-                MoveApplication(parameters, pathWithSpace);
-                parameters.TransformPath((path, root) => Path.Combine(pathWithSpace, path));
-                parameters.TransformArguments((arguments, root) => "\"additional argument\"");
-                return "additional argument";
-            }
-        );
+        dictionary.Add("App in subdirectory", parameters =>
+        {
+            MoveApplication(parameters, pathWithSpace);
+            parameters.TransformPath((path, root) => Path.Combine(pathWithSpace, path));
+            parameters.TransformArguments((arguments, root) => "\"additional argument\"");
+            return "additional argument";
+        });
 
-        dictionary.Add(
-            "App in bin subdirectory full path",
-            parameters =>
-            {
-                MoveApplication(parameters, pathWithSpace);
-                parameters.TransformPath((path, root) => Path.Combine(root, pathWithSpace, path));
-                parameters.TransformArguments((arguments, root) => "additional arguments");
-                return "additional|arguments";
-            }
-        );
+        dictionary.Add("App in bin subdirectory full path", parameters =>
+        {
+            MoveApplication(parameters, pathWithSpace);
+            parameters.TransformPath((path, root) => Path.Combine(root, pathWithSpace, path));
+            parameters.TransformArguments((arguments, root) => "additional arguments");
+            return "additional|arguments";
+        });
 
         return dictionary;
     }
@@ -1251,12 +1226,8 @@ public class StartupTests : IISFunctionalTestBase
         if (deploymentParameters.ServerType == ServerType.IISExpress)
         {
             // We can't read stdout logs from IIS as they aren't redirected.
-            Assert.Contains(
-                TestSink.Writes,
-                context =>
-                    context.Message.Contains(
-                        "An unhandled exception was thrown by the application."
-                    )
+            Assert.Contains(TestSink.Writes, context =>
+                context.Message.Contains("An unhandled exception was thrown by the application.")
             );
         }
     }
@@ -1338,9 +1309,8 @@ public class StartupTests : IISFunctionalTestBase
 
         await AssertFailsToStart(deploymentResult);
 
-        Assert.Contains(
-            TestSink.Writes,
-            context => context.Message.Contains("Is Console redirection: True")
+        Assert.Contains(TestSink.Writes, context =>
+            context.Message.Contains("Is Console redirection: True")
         );
     }
 

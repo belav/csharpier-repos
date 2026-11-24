@@ -21,8 +21,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Structure
             var autoCollapse = true;
 
             var outliningRegion = new BlockSpan(
-                isCollapsible: true, textSpan: span, hintSpan: hintSpan,
-                type: BlockTypes.Nonstructural, bannerText: bannerText, autoCollapse: autoCollapse);
+                isCollapsible: true,
+                textSpan: span,
+                hintSpan: hintSpan,
+                type: BlockTypes.Nonstructural,
+                bannerText: bannerText,
+                autoCollapse: autoCollapse
+            );
 
             Assert.Equal(span, outliningRegion.TextSpan);
             Assert.Equal(hintSpan, outliningRegion.HintSpan);
@@ -39,10 +44,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Structure
             var autoCollapse = true;
 
             var outliningRegion = new BlockSpan(
-                isCollapsible: true, textSpan: span, hintSpan: hintSpan,
-                type: BlockTypes.Nonstructural, bannerText: bannerText, autoCollapse: autoCollapse);
+                isCollapsible: true,
+                textSpan: span,
+                hintSpan: hintSpan,
+                type: BlockTypes.Nonstructural,
+                bannerText: bannerText,
+                autoCollapse: autoCollapse
+            );
 
-            Assert.Equal("{Span=[0..1), HintSpan=[2..3), BannerText=\"Goo\", AutoCollapse=True, IsDefaultCollapsed=False}", outliningRegion.ToString());
+            Assert.Equal(
+                "{Span=[0..1), HintSpan=[2..3), BannerText=\"Goo\", AutoCollapse=True, IsDefaultCollapsed=False}",
+                outliningRegion.ToString()
+            );
         }
 
         [Fact]
@@ -53,10 +66,17 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Structure
             var autoCollapse = true;
 
             var outliningRegion = new BlockSpan(
-                isCollapsible: true, textSpan: span,
-                type: BlockTypes.Nonstructural, bannerText: bannerText, autoCollapse: autoCollapse);
+                isCollapsible: true,
+                textSpan: span,
+                type: BlockTypes.Nonstructural,
+                bannerText: bannerText,
+                autoCollapse: autoCollapse
+            );
 
-            Assert.Equal("{Span=[0..1), BannerText=\"Goo\", AutoCollapse=True, IsDefaultCollapsed=False}", outliningRegion.ToString());
+            Assert.Equal(
+                "{Span=[0..1), BannerText=\"Goo\", AutoCollapse=True, IsDefaultCollapsed=False}",
+                outliningRegion.ToString()
+            );
         }
     }
 }

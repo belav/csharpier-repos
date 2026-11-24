@@ -4,16 +4,15 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
     using System.Collections.Specialized;
 
-    public interface IBindableControl {
-
+    public interface IBindableControl
+    {
         /// <devdoc>
         /// Retrives the values of all control properties with two-way bindings.
         /// </devdoc>
         void ExtractValues(IOrderedDictionary dictionary);
-
     }
 }
-

@@ -12,20 +12,26 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
     {
         public static readonly CSharpFlagsEnumGenerator Instance = new();
 
-        private CSharpFlagsEnumGenerator()
-        {
-        }
+        private CSharpFlagsEnumGenerator() { }
 
         protected override SyntaxNode CreateExplicitlyCastedLiteralValue(
             SyntaxGenerator generator,
             INamedTypeSymbol enumType,
             SpecialType underlyingSpecialType,
-            object constantValue)
+            object constantValue
+        )
         {
             var expression = ExpressionGenerator.GenerateNonEnumValueExpression(
-                generator, enumType.EnumUnderlyingType, constantValue, canUseFieldReference: true);
+                generator,
+                enumType.EnumUnderlyingType,
+                constantValue,
+                canUseFieldReference: true
+            );
 
-            var constantValueULong = EnumUtilities.ConvertEnumUnderlyingTypeToUInt64(constantValue, underlyingSpecialType);
+            var constantValueULong = EnumUtilities.ConvertEnumUnderlyingTypeToUInt64(
+                constantValue,
+                underlyingSpecialType
+            );
             if (constantValueULong == 0)
             {
                 // 0 is always convertible to an enum type without needing a cast.
@@ -35,7 +41,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             return generator.CastExpression(enumType, expression);
         }
 
-        protected override bool IsValidName(INamedTypeSymbol enumType, string name)
-            => SyntaxFacts.IsValidIdentifier(name);
+        protected override bool IsValidName(INamedTypeSymbol enumType, string name) =>
+            SyntaxFacts.IsValidIdentifier(name);
     }
 }

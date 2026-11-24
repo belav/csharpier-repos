@@ -7,9 +7,7 @@ namespace System.Reflection.TypeLoading
 {
     internal abstract partial class RoMethodBody : MethodBody
     {
-        protected RoMethodBody()
-        {
-        }
+        protected RoMethodBody() { }
 
         public abstract override bool InitLocals { get; }
         public abstract override int MaxStackSize { get; }
@@ -17,6 +15,7 @@ namespace System.Reflection.TypeLoading
 
         // Unlike most apis, this one does not copy the byte array.
         public sealed override byte[]? GetILAsByteArray() => _lazyIL ??= ComputeIL();
+
         protected abstract byte[]? ComputeIL();
         private volatile byte[]? _lazyIL;
 

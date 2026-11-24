@@ -23,15 +23,16 @@ public class MemberListSourceAndForPath : AutoMapperSpecBase
         public string Source { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Input, TargetOuter>(MemberList.Source)
-            .ForPath(x => x.Inner.MyProp, opt => opt.MapFrom(x => x.Source));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Input, TargetOuter>(MemberList.Source)
+                .ForPath(x => x.Inner.MyProp, opt => opt.MapFrom(x => x.Source));
+        });
 
     protected override void Because_of()
     {
-        var input = new Input() {Source = "Hello World!"};
+        var input = new Input() { Source = "Hello World!" };
         var output = Mapper.Map<TargetOuter>(input);
 
         _equal = output.Inner.MyProp == input.Source;

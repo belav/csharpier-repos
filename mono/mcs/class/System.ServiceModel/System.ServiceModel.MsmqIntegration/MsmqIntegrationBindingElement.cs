@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,74 +31,83 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.MsmqIntegration
 {
-	public sealed class MsmqIntegrationBindingElement : MsmqBindingElementBase
-	{
-		MsmqMessageSerializationFormat format;
-		Type [] target_types;
+    public sealed class MsmqIntegrationBindingElement : MsmqBindingElementBase
+    {
+        MsmqMessageSerializationFormat format;
+        Type[] target_types;
 
-		public MsmqIntegrationBindingElement ()
-		{
-		}
+        public MsmqIntegrationBindingElement() { }
 
-		public MsmqMessageSerializationFormat SerializationFormat {
-			get { return format; }
-			set { format = value; }
-		}
+        public MsmqMessageSerializationFormat SerializationFormat
+        {
+            get { return format; }
+            set { format = value; }
+        }
 
-		public override string Scheme {
-			get { return "net.msmq"; }
-		}
+        public override string Scheme
+        {
+            get { return "net.msmq"; }
+        }
 
-		public Type[] TargetSerializationTypes {
-			get { return target_types; }
-			set { target_types = value; }
-		}
+        public Type[] TargetSerializationTypes
+        {
+            get { return target_types; }
+            set { target_types = value; }
+        }
 
-		public override BindingElement Clone ()
-		{
-			return (MsmqIntegrationBindingElement) MemberwiseClone ();
-		}
+        public override BindingElement Clone()
+        {
+            return (MsmqIntegrationBindingElement)MemberwiseClone();
+        }
 
-		public override bool CanBuildChannelFactory<TChannel> (BindingContext context)
-		{
-			if (typeof (TChannel) == typeof (IOutputChannel))
-				return true;
-			else
-				return false;
-		}
+        public override bool CanBuildChannelFactory<TChannel>(BindingContext context)
+        {
+            if (typeof(TChannel) == typeof(IOutputChannel))
+                return true;
+            else
+                return false;
+        }
 
-		[MonoTODO]
-		public override IChannelFactory<TChannel> BuildChannelFactory<TChannel> (BindingContext context)
-		{
-			if (!CanBuildChannelFactory<TChannel> (context))
-				throw new InvalidOperationException ("MSMQ integration binding element only supports IOutputChannel");
+        [MonoTODO]
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
+        {
+            if (!CanBuildChannelFactory<TChannel>(context))
+                throw new InvalidOperationException(
+                    "MSMQ integration binding element only supports IOutputChannel"
+                );
 
-			throw new NotImplementedException ();
-		}
+            throw new NotImplementedException();
+        }
 
-		public override bool CanBuildChannelListener<TChannel> (BindingContext context)
-		{
-			if (typeof (TChannel) == typeof (IInputChannel))
-				return true;
-			else
-				return false;
-		}
+        public override bool CanBuildChannelListener<TChannel>(BindingContext context)
+        {
+            if (typeof(TChannel) == typeof(IInputChannel))
+                return true;
+            else
+                return false;
+        }
 
-		[MonoTODO]
-		public override IChannelListener<TChannel> BuildChannelListener<TChannel> (BindingContext context)
-		{
-			if (!CanBuildChannelListener<TChannel> (context))
-				throw new InvalidOperationException ("MSMQ integration binding element only supports IOutputChannel");
+        [MonoTODO]
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
+        {
+            if (!CanBuildChannelListener<TChannel>(context))
+                throw new InvalidOperationException(
+                    "MSMQ integration binding element only supports IOutputChannel"
+                );
 
-			throw new NotImplementedException ();
-		}
+            throw new NotImplementedException();
+        }
 
-		public override T GetProperty<T> (BindingContext context)
-		{
-			// http://blogs.msdn.com/drnick/archive/2007/04/10/interfaces-for-getproperty-part-1.aspx
-			if (typeof (T) == typeof (MessageVersion))
-				return (T) (object) MessageVersion.None;
-			return base.GetProperty<T> (context);
-		}
-	}
+        public override T GetProperty<T>(BindingContext context)
+        {
+            // http://blogs.msdn.com/drnick/archive/2007/04/10/interfaces-for-getproperty-part-1.aspx
+            if (typeof(T) == typeof(MessageVersion))
+                return (T)(object)MessageVersion.None;
+            return base.GetProperty<T>(context);
+        }
+    }
 }

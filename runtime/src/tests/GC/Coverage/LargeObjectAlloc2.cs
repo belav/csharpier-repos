@@ -6,7 +6,6 @@
 // and committed from the LargeObjectHeap
 // The Finalizer makes sure that the GC is actually collecting the large objects
 
-
 using System;
 
 namespace LargeObjectTest
@@ -35,7 +34,7 @@ namespace LargeObjectTest
         public LargeObject()
         {
             _array = new int[1250000]; // 5 MB
-            _olargeobj = new OtherLargeObject[1000];     //20 MB
+            _olargeobj = new OtherLargeObject[1000]; //20 MB
             for (int i = 0; i < 1000; i++)
             {
                 _olargeobj[i] = new OtherLargeObject();
@@ -52,6 +51,7 @@ namespace LargeObjectTest
     public class Test
     {
         public static int ExitCode = 1;
+
         public static int Main()
         {
             int loop = 0;

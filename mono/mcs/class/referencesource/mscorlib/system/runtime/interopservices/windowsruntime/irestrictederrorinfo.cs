@@ -1,7 +1,7 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>ShawnFa</OWNER>
@@ -18,10 +18,12 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     internal interface IRestrictedErrorInfo
     {
-        void GetErrorDetails([MarshalAs(UnmanagedType.BStr)] out string description,
-                             out int error,
-                             [MarshalAs(UnmanagedType.BStr)] out string restrictedDescription,
-                             [MarshalAs(UnmanagedType.BStr)] out string capabilitySid);
+        void GetErrorDetails(
+            [MarshalAs(UnmanagedType.BStr)] out string description,
+            out int error,
+            [MarshalAs(UnmanagedType.BStr)] out string restrictedDescription,
+            [MarshalAs(UnmanagedType.BStr)] out string capabilitySid
+        );
 
         void GetReference([MarshalAs(UnmanagedType.BStr)] out string reference);
     }

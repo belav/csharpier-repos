@@ -12,7 +12,9 @@ namespace System.Workflow.Runtime.DebugEngine
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public struct ActivityHandlerDescriptor
     {
         [MarshalAs(UnmanagedType.BStr)]

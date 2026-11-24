@@ -14,10 +14,11 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class ExplicitInterfaceTypeCompletionProviderTests : AbstractCSharpCompletionProviderTests
+    public class ExplicitInterfaceTypeCompletionProviderTests
+        : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(ExplicitInterfaceTypeCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(ExplicitInterfaceTypeCompletionProvider);
 
         [Fact]
         public async Task TestAtStartOfClass()
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [InlineData("record struct")]
         public async Task TestAtStartOfRecord(string record)
         {
-            var markup = $@"
+            var markup =
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"" LanguageVersion=""Preview"">
         <Document>
@@ -62,7 +64,12 @@ using System.Collections;
             await VerifyItemExistsAsync(markup, "IList");
         }
 
-        [Fact, WorkItem("https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=459044")]
+        [
+            Fact,
+            WorkItem(
+                "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=459044"
+            )
+        ]
         public async Task TestInMisplacedUsing()
         {
             var markup = """

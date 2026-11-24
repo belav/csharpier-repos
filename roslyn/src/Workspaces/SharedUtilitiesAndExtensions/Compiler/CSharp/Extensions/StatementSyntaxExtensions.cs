@@ -10,15 +10,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
     internal static class StatementSyntaxExtensions
     {
-        public static StatementSyntax WithoutLeadingBlankLinesInTrivia(this StatementSyntax statement)
-            => statement.WithLeadingTrivia(statement.GetLeadingTrivia().WithoutLeadingBlankLines());
+        public static StatementSyntax WithoutLeadingBlankLinesInTrivia(
+            this StatementSyntax statement
+        ) => statement.WithLeadingTrivia(statement.GetLeadingTrivia().WithoutLeadingBlankLines());
 
         public static StatementSyntax? GetPreviousStatement(this StatementSyntax? statement)
         {
             if (statement != null)
             {
                 var previousToken = statement.GetFirstToken().GetPreviousToken();
-                return previousToken.GetAncestors<StatementSyntax>().FirstOrDefault(s => AreSiblingStatements(s, statement));
+                return previousToken
+                    .GetAncestors<StatementSyntax>()
+                    .FirstOrDefault(s => AreSiblingStatements(s, statement));
             }
 
             return null;
@@ -29,7 +32,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             if (statement != null)
             {
                 var nextToken = statement.GetLastToken().GetNextToken();
-                return nextToken.GetAncestors<StatementSyntax>().FirstOrDefault(s => AreSiblingStatements(s, statement));
+                return nextToken
+                    .GetAncestors<StatementSyntax>()
+                    .FirstOrDefault(s => AreSiblingStatements(s, statement));
             }
 
             return null;

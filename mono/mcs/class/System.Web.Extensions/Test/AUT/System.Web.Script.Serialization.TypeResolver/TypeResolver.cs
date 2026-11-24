@@ -26,8 +26,7 @@ namespace System.Web.Script.Serialization.TypeResolver.CS
 
     public class ColorType
     {
-        public string[] rgb =
-            new string[] { "00", "00", "FF" };
+        public string[] rgb = new string[] { "00", "00", "FF" };
         public FavoriteColors defaultColor = FavoriteColors.Blue;
     }
 
@@ -36,6 +35,6 @@ namespace System.Web.Script.Serialization.TypeResolver.CS
         Black,
         White,
         Blue,
-        Red
+        Red,
     }
 }

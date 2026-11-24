@@ -21,13 +21,16 @@ namespace System.Net
         private Uri? _requestUri;
         private Version _version;
 
-        public string[]? AcceptTypes => Helpers.ParseMultivalueHeader(Headers[HttpKnownHeaderNames.Accept]!);
+        public string[]? AcceptTypes =>
+            Helpers.ParseMultivalueHeader(Headers[HttpKnownHeaderNames.Accept]!);
 
-        public string[]? UserLanguages => Helpers.ParseMultivalueHeader(Headers[HttpKnownHeaderNames.AcceptLanguage]!);
+        public string[]? UserLanguages =>
+            Helpers.ParseMultivalueHeader(Headers[HttpKnownHeaderNames.AcceptLanguage]!);
 
         private CookieCollection ParseCookies(Uri? uri, string setCookieHeader)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "uri:" + uri + " setCookieHeader:" + setCookieHeader);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, "uri:" + uri + " setCookieHeader:" + setCookieHeader);
             CookieCollection cookies = new CookieCollection();
             CookieParser parser = new CookieParser(setCookieHeader);
             while (true)
@@ -38,7 +41,8 @@ namespace System.Net
                     // EOF, done.
                     break;
                 }
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "CookieParser returned cookie: " + cookie.ToString());
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, "CookieParser returned cookie: " + cookie.ToString());
                 if (cookie.Name.Length == 0)
                 {
                     continue;
@@ -71,7 +75,10 @@ namespace System.Net
         {
             get
             {
-                if (UserAgent != null && CultureInfo.InvariantCulture.CompareInfo.IsPrefix(UserAgent, "UP"))
+                if (
+                    UserAgent != null
+                    && CultureInfo.InvariantCulture.CompareInfo.IsPrefix(UserAgent, "UP")
+                )
                 {
                     string? postDataCharset = Headers["x-up-devcap-post-charset"];
                     if (postDataCharset != null && postDataCharset.Length > 0)
@@ -80,9 +87,7 @@ namespace System.Net
                         {
                             return Encoding.GetEncoding(postDataCharset);
                         }
-                        catch (ArgumentException)
-                        {
-                        }
+                        catch (ArgumentException) { }
                     }
                 }
                 if (HasEntityBody)
@@ -96,9 +101,7 @@ namespace System.Net
                             {
                                 return Encoding.GetEncoding(charSet);
                             }
-                            catch (ArgumentException)
-                            {
-                            }
+                            catch (ArgumentException) { }
                         }
                     }
                 }
@@ -120,14 +123,23 @@ namespace System.Net
                 }
 
                 bool foundConnectionUpgradeHeader = false;
-                if (string.IsNullOrEmpty(Headers[HttpKnownHeaderNames.Connection]) || string.IsNullOrEmpty(Headers[HttpKnownHeaderNames.Upgrade]))
+                if (
+                    string.IsNullOrEmpty(Headers[HttpKnownHeaderNames.Connection])
+                    || string.IsNullOrEmpty(Headers[HttpKnownHeaderNames.Upgrade])
+                )
                 {
                     return false;
                 }
 
                 foreach (string connection in Headers.GetValues(HttpKnownHeaderNames.Connection)!)
                 {
-                    if (string.Equals(connection, HttpKnownHeaderNames.Upgrade, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        string.Equals(
+                            connection,
+                            HttpKnownHeaderNames.Upgrade,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         foundConnectionUpgradeHeader = true;
                         break;
@@ -141,7 +153,13 @@ namespace System.Net
 
                 foreach (string upgrade in Headers.GetValues(HttpKnownHeaderNames.Upgrade)!)
                 {
-                    if (string.Equals(upgrade, HttpWebSocket.WebSocketUpgradeToken, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        string.Equals(
+                            upgrade,
+                            HttpWebSocket.WebSocketUpgradeToken,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         return true;
                     }
@@ -178,12 +196,13 @@ namespace System.Net
                     {
                         header = header.ToLowerInvariant();
                         _keepAlive =
-                            header.IndexOf("close", StringComparison.OrdinalIgnoreCase) < 0 ||
-                            header.Contains("keep-alive", StringComparison.OrdinalIgnoreCase);
+                            header.IndexOf("close", StringComparison.OrdinalIgnoreCase) < 0
+                            || header.Contains("keep-alive", StringComparison.OrdinalIgnoreCase);
                     }
                 }
 
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "_keepAlive=" + _keepAlive);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, "_keepAlive=" + _keepAlive);
                 return _keepAlive.Value;
             }
         }
@@ -218,7 +237,11 @@ namespace System.Net
                     return null;
                 }
 
-                bool success = Uri.TryCreate(referrer, UriKind.RelativeOrAbsolute, out Uri? urlReferrer);
+                bool success = Uri.TryCreate(
+                    referrer,
+                    UriKind.RelativeOrAbsolute,
+                    out Uri? urlReferrer
+                );
                 return success ? urlReferrer : null;
             }
         }
@@ -230,22 +253,34 @@ namespace System.Net
         public X509Certificate2? GetClientCertificate()
         {
             if (ClientCertState == ListenerClientCertState.InProgress)
-                throw new InvalidOperationException(SR.Format(SR.net_listener_callinprogress, $"{nameof(GetClientCertificate)}()/{nameof(BeginGetClientCertificate)}()"));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.net_listener_callinprogress,
+                        $"{nameof(GetClientCertificate)}()/{nameof(BeginGetClientCertificate)}()"
+                    )
+                );
             ClientCertState = ListenerClientCertState.InProgress;
 
             GetClientCertificateCore();
 
             ClientCertState = ListenerClientCertState.Completed;
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"_clientCertificate:{ClientCertificate}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"_clientCertificate:{ClientCertificate}");
 
             return ClientCertificate;
         }
 
         public IAsyncResult BeginGetClientCertificate(AsyncCallback? requestCallback, object? state)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this);
             if (ClientCertState == ListenerClientCertState.InProgress)
-                throw new InvalidOperationException(SR.Format(SR.net_listener_callinprogress, $"{nameof(GetClientCertificate)}()/{nameof(BeginGetClientCertificate)}()"));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.net_listener_callinprogress,
+                        $"{nameof(GetClientCertificate)}()/{nameof(BeginGetClientCertificate)}()"
+                    )
+                );
             ClientCertState = ListenerClientCertState.InProgress;
 
             return BeginGetClientCertificateCore(requestCallback, state);
@@ -254,12 +289,15 @@ namespace System.Net
         public Task<X509Certificate2?> GetClientCertificateAsync()
         {
             return Task.Factory.FromAsync(
-                (callback, state) => ((HttpListenerRequest)state!).BeginGetClientCertificate(callback, state),
+                (callback, state) =>
+                    ((HttpListenerRequest)state!).BeginGetClientCertificate(callback, state),
                 iar => ((HttpListenerRequest)iar.AsyncState!).EndGetClientCertificate(iar),
-                this);
+                this
+            );
         }
 
-        internal ListenerClientCertState ClientCertState { get; set; } = ListenerClientCertState.NotInitialized;
+        internal ListenerClientCertState ClientCertState { get; set; } =
+            ListenerClientCertState.NotInitialized;
         internal X509Certificate2? ClientCertificate { get; set; }
 
         public int ClientCertificateError
@@ -267,9 +305,19 @@ namespace System.Net
             get
             {
                 if (ClientCertState == ListenerClientCertState.NotInitialized)
-                    throw new InvalidOperationException(SR.Format(SR.net_listener_mustcall, "GetClientCertificate()/BeginGetClientCertificate()"));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.net_listener_mustcall,
+                            "GetClientCertificate()/BeginGetClientCertificate()"
+                        )
+                    );
                 else if (ClientCertState == ListenerClientCertState.InProgress)
-                    throw new InvalidOperationException(SR.Format(SR.net_listener_mustcompletecall, "GetClientCertificate()/BeginGetClientCertificate()"));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.net_listener_mustcompletecall,
+                            "GetClientCertificate()/BeginGetClientCertificate()"
+                        )
+                    );
 
                 return GetClientCertificateErrorCore();
             }
@@ -295,7 +343,12 @@ namespace System.Net
 
                 while (i < l)
                 {
-                    i = CultureInfo.InvariantCulture.CompareInfo.IndexOf(headerValue, AttrName, i, CompareOptions.IgnoreCase);
+                    i = CultureInfo.InvariantCulture.CompareInfo.IndexOf(
+                        headerValue,
+                        AttrName,
+                        i,
+                        CompareOptions.IgnoreCase
+                    );
                     if (i < 0)
                         break;
                     if (i + k >= l)
@@ -303,7 +356,10 @@ namespace System.Net
 
                     char chPrev = headerValue[i - 1];
                     char chNext = headerValue[i + k];
-                    if ((chPrev == ';' || chPrev == ',' || char.IsWhiteSpace(chPrev)) && (chNext == '=' || char.IsWhiteSpace(chNext)))
+                    if (
+                        (chPrev == ';' || chPrev == ',' || char.IsWhiteSpace(chPrev))
+                        && (chNext == '=' || char.IsWhiteSpace(chNext))
+                    )
                         break;
 
                     i += k;
@@ -406,7 +462,6 @@ namespace System.Net
                 return strings;
             }
 
-
             private static string UrlDecodeStringFromStringInternal(string s, Encoding e)
             {
                 int count = s.Length;
@@ -434,7 +489,7 @@ namespace System.Net
                             int h4 = HexConverter.FromChar(s[pos + 5]);
 
                             if ((h1 | h2 | h3 | h4) != 0xFF)
-                            {   // valid 4 hex chars
+                            { // valid 4 hex chars
                                 ch = (char)((h1 << 12) | (h2 << 8) | (h3 << 4) | h4);
                                 pos += 5;
 
@@ -449,7 +504,7 @@ namespace System.Net
                             int h2 = HexConverter.FromChar(s[pos + 2]);
 
                             if ((h1 | h2) != 0xFF)
-                            {     // valid 2 hex chars
+                            { // valid 2 hex chars
                                 byte b = (byte)((h1 << 4) | h2);
                                 pos += 2;
 
@@ -488,7 +543,13 @@ namespace System.Net
                 {
                     if (_numBytes > 0)
                     {
-                        _numChars += _encoding.GetChars(_byteBuffer!, 0, _numBytes, _charBuffer, _numChars);
+                        _numChars += _encoding.GetChars(
+                            _byteBuffer!,
+                            0,
+                            _numBytes,
+                            _charBuffer,
+                            _numChars
+                        );
                         _numBytes = 0;
                     }
                 }
@@ -529,8 +590,12 @@ namespace System.Net
                 }
             }
 
-
-            internal static void FillFromString(NameValueCollection nvc, string s, bool urlencoded, Encoding encoding)
+            internal static void FillFromString(
+                NameValueCollection nvc,
+                string s,
+                bool urlencoded,
+                Encoding encoding
+            )
             {
                 int i = s.StartsWith('?') ? 1 : 0;
                 int l = s.Length;
@@ -578,8 +643,9 @@ namespace System.Net
 
                     if (urlencoded)
                         nvc.Add(
-                           name == null ? null : UrlDecodeStringFromStringInternal(name, encoding),
-                           UrlDecodeStringFromStringInternal(value, encoding));
+                            name == null ? null : UrlDecodeStringFromStringInternal(name, encoding),
+                            UrlDecodeStringFromStringInternal(value, encoding)
+                        );
                     else
                         nvc.Add(name, value);
 

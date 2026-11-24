@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -22,21 +22,20 @@ namespace System.Linq.Parallel
     /// inlined operators ensure that real MSIL instructions are used to perform elementary
     /// operations versus general purpose delegate-based binary operators.  For obvious reasons
     /// this is a quite bit more efficient, although it does lead to a fair bit of unfortunate
-    /// code duplication. 
+    /// code duplication.
     /// </summary>
     /// <typeparam name="TSource"></typeparam>
     /// <typeparam name="TIntermediate"></typeparam>
     /// <typeparam name="TResult"></typeparam>
-    internal abstract class InlinedAggregationOperator<TSource, TIntermediate, TResult> :
-        UnaryQueryOperator<TSource, TIntermediate>
+    internal abstract class InlinedAggregationOperator<TSource, TIntermediate, TResult>
+        : UnaryQueryOperator<TSource, TIntermediate>
     {
-
         //---------------------------------------------------------------------------------------
         // Constructs a new instance of an inlined sum associative operator.
         //
 
         internal InlinedAggregationOperator(IEnumerable<TSource> child)
-            :base(child)
+            : base(child)
         {
             Contract.Assert(child != null, "child data source cannot be null");
         }
@@ -78,9 +77,15 @@ namespace System.Linq.Parallel
                     // -  The externalToken is actually in the canceled state.
 
                     OperationCanceledException cancelEx = ex as OperationCanceledException;
-                    if (cancelEx != null
-                        && cancelEx.CancellationToken == SpecifiedQuerySettings.CancellationState.ExternalCancellationToken
-                        && SpecifiedQuerySettings.CancellationState.ExternalCancellationToken.IsCancellationRequested)
+                    if (
+                        cancelEx != null
+                        && cancelEx.CancellationToken
+                            == SpecifiedQuerySettings.CancellationState.ExternalCancellationToken
+                        && SpecifiedQuerySettings
+                            .CancellationState
+                            .ExternalCancellationToken
+                            .IsCancellationRequested
+                    )
                     {
                         throw;
                     }
@@ -120,37 +125,57 @@ namespace System.Linq.Parallel
         //
 
         internal override QueryResults<TIntermediate> Open(
-            QuerySettings settings, bool preferStriping)
+            QuerySettings settings,
+            bool preferStriping
+        )
         {
             QueryResults<TSource> childQueryResults = Child.Open(settings, preferStriping);
             return new UnaryQueryOperatorResults(childQueryResults, this, settings, preferStriping);
         }
 
         internal override void WrapPartitionedStream<TKey>(
-            PartitionedStream<TSource, TKey> inputStream, IPartitionedStreamRecipient<TIntermediate> recipient,
-            bool preferStriping, QuerySettings settings)
+            PartitionedStream<TSource, TKey> inputStream,
+            IPartitionedStreamRecipient<TIntermediate> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
             int partitionCount = inputStream.PartitionCount;
-            PartitionedStream<TIntermediate, int> outputStream = new PartitionedStream<TIntermediate, int>(
-                partitionCount, Util.GetDefaultComparer<int>(), OrdinalIndexState.Correct);
+            PartitionedStream<TIntermediate, int> outputStream = new PartitionedStream<
+                TIntermediate,
+                int
+            >(partitionCount, Util.GetDefaultComparer<int>(), OrdinalIndexState.Correct);
 
             for (int i = 0; i < partitionCount; i++)
             {
-                outputStream[i] = CreateEnumerator<TKey>(i, partitionCount, inputStream[i], null, settings.CancellationState.MergedCancellationToken);
+                outputStream[i] = CreateEnumerator<TKey>(
+                    i,
+                    partitionCount,
+                    inputStream[i],
+                    null,
+                    settings.CancellationState.MergedCancellationToken
+                );
             }
 
             recipient.Receive(outputStream);
         }
 
         protected abstract QueryOperatorEnumerator<TIntermediate, int> CreateEnumerator<TKey>(
-            int index, int count, QueryOperatorEnumerator<TSource, TKey> source, object sharedData, CancellationToken cancellationToken);
+            int index,
+            int count,
+            QueryOperatorEnumerator<TSource, TKey> source,
+            object sharedData,
+            CancellationToken cancellationToken
+        );
 
         internal override IEnumerable<TIntermediate> AsSequentialQuery(CancellationToken token)
         {
-            Contract.Assert(false, "This method should never be called. Associative aggregation can always be parallelized.");
+            Contract.Assert(
+                false,
+                "This method should never be called. Associative aggregation can always be parallelized."
+            );
             throw new NotSupportedException();
         }
-
 
         //---------------------------------------------------------------------------------------
         // Whether this operator performs a premature merge that would not be performed in

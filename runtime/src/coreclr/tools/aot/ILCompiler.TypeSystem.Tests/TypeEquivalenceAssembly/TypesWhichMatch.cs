@@ -4,24 +4,20 @@ using System.Runtime.InteropServices;
 #pragma warning disable 169
 
 #if TYPEEQUIVALENCEASSEMBLY_1
-public class TypeEquivalenceAssembly1
-{}
+public class TypeEquivalenceAssembly1 { }
 #else
-public class TypeEquivalenceAssembly2
-{ }
+public class TypeEquivalenceAssembly2 { }
 #endif
 
 namespace TypesWhichMatch
 {
     [TypeIdentifier("TypesWhichMatch", "Type1")]
-    public enum Type1
-    {
-    }
+    public enum Type1 { }
 
     [TypeIdentifier("TypesWhichMatch", "Type2")]
     public enum Type2
     {
-// The actual values of the literal enums are not considered relevant for type equivalence
+        // The actual values of the literal enums are not considered relevant for type equivalence
 #if TYPEEQUIVALENCEASSEMBLY_1
         First = 1,
         Second = 2,
@@ -32,9 +28,7 @@ namespace TypesWhichMatch
     }
 
     [TypeIdentifier("TypesWhichMatch", "Type3")]
-    public struct Type3
-    {
-    }
+    public struct Type3 { }
 
     [TypeIdentifier("TypesWhichMatch", "Type4")]
     public struct Type4
@@ -48,7 +42,6 @@ namespace TypesWhichMatch
         public int X;
         public Type4 type4;
     }
-
 
     [TypeIdentifier("TypesWhichMatch", "Type6")]
     public delegate void Type6(int X);
@@ -85,6 +78,7 @@ namespace TypesWhichMatch
     {
         [FieldOffset(0)]
         public int Lol;
+
         [FieldOffset(20)]
         public byte Omg;
     }
@@ -95,15 +89,14 @@ namespace TypesWhichMatch
     {
         [FieldOffset(0)]
         public int Lol;
+
         [FieldOffset(20)]
         public byte Omg;
     }
 
     [TypeIdentifier("TypesWhichMatch", "Type13")]
     [ComEventInterface(null, null)]
-    public interface Type13
-    {
-    }
+    public interface Type13 { }
 
     [TypeIdentifier("TypesWhichMatch", "Type14")]
     public struct Type14
@@ -118,7 +111,6 @@ namespace TypesWhichMatch
     [TypeIdentifier("TypesWhichDoNotMatch", "Type15")]
     public struct Type15
     {
-        public unsafe delegate*<int, void> functionPointer;
+        public unsafe delegate* <int, void> functionPointer;
     }
-
 }

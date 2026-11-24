@@ -5,8 +5,8 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
 
 namespace IntelHardwareIntrinsicTest._Sse3
@@ -26,7 +26,8 @@ namespace IntelHardwareIntrinsicTest._Sse3
             return (void*)(buffer + misalignment);
         }
 
-        public unsafe struct TestTable<T> : IDisposable where T : struct
+        public unsafe struct TestTable<T> : IDisposable
+            where T : struct
         {
             public T[] inArray;
             public T[] outArray;
@@ -36,6 +37,7 @@ namespace IntelHardwareIntrinsicTest._Sse3
 
             GCHandle inHandle;
             GCHandle outHandle;
+
             public TestTable(T[] a, T[] b)
             {
                 this.inArray = a;
@@ -44,10 +46,12 @@ namespace IntelHardwareIntrinsicTest._Sse3
                 inHandle = GCHandle.Alloc(inArray, GCHandleType.Pinned);
                 outHandle = GCHandle.Alloc(outArray, GCHandleType.Pinned);
             }
+
             public bool CheckResult(Func<T[], T[], bool> check)
             {
                 return check(inArray, outArray);
             }
+
             public bool CheckResult(Func<T, T, bool> check)
             {
                 for (int i = 0; i < inArray.Length; i++)
@@ -59,6 +63,7 @@ namespace IntelHardwareIntrinsicTest._Sse3
                 }
                 return true;
             }
+
             public void Dispose()
             {
                 inHandle.Free();
@@ -66,7 +71,8 @@ namespace IntelHardwareIntrinsicTest._Sse3
             }
         }
 
-        public unsafe struct TestTable_SingleArray<T> : IDisposable where T : struct
+        public unsafe struct TestTable_SingleArray<T> : IDisposable
+            where T : struct
         {
             public T[] inArray;
 
@@ -74,6 +80,7 @@ namespace IntelHardwareIntrinsicTest._Sse3
             public void* inArray1Ptr => inHandle.AddrOfPinnedObject().ToPointer();
 
             GCHandle inHandle;
+
             public TestTable_SingleArray(T[] a)
             {
                 this.inArray = a;
@@ -87,7 +94,8 @@ namespace IntelHardwareIntrinsicTest._Sse3
             }
         }
 
-        public unsafe struct AlignedTestTable<T> : IDisposable where T : struct
+        public unsafe struct AlignedTestTable<T> : IDisposable
+            where T : struct
         {
             private byte[] inArray;
             public T[] outArray;
@@ -107,10 +115,15 @@ namespace IntelHardwareIntrinsicTest._Sse3
 
                 this.simdSize = 16;
 
-                Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArrayPtr), ref Unsafe.As<T, byte>(ref a[0]), this.simdSize);
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.AsRef<byte>(inArrayPtr),
+                    ref Unsafe.As<T, byte>(ref a[0]),
+                    this.simdSize
+                );
             }
 
-            public void* inArrayPtr => Align((byte*)(inHandle.AddrOfPinnedObject().ToPointer()), simdSize);
+            public void* inArrayPtr =>
+                Align((byte*)(inHandle.AddrOfPinnedObject().ToPointer()), simdSize);
             public void* outArrayPtr => outHandle.AddrOfPinnedObject().ToPointer();
 
             public bool CheckResult(Func<T, T, bool> check)
@@ -142,7 +155,8 @@ namespace IntelHardwareIntrinsicTest._Sse3
             }
         }
 
-        public unsafe struct TestTable_2Input<T> : IDisposable where T : struct
+        public unsafe struct TestTable_2Input<T> : IDisposable
+            where T : struct
         {
             public T[] inArray1;
             public T[] inArray2;
@@ -156,7 +170,8 @@ namespace IntelHardwareIntrinsicTest._Sse3
             GCHandle inHandle2;
             GCHandle outHandle;
 
-            public TestTable_2Input(T[] a, T[] b) : this(a, a, b) {}
+            public TestTable_2Input(T[] a, T[] b)
+                : this(a, a, b) { }
 
             public TestTable_2Input(T[] a, T[] b, T[] c)
             {
@@ -168,10 +183,12 @@ namespace IntelHardwareIntrinsicTest._Sse3
                 inHandle2 = GCHandle.Alloc(inArray2, GCHandleType.Pinned);
                 outHandle = GCHandle.Alloc(outArray, GCHandleType.Pinned);
             }
+
             public bool CheckResult(Func<T[], T[], T[], bool> check)
             {
                 return check(inArray1, inArray2, outArray);
             }
+
             public bool CheckResult(Func<T, T, T, bool> check)
             {
                 for (int i = 0; i < inArray1.Length; i++)
@@ -191,7 +208,5 @@ namespace IntelHardwareIntrinsicTest._Sse3
                 outHandle.Free();
             }
         }
-
-
     }
 }

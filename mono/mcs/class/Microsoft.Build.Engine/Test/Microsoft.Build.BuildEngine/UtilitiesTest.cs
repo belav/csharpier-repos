@@ -30,30 +30,39 @@ using System.Collections;
 using Microsoft.Build.BuildEngine;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.BuildEngine {
-	[TestFixture]
-	public class UtilitiesTest {
-		
-		[Test]
-		public void TestEscape ()
-		{
-			char[] list = new char [] {'$', '%', '\'', '(', ')', '*', ';', '?', '@'};
-			Hashtable different = new Hashtable ();
-			foreach (char c in list)
-				different.Add (c, null);
-			
-			for (int i = 0; i < 256; i++) {
-				char c = (char) i;
-				if (Utilities.Escape (c.ToString ()) != c.ToString()) {
-					if (different.Contains (c)) {
-						string hex = String.Format ("%{0:x2}", i);
-						if (hex != Utilities.Escape (c.ToString ()))
-							Assert.Fail ("Char {0} should be escaped to {1} instead of {2}",
-								c, hex, Utilities.Escape (c.ToString ()));
-					} else
-						Assert.Fail ("Char {0} should not be escaped", c);
-				}
-			}
-		}
-	}
+namespace MonoTests.Microsoft.Build.BuildEngine
+{
+    [TestFixture]
+    public class UtilitiesTest
+    {
+        [Test]
+        public void TestEscape()
+        {
+            char[] list = new char[] { '$', '%', '\'', '(', ')', '*', ';', '?', '@' };
+            Hashtable different = new Hashtable();
+            foreach (char c in list)
+                different.Add(c, null);
+
+            for (int i = 0; i < 256; i++)
+            {
+                char c = (char)i;
+                if (Utilities.Escape(c.ToString()) != c.ToString())
+                {
+                    if (different.Contains(c))
+                    {
+                        string hex = String.Format("%{0:x2}", i);
+                        if (hex != Utilities.Escape(c.ToString()))
+                            Assert.Fail(
+                                "Char {0} should be escaped to {1} instead of {2}",
+                                c,
+                                hex,
+                                Utilities.Escape(c.ToString())
+                            );
+                    }
+                    else
+                        Assert.Fail("Char {0} should not be escaped", c);
+                }
+            }
+        }
+    }
 }

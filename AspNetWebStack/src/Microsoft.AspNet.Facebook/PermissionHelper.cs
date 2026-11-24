@@ -14,7 +14,9 @@ namespace Microsoft.AspNet.Facebook
         // This cookie name is used to track permissions we've requested of the user to determine skipped permissions.
         public const string RequestedPermissionCookieName = "_fb_requested_permissions";
 
-        public static IEnumerable<string> GetDeclinedPermissions(PermissionsStatus permissionsStatus)
+        public static IEnumerable<string> GetDeclinedPermissions(
+            PermissionsStatus permissionsStatus
+        )
         {
             return GetPermissionsWithStatus(permissionsStatus, PermissionStatus.Declined);
         }
@@ -37,35 +39,53 @@ namespace Microsoft.AspNet.Facebook
             return existingCookie.Value.Split(',');
         }
 
-        public static HashSet<string> GetRequiredPermissions(IEnumerable<FacebookAuthorizeAttribute> facebookAuthorizeAttributes)
+        public static HashSet<string> GetRequiredPermissions(
+            IEnumerable<FacebookAuthorizeAttribute> facebookAuthorizeAttributes
+        )
         {
             var requiredPermissions = new HashSet<string>(
                 facebookAuthorizeAttributes.SelectMany(attribute => attribute.Permissions),
-                StringComparer.Ordinal);
+                StringComparer.Ordinal
+            );
 
             return requiredPermissions;
         }
 
-        public static IEnumerable<string> GetSkippedPermissions(HttpRequestBase request,
-                                                                IEnumerable<string> missingPermissions,
-                                                                IEnumerable<string> declinedPermissions)
+        public static IEnumerable<string> GetSkippedPermissions(
+            HttpRequestBase request,
+            IEnumerable<string> missingPermissions,
+            IEnumerable<string> declinedPermissions
+        )
         {
-            IEnumerable<string> previouslyRequestedPermissions = PermissionHelper.GetPreviouslyRequestedPermissions(request);
-            IEnumerable<string> previouslyRequestedMissingPermissions = missingPermissions.Where((permission) =>
-                previouslyRequestedPermissions.Contains(permission));
-            IEnumerable<string> skippedPermissions = previouslyRequestedMissingPermissions.Except(declinedPermissions);
+            IEnumerable<string> previouslyRequestedPermissions =
+                PermissionHelper.GetPreviouslyRequestedPermissions(request);
+            IEnumerable<string> previouslyRequestedMissingPermissions = missingPermissions.Where(
+                (permission) => previouslyRequestedPermissions.Contains(permission)
+            );
+            IEnumerable<string> skippedPermissions = previouslyRequestedMissingPermissions.Except(
+                declinedPermissions
+            );
 
             return skippedPermissions;
         }
 
-        public static void PersistRequestedPermissions(AuthorizationContext context, IEnumerable<string> requestedPermissions)
+        public static void PersistRequestedPermissions(
+            AuthorizationContext context,
+            IEnumerable<string> requestedPermissions
+        )
         {
             HttpRequestBase request = context.HttpContext.Request;
-            IEnumerable<string> existingRequestedPermissions = GetPreviouslyRequestedPermissions(request);
-            IEnumerable<string> combinedRequestedPermissions = existingRequestedPermissions.Concat(requestedPermissions);
+            IEnumerable<string> existingRequestedPermissions = GetPreviouslyRequestedPermissions(
+                request
+            );
+            IEnumerable<string> combinedRequestedPermissions = existingRequestedPermissions.Concat(
+                requestedPermissions
+            );
 
             // No need for duplicates
-            combinedRequestedPermissions = combinedRequestedPermissions.Distinct(StringComparer.Ordinal);
+            combinedRequestedPermissions = combinedRequestedPermissions.Distinct(
+                StringComparer.Ordinal
+            );
 
             string newCookieValue = String.Join(",", combinedRequestedPermissions);
 
@@ -79,11 +99,14 @@ namespace Microsoft.AspNet.Facebook
             return request.Cookies.Get(RequestedPermissionCookieName) != null;
         }
 
-        private static IEnumerable<string> GetPermissionsWithStatus(PermissionsStatus permissionsStatus, 
-                                                                    PermissionStatus status)
+        private static IEnumerable<string> GetPermissionsWithStatus(
+            PermissionsStatus permissionsStatus,
+            PermissionStatus status
+        )
         {
-            return permissionsStatus.Status.Where(kvp => kvp.Value == status)
-                                           .Select(kvp => kvp.Key);
+            return permissionsStatus
+                .Status.Where(kvp => kvp.Value == status)
+                .Select(kvp => kvp.Key);
         }
     }
 }

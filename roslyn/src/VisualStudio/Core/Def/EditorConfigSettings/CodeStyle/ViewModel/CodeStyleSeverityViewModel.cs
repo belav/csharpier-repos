@@ -20,7 +20,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.CodeStyle
             ServicesVSResources.Refactoring_Only,
             ServicesVSResources.Suggestion,
             ServicesVSResources.Warning,
-            ServicesVSResources.Error
+            ServicesVSResources.Error,
         ];
 
         private readonly int _selectedSeverityIndex;

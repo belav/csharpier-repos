@@ -27,7 +27,11 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             private double _width;
             private double _height;
 
-            public SizeToFitHelper(IThreadingContext threadingContext, IWpfDifferenceViewer diffViewer, double minWidth)
+            public SizeToFitHelper(
+                IThreadingContext threadingContext,
+                IWpfDifferenceViewer diffViewer,
+                double minWidth
+            )
                 : base(threadingContext)
             {
                 _diffViewer = diffViewer;
@@ -36,7 +40,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
             public async Task SizeToFitAsync(CancellationToken cancellationToken)
             {
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
 #pragma warning disable CA2007 // Consider calling ConfigureAwait on the awaited task (containing method uses JTF)
                 await CalculateSizeAsync(cancellationToken);
@@ -48,7 +54,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 _diffViewer.VisualElement.Height = _height;
             }
 
-            private async Task<IProjectionSnapshot> GetInlineBufferSnapshotAsync(CancellationToken cancellationToken)
+            private async Task<IProjectionSnapshot> GetInlineBufferSnapshotAsync(
+                CancellationToken cancellationToken
+            )
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
@@ -57,8 +65,11 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                     return snapshot;
                 }
 
-                var completionSource = new TaskCompletionSource<IProjectionSnapshot>(TaskCreationOptions.RunContinuationsAsynchronously);
-                _diffViewer.DifferenceBuffer.SnapshotDifferenceChanged += HandleSnapshotDifferenceChanged;
+                var completionSource = new TaskCompletionSource<IProjectionSnapshot>(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
+                _diffViewer.DifferenceBuffer.SnapshotDifferenceChanged +=
+                    HandleSnapshotDifferenceChanged;
 
                 // Handle cases where the snapshot was set between the previous check and the event registration
                 if (_diffViewer.DifferenceBuffer.CurrentInlineBufferSnapshot is { } snapshot2)
@@ -66,26 +77,36 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
                 try
                 {
-                    return await completionSource.Task.WithCancellation(cancellationToken).ConfigureAwaitRunInline();
+                    return await completionSource
+                        .Task.WithCancellation(cancellationToken)
+                        .ConfigureAwaitRunInline();
                 }
                 finally
                 {
-                    _diffViewer.DifferenceBuffer.SnapshotDifferenceChanged -= HandleSnapshotDifferenceChanged;
+                    _diffViewer.DifferenceBuffer.SnapshotDifferenceChanged -=
+                        HandleSnapshotDifferenceChanged;
                 }
 
                 // Local function
-                void HandleSnapshotDifferenceChanged(object sender, SnapshotDifferenceChangeEventArgs e)
+                void HandleSnapshotDifferenceChanged(
+                    object sender,
+                    SnapshotDifferenceChangeEventArgs e
+                )
                 {
                     // This event handler will only be called when the inline diff snapshot computation is complete.
                     Contract.ThrowIfNull(_diffViewer.DifferenceBuffer.CurrentInlineBufferSnapshot);
 
-                    completionSource.SetResult(_diffViewer.DifferenceBuffer.CurrentInlineBufferSnapshot);
+                    completionSource.SetResult(
+                        _diffViewer.DifferenceBuffer.CurrentInlineBufferSnapshot
+                    );
                 }
             }
 
             private async Task CalculateSizeAsync(CancellationToken cancellationToken)
             {
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
                 IWpfTextView textView;
                 ITextSnapshot snapshot;
@@ -114,21 +135,36 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 // different sizes.
                 textView.DisplayTextLineContainingBufferPosition(
                     new SnapshotPoint(snapshot, 0),
-                    0.0, ViewRelativePosition.Top, double.MaxValue, double.MaxValue);
+                    0.0,
+                    ViewRelativePosition.Top,
+                    double.MaxValue,
+                    double.MaxValue
+                );
 
-                _width = Math.Max(textView.MaxTextRightCoordinate * (textView.ZoomLevel / 100), _minWidth); // Width of the widest line.
+                _width = Math.Max(
+                    textView.MaxTextRightCoordinate * (textView.ZoomLevel / 100),
+                    _minWidth
+                ); // Width of the widest line.
                 Contract.ThrowIfFalse(IsNormal(_width));
 
-                _height = textView.LineHeight * (textView.ZoomLevel / 100) * // Height of each line.
-                         snapshot.LineCount;                                // Number of lines.
+                _height =
+                    textView.LineHeight
+                    * (textView.ZoomLevel / 100)
+                    * // Height of each line.
+                    snapshot.LineCount; // Number of lines.
                 Contract.ThrowIfFalse(IsNormal(_height));
             }
 
-            private static bool IsNormal(double value)
-                => !double.IsNaN(value) && !double.IsInfinity(value) && value > 0.0;
+            private static bool IsNormal(double value) =>
+                !double.IsNaN(value) && !double.IsInfinity(value) && value > 0.0;
         }
 
-        public static Task SizeToFitAsync(this IWpfDifferenceViewer diffViewer, IThreadingContext threadingContext, double minWidth = 400.0, CancellationToken cancellationToken = default)
+        public static Task SizeToFitAsync(
+            this IWpfDifferenceViewer diffViewer,
+            IThreadingContext threadingContext,
+            double minWidth = 400.0,
+            CancellationToken cancellationToken = default
+        )
         {
             var helper = new SizeToFitHelper(threadingContext, diffViewer, minWidth);
             return helper.SizeToFitAsync(cancellationToken);

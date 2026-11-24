@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void DisabledError_DiagnosticsAndEffect()
         {
-            var source = @"
+            var source =
+                @"
 #if false
 #error ""error1""
 #endif
@@ -24,15 +25,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 class C { }
 ";
 
-            ParserErrorMessageTests.ParseAndValidate(source,
-                Diagnostic(ErrorCode.ERR_ErrorDirective, @"""error2""").WithArguments(@"""error2"""));
+            ParserErrorMessageTests.ParseAndValidate(
+                source,
+                Diagnostic(ErrorCode.ERR_ErrorDirective, @"""error2""").WithArguments(@"""error2""")
+            );
         }
 
         [WorkItem(544917, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544917")]
         [Fact]
         public void DisabledWarning_DiagnosticsAndEffect()
         {
-            var source = @"
+            var source =
+                @"
 #if false
 #warning ""warning1""
 #endif
@@ -40,15 +44,19 @@ class C { }
 class C { }
 ";
 
-            ParserErrorMessageTests.ParseAndValidate(source,
-                Diagnostic(ErrorCode.WRN_WarningDirective, @"""warning2""").WithArguments(@"""warning2"""));
+            ParserErrorMessageTests.ParseAndValidate(
+                source,
+                Diagnostic(ErrorCode.WRN_WarningDirective, @"""warning2""")
+                    .WithArguments(@"""warning2""")
+            );
         }
 
         [WorkItem(544917, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544917")]
         [Fact]
         public void DisabledLine_Diagnostics()
         {
-            var source = @"
+            var source =
+                @"
 #if false
 #line
 #line 0
@@ -58,16 +66,19 @@ class C { }
 class C { }
 ";
 
-            ParserErrorMessageTests.ParseAndValidate(source,
+            ParserErrorMessageTests.ParseAndValidate(
+                source,
                 Diagnostic(ErrorCode.ERR_InvalidLineNumber, ""),
-                Diagnostic(ErrorCode.ERR_InvalidLineNumber, "0"));
+                Diagnostic(ErrorCode.ERR_InvalidLineNumber, "0")
+            );
         }
 
         [WorkItem(544917, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544917")]
         [Fact]
         public void DisabledPragma_Diagnostics()
         {
-            var source = @"
+            var source =
+                @"
 #if false
 #pragma
 #pragma warning
@@ -91,7 +102,8 @@ class C { }
 class C { }
 ";
 
-            ParserErrorMessageTests.ParseAndValidate(source,
+            ParserErrorMessageTests.ParseAndValidate(
+                source,
                 Diagnostic(ErrorCode.WRN_IllegalPragma, ""),
                 Diagnostic(ErrorCode.WRN_IllegalPPWarning, ""),
                 Diagnostic(ErrorCode.WRN_IdentifierOrNumericLiteralExpected, "\"something2\""),
@@ -101,14 +113,16 @@ class C { }
                 Diagnostic(ErrorCode.WRN_IllegalPPChecksum, @"""guid"""),
                 Diagnostic(ErrorCode.WRN_IllegalPPChecksum, ""),
                 Diagnostic(ErrorCode.WRN_IllegalPPChecksum, @"""guid"""),
-                Diagnostic(ErrorCode.WRN_IllegalPPChecksum, @"""bytes"""));
+                Diagnostic(ErrorCode.WRN_IllegalPPChecksum, @"""bytes""")
+            );
         }
 
         [WorkItem(544917, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544917")]
         [Fact]
         public void DisabledReference_Diagnostics()
         {
-            var source = @"
+            var source =
+                @"
 #if false
 #r
 #endif
@@ -116,15 +130,19 @@ class C { }
 class C { }
 ";
 
-            ParserErrorMessageTests.ParseAndValidate(source, TestOptions.Script,
-                Diagnostic(ErrorCode.ERR_ExpectedPPFile, ""));
+            ParserErrorMessageTests.ParseAndValidate(
+                source,
+                TestOptions.Script,
+                Diagnostic(ErrorCode.ERR_ExpectedPPFile, "")
+            );
         }
 
         [WorkItem(544917, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544917")]
         [Fact]
         public void DisabledDefine_Effect()
         {
-            var source = @"
+            var source =
+                @"
 #if false
 #define goo
 #endif
@@ -141,22 +159,26 @@ class C { }
         [Fact]
         public void DisabledDefine_Diagnostics()
         {
-            var source = @"
+            var source =
+                @"
 #if false
 #define
 #endif
 class C { }
 ";
 
-            ParserErrorMessageTests.ParseAndValidate(source,
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ""));
+            ParserErrorMessageTests.ParseAndValidate(
+                source,
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "")
+            );
         }
 
         [WorkItem(544917, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544917")]
         [Fact]
         public void DisabledUndef_Effect()
         {
-            var source = @"
+            var source =
+                @"
 #define goo
 #if false
 #undef goo
@@ -167,30 +189,37 @@ class C { }
 class C { }
 ";
 
-            ParserErrorMessageTests.ParseAndValidate(source,
-                Diagnostic(ErrorCode.WRN_WarningDirective, @"""warning""").WithArguments(@"""warning"""));
+            ParserErrorMessageTests.ParseAndValidate(
+                source,
+                Diagnostic(ErrorCode.WRN_WarningDirective, @"""warning""")
+                    .WithArguments(@"""warning""")
+            );
         }
 
         [WorkItem(544917, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544917")]
         [Fact]
         public void DisabledUndef_Diagnostics()
         {
-            var source = @"
+            var source =
+                @"
 #if false
 #undef
 #endif
 class C { }
 ";
 
-            ParserErrorMessageTests.ParseAndValidate(source,
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ""));
+            ParserErrorMessageTests.ParseAndValidate(
+                source,
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "")
+            );
         }
 
         [WorkItem(544917, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544917")]
         [Fact]
         public void DisabledRegion_Diagnostics()
         {
-            var source = @"
+            var source =
+                @"
 #if false
 #region
 #endif
@@ -204,16 +233,19 @@ class C { }
             // NOTE: we deliberately suppress the "missing endif" that
             // dev10 would have reported - we only report the first error
             // when unwinding the stack.
-            ParserErrorMessageTests.ParseAndValidate(source,
+            ParserErrorMessageTests.ParseAndValidate(
+                source,
                 Diagnostic(ErrorCode.ERR_EndRegionDirectiveExpected, "#endif"),
-                Diagnostic(ErrorCode.ERR_EndRegionDirectiveExpected, ""));
+                Diagnostic(ErrorCode.ERR_EndRegionDirectiveExpected, "")
+            );
         }
 
         [WorkItem(544917, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544917")]
         [Fact]
         public void DisabledEndRegion_Diagnostics()
         {
-            var source = @"
+            var source =
+                @"
 #if false
 #endregion
 #endif
@@ -221,15 +253,18 @@ class C { }
 ";
 
             // Deliberately refined from ERR_UnexpectedDirective in Dev10.
-            ParserErrorMessageTests.ParseAndValidate(source,
-                Diagnostic(ErrorCode.ERR_EndifDirectiveExpected, "#endregion"));
+            ParserErrorMessageTests.ParseAndValidate(
+                source,
+                Diagnostic(ErrorCode.ERR_EndifDirectiveExpected, "#endregion")
+            );
         }
 
         [WorkItem(544917, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544917")]
         [Fact]
         public void DisabledIf_Effect()
         {
-            var source = @"
+            var source =
+                @"
 #if false
 #if true
 #error error
@@ -245,15 +280,18 @@ class C { }
         [Fact]
         public void DisabledIf_Diagnostics()
         {
-            var source = @"
+            var source =
+                @"
 #if false
 #if true
 #endif
 class C { }
 ";
 
-            ParserErrorMessageTests.ParseAndValidate(source,
-                Diagnostic(ErrorCode.ERR_EndifDirectiveExpected, ""));
+            ParserErrorMessageTests.ParseAndValidate(
+                source,
+                Diagnostic(ErrorCode.ERR_EndifDirectiveExpected, "")
+            );
         }
     }
 }

@@ -27,48 +27,52 @@ namespace System.ServiceModel.Activities.Dispatcher
         OperationExecutionFault(string description, FaultCode subcode)
         {
             this.faultCode = FaultCode.CreateSenderFaultCode(subcode);
-            this.faultReason = new FaultReason(new FaultReasonText(
-                description, CultureInfo.CurrentCulture));
+            this.faultReason = new FaultReason(
+                new FaultReasonText(description, CultureInfo.CurrentCulture)
+            );
         }
 
         public override FaultCode Code
         {
-            get
-            {
-                return this.faultCode;
-            }
+            get { return this.faultCode; }
         }
 
         public override bool HasDetail
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override FaultReason Reason
         {
-            get
-            {
-                return this.faultReason;
-            }
+            get { return this.faultReason; }
         }
 
-        public static OperationExecutionFault CreateTransactedLockException(Guid instanceId, string operationName)
+        public static OperationExecutionFault CreateTransactedLockException(
+            Guid instanceId,
+            string operationName
+        )
         {
             if (instanceLockedFaultCode == null)
             {
-                instanceLockedFaultCode = new FaultCode(XD2.WorkflowControlServiceFaults.InstanceLockedUnderTransaction, XD2.WorkflowServices.Namespace);
+                instanceLockedFaultCode = new FaultCode(
+                    XD2.WorkflowControlServiceFaults.InstanceLockedUnderTransaction,
+                    XD2.WorkflowServices.Namespace
+                );
             }
-            return new OperationExecutionFault(SR2.InstanceLockedUnderTransaction(operationName, instanceId), instanceLockedFaultCode);
+            return new OperationExecutionFault(
+                SR2.InstanceLockedUnderTransaction(operationName, instanceId),
+                instanceLockedFaultCode
+            );
         }
 
         public static OperationExecutionFault CreateInstanceUnloadedFault(string description)
         {
             if (instanceUnloadedFaultCode == null)
             {
-                instanceUnloadedFaultCode = new FaultCode(XD2.WorkflowControlServiceFaults.InstanceUnloaded, XD2.WorkflowServices.Namespace);
+                instanceUnloadedFaultCode = new FaultCode(
+                    XD2.WorkflowControlServiceFaults.InstanceUnloaded,
+                    XD2.WorkflowServices.Namespace
+                );
             }
             return new OperationExecutionFault(description, instanceUnloadedFaultCode);
         }
@@ -77,7 +81,10 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             if (instanceNotFoundCode == null)
             {
-                instanceNotFoundCode = new FaultCode(XD2.WorkflowControlServiceFaults.InstanceNotFound, XD2.WorkflowServices.Namespace);
+                instanceNotFoundCode = new FaultCode(
+                    XD2.WorkflowControlServiceFaults.InstanceNotFound,
+                    XD2.WorkflowServices.Namespace
+                );
             }
             return new OperationExecutionFault(description, instanceNotFoundCode);
         }
@@ -86,7 +93,10 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             if (instanceCompletedCode == null)
             {
-                instanceCompletedCode = new FaultCode(XD2.WorkflowControlServiceFaults.InstanceCompleted, XD2.WorkflowServices.Namespace);
+                instanceCompletedCode = new FaultCode(
+                    XD2.WorkflowControlServiceFaults.InstanceCompleted,
+                    XD2.WorkflowServices.Namespace
+                );
             }
             return new OperationExecutionFault(description, instanceCompletedCode);
         }
@@ -95,34 +105,58 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             if (instanceTerminatedCode == null)
             {
-                instanceTerminatedCode = new FaultCode(XD2.WorkflowControlServiceFaults.InstanceTerminated, XD2.WorkflowServices.Namespace);
+                instanceTerminatedCode = new FaultCode(
+                    XD2.WorkflowControlServiceFaults.InstanceTerminated,
+                    XD2.WorkflowServices.Namespace
+                );
             }
             return new OperationExecutionFault(description, instanceTerminatedCode);
         }
 
-        public static OperationExecutionFault CreateSuspendedFault(Guid instanceId, string operationName)
+        public static OperationExecutionFault CreateSuspendedFault(
+            Guid instanceId,
+            string operationName
+        )
         {
             if (instanceSuspendedFaultCode == null)
             {
-                instanceSuspendedFaultCode = new FaultCode(XD2.WorkflowControlServiceFaults.InstanceSuspended, XD2.WorkflowServices.Namespace);
+                instanceSuspendedFaultCode = new FaultCode(
+                    XD2.WorkflowControlServiceFaults.InstanceSuspended,
+                    XD2.WorkflowServices.Namespace
+                );
             }
-            return new OperationExecutionFault(SR2.InstanceSuspended(operationName, instanceId), instanceSuspendedFaultCode);
+            return new OperationExecutionFault(
+                SR2.InstanceSuspended(operationName, instanceId),
+                instanceSuspendedFaultCode
+            );
         }
 
-        public static OperationExecutionFault CreateOperationNotAvailableFault(Guid instanceId, string operationName)
+        public static OperationExecutionFault CreateOperationNotAvailableFault(
+            Guid instanceId,
+            string operationName
+        )
         {
             if (operationNotAvailableFaultCode == null)
             {
-                operationNotAvailableFaultCode = new FaultCode(XD2.WorkflowControlServiceFaults.OperationNotAvailable, XD2.WorkflowServices.Namespace);
+                operationNotAvailableFaultCode = new FaultCode(
+                    XD2.WorkflowControlServiceFaults.OperationNotAvailable,
+                    XD2.WorkflowServices.Namespace
+                );
             }
-            return new OperationExecutionFault(SR2.OperationNotAvailable(operationName, instanceId), operationNotAvailableFaultCode);
+            return new OperationExecutionFault(
+                SR2.OperationNotAvailable(operationName, instanceId),
+                operationNotAvailableFaultCode
+            );
         }
 
         public static OperationExecutionFault CreateAbortedFault(string description)
         {
             if (instanceAbortedCode == null)
             {
-                instanceAbortedCode = new FaultCode(XD2.WorkflowControlServiceFaults.InstanceAborted, XD2.WorkflowServices.Namespace);
+                instanceAbortedCode = new FaultCode(
+                    XD2.WorkflowControlServiceFaults.InstanceAborted,
+                    XD2.WorkflowServices.Namespace
+                );
             }
             return new OperationExecutionFault(description, instanceAbortedCode);
         }
@@ -131,15 +165,22 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             if (updatedFailedFaultCode == null)
             {
-                updatedFailedFaultCode = new FaultCode(XD2.WorkflowControlServiceFaults.UpdateFailed, XD2.WorkflowServices.Namespace);
+                updatedFailedFaultCode = new FaultCode(
+                    XD2.WorkflowControlServiceFaults.UpdateFailed,
+                    XD2.WorkflowServices.Namespace
+                );
             }
             return new OperationExecutionFault(description, updatedFailedFaultCode);
         }
 
         public static bool IsAbortedFaultException(FaultException exception)
         {
-            if (exception.Code != null && exception.Code.SubCode != null &&
-                exception.Code.SubCode.Name == instanceAbortedCode.Name && exception.Code.SubCode.Namespace == instanceAbortedCode.Namespace)
+            if (
+                exception.Code != null
+                && exception.Code.SubCode != null
+                && exception.Code.SubCode.Name == instanceAbortedCode.Name
+                && exception.Code.SubCode.Namespace == instanceAbortedCode.Namespace
+            )
             {
                 return true;
             }

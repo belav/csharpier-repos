@@ -3,7 +3,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -27,10 +27,12 @@
 
 using System;
 
-namespace Microsoft.Build.BuildEngine {
-	[Flags]
-	public enum BuildSettings {
-		None,
-		DoNotResetPreviouslyBuiltTargets
-	}
+namespace Microsoft.Build.BuildEngine
+{
+    [Flags]
+    public enum BuildSettings
+    {
+        None,
+        DoNotResetPreviouslyBuiltTargets,
+    }
 }

@@ -23,16 +23,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
             CodeActionOptionsProvider fallbackOptions,
             BaseObjectCreationExpressionSyntax objectCreation,
             ImmutableArray<Match<StatementSyntax>> matches,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return CSharpCollectionExpressionRewriter.CreateCollectionExpressionAsync(
                 document,
                 fallbackOptions,
                 objectCreation,
-                matches.SelectAsArray(m => new CollectionExpressionMatch<StatementSyntax>(m.Statement, m.UseSpread)),
+                matches.SelectAsArray(m => new CollectionExpressionMatch<StatementSyntax>(
+                    m.Statement,
+                    m.UseSpread
+                )),
                 static objectCreation => objectCreation.Initializer,
                 static (objectCreation, initializer) => objectCreation.WithInitializer(initializer),
-                cancellationToken);
+                cancellationToken
+            );
         }
     }
 }

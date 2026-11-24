@@ -3,8 +3,8 @@
 
 using System;
 using System.IO;
-using Xunit;
 using System.Tests;
+using Xunit;
 
 namespace System.IO.Tests
 {
@@ -14,7 +14,11 @@ namespace System.IO.Tests
         public static void Ctor_Empty()
         {
             var exception = new DirectoryNotFoundException();
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: HResults.COR_E_DIRECTORYNOTFOUND, validateMessage: false);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: HResults.COR_E_DIRECTORYNOTFOUND,
+                validateMessage: false
+            );
         }
 
         [Fact]
@@ -22,7 +26,11 @@ namespace System.IO.Tests
         {
             string message = "That page was missing from the directory.";
             var exception = new DirectoryNotFoundException(message);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: HResults.COR_E_DIRECTORYNOTFOUND, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: HResults.COR_E_DIRECTORYNOTFOUND,
+                message: message
+            );
         }
 
         [Fact]
@@ -31,7 +39,12 @@ namespace System.IO.Tests
             string message = "That page was missing from the directory.";
             var innerException = new Exception("Inner exception");
             var exception = new DirectoryNotFoundException(message, innerException);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: HResults.COR_E_DIRECTORYNOTFOUND, innerException: innerException, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: HResults.COR_E_DIRECTORYNOTFOUND,
+                innerException: innerException,
+                message: message
+            );
         }
     }
 }

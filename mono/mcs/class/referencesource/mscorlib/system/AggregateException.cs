@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -25,7 +25,6 @@ using System.Threading;
 
 namespace System
 {
-
     /// <summary>Represents one or more errors that occur during application execution.</summary>
     /// <remarks>
     /// <see cref="AggregateException"/> is used to consolidate multiple failures into a single, throwable
@@ -35,7 +34,6 @@ namespace System
     [DebuggerDisplay("Count = {InnerExceptionCount}")]
     public class AggregateException : Exception
     {
-
         private ReadOnlyCollection<Exception> m_innerExceptions; // Complete set of exceptions.
 
         /// <summary>
@@ -74,7 +72,9 @@ namespace System
                 throw new ArgumentNullException("innerException");
             }
 
-            m_innerExceptions = new ReadOnlyCollection<Exception>(new Exception[] { innerException });
+            m_innerExceptions = new ReadOnlyCollection<Exception>(
+                new Exception[] { innerException }
+            );
         }
 
         /// <summary>
@@ -86,10 +86,11 @@ namespace System
         /// is null.</exception>
         /// <exception cref="T:System.ArgumentException">An element of <paramref name="innerExceptions"/> is
         /// null.</exception>
-        public AggregateException(IEnumerable<Exception> innerExceptions) :
-            this(Environment.GetResourceString("AggregateException_ctor_DefaultMessage"), innerExceptions)
-        {
-        }
+        public AggregateException(IEnumerable<Exception> innerExceptions)
+            : this(
+                Environment.GetResourceString("AggregateException_ctor_DefaultMessage"),
+                innerExceptions
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateException"/> class with
@@ -100,10 +101,11 @@ namespace System
         /// is null.</exception>
         /// <exception cref="T:System.ArgumentException">An element of <paramref name="innerExceptions"/> is
         /// null.</exception>
-        public AggregateException(params Exception[] innerExceptions) :
-            this(Environment.GetResourceString("AggregateException_ctor_DefaultMessage"), innerExceptions)
-        {
-        }
+        public AggregateException(params Exception[] innerExceptions)
+            : this(
+                Environment.GetResourceString("AggregateException_ctor_DefaultMessage"),
+                innerExceptions
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateException"/> class with a specified error
@@ -117,10 +119,16 @@ namespace System
         /// null.</exception>
         public AggregateException(string message, IEnumerable<Exception> innerExceptions)
             // If it's already an IList, pass that along (a defensive copy will be made in the delegated ctor).  If it's null, just pass along
-            // null typed correctly.  Otherwise, create an IList from the enumerable and pass that along. 
-            : this(message, innerExceptions as IList<Exception> ?? (innerExceptions == null ? (List<Exception>)null : new List<Exception>(innerExceptions)))
-        {
-        }
+            // null typed correctly.  Otherwise, create an IList from the enumerable and pass that along.
+            : this(
+                message,
+                innerExceptions as IList<Exception>
+                    ?? (
+                        innerExceptions == null
+                            ? (List<Exception>)null
+                            : new List<Exception>(innerExceptions)
+                    )
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateException"/> class with a specified error
@@ -132,10 +140,8 @@ namespace System
         /// is null.</exception>
         /// <exception cref="T:System.ArgumentException">An element of <paramref name="innerExceptions"/> is
         /// null.</exception>
-        public AggregateException(string message, params Exception[] innerExceptions) :
-            this(message, (IList<Exception>)innerExceptions)
-        {
-        }
+        public AggregateException(string message, params Exception[] innerExceptions)
+            : this(message, (IList<Exception>)innerExceptions) { }
 
         /// <summary>
         /// Allocates a new aggregate exception with the specified message and list of inner exceptions.
@@ -147,7 +153,10 @@ namespace System
         /// <exception cref="T:System.ArgumentException">An element of <paramref name="innerExceptions"/> is
         /// null.</exception>
         private AggregateException(string message, IList<Exception> innerExceptions)
-            : base(message, innerExceptions != null && innerExceptions.Count > 0 ? innerExceptions[0] : null)
+            : base(
+                message,
+                innerExceptions != null && innerExceptions.Count > 0 ? innerExceptions[0] : null
+            )
         {
             if (innerExceptions == null)
             {
@@ -165,7 +174,9 @@ namespace System
 
                 if (exceptionsCopy[i] == null)
                 {
-                    throw new ArgumentException(Environment.GetResourceString("AggregateException_ctor_InnerExceptionNull"));
+                    throw new ArgumentException(
+                        Environment.GetResourceString("AggregateException_ctor_InnerExceptionNull")
+                    );
                 }
             }
 
@@ -183,14 +194,15 @@ namespace System
         /// is null.</exception>
         /// <exception cref="T:System.ArgumentException">An element of <paramref name="innerExceptionInfos"/> is
         /// null.</exception>
-        internal AggregateException(IEnumerable<ExceptionDispatchInfo> innerExceptionInfos) :
-            this(Environment.GetResourceString("AggregateException_ctor_DefaultMessage"), innerExceptionInfos)
-        {
-        }
+        internal AggregateException(IEnumerable<ExceptionDispatchInfo> innerExceptionInfos)
+            : this(
+                Environment.GetResourceString("AggregateException_ctor_DefaultMessage"),
+                innerExceptionInfos
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateException"/> class with a specified error
-        /// message and references to the inner exception dispatch info objects that represent the cause of 
+        /// message and references to the inner exception dispatch info objects that represent the cause of
         /// this exception.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
@@ -201,18 +213,24 @@ namespace System
         /// is null.</exception>
         /// <exception cref="T:System.ArgumentException">An element of <paramref name="innerExceptionInfos"/> is
         /// null.</exception>
-        internal AggregateException(string message, IEnumerable<ExceptionDispatchInfo> innerExceptionInfos)
+        internal AggregateException(
+            string message,
+            IEnumerable<ExceptionDispatchInfo> innerExceptionInfos
+        )
             // If it's already an IList, pass that along (a defensive copy will be made in the delegated ctor).  If it's null, just pass along
-            // null typed correctly.  Otherwise, create an IList from the enumerable and pass that along. 
-            : this(message, innerExceptionInfos as IList<ExceptionDispatchInfo> ?? 
-                                (innerExceptionInfos == null ? 
-                                    (List<ExceptionDispatchInfo>)null : 
-                                    new List<ExceptionDispatchInfo>(innerExceptionInfos)))
-        {
-        }
+            // null typed correctly.  Otherwise, create an IList from the enumerable and pass that along.
+            : this(
+                message,
+                innerExceptionInfos as IList<ExceptionDispatchInfo>
+                    ?? (
+                        innerExceptionInfos == null
+                            ? (List<ExceptionDispatchInfo>)null
+                            : new List<ExceptionDispatchInfo>(innerExceptionInfos)
+                    )
+            ) { }
 
         /// <summary>
-        /// Allocates a new aggregate exception with the specified message and list of inner 
+        /// Allocates a new aggregate exception with the specified message and list of inner
         /// exception dispatch info objects.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
@@ -224,8 +242,14 @@ namespace System
         /// <exception cref="T:System.ArgumentException">An element of <paramref name="innerExceptionInfos"/> is
         /// null.</exception>
         private AggregateException(string message, IList<ExceptionDispatchInfo> innerExceptionInfos)
-            : base(message, innerExceptionInfos != null && innerExceptionInfos.Count > 0 && innerExceptionInfos[0] != null ?
-                                innerExceptionInfos[0].SourceException : null)
+            : base(
+                message,
+                innerExceptionInfos != null
+                && innerExceptionInfos.Count > 0
+                && innerExceptionInfos[0] != null
+                    ? innerExceptionInfos[0].SourceException
+                    : null
+            )
         {
             if (innerExceptionInfos == null)
             {
@@ -240,11 +264,14 @@ namespace System
             for (int i = 0; i < exceptionsCopy.Length; i++)
             {
                 var edi = innerExceptionInfos[i];
-                if (edi != null) exceptionsCopy[i] = edi.SourceException;
+                if (edi != null)
+                    exceptionsCopy[i] = edi.SourceException;
 
                 if (exceptionsCopy[i] == null)
                 {
-                    throw new ArgumentException(Environment.GetResourceString("AggregateException_ctor_InnerExceptionNull"));
+                    throw new ArgumentException(
+                        Environment.GetResourceString("AggregateException_ctor_InnerExceptionNull")
+                    );
                 }
             }
 
@@ -261,18 +288,21 @@ namespace System
         /// <exception cref="T:System.ArgumentNullException">The <paramref name="info"/> argument is null.</exception>
         /// <exception cref="T:System.Runtime.Serialization.SerializationException">The exception could not be deserialized correctly.</exception>
         [SecurityCritical]
-        protected AggregateException(SerializationInfo info, StreamingContext context) :
-            base(info, context)
+        protected AggregateException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             if (info == null)
             {
                 throw new ArgumentNullException("info");
             }
 
-            Exception[] innerExceptions = info.GetValue("InnerExceptions", typeof(Exception[])) as Exception[];
+            Exception[] innerExceptions =
+                info.GetValue("InnerExceptions", typeof(Exception[])) as Exception[];
             if (innerExceptions == null)
             {
-                throw new SerializationException(Environment.GetResourceString("AggregateException_DeserializationFailure"));
+                throw new SerializationException(
+                    Environment.GetResourceString("AggregateException_DeserializationFailure")
+                );
             }
 
             m_innerExceptions = new ReadOnlyCollection<Exception>(innerExceptions);
@@ -329,7 +359,6 @@ namespace System
             get { return m_innerExceptions; }
         }
 
-
         /// <summary>
         /// Invokes a handler on each <see cref="T:System.Exception"/> contained by this <see
         /// cref="AggregateException"/>.
@@ -379,7 +408,6 @@ namespace System
             }
         }
 
-
         /// <summary>
         /// Flattens an <see cref="AggregateException"/> instances into a single, new instance.
         /// </summary>
@@ -405,7 +433,9 @@ namespace System
             while (exceptionsToFlatten.Count > nDequeueIndex)
             {
                 // dequeue one from exceptionsToFlatten
-                IList<Exception> currentInnerExceptions = exceptionsToFlatten[nDequeueIndex++].InnerExceptions;
+                IList<Exception> currentInnerExceptions = exceptionsToFlatten[
+                    nDequeueIndex++
+                ].InnerExceptions;
 
                 for (int i = 0; i < currentInnerExceptions.Count; i++)
                 {
@@ -416,7 +446,8 @@ namespace System
                         continue;
                     }
 
-                    AggregateException currentInnerAsAggregate = currentInnerException as AggregateException;
+                    AggregateException currentInnerAsAggregate =
+                        currentInnerException as AggregateException;
 
                     // If this exception is an aggregate, keep it around for later.  Otherwise,
                     // simply add it to the list of flattened exceptions to be returned.
@@ -430,7 +461,6 @@ namespace System
                     }
                 }
             }
-
 
             return new AggregateException(Message, flattenedExceptions);
         }
@@ -448,7 +478,13 @@ namespace System
                 text = String.Format(
                     CultureInfo.InvariantCulture,
                     Environment.GetResourceString("AggregateException_ToString"),
-                    text, Environment.NewLine, i, m_innerExceptions[i].ToString(), "<---", Environment.NewLine);
+                    text,
+                    Environment.NewLine,
+                    i,
+                    m_innerExceptions[i].ToString(),
+                    "<---",
+                    Environment.NewLine
+                );
             }
 
             return text;
@@ -456,20 +492,16 @@ namespace System
 
         /// <summary>
         /// This helper property is used by the DebuggerDisplay.
-        /// 
-        /// Note that we don't want to remove this property and change the debugger display to {InnerExceptions.Count} 
-        /// because DebuggerDisplay should be a single property access or parameterless method call, so that the debugger 
+        ///
+        /// Note that we don't want to remove this property and change the debugger display to {InnerExceptions.Count}
+        /// because DebuggerDisplay should be a single property access or parameterless method call, so that the debugger
         /// can use a fast path without using the expression evaluator.
-        /// 
+        ///
         /// See http://msdn.microsoft.com/en-us/library/x810d419.aspx
         /// </summary>
         private int InnerExceptionCount
         {
-            get
-            {
-                return InnerExceptions.Count;
-            }
+            get { return InnerExceptions.Count; }
         }
     }
-
 }

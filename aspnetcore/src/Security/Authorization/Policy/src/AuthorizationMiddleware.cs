@@ -122,12 +122,10 @@ public class AuthorizationMiddleware
         if (policy == null)
         {
             // IMPORTANT: Changes to authorization logic should be mirrored in MVC's AuthorizeFilter
-            var authorizeData =
-                endpoint?.Metadata.GetOrderedMetadata<IAuthorizeData>()
+            var authorizeData = endpoint?.Metadata.GetOrderedMetadata<IAuthorizeData>()
                 ?? Array.Empty<IAuthorizeData>();
 
-            var policies =
-                endpoint?.Metadata.GetOrderedMetadata<AuthorizationPolicy>()
+            var policies = endpoint?.Metadata.GetOrderedMetadata<AuthorizationPolicy>()
                 ?? Array.Empty<AuthorizationPolicy>();
 
             policy = await AuthorizationPolicy.CombineAsync(

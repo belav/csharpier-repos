@@ -18,12 +18,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE80.CodeParameter2))]
-    public sealed class CodeParameter : AbstractCodeElement, EnvDTE.CodeParameter, EnvDTE80.CodeParameter2, IParameterKind
+    public sealed class CodeParameter
+        : AbstractCodeElement,
+            EnvDTE.CodeParameter,
+            EnvDTE80.CodeParameter2,
+            IParameterKind
     {
         internal static EnvDTE.CodeParameter Create(
             CodeModelState state,
             AbstractCodeMember parent,
-            string name)
+            string name
+        )
         {
             var element = new CodeParameter(state, parent, name);
             return (EnvDTE.CodeParameter)ComAggregate.CreateAggregatedObject(element);
@@ -32,10 +37,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         private readonly ParentHandle<AbstractCodeMember> _parentHandle;
         private readonly string _name;
 
-        private CodeParameter(
-            CodeModelState state,
-            AbstractCodeMember parent,
-            string name)
+        private CodeParameter(CodeModelState state, AbstractCodeMember parent, string name)
             : base(state, parent.FileCodeModel)
         {
             _parentHandle = new ParentHandle<AbstractCodeMember>(parent);
@@ -47,7 +49,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             get { return (IParameterSymbol)LookupSymbol(); }
         }
 
-        private void UpdateNodeAndReacquireParentNodeKey<T>(Action<SyntaxNode, T> parameterUpdater, T value)
+        private void UpdateNodeAndReacquireParentNodeKey<T>(
+            Action<SyntaxNode, T> parameterUpdater,
+            T value
+        )
         {
             void updater(SyntaxNode n, T v)
             {
@@ -62,11 +67,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             UpdateNode(updater, value);
         }
 
-        protected override EnvDTE.CodeElements GetCollection()
-            => GetCollection<CodeParameter>(Parent);
+        protected override EnvDTE.CodeElements GetCollection() =>
+            GetCollection<CodeParameter>(Parent);
 
-        protected override string GetName()
-            => _name;
+        protected override string GetName() => _name;
 
         protected override string GetFullName()
         {
@@ -130,15 +134,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         public string DocComment
         {
-            get
-            {
-                return string.Empty;
-            }
-
-            set
-            {
-                throw Exceptions.ThrowENotImpl();
-            }
+            get { return string.Empty; }
+            set { throw Exceptions.ThrowENotImpl(); }
         }
 
         public EnvDTE.CodeTypeRef Type
@@ -147,37 +144,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             {
                 return CodeTypeRef.Create(this.State, this, GetProjectId(), ParameterSymbol.Type);
             }
-
-            set
-            {
-                UpdateNodeAndReacquireParentNodeKey(FileCodeModel.UpdateType, value);
-            }
+            set { UpdateNodeAndReacquireParentNodeKey(FileCodeModel.UpdateType, value); }
         }
 
         public EnvDTE80.vsCMParameterKind ParameterKind
         {
-            get
-            {
-                return CodeModelService.GetParameterKind(LookupNode());
-            }
-
-            set
-            {
-                UpdateNodeAndReacquireParentNodeKey(FileCodeModel.UpdateParameterKind, value);
-            }
+            get { return CodeModelService.GetParameterKind(LookupNode()); }
+            set { UpdateNodeAndReacquireParentNodeKey(FileCodeModel.UpdateParameterKind, value); }
         }
 
         public string DefaultValue
         {
-            get
-            {
-                return CodeModelService.GetInitExpression(LookupNode());
-            }
-
-            set
-            {
-                UpdateNode(FileCodeModel.UpdateInitExpression, value);
-            }
+            get { return CodeModelService.GetInitExpression(LookupNode()); }
+            set { UpdateNode(FileCodeModel.UpdateInitExpression, value); }
         }
 
         public EnvDTE.CodeAttribute AddAttribute(string name, string value, object position)
@@ -188,17 +167,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             });
         }
 
-        void IParameterKind.SetParameterPassingMode(PARAMETER_PASSING_MODE passingMode)
-            => this.ParameterKind = this.CodeModelService.UpdateParameterKind(ParameterKind, passingMode);
+        void IParameterKind.SetParameterPassingMode(PARAMETER_PASSING_MODE passingMode) =>
+            this.ParameterKind = this.CodeModelService.UpdateParameterKind(
+                ParameterKind,
+                passingMode
+            );
 
         void IParameterKind.SetParameterArrayDimensions(int dimensions)
         {
             var type = this.ParameterSymbol.Type;
             var compilation = this.FileCodeModel.GetCompilation();
 
-            var elementType = type is IArrayTypeSymbol
-                ? ((IArrayTypeSymbol)type).ElementType
-                : type;
+            var elementType =
+                type is IArrayTypeSymbol ? ((IArrayTypeSymbol)type).ElementType : type;
 
             // The original C# implementation had a weird behavior where it wold allow setting array dimensions
             // to 0 to create an array with a single rank.

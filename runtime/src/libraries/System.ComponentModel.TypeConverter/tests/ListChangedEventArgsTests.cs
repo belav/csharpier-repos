@@ -35,17 +35,36 @@ namespace System.ComponentModel.Tests
             yield return new object[] { ListChangedType.ItemChanged, new MockPropertyDescriptor() };
             yield return new object[] { ListChangedType.ItemDeleted, new MockPropertyDescriptor() };
             yield return new object[] { ListChangedType.ItemMoved, new MockPropertyDescriptor() };
-            yield return new object[] { ListChangedType.PropertyDescriptorAdded, new MockPropertyDescriptor() };
-            yield return new object[] { ListChangedType.PropertyDescriptorDeleted, new MockPropertyDescriptor() };
-            yield return new object[] { ListChangedType.PropertyDescriptorChanged, new MockPropertyDescriptor() };
+            yield return new object[]
+            {
+                ListChangedType.PropertyDescriptorAdded,
+                new MockPropertyDescriptor(),
+            };
+            yield return new object[]
+            {
+                ListChangedType.PropertyDescriptorDeleted,
+                new MockPropertyDescriptor(),
+            };
+            yield return new object[]
+            {
+                ListChangedType.PropertyDescriptorChanged,
+                new MockPropertyDescriptor(),
+            };
             yield return new object[] { ListChangedType.Reset, new MockPropertyDescriptor() };
             yield return new object[] { ListChangedType.Reset - 1, new MockPropertyDescriptor() };
-            yield return new object[] { ListChangedType.PropertyDescriptorChanged + 1, new MockPropertyDescriptor() };
+            yield return new object[]
+            {
+                ListChangedType.PropertyDescriptorChanged + 1,
+                new MockPropertyDescriptor(),
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_ListChangedType_PropertyDescriptor_TestData))]
-        public void Ctor_ListChangedType_PropertyDescriptor(ListChangedType listChangedType, PropertyDescriptor propDesc)
+        public void Ctor_ListChangedType_PropertyDescriptor(
+            ListChangedType listChangedType,
+            PropertyDescriptor propDesc
+        )
         {
             var args = new ListChangedEventArgs(listChangedType, propDesc);
             Assert.Equal(listChangedType, args.ListChangedType);
@@ -65,7 +84,11 @@ namespace System.ComponentModel.Tests
         [InlineData(ListChangedType.Reset, 6, 7)]
         [InlineData(ListChangedType.Reset - 1, 7, 8)]
         [InlineData(ListChangedType.PropertyDescriptorChanged + 1, 8, -1)]
-        public void Ctor_ListChangedType_Int_Int(ListChangedType listChangedType, int newIndex, int oldIndex)
+        public void Ctor_ListChangedType_Int_Int(
+            ListChangedType listChangedType,
+            int newIndex,
+            int oldIndex
+        )
         {
             var args = new ListChangedEventArgs(listChangedType, newIndex, oldIndex);
             Assert.Equal(listChangedType, args.ListChangedType);
@@ -77,20 +100,64 @@ namespace System.ComponentModel.Tests
         public static IEnumerable<object[]> Ctor_ListChangedType_Int_PropertyDescriptor_TestData()
         {
             yield return new object[] { ListChangedType.ItemAdded, -1, null };
-            yield return new object[] { ListChangedType.ItemChanged, 0, new MockPropertyDescriptor() };
-            yield return new object[] { ListChangedType.ItemDeleted, 1, new MockPropertyDescriptor() };
-            yield return new object[] { ListChangedType.ItemMoved, 2, new MockPropertyDescriptor() };
-            yield return new object[] { ListChangedType.PropertyDescriptorAdded, 3, new MockPropertyDescriptor() };
-            yield return new object[] { ListChangedType.PropertyDescriptorDeleted, 4, new MockPropertyDescriptor() };
-            yield return new object[] { ListChangedType.PropertyDescriptorChanged, 5, new MockPropertyDescriptor() };
+            yield return new object[]
+            {
+                ListChangedType.ItemChanged,
+                0,
+                new MockPropertyDescriptor(),
+            };
+            yield return new object[]
+            {
+                ListChangedType.ItemDeleted,
+                1,
+                new MockPropertyDescriptor(),
+            };
+            yield return new object[]
+            {
+                ListChangedType.ItemMoved,
+                2,
+                new MockPropertyDescriptor(),
+            };
+            yield return new object[]
+            {
+                ListChangedType.PropertyDescriptorAdded,
+                3,
+                new MockPropertyDescriptor(),
+            };
+            yield return new object[]
+            {
+                ListChangedType.PropertyDescriptorDeleted,
+                4,
+                new MockPropertyDescriptor(),
+            };
+            yield return new object[]
+            {
+                ListChangedType.PropertyDescriptorChanged,
+                5,
+                new MockPropertyDescriptor(),
+            };
             yield return new object[] { ListChangedType.Reset, 6, new MockPropertyDescriptor() };
-            yield return new object[] { ListChangedType.Reset - 1, 7, new MockPropertyDescriptor() };
-            yield return new object[] { ListChangedType.PropertyDescriptorChanged + 1, 8, new MockPropertyDescriptor() };
+            yield return new object[]
+            {
+                ListChangedType.Reset - 1,
+                7,
+                new MockPropertyDescriptor(),
+            };
+            yield return new object[]
+            {
+                ListChangedType.PropertyDescriptorChanged + 1,
+                8,
+                new MockPropertyDescriptor(),
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_ListChangedType_Int_PropertyDescriptor_TestData))]
-        public void Ctor_ListChangedType_Int_PropertyDescriptor(ListChangedType listChangedType, int newIndex, PropertyDescriptor propDesc)
+        public void Ctor_ListChangedType_Int_PropertyDescriptor(
+            ListChangedType listChangedType,
+            int newIndex,
+            PropertyDescriptor propDesc
+        )
         {
             var args = new ListChangedEventArgs(listChangedType, newIndex, propDesc);
             Assert.Equal(listChangedType, args.ListChangedType);

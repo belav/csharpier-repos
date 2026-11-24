@@ -12,7 +12,10 @@ namespace System.CommandLine.Rendering
         {
             if (string.IsNullOrWhiteSpace(escapeSequence))
             {
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(escapeSequence));
+                throw new ArgumentException(
+                    "Value cannot be null or whitespace.",
+                    nameof(escapeSequence)
+                );
             }
 
             EscapeSequence = escapeSequence;
@@ -26,12 +29,11 @@ namespace System.CommandLine.Rendering
         {
             ConsoleFormatInfo info = ConsoleFormatInfo.GetInstance(provider);
 
-            return info.SupportsAnsiCodes ?
-                EscapeSequence :
-                string.Empty;
+            return info.SupportsAnsiCodes ? EscapeSequence : string.Empty;
         }
 
-        protected bool Equals(AnsiControlCode other) => string.Equals(EscapeSequence, other.EscapeSequence);
+        protected bool Equals(AnsiControlCode other) =>
+            string.Equals(EscapeSequence, other.EscapeSequence);
 
         public override bool Equals(object obj)
         {
@@ -45,8 +47,7 @@ namespace System.CommandLine.Rendering
                 return true;
             }
 
-            return obj.GetType() == GetType() &&
-                   Equals((AnsiControlCode)obj);
+            return obj.GetType() == GetType() && Equals((AnsiControlCode)obj);
         }
 
         public override int GetHashCode() => EscapeSequence.GetHashCode();

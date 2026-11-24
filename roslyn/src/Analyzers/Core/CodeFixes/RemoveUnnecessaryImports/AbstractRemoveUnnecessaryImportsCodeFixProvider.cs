@@ -18,11 +18,11 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
     {
         protected abstract ISyntaxFormatting GetSyntaxFormatting();
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(RemoveUnnecessaryImportsConstants.DiagnosticFixableId);
+        public sealed override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(RemoveUnnecessaryImportsConstants.DiagnosticFixableId);
 
-        public sealed override FixAllProvider GetFixAllProvider()
-            => WellKnownFixAllProviders.BatchFixer;
+        public sealed override FixAllProvider GetFixAllProvider() =>
+            WellKnownFixAllProviders.BatchFixer;
 
         public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -30,9 +30,16 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
             context.RegisterCodeFix(
                 CodeAction.Create(
                     title,
-                    c => RemoveUnnecessaryImportsAsync(context.Document, context.GetOptionsProvider(), c),
-                    title),
-                context.Diagnostics);
+                    c =>
+                        RemoveUnnecessaryImportsAsync(
+                            context.Document,
+                            context.GetOptionsProvider(),
+                            c
+                        ),
+                    title
+                ),
+                context.Diagnostics
+            );
             return Task.CompletedTask;
         }
 
@@ -41,13 +48,18 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
         private async Task<Document> RemoveUnnecessaryImportsAsync(
             Document document,
             CodeActionOptionsProvider fallbackOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var service = document.GetRequiredLanguageService<IRemoveUnnecessaryImportsService>();
 
-            var options = await document.GetCodeFixOptionsAsync(fallbackOptions, cancellationToken).ConfigureAwait(false);
+            var options = await document
+                .GetCodeFixOptionsAsync(fallbackOptions, cancellationToken)
+                .ConfigureAwait(false);
             var formattingOptions = options.GetFormattingOptions(GetSyntaxFormatting());
-            return await service.RemoveUnnecessaryImportsAsync(document, formattingOptions, cancellationToken).ConfigureAwait(false);
+            return await service
+                .RemoveUnnecessaryImportsAsync(document, formattingOptions, cancellationToken)
+                .ConfigureAwait(false);
         }
     }
 }

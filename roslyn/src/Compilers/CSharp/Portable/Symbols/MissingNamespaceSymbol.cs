@@ -39,26 +39,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override string Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
         public override Symbol ContainingSymbol
         {
-            get
-            {
-                return _containingSymbol;
-            }
+            get { return _containingSymbol; }
         }
 
         public override AssemblySymbol ContainingAssembly
         {
-            get
-            {
-                return _containingSymbol.ContainingAssembly;
-            }
+            get { return _containingSymbol.ContainingAssembly; }
         }
 
         internal override NamespaceExtent Extent
@@ -88,23 +79,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             MissingNamespaceSymbol other = obj as MissingNamespaceSymbol;
 
-            return (object)other != null && _name.Equals(other._name) && _containingSymbol.Equals(other._containingSymbol, compareKind);
+            return (object)other != null
+                && _name.Equals(other._name)
+                && _containingSymbol.Equals(other._containingSymbol, compareKind);
         }
 
         public override ImmutableArray<Location> Locations
         {
-            get
-            {
-                return ImmutableArray<Location>.Empty;
-            }
+            get { return ImmutableArray<Location>.Empty; }
         }
 
         public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
-            get
-            {
-                return ImmutableArray<SyntaxReference>.Empty;
-            }
+            get { return ImmutableArray<SyntaxReference>.Empty; }
         }
 
         public override ImmutableArray<NamedTypeSymbol> GetTypeMembers()
@@ -117,7 +104,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return ImmutableArray<NamedTypeSymbol>.Empty;
         }
 
-        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(ReadOnlyMemory<char> name, int arity)
+        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(
+            ReadOnlyMemory<char> name,
+            int arity
+        )
         {
             return ImmutableArray<NamedTypeSymbol>.Empty;
         }

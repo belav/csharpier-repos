@@ -18,32 +18,48 @@ namespace System.Net.WebSockets
         public abstract WebSocketState State { get; }
 
         public abstract void Abort();
-        public abstract Task CloseAsync(WebSocketCloseStatus closeStatus,
+        public abstract Task CloseAsync(
+            WebSocketCloseStatus closeStatus,
             string? statusDescription,
-            CancellationToken cancellationToken);
-        public abstract Task CloseOutputAsync(WebSocketCloseStatus closeStatus,
+            CancellationToken cancellationToken
+        );
+        public abstract Task CloseOutputAsync(
+            WebSocketCloseStatus closeStatus,
             string? statusDescription,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
         public abstract void Dispose();
-        public abstract Task<WebSocketReceiveResult> ReceiveAsync(ArraySegment<byte> buffer,
-            CancellationToken cancellationToken);
-        public abstract Task SendAsync(ArraySegment<byte> buffer,
+        public abstract Task<WebSocketReceiveResult> ReceiveAsync(
+            ArraySegment<byte> buffer,
+            CancellationToken cancellationToken
+        );
+        public abstract Task SendAsync(
+            ArraySegment<byte> buffer,
             WebSocketMessageType messageType,
             bool endOfMessage,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
-        public virtual async ValueTask<ValueWebSocketReceiveResult> ReceiveAsync(Memory<byte> buffer, CancellationToken cancellationToken)
+        public virtual async ValueTask<ValueWebSocketReceiveResult> ReceiveAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
             if (MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> arraySegment))
             {
-                WebSocketReceiveResult r = await ReceiveAsync(arraySegment, cancellationToken).ConfigureAwait(false);
+                WebSocketReceiveResult r = await ReceiveAsync(arraySegment, cancellationToken)
+                    .ConfigureAwait(false);
                 return new ValueWebSocketReceiveResult(r.Count, r.MessageType, r.EndOfMessage);
             }
 
             byte[] array = ArrayPool<byte>.Shared.Rent(buffer.Length);
             try
             {
-                WebSocketReceiveResult r = await ReceiveAsync(new ArraySegment<byte>(array, 0, buffer.Length), cancellationToken).ConfigureAwait(false);
+                WebSocketReceiveResult r = await ReceiveAsync(
+                        new ArraySegment<byte>(array, 0, buffer.Length),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 new Span<byte>(array, 0, r.Count).CopyTo(buffer.Span);
                 return new ValueWebSocketReceiveResult(r.Count, r.MessageType, r.EndOfMessage);
             }
@@ -53,27 +69,51 @@ namespace System.Net.WebSockets
             }
         }
 
-        public virtual ValueTask SendAsync(ReadOnlyMemory<byte> buffer, WebSocketMessageType messageType, bool endOfMessage, CancellationToken cancellationToken) =>
-            MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> arraySegment) ?
-                new ValueTask(SendAsync(arraySegment, messageType, endOfMessage, cancellationToken)) :
-                SendWithArrayPoolAsync(buffer, messageType, endOfMessage, cancellationToken);
+        public virtual ValueTask SendAsync(
+            ReadOnlyMemory<byte> buffer,
+            WebSocketMessageType messageType,
+            bool endOfMessage,
+            CancellationToken cancellationToken
+        ) =>
+            MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> arraySegment)
+                ? new ValueTask(
+                    SendAsync(arraySegment, messageType, endOfMessage, cancellationToken)
+                )
+                : SendWithArrayPoolAsync(buffer, messageType, endOfMessage, cancellationToken);
 
-        public virtual ValueTask SendAsync(ReadOnlyMemory<byte> buffer, WebSocketMessageType messageType, WebSocketMessageFlags messageFlags, CancellationToken cancellationToken = default)
+        public virtual ValueTask SendAsync(
+            ReadOnlyMemory<byte> buffer,
+            WebSocketMessageType messageType,
+            WebSocketMessageFlags messageFlags,
+            CancellationToken cancellationToken = default
+        )
         {
-            return SendAsync(buffer, messageType, messageFlags.HasFlag(WebSocketMessageFlags.EndOfMessage), cancellationToken);
+            return SendAsync(
+                buffer,
+                messageType,
+                messageFlags.HasFlag(WebSocketMessageFlags.EndOfMessage),
+                cancellationToken
+            );
         }
 
         private async ValueTask SendWithArrayPoolAsync(
             ReadOnlyMemory<byte> buffer,
             WebSocketMessageType messageType,
             bool endOfMessage,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             byte[] array = ArrayPool<byte>.Shared.Rent(buffer.Length);
             try
             {
                 buffer.Span.CopyTo(array);
-                await SendAsync(new ArraySegment<byte>(array, 0, buffer.Length), messageType, endOfMessage, cancellationToken).ConfigureAwait(false);
+                await SendAsync(
+                        new ArraySegment<byte>(array, 0, buffer.Length),
+                        messageType,
+                        endOfMessage,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
             finally
             {
@@ -87,7 +127,10 @@ namespace System.Net.WebSockets
             get { return TimeSpan.FromSeconds(30); }
         }
 
-        protected static void ThrowOnInvalidState(WebSocketState state, params WebSocketState[] validStates)
+        protected static void ThrowOnInvalidState(
+            WebSocketState state,
+            params WebSocketState[] validStates
+        )
         {
             string validStatesText = string.Empty;
 
@@ -104,13 +147,19 @@ namespace System.Net.WebSockets
                 validStatesText = string.Join(", ", validStates);
             }
 
-            throw new WebSocketException(WebSocketError.InvalidState, SR.Format(SR.net_WebSockets_InvalidState, state, validStatesText));
+            throw new WebSocketException(
+                WebSocketError.InvalidState,
+                SR.Format(SR.net_WebSockets_InvalidState, state, validStatesText)
+            );
         }
 
         protected static bool IsStateTerminal(WebSocketState state) =>
             state == WebSocketState.Closed || state == WebSocketState.Aborted;
 
-        public static ArraySegment<byte> CreateClientBuffer(int receiveBufferSize, int sendBufferSize)
+        public static ArraySegment<byte> CreateClientBuffer(
+            int receiveBufferSize,
+            int sendBufferSize
+        )
         {
             ArgumentOutOfRangeException.ThrowIfNegativeOrZero(receiveBufferSize);
             ArgumentOutOfRangeException.ThrowIfNegativeOrZero(sendBufferSize);
@@ -129,13 +178,21 @@ namespace System.Net.WebSockets
         /// <param name="subProtocol">The agreed upon sub-protocol that was used when creating the connection.</param>
         /// <param name="keepAliveInterval">The keep-alive interval to use, or <see cref="Timeout.InfiniteTimeSpan"/> to disable keep-alives.</param>
         /// <returns>The created <see cref="WebSocket"/>.</returns>
-        public static WebSocket CreateFromStream(Stream stream, bool isServer, string? subProtocol, TimeSpan keepAliveInterval)
+        public static WebSocket CreateFromStream(
+            Stream stream,
+            bool isServer,
+            string? subProtocol,
+            TimeSpan keepAliveInterval
+        )
         {
             ArgumentNullException.ThrowIfNull(stream);
 
             if (!stream.CanRead || !stream.CanWrite)
             {
-                throw new ArgumentException(!stream.CanRead ? SR.NotReadableStream : SR.NotWriteableStream, nameof(stream));
+                throw new ArgumentException(
+                    !stream.CanRead ? SR.NotReadableStream : SR.NotWriteableStream,
+                    nameof(stream)
+                );
             }
 
             if (subProtocol != null)
@@ -145,9 +202,11 @@ namespace System.Net.WebSockets
 
             if (keepAliveInterval != Timeout.InfiniteTimeSpan && keepAliveInterval < TimeSpan.Zero)
             {
-                throw new ArgumentOutOfRangeException(nameof(keepAliveInterval), keepAliveInterval,
-                    SR.Format(SR.net_WebSockets_ArgumentOutOfRange_TooSmall,
-                    0));
+                throw new ArgumentOutOfRangeException(
+                    nameof(keepAliveInterval),
+                    keepAliveInterval,
+                    SR.Format(SR.net_WebSockets_ArgumentOutOfRange_TooSmall, 0)
+                );
             }
 
             return new ManagedWebSocket(stream, isServer, subProtocol, keepAliveInterval);
@@ -162,17 +221,24 @@ namespace System.Net.WebSockets
             ArgumentNullException.ThrowIfNull(options);
 
             if (!stream.CanRead || !stream.CanWrite)
-                throw new ArgumentException(!stream.CanRead ? SR.NotReadableStream : SR.NotWriteableStream, nameof(stream));
+                throw new ArgumentException(
+                    !stream.CanRead ? SR.NotReadableStream : SR.NotWriteableStream,
+                    nameof(stream)
+                );
 
             return new ManagedWebSocket(stream, options);
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.")]
+        [Obsolete(
+            "This API supports the .NET Framework infrastructure and is not intended to be used directly from your code."
+        )]
         public static bool IsApplicationTargeting45() => true;
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.")]
+        [Obsolete(
+            "This API supports the .NET Framework infrastructure and is not intended to be used directly from your code."
+        )]
         public static void RegisterPrefixes()
         {
             // The current WebRequest implementation in the libraries does not support upgrading
@@ -181,15 +247,24 @@ namespace System.Net.WebSockets
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static WebSocket CreateClientWebSocket(Stream innerStream,
-            string? subProtocol, int receiveBufferSize, int sendBufferSize,
-            TimeSpan keepAliveInterval, bool useZeroMaskingKey, ArraySegment<byte> internalBuffer)
+        public static WebSocket CreateClientWebSocket(
+            Stream innerStream,
+            string? subProtocol,
+            int receiveBufferSize,
+            int sendBufferSize,
+            TimeSpan keepAliveInterval,
+            bool useZeroMaskingKey,
+            ArraySegment<byte> internalBuffer
+        )
         {
             ArgumentNullException.ThrowIfNull(innerStream);
 
             if (!innerStream.CanRead || !innerStream.CanWrite)
             {
-                throw new ArgumentException(!innerStream.CanRead ? SR.NotReadableStream : SR.NotWriteableStream, nameof(innerStream));
+                throw new ArgumentException(
+                    !innerStream.CanRead ? SR.NotReadableStream : SR.NotWriteableStream,
+                    nameof(innerStream)
+                );
             }
 
             if (subProtocol != null)
@@ -199,9 +274,11 @@ namespace System.Net.WebSockets
 
             if (keepAliveInterval != Timeout.InfiniteTimeSpan && keepAliveInterval < TimeSpan.Zero)
             {
-                throw new ArgumentOutOfRangeException(nameof(keepAliveInterval), keepAliveInterval,
-                    SR.Format(SR.net_WebSockets_ArgumentOutOfRange_TooSmall,
-                    0));
+                throw new ArgumentOutOfRangeException(
+                    nameof(keepAliveInterval),
+                    keepAliveInterval,
+                    SR.Format(SR.net_WebSockets_ArgumentOutOfRange_TooSmall, 0)
+                );
             }
 
             ArgumentOutOfRangeException.ThrowIfNegativeOrZero(receiveBufferSize);

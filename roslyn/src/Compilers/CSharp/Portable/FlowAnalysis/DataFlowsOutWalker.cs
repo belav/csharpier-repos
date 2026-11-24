@@ -4,12 +4,12 @@
 
 #nullable disable
 
-using Microsoft.CodeAnalysis.CSharp.Symbols;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
+using Microsoft.CodeAnalysis.CSharp.Symbols;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
@@ -24,22 +24,54 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private readonly ImmutableArray<ISymbol> _dataFlowsIn;
 
-        private DataFlowsOutWalker(CSharpCompilation compilation, Symbol member, BoundNode node, BoundNode firstInRegion, BoundNode lastInRegion, HashSet<Symbol> unassignedVariables, ImmutableArray<ISymbol> dataFlowsIn)
-            : base(compilation, member, node, firstInRegion, lastInRegion, unassignedVariables, trackUnassignments: true)
+        private DataFlowsOutWalker(
+            CSharpCompilation compilation,
+            Symbol member,
+            BoundNode node,
+            BoundNode firstInRegion,
+            BoundNode lastInRegion,
+            HashSet<Symbol> unassignedVariables,
+            ImmutableArray<ISymbol> dataFlowsIn
+        )
+            : base(
+                compilation,
+                member,
+                node,
+                firstInRegion,
+                lastInRegion,
+                unassignedVariables,
+                trackUnassignments: true
+            )
         {
             _dataFlowsIn = dataFlowsIn;
         }
 
-        internal static HashSet<Symbol> Analyze(CSharpCompilation compilation, Symbol member, BoundNode node, BoundNode firstInRegion, BoundNode lastInRegion, HashSet<Symbol> unassignedVariables, ImmutableArray<ISymbol> dataFlowsIn)
+        internal static HashSet<Symbol> Analyze(
+            CSharpCompilation compilation,
+            Symbol member,
+            BoundNode node,
+            BoundNode firstInRegion,
+            BoundNode lastInRegion,
+            HashSet<Symbol> unassignedVariables,
+            ImmutableArray<ISymbol> dataFlowsIn
+        )
         {
-            var walker = new DataFlowsOutWalker(compilation, member, node, firstInRegion, lastInRegion, unassignedVariables, dataFlowsIn);
+            var walker = new DataFlowsOutWalker(
+                compilation,
+                member,
+                node,
+                firstInRegion,
+                lastInRegion,
+                unassignedVariables,
+                dataFlowsIn
+            );
             try
             {
                 bool badRegion = false;
                 var result = walker.Analyze(ref badRegion);
 #if DEBUG
                 // Assert that DataFlowsOut only contains variables that were assigned to inside the region
-                // https://github.com/dotnet/roslyn/issues/41600 blocks some tests with local functions. 
+                // https://github.com/dotnet/roslyn/issues/41600 blocks some tests with local functions.
                 // Enable the following assert once the issue is fixed.
                 //Debug.Assert(badRegion || !result.Any((variable) => !walker._assignedInside.Contains(variable)));
 #endif
@@ -120,77 +152,79 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case BoundKind.ListPattern:
                     case BoundKind.RecursivePattern:
                     case BoundKind.DeclarationPattern:
-                        {
-                            return ((BoundObjectPattern)node).Variable as LocalSymbol;
-                        }
+                    {
+                        return ((BoundObjectPattern)node).Variable as LocalSymbol;
+                    }
 
                     case BoundKind.FieldAccess:
+                    {
+                        var fieldAccess = (BoundFieldAccess)node;
+                        if (MayRequireTracking(fieldAccess.ReceiverOpt, fieldAccess.FieldSymbol))
                         {
-                            var fieldAccess = (BoundFieldAccess)node;
-                            if (MayRequireTracking(fieldAccess.ReceiverOpt, fieldAccess.FieldSymbol))
-                            {
-                                node = fieldAccess.ReceiverOpt;
-                                continue;
-                            }
-
-                            return null;
+                            node = fieldAccess.ReceiverOpt;
+                            continue;
                         }
+
+                        return null;
+                    }
 
                     case BoundKind.LocalDeclaration:
-                        {
-                            return ((BoundLocalDeclaration)node).LocalSymbol;
-                        }
+                    {
+                        return ((BoundLocalDeclaration)node).LocalSymbol;
+                    }
 
                     case BoundKind.ThisReference:
-                        {
-                            return MethodThisParameter;
-                        }
+                    {
+                        return MethodThisParameter;
+                    }
 
                     case BoundKind.Local:
-                        {
-                            return ((BoundLocal)node).LocalSymbol;
-                        }
+                    {
+                        return ((BoundLocal)node).LocalSymbol;
+                    }
 
                     case BoundKind.Parameter:
-                        {
-                            return ((BoundParameter)node).ParameterSymbol;
-                        }
+                    {
+                        return ((BoundParameter)node).ParameterSymbol;
+                    }
 
                     case BoundKind.CatchBlock:
-                        {
-                            var local = ((BoundCatchBlock)node).Locals.FirstOrDefault();
-                            return local?.DeclarationKind == LocalDeclarationKind.CatchVariable ? local : null;
-                        }
+                    {
+                        var local = ((BoundCatchBlock)node).Locals.FirstOrDefault();
+                        return local?.DeclarationKind == LocalDeclarationKind.CatchVariable
+                            ? local
+                            : null;
+                    }
 
                     case BoundKind.RangeVariable:
-                        {
-                            return ((BoundRangeVariable)node).RangeVariableSymbol;
-                        }
+                    {
+                        return ((BoundRangeVariable)node).RangeVariableSymbol;
+                    }
 
                     case BoundKind.EventAccess:
+                    {
+                        var eventAccess = (BoundEventAccess)node;
+                        FieldSymbol associatedField = eventAccess.EventSymbol.AssociatedField;
+                        if ((object)associatedField != null)
                         {
-                            var eventAccess = (BoundEventAccess)node;
-                            FieldSymbol associatedField = eventAccess.EventSymbol.AssociatedField;
-                            if ((object)associatedField != null)
+                            if (MayRequireTracking(eventAccess.ReceiverOpt, associatedField))
                             {
-                                if (MayRequireTracking(eventAccess.ReceiverOpt, associatedField))
-                                {
-                                    node = eventAccess.ReceiverOpt;
-                                    continue;
-                                }
+                                node = eventAccess.ReceiverOpt;
+                                continue;
                             }
-                            return null;
                         }
+                        return null;
+                    }
 
                     case BoundKind.LocalFunctionStatement:
-                        {
-                            return ((BoundLocalFunctionStatement)node).Symbol;
-                        }
+                    {
+                        return ((BoundLocalFunctionStatement)node).Symbol;
+                    }
 
                     default:
-                        {
-                            return null;
-                        }
+                    {
+                        return null;
+                    }
                 }
             }
 
@@ -198,7 +232,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 #endif
 
-        protected override void AssignImpl(BoundNode node, BoundExpression value, bool isRef, bool written, bool read)
+        protected override void AssignImpl(
+            BoundNode node,
+            BoundExpression value,
+            bool isRef,
+            bool written,
+            bool read
+        )
         {
             if (IsInside)
             {
@@ -229,18 +269,27 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private bool FlowsOut(ParameterSymbol param)
         {
-            return (object)param != null &&
-                   ((param.RefKind != RefKind.None && !param.IsImplicitlyDeclared && !RegionContains(param.GetFirstLocation().SourceSpan)) ||
-                    param.ContainingSymbol is SynthesizedPrimaryConstructor); // Primary constructor parameter can be used in other initializers and methods 
+            return (object)param != null
+                && (
+                    (
+                        param.RefKind != RefKind.None
+                        && !param.IsImplicitlyDeclared
+                        && !RegionContains(param.GetFirstLocation().SourceSpan)
+                    )
+                    || param.ContainingSymbol is SynthesizedPrimaryConstructor
+                ); // Primary constructor parameter can be used in other initializers and methods
         }
 
         private ParameterSymbol Param(BoundNode node)
         {
             switch (node.Kind)
             {
-                case BoundKind.Parameter: return ((BoundParameter)node).ParameterSymbol;
-                case BoundKind.ThisReference: return this.MethodThisParameter;
-                default: return null;
+                case BoundKind.Parameter:
+                    return ((BoundParameter)node).ParameterSymbol;
+                case BoundKind.ThisReference:
+                    return this.MethodThisParameter;
+                default:
+                    return null;
             }
         }
 
@@ -249,21 +298,35 @@ namespace Microsoft.CodeAnalysis.CSharp
             return base.VisitQueryClause(node);
         }
 
-        protected override void ReportUnassigned(Symbol symbol, SyntaxNode node, int slot, bool skipIfUseBeforeDeclaration)
+        protected override void ReportUnassigned(
+            Symbol symbol,
+            SyntaxNode node,
+            int slot,
+            bool skipIfUseBeforeDeclaration
+        )
         {
             if (!IsInside)
             {
                 // If the field access is reported as unassigned it should mean the original local
                 // or parameter flows out, so we should get the symbol associated with the expression
-                _dataFlowsOut.Add(symbol.Kind == SymbolKind.Field ? GetNonMemberSymbol(slot) : symbol);
+                _dataFlowsOut.Add(
+                    symbol.Kind == SymbolKind.Field ? GetNonMemberSymbol(slot) : symbol
+                );
             }
 
             base.ReportUnassigned(symbol, node, slot, skipIfUseBeforeDeclaration);
         }
 
-        protected override void ReportUnassignedOutParameter(ParameterSymbol parameter, SyntaxNode node, Location location)
+        protected override void ReportUnassignedOutParameter(
+            ParameterSymbol parameter,
+            SyntaxNode node,
+            Location location
+        )
         {
-            if (!_dataFlowsOut.Contains(parameter) && (node == null || node is ReturnStatementSyntax))
+            if (
+                !_dataFlowsOut.Contains(parameter)
+                && (node == null || node is ReturnStatementSyntax)
+            )
             {
                 _dataFlowsOut.Add(parameter);
             }

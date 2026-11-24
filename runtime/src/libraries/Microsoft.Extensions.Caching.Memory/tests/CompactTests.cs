@@ -13,10 +13,7 @@ namespace Microsoft.Extensions.Caching.Memory
     {
         private MemoryCache CreateCache(ISystemClock clock = null)
         {
-            return new MemoryCache(new MemoryCacheOptions()
-            {
-                Clock = clock,
-            });
+            return new MemoryCache(new MemoryCacheOptions() { Clock = clock });
         }
 
         [Fact]
@@ -41,8 +38,16 @@ namespace Microsoft.Extensions.Caching.Memory
         public void Compact100PercentClearsAllButNeverRemoveItems()
         {
             var cache = CreateCache();
-            cache.Set("key1", "Value1", new MemoryCacheEntryOptions().SetPriority(CacheItemPriority.NeverRemove));
-            cache.Set("key2", "Value2", new MemoryCacheEntryOptions().SetPriority(CacheItemPriority.NeverRemove));
+            cache.Set(
+                "key1",
+                "Value1",
+                new MemoryCacheEntryOptions().SetPriority(CacheItemPriority.NeverRemove)
+            );
+            cache.Set(
+                "key2",
+                "Value2",
+                new MemoryCacheEntryOptions().SetPriority(CacheItemPriority.NeverRemove)
+            );
             cache.Set("key3", "value3");
             cache.Set("key4", "value4");
             Assert.Equal(4, cache.Count);
@@ -56,8 +61,16 @@ namespace Microsoft.Extensions.Caching.Memory
         public void CompactPrioritizesLowPriorityItems()
         {
             var cache = CreateCache();
-            cache.Set("key1", "Value1", new MemoryCacheEntryOptions().SetPriority(CacheItemPriority.Low));
-            cache.Set("key2", "Value2", new MemoryCacheEntryOptions().SetPriority(CacheItemPriority.Low));
+            cache.Set(
+                "key1",
+                "Value1",
+                new MemoryCacheEntryOptions().SetPriority(CacheItemPriority.Low)
+            );
+            cache.Set(
+                "key2",
+                "Value2",
+                new MemoryCacheEntryOptions().SetPriority(CacheItemPriority.Low)
+            );
             cache.Set("key3", "value3");
             cache.Set("key4", "value4");
             Assert.Equal(4, cache.Count);

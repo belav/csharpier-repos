@@ -1,10 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="BitmapSuffixInSameAssemblyAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Drawing {
+namespace System.Drawing
+{
     using System;
 
     /// <summary>
@@ -12,6 +13,5 @@ namespace System.Drawing {
     /// i.e. System.dll -> System<.VisualStudio.11.0>.dll
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly)]
-    internal class BitmapSuffixInSatelliteAssemblyAttribute : Attribute {
-    }
+    internal class BitmapSuffixInSatelliteAssemblyAttribute : Attribute { }
 }

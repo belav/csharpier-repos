@@ -15,15 +15,15 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveDocCommentNode)]
-    public class RemoveDocCommentNodeCodeFixProviderTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class RemoveDocCommentNodeCodeFixProviderTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public RemoveDocCommentNodeCodeFixProviderTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpRemoveDocCommentNodeCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpRemoveDocCommentNodeCodeFixProvider());
 
         private async Task TestAsync(string initial, string expected)
         {
@@ -34,8 +34,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveDocCommentNode)]
         public async Task RemovesDuplicateParamTag()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <summary>
@@ -47,8 +46,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <summary>
@@ -64,8 +62,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveDocCommentNode)]
         public async Task RemovesDuplicateParamTag_OnlyParamTags()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <param name="value"></param>
@@ -74,8 +71,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <param name="value"></param>
@@ -88,8 +84,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveDocCommentNode)]
         public async Task RemovesDuplicateParamTag_TagBelowOffendingParamTag()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <param name="value"></param>
@@ -99,8 +94,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <param name="value"></param>
@@ -114,8 +108,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveDocCommentNode)]
         public async Task RemovesDuplicateParamTag_BothParamTagsOnSameLine_DocCommentTagBetweenThem()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <summary>
@@ -126,8 +119,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <summary>
@@ -143,8 +135,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveDocCommentNode)]
         public async Task RemovesDuplicateParamTag_BothParamTagsOnSameLine_WhitespaceBetweenThem()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <summary>
@@ -155,8 +146,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <summary>
@@ -172,8 +162,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveDocCommentNode)]
         public async Task RemovesDuplicateParamTag_BothParamTagsOnSameLine_NothingBetweenThem1()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <summary>
@@ -184,8 +173,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <summary>
@@ -202,8 +190,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [WorkItem("https://github.com/dotnet/roslyn/issues/13436")]
         public async Task RemovesTag_BothParamTagsOnSameLine_NothingBetweenThem2()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <summary>
@@ -214,8 +201,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <summary>
@@ -232,8 +218,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [WorkItem("https://github.com/dotnet/roslyn/issues/13436")]
         public async Task RemovesTag_TrailingTextAfterTag()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <summary>
@@ -244,8 +229,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <summary>
@@ -261,8 +245,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveDocCommentNode)]
         public async Task RemovesDuplicateParamTag_RawTextBeforeAndAfterNode()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <summary>
@@ -274,8 +257,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <summary>
@@ -292,8 +274,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveDocCommentNode)]
         public async Task RemovesDuplicateTypeparamTag()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <summary>
@@ -305,8 +286,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <summary>
@@ -322,8 +302,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveDocCommentNode)]
         public async Task RemovesParamTagWithNoMatchingParameter()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <summary>
@@ -334,8 +313,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <summary>
@@ -350,8 +328,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveDocCommentNode)]
         public async Task RemovesParamTag_NestedInSummaryTag()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <summary>
@@ -362,8 +339,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <summary>
@@ -378,8 +354,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveDocCommentNode)]
         public async Task RemovesParamTag_NestedInSummaryTag_WithChildren()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <summary>
@@ -392,8 +367,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <summary>

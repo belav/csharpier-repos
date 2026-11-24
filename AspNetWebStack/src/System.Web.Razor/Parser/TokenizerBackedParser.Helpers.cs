@@ -17,12 +17,17 @@ using System.Web.Razor.Utils;
 
 namespace System.Web.Razor.Parser
 {
-    public abstract partial class TokenizerBackedParser<TTokenizer, TSymbol, TSymbolType> : ParserBase
+    public abstract partial class TokenizerBackedParser<TTokenizer, TSymbol, TSymbolType>
+        : ParserBase
         where TTokenizer : Tokenizer<TSymbol, TSymbolType>
         where TSymbol : SymbolBase<TSymbolType>
     {
         // Helpers
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "This only occurs in Release builds, where this method is empty by design")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This only occurs in Release builds, where this method is empty by design"
+        )]
         [Conditional("DEBUG")]
         internal void Assert(TSymbolType expectedType)
         {
@@ -72,16 +77,23 @@ namespace System.Web.Razor.Parser
             AcceptAndMoveNext();
             if (EndOfFile && !mode.HasFlag(BalancingModes.NoErrorOnFailure))
             {
-                Context.OnError(start,
-                                RazorResources.ParseError_Expected_CloseBracket_Before_EOF,
-                                Language.GetSample(left),
-                                Language.GetSample(right));
+                Context.OnError(
+                    start,
+                    RazorResources.ParseError_Expected_CloseBracket_Before_EOF,
+                    Language.GetSample(left),
+                    Language.GetSample(right)
+                );
             }
 
             return Balance(mode, left, right, start);
         }
 
-        protected internal bool Balance(BalancingModes mode, TSymbolType left, TSymbolType right, SourceLocation start)
+        protected internal bool Balance(
+            BalancingModes mode,
+            TSymbolType left,
+            TSymbolType right,
+            SourceLocation start
+        )
         {
             int startPosition = CurrentLocation.AbsoluteIndex;
             int nesting = 1;
@@ -90,9 +102,12 @@ namespace System.Web.Razor.Parser
                 IList<TSymbol> syms = new List<TSymbol>();
                 do
                 {
-                    if (IsAtEmbeddedTransition(
-                        mode.HasFlag(BalancingModes.AllowCommentsAndTemplates),
-                        mode.HasFlag(BalancingModes.AllowEmbeddedTransitions)))
+                    if (
+                        IsAtEmbeddedTransition(
+                            mode.HasFlag(BalancingModes.AllowCommentsAndTemplates),
+                            mode.HasFlag(BalancingModes.AllowEmbeddedTransitions)
+                        )
+                    )
                     {
                         Accept(syms);
                         syms.Clear();
@@ -113,17 +128,18 @@ namespace System.Web.Razor.Parser
                     {
                         syms.Add(CurrentSymbol);
                     }
-                }
-                while (nesting > 0 && NextToken());
+                } while (nesting > 0 && NextToken());
 
                 if (nesting > 0)
                 {
                     if (!mode.HasFlag(BalancingModes.NoErrorOnFailure))
                     {
-                        Context.OnError(start,
-                                        RazorResources.ParseError_Expected_CloseBracket_Before_EOF,
-                                        Language.GetSample(left),
-                                        Language.GetSample(right));
+                        Context.OnError(
+                            start,
+                            RazorResources.ParseError_Expected_CloseBracket_Before_EOF,
+                            Language.GetSample(left),
+                            Language.GetSample(right)
+                        );
                     }
                     if (mode.HasFlag(BalancingModes.BacktrackOnFailure))
                     {
@@ -185,7 +201,11 @@ namespace System.Web.Razor.Parser
         {
             if (Language.IsWhiteSpace(CurrentSymbol))
             {
-                Tuple<TSymbol, TSymbol> pair = Language.SplitSymbol(CurrentSymbol, 1, Language.GetKnownSymbolType(KnownSymbolType.WhiteSpace));
+                Tuple<TSymbol, TSymbol> pair = Language.SplitSymbol(
+                    CurrentSymbol,
+                    1,
+                    Language.GetKnownSymbolType(KnownSymbolType.WhiteSpace)
+                );
                 Accept(pair.Item1);
                 Span.EditHandler.AcceptedCharacters = AcceptedCharacters.None;
                 NextToken();
@@ -274,10 +294,18 @@ namespace System.Web.Razor.Parser
 
         protected IDisposable PushSpanConfig(Action<SpanBuilder> newConfig)
         {
-            return PushSpanConfig(newConfig == null ? (Action<SpanBuilder, Action<SpanBuilder>>)null : (span, _) => newConfig(span));
+            return PushSpanConfig(
+                newConfig == null
+                    ? (Action<SpanBuilder, Action<SpanBuilder>>)null
+                    : (span, _) => newConfig(span)
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "The Action<T> parameters are preferred over custom delegates")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "The Action<T> parameters are preferred over custom delegates"
+        )]
         protected IDisposable PushSpanConfig(Action<SpanBuilder, Action<SpanBuilder>> newConfig)
         {
             Action<SpanBuilder> old = SpanConfig;
@@ -291,7 +319,11 @@ namespace System.Web.Razor.Parser
             Initialize(Span);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "The Action<T> parameters are preferred over custom delegates")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "The Action<T> parameters are preferred over custom delegates"
+        )]
         protected void ConfigureSpan(Action<SpanBuilder, Action<SpanBuilder>> config)
         {
             Action<SpanBuilder> prev = SpanConfig;
@@ -311,7 +343,12 @@ namespace System.Web.Razor.Parser
             Expected(Language.GetKnownSymbolType(type));
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "types", Justification = "It is used in debug builds")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "types",
+            Justification = "It is used in debug builds"
+        )]
         protected internal void Expected(params TSymbolType[] types)
         {
             Debug.Assert(!EndOfFile && CurrentSymbol != null && types.Contains(CurrentSymbol.Type));
@@ -333,7 +370,11 @@ namespace System.Web.Razor.Parser
             return false;
         }
 
-        protected internal bool Required(TSymbolType expected, bool errorIfNotFound, string errorBase)
+        protected internal bool Required(
+            TSymbolType expected,
+            bool errorIfNotFound,
+            string errorBase
+        )
         {
             bool found = At(expected);
             if (!found && errorIfNotFound)
@@ -353,13 +394,14 @@ namespace System.Web.Razor.Parser
                 }
                 else
                 {
-                    error = String.Format(CultureInfo.CurrentCulture, RazorResources.ErrorComponent_Character, CurrentSymbol.Content);
+                    error = String.Format(
+                        CultureInfo.CurrentCulture,
+                        RazorResources.ErrorComponent_Character,
+                        CurrentSymbol.Content
+                    );
                 }
 
-                Context.OnError(
-                    CurrentLocation,
-                    errorBase,
-                    error);
+                Context.OnError(CurrentLocation, errorBase, error);
             }
             return found;
         }
@@ -386,7 +428,9 @@ namespace System.Web.Razor.Parser
 
         protected internal void AcceptWhile(TSymbolType type1, TSymbolType type2, TSymbolType type3)
         {
-            AcceptWhile(sym => Equals(type1, sym.Type) || Equals(type2, sym.Type) || Equals(type3, sym.Type));
+            AcceptWhile(sym =>
+                Equals(type1, sym.Type) || Equals(type2, sym.Type) || Equals(type3, sym.Type)
+            );
         }
 
         protected internal void AcceptWhile(params TSymbolType[] types)
@@ -407,7 +451,9 @@ namespace System.Web.Razor.Parser
 
         protected internal void AcceptUntil(TSymbolType type1, TSymbolType type2, TSymbolType type3)
         {
-            AcceptWhile(sym => !Equals(type1, sym.Type) && !Equals(type2, sym.Type) && !Equals(type3, sym.Type));
+            AcceptWhile(sym =>
+                !Equals(type1, sym.Type) && !Equals(type2, sym.Type) && !Equals(type3, sym.Type)
+            );
         }
 
         protected internal void AcceptUntil(params TSymbolType[] types)
@@ -454,9 +500,11 @@ namespace System.Web.Razor.Parser
 
         protected bool AtIdentifier(bool allowKeywords)
         {
-            return CurrentSymbol != null &&
-                   (Language.IsIdentifier(CurrentSymbol) ||
-                    (allowKeywords && Language.IsKeyword(CurrentSymbol)));
+            return CurrentSymbol != null
+                && (
+                    Language.IsIdentifier(CurrentSymbol)
+                    || (allowKeywords && Language.IsKeyword(CurrentSymbol))
+                );
         }
 
         // Don't open this to sub classes because it's lazy but it looks eager.
@@ -484,7 +532,9 @@ namespace System.Web.Razor.Parser
 
         protected virtual void OutputSpanBeforeRazorComment()
         {
-            throw new InvalidOperationException(RazorResources.Language_Does_Not_Support_RazorComment);
+            throw new InvalidOperationException(
+                RazorResources.Language_Does_Not_Support_RazorComment
+            );
         }
 
         private void CommentSpanConfig(SpanBuilder span)
@@ -495,11 +545,15 @@ namespace System.Web.Razor.Parser
 
         protected void RazorComment()
         {
-            if (!Language.KnowsSymbolType(KnownSymbolType.CommentStart) ||
-                !Language.KnowsSymbolType(KnownSymbolType.CommentStar) ||
-                !Language.KnowsSymbolType(KnownSymbolType.CommentBody))
+            if (
+                !Language.KnowsSymbolType(KnownSymbolType.CommentStart)
+                || !Language.KnowsSymbolType(KnownSymbolType.CommentStar)
+                || !Language.KnowsSymbolType(KnownSymbolType.CommentBody)
+            )
             {
-                throw new InvalidOperationException(RazorResources.Language_Does_Not_Support_RazorComment);
+                throw new InvalidOperationException(
+                    RazorResources.Language_Does_Not_Support_RazorComment
+                );
             }
             OutputSpanBeforeRazorComment();
             using (PushSpanConfig(CommentSpanConfig))
@@ -523,7 +577,10 @@ namespace System.Web.Razor.Parser
                     if (!Optional(KnownSymbolType.CommentStar))
                     {
                         errorReported = true;
-                        Context.OnError(start, RazorResources.ParseError_RazorComment_Not_Terminated);
+                        Context.OnError(
+                            start,
+                            RazorResources.ParseError_RazorComment_Not_Terminated
+                        );
                     }
                     else
                     {
@@ -535,7 +592,10 @@ namespace System.Web.Razor.Parser
                         if (!errorReported)
                         {
                             errorReported = true;
-                            Context.OnError(start, RazorResources.ParseError_RazorComment_Not_Terminated);
+                            Context.OnError(
+                                start,
+                                RazorResources.ParseError_RazorComment_Not_Terminated
+                            );
                         }
                     }
                     else

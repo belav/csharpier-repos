@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         [Fact]
         public void DkmEvaluationFlagsConflict()
         {
-            var values = Enum.GetValues(typeof(DkmEvaluationFlags)).Cast<DkmEvaluationFlags>().ToArray();
+            var values = Enum.GetValues(typeof(DkmEvaluationFlags))
+                .Cast<DkmEvaluationFlags>()
+                .ToArray();
             Assert.False(values.Contains(ResultProvider.NoResults));
             Assert.False(values.Contains(ResultProvider.NotRoot));
         }

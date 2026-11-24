@@ -34,8 +34,7 @@ public class PropertyInfoExtensionsTest
         internal static int And { private get; set; }
         internal static int Chocolate { get; }
 
-        protected internal static int With
-            => 0;
+        protected internal static int With => 0;
 
         public static int No
         {
@@ -48,8 +47,7 @@ public class PropertyInfoExtensionsTest
         internal int May { private get; set; }
         protected internal int Contain { get; }
 
-        public int TreeNuts
-            => 0;
+        public int TreeNuts => 0;
 
         public int Just
         {

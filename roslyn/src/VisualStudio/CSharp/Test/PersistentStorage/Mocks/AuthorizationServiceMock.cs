@@ -23,12 +23,17 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices.Mocks
 
         internal bool Allow { get; set; } = true;
 
-        public ValueTask<bool> CheckAuthorizationAsync(ProtectedOperation operation, CancellationToken cancellationToken = default)
+        public ValueTask<bool> CheckAuthorizationAsync(
+            ProtectedOperation operation,
+            CancellationToken cancellationToken = default
+        )
         {
             return new ValueTask<bool>(this.Allow);
         }
 
-        public ValueTask<IReadOnlyDictionary<string, string>> GetCredentialsAsync(CancellationToken cancellationToken = default)
+        public ValueTask<IReadOnlyDictionary<string, string>> GetCredentialsAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             throw new NotImplementedException();
         }

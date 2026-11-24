@@ -19,13 +19,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         private bool _checkedInfMustFail; // there is a type variable used in no parameter.
 
         private MethodSymbol _convNext; // For linked list of conversion operators.
-        private PropertySymbol _prop;     // For property accessors, this is the PropertySymbol.
-        private EventSymbol _evt;     // For event accessors, this is the EventSymbol.
+        private PropertySymbol _prop; // For property accessors, this is the PropertySymbol.
+        private EventSymbol _evt; // For event accessors, this is the EventSymbol.
 
-        public bool isVirtual;              // Virtual member?
+        public bool isVirtual; // Virtual member?
         public MemberInfo AssociatedMemberInfo;
 
-        public TypeArray typeVars;          // All the type variables for a generic method, as declarations.
+        public TypeArray typeVars; // All the type variables for a generic method, as declarations.
 
         // If there is a type variable in the method which is used in no parameter,
         // then inference must fail. Since this is expensive to check, we cache
@@ -70,23 +70,23 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         public bool IsNullableConstructor()
         {
-            return getClass().isPredefAgg(PredefinedType.PT_G_OPTIONAL) &&
-                Params.Count == 1 &&
-                Params[0] is TypeParameterType &&
-                IsConstructor();
+            return getClass().isPredefAgg(PredefinedType.PT_G_OPTIONAL)
+                && Params.Count == 1
+                && Params[0] is TypeParameterType
+                && IsConstructor();
         }
 
-        public bool isPropertyAccessor()  // true if this method is a property set or get method
+        public bool isPropertyAccessor() // true if this method is a property set or get method
         {
             return _methKind == MethodKindEnum.PropAccessor;
         }
 
-        public bool isEventAccessor()     // true if this method is an event add/remove method
+        public bool isEventAccessor() // true if this method is an event add/remove method
         {
             return _methKind == MethodKindEnum.EventAccessor;
         }
 
-        public bool isImplicit()          // is user defined implicit conversion operator
+        public bool isImplicit() // is user defined implicit conversion operator
         {
             return _methKind == MethodKindEnum.ImplicitConv;
         }
@@ -136,7 +136,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         [Conditional("DEBUG")]
         private void AssertIsConversionOperator()
         {
-            Debug.Assert(MethKind == MethodKindEnum.ExplicitConv || MethKind == MethodKindEnum.ImplicitConv);
+            Debug.Assert(
+                MethKind == MethodKindEnum.ExplicitConv || MethKind == MethodKindEnum.ImplicitConv
+            );
         }
 
         public new bool isUserCallable()

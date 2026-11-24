@@ -12,7 +12,9 @@ namespace System.Xml.XmlReaderTests
         {
             var reader = Utils.CreateFragmentReader("<a>2000-02-29T23:59:59+13:60</a>");
             reader.PositionOnElement("a");
-            Assert.Throws<XmlException>(() => reader.ReadElementContentAs(typeof(TimeZoneInfo), null));
+            Assert.Throws<XmlException>(() =>
+                reader.ReadElementContentAs(typeof(TimeZoneInfo), null)
+            );
         }
     }
 }

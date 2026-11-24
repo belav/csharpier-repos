@@ -14,13 +14,13 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SimplifyMethod
 {
-    public class FormatNewFileTests(ITestOutputHelper? testOutputHelper) : AbstractLanguageServerProtocolTests(testOutputHelper)
+    public class FormatNewFileTests(ITestOutputHelper? testOutputHelper)
+        : AbstractLanguageServerProtocolTests(testOutputHelper)
     {
         [Theory, CombinatorialData]
         public async Task TestFormatNewFileAsync(bool mutatingLspWorkspace)
         {
-            var markup =
-                """
+            var markup = """
                 // This is a file header
 
                 using System;
@@ -48,7 +48,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SimplifyMethod
 
             var expected = """
                 // This is a file header
-                
+
                 namespace test
                 {
                     public partial class MyComponent
@@ -57,7 +57,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SimplifyMethod
                 }
                 """;
 
-            await using var testLspServer = await CreateTestLspServerAsync(markup, mutatingLspWorkspace);
+            await using var testLspServer = await CreateTestLspServerAsync(
+                markup,
+                mutatingLspWorkspace
+            );
 
             var newFilePath = "C:\\MyComponent.razor.cs";
 
@@ -65,7 +68,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SimplifyMethod
             AssertEx.EqualOrDiff(expected, result);
         }
 
-        private static async Task<string?> RunHandlerAsync(TestLspServer testLspServer, string newFilePath, string input)
+        private static async Task<string?> RunHandlerAsync(
+            TestLspServer testLspServer,
+            string newFilePath,
+            string input
+        )
         {
             var project = testLspServer.GetCurrentSolution().Projects.First();
             Contract.ThrowIfNull(project.FilePath);
@@ -74,16 +81,20 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SimplifyMethod
             {
                 Project = new TextDocumentIdentifier
                 {
-                    Uri = ProtocolConversions.CreateAbsoluteUri(project.FilePath)
+                    Uri = ProtocolConversions.CreateAbsoluteUri(project.FilePath),
                 },
                 Document = new TextDocumentIdentifier
                 {
-                    Uri = ProtocolConversions.CreateAbsoluteUri(newFilePath)
+                    Uri = ProtocolConversions.CreateAbsoluteUri(newFilePath),
                 },
-                Contents = input
+                Contents = input,
             };
 
-            return await testLspServer.ExecuteRequestAsync<FormatNewFileParams, string?>(FormatNewFileHandler.FormatNewFileMethodName, parameters, CancellationToken.None);
+            return await testLspServer.ExecuteRequestAsync<FormatNewFileParams, string?>(
+                FormatNewFileHandler.FormatNewFileMethodName,
+                parameters,
+                CancellationToken.None
+            );
         }
     }
 }

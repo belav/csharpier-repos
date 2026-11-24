@@ -1,11 +1,11 @@
 /* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Apache License, Version 2.0, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Apache License, Version 2.0, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Apache License, Version 2.0.
  *
  * You must not remove this notice, or any other, from this software.
@@ -20,15 +20,16 @@ using System.Diagnostics;
 using System.Dynamic.Utils;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-
 #if SILVERLIGHT
 using System.Core;
 #endif
 
 #if CLR2
-namespace Microsoft.Scripting.Ast {
+namespace Microsoft.Scripting.Ast
+{
 #else
-namespace System.Linq.Expressions {
+namespace System.Linq.Expressions
+{
 #endif
     /// <summary>
     /// Represents a call to either static or an instance method.
@@ -36,15 +37,17 @@ namespace System.Linq.Expressions {
 #if !SILVERLIGHT
     [DebuggerTypeProxy(typeof(Expression.MethodCallExpressionProxy))]
 #endif
-    public class MethodCallExpression : Expression, IArgumentProvider {
+    public class MethodCallExpression : Expression, IArgumentProvider
+    {
         private readonly MethodInfo _method;
 
-        internal MethodCallExpression(MethodInfo method) {
-
+        internal MethodCallExpression(MethodInfo method)
+        {
             _method = method;
         }
 
-        internal virtual Expression GetInstance() {
+        internal virtual Expression GetInstance()
+        {
             return null;
         }
 
@@ -52,7 +55,8 @@ namespace System.Linq.Expressions {
         /// Returns the node type of this <see cref="Expression" />. (Inherited from <see cref="Expression" />.)
         /// </summary>
         /// <returns>The <see cref="ExpressionType"/> that represents this expression.</returns>
-        public sealed override ExpressionType NodeType {
+        public sealed override ExpressionType NodeType
+        {
             get { return ExpressionType.Call; }
         }
 
@@ -60,29 +64,33 @@ namespace System.Linq.Expressions {
         /// Gets the static type of the expression that this <see cref="Expression" /> represents. (Inherited from <see cref="Expression"/>.)
         /// </summary>
         /// <returns>The <see cref="Type"/> that represents the static type of the expression.</returns>
-        public sealed override Type Type {
+        public sealed override Type Type
+        {
             get { return _method.ReturnType; }
         }
 
         /// <summary>
         /// Gets the <see cref="MethodInfo" /> for the method to be called.
         /// </summary>
-        public MethodInfo Method {
+        public MethodInfo Method
+        {
             get { return _method; }
         }
 
         /// <summary>
-        /// Gets the <see cref="Expression" /> that represents the instance 
+        /// Gets the <see cref="Expression" /> that represents the instance
         /// for instance method calls or null for static method cals.
         /// </summary>
-        public Expression Object {
+        public Expression Object
+        {
             get { return GetInstance(); }
         }
 
         /// <summary>
         /// Gets a collection of expressions that represent arguments to the method call.
         /// </summary>
-        public ReadOnlyCollection<Expression> Arguments {
+        public ReadOnlyCollection<Expression> Arguments
+        {
             get { return GetOrMakeArguments(); }
         }
 
@@ -94,21 +102,25 @@ namespace System.Linq.Expressions {
         /// <param name="object">The <see cref="Object" /> property of the result.</param>
         /// <param name="arguments">The <see cref="Arguments" /> property of the result.</param>
         /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-        public MethodCallExpression Update(Expression @object, IEnumerable<Expression> arguments) {
-            if (@object == Object && arguments == Arguments) {
+        public MethodCallExpression Update(Expression @object, IEnumerable<Expression> arguments)
+        {
+            if (@object == Object && arguments == Arguments)
+            {
                 return this;
             }
             return Expression.Call(@object, Method, arguments);
         }
 
-        internal virtual ReadOnlyCollection<Expression> GetOrMakeArguments() {
+        internal virtual ReadOnlyCollection<Expression> GetOrMakeArguments()
+        {
             throw ContractUtils.Unreachable;
         }
 
         /// <summary>
         /// Dispatches to the specific visit method for this node type.
         /// </summary>
-        protected internal override Expression Accept(ExpressionVisitor visitor) {
+        protected internal override Expression Accept(ExpressionVisitor visitor)
+        {
             return visitor.VisitMethodCall(this);
         }
 
@@ -116,21 +128,24 @@ namespace System.Linq.Expressions {
         /// Returns a new MethodCallExpression replacing the existing instance/args with the
         /// newly provided instance and args.    Arguments can be null to use the existing
         /// arguments.
-        /// 
+        ///
         /// This helper is provided to allow re-writing of nodes to not depend on the specific optimized
-        /// subclass of MethodCallExpression which is being used. 
+        /// subclass of MethodCallExpression which is being used.
         /// </summary>
-        internal virtual MethodCallExpression Rewrite(Expression instance, IList<Expression> args) {
+        internal virtual MethodCallExpression Rewrite(Expression instance, IList<Expression> args)
+        {
             throw ContractUtils.Unreachable;
         }
 
         #region IArgumentProvider Members
 
-        Expression IArgumentProvider.GetArgument(int index) {
+        Expression IArgumentProvider.GetArgument(int index)
+        {
             throw ContractUtils.Unreachable;
         }
 
-        int IArgumentProvider.ArgumentCount {
+        int IArgumentProvider.ArgumentCount
+        {
             get { throw ContractUtils.Unreachable; }
         }
 
@@ -139,29 +154,33 @@ namespace System.Linq.Expressions {
 
     #region Specialized Subclasses
 
-    internal class MethodCallExpressionN : MethodCallExpression, IArgumentProvider {
+    internal class MethodCallExpressionN : MethodCallExpression, IArgumentProvider
+    {
         private IList<Expression> _arguments;
 
         public MethodCallExpressionN(MethodInfo method, IList<Expression> args)
-            : base(method) {
+            : base(method)
+        {
             _arguments = args;
         }
 
-        Expression IArgumentProvider.GetArgument(int index) {
+        Expression IArgumentProvider.GetArgument(int index)
+        {
             return _arguments[index];
         }
 
-        int IArgumentProvider.ArgumentCount {
-            get {
-                return _arguments.Count;
-            }
+        int IArgumentProvider.ArgumentCount
+        {
+            get { return _arguments.Count; }
         }
 
-        internal override ReadOnlyCollection<Expression> GetOrMakeArguments() {
+        internal override ReadOnlyCollection<Expression> GetOrMakeArguments()
+        {
             return ReturnReadOnly(ref _arguments);
         }
 
-        internal override MethodCallExpression Rewrite(Expression instance, IList<Expression> args) {
+        internal override MethodCallExpression Rewrite(Expression instance, IList<Expression> args)
+        {
             Debug.Assert(instance == null);
             Debug.Assert(args == null || args.Count == _arguments.Count);
 
@@ -169,35 +188,44 @@ namespace System.Linq.Expressions {
         }
     }
 
-    internal class InstanceMethodCallExpressionN : MethodCallExpression, IArgumentProvider {
+    internal class InstanceMethodCallExpressionN : MethodCallExpression, IArgumentProvider
+    {
         private IList<Expression> _arguments;
         private readonly Expression _instance;
 
-        public InstanceMethodCallExpressionN(MethodInfo method, Expression instance, IList<Expression> args)
-            : base(method) {
+        public InstanceMethodCallExpressionN(
+            MethodInfo method,
+            Expression instance,
+            IList<Expression> args
+        )
+            : base(method)
+        {
             _instance = instance;
             _arguments = args;
         }
 
-        Expression IArgumentProvider.GetArgument(int index) {
+        Expression IArgumentProvider.GetArgument(int index)
+        {
             return _arguments[index];
         }
 
-        int IArgumentProvider.ArgumentCount {
-            get {
-                return _arguments.Count;
-            }
+        int IArgumentProvider.ArgumentCount
+        {
+            get { return _arguments.Count; }
         }
 
-        internal override Expression GetInstance() {
+        internal override Expression GetInstance()
+        {
             return _instance;
         }
 
-        internal override ReadOnlyCollection<Expression> GetOrMakeArguments() {
+        internal override ReadOnlyCollection<Expression> GetOrMakeArguments()
+        {
             return ReturnReadOnly(ref _arguments);
         }
 
-        internal override MethodCallExpression Rewrite(Expression instance, IList<Expression> args) {
+        internal override MethodCallExpression Rewrite(Expression instance, IList<Expression> args)
+        {
             Debug.Assert(instance != null);
             Debug.Assert(args == null || args.Count == _arguments.Count);
 
@@ -205,36 +233,44 @@ namespace System.Linq.Expressions {
         }
     }
 
-    internal class MethodCallExpression1 : MethodCallExpression, IArgumentProvider {
-        private object _arg0;       // storage for the 1st argument or a readonly collection.  See IArgumentProvider
+    internal class MethodCallExpression1 : MethodCallExpression, IArgumentProvider
+    {
+        private object _arg0; // storage for the 1st argument or a readonly collection.  See IArgumentProvider
 
         public MethodCallExpression1(MethodInfo method, Expression arg0)
-            : base(method) {
+            : base(method)
+        {
             _arg0 = arg0;
         }
 
-        Expression IArgumentProvider.GetArgument(int index) {
-            switch (index) {
-                case 0: return ReturnObject<Expression>(_arg0);
-                default: throw new InvalidOperationException();
+        Expression IArgumentProvider.GetArgument(int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    return ReturnObject<Expression>(_arg0);
+                default:
+                    throw new InvalidOperationException();
             }
         }
 
-        int IArgumentProvider.ArgumentCount {
-            get {
-                return 1;
-            }
+        int IArgumentProvider.ArgumentCount
+        {
+            get { return 1; }
         }
 
-        internal override ReadOnlyCollection<Expression> GetOrMakeArguments() {
+        internal override ReadOnlyCollection<Expression> GetOrMakeArguments()
+        {
             return ReturnReadOnly(this, ref _arg0);
         }
 
-        internal override MethodCallExpression Rewrite(Expression instance, IList<Expression> args) {
+        internal override MethodCallExpression Rewrite(Expression instance, IList<Expression> args)
+        {
             Debug.Assert(instance == null);
             Debug.Assert(args == null || args.Count == 1);
 
-            if (args != null) {
+            if (args != null)
+            {
                 return Expression.Call(Method, args[0]);
             }
 
@@ -242,135 +278,191 @@ namespace System.Linq.Expressions {
         }
     }
 
-    internal class MethodCallExpression2 : MethodCallExpression, IArgumentProvider {
-        private object _arg0;               // storage for the 1st argument or a readonly collection.  See IArgumentProvider
-        private readonly Expression _arg1;  // storage for the 2nd arg
+    internal class MethodCallExpression2 : MethodCallExpression, IArgumentProvider
+    {
+        private object _arg0; // storage for the 1st argument or a readonly collection.  See IArgumentProvider
+        private readonly Expression _arg1; // storage for the 2nd arg
 
         public MethodCallExpression2(MethodInfo method, Expression arg0, Expression arg1)
-            : base(method) {
+            : base(method)
+        {
             _arg0 = arg0;
             _arg1 = arg1;
         }
 
-        Expression IArgumentProvider.GetArgument(int index) {
-            switch (index) {
-                case 0: return ReturnObject<Expression>(_arg0);
-                case 1: return _arg1;
-                default: throw new InvalidOperationException();
+        Expression IArgumentProvider.GetArgument(int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    return ReturnObject<Expression>(_arg0);
+                case 1:
+                    return _arg1;
+                default:
+                    throw new InvalidOperationException();
             }
         }
 
-        int IArgumentProvider.ArgumentCount {
-            get {
-                return 2;
-            }
+        int IArgumentProvider.ArgumentCount
+        {
+            get { return 2; }
         }
 
-        internal override ReadOnlyCollection<Expression> GetOrMakeArguments() {
+        internal override ReadOnlyCollection<Expression> GetOrMakeArguments()
+        {
             return ReturnReadOnly(this, ref _arg0);
         }
 
-        internal override MethodCallExpression Rewrite(Expression instance, IList<Expression> args) {
+        internal override MethodCallExpression Rewrite(Expression instance, IList<Expression> args)
+        {
             Debug.Assert(instance == null);
             Debug.Assert(args == null || args.Count == 2);
 
-            if (args != null) {
+            if (args != null)
+            {
                 return Expression.Call(Method, args[0], args[1]);
             }
             return Expression.Call(Method, ReturnObject<Expression>(_arg0), _arg1);
         }
     }
 
-    internal class MethodCallExpression3 : MethodCallExpression, IArgumentProvider {
-        private object _arg0;           // storage for the 1st argument or a readonly collection.  See IArgumentProvider
-        private readonly Expression _arg1, _arg2; // storage for the 2nd - 3rd args.
+    internal class MethodCallExpression3 : MethodCallExpression, IArgumentProvider
+    {
+        private object _arg0; // storage for the 1st argument or a readonly collection.  See IArgumentProvider
+        private readonly Expression _arg1,
+            _arg2; // storage for the 2nd - 3rd args.
 
-        public MethodCallExpression3(MethodInfo method, Expression arg0, Expression arg1, Expression arg2)
-            : base(method) {
+        public MethodCallExpression3(
+            MethodInfo method,
+            Expression arg0,
+            Expression arg1,
+            Expression arg2
+        )
+            : base(method)
+        {
             _arg0 = arg0;
             _arg1 = arg1;
             _arg2 = arg2;
         }
 
-        Expression IArgumentProvider.GetArgument(int index) {
-            switch (index) {
-                case 0: return ReturnObject<Expression>(_arg0);
-                case 1: return _arg1;
-                case 2: return _arg2;
-                default: throw new InvalidOperationException();
+        Expression IArgumentProvider.GetArgument(int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    return ReturnObject<Expression>(_arg0);
+                case 1:
+                    return _arg1;
+                case 2:
+                    return _arg2;
+                default:
+                    throw new InvalidOperationException();
             }
         }
 
-        int IArgumentProvider.ArgumentCount {
-            get {
-                return 3;
-            }
+        int IArgumentProvider.ArgumentCount
+        {
+            get { return 3; }
         }
 
-        internal override ReadOnlyCollection<Expression> GetOrMakeArguments() {
+        internal override ReadOnlyCollection<Expression> GetOrMakeArguments()
+        {
             return ReturnReadOnly(this, ref _arg0);
         }
 
-        internal override MethodCallExpression Rewrite(Expression instance, IList<Expression> args) {
+        internal override MethodCallExpression Rewrite(Expression instance, IList<Expression> args)
+        {
             Debug.Assert(instance == null);
             Debug.Assert(args == null || args.Count == 3);
 
-            if (args != null) {
+            if (args != null)
+            {
                 return Expression.Call(Method, args[0], args[1], args[2]);
             }
             return Expression.Call(Method, ReturnObject<Expression>(_arg0), _arg1, _arg2);
         }
     }
 
-    internal class MethodCallExpression4 : MethodCallExpression, IArgumentProvider {
-        private object _arg0;               // storage for the 1st argument or a readonly collection.  See IArgumentProvider
-        private readonly Expression _arg1, _arg2, _arg3;  // storage for the 2nd - 4th args.
+    internal class MethodCallExpression4 : MethodCallExpression, IArgumentProvider
+    {
+        private object _arg0; // storage for the 1st argument or a readonly collection.  See IArgumentProvider
+        private readonly Expression _arg1,
+            _arg2,
+            _arg3; // storage for the 2nd - 4th args.
 
-        public MethodCallExpression4(MethodInfo method, Expression arg0, Expression arg1, Expression arg2, Expression arg3)
-            : base(method) {
+        public MethodCallExpression4(
+            MethodInfo method,
+            Expression arg0,
+            Expression arg1,
+            Expression arg2,
+            Expression arg3
+        )
+            : base(method)
+        {
             _arg0 = arg0;
             _arg1 = arg1;
             _arg2 = arg2;
             _arg3 = arg3;
         }
 
-        Expression IArgumentProvider.GetArgument(int index) {
-            switch (index) {
-                case 0: return ReturnObject<Expression>(_arg0);
-                case 1: return _arg1;
-                case 2: return _arg2;
-                case 3: return _arg3;
-                default: throw new InvalidOperationException();
+        Expression IArgumentProvider.GetArgument(int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    return ReturnObject<Expression>(_arg0);
+                case 1:
+                    return _arg1;
+                case 2:
+                    return _arg2;
+                case 3:
+                    return _arg3;
+                default:
+                    throw new InvalidOperationException();
             }
         }
 
-        int IArgumentProvider.ArgumentCount {
-            get {
-                return 4;
-            }
+        int IArgumentProvider.ArgumentCount
+        {
+            get { return 4; }
         }
 
-        internal override ReadOnlyCollection<Expression> GetOrMakeArguments() {
+        internal override ReadOnlyCollection<Expression> GetOrMakeArguments()
+        {
             return ReturnReadOnly(this, ref _arg0);
         }
 
-        internal override MethodCallExpression Rewrite(Expression instance, IList<Expression> args) {
+        internal override MethodCallExpression Rewrite(Expression instance, IList<Expression> args)
+        {
             Debug.Assert(instance == null);
             Debug.Assert(args == null || args.Count == 4);
 
-            if (args != null) {
+            if (args != null)
+            {
                 return Expression.Call(Method, args[0], args[1], args[2], args[3]);
             }
             return Expression.Call(Method, ReturnObject<Expression>(_arg0), _arg1, _arg2, _arg3);
         }
     }
 
-    internal class MethodCallExpression5 : MethodCallExpression, IArgumentProvider {
-        private object _arg0;           // storage for the 1st argument or a readonly collection.  See IArgumentProvider
-        private readonly Expression _arg1, _arg2, _arg3, _arg4;   // storage for the 2nd - 5th args.
+    internal class MethodCallExpression5 : MethodCallExpression, IArgumentProvider
+    {
+        private object _arg0; // storage for the 1st argument or a readonly collection.  See IArgumentProvider
+        private readonly Expression _arg1,
+            _arg2,
+            _arg3,
+            _arg4; // storage for the 2nd - 5th args.
 
-        public MethodCallExpression5(MethodInfo method, Expression arg0, Expression arg1, Expression arg2, Expression arg3, Expression arg4)
-            : base(method) {
+        public MethodCallExpression5(
+            MethodInfo method,
+            Expression arg0,
+            Expression arg1,
+            Expression arg2,
+            Expression arg3,
+            Expression arg4
+        )
+            : base(method)
+        {
             _arg0 = arg0;
             _arg1 = arg1;
             _arg2 = arg2;
@@ -378,46 +470,70 @@ namespace System.Linq.Expressions {
             _arg4 = arg4;
         }
 
-        Expression IArgumentProvider.GetArgument(int index) {
-            switch (index) {
-                case 0: return ReturnObject<Expression>(_arg0);
-                case 1: return _arg1;
-                case 2: return _arg2;
-                case 3: return _arg3;
-                case 4: return _arg4;
-                default: throw new InvalidOperationException();
+        Expression IArgumentProvider.GetArgument(int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    return ReturnObject<Expression>(_arg0);
+                case 1:
+                    return _arg1;
+                case 2:
+                    return _arg2;
+                case 3:
+                    return _arg3;
+                case 4:
+                    return _arg4;
+                default:
+                    throw new InvalidOperationException();
             }
         }
 
-        int IArgumentProvider.ArgumentCount {
-            get {
-                return 5;
-            }
+        int IArgumentProvider.ArgumentCount
+        {
+            get { return 5; }
         }
 
-        internal override ReadOnlyCollection<Expression> GetOrMakeArguments() {
+        internal override ReadOnlyCollection<Expression> GetOrMakeArguments()
+        {
             return ReturnReadOnly(this, ref _arg0);
         }
 
-        internal override MethodCallExpression Rewrite(Expression instance, IList<Expression> args) {
+        internal override MethodCallExpression Rewrite(Expression instance, IList<Expression> args)
+        {
             Debug.Assert(instance == null);
             Debug.Assert(args == null || args.Count == 5);
 
-            if (args != null) {
+            if (args != null)
+            {
                 return Expression.Call(Method, args[0], args[1], args[2], args[3], args[4]);
             }
 
-            return Expression.Call(Method, ReturnObject<Expression>(_arg0), _arg1, _arg2, _arg3, _arg4);
+            return Expression.Call(
+                Method,
+                ReturnObject<Expression>(_arg0),
+                _arg1,
+                _arg2,
+                _arg3,
+                _arg4
+            );
         }
     }
 
-    internal class InstanceMethodCallExpression2 : MethodCallExpression, IArgumentProvider {
+    internal class InstanceMethodCallExpression2 : MethodCallExpression, IArgumentProvider
+    {
         private readonly Expression _instance;
-        private object _arg0;                // storage for the 1st argument or a readonly collection.  See IArgumentProvider
-        private readonly Expression _arg1;   // storage for the 2nd argument
+        private object _arg0; // storage for the 1st argument or a readonly collection.  See IArgumentProvider
+        private readonly Expression _arg1; // storage for the 2nd argument
 
-        public InstanceMethodCallExpression2(MethodInfo method, Expression instance, Expression arg0, Expression arg1)
-            : base(method) {
+        public InstanceMethodCallExpression2(
+            MethodInfo method,
+            Expression instance,
+            Expression arg0,
+            Expression arg1
+        )
+            : base(method)
+        {
             Debug.Assert(instance != null);
 
             _instance = instance;
@@ -425,46 +541,63 @@ namespace System.Linq.Expressions {
             _arg1 = arg1;
         }
 
-        Expression IArgumentProvider.GetArgument(int index) {
-            switch (index) {
-                case 0: return ReturnObject<Expression>(_arg0);
-                case 1: return _arg1;
-                default: throw new InvalidOperationException();
+        Expression IArgumentProvider.GetArgument(int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    return ReturnObject<Expression>(_arg0);
+                case 1:
+                    return _arg1;
+                default:
+                    throw new InvalidOperationException();
             }
         }
 
-        int IArgumentProvider.ArgumentCount {
-            get {
-                return 2;
-            }
+        int IArgumentProvider.ArgumentCount
+        {
+            get { return 2; }
         }
 
-        internal override Expression GetInstance() {
+        internal override Expression GetInstance()
+        {
             return _instance;
         }
 
-        internal override ReadOnlyCollection<Expression> GetOrMakeArguments() {
+        internal override ReadOnlyCollection<Expression> GetOrMakeArguments()
+        {
             return ReturnReadOnly(this, ref _arg0);
         }
 
-        internal override MethodCallExpression Rewrite(Expression instance, IList<Expression> args) {
+        internal override MethodCallExpression Rewrite(Expression instance, IList<Expression> args)
+        {
             Debug.Assert(instance != null);
             Debug.Assert(args == null || args.Count == 2);
 
-            if (args != null) {
+            if (args != null)
+            {
                 return Expression.Call(instance, Method, args[0], args[1]);
             }
             return Expression.Call(instance, Method, ReturnObject<Expression>(_arg0), _arg1);
         }
     }
 
-    internal class InstanceMethodCallExpression3 : MethodCallExpression, IArgumentProvider {
+    internal class InstanceMethodCallExpression3 : MethodCallExpression, IArgumentProvider
+    {
         private readonly Expression _instance;
-        private object _arg0;                       // storage for the 1st argument or a readonly collection.  See IArgumentProvider
-        private readonly Expression _arg1, _arg2;   // storage for the 2nd - 3rd argument
+        private object _arg0; // storage for the 1st argument or a readonly collection.  See IArgumentProvider
+        private readonly Expression _arg1,
+            _arg2; // storage for the 2nd - 3rd argument
 
-        public InstanceMethodCallExpression3(MethodInfo method, Expression instance, Expression arg0, Expression arg1, Expression arg2)
-            : base(method) {
+        public InstanceMethodCallExpression3(
+            MethodInfo method,
+            Expression instance,
+            Expression arg0,
+            Expression arg1,
+            Expression arg2
+        )
+            : base(method)
+        {
             Debug.Assert(instance != null);
 
             _instance = instance;
@@ -473,34 +606,43 @@ namespace System.Linq.Expressions {
             _arg2 = arg2;
         }
 
-        Expression IArgumentProvider.GetArgument(int index) {
-            switch (index) {
-                case 0: return ReturnObject<Expression>(_arg0);
-                case 1: return _arg1;
-                case 2: return _arg2;
-                default: throw new InvalidOperationException();
+        Expression IArgumentProvider.GetArgument(int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    return ReturnObject<Expression>(_arg0);
+                case 1:
+                    return _arg1;
+                case 2:
+                    return _arg2;
+                default:
+                    throw new InvalidOperationException();
             }
         }
 
-        int IArgumentProvider.ArgumentCount {
-            get {
-                return 3;
-            }
+        int IArgumentProvider.ArgumentCount
+        {
+            get { return 3; }
         }
 
-        internal override Expression GetInstance() {
+        internal override Expression GetInstance()
+        {
             return _instance;
         }
 
-        internal override ReadOnlyCollection<Expression> GetOrMakeArguments() {
+        internal override ReadOnlyCollection<Expression> GetOrMakeArguments()
+        {
             return ReturnReadOnly(this, ref _arg0);
         }
 
-        internal override MethodCallExpression Rewrite(Expression instance, IList<Expression> args) {
+        internal override MethodCallExpression Rewrite(Expression instance, IList<Expression> args)
+        {
             Debug.Assert(instance != null);
             Debug.Assert(args == null || args.Count == 3);
 
-            if (args != null) {
+            if (args != null)
+            {
                 return Expression.Call(instance, Method, args[0], args[1], args[2]);
             }
             return Expression.Call(instance, Method, ReturnObject<Expression>(_arg0), _arg1, _arg2);
@@ -509,8 +651,8 @@ namespace System.Linq.Expressions {
 
     #endregion
 
-    public partial class Expression {
-
+    public partial class Expression
+    {
         #region Call
 
         ///<summary>Creates a <see cref="T:System.Linq.Expressions.MethodCallExpression" /> that represents a call to a static method that takes one argument.</summary>
@@ -519,7 +661,8 @@ namespace System.Linq.Expressions {
         ///<param name="arg0">The <see cref="Expression" /> that represents the first argument.</param>
         ///<exception cref="T:System.ArgumentNullException">
         ///<paramref name="method" /> is null.</exception>
-        public static MethodCallExpression Call(MethodInfo method, Expression arg0) {
+        public static MethodCallExpression Call(MethodInfo method, Expression arg0)
+        {
             ContractUtils.RequiresNotNull(method, "method");
             ContractUtils.RequiresNotNull(arg0, "arg0");
 
@@ -539,7 +682,8 @@ namespace System.Linq.Expressions {
         ///<param name="arg1">The <see cref="Expression" /> that represents the second argument.</param>
         ///<exception cref="T:System.ArgumentNullException">
         ///<paramref name="method" /> is null.</exception>
-        public static MethodCallExpression Call(MethodInfo method, Expression arg0, Expression arg1) {
+        public static MethodCallExpression Call(MethodInfo method, Expression arg0, Expression arg1)
+        {
             ContractUtils.RequiresNotNull(method, "method");
             ContractUtils.RequiresNotNull(arg0, "arg0");
             ContractUtils.RequiresNotNull(arg1, "arg1");
@@ -562,7 +706,13 @@ namespace System.Linq.Expressions {
         ///<param name="arg2">The <see cref="Expression" /> that represents the third argument.</param>
         ///<exception cref="T:System.ArgumentNullException">
         ///<paramref name="method" /> is null.</exception>
-        public static MethodCallExpression Call(MethodInfo method, Expression arg0, Expression arg1, Expression arg2) {
+        public static MethodCallExpression Call(
+            MethodInfo method,
+            Expression arg0,
+            Expression arg1,
+            Expression arg2
+        )
+        {
             ContractUtils.RequiresNotNull(method, "method");
             ContractUtils.RequiresNotNull(arg0, "arg0");
             ContractUtils.RequiresNotNull(arg1, "arg1");
@@ -588,7 +738,14 @@ namespace System.Linq.Expressions {
         ///<param name="arg3">The <see cref="Expression" /> that represents the fourth argument.</param>
         ///<exception cref="T:System.ArgumentNullException">
         ///<paramref name="method" /> is null.</exception>
-        public static MethodCallExpression Call(MethodInfo method, Expression arg0, Expression arg1, Expression arg2, Expression arg3) {
+        public static MethodCallExpression Call(
+            MethodInfo method,
+            Expression arg0,
+            Expression arg1,
+            Expression arg2,
+            Expression arg3
+        )
+        {
             ContractUtils.RequiresNotNull(method, "method");
             ContractUtils.RequiresNotNull(arg0, "arg0");
             ContractUtils.RequiresNotNull(arg1, "arg1");
@@ -618,7 +775,15 @@ namespace System.Linq.Expressions {
         ///<exception cref="T:System.ArgumentNullException">
         ///<paramref name="method" /> is null.</exception>
         ///<returns>A <see cref="T:System.Linq.Expressions.MethodCallExpression" /> that has the <see cref="P:System.Linq.Expressions.Expression.NodeType" /> property equal to <see cref="F:System.Linq.Expressions.ExpressionType.Call" /> and the <see cref="P:System.Linq.Expressions.MethodCallExpression.Object" /> and <see cref="P:System.Linq.Expressions.MethodCallExpression.Method" /> properties set to the specified values.</returns>
-        public static MethodCallExpression Call(MethodInfo method, Expression arg0, Expression arg1, Expression arg2, Expression arg3, Expression arg4) {
+        public static MethodCallExpression Call(
+            MethodInfo method,
+            Expression arg0,
+            Expression arg1,
+            Expression arg2,
+            Expression arg3,
+            Expression arg4
+        )
+        {
             ContractUtils.RequiresNotNull(method, "method");
             ContractUtils.RequiresNotNull(arg0, "arg0");
             ContractUtils.RequiresNotNull(arg1, "arg1");
@@ -645,7 +810,8 @@ namespace System.Linq.Expressions {
         /// <param name="method">The <see cref="MethodInfo" /> that represents the target method.</param>
         /// <param name="arguments">The array of one or more of <see cref="Expression" /> that represents the call arguments.</param>
         ///<returns>A <see cref="T:System.Linq.Expressions.MethodCallExpression" /> that has the <see cref="P:System.Linq.Expressions.Expression.NodeType" /> property equal to <see cref="F:System.Linq.Expressions.ExpressionType.Call" /> and the <see cref="P:System.Linq.Expressions.MethodCallExpression.Object" /> and <see cref="P:System.Linq.Expressions.MethodCallExpression.Method" /> properties set to the specified values.</returns>
-        public static MethodCallExpression Call(MethodInfo method, params Expression[] arguments) {
+        public static MethodCallExpression Call(MethodInfo method, params Expression[] arguments)
+        {
             return Call(null, method, arguments);
         }
 
@@ -655,7 +821,11 @@ namespace System.Linq.Expressions {
         /// <param name="method">The <see cref="MethodInfo" /> that represents the target method.</param>
         /// <param name="arguments">A collection of <see cref="Expression" /> that represents the call arguments.</param>
         ///<returns>A <see cref="T:System.Linq.Expressions.MethodCallExpression" /> that has the <see cref="P:System.Linq.Expressions.Expression.NodeType" /> property equal to <see cref="F:System.Linq.Expressions.ExpressionType.Call" /> and the <see cref="P:System.Linq.Expressions.MethodCallExpression.Object" /> and <see cref="P:System.Linq.Expressions.MethodCallExpression.Method" /> properties set to the specified values.</returns>
-        public static MethodCallExpression Call(MethodInfo method, IEnumerable<Expression> arguments) {
+        public static MethodCallExpression Call(
+            MethodInfo method,
+            IEnumerable<Expression> arguments
+        )
+        {
             return Call(null, method, arguments);
         }
 
@@ -665,7 +835,8 @@ namespace System.Linq.Expressions {
         /// <param name="instance">An <see cref="Expression" /> that specifies the instance for an instance call. (pass null for a static (Shared in Visual Basic) method).</param>
         /// <param name="method">The <see cref="MethodInfo" /> that represents the target method.</param>
         ///<returns>A <see cref="T:System.Linq.Expressions.MethodCallExpression" /> that has the <see cref="P:System.Linq.Expressions.Expression.NodeType" /> property equal to <see cref="F:System.Linq.Expressions.ExpressionType.Call" /> and the <see cref="P:System.Linq.Expressions.MethodCallExpression.Object" /> and <see cref="P:System.Linq.Expressions.MethodCallExpression.Method" /> properties set to the specified values.</returns>
-        public static MethodCallExpression Call(Expression instance, MethodInfo method) {
+        public static MethodCallExpression Call(Expression instance, MethodInfo method)
+        {
             return Call(instance, method, EmptyReadOnlyCollection<Expression>.Instance);
         }
 
@@ -676,7 +847,12 @@ namespace System.Linq.Expressions {
         /// <param name="method">The <see cref="MethodInfo" /> that represents the target method.</param>
         /// <param name="arguments">An array of one or more of <see cref="Expression" /> that represents the call arguments.</param>
         ///<returns>A <see cref="T:System.Linq.Expressions.MethodCallExpression" /> that has the <see cref="P:System.Linq.Expressions.Expression.NodeType" /> property equal to <see cref="F:System.Linq.Expressions.ExpressionType.Call" /> and the <see cref="P:System.Linq.Expressions.MethodCallExpression.Object" /> and <see cref="P:System.Linq.Expressions.MethodCallExpression.Method" /> properties set to the specified values.</returns>
-        public static MethodCallExpression Call(Expression instance, MethodInfo method, params Expression[] arguments) {
+        public static MethodCallExpression Call(
+            Expression instance,
+            MethodInfo method,
+            params Expression[] arguments
+        )
+        {
             return Call(instance, method, (IEnumerable<Expression>)arguments);
         }
 
@@ -688,7 +864,13 @@ namespace System.Linq.Expressions {
         /// <param name="arg0">The <see cref="Expression" /> that represents the first argument.</param>
         /// <param name="arg1">The <see cref="Expression" /> that represents the second argument.</param>
         ///<returns>A <see cref="T:System.Linq.Expressions.MethodCallExpression" /> that has the <see cref="P:System.Linq.Expressions.Expression.NodeType" /> property equal to <see cref="F:System.Linq.Expressions.ExpressionType.Call" /> and the <see cref="P:System.Linq.Expressions.MethodCallExpression.Object" /> and <see cref="P:System.Linq.Expressions.MethodCallExpression.Method" /> properties set to the specified values.</returns>
-        public static MethodCallExpression Call(Expression instance, MethodInfo method, Expression arg0, Expression arg1) {
+        public static MethodCallExpression Call(
+            Expression instance,
+            MethodInfo method,
+            Expression arg0,
+            Expression arg1
+        )
+        {
             ContractUtils.RequiresNotNull(method, "method");
             ContractUtils.RequiresNotNull(arg0, "arg0");
             ContractUtils.RequiresNotNull(arg1, "arg1");
@@ -700,7 +882,8 @@ namespace System.Linq.Expressions {
             arg0 = ValidateOneArgument(method, ExpressionType.Call, arg0, pis[0]);
             arg1 = ValidateOneArgument(method, ExpressionType.Call, arg1, pis[1]);
 
-            if (instance != null) {
+            if (instance != null)
+            {
                 return new InstanceMethodCallExpression2(method, instance, arg0, arg1);
             }
 
@@ -716,7 +899,14 @@ namespace System.Linq.Expressions {
         /// <param name="arg1">The <see cref="Expression" /> that represents the second argument.</param>
         /// <param name="arg2">The <see cref="Expression" /> that represents the third argument.</param>
         ///<returns>A <see cref="T:System.Linq.Expressions.MethodCallExpression" /> that has the <see cref="P:System.Linq.Expressions.Expression.NodeType" /> property equal to <see cref="F:System.Linq.Expressions.ExpressionType.Call" /> and the <see cref="P:System.Linq.Expressions.MethodCallExpression.Object" /> and <see cref="P:System.Linq.Expressions.MethodCallExpression.Method" /> properties set to the specified values.</returns>
-        public static MethodCallExpression Call(Expression instance, MethodInfo method, Expression arg0, Expression arg1, Expression arg2) {
+        public static MethodCallExpression Call(
+            Expression instance,
+            MethodInfo method,
+            Expression arg0,
+            Expression arg1,
+            Expression arg2
+        )
+        {
             ContractUtils.RequiresNotNull(method, "method");
             ContractUtils.RequiresNotNull(arg0, "arg0");
             ContractUtils.RequiresNotNull(arg1, "arg1");
@@ -730,7 +920,8 @@ namespace System.Linq.Expressions {
             arg1 = ValidateOneArgument(method, ExpressionType.Call, arg1, pis[1]);
             arg2 = ValidateOneArgument(method, ExpressionType.Call, arg2, pis[2]);
 
-            if (instance != null) {
+            if (instance != null)
+            {
                 return new InstanceMethodCallExpression3(method, instance, arg0, arg1, arg2);
             }
             return new MethodCallExpression3(method, arg0, arg1, arg2);
@@ -748,15 +939,30 @@ namespace System.Linq.Expressions {
         ///<exception cref="T:System.ArgumentNullException">
         ///<paramref name="instance" /> or <paramref name="methodName" /> is null.</exception>
         ///<exception cref="T:System.InvalidOperationException">No method whose name is <paramref name="methodName" />, whose type parameters match <paramref name="typeArguments" />, and whose parameter types match <paramref name="arguments" /> is found in <paramref name="instance" />.Type or its base types.-or-More than one method whose name is <paramref name="methodName" />, whose type parameters match <paramref name="typeArguments" />, and whose parameter types match <paramref name="arguments" /> is found in <paramref name="instance" />.Type or its base types.</exception>
-        public static MethodCallExpression Call(Expression instance, string methodName, Type[] typeArguments, params Expression[] arguments) {
+        public static MethodCallExpression Call(
+            Expression instance,
+            string methodName,
+            Type[] typeArguments,
+            params Expression[] arguments
+        )
+        {
             ContractUtils.RequiresNotNull(instance, "instance");
             ContractUtils.RequiresNotNull(methodName, "methodName");
-            if (arguments == null) {
+            if (arguments == null)
+            {
                 arguments = new Expression[0];
             }
 
-            BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy;
-            return Expression.Call(instance, FindMethod(instance.Type, methodName, typeArguments, arguments, flags), arguments);
+            BindingFlags flags =
+                BindingFlags.Instance
+                | BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.FlattenHierarchy;
+            return Expression.Call(
+                instance,
+                FindMethod(instance.Type, methodName, typeArguments, arguments, flags),
+                arguments
+            );
         }
 
         ///<summary>Creates a <see cref="T:System.Linq.Expressions.MethodCallExpression" /> that represents a call to a static (Shared in Visual Basic) method by calling the appropriate factory method.</summary>
@@ -771,13 +977,28 @@ namespace System.Linq.Expressions {
         ///<exception cref="T:System.ArgumentNullException">
         ///<paramref name="type" /> or <paramref name="methodName" /> is null.</exception>
         ///<exception cref="T:System.InvalidOperationException">No method whose name is <paramref name="methodName" />, whose type parameters match <paramref name="typeArguments" />, and whose parameter types match <paramref name="arguments" /> is found in <paramref name="type" /> or its base types.-or-More than one method whose name is <paramref name="methodName" />, whose type parameters match <paramref name="typeArguments" />, and whose parameter types match <paramref name="arguments" /> is found in <paramref name="type" /> or its base types.</exception>
-        public static MethodCallExpression Call(Type type, string methodName, Type[] typeArguments, params Expression[] arguments) {
+        public static MethodCallExpression Call(
+            Type type,
+            string methodName,
+            Type[] typeArguments,
+            params Expression[] arguments
+        )
+        {
             ContractUtils.RequiresNotNull(type, "type");
             ContractUtils.RequiresNotNull(methodName, "methodName");
 
-            if (arguments == null) arguments = new Expression[] { };
-            BindingFlags flags = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy;
-            return Expression.Call(null, FindMethod(type, methodName, typeArguments, arguments, flags), arguments);
+            if (arguments == null)
+                arguments = new Expression[] { };
+            BindingFlags flags =
+                BindingFlags.Static
+                | BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.FlattenHierarchy;
+            return Expression.Call(
+                null,
+                FindMethod(type, methodName, typeArguments, arguments, flags),
+                arguments
+            );
         }
 
         ///<summary>Creates a <see cref="T:System.Linq.Expressions.MethodCallExpression" /> that represents a method call.</summary>
@@ -789,7 +1010,12 @@ namespace System.Linq.Expressions {
         ///<paramref name="method" /> is null.-or-<paramref name="instance" /> is null and <paramref name="method" /> represents an instance method.</exception>
         ///<exception cref="T:System.ArgumentException">
         ///<paramref name="instance" />.Type is not assignable to the declaring type of the method represented by <paramref name="method" />.-or-The number of elements in <paramref name="arguments" /> does not equal the number of parameters for the method represented by <paramref name="method" />.-or-One or more of the elements of <paramref name="arguments" /> is not assignable to the corresponding parameter for the method represented by <paramref name="method" />.</exception>
-        public static MethodCallExpression Call(Expression instance, MethodInfo method, IEnumerable<Expression> arguments) {
+        public static MethodCallExpression Call(
+            Expression instance,
+            MethodInfo method,
+            IEnumerable<Expression> arguments
+        )
+        {
             ContractUtils.RequiresNotNull(method, "method");
 
             ReadOnlyCollection<Expression> argList = arguments.ToReadOnly();
@@ -798,80 +1024,134 @@ namespace System.Linq.Expressions {
             ValidateStaticOrInstanceMethod(instance, method);
             ValidateArgumentTypes(method, ExpressionType.Call, ref argList);
 
-            if (instance == null) {
+            if (instance == null)
+            {
                 return new MethodCallExpressionN(method, argList);
-            } else {
+            }
+            else
+            {
                 return new InstanceMethodCallExpressionN(method, instance, argList);
             }
         }
 
-        private static ParameterInfo[] ValidateMethodAndGetParameters(Expression instance, MethodInfo method) {
+        private static ParameterInfo[] ValidateMethodAndGetParameters(
+            Expression instance,
+            MethodInfo method
+        )
+        {
             ValidateMethodInfo(method);
             ValidateStaticOrInstanceMethod(instance, method);
 
             return GetParametersForValidation(method, ExpressionType.Call);
         }
 
-        private static void ValidateStaticOrInstanceMethod(Expression instance, MethodInfo method) {
-            if (method.IsStatic) {
+        private static void ValidateStaticOrInstanceMethod(Expression instance, MethodInfo method)
+        {
+            if (method.IsStatic)
+            {
 #if SILVERLIGHT
-                if (SilverlightQuirks) return;
+                if (SilverlightQuirks)
+                    return;
 #endif
-                if (instance != null) throw new ArgumentException(Strings.OnlyStaticMethodsHaveNullInstance, "instance");
-            } else {
-                if (instance == null) throw new ArgumentException(Strings.OnlyStaticMethodsHaveNullInstance, "method");
+                if (instance != null)
+                    throw new ArgumentException(
+                        Strings.OnlyStaticMethodsHaveNullInstance,
+                        "instance"
+                    );
+            }
+            else
+            {
+                if (instance == null)
+                    throw new ArgumentException(
+                        Strings.OnlyStaticMethodsHaveNullInstance,
+                        "method"
+                    );
                 RequiresCanRead(instance, "instance");
                 ValidateCallInstanceType(instance.Type, method);
             }
         }
 
-        private static void ValidateCallInstanceType(Type instanceType, MethodInfo method) {
-            if (!TypeUtils.IsValidInstanceType(method, instanceType)) {
-                throw Error.InstanceAndMethodTypeMismatch(method, method.DeclaringType, instanceType);
+        private static void ValidateCallInstanceType(Type instanceType, MethodInfo method)
+        {
+            if (!TypeUtils.IsValidInstanceType(method, instanceType))
+            {
+                throw Error.InstanceAndMethodTypeMismatch(
+                    method,
+                    method.DeclaringType,
+                    instanceType
+                );
             }
         }
 
-        private static void ValidateArgumentTypes(MethodBase method, ExpressionType nodeKind, ref ReadOnlyCollection<Expression> arguments) {
-            Debug.Assert(nodeKind == ExpressionType.Invoke || nodeKind == ExpressionType.Call || nodeKind == ExpressionType.Dynamic || nodeKind == ExpressionType.New);
+        private static void ValidateArgumentTypes(
+            MethodBase method,
+            ExpressionType nodeKind,
+            ref ReadOnlyCollection<Expression> arguments
+        )
+        {
+            Debug.Assert(
+                nodeKind == ExpressionType.Invoke
+                    || nodeKind == ExpressionType.Call
+                    || nodeKind == ExpressionType.Dynamic
+                    || nodeKind == ExpressionType.New
+            );
 
             ParameterInfo[] pis = GetParametersForValidation(method, nodeKind);
 
             ValidateArgumentCount(method, nodeKind, arguments.Count, pis);
 
             Expression[] newArgs = null;
-            for (int i = 0, n = pis.Length; i < n; i++) {
+            for (int i = 0, n = pis.Length; i < n; i++)
+            {
                 Expression arg = arguments[i];
                 ParameterInfo pi = pis[i];
                 arg = ValidateOneArgument(method, nodeKind, arg, pi);
 
-                if (newArgs == null && arg != arguments[i]) {
+                if (newArgs == null && arg != arguments[i])
+                {
                     newArgs = new Expression[arguments.Count];
-                    for (int j = 0; j < i; j++) {
+                    for (int j = 0; j < i; j++)
+                    {
                         newArgs[j] = arguments[j];
                     }
                 }
-                if (newArgs != null) {
+                if (newArgs != null)
+                {
                     newArgs[i] = arg;
                 }
             }
-            if (newArgs != null) {
+            if (newArgs != null)
+            {
                 arguments = new TrueReadOnlyCollection<Expression>(newArgs);
             }
         }
 
-        private static ParameterInfo[] GetParametersForValidation(MethodBase method, ExpressionType nodeKind) {
+        private static ParameterInfo[] GetParametersForValidation(
+            MethodBase method,
+            ExpressionType nodeKind
+        )
+        {
             ParameterInfo[] pis = method.GetParametersCached();
 
-            if (nodeKind == ExpressionType.Dynamic) {
+            if (nodeKind == ExpressionType.Dynamic)
+            {
                 pis = pis.RemoveFirst(); // ignore CallSite argument
             }
             return pis;
         }
 
-        private static void ValidateArgumentCount(MethodBase method, ExpressionType nodeKind, int count, ParameterInfo[] pis) {
-            if (pis.Length != count) {
+        private static void ValidateArgumentCount(
+            MethodBase method,
+            ExpressionType nodeKind,
+            int count,
+            ParameterInfo[] pis
+        )
+        {
+            if (pis.Length != count)
+            {
                 // Throw the right error for the node we were given
-                switch (nodeKind) {
+                switch (nodeKind)
+                {
                     case ExpressionType.New:
                         throw Error.IncorrectNumberOfConstructorArguments();
                     case ExpressionType.Invoke:
@@ -885,24 +1165,41 @@ namespace System.Linq.Expressions {
             }
         }
 
-        private static Expression ValidateOneArgument(MethodBase method, ExpressionType nodeKind, Expression arg, ParameterInfo pi) {
+        private static Expression ValidateOneArgument(
+            MethodBase method,
+            ExpressionType nodeKind,
+            Expression arg,
+            ParameterInfo pi
+        )
+        {
             RequiresCanRead(arg, "arguments");
             Type pType = pi.ParameterType;
-            if (pType.IsByRef) {
+            if (pType.IsByRef)
+            {
                 pType = pType.GetElementType();
             }
             TypeUtils.ValidateType(pType);
-            if (!TypeUtils.AreReferenceAssignable(pType, arg.Type)) {
-                if (!TryQuote(pType, ref arg)) {
+            if (!TypeUtils.AreReferenceAssignable(pType, arg.Type))
+            {
+                if (!TryQuote(pType, ref arg))
+                {
                     // Throw the right error for the node we were given
-                    switch (nodeKind) {
+                    switch (nodeKind)
+                    {
                         case ExpressionType.New:
-                            throw Error.ExpressionTypeDoesNotMatchConstructorParameter(arg.Type, pType);
+                            throw Error.ExpressionTypeDoesNotMatchConstructorParameter(
+                                arg.Type,
+                                pType
+                            );
                         case ExpressionType.Invoke:
                             throw Error.ExpressionTypeDoesNotMatchParameter(arg.Type, pType);
                         case ExpressionType.Dynamic:
                         case ExpressionType.Call:
-                            throw Error.ExpressionTypeDoesNotMatchMethodParameter(arg.Type, pType, method);
+                            throw Error.ExpressionTypeDoesNotMatchMethodParameter(
+                                arg.Type,
+                                pType,
+                                method
+                            );
                         default:
                             throw ContractUtils.Unreachable;
                     }
@@ -912,24 +1209,41 @@ namespace System.Linq.Expressions {
         }
 
         // Attempts to auto-quote the expression tree. Returns true if it succeeded, false otherwise.
-        private static bool TryQuote(Type parameterType, ref Expression argument) {
+        private static bool TryQuote(Type parameterType, ref Expression argument)
+        {
             // We used to allow quoting of any expression, but the behavior of
             // quote (produce a new tree closed over parameter values), only
             // works consistently for lambdas
             Type quoteable = typeof(LambdaExpression);
 #if SILVERLIGHT
-            if (SilverlightQuirks) quoteable = typeof(Expression);
+            if (SilverlightQuirks)
+                quoteable = typeof(Expression);
 #endif
-            if (TypeUtils.IsSameOrSubclass(quoteable, parameterType) &&
-                parameterType.IsAssignableFrom(argument.GetType())) {
+            if (
+                TypeUtils.IsSameOrSubclass(quoteable, parameterType)
+                && parameterType.IsAssignableFrom(argument.GetType())
+            )
+            {
                 argument = Expression.Quote(argument);
                 return true;
             }
             return false;
         }
 
-        private static MethodInfo FindMethod(Type type, string methodName, Type[] typeArgs, Expression[] args, BindingFlags flags) {
-            MemberInfo[] members = type.FindMembers(MemberTypes.Method, flags, Type.FilterNameIgnoreCase, methodName);
+        private static MethodInfo FindMethod(
+            Type type,
+            string methodName,
+            Type[] typeArgs,
+            Expression[] args,
+            BindingFlags flags
+        )
+        {
+            MemberInfo[] members = type.FindMembers(
+                MemberTypes.Method,
+                flags,
+                Type.FilterNameIgnoreCase,
+                methodName
+            );
             if (members == null || members.Length == 0)
                 throw Error.MethodDoesNotExistOnType(methodName, type);
 
@@ -938,10 +1252,14 @@ namespace System.Linq.Expressions {
             var methodInfos = members.Map(t => (MethodInfo)t);
             int count = FindBestMethod(methodInfos, typeArgs, args, out method);
 
-            if (count == 0) {
-                if (typeArgs != null && typeArgs.Length > 0) {
+            if (count == 0)
+            {
+                if (typeArgs != null && typeArgs.Length > 0)
+                {
                     throw Error.GenericMethodWithArgsDoesNotExistOnType(methodName, type);
-                } else {
+                }
+                else
+                {
                     throw Error.MethodWithArgsDoesNotExistOnType(methodName, type);
                 }
             }
@@ -950,19 +1268,29 @@ namespace System.Linq.Expressions {
             return method;
         }
 
-        private static int FindBestMethod(IEnumerable<MethodInfo> methods, Type[] typeArgs, Expression[] args, out MethodInfo method) {
+        private static int FindBestMethod(
+            IEnumerable<MethodInfo> methods,
+            Type[] typeArgs,
+            Expression[] args,
+            out MethodInfo method
+        )
+        {
             int count = 0;
             method = null;
-            foreach (MethodInfo mi in methods) {
+            foreach (MethodInfo mi in methods)
+            {
                 MethodInfo moo = ApplyTypeArgs(mi, typeArgs);
-                if (moo != null && IsCompatible(moo, args)) {
+                if (moo != null && IsCompatible(moo, args))
+                {
                     // favor public over non-public methods
-                    if (method == null || (!method.IsPublic && moo.IsPublic)) {
+                    if (method == null || (!method.IsPublic && moo.IsPublic))
+                    {
                         method = moo;
                         count = 1;
                     }
-                        // only count it as additional method if they both public or both non-public
-                    else if (method.IsPublic == moo.IsPublic) {
+                    // only count it as additional method if they both public or both non-public
+                    else if (method.IsPublic == moo.IsPublic)
+                    {
                         count++;
                     }
                 }
@@ -970,37 +1298,52 @@ namespace System.Linq.Expressions {
             return count;
         }
 
-        private static bool IsCompatible(MethodBase m, Expression[] args) {
+        private static bool IsCompatible(MethodBase m, Expression[] args)
+        {
             ParameterInfo[] parms = m.GetParametersCached();
             if (parms.Length != args.Length)
                 return false;
-            for (int i = 0; i < args.Length; i++) {
+            for (int i = 0; i < args.Length; i++)
+            {
                 Expression arg = args[i];
                 ContractUtils.RequiresNotNull(arg, "argument");
                 Type argType = arg.Type;
                 Type pType = parms[i].ParameterType;
-                if (pType.IsByRef) {
+                if (pType.IsByRef)
+                {
                     pType = pType.GetElementType();
                 }
-                if (!TypeUtils.AreReferenceAssignable(pType, argType) &&
-                    !(TypeUtils.IsSameOrSubclass(typeof(LambdaExpression), pType) && pType.IsAssignableFrom(arg.GetType()))) {
+                if (
+                    !TypeUtils.AreReferenceAssignable(pType, argType)
+                    && !(
+                        TypeUtils.IsSameOrSubclass(typeof(LambdaExpression), pType)
+                        && pType.IsAssignableFrom(arg.GetType())
+                    )
+                )
+                {
                     return false;
                 }
             }
             return true;
         }
 
-        private static MethodInfo ApplyTypeArgs(MethodInfo m, Type[] typeArgs) {
-            if (typeArgs == null || typeArgs.Length == 0) {
+        private static MethodInfo ApplyTypeArgs(MethodInfo m, Type[] typeArgs)
+        {
+            if (typeArgs == null || typeArgs.Length == 0)
+            {
                 if (!m.IsGenericMethodDefinition)
                     return m;
-            } else {
-                if (m.IsGenericMethodDefinition && m.GetGenericArguments().Length == typeArgs.Length)
+            }
+            else
+            {
+                if (
+                    m.IsGenericMethodDefinition
+                    && m.GetGenericArguments().Length == typeArgs.Length
+                )
                     return m.MakeGenericMethod(typeArgs);
             }
             return null;
         }
-
 
         #endregion
 
@@ -1010,7 +1353,8 @@ namespace System.Linq.Expressions {
         ///<returns>A <see cref="T:System.Linq.Expressions.BinaryExpression" /> that has the <see cref="P:System.Linq.Expressions.Expression.NodeType" /> property equal to <see cref="F:System.Linq.Expressions.ExpressionType.ArrayIndex" /> and the <see cref="P:System.Linq.Expressions.BinaryExpression.Left" /> and <see cref="P:System.Linq.Expressions.BinaryExpression.Right" /> properties set to the specified values.</returns>
         ///<param name="array">An array of <see cref="T:System.Linq.Expressions.Expression" /> instances - indexes for the array index operation.</param>
         ///<param name="indexes">An array that contains <see cref="T:System.Linq.Expressions.Expression" /> objects to use to populate the <see cref="P:System.Linq.Expressions.MethodCallExpression.Arguments" /> collection.</param>
-        public static MethodCallExpression ArrayIndex(Expression array, params Expression[] indexes) {
+        public static MethodCallExpression ArrayIndex(Expression array, params Expression[] indexes)
+        {
             return ArrayIndex(array, (IEnumerable<Expression>)indexes);
         }
 
@@ -1022,32 +1366,42 @@ namespace System.Linq.Expressions {
         ///<paramref name="array" /> or <paramref name="indexes" /> is null.</exception>
         ///<exception cref="T:System.ArgumentException">
         ///<paramref name="array" />.Type does not represent an array type.-or-The rank of <paramref name="array" />.Type does not match the number of elements in <paramref name="indexes" />.-or-The <see cref="P:System.Linq.Expressions.Expression.Type" /> property of one or more elements of <paramref name="indexes" /> does not represent the <see cref="T:System.Int32" /> type.</exception>
-        public static MethodCallExpression ArrayIndex(Expression array, IEnumerable<Expression> indexes) {
+        public static MethodCallExpression ArrayIndex(
+            Expression array,
+            IEnumerable<Expression> indexes
+        )
+        {
             RequiresCanRead(array, "array");
             ContractUtils.RequiresNotNull(indexes, "indexes");
 
             Type arrayType = array.Type;
-            if (!arrayType.IsArray) {
+            if (!arrayType.IsArray)
+            {
                 throw Error.ArgumentMustBeArray();
             }
 
             ReadOnlyCollection<Expression> indexList = indexes.ToReadOnly();
-            if (arrayType.GetArrayRank() != indexList.Count) {
+            if (arrayType.GetArrayRank() != indexList.Count)
+            {
                 throw Error.IncorrectNumberOfIndexes();
             }
 
-            foreach (Expression e in indexList) {
+            foreach (Expression e in indexList)
+            {
                 RequiresCanRead(e, "indexes");
-                if (e.Type != typeof(int)) {
+                if (e.Type != typeof(int))
+                {
                     throw Error.ArgumentMustBeArrayIndexType();
                 }
             }
 
-            MethodInfo mi = array.Type.GetMethod("Get", BindingFlags.Public | BindingFlags.Instance);
+            MethodInfo mi = array.Type.GetMethod(
+                "Get",
+                BindingFlags.Public | BindingFlags.Instance
+            );
             return Call(array, mi, indexList);
         }
 
         #endregion
-
     }
 }

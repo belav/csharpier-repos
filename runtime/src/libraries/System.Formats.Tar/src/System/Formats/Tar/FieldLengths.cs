@@ -49,7 +49,8 @@ namespace System.Formats.Tar
         internal const ushort V7Padding = 255;
         internal const ushort PosixPadding = 12;
 
-        internal const int AllGnuUnused = Offset + LongNames + Unused + Sparse + IsExtended + RealSize;
+        internal const int AllGnuUnused =
+            Offset + LongNames + Unused + Sparse + IsExtended + RealSize;
 
         internal const ushort GnuPadding = 17;
     }

@@ -24,9 +24,11 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             base.Dispose(disposing);
         }
     }
+
     public class DelimiterWriteMethodTestsCtorStream : DelimiterWriteMethodTestsBase
     {
         private readonly Stream _stream;
+
         public DelimiterWriteMethodTestsCtorStream()
         {
             CommonUtilities.DeleteFile(_fileName);
@@ -37,6 +39,7 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
         {
             return new DelimitedListTraceListener(_stream);
         }
+
         protected override void Dispose(bool disposing)
         {
             _stream.Dispose();
@@ -70,42 +73,122 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
 
                 return new[]
                 {
-                    new object[] { nullFilter,  nullCache, "Co1971",     TraceEventType.Critical,    42, format, args },
-                    new object[] { nullFilter,  testCache, "Co\"1984\"", TraceEventType.Verbose,     12, message, null},
-                    new object[] { trueFilter,  nullCache, "Co1971",     TraceEventType.Error,       24, format, args },
-                    new object[] { falseFilter, testCache, "Co\"1984\"", TraceEventType.Information, 33, message, null }
+                    new object[]
+                    {
+                        nullFilter,
+                        nullCache,
+                        "Co1971",
+                        TraceEventType.Critical,
+                        42,
+                        format,
+                        args,
+                    },
+                    new object[]
+                    {
+                        nullFilter,
+                        testCache,
+                        "Co\"1984\"",
+                        TraceEventType.Verbose,
+                        12,
+                        message,
+                        null,
+                    },
+                    new object[]
+                    {
+                        trueFilter,
+                        nullCache,
+                        "Co1971",
+                        TraceEventType.Error,
+                        24,
+                        format,
+                        args,
+                    },
+                    new object[]
+                    {
+                        falseFilter,
+                        testCache,
+                        "Co\"1984\"",
+                        TraceEventType.Information,
+                        33,
+                        message,
+                        null,
+                    },
                 };
             }
         }
 
         [Theory]
         [MemberData(nameof(TraceEventInvariants))]
-        public void TraceEvent_FormatString_Test(TraceFilter filter, TraceEventCache eventCache, string source, TraceEventType eventType, int id, string format, object[] args)
+        public void TraceEvent_FormatString_Test(
+            TraceFilter filter,
+            TraceEventCache eventCache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            string format,
+            object[] args
+        )
         {
             using (var target = GetListener())
             {
                 target.Filter = filter;
-                target.TraceOutputOptions = TraceOptions.ProcessId | TraceOptions.ThreadId | TraceOptions.DateTime | TraceOptions.Timestamp | TraceOptions.LogicalOperationStack | TraceOptions.Callstack;
+                target.TraceOutputOptions =
+                    TraceOptions.ProcessId
+                    | TraceOptions.ThreadId
+                    | TraceOptions.DateTime
+                    | TraceOptions.Timestamp
+                    | TraceOptions.LogicalOperationStack
+                    | TraceOptions.Callstack;
                 target.TraceEvent(eventCache, source, eventType, id, format, args);
             }
 
-            string expected = CommonUtilities.ExpectedTraceEventOutput(filter, eventCache, source, eventType, id, format, args);
+            string expected = CommonUtilities.ExpectedTraceEventOutput(
+                filter,
+                eventCache,
+                source,
+                eventType,
+                id,
+                format,
+                args
+            );
             Assert.Equal(expected, File.Exists(_fileName) ? File.ReadAllText(_fileName) : "");
         }
 
         [Theory]
         [MemberData(nameof(TraceEventInvariants))]
-        public void TraceEvent_String_Test(TraceFilter filter, TraceEventCache eventCache, string source, TraceEventType eventType, int id, string format, object[] args)
+        public void TraceEvent_String_Test(
+            TraceFilter filter,
+            TraceEventCache eventCache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            string format,
+            object[] args
+        )
         {
             string message = args != null ? string.Format(format, args) : format;
             using (var target = GetListener())
             {
                 target.Filter = filter;
-                target.TraceOutputOptions = TraceOptions.ProcessId | TraceOptions.ThreadId | TraceOptions.DateTime | TraceOptions.Timestamp | TraceOptions.LogicalOperationStack | TraceOptions.Callstack;
+                target.TraceOutputOptions =
+                    TraceOptions.ProcessId
+                    | TraceOptions.ThreadId
+                    | TraceOptions.DateTime
+                    | TraceOptions.Timestamp
+                    | TraceOptions.LogicalOperationStack
+                    | TraceOptions.Callstack;
                 target.TraceEvent(eventCache, source, eventType, id, message);
             }
 
-            string expected = CommonUtilities.ExpectedTraceEventOutput(filter, eventCache, source, eventType, id, format, args);
+            string expected = CommonUtilities.ExpectedTraceEventOutput(
+                filter,
+                eventCache,
+                source,
+                eventType,
+                id,
+                format,
+                args
+            );
             Assert.Equal(expected, File.Exists(_fileName) ? File.ReadAllText(_fileName) : "");
         }
 
@@ -122,26 +205,78 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
 
                 return new[]
                 {
-                    new object[] { nullFilter,  nullCache, "Co1971",     TraceEventType.Critical,    42, decimal.MaxValue },
-                    new object[] { nullFilter,  testCache, "Co\"1984\"", TraceEventType.Verbose,     12, message },
-                    new object[] { trueFilter,  nullCache, "Co1971",     TraceEventType.Error,       24, decimal.MinusOne },
-                    new object[] { falseFilter, testCache, "Co\"1984\"", TraceEventType.Information, 33, message }
+                    new object[]
+                    {
+                        nullFilter,
+                        nullCache,
+                        "Co1971",
+                        TraceEventType.Critical,
+                        42,
+                        decimal.MaxValue,
+                    },
+                    new object[]
+                    {
+                        nullFilter,
+                        testCache,
+                        "Co\"1984\"",
+                        TraceEventType.Verbose,
+                        12,
+                        message,
+                    },
+                    new object[]
+                    {
+                        trueFilter,
+                        nullCache,
+                        "Co1971",
+                        TraceEventType.Error,
+                        24,
+                        decimal.MinusOne,
+                    },
+                    new object[]
+                    {
+                        falseFilter,
+                        testCache,
+                        "Co\"1984\"",
+                        TraceEventType.Information,
+                        33,
+                        message,
+                    },
                 };
             }
         }
 
         [Theory]
         [MemberData(nameof(TraceDataObjectInvariants))]
-        public void TraceData_Object_Test(TraceFilter filter, TraceEventCache eventCache, string source, TraceEventType eventType, int id, object data)
+        public void TraceData_Object_Test(
+            TraceFilter filter,
+            TraceEventCache eventCache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            object data
+        )
         {
             using (var target = GetListener())
             {
                 target.Filter = filter;
-                target.TraceOutputOptions = TraceOptions.ProcessId | TraceOptions.ThreadId | TraceOptions.DateTime | TraceOptions.Timestamp | TraceOptions.LogicalOperationStack | TraceOptions.Callstack;
+                target.TraceOutputOptions =
+                    TraceOptions.ProcessId
+                    | TraceOptions.ThreadId
+                    | TraceOptions.DateTime
+                    | TraceOptions.Timestamp
+                    | TraceOptions.LogicalOperationStack
+                    | TraceOptions.Callstack;
                 target.TraceData(eventCache, source, eventType, id, data);
             }
 
-            string expected = CommonUtilities.ExpectedTraceDataOutput(filter, eventCache, source, eventType, id, data);
+            string expected = CommonUtilities.ExpectedTraceDataOutput(
+                filter,
+                eventCache,
+                source,
+                eventType,
+                id,
+                data
+            );
             Assert.Equal(expected, File.Exists(_fileName) ? File.ReadAllText(_fileName) : "");
         }
 
@@ -157,39 +292,111 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
 
                 return new[]
                 {
-                    new object[] { ",", nullFilter,  nullCache, "Co1971",     TraceEventType.Critical,    42, new object[0] },
-                    new object[] { ";", nullFilter,  testCache, "Co\"1984\"", TraceEventType.Verbose,     12, null },
-                    new object[] { ".", trueFilter,  nullCache, "Co1971",     TraceEventType.Error,       24, new object[] { "Hello", 6 } },
-                    new object[] { ";", falseFilter, testCache, "Co\"1984\"", TraceEventType.Information, 33, null }
+                    new object[]
+                    {
+                        ",",
+                        nullFilter,
+                        nullCache,
+                        "Co1971",
+                        TraceEventType.Critical,
+                        42,
+                        new object[0],
+                    },
+                    new object[]
+                    {
+                        ";",
+                        nullFilter,
+                        testCache,
+                        "Co\"1984\"",
+                        TraceEventType.Verbose,
+                        12,
+                        null,
+                    },
+                    new object[]
+                    {
+                        ".",
+                        trueFilter,
+                        nullCache,
+                        "Co1971",
+                        TraceEventType.Error,
+                        24,
+                        new object[] { "Hello", 6 },
+                    },
+                    new object[]
+                    {
+                        ";",
+                        falseFilter,
+                        testCache,
+                        "Co\"1984\"",
+                        TraceEventType.Information,
+                        33,
+                        null,
+                    },
                 };
             }
         }
 
         [Theory]
         [MemberData(nameof(TraceDataObjectArrayInvariants))]
-        public void TraceData_ObjectArray_Test(string delimiter, TraceFilter filter, TraceEventCache eventCache, string source, TraceEventType eventType, int id, object[] data)
+        public void TraceData_ObjectArray_Test(
+            string delimiter,
+            TraceFilter filter,
+            TraceEventCache eventCache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            object[] data
+        )
         {
             using (var target = GetListener())
             {
                 target.Delimiter = delimiter;
                 target.Filter = filter;
-                target.TraceOutputOptions = TraceOptions.ProcessId | TraceOptions.ThreadId | TraceOptions.DateTime | TraceOptions.Timestamp | TraceOptions.LogicalOperationStack | TraceOptions.Callstack;
+                target.TraceOutputOptions =
+                    TraceOptions.ProcessId
+                    | TraceOptions.ThreadId
+                    | TraceOptions.DateTime
+                    | TraceOptions.Timestamp
+                    | TraceOptions.LogicalOperationStack
+                    | TraceOptions.Callstack;
                 target.TraceData(eventCache, source, eventType, id, data);
             }
 
-            string expected = CommonUtilities.ExpectedTraceDataOutput(delimiter, filter, eventCache, source, eventType, id, data);
+            string expected = CommonUtilities.ExpectedTraceDataOutput(
+                delimiter,
+                filter,
+                eventCache,
+                source,
+                eventType,
+                id,
+                data
+            );
             Assert.Equal(expected, File.Exists(_fileName) ? File.ReadAllText(_fileName) : "");
         }
 
         [Theory]
         [MemberData(nameof(TraceDataObjectArrayInvariants))]
-        public void AttributeDelimiter_ChangesDelimiter_Test(string delimiter, TraceFilter filter, TraceEventCache eventCache, string source, TraceEventType eventType, int id, object[] data)
+        public void AttributeDelimiter_ChangesDelimiter_Test(
+            string delimiter,
+            TraceFilter filter,
+            TraceEventCache eventCache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            object[] data
+        )
         {
             string newDelimiter = "||";
             using (var target = GetListener())
             {
                 target.Filter = filter;
-                target.TraceOutputOptions = TraceOptions.ProcessId | TraceOptions.ThreadId | TraceOptions.DateTime | TraceOptions.Timestamp | TraceOptions.LogicalOperationStack | TraceOptions.Callstack;
+                target.TraceOutputOptions =
+                    TraceOptions.ProcessId
+                    | TraceOptions.ThreadId
+                    | TraceOptions.DateTime
+                    | TraceOptions.Timestamp
+                    | TraceOptions.LogicalOperationStack
+                    | TraceOptions.Callstack;
                 target.Attributes.Add("delimiter", newDelimiter);
                 target.TraceData(eventCache, source, eventType, id, data);
                 Assert.Equal(newDelimiter, target.Delimiter);
@@ -198,19 +405,41 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                 Assert.Equal(delimiter, target.Delimiter);
             }
 
-            string expected = CommonUtilities.ExpectedTraceDataOutput(newDelimiter, filter, eventCache, source, eventType, id, data);
+            string expected = CommonUtilities.ExpectedTraceDataOutput(
+                newDelimiter,
+                filter,
+                eventCache,
+                source,
+                eventType,
+                id,
+                data
+            );
             Assert.Equal(expected, File.Exists(_fileName) ? File.ReadAllText(_fileName) : "");
         }
 
         [Theory]
         [MemberData(nameof(TraceDataObjectArrayInvariants))]
-        public void AttributeDelimiter_IgnoredAfterDelimiterSet_Test(string delimiter, TraceFilter filter, TraceEventCache eventCache, string source, TraceEventType eventType, int id, object[] data)
+        public void AttributeDelimiter_IgnoredAfterDelimiterSet_Test(
+            string delimiter,
+            TraceFilter filter,
+            TraceEventCache eventCache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            object[] data
+        )
         {
             string newDelimiter = "||";
             using (var target = GetListener())
             {
                 target.Filter = filter;
-                target.TraceOutputOptions = TraceOptions.ProcessId | TraceOptions.ThreadId | TraceOptions.DateTime | TraceOptions.Timestamp | TraceOptions.LogicalOperationStack | TraceOptions.Callstack;
+                target.TraceOutputOptions =
+                    TraceOptions.ProcessId
+                    | TraceOptions.ThreadId
+                    | TraceOptions.DateTime
+                    | TraceOptions.Timestamp
+                    | TraceOptions.LogicalOperationStack
+                    | TraceOptions.Callstack;
 
                 // Setting target.Delimiter here should initialize the delimiter
                 // so that future delimiter attributes aren't used.
@@ -221,19 +450,41 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                 Assert.Equal(delimiter, target.Delimiter);
             }
 
-            string expected = CommonUtilities.ExpectedTraceDataOutput(delimiter, filter, eventCache, source, eventType, id, data);
+            string expected = CommonUtilities.ExpectedTraceDataOutput(
+                delimiter,
+                filter,
+                eventCache,
+                source,
+                eventType,
+                id,
+                data
+            );
             Assert.Equal(expected, File.Exists(_fileName) ? File.ReadAllText(_fileName) : "");
         }
 
         [Theory]
         [MemberData(nameof(TraceDataObjectArrayInvariants))]
-        public void AttributeDelimiter_IgnoredAfterDelimiterRead_Test(string delimiter, TraceFilter filter, TraceEventCache eventCache, string source, TraceEventType eventType, int id, object[] data)
+        public void AttributeDelimiter_IgnoredAfterDelimiterRead_Test(
+            string delimiter,
+            TraceFilter filter,
+            TraceEventCache eventCache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            object[] data
+        )
         {
             string newDelimiter = "||";
             using (var target = GetListener())
             {
                 target.Filter = filter;
-                target.TraceOutputOptions = TraceOptions.ProcessId | TraceOptions.ThreadId | TraceOptions.DateTime | TraceOptions.Timestamp | TraceOptions.LogicalOperationStack | TraceOptions.Callstack;
+                target.TraceOutputOptions =
+                    TraceOptions.ProcessId
+                    | TraceOptions.ThreadId
+                    | TraceOptions.DateTime
+                    | TraceOptions.Timestamp
+                    | TraceOptions.LogicalOperationStack
+                    | TraceOptions.Callstack;
 
                 // Getting target.Delimiter here should initialize the delimiter
                 // so that future delimiter attributes aren't used.
@@ -247,7 +498,15 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                 Assert.Equal(delimiter, target.Delimiter);
             }
 
-            string expected = CommonUtilities.ExpectedTraceDataOutput(CommonUtilities.DefaultDelimiter, filter, eventCache, source, eventType, id, data);
+            string expected = CommonUtilities.ExpectedTraceDataOutput(
+                CommonUtilities.DefaultDelimiter,
+                filter,
+                eventCache,
+                source,
+                eventType,
+                id,
+                data
+            );
             Assert.Equal(expected, File.Exists(_fileName) ? File.ReadAllText(_fileName) : "");
         }
 

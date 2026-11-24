@@ -21,7 +21,12 @@ namespace Microsoft.Workload.Build.Tasks
         private string _packagesDir;
         private bool _cleanPackagesdir;
 
-        private PackageInstaller(string nugetConfigContents, string baseTempDir, string? packagesPath, TaskLoggingHelper logger)
+        private PackageInstaller(
+            string nugetConfigContents,
+            string baseTempDir,
+            string? packagesPath,
+            TaskLoggingHelper logger
+        )
         {
             _nugetConfigContents = nugetConfigContents;
 
@@ -31,13 +36,24 @@ namespace Microsoft.Workload.Build.Tasks
             _packagesDir = packagesPath ?? Path.Combine(_tempDir, "nuget-packages");
         }
 
-        public static bool Install(PackageReference[] references, string nugetConfigContents, string baseTempDir, TaskLoggingHelper logger, bool stopOnMissing=true, string? packagesPath=null)
+        public static bool Install(
+            PackageReference[] references,
+            string nugetConfigContents,
+            string baseTempDir,
+            TaskLoggingHelper logger,
+            bool stopOnMissing = true,
+            string? packagesPath = null
+        )
         {
             if (references.Length == 0)
                 return true;
 
-            return new PackageInstaller(nugetConfigContents, baseTempDir, packagesPath, logger)
-                        .InstallActual(references, stopOnMissing);
+            return new PackageInstaller(
+                nugetConfigContents,
+                baseTempDir,
+                packagesPath,
+                logger
+            ).InstallActual(references, stopOnMissing);
         }
 
         private bool InstallActual(PackageReference[] references, bool stopOnMissing)
@@ -59,26 +75,41 @@ namespace Microsoft.Workload.Build.Tasks
             File.WriteAllText(projectPath, GenerateProject(references));
             File.WriteAllText(Path.Combine(projecDir, "nuget.config"), _nugetConfigContents);
 
-            _logger.LogMessage(MessageImportance.Low, $"Restoring packages: {string.Join(", ", references.Select(r => $"{r.Name}/{r.Version}"))}");
+            _logger.LogMessage(
+                MessageImportance.Low,
+                $"Restoring packages: {string.Join(", ", references.Select(r => $"{r.Name}/{r.Version}"))}"
+            );
 
             string args = $"restore \"{projectPath}\" /p:RestorePackagesPath=\"{_packagesDir}\"";
-            (int exitCode, string output) = Utils.TryRunProcess(_logger, "dotnet", args, silent: false, debugMessageImportance: MessageImportance.Low);
+            (int exitCode, string output) = Utils.TryRunProcess(
+                _logger,
+                "dotnet",
+                args,
+                silent: false,
+                debugMessageImportance: MessageImportance.Low
+            );
             if (exitCode != 0)
             {
-                LogErrorOrWarning($"Restoring packages failed with exit code: {exitCode}. Output:{Environment.NewLine}{output}", stopOnMissing);
+                LogErrorOrWarning(
+                    $"Restoring packages failed with exit code: {exitCode}. Output:{Environment.NewLine}{output}",
+                    stopOnMissing
+                );
                 return false;
             }
 
             IList<(PackageReference, string)> failedToRestore = references
-                                                             .Select(r => (r, Path.Combine(_packagesDir, r.Name.ToLowerInvariant(), r.Version)))
-                                                             .Where(tuple => !Directory.Exists(tuple.Item2))
-                                                             .ToList();
+                .Select(r => (r, Path.Combine(_packagesDir, r.Name.ToLowerInvariant(), r.Version)))
+                .Where(tuple => !Directory.Exists(tuple.Item2))
+                .ToList();
 
             if (failedToRestore.Count > 0)
             {
                 _logger.LogMessage(MessageImportance.Normal, output);
                 foreach ((PackageReference pkgRef, string pkgDir) in failedToRestore)
-                    LogErrorOrWarning($"Could not restore {pkgRef.Name}/{pkgRef.Version} (can't find {pkgDir})", stopOnMissing);
+                    LogErrorOrWarning(
+                        $"Could not restore {pkgRef.Name}/{pkgRef.Version} (can't find {pkgDir})",
+                        stopOnMissing
+                    );
 
                 return false;
             }
@@ -90,10 +121,18 @@ namespace Microsoft.Workload.Build.Tasks
         {
             foreach (var pkgRef in references)
             {
-                var source = Path.Combine(_packagesDir, pkgRef.Name.ToLowerInvariant(), pkgRef.Version, pkgRef.relativeSourceDir);
+                var source = Path.Combine(
+                    _packagesDir,
+                    pkgRef.Name.ToLowerInvariant(),
+                    pkgRef.Version,
+                    pkgRef.relativeSourceDir
+                );
                 if (!Directory.Exists(source))
                 {
-                    LogErrorOrWarning($"Failed to restore {pkgRef.Name}/{pkgRef.Version} (could not find {source})", stopOnMissing);
+                    LogErrorOrWarning(
+                        $"Failed to restore {pkgRef.Name}/{pkgRef.Version} (could not find {source})",
+                        stopOnMissing
+                    );
                     if (stopOnMissing)
                         return false;
                 }
@@ -110,20 +149,26 @@ namespace Microsoft.Workload.Build.Tasks
         private static string GenerateProject(IEnumerable<PackageReference> references)
         {
             StringBuilder projectFileBuilder = new();
-            projectFileBuilder.Append(@"
+            projectFileBuilder.Append(
+                @"
 <Project Sdk=""Microsoft.NET.Sdk"">
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
-    <ItemGroup>");
+    <ItemGroup>"
+            );
 
             foreach (var reference in references)
-                projectFileBuilder.AppendLine($"<PackageReference Include=\"{reference.Name}\" Version=\"{reference.Version}\" />");
+                projectFileBuilder.AppendLine(
+                    $"<PackageReference Include=\"{reference.Name}\" Version=\"{reference.Version}\" />"
+                );
 
-            projectFileBuilder.Append(@"
+            projectFileBuilder.Append(
+                @"
     </ItemGroup>
 </Project>
-");
+"
+            );
 
             return projectFileBuilder.ToString();
         }

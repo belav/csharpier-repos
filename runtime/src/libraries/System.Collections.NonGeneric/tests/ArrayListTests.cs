@@ -39,7 +39,9 @@ namespace System.Collections.Tests
         [Fact]
         public static void Ctor_Int_NegativeCapacity_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => new ArrayList(-1)); // Capacity < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new ArrayList(-1)
+            ); // Capacity < 0
         }
 
         [Fact]
@@ -78,11 +80,16 @@ namespace System.Collections.Tests
             AssertExtensions.Throws<ArgumentNullException>("c", () => new ArrayList(null)); // Collection is null
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         public static void DebuggerAttribute()
         {
             DebuggerAttributes.ValidateDebuggerDisplayReferences(new ArrayList());
-            DebuggerAttributes.ValidateDebuggerTypeProxyProperties(new ArrayList() { "a", 1, "b", 2 });
+            DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                new ArrayList() { "a", 1, "b", 2 }
+            );
 
             bool threwNull = false;
             try
@@ -139,7 +146,10 @@ namespace System.Collections.Tests
             const string FromBefore = " from before";
 
             // Make sure changes through listAdapter show up in list
-            ArrayList arrList = Helpers.CreateStringArrayList(count: 10, optionalString: FromBefore);
+            ArrayList arrList = Helpers.CreateStringArrayList(
+                count: 10,
+                optionalString: FromBefore
+            );
             ArrayList adapter = ArrayList.Adapter(arrList);
             adapter.Reverse(0, adapter.Count);
 
@@ -539,7 +549,12 @@ namespace System.Collections.Tests
             {
                 foreach (object value in arrList2)
                 {
-                    int ndx = arrList2.BinarySearch(0, arrList2.Count, value, new BinarySearchComparer());
+                    int ndx = arrList2.BinarySearch(
+                        0,
+                        arrList2.Count,
+                        value,
+                        new BinarySearchComparer()
+                    );
                     Assert.Equal(arrList2[ndx], value);
                 }
             });
@@ -552,7 +567,12 @@ namespace System.Collections.Tests
             Helpers.PerformActionOnAllArrayListWrappers(arrList1, arrList2 =>
             {
                 // Index > list.IndexOf(object)
-                int ndx = arrList2.BinarySearch(1, arrList2.Count - 1, 0, new BinarySearchComparer());
+                int ndx = arrList2.BinarySearch(
+                    1,
+                    arrList2.Count - 1,
+                    0,
+                    new BinarySearchComparer()
+                );
                 Assert.Equal(-2, ndx);
 
                 // Index + count < list.IndexOf(object)
@@ -585,13 +605,25 @@ namespace System.Collections.Tests
             {
                 IComparer comparer = new BinarySearchComparer();
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => arrList2.BinarySearch(-1, 1000, arrList2.Count, comparer)); // Index < 0
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => arrList2.BinarySearch(-1, 1000, 1, comparer)); // Index < 0
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => arrList2.BinarySearch(-1, arrList2.Count, 1, comparer)); // Index < 0
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => arrList2.BinarySearch(0, -1, 1, comparer)); // Count < 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    arrList2.BinarySearch(-1, 1000, arrList2.Count, comparer)
+                ); // Index < 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    arrList2.BinarySearch(-1, 1000, 1, comparer)
+                ); // Index < 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    arrList2.BinarySearch(-1, arrList2.Count, 1, comparer)
+                ); // Index < 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    arrList2.BinarySearch(0, -1, 1, comparer)
+                ); // Count < 0
 
-                AssertExtensions.Throws<ArgumentException>(null, () => arrList2.BinarySearch(1, arrList2.Count, 1, comparer)); // Index + Count >= list.Count
-                AssertExtensions.Throws<ArgumentException>(null, () => arrList2.BinarySearch(3, arrList2.Count - 2, 1, comparer)); // Index + Count >= list.Count
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    arrList2.BinarySearch(1, arrList2.Count, 1, comparer)
+                ); // Index + Count >= list.Count
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    arrList2.BinarySearch(3, arrList2.Count - 2, 1, comparer)
+                ); // Index + Count >= list.Count
             });
         }
 
@@ -665,8 +697,12 @@ namespace System.Collections.Tests
                     return;
                 }
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => arrList2.Capacity = -1); // Capacity < 0
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => arrList2.Capacity = arrList1.Count - 1); // Capacity < list.Count
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    arrList2.Capacity = -1
+                ); // Capacity < 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    arrList2.Capacity = arrList1.Count - 1
+                ); // Capacity < list.Count
             });
         }
 
@@ -812,12 +848,18 @@ namespace System.Collections.Tests
                 var arrCopy = new int[arrList2.Count];
 
                 Assert.Throws<ArgumentNullException>(() => arrList2.CopyTo(null)); // Array is null
-                AssertExtensions.Throws<ArgumentException>("array", null, () => arrList2.CopyTo(new object[10, 10])); // Array is multidimensional
+                AssertExtensions.Throws<ArgumentException>("array", null, () =>
+                    arrList2.CopyTo(new object[10, 10])
+                ); // Array is multidimensional
 
                 Assert.Throws<ArgumentOutOfRangeException>(() => arrList2.CopyTo(arrCopy, -1)); // Index < 0
 
                 bool hasParamName = arrList2.GetType().Name != "Range";
-                AssertExtensions.Throws<ArgumentException>(hasParamName ? "destinationArray" : null, hasParamName ? "" : null, () => arrList2.CopyTo(new object[11], 2)); // Invalid index and length
+                AssertExtensions.Throws<ArgumentException>(
+                    hasParamName ? "destinationArray" : null,
+                    hasParamName ? "" : null,
+                    () => arrList2.CopyTo(new object[11], 2)
+                ); // Invalid index and length
             });
         }
 
@@ -868,8 +910,12 @@ namespace System.Collections.Tests
             {
                 var arrCopy = new string[10];
                 Assert.ThrowsAny<ArgumentException>(() => arrList2.CopyTo(0, arrCopy, -1, 1000)); // Array index < 0 (should throw ArgumentOutOfRangeException)
-                Assert.Throws<ArgumentOutOfRangeException>(() => arrList2.CopyTo(-1, arrCopy, 0, 1)); // Index < 0
-                Assert.Throws<ArgumentOutOfRangeException>(() => arrList2.CopyTo(0, arrCopy, 0, -1)); // Count < 0
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    arrList2.CopyTo(-1, arrCopy, 0, 1)
+                ); // Index < 0
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    arrList2.CopyTo(0, arrCopy, 0, -1)
+                ); // Count < 0
 
                 AssertExtensions.Throws<ArgumentException>(null, () =>
                 {
@@ -878,7 +924,14 @@ namespace System.Collections.Tests
                 });
 
                 Assert.Throws<ArgumentNullException>(() => arrList2.CopyTo(0, null, 3, 3)); // Array is null
-                AssertExtensions.Throws<ArgumentException>("array", null, () => arrList2.CopyTo(0, new object[arrList2.Count, arrList2.Count], 0, arrList2.Count)); // Array is multidimensional
+                AssertExtensions.Throws<ArgumentException>("array", null, () =>
+                    arrList2.CopyTo(
+                        0,
+                        new object[arrList2.Count, arrList2.Count],
+                        0,
+                        arrList2.Count
+                    )
+                ); // Array is multidimensional
 
                 // Array index and count is out of bounds
                 AssertExtensions.Throws<ArgumentException>(null, () =>
@@ -887,7 +940,9 @@ namespace System.Collections.Tests
                     arrList2.CopyTo(0, arrCopy, 3, 15);
                 });
 
-                Assert.ThrowsAny<ArgumentException>(() => arrList2.CopyTo(0, new object[arrList2.Count, arrList2.Count], 0, -1)); // Should throw ArgumentOutOfRangeException
+                Assert.ThrowsAny<ArgumentException>(() =>
+                    arrList2.CopyTo(0, new object[arrList2.Count, arrList2.Count], 0, -1)
+                ); // Should throw ArgumentOutOfRangeException
             });
         }
 
@@ -1001,7 +1056,9 @@ namespace System.Collections.Tests
         [Fact]
         public static void FixedSize_IList_NullList_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("list", () => ArrayList.FixedSize((IList)null)); // List is null
+            AssertExtensions.Throws<ArgumentNullException>("list", () =>
+                ArrayList.FixedSize((IList)null)
+            ); // List is null
         }
 
         [Fact]
@@ -1090,7 +1147,13 @@ namespace System.Collections.Tests
                 tempArray[tempArray.Length - 1] = arrList2;
 
                 Array.Copy(data, 0, tempArray, 1, data.Length / 2);
-                Array.Copy(data, data.Length / 2, tempArray, (tempArray.Length / 2) + 1, data.Length - (data.Length / 2));
+                Array.Copy(
+                    data,
+                    data.Length / 2,
+                    tempArray,
+                    (tempArray.Length / 2) + 1,
+                    data.Length - (data.Length / 2)
+                );
 
                 // Enumerate the entire collection
                 IEnumerator enumerator = arrList2.GetEnumerator(0, tempArray.Length);
@@ -1171,14 +1234,23 @@ namespace System.Collections.Tests
                 enumerator = arrList2.GetEnumerator(index, count);
                 Assert.Throws<InvalidOperationException>(() => enumerator.Current);
 
-                while (enumerator.MoveNext()) ;
+                while (enumerator.MoveNext())
+                    ;
                 Assert.Throws<InvalidOperationException>(() => enumerator.Current);
 
                 // Invalid parameters
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => arrList2.GetEnumerator(-1, arrList2.Count)); // Index < 0
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => arrList2.GetEnumerator(0, -1)); // Count < 0
-                AssertExtensions.Throws<ArgumentException>(null, () => arrList2.GetEnumerator(0, arrList2.Count + 1)); // Count + list.Count
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => arrList2.GetEnumerator(-1, arrList2.Count + 1)); // Index < 0 and count > list.Count
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    arrList2.GetEnumerator(-1, arrList2.Count)
+                ); // Index < 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    arrList2.GetEnumerator(0, -1)
+                ); // Count < 0
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    arrList2.GetEnumerator(0, arrList2.Count + 1)
+                ); // Count + list.Count
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    arrList2.GetEnumerator(-1, arrList2.Count + 1)
+                ); // Index < 0 and count > list.Count
             });
         }
 
@@ -1217,7 +1289,7 @@ namespace System.Collections.Tests
             ArrayList arrList1 = Helpers.CreateIntArrayList(100);
             Helpers.PerformActionOnAllArrayListWrappers(arrList1, arrList2 =>
             {
-                ArrayList range = arrList2.GetRange(index, count);// We can change the underlying collection through the range and this[int index]
+                ArrayList range = arrList2.GetRange(index, count); // We can change the underlying collection through the range and this[int index]
                 if (!range.IsReadOnly)
                 {
                     for (int i = 0; i < 50; i++)
@@ -1298,11 +1370,17 @@ namespace System.Collections.Tests
             ArrayList arrList1 = Helpers.CreateIntArrayList(100);
             Helpers.PerformActionOnAllArrayListWrappers(arrList1, arrList2 =>
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => arrList2.GetRange(-1, 50)); // Index < 0
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => arrList2.GetRange(0, -1)); // Count < 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    arrList2.GetRange(-1, 50)
+                ); // Index < 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    arrList2.GetRange(0, -1)
+                ); // Count < 0
 
                 AssertExtensions.Throws<ArgumentException>(null, () => arrList2.GetRange(0, 500)); // Index + count > list.count
-                AssertExtensions.Throws<ArgumentException>(null, () => arrList2.GetRange(arrList2.Count, 1)); // Index >= list.count
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    arrList2.GetRange(arrList2.Count, 1)
+                ); // Index >= list.count
             });
         }
 
@@ -1379,12 +1457,20 @@ namespace System.Collections.Tests
                     return;
                 }
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => arrList2.SetRange(3, arrList2)); // Index + collection.Count > list.Count
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    arrList2.SetRange(3, arrList2)
+                ); // Index + collection.Count > list.Count
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => arrList2.SetRange(-1, new object[1])); // Index < 0
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => arrList2.SetRange(arrList2.Count, new object[1])); // Index > list.Count
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    arrList2.SetRange(-1, new object[1])
+                ); // Index < 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    arrList2.SetRange(arrList2.Count, new object[1])
+                ); // Index > list.Count
 
-                AssertExtensions.Throws<ArgumentNullException>("c", () => arrList2.SetRange(0, null)); // Collection is null
+                AssertExtensions.Throws<ArgumentNullException>("c", () =>
+                    arrList2.SetRange(0, null)
+                ); // Collection is null
             });
         }
 
@@ -1443,7 +1529,10 @@ namespace System.Collections.Tests
             {
                 foreach (object value in data)
                 {
-                    Assert.Equal(Array.IndexOf(data, value, startIndex), arrList2.IndexOf(value, startIndex));
+                    Assert.Equal(
+                        Array.IndexOf(data, value, startIndex),
+                        arrList2.IndexOf(value, startIndex)
+                    );
                 }
             });
         }
@@ -1477,8 +1566,12 @@ namespace System.Collections.Tests
             ArrayList arrList1 = Helpers.CreateIntArrayList(10);
             Helpers.PerformActionOnAllArrayListWrappers(arrList1, arrList2 =>
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () => arrList2.IndexOf("Batman", -1)); // Start index < 0
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () => arrList2.IndexOf("Batman", arrList2.Count + 1)); // Start index > list.Count
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                    arrList2.IndexOf("Batman", -1)
+                ); // Start index < 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                    arrList2.IndexOf("Batman", arrList2.Count + 1)
+                ); // Start index > list.Count
 
                 Assert.Equal(-1, arrList2.IndexOf("Batman", arrList2.Count, 0)); // Index = list.Count
             });
@@ -1505,7 +1598,10 @@ namespace System.Collections.Tests
             {
                 foreach (object value in arrList2)
                 {
-                    Assert.Equal(Array.IndexOf(data, value, startIndex, count), arrList2.IndexOf(value, startIndex, count));
+                    Assert.Equal(
+                        Array.IndexOf(data, value, startIndex, count),
+                        arrList2.IndexOf(value, startIndex, count)
+                    );
                 }
             });
         }
@@ -1540,10 +1636,18 @@ namespace System.Collections.Tests
             ArrayList arrList1 = Helpers.CreateIntArrayList(10);
             Helpers.PerformActionOnAllArrayListWrappers(arrList1, arrList2 =>
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () => arrList2.IndexOf("Batman", -1, arrList2.Count)); // Start index < 0
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () => arrList2.IndexOf("Batman", arrList2.Count + 1, arrList2.Count)); // Start index > Count
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => arrList2.IndexOf("Batman", 0, -1)); // Count < 0
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => arrList2.IndexOf("Batman", 3, arrList2.Count + 1)); // Count > list.Count
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                    arrList2.IndexOf("Batman", -1, arrList2.Count)
+                ); // Start index < 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                    arrList2.IndexOf("Batman", arrList2.Count + 1, arrList2.Count)
+                ); // Start index > Count
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    arrList2.IndexOf("Batman", 0, -1)
+                ); // Count < 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    arrList2.IndexOf("Batman", 3, arrList2.Count + 1)
+                ); // Count > list.Count
 
                 Assert.Equal(-1, arrList2.IndexOf("Batman", arrList2.Count, 0)); // Index = list.Count
             });
@@ -1688,10 +1792,16 @@ namespace System.Collections.Tests
                     return;
                 }
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => arrList2.InsertRange(-1, new object[1])); // Index < 0
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => arrList2.InsertRange(1000, new object[1])); // Index > count
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    arrList2.InsertRange(-1, new object[1])
+                ); // Index < 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    arrList2.InsertRange(1000, new object[1])
+                ); // Index > count
 
-                AssertExtensions.Throws<ArgumentNullException>("c", () => arrList2.InsertRange(3, null)); // Collection is null
+                AssertExtensions.Throws<ArgumentNullException>("c", () =>
+                    arrList2.InsertRange(3, null)
+                ); // Collection is null
             });
         }
 
@@ -1762,7 +1872,10 @@ namespace System.Collections.Tests
             {
                 foreach (object value in arrList2)
                 {
-                    Assert.Equal(Array.LastIndexOf(data, value, startIndex), arrList2.LastIndexOf(value, startIndex));
+                    Assert.Equal(
+                        Array.LastIndexOf(data, value, startIndex),
+                        arrList2.LastIndexOf(value, startIndex)
+                    );
                 }
                 Assert.Equal(20, arrList2.LastIndexOf(null, data.Length - 1));
             });
@@ -1797,8 +1910,12 @@ namespace System.Collections.Tests
             ArrayList arrList1 = Helpers.CreateIntArrayList(10);
             Helpers.PerformActionOnAllArrayListWrappers(arrList1, arrList2 =>
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () => arrList2.LastIndexOf(0, -1)); // StartIndex < 0
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () => arrList2.LastIndexOf(0, arrList2.Count)); // StartIndex >= list.Count
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                    arrList2.LastIndexOf(0, -1)
+                ); // StartIndex < 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                    arrList2.LastIndexOf(0, arrList2.Count)
+                ); // StartIndex >= list.Count
             });
         }
 
@@ -1824,7 +1941,10 @@ namespace System.Collections.Tests
             {
                 foreach (object value in arrList2)
                 {
-                    Assert.Equal(Array.LastIndexOf(data, value, startIndex, count), arrList2.LastIndexOf(value, startIndex, count));
+                    Assert.Equal(
+                        Array.LastIndexOf(data, value, startIndex, count),
+                        arrList2.LastIndexOf(value, startIndex, count)
+                    );
                 }
                 Assert.Equal(20, arrList2.LastIndexOf(null, data.Length - 1, 2));
             });
@@ -1870,13 +1990,23 @@ namespace System.Collections.Tests
             ArrayList arrList1 = Helpers.CreateIntArrayList(10);
             Helpers.PerformActionOnAllArrayListWrappers(arrList1, arrList2 =>
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () => arrList2.LastIndexOf(0, -1, 2)); // Index < 0
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () => arrList2.LastIndexOf(0, arrList2.Count, 2)); // Index >= list.Count
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                    arrList2.LastIndexOf(0, -1, 2)
+                ); // Index < 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                    arrList2.LastIndexOf(0, arrList2.Count, 2)
+                ); // Index >= list.Count
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => arrList2.LastIndexOf(0, 0, -1)); // Count < 0
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => arrList2.LastIndexOf(0, 0, arrList2.Count + 1)); // Count > list.Count
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    arrList2.LastIndexOf(0, 0, -1)
+                ); // Count < 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    arrList2.LastIndexOf(0, 0, arrList2.Count + 1)
+                ); // Count > list.Count
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => arrList2.LastIndexOf(0, 4, arrList2.Count - 4)); // Index + count > list.Count
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    arrList2.LastIndexOf(0, 4, arrList2.Count - 4)
+                ); // Index + count > list.Count
             });
         }
 
@@ -1978,7 +2108,9 @@ namespace System.Collections.Tests
         [Fact]
         public static void ReadOnly_IList_NullList_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("list", () => ArrayList.ReadOnly((IList)null)); // List is null
+            AssertExtensions.Throws<ArgumentNullException>("list", () =>
+                ArrayList.ReadOnly((IList)null)
+            ); // List is null
         }
 
         [Fact]
@@ -2039,12 +2171,22 @@ namespace System.Collections.Tests
                     return;
                 }
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => arrList2.RemoveRange(-1, 1)); // Index < 0
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => arrList2.RemoveRange(1, -1)); // Count < 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    arrList2.RemoveRange(-1, 1)
+                ); // Index < 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    arrList2.RemoveRange(1, -1)
+                ); // Count < 0
 
-                AssertExtensions.Throws<ArgumentException>(null, () => arrList2.RemoveRange(arrList2.Count, 1)); // Index > list.Count
-                AssertExtensions.Throws<ArgumentException>(null, () => arrList2.RemoveRange(0, arrList2.Count + 1)); // Count > list.Count
-                AssertExtensions.Throws<ArgumentException>(null, () => arrList2.RemoveRange(5, arrList2.Count - 1)); // Index + count > list.Count
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    arrList2.RemoveRange(arrList2.Count, 1)
+                ); // Index > list.Count
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    arrList2.RemoveRange(0, arrList2.Count + 1)
+                ); // Count > list.Count
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    arrList2.RemoveRange(5, arrList2.Count - 1)
+                ); // Index + count > list.Count
             });
         }
 
@@ -2093,7 +2235,9 @@ namespace System.Collections.Tests
         [Fact]
         public static void Repeat_NegativeCount_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => ArrayList.Repeat(5, -1)); // Count < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                ArrayList.Repeat(5, -1)
+            ); // Count < 0
         }
 
         [Fact]
@@ -2214,9 +2358,15 @@ namespace System.Collections.Tests
                     return;
                 }
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => arrList2.Reverse(-1, arrList2.Count)); // Index < 0
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => arrList2.Reverse(0, -1)); // Count < 0
-                AssertExtensions.Throws<ArgumentException>(null, () => arrList2.Reverse(1000, arrList2.Count)); // Index is too big
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    arrList2.Reverse(-1, arrList2.Count)
+                ); // Index < 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    arrList2.Reverse(0, -1)
+                ); // Count < 0
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    arrList2.Reverse(1000, arrList2.Count)
+                ); // Index is too big
             });
         }
 
@@ -2346,11 +2496,19 @@ namespace System.Collections.Tests
                     return;
                 }
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => arrList2.Sort(-1, arrList2.Count, null)); // Index < 0
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => arrList2.Sort(0, -1, null)); // Count < 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    arrList2.Sort(-1, arrList2.Count, null)
+                ); // Index < 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    arrList2.Sort(0, -1, null)
+                ); // Count < 0
 
-                AssertExtensions.Throws<ArgumentException>(null, () => arrList2.Sort(arrList2.Count, arrList2.Count, null)); // Index >= list.Count
-                AssertExtensions.Throws<ArgumentException>(null, () => arrList2.Sort(0, arrList2.Count + 1, null)); // Count = list.Count
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    arrList2.Sort(arrList2.Count, arrList2.Count, null)
+                ); // Index >= list.Count
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    arrList2.Sort(0, arrList2.Count + 1, null)
+                ); // Count = list.Count
             });
         }
 
@@ -2406,7 +2564,9 @@ namespace System.Collections.Tests
         [Fact]
         public static void Synchronized_ArrayList_NullList_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("list", () => ArrayList.Synchronized(null)); // List is null
+            AssertExtensions.Throws<ArgumentNullException>("list", () =>
+                ArrayList.Synchronized(null)
+            ); // List is null
         }
 
         [Fact]
@@ -2430,7 +2590,9 @@ namespace System.Collections.Tests
         [Fact]
         public static void Synchronized_IList_NullList_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("list", () => ArrayList.Synchronized((IList)null)); // List is null
+            AssertExtensions.Throws<ArgumentNullException>("list", () =>
+                ArrayList.Synchronized((IList)null)
+            ); // List is null
         }
 
         [Fact]
@@ -2474,7 +2636,9 @@ namespace System.Collections.Tests
             {
                 // This should be covered in Array.Copy, but lets do it for completion's sake
                 Assert.Throws<InvalidCastException>(() => arrList2.ToArray(typeof(string))); // Objects stored are not strings
-                AssertExtensions.Throws<ArgumentNullException>("type", () => arrList2.ToArray(null)); // Type is null
+                AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                    arrList2.ToArray(null)
+                ); // Type is null
             });
         }
 
@@ -2537,7 +2701,7 @@ namespace System.Collections.Tests
 
             public int StartIndex => _startIndex;
 
-            public int Count =>_collection.Count;
+            public int Count => _collection.Count;
 
             public object SyncRoot => _collection.SyncRoot;
 
@@ -2568,7 +2732,8 @@ namespace System.Collections.Tests
 
         private class DerivedArrayList : ArrayList
         {
-            public DerivedArrayList(ICollection c) : base(c) { }
+            public DerivedArrayList(ICollection c)
+                : base(c) { }
         }
     }
 
@@ -2857,7 +3022,7 @@ namespace System.Collections.Tests
             "Atom",
             "Batman",
             "Black Canary",
-            "Captain America"
+            "Captain America",
         };
 
         private IList _iList;

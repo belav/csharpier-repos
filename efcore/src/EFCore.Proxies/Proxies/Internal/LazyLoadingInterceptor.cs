@@ -14,8 +14,9 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal;
 /// </summary>
 public class LazyLoadingInterceptor : IInterceptor
 {
-    private static readonly PropertyInfo LazyLoaderProperty
-        = typeof(IProxyLazyLoader).GetProperty(nameof(IProxyLazyLoader.LazyLoader))!;
+    private static readonly PropertyInfo LazyLoaderProperty = typeof(IProxyLazyLoader).GetProperty(
+        nameof(IProxyLazyLoader.LazyLoader)
+    )!;
 
     private static readonly MethodInfo LazyLoaderGetter = LazyLoaderProperty.GetMethod!;
     private static readonly MethodInfo LazyLoaderSetter = LazyLoaderProperty.SetMethod!;
@@ -29,12 +30,12 @@ public class LazyLoadingInterceptor : IInterceptor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public LazyLoadingInterceptor(
-        IEntityType entityType,
-        ILazyLoader loader)
+    public LazyLoadingInterceptor(IEntityType entityType, ILazyLoader loader)
     {
         _loader = loader;
-        _navigations = entityType!.GetNavigations().Where(n => !n.ForeignKey.IsOwnership)
+        _navigations = entityType!
+            .GetNavigations()
+            .Where(n => !n.ForeignKey.IsOwnership)
             .Cast<INavigationBase>()
             .Concat(entityType.GetSkipNavigations())
             .Select(n => n.Name)
@@ -61,8 +62,7 @@ public class LazyLoadingInterceptor : IInterceptor
         }
         else
         {
-            if (_loader != null
-                && methodName.StartsWith("get_", StringComparison.Ordinal))
+            if (_loader != null && methodName.StartsWith("get_", StringComparison.Ordinal))
             {
                 var navigationName = methodName[4..];
                 if (_navigations.Contains(navigationName))

@@ -22,11 +22,13 @@ namespace Microsoft.VisualStudio.Debugger.ComponentInterfaces
             DkmClrModuleInstance moduleInstance,
             DkmClrMethodId methodId,
             DkmILRange ilRange,
-            DkmClrLocalVariable localVariable);
+            DkmClrLocalVariable localVariable
+        );
 
         string GetClrNameForField(
             DkmInspectionContext inspectionContext,
             DkmClrModuleInstance moduleInstance,
-            int fieldToken);
+            int fieldToken
+        );
     }
 }

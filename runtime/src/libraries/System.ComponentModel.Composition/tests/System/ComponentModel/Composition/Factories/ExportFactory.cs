@@ -27,14 +27,17 @@ namespace System.ComponentModel.Composition.Factories
             return new Lazy<T>(() => value, false);
         }
 
-        public static Lazy<T, IDictionary<string, object>> Create<T>(T value, IDictionary<string, object> metadata)
+        public static Lazy<T, IDictionary<string, object>> Create<T>(
+            T value,
+            IDictionary<string, object> metadata
+        )
         {
             return Create<T, IDictionary<string, object>>(() => value, metadata);
         }
 
         public static Export Create(string contractName, Func<object> exportedValueGetter)
         {
-            return Create(contractName,(IDictionary<string, object>)null, exportedValueGetter);
+            return Create(contractName, (IDictionary<string, object>)null, exportedValueGetter);
         }
 
         public static Export Create(string contractName)
@@ -47,19 +50,37 @@ namespace System.ComponentModel.Composition.Factories
             return Create(contractName, value, (IDictionary<string, object>)null);
         }
 
-        public static Export Create(string contractName, object value, IDictionary<string, object> metadata)
+        public static Export Create(
+            string contractName,
+            object value,
+            IDictionary<string, object> metadata
+        )
         {
             return Create(contractName, metadata, () => value);
         }
 
-        public static Export Create(string contractName, IDictionary<string, object> metadata, Func<object> exportedValueGetter)
+        public static Export Create(
+            string contractName,
+            IDictionary<string, object> metadata,
+            Func<object> exportedValueGetter
+        )
         {
-            return new Export(ExportDefinitionFactory.Create(contractName, metadata), exportedValueGetter);
+            return new Export(
+                ExportDefinitionFactory.Create(contractName, metadata),
+                exportedValueGetter
+            );
         }
 
-        private static Lazy<T, TMetadataView> Create<T, TMetadataView>(Func<T> exportedValueGetter, IDictionary<string, object> metadata)
+        private static Lazy<T, TMetadataView> Create<T, TMetadataView>(
+            Func<T> exportedValueGetter,
+            IDictionary<string, object> metadata
+        )
         {
-            return new Lazy<T, TMetadataView>(exportedValueGetter, AttributedModelServices.GetMetadataView<TMetadataView>(metadata), false);
+            return new Lazy<T, TMetadataView>(
+                exportedValueGetter,
+                AttributedModelServices.GetMetadataView<TMetadataView>(metadata),
+                false
+            );
         }
     }
 }

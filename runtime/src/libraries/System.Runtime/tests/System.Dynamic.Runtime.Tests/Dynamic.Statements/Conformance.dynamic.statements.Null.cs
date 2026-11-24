@@ -29,8 +29,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.Null.nullabl
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.Null.null002.null002
 {
     public class Test
@@ -75,8 +73,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.Null.null002
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.Null.null003.null003
 {
     public class Test
@@ -97,7 +93,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.Null.null003
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(RuntimeErrorId.NullReferenceOnMemberException, ex.Message);
+                bool ret = ErrorVerifier.Verify(
+                    RuntimeErrorId.NullReferenceOnMemberException,
+                    ex.Message
+                );
                 if (ret)
                     return 0;
             }
@@ -112,8 +111,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.Null.null003
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.Null.null004.null004
 {
@@ -135,7 +132,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.Null.null004
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, ex.Message, "Test", "Bar");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoSuchMember,
+                    ex.Message,
+                    "Test",
+                    "Bar"
+                );
                 if (ret)
                     return 0;
             }
@@ -150,8 +152,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.Null.null004
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.Null.void001.void001
 {
@@ -173,7 +173,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.Null.void001
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(RuntimeErrorId.BindToVoidMethodButExpectResult, ex.Message);
+                bool ret = ErrorVerifier.Verify(
+                    RuntimeErrorId.BindToVoidMethodButExpectResult,
+                    ex.Message
+                );
                 if (ret)
                     return 0;
             }
@@ -181,9 +184,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.Null.void001
             return 1;
         }
 
-        public void Bar()
-        {
-        }
+        public void Bar() { }
     }
     // </Code>
 }

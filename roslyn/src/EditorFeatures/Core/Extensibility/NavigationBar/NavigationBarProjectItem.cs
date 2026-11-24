@@ -13,10 +13,19 @@ namespace Microsoft.CodeAnalysis.Editor
         Glyph glyph,
         Workspace workspace,
         DocumentId documentId,
-        string language) : NavigationBarItem(textVersion: null, text, glyph,
-                   spans: ImmutableArray<TextSpan>.Empty,
-                   childItems: ImmutableArray<NavigationBarItem>.Empty,
-                   indent: 0, bolded: false, grayed: false), IEquatable<NavigationBarProjectItem>
+        string language
+    )
+        : NavigationBarItem(
+            textVersion: null,
+            text,
+            glyph,
+            spans: ImmutableArray<TextSpan>.Empty,
+            childItems: ImmutableArray<NavigationBarItem>.Empty,
+            indent: 0,
+            bolded: false,
+            grayed: false
+        ),
+            IEquatable<NavigationBarProjectItem>
     {
         public Workspace Workspace { get; } = workspace;
         public DocumentId DocumentId { get; } = documentId;
@@ -31,16 +40,14 @@ namespace Microsoft.CodeAnalysis.Editor
             }
         }
 
-        public override bool Equals(object? obj)
-            => Equals(obj as NavigationBarProjectItem);
+        public override bool Equals(object? obj) => Equals(obj as NavigationBarProjectItem);
 
-        public bool Equals(NavigationBarProjectItem? item)
-            => base.Equals(item) &&
-               Workspace == item.Workspace &&
-               DocumentId == item.DocumentId &&
-               Language == item.Language;
+        public bool Equals(NavigationBarProjectItem? item) =>
+            base.Equals(item)
+            && Workspace == item.Workspace
+            && DocumentId == item.DocumentId
+            && Language == item.Language;
 
-        public override int GetHashCode()
-            => throw new NotImplementedException();
+        public override int GetHashCode() => throw new NotImplementedException();
     }
 }

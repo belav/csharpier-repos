@@ -44,7 +44,7 @@ namespace System.Net
         ParameterIsDirectory = 0x20,
         ShouldParseForResponseUri = 0x40,
         HasHttpCommand = 0x80,
-        MustChangeWorkingDirectoryToPath = 0x100
+        MustChangeWorkingDirectoryToPath = 0x100,
     }
 
     internal sealed class FtpMethodInfo
@@ -54,10 +54,12 @@ namespace System.Net
         internal FtpMethodFlags Flags;
         internal string? HttpCommand;
 
-        internal FtpMethodInfo(string method,
-                               FtpOperation operation,
-                               FtpMethodFlags flags,
-                               string? httpCommand)
+        internal FtpMethodInfo(
+            string method,
+            FtpOperation operation,
+            FtpMethodFlags flags,
+            string? httpCommand
+        )
         {
             Method = method;
             Operation = operation;
@@ -106,73 +108,95 @@ namespace System.Net
 
         private static readonly FtpMethodInfo[] s_knownMethodInfo =
         {
-            new FtpMethodInfo(WebRequestMethods.Ftp.DownloadFile,
-                              FtpOperation.DownloadFile,
-                              FtpMethodFlags.IsDownload
-                              | FtpMethodFlags.HasHttpCommand
-                              | FtpMethodFlags.TakesParameter,
-                              "GET"),
-            new FtpMethodInfo(WebRequestMethods.Ftp.ListDirectory,
-                              FtpOperation.ListDirectory,
-                              FtpMethodFlags.IsDownload
-                              | FtpMethodFlags.MustChangeWorkingDirectoryToPath
-                              | FtpMethodFlags.HasHttpCommand
-                              | FtpMethodFlags.MayTakeParameter,
-                              "GET"),
-            new FtpMethodInfo(WebRequestMethods.Ftp.ListDirectoryDetails,
-                              FtpOperation.ListDirectoryDetails,
-                              FtpMethodFlags.IsDownload
-                              | FtpMethodFlags.MustChangeWorkingDirectoryToPath
-                              | FtpMethodFlags.HasHttpCommand
-                              | FtpMethodFlags.MayTakeParameter,
-                              "GET"),
-            new FtpMethodInfo(WebRequestMethods.Ftp.UploadFile,
-                              FtpOperation.UploadFile,
-                              FtpMethodFlags.IsUpload
-                              | FtpMethodFlags.TakesParameter,
-                              null),
-            new FtpMethodInfo(WebRequestMethods.Ftp.UploadFileWithUniqueName,
-                              FtpOperation.UploadFileUnique,
-                              FtpMethodFlags.IsUpload
-                              | FtpMethodFlags.MustChangeWorkingDirectoryToPath
-                              | FtpMethodFlags.DoesNotTakeParameter
-                              | FtpMethodFlags.ShouldParseForResponseUri,
-                              null),
-            new FtpMethodInfo(WebRequestMethods.Ftp.AppendFile,
-                              FtpOperation.AppendFile,
-                              FtpMethodFlags.IsUpload
-                              | FtpMethodFlags.TakesParameter,
-                              null),
-            new FtpMethodInfo(WebRequestMethods.Ftp.DeleteFile,
-                              FtpOperation.DeleteFile,
-                              FtpMethodFlags.TakesParameter,
-                              null),
-            new FtpMethodInfo(WebRequestMethods.Ftp.GetDateTimestamp,
-                              FtpOperation.GetDateTimestamp,
-                              FtpMethodFlags.TakesParameter,
-                              null),
-            new FtpMethodInfo(WebRequestMethods.Ftp.GetFileSize,
-                              FtpOperation.GetFileSize,
-                              FtpMethodFlags.TakesParameter,
-                              null),
-            new FtpMethodInfo(WebRequestMethods.Ftp.Rename,
-                              FtpOperation.Rename,
-                              FtpMethodFlags.TakesParameter,
-                              null),
-            new FtpMethodInfo(WebRequestMethods.Ftp.MakeDirectory,
-                              FtpOperation.MakeDirectory,
-                              FtpMethodFlags.TakesParameter
-                              | FtpMethodFlags.ParameterIsDirectory,
-                              null),
-            new FtpMethodInfo(WebRequestMethods.Ftp.RemoveDirectory,
-                              FtpOperation.RemoveDirectory,
-                              FtpMethodFlags.TakesParameter
-                              | FtpMethodFlags.ParameterIsDirectory,
-                              null),
-            new FtpMethodInfo(WebRequestMethods.Ftp.PrintWorkingDirectory,
-                              FtpOperation.PrintWorkingDirectory,
-                              FtpMethodFlags.DoesNotTakeParameter,
-                              null)
+            new FtpMethodInfo(
+                WebRequestMethods.Ftp.DownloadFile,
+                FtpOperation.DownloadFile,
+                FtpMethodFlags.IsDownload
+                    | FtpMethodFlags.HasHttpCommand
+                    | FtpMethodFlags.TakesParameter,
+                "GET"
+            ),
+            new FtpMethodInfo(
+                WebRequestMethods.Ftp.ListDirectory,
+                FtpOperation.ListDirectory,
+                FtpMethodFlags.IsDownload
+                    | FtpMethodFlags.MustChangeWorkingDirectoryToPath
+                    | FtpMethodFlags.HasHttpCommand
+                    | FtpMethodFlags.MayTakeParameter,
+                "GET"
+            ),
+            new FtpMethodInfo(
+                WebRequestMethods.Ftp.ListDirectoryDetails,
+                FtpOperation.ListDirectoryDetails,
+                FtpMethodFlags.IsDownload
+                    | FtpMethodFlags.MustChangeWorkingDirectoryToPath
+                    | FtpMethodFlags.HasHttpCommand
+                    | FtpMethodFlags.MayTakeParameter,
+                "GET"
+            ),
+            new FtpMethodInfo(
+                WebRequestMethods.Ftp.UploadFile,
+                FtpOperation.UploadFile,
+                FtpMethodFlags.IsUpload | FtpMethodFlags.TakesParameter,
+                null
+            ),
+            new FtpMethodInfo(
+                WebRequestMethods.Ftp.UploadFileWithUniqueName,
+                FtpOperation.UploadFileUnique,
+                FtpMethodFlags.IsUpload
+                    | FtpMethodFlags.MustChangeWorkingDirectoryToPath
+                    | FtpMethodFlags.DoesNotTakeParameter
+                    | FtpMethodFlags.ShouldParseForResponseUri,
+                null
+            ),
+            new FtpMethodInfo(
+                WebRequestMethods.Ftp.AppendFile,
+                FtpOperation.AppendFile,
+                FtpMethodFlags.IsUpload | FtpMethodFlags.TakesParameter,
+                null
+            ),
+            new FtpMethodInfo(
+                WebRequestMethods.Ftp.DeleteFile,
+                FtpOperation.DeleteFile,
+                FtpMethodFlags.TakesParameter,
+                null
+            ),
+            new FtpMethodInfo(
+                WebRequestMethods.Ftp.GetDateTimestamp,
+                FtpOperation.GetDateTimestamp,
+                FtpMethodFlags.TakesParameter,
+                null
+            ),
+            new FtpMethodInfo(
+                WebRequestMethods.Ftp.GetFileSize,
+                FtpOperation.GetFileSize,
+                FtpMethodFlags.TakesParameter,
+                null
+            ),
+            new FtpMethodInfo(
+                WebRequestMethods.Ftp.Rename,
+                FtpOperation.Rename,
+                FtpMethodFlags.TakesParameter,
+                null
+            ),
+            new FtpMethodInfo(
+                WebRequestMethods.Ftp.MakeDirectory,
+                FtpOperation.MakeDirectory,
+                FtpMethodFlags.TakesParameter | FtpMethodFlags.ParameterIsDirectory,
+                null
+            ),
+            new FtpMethodInfo(
+                WebRequestMethods.Ftp.RemoveDirectory,
+                FtpOperation.RemoveDirectory,
+                FtpMethodFlags.TakesParameter | FtpMethodFlags.ParameterIsDirectory,
+                null
+            ),
+            new FtpMethodInfo(
+                WebRequestMethods.Ftp.PrintWorkingDirectory,
+                FtpOperation.PrintWorkingDirectory,
+                FtpMethodFlags.DoesNotTakeParameter,
+                null
+            ),
         };
     }
 
@@ -215,32 +239,28 @@ namespace System.Net
         private bool _onceFailed;
         private WebHeaderCollection? _ftpRequestHeaders;
         private FtpWebResponse? _ftpWebResponse;
-        private int _readWriteTimeout = 5 * 60 * 1000;  // 5 minutes.
+        private int _readWriteTimeout = 5 * 60 * 1000; // 5 minutes.
 
         private ContextAwareResult? _writeAsyncResult;
         private LazyAsyncResult? _readAsyncResult;
         private LazyAsyncResult? _requestCompleteAsyncResult;
 
         // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression approved. Anonymous FTP credential in production code.")]
-        private static readonly NetworkCredential s_defaultFtpNetworkCredential = new NetworkCredential("anonymous", "anonymous@", string.Empty);
-        private const int s_DefaultTimeout = 100000;  // 100 seconds
-        private static readonly TimerThread.Queue s_DefaultTimerQueue = TimerThread.GetOrCreateQueue(s_DefaultTimeout);
+        private static readonly NetworkCredential s_defaultFtpNetworkCredential =
+            new NetworkCredential("anonymous", "anonymous@", string.Empty);
+        private const int s_DefaultTimeout = 100000; // 100 seconds
+        private static readonly TimerThread.Queue s_DefaultTimerQueue =
+            TimerThread.GetOrCreateQueue(s_DefaultTimeout);
 
         // Used by FtpControlStream
         internal FtpMethodInfo MethodInfo
         {
-            get
-            {
-                return _methodInfo;
-            }
+            get { return _methodInfo; }
         }
 
         public static new RequestCachePolicy? DefaultCachePolicy
         {
-            get
-            {
-                return WebRequest.DefaultCachePolicy;
-            }
+            get { return WebRequest.DefaultCachePolicy; }
             set
             {
                 // We don't support caching, so ignore attempts to set this property.
@@ -255,10 +275,7 @@ namespace System.Net
         /// </summary>
         public override string Method
         {
-            get
-            {
-                return _methodInfo.Method;
-            }
+            get { return _methodInfo.Method; }
             set
             {
                 ArgumentException.ThrowIfNullOrEmpty(value);
@@ -287,10 +304,7 @@ namespace System.Net
         [DisallowNull]
         public string? RenameTo
         {
-            get
-            {
-                return _renameTo;
-            }
+            get { return _renameTo; }
             set
             {
                 if (InUse)
@@ -310,10 +324,7 @@ namespace System.Net
         [DisallowNull]
         public override ICredentials? Credentials
         {
-            get
-            {
-                return _authInfo;
-            }
+            get { return _authInfo; }
             set
             {
                 if (InUse)
@@ -334,10 +345,7 @@ namespace System.Net
         /// </summary>
         public override Uri RequestUri
         {
-            get
-            {
-                return _uri;
-            }
+            get { return _uri; }
         }
 
         /// <summary>
@@ -345,10 +353,7 @@ namespace System.Net
         /// </summary>
         public override int Timeout
         {
-            get
-            {
-                return _timeout;
-            }
+            get { return _timeout; }
             set
             {
                 if (InUse)
@@ -357,7 +362,10 @@ namespace System.Net
                 }
                 if (value < 0 && value != System.Threading.Timeout.Infinite)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.net_io_timeout_use_ge_zero);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.net_io_timeout_use_ge_zero
+                    );
                 }
                 if (_timeout != value)
                 {
@@ -369,10 +377,7 @@ namespace System.Net
 
         internal int RemainingTimeout
         {
-            get
-            {
-                return _remainingTimeout;
-            }
+            get { return _remainingTimeout; }
         }
 
         /// <summary>
@@ -383,10 +388,7 @@ namespace System.Net
         /// </summary>
         public int ReadWriteTimeout
         {
-            get
-            {
-                return _readWriteTimeout;
-            }
+            get { return _readWriteTimeout; }
             set
             {
                 if (_getResponseStarted)
@@ -395,7 +397,10 @@ namespace System.Net
                 }
                 if (value <= 0 && value != System.Threading.Timeout.Infinite)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.net_io_timeout_use_gt_zero);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.net_io_timeout_use_gt_zero
+                    );
                 }
                 _readWriteTimeout = value;
             }
@@ -406,10 +411,7 @@ namespace System.Net
         /// </summary>
         public long ContentOffset
         {
-            get
-            {
-                return _contentOffset;
-            }
+            get { return _contentOffset; }
             set
             {
                 if (InUse)
@@ -426,22 +428,13 @@ namespace System.Net
         /// </summary>
         public override long ContentLength
         {
-            get
-            {
-                return _contentLength;
-            }
-            set
-            {
-                _contentLength = value;
-            }
+            get { return _contentLength; }
+            set { _contentLength = value; }
         }
 
         public override IWebProxy? Proxy
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
             set
             {
                 if (InUse)
@@ -455,10 +448,7 @@ namespace System.Net
 
         public override string? ConnectionGroupName
         {
-            get
-            {
-                return _connectionGroupName;
-            }
+            get { return _connectionGroupName; }
             set
             {
                 if (InUse)
@@ -469,19 +459,18 @@ namespace System.Net
             }
         }
 
-        public ServicePoint ServicePoint => _servicePoint ??= ServicePointManager.FindServicePoint(_uri);
+        public ServicePoint ServicePoint =>
+            _servicePoint ??= ServicePointManager.FindServicePoint(_uri);
 
         internal bool Aborted
         {
-            get
-            {
-                return _aborted;
-            }
+            get { return _aborted; }
         }
 
         internal FtpWebRequest(Uri uri)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, uri);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, uri);
 
             if ((object)uri.Scheme != (object)Uri.UriSchemeFtp)
                 throw new ArgumentOutOfRangeException(nameof(uri));
@@ -518,7 +507,8 @@ namespace System.Net
         //
         public override WebResponse GetResponse()
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Method: {_methodInfo.Method}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"Method: {_methodInfo.Method}");
 
             try
             {
@@ -541,7 +531,8 @@ namespace System.Net
 
                 if (Timeout != System.Threading.Timeout.Infinite)
                 {
-                    _remainingTimeout = Timeout - (int)((DateTime.UtcNow - _startTime).TotalMilliseconds);
+                    _remainingTimeout =
+                        Timeout - (int)((DateTime.UtcNow - _startTime).TotalMilliseconds);
 
                     if (_remainingTimeout <= 0)
                     {
@@ -580,14 +571,16 @@ namespace System.Net
             }
             catch (Exception exception)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, exception);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(this, exception);
 
                 // if _exception == null, we are about to throw an exception to the user
                 // and we haven't saved the exception, which also means we haven't dealt
                 // with it. So just release the connection and log this for investigation.
                 if (_exception == null)
                 {
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, exception);
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Error(this, exception);
                     SetException(exception);
                     FinishRequestStage(RequestStage.CheckForError);
                 }
@@ -601,7 +594,8 @@ namespace System.Net
         /// </summary>
         public override IAsyncResult BeginGetResponse(AsyncCallback? callback, object? state)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Method: {_methodInfo.Method}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"Method: {_methodInfo.Method}");
 
             ContextAwareResult? asyncResult;
 
@@ -664,7 +658,8 @@ namespace System.Net
             }
             catch (Exception exception)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, exception);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(this, exception);
                 throw;
             }
 
@@ -687,7 +682,9 @@ namespace System.Net
                 }
                 if (castedAsyncResult.EndCalled)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.net_io_invalidendcall, "EndGetResponse"));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.net_io_invalidendcall, "EndGetResponse")
+                    );
                 }
 
                 castedAsyncResult.InternalWaitForCompletion();
@@ -696,7 +693,8 @@ namespace System.Net
             }
             catch (Exception exception)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, exception);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(this, exception);
                 throw;
             }
 
@@ -708,7 +706,8 @@ namespace System.Net
         /// </summary>
         public override Stream GetRequestStream()
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Method: {_methodInfo.Method}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"Method: {_methodInfo.Method}");
 
             try
             {
@@ -728,7 +727,8 @@ namespace System.Net
 
                 if (Timeout != System.Threading.Timeout.Infinite)
                 {
-                    _remainingTimeout = Timeout - (int)((DateTime.UtcNow - _startTime).TotalMilliseconds);
+                    _remainingTimeout =
+                        Timeout - (int)((DateTime.UtcNow - _startTime).TotalMilliseconds);
 
                     if (_remainingTimeout <= 0)
                     {
@@ -749,7 +749,8 @@ namespace System.Net
             }
             catch (Exception exception)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, exception);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(this, exception);
                 throw;
             }
             return _stream;
@@ -760,7 +761,8 @@ namespace System.Net
         /// </summary>
         public override IAsyncResult BeginGetRequestStream(AsyncCallback? callback, object? state)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Method: {_methodInfo.Method}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"Method: {_methodInfo.Method}");
 
             ContextAwareResult? asyncResult = null;
             try
@@ -788,7 +790,8 @@ namespace System.Net
             }
             catch (Exception exception)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, exception);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(this, exception);
                 throw;
             }
 
@@ -811,7 +814,9 @@ namespace System.Net
 
                 if (castedAsyncResult.EndCalled)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.net_io_invalidendcall, "EndGetResponse"));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.net_io_invalidendcall, "EndGetResponse")
+                    );
                 }
 
                 castedAsyncResult.InternalWaitForCompletion();
@@ -828,7 +833,8 @@ namespace System.Net
             }
             catch (Exception exception)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, exception);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(this, exception);
                 throw;
             }
             return requestStream;
@@ -869,7 +875,8 @@ namespace System.Net
                     {
                         if (Timeout != System.Threading.Timeout.Infinite)
                         {
-                            _remainingTimeout = Timeout - (int)((DateTime.UtcNow - _startTime).TotalMilliseconds);
+                            _remainingTimeout =
+                                Timeout - (int)((DateTime.UtcNow - _startTime).TotalMilliseconds);
 
                             if (_remainingTimeout <= 0)
                             {
@@ -878,7 +885,8 @@ namespace System.Net
                         }
                     }
 
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "Request being submitted");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(this, "Request being submitted");
 
                     connection.SetSocketTimeoutOption(RemainingTimeout);
 
@@ -894,7 +902,9 @@ namespace System.Net
                             {
                                 if (Timeout != System.Threading.Timeout.Infinite)
                                 {
-                                    _remainingTimeout = Timeout - (int)((DateTime.UtcNow - _startTime).TotalMilliseconds);
+                                    _remainingTimeout =
+                                        Timeout
+                                        - (int)((DateTime.UtcNow - _startTime).TotalMilliseconds);
                                     if (_remainingTimeout <= 0)
                                     {
                                         throw;
@@ -912,11 +922,17 @@ namespace System.Net
             catch (WebException webException)
             {
                 // If this was a timeout, throw a timeout exception
-                if (webException.InnerException is IOException ioEx &&
-                    ioEx.InnerException is SocketException sEx &&
-                    sEx.SocketErrorCode == SocketError.TimedOut)
+                if (
+                    webException.InnerException is IOException ioEx
+                    && ioEx.InnerException is SocketException sEx
+                    && sEx.SocketErrorCode == SocketError.TimedOut
+                )
                 {
-                    SetException(ExceptionDispatchInfo.SetCurrentStackTrace(new WebException(SR.net_timeout, WebExceptionStatus.Timeout)));
+                    SetException(
+                        ExceptionDispatchInfo.SetCurrentStackTrace(
+                            new WebException(SR.net_timeout, WebExceptionStatus.Timeout)
+                        )
+                    );
                 }
                 else
                 {
@@ -935,11 +951,17 @@ namespace System.Net
             {
                 if (se.SocketErrorCode == SocketError.HostNotFound)
                 {
-                    return new WebException(SR.net_webstatus_NameResolutionFailure, WebExceptionStatus.NameResolutionFailure);
+                    return new WebException(
+                        SR.net_webstatus_NameResolutionFailure,
+                        WebExceptionStatus.NameResolutionFailure
+                    );
                 }
                 else
                 {
-                    return new WebException(SR.net_webstatus_ConnectFailure, WebExceptionStatus.ConnectFailure);
+                    return new WebException(
+                        SR.net_webstatus_ConnectFailure,
+                        WebExceptionStatus.ConnectFailure
+                    );
                 }
             }
 
@@ -1001,7 +1023,10 @@ namespace System.Net
             }
             catch (Exception exception)
             {
-                if (!(exception is SocketException || exception is ObjectDisposedException) || !timer.HasExpired)
+                if (
+                    !(exception is SocketException || exception is ObjectDisposedException)
+                    || !timer.HasExpired
+                )
                 {
                     timer.Cancel();
                     throw;
@@ -1038,29 +1063,34 @@ namespace System.Net
         /// </summary>
         private void TimerCallback(TimerThread.Timer timer, int timeNoticed, object? context)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this);
 
             FtpControlStream? connection = _connection;
             if (connection != null)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "aborting connection");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, "aborting connection");
                 connection.AbortConnect();
             }
         }
 
-        private TimerThread.Queue TimerQueue => _timerQueue ??= TimerThread.GetOrCreateQueue(RemainingTimeout);
+        private TimerThread.Queue TimerQueue =>
+            _timerQueue ??= TimerThread.GetOrCreateQueue(RemainingTimeout);
 
         /// <summary>
         ///    <para>Returns true if we should restart the request after an error</para>
         /// </summary>
         private bool AttemptedRecovery(Exception e)
         {
-            if (e is OutOfMemoryException
+            if (
+                e is OutOfMemoryException
                 || _onceFailed
                 || _aborted
                 || _timedOut
                 || _connection == null
-                || !_connection.RecoverableFailure)
+                || !_connection.RecoverableFailure
+            )
             {
                 return false;
             }
@@ -1071,7 +1101,8 @@ namespace System.Net
                 if (_connection != null)
                 {
                     _connection.CloseSocket();
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Releasing connection: {_connection}");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(this, $"Releasing connection: {_connection}");
                     _connection = null;
                 }
                 else
@@ -1087,7 +1118,8 @@ namespace System.Net
         /// </summary>
         private void SetException(Exception exception)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this);
 
             if (exception is OutOfMemoryException)
             {
@@ -1101,7 +1133,12 @@ namespace System.Net
                 if (exception is WebException)
                 {
                     EnsureFtpWebResponse();
-                    _exception = new WebException(exception.Message, null, ((WebException)exception).Status, _ftpWebResponse);
+                    _exception = new WebException(
+                        exception.Message,
+                        null,
+                        ((WebException)exception).Status,
+                        _ftpWebResponse
+                    );
                 }
                 else if (exception is AuthenticationException || exception is SecurityException)
                 {
@@ -1110,7 +1147,12 @@ namespace System.Net
                 else if (connection != null && connection.StatusCode != FtpStatusCode.Undefined)
                 {
                     EnsureFtpWebResponse();
-                    _exception = new WebException(SR.Format(SR.net_ftp_servererror, connection.StatusLine), exception, WebExceptionStatus.ProtocolError, _ftpWebResponse);
+                    _exception = new WebException(
+                        SR.Format(SR.net_ftp_servererror, connection.StatusLine),
+                        exception,
+                        WebExceptionStatus.ProtocolError,
+                        _ftpWebResponse
+                    );
                 }
                 else
                 {
@@ -1118,7 +1160,11 @@ namespace System.Net
                 }
 
                 if (connection != null && _ftpWebResponse != null)
-                    _ftpWebResponse.UpdateStatus(connection.StatusCode, connection.StatusLine, connection.ExitMessage);
+                    _ftpWebResponse.UpdateStatus(
+                        connection.StatusCode,
+                        connection.StatusLine,
+                        connection.ExitMessage
+                    );
             }
         }
 
@@ -1146,14 +1192,17 @@ namespace System.Net
         //
         private void SyncRequestCallback(object? obj)
         {
-
             RequestStage stageMode = RequestStage.CheckForError;
             try
             {
                 bool completedRequest = obj == null;
                 Exception? exception = obj as Exception;
 
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"exp:{exception} completedRequest:{completedRequest}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(
+                        this,
+                        $"exp:{exception} completedRequest:{completedRequest}"
+                    );
 
                 if (exception != null)
                 {
@@ -1173,7 +1222,11 @@ namespace System.Net
 
                         // This to update response status and exit message if any.
                         // Note that status 221 "Service closing control connection" is always suppressed.
-                        _ftpWebResponse!.UpdateStatus(connection.StatusCode, connection.StatusLine, connection.ExitMessage);
+                        _ftpWebResponse!.UpdateStatus(
+                            connection.StatusCode,
+                            connection.StatusLine,
+                            connection.ExitMessage
+                        );
                     }
 
                     stageMode = RequestStage.ReleaseConnection;
@@ -1205,7 +1258,11 @@ namespace System.Net
 
                 bool completedRequest = (obj == null);
 
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"stream:{stream} conn:{connection} exp:{exception} completedRequest:{completedRequest}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(
+                        this,
+                        $"stream:{stream} conn:{connection} exp:{exception} completedRequest:{completedRequest}"
+                    );
                 while (true)
                 {
                     if (exception != null)
@@ -1231,12 +1288,14 @@ namespace System.Net
                         {
                             if (_aborted)
                             {
-                                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Releasing connect:{connection}");
+                                if (NetEventSource.Log.IsEnabled())
+                                    NetEventSource.Info(this, $"Releasing connect:{connection}");
                                 connection.CloseSocket();
                                 break;
                             }
                             _connection = connection;
-                            if (NetEventSource.Log.IsEnabled()) NetEventSource.Associate(this, _connection);
+                            if (NetEventSource.Log.IsEnabled())
+                                NetEventSource.Associate(this, _connection);
                         }
 
                         try
@@ -1256,7 +1315,9 @@ namespace System.Net
                         {
                             if (_aborted)
                             {
-                                ((ICloseEx)stream).CloseEx(CloseExState.Abort | CloseExState.Silent);
+                                ((ICloseEx)stream).CloseEx(
+                                    CloseExState.Abort | CloseExState.Silent
+                                );
                                 break;
                             }
                             _stream = stream;
@@ -1265,7 +1326,9 @@ namespace System.Net
                         stream.SetSocketTimeoutOption(Timeout);
                         EnsureFtpWebResponse();
 
-                        stageMode = stream.CanRead ? RequestStage.ReadReady : RequestStage.WriteReady;
+                        stageMode = stream.CanRead
+                            ? RequestStage.ReadReady
+                            : RequestStage.WriteReady;
                     }
                     else if (completedRequest)
                     {
@@ -1277,7 +1340,11 @@ namespace System.Net
 
                             // This to update response status and exit message if any.
                             // Note that the status 221 "Service closing control connection" is always suppressed.
-                            _ftpWebResponse!.UpdateStatus(connection.StatusCode, connection.StatusLine, connection.ExitMessage);
+                            _ftpWebResponse!.UpdateStatus(
+                                connection.StatusCode,
+                                connection.StatusLine,
+                                connection.ExitMessage
+                            );
                         }
 
                         stageMode = RequestStage.ReleaseConnection;
@@ -1301,11 +1368,11 @@ namespace System.Net
 
         private enum RequestStage
         {
-            CheckForError = 0,  // Do nothing except if there is an error then auto promote to ReleaseConnection
-            RequestStarted,     // Mark this request as started
-            WriteReady,         // First half is done, i.e. either writer or response stream. This is always assumed unless Started or CheckForError
-            ReadReady,          // Second half is done, i.e. the read stream can be accesses.
-            ReleaseConnection   // Release the control connection (request is read i.e. done-done)
+            CheckForError = 0, // Do nothing except if there is an error then auto promote to ReleaseConnection
+            RequestStarted, // Mark this request as started
+            WriteReady, // First half is done, i.e. either writer or response stream. This is always assumed unless Started or CheckForError
+            ReadReady, // Second half is done, i.e. the read stream can be accesses.
+            ReleaseConnection, // Release the control connection (request is read i.e. done-done)
         }
 
         //
@@ -1313,7 +1380,8 @@ namespace System.Net
         //
         private RequestStage FinishRequestStage(RequestStage stage)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"state:{stage}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"state:{stage}");
 
             if (_exception != null)
                 stage = RequestStage.ReleaseConnection;
@@ -1330,8 +1398,10 @@ namespace System.Net
                 if (stage == RequestStage.CheckForError)
                     return prev;
 
-                if (prev == RequestStage.ReleaseConnection &&
-                    stage == RequestStage.ReleaseConnection)
+                if (
+                    prev == RequestStage.ReleaseConnection
+                    && stage == RequestStage.ReleaseConnection
+                )
                 {
                     return RequestStage.ReleaseConnection;
                 }
@@ -1348,11 +1418,13 @@ namespace System.Net
 
                 if (stage == RequestStage.ReleaseConnection)
                 {
-                    if (_exception == null &&
-                        !_aborted &&
-                        prev != RequestStage.ReadReady &&
-                        _methodInfo.IsDownload &&
-                        !_ftpWebResponse!.IsFromCache)
+                    if (
+                        _exception == null
+                        && !_aborted
+                        && prev != RequestStage.ReadReady
+                        && _methodInfo.IsDownload
+                        && !_ftpWebResponse!.IsFromCache
+                    )
                     {
                         return prev;
                     }
@@ -1364,9 +1436,13 @@ namespace System.Net
             try
             {
                 // First check to see on releasing the connection
-                if ((stage == RequestStage.ReleaseConnection ||
-                     prev == RequestStage.ReleaseConnection)
-                    && connection != null)
+                if (
+                    (
+                        stage == RequestStage.ReleaseConnection
+                        || prev == RequestStage.ReleaseConnection
+                    )
+                    && connection != null
+                )
                 {
                     try
                     {
@@ -1377,7 +1453,8 @@ namespace System.Net
                     }
                     finally
                     {
-                        if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Releasing connection: {connection}");
+                        if (NetEventSource.Log.IsEnabled())
+                            NetEventSource.Info(this, $"Releasing connection: {connection}");
                         connection.CloseSocket();
                         if (_async)
                         {
@@ -1410,7 +1487,11 @@ namespace System.Net
                 finally
                 {
                     // The response is ready either with or without a stream
-                    if (stage >= RequestStage.ReadReady && readResult != null && !readResult.InternalPeekCompleted)
+                    if (
+                        stage >= RequestStage.ReadReady
+                        && readResult != null
+                        && !readResult.InternalPeekCompleted
+                    )
                         readResult.InvokeCallback();
                 }
             }
@@ -1423,7 +1504,6 @@ namespace System.Net
         {
             if (_aborted)
                 return;
-
 
             try
             {
@@ -1441,7 +1521,10 @@ namespace System.Net
 
                 if (stream != null)
                 {
-                    Debug.Assert(stream is ICloseEx, "The _stream member is not CloseEx hence the risk of connection been orphaned.");
+                    Debug.Assert(
+                        stream is ICloseEx,
+                        "The _stream member is not CloseEx hence the risk of connection been orphaned."
+                    );
                     ((ICloseEx)stream).CloseEx(CloseExState.Abort | CloseExState.Silent);
                 }
 
@@ -1449,17 +1532,15 @@ namespace System.Net
             }
             catch (Exception exception)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, exception);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(this, exception);
                 throw;
             }
         }
 
         public bool KeepAlive
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
             set
             {
                 if (InUse)
@@ -1473,10 +1554,7 @@ namespace System.Net
 
         public override RequestCachePolicy? CachePolicy
         {
-            get
-            {
-                return FtpWebRequest.DefaultCachePolicy;
-            }
+            get { return FtpWebRequest.DefaultCachePolicy; }
             set
             {
                 if (InUse)
@@ -1493,10 +1571,7 @@ namespace System.Net
         /// </summary>
         public bool UseBinary
         {
-            get
-            {
-                return _binary;
-            }
+            get { return _binary; }
             set
             {
                 if (InUse)
@@ -1509,10 +1584,7 @@ namespace System.Net
 
         public bool UsePassive
         {
-            get
-            {
-                return _passive;
-            }
+            get { return _passive; }
             set
             {
                 if (InUse)
@@ -1527,7 +1599,11 @@ namespace System.Net
         {
             get
             {
-                return LazyInitializer.EnsureInitialized(ref _clientCertificates, ref _syncObject, () => new X509CertificateCollection());
+                return LazyInitializer.EnsureInitialized(
+                    ref _clientCertificates,
+                    ref _syncObject,
+                    () => new X509CertificateCollection()
+                );
             }
             set
             {
@@ -1541,10 +1617,7 @@ namespace System.Net
         /// </summary>
         public bool EnableSsl
         {
-            get
-            {
-                return _enableSsl;
-            }
+            get { return _enableSsl; }
             set
             {
                 if (InUse)
@@ -1564,40 +1637,22 @@ namespace System.Net
         // NOT SUPPORTED method
         public override string? ContentType
         {
-            get
-            {
-                throw ExceptionHelper.PropertyNotSupportedException;
-            }
-            set
-            {
-                throw ExceptionHelper.PropertyNotSupportedException;
-            }
+            get { throw ExceptionHelper.PropertyNotSupportedException; }
+            set { throw ExceptionHelper.PropertyNotSupportedException; }
         }
 
         // NOT SUPPORTED method
         public override bool UseDefaultCredentials
         {
-            get
-            {
-                throw ExceptionHelper.PropertyNotSupportedException;
-            }
-            set
-            {
-                throw ExceptionHelper.PropertyNotSupportedException;
-            }
+            get { throw ExceptionHelper.PropertyNotSupportedException; }
+            set { throw ExceptionHelper.PropertyNotSupportedException; }
         }
 
         // NOT SUPPORTED method
         public override bool PreAuthenticate
         {
-            get
-            {
-                throw ExceptionHelper.PropertyNotSupportedException;
-            }
-            set
-            {
-                throw ExceptionHelper.PropertyNotSupportedException;
-            }
+            get { throw ExceptionHelper.PropertyNotSupportedException; }
+            set { throw ExceptionHelper.PropertyNotSupportedException; }
         }
 
         /// <summary>
@@ -1623,11 +1678,23 @@ namespace System.Net
         /// </summary>
         private void EnsureFtpWebResponse()
         {
-            if (_ftpWebResponse == null || (_ftpWebResponse.GetResponseStream() is FtpWebResponse.EmptyStream && _stream != null))
+            if (
+                _ftpWebResponse == null
+                || (
+                    _ftpWebResponse.GetResponseStream() is FtpWebResponse.EmptyStream
+                    && _stream != null
+                )
+            )
             {
                 lock (_syncObject)
                 {
-                    if (_ftpWebResponse == null || (_ftpWebResponse.GetResponseStream() is FtpWebResponse.EmptyStream && _stream != null))
+                    if (
+                        _ftpWebResponse == null
+                        || (
+                            _ftpWebResponse.GetResponseStream() is FtpWebResponse.EmptyStream
+                            && _stream != null
+                        )
+                    )
                     {
                         Stream? responseStream = _stream;
 
@@ -1663,15 +1730,39 @@ namespace System.Net
                         else
                         {
                             if (connection != null)
-                                _ftpWebResponse = new FtpWebResponse(responseStream, contentLength, connection.ResponseUri, connection.StatusCode, connection.StatusLine, connection.LastModified, connection.BannerMessage, connection.WelcomeMessage, connection.ExitMessage);
+                                _ftpWebResponse = new FtpWebResponse(
+                                    responseStream,
+                                    contentLength,
+                                    connection.ResponseUri,
+                                    connection.StatusCode,
+                                    connection.StatusLine,
+                                    connection.LastModified,
+                                    connection.BannerMessage,
+                                    connection.WelcomeMessage,
+                                    connection.ExitMessage
+                                );
                             else
-                                _ftpWebResponse = new FtpWebResponse(responseStream, -1, _uri, FtpStatusCode.Undefined, null, DateTime.Now, null, null, null);
+                                _ftpWebResponse = new FtpWebResponse(
+                                    responseStream,
+                                    -1,
+                                    _uri,
+                                    FtpStatusCode.Undefined,
+                                    null,
+                                    DateTime.Now,
+                                    null,
+                                    null,
+                                    null
+                                );
                         }
                     }
                 }
             }
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Returns {_ftpWebResponse} with stream {_ftpWebResponse._responseStream}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    $"Returns {_ftpWebResponse} with stream {_ftpWebResponse._responseStream}"
+                );
 
             return;
         }
@@ -1695,16 +1786,15 @@ namespace System.Net
                 _connection?.Abort(ExceptionHelper.RequestAbortedException);
             }
         }
-    }  // class FtpWebRequest
+    } // class FtpWebRequest
 
     //
     // Class used by the WebRequest.Create factory to create FTP requests
     //
     internal sealed class FtpWebRequestCreator : IWebRequestCreate
     {
-        internal FtpWebRequestCreator()
-        {
-        }
+        internal FtpWebRequestCreator() { }
+
         public WebRequest Create(Uri uri)
         {
             return new FtpWebRequest(uri);

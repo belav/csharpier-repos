@@ -6,18 +6,18 @@ using System;
 using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
+using System.Workflow.Activities.Common;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Compiler;
-using System.ComponentModel;
-using System.Workflow.Activities.Common;
 
 namespace System.Workflow.Activities.Rules
 {
     public enum RuleReevaluationBehavior
     {
         Never,
-        Always
+        Always,
     };
 
     [Serializable]
@@ -33,9 +33,7 @@ namespace System.Workflow.Activities.Rules
         internal IList<RuleAction> elseActions;
         private bool runtimeInitialized;
 
-        public Rule()
-        {
-        }
+        public Rule() { }
 
         public Rule(string name)
         {
@@ -49,7 +47,12 @@ namespace System.Workflow.Activities.Rules
             this.thenActions = thenActions;
         }
 
-        public Rule(string name, RuleCondition condition, IList<RuleAction> thenActions, IList<RuleAction> elseActions)
+        public Rule(
+            string name,
+            RuleCondition condition,
+            IList<RuleAction> thenActions,
+            IList<RuleAction> elseActions
+        )
         {
             this.name = name;
             this.condition = condition;
@@ -63,7 +66,9 @@ namespace System.Workflow.Activities.Rules
             set
             {
                 if (runtimeInitialized)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_CanNotChangeAtRuntime));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_CanNotChangeAtRuntime)
+                    );
                 name = value;
             }
         }
@@ -74,7 +79,9 @@ namespace System.Workflow.Activities.Rules
             set
             {
                 if (runtimeInitialized)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_CanNotChangeAtRuntime));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_CanNotChangeAtRuntime)
+                    );
                 description = value;
             }
         }
@@ -85,7 +92,9 @@ namespace System.Workflow.Activities.Rules
             set
             {
                 if (runtimeInitialized)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_CanNotChangeAtRuntime));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_CanNotChangeAtRuntime)
+                    );
                 priority = value;
             }
         }
@@ -96,7 +105,9 @@ namespace System.Workflow.Activities.Rules
             set
             {
                 if (runtimeInitialized)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_CanNotChangeAtRuntime));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_CanNotChangeAtRuntime)
+                    );
                 behavior = value;
             }
         }
@@ -107,7 +118,9 @@ namespace System.Workflow.Activities.Rules
             set
             {
                 if (runtimeInitialized)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_CanNotChangeAtRuntime));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_CanNotChangeAtRuntime)
+                    );
                 active = value;
             }
         }
@@ -118,7 +131,9 @@ namespace System.Workflow.Activities.Rules
             set
             {
                 if (runtimeInitialized)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_CanNotChangeAtRuntime));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_CanNotChangeAtRuntime)
+                    );
                 condition = value;
             }
         }
@@ -126,13 +141,23 @@ namespace System.Workflow.Activities.Rules
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public IList<RuleAction> ThenActions
         {
-            get { if (thenActions == null) thenActions = new List<RuleAction>(); return thenActions; }
+            get
+            {
+                if (thenActions == null)
+                    thenActions = new List<RuleAction>();
+                return thenActions;
+            }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public IList<RuleAction> ElseActions
         {
-            get { if (elseActions == null) elseActions = new List<RuleAction>(); return elseActions; }
+            get
+            {
+                if (elseActions == null)
+                    elseActions = new List<RuleAction>();
+                return elseActions;
+            }
         }
 
         internal void Validate(RuleValidation validation)
@@ -140,11 +165,21 @@ namespace System.Workflow.Activities.Rules
             int oldErrorCount = validation.Errors.Count;
 
             if (string.IsNullOrEmpty(name))
-                validation.Errors.Add(new ValidationError(Messages.RuleNameMissing, ErrorNumbers.Error_InvalidConditionName));
+                validation.Errors.Add(
+                    new ValidationError(
+                        Messages.RuleNameMissing,
+                        ErrorNumbers.Error_InvalidConditionName
+                    )
+                );
 
             // check the condition
             if (condition == null)
-                validation.Errors.Add(new ValidationError(Messages.MissingRuleCondition, ErrorNumbers.Error_MissingRuleCondition));
+                validation.Errors.Add(
+                    new ValidationError(
+                        Messages.MissingRuleCondition,
+                        ErrorNumbers.Error_MissingRuleCondition
+                    )
+                );
             else
                 condition.Validate(validation);
 
@@ -160,14 +195,22 @@ namespace System.Workflow.Activities.Rules
             ValidationErrorCollection errors = validation.Errors;
             if (errors.Count > oldErrorCount)
             {
-                string prefix = string.Format(CultureInfo.CurrentCulture, Messages.RuleValidationError, name);
+                string prefix = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.RuleValidationError,
+                    name
+                );
 
                 int newErrorCount = errors.Count;
                 for (int i = oldErrorCount; i < newErrorCount; ++i)
                 {
                     ValidationError oldError = errors[i];
 
-                    ValidationError newError = new ValidationError(prefix + oldError.ErrorText, oldError.ErrorNumber, oldError.IsWarning);
+                    ValidationError newError = new ValidationError(
+                        prefix + oldError.ErrorText,
+                        oldError.ErrorNumber,
+                        oldError.IsWarning
+                    );
                     foreach (DictionaryEntry de in oldError.UserData)
                         newError.UserData[de.Key] = de.Value;
 
@@ -176,7 +219,10 @@ namespace System.Workflow.Activities.Rules
             }
         }
 
-        private static void ValidateRuleActions(ICollection<RuleAction> ruleActions, RuleValidation validator)
+        private static void ValidateRuleActions(
+            ICollection<RuleAction> ruleActions,
+            RuleValidation validator
+        )
         {
             bool seenHalt = false;
             bool statementsAfterHalt = false;
@@ -192,7 +238,13 @@ namespace System.Workflow.Activities.Rules
             if (statementsAfterHalt)
             {
                 // one or more actions after Halt
-                validator.Errors.Add(new ValidationError(Messages.UnreachableCodeHalt, ErrorNumbers.Warning_UnreachableCode, true));
+                validator.Errors.Add(
+                    new ValidationError(
+                        Messages.UnreachableCodeHalt,
+                        ErrorNumbers.Warning_UnreachableCode,
+                        true
+                    )
+                );
             }
         }
 
@@ -226,11 +278,13 @@ namespace System.Workflow.Activities.Rules
             Rule other = obj as Rule;
             if (other == null)
                 return false;
-            if ((this.Name != other.Name)
+            if (
+                (this.Name != other.Name)
                 || (this.Description != other.Description)
                 || (this.Active != other.Active)
                 || (this.ReevaluationBehavior != other.ReevaluationBehavior)
-                || (this.Priority != other.Priority))
+                || (this.Priority != other.Priority)
+            )
                 return false;
             // look similar, compare condition (can be null)
             if (this.Condition == null)
@@ -251,7 +305,10 @@ namespace System.Workflow.Activities.Rules
             return true;
         }
 
-        private static bool ActionsEqual(IList<RuleAction> myActions, IList<RuleAction> otherActions)
+        private static bool ActionsEqual(
+            IList<RuleAction> myActions,
+            IList<RuleAction> otherActions
+        )
         {
             if ((myActions == null) && (otherActions == null))
                 return true;

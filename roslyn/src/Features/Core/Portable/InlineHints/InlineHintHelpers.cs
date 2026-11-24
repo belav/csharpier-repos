@@ -16,27 +16,60 @@ namespace Microsoft.CodeAnalysis.InlineHints
 {
     internal static class InlineHintHelpers
     {
-        public static Func<Document, CancellationToken, Task<ImmutableArray<TaggedText>>>? GetDescriptionFunction(int position, SymbolKey symbolKey, SymbolDescriptionOptions options)
-            => (document, cancellationToken) => GetDescriptionAsync(document, position, symbolKey, options, cancellationToken);
+        public static Func<
+            Document,
+            CancellationToken,
+            Task<ImmutableArray<TaggedText>>
+        >? GetDescriptionFunction(
+            int position,
+            SymbolKey symbolKey,
+            SymbolDescriptionOptions options
+        ) =>
+            (document, cancellationToken) =>
+                GetDescriptionAsync(document, position, symbolKey, options, cancellationToken);
 
-        private static async Task<ImmutableArray<TaggedText>> GetDescriptionAsync(Document document, int position, SymbolKey symbolKey, SymbolDescriptionOptions options, CancellationToken cancellationToken)
+        private static async Task<ImmutableArray<TaggedText>> GetDescriptionAsync(
+            Document document,
+            int position,
+            SymbolKey symbolKey,
+            SymbolDescriptionOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            var symbol = symbolKey.Resolve(semanticModel.Compilation, cancellationToken: cancellationToken).Symbol;
+            var symbol = symbolKey
+                .Resolve(semanticModel.Compilation, cancellationToken: cancellationToken)
+                .Symbol;
             if (symbol != null)
             {
-                var symbolDisplayService = document.GetRequiredLanguageService<ISymbolDisplayService>();
+                var symbolDisplayService =
+                    document.GetRequiredLanguageService<ISymbolDisplayService>();
 
                 var parts = new List<TaggedText>();
 
-                var groups = await symbolDisplayService.ToDescriptionGroupsAsync(
-                    semanticModel, position, ImmutableArray.Create(symbol), options, cancellationToken).ConfigureAwait(false);
+                var groups = await symbolDisplayService
+                    .ToDescriptionGroupsAsync(
+                        semanticModel,
+                        position,
+                        ImmutableArray.Create(symbol),
+                        options,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 parts.AddRange(groups[SymbolDescriptionGroups.MainDescription]);
 
-                var formatter = document.GetRequiredLanguageService<IDocumentationCommentFormattingService>();
-                var documentation = symbol.GetDocumentationParts(semanticModel, position, formatter, cancellationToken);
+                var formatter =
+                    document.GetRequiredLanguageService<IDocumentationCommentFormattingService>();
+                var documentation = symbol.GetDocumentationParts(
+                    semanticModel,
+                    position,
+                    formatter,
+                    cancellationToken
+                );
 
                 if (documentation.Any())
                 {
@@ -44,7 +77,12 @@ namespace Microsoft.CodeAnalysis.InlineHints
                     parts.AddRange(documentation);
                 }
 
-                if (groups.TryGetValue(SymbolDescriptionGroups.StructuralTypes, out var anonymousTypes))
+                if (
+                    groups.TryGetValue(
+                        SymbolDescriptionGroups.StructuralTypes,
+                        out var anonymousTypes
+                    )
+                )
                 {
                     if (!anonymousTypes.IsDefaultOrEmpty)
                     {

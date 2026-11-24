@@ -3,7 +3,5 @@
 
 namespace Microsoft.Extensions.DependencyInjection.Tests.Fakes
 {
-    public interface ISelfCircularDependencyWithInterface
-    {
-    }
+    public interface ISelfCircularDependencyWithInterface { }
 }

@@ -13,7 +13,6 @@ using System.Globalization;
 using System.IO;
 using System.Reflection.Runtime.General;
 using System.Text;
-
 using Internal.LowLevelLinq;
 
 namespace System.Reflection.Runtime.Assemblies
@@ -22,8 +21,12 @@ namespace System.Reflection.Runtime.Assemblies
     {
         [RequiresUnreferencedCode("Types might be removed")]
         public sealed override Type[] GetExportedTypes() => ExportedTypes.ToArray();
-        public sealed override Module[] GetLoadedModules(bool getResourceModules) => Modules.ToArray();
+
+        public sealed override Module[] GetLoadedModules(bool getResourceModules) =>
+            Modules.ToArray();
+
         public sealed override Module[] GetModules(bool getResourceModules) => Modules.ToArray();
+
         [RequiresUnreferencedCode("Types might be removed")]
         public sealed override Type[] GetTypes() => DefinedTypes.ToArray();
 
@@ -61,27 +64,35 @@ namespace System.Reflection.Runtime.Assemblies
 
         public override string Location
         {
-            get
-            {
-                return string.Empty;
-            }
+            get { return string.Empty; }
         }
 
-        [Obsolete("Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location.", DiagnosticId = "SYSLIB0012", UrlFormat = "https://aka.ms/dotnet-warnings/{0}")]
+        [Obsolete(
+            "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location.",
+            DiagnosticId = "SYSLIB0012",
+            UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
+        )]
         [RequiresAssemblyFiles("The code will throw for assemblies embedded in a single-file app")]
         public sealed override string? CodeBase
         {
-            get
-            {
-                throw new NotSupportedException(SR.NotSupported_CodeBase);
-            }
+            get { throw new NotSupportedException(SR.NotSupported_CodeBase); }
         }
 
-        public sealed override Assembly GetSatelliteAssembly(CultureInfo culture) { throw new PlatformNotSupportedException(); }
-        public sealed override Assembly GetSatelliteAssembly(CultureInfo culture, Version version) { throw new PlatformNotSupportedException(); }
+        public sealed override Assembly GetSatelliteAssembly(CultureInfo culture)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public sealed override Assembly GetSatelliteAssembly(CultureInfo culture, Version version)
+        {
+            throw new PlatformNotSupportedException();
+        }
 
         [RequiresUnreferencedCode("Assembly references might be removed")]
-        public sealed override AssemblyName[] GetReferencedAssemblies() { throw new PlatformNotSupportedException(); }
+        public sealed override AssemblyName[] GetReferencedAssemblies()
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
 }
 
@@ -89,7 +100,8 @@ namespace System.Reflection.Runtime.MethodInfos
 {
     internal abstract partial class RuntimeConstructorInfo
     {
-        public sealed override MethodImplAttributes GetMethodImplementationFlags() => MethodImplementationFlags;
+        public sealed override MethodImplAttributes GetMethodImplementationFlags() =>
+            MethodImplementationFlags;
 
         // Partial trust doesn't exist in Aot so these legacy apis are meaningless. Will report everything as SecurityCritical by fiat.
         public sealed override bool IsSecurityCritical => true;
@@ -102,9 +114,14 @@ namespace System.Reflection.Runtime.EventInfos
 {
     internal abstract partial class RuntimeEventInfo
     {
-        public sealed override MethodInfo GetAddMethod(bool nonPublic) => AddMethod.FilterAccessor(nonPublic);
-        public sealed override MethodInfo GetRemoveMethod(bool nonPublic) => RemoveMethod.FilterAccessor(nonPublic);
-        public sealed override MethodInfo GetRaiseMethod(bool nonPublic) => RaiseMethod?.FilterAccessor(nonPublic);
+        public sealed override MethodInfo GetAddMethod(bool nonPublic) =>
+            AddMethod.FilterAccessor(nonPublic);
+
+        public sealed override MethodInfo GetRemoveMethod(bool nonPublic) =>
+            RemoveMethod.FilterAccessor(nonPublic);
+
+        public sealed override MethodInfo GetRaiseMethod(bool nonPublic) =>
+            RaiseMethod?.FilterAccessor(nonPublic);
     }
 }
 
@@ -112,8 +129,11 @@ namespace System.Reflection.Runtime.MethodInfos
 {
     internal abstract partial class RuntimeMethodInfo
     {
-        public sealed override MethodImplAttributes GetMethodImplementationFlags() => MethodImplementationFlags;
-        public sealed override ICustomAttributeProvider ReturnTypeCustomAttributes => ReturnParameter;
+        public sealed override MethodImplAttributes GetMethodImplementationFlags() =>
+            MethodImplementationFlags;
+
+        public sealed override ICustomAttributeProvider ReturnTypeCustomAttributes =>
+            ReturnParameter;
 
         // Partial trust doesn't exist in Aot so these legacy apis are meaningless. Will report everything as SecurityCritical by fiat.
         public sealed override bool IsSecurityCritical => true;
@@ -126,8 +146,12 @@ namespace System.Reflection.Runtime.PropertyInfos
 {
     internal abstract partial class RuntimePropertyInfo
     {
-        public sealed override MethodInfo GetGetMethod(bool nonPublic) => Getter?.FilterAccessor(nonPublic);
-        public sealed override MethodInfo GetSetMethod(bool nonPublic) => Setter?.FilterAccessor(nonPublic);
+        public sealed override MethodInfo GetGetMethod(bool nonPublic) =>
+            Getter?.FilterAccessor(nonPublic);
+
+        public sealed override MethodInfo GetSetMethod(bool nonPublic) =>
+            Setter?.FilterAccessor(nonPublic);
+
         public sealed override MethodInfo[] GetAccessors(bool nonPublic)
         {
             MethodInfo getter = GetGetMethod(nonPublic);
@@ -153,15 +177,27 @@ namespace System.Reflection.Runtime.TypeInfos
     internal abstract partial class RuntimeTypeInfo
     {
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2063:UnrecognizedReflectionPattern",
-            Justification = "Analysis does not track annotations for RuntimeTypeInfo")]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2073:UnrecognizedReflectionPattern",
-            Justification = "Analysis does not track annotations for RuntimeTypeInfo")]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2121:UnrecognizedReflectionPattern",
-            Justification = "Analysis does not track annotations for RuntimeTypeInfo")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2063:UnrecognizedReflectionPattern",
+            Justification = "Analysis does not track annotations for RuntimeTypeInfo"
+        )]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2073:UnrecognizedReflectionPattern",
+            Justification = "Analysis does not track annotations for RuntimeTypeInfo"
+        )]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2121:UnrecognizedReflectionPattern",
+            Justification = "Analysis does not track annotations for RuntimeTypeInfo"
+        )]
         public Type? GetInterface(string name, bool ignoreCase)
         {
-            ArgumentNullException.ThrowIfNull(name, "fullname" /* Yep, CoreCLR names this different than the ref assembly */);
+            ArgumentNullException.ThrowIfNull(
+                name,
+                "fullname" /* Yep, CoreCLR names this different than the ref assembly */
+            );
 
             SplitTypeName(name, out string simpleName, out string ns);
 
@@ -170,7 +206,14 @@ namespace System.Reflection.Runtime.TypeInfos
             {
                 string ifcSimpleName = ifc.Name;
                 bool simpleNameMatches = ignoreCase
-                    ? (0 == CultureInfo.InvariantCulture.CompareInfo.Compare(simpleName, ifcSimpleName, CompareOptions.IgnoreCase))  // @todo: This could be expressed simpler but the necessary parts of String api not yet ported.
+                    ? (
+                        0
+                        == CultureInfo.InvariantCulture.CompareInfo.Compare(
+                            simpleName,
+                            ifcSimpleName,
+                            CompareOptions.IgnoreCase
+                        )
+                    ) // @todo: This could be expressed simpler but the necessary parts of String api not yet ported.
                     : simpleName.Equals(ifcSimpleName);
                 if (!simpleNameMatches)
                     continue;

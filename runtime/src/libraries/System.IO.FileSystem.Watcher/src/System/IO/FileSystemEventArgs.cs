@@ -34,11 +34,12 @@ namespace System.IO
         /// </remarks>
         internal static string Combine(string directory, string? name)
         {
-            bool hasSeparator = directory.Length != 0 && PathInternal.IsDirectorySeparator(directory[^1]);
+            bool hasSeparator =
+                directory.Length != 0 && PathInternal.IsDirectorySeparator(directory[^1]);
 
-            return hasSeparator ?
-                directory + name :
-                directory + PathInternal.DirectorySeparatorCharAsString + name;
+            return hasSeparator
+                ? directory + name
+                : directory + PathInternal.DirectorySeparatorCharAsString + name;
         }
 
         /// <devdoc>
@@ -46,10 +47,7 @@ namespace System.IO
         /// </devdoc>
         public WatcherChangeTypes ChangeType
         {
-            get
-            {
-                return _changeType;
-            }
+            get { return _changeType; }
         }
 
         /// <devdoc>
@@ -57,22 +55,15 @@ namespace System.IO
         /// </devdoc>
         public string FullPath
         {
-            get
-            {
-                return _fullPath;
-            }
+            get { return _fullPath; }
         }
-
 
         /// <devdoc>
         ///       Gets the name of the affected file or directory.
         /// </devdoc>
         public string? Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
     }
 }

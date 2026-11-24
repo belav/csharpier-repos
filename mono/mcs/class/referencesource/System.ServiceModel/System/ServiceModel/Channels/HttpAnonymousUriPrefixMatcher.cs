@@ -5,23 +5,23 @@ namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
     using System.Runtime;
-    using System.ServiceModel.Description;
     using System.ServiceModel;
+    using System.ServiceModel.Description;
 
     class HttpAnonymousUriPrefixMatcher : IAnonymousUriPrefixMatcher
     {
         UriPrefixTable<Uri> anonymousUriPrefixes;
 
-        internal HttpAnonymousUriPrefixMatcher()
-        {
-        }
+        internal HttpAnonymousUriPrefixMatcher() { }
 
         internal HttpAnonymousUriPrefixMatcher(HttpAnonymousUriPrefixMatcher objectToClone)
             : this()
         {
             if (objectToClone.anonymousUriPrefixes != null)
             {
-                this.anonymousUriPrefixes = new UriPrefixTable<Uri>(objectToClone.anonymousUriPrefixes);
+                this.anonymousUriPrefixes = new UriPrefixTable<Uri>(
+                    objectToClone.anonymousUriPrefixes
+                );
             }
         }
 
@@ -29,12 +29,17 @@ namespace System.ServiceModel.Channels
         {
             if (anonymousUriPrefix == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("anonymousUriPrefix");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "anonymousUriPrefix"
+                );
             }
 
             if (!anonymousUriPrefix.IsAbsoluteUri)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("anonymousUriPrefix", SR.GetString(SR.UriMustBeAbsolute));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "anonymousUriPrefix",
+                    SR.GetString(SR.UriMustBeAbsolute)
+                );
             }
 
             if (this.anonymousUriPrefixes == null)
@@ -42,9 +47,17 @@ namespace System.ServiceModel.Channels
                 this.anonymousUriPrefixes = new UriPrefixTable<Uri>(true);
             }
 
-            if (!this.anonymousUriPrefixes.IsRegistered(new BaseUriWithWildcard(anonymousUriPrefix, HostNameComparisonMode.Exact)))
+            if (
+                !this.anonymousUriPrefixes.IsRegistered(
+                    new BaseUriWithWildcard(anonymousUriPrefix, HostNameComparisonMode.Exact)
+                )
+            )
             {
-                this.anonymousUriPrefixes.RegisterUri(anonymousUriPrefix, HostNameComparisonMode.Exact, anonymousUriPrefix);
+                this.anonymousUriPrefixes.RegisterUri(
+                    anonymousUriPrefix,
+                    HostNameComparisonMode.Exact,
+                    anonymousUriPrefix
+                );
             }
         }
 
@@ -58,7 +71,11 @@ namespace System.ServiceModel.Channels
             }
 
             Uri returnValue;
-            return this.anonymousUriPrefixes.TryLookupUri(to, HostNameComparisonMode.Exact, out returnValue);
+            return this.anonymousUriPrefixes.TryLookupUri(
+                to,
+                HostNameComparisonMode.Exact,
+                out returnValue
+            );
         }
     }
 }

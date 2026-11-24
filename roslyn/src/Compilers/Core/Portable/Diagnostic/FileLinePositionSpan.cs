@@ -48,9 +48,7 @@ namespace Microsoft.CodeAnalysis
         /// <param name="end">The end line position.</param>
         /// <exception cref="ArgumentNullException"><paramref name="path"/> is null.</exception>
         public FileLinePositionSpan(string path, LinePosition start, LinePosition end)
-            : this(path, new LinePositionSpan(start, end))
-        {
-        }
+            : this(path, new LinePositionSpan(start, end)) { }
 
         /// <summary>
         /// Initializes the <see cref="FileLinePositionSpan"/> instance.
@@ -87,8 +85,7 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Returns true if the span represents a valid location.
         /// </summary>
-        public bool IsValid
-            => Path != null; // invalid span can be constructed by new FileLinePositionSpan()
+        public bool IsValid => Path != null; // invalid span can be constructed by new FileLinePositionSpan()
 
         /// <summary>
         /// Determines if two FileLinePositionSpan objects are equal.
@@ -96,16 +93,16 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// The path is treated as an opaque string, i.e. a case-sensitive comparison is used.
         /// </remarks>
-        public bool Equals(FileLinePositionSpan other)
-            => Span.Equals(other.Span) &&
-               HasMappedPath == other.HasMappedPath &&
-               string.Equals(Path, other.Path, StringComparison.Ordinal);
+        public bool Equals(FileLinePositionSpan other) =>
+            Span.Equals(other.Span)
+            && HasMappedPath == other.HasMappedPath
+            && string.Equals(Path, other.Path, StringComparison.Ordinal);
 
         /// <summary>
         /// Determines if two FileLinePositionSpan objects are equal.
         /// </summary>
-        public override bool Equals(object? other)
-            => other is FileLinePositionSpan span && Equals(span);
+        public override bool Equals(object? other) =>
+            other is FileLinePositionSpan span && Equals(span);
 
         /// <summary>
         /// Serves as a hash function for FileLinePositionSpan.
@@ -114,21 +111,20 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// The path is treated as an opaque string, i.e. a case-sensitive hash is calculated.
         /// </remarks>
-        public override int GetHashCode()
-            => Hash.Combine(Path, Hash.Combine(HasMappedPath, Span.GetHashCode()));
+        public override int GetHashCode() =>
+            Hash.Combine(Path, Hash.Combine(HasMappedPath, Span.GetHashCode()));
 
         /// <summary>
         /// Returns a <see cref="string"/> that represents <see cref="FileLinePositionSpan"/>.
         /// </summary>
         /// <returns>The string representation of <see cref="FileLinePositionSpan"/>.</returns>
         /// <example>Path: (0,0)-(5,6)</example>
-        public override string ToString()
-            => Path + ": " + Span;
+        public override string ToString() => Path + ": " + Span;
 
-        public static bool operator ==(FileLinePositionSpan left, FileLinePositionSpan right)
-            => left.Equals(right);
+        public static bool operator ==(FileLinePositionSpan left, FileLinePositionSpan right) =>
+            left.Equals(right);
 
-        public static bool operator !=(FileLinePositionSpan left, FileLinePositionSpan right)
-            => !(left == right);
+        public static bool operator !=(FileLinePositionSpan left, FileLinePositionSpan right) =>
+            !(left == right);
     }
 }

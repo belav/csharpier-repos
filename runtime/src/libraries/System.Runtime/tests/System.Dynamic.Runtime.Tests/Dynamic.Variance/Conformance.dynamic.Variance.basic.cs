@@ -15,17 +15,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     //<Expects Status=warning>\(53,26\).*CS0168</Expects>
     using System;
 
-    public class Animal
-    {
-    }
+    public class Animal { }
 
-    public class Tiger : Animal
-    {
-    }
+    public class Tiger : Animal { }
 
     public class C
     {
         public delegate void Foo<in T>(T t);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -36,11 +33,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
         {
             int result = 0;
             bool ret = true;
-            dynamic f11 = (Foo<Tiger>)((Tiger a) =>
-            {
-            }
-
-            );
+            dynamic f11 = (Foo<Tiger>)((Tiger a) => { });
             try
             {
                 Foo<Animal> f12 = f11;
@@ -48,46 +41,37 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                ret = ErrorVerifier.Verify(ErrorMessageId.NoImplicitConvCast, e.Message, "C.Foo<Tiger>", "C.Foo<Animal>");
+                ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoImplicitConvCast,
+                    e.Message,
+                    "C.Foo<Tiger>",
+                    "C.Foo<Animal>"
+                );
                 if (ret == false)
                     result++;
             }
 
-            Foo<Tiger> f21 = (Tiger a) =>
-            {
-            }
-
-            ;
+            Foo<Tiger> f21 = (Tiger a) => { };
             try
             {
                 dynamic f22 = (Foo<Animal>)f21;
                 result++;
             }
-            catch (InvalidCastException e)
-            {
-            }
+            catch (InvalidCastException e) { }
 
-            dynamic f31 = (Foo<Tiger>)((Tiger a) =>
-            {
-            }
-
-            );
+            dynamic f31 = (Foo<Tiger>)((Tiger a) => { });
             try
             {
                 dynamic f32 = (Foo<Animal>)f31;
                 result++;
             }
-            catch (Exception e)
-            {
-            }
+            catch (Exception e) { }
 
             return result;
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateconvar.dlgateconvar
 {
@@ -97,17 +81,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>
-    public class Animal
-    {
-    }
+    public class Animal { }
 
-    public class Tiger : Animal
-    {
-    }
+    public class Tiger : Animal { }
 
     public class C
     {
         public delegate void Foo<in T>(T t);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -116,25 +97,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
 
         public static int MainMethod()
         {
-            dynamic f11 = (Foo<Animal>)((Animal a) =>
-            {
-            }
-
-            );
+            dynamic f11 = (Foo<Animal>)((Animal a) => { });
             Foo<Tiger> f12 = (Foo<Tiger>)f11;
             f12(new Tiger());
-            Foo<Animal> f21 = (Animal a) =>
-            {
-            }
-
-            ;
+            Foo<Animal> f21 = (Animal a) => { };
             dynamic f22 = (Foo<Tiger>)f21;
             f22(new Tiger());
-            dynamic f31 = (Foo<Animal>)((Animal a) =>
-            {
-            }
-
-            );
+            dynamic f31 = (Foo<Animal>)((Animal a) => { });
             dynamic f32 = (Foo<Tiger>)f31;
             f32(new Tiger());
             return 0;
@@ -142,8 +111,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgatecov.dlgatecov
 {
@@ -153,17 +120,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>
-    public class Animal
-    {
-    }
+    public class Animal { }
 
-    public class Tiger : Animal
-    {
-    }
+    public class Tiger : Animal { }
 
     public class C
     {
         public delegate T Foo<out T>();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -172,28 +136,28 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
 
         public static int MainMethod()
         {
-            dynamic f11 = (Foo<Tiger>)(() =>
-            {
-                return new Tiger();
-            }
-
-            );
+            dynamic f11 =
+                (Foo<Tiger>)(
+                    () =>
+                    {
+                        return new Tiger();
+                    }
+                );
             Foo<Animal> f12 = f11;
             Animal t1 = f12();
             Foo<Tiger> f21 = () =>
             {
                 return new Tiger();
-            }
-
-            ;
+            };
             dynamic f22 = (Foo<Animal>)f21;
             Animal t2 = f22();
-            dynamic f31 = (Foo<Tiger>)(() =>
-            {
-                return new Tiger();
-            }
-
-            );
+            dynamic f31 =
+                (Foo<Tiger>)(
+                    () =>
+                    {
+                        return new Tiger();
+                    }
+                );
             dynamic f32 = (Foo<Animal>)f31;
             Animal t3 = f32();
             return 0;
@@ -201,8 +165,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgatecovar2.dlgatecovar2
 {
@@ -212,17 +174,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success></Expects>
     // <Code>
-    public class Animal
-    {
-    }
+    public class Animal { }
 
-    public class Tiger : Animal
-    {
-    }
+    public class Tiger : Animal { }
 
     public class C
     {
         public delegate T Foo<out T>();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -233,12 +192,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
         {
             int result = 0;
             bool ret = true;
-            dynamic f11 = (Foo<Animal>)(() =>
-            {
-                return new Tiger();
-            }
-
-            );
+            dynamic f11 =
+                (Foo<Animal>)(
+                    () =>
+                    {
+                        return new Tiger();
+                    }
+                );
             try
             {
                 result++;
@@ -247,7 +207,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
                 result--;
-                ret = ErrorVerifier.Verify(ErrorMessageId.NoImplicitConvCast, ex.Message, "C.Foo<Animal>", "C.Foo<Tiger>");
+                ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoImplicitConvCast,
+                    ex.Message,
+                    "C.Foo<Animal>",
+                    "C.Foo<Tiger>"
+                );
                 if (!ret)
                     result++;
             }
@@ -255,9 +220,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
             Foo<Animal> f21 = () =>
             {
                 return new Tiger();
-            }
-
-            ;
+            };
             try
             {
                 result++;
@@ -268,12 +231,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
                 result--;
             }
 
-            dynamic f31 = (Foo<Animal>)(() =>
-            {
-                return new Tiger();
-            }
-
-            );
+            dynamic f31 =
+                (Foo<Animal>)(
+                    () =>
+                    {
+                        return new Tiger();
+                    }
+                );
             try
             {
                 result++;
@@ -290,8 +254,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integeregererfacecontravar2.integeregererfacecontravar2
 {
     // <Area>variance</Area>
@@ -307,18 +269,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
 
     public class Variance<T> : iVariance<T>
     {
-        public void Boo(T t)
-        {
-        }
+        public void Boo(T t) { }
     }
 
-    public class Animal
-    {
-    }
+    public class Animal { }
 
-    public class Tiger : Animal
-    {
-    }
+    public class Tiger : Animal { }
 
     public class C
     {
@@ -340,7 +296,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoImplicitConvCast, ex.Message, "Variance<Tiger>", "iVariance<Animal>");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoImplicitConvCast,
+                    ex.Message,
+                    "Variance<Tiger>",
+                    "iVariance<Animal>"
+                );
                 if (ret)
                 {
                     result--;
@@ -375,8 +336,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integeregererfaceconvar.integeregererfaceconvar
 {
     // <Area>variance</Area>
@@ -392,18 +351,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
 
     public class Variance<T> : iVariance<T>
     {
-        public void Boo(T t)
-        {
-        }
+        public void Boo(T t) { }
     }
 
-    public class Animal
-    {
-    }
+    public class Animal { }
 
-    public class Tiger : Animal
-    {
-    }
+    public class Tiger : Animal { }
 
     public class C
     {
@@ -430,8 +383,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integeregererfacecovar2.integeregererfacecovar2
 {
     // <Area>variance</Area>
@@ -445,7 +396,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
         T Boo();
     }
 
-    public class Variance<T> : iVariance<T> where T : new()
+    public class Variance<T> : iVariance<T>
+        where T : new()
     {
         public T Boo()
         {
@@ -453,13 +405,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
         }
     }
 
-    public class Animal
-    {
-    }
+    public class Animal { }
 
-    public class Tiger : Animal
-    {
-    }
+    public class Tiger : Animal { }
 
     public class C
     {
@@ -480,7 +428,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoImplicitConvCast, ex.Message, "Variance<Animal>", "iVariance<Tiger>");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoImplicitConvCast,
+                    ex.Message,
+                    "Variance<Animal>",
+                    "iVariance<Tiger>"
+                );
                 if (ret)
                 {
                     result--;
@@ -515,8 +468,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integeregererfacecovar.integeregererfacecovar
 {
     // <Area>variance</Area>
@@ -530,7 +481,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
         T Boo();
     }
 
-    public class Variance<T> : iVariance<T> where T : new()
+    public class Variance<T> : iVariance<T>
+        where T : new()
     {
         public T Boo()
         {
@@ -538,13 +490,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
         }
     }
 
-    public class Animal
-    {
-    }
+    public class Animal { }
 
-    public class Tiger : Animal
-    {
-    }
+    public class Tiger : Animal { }
 
     public class C
     {
@@ -571,8 +519,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgatecontravar4.dlgatecontravar4
 {
     // <Area>variance</Area>
@@ -588,6 +534,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     public class C
     {
         public delegate void Foo<in T>(T t);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -598,11 +545,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
         {
             int result = 0;
             bool ret = true;
-            dynamic f11 = (Foo<string>)((string a) =>
-            {
-            }
-
-            );
+            dynamic f11 = (Foo<string>)((string a) => { });
             try
             {
                 Foo<dynamic> f12 = f11;
@@ -610,46 +553,37 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                ret = ErrorVerifier.Verify(ErrorMessageId.NoImplicitConvCast, e.Message, "C.Foo<string>", "C.Foo<object>");
+                ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoImplicitConvCast,
+                    e.Message,
+                    "C.Foo<string>",
+                    "C.Foo<object>"
+                );
                 if (!ret)
                     result++;
             }
 
-            Foo<string> f21 = (string a) =>
-            {
-            }
-
-            ;
+            Foo<string> f21 = (string a) => { };
             try
             {
                 dynamic f22 = (Foo<dynamic>)f21;
                 result++;
             }
-            catch (InvalidCastException e)
-            {
-            }
+            catch (InvalidCastException e) { }
 
-            dynamic f31 = (Foo<string>)((string a) =>
-            {
-            }
-
-            );
+            dynamic f31 = (Foo<string>)((string a) => { });
             try
             {
                 dynamic f32 = (Foo<dynamic>)f31;
                 result++;
             }
-            catch (InvalidCastException e)
-            {
-            }
+            catch (InvalidCastException e) { }
 
             return result;
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateconvar3.dlgateconvar3
 {
@@ -662,6 +596,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     public class C
     {
         public delegate void Foo<in T>(T t);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -670,25 +605,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
 
         public static int MainMethod()
         {
-            dynamic f11 = (Foo<dynamic>)((dynamic a) =>
-            {
-            }
-
-            );
+            dynamic f11 = (Foo<dynamic>)((dynamic a) => { });
             Foo<string> f12 = (Foo<string>)f11;
             f12(string.Empty);
-            Foo<dynamic> f21 = (dynamic a) =>
-            {
-            }
-
-            ;
+            Foo<dynamic> f21 = (dynamic a) => { };
             dynamic f22 = (Foo<string>)f21;
             f22(null);
-            dynamic f31 = (Foo<dynamic>)((dynamic a) =>
-            {
-            }
-
-            );
+            dynamic f31 = (Foo<dynamic>)((dynamic a) => { });
             dynamic f32 = (Foo<string>)f31;
             f32("ABC");
             return 0;
@@ -696,8 +619,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgatecov3.dlgatecov3
 {
@@ -710,6 +631,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     public class C
     {
         public delegate T Foo<out T>();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -718,28 +640,28 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
 
         public static int MainMethod()
         {
-            dynamic f11 = (Foo<string>)(() =>
-            {
-                return null;
-            }
-
-            );
+            dynamic f11 =
+                (Foo<string>)(
+                    () =>
+                    {
+                        return null;
+                    }
+                );
             Foo<dynamic> f12 = f11;
             dynamic t1 = f12();
             Foo<string> f21 = () =>
             {
                 return string.Empty;
-            }
-
-            ;
+            };
             dynamic f22 = (Foo<dynamic>)f21;
             dynamic t2 = f22();
-            dynamic f31 = (Foo<string>)(() =>
-            {
-                return "ABC";
-            }
-
-            );
+            dynamic f31 =
+                (Foo<string>)(
+                    () =>
+                    {
+                        return "ABC";
+                    }
+                );
             dynamic f32 = (Foo<dynamic>)f31;
             dynamic t3 = f32();
             return 0;
@@ -747,8 +669,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgatecovar4.dlgatecovar4
 {
@@ -761,6 +681,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     public class C
     {
         public delegate T Foo<out T>();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -771,12 +692,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
         {
             int result = 0;
             bool ret = true;
-            dynamic f11 = (Foo<dynamic>)(() =>
-            {
-                return 10;
-            }
-
-            );
+            dynamic f11 =
+                (Foo<dynamic>)(
+                    () =>
+                    {
+                        return 10;
+                    }
+                );
             try
             {
                 result++;
@@ -785,7 +707,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
                 result--;
-                ret = ErrorVerifier.Verify(ErrorMessageId.NoImplicitConvCast, ex.Message, "C.Foo<object>", "C.Foo<C>");
+                ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoImplicitConvCast,
+                    ex.Message,
+                    "C.Foo<object>",
+                    "C.Foo<C>"
+                );
                 if (!ret)
                     result++;
             }
@@ -793,9 +720,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
             Foo<dynamic> f21 = () =>
             {
                 return 10;
-            }
-
-            ;
+            };
             try
             {
                 result++;
@@ -806,12 +731,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
                 result--;
             }
 
-            dynamic f31 = (Foo<dynamic>)(() =>
-            {
-                return 10;
-            }
-
-            );
+            dynamic f31 =
+                (Foo<dynamic>)(
+                    () =>
+                    {
+                        return 10;
+                    }
+                );
             try
             {
                 result++;
@@ -828,8 +754,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integeregererfacecontravar4.integeregererfacecontravar4
 {
     // <Area>variance</Area>
@@ -845,9 +769,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
 
     public class Variance<T> : iVariance<T>
     {
-        public void Boo(T t)
-        {
-        }
+        public void Boo(T t) { }
     }
 
     public class C
@@ -869,7 +791,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoImplicitConvCast, ex.Message, "Variance<string>", "iVariance<object>");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoImplicitConvCast,
+                    ex.Message,
+                    "Variance<string>",
+                    "iVariance<object>"
+                );
                 if (ret)
                 {
                     result--;
@@ -904,8 +831,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integeregererfaceconvar3.integeregererfaceconvar3
 {
     // <Area>variance</Area>
@@ -921,9 +846,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
 
     public class Variance<T> : iVariance<T>
     {
-        public void Boo(T t)
-        {
-        }
+        public void Boo(T t) { }
     }
 
     public class C
@@ -951,8 +874,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integeregererfacecovar4.integeregererfacecovar4
 {
     // <Area>variance</Area>
@@ -966,7 +887,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
         T Boo();
     }
 
-    public class Variance<T> : iVariance<T> where T : new()
+    public class Variance<T> : iVariance<T>
+        where T : new()
     {
         public T Boo()
         {
@@ -993,7 +915,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoImplicitConvCast, ex.Message, "Variance<object>", "iVariance<C>");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoImplicitConvCast,
+                    ex.Message,
+                    "Variance<object>",
+                    "iVariance<C>"
+                );
                 if (ret)
                 {
                     result--;
@@ -1028,8 +955,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integeregererfacecovar3.integeregererfacecovar3
 {
     // <Area>variance</Area>
@@ -1043,7 +968,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
         T Boo();
     }
 
-    public class Variance<T> : iVariance<T> where T : new()
+    public class Variance<T> : iVariance<T>
+        where T : new()
     {
         public T Boo()
         {

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,69 +29,66 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Configuration;
 using System.ComponentModel;
+using System.Configuration;
+using System.Text;
 using System.Web.UI.WebControls;
 
 namespace System.Web.Configuration
 {
-	public sealed class ScriptingProfileServiceSection : ConfigurationSection
-	{
-		[ConfigurationPropertyAttribute ("enabled", DefaultValue = false)]
-		public bool Enabled {
-			get {
-				return (bool) this ["enabled"];
-			}
-			set {
-				this ["enabled"] = value;
-			}
-		}
+    public sealed class ScriptingProfileServiceSection : ConfigurationSection
+    {
+        [ConfigurationPropertyAttribute("enabled", DefaultValue = false)]
+        public bool Enabled
+        {
+            get { return (bool)this["enabled"]; }
+            set { this["enabled"] = value; }
+        }
 
-		[ConfigurationPropertyAttribute ("readAccessProperties", DefaultValue = null)]
-		[TypeConverter(typeof(StringArrayConverter))]
-		public string [] ReadAccessProperties {
-			get {
-				string [] data = ReadAccessPropertiesNoCopy;
-				return (string []) data.Clone ();
-			}
-			set {
-				if (value != null)
-					value = (string []) value.Clone ();
-				ReadAccessPropertiesNoCopy = value;
-			}
-		}
+        [ConfigurationPropertyAttribute("readAccessProperties", DefaultValue = null)]
+        [TypeConverter(typeof(StringArrayConverter))]
+        public string[] ReadAccessProperties
+        {
+            get
+            {
+                string[] data = ReadAccessPropertiesNoCopy;
+                return (string[])data.Clone();
+            }
+            set
+            {
+                if (value != null)
+                    value = (string[])value.Clone();
+                ReadAccessPropertiesNoCopy = value;
+            }
+        }
 
-		internal string [] ReadAccessPropertiesNoCopy {
-			get {
-				return (string []) this ["readAccessProperties"];
-			}
-			set {
-				this ["readAccessProperties"] = value;
-			}
-		}
+        internal string[] ReadAccessPropertiesNoCopy
+        {
+            get { return (string[])this["readAccessProperties"]; }
+            set { this["readAccessProperties"] = value; }
+        }
 
-		[ConfigurationPropertyAttribute ("writeAccessProperties", DefaultValue = null)]
-		[TypeConverter (typeof (StringArrayConverter))]
-		public string [] WriteAccessProperties {
-			get {
-				string [] data = WriteAccessPropertiesNoCopy;
-				return (string []) data.Clone ();
-			}
-			set {
-				if (value != null)
-					value = (string []) value.Clone ();
-				WriteAccessPropertiesNoCopy = value;
-			}
-		}
+        [ConfigurationPropertyAttribute("writeAccessProperties", DefaultValue = null)]
+        [TypeConverter(typeof(StringArrayConverter))]
+        public string[] WriteAccessProperties
+        {
+            get
+            {
+                string[] data = WriteAccessPropertiesNoCopy;
+                return (string[])data.Clone();
+            }
+            set
+            {
+                if (value != null)
+                    value = (string[])value.Clone();
+                WriteAccessPropertiesNoCopy = value;
+            }
+        }
 
-		internal string [] WriteAccessPropertiesNoCopy {
-			get {
-				return (string []) this ["writeAccessProperties"];
-			}
-			set {
-				this ["writeAccessProperties"] = value;
-			}
-		}
-	}
+        internal string[] WriteAccessPropertiesNoCopy
+        {
+            get { return (string[])this["writeAccessProperties"]; }
+            set { this["writeAccessProperties"] = value; }
+        }
+    }
 }

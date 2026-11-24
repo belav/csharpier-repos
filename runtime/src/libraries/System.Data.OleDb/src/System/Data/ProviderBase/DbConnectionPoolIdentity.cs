@@ -20,7 +20,11 @@ namespace System.Data.ProviderBase
         private const int E_NotImpersonationToken = unchecked((int)0x8007051D);
         private const int Win32_CheckTokenMembership = 1;
 
-        public static readonly DbConnectionPoolIdentity NoIdentity = new DbConnectionPoolIdentity(string.Empty, false, true);
+        public static readonly DbConnectionPoolIdentity NoIdentity = new DbConnectionPoolIdentity(
+            string.Empty,
+            false,
+            true
+        );
 
         private readonly string _sidString;
         private readonly bool _isRestricted;
@@ -46,7 +50,11 @@ namespace System.Data.ProviderBase
             if (!result && (null != value))
             {
                 DbConnectionPoolIdentity that = ((DbConnectionPoolIdentity)value);
-                result = ((_sidString == that._sidString) && (_isRestricted == that._isRestricted) && (_isNetwork == that._isNetwork));
+                result = (
+                    (_sidString == that._sidString)
+                    && (_isRestricted == that._isRestricted)
+                    && (_isNetwork == that._isNetwork)
+                );
             }
             return result;
         }
@@ -71,6 +79,5 @@ namespace System.Data.ProviderBase
                 Marshal.ThrowExceptionForHR(lastError); // will only throw if (hresult < 0)
             }
         }
-
     }
 }

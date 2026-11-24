@@ -16,9 +16,8 @@ namespace System.Data.Common
         private SqlSingle[] _values = default!; // Late-initialized
 
         public SqlSingleStorage(DataColumn column)
-        : base(column, typeof(SqlSingle), SqlSingle.Null, SqlSingle.Null, StorageType.SqlSingle)
-        {
-        }
+            : base(column, typeof(SqlSingle), SqlSingle.Null, SqlSingle.Null, StorageType.SqlSingle)
+        { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -33,7 +32,10 @@ namespace System.Data.Common
                         {
                             if (IsNull(record))
                                 continue;
-                            checked { sum += _values[record]; }
+                            checked
+                            {
+                                sum += _values[record];
+                            }
                             hasData = true;
                         }
                         if (hasData)
@@ -48,15 +50,20 @@ namespace System.Data.Common
                         {
                             if (IsNull(record))
                                 continue;
-
-                            checked { meanSum += _values[record].ToSqlDouble(); }
+                            checked
+                            {
+                                meanSum += _values[record].ToSqlDouble();
+                            }
                             meanCount++;
                             hasData = true;
                         }
                         if (hasData)
                         {
                             SqlSingle mean = 0;
-                            checked { mean = (meanSum / meanCount).ToSqlSingle(); }
+                            checked
+                            {
+                                mean = (meanSum / meanCount).ToSqlSingle();
+                            }
                             return mean;
                         }
                         return _nullValue;
@@ -74,7 +81,8 @@ namespace System.Data.Common
                             if (IsNull(record))
                                 continue;
                             dsum += _values[record].ToSqlDouble();
-                            sqrsum += (_values[record]).ToSqlDouble() * (_values[record]).ToSqlDouble();
+                            sqrsum +=
+                                (_values[record]).ToSqlDouble() * (_values[record]).ToSqlDouble();
                             count++;
                         }
 
@@ -237,7 +245,12 @@ namespace System.Data.Common
             return new SqlSingle[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             SqlSingle[] typedStore = (SqlSingle[])store;
             typedStore[storeIndex] = _values[record];

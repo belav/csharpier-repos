@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,88 +29,112 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel;
+using System.Text;
 
 namespace System.Web.UI
 {
-	[DefaultProperty ("TargetControlID")]
-	[ParseChildren (true)]
-	[NonVisualControl]
-	[PersistChildren (false)]
-	public abstract class ExtenderControl : Control, IExtenderControl
-	{
-		ScriptManager _scriptManager;
-		string _targetControlID;
-		
-		protected ExtenderControl () { }
+    [DefaultProperty("TargetControlID")]
+    [ParseChildren(true)]
+    [NonVisualControl]
+    [PersistChildren(false)]
+    public abstract class ExtenderControl : Control, IExtenderControl
+    {
+        ScriptManager _scriptManager;
+        string _targetControlID;
 
-		[DefaultValue ("")]
-		[IDReferenceProperty]
-		[Category ("Behavior")]
-		public string TargetControlID {
-			get {
-				if (_targetControlID == null)
-					return String.Empty;
-				return _targetControlID;
-			}
-			set { _targetControlID = value; }
-		}
+        protected ExtenderControl() { }
 
-		[Browsable (false)]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public override bool Visible {
-			get {
-				return base.Visible;
-			}
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+        [DefaultValue("")]
+        [IDReferenceProperty]
+        [Category("Behavior")]
+        public string TargetControlID
+        {
+            get
+            {
+                if (_targetControlID == null)
+                    return String.Empty;
+                return _targetControlID;
+            }
+            set { _targetControlID = value; }
+        }
 
-		ScriptManager ScriptManager {
-			get {
-				if (_scriptManager == null) {
-					_scriptManager = ScriptManager.GetCurrent (Page);
-					if (_scriptManager == null)
-						throw new InvalidOperationException (String.Format ("The control with ID '{0}' requires a ScriptManager on the page. The ScriptManager must appear before any controls that need it.", ID));
-				}
-				return _scriptManager;
-			}
-		}
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override bool Visible
+        {
+            get { return base.Visible; }
+            set { throw new NotImplementedException(); }
+        }
 
-		protected abstract IEnumerable<ScriptDescriptor> GetScriptDescriptors (Control targetControl);
+        ScriptManager ScriptManager
+        {
+            get
+            {
+                if (_scriptManager == null)
+                {
+                    _scriptManager = ScriptManager.GetCurrent(Page);
+                    if (_scriptManager == null)
+                        throw new InvalidOperationException(
+                            String.Format(
+                                "The control with ID '{0}' requires a ScriptManager on the page. The ScriptManager must appear before any controls that need it.",
+                                ID
+                            )
+                        );
+                }
+                return _scriptManager;
+            }
+        }
 
-		protected abstract IEnumerable<ScriptReference> GetScriptReferences ();
+        protected abstract IEnumerable<ScriptDescriptor> GetScriptDescriptors(
+            Control targetControl
+        );
 
-		protected internal override void OnPreRender (EventArgs e) {
-			base.OnPreRender (e);
+        protected abstract IEnumerable<ScriptReference> GetScriptReferences();
 
-			if (String.IsNullOrEmpty (TargetControlID))
-				throw new InvalidOperationException (String.Format ("The TargetControlID of '{0}' is not valid. The value cannot be null or empty.", ID));
-			Control c = FindControl (TargetControlID);
-			if (c == null)
-				throw new InvalidOperationException (String.Format ("The TargetControlID of '{0}' is not valid. A control with ID '{1}' could not be found.", ID, TargetControlID));
+        protected internal override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
 
-			ScriptManager.RegisterExtenderControl (this, c);
-		}
+            if (String.IsNullOrEmpty(TargetControlID))
+                throw new InvalidOperationException(
+                    String.Format(
+                        "The TargetControlID of '{0}' is not valid. The value cannot be null or empty.",
+                        ID
+                    )
+                );
+            Control c = FindControl(TargetControlID);
+            if (c == null)
+                throw new InvalidOperationException(
+                    String.Format(
+                        "The TargetControlID of '{0}' is not valid. A control with ID '{1}' could not be found.",
+                        ID,
+                        TargetControlID
+                    )
+                );
 
-		protected internal override void Render (HtmlTextWriter writer) {
-			ScriptManager.RegisterScriptDescriptors (this);
-			base.Render (writer);
-		}
+            ScriptManager.RegisterExtenderControl(this, c);
+        }
 
-		#region IExtenderControl Members
+        protected internal override void Render(HtmlTextWriter writer)
+        {
+            ScriptManager.RegisterScriptDescriptors(this);
+            base.Render(writer);
+        }
 
-		IEnumerable<ScriptDescriptor> IExtenderControl.GetScriptDescriptors (Control targetControl) {
-			return GetScriptDescriptors (targetControl);
-		}
+        #region IExtenderControl Members
 
-		IEnumerable<ScriptReference> IExtenderControl.GetScriptReferences () {
-			return GetScriptReferences ();
-		}
+        IEnumerable<ScriptDescriptor> IExtenderControl.GetScriptDescriptors(Control targetControl)
+        {
+            return GetScriptDescriptors(targetControl);
+        }
 
-		#endregion
-	}
+        IEnumerable<ScriptReference> IExtenderControl.GetScriptReferences()
+        {
+            return GetScriptReferences();
+        }
+
+        #endregion
+    }
 }

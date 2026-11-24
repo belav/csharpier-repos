@@ -10,9 +10,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Data.Common.Utils;
 using System.Diagnostics;
 using System.Reflection;
-using System.Data.Common.Utils;
 
 namespace System.Data.Metadata.Edm
 {
@@ -27,12 +27,13 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         /// <param name="item">Item with which the collection is associated.</param>
         internal MetadataPropertyCollection(MetadataItem item)
-            : base(GetSystemMetadataProperties(item))
-        {
-        }
+            : base(GetSystemMetadataProperties(item)) { }
 
-        private readonly static Memoizer<Type, ItemTypeInformation> s_itemTypeMemoizer =
-            new Memoizer<Type, ItemTypeInformation>(clrType => new ItemTypeInformation(clrType), null);
+        private static readonly Memoizer<Type, ItemTypeInformation> s_itemTypeMemoizer =
+            new Memoizer<Type, ItemTypeInformation>(
+                clrType => new ItemTypeInformation(clrType),
+                null
+            );
 
         // Given an item, returns all system type attributes for the item.
         private static IEnumerable<MetadataProperty> GetSystemMetadataProperties(MetadataItem item)
@@ -77,15 +78,23 @@ namespace System.Data.Metadata.Edm
                 }
             }
 
-            // Gets type information for item with the given type. Uses cached information where 
+            // Gets type information for item with the given type. Uses cached information where
             // available.
             private static List<ItemPropertyInfo> GetItemProperties(Type clrType)
             {
                 List<ItemPropertyInfo> result = new List<ItemPropertyInfo>();
-                foreach (PropertyInfo propertyInfo in clrType.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
+                foreach (
+                    PropertyInfo propertyInfo in clrType.GetProperties(
+                        BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                    )
+                )
                 {
-                    foreach (MetadataPropertyAttribute attribute in propertyInfo.GetCustomAttributes(
-                        typeof(MetadataPropertyAttribute), false))
+                    foreach (
+                        MetadataPropertyAttribute attribute in propertyInfo.GetCustomAttributes(
+                            typeof(MetadataPropertyAttribute),
+                            false
+                        )
+                    )
                     {
                         result.Add(new ItemPropertyInfo(propertyInfo, attribute));
                     }
@@ -93,7 +102,6 @@ namespace System.Data.Metadata.Edm
                 return result;
             }
         }
-
 
         /// <summary>
         /// Encapsulates information about a CLR property of an item class.
@@ -106,7 +114,10 @@ namespace System.Data.Metadata.Edm
             /// </summary>
             /// <param name="propertyInfo">Property referenced.</param>
             /// <param name="attribute">Attribute for the property.</param>
-            internal ItemPropertyInfo(PropertyInfo propertyInfo, MetadataPropertyAttribute attribute)
+            internal ItemPropertyInfo(
+                PropertyInfo propertyInfo,
+                MetadataPropertyAttribute attribute
+            )
             {
                 Debug.Assert(null != propertyInfo);
                 Debug.Assert(null != attribute);
@@ -125,8 +136,12 @@ namespace System.Data.Metadata.Edm
             /// <returns>Item attribute.</returns>
             internal MetadataProperty GetMetadataProperty(MetadataItem item)
             {
-                return new MetadataProperty(_propertyInfo.Name, _attribute.Type, _attribute.IsCollectionType,
-                    new MetadataPropertyValue(_propertyInfo, item));
+                return new MetadataProperty(
+                    _propertyInfo.Name,
+                    _attribute.Type,
+                    _attribute.IsCollectionType,
+                    new MetadataPropertyValue(_propertyInfo, item)
+                );
             }
         }
     }

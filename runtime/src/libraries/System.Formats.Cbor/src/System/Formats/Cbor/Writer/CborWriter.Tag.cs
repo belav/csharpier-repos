@@ -21,7 +21,9 @@ namespace System.Formats.Cbor
         {
             if (!CborConformanceModeHelpers.AllowsTags(ConformanceMode))
             {
-                throw new InvalidOperationException(SR.Format(SR.Cbor_ConformanceMode_TagsNotSupported, ConformanceMode));
+                throw new InvalidOperationException(
+                    SR.Format(SR.Cbor_ConformanceMode_TagsNotSupported, ConformanceMode)
+                );
             }
 
             WriteUnsignedInteger(CborMajorType.Tag, (ulong)tag);
@@ -39,12 +41,15 @@ namespace System.Formats.Cbor
         {
             string dateString =
 #if NET8_0_OR_GREATER
-                value.TotalOffsetMinutes == 0 ?
+                value.TotalOffsetMinutes == 0
+                    ?
 #else
-                value.Offset == TimeSpan.Zero ?
+                value.Offset == TimeSpan.Zero
+                    ?
 #endif // NET8_0_OR_GREATER
-                value.UtcDateTime.ToString(Rfc3339FormatString, CultureInfo.InvariantCulture) : // prefer 'Z' over '+00:00'
-                value.ToString(Rfc3339FormatString, CultureInfo.InvariantCulture);
+                    value.UtcDateTime.ToString(Rfc3339FormatString, CultureInfo.InvariantCulture)
+                    : // prefer 'Z' over '+00:00'
+                    value.ToString(Rfc3339FormatString, CultureInfo.InvariantCulture);
 
             WriteTag(CborTag.DateTimeString);
             WriteTextString(dateString);
@@ -75,7 +80,10 @@ namespace System.Formats.Cbor
         {
             if (double.IsInfinity(seconds) || double.IsNaN(seconds))
             {
-                throw new ArgumentException(SR.Cbor_Writer_ValueCannotBeInfiniteOrNaN, nameof(seconds));
+                throw new ArgumentException(
+                    SR.Cbor_Writer_ValueCannotBeInfiniteOrNaN,
+                    nameof(seconds)
+                );
             }
 
             WriteTag(CborTag.UnixTimeSeconds);
@@ -93,7 +101,8 @@ namespace System.Formats.Cbor
         {
             bool isUnsigned = value.Sign >= 0;
             BigInteger unsignedValue = isUnsigned ? value : -1 - value;
-            byte[] unsignedBigEndianEncoding = CborHelpers.CreateUnsignedBigEndianBytesFromBigInteger(unsignedValue);
+            byte[] unsignedBigEndianEncoding =
+                CborHelpers.CreateUnsignedBigEndianBytesFromBigInteger(unsignedValue);
 
             WriteTag(isUnsigned ? CborTag.UnsignedBigNum : CborTag.NegativeBigNum);
             WriteByteString(unsignedBigEndianEncoding);
@@ -151,7 +160,13 @@ namespace System.Formats.Cbor
 
                 int flags = buf[3];
                 bool isNegative = (flags & SignMask) == SignMask;
-                mantissa = new decimal(lo: buf[0], mid: buf[1], hi: buf[2], isNegative: isNegative, scale: 0);
+                mantissa = new decimal(
+                    lo: buf[0],
+                    mid: buf[1],
+                    hi: buf[2],
+                    isNegative: isNegative,
+                    scale: 0
+                );
                 scale = (byte)((flags & ScaleMask) >> ScaleShift);
             }
 
@@ -164,7 +179,13 @@ namespace System.Formats.Cbor
                 int flags = buf[3];
                 bool isNegative = (flags & SignMask) == SignMask;
                 Debug.Assert((flags & ScaleMask) == 0, "mantissa argument should be integral.");
-                return new decimal(lo: buf[0], mid: buf[1], hi: buf[2], isNegative: isNegative, scale: scale);
+                return new decimal(
+                    lo: buf[0],
+                    mid: buf[1],
+                    hi: buf[2],
+                    isNegative: isNegative,
+                    scale: scale
+                );
             }
 
             public static decimal Reconstruct(decimal mantissa, long exponent)
@@ -188,11 +209,16 @@ namespace System.Formats.Cbor
 
                     switch (exponent)
                     {
-                        case 0: return mantissa;
-                        case 1: return mantissa * 10m;
-                        case 2: return mantissa * 100m;
-                        case 3: return mantissa * 1000m;
-                        case 4: return mantissa * 10000m;
+                        case 0:
+                            return mantissa;
+                        case 1:
+                            return mantissa * 10m;
+                        case 2:
+                            return mantissa * 100m;
+                        case 3:
+                            return mantissa * 1000m;
+                        case 4:
+                            return mantissa * 10000m;
                         default:
                             Debug.Fail("Unreachable code in decimal exponentiation logic");
                             throw new Exception();

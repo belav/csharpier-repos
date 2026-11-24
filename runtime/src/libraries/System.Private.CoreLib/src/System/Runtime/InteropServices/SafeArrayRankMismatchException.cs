@@ -12,7 +12,9 @@ namespace System.Runtime.InteropServices
     /// than the array rank specified in the metadata.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class SafeArrayRankMismatchException : SystemException
     {
         public SafeArrayRankMismatchException()
@@ -33,10 +35,13 @@ namespace System.Runtime.InteropServices
             HResult = HResults.COR_E_SAFEARRAYRANKMISMATCH;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected SafeArrayRankMismatchException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected SafeArrayRankMismatchException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

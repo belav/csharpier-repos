@@ -10,13 +10,17 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void IsValidForRequestReturnsFalseIfHttpVerbIsNotOptions()
         {
-            HttpVerbAttributeHelper.TestHttpVerbAttributeWithInvalidVerb<HttpOptionsAttribute>("GET");
+            HttpVerbAttributeHelper.TestHttpVerbAttributeWithInvalidVerb<HttpOptionsAttribute>(
+                "GET"
+            );
         }
 
         [Fact]
         public void IsValidForRequestReturnsTrueIfHttpVerbIsOptions()
         {
-            HttpVerbAttributeHelper.TestHttpVerbAttributeWithValidVerb<HttpOptionsAttribute>("OPTIONS");
+            HttpVerbAttributeHelper.TestHttpVerbAttributeWithValidVerb<HttpOptionsAttribute>(
+                "OPTIONS"
+            );
         }
 
         [Fact]

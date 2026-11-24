@@ -20,7 +20,8 @@ public class SharedTableConvention : IModelFinalizingConvention
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public SharedTableConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
     {
         Dependencies = dependencies;
         RelationalDependencies = relationalDependencies;
@@ -39,10 +40,12 @@ public class SharedTableConvention : IModelFinalizingConvention
     /// <inheritdoc />
     public virtual void ProcessModelFinalizing(
         IConventionModelBuilder modelBuilder,
-        IConventionContext<IConventionModelBuilder> context)
+        IConventionContext<IConventionModelBuilder> context
+    )
     {
         var maxLength = modelBuilder.Metadata.GetMaxIdentifierLength();
-        var tables = new Dictionary<(string TableName, string? Schema), List<IConventionEntityType>>();
+        var tables =
+            new Dictionary<(string TableName, string? Schema), List<IConventionEntityType>>();
 
         TryUniquifyTableNames(modelBuilder.Metadata, tables, maxLength);
 
@@ -50,7 +53,11 @@ public class SharedTableConvention : IModelFinalizingConvention
         var keys = new Dictionary<string, (IConventionKey, StoreObjectIdentifier)>();
         var foreignKeys = new Dictionary<string, (IConventionForeignKey, StoreObjectIdentifier)>();
         var indexes = new Dictionary<string, (IConventionIndex, StoreObjectIdentifier)>();
-        var checkConstraints = new Dictionary<(string, string?), (IConventionCheckConstraint, StoreObjectIdentifier)>();
+        var checkConstraints =
+            new Dictionary<
+                (string, string?),
+                (IConventionCheckConstraint, StoreObjectIdentifier)
+            >();
         var triggers = new Dictionary<string, (IConventionTrigger, StoreObjectIdentifier)>();
         foreach (var ((tableName, schema), conventionEntityTypes) in tables)
         {
@@ -97,46 +104,42 @@ public class SharedTableConvention : IModelFinalizingConvention
     /// <summary>
     ///     Gets a value indicating whether key names should be unique across tables.
     /// </summary>
-    protected virtual bool KeysUniqueAcrossTables
-        => false;
+    protected virtual bool KeysUniqueAcrossTables => false;
 
     /// <summary>
     ///     Gets a value indicating whether foreign key names should be unique across tables.
     /// </summary>
-    protected virtual bool ForeignKeysUniqueAcrossTables
-        => false;
+    protected virtual bool ForeignKeysUniqueAcrossTables => false;
 
     /// <summary>
     ///     Gets a value indicating whether index names should be unique across tables.
     /// </summary>
-    protected virtual bool IndexesUniqueAcrossTables
-        => true;
+    protected virtual bool IndexesUniqueAcrossTables => true;
 
     /// <summary>
     ///     Gets a value indicating whether check constraint names should be unique across tables.
     /// </summary>
-    protected virtual bool CheckConstraintsUniqueAcrossTables
-        => true;
+    protected virtual bool CheckConstraintsUniqueAcrossTables => true;
 
     /// <summary>
     ///     Gets a value indicating whether trigger names should be unique across tables.
     /// </summary>
-    protected virtual bool TriggersUniqueAcrossTables
-        => true;
+    protected virtual bool TriggersUniqueAcrossTables => true;
 
     private static void TryUniquifyTableNames(
         IConventionModel model,
         Dictionary<(string Name, string? Schema), List<IConventionEntityType>> tables,
-        int maxLength)
+        int maxLength
+    )
     {
-        Dictionary<(string Name, string? Schema), Dictionary<(string Name, string? Schema), List<IConventionEntityType>>>?
-            clashingTables
-                = null;
+        Dictionary<
+            (string Name, string? Schema),
+            Dictionary<(string Name, string? Schema), List<IConventionEntityType>>
+        >? clashingTables = null;
         foreach (var entityType in model.GetEntityTypes())
         {
             var tableName = entityType.GetTableName();
-            if (tableName == null
-                || entityType.FindPrimaryKey() == null)
+            if (tableName == null || entityType.FindPrimaryKey() == null)
             {
                 continue;
             }
@@ -149,9 +152,15 @@ public class SharedTableConvention : IModelFinalizingConvention
                 tables[table] = entityTypes;
             }
 
-            if (entityTypes.Count > 0
-                && !entityType.FindRowInternalForeignKeys(StoreObjectIdentifier.Table(table.Name, table.Schema)).Any()
-                && !entityTypes.Any(t => t.IsAssignableFrom(entityType)))
+            if (
+                entityTypes.Count > 0
+                && !entityType
+                    .FindRowInternalForeignKeys(
+                        StoreObjectIdentifier.Table(table.Name, table.Schema)
+                    )
+                    .Any()
+                && !entityTypes.Any(t => t.IsAssignableFrom(entityType))
+            )
             {
                 entityTypes.Insert(0, entityType);
             }
@@ -169,11 +178,18 @@ public class SharedTableConvention : IModelFinalizingConvention
                 }
 
                 clashingTables ??=
-                    new Dictionary<(string Name, string? Schema), Dictionary<(string Name, string? Schema), List<IConventionEntityType>>>();
+                    new Dictionary<
+                        (string Name, string? Schema),
+                        Dictionary<(string Name, string? Schema), List<IConventionEntityType>>
+                    >();
 
                 if (!clashingTables.TryGetValue(table, out var clashingSubTables))
                 {
-                    clashingSubTables = new Dictionary<(string Name, string? Schema), List<IConventionEntityType>>();
+                    clashingSubTables =
+                        new Dictionary<
+                            (string Name, string? Schema),
+                            List<IConventionEntityType>
+                        >();
                     clashingTables[table] = clashingSubTables;
                 }
 
@@ -199,7 +215,12 @@ public class SharedTableConvention : IModelFinalizingConvention
             var oldTable = tables[table];
             foreach (var subTable in value.Values.Skip(1))
             {
-                var uniqueName = Uniquifier.Uniquify(table.Name, tables, n => (n, table.Schema), maxLength);
+                var uniqueName = Uniquifier.Uniquify(
+                    table.Name,
+                    tables,
+                    n => (n, table.Schema),
+                    maxLength
+                );
                 tables[(uniqueName, table.Schema)] = subTable;
                 foreach (var entityType in subTable)
                 {
@@ -214,7 +235,8 @@ public class SharedTableConvention : IModelFinalizingConvention
         IConventionTypeBase type,
         Dictionary<string, IConventionProperty> columns,
         in StoreObjectIdentifier storeObject,
-        int maxLength)
+        int maxLength
+    )
     {
         foreach (var property in type.GetProperties())
         {
@@ -236,21 +258,38 @@ public class SharedTableConvention : IModelFinalizingConvention
             }
 
             var identifyingMemberInfo = property.PropertyInfo ?? (MemberInfo?)property.FieldInfo;
-            if ((identifyingMemberInfo != null
-                    && identifyingMemberInfo.IsSameAs(otherProperty.PropertyInfo ?? (MemberInfo?)otherProperty.FieldInfo))
+            if (
+                (
+                    identifyingMemberInfo != null
+                    && identifyingMemberInfo.IsSameAs(
+                        otherProperty.PropertyInfo ?? (MemberInfo?)otherProperty.FieldInfo
+                    )
+                )
                 || (property.IsPrimaryKey() && otherProperty.IsPrimaryKey())
                 || (property.IsConcurrencyToken && otherProperty.IsConcurrencyToken)
-                || (!property.Builder.CanSetColumnName(null) && !otherProperty.Builder.CanSetColumnName(null)))
+                || (
+                    !property.Builder.CanSetColumnName(null)
+                    && !otherProperty.Builder.CanSetColumnName(null)
+                )
+            )
             {
                 // Handle this with a default value convention #9329
-                if (property.GetAfterSaveBehavior() == PropertySaveBehavior.Save
-                    && property.ValueGenerated is ValueGenerated.Never or ValueGenerated.OnUpdateSometimes)
+                if (
+                    property.GetAfterSaveBehavior() == PropertySaveBehavior.Save
+                    && property.ValueGenerated
+                        is ValueGenerated.Never
+                            or ValueGenerated.OnUpdateSometimes
+                )
                 {
                     property.Builder.ValueGenerated(ValueGenerated.OnUpdateSometimes);
                 }
 
-                if (otherProperty.GetAfterSaveBehavior() == PropertySaveBehavior.Save
-                    && otherProperty.ValueGenerated is ValueGenerated.Never or ValueGenerated.OnUpdateSometimes)
+                if (
+                    otherProperty.GetAfterSaveBehavior() == PropertySaveBehavior.Save
+                    && otherProperty.ValueGenerated
+                        is ValueGenerated.Never
+                            or ValueGenerated.OnUpdateSometimes
+                )
                 {
                     otherProperty.Builder.ValueGenerated(ValueGenerated.OnUpdateSometimes);
                 }
@@ -259,12 +298,25 @@ public class SharedTableConvention : IModelFinalizingConvention
             }
 
             var usePrefix = property.DeclaringType != otherProperty.DeclaringType;
-            if (!usePrefix
-                || (!property.DeclaringType.IsStrictlyDerivedFrom(otherProperty.DeclaringType)
-                    && !otherProperty.DeclaringType.IsStrictlyDerivedFrom(property.DeclaringType))
-                || (property.DeclaringType as IConventionEntityType)?.FindRowInternalForeignKeys(storeObject).Any() == true)
+            if (
+                !usePrefix
+                || (
+                    !property.DeclaringType.IsStrictlyDerivedFrom(otherProperty.DeclaringType)
+                    && !otherProperty.DeclaringType.IsStrictlyDerivedFrom(property.DeclaringType)
+                )
+                || (property.DeclaringType as IConventionEntityType)
+                    ?.FindRowInternalForeignKeys(storeObject)
+                    .Any() == true
+            )
             {
-                var newColumnName = TryUniquify(property, columnName, columns, storeObject, usePrefix, maxLength);
+                var newColumnName = TryUniquify(
+                    property,
+                    columnName,
+                    columns,
+                    storeObject,
+                    usePrefix,
+                    maxLength
+                );
                 if (newColumnName != null)
                 {
                     columns[newColumnName] = property;
@@ -272,12 +324,25 @@ public class SharedTableConvention : IModelFinalizingConvention
                 }
             }
 
-            if (!usePrefix
-                || (!property.DeclaringType.IsStrictlyDerivedFrom(otherProperty.DeclaringType)
-                    && !otherProperty.DeclaringType.IsStrictlyDerivedFrom(property.DeclaringType))
-                || (otherProperty.DeclaringType as IConventionEntityType)?.FindRowInternalForeignKeys(storeObject).Any() == true)
+            if (
+                !usePrefix
+                || (
+                    !property.DeclaringType.IsStrictlyDerivedFrom(otherProperty.DeclaringType)
+                    && !otherProperty.DeclaringType.IsStrictlyDerivedFrom(property.DeclaringType)
+                )
+                || (otherProperty.DeclaringType as IConventionEntityType)
+                    ?.FindRowInternalForeignKeys(storeObject)
+                    .Any() == true
+            )
             {
-                var newOtherColumnName = TryUniquify(otherProperty, columnName, columns, storeObject, usePrefix, maxLength);
+                var newOtherColumnName = TryUniquify(
+                    otherProperty,
+                    columnName,
+                    columns,
+                    storeObject,
+                    usePrefix,
+                    maxLength
+                );
                 if (newOtherColumnName != null)
                 {
                     columns[columnName] = property;
@@ -298,10 +363,13 @@ public class SharedTableConvention : IModelFinalizingConvention
         Dictionary<string, IConventionProperty> properties,
         in StoreObjectIdentifier storeObject,
         bool usePrefix,
-        int maxLength)
+        int maxLength
+    )
     {
-        if (property.Builder.CanSetColumnName(null)
-            && property.Builder.CanSetColumnName(null, storeObject))
+        if (
+            property.Builder.CanSetColumnName(null)
+            && property.Builder.CanSetColumnName(null, storeObject)
+        )
         {
             if (usePrefix)
             {
@@ -329,7 +397,8 @@ public class SharedTableConvention : IModelFinalizingConvention
         IConventionEntityType entityType,
         Dictionary<string, (IConventionKey, StoreObjectIdentifier)> keys,
         in StoreObjectIdentifier storeObject,
-        int maxLength)
+        int maxLength
+    )
     {
         foreach (var key in entityType.GetDeclaredKeys())
         {
@@ -346,10 +415,13 @@ public class SharedTableConvention : IModelFinalizingConvention
             }
 
             var (otherKey, otherStoreObject) = otherKeyPair;
-            if (storeObject == otherStoreObject
-                && ((key.IsPrimaryKey()
-                        && otherKey.IsPrimaryKey())
-                    || AreCompatible(key, otherKey, storeObject)))
+            if (
+                storeObject == otherStoreObject
+                && (
+                    (key.IsPrimaryKey() && otherKey.IsPrimaryKey())
+                    || AreCompatible(key, otherKey, storeObject)
+                )
+            )
             {
                 continue;
             }
@@ -380,14 +452,15 @@ public class SharedTableConvention : IModelFinalizingConvention
     protected virtual bool AreCompatible(
         IReadOnlyKey key,
         IReadOnlyKey duplicateKey,
-        in StoreObjectIdentifier storeObject)
-        => key.AreCompatible(duplicateKey, storeObject, shouldThrow: false);
+        in StoreObjectIdentifier storeObject
+    ) => key.AreCompatible(duplicateKey, storeObject, shouldThrow: false);
 
     private static string? TryUniquify(
         IConventionKey key,
         string keyName,
         Dictionary<string, (IConventionKey, StoreObjectIdentifier)> keys,
-        int maxLength)
+        int maxLength
+    )
     {
         if (key.Builder.CanSetName(null))
         {
@@ -403,7 +476,8 @@ public class SharedTableConvention : IModelFinalizingConvention
         IConventionEntityType entityType,
         Dictionary<string, (IConventionIndex, StoreObjectIdentifier)> indexes,
         in StoreObjectIdentifier storeObject,
-        int maxLength)
+        int maxLength
+    )
     {
         foreach (var index in entityType.GetDeclaredIndexes())
         {
@@ -420,8 +494,7 @@ public class SharedTableConvention : IModelFinalizingConvention
             }
 
             var (otherIndex, otherStoreObject) = otherIndexPair;
-            if (storeObject == otherStoreObject
-                && AreCompatible(index, otherIndex, storeObject))
+            if (storeObject == otherStoreObject && AreCompatible(index, otherIndex, storeObject))
             {
                 continue;
             }
@@ -452,14 +525,15 @@ public class SharedTableConvention : IModelFinalizingConvention
     protected virtual bool AreCompatible(
         IReadOnlyIndex index,
         IReadOnlyIndex duplicateIndex,
-        in StoreObjectIdentifier storeObject)
-        => index.AreCompatible(duplicateIndex, storeObject, shouldThrow: false);
+        in StoreObjectIdentifier storeObject
+    ) => index.AreCompatible(duplicateIndex, storeObject, shouldThrow: false);
 
     private static string? TryUniquify(
         IConventionIndex index,
         string indexName,
         Dictionary<string, (IConventionIndex, StoreObjectIdentifier)> indexes,
-        int maxLength)
+        int maxLength
+    )
     {
         if (index.Builder.CanSetDatabaseName(null))
         {
@@ -475,21 +549,32 @@ public class SharedTableConvention : IModelFinalizingConvention
         IConventionEntityType entityType,
         Dictionary<string, (IConventionForeignKey, StoreObjectIdentifier)> foreignKeys,
         in StoreObjectIdentifier storeObject,
-        int maxLength)
+        int maxLength
+    )
     {
         foreach (var foreignKey in entityType.GetForeignKeys())
         {
-            if (foreignKey.DeclaringEntityType != entityType
-                && StoreObjectIdentifier.Create(foreignKey.DeclaringEntityType, StoreObjectType.Table) == storeObject)
+            if (
+                foreignKey.DeclaringEntityType != entityType
+                && StoreObjectIdentifier.Create(
+                    foreignKey.DeclaringEntityType,
+                    StoreObjectType.Table
+                ) == storeObject
+            )
             {
                 continue;
             }
 
             var principalTable = foreignKey.PrincipalKey.IsPrimaryKey()
-                ? StoreObjectIdentifier.Create(foreignKey.PrincipalEntityType, StoreObjectType.Table)
-                : StoreObjectIdentifier.Create(foreignKey.PrincipalKey.DeclaringEntityType, StoreObjectType.Table);
-            if (principalTable == null
-                || storeObject == principalTable.Value)
+                ? StoreObjectIdentifier.Create(
+                    foreignKey.PrincipalEntityType,
+                    StoreObjectType.Table
+                )
+                : StoreObjectIdentifier.Create(
+                    foreignKey.PrincipalKey.DeclaringEntityType,
+                    StoreObjectType.Table
+                );
+            if (principalTable == null || storeObject == principalTable.Value)
             {
                 continue;
             }
@@ -507,8 +592,10 @@ public class SharedTableConvention : IModelFinalizingConvention
             }
 
             var (otherForeignKey, otherStoreObject) = otherForeignKeyPair;
-            if (storeObject == otherStoreObject
-                && AreCompatible(foreignKey, otherForeignKey, storeObject))
+            if (
+                storeObject == otherStoreObject
+                && AreCompatible(foreignKey, otherForeignKey, storeObject)
+            )
             {
                 continue;
             }
@@ -520,13 +607,20 @@ public class SharedTableConvention : IModelFinalizingConvention
                 continue;
             }
 
-            if (!otherForeignKey.DeclaringEntityType.IsAssignableFrom(entityType)
-                && !entityType.IsAssignableFrom(otherForeignKey.DeclaringEntityType))
+            if (
+                !otherForeignKey.DeclaringEntityType.IsAssignableFrom(entityType)
+                && !entityType.IsAssignableFrom(otherForeignKey.DeclaringEntityType)
+            )
             {
                 continue;
             }
 
-            var newOtherForeignKeyName = TryUniquify(otherForeignKey, foreignKeyName, foreignKeys, maxLength);
+            var newOtherForeignKeyName = TryUniquify(
+                otherForeignKey,
+                foreignKeyName,
+                foreignKeys,
+                maxLength
+            );
             if (newOtherForeignKeyName != null)
             {
                 foreignKeys[foreignKeyName] = (foreignKey, storeObject);
@@ -545,14 +639,15 @@ public class SharedTableConvention : IModelFinalizingConvention
     protected virtual bool AreCompatible(
         IReadOnlyForeignKey foreignKey,
         IReadOnlyForeignKey duplicateForeignKey,
-        in StoreObjectIdentifier storeObject)
-        => foreignKey.AreCompatible(duplicateForeignKey, storeObject, shouldThrow: false);
+        in StoreObjectIdentifier storeObject
+    ) => foreignKey.AreCompatible(duplicateForeignKey, storeObject, shouldThrow: false);
 
     private static string? TryUniquify(
         IConventionForeignKey foreignKey,
         string foreignKeyName,
         Dictionary<string, (IConventionForeignKey, StoreObjectIdentifier)> foreignKeys,
-        int maxLength)
+        int maxLength
+    )
     {
         if (foreignKey.Builder.CanSetConstraintName(null))
         {
@@ -566,9 +661,13 @@ public class SharedTableConvention : IModelFinalizingConvention
 
     private void UniquifyCheckConstraintNames(
         IConventionEntityType entityType,
-        Dictionary<(string, string?), (IConventionCheckConstraint, StoreObjectIdentifier)> checkConstraints,
+        Dictionary<
+            (string, string?),
+            (IConventionCheckConstraint, StoreObjectIdentifier)
+        > checkConstraints,
         in StoreObjectIdentifier storeObject,
-        int maxLength)
+        int maxLength
+    )
     {
         foreach (var checkConstraint in entityType.GetDeclaredCheckConstraints())
         {
@@ -578,31 +677,60 @@ public class SharedTableConvention : IModelFinalizingConvention
                 continue;
             }
 
-            if (!checkConstraints.TryGetValue((constraintName, storeObject.Schema), out var otherCheckConstraintPair))
+            if (
+                !checkConstraints.TryGetValue(
+                    (constraintName, storeObject.Schema),
+                    out var otherCheckConstraintPair
+                )
+            )
             {
-                checkConstraints[(constraintName, storeObject.Schema)] = (checkConstraint, storeObject);
+                checkConstraints[(constraintName, storeObject.Schema)] = (
+                    checkConstraint,
+                    storeObject
+                );
                 continue;
             }
 
             var (otherCheckConstraint, otherStoreObject) = otherCheckConstraintPair;
-            if (storeObject == otherStoreObject
-                && AreCompatible(checkConstraint, otherCheckConstraint, storeObject))
+            if (
+                storeObject == otherStoreObject
+                && AreCompatible(checkConstraint, otherCheckConstraint, storeObject)
+            )
             {
                 continue;
             }
 
-            var newConstraintName = TryUniquify(checkConstraint, constraintName, storeObject.Schema, checkConstraints, maxLength);
+            var newConstraintName = TryUniquify(
+                checkConstraint,
+                constraintName,
+                storeObject.Schema,
+                checkConstraints,
+                maxLength
+            );
             if (newConstraintName != null)
             {
-                checkConstraints[(newConstraintName, storeObject.Schema)] = (checkConstraint, storeObject);
+                checkConstraints[(newConstraintName, storeObject.Schema)] = (
+                    checkConstraint,
+                    storeObject
+                );
                 continue;
             }
 
-            var newOtherConstraintName = TryUniquify(otherCheckConstraint, constraintName, storeObject.Schema, checkConstraints, maxLength);
+            var newOtherConstraintName = TryUniquify(
+                otherCheckConstraint,
+                constraintName,
+                storeObject.Schema,
+                checkConstraints,
+                maxLength
+            );
             if (newOtherConstraintName != null)
             {
-                checkConstraints[(constraintName, storeObject.Schema)] = (checkConstraint, storeObject);
-                checkConstraints[(newOtherConstraintName, otherStoreObject.Schema)] = otherCheckConstraintPair;
+                checkConstraints[(constraintName, storeObject.Schema)] = (
+                    checkConstraint,
+                    storeObject
+                );
+                checkConstraints[(newOtherConstraintName, otherStoreObject.Schema)] =
+                    otherCheckConstraintPair;
             }
         }
     }
@@ -617,19 +745,34 @@ public class SharedTableConvention : IModelFinalizingConvention
     protected virtual bool AreCompatible(
         IReadOnlyCheckConstraint checkConstraint,
         IReadOnlyCheckConstraint duplicateCheckConstraint,
-        in StoreObjectIdentifier storeObject)
-        => CheckConstraint.AreCompatible(checkConstraint, duplicateCheckConstraint, storeObject, shouldThrow: false);
+        in StoreObjectIdentifier storeObject
+    ) =>
+        CheckConstraint.AreCompatible(
+            checkConstraint,
+            duplicateCheckConstraint,
+            storeObject,
+            shouldThrow: false
+        );
 
     private static string? TryUniquify(
         IConventionCheckConstraint checkConstraint,
         string checkConstraintName,
         string? schema,
-        Dictionary<(string, string?), (IConventionCheckConstraint, StoreObjectIdentifier)> checkConstraints,
-        int maxLength)
+        Dictionary<
+            (string, string?),
+            (IConventionCheckConstraint, StoreObjectIdentifier)
+        > checkConstraints,
+        int maxLength
+    )
     {
         if (checkConstraint.Builder.CanSetName(null))
         {
-            checkConstraintName = Uniquifier.Uniquify(checkConstraintName, checkConstraints, n => (n, schema), maxLength);
+            checkConstraintName = Uniquifier.Uniquify(
+                checkConstraintName,
+                checkConstraints,
+                n => (n, schema),
+                maxLength
+            );
             checkConstraint.Builder.HasName(checkConstraintName);
             return checkConstraintName;
         }
@@ -641,7 +784,8 @@ public class SharedTableConvention : IModelFinalizingConvention
         IConventionEntityType entityType,
         Dictionary<string, (IConventionTrigger, StoreObjectIdentifier)> triggers,
         in StoreObjectIdentifier storeObject,
-        int maxLength)
+        int maxLength
+    )
     {
         foreach (var trigger in entityType.GetDeclaredTriggers())
         {
@@ -658,8 +802,10 @@ public class SharedTableConvention : IModelFinalizingConvention
             }
 
             var (otherTrigger, otherStoreObject) = otherTriggerPair;
-            if (otherStoreObject == storeObject
-                && AreCompatible(trigger, otherTrigger, storeObject))
+            if (
+                otherStoreObject == storeObject
+                && AreCompatible(trigger, otherTrigger, storeObject)
+            )
             {
                 continue;
             }
@@ -690,14 +836,15 @@ public class SharedTableConvention : IModelFinalizingConvention
     protected virtual bool AreCompatible(
         IReadOnlyTrigger trigger,
         IReadOnlyTrigger duplicateTrigger,
-        in StoreObjectIdentifier storeObject)
-        => true;
+        in StoreObjectIdentifier storeObject
+    ) => true;
 
     private static string? TryUniquify(
         IConventionTrigger trigger,
         string triggerName,
         Dictionary<string, (IConventionTrigger, StoreObjectIdentifier)> triggers,
-        int maxLength)
+        int maxLength
+    )
     {
         if (trigger.Builder.CanSetDatabaseName(null))
         {

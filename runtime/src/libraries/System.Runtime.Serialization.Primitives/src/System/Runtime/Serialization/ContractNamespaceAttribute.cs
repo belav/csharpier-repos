@@ -3,7 +3,11 @@
 
 namespace System.Runtime.Serialization
 {
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Module, Inherited = false, AllowMultiple = true)]
+    [AttributeUsage(
+        AttributeTargets.Assembly | AttributeTargets.Module,
+        Inherited = false,
+        AllowMultiple = true
+    )]
     public sealed class ContractNamespaceAttribute : Attribute
     {
         public ContractNamespaceAttribute(string contractNamespace)

@@ -11,7 +11,11 @@ namespace System.Activities
     {
         static bool IsDefined(BookmarkOptions options)
         {
-            return options == BookmarkOptions.None || ((options & (BookmarkOptions.MultipleResume | BookmarkOptions.NonBlocking)) == options);
+            return options == BookmarkOptions.None
+                || (
+                    (options & (BookmarkOptions.MultipleResume | BookmarkOptions.NonBlocking))
+                    == options
+                );
         }
 
         public static void Validate(BookmarkOptions options, string argumentName)
@@ -19,7 +23,12 @@ namespace System.Activities
             if (!IsDefined(options))
             {
                 throw FxTrace.Exception.AsError(
-                    new InvalidEnumArgumentException(argumentName, (int)options, typeof(BookmarkOptions)));
+                    new InvalidEnumArgumentException(
+                        argumentName,
+                        (int)options,
+                        typeof(BookmarkOptions)
+                    )
+                );
             }
         }
 

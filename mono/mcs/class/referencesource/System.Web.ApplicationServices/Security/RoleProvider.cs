@@ -4,51 +4,77 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Security {
-   using  System.Web;
-   using  System.Security.Principal;
-   using  System.Security.Permissions;
-   using  System.Globalization;
-   using  System.Runtime.CompilerServices;
-   using  System.Runtime.Serialization;
-   using  System.Collections;
-   using  System.Collections.Specialized;
-   using  System.Configuration.Provider;
-   using System.Diagnostics.CodeAnalysis;
+namespace System.Web.Security
+{
+    using System.Collections;
+    using System.Collections.Specialized;
+    using System.Configuration.Provider;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
+    using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Web;
 
-   /// <devdoc>
-   ///   <para>[To be supplied.]</para>
-   /// </devdoc>
-   [TypeForwardedFrom("System.Web, Version=2.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-   public abstract class RoleProvider : ProviderBase
-   {
+    /// <devdoc>
+    ///   <para>[To be supplied.]</para>
+    /// </devdoc>
+    [TypeForwardedFrom(
+        "System.Web, Version=2.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
+    public abstract class RoleProvider : ProviderBase
+    {
+        public abstract string ApplicationName { get; set; }
 
-       public abstract string ApplicationName { get; set; }
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "username",
+            Justification = "This version is required to maintain backwards binary compatibility"
+        )]
+        public abstract bool IsUserInRole(string username, string roleName);
 
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "username",
+            Justification = "This version is required to maintain backwards binary compatibility"
+        )]
+        public abstract string[] GetRolesForUser(string username);
 
-       [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "username", Justification="This version is required to maintain backwards binary compatibility")]
-       public abstract bool IsUserInRole(string username, string roleName);
+        public abstract void CreateRole(string roleName);
 
-       [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "username", Justification="This version is required to maintain backwards binary compatibility")]
-       public abstract string[] GetRolesForUser(string username);
+        public abstract bool DeleteRole(string roleName, bool throwOnPopulatedRole);
 
-       public abstract void CreateRole(string roleName);
+        public abstract bool RoleExists(string roleName);
 
-       public abstract bool DeleteRole(string roleName, bool throwOnPopulatedRole);
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "usernames",
+            Justification = "This version is required to maintain backwards binary compatibility"
+        )]
+        public abstract void AddUsersToRoles(string[] usernames, string[] roleNames);
 
-       public abstract bool RoleExists(string roleName);
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "usernames",
+            Justification = "This version is required to maintain backwards binary compatibility"
+        )]
+        public abstract void RemoveUsersFromRoles(string[] usernames, string[] roleNames);
 
-       [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "usernames", Justification="This version is required to maintain backwards binary compatibility")]
-       public abstract void AddUsersToRoles(string[] usernames, string[] roleNames);
+        public abstract string[] GetUsersInRole(string roleName);
 
-       [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "usernames", Justification="This version is required to maintain backwards binary compatibility")]
-       public abstract void RemoveUsersFromRoles(string[] usernames, string[] roleNames);
+        public abstract string[] GetAllRoles();
 
-       public abstract string[] GetUsersInRole(string roleName);
-
-       public abstract string[] GetAllRoles();
-
-       [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "username", Justification="This version is required to maintain backwards binary compatibility")]
-       public abstract string[] FindUsersInRole(string roleName, string usernameToMatch);
-   }
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "username",
+            Justification = "This version is required to maintain backwards binary compatibility"
+        )]
+        public abstract string[] FindUsersInRole(string roleName, string usernameToMatch);
+    }
 }

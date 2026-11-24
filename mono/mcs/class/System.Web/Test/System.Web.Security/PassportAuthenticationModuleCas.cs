@@ -1,5 +1,5 @@
 //
-// PassportAuthenticationModuleCas.cs 
+// PassportAuthenticationModuleCas.cs
 //	- CAS unit tests for System.Web.Security.PassportAuthenticationModule
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,76 +27,79 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.Security;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.Security {
+namespace MonoCasTests.System.Web.Security
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class PassportAuthenticationModuleCas : AspNetHostingMinimal
+    {
+        private HttpApplication app;
+        private PassportAuthenticationModule module;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class PassportAuthenticationModuleCas : AspNetHostingMinimal {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            app = new HttpApplication();
+            module = new PassportAuthenticationModule();
+        }
 
-		private HttpApplication app;
-		private PassportAuthenticationModule module;
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Constructor_Deny_UnmanagedCode()
+        {
+            new PassportAuthenticationModule();
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			app = new HttpApplication ();
-			module = new PassportAuthenticationModule ();
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.PermitOnly, UnmanagedCode = true)]
+        public void Constructor_PermitOnly_UnmanagedCode()
+        {
+            new PassportAuthenticationModule();
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Constructor_Deny_UnmanagedCode ()
-		{
-			new PassportAuthenticationModule ();
-		}
+        private void Authenticate(object sender, PassportAuthenticationEventArgs e) { }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		public void Constructor_PermitOnly_UnmanagedCode ()
-		{
-			new PassportAuthenticationModule ();
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Module()
+        {
+            // only the ctor requires UnmanagedCode
+            try
+            {
+                module.Init(app);
+            }
+            catch (NotImplementedException)
+            {
+                // Mono
+            }
+            module.Authenticate += new PassportAuthenticationEventHandler(Authenticate);
+            module.Authenticate -= new PassportAuthenticationEventHandler(Authenticate);
+            module.Dispose(); // but doesn't implement IDisposable
+        }
 
-		private void Authenticate (object sender, PassportAuthenticationEventArgs e)
-		{
-		}
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Module ()
-		{
-			// only the ctor requires UnmanagedCode
-			try {
-				module.Init (app);
-			}
-			catch (NotImplementedException) {
-				// Mono
-			}
-			module.Authenticate += new PassportAuthenticationEventHandler (Authenticate);
-			module.Authenticate -= new PassportAuthenticationEventHandler (Authenticate);
-			module.Dispose (); // but doesn't implement IDisposable
-		}
+        [SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
+        {
+            return base.CreateControl(action, level);
+        }
 
-		// LinkDemand
-
-		[SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			return base.CreateControl (action, level);
-		}
-
-		public override Type Type {
-			get { return typeof (PassportAuthenticationModule); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(PassportAuthenticationModule); }
+        }
+    }
 }

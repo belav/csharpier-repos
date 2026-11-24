@@ -8,19 +8,13 @@ namespace System.Net.NetworkInformation
         // Specifies the host name for the local computer.
         internal static string HostName
         {
-            get
-            {
-                return HostInformationPal.GetHostName();
-            }
+            get { return HostInformationPal.GetHostName(); }
         }
 
         // Specifies the domain in which the local computer is registered.
         internal static string DomainName
         {
-            get
-            {
-                return HostInformationPal.GetDomainName();
-            }
+            get { return HostInformationPal.GetDomainName(); }
         }
     }
 }

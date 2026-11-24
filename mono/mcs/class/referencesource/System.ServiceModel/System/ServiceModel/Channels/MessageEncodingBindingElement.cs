@@ -5,37 +5,35 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Description;
     using System.Runtime.Serialization;
     using System.ServiceModel;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
-
     using System.Xml;
 
     public abstract class MessageEncodingBindingElement : BindingElement
     {
-        protected MessageEncodingBindingElement()
-        {
-        }
+        protected MessageEncodingBindingElement() { }
 
         protected MessageEncodingBindingElement(MessageEncodingBindingElement elementToBeCloned)
-            : base(elementToBeCloned)
-        {
-        }
+            : base(elementToBeCloned) { }
 
         public abstract MessageVersion MessageVersion { get; set; }
-
 
         internal virtual bool IsWsdlExportable
         {
             get { return true; }
         }
 
-        internal IChannelFactory<TChannel> InternalBuildChannelFactory<TChannel>(BindingContext context)
+        internal IChannelFactory<TChannel> InternalBuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("context"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("context")
+                );
             }
 
 #pragma warning suppress 56506 // Microsoft, BindingContext.BindingParameters never be null
@@ -47,7 +45,9 @@ namespace System.ServiceModel.Channels
         {
             if (context == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("context"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("context")
+                );
             }
 
 #pragma warning suppress 56506 // Microsoft, BindingContext.BindingParameters never be null
@@ -55,12 +55,16 @@ namespace System.ServiceModel.Channels
             return context.CanBuildInnerChannelFactory<TChannel>();
         }
 
-        internal IChannelListener<TChannel> InternalBuildChannelListener<TChannel>(BindingContext context)
+        internal IChannelListener<TChannel> InternalBuildChannelListener<TChannel>(
+            BindingContext context
+        )
             where TChannel : class, IChannel
         {
             if (context == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("context"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("context")
+                );
             }
 
 #pragma warning suppress 56506 // Microsoft, BindingContext.BindingParameters never be null
@@ -73,7 +77,9 @@ namespace System.ServiceModel.Channels
         {
             if (context == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("context"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("context")
+                );
             }
 
 #pragma warning suppress 56506 // Microsoft, BindingContext.BindingParameters never be null

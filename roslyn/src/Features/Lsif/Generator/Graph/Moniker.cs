@@ -15,7 +15,13 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
         /// </summary>
         public string? Unique { get; }
 
-        public Moniker(string scheme, string identifier, string? kind, string? unique, IdFactory idFactory)
+        public Moniker(
+            string scheme,
+            string identifier,
+            string? kind,
+            string? unique,
+            IdFactory idFactory
+        )
             : base(label: "moniker", idFactory)
         {
             Scheme = scheme;

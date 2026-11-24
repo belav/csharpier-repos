@@ -6,10 +6,12 @@
 
 using System;
 
-namespace System.Web.UI.WebControls {
-    public enum ListViewItemType {
+namespace System.Web.UI.WebControls
+{
+    public enum ListViewItemType
+    {
         DataItem,
         InsertItem,
-        EmptyItem
+        EmptyItem,
     }
 }

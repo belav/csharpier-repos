@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -11,9 +11,9 @@
 //
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+using System.Diagnostics.Contracts;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Diagnostics.Contracts;
 
 namespace System.Linq.Parallel
 {
@@ -45,9 +45,12 @@ namespace System.Linq.Parallel
         //
 
         private OrderPreservingSpoolingTask(
-            int taskIndex, QueryTaskGroupState groupState,
-            Shared<TInputOutput[]> results, SortHelper<TInputOutput> sortHelper) :
-            base(taskIndex, groupState)
+            int taskIndex,
+            QueryTaskGroupState groupState,
+            Shared<TInputOutput[]> results,
+            SortHelper<TInputOutput> sortHelper
+        )
+            : base(taskIndex, groupState)
         {
             Contract.Requires(groupState != null);
             Contract.Requires(results != null);
@@ -72,8 +75,11 @@ namespace System.Linq.Parallel
         //
 
         internal static void Spool(
-            QueryTaskGroupState groupState, PartitionedStream<TInputOutput, TKey> partitions,
-            Shared<TInputOutput[]> results, TaskScheduler taskScheduler)
+            QueryTaskGroupState groupState,
+            PartitionedStream<TInputOutput, TKey> partitions,
+            Shared<TInputOutput[]> results,
+            TaskScheduler taskScheduler
+        )
         {
             Contract.Requires(groupState != null);
             Contract.Requires(partitions != null);
@@ -84,30 +90,45 @@ namespace System.Linq.Parallel
             int maxToRunInParallel = partitions.PartitionCount - 1;
 
             // Generate a set of sort helpers.
-            SortHelper<TInputOutput, TKey>[] sortHelpers =
-                SortHelper<TInputOutput, TKey>.GenerateSortHelpers(partitions, groupState);
+            SortHelper<TInputOutput, TKey>[] sortHelpers = SortHelper<
+                TInputOutput,
+                TKey
+            >.GenerateSortHelpers(partitions, groupState);
 
             // Ensure all tasks in this query are parented under a common root.
-            Task rootTask = new Task(
-                () =>
+            Task rootTask = new Task(() =>
+            {
+                // Create tasks that will enumerate the partitions in parallel.  We'll use the current
+                // thread for one task and then block before returning to the caller, until all results
+                // have been accumulated. Pipelining is not supported by sort merges.
+                for (int i = 0; i < maxToRunInParallel; i++)
                 {
-                    // Create tasks that will enumerate the partitions in parallel.  We'll use the current
-                    // thread for one task and then block before returning to the caller, until all results
-                    // have been accumulated. Pipelining is not supported by sort merges.
-                    for (int i = 0; i < maxToRunInParallel; i++)
-                    {
-                        TraceHelpers.TraceInfo("OrderPreservingSpoolingTask::Spool: Running partition[{0}] asynchronously", i);
-                        QueryTask asyncTask = new OrderPreservingSpoolingTask<TInputOutput, TKey>(
-                            i, groupState, results, sortHelpers[i]);
-                        asyncTask.RunAsynchronously(taskScheduler);
-                    }
+                    TraceHelpers.TraceInfo(
+                        "OrderPreservingSpoolingTask::Spool: Running partition[{0}] asynchronously",
+                        i
+                    );
+                    QueryTask asyncTask = new OrderPreservingSpoolingTask<TInputOutput, TKey>(
+                        i,
+                        groupState,
+                        results,
+                        sortHelpers[i]
+                    );
+                    asyncTask.RunAsynchronously(taskScheduler);
+                }
 
-                    // Run one task synchronously on the current thread.
-                    TraceHelpers.TraceInfo("OrderPreservingSpoolingTask::Spool: Running partition[{0}] synchronously", maxToRunInParallel);
-                    QueryTask syncTask = new OrderPreservingSpoolingTask<TInputOutput, TKey>(
-                        maxToRunInParallel, groupState, results, sortHelpers[maxToRunInParallel]);
-                    syncTask.RunSynchronously(taskScheduler);
-                });
+                // Run one task synchronously on the current thread.
+                TraceHelpers.TraceInfo(
+                    "OrderPreservingSpoolingTask::Spool: Running partition[{0}] synchronously",
+                    maxToRunInParallel
+                );
+                QueryTask syncTask = new OrderPreservingSpoolingTask<TInputOutput, TKey>(
+                    maxToRunInParallel,
+                    groupState,
+                    results,
+                    sortHelpers[maxToRunInParallel]
+                );
+                syncTask.RunSynchronously(taskScheduler);
+            });
 
             // Begin the query on the calling thread.
             groupState.QueryBegin(rootTask);

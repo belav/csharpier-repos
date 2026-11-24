@@ -25,5 +25,5 @@ public enum DbCommandMethod
     ///     The <see cref="DbCommand.ExecuteReader()" /> or
     ///     <see cref="DbCommand.ExecuteReaderAsync()" /> method.
     /// </summary>
-    ExecuteReader
+    ExecuteReader,
 }

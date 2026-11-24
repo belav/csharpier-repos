@@ -11,7 +11,8 @@ namespace System.CommandLine.Binding
         internal BoundValue(
             object? value,
             IValueDescriptor valueDescriptor,
-            IValueSource valueSource)
+            IValueSource valueSource
+        )
         {
             Value = value;
             ValueDescriptor = valueDescriptor;

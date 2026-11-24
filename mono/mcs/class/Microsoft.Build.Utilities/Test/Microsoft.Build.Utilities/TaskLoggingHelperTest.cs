@@ -31,283 +31,366 @@ using System;
 using System.Collections;
 using System.Reflection;
 using System.Resources;
+using Microsoft.Build.BuildEngine;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using Microsoft.Build.BuildEngine;
-using NUnit.Framework;
 using MonoTests.Microsoft.Build.Tasks;
+using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Utilities {
-	
-	class TestTask : Task {
-		public static Action<TaskLoggingHelper> action = null;
+namespace MonoTests.Microsoft.Build.Utilities
+{
+    class TestTask : Task
+    {
+        public static Action<TaskLoggingHelper> action = null;
 
-		public TestTask ()
-			: base (new ResourceManager("Strings", typeof(TestTask).GetTypeInfo().Assembly))
-		{
-		}
+        public TestTask()
+            : base(new ResourceManager("Strings", typeof(TestTask).GetTypeInfo().Assembly)) { }
 
-		public override bool Execute ()
-		{
-			action (Log);
-			return true; 
-		}
-	}
-	
-	[TestFixture]
-	public class TaskLoggingHelperTest {
-	
-		TaskLoggingHelper tlh;
-		TestTask task;
+        public override bool Execute()
+        {
+            action(Log);
+            return true;
+        }
+    }
 
-		public TaskLoggingHelperTest ()
-		{
-			task = new TestTask ();
-		}
-	
-		[Test]
-		public void TestAssignment ()
-		{
-			tlh = new TaskLoggingHelper (task);
-		}
-		
-		[Test]
-		[Category ("NotWorking")]
-		public void TestExtractMessageCode1 ()
-		{
-			tlh = new TaskLoggingHelper (task);
-			
-			string message = "MYTASK1001: This is an error message.";
-			string validCode = "MYTASK1001";
-			string validMessageWithoutCodePrefix = "This is an error message.";
-			string code, messageWithoutCodePrefix;
-			
-			code = tlh.ExtractMessageCode (message, out messageWithoutCodePrefix);
-			
-			Assert.AreEqual (validCode, code, "#1");
-			Assert.AreEqual (validMessageWithoutCodePrefix, messageWithoutCodePrefix, "#2");
-		}
-		
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void TestExtractMessageCode2 ()
-		{
-			tlh = new TaskLoggingHelper (task);
-			string output;
-			tlh.ExtractMessageCode (null, out output);
-		}
+    [TestFixture]
+    public class TaskLoggingHelperTest
+    {
+        TaskLoggingHelper tlh;
+        TestTask task;
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void TestLogErrorFromResourcesNullMessage ()
-		{
-			tlh = new TaskLoggingHelper (task);
-			tlh.LogErrorFromResources (null);
-		}
+        public TaskLoggingHelperTest()
+        {
+            task = new TestTask();
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void TestLogErrorFromResourcesNullMessage2 ()
-		{
-			tlh = new TaskLoggingHelper (task);
-			tlh.LogErrorFromResources (null, null, null, null, 0, 0, 0, 0, null);
-		}
+        [Test]
+        public void TestAssignment()
+        {
+            tlh = new TaskLoggingHelper(task);
+        }
 
-		[Test]
-		public void TestLogErrorFromResources1 ()
-		{
-			RunAndCheckTaskLoggingHelper (
-					(tlh) => tlh.LogErrorFromResources ("MessageResource1", "foo"),
-					(l) => Assert.IsTrue (l.CheckFullLog ("Message from resources with arg 'foo'") == 0, "Message not found")
-					);
-		}
+        [Test]
+        [Category("NotWorking")]
+        public void TestExtractMessageCode1()
+        {
+            tlh = new TaskLoggingHelper(task);
 
-		[Test]
-		public void TestLogErrorFromResourcesNonExistantResourceName ()
-		{
-			RunAndCheckTaskLoggingHelper (
-					(tlh) => tlh.LogErrorFromResources ("NonExistantResourceName", "foo"),
-					null,
-					(p, l) => {
-						Assert.IsFalse (p.Build (), "Build should have failed");
-						Assert.IsTrue (l.CheckFullLog (
-								"Error executing task TestTask: No resource string found for resource named NonExistantResourceName") == 0,
-								"Error not found in the log");
-					}
-				);
-		}
+            string message = "MYTASK1001: This is an error message.";
+            string validCode = "MYTASK1001";
+            string validMessageWithoutCodePrefix = "This is an error message.";
+            string code,
+                messageWithoutCodePrefix;
 
+            code = tlh.ExtractMessageCode(message, out messageWithoutCodePrefix);
 
-		[Test]
-		public void TestLogErrorFromResourcesNullSubcategoryResourceName ()
-		{
-			RunAndCheckTaskLoggingHelper (
-					(tlh) => tlh.LogErrorFromResources (null, null, null, null, 0, 0, 0, 0, "MessageResource1", "foo"),
-					(l) => Assert.IsTrue (l.CheckFullLog ("Message from resources with arg 'foo'") == 0, "Message not found")
-					);
-		}
+            Assert.AreEqual(validCode, code, "#1");
+            Assert.AreEqual(validMessageWithoutCodePrefix, messageWithoutCodePrefix, "#2");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void TestLogWarningFromResourcesNullMessage ()
-		{
-			tlh = new TaskLoggingHelper (task);
-			tlh.LogWarningFromResources (null);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestExtractMessageCode2()
+        {
+            tlh = new TaskLoggingHelper(task);
+            string output;
+            tlh.ExtractMessageCode(null, out output);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void TestLogWarningFromResourcesNullMessage2 ()
-		{
-			tlh = new TaskLoggingHelper (task);
-			tlh.LogWarningFromResources (null, null, null, null, 0, 0, 0, 0, null);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestLogErrorFromResourcesNullMessage()
+        {
+            tlh = new TaskLoggingHelper(task);
+            tlh.LogErrorFromResources(null);
+        }
 
-		[Test]
-		public void TestLogWarningFromResourcesNullSubcategoryResourceName ()
-		{
-			RunAndCheckTaskLoggingHelper (
-					(tlh) => tlh.LogWarningFromResources (null, null, null, null, 0, 0, 0, 0, "MessageResource1", "foo"),
-					(l) => Assert.IsTrue (l.CheckFullLog ("Message from resources with arg 'foo'") == 0, "Message not found")
-					);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestLogErrorFromResourcesNullMessage2()
+        {
+            tlh = new TaskLoggingHelper(task);
+            tlh.LogErrorFromResources(null, null, null, null, 0, 0, 0, 0, null);
+        }
 
-		[Test]
-		public void TestLogWarningFromResources1 ()
-		{
-			RunAndCheckTaskLoggingHelper (
-					(tlh) => tlh.LogWarningFromResources ("MessageResource1", "foo"),
-					(l) => Assert.IsTrue (l.CheckFullLog ("Message from resources with arg 'foo'") == 0, "Message not found")
-					);
-		}
+        [Test]
+        public void TestLogErrorFromResources1()
+        {
+            RunAndCheckTaskLoggingHelper(
+                (tlh) => tlh.LogErrorFromResources("MessageResource1", "foo"),
+                (l) =>
+                    Assert.IsTrue(
+                        l.CheckFullLog("Message from resources with arg 'foo'") == 0,
+                        "Message not found"
+                    )
+            );
+        }
 
-		[Test]
-		public void TestLogWarningFromResourcesNonExistantResourceName ()
-		{
-			RunAndCheckTaskLoggingHelper (
-					(tlh) => tlh.LogWarningFromResources ("NonExistantResourceName", "foo"),
-					null,
-					(p, l) => {
-						if (p.Build ()) { l.DumpMessages (); Assert.Fail ("Build should have failed"); }
-						Assert.IsTrue (l.CheckFullLog (
-								"Error executing task TestTask: No resource string found for resource named NonExistantResourceName") == 0,
-								"Error not found in the log");
-					}
-				);
-		}
+        [Test]
+        public void TestLogErrorFromResourcesNonExistantResourceName()
+        {
+            RunAndCheckTaskLoggingHelper(
+                (tlh) => tlh.LogErrorFromResources("NonExistantResourceName", "foo"),
+                null,
+                (p, l) =>
+                {
+                    Assert.IsFalse(p.Build(), "Build should have failed");
+                    Assert.IsTrue(
+                        l.CheckFullLog(
+                            "Error executing task TestTask: No resource string found for resource named NonExistantResourceName"
+                        ) == 0,
+                        "Error not found in the log"
+                    );
+                }
+            );
+        }
 
+        [Test]
+        public void TestLogErrorFromResourcesNullSubcategoryResourceName()
+        {
+            RunAndCheckTaskLoggingHelper(
+                (tlh) =>
+                    tlh.LogErrorFromResources(
+                        null,
+                        null,
+                        null,
+                        null,
+                        0,
+                        0,
+                        0,
+                        0,
+                        "MessageResource1",
+                        "foo"
+                    ),
+                (l) =>
+                    Assert.IsTrue(
+                        l.CheckFullLog("Message from resources with arg 'foo'") == 0,
+                        "Message not found"
+                    )
+            );
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void TestLogMessageFromResourcesNullMessage ()
-		{
-			tlh = new TaskLoggingHelper (task);
-			tlh.LogMessageFromResources (null);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestLogWarningFromResourcesNullMessage()
+        {
+            tlh = new TaskLoggingHelper(task);
+            tlh.LogWarningFromResources(null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void TestLogMessageFromResourcesNullMessage2 ()
-		{
-			tlh = new TaskLoggingHelper (task);
-			tlh.LogMessageFromResources (MessageImportance.Low, null);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestLogWarningFromResourcesNullMessage2()
+        {
+            tlh = new TaskLoggingHelper(task);
+            tlh.LogWarningFromResources(null, null, null, null, 0, 0, 0, 0, null);
+        }
 
-		[Test]
-		public void TestLogMessageFromResources1 ()
-		{
-			RunAndCheckTaskLoggingHelper (
-					(tlh) => tlh.LogMessageFromResources ("MessageResource1", "foo"),
-					(l) => Assert.IsTrue (l.CheckFullLog ("Message from resources with arg 'foo'") == 0, "Message not found")
-					);
-		}
+        [Test]
+        public void TestLogWarningFromResourcesNullSubcategoryResourceName()
+        {
+            RunAndCheckTaskLoggingHelper(
+                (tlh) =>
+                    tlh.LogWarningFromResources(
+                        null,
+                        null,
+                        null,
+                        null,
+                        0,
+                        0,
+                        0,
+                        0,
+                        "MessageResource1",
+                        "foo"
+                    ),
+                (l) =>
+                    Assert.IsTrue(
+                        l.CheckFullLog("Message from resources with arg 'foo'") == 0,
+                        "Message not found"
+                    )
+            );
+        }
 
-		[Test]
-		public void TestLogMessageFromResourcesNonExistantResourceName ()
-		{
-			RunAndCheckTaskLoggingHelper (
-					(tlh) => tlh.LogMessageFromResources ("NonExistantResourceName", "foo"),
-					null,
-					(p, l) => {
-						if (p.Build ()) { l.DumpMessages (); Assert.Fail ("Build should have failed"); }
-						l.DumpMessages ();
-						Assert.IsTrue (l.CheckFullLog (
-								"Error executing task TestTask: No resource string found for resource named NonExistantResourceName") == 0,
-								"Error not found in the log");
-					}
-				);
-		}
+        [Test]
+        public void TestLogWarningFromResources1()
+        {
+            RunAndCheckTaskLoggingHelper(
+                (tlh) => tlh.LogWarningFromResources("MessageResource1", "foo"),
+                (l) =>
+                    Assert.IsTrue(
+                        l.CheckFullLog("Message from resources with arg 'foo'") == 0,
+                        "Message not found"
+                    )
+            );
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void TestFormatResourceString1 ()
-		{
-			tlh = new TaskLoggingHelper (task);
-			tlh.FormatResourceString (null);
-		}
+        [Test]
+        public void TestLogWarningFromResourcesNonExistantResourceName()
+        {
+            RunAndCheckTaskLoggingHelper(
+                (tlh) => tlh.LogWarningFromResources("NonExistantResourceName", "foo"),
+                null,
+                (p, l) =>
+                {
+                    if (p.Build())
+                    {
+                        l.DumpMessages();
+                        Assert.Fail("Build should have failed");
+                    }
+                    Assert.IsTrue(
+                        l.CheckFullLog(
+                            "Error executing task TestTask: No resource string found for resource named NonExistantResourceName"
+                        ) == 0,
+                        "Error not found in the log"
+                    );
+                }
+            );
+        }
 
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))]
-		public void TestFormatResourceString2 ()
-		{
-			tlh = new TaskLoggingHelper (task);
-			tlh.FormatResourceString ("MessageResource1");
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestLogMessageFromResourcesNullMessage()
+        {
+            tlh = new TaskLoggingHelper(task);
+            tlh.LogMessageFromResources(null);
+        }
 
-		[Test]
-		public void TestFormatResourceString3 ()
-		{
-			RunAndCheckTaskLoggingHelper (
-					(tlh) => tlh.FormatResourceString ("NonExistantResourceName"),
-					null,
-					(p, l) => {
-						if (p.Build ()) { l.DumpMessages (); Assert.Fail ("Build should have failed"); }
-						l.DumpMessages ();
-						Assert.IsTrue (l.CheckFullLog (
-								"Error executing task TestTask: No resource string found for resource named NonExistantResourceName") == 0,
-								"Error not found in the log");
-					}
-				);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestLogMessageFromResourcesNullMessage2()
+        {
+            tlh = new TaskLoggingHelper(task);
+            tlh.LogMessageFromResources(MessageImportance.Low, null);
+        }
 
-		[Test]
-		public void TestFormatResourceString4 ()
-		{
-			RunAndCheckTaskLoggingHelper (
-					(tlh) => Assert.AreEqual (
-						tlh.FormatResourceString ("MessageResource1", "foo"),
-						"Message from resources with arg 'foo'"),
-					null
-				);
-		}
-		void RunAndCheckTaskLoggingHelper (Action<TaskLoggingHelper> taskAction, Action<TestMessageLogger> loggerAction, Action<Project, TestMessageLogger> projectBuildAction = null)
-		{
-			string asmLocation = typeof (TaskLoggingHelperTest).Assembly.Location;
-			string project_xml = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
-			<UsingTask TaskName='MonoTests.Microsoft.Build.Utilities.TestTask' AssemblyFile='" + asmLocation + @"' />
+        [Test]
+        public void TestLogMessageFromResources1()
+        {
+            RunAndCheckTaskLoggingHelper(
+                (tlh) => tlh.LogMessageFromResources("MessageResource1", "foo"),
+                (l) =>
+                    Assert.IsTrue(
+                        l.CheckFullLog("Message from resources with arg 'foo'") == 0,
+                        "Message not found"
+                    )
+            );
+        }
+
+        [Test]
+        public void TestLogMessageFromResourcesNonExistantResourceName()
+        {
+            RunAndCheckTaskLoggingHelper(
+                (tlh) => tlh.LogMessageFromResources("NonExistantResourceName", "foo"),
+                null,
+                (p, l) =>
+                {
+                    if (p.Build())
+                    {
+                        l.DumpMessages();
+                        Assert.Fail("Build should have failed");
+                    }
+                    l.DumpMessages();
+                    Assert.IsTrue(
+                        l.CheckFullLog(
+                            "Error executing task TestTask: No resource string found for resource named NonExistantResourceName"
+                        ) == 0,
+                        "Error not found in the log"
+                    );
+                }
+            );
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestFormatResourceString1()
+        {
+            tlh = new TaskLoggingHelper(task);
+            tlh.FormatResourceString(null);
+        }
+
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void TestFormatResourceString2()
+        {
+            tlh = new TaskLoggingHelper(task);
+            tlh.FormatResourceString("MessageResource1");
+        }
+
+        [Test]
+        public void TestFormatResourceString3()
+        {
+            RunAndCheckTaskLoggingHelper(
+                (tlh) => tlh.FormatResourceString("NonExistantResourceName"),
+                null,
+                (p, l) =>
+                {
+                    if (p.Build())
+                    {
+                        l.DumpMessages();
+                        Assert.Fail("Build should have failed");
+                    }
+                    l.DumpMessages();
+                    Assert.IsTrue(
+                        l.CheckFullLog(
+                            "Error executing task TestTask: No resource string found for resource named NonExistantResourceName"
+                        ) == 0,
+                        "Error not found in the log"
+                    );
+                }
+            );
+        }
+
+        [Test]
+        public void TestFormatResourceString4()
+        {
+            RunAndCheckTaskLoggingHelper(
+                (tlh) =>
+                    Assert.AreEqual(
+                        tlh.FormatResourceString("MessageResource1", "foo"),
+                        "Message from resources with arg 'foo'"
+                    ),
+                null
+            );
+        }
+
+        void RunAndCheckTaskLoggingHelper(
+            Action<TaskLoggingHelper> taskAction,
+            Action<TestMessageLogger> loggerAction,
+            Action<Project, TestMessageLogger> projectBuildAction = null
+        )
+        {
+            string asmLocation = typeof(TaskLoggingHelperTest).Assembly.Location;
+            string project_xml =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+			<UsingTask TaskName='MonoTests.Microsoft.Build.Utilities.TestTask' AssemblyFile='"
+                + asmLocation
+                + @"' />
 			<Target Name=""1"">
 				<TestTask />
 			</Target>
 			</Project>";
 
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
-			proj.LoadXml (project_xml);
-			TestMessageLogger logger = new TestMessageLogger ();
-			engine.RegisterLogger (logger);
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
+            proj.LoadXml(project_xml);
+            TestMessageLogger logger = new TestMessageLogger();
+            engine.RegisterLogger(logger);
 
-			TestTask.action = taskAction;
+            TestTask.action = taskAction;
 
-			if (projectBuildAction == null) {
-				if (!proj.Build ("1")) {
-					logger.DumpMessages ();
-					Assert.Fail ("Build failed");
-				}
-			} else
-				projectBuildAction (proj, logger);
+            if (projectBuildAction == null)
+            {
+                if (!proj.Build("1"))
+                {
+                    logger.DumpMessages();
+                    Assert.Fail("Build failed");
+                }
+            }
+            else
+                projectBuildAction(proj, logger);
 
-			if (loggerAction != null)
-				loggerAction (logger);
-		}
-	}
+            if (loggerAction != null)
+                loggerAction(logger);
+        }
+    }
 }

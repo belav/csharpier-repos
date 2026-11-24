@@ -25,7 +25,10 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     private bool _useValueProjection;
     private ParameterNameGenerator _parameterNameGenerator;
 
-    private readonly IDictionary<ExpressionType, string> _operatorMap = new Dictionary<ExpressionType, string>
+    private readonly IDictionary<ExpressionType, string> _operatorMap = new Dictionary<
+        ExpressionType,
+        string
+    >
     {
         // Arithmetic
         { ExpressionType.Add, " + " },
@@ -33,18 +36,15 @@ public class QuerySqlGenerator : SqlExpressionVisitor
         { ExpressionType.Multiply, " * " },
         { ExpressionType.Divide, " / " },
         { ExpressionType.Modulo, " % " },
-
         // Bitwise >>> (zero-fill right shift) not available in C#
         { ExpressionType.Or, " | " },
         { ExpressionType.And, " & " },
         { ExpressionType.ExclusiveOr, " ^ " },
         { ExpressionType.LeftShift, " << " },
         { ExpressionType.RightShift, " >> " },
-
         // Logical
         { ExpressionType.AndAlso, " AND " },
         { ExpressionType.OrElse, " OR " },
-
         // Comparison
         { ExpressionType.Equal, " = " },
         { ExpressionType.NotEqual, " != " },
@@ -52,11 +52,10 @@ public class QuerySqlGenerator : SqlExpressionVisitor
         { ExpressionType.GreaterThanOrEqual, " >= " },
         { ExpressionType.LessThan, " < " },
         { ExpressionType.LessThanOrEqual, " <= " },
-
         // Unary
         { ExpressionType.UnaryPlus, "+" },
         { ExpressionType.Negate, "-" },
-        { ExpressionType.Not, "~" }
+        { ExpressionType.Not, "~" },
     };
 
     /// <summary>
@@ -78,7 +77,8 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     /// </summary>
     public virtual CosmosSqlQuery GetSqlQuery(
         SelectExpression selectExpression,
-        IReadOnlyDictionary<string, object> parameterValues)
+        IReadOnlyDictionary<string, object> parameterValues
+    )
     {
         _sqlBuilder.Clear();
         _parameterValues = parameterValues;
@@ -96,7 +96,9 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override Expression VisitEntityProjection(EntityProjectionExpression entityProjectionExpression)
+    protected override Expression VisitEntityProjection(
+        EntityProjectionExpression entityProjectionExpression
+    )
     {
         Visit(entityProjectionExpression.AccessExpression);
 
@@ -109,7 +111,9 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override Expression VisitObjectArrayProjection(ObjectArrayProjectionExpression objectArrayProjectionExpression)
+    protected override Expression VisitObjectArrayProjection(
+        ObjectArrayProjectionExpression objectArrayProjectionExpression
+    )
     {
         _sqlBuilder.Append(objectArrayProjectionExpression.ToString());
 
@@ -157,9 +161,11 @@ public class QuerySqlGenerator : SqlExpressionVisitor
 
         Visit(projectionExpression.Expression);
 
-        if (!_useValueProjection
+        if (
+            !_useValueProjection
             && !string.IsNullOrEmpty(projectionExpression.Alias)
-            && projectionExpression.Alias != projectionExpression.Name)
+            && projectionExpression.Alias != projectionExpression.Name
+        )
         {
             _sqlBuilder.Append(" AS " + projectionExpression.Alias);
         }
@@ -173,7 +179,9 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override Expression VisitRootReference(RootReferenceExpression rootReferenceExpression)
+    protected override Expression VisitRootReference(
+        RootReferenceExpression rootReferenceExpression
+    )
     {
         _sqlBuilder.Append(rootReferenceExpression.ToString());
 
@@ -197,8 +205,11 @@ public class QuerySqlGenerator : SqlExpressionVisitor
 
         if (selectExpression.Projection.Count > 0)
         {
-            if (selectExpression.Projection.Any(p => !string.IsNullOrEmpty(p.Alias) && p.Alias != p.Name)
-                && !selectExpression.Projection.Any(p => p.Expression is SqlFunctionExpression)) // Aggregates are not allowed
+            if (
+                selectExpression.Projection.Any(p =>
+                    !string.IsNullOrEmpty(p.Alias) && p.Alias != p.Name
+                ) && !selectExpression.Projection.Any(p => p.Expression is SqlFunctionExpression)
+            ) // Aggregates are not allowed
             {
                 _useValueProjection = true;
                 _sqlBuilder.Append("VALUE {");
@@ -218,7 +229,9 @@ public class QuerySqlGenerator : SqlExpressionVisitor
 
         _sqlBuilder.AppendLine();
 
-        _sqlBuilder.Append(selectExpression.FromExpression is FromSqlExpression ? "FROM " : "FROM root ");
+        _sqlBuilder.Append(
+            selectExpression.FromExpression is FromSqlExpression ? "FROM " : "FROM root "
+        );
 
         Visit(selectExpression.FromExpression);
 
@@ -235,8 +248,7 @@ public class QuerySqlGenerator : SqlExpressionVisitor
             GenerateList(selectExpression.Orderings, e => Visit(e));
         }
 
-        if (selectExpression.Offset != null
-            || selectExpression.Limit != null)
+        if (selectExpression.Offset != null || selectExpression.Limit != null)
         {
             _sqlBuilder.AppendLine().Append("OFFSET ");
 
@@ -276,7 +288,7 @@ public class QuerySqlGenerator : SqlExpressionVisitor
         {
             case ParameterExpression { Name: not null } parameterExpression
                 when _parameterValues.TryGetValue(parameterExpression.Name, out var parameterValue)
-                && parameterValue is object[] parameterValues:
+                    && parameterValue is object[] parameterValues:
             {
                 substitutions = new string[parameterValues.Length];
                 for (var i = 0; i < parameterValues.Length; i++)
@@ -295,7 +307,10 @@ public class QuerySqlGenerator : SqlExpressionVisitor
                 for (var i = 0; i < constantValues.Length; i++)
                 {
                     var value = constantValues[i];
-                    substitutions[i] = GenerateConstant(value, _typeMappingSource.FindMapping(value.GetType()));
+                    substitutions[i] = GenerateConstant(
+                        value,
+                        _typeMappingSource.FindMapping(value.GetType())
+                    );
                 }
 
                 break;
@@ -309,7 +324,9 @@ public class QuerySqlGenerator : SqlExpressionVisitor
                         fromSqlExpression.Arguments.GetType(),
                         fromSqlExpression.Arguments is ConstantExpression constantExpression
                             ? constantExpression.Value?.GetType()
-                            : null));
+                            : null
+                    )
+                );
         }
 
         // ReSharper disable once CoVariantArrayConversion
@@ -323,9 +340,7 @@ public class QuerySqlGenerator : SqlExpressionVisitor
             _sqlBuilder.AppendLines(sql);
         }
 
-        _sqlBuilder
-            .Append(") ")
-            .Append(fromSqlExpression.Alias);
+        _sqlBuilder.Append(") ").Append(fromSqlExpression.Alias);
 
         return fromSqlExpression;
     }
@@ -360,8 +375,10 @@ public class QuerySqlGenerator : SqlExpressionVisitor
         _sqlBuilder.Append('(');
         Visit(sqlBinaryExpression.Left);
 
-        if (sqlBinaryExpression.OperatorType == ExpressionType.Add
-            && sqlBinaryExpression.Left.Type == typeof(string))
+        if (
+            sqlBinaryExpression.OperatorType == ExpressionType.Add
+            && sqlBinaryExpression.Left.Type == typeof(string)
+        )
         {
             op = " || ";
         }
@@ -384,8 +401,10 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     {
         var op = _operatorMap[sqlUnaryExpression.OperatorType];
 
-        if (sqlUnaryExpression.OperatorType == ExpressionType.Not
-            && sqlUnaryExpression.Operand.Type == typeof(bool))
+        if (
+            sqlUnaryExpression.OperatorType == ExpressionType.Not
+            && sqlUnaryExpression.Operand.Type == typeof(bool)
+        )
         {
             if (sqlUnaryExpression.Operand is InExpression inExpression)
             {
@@ -409,7 +428,8 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     private void GenerateList<T>(
         IReadOnlyList<T> items,
         Action<T> generationAction,
-        Action<IndentedStringBuilder> joinAction = null)
+        Action<IndentedStringBuilder> joinAction = null
+    )
     {
         joinAction ??= (isb => isb.Append(", "));
 
@@ -432,7 +452,9 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     /// </summary>
     protected override Expression VisitSqlConstant(SqlConstantExpression sqlConstantExpression)
     {
-        _sqlBuilder.Append(GenerateConstant(sqlConstantExpression.Value, sqlConstantExpression.TypeMapping));
+        _sqlBuilder.Append(
+            GenerateConstant(sqlConstantExpression.Value, sqlConstantExpression.TypeMapping)
+        );
 
         return sqlConstantExpression;
     }
@@ -449,11 +471,10 @@ public class QuerySqlGenerator : SqlExpressionVisitor
         if (value?.GetType().IsInteger() == true)
         {
             var unwrappedType = typeMapping.ClrType.UnwrapNullableType();
-            value = unwrappedType.IsEnum
-                ? Enum.ToObject(unwrappedType, value)
-                : unwrappedType == typeof(char)
-                    ? Convert.ChangeType(value, unwrappedType)
-                    : value;
+            value =
+                unwrappedType.IsEnum ? Enum.ToObject(unwrappedType, value)
+                : unwrappedType == typeof(char) ? Convert.ChangeType(value, unwrappedType)
+                : value;
         }
 
         var converter = typeMapping.Converter;
@@ -473,7 +494,9 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override Expression VisitSqlConditional(SqlConditionalExpression sqlConditionalExpression)
+    protected override Expression VisitSqlConditional(
+        SqlConditionalExpression sqlConditionalExpression
+    )
     {
         _sqlBuilder.Append('(');
         Visit(sqlConditionalExpression.Test);
@@ -498,7 +521,10 @@ public class QuerySqlGenerator : SqlExpressionVisitor
 
         if (_sqlParameters.All(sp => sp.Name != parameterName))
         {
-            var jToken = GenerateJToken(_parameterValues[sqlParameterExpression.Name], sqlParameterExpression.TypeMapping);
+            var jToken = GenerateJToken(
+                _parameterValues[sqlParameterExpression.Name],
+                sqlParameterExpression.TypeMapping
+            );
             _sqlParameters.Add(new SqlParameter(parameterName, jToken));
         }
 
@@ -531,7 +557,8 @@ public class QuerySqlGenerator : SqlExpressionVisitor
         Check.DebugAssert(
             inExpression.ValuesParameter is null,
             "InExpression.ValuesParameter must have been expanded to constants before SQL generation (in "
-            + "InExpressionValuesExpandingExpressionVisitor)");
+                + "InExpressionValuesExpandingExpressionVisitor)"
+        );
         Check.DebugAssert(inExpression.Values is not null, "Missing Values on InExpression");
 
         Visit(inExpression.Item);
@@ -560,7 +587,6 @@ public class QuerySqlGenerator : SqlExpressionVisitor
     {
         private int _count;
 
-        public string GenerateNext()
-            => "@p" + _count++;
+        public string GenerateNext() => "@p" + _count++;
     }
 }

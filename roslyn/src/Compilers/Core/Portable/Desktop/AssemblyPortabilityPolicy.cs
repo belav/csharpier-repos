@@ -23,10 +23,13 @@ namespace Microsoft.CodeAnalysis
 
         public AssemblyPortabilityPolicy(
             bool suppressSilverlightPlatformAssembliesPortability,
-            bool suppressSilverlightLibraryAssembliesPortability)
+            bool suppressSilverlightLibraryAssembliesPortability
+        )
         {
-            this.SuppressSilverlightLibraryAssembliesPortability = suppressSilverlightLibraryAssembliesPortability;
-            this.SuppressSilverlightPlatformAssembliesPortability = suppressSilverlightPlatformAssembliesPortability;
+            this.SuppressSilverlightLibraryAssembliesPortability =
+                suppressSilverlightLibraryAssembliesPortability;
+            this.SuppressSilverlightPlatformAssembliesPortability =
+                suppressSilverlightPlatformAssembliesPortability;
         }
 
         public override bool Equals(object obj)
@@ -36,17 +39,24 @@ namespace Microsoft.CodeAnalysis
 
         public bool Equals(AssemblyPortabilityPolicy other)
         {
-            return this.SuppressSilverlightLibraryAssembliesPortability == other.SuppressSilverlightLibraryAssembliesPortability
-                && this.SuppressSilverlightPlatformAssembliesPortability == other.SuppressSilverlightPlatformAssembliesPortability;
+            return this.SuppressSilverlightLibraryAssembliesPortability
+                    == other.SuppressSilverlightLibraryAssembliesPortability
+                && this.SuppressSilverlightPlatformAssembliesPortability
+                    == other.SuppressSilverlightPlatformAssembliesPortability;
         }
 
         public override int GetHashCode()
         {
-            return (this.SuppressSilverlightLibraryAssembliesPortability ? 1 : 0) |
-                   (this.SuppressSilverlightPlatformAssembliesPortability ? 2 : 0);
+            return (this.SuppressSilverlightLibraryAssembliesPortability ? 1 : 0)
+                | (this.SuppressSilverlightPlatformAssembliesPortability ? 2 : 0);
         }
 
-        private static bool ReadToChild(XmlReader reader, int depth, string elementName, string elementNamespace = "")
+        private static bool ReadToChild(
+            XmlReader reader,
+            int depth,
+            string elementName,
+            string elementNamespace = ""
+        )
         {
             return reader.ReadToDescendant(elementName, elementNamespace) && reader.Depth == depth;
         }
@@ -64,10 +74,12 @@ namespace Microsoft.CodeAnalysis
 
             using (XmlReader xml = XmlReader.Create(input, s_xmlSettings))
             {
-                if (!ReadToChild(xml, 0, "configuration") ||
-                    !ReadToChild(xml, 1, "runtime") ||
-                    !ReadToChild(xml, 2, "assemblyBinding", ns) ||
-                    !ReadToChild(xml, 3, "supportPortability", ns))
+                if (
+                    !ReadToChild(xml, 0, "configuration")
+                    || !ReadToChild(xml, 1, "runtime")
+                    || !ReadToChild(xml, 2, "assemblyBinding", ns)
+                    || !ReadToChild(xml, 3, "supportPortability", ns)
+                )
                 {
                     return default(AssemblyPortabilityPolicy);
                 }
@@ -88,17 +100,31 @@ namespace Microsoft.CodeAnalysis
                     string enableAttribute = xml.GetAttribute("enable");
 
                     bool? enable =
-                        string.Equals(enableAttribute, "false", StringComparison.OrdinalIgnoreCase) ? false :
-                        string.Equals(enableAttribute, "true", StringComparison.OrdinalIgnoreCase) ? true :
-                        (bool?)null;
+                        string.Equals(enableAttribute, "false", StringComparison.OrdinalIgnoreCase)
+                            ? false
+                        : string.Equals(enableAttribute, "true", StringComparison.OrdinalIgnoreCase)
+                            ? true
+                        : (bool?)null;
 
                     if (enable != null)
                     {
-                        if (string.Equals(pkt, "31bf3856ad364e35", StringComparison.OrdinalIgnoreCase))
+                        if (
+                            string.Equals(
+                                pkt,
+                                "31bf3856ad364e35",
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             suppressLibrary = !enable.Value;
                         }
-                        else if (string.Equals(pkt, "7cec85d7bea7798e", StringComparison.OrdinalIgnoreCase))
+                        else if (
+                            string.Equals(
+                                pkt,
+                                "7cec85d7bea7798e",
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             suppressPlatform = !enable.Value;
                         }

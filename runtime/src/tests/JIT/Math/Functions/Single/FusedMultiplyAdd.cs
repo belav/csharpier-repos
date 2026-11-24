@@ -18,19 +18,26 @@ namespace System.MathBenchmarks
 
         public static void FusedMultiplyAddTest()
         {
-            float result = 0.0f, valueX = 2.0f, valueY = -2.0f, valueZ = 1.0f;
+            float result = 0.0f,
+                valueX = 2.0f,
+                valueY = -2.0f,
+                valueZ = 1.0f;
 
             for (int iteration = 0; iteration < MathTests.Iterations; iteration++)
             {
                 result += MathF.FusedMultiplyAdd(valueX, valueY, valueZ);
-                valueX += fusedMultiplyAddDeltaX; valueY += fusedMultiplyAddDeltaY; valueZ += fusedMultiplyAddDeltaZ;
+                valueX += fusedMultiplyAddDeltaX;
+                valueY += fusedMultiplyAddDeltaY;
+                valueZ += fusedMultiplyAddDeltaZ;
             }
 
             float diff = MathF.Abs(fusedMultiplyAddExpectedResult - result);
 
             if (float.IsNaN(result) || (diff > MathTests.SingleEpsilon))
             {
-                throw new Exception($"Expected Result {fusedMultiplyAddExpectedResult,10:g9}; Actual Result {result,10:g9}");
+                throw new Exception(
+                    $"Expected Result {fusedMultiplyAddExpectedResult, 10:g9}; Actual Result {result, 10:g9}"
+                );
             }
         }
     }

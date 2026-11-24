@@ -3,9 +3,7 @@
 
 using ILCompiler.DependencyAnalysis;
 using ILCompiler.DependencyAnalysisFramework;
-
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler
@@ -52,7 +50,12 @@ namespace ILCompiler
             if (!_factory.MetadataManager.IsReflectionBlocked(method))
             {
                 _factory.TypeSystemContext.EnsureLoadableMethod(method);
-                _rootAdder(_factory.ReflectedMethod(method.GetCanonMethodTarget(CanonicalFormKind.Specific)), reason);
+                _rootAdder(
+                    _factory.ReflectedMethod(
+                        method.GetCanonMethodTarget(CanonicalFormKind.Specific)
+                    ),
+                    reason
+                );
             }
         }
 
@@ -106,7 +109,13 @@ namespace ILCompiler
             Debug.Assert(!type.IsGenericDefinition);
 
             MetadataType metadataType = type as MetadataType;
-            if (metadataType != null && (metadataType.NonGCStaticFieldSize.AsInt > 0 || _factory.PreinitializationManager.HasLazyStaticConstructor(type)))
+            if (
+                metadataType != null
+                && (
+                    metadataType.NonGCStaticFieldSize.AsInt > 0
+                    || _factory.PreinitializationManager.HasLazyStaticConstructor(type)
+                )
+            )
             {
                 _rootAdder(_factory.TypeNonGCStaticsSymbol(metadataType), reason);
             }
@@ -129,7 +138,12 @@ namespace ILCompiler
             }
         }
 
-        public void RootReadOnlyDataBlob(byte[] data, int alignment, string reason, string exportName)
+        public void RootReadOnlyDataBlob(
+            byte[] data,
+            int alignment,
+            string reason,
+            string exportName
+        )
         {
             var blob = _factory.ReadOnlyDataBlob("__readonlydata_" + exportName, data, alignment);
             _rootAdder(blob, reason);

@@ -47,10 +47,8 @@ public abstract class CompiledQueryBase<TContext, TResult>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual TResult ExecuteCore(
-        TContext context,
-        params object?[] parameters)
-        => ExecuteCore(context, default, parameters);
+    protected virtual TResult ExecuteCore(TContext context, params object?[] parameters) =>
+        ExecuteCore(context, default, parameters);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -61,13 +59,16 @@ public abstract class CompiledQueryBase<TContext, TResult>
     protected virtual TResult ExecuteCore(
         TContext context,
         CancellationToken cancellationToken,
-        params object?[] parameters)
+        params object?[] parameters
+    )
     {
         EnsureExecutor(context);
 
         if (_executor!.Model != context.Model)
         {
-            throw new InvalidOperationException(CoreStrings.CompiledQueryDifferentModel(_queryExpression.Print()));
+            throw new InvalidOperationException(
+                CoreStrings.CompiledQueryDifferentModel(_queryExpression.Print())
+            );
         }
 
         var queryContextFactory = context.GetService<IQueryContextFactory>();
@@ -78,8 +79,10 @@ public abstract class CompiledQueryBase<TContext, TResult>
         for (var i = 0; i < parameters.Length; i++)
         {
             queryContext.AddParameter(
-                QueryCompilationContext.QueryParameterPrefix + _queryExpression.Parameters[i + 1].Name,
-                parameters[i]);
+                QueryCompilationContext.QueryParameterPrefix
+                    + _queryExpression.Parameters[i + 1].Name,
+                parameters[i]
+            );
         }
 
         return _executor.Executor(queryContext);
@@ -93,10 +96,11 @@ public abstract class CompiledQueryBase<TContext, TResult>
     /// </summary>
     protected abstract Func<QueryContext, TResult> CreateCompiledQuery(
         IQueryCompiler queryCompiler,
-        Expression expression);
+        Expression expression
+    );
 
-    private void EnsureExecutor(TContext context)
-        => NonCapturingLazyInitializer.EnsureInitialized(
+    private void EnsureExecutor(TContext context) =>
+        NonCapturingLazyInitializer.EnsureInitialized(
             ref _executor,
             this,
             context,
@@ -106,8 +110,12 @@ public abstract class CompiledQueryBase<TContext, TResult>
                 var queryCompiler = c.GetService<IQueryCompiler>();
                 var expression = new QueryExpressionRewriter(c, q.Parameters).Visit(q.Body);
 
-                return new ExecutorAndModel(t.CreateCompiledQuery(queryCompiler, expression), c.Model);
-            });
+                return new ExecutorAndModel(
+                    t.CreateCompiledQuery(queryCompiler, expression),
+                    c.Model
+                );
+            }
+        );
 
     private sealed class QueryExpressionRewriter : ExpressionVisitor
     {
@@ -116,7 +124,8 @@ public abstract class CompiledQueryBase<TContext, TResult>
 
         public QueryExpressionRewriter(
             TContext context,
-            IReadOnlyCollection<ParameterExpression> parameters)
+            IReadOnlyCollection<ParameterExpression> parameters
+        )
         {
             _context = context;
             _parameters = parameters;
@@ -132,7 +141,8 @@ public abstract class CompiledQueryBase<TContext, TResult>
             return _parameters.Contains(parameterExpression)
                 ? Expression.Parameter(
                     parameterExpression.Type,
-                    QueryCompilationContext.QueryParameterPrefix + parameterExpression.Name)
+                    QueryCompilationContext.QueryParameterPrefix + parameterExpression.Name
+                )
                 : parameterExpression;
         }
     }

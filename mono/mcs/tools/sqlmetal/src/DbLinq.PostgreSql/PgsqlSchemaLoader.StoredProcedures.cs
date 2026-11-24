@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 using System;
 using System.Collections.Generic;
@@ -65,7 +65,10 @@ namespace DbLinq.PostgreSql
             /// </summary>
             public string proargmodes;
 
-            public override string ToString() { return "Pg_Proc " + proname; }
+            public override string ToString()
+            {
+                return "Pg_Proc " + proname;
+            }
         }
 
         protected virtual DataStoredProcedure ReadProcedure(IDataReader rdr)
@@ -78,7 +81,7 @@ namespace DbLinq.PostgreSql
             procedure.prorettype = rdr.GetAsNumeric<long>(field++);
             procedure.formatted_prorettype = rdr.GetAsString(field++);
             procedure.proargtypes = rdr.GetAsString(field++);
-            procedure.proallargtypes = rdr.GetAsString( field++);
+            procedure.proallargtypes = rdr.GetAsString(field++);
             procedure.proargnames = rdr.GetAsString(field++);
             procedure.proargmodes = rdr.GetAsString(field++);
             return procedure;
@@ -86,7 +89,8 @@ namespace DbLinq.PostgreSql
 
         protected virtual List<DataStoredProcedure> ReadProcedures(IDbConnection conn, string db)
         {
-            string sql = @"
+            string sql =
+                @"
 SELECT pr.proowner, pr.proname, pr.proretset, pr.prorettype, pg_catalog.format_type(pr.prorettype, NULL) 
   ,pr.proargtypes, pr.proallargtypes, pr.proargnames, pr.proargmodes
 FROM pg_proc pr, pg_type tp 
@@ -100,15 +104,22 @@ WHERE nspname NOT LIKE 'pg_%' AND nspname != 'information_schema' );
             return DataCommand.Find<DataStoredProcedure>(conn, sql, ":db", db, ReadProcedure);
         }
 
-        protected virtual int GetTypeNames(IDbConnection conn, string db, Dictionary<long, string> oid_to_name_map)
+        protected virtual int GetTypeNames(
+            IDbConnection conn,
+            string db,
+            Dictionary<long, string> oid_to_name_map
+        )
         {
-            string sql = @"
+            string sql =
+                @"
 SELECT pg_catalog.format_type(:typeOid, NULL)
 ";
             int numDone = 0;
 
             //clone to prevent 'collection was modified' exception
-            Dictionary<long, string> oid_to_name_map2 = new Dictionary<long, string>(oid_to_name_map);
+            Dictionary<long, string> oid_to_name_map2 = new Dictionary<long, string>(
+                oid_to_name_map
+            );
 
             foreach (var kv in oid_to_name_map2)
             {
@@ -132,6 +143,5 @@ SELECT pg_catalog.format_type(:typeOid, NULL)
             }
             return numDone;
         }
-
     }
 }

@@ -58,8 +58,7 @@ public class CookiePolicyMiddleware
     /// <param name="context">The <see cref="HttpContext" />.</param>
     public Task Invoke(HttpContext context)
     {
-        var feature =
-            context.Features.Get<IResponseCookiesFeature>()
+        var feature = context.Features.Get<IResponseCookiesFeature>()
             ?? new ResponseCookiesFeature(context.Features);
         var wrapper = new ResponseCookiesWrapper(context, Options, feature, _logger);
         context.Features.Set<IResponseCookiesFeature>(new CookiesWrapperFeature(wrapper));

@@ -18,9 +18,7 @@ namespace System.Web.Http.ModelBinding.Binders
     public class CompositeModelBinder : IModelBinder
     {
         public CompositeModelBinder(IEnumerable<IModelBinder> binders)
-            : this(binders.ToArray())
-        {
-        }
+            : this(binders.ToArray()) { }
 
         public CompositeModelBinder(params IModelBinder[] binders)
         {
@@ -29,16 +27,28 @@ namespace System.Web.Http.ModelBinding.Binders
 
         private IModelBinder[] Binders { get; set; }
 
-        public virtual bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
+        public virtual bool BindModel(
+            HttpActionContext actionContext,
+            ModelBindingContext bindingContext
+        )
         {
-            ModelBindingContext newBindingContext = CreateNewBindingContext(bindingContext, bindingContext.ModelName);
+            ModelBindingContext newBindingContext = CreateNewBindingContext(
+                bindingContext,
+                bindingContext.ModelName
+            );
 
             bool boundSuccessfully = TryBind(actionContext, newBindingContext);
-            if (!boundSuccessfully && !String.IsNullOrEmpty(bindingContext.ModelName)
-                && bindingContext.FallbackToEmptyPrefix)
+            if (
+                !boundSuccessfully
+                && !String.IsNullOrEmpty(bindingContext.ModelName)
+                && bindingContext.FallbackToEmptyPrefix
+            )
             {
                 // fallback to empty prefix?
-                newBindingContext = CreateNewBindingContext(bindingContext, modelName: String.Empty);
+                newBindingContext = CreateNewBindingContext(
+                    bindingContext,
+                    modelName: String.Empty
+                );
                 boundSuccessfully = TryBind(actionContext, newBindingContext);
             }
 
@@ -51,12 +61,21 @@ namespace System.Web.Http.ModelBinding.Binders
             // If we fell back to an empty prefix above and are dealing with simple types,
             // propagate the non-blank model name through for user clarity in validation errors.
             // Complex types will reveal their individual properties as model names and do not require this.
-            if (!newBindingContext.ModelMetadata.IsComplexType && String.IsNullOrEmpty(newBindingContext.ModelName))
+            if (
+                !newBindingContext.ModelMetadata.IsComplexType
+                && String.IsNullOrEmpty(newBindingContext.ModelName)
+            )
             {
-                newBindingContext.ValidationNode = new Validation.ModelValidationNode(newBindingContext.ModelMetadata, bindingContext.ModelName);
+                newBindingContext.ValidationNode = new Validation.ModelValidationNode(
+                    newBindingContext.ModelMetadata,
+                    bindingContext.ModelName
+                );
             }
 
-            newBindingContext.ValidationNode.Validate(actionContext, null /* parentNode */);
+            newBindingContext.ValidationNode.Validate(
+                actionContext,
+                null /* parentNode */
+            );
             bindingContext.Model = newBindingContext.Model;
             return true;
         }
@@ -66,14 +85,17 @@ namespace System.Web.Http.ModelBinding.Binders
             return actionContext.Bind(bindingContext, Binders);
         }
 
-        private static ModelBindingContext CreateNewBindingContext(ModelBindingContext oldBindingContext, string modelName)
+        private static ModelBindingContext CreateNewBindingContext(
+            ModelBindingContext oldBindingContext,
+            string modelName
+        )
         {
             ModelBindingContext newBindingContext = new ModelBindingContext
             {
                 ModelMetadata = oldBindingContext.ModelMetadata,
                 ModelName = modelName,
                 ModelState = oldBindingContext.ModelState,
-                ValueProvider = oldBindingContext.ValueProvider
+                ValueProvider = oldBindingContext.ValueProvider,
             };
 
             // validation is expensive to create, so copy it over if we can

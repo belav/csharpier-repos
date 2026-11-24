@@ -15,31 +15,37 @@ Author:
 Revision History:
 
 --*/
-namespace System.Net.Cache {
+namespace System.Net.Cache
+{
     using System;
-    using System.Net;
-    using System.IO;
     using System.Collections;
-    using System.Text;
     using System.Collections.Specialized;
     using System.Globalization;
+    using System.IO;
+    using System.Net;
+    using System.Text;
     using System.Threading;
 
-
     // The class represents an adavanced way for an application to control caching protocol
-    internal class FtpRequestCacheValidator: HttpRequestCacheValidator {
+    internal class FtpRequestCacheValidator : HttpRequestCacheValidator
+    {
+        DateTime m_LastModified;
+        bool m_HttpProxyMode;
 
-        DateTime       m_LastModified;
-        bool           m_HttpProxyMode;
-
-        private bool                    HttpProxyMode    {get{return m_HttpProxyMode;}}
-        internal new RequestCachePolicy Policy           {get {return ((RequestCacheValidator)this).Policy;}}
+        private bool HttpProxyMode
+        {
+            get { return m_HttpProxyMode; }
+        }
+        internal new RequestCachePolicy Policy
+        {
+            get { return ((RequestCacheValidator)this).Policy; }
+        }
 
         //
         private void ZeroPrivateVars()
         {
-            m_LastModified      = DateTime.MinValue;
-            m_HttpProxyMode     = false;
+            m_LastModified = DateTime.MinValue;
+            m_HttpProxyMode = false;
         }
 
         //public
@@ -49,9 +55,8 @@ namespace System.Net.Cache {
         }
 
         //public
-        internal FtpRequestCacheValidator(bool strictCacheErrors, TimeSpan unspecifiedMaxAge): base(strictCacheErrors, unspecifiedMaxAge)
-        {
-        }
+        internal FtpRequestCacheValidator(bool strictCacheErrors, TimeSpan unspecifiedMaxAge)
+            : base(strictCacheErrors, unspecifiedMaxAge) { }
 
         //
         // This validation method is called first and before any Cache access is done.
@@ -69,7 +74,11 @@ namespace System.Net.Cache {
             if (Request is HttpWebRequest)
             {
                 m_HttpProxyMode = true;
-                if(Logging.On)Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_ftp_proxy_doesnt_support_partial));
+                if (Logging.On)
+                    Logging.PrintInfo(
+                        Logging.RequestCache,
+                        SR.GetString(SR.net_log_cache_ftp_proxy_doesnt_support_partial)
+                    );
                 return base.ValidateRequest();
             }
 
@@ -77,19 +86,39 @@ namespace System.Net.Cache {
                 return CacheValidationStatus.DoNotUseCache;
 
             string method = Request.Method.ToUpper(CultureInfo.InvariantCulture);
-            if(Logging.On)Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_ftp_method, method));
+            if (Logging.On)
+                Logging.PrintInfo(
+                    Logging.RequestCache,
+                    SR.GetString(SR.net_log_cache_ftp_method, method)
+                );
 
-            switch (method) {
-                case WebRequestMethods.Ftp.DownloadFile:  RequestMethod = HttpMethod.Get;   break;
-                case WebRequestMethods.Ftp.UploadFile:    RequestMethod = HttpMethod.Put;break;
-                case WebRequestMethods.Ftp.AppendFile:    RequestMethod = HttpMethod.Put;break;
-                case WebRequestMethods.Ftp.Rename:        RequestMethod = HttpMethod.Put;break;
-                case WebRequestMethods.Ftp.DeleteFile:    RequestMethod = HttpMethod.Delete;break;
+            switch (method)
+            {
+                case WebRequestMethods.Ftp.DownloadFile:
+                    RequestMethod = HttpMethod.Get;
+                    break;
+                case WebRequestMethods.Ftp.UploadFile:
+                    RequestMethod = HttpMethod.Put;
+                    break;
+                case WebRequestMethods.Ftp.AppendFile:
+                    RequestMethod = HttpMethod.Put;
+                    break;
+                case WebRequestMethods.Ftp.Rename:
+                    RequestMethod = HttpMethod.Put;
+                    break;
+                case WebRequestMethods.Ftp.DeleteFile:
+                    RequestMethod = HttpMethod.Delete;
+                    break;
 
-                default:        RequestMethod = HttpMethod.Other;    break;
+                default:
+                    RequestMethod = HttpMethod.Other;
+                    break;
             }
 
-            if ((RequestMethod != HttpMethod.Get || !((FtpWebRequest)Request).UseBinary) && Policy.Level == RequestCacheLevel.CacheOnly)
+            if (
+                (RequestMethod != HttpMethod.Get || !((FtpWebRequest)Request).UseBinary)
+                && Policy.Level == RequestCacheLevel.CacheOnly
+            )
             {
                 // Throw because the request must hit the wire and it's cache-only policy
                 FailRequest(WebExceptionStatus.RequestProhibitedByCachePolicy);
@@ -100,7 +129,11 @@ namespace System.Net.Cache {
 
             if (!((FtpWebRequest)Request).UseBinary)
             {
-                if(Logging.On)Logging.PrintWarning(Logging.RequestCache, SR.GetString(SR.net_log_cache_ftp_supports_bin_only));
+                if (Logging.On)
+                    Logging.PrintWarning(
+                        Logging.RequestCache,
+                        SR.GetString(SR.net_log_cache_ftp_supports_bin_only)
+                    );
                 return CacheValidationStatus.DoNotUseCache;
             }
 
@@ -116,12 +149,15 @@ namespace System.Net.Cache {
         // the handler has to decide whether a cached item can be considered as fresh.
         protected internal override CacheFreshnessStatus ValidateFreshness()
         {
-
             if (HttpProxyMode)
             {
                 if (CacheStream != Stream.Null)
                 {
-                    if(Logging.On)Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_replacing_entry_with_HTTP_200));
+                    if (Logging.On)
+                        Logging.PrintInfo(
+                            Logging.RequestCache,
+                            SR.GetString(SR.net_log_cache_replacing_entry_with_HTTP_200)
+                        );
 
                     // HTTP validator cannot parse FTP status code and other metadata
                     if (CacheEntry.EntryMetadata == null)
@@ -135,25 +171,51 @@ namespace System.Net.Cache {
 
             DateTime nowDate = DateTime.UtcNow;
 
-            if(Logging.On)Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_now_time, nowDate.ToString("r", CultureInfo.InvariantCulture)));
+            if (Logging.On)
+                Logging.PrintInfo(
+                    Logging.RequestCache,
+                    SR.GetString(
+                        SR.net_log_cache_now_time,
+                        nowDate.ToString("r", CultureInfo.InvariantCulture)
+                    )
+                );
 
             // If absolute Expires can be recovered
             if (CacheEntry.ExpiresUtc != DateTime.MinValue)
             {
                 //Take absolute Expires value
-                if(Logging.On)Logging.PrintWarning(Logging.RequestCache, SR.GetString(SR.net_log_cache_max_age_absolute, CacheEntry.ExpiresUtc.ToString("r", CultureInfo.InvariantCulture)));
-                if (CacheEntry.ExpiresUtc < nowDate) {
+                if (Logging.On)
+                    Logging.PrintWarning(
+                        Logging.RequestCache,
+                        SR.GetString(
+                            SR.net_log_cache_max_age_absolute,
+                            CacheEntry.ExpiresUtc.ToString("r", CultureInfo.InvariantCulture)
+                        )
+                    );
+                if (CacheEntry.ExpiresUtc < nowDate)
+                {
                     return CacheFreshnessStatus.Stale;
                 }
                 return CacheFreshnessStatus.Fresh;
             }
 
-            TimeSpan age  = TimeSpan.MaxValue;
+            TimeSpan age = TimeSpan.MaxValue;
 
-            if(CacheEntry.LastSynchronizedUtc != DateTime.MinValue)
+            if (CacheEntry.LastSynchronizedUtc != DateTime.MinValue)
             {
                 age = nowDate - CacheEntry.LastSynchronizedUtc;
-                if(Logging.On)Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_age1, ((int)age.TotalSeconds).ToString(NumberFormatInfo.InvariantInfo), CacheEntry.LastSynchronizedUtc.ToString("r", CultureInfo.InvariantCulture)));
+                if (Logging.On)
+                    Logging.PrintInfo(
+                        Logging.RequestCache,
+                        SR.GetString(
+                            SR.net_log_cache_age1,
+                            ((int)age.TotalSeconds).ToString(NumberFormatInfo.InvariantInfo),
+                            CacheEntry.LastSynchronizedUtc.ToString(
+                                "r",
+                                CultureInfo.InvariantCulture
+                            )
+                        )
+                    );
             }
 
             //
@@ -162,16 +224,34 @@ namespace System.Net.Cache {
             if (CacheEntry.LastModifiedUtc != DateTime.MinValue)
             {
                 TimeSpan span = (nowDate - CacheEntry.LastModifiedUtc);
-                int maxAgeSeconds = (int)(span.TotalSeconds/10);
-                if(Logging.On)Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_no_max_age_use_10_percent, maxAgeSeconds.ToString(NumberFormatInfo.InvariantInfo), CacheEntry.LastModifiedUtc.ToString("r", CultureInfo.InvariantCulture)));
-                if (age.TotalSeconds < maxAgeSeconds) {
+                int maxAgeSeconds = (int)(span.TotalSeconds / 10);
+                if (Logging.On)
+                    Logging.PrintInfo(
+                        Logging.RequestCache,
+                        SR.GetString(
+                            SR.net_log_cache_no_max_age_use_10_percent,
+                            maxAgeSeconds.ToString(NumberFormatInfo.InvariantInfo),
+                            CacheEntry.LastModifiedUtc.ToString("r", CultureInfo.InvariantCulture)
+                        )
+                    );
+                if (age.TotalSeconds < maxAgeSeconds)
+                {
                     return CacheFreshnessStatus.Fresh;
                 }
                 return CacheFreshnessStatus.Stale;
             }
 
             // Else we can only rely on UnspecifiedMaxAge hint
-            if(Logging.On)Logging.PrintWarning(Logging.RequestCache, SR.GetString(SR.net_log_cache_no_max_age_use_default, ((int)(UnspecifiedMaxAge.TotalSeconds)).ToString(NumberFormatInfo.InvariantInfo)));
+            if (Logging.On)
+                Logging.PrintWarning(
+                    Logging.RequestCache,
+                    SR.GetString(
+                        SR.net_log_cache_no_max_age_use_default,
+                        ((int)(UnspecifiedMaxAge.TotalSeconds)).ToString(
+                            NumberFormatInfo.InvariantInfo
+                        )
+                    )
+                );
             if (UnspecifiedMaxAge >= age)
             {
                 return CacheFreshnessStatus.Fresh;
@@ -190,8 +270,18 @@ namespace System.Net.Cache {
             if (Policy.Level >= RequestCacheLevel.Reload)
             {
                 // For those policies cache is never returned
-                GlobalLog.Assert("OnValidateCache()", "This validator should not be called for policy = " + Policy.ToString());
-                if(Logging.On)Logging.PrintError(Logging.RequestCache, SR.GetString(SR.net_log_cache_validator_invalid_for_policy, Policy.ToString()));
+                GlobalLog.Assert(
+                    "OnValidateCache()",
+                    "This validator should not be called for policy = " + Policy.ToString()
+                );
+                if (Logging.On)
+                    Logging.PrintError(
+                        Logging.RequestCache,
+                        SR.GetString(
+                            SR.net_log_cache_validator_invalid_for_policy,
+                            Policy.ToString()
+                        )
+                    );
                 return CacheValidationStatus.DoNotTakeFromCache;
             }
 
@@ -221,9 +311,14 @@ namespace System.Net.Cache {
                 return TryConditionalRequest();
             }
 
-            long contentOffset = Request is FtpWebRequest ? ((FtpWebRequest)Request).ContentOffset: 0L;
+            long contentOffset =
+                Request is FtpWebRequest ? ((FtpWebRequest)Request).ContentOffset : 0L;
 
-            if (CacheFreshnessStatus == CacheFreshnessStatus.Fresh || Policy.Level == RequestCacheLevel.CacheOnly || Policy.Level == RequestCacheLevel.CacheIfAvailable)
+            if (
+                CacheFreshnessStatus == CacheFreshnessStatus.Fresh
+                || Policy.Level == RequestCacheLevel.CacheOnly
+                || Policy.Level == RequestCacheLevel.CacheIfAvailable
+            )
             {
                 if (contentOffset != 0)
                 {
@@ -243,6 +338,7 @@ namespace System.Net.Cache {
 
             return CacheValidationStatus.DoNotTakeFromCache;
         }
+
         //
         // This is (optionally) called after receiveing a live response
         //
@@ -251,12 +347,21 @@ namespace System.Net.Cache {
             if (HttpProxyMode)
                 return base.RevalidateCache();
 
-
             if (Policy.Level >= RequestCacheLevel.Reload)
             {
                 // For those policies cache is never returned
-                GlobalLog.Assert("RevalidateCache()", "This validator should not be called for policy = " + Policy.ToString());
-                if(Logging.On)Logging.PrintError(Logging.RequestCache, SR.GetString(SR.net_log_cache_validator_invalid_for_policy, Policy.ToString()));
+                GlobalLog.Assert(
+                    "RevalidateCache()",
+                    "This validator should not be called for policy = " + Policy.ToString()
+                );
+                if (Logging.On)
+                    Logging.PrintError(
+                        Logging.RequestCache,
+                        SR.GetString(
+                            SR.net_log_cache_validator_invalid_for_policy,
+                            Policy.ToString()
+                        )
+                    );
                 return CacheValidationStatus.DoNotTakeFromCache;
             }
 
@@ -281,13 +386,37 @@ namespace System.Net.Cache {
 
             if (resp.StatusCode == FtpStatusCode.FileStatus)
             {
-                if(Logging.On) Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_response_last_modified, resp.LastModified.ToUniversalTime().ToString("r", CultureInfo.InvariantCulture), resp.ContentLength));
-                if(Logging.On) Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_cache_last_modified, CacheEntry.LastModifiedUtc.ToString("r", CultureInfo.InvariantCulture), CacheEntry.StreamSize));
+                if (Logging.On)
+                    Logging.PrintInfo(
+                        Logging.RequestCache,
+                        SR.GetString(
+                            SR.net_log_cache_response_last_modified,
+                            resp.LastModified.ToUniversalTime()
+                                .ToString("r", CultureInfo.InvariantCulture),
+                            resp.ContentLength
+                        )
+                    );
+                if (Logging.On)
+                    Logging.PrintInfo(
+                        Logging.RequestCache,
+                        SR.GetString(
+                            SR.net_log_cache_cache_last_modified,
+                            CacheEntry.LastModifiedUtc.ToString("r", CultureInfo.InvariantCulture),
+                            CacheEntry.StreamSize
+                        )
+                    );
 
                 if (CacheStreamOffset != 0L && CacheEntry.IsPartialEntry)
                 {
                     //should never happen
-                    if(Logging.On) Logging.PrintError(Logging.RequestCache, SR.GetString(SR.net_log_cache_partial_and_non_zero_content_offset, CacheStreamOffset.ToString(CultureInfo.InvariantCulture))); 
+                    if (Logging.On)
+                        Logging.PrintError(
+                            Logging.RequestCache,
+                            SR.GetString(
+                                SR.net_log_cache_partial_and_non_zero_content_offset,
+                                CacheStreamOffset.ToString(CultureInfo.InvariantCulture)
+                            )
+                        );
                     result = CacheValidationStatus.DoNotTakeFromCache;
                 }
 
@@ -316,7 +445,7 @@ namespace System.Net.Cache {
             }
             else
             {
-                result =  CacheValidationStatus.DoNotTakeFromCache;
+                result = CacheValidationStatus.DoNotTakeFromCache;
             }
 
             return result;
@@ -334,29 +463,60 @@ namespace System.Net.Cache {
             if (HttpProxyMode)
                 return base.ValidateResponse();
 
-            if (Policy.Level != RequestCacheLevel.Default && Policy.Level != RequestCacheLevel.Revalidate)
+            if (
+                Policy.Level != RequestCacheLevel.Default
+                && Policy.Level != RequestCacheLevel.Revalidate
+            )
             {
                 // Those policy levels do not modify requests
-                if(Logging.On)Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_response_valid_based_on_policy, Policy.ToString()));
+                if (Logging.On)
+                    Logging.PrintInfo(
+                        Logging.RequestCache,
+                        SR.GetString(
+                            SR.net_log_cache_response_valid_based_on_policy,
+                            Policy.ToString()
+                        )
+                    );
                 return CacheValidationStatus.Continue;
             }
 
             FtpWebResponse resp = Response as FtpWebResponse;
 
-            if (resp == null) {
-                if(Logging.On)Logging.PrintWarning(Logging.RequestCache, SR.GetString(SR.net_log_cache_null_response_failure));
+            if (resp == null)
+            {
+                if (Logging.On)
+                    Logging.PrintWarning(
+                        Logging.RequestCache,
+                        SR.GetString(SR.net_log_cache_null_response_failure)
+                    );
                 return CacheValidationStatus.Continue;
             }
 
-            if(Logging.On) Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_ftp_response_status, ((int)resp.StatusCode).ToString(CultureInfo.InvariantCulture), resp.StatusCode.ToString()));
+            if (Logging.On)
+                Logging.PrintInfo(
+                    Logging.RequestCache,
+                    SR.GetString(
+                        SR.net_log_cache_ftp_response_status,
+                        ((int)resp.StatusCode).ToString(CultureInfo.InvariantCulture),
+                        resp.StatusCode.ToString()
+                    )
+                );
 
             // If there was a retry already, it should go with cache disabled so by default we won't retry it again
-            if (ResponseCount > 1) {
-                if(Logging.On)Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_resp_valid_based_on_retry, ResponseCount));
+            if (ResponseCount > 1)
+            {
+                if (Logging.On)
+                    Logging.PrintInfo(
+                        Logging.RequestCache,
+                        SR.GetString(SR.net_log_cache_resp_valid_based_on_retry, ResponseCount)
+                    );
                 return CacheValidationStatus.Continue;
             }
 
-            if (resp.StatusCode != FtpStatusCode.OpeningData && resp.StatusCode != FtpStatusCode.FileStatus)
+            if (
+                resp.StatusCode != FtpStatusCode.OpeningData
+                && resp.StatusCode != FtpStatusCode.FileStatus
+            )
             {
                 return CacheValidationStatus.RetryResponseFromServer;
             }
@@ -376,17 +536,34 @@ namespace System.Net.Cache {
 
             if (RequestMethod == HttpMethod.Other)
             {
-                if(Logging.On)Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_not_updated_based_on_policy, Request.Method));
+                if (Logging.On)
+                    Logging.PrintInfo(
+                        Logging.RequestCache,
+                        SR.GetString(SR.net_log_cache_not_updated_based_on_policy, Request.Method)
+                    );
                 return CacheValidationStatus.DoNotUpdateCache;
             }
 
-            if (ValidationStatus == CacheValidationStatus.RemoveFromCache) {
-                if(Logging.On)Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_removed_existing_invalid_entry));
+            if (ValidationStatus == CacheValidationStatus.RemoveFromCache)
+            {
+                if (Logging.On)
+                    Logging.PrintInfo(
+                        Logging.RequestCache,
+                        SR.GetString(SR.net_log_cache_removed_existing_invalid_entry)
+                    );
                 return CacheValidationStatus.RemoveFromCache;
             }
 
-            if (Policy.Level == RequestCacheLevel.CacheOnly) {
-                if(Logging.On)Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_not_updated_based_on_policy, Policy.ToString()));
+            if (Policy.Level == RequestCacheLevel.CacheOnly)
+            {
+                if (Logging.On)
+                    Logging.PrintInfo(
+                        Logging.RequestCache,
+                        SR.GetString(
+                            SR.net_log_cache_not_updated_based_on_policy,
+                            Policy.ToString()
+                        )
+                    );
                 return CacheValidationStatus.DoNotUpdateCache;
             }
 
@@ -394,7 +571,11 @@ namespace System.Net.Cache {
 
             if (resp == null)
             {
-                if(Logging.On)Logging.PrintWarning(Logging.RequestCache, SR.GetString(SR.net_log_cache_not_updated_because_no_response));
+                if (Logging.On)
+                    Logging.PrintWarning(
+                        Logging.RequestCache,
+                        SR.GetString(SR.net_log_cache_not_updated_because_no_response)
+                    );
                 return CacheValidationStatus.DoNotUpdateCache;
             }
 
@@ -403,21 +584,46 @@ namespace System.Net.Cache {
             //
             if (RequestMethod == HttpMethod.Delete || RequestMethod == HttpMethod.Put)
             {
-                if (RequestMethod == HttpMethod.Delete ||
-                    resp.StatusCode == FtpStatusCode.OpeningData ||
-                    resp.StatusCode == FtpStatusCode.DataAlreadyOpen ||
-                    resp.StatusCode == FtpStatusCode.FileActionOK ||
-                    resp.StatusCode == FtpStatusCode.ClosingData)
+                if (
+                    RequestMethod == HttpMethod.Delete
+                    || resp.StatusCode == FtpStatusCode.OpeningData
+                    || resp.StatusCode == FtpStatusCode.DataAlreadyOpen
+                    || resp.StatusCode == FtpStatusCode.FileActionOK
+                    || resp.StatusCode == FtpStatusCode.ClosingData
+                )
                 {
-                    if(Logging.On)Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_removed_existing_based_on_method, Request.Method));
+                    if (Logging.On)
+                        Logging.PrintInfo(
+                            Logging.RequestCache,
+                            SR.GetString(
+                                SR.net_log_cache_removed_existing_based_on_method,
+                                Request.Method
+                            )
+                        );
                     return CacheValidationStatus.RemoveFromCache;
                 }
-                if(Logging.On)Logging.PrintWarning(Logging.RequestCache, SR.GetString(SR.net_log_cache_existing_not_removed_because_unexpected_response_status, (int)resp.StatusCode, resp.StatusCode.ToString()));
+                if (Logging.On)
+                    Logging.PrintWarning(
+                        Logging.RequestCache,
+                        SR.GetString(
+                            SR.net_log_cache_existing_not_removed_because_unexpected_response_status,
+                            (int)resp.StatusCode,
+                            resp.StatusCode.ToString()
+                        )
+                    );
                 return CacheValidationStatus.DoNotUpdateCache;
             }
 
-            if (Policy.Level == RequestCacheLevel.NoCacheNoStore) {
-                if(Logging.On)Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_removed_existing_based_on_policy, Policy.ToString()));
+            if (Policy.Level == RequestCacheLevel.NoCacheNoStore)
+            {
+                if (Logging.On)
+                    Logging.PrintInfo(
+                        Logging.RequestCache,
+                        SR.GetString(
+                            SR.net_log_cache_removed_existing_based_on_policy,
+                            Policy.ToString()
+                        )
+                    );
                 return CacheValidationStatus.RemoveFromCache;
             }
 
@@ -427,21 +633,59 @@ namespace System.Net.Cache {
                 return UpdateCacheEntryOnRevalidate();
             }
 
-            if (resp.StatusCode != FtpStatusCode.OpeningData 
+            if (
+                resp.StatusCode != FtpStatusCode.OpeningData
                 && resp.StatusCode != FtpStatusCode.DataAlreadyOpen
-                && resp.StatusCode != FtpStatusCode.ClosingData)
+                && resp.StatusCode != FtpStatusCode.ClosingData
+            )
             {
-                if(Logging.On)Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_not_updated_based_on_ftp_response_status, FtpStatusCode.OpeningData.ToString() + "|" + FtpStatusCode.DataAlreadyOpen.ToString() + "|" + FtpStatusCode.ClosingData.ToString(), resp.StatusCode.ToString()));
+                if (Logging.On)
+                    Logging.PrintInfo(
+                        Logging.RequestCache,
+                        SR.GetString(
+                            SR.net_log_cache_not_updated_based_on_ftp_response_status,
+                            FtpStatusCode.OpeningData.ToString()
+                                + "|"
+                                + FtpStatusCode.DataAlreadyOpen.ToString()
+                                + "|"
+                                + FtpStatusCode.ClosingData.ToString(),
+                            resp.StatusCode.ToString()
+                        )
+                    );
                 return CacheValidationStatus.DoNotUpdateCache;
             }
 
             // Check on no-update or cache removal if restart action has invalidated existing cache entry
             if (((FtpWebRequest)Request).ContentOffset != 0L)
             {
-                if(Logging.On)Logging.PrintWarning(Logging.RequestCache, SR.GetString(SR.net_log_cache_update_not_supported_for_ftp_restart, ((FtpWebRequest)Request).ContentOffset.ToString(CultureInfo.InvariantCulture)));
-                if (CacheEntry.LastModifiedUtc != DateTime.MinValue && resp.LastModified.ToUniversalTime() != CacheEntry.LastModifiedUtc)
+                if (Logging.On)
+                    Logging.PrintWarning(
+                        Logging.RequestCache,
+                        SR.GetString(
+                            SR.net_log_cache_update_not_supported_for_ftp_restart,
+                            ((FtpWebRequest)Request).ContentOffset.ToString(
+                                CultureInfo.InvariantCulture
+                            )
+                        )
+                    );
+                if (
+                    CacheEntry.LastModifiedUtc != DateTime.MinValue
+                    && resp.LastModified.ToUniversalTime() != CacheEntry.LastModifiedUtc
+                )
                 {
-                    if(Logging.On)Logging.PrintWarning(Logging.RequestCache, SR.GetString(SR.net_log_cache_removed_entry_because_ftp_restart_response_changed, CacheEntry.LastModifiedUtc.ToString("r", CultureInfo.InvariantCulture), resp.LastModified.ToUniversalTime().ToString("r", CultureInfo.InvariantCulture)));
+                    if (Logging.On)
+                        Logging.PrintWarning(
+                            Logging.RequestCache,
+                            SR.GetString(
+                                SR.net_log_cache_removed_entry_because_ftp_restart_response_changed,
+                                CacheEntry.LastModifiedUtc.ToString(
+                                    "r",
+                                    CultureInfo.InvariantCulture
+                                ),
+                                resp.LastModified.ToUniversalTime()
+                                    .ToString("r", CultureInfo.InvariantCulture)
+                            )
+                        );
                     return CacheValidationStatus.RemoveFromCache;
                 }
                 return CacheValidationStatus.DoNotUpdateCache;
@@ -455,7 +699,7 @@ namespace System.Net.Cache {
         //
         private CacheValidationStatus UpdateCacheEntryOnStore()
         {
-            CacheEntry.EntryMetadata  = null;
+            CacheEntry.EntryMetadata = null;
             CacheEntry.SystemMetadata = null;
 
             FtpWebResponse resp = Response as FtpWebResponse;
@@ -465,29 +709,48 @@ namespace System.Net.Cache {
             }
 
             ResponseEntityLength = Response.ContentLength;
-            CacheEntry.StreamSize = ResponseEntityLength;       //This is passed down to cache on what size to expect
+            CacheEntry.StreamSize = ResponseEntityLength; //This is passed down to cache on what size to expect
             CacheEntry.LastSynchronizedUtc = DateTime.UtcNow;
             return CacheValidationStatus.CacheResponse;
         }
+
         //
         //
         private CacheValidationStatus UpdateCacheEntryOnRevalidate()
         {
-            if(Logging.On)Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_last_synchronized, CacheEntry.LastSynchronizedUtc.ToString("r", CultureInfo.InvariantCulture)));
+            if (Logging.On)
+                Logging.PrintInfo(
+                    Logging.RequestCache,
+                    SR.GetString(
+                        SR.net_log_cache_last_synchronized,
+                        CacheEntry.LastSynchronizedUtc.ToString("r", CultureInfo.InvariantCulture)
+                    )
+                );
 
             DateTime nowUtc = DateTime.UtcNow;
             if (CacheEntry.LastSynchronizedUtc + TimeSpan.FromMinutes(1) >= nowUtc)
             {
-                if(Logging.On)Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_suppress_update_because_synched_last_minute));
+                if (Logging.On)
+                    Logging.PrintInfo(
+                        Logging.RequestCache,
+                        SR.GetString(SR.net_log_cache_suppress_update_because_synched_last_minute)
+                    );
                 return CacheValidationStatus.DoNotUpdateCache;
             }
 
-            CacheEntry.EntryMetadata  = null;
+            CacheEntry.EntryMetadata = null;
             CacheEntry.SystemMetadata = null;
 
             CacheEntry.LastSynchronizedUtc = nowUtc;
 
-            if(Logging.On)Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_updating_last_synchronized, CacheEntry.LastSynchronizedUtc.ToString("r", CultureInfo.InvariantCulture)));
+            if (Logging.On)
+                Logging.PrintInfo(
+                    Logging.RequestCache,
+                    SR.GetString(
+                        SR.net_log_cache_updating_last_synchronized,
+                        CacheEntry.LastSynchronizedUtc.ToString("r", CultureInfo.InvariantCulture)
+                    )
+                );
 
             return CacheValidationStatus.UpdateResponseInformation;
         }
@@ -507,7 +770,5 @@ namespace System.Net.Cache {
             }
             return CacheValidationStatus.Continue;
         }
-
     }
 }
-

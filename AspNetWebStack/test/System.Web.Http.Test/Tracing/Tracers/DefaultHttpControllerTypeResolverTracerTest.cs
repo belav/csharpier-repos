@@ -26,7 +26,9 @@ namespace System.Web.Http.Tracing.Tracers
         {
             ExpectedTypes = new List<Type>
             {
-                typeof(ValidController), typeof(UsersRpcController), typeof(UsersController),
+                typeof(ValidController),
+                typeof(UsersRpcController),
+                typeof(UsersController),
             };
 
             Type[] fine1Types = new Type[]
@@ -49,11 +51,14 @@ namespace System.Web.Http.Tracing.Tracers
                 null,
                 typeof(DefaultHttpControllerTypeResolverTracer),
                 null,
-                typeof(UsersController)
+                typeof(UsersController),
             };
 
             Exception worseException = new Exception(ExceptionMessage);
-            Exception poorException = new ReflectionTypeLoadException(poorTypes, new Exception[] { worseException });
+            Exception poorException = new ReflectionTypeLoadException(
+                poorTypes,
+                new Exception[] { worseException }
+            );
             ExpectedTraces = new List<TraceRecord>
             {
                 new TraceRecord(null, TraceCategories.ControllersCategory, TraceLevel.Debug)
@@ -86,7 +91,7 @@ namespace System.Web.Http.Tracing.Tracers
             fine1Assembly.Setup(assembly => assembly.GetTypes()).Returns(fine1Types);
             fine1Assembly.SetupGet(assembly => assembly.IsDynamic).Returns(false);
 
-            Exception[] exceptions = new Exception[] { new Exception(ExceptionMessage), };
+            Exception[] exceptions = new Exception[] { new Exception(ExceptionMessage) };
             Mock<MockableAssembly> poorAssembly = new Mock<MockableAssembly>(MockBehavior.Strict);
             poorAssembly.Setup(assembly => assembly.GetTypes()).Throws(poorException);
             poorAssembly.SetupGet(assembly => assembly.IsDynamic).Returns(false);
@@ -101,7 +106,9 @@ namespace System.Web.Http.Tracing.Tracers
             fine2Assembly.Setup(assembly => assembly.GetTypes()).Returns(fine2Types);
             fine2Assembly.SetupGet(assembly => assembly.IsDynamic).Returns(false);
 
-            Mock<MockableAssembly> dynamicAssembly = new Mock<MockableAssembly>(MockBehavior.Strict);
+            Mock<MockableAssembly> dynamicAssembly = new Mock<MockableAssembly>(
+                MockBehavior.Strict
+            );
             dynamicAssembly.SetupGet(assembly => assembly.IsDynamic).Returns(true);
 
             Assemblies = new Mock<MockableAssembly>[]
@@ -114,11 +121,14 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             AssembliesResolver = new Mock<IAssembliesResolver>(MockBehavior.Strict);
-            AssembliesResolver.Setup(resolver => resolver.GetAssemblies()).Returns(
-                Assemblies.Select(assembly => (Assembly)assembly.Object).AsCollection());
+            AssembliesResolver
+                .Setup(resolver => resolver.GetAssemblies())
+                .Returns(Assemblies.Select(assembly => (Assembly)assembly.Object).AsCollection());
 
-            HttpControllerTypeResolver =
-                new Mock<DefaultHttpControllerTypeResolver>() { CallBase = true, };
+            HttpControllerTypeResolver = new Mock<DefaultHttpControllerTypeResolver>()
+            {
+                CallBase = true,
+            };
         }
 
         [Fact]
@@ -127,23 +137,34 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             TestTraceWriter traceWriter = new TestTraceWriter();
             DefaultHttpControllerTypeResolverTracer tracer =
-                new DefaultHttpControllerTypeResolverTracer(HttpControllerTypeResolver.Object, traceWriter);
+                new DefaultHttpControllerTypeResolverTracer(
+                    HttpControllerTypeResolver.Object,
+                    traceWriter
+                );
 
             // Act
             tracer.GetControllerTypes(AssembliesResolver.Object);
 
             // Assert (particularly important tracer delegates to original DefaultHttpControllerTypeResolver)
             HttpControllerTypeResolver.Verify(
-                controller => controller.GetControllerTypes(AssembliesResolver.Object), Times.Once());
+                controller => controller.GetControllerTypes(AssembliesResolver.Object),
+                Times.Once()
+            );
 
             // Predicate is not called on null entries or internal types in the Type arrays (see TypeIsVisible)
-            HttpControllerTypeResolver.VerifyGet(controller => controller.IsControllerTypePredicate, Times.Exactly(7));
+            HttpControllerTypeResolver.VerifyGet(
+                controller => controller.IsControllerTypePredicate,
+                Times.Exactly(7)
+            );
 
             AssembliesResolver.Verify(resolver => resolver.GetAssemblies(), Times.Once());
             foreach (Mock<MockableAssembly> mock in Assemblies)
             {
                 mock.VerifyGet(assembly => assembly.IsDynamic, Times.Once());
-                mock.Verify(assembly => assembly.GetTypes(), mock.Object.IsDynamic ? Times.Never() : Times.Once());
+                mock.Verify(
+                    assembly => assembly.GetTypes(),
+                    mock.Object.IsDynamic ? Times.Never() : Times.Once()
+                );
             }
         }
 
@@ -153,7 +174,10 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             TestTraceWriter traceWriter = new TestTraceWriter();
             DefaultHttpControllerTypeResolverTracer tracer =
-                new DefaultHttpControllerTypeResolverTracer(HttpControllerTypeResolver.Object, traceWriter);
+                new DefaultHttpControllerTypeResolverTracer(
+                    HttpControllerTypeResolver.Object,
+                    traceWriter
+                );
 
             // Act
             ICollection<Type> types = tracer.GetControllerTypes(AssembliesResolver.Object);
@@ -170,7 +194,10 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             TestTraceWriter traceWriter = new TestTraceWriter();
             DefaultHttpControllerTypeResolverTracer tracer =
-                new DefaultHttpControllerTypeResolverTracer(HttpControllerTypeResolver.Object, traceWriter);
+                new DefaultHttpControllerTypeResolverTracer(
+                    HttpControllerTypeResolver.Object,
+                    traceWriter
+                );
 
             // Act
             ICollection<Type> types = tracer.GetControllerTypes(AssembliesResolver.Object);
@@ -187,7 +214,10 @@ namespace System.Web.Http.Tracing.Tracers
             DefaultHttpControllerTypeResolver expectedResolver = HttpControllerTypeResolver.Object;
             TestTraceWriter traceWriter = new TestTraceWriter();
             DefaultHttpControllerTypeResolverTracer tracer =
-                new DefaultHttpControllerTypeResolverTracer(HttpControllerTypeResolver.Object, traceWriter);
+                new DefaultHttpControllerTypeResolverTracer(
+                    HttpControllerTypeResolver.Object,
+                    traceWriter
+                );
 
             // Act
             DefaultHttpControllerTypeResolver resolver = tracer.Inner;
@@ -204,10 +234,15 @@ namespace System.Web.Http.Tracing.Tracers
             DefaultHttpControllerTypeResolver expectedResolver = HttpControllerTypeResolver.Object;
             TestTraceWriter traceWriter = new TestTraceWriter();
             DefaultHttpControllerTypeResolverTracer tracer =
-                new DefaultHttpControllerTypeResolverTracer(HttpControllerTypeResolver.Object, traceWriter);
+                new DefaultHttpControllerTypeResolverTracer(
+                    HttpControllerTypeResolver.Object,
+                    traceWriter
+                );
 
             // Act
-            DefaultHttpControllerTypeResolver resolver = Decorator.GetInner(tracer as DefaultHttpControllerTypeResolver);
+            DefaultHttpControllerTypeResolver resolver = Decorator.GetInner(
+                tracer as DefaultHttpControllerTypeResolver
+            );
 
             // Assert
             Assert.NotNull(resolver);
@@ -220,10 +255,15 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             TestTraceWriter traceWriter = new TestTraceWriter();
             DefaultHttpControllerTypeResolverTracer tracer =
-                new DefaultHttpControllerTypeResolverTracer(HttpControllerTypeResolver.Object, traceWriter);
+                new DefaultHttpControllerTypeResolverTracer(
+                    HttpControllerTypeResolver.Object,
+                    traceWriter
+                );
 
             // Act
-            Predicate<Type> innerPredicate = HttpControllerTypeResolver.Object.IsControllerTypePredicate;
+            Predicate<Type> innerPredicate = HttpControllerTypeResolver
+                .Object
+                .IsControllerTypePredicate;
             Predicate<Type> tracerPredicate = tracer.IsControllerTypePredicate;
 
             // Assert
@@ -236,7 +276,9 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             Predicate<Type> expectedPredicate = type => type != null;
-            DefaultHttpControllerTypeResolver resolver = new DefaultHttpControllerTypeResolver(expectedPredicate);
+            DefaultHttpControllerTypeResolver resolver = new DefaultHttpControllerTypeResolver(
+                expectedPredicate
+            );
 
             TestTraceWriter traceWriter = new TestTraceWriter();
             DefaultHttpControllerTypeResolverTracer tracer =
@@ -254,9 +296,7 @@ namespace System.Web.Http.Tracing.Tracers
         // Assembly implements ISerializable but lacks the constructor.
         public abstract class MockableAssembly : Assembly
         {
-            public MockableAssembly()
-            {
-            }
+            public MockableAssembly() { }
 
             public MockableAssembly(SerializationInfo info, StreamingContext context)
             {

@@ -18,7 +18,7 @@ namespace System.Globalization
     {
         private static readonly EraInfo[] s_thaiBuddhistEraInfo = new EraInfo[]
         {
-            new EraInfo(1, 1, 1, 1, -543, 544, GregorianCalendar.MaxYear + 543)     // era #, start year/month/day, yearOffset, minEraYear
+            new EraInfo(1, 1, 1, 1, -543, 544, GregorianCalendar.MaxYear + 543), // era #, start year/month/day, yearOffset, minEraYear
         };
 
         public const int ThaiBuddhistEra = 1;
@@ -78,7 +78,11 @@ namespace System.Globalization
             return _helper.GetMonthsInYear(year, era);
         }
 
-        public override int GetWeekOfYear(DateTime time, CalendarWeekRule rule, DayOfWeek firstDayOfWeek)
+        public override int GetWeekOfYear(
+            DateTime time,
+            CalendarWeekRule rule,
+            DayOfWeek firstDayOfWeek
+        )
         {
             return _helper.GetWeekOfYear(time, rule, firstDayOfWeek);
         }
@@ -118,7 +122,16 @@ namespace System.Globalization
             return _helper.IsLeapMonth(year, month, era);
         }
 
-        public override DateTime ToDateTime(int year, int month, int day, int hour, int minute, int second, int millisecond, int era)
+        public override DateTime ToDateTime(
+            int year,
+            int month,
+            int day,
+            int hour,
+            int minute,
+            int second,
+            int millisecond,
+            int era
+        )
         {
             return _helper.ToDateTime(year, month, day, hour, minute, second, millisecond, era);
         }
@@ -126,7 +139,6 @@ namespace System.Globalization
         public override int[] Eras => _helper.Eras;
 
         private const int DefaultTwoDigitYearMax = 2572;
-
 
         public override int TwoDigitYearMax
         {
@@ -147,7 +159,8 @@ namespace System.Globalization
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         value,
-                        SR.Format(SR.ArgumentOutOfRange_Range, 99, _helper.MaxYear));
+                        SR.Format(SR.ArgumentOutOfRange_Range, 99, _helper.MaxYear)
+                    );
                 }
 
                 _twoDigitYearMax = value;

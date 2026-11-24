@@ -15,15 +15,20 @@ namespace System.Collections.Tests
         protected override bool ExpectedIsSynchronized => true;
         protected override bool SupportsSerialization => false;
 
-        protected override IDictionary NonGenericIDictionaryFactory() => Hashtable.Synchronized(new Hashtable());
+        protected override IDictionary NonGenericIDictionaryFactory() =>
+            Hashtable.Synchronized(new Hashtable());
     }
 
     public abstract class HashtableIDictionaryTestBase : IDictionary_NonGeneric_Tests
     {
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfEnumType_ThrowType => typeof(InvalidCastException);
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType_ThrowType => typeof(InvalidCastException);
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectValueType_ThrowType => typeof(InvalidCastException);
-        protected override Type ICollection_NonGeneric_CopyTo_NonZeroLowerBound_ThrowType => typeof(IndexOutOfRangeException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfEnumType_ThrowType =>
+            typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType_ThrowType =>
+            typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectValueType_ThrowType =>
+            typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_NonZeroLowerBound_ThrowType =>
+            typeof(IndexOutOfRangeException);
 
         protected override object CreateTKey(int seed)
         {

@@ -84,7 +84,9 @@ namespace Newtonsoft.Json.Tests.Issues
 
             var json = JsonConvert.SerializeObject(fooBar, SerializeSettings(maxDepth));
 
-            var ex = ExceptionAssert.Throws<JsonReaderException>(() => JsonConvert.DeserializeObject<FooBar>(json, DeserializeSettings(maxDepth)));
+            var ex = ExceptionAssert.Throws<JsonReaderException>(() =>
+                JsonConvert.DeserializeObject<FooBar>(json, DeserializeSettings(maxDepth))
+            );
             Assert.IsTrue(ex.Message.StartsWith("The reader's MaxDepth of 512 has been exceeded."));
         }
 
@@ -105,7 +107,9 @@ namespace Newtonsoft.Json.Tests.Issues
 
             var json = JsonConvert.SerializeObject(fooBar, SerializeSettings(maxDepth));
 
-            var ex = ExceptionAssert.Throws<JsonReaderException>(() => JsonConvert.DeserializeObject<FooBar>(json, DeserializeSettings(maxDepth)));
+            var ex = ExceptionAssert.Throws<JsonReaderException>(() =>
+                JsonConvert.DeserializeObject<FooBar>(json, DeserializeSettings(maxDepth))
+            );
             Assert.IsTrue(ex.Message.StartsWith("The reader's MaxDepth of 10 has been exceeded."));
         }
 
@@ -116,13 +120,13 @@ namespace Newtonsoft.Json.Tests.Issues
 
             public IList<Foo> FooList => _myData.Values.ToList();
 
-            public FooBar()
-            {
-            }
+            public FooBar() { }
 
             public FooBar(SerializationInfo info, StreamingContext context)
             {
-                _myData = (Dictionary<string, Foo>)info.GetValue(nameof(_myData), typeof(Dictionary<string, Foo>));
+                _myData =
+                    (Dictionary<string, Foo>)
+                        info.GetValue(nameof(_myData), typeof(Dictionary<string, Foo>));
             }
 
             public void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -148,17 +152,19 @@ namespace Newtonsoft.Json.Tests.Issues
             }
         }
 
-        private JsonSerializerSettings DeserializeSettings(int maxDepth) => new JsonSerializerSettings()
-        {
-            TypeNameHandling = TypeNameHandling.None,
-            MaxDepth = maxDepth
-        };
+        private JsonSerializerSettings DeserializeSettings(int maxDepth) =>
+            new JsonSerializerSettings()
+            {
+                TypeNameHandling = TypeNameHandling.None,
+                MaxDepth = maxDepth,
+            };
 
-        private JsonSerializerSettings SerializeSettings(int maxDepth) => new JsonSerializerSettings()
-        {
-            TypeNameHandling = TypeNameHandling.All,
-            MaxDepth = maxDepth
-        };
+        private JsonSerializerSettings SerializeSettings(int maxDepth) =>
+            new JsonSerializerSettings()
+            {
+                TypeNameHandling = TypeNameHandling.All,
+                MaxDepth = maxDepth,
+            };
     }
 }
 #endif

@@ -16,7 +16,10 @@ namespace System.Runtime
     // We choose this name to avoid clashing with any future public class with the name Finalizer.
     internal static class __Finalizer
     {
-        [UnmanagedCallersOnly(EntryPoint = "ProcessFinalizers", CallConvs = new Type[] { typeof(CallConvCdecl) })]
+        [UnmanagedCallersOnly(
+            EntryPoint = "ProcessFinalizers",
+            CallConvs = new Type[] { typeof(CallConvCdecl) }
+        )]
         public static void ProcessFinalizers()
         {
 #if INPLACE_RUNTIME
@@ -63,7 +66,7 @@ namespace System.Runtime
                 // Call the finalizer on the current target object. If the finalizer throws we'll fail
                 // fast via normal Redhawk exception semantics (since we don't attempt to catch
                 // anything).
-                ((delegate*<object, void>)target.GetMethodTable()->FinalizerCode)(target);
+                ((delegate* <object, void>)target.GetMethodTable()->FinalizerCode)(target);
             }
         }
     }

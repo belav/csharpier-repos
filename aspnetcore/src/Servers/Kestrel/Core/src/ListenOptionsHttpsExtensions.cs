@@ -128,13 +128,8 @@ public static class ListenOptionsHttpsExtensions
         bool allowInvalid,
         StoreLocation location
     ) =>
-        listenOptions.UseHttps(
-            storeName,
-            subject,
-            allowInvalid,
-            location,
-            configureOptions: _ => { }
-        );
+        listenOptions.UseHttps(storeName, subject, allowInvalid, location, configureOptions: _ =>
+        { });
 
     /// <summary>
     /// Configure Kestrel to use HTTPS.

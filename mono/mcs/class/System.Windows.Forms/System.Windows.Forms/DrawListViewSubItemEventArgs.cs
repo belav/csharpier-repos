@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,7 +23,6 @@
 //	Alan McGovern (alan.mcgovern@gmail.com)
 //
 
-
 using System.Drawing;
 
 namespace System.Windows.Forms
@@ -34,7 +33,7 @@ namespace System.Windows.Forms
 
         private Rectangle bounds;
         private int columnIndex;
-		private bool drawDefault;
+        private bool drawDefault;
         private Graphics graphics;
         private ColumnHeader header;
         private ListViewItem item;
@@ -47,52 +46,67 @@ namespace System.Windows.Forms
 
         #region Properties
 
-        public Rectangle Bounds {
+        public Rectangle Bounds
+        {
             get { return bounds; }
         }
 
-        public int ColumnIndex {
+        public int ColumnIndex
+        {
             get { return columnIndex; }
         }
 
-        public bool DrawDefault {
+        public bool DrawDefault
+        {
             get { return drawDefault; }
             set { drawDefault = value; }
         }
 
-        public Graphics Graphics {
+        public Graphics Graphics
+        {
             get { return graphics; }
         }
 
-        public ColumnHeader Header {
+        public ColumnHeader Header
+        {
             get { return header; }
         }
 
-        public ListViewItem Item {
+        public ListViewItem Item
+        {
             get { return item; }
         }
 
-        public int ItemIndex {
+        public int ItemIndex
+        {
             get { return itemIndex; }
         }
 
-        public ListViewItemStates ItemState {
+        public ListViewItemStates ItemState
+        {
             get { return itemState; }
         }
 
-        public ListViewItem.ListViewSubItem SubItem {
+        public ListViewItem.ListViewSubItem SubItem
+        {
             get { return this.subItem; }
         }
 
-        #endregion Properties 
+        #endregion Properties
 
 
         #region Constructors
 
-        public DrawListViewSubItemEventArgs(Graphics graphics, Rectangle bounds,
-                                            ListViewItem item, ListViewItem.ListViewSubItem subItem,
-                                            int itemIndex, int columnIndex,
-                                            ColumnHeader header, ListViewItemStates itemState)
+        public DrawListViewSubItemEventArgs(
+            Graphics graphics,
+            Rectangle bounds,
+            ListViewItem item,
+            ListViewItem.ListViewSubItem subItem,
+            int itemIndex,
+            int columnIndex,
+            ColumnHeader header,
+            ListViewItemStates itemState
+        )
         {
             this.bounds = bounds;
             this.columnIndex = columnIndex;
@@ -109,29 +123,55 @@ namespace System.Windows.Forms
 
         #region Public Methods
 
-        public void DrawBackground ()
+        public void DrawBackground()
         {
-		graphics.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (subItem.BackColor), bounds);
+            graphics.FillRectangle(
+                ThemeEngine.Current.ResPool.GetSolidBrush(subItem.BackColor),
+                bounds
+            );
         }
 
-        public void DrawFocusRectangle (Rectangle bounds)
+        public void DrawFocusRectangle(Rectangle bounds)
         {
-		if ((itemState & ListViewItemStates.Focused) != 0) {
-			Rectangle rect = new Rectangle (bounds.X + 1, bounds.Y + 1, bounds.Width - 1, bounds.Height - 1);
-			ThemeEngine.Current.CPDrawFocusRectangle (graphics, rect, subItem.ForeColor, subItem.BackColor);
-		}
+            if ((itemState & ListViewItemStates.Focused) != 0)
+            {
+                Rectangle rect = new Rectangle(
+                    bounds.X + 1,
+                    bounds.Y + 1,
+                    bounds.Width - 1,
+                    bounds.Height - 1
+                );
+                ThemeEngine.Current.CPDrawFocusRectangle(
+                    graphics,
+                    rect,
+                    subItem.ForeColor,
+                    subItem.BackColor
+                );
+            }
         }
 
-        public void DrawText ()
+        public void DrawText()
         {
-		DrawText (TextFormatFlags.EndEllipsis | TextFormatFlags.HorizontalCenter);
+            DrawText(TextFormatFlags.EndEllipsis | TextFormatFlags.HorizontalCenter);
         }
 
-        public void DrawText (TextFormatFlags flags)
+        public void DrawText(TextFormatFlags flags)
         {
-		// Text adjustments
-		Rectangle text_bounds = new Rectangle (bounds.X + 8, bounds.Y, bounds.Width - 13, bounds.Height);
-		TextRenderer.DrawText (graphics, subItem.Text, subItem.Font, text_bounds, subItem.ForeColor, flags);
+            // Text adjustments
+            Rectangle text_bounds = new Rectangle(
+                bounds.X + 8,
+                bounds.Y,
+                bounds.Width - 13,
+                bounds.Height
+            );
+            TextRenderer.DrawText(
+                graphics,
+                subItem.Text,
+                subItem.Font,
+                text_bounds,
+                subItem.ForeColor,
+                flags
+            );
         }
 
         #endregion Public Methods

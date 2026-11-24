@@ -13,45 +13,44 @@ namespace System.Activities.Expressions
     public sealed class ArrayItemReference<TItem> : CodeActivity<Location<TItem>>
     {
         public ArrayItemReference()
-            : base()
-        {
-        }
+            : base() { }
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<TItem[]> Array
-        {
-            get;
-            set;
-        }
+        public InArgument<TItem[]> Array { get; set; }
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<int> Index
-        {
-            get;
-            set;
-        }
-
+        public InArgument<int> Index { get; set; }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
-            RuntimeArgument arrayArgument = new RuntimeArgument("Array", typeof(TItem[]), ArgumentDirection.In, true);
+            RuntimeArgument arrayArgument = new RuntimeArgument(
+                "Array",
+                typeof(TItem[]),
+                ArgumentDirection.In,
+                true
+            );
             metadata.Bind(this.Array, arrayArgument);
 
-            RuntimeArgument indexArgument = new RuntimeArgument("Index", typeof(int), ArgumentDirection.In, true);
+            RuntimeArgument indexArgument = new RuntimeArgument(
+                "Index",
+                typeof(int),
+                ArgumentDirection.In,
+                true
+            );
             metadata.Bind(this.Index, indexArgument);
 
-            RuntimeArgument resultArgument = new RuntimeArgument("Result", typeof(Location<TItem>), ArgumentDirection.Out);
+            RuntimeArgument resultArgument = new RuntimeArgument(
+                "Result",
+                typeof(Location<TItem>),
+                ArgumentDirection.Out
+            );
             metadata.Bind(this.Result, resultArgument);
 
             metadata.SetArgumentsCollection(
-                new Collection<RuntimeArgument>
-                {
-                    arrayArgument,
-                    indexArgument,
-                    resultArgument
-                });
+                new Collection<RuntimeArgument> { arrayArgument, indexArgument, resultArgument }
+            );
         }
 
         protected override Location<TItem> Execute(CodeActivityContext context)
@@ -59,7 +58,11 @@ namespace System.Activities.Expressions
             TItem[] items = this.Array.Get(context);
             if (items == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.MemberCannotBeNull("Array", this.GetType().Name, this.DisplayName)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.MemberCannotBeNull("Array", this.GetType().Name, this.DisplayName)
+                    )
+                );
             }
             int itemIndex = this.Index.Get(context);
             return new ArrayLocation(items, itemIndex);
@@ -81,14 +84,8 @@ namespace System.Activities.Expressions
 
             public override TItem Value
             {
-                get
-                {
-                    return this.array[this.index];
-                }
-                set
-                {
-                    this.array[this.index] = value;
-                }
+                get { return this.array[this.index]; }
+                set { this.array[this.index] = value; }
             }
 
             [DataMember(Name = "array")]

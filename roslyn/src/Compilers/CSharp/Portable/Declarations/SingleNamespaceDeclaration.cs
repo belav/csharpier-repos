@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxReference syntaxReference,
             SourceLocation nameLocation,
             ImmutableArray<SingleNamespaceOrTypeDeclaration> children,
-            ImmutableArray<Diagnostic> diagnostics)
+            ImmutableArray<Diagnostic> diagnostics
+        )
             : base(name, syntaxReference, nameLocation, diagnostics)
         {
             _children = children;
@@ -25,10 +26,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override DeclarationKind Kind
         {
-            get
-            {
-                return DeclarationKind.Namespace;
-            }
+            get { return DeclarationKind.Namespace; }
         }
 
         protected override ImmutableArray<SingleNamespaceOrTypeDeclaration> GetNamespaceOrTypeDeclarationChildren()
@@ -38,26 +36,17 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public virtual bool HasGlobalUsings
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public virtual bool HasUsings
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public virtual bool HasExternAliases
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public static SingleNamespaceDeclaration Create(
@@ -67,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxReference syntaxReference,
             SourceLocation nameLocation,
             ImmutableArray<SingleNamespaceOrTypeDeclaration> children,
-            ImmutableArray<Diagnostic> diagnostics)
+            ImmutableArray<Diagnostic> diagnostics
+        )
         {
             // By far the most common case is "no usings and no extern aliases", so optimize for
             // that to minimize space. The other cases are not frequent enough to warrant their own
@@ -75,12 +65,24 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (!hasUsings && !hasExternAliases)
             {
                 return new SingleNamespaceDeclaration(
-                    name, syntaxReference, nameLocation, children, diagnostics);
+                    name,
+                    syntaxReference,
+                    nameLocation,
+                    children,
+                    diagnostics
+                );
             }
             else
             {
                 return new SingleNamespaceDeclarationEx(
-                    name, hasUsings, hasExternAliases, syntaxReference, nameLocation, children, diagnostics);
+                    name,
+                    hasUsings,
+                    hasExternAliases,
+                    syntaxReference,
+                    nameLocation,
+                    children,
+                    diagnostics
+                );
             }
         }
     }

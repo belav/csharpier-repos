@@ -28,13 +28,17 @@ namespace Test
     public class BaseClass
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public BaseClass(string arg) { Console.Write("BaseClass::.ctor -- `{0}'\r\n", arg); return; }
+        public BaseClass(string arg)
+        {
+            Console.Write("BaseClass::.ctor -- `{0}'\r\n", arg);
+            return;
+        }
     }
 
     public class DerivedClass : BaseClass
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public DerivedClass(string selector) : base(selector ?? "NeededToFallBack") { }
+        public DerivedClass(string selector)
+            : base(selector ?? "NeededToFallBack") { }
     }
 }
-

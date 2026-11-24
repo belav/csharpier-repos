@@ -88,7 +88,8 @@ namespace System.Net.NetworkInformation.Tests
         {
             string fileName = GetTestFilePath();
             FileUtil.NormalizeLineEndings("NetworkFiles/snmp", fileName);
-            TcpGlobalStatisticsTable table = StringParsingHelpers.ParseTcpGlobalStatisticsFromSnmpFile(fileName);
+            TcpGlobalStatisticsTable table =
+                StringParsingHelpers.ParseTcpGlobalStatisticsFromSnmpFile(fileName);
             Assert.Equal(1L, table.RtoAlgorithm);
             Assert.Equal(200L, table.RtoMin);
             Assert.Equal(120000L, table.RtoMax);
@@ -111,7 +112,8 @@ namespace System.Net.NetworkInformation.Tests
         {
             string fileName = GetTestFilePath();
             FileUtil.NormalizeLineEndings("NetworkFiles/snmp", fileName);
-            UdpGlobalStatisticsTable table = StringParsingHelpers.ParseUdpv4GlobalStatisticsFromSnmpFile(fileName);
+            UdpGlobalStatisticsTable table =
+                StringParsingHelpers.ParseUdpv4GlobalStatisticsFromSnmpFile(fileName);
             Assert.Equal(7181L, table.InDatagrams);
             Assert.Equal(150L, table.NoPorts);
             Assert.Equal(0L, table.InErrors);
@@ -126,7 +128,8 @@ namespace System.Net.NetworkInformation.Tests
         {
             string fileName = GetTestFilePath();
             FileUtil.NormalizeLineEndings("NetworkFiles/snmp6", fileName);
-            UdpGlobalStatisticsTable table = StringParsingHelpers.ParseUdpv6GlobalStatisticsFromSnmp6File(fileName);
+            UdpGlobalStatisticsTable table =
+                StringParsingHelpers.ParseUdpv6GlobalStatisticsFromSnmp6File(fileName);
             Assert.Equal(19L, table.InDatagrams);
             Assert.Equal(0L, table.NoPorts);
             Assert.Equal(0L, table.InErrors);
@@ -141,7 +144,8 @@ namespace System.Net.NetworkInformation.Tests
         {
             string fileName = GetTestFilePath();
             FileUtil.NormalizeLineEndings("NetworkFiles/snmp", fileName);
-            IPGlobalStatisticsTable table = StringParsingHelpers.ParseIPv4GlobalStatisticsFromSnmpFile(fileName);
+            IPGlobalStatisticsTable table =
+                StringParsingHelpers.ParseIPv4GlobalStatisticsFromSnmpFile(fileName);
 
             Assert.False(table.Forwarding);
             Assert.Equal(64L, table.DefaultTtl);
@@ -169,7 +173,8 @@ namespace System.Net.NetworkInformation.Tests
         {
             string fileName = GetTestFilePath();
             FileUtil.NormalizeLineEndings("NetworkFiles/snmp6", fileName);
-            IPGlobalStatisticsTable table = StringParsingHelpers.ParseIPv6GlobalStatisticsFromSnmp6File(fileName);
+            IPGlobalStatisticsTable table =
+                StringParsingHelpers.ParseIPv6GlobalStatisticsFromSnmp6File(fileName);
 
             Assert.Equal(189L, table.InReceives);
             Assert.Equal(0L, table.InHeaderErrors);
@@ -195,7 +200,8 @@ namespace System.Net.NetworkInformation.Tests
         {
             string fileName = GetTestFilePath();
             FileUtil.NormalizeLineEndings("NetworkFiles/dev", fileName);
-            IPInterfaceStatisticsTable table = StringParsingHelpers.ParseInterfaceStatisticsTableFromFile(fileName, "wlan0");
+            IPInterfaceStatisticsTable table =
+                StringParsingHelpers.ParseInterfaceStatisticsTableFromFile(fileName, "wlan0");
 
             Assert.Equal(26622L, table.BytesReceived);
             Assert.Equal(394L, table.PacketsReceived);
@@ -221,7 +227,8 @@ namespace System.Net.NetworkInformation.Tests
         {
             string fileName = GetTestFilePath();
             FileUtil.NormalizeLineEndings("NetworkFiles/dev", fileName);
-            IPInterfaceStatisticsTable table = StringParsingHelpers.ParseInterfaceStatisticsTableFromFile(fileName, "lo");
+            IPInterfaceStatisticsTable table =
+                StringParsingHelpers.ParseInterfaceStatisticsTableFromFile(fileName, "lo");
 
             Assert.Equal(long.MaxValue, table.BytesReceived);
             Assert.Equal(302L, table.PacketsReceived);

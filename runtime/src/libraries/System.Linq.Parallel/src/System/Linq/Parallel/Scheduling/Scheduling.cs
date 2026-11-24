@@ -32,7 +32,10 @@ namespace System.Linq.Parallel
 
         // The default degree of parallelism, or -1 if unspecified. Dev unit tests set this value
         // to change the default DOP.
-        internal static int DefaultDegreeOfParallelism = Math.Min(Environment.ProcessorCount, MAX_SUPPORTED_DOP);
+        internal static int DefaultDegreeOfParallelism = Math.Min(
+            Environment.ProcessorCount,
+            MAX_SUPPORTED_DOP
+        );
 
         // The size to use for bounded buffers.
         internal const int DEFAULT_BOUNDED_BUFFER_CAPACITY = 512;
@@ -48,7 +51,6 @@ namespace System.Linq.Parallel
 
         // The largest number of partitions that PLINQ supports.
         internal const int MAX_SUPPORTED_DOP = 512;
-
 
         //-----------------------------------------------------------------------------------
         // Calculates the proper amount of DOP.  This takes into consideration dynamic nesting.
@@ -86,11 +88,18 @@ namespace System.Linq.Parallel
             }
             else
             {
-                Debug.Assert((DEFAULT_BYTES_PER_CHUNK % IntPtr.Size) == 0, "bytes per chunk should be a multiple of pointer size");
+                Debug.Assert(
+                    (DEFAULT_BYTES_PER_CHUNK % IntPtr.Size) == 0,
+                    "bytes per chunk should be a multiple of pointer size"
+                );
                 chunkSize = (DEFAULT_BYTES_PER_CHUNK / IntPtr.Size);
             }
 
-            TraceHelpers.TraceInfo("Scheduling::GetDefaultChunkSize({0}) -- returning {1}", typeof(T), chunkSize);
+            TraceHelpers.TraceInfo(
+                "Scheduling::GetDefaultChunkSize({0}) -- returning {1}",
+                typeof(T),
+                chunkSize
+            );
 
             return chunkSize;
         }

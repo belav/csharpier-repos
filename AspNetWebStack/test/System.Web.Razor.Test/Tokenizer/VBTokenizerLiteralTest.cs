@@ -125,7 +125,11 @@ namespace System.Web.Razor.Test.Tokenizer
         [Fact]
         public void String_Literal_Is_Terminated_At_EOL()
         {
-            TestTokenizer("\"Foo\nBar", new VBSymbol(0, 0, 0, "\"Foo", VBSymbolType.StringLiteral), IgnoreRemaining);
+            TestTokenizer(
+                "\"Foo\nBar",
+                new VBSymbol(0, 0, 0, "\"Foo", VBSymbolType.StringLiteral),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
@@ -142,7 +146,11 @@ namespace System.Web.Razor.Test.Tokenizer
             TestSingleToken("“Foo ““Bar““ Baz“", VBSymbolType.StringLiteral);
             TestSingleToken("“Foo", VBSymbolType.StringLiteral);
             TestSingleToken("“abc“c", VBSymbolType.CharacterLiteral);
-            TestTokenizer("“Foo\nBar", new VBSymbol(0, 0, 0, "“Foo", VBSymbolType.StringLiteral), IgnoreRemaining);
+            TestTokenizer(
+                "“Foo\nBar",
+                new VBSymbol(0, 0, 0, "“Foo", VBSymbolType.StringLiteral),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
@@ -153,7 +161,11 @@ namespace System.Web.Razor.Test.Tokenizer
             TestSingleToken("”Foo ””Bar”” Baz”", VBSymbolType.StringLiteral);
             TestSingleToken("”Foo", VBSymbolType.StringLiteral);
             TestSingleToken("”abc”c", VBSymbolType.CharacterLiteral);
-            TestTokenizer("”Foo\nBar", new VBSymbol(0, 0, 0, "”Foo", VBSymbolType.StringLiteral), IgnoreRemaining);
+            TestTokenizer(
+                "”Foo\nBar",
+                new VBSymbol(0, 0, 0, "”Foo", VBSymbolType.StringLiteral),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
@@ -165,7 +177,11 @@ namespace System.Web.Razor.Test.Tokenizer
         [Fact]
         public void DateLiteral_Is_Terminated_At_EndHash()
         {
-            TestTokenizer("# 8/23/1970 # 3:45:39AM", new VBSymbol(0, 0, 0, "# 8/23/1970 #", VBSymbolType.DateLiteral), IgnoreRemaining);
+            TestTokenizer(
+                "# 8/23/1970 # 3:45:39AM",
+                new VBSymbol(0, 0, 0, "# 8/23/1970 #", VBSymbolType.DateLiteral),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
@@ -177,7 +193,11 @@ namespace System.Web.Razor.Test.Tokenizer
         [Fact]
         public void DateLiteral_Is_Terminated_At_EOL()
         {
-            TestTokenizer("# 8/23/1970\n3:45:39AM", new VBSymbol(0, 0, 0, "# 8/23/1970", VBSymbolType.DateLiteral), IgnoreRemaining);
+            TestTokenizer(
+                "# 8/23/1970\n3:45:39AM",
+                new VBSymbol(0, 0, 0, "# 8/23/1970", VBSymbolType.DateLiteral),
+                IgnoreRemaining
+            );
         }
     }
 }

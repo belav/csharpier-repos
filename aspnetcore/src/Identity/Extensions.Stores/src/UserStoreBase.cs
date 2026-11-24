@@ -1126,14 +1126,14 @@ public abstract class UserStoreBase<
         ThrowIfDisposed();
 
         ArgumentNullThrowHelper.ThrowIfNull(user);
-        var mergedCodes =
-            await GetTokenAsync(
-                    user,
-                    InternalLoginProvider,
-                    RecoveryCodeTokenName,
-                    cancellationToken
-                )
-                .ConfigureAwait(false) ?? "";
+        var mergedCodes = await GetTokenAsync(
+                user,
+                InternalLoginProvider,
+                RecoveryCodeTokenName,
+                cancellationToken
+            )
+            .ConfigureAwait(false)
+            ?? "";
         if (mergedCodes.Length > 0)
         {
 #if NET8_0_OR_GREATER
@@ -1201,14 +1201,14 @@ public abstract class UserStoreBase<
         ArgumentNullThrowHelper.ThrowIfNull(user);
         ArgumentNullThrowHelper.ThrowIfNull(code);
 
-        var mergedCodes =
-            await GetTokenAsync(
-                    user,
-                    InternalLoginProvider,
-                    RecoveryCodeTokenName,
-                    cancellationToken
-                )
-                .ConfigureAwait(false) ?? "";
+        var mergedCodes = await GetTokenAsync(
+                user,
+                InternalLoginProvider,
+                RecoveryCodeTokenName,
+                cancellationToken
+            )
+            .ConfigureAwait(false)
+            ?? "";
         var splitCodes = mergedCodes.Split(';');
         if (splitCodes.Contains(code))
         {

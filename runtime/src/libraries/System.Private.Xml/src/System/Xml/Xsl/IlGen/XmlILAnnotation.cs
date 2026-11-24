@@ -19,7 +19,6 @@ namespace System.Xml.Xsl.IlGen
         private XmlILConstructInfo? _constrInfo;
         private OptimizerPatterns? _optPatt;
 
-
         //-----------------------------------------------
         // Constructor
         //-----------------------------------------------
@@ -44,7 +43,6 @@ namespace System.Xml.Xsl.IlGen
         {
             _annPrev = annPrev;
         }
-
 
         //-----------------------------------------------
         // Annotations
@@ -101,7 +99,6 @@ namespace System.Xml.Xsl.IlGen
             set { _optPatt = value; }
         }
 
-
         //-----------------------------------------------
         // ListBase implementation
         //-----------------------------------------------
@@ -137,10 +134,7 @@ namespace System.Xml.Xsl.IlGen
                     _ => throw new IndexOutOfRangeException(),
                 };
             }
-            set
-            {
-                throw new NotSupportedException();
-            }
+            set { throw new NotSupportedException(); }
         }
     }
 }

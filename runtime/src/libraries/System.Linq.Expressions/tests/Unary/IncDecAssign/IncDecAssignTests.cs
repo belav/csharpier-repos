@@ -15,17 +15,15 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        public static IEnumerable<T?> NullableSequence<T>(IEnumerable<T> source) where T : struct
+        public static IEnumerable<T?> NullableSequence<T>(IEnumerable<T> source)
+            where T : struct
         {
             return source.Select(i => (T?)i).Concat(Enumerable.Repeat(default(T?), 1));
         }
 
         public static IEnumerable<short> Int16s
         {
-            get
-            {
-                return new short[] { 0, 1, 2, short.MinValue, short.MaxValue };
-            }
+            get { return new short[] { 0, 1, 2, short.MinValue, short.MaxValue }; }
         }
 
         public static IEnumerable<object[]> Int16sAndDecrements()
@@ -45,30 +43,35 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<object[]> NullableInt16sAndDecrements()
         {
-            return NullableInt16s.Select(i => new object[] { typeof(short?), i, unchecked((short?)(i - 1)) });
+            return NullableInt16s.Select(i =>
+                new object[] { typeof(short?), i, unchecked((short?)(i - 1)) }
+            );
         }
 
         public static IEnumerable<object[]> NullableInt16sAndIncrements()
         {
-            return NullableInt16s.Select(i => new object[] { typeof(short?), i, unchecked((short?)(i + 1)) });
+            return NullableInt16s.Select(i =>
+                new object[] { typeof(short?), i, unchecked((short?)(i + 1)) }
+            );
         }
 
         public static IEnumerable<ushort> UInt16s
         {
-            get
-            {
-                return new ushort[] { 0, 1, ushort.MaxValue };
-            }
+            get { return new ushort[] { 0, 1, ushort.MaxValue }; }
         }
 
         public static IEnumerable<object[]> UInt16sAndDecrements()
         {
-            return UInt16s.Select(i => new object[] { typeof(ushort), i, unchecked((ushort)(i - 1)) });
+            return UInt16s.Select(i =>
+                new object[] { typeof(ushort), i, unchecked((ushort)(i - 1)) }
+            );
         }
 
         public static IEnumerable<object[]> UInt16sAndIncrements()
         {
-            return UInt16s.Select(i => new object[] { typeof(ushort), i, unchecked((ushort)(i + 1)) });
+            return UInt16s.Select(i =>
+                new object[] { typeof(ushort), i, unchecked((ushort)(i + 1)) }
+            );
         }
 
         public static IEnumerable<ushort?> NullableUInt16s
@@ -78,20 +81,21 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<object[]> NullableUInt16sAndDecrements()
         {
-            return NullableUInt16s.Select(i => new object[] { typeof(ushort?), i, unchecked((ushort?)(i - 1)) });
+            return NullableUInt16s.Select(i =>
+                new object[] { typeof(ushort?), i, unchecked((ushort?)(i - 1)) }
+            );
         }
 
         public static IEnumerable<object[]> NullableUInt16sAndIncrements()
         {
-            return NullableUInt16s.Select(i => new object[] { typeof(ushort?), i, unchecked((ushort?)(i + 1)) });
+            return NullableUInt16s.Select(i =>
+                new object[] { typeof(ushort?), i, unchecked((ushort?)(i + 1)) }
+            );
         }
 
         public static IEnumerable<int> Int32s
         {
-            get
-            {
-                return new[] { 0, 1, 2, int.MinValue, int.MaxValue };
-            }
+            get { return new[] { 0, 1, 2, int.MinValue, int.MaxValue }; }
         }
 
         public static IEnumerable<object[]> Int32sAndDecrements()
@@ -154,10 +158,7 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<long> Int64s
         {
-            get
-            {
-                return new[] { 0L, 1L, 2L, long.MinValue, long.MaxValue };
-            }
+            get { return new[] { 0L, 1L, 2L, long.MinValue, long.MaxValue }; }
         }
 
         public static IEnumerable<object[]> Int64sAndDecrements()
@@ -189,7 +190,15 @@ namespace System.Linq.Expressions.Tests
         {
             get
             {
-                return new[] { 0UL, 1UL, 2U, (ulong)long.MaxValue, 1UL + long.MaxValue, ulong.MaxValue };
+                return new[]
+                {
+                    0UL,
+                    1UL,
+                    2U,
+                    (ulong)long.MaxValue,
+                    1UL + long.MaxValue,
+                    ulong.MaxValue,
+                };
             }
         }
 
@@ -210,20 +219,21 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<object[]> NullableUInt64sAndDecrements()
         {
-            return NullableUInt64s.Select(i => new object[] { typeof(ulong?), i, unchecked(i - 1) });
+            return NullableUInt64s.Select(i =>
+                new object[] { typeof(ulong?), i, unchecked(i - 1) }
+            );
         }
 
         public static IEnumerable<object[]> NullableUInt64sAndIncrements()
         {
-            return NullableUInt64s.Select(i => new object[] { typeof(ulong?), i, unchecked(i + 1) });
+            return NullableUInt64s.Select(i =>
+                new object[] { typeof(ulong?), i, unchecked(i + 1) }
+            );
         }
 
         public static IEnumerable<decimal> Decimals
         {
-            get
-            {
-                return new[] { 0m, 1m, -1m, decimal.MinValue + 1, decimal.MaxValue - 1 };
-            }
+            get { return new[] { 0m, 1m, -1m, decimal.MinValue + 1, decimal.MaxValue - 1 }; }
         }
 
         public static IEnumerable<object[]> DecimalsAndDecrements()
@@ -238,10 +248,7 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<decimal?> NullableDecimals
         {
-            get
-            {
-                return NullableSequence(Decimals);
-            }
+            get { return NullableSequence(Decimals); }
         }
 
         public static IEnumerable<object[]> NullableDecimalsAndDecrements()
@@ -258,7 +265,15 @@ namespace System.Linq.Expressions.Tests
         {
             get
             {
-                return new[] { 0F, 1F, float.MinValue, float.MaxValue, float.NegativeInfinity, float.PositiveInfinity };
+                return new[]
+                {
+                    0F,
+                    1F,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                };
             }
         }
 
@@ -291,7 +306,15 @@ namespace System.Linq.Expressions.Tests
         {
             get
             {
-                return new[] { 0F, 1F, double.MinValue, double.MaxValue, double.NegativeInfinity, double.PositiveInfinity };
+                return new[]
+                {
+                    0F,
+                    1F,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                };
             }
         }
 

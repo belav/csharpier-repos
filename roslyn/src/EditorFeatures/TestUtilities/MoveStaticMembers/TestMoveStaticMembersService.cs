@@ -20,9 +20,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveStaticMembers
     {
         [ImportingConstructor]
         [System.Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestMoveStaticMembersService()
-        {
-        }
+        public TestMoveStaticMembersService() { }
 
         public string? DestinationName { get; set; }
 
@@ -34,7 +32,11 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveStaticMembers
 
         public bool CreateNew { get; set; } = true;
 
-        public MoveStaticMembersOptions GetMoveMembersToTypeOptions(Document document, INamedTypeSymbol selectedType, ImmutableArray<ISymbol> selectedNodeSymbols)
+        public MoveStaticMembersOptions GetMoveMembersToTypeOptions(
+            Document document,
+            INamedTypeSymbol selectedType,
+            ImmutableArray<ISymbol> selectedNodeSymbols
+        )
         {
             if (!ExpectedPrecheckedMembers.IsEmpty)
             {
@@ -42,14 +44,22 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveStaticMembers
                 var actualPrecheckedMembers = selectedNodeSymbols.SelectAsArray(n => n.Name).Sort();
                 if (!ExpectedPrecheckedMembers.Sort().SequenceEqual(actualPrecheckedMembers))
                 {
-                    System.Diagnostics.Debug.Fail("Expected Prechecked members did not match recieved members");
-                    var errMsg = string.Format("Expected: {0} \n Actual: {1}", ExpectedPrecheckedMembers, actualPrecheckedMembers);
+                    System.Diagnostics.Debug.Fail(
+                        "Expected Prechecked members did not match recieved members"
+                    );
+                    var errMsg = string.Format(
+                        "Expected: {0} \n Actual: {1}",
+                        ExpectedPrecheckedMembers,
+                        actualPrecheckedMembers
+                    );
                     System.Diagnostics.Debug.Fail(errMsg);
                     throw new InvalidOperationException(errMsg);
                 }
             }
 
-            var selectedMembers = selectedType.GetMembers().WhereAsArray(symbol => SelectedMembers.Contains(symbol.Name));
+            var selectedMembers = selectedType
+                .GetMembers()
+                .WhereAsArray(symbol => SelectedMembers.Contains(symbol.Name));
             if (CreateNew)
             {
                 var namespaceDisplay = selectedType.ContainingNamespace.IsGlobalNamespace
@@ -59,10 +69,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveStaticMembers
                 return new MoveStaticMembersOptions(
                     Filename!,
                     string.Join(".", namespaceDisplay, DestinationName!),
-                    selectedMembers);
+                    selectedMembers
+                );
             }
 
-            var destination = selectedType.ContainingNamespace.GetAllTypes(CancellationToken.None).First(t => t.ToDisplayString() == DestinationName);
+            var destination = selectedType
+                .ContainingNamespace.GetAllTypes(CancellationToken.None)
+                .First(t => t.ToDisplayString() == DestinationName);
             return new MoveStaticMembersOptions(destination, selectedMembers);
         }
     }

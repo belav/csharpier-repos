@@ -5,8 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Threading;
+using System.Threading.Tasks;
 using Xunit;
 
 /************************
@@ -34,18 +34,18 @@ namespace Prog
 
         public void ServiceCallbackOnPositionAvailable(Object state, bool timedOut)
         {
-
             if (this.sessionRegisteredWait == null)
             {
                 this.sessionNotification.Reset();
                 this.sessionRegisteredWait.Unregister(null);
 
-                this.sessionRegisteredWait =
-                        ThreadPool.RegisterWaitForSingleObject(this.sessionNotification,
-                                                                ServiceCallbackOnPositionAvailable,
-                                                                this,   /* object state */
-                                                                -1,     /* INFINITE */
-                                                                true    /* ExecuteOnlyOnce */);
+                this.sessionRegisteredWait = ThreadPool.RegisterWaitForSingleObject(
+                    this.sessionNotification,
+                    ServiceCallbackOnPositionAvailable,
+                    this, /* object state */
+                    -1, /* INFINITE */
+                    true /* ExecuteOnlyOnce */
+                );
             }
 
             Console.WriteLine("callback running");
@@ -62,11 +62,12 @@ namespace Prog
             this.sessionNotification = new ManualResetEvent(false);
 
             this.sessionRegisteredWait = ThreadPool.RegisterWaitForSingleObject(
-                                                            this.sessionNotification,
-                                                            ServiceCallbackOnPositionAvailable,
-                                                            this,   /* object state */
-                                                            -1,     /* INFINITE */
-                                                            true    /* ExecuteOnlyOnce */);
+                this.sessionNotification,
+                ServiceCallbackOnPositionAvailable,
+                this, /* object state */
+                -1, /* INFINITE */
+                true /* ExecuteOnlyOnce */
+            );
         }
 
         public void unregister()

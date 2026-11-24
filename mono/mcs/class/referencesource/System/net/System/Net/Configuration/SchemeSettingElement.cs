@@ -11,27 +11,41 @@ namespace System.Configuration
 
         static SchemeSettingElement()
         {
-            name = new ConfigurationProperty(CommonConfigurationStrings.SchemeName, typeof(string), null,
-                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+            name = new ConfigurationProperty(
+                CommonConfigurationStrings.SchemeName,
+                typeof(string),
+                null,
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
 
-            genericUriParserOptions = new ConfigurationProperty(CommonConfigurationStrings.GenericUriParserOptions,
-                typeof(GenericUriParserOptions), GenericUriParserOptions.Default, 
-                ConfigurationPropertyOptions.IsRequired);
+            genericUriParserOptions = new ConfigurationProperty(
+                CommonConfigurationStrings.GenericUriParserOptions,
+                typeof(GenericUriParserOptions),
+                GenericUriParserOptions.Default,
+                ConfigurationPropertyOptions.IsRequired
+            );
 
             properties = new ConfigurationPropertyCollection();
             properties.Add(name);
             properties.Add(genericUriParserOptions);
         }
 
-        [ConfigurationProperty(CommonConfigurationStrings.SchemeName,
-            DefaultValue = null, IsRequired = true, IsKey = true)]
+        [ConfigurationProperty(
+            CommonConfigurationStrings.SchemeName,
+            DefaultValue = null,
+            IsRequired = true,
+            IsKey = true
+        )]
         public string Name
         {
             get { return (string)this[name]; }
         }
 
-        [ConfigurationProperty(CommonConfigurationStrings.GenericUriParserOptions,
-            DefaultValue = ConfigurationPropertyOptions.None, IsRequired = true)]
+        [ConfigurationProperty(
+            CommonConfigurationStrings.GenericUriParserOptions,
+            DefaultValue = ConfigurationPropertyOptions.None,
+            IsRequired = true
+        )]
         public GenericUriParserOptions GenericUriParserOptions
         {
             get { return (GenericUriParserOptions)this[genericUriParserOptions]; }

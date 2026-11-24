@@ -62,7 +62,8 @@ namespace System.Configuration
 
         internal void ThrowIfErrors(bool ignoreLocal)
         {
-            if (!HasErrors(ignoreLocal)) return;
+            if (!HasErrors(ignoreLocal))
+                return;
 
             if (HasGlobalErrors)
             {
@@ -80,7 +81,8 @@ namespace System.Configuration
             List<ConfigurationException> list = _errorsLocal;
             _errorsLocal = null;
 
-            if (keepLocalErrors) ErrorsHelper.AddErrors(ref _errorsAll, list);
+            if (keepLocalErrors)
+                ErrorsHelper.AddErrors(ref _errorsAll, list);
 
             return list;
         }

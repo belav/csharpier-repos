@@ -15,6 +15,7 @@ internal static partial class Interop
             IntPtr hMIO,
             MMCKINFO* lpck,
             MMCKINFO* lcpkParent,
-            int flags);
+            int flags
+        );
     }
 }

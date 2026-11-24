@@ -15,14 +15,15 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Writing
     /// </summary>
     internal sealed partial class LineModeLsifJsonWriter : ILsifJsonWriter
     {
-        public static readonly JsonSerializerSettings SerializerSettings = new JsonSerializerSettings
-        {
-            Formatting = Newtonsoft.Json.Formatting.None,
-            NullValueHandling = NullValueHandling.Ignore,
-            ContractResolver = new CamelCasePropertyNamesContractResolver(),
-            TypeNameHandling = TypeNameHandling.None,
-            Converters = new[] { new LsifConverter() }
-        };
+        public static readonly JsonSerializerSettings SerializerSettings =
+            new JsonSerializerSettings
+            {
+                Formatting = Newtonsoft.Json.Formatting.None,
+                NullValueHandling = NullValueHandling.Ignore,
+                ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                TypeNameHandling = TypeNameHandling.None,
+                Converters = new[] { new LsifConverter() },
+            };
 
         private readonly object _writeGate = new object();
         private readonly TextWriter _outputWriter;

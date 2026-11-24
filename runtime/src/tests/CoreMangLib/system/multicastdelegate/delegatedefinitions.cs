@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 using System.Runtime.InteropServices; // for DllImportAttribute
-
 #region Delegates Definitions
 public delegate void ValueParameterVoidDelegate(int val);
 
@@ -42,166 +41,85 @@ public class DelegateDefinitions
     #region Public Properties
     public ValueParameterVoidDelegate ValueParameterVoidDelegate
     {
-        get
-        {
-            return m_ValueParameterVoidDelegate;
-        }
-        set
-        {
-            m_ValueParameterVoidDelegate = value;
-        }
+        get { return m_ValueParameterVoidDelegate; }
+        set { m_ValueParameterVoidDelegate = value; }
     }
 
     public ReferenceParameterVoidDelegate ReferenceParameterVoidDelegate
     {
-        get
-        {
-            return m_ReferenceParameterVoidDelegate;
-        }
-        set
-        {
-            m_ReferenceParameterVoidDelegate = value;
-        }
+        get { return m_ReferenceParameterVoidDelegate; }
+        set { m_ReferenceParameterVoidDelegate = value; }
     }
 
     public VoidParameterVoidDelegate VoidParameterVoidDelegate
     {
-        get
-        {
-            return m_VoidParameterVoidDelegate;
-        }
-        set
-        {
-            m_VoidParameterVoidDelegate = value;
-        }
+        get { return m_VoidParameterVoidDelegate; }
+        set { m_VoidParameterVoidDelegate = value; }
     }
 
     public ValueParameterValueDelegate ValueParameterValueDelegate
     {
-        get
-        {
-            return m_ValueParameterValueDelegate;
-        }
-        set
-        {
-            m_ValueParameterValueDelegate = value;
-        }
+        get { return m_ValueParameterValueDelegate; }
+        set { m_ValueParameterValueDelegate = value; }
     }
 
     public ReferenceParameterReferenceDelegate ReferenceParameterReferenceDelegate
     {
-        get
-        {
-            return m_ReferenceParameterReferenceDelegate;
-        }
-        set
-        {
-            m_ReferenceParameterReferenceDelegate = value;
-        }
+        get { return m_ReferenceParameterReferenceDelegate; }
+        set { m_ReferenceParameterReferenceDelegate = value; }
     }
 
     public ValueParameterReferenceDelegate ValueParameterReferenceDelegate
     {
-        get
-        {
-            return m_ValueParameterReferenceDelegate;
-        }
-        set
-        {
-            m_ValueParameterReferenceDelegate = value;
-        }
+        get { return m_ValueParameterReferenceDelegate; }
+        set { m_ValueParameterReferenceDelegate = value; }
     }
 
     public ReferenceParameterValueDelegate ReferenceParameterValueDelegate
     {
-        get
-        {
-            return m_ReferenceParameterValueDelegate;
-        }
-        set
-        {
-            m_ReferenceParameterValueDelegate = value;
-        }
+        get { return m_ReferenceParameterValueDelegate; }
+        set { m_ReferenceParameterValueDelegate = value; }
     }
 
     public VoidParameterValueDelegate VoidParameterValueDelegate
     {
-        get
-        {
-            return m_VoidParameterValueDelegate;
-        }
-        set
-        {
-            m_VoidParameterValueDelegate = value;
-        }
+        get { return m_VoidParameterValueDelegate; }
+        set { m_VoidParameterValueDelegate = value; }
     }
 
     public VoidParameterReferenceDelegate VoidParameterReferenceDelegate
     {
-        get
-        {
-            return m_VoidParameterReferenceDelegate;
-        }
-        set
-        {
-            m_VoidParameterReferenceDelegate = value;
-        }
+        get { return m_VoidParameterReferenceDelegate; }
+        set { m_VoidParameterReferenceDelegate = value; }
     }
 
     public TwoValueParameterVoidDelegate TwoValueParameterVoidDelegate
     {
-        get
-        {
-            return m_TwoValueParameterVoidDelegate;
-        }
-        set
-        {
-            m_TwoValueParameterVoidDelegate = value;
-        }
+        get { return m_TwoValueParameterVoidDelegate; }
+        set { m_TwoValueParameterVoidDelegate = value; }
     }
 
     public ValueReferenceParameterVoidDelegate ValueReferenceParameterVoidDelegate
     {
-        get
-        {
-            return m_ValueReferenceParameterVoidDelegate;
-        }
-        set
-        {
-            m_ValueReferenceParameterVoidDelegate = value;
-        }
+        get { return m_ValueReferenceParameterVoidDelegate; }
+        set { m_ValueReferenceParameterVoidDelegate = value; }
     }
 
     public ReferenceValueParameterVoidDelegate ReferenceValueParameterVoidDelegate
     {
-        get
-        {
-            return m_ReferenceValueParameterVoidDelegate;
-        }
-        set
-        {
-            m_ReferenceValueParameterVoidDelegate = value;
-        }
+        get { return m_ReferenceValueParameterVoidDelegate; }
+        set { m_ReferenceValueParameterVoidDelegate = value; }
     }
 
     public ReferenceValueParameterReferenceDelegate ReferenceValueParameterReferenceDelegate
     {
-        get
-        {
-            return m_ReferenceValueParameterReferenceDelegate;
-        }
-        set
-        {
-            m_ReferenceValueParameterReferenceDelegate = value;
-        }
+        get { return m_ReferenceValueParameterReferenceDelegate; }
+        set { m_ReferenceValueParameterReferenceDelegate = value; }
     }
 
     public int VoidParameterVoidDelegateTestValue
     {
-        get
-        {
-            return m_VoidParameterVoidDelegateTestValue;
-        }
+        get { return m_VoidParameterVoidDelegateTestValue; }
     }
     #endregion
 
@@ -224,7 +142,8 @@ public class DelegateDefinitions
     #endregion
 
     #region Public Static Properties
-    public static int VoidParameterVoidDelegateStaticTestValue = c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER;
+    public static int VoidParameterVoidDelegateStaticTestValue =
+        c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER;
     #endregion
 
     #region Public Static Methods
@@ -241,7 +160,8 @@ public class DelegateDefinitions
             VerificationAgent.ThrowVerificationException(
                 "Input value parameter is not expected",
                 val,
-                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
     }
 
     public static void TestReferenceParameterVoidStaticCallback(object val)
@@ -250,7 +170,8 @@ public class DelegateDefinitions
             VerificationAgent.ThrowVerificationException(
                 "Input reference parameter is not expected",
                 val,
-                c_DELEGATE_TEST_DEFAULT_REFERENCE_PARAMETER);
+                c_DELEGATE_TEST_DEFAULT_REFERENCE_PARAMETER
+            );
     }
 
     public static void TestVoidParameterVoidStaticCallback()
@@ -270,7 +191,8 @@ public class DelegateDefinitions
             VerificationAgent.ThrowVerificationException(
                 "Input value parameter is not expected",
                 val,
-                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
 
         return c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER;
     }
@@ -281,13 +203,15 @@ public class DelegateDefinitions
             VerificationAgent.ThrowVerificationException(
                 "First input reference parameter is not expected",
                 val1,
-                c_DELEGATE_TEST_DEFAULT_REFERENCE_PARAMETER);
+                c_DELEGATE_TEST_DEFAULT_REFERENCE_PARAMETER
+            );
 
         if (c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER != val2)
             VerificationAgent.ThrowVerificationException(
                 "Second input value parameter is not expected",
                 val2,
-                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
 
         return c_DELEGATE_TEST_DEFAULT_REFERENCE_PARAMETER;
     }
@@ -301,7 +225,8 @@ public class DelegateDefinitions
             VerificationAgent.ThrowVerificationException(
                 "Input value parameter is not expected",
                 val,
-                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
     }
 
     public void TestReferenceParameterVoidCallback(object val)
@@ -310,7 +235,8 @@ public class DelegateDefinitions
             VerificationAgent.ThrowVerificationException(
                 "Input reference parameter is not expected",
                 val,
-                c_DELEGATE_TEST_DEFAULT_REFERENCE_PARAMETER);
+                c_DELEGATE_TEST_DEFAULT_REFERENCE_PARAMETER
+            );
     }
 
     public void TestVoidParameterVoidCallback()
@@ -325,7 +251,8 @@ public class DelegateDefinitions
             VerificationAgent.ThrowVerificationException(
                 "Input value parameter is not expected",
                 val,
-                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
 
         return c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER;
     }
@@ -336,7 +263,8 @@ public class DelegateDefinitions
             VerificationAgent.ThrowVerificationException(
                 "Input reference parameter is not expected",
                 val,
-                c_DELEGATE_TEST_DEFAULT_REFERENCE_PARAMETER);
+                c_DELEGATE_TEST_DEFAULT_REFERENCE_PARAMETER
+            );
 
         return c_DELEGATE_TEST_DEFAULT_REFERENCE_PARAMETER;
     }
@@ -347,7 +275,8 @@ public class DelegateDefinitions
             VerificationAgent.ThrowVerificationException(
                 "Input value parameter is not expected",
                 val,
-                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
 
         return c_DELEGATE_TEST_DEFAULT_REFERENCE_PARAMETER;
     }
@@ -358,7 +287,8 @@ public class DelegateDefinitions
             VerificationAgent.ThrowVerificationException(
                 "Input reference parameter is not expected",
                 val,
-                c_DELEGATE_TEST_DEFAULT_REFERENCE_PARAMETER);
+                c_DELEGATE_TEST_DEFAULT_REFERENCE_PARAMETER
+            );
 
         return c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER;
     }
@@ -379,13 +309,15 @@ public class DelegateDefinitions
             VerificationAgent.ThrowVerificationException(
                 "First input value parameter is not expected",
                 val1,
-                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
 
         if (c_DELEGATE_TEST_ADDITIONAL_VALUE_PARAMETER != val2)
             VerificationAgent.ThrowVerificationException(
                 "Second input value parameter is not expected",
                 val2,
-                c_DELEGATE_TEST_ADDITIONAL_VALUE_PARAMETER);
+                c_DELEGATE_TEST_ADDITIONAL_VALUE_PARAMETER
+            );
     }
 
     public void TestValueReferenceParameterVoidCallback(int val1, object val2)
@@ -394,13 +326,15 @@ public class DelegateDefinitions
             VerificationAgent.ThrowVerificationException(
                 "First input value parameter is not expected",
                 val1,
-                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
 
         if (!val2.Equals(c_DELEGATE_TEST_DEFAULT_REFERENCE_PARAMETER))
             VerificationAgent.ThrowVerificationException(
                 "Second input reference parameter is not expected",
                 val2,
-                c_DELEGATE_TEST_DEFAULT_REFERENCE_PARAMETER);
+                c_DELEGATE_TEST_DEFAULT_REFERENCE_PARAMETER
+            );
     }
 
     public void TestReferenceValueParameterVoidCallback(object val1, int val2)
@@ -409,13 +343,15 @@ public class DelegateDefinitions
             VerificationAgent.ThrowVerificationException(
                 "First input reference parameter is not expected",
                 val1,
-                c_DELEGATE_TEST_DEFAULT_REFERENCE_PARAMETER);
+                c_DELEGATE_TEST_DEFAULT_REFERENCE_PARAMETER
+            );
 
         if (c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER != val2)
             VerificationAgent.ThrowVerificationException(
                 "Second input value parameter is not expected",
                 val2,
-                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
     }
 
     public object TestReferenceValueParameterReferenceCallback(object val1, int val2)
@@ -424,13 +360,15 @@ public class DelegateDefinitions
             VerificationAgent.ThrowVerificationException(
                 "First input reference parameter is not expected",
                 val1,
-                c_DELEGATE_TEST_DEFAULT_REFERENCE_PARAMETER);
+                c_DELEGATE_TEST_DEFAULT_REFERENCE_PARAMETER
+            );
 
         if (c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER != val2)
             VerificationAgent.ThrowVerificationException(
                 "Second input value parameter is not expected",
                 val2,
-                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
 
         return c_DELEGATE_TEST_DEFAULT_REFERENCE_PARAMETER;
     }
@@ -443,7 +381,8 @@ public class DelegateDefinitions
             VerificationAgent.ThrowVerificationException(
                 "Input reference parameter is not expected",
                 val,
-                "null");
+                "null"
+            );
     }
 
     public object TestReferenceParameterReferenceCallbackWithNullValue(object val)
@@ -452,7 +391,8 @@ public class DelegateDefinitions
             VerificationAgent.ThrowVerificationException(
                 "Input reference parameter is not expected",
                 val,
-                "null");
+                "null"
+            );
 
         return null;
     }
@@ -463,13 +403,15 @@ public class DelegateDefinitions
             VerificationAgent.ThrowVerificationException(
                 "First input value parameter is not expected",
                 val1,
-                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
 
         if (null != val2)
             VerificationAgent.ThrowVerificationException(
                 "Second input reference parameter is not expected",
                 val2,
-                "null");
+                "null"
+            );
     }
 
     public void TestReferenceValueParameterVoidCallbackWithNullValue(object val1, int val2)
@@ -478,13 +420,15 @@ public class DelegateDefinitions
             VerificationAgent.ThrowVerificationException(
                 "First input reference parameter is not expected",
                 val1,
-                "null");
+                "null"
+            );
 
         if (c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER != val2)
             VerificationAgent.ThrowVerificationException(
                 "Second input value parameter is not expected",
                 val2,
-                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
     }
 
     public object TestReferenceValueParameterReferenceCallbackWithNullValue(object val1, int val2)
@@ -493,13 +437,15 @@ public class DelegateDefinitions
             VerificationAgent.ThrowVerificationException(
                 "First input reference parameter is not expected",
                 val1,
-                "null");
+                "null"
+            );
 
         if (c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER != val2)
             VerificationAgent.ThrowVerificationException(
                 "Second input value parameter is not expected",
                 val2,
-                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+                c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
 
         return null;
     }

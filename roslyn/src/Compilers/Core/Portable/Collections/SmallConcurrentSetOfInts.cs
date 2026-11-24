@@ -64,8 +64,7 @@ namespace Microsoft.CodeAnalysis.Collections
                 }
 
                 current = current._next;
-            }
-            while (current != null);
+            } while (current != null);
 
             return false;
         }
@@ -87,10 +86,12 @@ namespace Microsoft.CodeAnalysis.Collections
 
             while (true)
             {
-                if (AddHelper(ref set._v1, i, ref added) ||
-                    AddHelper(ref set._v2, i, ref added) ||
-                    AddHelper(ref set._v3, i, ref added) ||
-                    AddHelper(ref set._v4, i, ref added))
+                if (
+                    AddHelper(ref set._v1, i, ref added)
+                    || AddHelper(ref set._v2, i, ref added)
+                    || AddHelper(ref set._v3, i, ref added)
+                    || AddHelper(ref set._v4, i, ref added)
+                )
                 {
                     return added;
                 }

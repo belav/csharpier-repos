@@ -8,23 +8,26 @@
  * Config related classes for HttpApplication
  */
 
-namespace System.Web.Configuration {
-
+namespace System.Web.Configuration
+{
     using System;
 
     /*
      * Factory / handler pair for recycling
      */
-    internal class HandlerWithFactory {
+    internal class HandlerWithFactory
+    {
         private IHttpHandler _handler;
         private IHttpHandlerFactory _factory;
 
-        internal HandlerWithFactory(IHttpHandler handler, IHttpHandlerFactory factory) {
+        internal HandlerWithFactory(IHttpHandler handler, IHttpHandlerFactory factory)
+        {
             _handler = handler;
             _factory = factory;
         }
 
-        internal void Recycle() {
+        internal void Recycle()
+        {
             _factory.ReleaseHandler(_handler);
         }
     }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,120 +26,123 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.IO;
 using System.Reflection;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI {
+namespace MonoCasTests.System.Web.UI
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class HtmlTextWriterCas : AspNetHostingMinimal
+    {
+        private StringWriter sw;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HtmlTextWriterCas : AspNetHostingMinimal {
+        [SetUp]
+        public override void SetUp()
+        {
+            base.SetUp();
+            sw = new StringWriter();
+        }
 
-		private StringWriter sw;
+        private void Deny_Unrestricted(HtmlTextWriter htw)
+        {
+            Assert.IsTrue(htw.Indent >= 0, "Indent");
+            Assert.AreSame(sw, htw.InnerWriter, "InnerWriter");
+            htw.NewLine = Environment.NewLine;
+            Assert.IsNotNull(htw.NewLine, "NewLine");
 
-		[SetUp]
-		public override void SetUp ()
-		{
-			base.SetUp ();
-			sw = new StringWriter ();
-		}
+            htw.AddAttribute(HtmlTextWriterAttribute.Bgcolor, "blue");
+            htw.AddAttribute(HtmlTextWriterAttribute.Bgcolor, "blue", false);
+            htw.AddAttribute("align", "left");
+            htw.AddAttribute("align", "left", false);
 
-		private void Deny_Unrestricted (HtmlTextWriter htw)
-		{
-			Assert.IsTrue (htw.Indent >= 0, "Indent");
-			Assert.AreSame (sw, htw.InnerWriter, "InnerWriter");
-			htw.NewLine = Environment.NewLine;
-			Assert.IsNotNull (htw.NewLine, "NewLine");
+            htw.AddStyleAttribute(HtmlTextWriterStyle.BackgroundColor, "blue");
+            htw.AddStyleAttribute("left", "1");
 
-			htw.AddAttribute (HtmlTextWriterAttribute.Bgcolor, "blue");
-			htw.AddAttribute (HtmlTextWriterAttribute.Bgcolor, "blue", false);
-			htw.AddAttribute ("align", "left");
-			htw.AddAttribute ("align", "left", false);
+            htw.RenderBeginTag(HtmlTextWriterTag.Table);
+            htw.RenderBeginTag("<tr>");
+            htw.RenderEndTag();
 
-			htw.AddStyleAttribute (HtmlTextWriterStyle.BackgroundColor, "blue");
-			htw.AddStyleAttribute ("left", "1");
+            htw.WriteAttribute("align", "left");
+            htw.WriteAttribute("align", "left", false);
+            htw.WriteBeginTag("table");
+            htw.WriteEndTag("table");
+            htw.WriteFullBeginTag("div");
 
-			htw.RenderBeginTag (HtmlTextWriterTag.Table);
-			htw.RenderBeginTag ("<tr>");
-			htw.RenderEndTag ();
+            htw.WriteStyleAttribute("left", "2");
+            htw.WriteStyleAttribute("left", "3", false);
 
-			htw.WriteAttribute ("align", "left");
-			htw.WriteAttribute ("align", "left", false);
-			htw.WriteBeginTag ("table");
-			htw.WriteEndTag ("table");
-			htw.WriteFullBeginTag ("div");
+            htw.Write(new char[1], 0, 1);
+            htw.Write((double)1.0);
+            htw.Write(Char.MinValue);
+            htw.Write(new char[1]);
+            htw.Write((int)1);
+            htw.Write("{0}", 1);
+            htw.Write("{0}{1}", 1, 2);
+            htw.Write("{0}{1}{2}", 1, 2, 3);
+            htw.Write(String.Empty);
+            htw.Write((long)1);
+            htw.Write(this);
+            htw.Write((float)1.0);
+            htw.Write(false);
 
-			htw.WriteStyleAttribute ("left", "2");
-			htw.WriteStyleAttribute ("left", "3", false);
+            htw.WriteLine(new char[1], 0, 1);
+            htw.WriteLine((double)1.0);
+            htw.WriteLine(Char.MinValue);
+            htw.WriteLine(new char[1]);
+            htw.WriteLine((int)1);
+            htw.WriteLine("{0}", 1);
+            htw.WriteLine("{0}{1}", 1, 2);
+            htw.WriteLine("{0}{1}{2}", 1, 2, 3);
+            htw.WriteLine(String.Empty);
+            htw.WriteLine((long)1);
+            htw.WriteLine(this);
+            htw.WriteLine((float)1.0);
+            htw.WriteLine(false);
+            htw.WriteLine((uint)0);
+            htw.WriteLine();
+            htw.WriteLineNoTabs(String.Empty);
 
-			htw.Write (new char[1], 0, 1);
-			htw.Write ((double)1.0);
-			htw.Write (Char.MinValue);
-			htw.Write (new char[1]);
-			htw.Write ((int)1);
-			htw.Write ("{0}", 1);
-			htw.Write ("{0}{1}", 1, 2);
-			htw.Write ("{0}{1}{2}", 1, 2, 3);
-			htw.Write (String.Empty);
-			htw.Write ((long)1);
-			htw.Write (this);
-			htw.Write ((float)1.0);
-			htw.Write (false);
+            htw.Flush();
+            htw.Close();
+        }
 
-			htw.WriteLine (new char[1], 0, 1);
-			htw.WriteLine ((double)1.0);
-			htw.WriteLine (Char.MinValue);
-			htw.WriteLine (new char[1]);
-			htw.WriteLine ((int)1);
-			htw.WriteLine ("{0}", 1);
-			htw.WriteLine ("{0}{1}", 1, 2);
-			htw.WriteLine ("{0}{1}{2}", 1, 2, 3);
-			htw.WriteLine (String.Empty);
-			htw.WriteLine ((long)1);
-			htw.WriteLine (this);
-			htw.WriteLine ((float)1.0);
-			htw.WriteLine (false);
-			htw.WriteLine ((uint)0);
-			htw.WriteLine ();
-			htw.WriteLineNoTabs (String.Empty);
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Ctor1_Deny_Unrestricted()
+        {
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+            Deny_Unrestricted(htw);
+        }
 
-			htw.Flush ();
-			htw.Close ();
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Ctor2_Deny_Unrestricted()
+        {
+            HtmlTextWriter htw = new HtmlTextWriter(sw, String.Empty);
+            Deny_Unrestricted(htw);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Ctor1_Deny_Unrestricted ()
-		{
-			HtmlTextWriter htw = new HtmlTextWriter (sw);
-			Deny_Unrestricted (htw);
-		}
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Ctor2_Deny_Unrestricted ()
-		{
-			HtmlTextWriter htw = new HtmlTextWriter (sw, String.Empty);
-			Deny_Unrestricted (htw);
-		}
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
+        {
+            ConstructorInfo ci = this.Type.GetConstructor(new Type[1] { typeof(TextWriter) });
+            Assert.IsNotNull(ci, ".ctor(TextWriter)");
+            return ci.Invoke(new object[1] { sw });
+        }
 
-		// LinkDemand
-
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (TextWriter) });
-			Assert.IsNotNull (ci, ".ctor(TextWriter)");
-			return ci.Invoke (new object[1] { sw });
-		}
-
-		public override Type Type {
-			get { return typeof (HtmlTextWriter); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(HtmlTextWriter); }
+        }
+    }
 }

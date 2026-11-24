@@ -9,42 +9,50 @@ namespace System.Text.Json.Serialization.Tests
 {
     public sealed class MetadataTests_Span : MetadataTests
     {
-        public MetadataTests_Span() : base(JsonSerializerWrapper.SpanSerializer) { }
+        public MetadataTests_Span()
+            : base(JsonSerializerWrapper.SpanSerializer) { }
     }
 
     public sealed class MetadataTests_String : MetadataTests
     {
-        public MetadataTests_String() : base(JsonSerializerWrapper.StringSerializer) { }
+        public MetadataTests_String()
+            : base(JsonSerializerWrapper.StringSerializer) { }
     }
 
     public sealed class MetadataTests_AsyncStream : MetadataTests
     {
-        public MetadataTests_AsyncStream() : base(JsonSerializerWrapper.AsyncStreamSerializer) { }
+        public MetadataTests_AsyncStream()
+            : base(JsonSerializerWrapper.AsyncStreamSerializer) { }
     }
 
     public sealed class MetadataTests_SyncStream : MetadataTests
     {
-        public MetadataTests_SyncStream() : base(JsonSerializerWrapper.SyncStreamSerializer) { }
+        public MetadataTests_SyncStream()
+            : base(JsonSerializerWrapper.SyncStreamSerializer) { }
     }
 
     public sealed class MetadataTests_LowLevel : MetadataTests
     {
-        public MetadataTests_LowLevel() : base(JsonSerializerWrapper.ReaderWriterSerializer) { }
+        public MetadataTests_LowLevel()
+            : base(JsonSerializerWrapper.ReaderWriterSerializer) { }
     }
 
     public class MetadataTests_Document : MetadataTests
     {
-        public MetadataTests_Document() : base(JsonSerializerWrapper.DocumentSerializer) { }
+        public MetadataTests_Document()
+            : base(JsonSerializerWrapper.DocumentSerializer) { }
     }
 
     public class MetadataTests_Element : MetadataTests
     {
-        public MetadataTests_Element() : base(JsonSerializerWrapper.ElementSerializer) { }
+        public MetadataTests_Element()
+            : base(JsonSerializerWrapper.ElementSerializer) { }
     }
 
     public class MetadataTests_Node : MetadataTests
     {
-        public MetadataTests_Node() : base(JsonSerializerWrapper.NodeSerializer) { }
+        public MetadataTests_Node()
+            : base(JsonSerializerWrapper.NodeSerializer) { }
     }
 
     public abstract partial class MetadataTests
@@ -75,7 +83,5 @@ namespace System.Text.Json.Serialization.Tests
     }
 
     [JsonSerializable(typeof(WeatherForecastWithPOCOs))]
-    internal sealed partial class JsonContext : JsonSerializerContext
-    {
-    }
+    internal sealed partial class JsonContext : JsonSerializerContext { }
 }

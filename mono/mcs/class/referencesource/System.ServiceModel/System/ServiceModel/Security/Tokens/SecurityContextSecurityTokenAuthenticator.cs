@@ -5,25 +5,26 @@
 namespace System.ServiceModel.Security.Tokens
 {
     using System;
-    using System.ServiceModel;
     using System.Collections.ObjectModel;
+    using System.IdentityModel.Policy;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
-    using System.IdentityModel.Policy;
+    using System.ServiceModel;
     using System.Xml;
 
     public class SecurityContextSecurityTokenAuthenticator : SecurityTokenAuthenticator
     {
         public SecurityContextSecurityTokenAuthenticator()
-            : base()
-        { }
+            : base() { }
 
         protected override bool CanValidateTokenCore(SecurityToken token)
         {
             return (token is SecurityContextSecurityToken);
         }
 
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(SecurityToken token)
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
+            SecurityToken token
+        )
         {
             SecurityContextSecurityToken sct = (SecurityContextSecurityToken)token;
             if (!IsTimeValid(sct))
@@ -36,13 +37,23 @@ namespace System.ServiceModel.Security.Tokens
 
         void ThrowExpiredContextFaultException(UniqueId contextId, SecurityContextSecurityToken sct)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new SecurityContextTokenValidationException(SR.GetString(SR.SecurityContextExpired, contextId, sct.KeyGeneration == null ? "none" : sct.KeyGeneration.ToString())));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                new SecurityContextTokenValidationException(
+                    SR.GetString(
+                        SR.SecurityContextExpired,
+                        contextId,
+                        sct.KeyGeneration == null ? "none" : sct.KeyGeneration.ToString()
+                    )
+                )
+            );
         }
 
         bool IsTimeValid(SecurityContextSecurityToken sct)
         {
             DateTime utcNow = DateTime.UtcNow;
-            return (sct.ValidFrom <= utcNow && sct.ValidTo >= utcNow && sct.KeyEffectiveTime <= utcNow);
+            return (
+                sct.ValidFrom <= utcNow && sct.ValidTo >= utcNow && sct.KeyEffectiveTime <= utcNow
+            );
         }
-   }
+    }
 }

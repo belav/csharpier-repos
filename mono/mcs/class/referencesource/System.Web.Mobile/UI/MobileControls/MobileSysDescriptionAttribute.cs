@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="MobileSysDescriptionAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -15,7 +15,9 @@ namespace System.Web.UI.MobileControls
     ///     the member.
     /// </devdoc>
     [AttributeUsage(AttributeTargets.All)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class MobileSysDescriptionAttribute : DescriptionAttribute
     {
         private bool replaced;
@@ -23,9 +25,8 @@ namespace System.Web.UI.MobileControls
         /// <devdoc>
         ///    <para>Constructs a new sys description.</para>
         /// </devdoc>
-        internal MobileSysDescriptionAttribute(String description) : base(description)
-        {
-        }
+        internal MobileSysDescriptionAttribute(String description)
+            : base(description) { }
 
         /// <devdoc>
         ///    <para>Retrieves the description text.</para>
@@ -37,7 +38,7 @@ namespace System.Web.UI.MobileControls
                 if (!replaced)
                 {
                     replaced = true;
-                    DescriptionValue = SR.GetString(base.Description);                
+                    DescriptionValue = SR.GetString(base.Description);
                 }
                 return base.Description;
             }

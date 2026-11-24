@@ -8,7 +8,11 @@ namespace Microsoft.CodeAnalysis.Formatting
 {
     internal static class TriviaHelpers
     {
-        public static SyntaxTriviaList CreateTriviaListFromTo(SyntaxTriviaList triviaList, int startIndex, int endIndex)
+        public static SyntaxTriviaList CreateTriviaListFromTo(
+            SyntaxTriviaList triviaList,
+            int startIndex,
+            int endIndex
+        )
         {
             if (startIndex > endIndex)
                 return default;

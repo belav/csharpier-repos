@@ -28,103 +28,104 @@
 //
 
 using System;
-using System.Data;
 using System.Collections;
+using System.Data;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class DataGrid_SelectedIndex
-		: GHTBaseWeb 
-	{
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
+    public class DataGrid_SelectedIndex : GHTBaseWeb
+    {
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		}
-		#endregion
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
-		protected System.Web.UI.WebControls.DataGrid DataGrid1;
-		protected GHTWebControls.GHTSubTest GHTSubTest1;
-		protected System.Web.UI.WebControls.DataGrid DataGrid2;
-		protected GHTWebControls.GHTSubTest GHTSubTest2;
-		protected System.Web.UI.WebControls.DataGrid DataGrid3;
-		protected GHTWebControls.GHTSubTest GHTSubTest3;
+        protected System.Web.UI.WebControls.DataGrid DataGrid1;
+        protected GHTWebControls.GHTSubTest GHTSubTest1;
+        protected System.Web.UI.WebControls.DataGrid DataGrid2;
+        protected GHTWebControls.GHTSubTest GHTSubTest2;
+        protected System.Web.UI.WebControls.DataGrid DataGrid3;
+        protected GHTWebControls.GHTSubTest GHTSubTest3;
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			//Put user code to initialize the page here
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            //Put user code to initialize the page here
 
-			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
-			GHTTestBegin(frm);
+            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
+            GHTTestBegin(frm);
 
-			GHTActiveSubTest = GHTSubTest1;
-			try 
-			{
-				DataGrid1.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
-				DataGrid1.SelectedIndex = 3;
-				DataGrid1.DataBind();;
-				GHTSubTestAddResult(DataGrid1.SelectedIndex.ToString());
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = GHTSubTest1;
+            try
+            {
+                DataGrid1.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
+                DataGrid1.SelectedIndex = 3;
+                DataGrid1.DataBind();
+                ;
+                GHTSubTestAddResult(DataGrid1.SelectedIndex.ToString());
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTActiveSubTest = GHTSubTest2;
-			try 
-			{
-				DataGrid2.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
-				DataGrid2.SelectedIndex = 77;
-				DataGrid2.DataBind();;
-				GHTSubTestAddResult(DataGrid2.SelectedIndex.ToString());
-				//GHTSubTestExpectedExceptionNotCaught("HttpException");
-			}
-			catch (HttpException eex) 
-			{
-				GHTSubTestExpectedExceptionCaught(eex); 
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = GHTSubTest2;
+            try
+            {
+                DataGrid2.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
+                DataGrid2.SelectedIndex = 77;
+                DataGrid2.DataBind();
+                ;
+                GHTSubTestAddResult(DataGrid2.SelectedIndex.ToString());
+                //GHTSubTestExpectedExceptionNotCaught("HttpException");
+            }
+            catch (HttpException eex)
+            {
+                GHTSubTestExpectedExceptionCaught(eex);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTActiveSubTest = GHTSubTest3;
-			try 
-			{
-				DataGrid3.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
-				DataGrid3.SelectedIndex = -3;
-				DataGrid3.DataBind();;
-				GHTSubTestAddResult(DataGrid3.SelectedIndex.ToString());
-				GHTSubTestExpectedExceptionNotCaught("ArgumentOutOfRangeException");
-			}
-			catch (ArgumentOutOfRangeException eex) 
-			{
-				GHTSubTestExpectedExceptionCaught(eex); 
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = GHTSubTest3;
+            try
+            {
+                DataGrid3.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
+                DataGrid3.SelectedIndex = -3;
+                DataGrid3.DataBind();
+                ;
+                GHTSubTestAddResult(DataGrid3.SelectedIndex.ToString());
+                GHTSubTestExpectedExceptionNotCaught("ArgumentOutOfRangeException");
+            }
+            catch (ArgumentOutOfRangeException eex)
+            {
+                GHTSubTestExpectedExceptionCaught(eex);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTTestEnd();
-		}
-	}
+            GHTTestEnd();
+        }
+    }
 }

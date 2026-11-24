@@ -18,21 +18,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAutoPropertyToFu
     [Trait(Traits.Feature, Traits.Features.ConvertAutoPropertyToFullProperty)]
     public partial class ConvertAutoPropertyToFullPropertyTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpConvertAutoPropertyToFullPropertyCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpConvertAutoPropertyToFullPropertyCodeRefactoringProvider();
 
         [Theory]
         [InlineData("set"), InlineData("init")]
         [WorkItem("https://github.com/dotnet/roslyn/issues/48133")]
         public async Task SimpleAutoPropertyTest(string setter)
         {
-            var text = $@"
+            var text =
+                $@"
 class TestClass
 {{
     public int G[||]oo {{ get; {setter}; }}
 }}
 ";
-            var expected = $@"
+            var expected =
+                $@"
 class TestClass
 {{
     private int goo;
@@ -50,7 +54,11 @@ class TestClass
     }}
 }}
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
@@ -82,7 +90,11 @@ class TestClass
 
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
@@ -112,7 +124,11 @@ class TestClass
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
@@ -144,7 +160,11 @@ class TestClass
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
@@ -174,7 +194,11 @@ class TestClass
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
@@ -207,7 +231,11 @@ class TestClass
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
@@ -241,7 +269,11 @@ class TestClass
                     //Comments after
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
@@ -261,7 +293,11 @@ class TestClass
                     public int Goo { get => goo; set => goo = value; }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: PreferExpressionBodiedAccessorsWhenPossible);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: PreferExpressionBodiedAccessorsWhenPossible
+            );
         }
 
         [Fact]
@@ -281,7 +317,11 @@ class TestClass
                     public int Goo { get => goo; set => goo = value; }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: PreferExpressionBodiedAccessorsWhenOnSingleLine);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: PreferExpressionBodiedAccessorsWhenOnSingleLine
+            );
         }
 
         [Fact]
@@ -309,7 +349,11 @@ class TestClass
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: PreferExpressionBodiedAccessorsWhenOnSingleLine);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: PreferExpressionBodiedAccessorsWhenOnSingleLine
+            );
         }
 
         [Fact]
@@ -329,7 +373,11 @@ class TestClass
                     public int Goo { get /* test */ => goo; set /* test2 */ => goo = value; }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: PreferExpressionBodiedAccessorsWhenPossible);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: PreferExpressionBodiedAccessorsWhenPossible
+            );
         }
 
         [Fact]
@@ -358,7 +406,11 @@ class TestClass
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessorsAndPropertyOpenBraceOnSameLine);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessorsAndPropertyOpenBraceOnSameLine
+            );
         }
 
         [Fact]
@@ -386,7 +438,11 @@ class TestClass
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessorsAndAccessorOpenBraceOnSameLine);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessorsAndAccessorOpenBraceOnSameLine
+            );
         }
 
         [Fact]
@@ -416,7 +472,11 @@ class TestClass
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
@@ -446,7 +506,11 @@ class TestClass
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
@@ -476,7 +540,11 @@ class TestClass
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
@@ -508,7 +576,11 @@ class TestClass
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
@@ -544,7 +616,11 @@ class TestClass
                     } /* test6 */
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
@@ -584,7 +660,11 @@ class TestClass
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
@@ -614,7 +694,11 @@ class TestClass
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
@@ -654,7 +738,11 @@ class TestClass
                     public override string Name {get; set;}
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
@@ -684,7 +772,11 @@ class TestClass
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
@@ -739,7 +831,11 @@ class TestClass
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
@@ -759,7 +855,11 @@ class TestClass
                     public int Goo => goo;
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: PreferExpressionBodiesOnAccessorsAndMethods);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: PreferExpressionBodiesOnAccessorsAndMethods
+            );
         }
 
         [Fact]
@@ -818,7 +918,11 @@ class TestClass
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
@@ -848,7 +952,11 @@ class TestClass
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
@@ -890,7 +998,11 @@ class TestClass
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
@@ -920,7 +1032,11 @@ class TestClass
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
@@ -950,7 +1066,11 @@ class TestClass
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
@@ -1034,7 +1154,11 @@ class TestClass
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: UseUnderscorePrefixedFieldName);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: UseUnderscorePrefixedFieldName
+            );
         }
 
         [Fact]
@@ -1158,7 +1282,11 @@ class TestClass
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/22146")]
@@ -1215,14 +1343,19 @@ class TestClass
                 }
                 """;
 
-            var xmlString = string.Format("""
+            var xmlString = string.Format(
+                """
                 <Workspace>
                     <Project Language="{0}" CommonReferences="true">
                         <Document FilePath="file1">{1}</Document>
                         <Document FilePath="file2">{2}</Document>
                     </Project>
                 </Workspace>
-                """, LanguageNames.CSharp, file1, file2);
+                """,
+                LanguageNames.CSharp,
+                file1,
+                file2
+            );
 
             using var testWorkspace = TestWorkspace.Create(xmlString);
             // refactor file1 and check
@@ -1235,7 +1368,8 @@ class TestClass
                 renameSpans: ImmutableArray<TextSpan>.Empty,
                 warningSpans: ImmutableArray<TextSpan>.Empty,
                 navigationSpans: ImmutableArray<TextSpan>.Empty,
-                parameters: null);
+                parameters: null
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/22146")]
@@ -1262,14 +1396,19 @@ class TestClass
                 }
                 """;
 
-            var xmlString = string.Format("""
+            var xmlString = string.Format(
+                """
                 <Workspace>
                     <Project Language="{0}" CommonReferences="true">
                         <Document FilePath="file1">{1}</Document>
                         <Document FilePath="file2">{2}</Document>
                     </Project>
                 </Workspace>
-                """, LanguageNames.CSharp, file1, file2);
+                """,
+                LanguageNames.CSharp,
+                file1,
+                file2
+            );
 
             using var testWorkspace = TestWorkspace.Create(xmlString);
             // refactor file2 and check
@@ -1282,18 +1421,21 @@ class TestClass
                 renameSpans: ImmutableArray<TextSpan>.Empty,
                 warningSpans: ImmutableArray<TextSpan>.Empty,
                 navigationSpans: ImmutableArray<TextSpan>.Empty,
-                parameters: null);
+                parameters: null
+            );
         }
 
         [Fact]
         public async Task InvalidLocation()
         {
-            await TestMissingAsync("""
+            await TestMissingAsync(
+                """
                 namespace NS
                 {
                     public int G[||]oo { get; set; }
                 }
-                """);
+                """
+            );
 
             await TestMissingAsync("public int G[||]oo { get; set; }");
         }
@@ -1319,7 +1461,8 @@ class TestClass
 
                     string? Name { get => name; set => name = value; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29021")]
@@ -1352,7 +1495,8 @@ class TestClass
 
                     public Dictionary<string, IImmutableDictionary<string, string>> Files => files;
                 }
-                """);
+                """
+            );
         }
     }
 }

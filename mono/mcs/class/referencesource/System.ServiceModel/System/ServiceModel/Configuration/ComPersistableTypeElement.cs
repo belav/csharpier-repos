@@ -14,16 +14,19 @@ namespace System.ServiceModel.Configuration
     public sealed partial class ComPersistableTypeElement : ConfigurationElement
     {
         public ComPersistableTypeElement()
-            : base()
-        {
-        }
+            : base() { }
+
         public ComPersistableTypeElement(string ID)
             : this()
         {
             this.ID = ID;
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Name, DefaultValue = "", Options = ConfigurationPropertyOptions.None)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Name,
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.None
+        )]
         [StringValidator(MinLength = 0)]
         public string Name
         {
@@ -39,7 +42,10 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ID, Options = ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ID,
+            Options = ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired
+        )]
         [StringValidator(MinLength = 1)]
         public string ID
         {
@@ -53,6 +59,6 @@ namespace System.ServiceModel.Configuration
 
                 base[ConfigurationStrings.ID] = value;
             }
-        }      
+        }
     }
 }

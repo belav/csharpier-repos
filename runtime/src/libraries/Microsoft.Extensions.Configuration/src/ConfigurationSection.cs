@@ -50,14 +50,8 @@ namespace Microsoft.Extensions.Configuration
         /// </summary>
         public string? Value
         {
-            get
-            {
-                return _root[Path];
-            }
-            set
-            {
-                _root[Path] = value;
-            }
+            get { return _root[Path]; }
+            set { _root[Path] = value; }
         }
 
         /// <summary>
@@ -67,14 +61,8 @@ namespace Microsoft.Extensions.Configuration
         /// <returns>The configuration value.</returns>
         public string? this[string key]
         {
-            get
-            {
-                return _root[Path + ConfigurationPath.KeyDelimiter + key];
-            }
-            set
-            {
-                _root[Path + ConfigurationPath.KeyDelimiter + key] = value;
-            }
+            get { return _root[Path + ConfigurationPath.KeyDelimiter + key]; }
+            set { _root[Path + ConfigurationPath.KeyDelimiter + key] = value; }
         }
 
         /// <summary>
@@ -86,13 +74,15 @@ namespace Microsoft.Extensions.Configuration
         ///     This method will never return <c>null</c>. If no matching sub-section is found with the specified key,
         ///     an empty <see cref="IConfigurationSection"/> will be returned.
         /// </remarks>
-        public IConfigurationSection GetSection(string key) => _root.GetSection(Path + ConfigurationPath.KeyDelimiter + key);
+        public IConfigurationSection GetSection(string key) =>
+            _root.GetSection(Path + ConfigurationPath.KeyDelimiter + key);
 
         /// <summary>
         /// Gets the immediate descendant configuration sub-sections.
         /// </summary>
         /// <returns>The configuration sub-sections.</returns>
-        public IEnumerable<IConfigurationSection> GetChildren() => _root.GetChildrenImplementation(Path);
+        public IEnumerable<IConfigurationSection> GetChildren() =>
+            _root.GetChildrenImplementation(Path);
 
         /// <summary>
         /// Returns a <see cref="IChangeToken"/> that can be used to observe when this configuration is reloaded.
@@ -103,7 +93,9 @@ namespace Microsoft.Extensions.Configuration
         private string DebuggerToString()
         {
             var s = $"Path = {Path}";
-            var childCount = Configuration.ConfigurationSectionDebugView.FromConfiguration(this, _root).Count;
+            var childCount = Configuration
+                .ConfigurationSectionDebugView.FromConfiguration(this, _root)
+                .Count;
             if (childCount > 0)
             {
                 s += $", Sections = {childCount}";
@@ -111,7 +103,8 @@ namespace Microsoft.Extensions.Configuration
             if (Value is not null)
             {
                 s += $", Value = {Value}";
-                IConfigurationProvider? provider = Configuration.ConfigurationSectionDebugView.GetValueProvider(_root, Path);
+                IConfigurationProvider? provider =
+                    Configuration.ConfigurationSectionDebugView.GetValueProvider(_root, Path);
                 if (provider != null)
                 {
                     s += $", Provider = {provider}";
@@ -128,14 +121,21 @@ namespace Microsoft.Extensions.Configuration
             public ConfigurationSectionDebugView(ConfigurationSection current)
             {
                 _current = current;
-                _provider = Configuration.ConfigurationSectionDebugView.GetValueProvider(_current._root, _current.Path);
+                _provider = Configuration.ConfigurationSectionDebugView.GetValueProvider(
+                    _current._root,
+                    _current.Path
+                );
             }
 
             public string Path => _current.Path;
             public string Key => _current.Key;
             public string? Value => _current.Value;
             public IConfigurationProvider? Provider => _provider;
-            public List<Configuration.ConfigurationSectionDebugView> Sections => Configuration.ConfigurationSectionDebugView.FromConfiguration(_current, _current._root);
+            public List<Configuration.ConfigurationSectionDebugView> Sections =>
+                Configuration.ConfigurationSectionDebugView.FromConfiguration(
+                    _current,
+                    _current._root
+                );
         }
     }
 }

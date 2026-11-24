@@ -28,9 +28,7 @@ namespace System.Security.Principal
         //
 
         public IdentityReferenceCollection()
-            : this(0)
-        {
-        }
+            : this(0) { }
 
         //
         // Creates an empty collection of given initial size
@@ -52,18 +50,12 @@ namespace System.Security.Principal
 
         public int Count
         {
-            get
-            {
-                return _identities.Count;
-            }
+            get { return _identities.Count; }
         }
 
         bool ICollection<IdentityReference>.IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public void Add(IdentityReference identity)
@@ -117,11 +109,7 @@ namespace System.Security.Principal
 
         public IdentityReference this[int index]
         {
-            get
-            {
-                return _identities[index];
-            }
-
+            get { return _identities[index]; }
             set
             {
                 ArgumentNullException.ThrowIfNull(value);
@@ -131,10 +119,7 @@ namespace System.Security.Principal
 
         internal List<IdentityReference> Identities
         {
-            get
-            {
-                return _identities;
-            }
+            get { return _identities; }
         }
 
         public IdentityReferenceCollection Translate(Type targetType)
@@ -152,7 +137,10 @@ namespace System.Security.Principal
 
             if (!targetType.IsSubclassOf(typeof(IdentityReference)))
             {
-                throw new ArgumentException(SR.IdentityReference_MustBeIdentityReference, nameof(targetType));
+                throw new ArgumentException(
+                    SR.IdentityReference_MustBeIdentityReference,
+                    nameof(targetType)
+                );
             }
 
             //
@@ -193,7 +181,9 @@ namespace System.Security.Principal
                     // Rare case that we have defined a type of identity reference and not included it in the code logic above.
                     // To avoid this we do not allow IdentityReference to be subclassed outside of the BCL.
                     //
-                    Debug.Fail("Source type is an IdentityReference type which has not been included in translation logic.");
+                    Debug.Fail(
+                        "Source type is an IdentityReference type which has not been included in translation logic."
+                    );
                     throw new NotSupportedException();
                 }
             }
@@ -255,14 +245,17 @@ namespace System.Security.Principal
                         // Rare case that we have defined a type of identity reference and not included it in the code logic above.
                         // To avoid this we do not allow IdentityReference to be subclassed outside of the BCL.
                         //
-                        Debug.Fail("Source type is an IdentityReference type which has not been included in translation logic.");
+                        Debug.Fail(
+                            "Source type is an IdentityReference type which has not been included in translation logic."
+                        );
                         throw new NotSupportedException();
                     }
                 }
             }
 
             bool someFailed = false;
-            IdentityReferenceCollection? TargetSids = null, TargetNTAccounts = null;
+            IdentityReferenceCollection? TargetSids = null,
+                TargetNTAccounts = null;
 
             if (SourceSidsCount > 0)
             {
@@ -276,7 +269,11 @@ namespace System.Security.Principal
 
             if (SourceNTAccountsCount > 0)
             {
-                TargetNTAccounts = NTAccount.Translate(SourceNTAccounts!, targetType, out someFailed);
+                TargetNTAccounts = NTAccount.Translate(
+                    SourceNTAccounts!,
+                    targetType,
+                    out someFailed
+                );
 
                 if (Homogeneous && !(forceSuccess && someFailed))
                 {
@@ -315,7 +312,10 @@ namespace System.Security.Principal
                     }
                 }
 
-                throw new IdentityNotMappedException(SR.IdentityReference_IdentityNotMapped, Result);
+                throw new IdentityNotMappedException(
+                    SR.IdentityReference_IdentityNotMapped,
+                    Result
+                );
             }
             else if (!Homogeneous)
             {
@@ -348,7 +348,9 @@ namespace System.Security.Principal
                         // Rare case that we have defined a type of identity reference and not included it in the code logic above.
                         // To avoid this we do not allow IdentityReference to be subclassed outside of the BCL.
                         //
-                        Debug.Fail("Source type is an IdentityReference type which has not been included in translation logic.");
+                        Debug.Fail(
+                            "Source type is an IdentityReference type which has not been included in translation logic."
+                        );
                         throw new NotSupportedException();
                     }
                 }
@@ -394,18 +396,12 @@ namespace System.Security.Principal
         /// <internalonly/>
         object IEnumerator.Current
         {
-            get
-            {
-                return Current;
-            }
+            get { return Current; }
         }
 
         public IdentityReference Current
         {
-            get
-            {
-                return _collection.Identities[_current];
-            }
+            get { return _collection.Identities[_current]; }
         }
 
         public bool MoveNext()
@@ -420,9 +416,7 @@ namespace System.Security.Principal
             _current = -1;
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
         #endregion
     }
 }

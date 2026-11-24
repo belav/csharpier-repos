@@ -18,12 +18,19 @@ namespace Microsoft.CodeAnalysis
     /// Represents a read-only list of <see cref="SyntaxToken"/>.
     /// </summary>
     [StructLayout(LayoutKind.Auto)]
-    public readonly partial struct SyntaxTokenList : IEquatable<SyntaxTokenList>, IReadOnlyList<SyntaxToken>
+    public readonly partial struct SyntaxTokenList
+        : IEquatable<SyntaxTokenList>,
+            IReadOnlyList<SyntaxToken>
     {
         private readonly SyntaxNode? _parent;
         private readonly int _index;
 
-        internal SyntaxTokenList(SyntaxNode? parent, GreenNode? tokenOrList, int position, int index)
+        internal SyntaxTokenList(
+            SyntaxNode? parent,
+            GreenNode? tokenOrList,
+            int position,
+            int index
+        )
         {
             Debug.Assert(tokenOrList != null || (position == 0 && index == 0 && parent == null));
             Debug.Assert(position >= 0);
@@ -47,17 +54,13 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="tokens">An array of tokens.</param>
         public SyntaxTokenList(params SyntaxToken[] tokens)
-            : this(null, CreateNode(tokens), 0, 0)
-        {
-        }
+            : this(null, CreateNode(tokens), 0, 0) { }
 
         /// <summary>
         /// Creates a list of tokens.
         /// </summary>
         public SyntaxTokenList(IEnumerable<SyntaxToken> tokens)
-            : this(null, CreateNode(tokens), 0, 0)
-        {
-        }
+            : this(null, CreateNode(tokens), 0, 0) { }
 
         private static GreenNode? CreateNode(SyntaxToken[] tokens)
         {
@@ -122,7 +125,12 @@ namespace Microsoft.CodeAnalysis
                     {
                         if (unchecked((uint)index < (uint)Node.SlotCount))
                         {
-                            return new SyntaxToken(_parent, Node.GetSlot(index), Position + Node.GetSlotOffset(index), _index + index);
+                            return new SyntaxToken(
+                                _parent,
+                                Node.GetSlot(index),
+                                Position + Node.GetSlotOffset(index),
+                                _index + index
+                            );
                         }
                     }
                     else if (index == 0)
@@ -163,17 +171,19 @@ namespace Microsoft.CodeAnalysis
                     return default(TextSpan);
                 }
 
-                return TextSpan.FromBounds(Position + Node.GetLeadingTriviaWidth(),
-                    Position + Node.FullWidth - Node.GetTrailingTriviaWidth());
+                return TextSpan.FromBounds(
+                    Position + Node.GetLeadingTriviaWidth(),
+                    Position + Node.FullWidth - Node.GetTrailingTriviaWidth()
+                );
             }
         }
 
         /// <summary>
-        /// Returns the string representation of the tokens in this list, not including 
+        /// Returns the string representation of the tokens in this list, not including
         /// the first token's leading trivia and the last token's trailing trivia.
         /// </summary>
         /// <returns>
-        /// The string representation of the tokens in this list, not including 
+        /// The string representation of the tokens in this list, not including
         /// the first token's leading trivia and the last token's trailing trivia.
         /// </returns>
         public override string ToString()
@@ -182,11 +192,11 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns the full string representation of the tokens in this list including 
+        /// Returns the full string representation of the tokens in this list including
         /// the first token's leading trivia and the last token's trailing trivia.
         /// </summary>
         /// <returns>
-        /// The full string representation of the tokens in this list including 
+        /// The full string representation of the tokens in this list including
         /// the first token's leading trivia and the last token's trailing trivia.
         /// </returns>
         public string ToFullString()
@@ -198,7 +208,7 @@ namespace Microsoft.CodeAnalysis
         /// Returns the first token in the list.
         /// </summary>
         /// <returns>The first token in the list.</returns>
-        /// <exception cref="InvalidOperationException">The list is empty.</exception>        
+        /// <exception cref="InvalidOperationException">The list is empty.</exception>
         public SyntaxToken First()
         {
             if (Any())
@@ -213,7 +223,7 @@ namespace Microsoft.CodeAnalysis
         /// Returns the last token in the list.
         /// </summary>
         /// <returns> The last token in the list.</returns>
-        /// <exception cref="InvalidOperationException">The list is empty.</exception>        
+        /// <exception cref="InvalidOperationException">The list is empty.</exception>
         public SyntaxToken Last()
         {
             if (Any())
@@ -361,7 +371,12 @@ namespace Microsoft.CodeAnalysis
                 return this;
             }
 
-            return new SyntaxTokenList(null, GreenNode.CreateList(list, static n => n.RequiredNode), 0, 0);
+            return new SyntaxTokenList(
+                null,
+                GreenNode.CreateList(list, static n => n.RequiredNode),
+                0,
+                0
+            );
         }
 
         /// <summary>
@@ -377,7 +392,12 @@ namespace Microsoft.CodeAnalysis
 
             var list = this.ToList();
             list.RemoveAt(index);
-            return new SyntaxTokenList(null, GreenNode.CreateList(list, static n => n.RequiredNode), 0, 0);
+            return new SyntaxTokenList(
+                null,
+                GreenNode.CreateList(list, static n => n.RequiredNode),
+                0,
+                0
+            );
         }
 
         /// <summary>
@@ -415,7 +435,10 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="tokenInList">The token to replace.</param>
         /// <param name="newTokens">The new tokens.</param>
-        public SyntaxTokenList ReplaceRange(SyntaxToken tokenInList, IEnumerable<SyntaxToken> newTokens)
+        public SyntaxTokenList ReplaceRange(
+            SyntaxToken tokenInList,
+            IEnumerable<SyntaxToken> newTokens
+        )
         {
             var index = this.IndexOf(tokenInList);
             if (index >= 0 && index <= this.Count)
@@ -423,7 +446,12 @@ namespace Microsoft.CodeAnalysis
                 var list = this.ToList();
                 list.RemoveAt(index);
                 list.InsertRange(index, newTokens);
-                return new SyntaxTokenList(null, GreenNode.CreateList(list, static n => n.RequiredNode), 0, 0);
+                return new SyntaxTokenList(
+                    null,
+                    GreenNode.CreateList(list, static n => n.RequiredNode),
+                    0,
+                    0
+                );
             }
 
             throw new ArgumentOutOfRangeException(nameof(tokenInList));

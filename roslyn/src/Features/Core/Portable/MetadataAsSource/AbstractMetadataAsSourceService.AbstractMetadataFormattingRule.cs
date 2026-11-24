@@ -15,18 +15,25 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
     {
         protected abstract class AbstractMetadataFormattingRule : AbstractFormattingRule
         {
-            protected abstract AdjustNewLinesOperation GetAdjustNewLinesOperationBetweenMembersAndUsings(SyntaxToken token1, SyntaxToken token2);
+            protected abstract AdjustNewLinesOperation GetAdjustNewLinesOperationBetweenMembersAndUsings(
+                SyntaxToken token1,
+                SyntaxToken token2
+            );
             protected abstract bool IsNewLine(char c);
 
             public override AdjustNewLinesOperation GetAdjustNewLinesOperation(
-                    in SyntaxToken previousToken, in SyntaxToken currentToken, in NextGetAdjustNewLinesOperation nextOperation)
+                in SyntaxToken previousToken,
+                in SyntaxToken currentToken,
+                in NextGetAdjustNewLinesOperation nextOperation
+            )
             {
                 if (previousToken.RawKind == 0 || currentToken.RawKind == 0)
                 {
                     nextOperation.Invoke(in previousToken, in currentToken);
                 }
 
-                var betweenMembersAndUsingsOperation = GetAdjustNewLinesOperationBetweenMembersAndUsings(previousToken, currentToken);
+                var betweenMembersAndUsingsOperation =
+                    GetAdjustNewLinesOperationBetweenMembersAndUsings(previousToken, currentToken);
                 if (betweenMembersAndUsingsOperation != null)
                 {
                     return betweenMembersAndUsingsOperation;
@@ -55,7 +62,11 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                     }
 
                     inElasticTriviaRun = false;
-                    count += trivia.ToFullString().Replace("\r\n", "\r").ToCharArray().Count(IsNewLine);
+                    count += trivia
+                        .ToFullString()
+                        .Replace("\r\n", "\r")
+                        .ToCharArray()
+                        .Count(IsNewLine);
                 }
 
                 return count;

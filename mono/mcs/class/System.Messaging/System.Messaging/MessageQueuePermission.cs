@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,238 +32,291 @@ using System.Globalization;
 using System.Security;
 using System.Security.Permissions;
 
-namespace System.Messaging {
+namespace System.Messaging
+{
+    [Serializable]
+    public sealed class MessageQueuePermission : CodeAccessPermission, IUnrestrictedPermission
+    {
+        private const int version = 1;
 
-	[Serializable]
-	public sealed class MessageQueuePermission: CodeAccessPermission, IUnrestrictedPermission {
+        private MessageQueuePermissionEntryCollection _list;
+        private bool _unrestricted;
 
-		private const int version = 1;
+        public MessageQueuePermission()
+        {
+            _list = new MessageQueuePermissionEntryCollection(this);
+        }
 
-		private MessageQueuePermissionEntryCollection _list;
-		private bool _unrestricted;
+        public MessageQueuePermission(MessageQueuePermissionEntry[] permissionAccessEntries)
+            : this()
+        {
+            foreach (MessageQueuePermissionEntry entry in permissionAccessEntries)
+                _list.Add(entry);
+        }
 
-		public MessageQueuePermission ()
-		{
-			_list = new MessageQueuePermissionEntryCollection (this);
-		}
-		
-		public MessageQueuePermission (MessageQueuePermissionEntry[] permissionAccessEntries)
-			: this ()
-		{
-			foreach (MessageQueuePermissionEntry entry in permissionAccessEntries)
-				_list.Add (entry);
-		}
-		
-		public MessageQueuePermission (PermissionState state)
-			: this ()
-		{
-			_unrestricted = (state == PermissionState.Unrestricted);
-		}
-		
-		public MessageQueuePermission (MessageQueuePermissionAccess permissionAccess, string path)
-			: this ()
-		{
-			MessageQueuePermissionEntry entry = new MessageQueuePermissionEntry (permissionAccess, path);
-			_list.Add (entry);
-		}
-		
-		public MessageQueuePermission (MessageQueuePermissionAccess permissionAccess,
-			string machineName, string label, string category) : this ()
-		{
-			MessageQueuePermissionEntry entry = new MessageQueuePermissionEntry (permissionAccess, machineName, label, category);
-			_list.Add (entry);
-		}
-		
-		public MessageQueuePermissionEntryCollection PermissionEntries {
-			get { return _list; }
-		}
-		
-		public override IPermission Copy ()
-		{
-			if (_unrestricted)
-				return new MessageQueuePermission (PermissionState.Unrestricted);
-			else {
-				MessageQueuePermission copy = new MessageQueuePermission (PermissionState.None);
-				foreach (MessageQueuePermissionEntry entry in _list)
-					copy._list.Add (entry);
-				return copy;
-			}
-		}
+        public MessageQueuePermission(PermissionState state)
+            : this()
+        {
+            _unrestricted = (state == PermissionState.Unrestricted);
+        }
 
-		public bool IsUnrestricted () 
-		{
-			return _unrestricted;
-		}
+        public MessageQueuePermission(MessageQueuePermissionAccess permissionAccess, string path)
+            : this()
+        {
+            MessageQueuePermissionEntry entry = new MessageQueuePermissionEntry(
+                permissionAccess,
+                path
+            );
+            _list.Add(entry);
+        }
 
-		[MonoTODO]
-		public override void FromXml (SecurityElement securityElement)
-		{
-			CheckSecurityElement (securityElement, "securityElement", version, version);
-			// Note: we do not (yet) care about the return value 
-			// as we only accept version 1 (min/max values)
+        public MessageQueuePermission(
+            MessageQueuePermissionAccess permissionAccess,
+            string machineName,
+            string label,
+            string category
+        )
+            : this()
+        {
+            MessageQueuePermissionEntry entry = new MessageQueuePermissionEntry(
+                permissionAccess,
+                machineName,
+                label,
+                category
+            );
+            _list.Add(entry);
+        }
 
-			_unrestricted = (IsUnrestricted (securityElement));
+        public MessageQueuePermissionEntryCollection PermissionEntries
+        {
+            get { return _list; }
+        }
 
-			// TODO read elements
-		}
-		
-		[MonoTODO]
-		public override IPermission Intersect (IPermission target)
-		{
-			Cast (target);
-			return null;
-		}
-		
-		[MonoTODO]
-		public override bool IsSubsetOf (IPermission target)
-		{
-			Cast (target);
-			return false;
-		}
-		
-		[MonoTODO]
-		public override SecurityElement ToXml ()
-		{
-			SecurityElement se = Element (version);
-			if (_unrestricted)
-				se.AddAttribute ("Unrestricted", "true");
-			else {
-				// TODO
-			}
-			return se;
-		}
-		
-		[MonoTODO]
-		public override IPermission Union (IPermission target)
-		{
-			Cast (target);
-			return null;
-		}
+        public override IPermission Copy()
+        {
+            if (_unrestricted)
+                return new MessageQueuePermission(PermissionState.Unrestricted);
+            else
+            {
+                MessageQueuePermission copy = new MessageQueuePermission(PermissionState.None);
+                foreach (MessageQueuePermissionEntry entry in _list)
+                    copy._list.Add(entry);
+                return copy;
+            }
+        }
 
-		// helpers
+        public bool IsUnrestricted()
+        {
+            return _unrestricted;
+        }
 
-		private bool IsEmpty ()
-		{
-			return (!_unrestricted && (_list.Count == 0));
-		}
+        [MonoTODO]
+        public override void FromXml(SecurityElement securityElement)
+        {
+            CheckSecurityElement(securityElement, "securityElement", version, version);
+            // Note: we do not (yet) care about the return value
+            // as we only accept version 1 (min/max values)
 
-		private MessageQueuePermission Cast (IPermission target)
-		{
-			if (target == null)
-				return null;
+            _unrestricted = (IsUnrestricted(securityElement));
 
-			MessageQueuePermission mqp = (target as MessageQueuePermission);
-			if (mqp == null) {
-				ThrowInvalidPermission (target, typeof (MessageQueuePermission));
-			}
+            // TODO read elements
+        }
 
-			return mqp;
-		}
+        [MonoTODO]
+        public override IPermission Intersect(IPermission target)
+        {
+            Cast(target);
+            return null;
+        }
 
-		// static helpers
+        [MonoTODO]
+        public override bool IsSubsetOf(IPermission target)
+        {
+            Cast(target);
+            return false;
+        }
 
-		private static char[] invalidChars = new char[] { '\t', '\n', '\v', '\f', '\r', ' ', '\\', '\x160' };
+        [MonoTODO]
+        public override SecurityElement ToXml()
+        {
+            SecurityElement se = Element(version);
+            if (_unrestricted)
+                se.AddAttribute("Unrestricted", "true");
+            else
+            {
+                // TODO
+            }
+            return se;
+        }
 
-		internal static void ValidateMachineName (string name)
-		{
-			// FIXME: maybe other checks are required (but not documented)
-			if ((name == null) || (name.Length == 0) || (name.IndexOfAny (invalidChars) != -1)) {
-				string msg = Locale.GetText ("Invalid machine name '{0}'.");
-				if (name == null)
-					name = "(null)";
-				msg = String.Format (msg, name);
-				throw new ArgumentException (msg, "MachineName");
-			}
-		}
+        [MonoTODO]
+        public override IPermission Union(IPermission target)
+        {
+            Cast(target);
+            return null;
+        }
 
-		internal static void ValidatePath (string path)
-		{
-			// FIXME: maybe other checks are required (but not documented)
-			if ((path.Length > 0) && (path [0] != '\\')) {
-				string msg = Locale.GetText ("Invalid path '{0}'.");
-				throw new ArgumentException (String.Format (msg, path), "Path");
-			}
-		}
+        // helpers
 
-		// NOTE: The following static methods should be moved out to a (static?) class 
-		// if (ever) System.Drawing.dll gets more than one permission in it's assembly.
+        private bool IsEmpty()
+        {
+            return (!_unrestricted && (_list.Count == 0));
+        }
 
-		// snippet moved from FileIOPermission (nickd) to be reused in all derived classes
-		internal SecurityElement Element (int version) 
-		{
-			SecurityElement se = new SecurityElement ("IPermission");
-			Type type = this.GetType ();
-			se.AddAttribute ("class", type.FullName + ", " + type.Assembly.ToString ().Replace ('\"', '\''));
-			se.AddAttribute ("version", version.ToString ());
-			return se;
-		}
+        private MessageQueuePermission Cast(IPermission target)
+        {
+            if (target == null)
+                return null;
 
-		internal static PermissionState CheckPermissionState (PermissionState state, bool allowUnrestricted)
-		{
-			string msg;
-			switch (state) {
-			case PermissionState.None:
-				break;
-			case PermissionState.Unrestricted:
-				if (!allowUnrestricted) {
-					msg = Locale.GetText ("Unrestricted isn't not allowed for identity permissions.");
-					throw new ArgumentException (msg, "state");
-				}
-				break;
-			default:
-				msg = String.Format (Locale.GetText ("Invalid enum {0}"), state);
-				throw new ArgumentException (msg, "state");
-			}
-			return state;
-		}
+            MessageQueuePermission mqp = (target as MessageQueuePermission);
+            if (mqp == null)
+            {
+                ThrowInvalidPermission(target, typeof(MessageQueuePermission));
+            }
 
-		// logic isn't identical to CodeAccessPermission.CheckSecurityElement - see unit tests
-		internal static int CheckSecurityElement (SecurityElement se, string parameterName, int minimumVersion, int maximumVersion) 
-		{
-			if (se == null)
-				throw new ArgumentNullException (parameterName);
+            return mqp;
+        }
 
-			if (se.Attribute ("class") == null) {
-				string msg = Locale.GetText ("Missing 'class' attribute.");
-				throw new ArgumentException (msg, parameterName);
-			}
+        // static helpers
 
-			// we assume minimum version if no version number is supplied
-			int version = minimumVersion;
-			string v = se.Attribute ("version");
-			if (v != null) {
-				try {
-					version = Int32.Parse (v);
-				}
-				catch (Exception e) {
-					string msg = Locale.GetText ("Couldn't parse version from '{0}'.");
-					msg = String.Format (msg, v);
-					throw new ArgumentException (msg, parameterName, e);
-				}
-			}
+        private static char[] invalidChars = new char[]
+        {
+            '\t',
+            '\n',
+            '\v',
+            '\f',
+            '\r',
+            ' ',
+            '\\',
+            '\x160',
+        };
 
-			if ((version < minimumVersion) || (version > maximumVersion)) {
-				string msg = Locale.GetText ("Unknown version '{0}', expected versions between ['{1}','{2}'].");
-				msg = String.Format (msg, version, minimumVersion, maximumVersion);
-				throw new ArgumentException (msg, parameterName);
-			}
-			return version;
-		}
+        internal static void ValidateMachineName(string name)
+        {
+            // FIXME: maybe other checks are required (but not documented)
+            if ((name == null) || (name.Length == 0) || (name.IndexOfAny(invalidChars) != -1))
+            {
+                string msg = Locale.GetText("Invalid machine name '{0}'.");
+                if (name == null)
+                    name = "(null)";
+                msg = String.Format(msg, name);
+                throw new ArgumentException(msg, "MachineName");
+            }
+        }
 
-		// must be called after CheckSecurityElement (i.e. se != null)
-		internal static bool IsUnrestricted (SecurityElement se) 
-		{
-			string value = se.Attribute ("Unrestricted");
-			if (value == null)
-				return false;
-			return (String.Compare (value, Boolean.TrueString, true, CultureInfo.InvariantCulture) == 0);
-		}
+        internal static void ValidatePath(string path)
+        {
+            // FIXME: maybe other checks are required (but not documented)
+            if ((path.Length > 0) && (path[0] != '\\'))
+            {
+                string msg = Locale.GetText("Invalid path '{0}'.");
+                throw new ArgumentException(String.Format(msg, path), "Path");
+            }
+        }
 
-		internal static void ThrowInvalidPermission (IPermission target, Type expected) 
-		{
-			string msg = Locale.GetText ("Invalid permission type '{0}', expected type '{1}'.");
-			msg = String.Format (msg, target.GetType (), expected);
-			throw new ArgumentException (msg, "target");
-		}
-	}
+        // NOTE: The following static methods should be moved out to a (static?) class
+        // if (ever) System.Drawing.dll gets more than one permission in it's assembly.
+
+        // snippet moved from FileIOPermission (nickd) to be reused in all derived classes
+        internal SecurityElement Element(int version)
+        {
+            SecurityElement se = new SecurityElement("IPermission");
+            Type type = this.GetType();
+            se.AddAttribute(
+                "class",
+                type.FullName + ", " + type.Assembly.ToString().Replace('\"', '\'')
+            );
+            se.AddAttribute("version", version.ToString());
+            return se;
+        }
+
+        internal static PermissionState CheckPermissionState(
+            PermissionState state,
+            bool allowUnrestricted
+        )
+        {
+            string msg;
+            switch (state)
+            {
+                case PermissionState.None:
+                    break;
+                case PermissionState.Unrestricted:
+                    if (!allowUnrestricted)
+                    {
+                        msg = Locale.GetText(
+                            "Unrestricted isn't not allowed for identity permissions."
+                        );
+                        throw new ArgumentException(msg, "state");
+                    }
+                    break;
+                default:
+                    msg = String.Format(Locale.GetText("Invalid enum {0}"), state);
+                    throw new ArgumentException(msg, "state");
+            }
+            return state;
+        }
+
+        // logic isn't identical to CodeAccessPermission.CheckSecurityElement - see unit tests
+        internal static int CheckSecurityElement(
+            SecurityElement se,
+            string parameterName,
+            int minimumVersion,
+            int maximumVersion
+        )
+        {
+            if (se == null)
+                throw new ArgumentNullException(parameterName);
+
+            if (se.Attribute("class") == null)
+            {
+                string msg = Locale.GetText("Missing 'class' attribute.");
+                throw new ArgumentException(msg, parameterName);
+            }
+
+            // we assume minimum version if no version number is supplied
+            int version = minimumVersion;
+            string v = se.Attribute("version");
+            if (v != null)
+            {
+                try
+                {
+                    version = Int32.Parse(v);
+                }
+                catch (Exception e)
+                {
+                    string msg = Locale.GetText("Couldn't parse version from '{0}'.");
+                    msg = String.Format(msg, v);
+                    throw new ArgumentException(msg, parameterName, e);
+                }
+            }
+
+            if ((version < minimumVersion) || (version > maximumVersion))
+            {
+                string msg = Locale.GetText(
+                    "Unknown version '{0}', expected versions between ['{1}','{2}']."
+                );
+                msg = String.Format(msg, version, minimumVersion, maximumVersion);
+                throw new ArgumentException(msg, parameterName);
+            }
+            return version;
+        }
+
+        // must be called after CheckSecurityElement (i.e. se != null)
+        internal static bool IsUnrestricted(SecurityElement se)
+        {
+            string value = se.Attribute("Unrestricted");
+            if (value == null)
+                return false;
+            return (
+                String.Compare(value, Boolean.TrueString, true, CultureInfo.InvariantCulture) == 0
+            );
+        }
+
+        internal static void ThrowInvalidPermission(IPermission target, Type expected)
+        {
+            string msg = Locale.GetText("Invalid permission type '{0}', expected type '{1}'.");
+            msg = String.Format(msg, target.GetType(), expected);
+            throw new ArgumentException(msg, "target");
+        }
+    }
 }

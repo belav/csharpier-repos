@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,54 +35,38 @@ using System.Threading;
 
 namespace System.ServiceModel
 {
-	[DataContract]
-	public class ExceptionDetail
-	{
-		
-		public ExceptionDetail (Exception exception)
-		{
-			if (exception == null)
-				throw new ArgumentNullException ("exception");
-			Message = exception.Message;
-			StackTrace = exception.StackTrace;
-			Type = exception.GetType ().FullName;
-			if (exception.InnerException != null)
-				InnerException = new ExceptionDetail (exception.InnerException);
-		}
+    [DataContract]
+    public class ExceptionDetail
+    {
+        public ExceptionDetail(Exception exception)
+        {
+            if (exception == null)
+                throw new ArgumentNullException("exception");
+            Message = exception.Message;
+            StackTrace = exception.StackTrace;
+            Type = exception.GetType().FullName;
+            if (exception.InnerException != null)
+                InnerException = new ExceptionDetail(exception.InnerException);
+        }
 
-		[DataMember]
-		public string HelpLink {
-			get;
-			set;
-		}
+        [DataMember]
+        public string HelpLink { get; set; }
 
-		[DataMember]
-		public ExceptionDetail InnerException {
-			get;
-			set;
-		}
+        [DataMember]
+        public ExceptionDetail InnerException { get; set; }
 
-		[DataMember]
-		public string Message {
-			get;
-			set;
-		}
+        [DataMember]
+        public string Message { get; set; }
 
-		[DataMember]
-		public string StackTrace {
-			get;
-			set;
-		}
+        [DataMember]
+        public string StackTrace { get; set; }
 
-		[DataMember]
-		public string Type {
-			get;
-			set;
-		}
+        [DataMember]
+        public string Type { get; set; }
 
-		public override string ToString ()
-		{
-			return Message;
-		}
-	}
+        public override string ToString()
+        {
+            return Message;
+        }
+    }
 }

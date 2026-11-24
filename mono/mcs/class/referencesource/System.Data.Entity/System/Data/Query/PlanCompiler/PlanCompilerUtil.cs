@@ -23,7 +23,7 @@ namespace System.Data.Query.PlanCompiler
         /// <summary>
         /// Utility method that determines whether a given CaseOp subtree can be optimized.
         /// Called by both PreProcessor and NominalTypeEliminator.
-        /// 
+        ///
         /// If the case statement is of the shape:
         ///     case when X then NULL else Y, or
         ///     case when X then Y else NULL,
@@ -33,9 +33,13 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="op"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        internal static bool IsRowTypeCaseOpWithNullability(CaseOp op, Node n, out bool thenClauseIsNull)
+        internal static bool IsRowTypeCaseOpWithNullability(
+            CaseOp op,
+            Node n,
+            out bool thenClauseIsNull
+        )
         {
-            thenClauseIsNull = false;  //any default value will do
+            thenClauseIsNull = false; //any default value will do
 
             if (!TypeSemantics.IsRowType(op.Type))
             {
@@ -78,9 +82,11 @@ namespace System.Data.Query.PlanCompiler
         /// <returns>true, if this was a collection aggregate function</returns>
         internal static bool IsCollectionAggregateFunction(FunctionOp op, Node n)
         {
-            return ((n.Children.Count == 1) &&
-                    TypeSemantics.IsCollectionType(n.Child0.Op.Type) &&
-                    TypeSemantics.IsAggregateFunction(op.Function));
+            return (
+                (n.Children.Count == 1)
+                && TypeSemantics.IsCollectionType(n.Child0.Op.Type)
+                && TypeSemantics.IsAggregateFunction(op.Function)
+            );
         }
 
         /// <summary>
@@ -90,18 +96,18 @@ namespace System.Data.Query.PlanCompiler
         /// <returns></returns>
         internal static bool IsConstantBaseOp(OpType opType)
         {
-            return opType == OpType.Constant ||
-                    opType == OpType.InternalConstant ||
-                    opType == OpType.Null ||
-                    opType == OpType.NullSentinel;
+            return opType == OpType.Constant
+                || opType == OpType.InternalConstant
+                || opType == OpType.Null
+                || opType == OpType.NullSentinel;
         }
 
         /// <summary>
-        /// Combine two predicates by trying to avoid the predicate parts of the 
+        /// Combine two predicates by trying to avoid the predicate parts of the
         /// second one that are already present in the first one.
-        /// 
-        /// In particular, given two nodes, predicate1 and predicate2, 
-        /// it creates a combined predicate logically equivalent to 
+        ///
+        /// In particular, given two nodes, predicate1 and predicate2,
+        /// it creates a combined predicate logically equivalent to
         ///     predicate1 AND predicate2,
         /// but it does not include any AND parts of predicate2 that are present
         /// in predicate1.
@@ -130,27 +136,33 @@ namespace System.Data.Query.PlanCompiler
                 }
                 if (!foundMatch)
                 {
-                    result = command.CreateNode(command.CreateConditionalOp(OpType.And), result, predicatePart2);
+                    result = command.CreateNode(
+                        command.CreateConditionalOp(OpType.And),
+                        result,
+                        predicatePart2
+                    );
                 }
             }
             return result;
         }
 
         /// <summary>
-        /// Create a list of AND parts for a given predicate. 
+        /// Create a list of AND parts for a given predicate.
         /// For example, if the predicate is of the shape:
         /// ((p1 and p2) and (p3 and p4)) the list is p1, p2, p3, p4
-        /// The predicates p1,p2, p3, p4 may be roots of subtrees that 
-        /// have nodes with AND ops, but 
+        /// The predicates p1,p2, p3, p4 may be roots of subtrees that
+        /// have nodes with AND ops, but
         /// would not be broken unless they are the AND nodes themselves.
         /// </summary>
         /// <param name="predicate"></param>
         /// <param name="andParts"></param>
         private static IEnumerable<Node> BreakIntoAndParts(Node predicate)
         {
-            return Helpers.GetLeafNodes<Node>(predicate,
+            return Helpers.GetLeafNodes<Node>(
+                predicate,
                 node => (node.Op.OpType != OpType.And),
-                node => (new[] {node.Child0, node.Child1}));
+                node => (new[] { node.Child0, node.Child1 })
+            );
         }
     }
 }

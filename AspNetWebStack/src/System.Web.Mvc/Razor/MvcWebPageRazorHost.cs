@@ -9,10 +9,19 @@ using System.Web.WebPages.Razor;
 
 namespace System.Web.Mvc.Razor
 {
-    [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "WebPage", Justification = "The class name is derived from the name of the base type")]
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1702:CompoundWordsShouldBeCasedCorrectly",
+        MessageId = "WebPage",
+        Justification = "The class name is derived from the name of the base type"
+    )]
     public class MvcWebPageRazorHost : WebPageRazorHost
     {
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Justification = "The NamespaceImports property should not be virtual. This is a temporary fix.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2214:DoNotCallOverridableMethodsInConstructors",
+            Justification = "The NamespaceImports property should not be virtual. This is a temporary fix."
+        )]
         public MvcWebPageRazorHost(string virtualPath, string physicalPath)
             : base(virtualPath, physicalPath)
         {
@@ -24,14 +33,18 @@ namespace System.Web.Mvc.Razor
             GetRidOfNamespace("System.Web.WebPages.Html");
         }
 
-        public override RazorCodeGenerator DecorateCodeGenerator(RazorCodeGenerator incomingCodeGenerator)
+        public override RazorCodeGenerator DecorateCodeGenerator(
+            RazorCodeGenerator incomingCodeGenerator
+        )
         {
             if (incomingCodeGenerator is CSharpRazorCodeGenerator)
             {
-                return new MvcCSharpRazorCodeGenerator(incomingCodeGenerator.ClassName,
-                                                       incomingCodeGenerator.RootNamespaceName,
-                                                       incomingCodeGenerator.SourceFileName,
-                                                       incomingCodeGenerator.Host);
+                return new MvcCSharpRazorCodeGenerator(
+                    incomingCodeGenerator.ClassName,
+                    incomingCodeGenerator.RootNamespaceName,
+                    incomingCodeGenerator.SourceFileName,
+                    incomingCodeGenerator.Host
+                );
             }
             else
             {

@@ -21,7 +21,10 @@ internal static partial class Interop
         internal static partial int EncodeOcspRequest(SafeOcspRequestHandle req, byte[] buf);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509BuildOcspRequest")]
-        internal static partial SafeOcspRequestHandle X509BuildOcspRequest(IntPtr subject, IntPtr issuer);
+        internal static partial SafeOcspRequestHandle X509BuildOcspRequest(
+            IntPtr subject,
+            IntPtr issuer
+        );
 
         [LibraryImport(Libraries.CryptoNative)]
         private static unsafe partial int CryptoNative_X509DecodeOcspToExpiration(
@@ -30,14 +33,16 @@ internal static partial class Interop
             SafeOcspRequestHandle req,
             IntPtr subject,
             IntPtr issuer,
-            ref long expiration);
+            ref long expiration
+        );
 
         internal static unsafe bool X509DecodeOcspToExpiration(
             ReadOnlySpan<byte> buf,
             SafeOcspRequestHandle request,
             IntPtr x509Subject,
             IntPtr x509Issuer,
-            out DateTimeOffset expiration)
+            out DateTimeOffset expiration
+        )
         {
             long timeT = 0;
             int ret;
@@ -50,7 +55,8 @@ internal static partial class Interop
                     request,
                     x509Subject,
                     x509Issuer,
-                    ref timeT);
+                    ref timeT
+                );
             }
 
             if (ret == 1)
@@ -76,13 +82,14 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static partial SafeOcspResponseHandle CryptoNative_DecodeOcspResponse(ref byte buf, int len);
+        private static partial SafeOcspResponseHandle CryptoNative_DecodeOcspResponse(
+            ref byte buf,
+            int len
+        );
 
         internal static SafeOcspResponseHandle DecodeOcspResponse(ReadOnlySpan<byte> buf)
         {
-            return CryptoNative_DecodeOcspResponse(
-                ref MemoryMarshal.GetReference(buf),
-                buf.Length);
+            return CryptoNative_DecodeOcspResponse(ref MemoryMarshal.GetReference(buf), buf.Length);
         }
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_OcspResponseDestroy")]
@@ -95,9 +102,7 @@ namespace System.Security.Cryptography.X509Certificates
     internal sealed class SafeOcspRequestHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         public SafeOcspRequestHandle()
-            : base(true)
-        {
-        }
+            : base(true) { }
 
         protected override bool ReleaseHandle()
         {
@@ -110,9 +115,7 @@ namespace System.Security.Cryptography.X509Certificates
     internal sealed class SafeOcspResponseHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         public SafeOcspResponseHandle()
-            : base(true)
-        {
-        }
+            : base(true) { }
 
         protected override bool ReleaseHandle()
         {

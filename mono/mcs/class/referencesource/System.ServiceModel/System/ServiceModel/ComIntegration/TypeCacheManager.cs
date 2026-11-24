@@ -22,16 +22,14 @@ namespace System.ServiceModel.ComIntegration
         {
             Default = 0,
             Register = 1,
-            None = 2
+            None = 2,
         }
-
 
         // TypeCacheManager.Provider will give access to the static instance of the TypeCache
         static Guid clrAssemblyCustomID = new Guid("90883F05-3D28-11D2-8F17-00A0C9A6186D");
         static object instanceLock = new object();
 
-
-        static public ITypeCacheManager Provider
+        public static ITypeCacheManager Provider
         {
             get
             {
@@ -48,8 +46,7 @@ namespace System.ServiceModel.ComIntegration
                 return instance;
             }
         }
-        static internal ITypeCacheManager instance;
-
+        internal static ITypeCacheManager instance;
 
         // Convert to typeLibrary ID (GUID)
         private Dictionary<Guid, Assembly> assemblyTable;
@@ -64,6 +61,7 @@ namespace System.ServiceModel.ComIntegration
             typeTableLock = new object();
             assemblyTableLock = new object();
         }
+
         private Guid GettypeLibraryIDFromIID(Guid iid, bool isServer, out String version)
         {
             // In server we need to open the the User hive for the Process User.
@@ -73,7 +71,11 @@ namespace System.ServiceModel.ComIntegration
                 string keyName = null;
                 if (isServer)
                 {
-                    keyName = String.Concat("software\\classes\\interface\\{", iid.ToString(), "}\\typelib");
+                    keyName = String.Concat(
+                        "software\\classes\\interface\\{",
+                        iid.ToString(),
+                        "}\\typelib"
+                    );
                     interfaceKey = Registry.LocalMachine.OpenSubKey(keyName, false);
                 }
                 else
@@ -82,10 +84,16 @@ namespace System.ServiceModel.ComIntegration
                     interfaceKey = Registry.ClassesRoot.OpenSubKey(keyName, false);
                 }
                 if (interfaceKey == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.InterfaceNotRegistered)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.InterfaceNotRegistered))
+                    );
                 string typeLibID = interfaceKey.GetValue("").ToString();
                 if (string.IsNullOrEmpty(typeLibID))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.NoTypeLibraryFoundForInterface)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.NoTypeLibraryFoundForInterface)
+                        )
+                    );
                 version = interfaceKey.GetValue("Version").ToString();
                 if (string.IsNullOrEmpty(version))
                     version = "1.0";
@@ -93,21 +101,28 @@ namespace System.ServiceModel.ComIntegration
                 Guid typeLibraryID;
                 if (!DiagnosticUtility.Utility.TryCreateGuid(typeLibID, out typeLibraryID))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.BadInterfaceRegistration)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.BadInterfaceRegistration))
+                    );
                 }
                 return typeLibraryID;
-
             }
             finally
             {
                 if (interfaceKey != null)
                     interfaceKey.Close();
             }
-
         }
-        private void ParseVersion(string version, bool parseVersionAsHex, out ushort major, out ushort minor)
+
+        private void ParseVersion(
+            string version,
+            bool parseVersionAsHex,
+            out ushort major,
+            out ushort minor
+        )
         {
-            NumberStyles numberStyle = (parseVersionAsHex) ? NumberStyles.HexNumber : NumberStyles.None;
+            NumberStyles numberStyle =
+                (parseVersionAsHex) ? NumberStyles.HexNumber : NumberStyles.None;
             major = 0;
             minor = 0;
             if (String.IsNullOrEmpty(version))
@@ -115,7 +130,6 @@ namespace System.ServiceModel.ComIntegration
             int indexOfDot = version.IndexOf(".", StringComparison.Ordinal);
             try
             {
-
                 if (indexOfDot == -1)
                 {
                     major = ushort.Parse(version, numberStyle, NumberFormatInfo.InvariantInfo);
@@ -123,7 +137,11 @@ namespace System.ServiceModel.ComIntegration
                 }
                 else
                 {
-                    major = ushort.Parse(version.Substring(0, indexOfDot), numberStyle, NumberFormatInfo.InvariantInfo); 
+                    major = ushort.Parse(
+                        version.Substring(0, indexOfDot),
+                        numberStyle,
+                        NumberFormatInfo.InvariantInfo
+                    );
                     string minorVersion = version.Substring(indexOfDot + 1);
                     int indexOfDot2 = minorVersion.IndexOf(".", StringComparison.Ordinal);
 
@@ -135,14 +153,18 @@ namespace System.ServiceModel.ComIntegration
             }
             catch (FormatException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.BadInterfaceVersion)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.BadInterfaceVersion))
+                );
             }
             catch (OverflowException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.BadInterfaceVersion)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.BadInterfaceVersion))
+                );
             }
-
         }
+
         private ITypeLib2 GettypeLibrary(Guid typeLibraryID, string version, bool parseVersionAsHex)
         {
             ushort major = 0;
@@ -150,29 +172,49 @@ namespace System.ServiceModel.ComIntegration
             const int lcidLocalIndependent = 0;
             ParseVersion(version, parseVersionAsHex, out major, out minor);
             object otlb;
-            int hr = SafeNativeMethods.LoadRegTypeLib(ref typeLibraryID, major, minor, lcidLocalIndependent, out otlb);
+            int hr = SafeNativeMethods.LoadRegTypeLib(
+                ref typeLibraryID,
+                major,
+                minor,
+                lcidLocalIndependent,
+                out otlb
+            );
             if (hr != 0 || null == otlb)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.FailedToLoadTypeLibrary), hr));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new COMException(SR.GetString(SR.FailedToLoadTypeLibrary), hr)
+                );
             return otlb as ITypeLib2;
-
-
         }
-
 
         private Assembly ResolveAssemblyFromIID(Guid iid, bool noAssemblyGeneration, bool isServer)
         {
-
             String version;
             Guid typeLibraryID = GettypeLibraryIDFromIID(iid, isServer, out version);
 
-            return ResolveAssemblyFromTypeLibID(iid, typeLibraryID, version, true, noAssemblyGeneration);
-
+            return ResolveAssemblyFromTypeLibID(
+                iid,
+                typeLibraryID,
+                version,
+                true,
+                noAssemblyGeneration
+            );
         }
 
-        private Assembly ResolveAssemblyFromTypeLibID(Guid iid, Guid typeLibraryID, string version, bool parseVersionAsHex, bool noAssemblyGeneration)
+        private Assembly ResolveAssemblyFromTypeLibID(
+            Guid iid,
+            Guid typeLibraryID,
+            string version,
+            bool parseVersionAsHex,
+            bool noAssemblyGeneration
+        )
         {
-            ComPlusTLBImportTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationTLBImportStarting,
-                                           SR.TraceCodeComIntegrationTLBImportStarting, iid, typeLibraryID);
+            ComPlusTLBImportTrace.Trace(
+                TraceEventType.Verbose,
+                TraceCode.ComIntegrationTLBImportStarting,
+                SR.TraceCodeComIntegrationTLBImportStarting,
+                iid,
+                typeLibraryID
+            );
             Assembly asm;
 
             bool generateNativeAssembly = false;
@@ -189,23 +231,42 @@ namespace System.ServiceModel.ComIntegration
                         object opaqueData = null;
                         typeLibrary.GetCustData(ref clrAssemblyCustomID, out opaqueData);
                         if (opaqueData == null)
-                            generateNativeAssembly = true;      // No custom data for this IID this is not a CLR typeLibrary
+                            generateNativeAssembly = true; // No custom data for this IID this is not a CLR typeLibrary
                         String assembly = opaqueData as String;
                         if (String.IsNullOrEmpty(assembly))
-                            generateNativeAssembly = true;      // No custom data for this IID this is not a CLR typeLibrary
+                            generateNativeAssembly = true; // No custom data for this IID this is not a CLR typeLibrary
                         if (noAssemblyGeneration && generateNativeAssembly)
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.NativeTypeLibraryNotAllowed, typeLibraryID)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.NativeTypeLibraryNotAllowed, typeLibraryID)
+                                )
+                            );
                         else if (!generateNativeAssembly)
                         {
-                            ComPlusTLBImportTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationTLBImportFromAssembly,
-                                          SR.TraceCodeComIntegrationTLBImportFromAssembly, iid, typeLibraryID, assembly);
-                            asm = Assembly.Load(assembly);            // Assembly.Load will get a full assembly name
+                            ComPlusTLBImportTrace.Trace(
+                                TraceEventType.Verbose,
+                                TraceCode.ComIntegrationTLBImportFromAssembly,
+                                SR.TraceCodeComIntegrationTLBImportFromAssembly,
+                                iid,
+                                typeLibraryID,
+                                assembly
+                            );
+                            asm = Assembly.Load(assembly); // Assembly.Load will get a full assembly name
                         }
                         else
                         {
-                            ComPlusTLBImportTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationTLBImportFromTypelib,
-                                               SR.TraceCodeComIntegrationTLBImportFromTypelib, iid, typeLibraryID);
-                            asm = TypeLibraryHelper.GenerateAssemblyFromNativeTypeLibrary(iid, typeLibraryID, typeLibrary as ITypeLib);
+                            ComPlusTLBImportTrace.Trace(
+                                TraceEventType.Verbose,
+                                TraceCode.ComIntegrationTLBImportFromTypelib,
+                                SR.TraceCodeComIntegrationTLBImportFromTypelib,
+                                iid,
+                                typeLibraryID
+                            );
+                            asm = TypeLibraryHelper.GenerateAssemblyFromNativeTypeLibrary(
+                                iid,
+                                typeLibraryID,
+                                typeLibrary as ITypeLib
+                            );
                         }
 
                         assemblyTable[typeLibraryID] = asm;
@@ -214,17 +275,18 @@ namespace System.ServiceModel.ComIntegration
             }
             catch (Exception e)
             {
-                DiagnosticUtility.EventLog.LogEvent(TraceEventType.Error,
+                DiagnosticUtility.EventLog.LogEvent(
+                    TraceEventType.Error,
                     (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
                     (uint)System.Runtime.Diagnostics.EventLogEventId.ComPlusTLBImportError,
                     iid.ToString(),
                     typeLibraryID.ToString(),
-                    e.ToString());
+                    e.ToString()
+                );
                 throw;
             }
             finally
             {
-
                 // Add Try Finally to cleanup typeLibrary
                 if (typeLibrary != null)
                     Marshal.ReleaseComObject((object)typeLibrary);
@@ -234,13 +296,23 @@ namespace System.ServiceModel.ComIntegration
             {
                 throw Fx.AssertAndThrow("Assembly should not be null");
             }
-            ComPlusTLBImportTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationTLBImportFinished,
-                               SR.TraceCodeComIntegrationTLBImportFinished, iid, typeLibraryID);
+            ComPlusTLBImportTrace.Trace(
+                TraceEventType.Verbose,
+                TraceCode.ComIntegrationTLBImportFinished,
+                SR.TraceCodeComIntegrationTLBImportFinished,
+                iid,
+                typeLibraryID
+            );
             return asm;
         }
+
         private bool NoCoClassAttributeOnType(ICustomAttributeProvider attrProvider)
         {
-            object[] attrs = System.ServiceModel.Description.ServiceReflector.GetCustomAttributes(attrProvider, typeof(CoClassAttribute), false);
+            object[] attrs = System.ServiceModel.Description.ServiceReflector.GetCustomAttributes(
+                attrProvider,
+                typeof(CoClassAttribute),
+                false
+            );
             if (attrs.Length == 0)
                 return true;
             else
@@ -259,14 +331,26 @@ namespace System.ServiceModel.ComIntegration
             return ret;
         }
 
-        void ITypeCacheManager.FindOrCreateType(Guid typeLibId, string typeLibVersion, Guid typeDefId, out Type userDefinedType, bool noAssemblyGeneration)
+        void ITypeCacheManager.FindOrCreateType(
+            Guid typeLibId,
+            string typeLibVersion,
+            Guid typeDefId,
+            out Type userDefinedType,
+            bool noAssemblyGeneration
+        )
         {
             lock (typeTableLock)
             {
                 typeTable.TryGetValue(typeDefId, out userDefinedType);
                 if (userDefinedType == null)
                 {
-                    Assembly asm = ResolveAssemblyFromTypeLibID(Guid.Empty, typeLibId, typeLibVersion, false, noAssemblyGeneration);
+                    Assembly asm = ResolveAssemblyFromTypeLibID(
+                        Guid.Empty,
+                        typeLibId,
+                        typeLibVersion,
+                        false,
+                        noAssemblyGeneration
+                    );
                     foreach (Type t in asm.GetTypes())
                     {
                         if (t.GUID == typeDefId)
@@ -279,16 +363,23 @@ namespace System.ServiceModel.ComIntegration
                         }
                     }
                     if (userDefinedType == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UdtNotFoundInAssembly, typeDefId)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.UdtNotFoundInAssembly, typeDefId)
+                            )
+                        );
 
                     typeTable[typeDefId] = userDefinedType;
-
                 }
             }
         }
 
-
-        public void FindOrCreateType(Guid iid, out Type interfaceType, bool noAssemblyGeneration, bool isServer)
+        public void FindOrCreateType(
+            Guid iid,
+            out Type interfaceType,
+            bool noAssemblyGeneration,
+            bool isServer
+        )
         {
             lock (typeTableLock)
             {
@@ -305,25 +396,34 @@ namespace System.ServiceModel.ComIntegration
                             {
                                 interfaceType = t;
                                 break;
-
                             }
                             else if (t.IsInterface && !NoCoClassAttributeOnType(t))
                             {
                                 coClassInterface = t;
                             }
                         }
-
                     }
                     if ((interfaceType == null) && (coClassInterface != null))
                         interfaceType = coClassInterface;
                     else if (interfaceType == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.InterfaceNotFoundInAssembly)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.InterfaceNotFoundInAssembly)
+                            )
+                        );
 
                     typeTable[iid] = interfaceType;
                 }
             }
         }
-        void ITypeCacheManager.FindOrCreateType(Type serverType, Guid iid, out Type interfaceType, bool noAssemblyGeneration, bool isServer)
+
+        void ITypeCacheManager.FindOrCreateType(
+            Type serverType,
+            Guid iid,
+            out Type interfaceType,
+            bool noAssemblyGeneration,
+            bool isServer
+        )
         {
             interfaceType = null;
             if (serverType == null)
@@ -343,19 +443,28 @@ namespace System.ServiceModel.ComIntegration
                     }
                 }
                 if (interfaceType == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.InterfaceNotFoundInAssembly)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.InterfaceNotFoundInAssembly))
+                    );
             }
-
         }
 
         public static Type ResolveClsidToType(Guid clsid)
         {
-            string keyName = String.Concat("software\\classes\\clsid\\{", clsid.ToString(), "}\\InprocServer32");
+            string keyName = String.Concat(
+                "software\\classes\\clsid\\{",
+                clsid.ToString(),
+                "}\\InprocServer32"
+            );
             using (RegistryKey clsidKey = Registry.LocalMachine.OpenSubKey(keyName, false))
             {
                 if (clsidKey != null)
                 {
-                    using (RegistryKey assemblyKey = clsidKey.OpenSubKey(typeof(TypeCacheManager).Assembly.ImageRuntimeVersion))
+                    using (
+                        RegistryKey assemblyKey = clsidKey.OpenSubKey(
+                            typeof(TypeCacheManager).Assembly.ImageRuntimeVersion
+                        )
+                    )
                     {
                         string assemblyName = null;
                         if (assemblyKey == null)
@@ -391,17 +500,26 @@ namespace System.ServiceModel.ComIntegration
                         return null;
                     }
                 }
-
             }
             // We failed to get the hive information from a native process hive lets go for the alternative bitness
 
-            using (RegistryHandle hkcr = RegistryHandle.GetBitnessHKCR(IntPtr.Size == 8 ? false : true))
+            using (
+                RegistryHandle hkcr = RegistryHandle.GetBitnessHKCR(IntPtr.Size == 8 ? false : true)
+            )
             {
                 if (hkcr != null)
                 {
-                    using (RegistryHandle clsidKey = hkcr.OpenSubKey(String.Concat("CLSID\\{", clsid.ToString(), "}\\InprocServer32")))
+                    using (
+                        RegistryHandle clsidKey = hkcr.OpenSubKey(
+                            String.Concat("CLSID\\{", clsid.ToString(), "}\\InprocServer32")
+                        )
+                    )
                     {
-                        using (RegistryHandle assemblyKey = clsidKey.OpenSubKey(typeof(TypeCacheManager).Assembly.ImageRuntimeVersion))
+                        using (
+                            RegistryHandle assemblyKey = clsidKey.OpenSubKey(
+                                typeof(TypeCacheManager).Assembly.ImageRuntimeVersion
+                            )
+                        )
                         {
                             string assemblyName = null;
                             if (assemblyKey == null)
@@ -412,9 +530,12 @@ namespace System.ServiceModel.ComIntegration
                                     keyName = subKeyName;
                                     if (String.IsNullOrEmpty(keyName))
                                         continue;
-                                    using (RegistryHandle assemblyKeyAny = clsidKey.OpenSubKey(keyName))
+                                    using (
+                                        RegistryHandle assemblyKeyAny = clsidKey.OpenSubKey(keyName)
+                                    )
                                     {
-                                        assemblyName = (string)assemblyKeyAny.GetStringValue("Assembly");
+                                        assemblyName = (string)
+                                            assemblyKeyAny.GetStringValue("Assembly");
                                         if (String.IsNullOrEmpty(assemblyName))
                                             continue;
                                         else
@@ -438,7 +559,6 @@ namespace System.ServiceModel.ComIntegration
                         }
                     }
                 }
-
             }
             return null;
         }

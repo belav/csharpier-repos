@@ -15,24 +15,24 @@ namespace System.Xml.Schema
             Required,
             Implied,
             Fixed,
-            RequiredFixed
+            RequiredFixed,
         };
 
         protected XmlQualifiedName name = XmlQualifiedName.Empty;
         protected string? prefix;
         protected bool isDeclaredInExternal;
-        protected Use presence;     // the presence, such as fixed, implied, etc
+        protected Use presence; // the presence, such as fixed, implied, etc
 
         protected XmlSchemaType? schemaType;
         protected XmlSchemaDatatype datatype = null!;
 
-        protected string? defaultValueRaw;       // default value in its original form
+        protected string? defaultValueRaw; // default value in its original form
         protected object? defaultValueTyped;
 
         protected long maxLength; // dt:maxLength
         protected long minLength; // dt:minLength
 
-        protected List<string>? values;    // array of values for enumerated and notation types
+        protected List<string>? values; // array of values for enumerated and notation types
 
         protected SchemaDeclBase(XmlQualifiedName name, string? prefix)
         {
@@ -42,9 +42,7 @@ namespace System.Xml.Schema
             minLength = -1;
         }
 
-        protected SchemaDeclBase()
-        {
-        }
+        protected SchemaDeclBase() { }
 
         internal XmlQualifiedName Name
         {
@@ -121,12 +119,16 @@ namespace System.Xml.Schema
 
         internal bool CheckEnumeration(object pVal)
         {
-            return (datatype.TokenizedType != XmlTokenizedType.NOTATION && datatype.TokenizedType != XmlTokenizedType.ENUMERATION) || values!.Contains(pVal.ToString()!);
+            return (
+                    datatype.TokenizedType != XmlTokenizedType.NOTATION
+                    && datatype.TokenizedType != XmlTokenizedType.ENUMERATION
+                ) || values!.Contains(pVal.ToString()!);
         }
 
         internal bool CheckValue(object pVal)
         {
-            return (presence != Use.Fixed && presence != Use.RequiredFixed) || (defaultValueTyped != null && datatype.IsEqual(pVal, defaultValueTyped));
+            return (presence != Use.Fixed && presence != Use.RequiredFixed)
+                || (defaultValueTyped != null && datatype.IsEqual(pVal, defaultValueTyped));
         }
     };
 }

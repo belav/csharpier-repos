@@ -101,18 +101,12 @@ namespace System.Xml
 
             internal int LineNo
             {
-                get
-                {
-                    return lineNo;
-                }
+                get { return lineNo; }
             }
 
             internal int LinePos
             {
-                get
-                {
-                    return charPos - lineStartPos;
-                }
+                get { return charPos - lineStartPos; }
             }
         }
 
@@ -148,17 +142,51 @@ namespace System.Xml
         //
         private sealed class NoNamespaceManager : XmlNamespaceManager
         {
-            public NoNamespaceManager() : base() { }
-            public override string DefaultNamespace { get { return string.Empty; } }
+            public NoNamespaceManager()
+                : base() { }
+
+            public override string DefaultNamespace
+            {
+                get { return string.Empty; }
+            }
+
             public override void PushScope() { }
-            public override bool PopScope() { return false; }
+
+            public override bool PopScope()
+            {
+                return false;
+            }
+
             public override void AddNamespace(string prefix, string uri) { }
+
             public override void RemoveNamespace(string prefix, string uri) { }
-            public override IEnumerator GetEnumerator() { return null!; }
-            public override IDictionary<string, string> GetNamespacesInScope(XmlNamespaceScope scope) { return null!; }
-            public override string LookupNamespace(string? prefix) { return string.Empty; }
-            public override string? LookupPrefix(string uri) { return null; }
-            public override bool HasNamespace(string prefix) { return false; }
+
+            public override IEnumerator GetEnumerator()
+            {
+                return null!;
+            }
+
+            public override IDictionary<string, string> GetNamespacesInScope(
+                XmlNamespaceScope scope
+            )
+            {
+                return null!;
+            }
+
+            public override string LookupNamespace(string? prefix)
+            {
+                return string.Empty;
+            }
+
+            public override string? LookupPrefix(string uri)
+            {
+                return null;
+            }
+
+            public override bool HasNamespace(string prefix)
+            {
+                return false;
+            }
         }
 
         //
@@ -249,7 +277,10 @@ namespace System.Xml
                 return _reader.DtdParserProxy_ParseNumericCharRef(internalSubsetBuilder);
             }
 
-            int IDtdParserAdapter.ParseNamedCharRef(bool expand, StringBuilder? internalSubsetBuilder)
+            int IDtdParserAdapter.ParseNamedCharRef(
+                bool expand,
+                StringBuilder? internalSubsetBuilder
+            )
             {
                 return _reader.DtdParserProxy_ParseNamedCharRef(expand, internalSubsetBuilder);
             }
@@ -291,12 +322,20 @@ namespace System.Xml
                 _reader.DtdParserProxy_Throw(e);
             }
 
-            void IDtdParserAdapter.OnSystemId(string systemId, LineInfo keywordLineInfo, LineInfo systemLiteralLineInfo)
+            void IDtdParserAdapter.OnSystemId(
+                string systemId,
+                LineInfo keywordLineInfo,
+                LineInfo systemLiteralLineInfo
+            )
             {
                 _reader.DtdParserProxy_OnSystemId(systemId, keywordLineInfo, systemLiteralLineInfo);
             }
 
-            void IDtdParserAdapter.OnPublicId(string publicId, LineInfo keywordLineInfo, LineInfo publicLiteralLineInfo)
+            void IDtdParserAdapter.OnPublicId(
+                string publicId,
+                LineInfo keywordLineInfo,
+                LineInfo publicLiteralLineInfo
+            )
             {
                 _reader.DtdParserProxy_OnPublicId(publicId, keywordLineInfo, publicLiteralLineInfo);
             }
@@ -392,26 +431,17 @@ namespace System.Xml
 
             internal int LineNo
             {
-                get
-                {
-                    return lineInfo.lineNo;
-                }
+                get { return lineInfo.lineNo; }
             }
 
             internal int LinePos
             {
-                get
-                {
-                    return lineInfo.linePos;
-                }
+                get { return lineInfo.linePos; }
             }
 
             internal bool IsEmptyElement
             {
-                get
-                {
-                    return type == XmlNodeType.Element && _isEmptyOrDefault;
-                }
+                get { return type == XmlNodeType.Element && _isEmptyOrDefault; }
                 set
                 {
                     Debug.Assert(type == XmlNodeType.Element);
@@ -421,10 +451,7 @@ namespace System.Xml
 
             internal bool IsDefaultAttribute
             {
-                get
-                {
-                    return type == XmlNodeType.Attribute && _isEmptyOrDefault;
-                }
+                get { return type == XmlNodeType.Attribute && _isEmptyOrDefault; }
                 set
                 {
                     Debug.Assert(type == XmlNodeType.Attribute);
@@ -434,10 +461,7 @@ namespace System.Xml
 
             internal bool ValueBuffered
             {
-                get
-                {
-                    return _value == null;
-                }
+                get { return _value == null; }
             }
 
             internal string StringValue
@@ -532,7 +556,12 @@ namespace System.Xml
                 SetNamedNode(type, localName, string.Empty, localName);
             }
 
-            internal void SetNamedNode(XmlNodeType type, string localName, string prefix, string? nameWPrefix)
+            internal void SetNamedNode(
+                XmlNodeType type,
+                string localName,
+                string prefix,
+                string? nameWPrefix
+            )
             {
                 Debug.Assert(localName != null);
                 Debug.Assert(localName.Length > 0);
@@ -603,7 +632,13 @@ namespace System.Xml
                     {
                         copyCount = length;
                     }
-                    XmlTextReaderImpl.BlockCopyChars(_chars, _valueStartPos + valueOffset, buffer, offset, copyCount);
+                    XmlTextReaderImpl.BlockCopyChars(
+                        _chars,
+                        _valueStartPos + valueOffset,
+                        buffer,
+                        offset,
+                        copyCount
+                    );
                     return copyCount;
                 }
                 else
@@ -624,7 +659,11 @@ namespace System.Xml
                 {
                     Debug.Assert(_valueStartPos != -1);
                     Debug.Assert(_chars != null);
-                    return decoder.Decode(_chars, _valueStartPos + valueOffset, _valueLength - valueOffset);
+                    return decoder.Decode(
+                        _chars,
+                        _valueStartPos + valueOffset,
+                        _valueLength - valueOffset
+                    );
                 }
                 else
                 {
@@ -641,12 +680,24 @@ namespace System.Xml
                 if (_valueStartPos != -1)
                 {
                     Debug.Assert(_chars != null);
-                    XmlTextReaderImpl.AdjustLineInfo(_chars, _valueStartPos, _valueStartPos + valueOffset, isNormalized, ref lineInfo);
+                    XmlTextReaderImpl.AdjustLineInfo(
+                        _chars,
+                        _valueStartPos,
+                        _valueStartPos + valueOffset,
+                        isNormalized,
+                        ref lineInfo
+                    );
                 }
                 else
                 {
                     Debug.Assert(_value != null);
-                    XmlTextReaderImpl.AdjustLineInfo(_value, 0, valueOffset, isNormalized, ref lineInfo);
+                    XmlTextReaderImpl.AdjustLineInfo(
+                        _value,
+                        0,
+                        valueOffset,
+                        isNormalized,
+                        ref lineInfo
+                    );
                 }
             }
 
@@ -713,7 +764,8 @@ namespace System.Xml
         // Compares IDtdDefaultAttributeInfo to NodeData
         private sealed class DtdDefaultAttributeInfoToNodeDataComparer : IComparer<object>
         {
-            private static readonly IComparer<object> s_instance = new DtdDefaultAttributeInfoToNodeDataComparer();
+            private static readonly IComparer<object> s_instance =
+                new DtdDefaultAttributeInfoToNodeDataComparer();
 
             internal static IComparer<object> Instance
             {
@@ -725,8 +777,10 @@ namespace System.Xml
                 Debug.Assert(x == null || x is NodeData || x is IDtdDefaultAttributeInfo);
                 Debug.Assert(y == null || y is NodeData || y is IDtdDefaultAttributeInfo);
 
-                string localName, localName2;
-                string prefix, prefix2;
+                string localName,
+                    localName2;
+                string prefix,
+                    prefix2;
 
                 if (x == null)
                 {
@@ -789,6 +843,9 @@ namespace System.Xml
         //
         // OnDefaultAttributeUse delegate
         //
-        internal delegate void OnDefaultAttributeUseDelegate(IDtdDefaultAttributeInfo defaultAttribute, XmlTextReaderImpl coreReader);
+        internal delegate void OnDefaultAttributeUseDelegate(
+            IDtdDefaultAttributeInfo defaultAttribute,
+            XmlTextReaderImpl coreReader
+        );
     }
 }

@@ -14,13 +14,19 @@ namespace System.Tests
         // accidentally keeping the object alive due to lifetime extension by the JIT.
         //
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static WeakReference MakeWeakReference(Func<object> valueFactory, bool trackResurrection = false)
+        private static WeakReference MakeWeakReference(
+            Func<object> valueFactory,
+            bool trackResurrection = false
+        )
         {
             return new WeakReference(valueFactory(), trackResurrection);
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static WeakReference<object> MakeWeakReferenceOfObject(Func<object> valueFactory, bool trackResurrection = false)
+        private static WeakReference<object> MakeWeakReferenceOfObject(
+            Func<object> valueFactory,
+            bool trackResurrection = false
+        )
         {
             return new WeakReference<object>(valueFactory(), trackResurrection);
         }
@@ -52,7 +58,9 @@ namespace System.Tests
             GC.WaitForPendingFinalizers();
             if (!l.FinalizerRan)
             {
-                Console.WriteLine("Attempted GC but could not force test object to finalize. Test skipped.");
+                Console.WriteLine(
+                    "Attempted GC but could not force test object to finalize. Test skipped."
+                );
             }
             else
             {
@@ -66,7 +74,9 @@ namespace System.Tests
             GC.Collect();
             if (!l.FinalizerRan)
             {
-                Console.WriteLine("Attempted GC but could not force test object to finalize. Test skipped.");
+                Console.WriteLine(
+                    "Attempted GC but could not force test object to finalize. Test skipped."
+                );
             }
             else
             {
@@ -104,7 +114,9 @@ namespace System.Tests
             GC.WaitForPendingFinalizers();
             if (!l.FinalizerRan)
             {
-                Console.WriteLine("Attempted GC but could not force test object to finalize. Test skipped.");
+                Console.WriteLine(
+                    "Attempted GC but could not force test object to finalize. Test skipped."
+                );
             }
             else
             {
@@ -118,7 +130,9 @@ namespace System.Tests
             GC.Collect();
             if (!l.FinalizerRan)
             {
-                Console.WriteLine("Attempted GC but could not force test object to finalize. Test skipped.");
+                Console.WriteLine(
+                    "Attempted GC but could not force test object to finalize. Test skipped."
+                );
             }
             else
             {
@@ -147,6 +161,7 @@ namespace System.Tests
         }
 
         private static ResurrectingC s_resurrectedC;
+
         private class ResurrectingC
         {
             public ResurrectingC(Latch latch)
@@ -169,7 +184,8 @@ namespace System.Tests
             Assert.True(w.Target != null);
         }
 
-        private static void VerifyStillAlive<T>(WeakReference<T> w) where T : class
+        private static void VerifyStillAlive<T>(WeakReference<T> w)
+            where T : class
         {
             T value;
             bool isAlive = w.TryGetTarget(out value);
@@ -183,7 +199,8 @@ namespace System.Tests
             Assert.Null(w.Target);
         }
 
-        private static void VerifyIsDead<T>(WeakReference<T> w) where T : class
+        private static void VerifyIsDead<T>(WeakReference<T> w)
+            where T : class
         {
             T value;
             bool isAlive = w.TryGetTarget(out value);

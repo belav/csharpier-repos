@@ -14,21 +14,39 @@ namespace Microsoft.Web.Mvc
     {
         // Shortcut to allow users to write this.RedirectToAction(x => x.OtherMethod()) to redirect
         // to a different method on the same controller.
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        public static RedirectToRouteResult RedirectToAction<TController>(this TController controller, Expression<Action<TController>> action) where TController : Controller
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        public static RedirectToRouteResult RedirectToAction<TController>(
+            this TController controller,
+            Expression<Action<TController>> action
+        )
+            where TController : Controller
         {
             return RedirectToAction((Controller)controller, action);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        public static RedirectToRouteResult RedirectToAction<TController>(this Controller controller, Expression<Action<TController>> action) where TController : Controller
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        public static RedirectToRouteResult RedirectToAction<TController>(
+            this Controller controller,
+            Expression<Action<TController>> action
+        )
+            where TController : Controller
         {
             if (controller == null)
             {
                 throw new ArgumentNullException("controller");
             }
 
-            RouteValueDictionary routeValues = ExpressionHelper.GetRouteValuesFromExpression(action);
+            RouteValueDictionary routeValues = ExpressionHelper.GetRouteValuesFromExpression(
+                action
+            );
             return new RedirectToRouteResult(routeValues);
         }
     }

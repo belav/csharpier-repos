@@ -8,8 +8,8 @@ namespace System.ServiceModel.Channels
     using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
-    using System.Threading;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
 
     abstract class TransportManager
     {
@@ -71,24 +71,40 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        internal static void EnsureRegistered<TChannelListener>(UriPrefixTable<TChannelListener> addressTable,
-            TChannelListener channelListener, HostNameComparisonMode registeredComparisonMode)
+        internal static void EnsureRegistered<TChannelListener>(
+            UriPrefixTable<TChannelListener> addressTable,
+            TChannelListener channelListener,
+            HostNameComparisonMode registeredComparisonMode
+        )
             where TChannelListener : TransportChannelListener
         {
             TChannelListener existingFactory;
-            if (!addressTable.TryLookupUri(channelListener.Uri, registeredComparisonMode, out existingFactory) ||
-                (existingFactory != channelListener))
+            if (
+                !addressTable.TryLookupUri(
+                    channelListener.Uri,
+                    registeredComparisonMode,
+                    out existingFactory
+                ) || (existingFactory != channelListener)
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(
-                    SR.ListenerFactoryNotRegistered, channelListener.Uri)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.ListenerFactoryNotRegistered, channelListener.Uri)
+                    )
+                );
             }
         }
 
         // Must be called under lock(ThisLock).
-        protected void Fault<TChannelListener>(UriPrefixTable<TChannelListener> addressTable, Exception exception)
+        protected void Fault<TChannelListener>(
+            UriPrefixTable<TChannelListener> addressTable,
+            Exception exception
+        )
             where TChannelListener : ChannelListenerBase
         {
-            foreach (KeyValuePair<BaseUriWithWildcard, TChannelListener> pair in addressTable.GetAll())
+            foreach (
+                KeyValuePair<BaseUriWithWildcard, TChannelListener> pair in addressTable.GetAll()
+            )
             {
                 TChannelListener listener = pair.Value;
                 listener.Fault(exception);
@@ -98,6 +114,7 @@ namespace System.ServiceModel.Channels
 
         internal abstract void OnClose(TimeSpan timeout);
         internal abstract void OnOpen();
+
         internal virtual void OnAbort() { }
 
         internal void Open(TransportChannelListener channelListener)
@@ -113,7 +130,11 @@ namespace System.ServiceModel.Channels
                         {
                             FxTrace.Trace.TraceTransfer(this.Activity.Id);
                         }
-                        ServiceModelActivity.Start(this.Activity, SR.GetString(SR.ActivityListenAt, channelListener.Uri.ToString()), ActivityType.ListenAt);
+                        ServiceModelActivity.Start(
+                            this.Activity,
+                            SR.GetString(SR.ActivityListenAt, channelListener.Uri.ToString()),
+                            ActivityType.ListenAt
+                        );
                     }
                 }
                 channelListener.Activity = this.Activity;
@@ -122,8 +143,12 @@ namespace System.ServiceModel.Channels
             {
                 if (DiagnosticUtility.ShouldTraceInformation)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.TransportListen,
-                        SR.GetString(SR.TraceCodeTransportListen, channelListener.Uri.ToString()), this);
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Information,
+                        TraceCode.TransportListen,
+                        SR.GetString(SR.TraceCodeTransportListen, channelListener.Uri.ToString()),
+                        this
+                    );
                 }
                 this.Register(channelListener);
                 try
@@ -159,15 +184,16 @@ namespace System.ServiceModel.Channels
             if (openCount > 0)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.TransportManagerOpen)));
+                    new InvalidOperationException(SR.GetString(SR.TransportManagerOpen))
+                );
             }
         }
 
         internal abstract void Unregister(TransportChannelListener channelListener);
     }
 
-
     delegate IList<TransportManager> SelectTransportManagersCallback();
+
     class TransportManagerContainer
     {
         IList<TransportManager> transportManagers;
@@ -194,7 +220,9 @@ namespace System.ServiceModel.Channels
         }
 
         // copy contents into a new container (used for listener/channel lifetime decoupling)
-        public static TransportManagerContainer TransferTransportManagers(TransportManagerContainer source)
+        public static TransportManagerContainer TransferTransportManagers(
+            TransportManagerContainer source
+        )
         {
             TransportManagerContainer result = null;
 
@@ -215,8 +243,11 @@ namespace System.ServiceModel.Channels
             Close(true, TimeSpan.Zero);
         }
 
-        public IAsyncResult BeginOpen(SelectTransportManagersCallback selectTransportManagerCallback,
-            AsyncCallback callback, object state)
+        public IAsyncResult BeginOpen(
+            SelectTransportManagersCallback selectTransportManagerCallback,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new OpenAsyncResult(selectTransportManagerCallback, this, callback, state);
         }
@@ -309,7 +340,12 @@ namespace System.ServiceModel.Channels
 
                 if (timeoutException != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new TimeoutException(SR.GetString(SR.TimeoutOnClose, timeout), timeoutException));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new TimeoutException(
+                            SR.GetString(SR.TimeoutOnClose, timeout),
+                            timeoutException
+                        )
+                    );
                 }
             }
         }
@@ -319,8 +355,11 @@ namespace System.ServiceModel.Channels
             TransportManagerContainer parent;
             static Action<object> scheduledCallback = new Action<object>(OnScheduled);
 
-            protected OpenOrCloseAsyncResult(TransportManagerContainer parent, AsyncCallback callback,
-                object state)
+            protected OpenOrCloseAsyncResult(
+                TransportManagerContainer parent,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.parent = parent;
@@ -366,8 +405,12 @@ namespace System.ServiceModel.Channels
         {
             TimeoutHelper timeoutHelper;
 
-            public CloseAsyncResult(TransportManagerContainer parent, AsyncCallback callback, TimeSpan timeout,
-                object state)
+            public CloseAsyncResult(
+                TransportManagerContainer parent,
+                AsyncCallback callback,
+                TimeSpan timeout,
+                object state
+            )
                 : base(parent, callback, state)
             {
                 this.timeoutHelper = new TimeoutHelper(timeout);
@@ -390,8 +433,12 @@ namespace System.ServiceModel.Channels
         {
             SelectTransportManagersCallback selectTransportManagerCallback;
 
-            public OpenAsyncResult(SelectTransportManagersCallback selectTransportManagerCallback, TransportManagerContainer parent,
-                AsyncCallback callback, object state)
+            public OpenAsyncResult(
+                SelectTransportManagersCallback selectTransportManagerCallback,
+                TransportManagerContainer parent,
+                AsyncCallback callback,
+                object state
+            )
                 : base(parent, callback, state)
             {
                 this.selectTransportManagerCallback = selectTransportManagerCallback;

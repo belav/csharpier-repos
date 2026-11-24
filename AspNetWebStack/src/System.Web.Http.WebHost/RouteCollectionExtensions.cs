@@ -22,9 +22,20 @@ namespace System.Web.Http
         /// <param name="name">The name of the route to map.</param>
         /// <param name="routeTemplate">The route template for the route.</param>
         /// <returns>A reference to the mapped route.</returns>
-        public static Route MapHttpRoute(this RouteCollection routes, string name, string routeTemplate)
+        public static Route MapHttpRoute(
+            this RouteCollection routes,
+            string name,
+            string routeTemplate
+        )
         {
-            return MapHttpRoute(routes, name, routeTemplate, defaults: null, constraints: null, handler: null);
+            return MapHttpRoute(
+                routes,
+                name,
+                routeTemplate,
+                defaults: null,
+                constraints: null,
+                handler: null
+            );
         }
 
         /// <summary>
@@ -35,9 +46,21 @@ namespace System.Web.Http
         /// <param name="routeTemplate">The route template for the route.</param>
         /// <param name="defaults">An object that contains default route values.</param>
         /// <returns>A reference to the mapped route.</returns>
-        public static Route MapHttpRoute(this RouteCollection routes, string name, string routeTemplate, object defaults)
+        public static Route MapHttpRoute(
+            this RouteCollection routes,
+            string name,
+            string routeTemplate,
+            object defaults
+        )
         {
-            return MapHttpRoute(routes, name, routeTemplate, defaults, constraints: null, handler: null);
+            return MapHttpRoute(
+                routes,
+                name,
+                routeTemplate,
+                defaults,
+                constraints: null,
+                handler: null
+            );
         }
 
         /// <summary>
@@ -49,7 +72,13 @@ namespace System.Web.Http
         /// <param name="defaults">An object that contains default route values.</param>
         /// <param name="constraints">A set of expressions that specify values for <paramref name="routeTemplate"/>.</param>
         /// <returns>A reference to the mapped route.</returns>
-        public static Route MapHttpRoute(this RouteCollection routes, string name, string routeTemplate, object defaults, object constraints)
+        public static Route MapHttpRoute(
+            this RouteCollection routes,
+            string name,
+            string routeTemplate,
+            object defaults,
+            object constraints
+        )
         {
             return MapHttpRoute(routes, name, routeTemplate, defaults, constraints, handler: null);
         }
@@ -64,7 +93,14 @@ namespace System.Web.Http
         /// <param name="constraints">A set of expressions that specify values for <paramref name="routeTemplate"/>.</param>
         /// <param name="handler">The handler to which the request will be dispatched.</param>
         /// <returns>A reference to the mapped route.</returns>
-        public static Route MapHttpRoute(this RouteCollection routes, string name, string routeTemplate, object defaults, object constraints, HttpMessageHandler handler)
+        public static Route MapHttpRoute(
+            this RouteCollection routes,
+            string name,
+            string routeTemplate,
+            object defaults,
+            object constraints,
+            HttpMessageHandler handler
+        )
         {
             if (routes == null)
             {
@@ -72,8 +108,17 @@ namespace System.Web.Http
             }
 
             HttpRouteValueDictionary defaultsDictionary = new HttpRouteValueDictionary(defaults);
-            HttpRouteValueDictionary constraintsDictionary = new HttpRouteValueDictionary(constraints);
-            HostedHttpRoute httpRoute = (HostedHttpRoute)GlobalConfiguration.Configuration.Routes.CreateRoute(routeTemplate, defaultsDictionary, constraintsDictionary, dataTokens: null, handler: handler);
+            HttpRouteValueDictionary constraintsDictionary = new HttpRouteValueDictionary(
+                constraints
+            );
+            HostedHttpRoute httpRoute = (HostedHttpRoute)
+                GlobalConfiguration.Configuration.Routes.CreateRoute(
+                    routeTemplate,
+                    defaultsDictionary,
+                    constraintsDictionary,
+                    dataTokens: null,
+                    handler: handler
+                );
             Route route = httpRoute.OriginalRoute;
             routes.Add(name, route);
             return route;

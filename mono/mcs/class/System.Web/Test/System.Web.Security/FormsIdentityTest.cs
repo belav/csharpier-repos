@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,43 +26,50 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Web;
 using System.Web.Security;
+using NUnit.Framework;
 
-namespace MonoTests.System.Web.Security {
+namespace MonoTests.System.Web.Security
+{
+    [TestFixture]
+    public class FormsIdentityTest
+    {
+        [Test]
+        public void Null()
+        {
+            FormsIdentity identity = new FormsIdentity(null);
+            Assert.AreEqual("Forms", identity.AuthenticationType, "AuthenticationType");
+            Assert.IsTrue(identity.IsAuthenticated, "IsAuthenticated");
+            Assert.IsNull(identity.Ticket, "Ticket");
+        }
 
-	[TestFixture]
-	public class FormsIdentityTest {
+        [Test]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void Null_Name()
+        {
+            FormsIdentity identity = new FormsIdentity(null);
+            Assert.IsNull(identity.Name, "Name");
+        }
 
-		[Test]
-		public void Null ()
-		{
-			FormsIdentity identity = new FormsIdentity (null);
-			Assert.AreEqual ("Forms", identity.AuthenticationType, "AuthenticationType");
-			Assert.IsTrue (identity.IsAuthenticated, "IsAuthenticated");
-			Assert.IsNull (identity.Ticket, "Ticket");
-		}
-
-		[Test]
-		[ExpectedException (typeof (NullReferenceException))]
-		public void Null_Name ()
-		{
-			FormsIdentity identity = new FormsIdentity (null);
-			Assert.IsNull (identity.Name, "Name");
-		}
-
-		[Test]
-		public void Ticket ()
-		{
-			FormsAuthenticationTicket ticket = new FormsAuthenticationTicket (3, "mine", DateTime.MinValue, DateTime.Now.AddSeconds (-1), false, "data", "path");
-			FormsIdentity identity = new FormsIdentity (ticket);
-			Assert.AreEqual ("Forms", identity.AuthenticationType, "AuthenticationType");
-			Assert.IsTrue (identity.IsAuthenticated, "IsAuthenticated");
-			Assert.AreEqual ("mine", identity.Name, "Name");
-			Assert.IsNotNull (identity.Ticket, "Ticket");
-		}
-	}
+        [Test]
+        public void Ticket()
+        {
+            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
+                3,
+                "mine",
+                DateTime.MinValue,
+                DateTime.Now.AddSeconds(-1),
+                false,
+                "data",
+                "path"
+            );
+            FormsIdentity identity = new FormsIdentity(ticket);
+            Assert.AreEqual("Forms", identity.AuthenticationType, "AuthenticationType");
+            Assert.IsTrue(identity.IsAuthenticated, "IsAuthenticated");
+            Assert.AreEqual("mine", identity.Name, "Name");
+            Assert.IsNotNull(identity.Ticket, "Ticket");
+        }
+    }
 }

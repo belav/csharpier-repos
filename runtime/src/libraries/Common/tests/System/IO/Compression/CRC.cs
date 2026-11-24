@@ -16,7 +16,8 @@ public class CRC
     private static void make_crc_table()
     {
         ulong c;
-        int n, k;
+        int n,
+            k;
 
         for (n = 0; n < 256; n++)
         {
@@ -51,5 +52,6 @@ public class CRC
         return c;
     }
 
-    public static ulong CalculateCRC(ReadOnlySpan<byte> buf) => (UpdateCRC(0xffffffffL, buf) ^ 0xffffffffL);
+    public static ulong CalculateCRC(ReadOnlySpan<byte> buf) =>
+        (UpdateCRC(0xffffffffL, buf) ^ 0xffffffffL);
 }

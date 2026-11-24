@@ -60,7 +60,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
             IGlobalOptionService globalOptions,
             IAsynchronousOperationListenerProvider listenerProvider,
             IUIThreadOperationExecutor threadOperationExecutor,
-            VisualStudioWorkspace workspace)
+            VisualStudioWorkspace workspace
+        )
         {
             _serviceProvider = (IAsyncServiceProvider)serviceProvider;
             _threadingContext = threadingContext;
@@ -76,12 +77,19 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
 
         public string DisplayName => "Go to value tracking";
 
-        public CommandState GetCommandState(ValueTrackingEditorCommandArgs args)
-            => CommandState.Available;
+        public CommandState GetCommandState(ValueTrackingEditorCommandArgs args) =>
+            CommandState.Available;
 
-        public bool ExecuteCommand(ValueTrackingEditorCommandArgs args, CommandExecutionContext executionContext)
+        public bool ExecuteCommand(
+            ValueTrackingEditorCommandArgs args,
+            CommandExecutionContext executionContext
+        )
         {
-            using var logger = Logger.LogBlock(FunctionId.ValueTracking_Command, CancellationToken.None, LogLevel.Information);
+            using var logger = Logger.LogBlock(
+                FunctionId.ValueTracking_Command,
+                CancellationToken.None,
+                LogLevel.Information
+            );
 
             var cancellationToken = executionContext.OperationContext.UserCancellationToken;
             var caretPosition = args.TextView.GetCaretPoint(args.SubjectBuffer);
@@ -99,34 +107,51 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
             }
 
             _threadingContext.JoinableTaskFactory.RunAsync(async () =>
+            {
+                var service =
+                    document.Project.Solution.Services.GetRequiredService<IValueTrackingService>();
+                var items = await service
+                    .TrackValueSourceAsync(textSpan, document, cancellationToken)
+                    .ConfigureAwait(false);
+                if (items.Length == 0)
                 {
-                    var service = document.Project.Solution.Services.GetRequiredService<IValueTrackingService>();
-                    var items = await service.TrackValueSourceAsync(textSpan, document, cancellationToken).ConfigureAwait(false);
-                    if (items.Length == 0)
-                    {
-                        return;
-                    }
+                    return;
+                }
 
-                    await ShowToolWindowAsync(args.TextView, document, items, cancellationToken).ConfigureAwait(false);
-                });
+                await ShowToolWindowAsync(args.TextView, document, items, cancellationToken)
+                    .ConfigureAwait(false);
+            });
 
             return true;
         }
 
-        private async Task ShowToolWindowAsync(ITextView textView, Document document, ImmutableArray<ValueTrackedItem> items, CancellationToken cancellationToken)
+        private async Task ShowToolWindowAsync(
+            ITextView textView,
+            Document document,
+            ImmutableArray<ValueTrackedItem> items,
+            CancellationToken cancellationToken
+        )
         {
-            var toolWindow = await GetOrCreateToolWindowAsync(textView, cancellationToken).ConfigureAwait(false);
+            var toolWindow = await GetOrCreateToolWindowAsync(textView, cancellationToken)
+                .ConfigureAwait(false);
             if (toolWindow?.ViewModel is null)
             {
                 return;
             }
 
-            var classificationFormatMap = _classificationFormatMapService.GetClassificationFormatMap(textView);
+            var classificationFormatMap =
+                _classificationFormatMapService.GetClassificationFormatMap(textView);
             var solution = document.Project.Solution;
-            var valueTrackingService = solution.Services.GetRequiredService<IValueTrackingService>();
-            var rootItemMap = items.GroupBy(i => i.Parent, resultSelector: (key, items) => (parent: key, children: items));
+            var valueTrackingService =
+                solution.Services.GetRequiredService<IValueTrackingService>();
+            var rootItemMap = items.GroupBy(
+                i => i.Parent,
+                resultSelector: (key, items) => (parent: key, children: items)
+            );
 
-            using var _ = CodeAnalysis.PooledObjects.ArrayBuilder<TreeItemViewModel>.GetInstance(out var rootItems);
+            using var _ = CodeAnalysis.PooledObjects.ArrayBuilder<TreeItemViewModel>.GetInstance(
+                out var rootItems
+            );
 
             foreach (var (parent, children) in rootItemMap)
             {
@@ -134,23 +159,65 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
                 {
                     foreach (var child in children)
                     {
-                        var root = await ValueTrackedTreeItemViewModel.CreateAsync(
-                            solution, child, children: ImmutableArray<TreeItemViewModel>.Empty, toolWindow.ViewModel, _glyphService, valueTrackingService, _globalOptions, _threadingContext, _listener, _threadOperationExecutor, cancellationToken).ConfigureAwait(false);
+                        var root = await ValueTrackedTreeItemViewModel
+                            .CreateAsync(
+                                solution,
+                                child,
+                                children: ImmutableArray<TreeItemViewModel>.Empty,
+                                toolWindow.ViewModel,
+                                _glyphService,
+                                valueTrackingService,
+                                _globalOptions,
+                                _threadingContext,
+                                _listener,
+                                _threadOperationExecutor,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                         rootItems.Add(root);
                     }
                 }
                 else
                 {
-                    using var _1 = CodeAnalysis.PooledObjects.ArrayBuilder<TreeItemViewModel>.GetInstance(out var childItems);
+                    using var _1 =
+                        CodeAnalysis.PooledObjects.ArrayBuilder<TreeItemViewModel>.GetInstance(
+                            out var childItems
+                        );
                     foreach (var child in children)
                     {
-                        var childViewModel = await ValueTrackedTreeItemViewModel.CreateAsync(
-                            solution, child, children: ImmutableArray<TreeItemViewModel>.Empty, toolWindow.ViewModel, _glyphService, valueTrackingService, _globalOptions, _threadingContext, _listener, _threadOperationExecutor, cancellationToken).ConfigureAwait(false);
+                        var childViewModel = await ValueTrackedTreeItemViewModel
+                            .CreateAsync(
+                                solution,
+                                child,
+                                children: ImmutableArray<TreeItemViewModel>.Empty,
+                                toolWindow.ViewModel,
+                                _glyphService,
+                                valueTrackingService,
+                                _globalOptions,
+                                _threadingContext,
+                                _listener,
+                                _threadOperationExecutor,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                         childItems.Add(childViewModel);
                     }
 
-                    var root = await ValueTrackedTreeItemViewModel.CreateAsync(
-                        solution, parent, childItems.ToImmutable(), toolWindow.ViewModel, _glyphService, valueTrackingService, _globalOptions, _threadingContext, _listener, _threadOperationExecutor, cancellationToken).ConfigureAwait(false);
+                    var root = await ValueTrackedTreeItemViewModel
+                        .CreateAsync(
+                            solution,
+                            parent,
+                            childItems.ToImmutable(),
+                            toolWindow.ViewModel,
+                            _glyphService,
+                            valueTrackingService,
+                            _globalOptions,
+                            _threadingContext,
+                            _listener,
+                            _threadOperationExecutor,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     rootItems.Add(root);
                 }
             }
@@ -168,35 +235,53 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
 
         private async Task ShowToolWindowAsync(CancellationToken cancellationToken)
         {
-            var roslynPackage = await RoslynPackage.GetOrLoadAsync(_threadingContext, _serviceProvider, cancellationToken).ConfigureAwait(false);
+            var roslynPackage = await RoslynPackage
+                .GetOrLoadAsync(_threadingContext, _serviceProvider, cancellationToken)
+                .ConfigureAwait(false);
             Contract.ThrowIfNull(roslynPackage);
 
-            await roslynPackage.ShowToolWindowAsync(
+            await roslynPackage
+                .ShowToolWindowAsync(
                     typeof(ValueTrackingToolWindow),
                     0,
                     true,
-                    roslynPackage.DisposalToken).ConfigureAwait(false);
+                    roslynPackage.DisposalToken
+                )
+                .ConfigureAwait(false);
         }
 
-        private async Task<ValueTrackingToolWindow?> GetOrCreateToolWindowAsync(ITextView textView, CancellationToken cancellationToken)
+        private async Task<ValueTrackingToolWindow?> GetOrCreateToolWindowAsync(
+            ITextView textView,
+            CancellationToken cancellationToken
+        )
         {
-            var roslynPackage = await RoslynPackage.GetOrLoadAsync(_threadingContext, _serviceProvider, cancellationToken).ConfigureAwait(false);
+            var roslynPackage = await RoslynPackage
+                .GetOrLoadAsync(_threadingContext, _serviceProvider, cancellationToken)
+                .ConfigureAwait(false);
             if (roslynPackage is null)
             {
                 return null;
             }
 
-            var window = (ValueTrackingToolWindow)await roslynPackage.FindWindowPaneAsync(
-                typeof(ValueTrackingToolWindow),
-                0,
-                create: true,
-                roslynPackage.DisposalToken).ConfigureAwait(false);
+            var window = (ValueTrackingToolWindow)
+                await roslynPackage
+                    .FindWindowPaneAsync(
+                        typeof(ValueTrackingToolWindow),
+                        0,
+                        create: true,
+                        roslynPackage.DisposalToken
+                    )
+                    .ConfigureAwait(false);
 
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             if (!window.Initialized)
             {
-                var viewModel = new ValueTrackingTreeViewModel(_classificationFormatMapService.GetClassificationFormatMap(textView), _typeMap, _formatMapService);
+                var viewModel = new ValueTrackingTreeViewModel(
+                    _classificationFormatMapService.GetClassificationFormatMap(textView),
+                    _typeMap,
+                    _formatMapService
+                );
                 window.Initialize(viewModel, _workspace, _threadingContext);
             }
 

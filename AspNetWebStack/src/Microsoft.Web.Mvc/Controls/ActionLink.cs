@@ -84,10 +84,16 @@ namespace Microsoft.Web.Mvc.Controls
             }
             else
             {
-                VirtualPathData vpd = RouteTable.Routes.GetVirtualPathForArea(ViewContext.RequestContext, RouteName, routeValues);
+                VirtualPathData vpd = RouteTable.Routes.GetVirtualPathForArea(
+                    ViewContext.RequestContext,
+                    RouteName,
+                    routeValues
+                );
                 if (vpd == null)
                 {
-                    throw new InvalidOperationException("A route that matches the requested values could not be located in the route table.");
+                    throw new InvalidOperationException(
+                        "A route that matches the requested values could not be located in the route table."
+                    );
                 }
                 href = vpd.VirtualPath;
             }

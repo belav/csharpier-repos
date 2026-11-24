@@ -26,14 +26,14 @@ namespace System.Data.Metadata.Edm
         /// <param name="name">The name of the Assocation set</param>
         /// <param name="associationType">The association type of the entities that this associationship set type contains</param>
         internal AssociationSet(string name, AssociationType associationType)
-            : base(name, null, null, null, associationType)
-        {
-        }
+            : base(name, null, null, null, associationType) { }
         #endregion
 
         #region Fields
         private readonly ReadOnlyMetadataCollection<AssociationSetEnd> _associationSetEnds =
-            new ReadOnlyMetadataCollection<AssociationSetEnd>(new MetadataCollection<AssociationSetEnd>());
+            new ReadOnlyMetadataCollection<AssociationSetEnd>(
+                new MetadataCollection<AssociationSetEnd>()
+            );
         #endregion
 
         #region Properties
@@ -42,10 +42,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         public new AssociationType ElementType
         {
-            get
-            {
-                return (AssociationType)base.ElementType;
-            }
+            get { return (AssociationType)base.ElementType; }
         }
 
         /// <summary>
@@ -54,16 +51,16 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(BuiltInTypeKind.AssociationSetEnd, true)]
         public ReadOnlyMetadataCollection<AssociationSetEnd> AssociationSetEnds
         {
-            get
-            {
-                return _associationSetEnds;
-            }
+            get { return _associationSetEnds; }
         }
 
         /// <summary>
         /// Returns the kind of the type
         /// </summary>
-        public override BuiltInTypeKind BuiltInTypeKind { get { return BuiltInTypeKind.AssociationSet; } }
+        public override BuiltInTypeKind BuiltInTypeKind
+        {
+            get { return BuiltInTypeKind.AssociationSet; }
+        }
         #endregion
 
         #region Methods

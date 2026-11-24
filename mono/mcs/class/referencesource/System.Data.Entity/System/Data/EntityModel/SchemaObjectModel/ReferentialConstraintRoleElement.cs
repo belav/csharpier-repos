@@ -28,9 +28,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// </summary>
         /// <param name="parentElement">Reference to the schema element.</param>
         public ReferentialConstraintRoleElement(ReferentialConstraint parentElement)
-            : base( parentElement )
-        {
-        }
+            : base(parentElement) { }
 
         public IList<PropertyRefElement> RoleProperties
         {
@@ -46,10 +44,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         public IRelationshipEnd End
         {
-            get
-            {
-                return _end;
-            }
+            get { return _end; }
         }
 
         protected override bool HandleElement(XmlReader reader)
@@ -79,7 +74,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         private void HandlePropertyRefElement(XmlReader reader)
@@ -106,21 +101,25 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
             if (!relationship.TryGetEnd(this.Name, out _end))
             {
-                AddError(ErrorCode.InvalidRoleInRelationshipConstraint,
-                         EdmSchemaErrorSeverity.Error,
-                         System.Data.Entity.Strings.InvalidEndRoleInRelationshipConstraint(this.Name, relationship.Name));
+                AddError(
+                    ErrorCode.InvalidRoleInRelationshipConstraint,
+                    EdmSchemaErrorSeverity.Error,
+                    System.Data.Entity.Strings.InvalidEndRoleInRelationshipConstraint(
+                        this.Name,
+                        relationship.Name
+                    )
+                );
 
                 return;
             }
 
-            // we are gauranteed that the _end has gone through ResolveNames, but 
+            // we are gauranteed that the _end has gone through ResolveNames, but
             // we are not gauranteed that it was successful
             if (_end.Type == null)
             {
                 // an error has already been added for this
                 return;
             }
-
         }
 
         internal override void Validate()
@@ -128,16 +127,22 @@ namespace System.Data.EntityModel.SchemaObjectModel
             base.Validate();
             // we can't resolve these names until validate because they will reference properties and types
             // that may not be resolved when this objects ResolveNames gets called
-            Debug.Assert(_roleProperties != null, "xsd should have verified that there should be atleast one property ref element in referential role element");
+            Debug.Assert(
+                _roleProperties != null,
+                "xsd should have verified that there should be atleast one property ref element in referential role element"
+            );
             foreach (PropertyRefElement property in _roleProperties)
             {
                 if (!property.ResolveNames((SchemaEntityType)_end.Type))
                 {
-                    AddError(ErrorCode.InvalidPropertyInRelationshipConstraint,
-                            EdmSchemaErrorSeverity.Error,
-                            System.Data.Entity.Strings.InvalidPropertyInRelationshipConstraint(
-                                          property.Name,
-                                          this.Name));
+                    AddError(
+                        ErrorCode.InvalidPropertyInRelationshipConstraint,
+                        EdmSchemaErrorSeverity.Error,
+                        System.Data.Entity.Strings.InvalidPropertyInRelationshipConstraint(
+                            property.Name,
+                            this.Name
+                        )
+                    );
                 }
             }
         }

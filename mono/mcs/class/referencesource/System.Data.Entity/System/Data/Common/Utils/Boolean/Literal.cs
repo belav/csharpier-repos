@@ -9,25 +9,26 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
+using System.Text;
 
 namespace System.Data.Common.Utils.Boolean
 {
     /// <summary>
     /// Represents a literal in a normal form expression of the form:
-    /// 
+    ///
     ///         Term
-    /// 
+    ///
     /// or
-    /// 
+    ///
     ///         !Term
     /// </summary>
     /// <typeparam name="T_Identifier"></typeparam>
-    internal sealed class Literal<T_Identifier> : NormalFormNode<T_Identifier>,
-        IEquatable<Literal<T_Identifier>>
+    internal sealed class Literal<T_Identifier>
+        : NormalFormNode<T_Identifier>,
+            IEquatable<Literal<T_Identifier>>
     {
         private readonly TermExpr<T_Identifier> _term;
         private readonly bool _isTermPositive;
@@ -38,7 +39,11 @@ namespace System.Data.Common.Utils.Boolean
         /// <param name="term">Term</param>
         /// <param name="isTermPositive">Sign of term</param>
         internal Literal(TermExpr<T_Identifier> term, bool isTermPositive)
-            : base(isTermPositive ? (BoolExpr<T_Identifier>)term : (BoolExpr<T_Identifier>)new NotExpr<T_Identifier>(term))
+            : base(
+                isTermPositive
+                    ? (BoolExpr<T_Identifier>)term
+                    : (BoolExpr<T_Identifier>)new NotExpr<T_Identifier>(term)
+            )
         {
             Debug.Assert(null != term);
             _term = term;
@@ -72,9 +77,11 @@ namespace System.Data.Common.Utils.Boolean
 
         public override string ToString()
         {
-            return StringUtil.FormatInvariant("{0}{1}",
+            return StringUtil.FormatInvariant(
+                "{0}{1}",
                 _isTermPositive ? String.Empty : "!",
-                _term);
+                _term
+            );
         }
 
         public override bool Equals(object obj)
@@ -85,9 +92,9 @@ namespace System.Data.Common.Utils.Boolean
 
         public bool Equals(Literal<T_Identifier> other)
         {
-            return null != other &&
-                other._isTermPositive == _isTermPositive &&
-                other._term.Equals(_term);
+            return null != other
+                && other._isTermPositive == _isTermPositive
+                && other._term.Equals(_term);
         }
 
         public override int GetHashCode()

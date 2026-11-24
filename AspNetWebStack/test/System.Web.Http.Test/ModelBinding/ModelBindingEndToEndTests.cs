@@ -21,8 +21,10 @@ namespace System.Web.Http.ModelBinding
         {
             // Arrange
             string value = "some-value";
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get,
-                            "http://localhost/ModelBinding/Url?somekey=" + value);
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/ModelBinding/Url?somekey=" + value
+            );
 
             // Act
             HttpResponseMessage response = await SubmitRequestAsync(request);
@@ -40,10 +42,12 @@ namespace System.Web.Http.ModelBinding
                 { "Name", "PersonName" },
                 { "Sibling.Name", "SiblingName" },
             };
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post,
-                            "http://localhost/ModelBinding/SimpleType")
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Post,
+                "http://localhost/ModelBinding/SimpleType"
+            )
             {
-                Content = new FormUrlEncodedContent(bodyParameters)
+                Content = new FormUrlEncodedContent(bodyParameters),
             };
 
             // Act
@@ -65,10 +69,12 @@ namespace System.Web.Http.ModelBinding
                 { "AddressLines[1].Line", "Street Address 1" },
                 { "ZipCode", "98052" },
             };
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put,
-                            "http://localhost/ModelBinding/CollectionType")
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Put,
+                "http://localhost/ModelBinding/CollectionType"
+            )
             {
-                Content = new FormUrlEncodedContent(bodyParameters)
+                Content = new FormUrlEncodedContent(bodyParameters),
             };
 
             // Act
@@ -93,10 +99,12 @@ namespace System.Web.Http.ModelBinding
                 new KeyValuePair<string, string>("AddressLines[3].Line", "Street Address 0"),
                 new KeyValuePair<string, string>("AddressLines[10000].Line", "Street Address 1"),
             };
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put,
-                            "http://localhost/ModelBinding/CollectionType")
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Put,
+                "http://localhost/ModelBinding/CollectionType"
+            )
             {
-                Content = new FormUrlEncodedContent(bodyParameters)
+                Content = new FormUrlEncodedContent(bodyParameters),
             };
 
             // Act
@@ -121,10 +129,12 @@ namespace System.Web.Http.ModelBinding
                 { "Addresses[1].AddressLines[0].Line", "Street Address 10" },
                 { "Addresses[1].AddressLines[3].Line", "Street Address 13" },
             };
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post,
-                            "http://localhost/ModelBinding/NestedCollection")
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Post,
+                "http://localhost/ModelBinding/NestedCollection"
+            )
             {
-                Content = new FormUrlEncodedContent(bodyParameters)
+                Content = new FormUrlEncodedContent(bodyParameters),
             };
 
             // Act
@@ -140,7 +150,7 @@ namespace System.Web.Http.ModelBinding
             Assert.Equal("98052", address.ZipCode);
 
             address = result.Addresses[1];
-            StreetAddress streetAddress= streetAddress = Assert.Single(address.AddressLines);
+            StreetAddress streetAddress = streetAddress = Assert.Single(address.AddressLines);
             Assert.Equal("Street Address 10", streetAddress.Line);
             Assert.Null(address.ZipCode);
         }
@@ -153,10 +163,12 @@ namespace System.Web.Http.ModelBinding
             {
                 { "Addresses", "Street Address 00" },
             };
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post,
-                            "http://localhost/ModelBinding/NestedCollection")
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Post,
+                "http://localhost/ModelBinding/NestedCollection"
+            )
             {
-                Content = new FormUrlEncodedContent(bodyParameters)
+                Content = new FormUrlEncodedContent(bodyParameters),
             };
 
             // Act
@@ -181,10 +193,12 @@ namespace System.Web.Http.ModelBinding
                 { "People[2].Sibling", "Person 2 Sibling" },
                 { "People[1000].Name", "Person 1000 Sibling" },
             };
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post,
-                            "http://localhost/ModelBinding/NestedCollectionOfRecursiveTypes")
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Post,
+                "http://localhost/ModelBinding/NestedCollectionOfRecursiveTypes"
+            )
             {
-                Content = new FormUrlEncodedContent(bodyParameters)
+                Content = new FormUrlEncodedContent(bodyParameters),
             };
 
             // Act
@@ -217,10 +231,12 @@ namespace System.Web.Http.ModelBinding
             {
                 { "People", "Person 0" },
             };
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post,
-                            "http://localhost/ModelBinding/NestedCollectionOfRecursiveTypes")
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Post,
+                "http://localhost/ModelBinding/NestedCollectionOfRecursiveTypes"
+            )
             {
-                Content = new FormUrlEncodedContent(bodyParameters)
+                Content = new FormUrlEncodedContent(bodyParameters),
             };
 
             // Act
@@ -233,14 +249,19 @@ namespace System.Web.Http.ModelBinding
             Assert.Null(person.Sibling);
         }
 
-        private static async Task<HttpResponseMessage> SubmitRequestAsync(HttpRequestMessage request)
+        private static async Task<HttpResponseMessage> SubmitRequestAsync(
+            HttpRequestMessage request
+        )
         {
             HttpConfiguration config = new HttpConfiguration();
             config.MapHttpAttributeRoutes();
             HttpServer server = new HttpServer(config);
             using (HttpMessageInvoker client = new HttpMessageInvoker(server))
             {
-                HttpResponseMessage response = await client.SendAsync(request, CancellationToken.None);
+                HttpResponseMessage response = await client.SendAsync(
+                    request,
+                    CancellationToken.None
+                );
                 response.EnsureSuccessStatusCode();
 
                 return response;
@@ -249,8 +270,10 @@ namespace System.Web.Http.ModelBinding
 
         private static async Task<TVal> ReadAsJson<TVal>(HttpResponseMessage response)
         {
-            Assert.Equal(MediaTypeHeaderValue.Parse("application/json; charset=utf-8"),
-                         response.Content.Headers.ContentType);
+            Assert.Equal(
+                MediaTypeHeaderValue.Parse("application/json; charset=utf-8"),
+                response.Content.Headers.ContentType
+            );
             string content = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<TVal>(content);
         }

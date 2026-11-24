@@ -2,7 +2,6 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
-
 namespace System.IdentityModel
 {
     using System;
@@ -10,15 +9,15 @@ namespace System.IdentityModel
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
     using System.IO;
+    using System.Runtime;
     using System.Security.Cryptography;
     using System.Text;
     using System.Xml;
-    using System.Runtime;
 
     /// <summary>
     /// Wraps a writer and generates a signature automatically when the envelope
     /// is written completely. By default the generated signature is inserted as
-    /// the last element in the envelope. This can be modified by explicitily 
+    /// the last element in the envelope. This can be modified by explicitily
     /// calling WriteSignature to indicate the location inside the envelope where
     /// the signature should be inserted.
     /// </summary>
@@ -41,7 +40,7 @@ namespace System.IdentityModel
 
         /// <summary>
         /// Initializes an instance of <see cref="EnvelopedSignatureWriter"/>. The returned writer can be directly used
-        /// to write the envelope. The signature will be automatically generated when 
+        /// to write the envelope. The signature will be automatically generated when
         /// the envelope is completed.
         /// </summary>
         /// <param name="innerWriter">Writer to wrap/</param>
@@ -50,7 +49,12 @@ namespace System.IdentityModel
         /// <param name="securityTokenSerializer">SecurityTokenSerializer to serialize the signature KeyInfo.</param>
         /// <exception cref="ArgumentNullException">One of he input parameter is null.</exception>
         /// <exception cref="ArgumentException">The string 'referenceId' is either null or empty.</exception>
-        public EnvelopedSignatureWriter(XmlWriter innerWriter, SigningCredentials signingCredentials, string referenceId, SecurityTokenSerializer securityTokenSerializer)
+        public EnvelopedSignatureWriter(
+            XmlWriter innerWriter,
+            SigningCredentials signingCredentials,
+            string referenceId,
+            SecurityTokenSerializer securityTokenSerializer
+        )
         {
             if (innerWriter == null)
             {
@@ -59,17 +63,23 @@ namespace System.IdentityModel
 
             if (signingCredentials == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("signingCredentials");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "signingCredentials"
+                );
             }
 
             if (string.IsNullOrEmpty(referenceId))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.ID0006), "referenceId"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.ID0006), "referenceId")
+                );
             }
 
             if (securityTokenSerializer == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("securityTokenSerializer");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityTokenSerializer"
+                );
             }
 
             // Remember the user's writer here. We need to finally write out the signed XML
@@ -84,7 +94,11 @@ namespace System.IdentityModel
             _endFragment = new MemoryStream();
             _writerStream = new MemoryStream();
 
-            XmlDictionaryWriter effectiveWriter = XmlDictionaryWriter.CreateTextWriter(_writerStream, Encoding.UTF8, false);
+            XmlDictionaryWriter effectiveWriter = XmlDictionaryWriter.CreateTextWriter(
+                _writerStream,
+                Encoding.UTF8,
+                false
+            );
 
             // Initialize the base writer to the newly created writer. The user should write the XML
             // to this.
@@ -99,7 +113,9 @@ namespace System.IdentityModel
             if (DiagnosticUtility.ShouldTraceVerbose)
             {
                 _preCanonicalTracingStream = new MemoryStream();
-                base.InitializeTracingWriter(new XmlTextWriter(_preCanonicalTracingStream, Encoding.UTF8));
+                base.InitializeTracingWriter(
+                    new XmlTextWriter(_preCanonicalTracingStream, Encoding.UTF8)
+                );
             }
         }
 
@@ -110,7 +126,10 @@ namespace System.IdentityModel
             signedInfo.CanonicalizationMethod = XD.ExclusiveC14NDictionary.Namespace.Value;
             signedInfo.SignatureMethod = _signingCreds.SignatureAlgorithm;
             signedInfo.DigestMethod = _signingCreds.DigestAlgorithm;
-            signedInfo.AddReference(_referenceId, _hashStream.FlushHashAndGetValue(_preCanonicalTracingStream));
+            signedInfo.AddReference(
+                _referenceId,
+                _hashStream.FlushHashAndGetValue(_preCanonicalTracingStream)
+            );
 
             SignedXml signedXml = new SignedXml(signedInfo, _dictionaryManager, _tokenSerializer);
             signedXml.ComputeSignature(_signingCreds.SigningKey);
@@ -127,14 +146,17 @@ namespace System.IdentityModel
                 // Default case. Signature is added as the last child element.
                 // We still have to compute the signature. Write end element as a different fragment.
 
-                ((IFragmentCapableXmlDictionaryWriter)base.InnerWriter).StartFragment(_endFragment, false);
+                ((IFragmentCapableXmlDictionaryWriter)base.InnerWriter).StartFragment(
+                    _endFragment,
+                    false
+                );
                 base.WriteEndElement();
                 ((IFragmentCapableXmlDictionaryWriter)base.InnerWriter).EndFragment();
             }
             else if (_hasSignatureBeenMarkedForInsert)
             {
-                // Signature should be added to the middle between the start and element 
-                // elements. Finish the end fragment and compute the signature and 
+                // Signature should be added to the middle between the start and element
+                // elements. Finish the end fragment and compute the signature and
                 // write the signature as a seperate fragment.
                 base.WriteEndElement();
                 ((IFragmentCapableXmlDictionaryWriter)base.InnerWriter).EndFragment();
@@ -144,13 +166,24 @@ namespace System.IdentityModel
             base.EndCanonicalization();
 
             // Compute signature and write it into a seperate fragment.
-            ((IFragmentCapableXmlDictionaryWriter)base.InnerWriter).StartFragment(_signatureFragment, false);
+            ((IFragmentCapableXmlDictionaryWriter)base.InnerWriter).StartFragment(
+                _signatureFragment,
+                false
+            );
             ComputeSignature();
             ((IFragmentCapableXmlDictionaryWriter)base.InnerWriter).EndFragment();
 
             // Put all fragments together. The fragment before the signature is already written into the writer.
-            ((IFragmentCapableXmlDictionaryWriter)base.InnerWriter).WriteFragment(_signatureFragment.GetBuffer(), 0, (int)_signatureFragment.Length);
-            ((IFragmentCapableXmlDictionaryWriter)base.InnerWriter).WriteFragment(_endFragment.GetBuffer(), 0, (int)_endFragment.Length);
+            ((IFragmentCapableXmlDictionaryWriter)base.InnerWriter).WriteFragment(
+                _signatureFragment.GetBuffer(),
+                0,
+                (int)_signatureFragment.Length
+            );
+            ((IFragmentCapableXmlDictionaryWriter)base.InnerWriter).WriteFragment(
+                _endFragment.GetBuffer(),
+                0,
+                (int)_endFragment.Length
+            );
 
             // _startFragment.Close();
             _signatureFragment.Close();
@@ -160,10 +193,13 @@ namespace System.IdentityModel
             _hasSignatureBeenMarkedForInsert = false;
 
             // Write the signed stream to the writer provided by the user.
-            // We are creating a Text Reader over a stream that we just wrote out. Hence, it is safe to 
+            // We are creating a Text Reader over a stream that we just wrote out. Hence, it is safe to
             // create a XmlTextReader and not a XmlDictionaryReader.
             // Note: reader will close _writerStream on Dispose.
-            XmlReader reader = XmlDictionaryReader.CreateTextReader(_writerStream, XmlDictionaryReaderQuotas.Max);
+            XmlReader reader = XmlDictionaryReader.CreateTextReader(
+                _writerStream,
+                XmlDictionaryReaderQuotas.Max
+            );
             reader.MoveToContent();
             _innerWriter.WriteNode(reader, false);
             _innerWriter.Flush();
@@ -173,7 +209,7 @@ namespace System.IdentityModel
 
         /// <summary>
         /// Sets the position of the signature within the envelope. Call this
-        /// method while writing the envelope to indicate at which point the 
+        /// method while writing the envelope to indicate at which point the
         /// signature should be inserted.
         /// </summary>
         public void WriteSignature()
@@ -181,18 +217,25 @@ namespace System.IdentityModel
             base.Flush();
             if (_writerStream == null || _writerStream.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID6029)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID6029))
+                );
             }
 
             if (_signatureFragment.Length != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID6030)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID6030))
+                );
             }
 
             Fx.Assert(_endFragment != null && _endFragment.Length == 0, SR.GetString(SR.ID8026));
 
             // Capture the remaing as a seperate fragment.
-            ((IFragmentCapableXmlDictionaryWriter)base.InnerWriter).StartFragment(_endFragment, false);
+            ((IFragmentCapableXmlDictionaryWriter)base.InnerWriter).StartFragment(
+                _endFragment,
+                false
+            );
 
             _hasSignatureBeenMarkedForInsert = true;
         }

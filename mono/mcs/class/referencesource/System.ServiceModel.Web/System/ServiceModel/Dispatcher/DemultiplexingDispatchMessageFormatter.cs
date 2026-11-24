@@ -6,10 +6,10 @@ namespace System.ServiceModel.Dispatcher
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.Globalization;
     using System.Text;
 
     class DemultiplexingDispatchMessageFormatter : IDispatchMessageFormatter
@@ -18,7 +18,10 @@ namespace System.ServiceModel.Dispatcher
         Dictionary<WebContentFormat, IDispatchMessageFormatter> formatters;
         string supportedFormats;
 
-        public DemultiplexingDispatchMessageFormatter(IDictionary<WebContentFormat, IDispatchMessageFormatter> formatters, IDispatchMessageFormatter defaultFormatter)
+        public DemultiplexingDispatchMessageFormatter(
+            IDictionary<WebContentFormat, IDispatchMessageFormatter> formatters,
+            IDispatchMessageFormatter defaultFormatter
+        )
         {
             if (formatters == null)
             {
@@ -45,7 +48,15 @@ namespace System.ServiceModel.Dispatcher
                 this.formatters.TryGetValue(format, out selectedFormatter);
                 if (selectedFormatter == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new InvalidOperationException(SR2.GetString(SR2.UnrecognizedHttpMessageFormat, format, GetSupportedFormats())));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.UnrecognizedHttpMessageFormat,
+                                format,
+                                GetSupportedFormats()
+                            )
+                        )
+                    );
                 }
             }
             else
@@ -53,15 +64,27 @@ namespace System.ServiceModel.Dispatcher
                 selectedFormatter = this.defaultFormatter;
                 if (selectedFormatter == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new InvalidOperationException(SR2.GetString(SR2.MessageFormatPropertyNotFound3)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.MessageFormatPropertyNotFound3)
+                        )
+                    );
                 }
             }
             selectedFormatter.DeserializeRequest(message, parameters);
         }
 
-        public Message SerializeReply(MessageVersion messageVersion, object[] parameters, object result)
+        public Message SerializeReply(
+            MessageVersion messageVersion,
+            object[] parameters,
+            object result
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR2.GetString(SR2.SerializingReplyNotSupportedByFormatter, this)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(
+                    SR2.GetString(SR2.SerializingReplyNotSupportedByFormatter, this)
+                )
+            );
         }
 
         internal static string GetSupportedFormats(IEnumerable<WebContentFormat> formats)
@@ -105,4 +128,3 @@ namespace System.ServiceModel.Dispatcher
         }
     }
 }
-

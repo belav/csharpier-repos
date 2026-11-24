@@ -15,23 +15,37 @@ namespace System.Reflection.Runtime.BindingFlagSupport
     {
         public static readonly PropertyPolicies Instance = new PropertyPolicies();
 
-        public PropertyPolicies() : base(MemberTypeIndex.Property) { }
+        public PropertyPolicies()
+            : base(MemberTypeIndex.Property) { }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "Reflection implementation")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "Reflection implementation"
+        )]
         public sealed override IEnumerable<PropertyInfo> GetDeclaredMembers(Type type)
         {
             return type.GetProperties(DeclaredOnlyLookup);
         }
 
-        public sealed override IEnumerable<PropertyInfo> CoreGetDeclaredMembers(RuntimeTypeInfo type, NameFilter? optionalNameFilter, RuntimeTypeInfo reflectedType)
+        public sealed override IEnumerable<PropertyInfo> CoreGetDeclaredMembers(
+            RuntimeTypeInfo type,
+            NameFilter? optionalNameFilter,
+            RuntimeTypeInfo reflectedType
+        )
         {
             return type.CoreGetDeclaredProperties(optionalNameFilter, reflectedType);
         }
 
         public sealed override bool AlwaysTreatAsDeclaredOnly => false;
 
-        public sealed override void GetMemberAttributes(PropertyInfo member, out MethodAttributes visibility, out bool isStatic, out bool isVirtual, out bool isNewSlot)
+        public sealed override void GetMemberAttributes(
+            PropertyInfo member,
+            out MethodAttributes visibility,
+            out bool isStatic,
+            out bool isVirtual,
+            out bool isNewSlot
+        )
         {
             MethodInfo? accessorMethod = GetAccessorMethod(member);
             if (accessorMethod == null)
@@ -54,7 +68,10 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             isNewSlot = (0 != (methodAttributes & MethodAttributes.NewSlot));
         }
 
-        public sealed override bool ImplicitlyOverrides(PropertyInfo? baseMember, PropertyInfo? derivedMember)
+        public sealed override bool ImplicitlyOverrides(
+            PropertyInfo? baseMember,
+            PropertyInfo? derivedMember
+        )
         {
             MethodInfo? baseAccessor = GetAccessorMethod(baseMember!);
             MethodInfo? derivedAccessor = GetAccessorMethod(derivedMember!);
@@ -65,7 +82,12 @@ namespace System.Reflection.Runtime.BindingFlagSupport
         // Desktop compat: Properties hide properties in base types if they share the same vtable slot, or
         // have the same name, return type, signature and hasThis value.
         //
-        public sealed override bool IsSuppressedByMoreDerivedMember(PropertyInfo member, PropertyInfo[] priorMembers, int startIndex, int endIndex)
+        public sealed override bool IsSuppressedByMoreDerivedMember(
+            PropertyInfo member,
+            PropertyInfo[] priorMembers,
+            int startIndex,
+            int endIndex
+        )
         {
             MethodInfo? baseAccessor = GetAccessorMethod(member);
             for (int i = startIndex; i < endIndex; i++)

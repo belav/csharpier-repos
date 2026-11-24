@@ -13,26 +13,37 @@ namespace Microsoft.CodeAnalysis.Interactive
 {
     internal sealed class InteractiveCommandCompletionService : CompletionService
     {
-        [ExportLanguageServiceFactory(typeof(CompletionService), InteractiveLanguageNames.InteractiveCommand), Shared]
+        [
+            ExportLanguageServiceFactory(
+                typeof(CompletionService),
+                InteractiveLanguageNames.InteractiveCommand
+            ),
+            Shared
+        ]
         [method: ImportingConstructor]
         [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        internal sealed class Factory(IAsynchronousOperationListenerProvider listenerProvider) : ILanguageServiceFactory
+        internal sealed class Factory(IAsynchronousOperationListenerProvider listenerProvider)
+            : ILanguageServiceFactory
         {
-            private readonly IAsynchronousOperationListenerProvider _listenerProvider = listenerProvider;
+            private readonly IAsynchronousOperationListenerProvider _listenerProvider =
+                listenerProvider;
 
-            public ILanguageService CreateLanguageService(HostLanguageServices languageServices)
-                => new InteractiveCommandCompletionService(languageServices.LanguageServices.SolutionServices, _listenerProvider);
+            public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
+                new InteractiveCommandCompletionService(
+                    languageServices.LanguageServices.SolutionServices,
+                    _listenerProvider
+                );
         }
 
-        private InteractiveCommandCompletionService(SolutionServices services, IAsynchronousOperationListenerProvider listenerProvider)
-            : base(services, listenerProvider)
-        {
-        }
+        private InteractiveCommandCompletionService(
+            SolutionServices services,
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
+            : base(services, listenerProvider) { }
 
-        public override string Language
-            => InteractiveLanguageNames.InteractiveCommand;
+        public override string Language => InteractiveLanguageNames.InteractiveCommand;
 
-        internal override CompletionRules GetRules(CompletionOptions options)
-            => CompletionRules.Default;
+        internal override CompletionRules GetRules(CompletionOptions options) =>
+            CompletionRules.Default;
     }
 }

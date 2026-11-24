@@ -53,21 +53,21 @@ public interface IReadOnlyStoredProcedureParameter : IReadOnlyAnnotatable
     /// <param name="options">Options for generating the string.</param>
     /// <param name="indent">The number of indent spaces to use before each new line.</param>
     /// <returns>A human-readable representation.</returns>
-    string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
+    string ToDebugString(
+        MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
+        int indent = 0
+    )
     {
         var builder = new StringBuilder();
         var indentString = new string(' ', indent);
 
-        builder
-            .Append(indentString)
-            .Append("StoredProcedureParameter: ");
+        builder.Append(indentString).Append("StoredProcedureParameter: ");
 
         builder.Append(Name);
 
         if (Direction != ParameterDirection.Input)
         {
-            builder.Append(' ')
-                .Append(Direction);
+            builder.Append(' ').Append(Direction);
         }
 
         if (ForOriginalValue == true)

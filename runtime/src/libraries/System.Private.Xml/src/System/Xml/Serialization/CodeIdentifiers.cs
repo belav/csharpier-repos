@@ -10,9 +10,8 @@ namespace System.Xml.Serialization
 {
     internal sealed class CaseInsensitiveKeyComparer : CaseInsensitiveComparer, IEqualityComparer
     {
-        public CaseInsensitiveKeyComparer() : base(CultureInfo.CurrentCulture)
-        {
-        }
+        public CaseInsensitiveKeyComparer()
+            : base(CultureInfo.CurrentCulture) { }
 
         bool IEqualityComparer.Equals(object? x, object? y)
         {
@@ -40,9 +39,8 @@ namespace System.Xml.Serialization
         private ArrayList _list;
         private bool _camelCase;
 
-        public CodeIdentifiers() : this(true)
-        {
-        }
+        public CodeIdentifiers()
+            : this(true) { }
 
         public CodeIdentifiers(bool caseSensitive)
         {

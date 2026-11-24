@@ -19,18 +19,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.GenerateEnu
     public class GenerateEnumMemberTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public GenerateEnumMemberTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new GenerateEnumMemberCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new GenerateEnumMemberCodeFixProvider());
 
         [Fact]
         public async Task TestEmptyEnum()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -41,7 +40,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.GenerateEnu
 enum Color
 {
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -52,14 +51,15 @@ enum Color
 enum Color
 {
     Red
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithSingleMember()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -71,7 +71,7 @@ enum Color
 {
     Red
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -83,14 +83,15 @@ enum Color
 {
     Red,
     Blue
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithExistingComma()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -102,7 +103,7 @@ enum Color
 {
     Red,
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -114,14 +115,15 @@ enum Color
 {
     Red,
     Blue,
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithMultipleMembers()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -134,7 +136,7 @@ enum Color
     Red,
     Blue
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -147,14 +149,15 @@ enum Color
     Red,
     Blue,
     Green
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithZero()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -166,7 +169,7 @@ enum Color
 {
     Red = 0
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -178,14 +181,15 @@ enum Color
 {
     Red = 0,
     Blue = 1
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithIntegralValue()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -197,7 +201,7 @@ enum Color
 {
     Red = 1
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -209,14 +213,15 @@ enum Color
 {
     Red = 1,
     Blue = 2
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithSingleBitIntegral()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -228,7 +233,7 @@ enum Color
 {
     Red = 2
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -240,14 +245,15 @@ enum Color
 {
     Red = 2,
     Blue = 4
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestGenerateIntoGeometricSequence()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -261,7 +267,7 @@ enum Color
     Yellow = 2,
     Green = 4
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -275,14 +281,15 @@ enum Color
     Yellow = 2,
     Green = 4,
     Blue = 8
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithSimpleSequence1()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -295,7 +302,7 @@ enum Color
     Red = 1,
     Green = 2
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -308,14 +315,15 @@ enum Color
     Red = 1,
     Green = 2,
     Blue = 3
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithSimpleSequence2()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -329,7 +337,7 @@ enum Color
     Red = 1,
     Green = 2
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -343,14 +351,15 @@ enum Color
     Red = 1,
     Green = 2,
     Blue = 3
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithNonZeroInteger()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -362,7 +371,7 @@ enum Color
 {
     Green = 5
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -374,14 +383,15 @@ enum Color
 {
     Green = 5,
     Blue = 6
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithLeftShift0()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -393,7 +403,7 @@ enum Color
 {
     Green = 1 << 0
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -405,14 +415,15 @@ enum Color
 {
     Green = 1 << 0,
     Blue = 1 << 1
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithLeftShift5()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -424,7 +435,7 @@ enum Color
 {
     Green = 1 << 5
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -436,14 +447,15 @@ enum Color
 {
     Green = 1 << 5,
     Blue = 1 << 6
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithDifferentStyles()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -456,7 +468,7 @@ enum Color
     Red = 2,
     Green = 1 << 5
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -469,14 +481,15 @@ enum Color
     Red = 2,
     Green = 1 << 5,
     Blue = 33
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestBinary()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -488,7 +501,7 @@ enum Color
 {
     Red = 0b01
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -500,14 +513,15 @@ enum Color
 {
     Red = 0b01,
     Blue = 0b10
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestHex1()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -519,7 +533,7 @@ enum Color
 {
     Red = 0x1
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -531,14 +545,15 @@ enum Color
 {
     Red = 0x1,
     Blue = 0x2
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestHex9()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -550,7 +565,7 @@ enum Color
 {
     Red = 0x9
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -562,14 +577,15 @@ enum Color
 {
     Red = 0x9,
     Blue = 0xA
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestHexF()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -581,7 +597,7 @@ enum Color
 {
     Red = 0xF
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -593,14 +609,15 @@ enum Color
 {
     Red = 0xF,
     Blue = 0x10
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestGenerateAfterEnumWithIntegerMaxValue()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -612,7 +629,7 @@ enum Color
 {
     Red = int.MaxValue
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -624,14 +641,15 @@ enum Color
 {
     Red = int.MaxValue,
     Blue = int.MinValue
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestUnsigned16BitEnums()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -643,7 +661,7 @@ enum Color : ushort
 {
     Red = 65535
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -655,14 +673,15 @@ enum Color : ushort
 {
     Red = 65535,
     Blue = 0
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestGenerateEnumMemberOfTypeLong()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -674,7 +693,7 @@ enum Color : long
 {
     Red = long.MaxValue
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -686,14 +705,15 @@ enum Color : long
 {
     Red = long.MaxValue,
     Blue = long.MinValue
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestGenerateAfterEnumWithLongMaxValueInBinary()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -705,7 +725,7 @@ enum Color : long
 {
     Red = 0b0111111111111111111111111111111111111111111111111111111111111111
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -717,14 +737,15 @@ enum Color : long
 {
     Red = 0b0111111111111111111111111111111111111111111111111111111111111111,
     Blue = 0b1000000000000000000000000000000000000000000000000000000000000000
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestGenerateAfterEnumWithLongMaxValueInHex()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -736,7 +757,7 @@ enum Color : long
 {
     Red = 0x7FFFFFFFFFFFFFFF
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -748,14 +769,15 @@ enum Color : long
 {
     Red = 0x7FFFFFFFFFFFFFFF,
     Blue = 0x8000000000000000
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528312")]
         public async Task TestGenerateAfterEnumWithLongMinValueInHex()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -767,7 +789,7 @@ enum Color : long
 {
     Red = 0xFFFFFFFFFFFFFFFF
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -779,14 +801,15 @@ enum Color : long
 {
     Red = 0xFFFFFFFFFFFFFFFF,
     Blue
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528312")]
         public async Task TestGenerateAfterPositiveLongInHex()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -799,7 +822,7 @@ enum Color : long
     Red = 0xFFFFFFFFFFFFFFFF,
     Green = 0x0
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -812,14 +835,15 @@ enum Color : long
     Red = 0xFFFFFFFFFFFFFFFF,
     Green = 0x0,
     Blue = 0x1
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestGenerateAfterPositiveLongExprInHex()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -831,7 +855,7 @@ enum Color : long
 {
     Red = 0x414 / 2
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -843,14 +867,15 @@ enum Color : long
 {
     Red = 0x414 / 2,
     Blue = 523
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestGenerateAfterEnumWithULongMaxValue()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -862,7 +887,7 @@ enum Color : ulong
 {
     Red = ulong.MaxValue
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -874,14 +899,15 @@ enum Color : ulong
 {
     Red = ulong.MaxValue,
     Blue = 0
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNegativeRangeIn64BitSignedEnums()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -893,7 +919,7 @@ enum Color : long
 {
     Red = -10
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -905,14 +931,15 @@ enum Color : long
 {
     Red = -10,
     Blue = -9
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestGenerateWithImplicitValues()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -926,7 +953,7 @@ enum Color
     Green,
     Yellow = -1
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -940,14 +967,15 @@ enum Color
     Green,
     Yellow = -1,
     Blue = 2
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestGenerateWithImplicitValues2()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -961,7 +989,7 @@ enum Color
     Green = 10,
     Yellow
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -975,14 +1003,15 @@ enum Color
     Green = 10,
     Yellow,
     Blue
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNoExtraneousStatementTerminatorBeforeCommentedMember()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -995,7 +1024,7 @@ enum Color
     Red
     //Blue
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1008,14 +1037,15 @@ enum Color
     Red,
     Blue
     //Blue
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNoExtraneousStatementTerminatorBeforeCommentedMember2()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1028,7 +1058,7 @@ enum Color
     Red
     /*Blue*/
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1041,14 +1071,15 @@ enum Color
     Red,
     Blue
     /*Blue*/
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestGenerateAfterEnumWithMinValue()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1060,7 +1091,7 @@ enum Color
 {
     Red = int.MinValue
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1072,14 +1103,15 @@ enum Color
 {
     Red = int.MinValue,
     Blue = -2147483647
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestGenerateAfterEnumWithMinValuePlusConstant()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1091,7 +1123,7 @@ enum Color
 {
     Red = int.MinValue + 100
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1103,14 +1135,15 @@ enum Color
 {
     Red = int.MinValue + 100,
     Blue = -2147483547
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestGenerateAfterEnumWithByteMaxValue()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1122,7 +1155,7 @@ enum Color : byte
 {
     Red = 255
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1134,14 +1167,15 @@ enum Color : byte
 {
     Red = 255,
     Blue = 0
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestGenerateIntoBitshiftEnum1()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1154,7 +1188,7 @@ enum Color
     Red = 1 << 1,
     Green = 1 << 2
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1167,14 +1201,15 @@ enum Color
     Red = 1 << 1,
     Green = 1 << 2,
     Blue = 1 << 3
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestGenerateIntoBitshiftEnum2()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1186,7 +1221,7 @@ enum Color
 {
     Red = 2 >> 1
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1198,14 +1233,15 @@ enum Color
 {
     Red = 2 >> 1,
     Blue = 2
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestStandaloneReference()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1218,7 +1254,7 @@ enum Color
     Red = int.MinValue,
     Green = 1
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1231,14 +1267,15 @@ enum Color
     Red = int.MinValue,
     Green = 1,
     Blue = 2
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestCircularEnumsForErrorTolerance()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1251,7 +1288,7 @@ enum Circular
     A = B,
     B
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1264,14 +1301,15 @@ enum Circular
     A = B,
     B,
     C
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestEnumWithIncorrectValueForErrorTolerance()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1283,7 +1321,7 @@ enum Circular : byte
 {
     A = -2
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1295,14 +1333,15 @@ enum Circular : byte
 {
     A = -2,
     B
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestGenerateIntoNewEnum()
         {
             await TestInRegularAndScriptAsync(
-@"class B : A
+                @"class B : A
 {
     void Main()
     {
@@ -1323,7 +1362,7 @@ class A
         Green = 2
     }
 }",
-@"class B : A
+                @"class B : A
 {
     void Main()
     {
@@ -1344,14 +1383,15 @@ class A
         Red = 1,
         Green = 2
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestGenerateIntoDerivedEnumMissingNewKeyword()
         {
             await TestInRegularAndScriptAsync(
-@"class B : A
+                @"class B : A
 {
     void Main()
     {
@@ -1372,7 +1412,7 @@ class A
         Green = 2
     }
 }",
-@"class B : A
+                @"class B : A
 {
     void Main()
     {
@@ -1393,14 +1433,15 @@ class A
         Red = 1,
         Green = 2
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestGenerateIntoBaseEnum()
         {
             await TestInRegularAndScriptAsync(
-@"class B : A
+                @"class B : A
 {
     void Main()
     {
@@ -1416,7 +1457,7 @@ class A
         Green = 2
     }
 }",
-@"class B : A
+                @"class B : A
 {
     void Main()
     {
@@ -1432,14 +1473,15 @@ class A
         Green = 2,
         Blue = 3
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestGenerationWhenMembersShareValues()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1453,7 +1495,7 @@ enum Color
     Green,
     Yellow = Green
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1467,14 +1509,15 @@ enum Color
     Green,
     Yellow = Green,
     Blue = 2
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestInvokeFromAddAssignmentStatement()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1489,7 +1532,7 @@ enum Color
     Green = 10,
     Yellow
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1504,14 +1547,15 @@ enum Color
     Green = 10,
     Yellow,
     Blue
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFormatting()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1522,7 +1566,7 @@ enum Weekday
 {
     Monday
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1533,14 +1577,15 @@ enum Weekday
 {
     Monday,
     Tuesday
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540919")]
         public async Task TestKeyword()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1552,7 +1597,7 @@ enum Color
 {
     Red
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1564,14 +1609,15 @@ enum Color
 {
     Red,
     @enum
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544333")]
         public async Task TestNotAfterPointer()
         {
             await TestMissingInRegularAndScriptAsync(
-@"struct MyStruct
+                @"struct MyStruct
 {
     public int MyField;
 }
@@ -1584,14 +1630,15 @@ class Program
         MyStruct* ptr = &s;
         var i1 = (() => &s)->[|M|];
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingOnHiddenEnum()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 enum E
 {
@@ -1605,14 +1652,15 @@ class Program
     {
         Console.WriteLine(E.[|x|]);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingOnPartiallyHiddenEnum()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 enum E
 {
@@ -1629,14 +1677,15 @@ class Program
     {
         Console.WriteLine(E.[|x|]);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545903")]
         public async Task TestNoOctal()
         {
             await TestInRegularAndScriptAsync(
-@"enum E
+                @"enum E
 {
     A = 007,
 }
@@ -1645,7 +1694,7 @@ class C
 {
     E x = E.[|B|];
 }",
-@"enum E
+                @"enum E
 {
     A = 007,
     B = 8,
@@ -1654,14 +1703,15 @@ class C
 class C
 {
     E x = E.B;
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546654")]
         public async Task TestLastValueDoesNotHaveInitializer()
         {
             await TestInRegularAndScriptAsync(
-@"enum E
+                @"enum E
 {
     A = 1,
     B
@@ -1673,7 +1723,7 @@ class Program
     {
         E.[|C|] }
 }",
-@"enum E
+                @"enum E
 {
     A = 1,
     B,
@@ -1685,14 +1735,15 @@ class Program
     void Main()
     {
         E.C }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/49679")]
         public async Task TestWithLeftShift_Long()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1704,7 +1755,7 @@ enum Color : long
 {
     Green = 1L << 0
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1716,14 +1767,15 @@ enum Color : long
 {
     Green = 1L << 0,
     Blue = 1L << 1
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/49679")]
         public async Task TestWithLeftShift_UInt()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1735,7 +1787,7 @@ enum Color : uint
 {
     Green = 1u << 0
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1747,14 +1799,15 @@ enum Color : uint
 {
     Green = 1u << 0,
     Blue = 1u << 1
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/49679")]
         public async Task TestWithLeftShift_ULong()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1766,7 +1819,7 @@ enum Color : ulong
 {
     Green = 1UL << 0
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -1778,14 +1831,15 @@ enum Color : ulong
 {
     Green = 1UL << 0,
     Blue = 1UL << 1
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/5468")]
         public async Task TestWithColorColorConflict1()
         {
             await TestInRegularAndScriptAsync(
-@"enum Color
+                @"enum Color
 {
     Blue,
     Green
@@ -1801,7 +1855,7 @@ class Sample1
     }
 }
 ",
-@"enum Color
+                @"enum Color
 {
     Blue,
     Green,
@@ -1817,14 +1871,15 @@ class Sample1
         if (Color == Color.Red) { } 
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/5468")]
         public async Task TestWithColorColorConflict2()
         {
             await TestInRegularAndScriptAsync(
-@"enum Color
+                @"enum Color
 {
     Blue,
     Green
@@ -1840,7 +1895,7 @@ class Sample1
     }
 }
 ",
-@"enum Color
+                @"enum Color
 {
     Blue,
     Green,
@@ -1856,7 +1911,8 @@ class Sample1
         if (Color == Color.Red) { } 
     }
 }
-");
+"
+            );
         }
     }
 }

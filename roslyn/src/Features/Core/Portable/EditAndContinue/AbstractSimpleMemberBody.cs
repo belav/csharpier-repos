@@ -11,24 +11,18 @@ namespace Microsoft.CodeAnalysis.EditAndContinue;
 
 internal abstract class AbstractSimpleMemberBody(SyntaxNode node) : MemberBody
 {
-    public SyntaxNode Node
-        => node;
+    public SyntaxNode Node => node;
 
-    public sealed override SyntaxTree SyntaxTree
-        => node.SyntaxTree;
+    public sealed override SyntaxTree SyntaxTree => node.SyntaxTree;
 
-    public sealed override OneOrMany<SyntaxNode> RootNodes
-        => OneOrMany.Create(node);
+    public sealed override OneOrMany<SyntaxNode> RootNodes => OneOrMany.Create(node);
 
-    public sealed override TextSpan Envelope
-        => node.Span;
+    public sealed override TextSpan Envelope => node.Span;
 
-    public sealed override SyntaxNode EncompassingAncestor
-        => node;
+    public sealed override SyntaxNode EncompassingAncestor => node;
 
-    public sealed override IEnumerable<SyntaxToken>? GetActiveTokens()
-        => node.DescendantTokens();
+    public sealed override IEnumerable<SyntaxToken>? GetActiveTokens() => node.DescendantTokens();
 
-    public override ImmutableArray<ISymbol> GetCapturedVariables(SemanticModel model)
-        => model.AnalyzeDataFlow(Node).CapturedInside;
+    public override ImmutableArray<ISymbol> GetCapturedVariables(SemanticModel model) =>
+        model.AnalyzeDataFlow(Node).CapturedInside;
 }

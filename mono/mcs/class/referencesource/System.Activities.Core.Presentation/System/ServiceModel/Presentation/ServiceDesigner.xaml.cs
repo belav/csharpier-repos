@@ -24,7 +24,7 @@ namespace System.ServiceModel.Presentation
 
         public ModelItem ExpandedChild
         {
-            get 
+            get
             {
                 ModelItem modelItemToSelect = null;
                 if (this.ModelItem != null)
@@ -39,21 +39,53 @@ namespace System.ServiceModel.Presentation
         {
             var serviceType = typeof(WorkflowService);
             var advancedAttribute = new EditorBrowsableAttribute(EditorBrowsableState.Advanced);
-            var categoryAttribute = new CategoryAttribute(EditorCategoryTemplateDictionary.Instance.GetCategoryTitle(MiscellaneousCategoryLabelKey));
+            var categoryAttribute = new CategoryAttribute(
+                EditorCategoryTemplateDictionary.Instance.GetCategoryTitle(
+                    MiscellaneousCategoryLabelKey
+                )
+            );
 
-            builder.AddCustomAttributes(serviceType, new DesignerAttribute(typeof(ServiceDesigner)));
-            builder.AddCustomAttributes(serviceType, "Name", new TypeConverterAttribute(typeof(XNameConverter)));
-            builder.AddCustomAttributes(serviceType, serviceType.GetProperty("Endpoints"), BrowsableAttribute.No);
             builder.AddCustomAttributes(
                 serviceType,
-                "ImplementedContracts", 
-                advancedAttribute, 
-                categoryAttribute, 
-                PropertyValueEditor.CreateEditorAttribute(typeof(TypeCollectionPropertyEditor)), 
-                new EditorOptionAttribute { Name = TypeCollectionPropertyEditor.AllowDuplicate, Value = false },
-                new EditorOptionAttribute { Name = TypeCollectionPropertyEditor.Filter, Value = ServiceContractImporter.FilterFunction },
-                new EditorOptionAttribute { Name = TypeCollectionPropertyEditor.DefaultType, Value = null });
-            builder.AddCustomAttributes(serviceType, serviceType.GetProperty("Body"), BrowsableAttribute.No);
+                new DesignerAttribute(typeof(ServiceDesigner))
+            );
+            builder.AddCustomAttributes(
+                serviceType,
+                "Name",
+                new TypeConverterAttribute(typeof(XNameConverter))
+            );
+            builder.AddCustomAttributes(
+                serviceType,
+                serviceType.GetProperty("Endpoints"),
+                BrowsableAttribute.No
+            );
+            builder.AddCustomAttributes(
+                serviceType,
+                "ImplementedContracts",
+                advancedAttribute,
+                categoryAttribute,
+                PropertyValueEditor.CreateEditorAttribute(typeof(TypeCollectionPropertyEditor)),
+                new EditorOptionAttribute
+                {
+                    Name = TypeCollectionPropertyEditor.AllowDuplicate,
+                    Value = false,
+                },
+                new EditorOptionAttribute
+                {
+                    Name = TypeCollectionPropertyEditor.Filter,
+                    Value = ServiceContractImporter.FilterFunction,
+                },
+                new EditorOptionAttribute
+                {
+                    Name = TypeCollectionPropertyEditor.DefaultType,
+                    Value = null,
+                }
+            );
+            builder.AddCustomAttributes(
+                serviceType,
+                serviceType.GetProperty("Body"),
+                BrowsableAttribute.No
+            );
         }
     }
 }

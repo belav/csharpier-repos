@@ -9,33 +9,31 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Query.InternalTrees;
 //using System.Diagnostics; // Please use PlanCompiler.Assert instead of Debug.Assert in this class...
 
 // It is fine to use Debug.Assert in cases where you assert an obvious thing that is supposed
-// to prevent from simple mistakes during development (e.g. method argument validation 
-// in cases where it was you who created the variables or the variables had already been validated or 
-// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default 
-// "else" block is chosen why the new condition should be treated separately). This kind of asserts are 
-// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in 
-// the shipped product. 
-// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions 
+// to prevent from simple mistakes during development (e.g. method argument validation
+// in cases where it was you who created the variables or the variables had already been validated or
+// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default
+// "else" block is chosen why the new condition should be treated separately). This kind of asserts are
+// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in
+// the shipped product.
+// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions
 // about how the tree was built etc. - in these cases we probably want to throw an exception (this is
-// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct 
+// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct
 // or the tree was built/rewritten not the way we thought it was.
 // Use your judgment - if you rather remove an assert than ship it use Debug.Assert otherwise use
 // PlanCompiler.Assert.
 
 using System.Globalization;
-using System.Text;
 using System.Linq;
-
-using md = System.Data.Metadata.Edm;
+using System.Text;
 using cqt = System.Data.Common.CommandTrees;
-using System.Data.Query.InternalTrees;
+using md = System.Data.Metadata.Edm;
 
 namespace System.Data.Query.PlanCompiler
 {
-
     /// <summary>
     /// The ProjectionPruner module is responsible for eliminating unnecessary column
     /// references (and other expressions) from the query.
@@ -43,18 +41,18 @@ namespace System.Data.Query.PlanCompiler
     /// Projection pruning logically operates in two passes - the first pass is a top-down
     /// pass where information about all referenced columns and expressions is collected
     /// (pushed down from a node to its children).
-    /// 
-    /// The second phase is a bottom-up phase, where each node (in response to the 
-    /// information collected above) attempts to rid itself of unwanted columns and 
+    ///
+    /// The second phase is a bottom-up phase, where each node (in response to the
+    /// information collected above) attempts to rid itself of unwanted columns and
     /// expressions.
-    /// 
-    /// The two phases can be combined into a single tree walk, where for each node, the 
+    ///
+    /// The two phases can be combined into a single tree walk, where for each node, the
     /// processing is on the lines of:
-    /// 
+    ///
     /// - compute and push information to children (top-down)
     /// - process children
     /// - eliminate unnecessary references from myself (bottom-up)
-    /// 
+    ///
     /// </summary>
     internal class ProjectionPruner : BasicOpVisitorOfNode
     {
@@ -68,7 +66,7 @@ namespace System.Data.Query.PlanCompiler
             /// <summary>
             /// Find all vars that were referenced in the column map. Looks for VarRefColumnMap
             /// in the ColumnMap tree, and tracks those vars
-            /// 
+            ///
             /// NOTE: The "vec" parameter must be supplied by the caller. The caller is responsible for
             /// clearing out this parameter (if necessary) before calling into this function
             /// </summary>
@@ -86,7 +84,8 @@ namespace System.Data.Query.PlanCompiler
             /// <summary>
             /// Trivial constructor
             /// </summary>
-            private ColumnMapVarTracker() : base() { }
+            private ColumnMapVarTracker()
+                : base() { }
             #endregion
 
             #region overrides
@@ -107,9 +106,11 @@ namespace System.Data.Query.PlanCompiler
         #region private state
 
         private PlanCompiler m_compilerState;
-        private Command m_command { get { return m_compilerState.Command; } }
+        private Command m_command
+        {
+            get { return m_compilerState.Command; }
+        }
         private VarVec m_referencedVars; // the list of referenced vars in the query
-
         #endregion
 
         #region constructor
@@ -195,6 +196,7 @@ namespace System.Data.Query.PlanCompiler
         {
             return m_referencedVars.IsSet(v);
         }
+
         /// <summary>
         /// Is this var unreferenced? Duh
         /// </summary>
@@ -272,12 +274,12 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// VarDefListOp
-        /// 
-        /// Walks the children (VarDefOp), and looks for those whose Vars 
-        /// have been referenced. Only those VarDefOps are visited - the 
+        ///
+        /// Walks the children (VarDefOp), and looks for those whose Vars
+        /// have been referenced. Only those VarDefOps are visited - the
         /// others are ignored.
-        /// 
-        /// At the end, a new list of children is created - with only those 
+        ///
+        /// At the end, a new list of children is created - with only those
         /// VarDefOps that have been referenced
         /// </summary>
         /// <param name="op">the varDefListOp</param>
@@ -285,10 +287,9 @@ namespace System.Data.Query.PlanCompiler
         /// <returns>modified node</returns>
         public override Node Visit(VarDefListOp op, Node n)
         {
-
-            // NOTE: It would be nice to optimize this to only create a new node 
+            // NOTE: It would be nice to optimize this to only create a new node
             //       and new list, if we needed to eliminate some arguments, but
-            //       I'm not sure that the effort to eliminate the allocations 
+            //       I'm not sure that the effort to eliminate the allocations
             //       wouldn't be more expensive than the allocations themselves.
             //       It's something that we can consider if it shows up on the
             //       perf radar.
@@ -313,7 +314,7 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// PhysicalProjectOp
-        /// 
+        ///
         /// Insist that all Vars in this are required
         /// </summary>
         /// <param name="op"></param>
@@ -341,8 +342,8 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// NestOps
-        /// 
-        /// Common handling for all NestOps. 
+        ///
+        /// Common handling for all NestOps.
         /// </summary>
         /// <param name="op"></param>
         /// <param name="n"></param>
@@ -352,15 +353,15 @@ namespace System.Data.Query.PlanCompiler
             // Mark all vars as needed
             AddReference(op.Outputs);
 
-            // visit children. Need to do some more actually - to indicate that all 
-            // vars from the children are really required. 
+            // visit children. Need to do some more actually - to indicate that all
+            // vars from the children are really required.
             VisitChildren(n);
             return n;
         }
 
         /// <summary>
-        /// SingleStreamNestOp 
-        /// 
+        /// SingleStreamNestOp
+        ///
         /// Insist (for now) that all Vars are required
         /// </summary>
         /// <param name="op"></param>
@@ -374,7 +375,7 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// MultiStreamNestOp
-        /// 
+        ///
         /// Insist (for now) that all Vars are required
         /// </summary>
         /// <param name="op"></param>
@@ -391,7 +392,7 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// ApplyOps
-        /// 
+        ///
         /// Common handling for all ApplyOps. Visit the right child first to capture
         /// any references to the left, and then visit the left child.
         /// </summary>
@@ -407,8 +408,8 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// DistinctOp
-        /// 
-        /// We remove all null and constant keys that are not referenced as long as 
+        ///
+        /// We remove all null and constant keys that are not referenced as long as
         /// there is one key left. We add all remaining keys to the referenced list
         /// and proceed to the inputs
         /// </summary>
@@ -419,7 +420,11 @@ namespace System.Data.Query.PlanCompiler
         {
             if (op.Keys.Count > 1 && n.Child0.Op.OpType == OpType.Project)
             {
-                RemoveRedundantConstantKeys(op.Keys, ((ProjectOp)n.Child0.Op).Outputs, n.Child0.Child1);
+                RemoveRedundantConstantKeys(
+                    op.Keys,
+                    ((ProjectOp)n.Child0.Op).Outputs,
+                    n.Child0.Child1
+                );
             }
             AddReference(op.Keys); // mark all keys as referenced - nothing more to do
             VisitChildren(n); // visit the children
@@ -428,10 +433,10 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// ElementOp
-        /// 
-        /// An ElementOp that is still present when Projection Prunning is invoked can only get introduced 
-        /// in the TransformationRules phase by transforming an apply operation into a scalar subquery. 
-        /// Such ElementOp serves as root of a defining expression of a VarDefinitionOp node and 
+        ///
+        /// An ElementOp that is still present when Projection Prunning is invoked can only get introduced
+        /// in the TransformationRules phase by transforming an apply operation into a scalar subquery.
+        /// Such ElementOp serves as root of a defining expression of a VarDefinitionOp node and
         /// thus what it produces is useful.
         /// </summary>
         /// <param name="op">the ElementOp</param>
@@ -449,9 +454,9 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// FilterOp
-        /// 
-        /// First visit the predicate (because that may contain references to 
-        /// the relop input), and then visit the relop input. No additional 
+        ///
+        /// First visit the predicate (because that may contain references to
+        /// the relop input), and then visit the relop input. No additional
         /// processing is required
         /// </summary>
         /// <param name="op">the filterOp</param>
@@ -466,13 +471,13 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// GroupByBase
-        /// 
+        ///
         /// First, we visit the vardeflist for aggregates and potentially group aggregates
-        /// as they may reference keys (including constant keys). 
-        /// Then we remove all null and constant keys that are not referenced as long as 
+        /// as they may reference keys (including constant keys).
+        /// Then we remove all null and constant keys that are not referenced as long as
         /// there is one key left. We add all remaining key columns to the referenced list.
         /// Then we walk through the vardeflist for the keys; and finally process the relop input
-        /// Once we're done, we update the "Outputs" varset - to account for any 
+        /// Once we're done, we update the "Outputs" varset - to account for any
         /// pruned vars. The "Keys" varset will not change
         /// </summary>
         /// <param name="op">the groupbyOp</param>
@@ -480,7 +485,7 @@ namespace System.Data.Query.PlanCompiler
         /// <returns>modified subtree</returns>
         protected override Node VisitGroupByOp(GroupByBaseOp op, Node n)
         {
-            // DevDiv#322980: Visit the vardeflist for aggregates and potentially group aggregates before removing 
+            // DevDiv#322980: Visit the vardeflist for aggregates and potentially group aggregates before removing
             // redundant constant keys. This is because they may depend on (reference) the keys
             for (int i = n.Children.Count - 1; i >= 2; i--)
             {
@@ -488,7 +493,7 @@ namespace System.Data.Query.PlanCompiler
             }
 
             //All constant and null keys that are not referenced can be removed
-            //as long as there is at least one key left.           
+            //as long as there is at least one key left.
             if (op.Keys.Count > 1)
             {
                 RemoveRedundantConstantKeys(op.Keys, op.Outputs, n.Child1);
@@ -519,31 +524,43 @@ namespace System.Data.Query.PlanCompiler
         /// <summary>
         /// Helper method for removing redundant constant keys from GroupByOp and DistictOp.
         /// It only examines the keys defined in the given varDefListNode.
-        /// It removes all constant and null keys that are not referenced elsewhere, 
-        /// but ensuring that at least one key is left. 
-        /// It should not be called with empty keyVec. 
+        /// It removes all constant and null keys that are not referenced elsewhere,
+        /// but ensuring that at least one key is left.
+        /// It should not be called with empty keyVec.
         /// </summary>
         /// <param name="keyVec">The keys</param>
         /// <param name="outputVec">The var vec that needs to be updated along with the keys</param>
         /// <param name="varDefListNode">Var def list node for the keys </param>
-        private void RemoveRedundantConstantKeys(VarVec keyVec, VarVec outputVec, Node varDefListNode)
+        private void RemoveRedundantConstantKeys(
+            VarVec keyVec,
+            VarVec outputVec,
+            Node varDefListNode
+        )
         {
             //Find all the keys that are nulls and constants
-            List<Node> constantKeys = varDefListNode.Children.Where(d => d.Op.OpType == OpType.VarDef 
-                && PlanCompilerUtil.IsConstantBaseOp(d.Child0.Op.OpType)).ToList();
+            List<Node> constantKeys = varDefListNode
+                .Children.Where(d =>
+                    d.Op.OpType == OpType.VarDef
+                    && PlanCompilerUtil.IsConstantBaseOp(d.Child0.Op.OpType)
+                )
+                .ToList();
 
-            VarVec constantKeyVars = this.m_command.CreateVarVec(constantKeys.Select(d => ((VarDefOp)d.Op).Var));
+            VarVec constantKeyVars = this.m_command.CreateVarVec(
+                constantKeys.Select(d => ((VarDefOp)d.Op).Var)
+            );
 
             //Get the list of unreferenced  constant keys
             constantKeyVars.Minus(m_referencedVars);
 
-            //Remove the unreferenced constant keys 
+            //Remove the unreferenced constant keys
             keyVec.Minus(constantKeyVars);
             outputVec.Minus(constantKeyVars);
 
-            varDefListNode.Children.RemoveAll(c => constantKeys.Contains(c) && constantKeyVars.IsSet(((VarDefOp)c.Op).Var));
+            varDefListNode.Children.RemoveAll(c =>
+                constantKeys.Contains(c) && constantKeyVars.IsSet(((VarDefOp)c.Op).Var)
+            );
 
-            //If no keys are left add one. 
+            //If no keys are left add one.
             if (keyVec.Count == 0)
             {
                 Node keyNode = constantKeys.First();
@@ -570,15 +587,19 @@ namespace System.Data.Query.PlanCompiler
             {
                 GroupByIntoOp newOp = (GroupByIntoOp)result.Op;
 
-                result = m_command.CreateNode(m_command.CreateGroupByOp(newOp.Keys, newOp.Outputs),
-                    result.Child0, result.Child1, result.Child2);
+                result = m_command.CreateNode(
+                    m_command.CreateGroupByOp(newOp.Keys, newOp.Outputs),
+                    result.Child0,
+                    result.Child1,
+                    result.Child2
+                );
             }
             return result;
         }
 
         /// <summary>
         /// JoinOps
-        /// 
+        ///
         /// Common handling for all join ops. For all joins (other than crossjoin),
         /// we must first visit the predicate (to capture any references from it), and
         /// then visit the relop inputs. The relop inputs can be visited in any order
@@ -612,12 +633,12 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// ProjectOp
-        /// 
-        /// We visit the projections first (the VarDefListOp child), and then 
+        ///
+        /// We visit the projections first (the VarDefListOp child), and then
         /// the input (the RelOp child) - this reverse order is necessary, since
         /// the projections need to be visited to determine if anything from
         /// the input is really needed.
-        /// 
+        ///
         /// The VarDefListOp child will handle the removal of unnecessary VarDefOps.
         /// On the way out, we then update our "Vars" property to reflect the Vars
         /// that have been eliminated
@@ -627,8 +648,7 @@ namespace System.Data.Query.PlanCompiler
         /// <returns>modified subtree</returns>
         public override Node Visit(ProjectOp op, Node n)
         {
-
-            // Update my Vars - to remove "unreferenced" vars. Do this before visiting 
+            // Update my Vars - to remove "unreferenced" vars. Do this before visiting
             // the children - the outputs of the ProjectOp are only consumed by upstream
             // consumers, and if a Var has not yet been referenced, its not needed upstream
             PruneVarSet(op.Outputs);
@@ -636,14 +656,14 @@ namespace System.Data.Query.PlanCompiler
             // first visit the computed expressions, then visit the input relop
             VisitChildrenReverse(n);
 
-            // If there are no Vars left, then simply return my child - otherwise, 
+            // If there are no Vars left, then simply return my child - otherwise,
             // return the current node
             return op.Outputs.IsEmpty ? n.Child0 : n;
         }
 
         /// <summary>
-        /// ScanTableOp 
-        /// 
+        /// ScanTableOp
+        ///
         /// Update the list of referenced columns
         /// </summary>
         /// <param name="op"></param>
@@ -660,8 +680,8 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// SetOps
-        /// 
-        /// Common handling for all SetOps. We first identify the "output" vars 
+        ///
+        /// Common handling for all SetOps. We first identify the "output" vars
         /// that are referenced, and mark the corresponding "input" vars as referenced
         /// We then remove all unreferenced output Vars from the "Outputs" varset
         /// as well as from the Varmaps.
@@ -672,7 +692,7 @@ namespace System.Data.Query.PlanCompiler
         /// <returns></returns>
         protected override Node VisitSetOp(SetOp op, Node n)
         {
-            // Prune the outputs varset, except for Intersect and Except, which require 
+            // Prune the outputs varset, except for Intersect and Except, which require
             // all their outputs to compare, so don't bother pruning them.
             if (OpType.Intersect == op.OpType || OpType.Except == op.OpType)
             {
@@ -695,11 +715,11 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// SortOp 
-        /// 
-        /// First visit the sort keys - no sort key can be eliminated. 
+        /// SortOp
+        ///
+        /// First visit the sort keys - no sort key can be eliminated.
         /// Then process the vardeflist child (if there is one) that contains computed
-        /// vars, and finally process the relop input. As before, the computedvars 
+        /// vars, and finally process the relop input. As before, the computedvars
         /// and sortkeys need to be processed before the relop input
         /// </summary>
         /// <param name="op">the sortop</param>
@@ -726,7 +746,7 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// UnnestOp
-        /// 
+        ///
         /// Marks the unnestVar as referenced, and if there
         /// is a child, visits the child.
         /// </summary>
@@ -745,7 +765,7 @@ namespace System.Data.Query.PlanCompiler
         #region ScalarOps Visitors
 
         //
-        // The only ScalarOps that need special processing are 
+        // The only ScalarOps that need special processing are
         //  * VarRefOp: we mark the corresponding Var as referenced
         //  * ExistsOp: We mark the (only) Var of the child ProjectOp as referenced
         //
@@ -754,7 +774,7 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// VarRefOp
-        /// 
+        ///
         /// Mark the corresponding Var as "referenced"
         /// </summary>
         /// <param name="op">the VarRefOp</param>
@@ -768,7 +788,7 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// ExistsOp
-        /// 
+        ///
         /// The child must be a ProjectOp - with exactly 1 var. Mark it as referenced
         /// </summary>
         /// <param name="op">the ExistsOp</param>
@@ -776,7 +796,7 @@ namespace System.Data.Query.PlanCompiler
         /// <returns></returns>
         public override Node Visit(ExistsOp op, Node n)
         {
-            // Ensure that the child is a projectOp, and has exactly one var. Mark 
+            // Ensure that the child is a projectOp, and has exactly one var. Mark
             // that var as referenced always
             ProjectOp projectOp = (ProjectOp)n.Child0.Op;
 

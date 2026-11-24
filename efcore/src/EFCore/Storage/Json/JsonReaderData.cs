@@ -62,7 +62,6 @@ public class JsonReaderData
         }
         else
         {
-
             var buffer = _buffer;
             var totalConsumed = bytesConsumed + _positionInBuffer;
             if (_bytesAvailable != 0 && totalConsumed < buffer.Length)
@@ -95,6 +94,10 @@ public class JsonReaderData
     ///     Creates a <see cref="Utf8JsonReader" /> for the current captured state.
     /// </summary>
     /// <returns>The new reader.</returns>
-    public virtual Utf8JsonReader CreateReader()
-        => new(_buffer.AsSpan(_positionInBuffer), isFinalBlock: _bytesAvailable != _buffer.Length, _readerState);
+    public virtual Utf8JsonReader CreateReader() =>
+        new(
+            _buffer.AsSpan(_positionInBuffer),
+            isFinalBlock: _bytesAvailable != _buffer.Length,
+            _readerState
+        );
 }

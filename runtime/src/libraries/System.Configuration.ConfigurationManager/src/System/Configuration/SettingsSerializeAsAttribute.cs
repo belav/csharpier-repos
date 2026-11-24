@@ -24,10 +24,7 @@ namespace System.Configuration
         /// </summary>
         public SettingsSerializeAs SerializeAs
         {
-            get
-            {
-                return _serializeAs;
-            }
+            get { return _serializeAs; }
         }
     }
 }

@@ -1,28 +1,31 @@
 //------------------------------------------------------------------------------
 // <copyright file="MimeFormatter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Protocols {
-    using System.IO;
+namespace System.Web.Services.Protocols
+{
     using System;
-    using System.Xml.Serialization;
-    using System.Reflection;
     using System.Collections;
-    using System.Web.Services;
+    using System.IO;
+    using System.Reflection;
     using System.Security.Permissions;
+    using System.Web.Services;
+    using System.Xml.Serialization;
 
     /// <include file='doc\MimeFormatter.uex' path='docs/doc[@for="MimeFormatter"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public abstract class MimeFormatter {
+    public abstract class MimeFormatter
+    {
         /// <include file='doc\MimeFormatter.uex' path='docs/doc[@for="MimeFormatter.GetInitializer"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public abstract object GetInitializer(LogicalMethodInfo methodInfo);
+
         /// <include file='doc\MimeFormatter.uex' path='docs/doc[@for="MimeFormatter.Initialize"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -33,7 +36,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public virtual object[] GetInitializers(LogicalMethodInfo[] methodInfos) {
+        public virtual object[] GetInitializers(LogicalMethodInfo[] methodInfos)
+        {
             object[] initializers = new object[methodInfos.Length];
             for (int i = 0; i < initializers.Length; i++)
                 initializers[i] = GetInitializer(methodInfos[i]);
@@ -45,7 +49,8 @@ namespace System.Web.Services.Protocols {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]
-        public static object GetInitializer(Type type, LogicalMethodInfo methodInfo) {
+        public static object GetInitializer(Type type, LogicalMethodInfo methodInfo)
+        {
             return ((MimeFormatter)Activator.CreateInstance(type)).GetInitializer(methodInfo);
         }
 
@@ -54,7 +59,8 @@ namespace System.Web.Services.Protocols {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]
-        public static object[] GetInitializers(Type type, LogicalMethodInfo[] methodInfos) {
+        public static object[] GetInitializers(Type type, LogicalMethodInfo[] methodInfos)
+        {
             return ((MimeFormatter)Activator.CreateInstance(type)).GetInitializers(methodInfos);
         }
 
@@ -63,11 +69,11 @@ namespace System.Web.Services.Protocols {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]
-        public static MimeFormatter CreateInstance(Type type, object initializer) {
+        public static MimeFormatter CreateInstance(Type type, object initializer)
+        {
             MimeFormatter formatter = (MimeFormatter)Activator.CreateInstance(type);
             formatter.Initialize(initializer);
             return formatter;
         }
     }
-
 }

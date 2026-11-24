@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.CodeStyle
     /// <completionlist cref="NotificationOption2"/>
     [DataContract]
     internal readonly partial record struct NotificationOption2(
-        [property: DataMember(Order = 0)] ReportDiagnostic Severity, [property: DataMember(Order = 1)] bool IsExplicitlySpecified)
+        [property: DataMember(Order = 0)] ReportDiagnostic Severity,
+        [property: DataMember(Order = 1)] bool IsExplicitlySpecified
+    )
     {
         /// <summary>
         /// Notification option to disable or suppress an option with <see cref="ReportDiagnostic.Suppress"/>.
@@ -41,28 +43,28 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// </summary>
         public static NotificationOption2 Error => new(ReportDiagnostic.Error, false);
 
-        public NotificationOption2 WithIsExplicitlySpecified(bool isExplicitlySpecified)
-            => new(Severity, isExplicitlySpecified);
+        public NotificationOption2 WithIsExplicitlySpecified(bool isExplicitlySpecified) =>
+            new(Severity, isExplicitlySpecified);
 
-        public static NotificationOption2 ForSeverity(ReportDiagnostic reportDiagnostic)
-            => reportDiagnostic switch
+        public static NotificationOption2 ForSeverity(ReportDiagnostic reportDiagnostic) =>
+            reportDiagnostic switch
             {
                 ReportDiagnostic.Error => Error,
                 ReportDiagnostic.Warn => Warning,
                 ReportDiagnostic.Info => Suggestion,
                 ReportDiagnostic.Hidden or ReportDiagnostic.Default => Silent,
                 ReportDiagnostic.Suppress => None,
-                _ => throw ExceptionUtilities.UnexpectedValue(reportDiagnostic)
+                _ => throw ExceptionUtilities.UnexpectedValue(reportDiagnostic),
             };
 
-        public static NotificationOption2 ForSeverity(DiagnosticSeverity severity)
-            => severity switch
+        public static NotificationOption2 ForSeverity(DiagnosticSeverity severity) =>
+            severity switch
             {
                 DiagnosticSeverity.Error => Error,
                 DiagnosticSeverity.Warning => Warning,
                 DiagnosticSeverity.Info => Suggestion,
                 DiagnosticSeverity.Hidden => Silent,
-                _ => throw ExceptionUtilities.UnexpectedValue(severity)
+                _ => throw ExceptionUtilities.UnexpectedValue(severity),
             };
     }
 }

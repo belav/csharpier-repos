@@ -11,14 +11,19 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Analyzer
 {
-    [ExportWorkspaceServiceFactory(typeof(IWorkspaceSettingsProviderFactory<AnalyzerSetting>)), Shared]
+    [
+        ExportWorkspaceServiceFactory(typeof(IWorkspaceSettingsProviderFactory<AnalyzerSetting>)),
+        Shared
+    ]
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    internal class AnalyzerSettingsWorkspaceServiceFactory(IDiagnosticAnalyzerService analyzerService) : IWorkspaceServiceFactory
+    internal class AnalyzerSettingsWorkspaceServiceFactory(
+        IDiagnosticAnalyzerService analyzerService
+    ) : IWorkspaceServiceFactory
     {
         private readonly IDiagnosticAnalyzerService _analyzerService = analyzerService;
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new AnalyzerSettingsProviderFactory(workspaceServices.Workspace, _analyzerService);
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new AnalyzerSettingsProviderFactory(workspaceServices.Workspace, _analyzerService);
     }
 }

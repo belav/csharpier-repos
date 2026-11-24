@@ -179,9 +179,8 @@ public class ErrorBoundaryTest : ServerTestBase<ToggleExecutionModeServerFixture
     void AssertGlobalErrorState(bool hasGlobalError)
     {
         var globalErrorUi = Browser.Exists(By.Id("blazor-error-ui"));
-        Browser.Equal(
-            hasGlobalError ? "block" : "none",
-            () => globalErrorUi.GetCssValue("display")
+        Browser.Equal(hasGlobalError ? "block" : "none", () =>
+            globalErrorUi.GetCssValue("display")
         );
     }
 }

@@ -5,27 +5,32 @@
 namespace System.ServiceModel.Configuration
 {
     using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Configuration;
     using System.Globalization;
-    using System.ServiceModel.Description;
-    using System.Collections.ObjectModel;
     using System.ServiceModel.Channels;
-    using System.Collections.Generic;
+    using System.ServiceModel.Description;
 
-    [ConfigurationCollection(typeof(ServiceBehaviorElement), AddItemName = ConfigurationStrings.Behavior)]
-    public sealed class ServiceBehaviorElementCollection : ServiceModelEnhancedConfigurationElementCollection<ServiceBehaviorElement>
+    [ConfigurationCollection(
+        typeof(ServiceBehaviorElement),
+        AddItemName = ConfigurationStrings.Behavior
+    )]
+    public sealed class ServiceBehaviorElementCollection
+        : ServiceModelEnhancedConfigurationElementCollection<ServiceBehaviorElement>
     {
-
         public ServiceBehaviorElementCollection()
-            : base(ConfigurationStrings.Behavior)
-        { }
+            : base(ConfigurationStrings.Behavior) { }
 
         protected override bool ThrowOnDuplicate
         {
             get { return false; }
         }
 
-        protected override void DeserializeElement(System.Xml.XmlReader reader, bool serializeCollectionKey)
+        protected override void DeserializeElement(
+            System.Xml.XmlReader reader,
+            bool serializeCollectionKey
+        )
         {
             base.DeserializeElement(reader, serializeCollectionKey);
         }
@@ -50,11 +55,15 @@ namespace System.ServiceModel.Configuration
 
             ServiceBehaviorElement childServiceBehaviorElement = element as ServiceBehaviorElement;
             string serviceBehaviorElementName = childServiceBehaviorElement.Name;
-            ServiceBehaviorElement parentServiceBehaviorElement = this.BaseGet(serviceBehaviorElementName) as ServiceBehaviorElement;
-            List<BehaviorExtensionElement> parentExtensionElements = new List<BehaviorExtensionElement>();
+            ServiceBehaviorElement parentServiceBehaviorElement =
+                this.BaseGet(serviceBehaviorElementName) as ServiceBehaviorElement;
+            List<BehaviorExtensionElement> parentExtensionElements =
+                new List<BehaviorExtensionElement>();
             if (parentServiceBehaviorElement != null)
             {
-                foreach (BehaviorExtensionElement parentBehaviorElement in parentServiceBehaviorElement)
+                foreach (
+                    BehaviorExtensionElement parentBehaviorElement in parentServiceBehaviorElement
+                )
                 {
                     parentExtensionElements.Add(parentBehaviorElement);
                 }
@@ -64,4 +73,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-

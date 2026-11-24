@@ -16,53 +16,40 @@ namespace System.Workflow.ComponentModel.Compiler
         string propertyName = null;
 
         public ValidationError(string errorText, int errorNumber)
-            : this(errorText, errorNumber, false, null)
-        {
-        }
+            : this(errorText, errorNumber, false, null) { }
 
         public ValidationError(string errorText, int errorNumber, bool isWarning)
-            : this(errorText, errorNumber, isWarning, null)
-        {
-        }
+            : this(errorText, errorNumber, isWarning, null) { }
 
-        public ValidationError(string errorText, int errorNumber, bool isWarning, string propertyName)
+        public ValidationError(
+            string errorText,
+            int errorNumber,
+            bool isWarning,
+            string propertyName
+        )
         {
             this.errorText = errorText;
             this.errorNumber = errorNumber;
             this.isWarning = isWarning;
             this.propertyName = propertyName;
         }
+
         public string PropertyName
         {
-            get
-            {
-                return this.propertyName;
-            }
-            set
-            {
-                this.propertyName = value;
-            }
+            get { return this.propertyName; }
+            set { this.propertyName = value; }
         }
         public string ErrorText
         {
-            get
-            {
-                return this.errorText;
-            }
+            get { return this.errorText; }
         }
         public bool IsWarning
         {
-            get
-            {
-                return this.isWarning;
-            }
+            get { return this.isWarning; }
         }
         public int ErrorNumber
         {
-            get
-            {
-                return this.errorNumber;
-            }
+            get { return this.errorNumber; }
         }
         public IDictionary UserData
         {
@@ -76,14 +63,23 @@ namespace System.Workflow.ComponentModel.Compiler
 
         public static ValidationError GetNotSetValidationError(string propertyName)
         {
-            ValidationError error = new ValidationError(SR.GetString(SR.Error_PropertyNotSet, propertyName), ErrorNumbers.Error_PropertyNotSet);
+            ValidationError error = new ValidationError(
+                SR.GetString(SR.Error_PropertyNotSet, propertyName),
+                ErrorNumbers.Error_PropertyNotSet
+            );
             error.PropertyName = propertyName;
             return error;
         }
 
         public override string ToString()
         {
-            return String.Format(CultureInfo.InvariantCulture, "{0} {1}: {2}", this.isWarning ? "warning" : "error", this.errorNumber, this.errorText);
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                "{0} {1}: {2}",
+                this.isWarning ? "warning" : "error",
+                this.errorNumber,
+                this.errorText
+            );
         }
     }
 

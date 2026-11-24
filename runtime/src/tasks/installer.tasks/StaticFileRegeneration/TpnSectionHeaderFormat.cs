@@ -26,6 +26,6 @@ namespace Microsoft.DotNet.Build.Tasks
         /// {number}.{tab}{name}
         /// {blank line}
         /// </summary>
-        Numbered
+        Numbered,
     }
 }

@@ -4,6 +4,7 @@
 namespace System.ServiceModel
 {
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.IdentityModel.Tokens;
     using System.Runtime;
     using System.Runtime.CompilerServices;
@@ -11,7 +12,6 @@ namespace System.ServiceModel
     using System.ServiceModel.Security;
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
-    using System.ComponentModel;
 
     public sealed class FederatedMessageSecurityOverHttp
     {
@@ -61,14 +61,8 @@ namespace System.ServiceModel
 
         public bool EstablishSecurityContext
         {
-            get
-            {
-                return this.establishSecurityContext;
-            }
-            set
-            {
-                this.establishSecurityContext = value;
-            }
+            get { return this.establishSecurityContext; }
+            set { this.establishSecurityContext = value; }
         }
 
         [DefaultValue(null)]
@@ -88,14 +82,8 @@ namespace System.ServiceModel
         [DefaultValue(null)]
         public Binding IssuerBinding
         {
-            get
-            {
-                return this.issuerBinding;
-            }
-            set
-            {
-                this.issuerBinding = value;
-            }
+            get { return this.issuerBinding; }
+            set { this.issuerBinding = value; }
         }
 
         [DefaultValue(null)]
@@ -112,7 +100,9 @@ namespace System.ServiceModel
             {
                 if (!SecurityKeyTypeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.issuedKeyType = value;
             }
@@ -129,24 +119,40 @@ namespace System.ServiceModel
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        internal SecurityBindingElement CreateSecurityBindingElement(bool isSecureTransportMode,
-                                                                     bool isReliableSession,
-                                                                     MessageSecurityVersion version)
+        internal SecurityBindingElement CreateSecurityBindingElement(
+            bool isSecureTransportMode,
+            bool isReliableSession,
+            MessageSecurityVersion version
+        )
         {
-            if ((this.IssuedKeyType == SecurityKeyType.BearerKey) &&
-               (version.TrustVersion == TrustVersion.WSTrustFeb2005))
+            if (
+                (this.IssuedKeyType == SecurityKeyType.BearerKey)
+                && (version.TrustVersion == TrustVersion.WSTrustFeb2005)
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.BearerKeyIncompatibleWithWSFederationHttpBinding)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.BearerKeyIncompatibleWithWSFederationHttpBinding)
+                    )
+                );
             }
 
             if (isReliableSession && !this.EstablishSecurityContext)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SecureConversationRequiredByReliableSession)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SecureConversationRequiredByReliableSession)
+                    )
+                );
             }
 
             SecurityBindingElement result;
             bool emitBspAttributes = true;
-            IssuedSecurityTokenParameters issuedParameters = new IssuedSecurityTokenParameters(this.IssuedTokenType, this.IssuerAddress, this.IssuerBinding);
+            IssuedSecurityTokenParameters issuedParameters = new IssuedSecurityTokenParameters(
+                this.IssuedTokenType,
+                this.IssuerAddress,
+                this.IssuerBinding
+            );
             issuedParameters.IssuerMetadataAddress = this.issuerMetadataAddress;
             issuedParameters.KeyType = this.IssuedKeyType;
             if (this.IssuedKeyType == SecurityKeyType.SymmetricKey)
@@ -165,18 +171,32 @@ namespace System.ServiceModel
             {
                 issuedParameters.AdditionalRequestParameters.Add(p);
             }
-            WSSecurityTokenSerializer versionSpecificSerializer = new WSSecurityTokenSerializer(version.SecurityVersion,
-                                                                                                version.TrustVersion,
-                                                                                                version.SecureConversationVersion,
-                                                                                                emitBspAttributes,
-                                                                                                null, null, null);
-            SecurityStandardsManager versionSpecificStandardsManager = new SecurityStandardsManager(version, versionSpecificSerializer);
-            issuedParameters.AddAlgorithmParameters(this.AlgorithmSuite, versionSpecificStandardsManager, this.issuedKeyType);
+            WSSecurityTokenSerializer versionSpecificSerializer = new WSSecurityTokenSerializer(
+                version.SecurityVersion,
+                version.TrustVersion,
+                version.SecureConversationVersion,
+                emitBspAttributes,
+                null,
+                null,
+                null
+            );
+            SecurityStandardsManager versionSpecificStandardsManager = new SecurityStandardsManager(
+                version,
+                versionSpecificSerializer
+            );
+            issuedParameters.AddAlgorithmParameters(
+                this.AlgorithmSuite,
+                versionSpecificStandardsManager,
+                this.issuedKeyType
+            );
 
             SecurityBindingElement issuedTokenSecurity;
             if (isSecureTransportMode)
             {
-                issuedTokenSecurity = SecurityBindingElement.CreateIssuedTokenOverTransportBindingElement(issuedParameters);
+                issuedTokenSecurity =
+                    SecurityBindingElement.CreateIssuedTokenOverTransportBindingElement(
+                        issuedParameters
+                    );
             }
             else
             {
@@ -184,11 +204,19 @@ namespace System.ServiceModel
                 {
                     // We should have passed 'true' as RequireCancelation to be consistent with other standard bindings.
                     // However, to limit the change for Orcas, we scope down to just newer version of WSSecurityPolicy.
-                    issuedTokenSecurity = SecurityBindingElement.CreateIssuedTokenForSslBindingElement(issuedParameters, version.SecurityPolicyVersion != SecurityPolicyVersion.WSSecurityPolicy11);
+                    issuedTokenSecurity =
+                        SecurityBindingElement.CreateIssuedTokenForSslBindingElement(
+                            issuedParameters,
+                            version.SecurityPolicyVersion
+                                != SecurityPolicyVersion.WSSecurityPolicy11
+                        );
                 }
                 else
                 {
-                    issuedTokenSecurity = SecurityBindingElement.CreateIssuedTokenForCertificateBindingElement(issuedParameters);
+                    issuedTokenSecurity =
+                        SecurityBindingElement.CreateIssuedTokenForCertificateBindingElement(
+                            issuedParameters
+                        );
                 }
             }
 
@@ -197,7 +225,10 @@ namespace System.ServiceModel
 
             if (this.EstablishSecurityContext)
             {
-                result = SecurityBindingElement.CreateSecureConversationBindingElement(issuedTokenSecurity, true);
+                result = SecurityBindingElement.CreateSecureConversationBindingElement(
+                    issuedTokenSecurity,
+                    true
+                );
             }
             else
             {
@@ -222,13 +253,20 @@ namespace System.ServiceModel
             if (this.establishSecurityContext)
             {
                 // issue the transition SCT for a short duration only
-                issuedTokenSecurity.LocalServiceSettings.IssuedCookieLifetime = SpnegoTokenAuthenticator.defaultServerIssuedTransitionTokenLifetime;
+                issuedTokenSecurity.LocalServiceSettings.IssuedCookieLifetime =
+                    SpnegoTokenAuthenticator.defaultServerIssuedTransitionTokenLifetime;
             }
 
             return result;
         }
 
-        internal static bool TryCreate(SecurityBindingElement sbe, bool isSecureTransportMode, bool isReliableSession, MessageSecurityVersion version, out FederatedMessageSecurityOverHttp messageSecurity)
+        internal static bool TryCreate(
+            SecurityBindingElement sbe,
+            bool isSecureTransportMode,
+            bool isReliableSession,
+            MessageSecurityVersion version,
+            out FederatedMessageSecurityOverHttp messageSecurity
+        )
         {
             Fx.Assert(null != sbe, string.Empty);
 
@@ -248,7 +286,11 @@ namespace System.ServiceModel
 
             SecurityBindingElement bootstrapSecurity;
 
-            bool establishSecurityContext = SecurityBindingElement.IsSecureConversationBinding(sbe, true, out bootstrapSecurity);
+            bool establishSecurityContext = SecurityBindingElement.IsSecureConversationBinding(
+                sbe,
+                true,
+                out bootstrapSecurity
+            );
             bootstrapSecurity = establishSecurityContext ? bootstrapSecurity : sbe;
 
             if (isSecureTransportMode && !(bootstrapSecurity is TransportSecurityBindingElement))
@@ -259,38 +301,67 @@ namespace System.ServiceModel
 
             if (isSecureTransportMode)
             {
-                if (!SecurityBindingElement.IsIssuedTokenOverTransportBinding(bootstrapSecurity, out issuedTokenParameters))
+                if (
+                    !SecurityBindingElement.IsIssuedTokenOverTransportBinding(
+                        bootstrapSecurity,
+                        out issuedTokenParameters
+                    )
+                )
                     return false;
             }
             else
             {
                 // We should have passed 'true' as RequireCancelation to be consistent with other standard bindings.
                 // However, to limit the change for Orcas, we scope down to just newer version of WSSecurityPolicy.
-                if (SecurityBindingElement.IsIssuedTokenForSslBinding(bootstrapSecurity, version.SecurityPolicyVersion != SecurityPolicyVersion.WSSecurityPolicy11, out issuedTokenParameters))
+                if (
+                    SecurityBindingElement.IsIssuedTokenForSslBinding(
+                        bootstrapSecurity,
+                        version.SecurityPolicyVersion != SecurityPolicyVersion.WSSecurityPolicy11,
+                        out issuedTokenParameters
+                    )
+                )
                     negotiateServiceCredential = true;
-                else if (SecurityBindingElement.IsIssuedTokenForCertificateBinding(bootstrapSecurity, out issuedTokenParameters))
+                else if (
+                    SecurityBindingElement.IsIssuedTokenForCertificateBinding(
+                        bootstrapSecurity,
+                        out issuedTokenParameters
+                    )
+                )
                     negotiateServiceCredential = false;
                 else
                     return false;
             }
 
-            if ((issuedTokenParameters.KeyType == SecurityKeyType.BearerKey) &&
-               (version.TrustVersion == TrustVersion.WSTrustFeb2005))
+            if (
+                (issuedTokenParameters.KeyType == SecurityKeyType.BearerKey)
+                && (version.TrustVersion == TrustVersion.WSTrustFeb2005)
+            )
             {
                 return false;
             }
 
             Collection<XmlElement> nonAlgorithmRequestParameters;
-            WSSecurityTokenSerializer versionSpecificSerializer = new WSSecurityTokenSerializer(version.SecurityVersion,
-                                                                                                version.TrustVersion,
-                                                                                                version.SecureConversationVersion,
-                                                                                                emitBspAttributes,
-                                                                                                null, null, null);
-            SecurityStandardsManager versionSpecificStandardsManager = new SecurityStandardsManager(version, versionSpecificSerializer);
+            WSSecurityTokenSerializer versionSpecificSerializer = new WSSecurityTokenSerializer(
+                version.SecurityVersion,
+                version.TrustVersion,
+                version.SecureConversationVersion,
+                emitBspAttributes,
+                null,
+                null,
+                null
+            );
+            SecurityStandardsManager versionSpecificStandardsManager = new SecurityStandardsManager(
+                version,
+                versionSpecificSerializer
+            );
 
-            if (!issuedTokenParameters.DoAlgorithmsMatch(sbe.DefaultAlgorithmSuite,
-                                                         versionSpecificStandardsManager,
-                                                         out nonAlgorithmRequestParameters))
+            if (
+                !issuedTokenParameters.DoAlgorithmsMatch(
+                    sbe.DefaultAlgorithmSuite,
+                    versionSpecificStandardsManager,
+                    out nonAlgorithmRequestParameters
+                )
+            )
             {
                 return false;
             }
@@ -312,7 +383,10 @@ namespace System.ServiceModel
             {
                 messageSecurity.TokenRequestParameters.Add(p);
             }
-            if (issuedTokenParameters.AlternativeIssuerEndpoints != null && issuedTokenParameters.AlternativeIssuerEndpoints.Count > 0)
+            if (
+                issuedTokenParameters.AlternativeIssuerEndpoints != null
+                && issuedTokenParameters.AlternativeIssuerEndpoints.Count > 0
+            )
             {
                 return false;
             }
@@ -321,12 +395,14 @@ namespace System.ServiceModel
 
         internal bool InternalShouldSerialize()
         {
-            return (this.ShouldSerializeAlgorithmSuite()
+            return (
+                this.ShouldSerializeAlgorithmSuite()
                 || this.ShouldSerializeClaimTypeRequirements()
                 || this.ShouldSerializeNegotiateServiceCredential()
                 || this.ShouldSerializeEstablishSecurityContext()
                 || this.ShouldSerializeIssuedKeyType()
-                || this.ShouldSerializeTokenRequestParameters());
+                || this.ShouldSerializeTokenRequestParameters()
+            );
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -364,6 +440,5 @@ namespace System.ServiceModel
         {
             return (this.TokenRequestParameters.Count > 0);
         }
-
     }
 }

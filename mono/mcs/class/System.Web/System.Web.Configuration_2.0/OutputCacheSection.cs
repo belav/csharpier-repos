@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,88 +33,114 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
+    public sealed class OutputCacheSection : ConfigurationSection
+    {
+        static ConfigurationProperty enableFragmentCacheProp;
+        static ConfigurationProperty enableOutputCacheProp;
+        static ConfigurationProperty omitVaryStarProp;
+        static ConfigurationProperty sendCacheControlHeaderProp;
+        static ConfigurationProperty enableKernelCacheForVaryByStarProp;
+        static ConfigurationProperty providersProp;
+        static ConfigurationProperty defaultProviderNameProp;
 
-	public sealed class OutputCacheSection : ConfigurationSection
-	{
-		static ConfigurationProperty enableFragmentCacheProp;
-		static ConfigurationProperty enableOutputCacheProp;
-		static ConfigurationProperty omitVaryStarProp;
-		static ConfigurationProperty sendCacheControlHeaderProp;
-		static ConfigurationProperty enableKernelCacheForVaryByStarProp;
-		static ConfigurationProperty providersProp;
-		static ConfigurationProperty defaultProviderNameProp;
-		
-		static ConfigurationPropertyCollection properties;
+        static ConfigurationPropertyCollection properties;
 
-		static OutputCacheSection ()
-		{
-			enableFragmentCacheProp = new ConfigurationProperty ("enableFragmentCache", typeof (bool), true);
-			enableOutputCacheProp = new ConfigurationProperty ("enableOutputCache", typeof (bool), true);
-			omitVaryStarProp = new ConfigurationProperty ("omitVaryStar", typeof (bool), false);
-			sendCacheControlHeaderProp = new ConfigurationProperty ("sendCacheControlHeader", typeof (bool), true);
-			enableKernelCacheForVaryByStarProp = new ConfigurationProperty ("enableKernelCacheForVaryByStar", typeof (bool), false);
-			providersProp = new ConfigurationProperty ("providers", typeof (ProviderSettingsCollection));
-			defaultProviderNameProp = new ConfigurationProperty ("defaultProvider", typeof (string), "AspNetInternalProvider");
-			
-			properties = new ConfigurationPropertyCollection ();
+        static OutputCacheSection()
+        {
+            enableFragmentCacheProp = new ConfigurationProperty(
+                "enableFragmentCache",
+                typeof(bool),
+                true
+            );
+            enableOutputCacheProp = new ConfigurationProperty(
+                "enableOutputCache",
+                typeof(bool),
+                true
+            );
+            omitVaryStarProp = new ConfigurationProperty("omitVaryStar", typeof(bool), false);
+            sendCacheControlHeaderProp = new ConfigurationProperty(
+                "sendCacheControlHeader",
+                typeof(bool),
+                true
+            );
+            enableKernelCacheForVaryByStarProp = new ConfigurationProperty(
+                "enableKernelCacheForVaryByStar",
+                typeof(bool),
+                false
+            );
+            providersProp = new ConfigurationProperty(
+                "providers",
+                typeof(ProviderSettingsCollection)
+            );
+            defaultProviderNameProp = new ConfigurationProperty(
+                "defaultProvider",
+                typeof(string),
+                "AspNetInternalProvider"
+            );
 
-			properties.Add (enableFragmentCacheProp);
-			properties.Add (enableOutputCacheProp);
-			properties.Add (omitVaryStarProp);
-			properties.Add (sendCacheControlHeaderProp);
-			properties.Add (enableKernelCacheForVaryByStarProp);
-			properties.Add (providersProp);
-			properties.Add (defaultProviderNameProp);
-		}
+            properties = new ConfigurationPropertyCollection();
 
-		[ConfigurationProperty ("enableFragmentCache", DefaultValue = "True")]
-		public bool EnableFragmentCache {
-			get { return (bool) base [enableFragmentCacheProp];}
-			set { base[enableFragmentCacheProp] = value; }
-		}
+            properties.Add(enableFragmentCacheProp);
+            properties.Add(enableOutputCacheProp);
+            properties.Add(omitVaryStarProp);
+            properties.Add(sendCacheControlHeaderProp);
+            properties.Add(enableKernelCacheForVaryByStarProp);
+            properties.Add(providersProp);
+            properties.Add(defaultProviderNameProp);
+        }
 
-		[ConfigurationProperty ("enableOutputCache", DefaultValue = "True")]
-		public bool EnableOutputCache {
-			get { return (bool) base [enableOutputCacheProp];}
-			set { base[enableOutputCacheProp] = value; }
-		}
+        [ConfigurationProperty("enableFragmentCache", DefaultValue = "True")]
+        public bool EnableFragmentCache
+        {
+            get { return (bool)base[enableFragmentCacheProp]; }
+            set { base[enableFragmentCacheProp] = value; }
+        }
 
-		[ConfigurationProperty ("enableKernelCacheForVaryByStar", DefaultValue = "False")]
-		public bool EnableKernelCacheForVaryByStar {
-			get { return (bool) base [enableKernelCacheForVaryByStarProp]; }
-			set { base [enableKernelCacheForVaryByStarProp] = value; }
-		}
-		
-		[ConfigurationProperty ("omitVaryStar", DefaultValue = "False")]
-		public bool OmitVaryStar {
-			get { return (bool) base [omitVaryStarProp];}
-			set { base[omitVaryStarProp] = value; }
-		}
+        [ConfigurationProperty("enableOutputCache", DefaultValue = "True")]
+        public bool EnableOutputCache
+        {
+            get { return (bool)base[enableOutputCacheProp]; }
+            set { base[enableOutputCacheProp] = value; }
+        }
 
-		[ConfigurationProperty ("sendCacheControlHeader", DefaultValue = "True")]
-		public bool SendCacheControlHeader {
-			get { return (bool) base [sendCacheControlHeaderProp];}
-			set { base[sendCacheControlHeaderProp] = value; }
-		}
+        [ConfigurationProperty("enableKernelCacheForVaryByStar", DefaultValue = "False")]
+        public bool EnableKernelCacheForVaryByStar
+        {
+            get { return (bool)base[enableKernelCacheForVaryByStarProp]; }
+            set { base[enableKernelCacheForVaryByStarProp] = value; }
+        }
 
-		[StringValidatorAttribute(MinLength = 1)]
-		[ConfigurationPropertyAttribute("defaultProvider", DefaultValue = "AspNetInternalProvider")]
-		public string DefaultProviderName {
-			get { return base [defaultProviderNameProp] as string; }
-			set { base [defaultProviderNameProp] = value; }
-		}
-		
-		[ConfigurationPropertyAttribute("providers")]
-		public ProviderSettingsCollection Providers {
-			get { return base [providersProp] as ProviderSettingsCollection; }
-		}
-		
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        [ConfigurationProperty("omitVaryStar", DefaultValue = "False")]
+        public bool OmitVaryStar
+        {
+            get { return (bool)base[omitVaryStarProp]; }
+            set { base[omitVaryStarProp] = value; }
+        }
 
-	}
+        [ConfigurationProperty("sendCacheControlHeader", DefaultValue = "True")]
+        public bool SendCacheControlHeader
+        {
+            get { return (bool)base[sendCacheControlHeaderProp]; }
+            set { base[sendCacheControlHeaderProp] = value; }
+        }
 
+        [StringValidatorAttribute(MinLength = 1)]
+        [ConfigurationPropertyAttribute("defaultProvider", DefaultValue = "AspNetInternalProvider")]
+        public string DefaultProviderName
+        {
+            get { return base[defaultProviderNameProp] as string; }
+            set { base[defaultProviderNameProp] = value; }
+        }
+
+        [ConfigurationPropertyAttribute("providers")]
+        public ProviderSettingsCollection Providers
+        {
+            get { return base[providersProp] as ProviderSettingsCollection; }
+        }
+
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
-
-

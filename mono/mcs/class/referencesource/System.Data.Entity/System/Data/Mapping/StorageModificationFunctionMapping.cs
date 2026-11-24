@@ -7,16 +7,15 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
+using System.Data.Common.Utils;
 using System.Data.Metadata.Edm;
 using System.Diagnostics;
 using System.Globalization;
-using System.Data.Common.Utils;
 using System.Linq;
+using System.Text;
 
 namespace System.Data.Mapping
 {
@@ -28,7 +27,8 @@ namespace System.Data.Mapping
         internal StorageAssociationSetModificationFunctionMapping(
             AssociationSet associationSet,
             StorageModificationFunctionMapping deleteFunctionMapping,
-            StorageModificationFunctionMapping insertFunctionMapping)
+            StorageModificationFunctionMapping insertFunctionMapping
+        )
         {
             this.AssociationSet = EntityUtil.CheckArgumentNull(associationSet, "associationSet");
             this.DeleteFunctionMapping = deleteFunctionMapping;
@@ -52,9 +52,14 @@ namespace System.Data.Mapping
 
         public override string ToString()
         {
-            return String.Format(CultureInfo.InvariantCulture,
-                "AS{{{0}}}:{3}DFunc={{{1}}},{3}IFunc={{{2}}}", AssociationSet, DeleteFunctionMapping,
-                InsertFunctionMapping, Environment.NewLine + "  ");
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                "AS{{{0}}}:{3}DFunc={{{1}}},{3}IFunc={{{2}}}",
+                AssociationSet,
+                DeleteFunctionMapping,
+                InsertFunctionMapping,
+                Environment.NewLine + "  "
+            );
         }
 
         internal void Print(int index)
@@ -77,7 +82,8 @@ namespace System.Data.Mapping
             EntityType entityType,
             StorageModificationFunctionMapping deleteFunctionMapping,
             StorageModificationFunctionMapping insertFunctionMapping,
-            StorageModificationFunctionMapping updateFunctionMapping)
+            StorageModificationFunctionMapping updateFunctionMapping
+        )
         {
             this.EntityType = EntityUtil.CheckArgumentNull(entityType, "entityType");
             this.DeleteFunctionMapping = deleteFunctionMapping;
@@ -107,9 +113,15 @@ namespace System.Data.Mapping
 
         public override string ToString()
         {
-            return String.Format(CultureInfo.InvariantCulture,
-                "ET{{{0}}}:{4}DFunc={{{1}}},{4}IFunc={{{2}}},{4}UFunc={{{3}}}", EntityType, DeleteFunctionMapping,
-                InsertFunctionMapping, UpdateFunctionMapping, Environment.NewLine + "  ");
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                "ET{{{0}}}:{4}DFunc={{{1}}},{4}IFunc={{{2}}},{4}UFunc={{{3}}}",
+                EntityType,
+                DeleteFunctionMapping,
+                InsertFunctionMapping,
+                UpdateFunctionMapping,
+                Environment.NewLine + "  "
+            );
         }
 
         internal void Print(int index)
@@ -134,13 +146,16 @@ namespace System.Data.Mapping
             EdmFunction function,
             IEnumerable<StorageModificationFunctionParameterBinding> parameterBindings,
             FunctionParameter rowsAffectedParameter,
-            IEnumerable<StorageModificationFunctionResultBinding> resultBindings)
+            IEnumerable<StorageModificationFunctionResultBinding> resultBindings
+        )
         {
             EntityUtil.CheckArgumentNull(entitySet, "entitySet");
             this.Function = EntityUtil.CheckArgumentNull(function, "function");
             this.RowsAffectedParameter = rowsAffectedParameter;
-            this.ParameterBindings = EntityUtil.CheckArgumentNull(parameterBindings, "parameterBindings")
-                .ToList().AsReadOnly();
+            this.ParameterBindings = EntityUtil
+                .CheckArgumentNull(parameterBindings, "parameterBindings")
+                .ToList()
+                .AsReadOnly();
             if (null != resultBindings)
             {
                 List<StorageModificationFunctionResultBinding> bindings = resultBindings.ToList();
@@ -149,7 +164,11 @@ namespace System.Data.Mapping
                     ResultBindings = bindings.AsReadOnly();
                 }
             }
-            this.CollocatedAssociationSetEnds = GetReferencedAssociationSetEnds(entitySet as EntitySet, entityType as EntityType, parameterBindings)
+            this.CollocatedAssociationSetEnds = GetReferencedAssociationSetEnds(
+                    entitySet as EntitySet,
+                    entityType as EntityType,
+                    parameterBindings
+                )
                 .ToList()
                 .AsReadOnly();
         }
@@ -181,20 +200,29 @@ namespace System.Data.Mapping
 
         public override string ToString()
         {
-            return String.Format(CultureInfo.InvariantCulture,
-                "Func{{{0}}}: Prm={{{1}}}, Result={{{2}}}", Function,
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                "Func{{{0}}}: Prm={{{1}}}, Result={{{2}}}",
+                Function,
                 StringUtil.ToCommaSeparatedStringSorted(ParameterBindings),
-                StringUtil.ToCommaSeparatedStringSorted(ResultBindings));
+                StringUtil.ToCommaSeparatedStringSorted(ResultBindings)
+            );
         }
 
         // requires: entitySet must not be null
         // Yields all referenced association set ends in this mapping.
-        private static IEnumerable<AssociationSetEnd> GetReferencedAssociationSetEnds(EntitySet entitySet, EntityType entityType, IEnumerable<StorageModificationFunctionParameterBinding> parameterBindings)
+        private static IEnumerable<AssociationSetEnd> GetReferencedAssociationSetEnds(
+            EntitySet entitySet,
+            EntityType entityType,
+            IEnumerable<StorageModificationFunctionParameterBinding> parameterBindings
+        )
         {
             HashSet<AssociationSetEnd> ends = new HashSet<AssociationSetEnd>();
             if (null != entitySet && null != entityType)
             {
-                foreach (StorageModificationFunctionParameterBinding parameterBinding in parameterBindings)
+                foreach (
+                    StorageModificationFunctionParameterBinding parameterBinding in parameterBindings
+                )
                 {
                     AssociationSetEnd end = parameterBinding.MemberPath.AssociationSetEnd;
                     if (null != end)
@@ -205,17 +233,31 @@ namespace System.Data.Mapping
 
                 // If there is a referential constraint, it counts as an implicit mapping of
                 // the association set
-                foreach (AssociationSet assocationSet in MetadataHelper.GetAssociationsForEntitySet(entitySet))
+                foreach (
+                    AssociationSet assocationSet in MetadataHelper.GetAssociationsForEntitySet(
+                        entitySet
+                    )
+                )
                 {
-                    ReadOnlyMetadataCollection<ReferentialConstraint> constraints = assocationSet.ElementType.ReferentialConstraints;
+                    ReadOnlyMetadataCollection<ReferentialConstraint> constraints = assocationSet
+                        .ElementType
+                        .ReferentialConstraints;
                     if (null != constraints)
                     {
                         foreach (ReferentialConstraint constraint in constraints)
                         {
-                            if ((assocationSet.AssociationSetEnds[constraint.ToRole.Name].EntitySet == entitySet) &&
-                                  (constraint.ToRole.GetEntityType().IsAssignableFrom(entityType)))
+                            if (
+                                (
+                                    assocationSet
+                                        .AssociationSetEnds[constraint.ToRole.Name]
+                                        .EntitySet == entitySet
+                                )
+                                && (constraint.ToRole.GetEntityType().IsAssignableFrom(entityType))
+                            )
                             {
-                                ends.Add(assocationSet.AssociationSetEnds[constraint.FromRole.Name]);
+                                ends.Add(
+                                    assocationSet.AssociationSetEnds[constraint.FromRole.Name]
+                                );
                             }
                         }
                     }
@@ -249,8 +291,7 @@ namespace System.Data.Mapping
 
         public override string ToString()
         {
-            return String.Format(CultureInfo.InvariantCulture,
-                "{0}->{1}", ColumnName, Property);
+            return String.Format(CultureInfo.InvariantCulture, "{0}->{1}", ColumnName, Property);
         }
     }
 
@@ -259,7 +300,11 @@ namespace System.Data.Mapping
     /// </summary>
     internal sealed class StorageModificationFunctionParameterBinding
     {
-        internal StorageModificationFunctionParameterBinding(FunctionParameter parameter, StorageModificationFunctionMemberPath memberPath, bool isCurrent)
+        internal StorageModificationFunctionParameterBinding(
+            FunctionParameter parameter,
+            StorageModificationFunctionMemberPath memberPath,
+            bool isCurrent
+        )
         {
             this.Parameter = EntityUtil.CheckArgumentNull(parameter, "parameter");
             this.MemberPath = EntityUtil.CheckArgumentNull(memberPath, "memberPath");
@@ -284,8 +329,13 @@ namespace System.Data.Mapping
 
         public override string ToString()
         {
-            return String.Format(CultureInfo.InvariantCulture,
-                "@{0}->{1}{2}", Parameter, IsCurrent ? "+" : "-", MemberPath);
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                "@{0}->{1}{2}",
+                Parameter,
+                IsCurrent ? "+" : "-",
+                MemberPath
+            );
         }
     }
 
@@ -294,16 +344,25 @@ namespace System.Data.Mapping
     /// </summary>
     internal sealed class StorageModificationFunctionMemberPath
     {
-        internal StorageModificationFunctionMemberPath(IEnumerable<EdmMember> members, AssociationSet associationSetNavigation)
+        internal StorageModificationFunctionMemberPath(
+            IEnumerable<EdmMember> members,
+            AssociationSet associationSetNavigation
+        )
         {
-            this.Members = new ReadOnlyCollection<EdmMember>(new List<EdmMember>(
-                EntityUtil.CheckArgumentNull(members, "members")));
+            this.Members = new ReadOnlyCollection<EdmMember>(
+                new List<EdmMember>(EntityUtil.CheckArgumentNull(members, "members"))
+            );
             if (null != associationSetNavigation)
             {
-                Debug.Assert(2 == this.Members.Count, "Association bindings must always consist of the end and the key");
+                Debug.Assert(
+                    2 == this.Members.Count,
+                    "Association bindings must always consist of the end and the key"
+                );
 
                 // find the association set end
-                this.AssociationSetEnd = associationSetNavigation.AssociationSetEnds[this.Members[1].Name];
+                this.AssociationSetEnd = associationSetNavigation.AssociationSetEnds[
+                    this.Members[1].Name
+                ];
             }
         }
 
@@ -321,9 +380,14 @@ namespace System.Data.Mapping
 
         public override string ToString()
         {
-            return String.Format(CultureInfo.InvariantCulture, "{0}{1}",
-                null == AssociationSetEnd ? String.Empty : "[" + AssociationSetEnd.ParentAssociationSet.ToString() + "]",
-                StringUtil.BuildDelimitedList(Members, null, "."));
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                "{0}{1}",
+                null == AssociationSetEnd
+                    ? String.Empty
+                    : "[" + AssociationSetEnd.ParentAssociationSet.ToString() + "]",
+                StringUtil.BuildDelimitedList(Members, null, ".")
+            );
         }
     }
 }

@@ -3,7 +3,6 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
-
 using BindingFlags = System.Reflection.BindingFlags;
 
 class ILLinkLinkAttributes
@@ -13,9 +12,21 @@ class ILLinkLinkAttributes
         ThrowIfTypeNotPresent(typeof(ILLinkLinkAttributes), nameof(TestDontRemoveAttribute));
         ThrowIfTypePresent(typeof(ILLinkLinkAttributes), nameof(TestRemoveAttribute));
         ThrowIfTypePresent(typeof(ILLinkLinkAttributes), nameof(TestMarkAllRemoveAttribute));
-        ThrowIfAttributePresent(typeof(ILLinkLinkAttributes), nameof(_fieldWithCustomAttribute), nameof(TestRemoveAttribute));
-        ThrowIfAttributeNotPresent(typeof(ILLinkLinkAttributes), nameof(_fieldWithCustomAttribute), nameof(TestDontRemoveAttribute));
-        ThrowIfAttributePresent(typeof(ILLinkLinkAttributes), nameof(_fieldWithCustomAttribute), nameof(AllowNullAttribute));
+        ThrowIfAttributePresent(
+            typeof(ILLinkLinkAttributes),
+            nameof(_fieldWithCustomAttribute),
+            nameof(TestRemoveAttribute)
+        );
+        ThrowIfAttributeNotPresent(
+            typeof(ILLinkLinkAttributes),
+            nameof(_fieldWithCustomAttribute),
+            nameof(TestDontRemoveAttribute)
+        );
+        ThrowIfAttributePresent(
+            typeof(ILLinkLinkAttributes),
+            nameof(_fieldWithCustomAttribute),
+            nameof(AllowNullAttribute)
+        );
         return 100;
     }
 
@@ -26,25 +37,23 @@ class ILLinkLinkAttributes
 
     class TestDontRemoveAttribute : Attribute
     {
-        public TestDontRemoveAttribute()
-        {
-        }
+        public TestDontRemoveAttribute() { }
     }
 
     class TestRemoveAttribute : Attribute
     {
-        public TestRemoveAttribute()
-        {
-        }
+        public TestRemoveAttribute() { }
     }
 
-    class TestMarkAllRemoveAttribute : Attribute
-    {
-    }
+    class TestMarkAllRemoveAttribute : Attribute { }
 
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-        Justification = "That's the point")]
-    private static bool IsTypePresent(Type testType, string typeName) => testType.GetNestedType(typeName, BindingFlags.NonPublic | BindingFlags.Public) != null;
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2070:UnrecognizedReflectionPattern",
+        Justification = "That's the point"
+    )]
+    private static bool IsTypePresent(Type testType, string typeName) =>
+        testType.GetNestedType(typeName, BindingFlags.NonPublic | BindingFlags.Public) != null;
 
     private static void ThrowIfTypeNotPresent(Type testType, string typeName)
     {
@@ -80,7 +89,11 @@ class ILLinkLinkAttributes
         return false;
     }
 
-    private static void ThrowIfAttributeNotPresent(Type testType, string memberName, string attributeName)
+    private static void ThrowIfAttributeNotPresent(
+        Type testType,
+        string memberName,
+        string attributeName
+    )
     {
         if (!IsAttributePresent(testType, memberName, attributeName))
         {
@@ -88,7 +101,11 @@ class ILLinkLinkAttributes
         }
     }
 
-    private static void ThrowIfAttributePresent(Type testType, string memberName, string attributeName)
+    private static void ThrowIfAttributePresent(
+        Type testType,
+        string memberName,
+        string attributeName
+    )
     {
         if (IsAttributePresent(testType, memberName, attributeName))
         {

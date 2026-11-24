@@ -16,10 +16,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void EndReadAfterClose()
         {
-            using (var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
+            )
+            using (
+                var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
+            )
             {
-                Debug.WriteLine("Verifying EndRead method throws exception after a call to Close()");
+                Debug.WriteLine(
+                    "Verifying EndRead method throws exception after a call to Close()"
+                );
 
                 com1.Open();
                 com2.Open();
@@ -42,10 +48,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void EndReadAfterSerialStreamClose()
         {
-            using (var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
+            )
+            using (
+                var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
+            )
             {
-                Debug.WriteLine("Verifying EndRead method throws exception after a call to BaseStream.Close()");
+                Debug.WriteLine(
+                    "Verifying EndRead method throws exception after a call to BaseStream.Close()"
+                );
 
                 com1.Open();
                 com2.Open();
@@ -68,7 +80,11 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void AsyncResult_Null()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 Debug.WriteLine("Verifying EndRead with null asyncResult");
 
@@ -80,11 +96,17 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void AsyncResult_MultipleInOrder()
         {
-            using (var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
+            )
+            using (
+                var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
+            )
             {
                 int endReadReturnValue;
-                int numBytesToRead1 = 8, numBytesToRead2 = 16, numBytesToRead3 = 10;
+                int numBytesToRead1 = 8,
+                    numBytesToRead2 = 16,
+                    numBytesToRead3 = 10;
                 int totalBytesToRead = numBytesToRead1 + numBytesToRead2 + numBytesToRead3;
 
                 Debug.WriteLine("Verifying EndRead with multiple calls to BeginRead");
@@ -96,26 +118,62 @@ namespace System.IO.Ports.Tests
 
                 TCSupport.WaitForReadBufferToLoad(com1, totalBytesToRead);
 
-                IAsyncResult readAsyncResult1 = com1.BaseStream.BeginRead(new byte[numBytesToRead1], 0, numBytesToRead1, null, null);
-                IAsyncResult readAsyncResult2 = com1.BaseStream.BeginRead(new byte[numBytesToRead2], 0, numBytesToRead2, null, null);
-                IAsyncResult readAsyncResult3 = com1.BaseStream.BeginRead(new byte[numBytesToRead3], 0, numBytesToRead3, null, null);
+                IAsyncResult readAsyncResult1 = com1.BaseStream.BeginRead(
+                    new byte[numBytesToRead1],
+                    0,
+                    numBytesToRead1,
+                    null,
+                    null
+                );
+                IAsyncResult readAsyncResult2 = com1.BaseStream.BeginRead(
+                    new byte[numBytesToRead2],
+                    0,
+                    numBytesToRead2,
+                    null,
+                    null
+                );
+                IAsyncResult readAsyncResult3 = com1.BaseStream.BeginRead(
+                    new byte[numBytesToRead3],
+                    0,
+                    numBytesToRead3,
+                    null,
+                    null
+                );
 
-                if (numBytesToRead1 != (endReadReturnValue = com1.BaseStream.EndRead(readAsyncResult1)))
+                if (
+                    numBytesToRead1
+                    != (endReadReturnValue = com1.BaseStream.EndRead(readAsyncResult1))
+                )
                 {
-                    Fail("ERROR!!! Expected EndRead to return={0} actual={1} for first read", numBytesToRead1,
-                        endReadReturnValue);
+                    Fail(
+                        "ERROR!!! Expected EndRead to return={0} actual={1} for first read",
+                        numBytesToRead1,
+                        endReadReturnValue
+                    );
                 }
 
-                if (numBytesToRead2 != (endReadReturnValue = com1.BaseStream.EndRead(readAsyncResult2)))
+                if (
+                    numBytesToRead2
+                    != (endReadReturnValue = com1.BaseStream.EndRead(readAsyncResult2))
+                )
                 {
-                    Fail("ERROR!!! Expected EndRead to return={0} actual={1} for second read", numBytesToRead2,
-                        endReadReturnValue);
+                    Fail(
+                        "ERROR!!! Expected EndRead to return={0} actual={1} for second read",
+                        numBytesToRead2,
+                        endReadReturnValue
+                    );
                 }
 
-                if (numBytesToRead3 != (endReadReturnValue = com1.BaseStream.EndRead(readAsyncResult3)))
+                if (
+                    numBytesToRead3
+                    != (endReadReturnValue = com1.BaseStream.EndRead(readAsyncResult3))
+                )
                 {
-                    Fail("ERROR!!! Expected EndRead to return={0} actual={1} for third read", numBytesToRead3,
-                        endReadReturnValue);
+                    Fail(
+                        "ERROR!!! Expected EndRead to return={0} actual={1} for third read",
+                        numBytesToRead3,
+                        endReadReturnValue
+                    );
                 }
             }
             // Give the port time to finish closing since we potentially have an unclosed BeginRead/BeginWrite
@@ -125,15 +183,22 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void AsyncResult_MultipleOutOfOrder()
         {
-            using (var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
+            )
+            using (
+                var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
+            )
             {
                 int endReadReturnValue;
-                int numBytesToRead1 = 8, numBytesToRead2 = 16, numBytesToRead3 = 10;
+                int numBytesToRead1 = 8,
+                    numBytesToRead2 = 16,
+                    numBytesToRead3 = 10;
                 int totalBytesToRead = numBytesToRead1 + numBytesToRead2 + numBytesToRead3;
 
                 Debug.WriteLine(
-                    "Verifying calling EndRead with different asyncResults out of order returned from BeginRead");
+                    "Verifying calling EndRead with different asyncResults out of order returned from BeginRead"
+                );
 
                 com1.Open();
                 com2.Open();
@@ -142,26 +207,62 @@ namespace System.IO.Ports.Tests
 
                 TCSupport.WaitForReadBufferToLoad(com1, totalBytesToRead);
 
-                IAsyncResult readAsyncResult1 = com1.BaseStream.BeginRead(new byte[numBytesToRead1], 0, numBytesToRead1, null, null);
-                IAsyncResult readAsyncResult2 = com1.BaseStream.BeginRead(new byte[numBytesToRead2], 0, numBytesToRead2, null, null);
-                IAsyncResult readAsyncResult3 = com1.BaseStream.BeginRead(new byte[numBytesToRead3], 0, numBytesToRead3, null, null);
+                IAsyncResult readAsyncResult1 = com1.BaseStream.BeginRead(
+                    new byte[numBytesToRead1],
+                    0,
+                    numBytesToRead1,
+                    null,
+                    null
+                );
+                IAsyncResult readAsyncResult2 = com1.BaseStream.BeginRead(
+                    new byte[numBytesToRead2],
+                    0,
+                    numBytesToRead2,
+                    null,
+                    null
+                );
+                IAsyncResult readAsyncResult3 = com1.BaseStream.BeginRead(
+                    new byte[numBytesToRead3],
+                    0,
+                    numBytesToRead3,
+                    null,
+                    null
+                );
 
-                if (numBytesToRead2 != (endReadReturnValue = com1.BaseStream.EndRead(readAsyncResult2)))
+                if (
+                    numBytesToRead2
+                    != (endReadReturnValue = com1.BaseStream.EndRead(readAsyncResult2))
+                )
                 {
-                    Fail("ERROR!!! Expected EndRead to return={0} actual={1} for second read", numBytesToRead2,
-                        endReadReturnValue);
+                    Fail(
+                        "ERROR!!! Expected EndRead to return={0} actual={1} for second read",
+                        numBytesToRead2,
+                        endReadReturnValue
+                    );
                 }
 
-                if (numBytesToRead3 != (endReadReturnValue = com1.BaseStream.EndRead(readAsyncResult3)))
+                if (
+                    numBytesToRead3
+                    != (endReadReturnValue = com1.BaseStream.EndRead(readAsyncResult3))
+                )
                 {
-                    Fail("ERROR!!! Expected EndRead to return={0} actual={1} for third read", numBytesToRead3,
-                        endReadReturnValue);
+                    Fail(
+                        "ERROR!!! Expected EndRead to return={0} actual={1} for third read",
+                        numBytesToRead3,
+                        endReadReturnValue
+                    );
                 }
 
-                if (numBytesToRead1 != (endReadReturnValue = com1.BaseStream.EndRead(readAsyncResult1)))
+                if (
+                    numBytesToRead1
+                    != (endReadReturnValue = com1.BaseStream.EndRead(readAsyncResult1))
+                )
                 {
-                    Fail("ERROR!!! Expected EndRead to return={0} actual={1} for first read", numBytesToRead1,
-                        endReadReturnValue);
+                    Fail(
+                        "ERROR!!! Expected EndRead to return={0} actual={1} for first read",
+                        numBytesToRead1,
+                        endReadReturnValue
+                    );
                 }
             }
             // Give the port time to finish closing since we potentially have an unclosed BeginRead/BeginWrite
@@ -171,7 +272,11 @@ namespace System.IO.Ports.Tests
 
         #region Verification for Test Cases
 
-        private void VerifyEndReadException(Stream serialStream, IAsyncResult asyncResult, Type expectedException)
+        private void VerifyEndReadException(
+            Stream serialStream,
+            IAsyncResult asyncResult,
+            Type expectedException
+        )
         {
             if (expectedException == null)
             {

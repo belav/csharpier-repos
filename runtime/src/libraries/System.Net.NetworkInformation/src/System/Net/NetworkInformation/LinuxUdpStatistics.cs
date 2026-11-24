@@ -15,25 +15,53 @@ namespace System.Net.NetworkInformation
         {
             if (ipv4)
             {
-                _table = StringParsingHelpers.ParseUdpv4GlobalStatisticsFromSnmpFile(NetworkFiles.SnmpV4StatsFile);
-                _udpListeners = StringParsingHelpers.ParseNumSocketConnections(NetworkFiles.SockstatFile, "UDP");
+                _table = StringParsingHelpers.ParseUdpv4GlobalStatisticsFromSnmpFile(
+                    NetworkFiles.SnmpV4StatsFile
+                );
+                _udpListeners = StringParsingHelpers.ParseNumSocketConnections(
+                    NetworkFiles.SockstatFile,
+                    "UDP"
+                );
             }
             else
             {
-                _table = StringParsingHelpers.ParseUdpv6GlobalStatisticsFromSnmp6File(NetworkFiles.SnmpV6StatsFile);
-                _udpListeners = StringParsingHelpers.ParseNumSocketConnections(NetworkFiles.Sockstat6File, "UDP6");
+                _table = StringParsingHelpers.ParseUdpv6GlobalStatisticsFromSnmp6File(
+                    NetworkFiles.SnmpV6StatsFile
+                );
+                _udpListeners = StringParsingHelpers.ParseNumSocketConnections(
+                    NetworkFiles.Sockstat6File,
+                    "UDP6"
+                );
             }
         }
 
-        public override long DatagramsReceived { get { return _table.InDatagrams; } }
+        public override long DatagramsReceived
+        {
+            get { return _table.InDatagrams; }
+        }
 
-        public override long DatagramsSent { get { return _table.OutDatagrams; } }
+        public override long DatagramsSent
+        {
+            get { return _table.OutDatagrams; }
+        }
 
         [UnsupportedOSPlatform("linux")]
-        public override long IncomingDatagramsDiscarded { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override long IncomingDatagramsDiscarded
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
-        public override long IncomingDatagramsWithErrors { get { return _table.InErrors; } }
+        public override long IncomingDatagramsWithErrors
+        {
+            get { return _table.InErrors; }
+        }
 
-        public override int UdpListeners { get { return _udpListeners; } }
+        public override int UdpListeners
+        {
+            get { return _udpListeners; }
+        }
     }
 }

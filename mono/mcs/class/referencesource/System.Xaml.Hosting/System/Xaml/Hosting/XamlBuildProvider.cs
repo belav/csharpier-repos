@@ -18,7 +18,7 @@ namespace System.Xaml.Hosting
     using System.Web.Hosting;
     using System.Xaml;
     using System.Xaml.Hosting.Configuration;
-    using System.Xml;   
+    using System.Xml;
 
     [BuildProviderAppliesTo(BuildProviderAppliesTo.Web)]
     public class XamlBuildProvider : BuildProvider
@@ -44,9 +44,12 @@ namespace System.Xaml.Hosting
                     this.xamlBuildProviderExtension.GenerateCode(assemblyBuilder, xamlStream, this);
                 }
             }
-        }        
+        }
 
-        [Fx.Tag.Throws(typeof(TypeLoadException), "The type resolution of the root element failed.")]
+        [Fx.Tag.Throws(
+            typeof(TypeLoadException),
+            "The type resolution of the root element failed."
+        )]
         public override Type GetGeneratedType(CompilerResults results)
         {
             if (this.xamlBuildProviderExtension != null)
@@ -57,7 +60,7 @@ namespace System.Xaml.Hosting
                     return result;
                 }
             }
-            
+
             try
             {
                 XamlType rootXamlType = GetRootXamlType();
@@ -65,7 +68,9 @@ namespace System.Xaml.Hosting
                 {
                     StringBuilder typeName = new StringBuilder();
                     AppendTypeName(rootXamlType, typeName);
-                    throw FxTrace.Exception.AsError(new TypeLoadException(SR.CouldNotResolveType(typeName)));
+                    throw FxTrace.Exception.AsError(
+                        new TypeLoadException(SR.CouldNotResolveType(typeName))
+                    );
                 }
                 return rootXamlType.UnderlyingType;
             }
@@ -73,7 +78,7 @@ namespace System.Xaml.Hosting
             {
                 throw FxTrace.Exception.AsError(new HttpCompileException(ex.Message, ex));
             }
-        }        
+        }
 
         public override BuildProviderResultFlags GetResultFlags(CompilerResults results)
         {
@@ -102,7 +107,7 @@ namespace System.Xaml.Hosting
                 }
                 sb.Append(")");
             }
-        }     
+        }
 
         XamlType GetRootXamlType()
         {
@@ -141,7 +146,8 @@ namespace System.Xaml.Hosting
 
             if (xamlBuildProviderExtensionFactory != null)
             {
-                this.xamlBuildProviderExtension = xamlBuildProviderExtensionFactory.GetXamlBuildProviderExtension();
+                this.xamlBuildProviderExtension =
+                    xamlBuildProviderExtensionFactory.GetXamlBuildProviderExtension();
             }
         }
 
@@ -154,15 +160,29 @@ namespace System.Xaml.Hosting
 
             // Get the HttpHandler type
             Type httpHandlerType;
-            XamlHostingConfiguration.TryGetHttpHandlerType(this.VirtualPath, rootXamlType.UnderlyingType, out httpHandlerType);
-            
-            if (httpHandlerType != null && typeof(IXamlBuildProviderExtensionFactory).IsAssignableFrom(httpHandlerType))
+            XamlHostingConfiguration.TryGetHttpHandlerType(
+                this.VirtualPath,
+                rootXamlType.UnderlyingType,
+                out httpHandlerType
+            );
+
+            if (
+                httpHandlerType != null
+                && typeof(IXamlBuildProviderExtensionFactory).IsAssignableFrom(httpHandlerType)
+            )
             {
-                xamlBuildProviderExtensionFactory = (IXamlBuildProviderExtensionFactory)Activator.CreateInstance(httpHandlerType,
-                    BindingFlags.CreateInstance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance,
-                    null, null, null);
+                xamlBuildProviderExtensionFactory = (IXamlBuildProviderExtensionFactory)
+                    Activator.CreateInstance(
+                        httpHandlerType,
+                        BindingFlags.CreateInstance
+                            | BindingFlags.NonPublic
+                            | BindingFlags.Public
+                            | BindingFlags.Instance,
+                        null,
+                        null,
+                        null
+                    );
             }
         }
     }
 }
-

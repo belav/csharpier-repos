@@ -12,11 +12,15 @@ namespace System.Security.Cryptography.Cose.Tests
     {
         internal override CoseMessageKind MessageKind => CoseMessageKind.Sign1;
 
-        internal override void AddSignature(CoseMultiSignMessage msg, byte[] content, CoseSigner signer, byte[]? associatedData = null)
-            => throw new NotSupportedException();
+        internal override void AddSignature(
+            CoseMultiSignMessage msg,
+            byte[] content,
+            CoseSigner signer,
+            byte[]? associatedData = null
+        ) => throw new NotSupportedException();
 
-        internal override CoseMessage Decode(ReadOnlySpan<byte> cborPayload)
-            => CoseMessage.DecodeSign1(cborPayload);
+        internal override CoseMessage Decode(ReadOnlySpan<byte> cborPayload) =>
+            CoseMessage.DecodeSign1(cborPayload);
 
         internal override CoseHeaderMap GetSigningHeaderMap(CoseMessage msg, bool getProtectedMap)
         {
@@ -24,10 +28,20 @@ namespace System.Security.Cryptography.Cose.Tests
             return getProtectedMap ? msg.ProtectedHeaders : msg.UnprotectedHeaders;
         }
 
-        internal override Task<byte[]> SignDetachedAsync(Stream detachedContent, CoseSigner signer, CoseHeaderMap? protectedHeaders = null, CoseHeaderMap? unprotectedHeaders = null, byte[]? associatedData = null)
-            => CoseSign1Message.SignDetachedAsync(detachedContent, signer, associatedData);
+        internal override Task<byte[]> SignDetachedAsync(
+            Stream detachedContent,
+            CoseSigner signer,
+            CoseHeaderMap? protectedHeaders = null,
+            CoseHeaderMap? unprotectedHeaders = null,
+            byte[]? associatedData = null
+        ) => CoseSign1Message.SignDetachedAsync(detachedContent, signer, associatedData);
 
-        internal override bool Verify(CoseMessage msg, AsymmetricAlgorithm key, byte[] content, byte[]? associatedData = null)
+        internal override bool Verify(
+            CoseMessage msg,
+            AsymmetricAlgorithm key,
+            byte[] content,
+            byte[]? associatedData = null
+        )
         {
             Assert.True(!OnlySupportsDetachedContent || msg.Content == null);
             return Sign1Verify(msg, key, content, associatedData);
@@ -38,11 +52,15 @@ namespace System.Security.Cryptography.Cose.Tests
     {
         internal override CoseMessageKind MessageKind => CoseMessageKind.Sign1;
 
-        internal override void AddSignature(CoseMultiSignMessage msg, byte[] content, CoseSigner signer, byte[]? associatedData = null)
-            => throw new NotSupportedException();
+        internal override void AddSignature(
+            CoseMultiSignMessage msg,
+            byte[] content,
+            CoseSigner signer,
+            byte[]? associatedData = null
+        ) => throw new NotSupportedException();
 
-        internal override CoseMessage Decode(ReadOnlySpan<byte> cborPayload)
-            => CoseMessage.DecodeSign1(cborPayload);
+        internal override CoseMessage Decode(ReadOnlySpan<byte> cborPayload) =>
+            CoseMessage.DecodeSign1(cborPayload);
 
         internal override CoseHeaderMap GetSigningHeaderMap(CoseMessage msg, bool getProtectedMap)
         {
@@ -50,10 +68,20 @@ namespace System.Security.Cryptography.Cose.Tests
             return getProtectedMap ? msg.ProtectedHeaders : msg.UnprotectedHeaders;
         }
 
-        internal override byte[] SignDetached(Stream detachedContent, CoseSigner signer, CoseHeaderMap? protectedHeaders = null, CoseHeaderMap? unprotectedHeaders = null, byte[]? associatedData = null)
-            => CoseSign1Message.SignDetached(detachedContent, signer, associatedData);
+        internal override byte[] SignDetached(
+            Stream detachedContent,
+            CoseSigner signer,
+            CoseHeaderMap? protectedHeaders = null,
+            CoseHeaderMap? unprotectedHeaders = null,
+            byte[]? associatedData = null
+        ) => CoseSign1Message.SignDetached(detachedContent, signer, associatedData);
 
-        internal override bool Verify(CoseMessage msg, AsymmetricAlgorithm key, byte[] content, byte[]? associatedData = null)
+        internal override bool Verify(
+            CoseMessage msg,
+            AsymmetricAlgorithm key,
+            byte[] content,
+            byte[]? associatedData = null
+        )
         {
             Assert.True(!OnlySupportsDetachedContent || msg.Content == null);
             return Sign1Verify(msg, key, content, associatedData);

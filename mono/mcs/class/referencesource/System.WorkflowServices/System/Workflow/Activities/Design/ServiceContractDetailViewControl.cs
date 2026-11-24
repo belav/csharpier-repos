@@ -12,11 +12,11 @@ namespace System.Workflow.Activities.Design
 
     internal partial class ServiceContractDetailViewControl : ListItemViewControl
     {
-
         public ServiceContractDetailViewControl()
         {
             InitializeComponent();
         }
+
         public override event EventHandler ItemChanged;
 
         public override void UpdateView()
@@ -29,15 +29,19 @@ namespace System.Workflow.Activities.Design
             if (listItem.IsCustomContract)
             {
                 this.contractNameTextBox.ReadOnly = false;
-                this.contractNameTextBox.Validated += new EventHandler(contractNameTextBox_Validated);
-                this.contractNameTextBox.Validating += new CancelEventHandler(contractNameTextBox_Validating);
+                this.contractNameTextBox.Validated += new EventHandler(
+                    contractNameTextBox_Validated
+                );
+                this.contractNameTextBox.Validating += new CancelEventHandler(
+                    contractNameTextBox_Validating
+                );
             }
             base.UpdateView();
         }
 
         void contractNameTextBox_Validated(object sender, EventArgs e)
         {
-            ServiceContractListItem contractListItem = (ServiceContractListItem) this.Item;
+            ServiceContractListItem contractListItem = (ServiceContractListItem)this.Item;
             UpdateImplementingActivities(contractListItem);
             // finally notify other observers of this change
             if (this.ItemChanged != null)
@@ -46,11 +50,9 @@ namespace System.Workflow.Activities.Design
             }
         }
 
-
-
         void contractNameTextBox_Validating(object sender, CancelEventArgs e)
         {
-            ServiceContractListItem contractListItem = (ServiceContractListItem) this.Item;
+            ServiceContractListItem contractListItem = (ServiceContractListItem)this.Item;
             string oldName = contractListItem.Name;
             contractListItem.Name = this.contractNameTextBox.Text;
             if (contractListItem.Validating != null)
@@ -63,22 +65,29 @@ namespace System.Workflow.Activities.Design
                 contractListItem.Name = oldName;
                 e.Cancel = false;
             }
-
         }
-
 
         private void UpdateImplementingActivities(ServiceContractListItem listItem)
         {
-            foreach (WorkflowServiceOperationListItem workflowOperationListItem in listItem.Operations)
+            foreach (
+                WorkflowServiceOperationListItem workflowOperationListItem in listItem.Operations
+            )
             {
-                Fx.Assert(workflowOperationListItem != null, "Operations inside an editable contract should only be workflow first operations");
+                Fx.Assert(
+                    workflowOperationListItem != null,
+                    "Operations inside an editable contract should only be workflow first operations"
+                );
                 workflowOperationListItem.Operation.ContractName = listItem.Name;
                 // update the activities implementing the operation too
                 foreach (Activity activity in workflowOperationListItem.ImplementingActivities)
                 {
-                    PropertyDescriptorUtils.SetPropertyValue(this.ServiceProvider, ServiceOperationHelpers.GetServiceOperationInfoPropertyDescriptor(activity), activity, workflowOperationListItem.Operation.Clone());
+                    PropertyDescriptorUtils.SetPropertyValue(
+                        this.ServiceProvider,
+                        ServiceOperationHelpers.GetServiceOperationInfoPropertyDescriptor(activity),
+                        activity,
+                        workflowOperationListItem.Operation.Clone()
+                    );
                 }
-
             }
         }
     }

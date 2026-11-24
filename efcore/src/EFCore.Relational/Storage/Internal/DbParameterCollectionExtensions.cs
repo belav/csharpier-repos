@@ -24,10 +24,8 @@ public static class DbParameterCollectionExtensions
     /// </summary>
     public static string FormatParameters(
         this DbParameterCollection parameters,
-        bool logParameterValues)
-        => parameters
-            .Cast<DbParameter>()
-            .Select(p => FormatParameter(p, logParameterValues)).Join();
+        bool logParameterValues
+    ) => parameters.Cast<DbParameter>().Select(p => FormatParameter(p, logParameterValues)).Join();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -35,8 +33,8 @@ public static class DbParameterCollectionExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static string FormatParameter(this DbParameter parameter, bool logParameterValues)
-        => FormatParameter(
+    public static string FormatParameter(this DbParameter parameter, bool logParameterValues) =>
+        FormatParameter(
             parameter.ParameterName,
             logParameterValues ? parameter.Value : "?",
             logParameterValues,
@@ -45,7 +43,8 @@ public static class DbParameterCollectionExtensions
             parameter.IsNullable,
             parameter.Size,
             parameter.Precision,
-            parameter.Scale);
+            parameter.Scale
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -62,30 +61,24 @@ public static class DbParameterCollectionExtensions
         bool nullable,
         int size,
         byte precision,
-        byte scale)
+        byte scale
+    )
     {
         var builder = new StringBuilder();
 
         var clrType = value?.GetType();
 
-        builder
-            .Append(name)
-            .Append('=');
+        builder.Append(name).Append('=');
 
         FormatParameterValue(builder, value);
 
-        if (nullable
-            && value != null
-            && !clrType!.IsNullableType())
+        if (nullable && value != null && !clrType!.IsNullableType())
         {
             builder.Append(" (Nullable = true)");
         }
         else
         {
-            if (!nullable
-                && hasValue
-                && (value == null
-                    || clrType!.IsNullableType()))
+            if (!nullable && hasValue && (value == null || clrType!.IsNullableType()))
             {
                 builder.Append(" (Nullable = false)");
             }
@@ -117,18 +110,12 @@ public static class DbParameterCollectionExtensions
 
         if (direction != ParameterDirection.Input)
         {
-            builder
-                .Append(" (Direction = ")
-                .Append(direction)
-                .Append(')');
+            builder.Append(" (Direction = ").Append(direction).Append(')');
         }
 
         if (ShouldShowDbType(hasValue, dbType, clrType))
         {
-            builder
-                .Append(" (DbType = ")
-                .Append(dbType)
-                .Append(')');
+            builder.Append(" (DbType = ").Append(dbType).Append(')');
         }
 
         return builder.ToString();
@@ -144,17 +131,11 @@ public static class DbParameterCollectionExtensions
                 return;
 
             case DateTime dateTime:
-                builder
-                    .Append('\'')
-                    .Append(dateTime.ToString("o"))
-                    .Append('\'');
+                builder.Append('\'').Append(dateTime.ToString("o")).Append('\'');
                 return;
 
             case DateTimeOffset dateTimeOffset:
-                builder
-                    .Append('\'')
-                    .Append(dateTimeOffset.ToString("o"))
-                    .Append('\'');
+                builder.Append('\'').Append(dateTimeOffset.ToString("o")).Append('\'');
                 return;
 
             case byte[] byteArray:
@@ -191,12 +172,10 @@ public static class DbParameterCollectionExtensions
             default:
                 var type = parameterValue.GetType();
                 var valueProperty = type.GetRuntimeProperty("Value");
-                if (valueProperty != null
-                    && valueProperty.PropertyType != type)
+                if (valueProperty != null && valueProperty.PropertyType != type)
                 {
                     var isNullProperty = type.GetRuntimeProperty("IsNull");
-                    if (isNullProperty != null
-                        && isNullProperty.GetValue(parameterValue) is true)
+                    if (isNullProperty != null && isNullProperty.GetValue(parameterValue) is true)
                     {
                         builder.Append("''");
                     }
@@ -219,9 +198,7 @@ public static class DbParameterCollectionExtensions
 
     private static bool ShouldShowDbType(bool hasValue, DbType dbType, Type? type)
     {
-        if (!hasValue
-            || type == null
-            || type == typeof(DBNull))
+        if (!hasValue || type == null || type == typeof(DBNull))
         {
             return dbType != DbType.String;
         }

@@ -10,7 +10,10 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 {
     public static class MultiServiceHelpers
     {
-        public static IEnumerable GetMultiService(Type collectionType, Func<Type, IEnumerable> getAllServices)
+        public static IEnumerable GetMultiService(
+            Type collectionType,
+            Func<Type, IEnumerable> getAllServices
+        )
         {
             if (IsGenericIEnumerable(collectionType))
             {
@@ -35,8 +38,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
         private static bool IsGenericIEnumerable(Type type)
         {
-            return type.GetTypeInfo().IsGenericType &&
-                   type.GetGenericTypeDefinition() == typeof(IEnumerable<>);
+            return type.GetTypeInfo().IsGenericType
+                && type.GetGenericTypeDefinition() == typeof(IEnumerable<>);
         }
 
         private static Type FirstGenericArgument(Type type)

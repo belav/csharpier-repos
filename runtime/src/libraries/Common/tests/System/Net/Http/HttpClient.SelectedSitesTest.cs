@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
-
 using Xunit;
 using Xunit.Abstractions;
 
@@ -13,13 +12,16 @@ namespace System.Net.Http.Functional.Tests
 {
     public abstract class HttpClient_SelectedSites_Test : HttpClientHandlerTestBase
     {
-        public HttpClient_SelectedSites_Test(ITestOutputHelper output) : base(output) { }
+        public HttpClient_SelectedSites_Test(ITestOutputHelper output)
+            : base(output) { }
 
         public static bool IsSelectedSitesTestEnabled()
         {
             string envVar = Environment.GetEnvironmentVariable("CORFX_NET_HTTP_SELECTED_SITES");
-            return envVar != null &&
-                (envVar.Equals("true", StringComparison.OrdinalIgnoreCase) || envVar.Equals("1"));
+            return envVar != null
+                && (
+                    envVar.Equals("true", StringComparison.OrdinalIgnoreCase) || envVar.Equals("1")
+                );
         }
 
         [ConditionalTheory(nameof(IsSelectedSitesTestEnabled))]
@@ -91,7 +93,10 @@ namespace System.Net.Http.Functional.Tests
                     case HttpStatusCode.Redirect:
                     case HttpStatusCode.OK:
                         if (response.Content.Headers.ContentLength > 0)
-                            Assert.Equal(response.Content.Headers.ContentLength.Value, (await response.Content.ReadAsByteArrayAsync()).Length);
+                            Assert.Equal(
+                                response.Content.Headers.ContentLength.Value,
+                                (await response.Content.ReadAsByteArrayAsync()).Length
+                            );
                         break;
                     case HttpStatusCode.BadGateway:
                     case HttpStatusCode.Forbidden:
@@ -114,16 +119,14 @@ namespace System.Net.Http.Functional.Tests
             // Some extra headers since some sites only give proper responses when they are present.
             httpClient.DefaultRequestHeaders.Add(
                 "User-Agent",
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36");
-            httpClient.DefaultRequestHeaders.Add(
-                "Accept-Language",
-                "en-US,en;q=0.9");
-            httpClient.DefaultRequestHeaders.Add(
-                "Accept-Encoding",
-                "gzip, deflate, br");
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36"
+            );
+            httpClient.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.9");
+            httpClient.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
             httpClient.DefaultRequestHeaders.Add(
                 "Accept",
-                "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
+                "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8"
+            );
 
             return httpClient;
         }

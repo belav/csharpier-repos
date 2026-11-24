@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.ConstructionEnabledAttribute.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,46 +31,49 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace System.EnterpriseServices {
-	[AttributeUsage (AttributeTargets.Class)]
-	[ComVisible(false)]
-	public sealed class ConstructionEnabledAttribute : Attribute {
+namespace System.EnterpriseServices
+{
+    [AttributeUsage(AttributeTargets.Class)]
+    [ComVisible(false)]
+    public sealed class ConstructionEnabledAttribute : Attribute
+    {
+        #region Fields
 
-		#region Fields
+        string def;
+        bool enabled;
 
-		string def;
-		bool enabled;
+        #endregion // Fields
 
-		#endregion // Fields
+        #region Constructors
 
-		#region Constructors
+        public ConstructionEnabledAttribute()
+        {
+            def = String.Empty;
+            enabled = true;
+        }
 
-		public ConstructionEnabledAttribute ()
-		{
-			def = String.Empty;
-			enabled = true;
-		}
+        public ConstructionEnabledAttribute(bool val)
+        {
+            def = String.Empty;
+            enabled = val;
+        }
 
-		public ConstructionEnabledAttribute (bool val)
-		{
-			def = String.Empty;
-			enabled = val;
-		}
+        #endregion // Constructors
 
-		#endregion // Constructors
+        #region Properties
 
-		#region Properties
+        public string Default
+        {
+            get { return def; }
+            set { def = value; }
+        }
 
-		public string Default {
-			get { return def; }
-			set { def = value; }
-		}
+        public bool Enabled
+        {
+            get { return enabled; }
+            set { enabled = value; }
+        }
 
-		public bool Enabled {
-			get { return enabled; }
-			set { enabled = value; }
-		}
-
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }

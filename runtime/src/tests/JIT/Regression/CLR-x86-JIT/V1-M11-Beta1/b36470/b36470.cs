@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -11,13 +12,17 @@ namespace Test
     {
         int[] m_anField3 = new int[100];
 
-        static bool Static1(ref int[] param1) { return false; }
+        static bool Static1(ref int[] param1)
+        {
+            return false;
+        }
 
         [Fact]
         public static void TestEntryPoint()
         {
             AA local5 = new AA();
-            while (AA.Static1(ref local5.m_anField3)) ;
+            while (AA.Static1(ref local5.m_anField3))
+                ;
         }
     }
 }

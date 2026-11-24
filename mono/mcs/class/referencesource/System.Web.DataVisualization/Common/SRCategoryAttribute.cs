@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel;
+using System.Text;
 
 #if Microsoft_CONTROL
 namespace System.Windows.Forms.DataVisualization.Charting
@@ -14,9 +14,7 @@ namespace System.Web.UI.DataVisualization.Charting
     {
         // Methods
         public SRCategoryAttribute(string category)
-            : base(category)
-        {
-        }
+            : base(category) { }
 
         protected override string GetLocalizedString(string value)
         {

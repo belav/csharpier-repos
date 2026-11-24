@@ -12,19 +12,37 @@ namespace System.Text.Json
     {
         private static readonly StandardFormat s_dateTimeStandardFormat = new StandardFormat('O');
 
-        public static void WriteDateTimeTrimmed(Span<byte> buffer, DateTime value, out int bytesWritten)
+        public static void WriteDateTimeTrimmed(
+            Span<byte> buffer,
+            DateTime value,
+            out int bytesWritten
+        )
         {
             Span<byte> tempSpan = stackalloc byte[JsonConstants.MaximumFormatDateTimeOffsetLength];
-            bool result = Utf8Formatter.TryFormat(value, tempSpan, out bytesWritten, s_dateTimeStandardFormat);
+            bool result = Utf8Formatter.TryFormat(
+                value,
+                tempSpan,
+                out bytesWritten,
+                s_dateTimeStandardFormat
+            );
             Debug.Assert(result);
             TrimDateTimeOffset(tempSpan.Slice(0, bytesWritten), out bytesWritten);
             tempSpan.Slice(0, bytesWritten).CopyTo(buffer);
         }
 
-        public static void WriteDateTimeOffsetTrimmed(Span<byte> buffer, DateTimeOffset value, out int bytesWritten)
+        public static void WriteDateTimeOffsetTrimmed(
+            Span<byte> buffer,
+            DateTimeOffset value,
+            out int bytesWritten
+        )
         {
             Span<byte> tempSpan = stackalloc byte[JsonConstants.MaximumFormatDateTimeOffsetLength];
-            bool result = Utf8Formatter.TryFormat(value, tempSpan, out bytesWritten, s_dateTimeStandardFormat);
+            bool result = Utf8Formatter.TryFormat(
+                value,
+                tempSpan,
+                out bytesWritten,
+                s_dateTimeStandardFormat
+            );
             Debug.Assert(result);
             TrimDateTimeOffset(tempSpan.Slice(0, bytesWritten), out bytesWritten);
             tempSpan.Slice(0, bytesWritten).CopyTo(buffer);
@@ -48,9 +66,11 @@ namespace System.Text.Json
             // YYYY-MM-DDThh:mm:ss.fffffff (JsonConstants.MaximumFormatDateTimeLength)
             // YYYY-MM-DDThh:mm:ss.fffffffZ (JsonConstants.MaximumFormatDateTimeLength + 1)
             // YYYY-MM-DDThh:mm:ss.fffffff(+|-)hh:mm (JsonConstants.MaximumFormatDateTimeOffsetLength)
-            Debug.Assert(buffer.Length == maxDateTimeLength ||
-                buffer.Length == maxDateTimeLength + 1 ||
-                buffer.Length == JsonConstants.MaximumFormatDateTimeOffsetLength);
+            Debug.Assert(
+                buffer.Length == maxDateTimeLength
+                    || buffer.Length == maxDateTimeLength + 1
+                    || buffer.Length == JsonConstants.MaximumFormatDateTimeOffsetLength
+            );
 
             // Find the last significant digit.
             int curIndex;
@@ -65,12 +85,30 @@ namespace System.Text.Json
                                         // All decimal places are 0 so we can delete the decimal point too.
                                         curIndex = maxDateTimeLength - 7 - 1;
                                     }
-                                    else { curIndex = maxDateTimeLength - 6; }
-                                else { curIndex = maxDateTimeLength - 5; }
-                            else { curIndex = maxDateTimeLength - 4; }
-                        else { curIndex = maxDateTimeLength - 3; }
-                    else { curIndex = maxDateTimeLength - 2; }
-                else { curIndex = maxDateTimeLength - 1; }
+                                    else
+                                    {
+                                        curIndex = maxDateTimeLength - 6;
+                                    }
+                                else
+                                {
+                                    curIndex = maxDateTimeLength - 5;
+                                }
+                            else
+                            {
+                                curIndex = maxDateTimeLength - 4;
+                            }
+                        else
+                        {
+                            curIndex = maxDateTimeLength - 3;
+                        }
+                    else
+                    {
+                        curIndex = maxDateTimeLength - 2;
+                    }
+                else
+                {
+                    curIndex = maxDateTimeLength - 1;
+                }
             else
             {
                 // There is nothing to trim.

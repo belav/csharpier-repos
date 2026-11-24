@@ -117,8 +117,12 @@ namespace System.MemoryTests
         private sealed class WrapperMemoryManager<T>(Memory<T> memory) : MemoryManager<T>
         {
             public override Span<T> GetSpan() => memory.Span;
-            public override MemoryHandle Pin(int elementIndex = 0) => throw new NotSupportedException();
+
+            public override MemoryHandle Pin(int elementIndex = 0) =>
+                throw new NotSupportedException();
+
             public override void Unpin() => throw new NotSupportedException();
+
             protected override void Dispose(bool disposing) { }
         }
     }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,72 +34,86 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel
 {
-	public class ServiceSecurityContext
-	{
-		static ServiceSecurityContext anonymous = new ServiceSecurityContext (new ReadOnlyCollection<IAuthorizationPolicy> (new IAuthorizationPolicy [0]));
-		static ServiceSecurityContext current;
+    public class ServiceSecurityContext
+    {
+        static ServiceSecurityContext anonymous = new ServiceSecurityContext(
+            new ReadOnlyCollection<IAuthorizationPolicy>(new IAuthorizationPolicy[0])
+        );
+        static ServiceSecurityContext current;
 
-		[MonoTODO]
-		public static ServiceSecurityContext Anonymous {
-			get { return anonymous; }
-		}
+        [MonoTODO]
+        public static ServiceSecurityContext Anonymous
+        {
+            get { return anonymous; }
+        }
 
-		[MonoTODO] // null by default?
-		public static ServiceSecurityContext Current {
-			get { return current; }
-		}
+        [MonoTODO] // null by default?
+        public static ServiceSecurityContext Current
+        {
+            get { return current; }
+        }
 
-		AuthorizationContext context;
-		ReadOnlyCollection<IAuthorizationPolicy> policies;
-		IIdentity primary_identity;
+        AuthorizationContext context;
+        ReadOnlyCollection<IAuthorizationPolicy> policies;
+        IIdentity primary_identity;
 
-		public ServiceSecurityContext (AuthorizationContext authorizationContext)
-			: this (authorizationContext, new ReadOnlyCollection<IAuthorizationPolicy> (new IAuthorizationPolicy [0]))
-		{
-		}
+        public ServiceSecurityContext(AuthorizationContext authorizationContext)
+            : this(
+                authorizationContext,
+                new ReadOnlyCollection<IAuthorizationPolicy>(new IAuthorizationPolicy[0])
+            ) { }
 
-		public ServiceSecurityContext (
-			ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies)
-			: this (AuthorizationContext.CreateDefaultAuthorizationContext (authorizationPolicies), authorizationPolicies)
-		{
-		}
+        public ServiceSecurityContext(
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies
+        )
+            : this(
+                AuthorizationContext.CreateDefaultAuthorizationContext(authorizationPolicies),
+                authorizationPolicies
+            ) { }
 
-		public ServiceSecurityContext (AuthorizationContext authorizationContext,
-			ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies)
-		{
-			if (authorizationContext == null)
-				throw new ArgumentNullException ("authorizationContext");
-			if (authorizationPolicies == null)
-				throw new ArgumentNullException ("authorizationPolicies");
-			this.policies = authorizationPolicies;
-			this.context = authorizationContext;
+        public ServiceSecurityContext(
+            AuthorizationContext authorizationContext,
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies
+        )
+        {
+            if (authorizationContext == null)
+                throw new ArgumentNullException("authorizationContext");
+            if (authorizationPolicies == null)
+                throw new ArgumentNullException("authorizationPolicies");
+            this.policies = authorizationPolicies;
+            this.context = authorizationContext;
 
-			// FIXME: get correct identity
-			primary_identity = new GenericIdentity (String.Empty);
-		}
+            // FIXME: get correct identity
+            primary_identity = new GenericIdentity(String.Empty);
+        }
 
-		public AuthorizationContext AuthorizationContext {
-			get { return context; }
-		}
+        public AuthorizationContext AuthorizationContext
+        {
+            get { return context; }
+        }
 
-		public ReadOnlyCollection<IAuthorizationPolicy> AuthorizationPolicies {
-			get { return policies; }
-			set { policies = value; }
-		}
+        public ReadOnlyCollection<IAuthorizationPolicy> AuthorizationPolicies
+        {
+            get { return policies; }
+            set { policies = value; }
+        }
 
-		[MonoTODO]
-		public bool IsAnonymous {
-			get { return policies.Count == 0; }
-		}
+        [MonoTODO]
+        public bool IsAnonymous
+        {
+            get { return policies.Count == 0; }
+        }
 
-		[MonoTODO]
-		public IIdentity PrimaryIdentity {
-			get { return primary_identity; }
-		}
+        [MonoTODO]
+        public IIdentity PrimaryIdentity
+        {
+            get { return primary_identity; }
+        }
 
-		[MonoTODO]
-		public WindowsIdentity WindowsIdentity {
-			get { throw new NotImplementedException (); }
-		}
-	}
+        [MonoTODO]
+        public WindowsIdentity WindowsIdentity
+        {
+            get { throw new NotImplementedException(); }
+        }
+    }
 }

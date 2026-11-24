@@ -34,14 +34,11 @@ public class Startup
 
         services
             .AddAuthentication(CookieScheme) // Sets the default scheme to cookies
-            .AddCookie(
-                CookieScheme,
-                options =>
-                {
-                    options.AccessDeniedPath = "/account/denied";
-                    options.LoginPath = "/account/login";
-                }
-            );
+            .AddCookie(CookieScheme, options =>
+            {
+                options.AccessDeniedPath = "/account/denied";
+                options.LoginPath = "/account/login";
+            });
 
         // Example of how to customize a particular instance of cookie options and
         // is able to also use other services.

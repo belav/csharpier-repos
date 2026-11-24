@@ -23,7 +23,10 @@ namespace Microsoft.CodeAnalysis.SimplifyThisOrMe
         where TMemberAccessExpressionSyntax : SyntaxNode
     {
         protected abstract string GetTitle();
-        protected abstract SyntaxNode Rewrite(SyntaxNode root, ISet<TMemberAccessExpressionSyntax> memberAccessNodes);
+        protected abstract SyntaxNode Rewrite(
+            SyntaxNode root,
+            ISet<TMemberAccessExpressionSyntax> memberAccessNodes
+        );
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(IDEDiagnosticIds.RemoveThisOrMeQualificationDiagnosticId);
@@ -34,21 +37,34 @@ namespace Microsoft.CodeAnalysis.SimplifyThisOrMe
                 CodeAction.Create(
                     GetTitle(),
                     GetDocumentUpdater(context),
-                    IDEDiagnosticIds.RemoveThisOrMeQualificationDiagnosticId),
-                context.Diagnostics);
+                    IDEDiagnosticIds.RemoveThisOrMeQualificationDiagnosticId
+                ),
+                context.Diagnostics
+            );
 
             return Task.CompletedTask;
         }
 
         protected sealed override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
-            var memberAccessNodes = diagnostics.Select(
-                d => (TMemberAccessExpressionSyntax)d.AdditionalLocations[0].FindNode(getInnermostNodeForTie: true, cancellationToken)).ToSet();
+            var memberAccessNodes = diagnostics
+                .Select(d =>
+                    (TMemberAccessExpressionSyntax)
+                        d.AdditionalLocations[0]
+                            .FindNode(getInnermostNodeForTie: true, cancellationToken)
+                )
+                .ToSet();
 
             var newRoot = Rewrite(root, memberAccessNodes);
             editor.ReplaceNode(root, newRoot);

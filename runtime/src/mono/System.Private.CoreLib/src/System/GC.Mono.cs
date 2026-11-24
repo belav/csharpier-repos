@@ -21,7 +21,7 @@ namespace System
         Failed = 1,
         Canceled = 2,
         Timeout = 3,
-        NotApplicable = 4
+        NotApplicable = 4,
     }
 
     public static partial class GC
@@ -89,11 +89,18 @@ namespace System
             InternalCollect(MaxGeneration);
         }
 
-        public static void Collect(int generation, GCCollectionMode mode) => Collect(generation, mode, true);
+        public static void Collect(int generation, GCCollectionMode mode) =>
+            Collect(generation, mode, true);
 
-        public static void Collect(int generation, GCCollectionMode mode, bool blocking) => Collect(generation, mode, blocking, false);
+        public static void Collect(int generation, GCCollectionMode mode, bool blocking) =>
+            Collect(generation, mode, blocking, false);
 
-        public static void Collect(int generation, GCCollectionMode mode, bool blocking, bool compacting)
+        public static void Collect(
+            int generation,
+            GCCollectionMode mode,
+            bool blocking,
+            bool compacting
+        )
         {
             ArgumentOutOfRangeException.ThrowIfNegative(generation);
             if ((mode < GCCollectionMode.Default) || (mode > GCCollectionMode.Aggressive))
@@ -109,9 +116,7 @@ namespace System
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // disable optimizations
-        public static void KeepAlive(object? obj)
-        {
-        }
+        public static void KeepAlive(object? obj) { }
 
         public static int GetGeneration(WeakReference wo)
         {
@@ -122,10 +127,7 @@ namespace System
 
         public static int MaxGeneration
         {
-            get
-            {
-                return GetMaxGeneration();
-            }
+            get { return GetMaxGeneration(); }
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -152,7 +154,10 @@ namespace System
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern long GetTotalMemory(bool forceFullCollection);
 
-        private static bool _RegisterForFullGCNotification(int maxGenerationPercentage, int largeObjectHeapPercentage)
+        private static bool _RegisterForFullGCNotification(
+            int maxGenerationPercentage,
+            int largeObjectHeapPercentage
+        )
         {
             throw new NotImplementedException();
         }
@@ -172,14 +177,21 @@ namespace System
             throw new NotImplementedException();
         }
 
-        public static void RegisterForFullGCNotification(int maxGenerationThreshold, int largeObjectHeapThreshold)
+        public static void RegisterForFullGCNotification(
+            int maxGenerationThreshold,
+            int largeObjectHeapThreshold
+        )
         {
             if ((maxGenerationThreshold <= 0) || (maxGenerationThreshold >= 100))
-                throw new ArgumentOutOfRangeException(nameof(maxGenerationThreshold),
-                                                       SR.Format(SR.ArgumentOutOfRange_Bounds_Lower_Upper, 1, 99));
+                throw new ArgumentOutOfRangeException(
+                    nameof(maxGenerationThreshold),
+                    SR.Format(SR.ArgumentOutOfRange_Bounds_Lower_Upper, 1, 99)
+                );
             if ((largeObjectHeapThreshold <= 0) || (largeObjectHeapThreshold >= 100))
-                throw new ArgumentOutOfRangeException(nameof(largeObjectHeapThreshold),
-                                                       SR.Format(SR.ArgumentOutOfRange_Bounds_Lower_Upper, 1, 99));
+                throw new ArgumentOutOfRangeException(
+                    nameof(largeObjectHeapThreshold),
+                    SR.Format(SR.ArgumentOutOfRange_Bounds_Lower_Upper, 1, 99)
+                );
 
             if (!_RegisterForFullGCNotification(maxGenerationThreshold, largeObjectHeapThreshold))
                 throw new InvalidOperationException(SR.InvalidOperation_NotWithConcurrentGC);
@@ -214,18 +226,30 @@ namespace System
             return _WaitForFullGCComplete(millisecondsTimeout);
         }
 
-        private static bool StartNoGCRegion(long totalSize, bool hasLohSize, long lohSize, bool disallowFullBlockingGC)
+        private static bool StartNoGCRegion(
+            long totalSize,
+            bool hasLohSize,
+            long lohSize,
+            bool disallowFullBlockingGC
+        )
         {
             throw new NotImplementedException();
         }
 
-        public static bool TryStartNoGCRegion(long totalSize) => StartNoGCRegion(totalSize, false, 0, false);
+        public static bool TryStartNoGCRegion(long totalSize) =>
+            StartNoGCRegion(totalSize, false, 0, false);
 
-        public static bool TryStartNoGCRegion(long totalSize, long lohSize) => StartNoGCRegion(totalSize, true, lohSize, false);
+        public static bool TryStartNoGCRegion(long totalSize, long lohSize) =>
+            StartNoGCRegion(totalSize, true, lohSize, false);
 
-        public static bool TryStartNoGCRegion(long totalSize, bool disallowFullBlockingGC) => StartNoGCRegion(totalSize, false, 0, disallowFullBlockingGC);
+        public static bool TryStartNoGCRegion(long totalSize, bool disallowFullBlockingGC) =>
+            StartNoGCRegion(totalSize, false, 0, disallowFullBlockingGC);
 
-        public static bool TryStartNoGCRegion(long totalSize, long lohSize, bool disallowFullBlockingGC) => StartNoGCRegion(totalSize, true, lohSize, disallowFullBlockingGC);
+        public static bool TryStartNoGCRegion(
+            long totalSize,
+            long lohSize,
+            bool disallowFullBlockingGC
+        ) => StartNoGCRegion(totalSize, true, lohSize, disallowFullBlockingGC);
 
         public static void EndNoGCRegion()
         {
@@ -239,23 +263,27 @@ namespace System
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void _GetGCMemoryInfo(out long highMemoryLoadThresholdBytes,
-                                        out long memoryLoadBytes,
-                                        out long totalAvailableMemoryBytes,
-                                        out long totalCommittedBytes,
-                                        out long heapSizeBytes,
-                                        out long fragmentedBytes);
+        private static extern void _GetGCMemoryInfo(
+            out long highMemoryLoadThresholdBytes,
+            out long memoryLoadBytes,
+            out long totalAvailableMemoryBytes,
+            out long totalCommittedBytes,
+            out long heapSizeBytes,
+            out long fragmentedBytes
+        );
 
         public static GCMemoryInfo GetGCMemoryInfo()
         {
             var data = new GCMemoryInfoData();
 
-            _GetGCMemoryInfo(out data._highMemoryLoadThresholdBytes,
-                             out data._memoryLoadBytes,
-                             out data._totalAvailableMemoryBytes,
-                             out data._totalCommittedBytes,
-                             out data._heapSizeBytes,
-                             out data._fragmentedBytes);
+            _GetGCMemoryInfo(
+                out data._highMemoryLoadThresholdBytes,
+                out data._memoryLoadBytes,
+                out data._totalAvailableMemoryBytes,
+                out data._totalCommittedBytes,
+                out data._heapSizeBytes,
+                out data._fragmentedBytes
+            );
 
             return new GCMemoryInfo(data);
         }
@@ -280,7 +308,8 @@ namespace System
 
         public static T[] AllocateArray<T>(int length, bool pinned = false)
         {
-            if (pinned) {
+            if (pinned)
+            {
                 return Unsafe.As<T[]>(AllocPinnedArray(typeof(T[]), length));
             }
 
@@ -289,25 +318,35 @@ namespace System
 
         internal static ulong GetGenerationSize(int generation)
         {
-            switch (generation) {
-            case 0 :
-                return EventPipeInternal.GetRuntimeCounterValue(EventPipeInternal.RuntimeCounters.GC_NURSERY_SIZE_BYTES);
-            case 1 :
-            case 2 :
-                return EventPipeInternal.GetRuntimeCounterValue(EventPipeInternal.RuntimeCounters.GC_MAJOR_SIZE_BYTES);
-            case 3 :
-                return EventPipeInternal.GetRuntimeCounterValue(EventPipeInternal.RuntimeCounters.GC_LARGE_OBJECT_SIZE_BYTES);
-            case 4:
-                // Pinned object heap.
-                return 0;
-            default:
-                return 0;
+            switch (generation)
+            {
+                case 0:
+                    return EventPipeInternal.GetRuntimeCounterValue(
+                        EventPipeInternal.RuntimeCounters.GC_NURSERY_SIZE_BYTES
+                    );
+                case 1:
+                case 2:
+                    return EventPipeInternal.GetRuntimeCounterValue(
+                        EventPipeInternal.RuntimeCounters.GC_MAJOR_SIZE_BYTES
+                    );
+                case 3:
+                    return EventPipeInternal.GetRuntimeCounterValue(
+                        EventPipeInternal.RuntimeCounters.GC_LARGE_OBJECT_SIZE_BYTES
+                    );
+                case 4:
+                    // Pinned object heap.
+                    return 0;
+                default:
+                    return 0;
             }
         }
 
         internal static int GetLastGCPercentTimeInGC()
         {
-            return (int)EventPipeInternal.GetRuntimeCounterValue(EventPipeInternal.RuntimeCounters.GC_LAST_PERCENT_TIME_IN_GC);
+            return (int)
+                EventPipeInternal.GetRuntimeCounterValue(
+                    EventPipeInternal.RuntimeCounters.GC_LAST_PERCENT_TIME_IN_GC
+                );
         }
 
         public static TimeSpan GetTotalPauseDuration()
@@ -315,7 +354,10 @@ namespace System
             return TimeSpan.Zero;
         }
 
-        public static System.Collections.Generic.IReadOnlyDictionary<string, object> GetConfigurationVariables()
+        public static System.Collections.Generic.IReadOnlyDictionary<
+            string,
+            object
+        > GetConfigurationVariables()
         {
             return new System.Collections.Generic.Dictionary<string, object>();
         }

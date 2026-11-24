@@ -3,14 +3,16 @@ namespace System.Workflow.ComponentModel.Compiler
     #region Imports
 
     using System;
-    using System.Reflection;
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel.Design.Serialization;
+    using System.Reflection;
 
     #endregion
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ValidationManager : IServiceProvider
     {
         #region Data members
@@ -25,10 +27,7 @@ namespace System.Workflow.ComponentModel.Compiler
         #region Constructors
 
         public ValidationManager(IServiceProvider serviceProvider)
-            :
-            this(serviceProvider, true)
-        {
-        }
+            : this(serviceProvider, true) { }
 
         public ValidationManager(IServiceProvider serviceProvider, bool validateChildActivities)
         {
@@ -53,10 +52,7 @@ namespace System.Workflow.ComponentModel.Compiler
 
         public bool ValidateChildActivities
         {
-            get
-            {
-                return this.validateChildActivities;
-            }
+            get { return this.validateChildActivities; }
         }
 
         public Validator[] GetValidators(Type type)
@@ -65,7 +61,12 @@ namespace System.Workflow.ComponentModel.Compiler
                 return ((List<Validator>)this.hashOfValidators[type]).ToArray();
 
             List<Validator> validators = new List<Validator>();
-            foreach (Validator validator in ComponentDispenser.CreateComponents(type, typeof(ActivityValidatorAttribute)))
+            foreach (
+                Validator validator in ComponentDispenser.CreateComponents(
+                    type,
+                    typeof(ActivityValidatorAttribute)
+                )
+            )
                 validators.Add(validator);
 
             this.hashOfValidators[type] = validators;

@@ -92,7 +92,9 @@ namespace System.ComponentModel.Design
         /// Limits valid selection types to Normal, Replace, MouseDown, MouseUp,
         /// Click, Toggle or Add.
         /// </summary>
-        [Obsolete("SelectionTypes.Valid has been deprecated. Use Enum class methods to determine valid values, or use a type converter instead.")]
+        [Obsolete(
+            "SelectionTypes.Valid has been deprecated. Use Enum class methods to determine valid values, or use a type converter instead."
+        )]
         Valid = 0x1F,
     }
 }

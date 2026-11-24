@@ -33,7 +33,7 @@ namespace System.Xml.XPath
         NodeSet = 3,
         Navigator = XPathResultType.String,
         Any = 5,
-        Error
+        Error,
     };
 
     public abstract class XPathExpression
@@ -44,7 +44,13 @@ namespace System.Xml.XPath
 
         public abstract void AddSort(object expr, IComparer comparer);
 
-        public abstract void AddSort(object expr, XmlSortOrder order, XmlCaseOrder caseOrder, string lang, XmlDataType dataType);
+        public abstract void AddSort(
+            object expr,
+            XmlSortOrder order,
+            XmlCaseOrder caseOrder,
+            string lang,
+            XmlDataType dataType
+        );
 
         public abstract XPathExpression Clone();
 
@@ -56,7 +62,10 @@ namespace System.Xml.XPath
 
         public static XPathExpression Compile(string xpath)
         {
-            return Compile(xpath, /*nsResolver:*/null);
+            return Compile(
+                xpath, /*nsResolver:*/
+                null
+            );
         }
 
         public static XPathExpression Compile(string xpath, IXmlNamespaceResolver? nsResolver)

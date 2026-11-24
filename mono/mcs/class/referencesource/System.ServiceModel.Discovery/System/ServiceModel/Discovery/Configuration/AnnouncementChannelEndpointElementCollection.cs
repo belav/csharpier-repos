@@ -8,8 +8,12 @@ namespace System.ServiceModel.Discovery.Configuration
     using System.Globalization;
     using System.ServiceModel.Configuration;
 
-    [ConfigurationCollection(typeof(ChannelEndpointElement), AddItemName = ConfigurationStrings.Endpoint)]
-    public sealed class AnnouncementChannelEndpointElementCollection : ServiceModelConfigurationElementCollection<ChannelEndpointElement>
+    [ConfigurationCollection(
+        typeof(ChannelEndpointElement),
+        AddItemName = ConfigurationStrings.Endpoint
+    )]
+    public sealed class AnnouncementChannelEndpointElementCollection
+        : ServiceModelConfigurationElementCollection<ChannelEndpointElement>
     {
         public AnnouncementChannelEndpointElementCollection()
         {
@@ -25,15 +29,20 @@ namespace System.ServiceModel.Discovery.Configuration
 
             ChannelEndpointElement channelEndpointElement = (ChannelEndpointElement)element;
 
-            string address = channelEndpointElement.Address == null ? "" : channelEndpointElement.Address.ToString().ToUpperInvariant();
+            string address =
+                channelEndpointElement.Address == null
+                    ? ""
+                    : channelEndpointElement.Address.ToString().ToUpperInvariant();
 
-            return string.Format(CultureInfo.InvariantCulture,
+            return string.Format(
+                CultureInfo.InvariantCulture,
                 "kind:{0};endpointConfiguration:{1};address:{2};bindingConfiguration:{3};binding:{4};",
                 channelEndpointElement.Kind,
                 channelEndpointElement.EndpointConfiguration,
                 address,
                 channelEndpointElement.BindingConfiguration,
-                channelEndpointElement.Binding);
+                channelEndpointElement.Binding
+            );
         }
     }
 }

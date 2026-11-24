@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Security.Permissions;
 
-namespace System.Runtime.InteropServices {
-
-
+namespace System.Runtime.InteropServices
+{
     [System.Security.SecuritySafeCritical]
-    public class ComAwareEventInfo : System.Reflection.EventInfo {
-
+    public class ComAwareEventInfo : System.Reflection.EventInfo
+    {
         #region private fields
         private System.Reflection.EventInfo _innerEventInfo;
         #endregion
 
         #region ctor
-        public ComAwareEventInfo(Type type, string eventName) {
+        public ComAwareEventInfo(Type type, string eventName)
+        {
             _innerEventInfo = type.GetEvent(eventName);
         }
         #endregion
@@ -21,8 +21,10 @@ namespace System.Runtime.InteropServices {
 #if FEATURE_NETCORE
         [System.Security.SecuritySafeCritical]
 #endif//FEATURE_NETCORE
-        public override void AddEventHandler(object target, Delegate handler) {
-            if (Marshal.IsComObject(target)) {
+        public override void AddEventHandler(object target, Delegate handler)
+        {
+            if (Marshal.IsComObject(target))
+            {
                 // retrieve sourceIid and dispid
                 Guid sourceIid;
                 int dispid;
@@ -30,11 +32,20 @@ namespace System.Runtime.InteropServices {
 
 #if FEATURE_CAS_POLICY
                 // now validate the caller can call into native and redirect to ComEventHelpers.Combine
-                SecurityPermission perm = new SecurityPermission(SecurityPermissionFlag.UnmanagedCode);
+                SecurityPermission perm = new SecurityPermission(
+                    SecurityPermissionFlag.UnmanagedCode
+                );
                 perm.Demand();
 #endif//FEATURE_CAS_POLICY
-                System.Runtime.InteropServices.ComEventsHelper.Combine(target, sourceIid, dispid, handler);
-            } else {
+                System.Runtime.InteropServices.ComEventsHelper.Combine(
+                    target,
+                    sourceIid,
+                    dispid,
+                    handler
+                );
+            }
+            else
+            {
                 // we are dealing with a managed object - just add the delegate through reflection
                 _innerEventInfo.AddEventHandler(target, handler);
             }
@@ -43,8 +54,10 @@ namespace System.Runtime.InteropServices {
 #if FEATURE_NETCORE
         [System.Security.SecuritySafeCritical]
 #endif//FEATURE_NETCORE
-        public override void RemoveEventHandler(object target, Delegate handler) {
-            if (Marshal.IsComObject(target)) {
+        public override void RemoveEventHandler(object target, Delegate handler)
+        {
+            if (Marshal.IsComObject(target))
+            {
                 // retrieve sourceIid and dispid
                 Guid sourceIid;
                 int dispid;
@@ -52,11 +65,20 @@ namespace System.Runtime.InteropServices {
 
 #if FEATURE_CAS_POLICY
                 // now validate the caller can call into native and redirect to ComEventHelpers.Combine
-                SecurityPermission perm = new SecurityPermission(SecurityPermissionFlag.UnmanagedCode);
+                SecurityPermission perm = new SecurityPermission(
+                    SecurityPermissionFlag.UnmanagedCode
+                );
                 perm.Demand();
 #endif//FEATURE_CAS_POLICY
-                System.Runtime.InteropServices.ComEventsHelper.Remove(target, sourceIid, dispid, handler);
-            } else {
+                System.Runtime.InteropServices.ComEventsHelper.Remove(
+                    target,
+                    sourceIid,
+                    dispid,
+                    handler
+                );
+            }
+            else
+            {
                 // we are dealing with a managed object - just add the delegate through relection
                 _innerEventInfo.RemoveEventHandler(target, handler);
             }
@@ -64,70 +86,100 @@ namespace System.Runtime.InteropServices {
         #endregion
 
         #region public overrides
-        public override System.Reflection.EventAttributes Attributes {
+        public override System.Reflection.EventAttributes Attributes
+        {
             get { return _innerEventInfo.Attributes; }
         }
 
-        public override System.Reflection.MethodInfo GetAddMethod(bool nonPublic) {
+        public override System.Reflection.MethodInfo GetAddMethod(bool nonPublic)
+        {
             return _innerEventInfo.GetAddMethod(nonPublic);
         }
 
-        public override System.Reflection.MethodInfo GetRaiseMethod(bool nonPublic) {
+        public override System.Reflection.MethodInfo GetRaiseMethod(bool nonPublic)
+        {
             return _innerEventInfo.GetRaiseMethod(nonPublic);
         }
 
-        public override System.Reflection.MethodInfo GetRemoveMethod(bool nonPublic) {
+        public override System.Reflection.MethodInfo GetRemoveMethod(bool nonPublic)
+        {
             return _innerEventInfo.GetRemoveMethod(nonPublic);
         }
 
-        public override Type DeclaringType {
+        public override Type DeclaringType
+        {
             get { return _innerEventInfo.DeclaringType; }
         }
 
-        public override object[] GetCustomAttributes(Type attributeType, bool inherit) {
+        public override object[] GetCustomAttributes(Type attributeType, bool inherit)
+        {
             return _innerEventInfo.GetCustomAttributes(attributeType, inherit);
         }
 
-        public override object[] GetCustomAttributes(bool inherit) {
+        public override object[] GetCustomAttributes(bool inherit)
+        {
             return _innerEventInfo.GetCustomAttributes(inherit);
         }
 
-        public override bool IsDefined(Type attributeType, bool inherit) {
+        public override bool IsDefined(Type attributeType, bool inherit)
+        {
             return _innerEventInfo.IsDefined(attributeType, inherit);
         }
 
-        public override string Name {
+        public override string Name
+        {
             get { return _innerEventInfo.Name; }
         }
 
-        public override Type ReflectedType {
+        public override Type ReflectedType
+        {
             get { return _innerEventInfo.ReflectedType; }
         }
         #endregion
 
         #region private methods
 
-        private static void GetDataForComInvocation(System.Reflection.EventInfo eventInfo, out Guid sourceIid, out int dispid) {
-            object[] comEventInterfaces = eventInfo.DeclaringType.GetCustomAttributes(typeof(ComEventInterfaceAttribute), false);
+        private static void GetDataForComInvocation(
+            System.Reflection.EventInfo eventInfo,
+            out Guid sourceIid,
+            out int dispid
+        )
+        {
+            object[] comEventInterfaces = eventInfo.DeclaringType.GetCustomAttributes(
+                typeof(ComEventInterfaceAttribute),
+                false
+            );
 
-            if (comEventInterfaces == null || comEventInterfaces.Length == 0) {
-                // 
-                throw new InvalidOperationException("event invocation for COM objects requires interface to be attributed with ComSourceInterfaceGuidAttribute");
+            if (comEventInterfaces == null || comEventInterfaces.Length == 0)
+            {
+                //
+                throw new InvalidOperationException(
+                    "event invocation for COM objects requires interface to be attributed with ComSourceInterfaceGuidAttribute"
+                );
             }
 
-            if (comEventInterfaces.Length > 1) {
-                // 
-                throw new System.Reflection.AmbiguousMatchException("more than one ComSourceInterfaceGuidAttribute found");
+            if (comEventInterfaces.Length > 1)
+            {
+                //
+                throw new System.Reflection.AmbiguousMatchException(
+                    "more than one ComSourceInterfaceGuidAttribute found"
+                );
             }
 
             Type sourceItf = ((ComEventInterfaceAttribute)comEventInterfaces[0]).SourceInterface;
             Guid guid = sourceItf.GUID;
 
             System.Reflection.MethodInfo methodInfo = sourceItf.GetMethod(eventInfo.Name);
-            Attribute dispIdAttribute = Attribute.GetCustomAttribute(methodInfo, typeof(DispIdAttribute));
-            if (dispIdAttribute == null) {
-                // 
-                throw new InvalidOperationException("event invocation for COM objects requires event to be attributed with DispIdAttribute");
+            Attribute dispIdAttribute = Attribute.GetCustomAttribute(
+                methodInfo,
+                typeof(DispIdAttribute)
+            );
+            if (dispIdAttribute == null)
+            {
+                //
+                throw new InvalidOperationException(
+                    "event invocation for COM objects requires event to be attributed with DispIdAttribute"
+                );
             }
 
             sourceIid = guid;

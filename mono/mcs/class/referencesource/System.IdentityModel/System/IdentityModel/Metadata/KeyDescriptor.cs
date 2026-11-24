@@ -21,9 +21,7 @@ namespace System.IdentityModel.Metadata
         /// Empty constructor.
         /// </summary>
         public KeyDescriptor()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         /// <summary>
         /// Constructs with a security key identifier.

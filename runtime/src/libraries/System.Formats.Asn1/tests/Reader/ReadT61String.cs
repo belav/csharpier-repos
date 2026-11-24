@@ -39,26 +39,11 @@ namespace System.Formats.Asn1.Tests.Reader
                     "Hedeby's M\u00f8belhandel - Salgsafdelingen",
                 },
                 // Valid UTF-8 string is interpreted as UTF-8
-                new object[]
-                {
-                    AsnEncodingRules.DER,
-                    "1402C2A2",
-                    "\u00a2",
-                },
+                new object[] { AsnEncodingRules.DER, "1402C2A2", "\u00a2" },
                 // Valid UTF-8 string is interpreted as UTF-8 (multi-segment)
-                new object[]
-                {
-                    AsnEncodingRules.BER,
-                    "34800401C20401A20000",
-                    "\u00a2",
-                },
+                new object[] { AsnEncodingRules.BER, "34800401C20401A20000", "\u00a2" },
                 // Invalid UTF-8 string with valid UTF-8 sequence is interpreted as ISO 8859-1
-                new object[]
-                {
-                    AsnEncodingRules.DER,
-                    "1403C2A2F8",
-                    "\u00c2\u00a2\u00f8",
-                },
+                new object[] { AsnEncodingRules.DER, "1403C2A2F8", "\u00c2\u00a2\u00f8" },
             };
 
         [Theory]
@@ -66,7 +51,8 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void GetT61String_Success(
             AsnEncodingRules ruleSet,
             string inputHex,
-            string expectedValue)
+            string expectedValue
+        )
         {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
@@ -80,7 +66,8 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void TryCopyT61String(
             AsnEncodingRules ruleSet,
             string inputHex,
-            string expectedValue)
+            string expectedValue
+        )
         {
             byte[] inputData = inputHex.HexToByteArray();
             char[] output = new char[expectedValue.Length];
@@ -96,7 +83,8 @@ namespace System.Formats.Asn1.Tests.Reader
                 copied = reader.TryReadCharacterString(
                     output.AsSpan(0, expectedValue.Length - 1),
                     UniversalTagNumber.T61String,
-                    out charsWritten);
+                    out charsWritten
+                );
 
                 Assert.False(copied, "reader.TryCopyT61String - too short");
                 Assert.Equal(0, charsWritten);
@@ -106,7 +94,8 @@ namespace System.Formats.Asn1.Tests.Reader
             copied = reader.TryReadCharacterString(
                 output,
                 UniversalTagNumber.T61String,
-                out charsWritten);
+                out charsWritten
+            );
 
             Assert.True(copied, "reader.TryCopyT61String");
 

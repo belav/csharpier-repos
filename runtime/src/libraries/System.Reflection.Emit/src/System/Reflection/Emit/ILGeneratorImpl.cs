@@ -34,7 +34,10 @@ namespace System.Reflection.Emit
         }
 
         internal int GetMaxStackSize() => _maxStackSize;
-        internal List<KeyValuePair<MemberInfo, BlobWriter>> GetMemberReferences() => _memberReferences;
+
+        internal List<KeyValuePair<MemberInfo, BlobWriter>> GetMemberReferences() =>
+            _memberReferences;
+
         internal InstructionEncoder Instructions => _il;
         internal bool HasDynamicStackAllocation => _hasDynamicStackAllocation;
         internal List<LocalBuilder> Locals => _locals;
@@ -77,8 +80,13 @@ namespace System.Reflection.Emit
                 currentExBlock.HandleStart = DefineLabel();
                 currentExBlock.HandleEnd = DefineLabel();
                 ModuleBuilderImpl module = (ModuleBuilderImpl)_methodBuilder.Module;
-                _cfBuilder.AddCatchRegion(_labelTable[currentExBlock.TryStart], _labelTable[currentExBlock.TryEnd],
-                    _labelTable[currentExBlock.HandleStart], _labelTable[currentExBlock.HandleEnd], module.GetTypeHandle(exceptionType));
+                _cfBuilder.AddCatchRegion(
+                    _labelTable[currentExBlock.TryStart],
+                    _labelTable[currentExBlock.TryEnd],
+                    _labelTable[currentExBlock.HandleStart],
+                    _labelTable[currentExBlock.HandleEnd],
+                    module.GetTypeHandle(exceptionType)
+                );
                 MarkLabel(currentExBlock.HandleStart);
             }
 
@@ -106,8 +114,13 @@ namespace System.Reflection.Emit
             currentExBlock.FilterStart = DefineLabel();
             currentExBlock.HandleStart = DefineLabel();
             currentExBlock.HandleEnd = DefineLabel();
-            _cfBuilder.AddFilterRegion(_labelTable[currentExBlock.TryStart], _labelTable[currentExBlock.TryEnd],
-                _labelTable[currentExBlock.HandleStart], _labelTable[currentExBlock.HandleEnd], _labelTable[currentExBlock.FilterStart]);
+            _cfBuilder.AddFilterRegion(
+                _labelTable[currentExBlock.TryStart],
+                _labelTable[currentExBlock.TryEnd],
+                _labelTable[currentExBlock.HandleStart],
+                _labelTable[currentExBlock.HandleEnd],
+                _labelTable[currentExBlock.FilterStart]
+            );
             currentExBlock.State = ExceptionState.Filter;
             MarkLabel(currentExBlock.FilterStart);
         }
@@ -144,8 +157,12 @@ namespace System.Reflection.Emit
 
             currentExBlock.HandleStart = DefineLabel();
             currentExBlock.HandleEnd = DefineLabel();
-            _cfBuilder.AddFaultRegion(_labelTable[currentExBlock.TryStart], _labelTable[currentExBlock.TryEnd],
-                               _labelTable[currentExBlock.HandleStart], _labelTable[currentExBlock.HandleEnd]);
+            _cfBuilder.AddFaultRegion(
+                _labelTable[currentExBlock.TryStart],
+                _labelTable[currentExBlock.TryEnd],
+                _labelTable[currentExBlock.HandleStart],
+                _labelTable[currentExBlock.HandleEnd]
+            );
             currentExBlock.State = ExceptionState.Fault;
             MarkLabel(currentExBlock.HandleStart);
         }
@@ -173,8 +190,12 @@ namespace System.Reflection.Emit
             MarkLabel(currentExBlock.TryEnd);
             currentExBlock.HandleStart = DefineLabel();
             currentExBlock.HandleEnd = finallyEndLabel;
-            _cfBuilder.AddFinallyRegion(_labelTable[currentExBlock.TryStart], _labelTable[currentExBlock.TryEnd],
-                               _labelTable[currentExBlock.HandleStart], _labelTable[currentExBlock.HandleEnd]);
+            _cfBuilder.AddFinallyRegion(
+                _labelTable[currentExBlock.TryStart],
+                _labelTable[currentExBlock.TryEnd],
+                _labelTable[currentExBlock.HandleStart],
+                _labelTable[currentExBlock.HandleEnd]
+            );
             currentExBlock.State = ExceptionState.Finally;
             MarkLabel(currentExBlock.HandleStart);
         }
@@ -188,7 +209,12 @@ namespace System.Reflection.Emit
 
             ArgumentNullException.ThrowIfNull(localType);
 
-            LocalBuilder local = new LocalBuilderImpl(_locals.Count, localType, methodBuilder, pinned);
+            LocalBuilder local = new LocalBuilderImpl(
+                _locals.Count,
+                localType,
+                methodBuilder,
+                pinned
+            );
             _locals.Add(local);
 
             return local;
@@ -201,6 +227,7 @@ namespace System.Reflection.Emit
             _labelTable.Add(emitLabel, metadataLabel);
             return emitLabel;
         }
+
         private void UpdateStackSize(OpCode opCode)
         {
             _currentStack += opCode.EvaluationStackDelta;
@@ -258,19 +285,21 @@ namespace System.Reflection.Emit
             {
                 if (arg >= -1 && arg <= 8)
                 {
-                    EmitOpcode(arg switch
-                    {
-                        -1 => OpCodes.Ldc_I4_M1,
-                        0 => OpCodes.Ldc_I4_0,
-                        1 => OpCodes.Ldc_I4_1,
-                        2 => OpCodes.Ldc_I4_2,
-                        3 => OpCodes.Ldc_I4_3,
-                        4 => OpCodes.Ldc_I4_4,
-                        5 => OpCodes.Ldc_I4_5,
-                        6 => OpCodes.Ldc_I4_6,
-                        7 => OpCodes.Ldc_I4_7,
-                        _ => OpCodes.Ldc_I4_8
-                    });
+                    EmitOpcode(
+                        arg switch
+                        {
+                            -1 => OpCodes.Ldc_I4_M1,
+                            0 => OpCodes.Ldc_I4_0,
+                            1 => OpCodes.Ldc_I4_1,
+                            2 => OpCodes.Ldc_I4_2,
+                            3 => OpCodes.Ldc_I4_3,
+                            4 => OpCodes.Ldc_I4_4,
+                            5 => OpCodes.Ldc_I4_5,
+                            6 => OpCodes.Ldc_I4_6,
+                            7 => OpCodes.Ldc_I4_7,
+                            _ => OpCodes.Ldc_I4_8,
+                        }
+                    );
                     return;
                 }
 
@@ -284,13 +313,15 @@ namespace System.Reflection.Emit
             {
                 if ((uint)arg <= 3)
                 {
-                    EmitOpcode(arg switch
-                    {
-                        0 => OpCodes.Ldarg_0,
-                        1 => OpCodes.Ldarg_1,
-                        2 => OpCodes.Ldarg_2,
-                        _ => OpCodes.Ldarg_3,
-                    });
+                    EmitOpcode(
+                        arg switch
+                        {
+                            0 => OpCodes.Ldarg_0,
+                            1 => OpCodes.Ldarg_1,
+                            2 => OpCodes.Ldarg_2,
+                            _ => OpCodes.Ldarg_3,
+                        }
+                    );
                     return;
                 }
 
@@ -360,7 +391,13 @@ namespace System.Reflection.Emit
         {
             ArgumentNullException.ThrowIfNull(con);
 
-            if (!(opcode.Equals(OpCodes.Call) || opcode.Equals(OpCodes.Callvirt) || opcode.Equals(OpCodes.Newobj)))
+            if (
+                !(
+                    opcode.Equals(OpCodes.Call)
+                    || opcode.Equals(OpCodes.Callvirt)
+                    || opcode.Equals(OpCodes.Newobj)
+                )
+            )
             {
                 throw new ArgumentException(SR.Argument_NotMethodCallOpcode, nameof(opcode));
             }
@@ -386,8 +423,12 @@ namespace System.Reflection.Emit
 
             UpdateStackSize(opcode, stackChange);
             _il.OpCode((ILOpCode)opcode.Value);
-            _memberReferences.Add(new KeyValuePair<MemberInfo, BlobWriter>
-                (con, new BlobWriter(_il.CodeBuilder.ReserveBytes(sizeof(int)))));
+            _memberReferences.Add(
+                new KeyValuePair<MemberInfo, BlobWriter>(
+                    con,
+                    new BlobWriter(_il.CodeBuilder.ReserveBytes(sizeof(int)))
+                )
+            );
         }
 
         public override void Emit(OpCode opcode, Label label)
@@ -425,7 +466,10 @@ namespace System.Reflection.Emit
         {
             ArgumentNullException.ThrowIfNull(local);
 
-            if (local is not LocalBuilderImpl localBuilder || localBuilder.GetMethodBuilder() != _methodBuilder)
+            if (
+                local is not LocalBuilderImpl localBuilder
+                || localBuilder.GetMethodBuilder() != _methodBuilder
+            )
             {
                 throw new ArgumentException(SR.Argument_UnmatchedMethodForLocal, nameof(local));
             }
@@ -449,7 +493,8 @@ namespace System.Reflection.Emit
             UpdateStackSize(opcode);
         }
 
-        public override void Emit(OpCode opcode, SignatureHelper signature) => throw new NotImplementedException();
+        public override void Emit(OpCode opcode, SignatureHelper signature) =>
+            throw new NotImplementedException();
 
         public override void Emit(OpCode opcode, FieldInfo field)
         {
@@ -462,7 +507,11 @@ namespace System.Reflection.Emit
         {
             ArgumentNullException.ThrowIfNull(meth);
 
-            if (opcode.Equals(OpCodes.Call) || opcode.Equals(OpCodes.Callvirt) || opcode.Equals(OpCodes.Newobj))
+            if (
+                opcode.Equals(OpCodes.Call)
+                || opcode.Equals(OpCodes.Callvirt)
+                || opcode.Equals(OpCodes.Newobj)
+            )
             {
                 EmitCall(opcode, meth, null);
             }
@@ -475,8 +524,12 @@ namespace System.Reflection.Emit
         private void EmitMember(OpCode opcode, MemberInfo member)
         {
             EmitOpcode(opcode);
-            _memberReferences.Add(new KeyValuePair<MemberInfo, BlobWriter>
-                (member, new BlobWriter(_il.CodeBuilder.ReserveBytes(sizeof(int)))));
+            _memberReferences.Add(
+                new KeyValuePair<MemberInfo, BlobWriter>(
+                    member,
+                    new BlobWriter(_il.CodeBuilder.ReserveBytes(sizeof(int)))
+                )
+            );
         }
 
         public override void Emit(OpCode opcode, Type cls)
@@ -488,22 +541,40 @@ namespace System.Reflection.Emit
             _il.Token(module.GetTypeMetadataToken(cls));
         }
 
-        public override void EmitCall(OpCode opcode, MethodInfo methodInfo, Type[]? optionalParameterTypes)
+        public override void EmitCall(
+            OpCode opcode,
+            MethodInfo methodInfo,
+            Type[]? optionalParameterTypes
+        )
         {
             ArgumentNullException.ThrowIfNull(methodInfo);
 
-            if (!(opcode.Equals(OpCodes.Call) || opcode.Equals(OpCodes.Callvirt) || opcode.Equals(OpCodes.Newobj)))
+            if (
+                !(
+                    opcode.Equals(OpCodes.Call)
+                    || opcode.Equals(OpCodes.Callvirt)
+                    || opcode.Equals(OpCodes.Newobj)
+                )
+            )
             {
                 throw new ArgumentException(SR.Argument_NotMethodCallOpcode, nameof(opcode));
             }
 
             _il.OpCode((ILOpCode)opcode.Value);
             UpdateStackSize(opcode, GetStackChange(opcode, methodInfo, optionalParameterTypes));
-            _memberReferences.Add(new KeyValuePair<MemberInfo, BlobWriter>
-                (methodInfo, new BlobWriter(_il.CodeBuilder.ReserveBytes(sizeof(int)))));
+            _memberReferences.Add(
+                new KeyValuePair<MemberInfo, BlobWriter>(
+                    methodInfo,
+                    new BlobWriter(_il.CodeBuilder.ReserveBytes(sizeof(int)))
+                )
+            );
         }
 
-        private static int GetStackChange(OpCode opcode, MethodInfo methodInfo, Type[]? optionalParameterTypes)
+        private static int GetStackChange(
+            OpCode opcode,
+            MethodInfo methodInfo,
+            Type[]? optionalParameterTypes
+        )
         {
             int stackChange = 0;
 
@@ -539,8 +610,20 @@ namespace System.Reflection.Emit
             return stackChange;
         }
 
-        public override void EmitCalli(OpCode opcode, CallingConventions callingConvention, Type? returnType, Type[]? parameterTypes, Type[]? optionalParameterTypes) => throw new NotImplementedException();
-        public override void EmitCalli(OpCode opcode, CallingConvention unmanagedCallConv, Type? returnType, Type[]? parameterTypes) => throw new NotImplementedException();
+        public override void EmitCalli(
+            OpCode opcode,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? parameterTypes,
+            Type[]? optionalParameterTypes
+        ) => throw new NotImplementedException();
+
+        public override void EmitCalli(
+            OpCode opcode,
+            CallingConvention unmanagedCallConv,
+            Type? returnType,
+            Type[]? parameterTypes
+        ) => throw new NotImplementedException();
 
         public override void EndExceptionBlock()
         {
@@ -588,7 +671,8 @@ namespace System.Reflection.Emit
             }
         }
 
-        public override void UsingNamespace(string usingNamespace) => throw new NotImplementedException();
+        public override void UsingNamespace(string usingNamespace) =>
+            throw new NotImplementedException();
     }
 
     internal sealed class ExceptionBlock
@@ -610,6 +694,6 @@ namespace System.Reflection.Emit
         Catch,
         Finally,
         Fault,
-        Done
+        Done,
     }
 }

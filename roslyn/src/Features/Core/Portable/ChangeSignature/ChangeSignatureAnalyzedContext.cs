@@ -6,12 +6,15 @@ using Microsoft.CodeAnalysis.CodeCleanup;
 
 namespace Microsoft.CodeAnalysis.ChangeSignature
 {
-    internal abstract class ChangeSignatureAnalyzedContext
-    {
-    }
+    internal abstract class ChangeSignatureAnalyzedContext { }
 
     internal sealed class ChangeSignatureAnalysisSucceededContext(
-        Document document, int positionForTypeBinding, ISymbol symbol, ParameterConfiguration parameterConfiguration, CodeCleanupOptionsProvider fallbackOptions) : ChangeSignatureAnalyzedContext
+        Document document,
+        int positionForTypeBinding,
+        ISymbol symbol,
+        ParameterConfiguration parameterConfiguration,
+        CodeCleanupOptionsProvider fallbackOptions
+    ) : ChangeSignatureAnalyzedContext
     {
         public readonly Document Document = document;
         public readonly ISymbol Symbol = symbol;
@@ -22,7 +25,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         public Solution Solution => Document.Project.Solution;
     }
 
-    internal sealed class CannotChangeSignatureAnalyzedContext(ChangeSignatureFailureKind reason) : ChangeSignatureAnalyzedContext
+    internal sealed class CannotChangeSignatureAnalyzedContext(ChangeSignatureFailureKind reason)
+        : ChangeSignatureAnalyzedContext
     {
         public readonly ChangeSignatureFailureKind CannotChangeSignatureReason = reason;
     }

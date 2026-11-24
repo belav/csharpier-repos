@@ -18,7 +18,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
     [Trait(Traits.Feature, Traits.Features.DebuggingNameResolver)]
     public class NameResolverTests
     {
-        private static async Task TestAsync(string text, string searchText, params string[] expectedNames)
+        private static async Task TestAsync(
+            string text,
+            string searchText,
+            params string[] expectedNames
+        )
         {
             using var workspace = TestWorkspace.CreateCSharp(text);
 
@@ -34,15 +38,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
             using var workspace = TestWorkspace.CreateCSharp(" ");
 
             var debugInfo = new CSharpBreakpointResolutionService();
-            var results = await debugInfo.ResolveBreakpointsAsync(workspace.CurrentSolution, "goo", CancellationToken.None);
+            var results = await debugInfo.ResolveBreakpointsAsync(
+                workspace.CurrentSolution,
+                "goo",
+                CancellationToken.None
+            );
             Assert.Equal(0, results.Count());
         }
 
         [Fact]
         public async Task TestSimpleNameInClass()
         {
-            var text =
-                """
+            var text = """
                 class C
                 {
                   void Goo()
@@ -64,8 +71,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         [Fact]
         public async Task TestSimpleNameInNamespace()
         {
-            var text =
-                """
+            var text = """
                 namespace N
                 {
                   class C
@@ -93,8 +99,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         [Fact]
         public async Task TestSimpleNameInGenericClassNamespace()
         {
-            var text =
-                """
+            var text = """
                 namespace N
                 {
                   class C<T>
@@ -123,8 +128,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         [Fact]
         public async Task TestGenericNameInClassNamespace()
         {
-            var text =
-                """
+            var text = """
                 namespace N
                 {
                   class C
@@ -158,8 +162,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         [Fact]
         public async Task TestOverloadsInSingleClass()
         {
-            var text =
-                """
+            var text = """
                 class C
                 {
                   void Goo()
@@ -186,8 +189,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         [Fact]
         public async Task TestMethodsInMultipleClasses()
         {
-            var text =
-                """
+            var text = """
                 namespace N
                 {
                   class C
@@ -224,8 +226,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         [Fact]
         public async Task TestMethodsWithDifferentArityInMultipleClasses()
         {
-            var text =
-                """
+            var text = """
                 namespace N
                 {
                   class C
@@ -266,8 +267,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         [Fact]
         public async Task TestOverloadsWithMultipleParametersInSingleClass()
         {
-            var text =
-                """
+            var text = """
                 class C
                 {
                   void Goo(int a)
@@ -285,7 +285,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """;
             await TestAsync(text, "Goo", "C.Goo(int)", "C.Goo(int, [string])", "C.Goo(__arglist)");
             await TestAsync(text, "goo");
-            await TestAsync(text, "C.Goo", "C.Goo(int)", "C.Goo(int, [string])", "C.Goo(__arglist)");
+            await TestAsync(
+                text,
+                "C.Goo",
+                "C.Goo(int)",
+                "C.Goo(int, [string])",
+                "C.Goo(__arglist)"
+            );
             await TestAsync(text, "N.C.Goo");
             await TestAsync(text, "Goo<T>");
             await TestAsync(text, "C<T>.Goo");
@@ -310,8 +316,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         [Fact]
         public async Task AccessorTests()
         {
-            var text =
-                """
+            var text = """
                 class C
                 {
                   int Property1 { get { return 42; } }
@@ -327,8 +332,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         [Fact]
         public async Task NegativeTests()
         {
-            var text =
-                """
+            var text = """
                 using System.Runtime.CompilerServices;
                 abstract class C
                 {
@@ -379,8 +383,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         [Fact]
         public async Task TestInstanceConstructors()
         {
-            var text =
-                """
+            var text = """
                 class C
                 {
                   public C() { }
@@ -422,8 +425,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         [Fact]
         public async Task TestStaticConstructors()
         {
-            var text =
-                """
+            var text = """
                 class C
                 {
                   static C()
@@ -447,8 +449,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         [Fact]
         public async Task TestAllConstructors()
         {
-            var text =
-                """
+            var text = """
                 class C
                 {
                   static C()
@@ -474,8 +475,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         [Fact]
         public async Task TestPartialMethods()
         {
-            var text =
-                """
+            var text = """
                 partial class C
                 {
                   partial int M1();
@@ -503,37 +503,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         [Fact]
         public async Task TestLeadingAndTrailingText()
         {
-            var text =
-                """
+            var text = """
                 class C
                 {
                   void Goo() { };
                 }
                 """;
             await TestAsync(text, "Goo;", "C.Goo()");
-            await TestAsync(text,
-@"Goo();", "C.Goo()");
+            await TestAsync(text, @"Goo();", "C.Goo()");
             await TestAsync(text, "  Goo;", "C.Goo()");
             await TestAsync(text, "  Goo;;");
             await TestAsync(text, "  Goo; ;");
-            await TestAsync(text,
-@"Goo();", "C.Goo()");
-            await TestAsync(text,
-@"Goo();", "C.Goo()");
-            await TestAsync(text,
-@"Goo(); // comment", "C.Goo()");
-            await TestAsync(text,
+            await TestAsync(text, @"Goo();", "C.Goo()");
+            await TestAsync(text, @"Goo();", "C.Goo()");
+            await TestAsync(text, @"Goo(); // comment", "C.Goo()");
+            await TestAsync(
+                text,
                 """
                 /*comment*/
                            Goo(/* params */); /* comment
-                """, "C.Goo()");
+                """,
+                "C.Goo()"
+            );
         }
 
         [Fact]
         public async Task TestEscapedKeywords()
         {
-            var text =
-                """
+            var text = """
                 struct @true { }
                 class @foreach
                 {
@@ -553,8 +550,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         [Fact]
         public async Task TestAliasQualifiedNames()
         {
-            var text =
-                """
+            var text = """
                 extern alias A
                 class C
                 {
@@ -571,8 +567,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         [Fact]
         public async Task TestNestedTypesAndNamespaces()
         {
-            var text =
-                """
+            var text = """
                 namespace N1
                 {
                   class C
@@ -608,7 +603,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 }
                 """;
 
-            await TestAsync(text, "Goo", "N1.N4.C.Goo(double)", "N1.N4.C.D.Goo()", "N1.N4.C.D.E.Goo()", "N1.C.Goo()");
+            await TestAsync(
+                text,
+                "Goo",
+                "N1.N4.C.Goo(double)",
+                "N1.N4.C.D.Goo()",
+                "N1.N4.C.D.E.Goo()",
+                "N1.C.Goo()"
+            );
             await TestAsync(text, "C.Goo", "N1.N4.C.Goo(double)", "N1.C.Goo()");
             await TestAsync(text, "D.Goo", "N1.N4.C.D.Goo()");
             await TestAsync(text, "N1.N4.C.D.Goo", "N1.N4.C.D.Goo()");
@@ -620,8 +622,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         [Fact]
         public async Task TestInterfaces()
         {
-            var text =
-                """
+            var text = """
                 interface I1
                 {
                   void Goo();

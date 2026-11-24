@@ -16,9 +16,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// parameterized by a type class
         /// <see cref="INumericTC{T}"/> that provides the primitives for that type.
         /// </summary>
-        private sealed class NumericValueSetFactory<T, TTC> : IValueSetFactory<T> where TTC : struct, INumericTC<T>
+        private sealed class NumericValueSetFactory<T, TTC> : IValueSetFactory<T>
+            where TTC : struct, INumericTC<T>
         {
-            public static readonly NumericValueSetFactory<T, TTC> Instance = new NumericValueSetFactory<T, TTC>();
+            public static readonly NumericValueSetFactory<T, TTC> Instance =
+                new NumericValueSetFactory<T, TTC>();
 
             IValueSet IValueSetFactory.AllValues => NumericValueSet<T, TTC>.AllValues;
 
@@ -51,7 +53,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             IValueSet IValueSetFactory.Related(BinaryOperatorKind relation, ConstantValue value) =>
-                value.IsBad ? NumericValueSet<T, TTC>.AllValues : Related(relation, default(TTC).FromConstantValue(value));
+                value.IsBad
+                    ? NumericValueSet<T, TTC>.AllValues
+                    : Related(relation, default(TTC).FromConstantValue(value));
 
             public IValueSet Random(int expectedSize, Random random) =>
                 NumericValueSet<T, TTC>.Random(expectedSize, random);
@@ -62,10 +66,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return tc.ToConstantValue(tc.Random(random));
             }
 
-            bool IValueSetFactory.Related(BinaryOperatorKind relation, ConstantValue left, ConstantValue right)
+            bool IValueSetFactory.Related(
+                BinaryOperatorKind relation,
+                ConstantValue left,
+                ConstantValue right
+            )
             {
                 var tc = default(TTC);
-                return tc.Related(relation, tc.FromConstantValue(left), tc.FromConstantValue(right));
+                return tc.Related(
+                    relation,
+                    tc.FromConstantValue(left),
+                    tc.FromConstantValue(right)
+                );
             }
         }
     }

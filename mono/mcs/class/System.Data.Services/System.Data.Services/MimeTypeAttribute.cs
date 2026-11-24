@@ -26,21 +26,19 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Data.Services {
-	[AttributeUsage (AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-	public sealed class MimeTypeAttribute : Attribute {
-		public MimeTypeAttribute (string memberName, string mimeType)
-		{
-			this.MemberName = memberName;
-			this.MimeType = mimeType;
-		}
+namespace System.Data.Services
+{
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+    public sealed class MimeTypeAttribute : Attribute
+    {
+        public MimeTypeAttribute(string memberName, string mimeType)
+        {
+            this.MemberName = memberName;
+            this.MimeType = mimeType;
+        }
 
-		public string MemberName {
-			get; private set;
-		}
+        public string MemberName { get; private set; }
 
-		public string MimeType {
-			get; private set;
-		}
-	}
+        public string MimeType { get; private set; }
+    }
 }

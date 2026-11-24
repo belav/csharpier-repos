@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,21 +31,23 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Description
 {
-	public interface IOperationBehavior
-	{
-		void AddBindingParameters (
-			OperationDescription operationDescription,
-			BindingParameterCollection bindingParameters);
+    public interface IOperationBehavior
+    {
+        void AddBindingParameters(
+            OperationDescription operationDescription,
+            BindingParameterCollection bindingParameters
+        );
 
-		void ApplyDispatchBehavior (
-			OperationDescription operationDescription,
-			DispatchOperation dispatchOperation);
+        void ApplyDispatchBehavior(
+            OperationDescription operationDescription,
+            DispatchOperation dispatchOperation
+        );
 
-		void ApplyClientBehavior (
-			OperationDescription operationDescription,
-			ClientOperation clientOperation);
+        void ApplyClientBehavior(
+            OperationDescription operationDescription,
+            ClientOperation clientOperation
+        );
 
-		void Validate (
-			OperationDescription operationDescription);
-	}
+        void Validate(OperationDescription operationDescription);
+    }
 }

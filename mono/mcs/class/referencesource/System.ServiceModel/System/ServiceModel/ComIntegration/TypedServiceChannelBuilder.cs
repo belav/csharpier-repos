@@ -18,16 +18,19 @@ namespace System.ServiceModel.ComIntegration
     using System.ServiceModel.Diagnostics;
     using System.Threading;
 
-    class TypedServiceChannelBuilder : IProxyCreator, IProvideChannelBuilderSettings, ICreateServiceChannel
+    class TypedServiceChannelBuilder
+        : IProxyCreator,
+            IProvideChannelBuilderSettings,
+            ICreateServiceChannel
     {
-
         ServiceChannelFactory serviceChannelFactory = null;
         Type contractType = null;
 
         // Double-checked locking pattern requires volatile for read/write synchronization
         volatile RealProxy serviceProxy = null;
         ServiceEndpoint serviceEndpoint = null;
-        KeyedByTypeCollection<IEndpointBehavior> behaviors = new KeyedByTypeCollection<IEndpointBehavior>();
+        KeyedByTypeCollection<IEndpointBehavior> behaviors =
+            new KeyedByTypeCollection<IEndpointBehavior>();
         Binding binding = null;
         string configurationName = null;
         string address = null;
@@ -53,17 +56,16 @@ namespace System.ServiceModel.ComIntegration
             get
             {
                 if (serviceProxy != null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.TooLate), HR.RPC_E_TOO_LATE));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new COMException(SR.GetString(SR.TooLate), HR.RPC_E_TOO_LATE)
+                    );
                 return serviceChannelFactory;
             }
         }
 #pragma warning restore 6503
         ServiceChannelFactory IProvideChannelBuilderSettings.ServiceChannelFactoryReadOnly
         {
-            get
-            {
-                return serviceChannelFactory;
-            }
+            get { return serviceChannelFactory; }
         }
         //Suppressing PreSharp warning that property get methods should not throw
 #pragma warning disable 6503
@@ -72,7 +74,9 @@ namespace System.ServiceModel.ComIntegration
             get
             {
                 if (serviceProxy != null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.TooLate), HR.RPC_E_TOO_LATE));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new COMException(SR.GetString(SR.TooLate), HR.RPC_E_TOO_LATE)
+                    );
                 return behaviors;
             }
         }
@@ -80,10 +84,7 @@ namespace System.ServiceModel.ComIntegration
 
         ServiceChannel IProvideChannelBuilderSettings.ServiceChannel
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         RealProxy ICreateServiceChannel.CreateChannel()
@@ -103,7 +104,9 @@ namespace System.ServiceModel.ComIntegration
 
                             if (serviceChannelFactory == null)
                             {
-                                throw Fx.AssertAndThrow("ServiceChannelFactory cannot be null at this point");
+                                throw Fx.AssertAndThrow(
+                                    "ServiceChannelFactory cannot be null at this point"
+                                );
                             }
 
                             serviceChannelFactory.Open();
@@ -117,10 +120,23 @@ namespace System.ServiceModel.ComIntegration
                                 throw Fx.AssertAndThrow("serviceEndpoint cannot be null");
                             }
 
-                            object transparentProxy = serviceChannelFactory.CreateChannel(contractType, new EndpointAddress(serviceEndpoint.Address.Uri, serviceEndpoint.Address.Identity, serviceEndpoint.Address.Headers), serviceEndpoint.Address.Uri);
+                            object transparentProxy = serviceChannelFactory.CreateChannel(
+                                contractType,
+                                new EndpointAddress(
+                                    serviceEndpoint.Address.Uri,
+                                    serviceEndpoint.Address.Identity,
+                                    serviceEndpoint.Address.Headers
+                                ),
+                                serviceEndpoint.Address.Uri
+                            );
 
-                            ComPlusChannelCreatedTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationChannelCreated,
-                                SR.TraceCodeComIntegrationChannelCreated, serviceEndpoint.Address.Uri, contractType);
+                            ComPlusChannelCreatedTrace.Trace(
+                                TraceEventType.Verbose,
+                                TraceCode.ComIntegrationChannelCreated,
+                                SR.TraceCodeComIntegrationChannelCreated,
+                                serviceEndpoint.Address.Uri,
+                                contractType
+                            );
 
                             RealProxy localProxy = RemotingServices.GetRealProxy(transparentProxy);
 
@@ -159,15 +175,21 @@ namespace System.ServiceModel.ComIntegration
                 configLoader.LoadChannelBehaviors(endpoint, configurationName);
             }
 
-            ComPlusTypedChannelBuilderTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationTypedChannelBuilderLoaded,
-                SR.TraceCodeComIntegrationTypedChannelBuilderLoaded, contractType, binding);
+            ComPlusTypedChannelBuilderTrace.Trace(
+                TraceEventType.Verbose,
+                TraceCode.ComIntegrationTypedChannelBuilderLoaded,
+                SR.TraceCodeComIntegrationTypedChannelBuilderLoaded,
+                contractType,
+                binding
+            );
 
             return endpoint;
         }
 
         private ServiceChannelFactory CreateServiceChannelFactory()
         {
-            ServiceChannelFactory serviceChannelFactory = ServiceChannelFactory.BuildChannelFactory(serviceEndpoint) as ServiceChannelFactory;
+            ServiceChannelFactory serviceChannelFactory =
+                ServiceChannelFactory.BuildChannelFactory(serviceEndpoint) as ServiceChannelFactory;
             if (serviceChannelFactory == null)
             {
                 throw Fx.AssertAndThrow("We should get a ServiceChannelFactory back");
@@ -188,10 +210,11 @@ namespace System.ServiceModel.ComIntegration
             foreach (IEndpointBehavior behavior in behaviors)
                 serviceEndpoint.Behaviors.Add(behavior);
             serviceChannelFactory = CreateServiceChannelFactory();
-
         }
 
-        internal void ResolveTypeIfPossible(Dictionary<MonikerHelper.MonikerAttribute, string> propertyTable)
+        internal void ResolveTypeIfPossible(
+            Dictionary<MonikerHelper.MonikerAttribute, string> propertyTable
+        )
         {
             string typeIID;
             propertyTable.TryGetValue(MonikerHelper.MonikerAttribute.Contract, out typeIID);
@@ -210,13 +233,22 @@ namespace System.ServiceModel.ComIntegration
                     if (Fx.IsFatal(e))
                         throw;
 
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MonikerSyntaxException(SR.GetString(SR.TypeLoadForContractTypeIIDFailedWith, typeIID, e.Message)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MonikerSyntaxException(
+                            SR.GetString(
+                                SR.TypeLoadForContractTypeIIDFailedWith,
+                                typeIID,
+                                e.Message
+                            )
+                        )
+                    );
                 }
-
             }
         }
 
-        internal TypedServiceChannelBuilder(Dictionary<MonikerHelper.MonikerAttribute, string> propertyTable)
+        internal TypedServiceChannelBuilder(
+            Dictionary<MonikerHelper.MonikerAttribute, string> propertyTable
+        )
         {
             string bindingType = null;
             string bindingConfigName = null;
@@ -227,7 +259,10 @@ namespace System.ServiceModel.ComIntegration
 
             propertyTable.TryGetValue(MonikerHelper.MonikerAttribute.Address, out address);
             propertyTable.TryGetValue(MonikerHelper.MonikerAttribute.Binding, out bindingType);
-            propertyTable.TryGetValue(MonikerHelper.MonikerAttribute.BindingConfiguration, out bindingConfigName);
+            propertyTable.TryGetValue(
+                MonikerHelper.MonikerAttribute.BindingConfiguration,
+                out bindingConfigName
+            );
             propertyTable.TryGetValue(MonikerHelper.MonikerAttribute.SpnIdentity, out spnIdentity);
             propertyTable.TryGetValue(MonikerHelper.MonikerAttribute.UpnIdentity, out upnIdentity);
             propertyTable.TryGetValue(MonikerHelper.MonikerAttribute.DnsIdentity, out dnsIdentity);
@@ -243,35 +278,52 @@ namespace System.ServiceModel.ComIntegration
                     if (Fx.IsFatal(e))
                         throw;
 
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MonikerSyntaxException(SR.GetString(SR.BindingLoadFromConfigFailedWith, bindingType, e.Message)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MonikerSyntaxException(
+                            SR.GetString(SR.BindingLoadFromConfigFailedWith, bindingType, e.Message)
+                        )
+                    );
                 }
                 if (binding == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MonikerSyntaxException(SR.GetString(SR.BindingNotFoundInConfig, bindingType, bindingConfigName)));
-
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MonikerSyntaxException(
+                            SR.GetString(SR.BindingNotFoundInConfig, bindingType, bindingConfigName)
+                        )
+                    );
             }
 
             if (binding == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MonikerSyntaxException(SR.GetString(SR.BindingNotSpecified)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MonikerSyntaxException(SR.GetString(SR.BindingNotSpecified))
+                );
 
             if (string.IsNullOrEmpty(address))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MonikerSyntaxException(SR.GetString(SR.AddressNotSpecified)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MonikerSyntaxException(SR.GetString(SR.AddressNotSpecified))
+                );
 
             if (!string.IsNullOrEmpty(spnIdentity))
             {
                 if ((!string.IsNullOrEmpty(upnIdentity)) || (!string.IsNullOrEmpty(dnsIdentity)))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MonikerSyntaxException(SR.GetString(SR.MonikerIncorrectServerIdentity)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MonikerSyntaxException(SR.GetString(SR.MonikerIncorrectServerIdentity))
+                    );
                 identity = EndpointIdentity.CreateSpnIdentity(spnIdentity);
             }
             else if (!string.IsNullOrEmpty(upnIdentity))
             {
                 if ((!string.IsNullOrEmpty(spnIdentity)) || (!string.IsNullOrEmpty(dnsIdentity)))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MonikerSyntaxException(SR.GetString(SR.MonikerIncorrectServerIdentity)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MonikerSyntaxException(SR.GetString(SR.MonikerIncorrectServerIdentity))
+                    );
                 identity = EndpointIdentity.CreateUpnIdentity(upnIdentity);
             }
             else if (!string.IsNullOrEmpty(dnsIdentity))
             {
                 if ((!string.IsNullOrEmpty(spnIdentity)) || (!string.IsNullOrEmpty(upnIdentity)))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MonikerSyntaxException(SR.GetString(SR.MonikerIncorrectServerIdentity)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MonikerSyntaxException(SR.GetString(SR.MonikerIncorrectServerIdentity))
+                    );
                 identity = EndpointIdentity.CreateDnsIdentity(dnsIdentity);
             }
             else
@@ -279,8 +331,8 @@ namespace System.ServiceModel.ComIntegration
             ResolveTypeIfPossible(propertyTable);
         }
 
-
         bool dispatchEnabled = false;
+
         private bool CheckDispatch(ref Guid riid)
         {
             if ((dispatchEnabled) && (riid == InterfaceID.idIDispatch))
@@ -301,7 +353,9 @@ namespace System.ServiceModel.ComIntegration
                 TypeCacheManager.Provider.FindOrCreateType(riid, out contractType, true, false);
 
             if ((contractType.GUID != riid) && !(CheckDispatch(ref riid)))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidCastException(SR.GetString(SR.NoInterface, riid)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidCastException(SR.GetString(SR.NoInterface, riid))
+                );
 
             Type proxiedType = EmitterCache.TypeEmitter.FindOrCreateType(contractType);
             ComProxy comProxy = null;
@@ -311,13 +365,11 @@ namespace System.ServiceModel.ComIntegration
                 tearoffProxy = new TearOffProxy(this, proxiedType);
                 comProxy = ComProxy.Create(outer, tearoffProxy.GetTransparentProxy(), tearoffProxy);
                 return comProxy;
-
             }
             finally
             {
                 if ((comProxy == null) && (tearoffProxy != null))
                     ((IDisposable)tearoffProxy).Dispose();
-
             }
         }
 
@@ -345,6 +397,3 @@ namespace System.ServiceModel.ComIntegration
         }
     }
 }
-          
-               
-          

@@ -38,7 +38,13 @@ namespace System.Data.Objects.ELinq
         /// <param name="lambda">The compiled query definition, as a <see cref="LambdaExpression"/></param>
         /// <param name="cacheToken">The cache token to use when retrieving or storing the new instance's execution plan in the query cache</param>
         /// <param name="parameterValues">The values passed into the CompiledQuery delegate</param>
-        internal CompiledELinqQueryState(Type elementType, ObjectContext context, LambdaExpression lambda, Guid cacheToken, object[] parameterValues)
+        internal CompiledELinqQueryState(
+            Type elementType,
+            ObjectContext context,
+            LambdaExpression lambda,
+            Guid cacheToken,
+            object[] parameterValues
+        )
             : base(elementType, context, lambda)
         {
             EntityUtil.CheckArgumentNull(parameterValues, "parameterValues");
@@ -52,15 +58,23 @@ namespace System.Data.Objects.ELinq
 
         internal override ObjectQueryExecutionPlan GetExecutionPlan(MergeOption? forMergeOption)
         {
-            Debug.Assert(this.Span == null, "Include span specified on compiled LINQ-based ObjectQuery instead of within the expression tree?");
-            Debug.Assert(this._cachedPlan == null, "Cached plan should not be set on compiled LINQ queries");
+            Debug.Assert(
+                this.Span == null,
+                "Include span specified on compiled LINQ-based ObjectQuery instead of within the expression tree?"
+            );
+            Debug.Assert(
+                this._cachedPlan == null,
+                "Cached plan should not be set on compiled LINQ queries"
+            );
 
             // Metadata is required to generate the execution plan or to retrieve it from the cache.
             this.ObjectContext.EnsureMetadata();
 
             ObjectQueryExecutionPlan plan = null;
             CompiledQueryCacheEntry cacheEntry = this._cacheEntry;
-            bool useCSharpNullComparisonBehavior = this.ObjectContext.ContextOptions.UseCSharpNullComparisonBehavior;
+            bool useCSharpNullComparisonBehavior = this.ObjectContext
+                .ContextOptions
+                .UseCSharpNullComparisonBehavior;
             if (cacheEntry != null)
             {
                 // The cache entry has already been retrieved, so compute the effective merge option with the following precedence:
@@ -68,7 +82,11 @@ namespace System.Data.Objects.ELinq
                 // 2. The merge option set using ObjectQuery.MergeOption
                 // 3. The propagated merge option as recorded in the cache entry
                 // 4. The global default merge option.
-                MergeOption mergeOption = EnsureMergeOption(forMergeOption, this.UserSpecifiedMergeOption, cacheEntry.PropagatedMergeOption);
+                MergeOption mergeOption = EnsureMergeOption(
+                    forMergeOption,
+                    this.UserSpecifiedMergeOption,
+                    cacheEntry.PropagatedMergeOption
+                );
 
                 // Ask for the corresponding execution plan
                 plan = cacheEntry.GetExecutionPlan(mergeOption, useCSharpNullComparisonBehavior);
@@ -77,11 +95,25 @@ namespace System.Data.Objects.ELinq
                     // Convert the LINQ expression to produce a command tree
                     ExpressionConverter converter = this.CreateExpressionConverter();
                     DbExpression queryExpression = converter.Convert();
-                    ReadOnlyCollection<KeyValuePair<ObjectParameter, QueryParameterExpression>> parameters = converter.GetParameters();
+                    ReadOnlyCollection<
+                        KeyValuePair<ObjectParameter, QueryParameterExpression>
+                    > parameters = converter.GetParameters();
 
                     // Prepare the execution plan using the command tree and the computed effective merge option
-                    DbQueryCommandTree tree = DbQueryCommandTree.FromValidExpression(this.ObjectContext.MetadataWorkspace, DataSpace.CSpace, queryExpression);
-                    plan = ObjectQueryExecutionPlan.Prepare(this.ObjectContext, tree, this.ElementType, mergeOption, converter.PropagatedSpan, parameters, converter.AliasGenerator);
+                    DbQueryCommandTree tree = DbQueryCommandTree.FromValidExpression(
+                        this.ObjectContext.MetadataWorkspace,
+                        DataSpace.CSpace,
+                        queryExpression
+                    );
+                    plan = ObjectQueryExecutionPlan.Prepare(
+                        this.ObjectContext,
+                        tree,
+                        this.ElementType,
+                        mergeOption,
+                        converter.PropagatedSpan,
+                        parameters,
+                        converter.AliasGenerator
+                    );
 
                     // Update and retrieve the execution plan
                     plan = cacheEntry.SetExecutionPlan(plan, useCSharpNullComparisonBehavior);
@@ -91,7 +123,8 @@ namespace System.Data.Objects.ELinq
             {
                 // This instance does not yet have a reference to a cache entry.
                 // First, attempt to retrieve an existing cache entry.
-                QueryCacheManager cacheManager = this.ObjectContext.MetadataWorkspace.GetQueryCacheManager();
+                QueryCacheManager cacheManager =
+                    this.ObjectContext.MetadataWorkspace.GetQueryCacheManager();
                 CompiledQueryCacheKey cacheKey = new CompiledQueryCacheKey(this._cacheToken);
 
                 if (cacheManager.TryCacheLookup(cacheKey, out cacheEntry))
@@ -99,8 +132,15 @@ namespace System.Data.Objects.ELinq
                     // An entry was found in the cache, so compute the effective merge option based on its propagated merge option,
                     // and use the UseCSharpNullComparisonBehavior flag to retrieve the corresponding execution plan.
                     this._cacheEntry = cacheEntry;
-                    MergeOption mergeOption = EnsureMergeOption(forMergeOption, this.UserSpecifiedMergeOption, cacheEntry.PropagatedMergeOption);
-                    plan = cacheEntry.GetExecutionPlan(mergeOption, useCSharpNullComparisonBehavior);
+                    MergeOption mergeOption = EnsureMergeOption(
+                        forMergeOption,
+                        this.UserSpecifiedMergeOption,
+                        cacheEntry.PropagatedMergeOption
+                    );
+                    plan = cacheEntry.GetExecutionPlan(
+                        mergeOption,
+                        useCSharpNullComparisonBehavior
+                    );
                 }
 
                 // If no cache entry was found or if the cache entry did not contain the required execution plan, the plan is still null at this point.
@@ -109,8 +149,14 @@ namespace System.Data.Objects.ELinq
                     // The execution plan needs to be produced, so create an appropriate expression converter and generate the query command tree.
                     ExpressionConverter converter = this.CreateExpressionConverter();
                     DbExpression queryExpression = converter.Convert();
-                    ReadOnlyCollection<KeyValuePair<ObjectParameter, QueryParameterExpression>> parameters = converter.GetParameters();
-                    DbQueryCommandTree tree = DbQueryCommandTree.FromValidExpression(this.ObjectContext.MetadataWorkspace, DataSpace.CSpace, queryExpression);
+                    ReadOnlyCollection<
+                        KeyValuePair<ObjectParameter, QueryParameterExpression>
+                    > parameters = converter.GetParameters();
+                    DbQueryCommandTree tree = DbQueryCommandTree.FromValidExpression(
+                        this.ObjectContext.MetadataWorkspace,
+                        DataSpace.CSpace,
+                        queryExpression
+                    );
 
                     // If a cache entry for this compiled query's cache key was not successfully retrieved, then it must be created now.
                     // Note that this is only possible after converting the LINQ expression and discovering the propagated merge option,
@@ -118,7 +164,10 @@ namespace System.Data.Objects.ELinq
                     if (cacheEntry == null)
                     {
                         // Create the cache entry using this instance's cache token and the propagated merge option (which may be null)
-                        cacheEntry = new CompiledQueryCacheEntry(cacheKey, converter.PropagatedMergeOption);
+                        cacheEntry = new CompiledQueryCacheEntry(
+                            cacheKey,
+                            converter.PropagatedMergeOption
+                        );
 
                         // Attempt to add the entry to the cache. If an entry was added in the meantime, use that entry instead.
                         QueryCacheEntry foundEntry;
@@ -132,14 +181,29 @@ namespace System.Data.Objects.ELinq
                     }
 
                     // Recompute the effective merge option in case a cache entry was just constructed above
-                    MergeOption mergeOption = EnsureMergeOption(forMergeOption, this.UserSpecifiedMergeOption, cacheEntry.PropagatedMergeOption);
+                    MergeOption mergeOption = EnsureMergeOption(
+                        forMergeOption,
+                        this.UserSpecifiedMergeOption,
+                        cacheEntry.PropagatedMergeOption
+                    );
 
                     // Ask the (retrieved or constructed) cache entry for the corresponding execution plan.
-                    plan = cacheEntry.GetExecutionPlan(mergeOption, useCSharpNullComparisonBehavior);
+                    plan = cacheEntry.GetExecutionPlan(
+                        mergeOption,
+                        useCSharpNullComparisonBehavior
+                    );
                     if (plan == null)
                     {
                         // The plan is not present, so prepare it now using the computed effective merge option
-                        plan = ObjectQueryExecutionPlan.Prepare(this.ObjectContext, tree, this.ElementType, mergeOption, converter.PropagatedSpan, parameters, converter.AliasGenerator);
+                        plan = ObjectQueryExecutionPlan.Prepare(
+                            this.ObjectContext,
+                            tree,
+                            this.ElementType,
+                            mergeOption,
+                            converter.PropagatedSpan,
+                            parameters,
+                            converter.AliasGenerator
+                        );
 
                         // Update the execution plan on the cache entry.
                         // If the execution plan was set in the meantime, SetExecutionPlan will return that value, otherwise it will return 'plan'.
@@ -154,7 +218,12 @@ namespace System.Data.Objects.ELinq
             {
                 currentParams.SetReadOnly(false);
                 currentParams.Clear();
-                foreach (KeyValuePair<ObjectParameter, QueryParameterExpression> pair in plan.CompiledQueryParameters)
+                foreach (
+                    KeyValuePair<
+                        ObjectParameter,
+                        QueryParameterExpression
+                    > pair in plan.CompiledQueryParameters
+                )
                 {
                     // Parameters retrieved from the CompiledQueryParameters collection must be cloned before being added to the query.
                     // The cached plan is shared and when used in multithreaded scenarios failing to clone the parameter would result
@@ -167,7 +236,9 @@ namespace System.Data.Objects.ELinq
                     currentParams.Add(convertedParam);
                     if (parameterExpression != null)
                     {
-                        convertedParam.Value = parameterExpression.EvaluateParameter(_parameterValues);
+                        convertedParam.Value = parameterExpression.EvaluateParameter(
+                            _parameterValues
+                        );
                     }
                 }
             }
@@ -185,8 +256,7 @@ namespace System.Data.Objects.ELinq
         {
             CompiledQueryCacheEntry cacheEntry = this._cacheEntry;
             TypeUsage resultType;
-            if (cacheEntry != null &&
-                cacheEntry.TryGetResultType(out resultType))
+            if (cacheEntry != null && cacheEntry.TryGetResultType(out resultType))
             {
                 return resultType;
             }
@@ -195,7 +265,7 @@ namespace System.Data.Objects.ELinq
         }
 
         /// <summary>
-        /// Gets a LINQ expression that defines this query. 
+        /// Gets a LINQ expression that defines this query.
         /// This is overridden to remove parameter references from the underlying expression,
         /// producing an expression that contains the values of those parameters as <see cref="ConstantExpression"/>s.
         /// </summary>
@@ -203,7 +273,11 @@ namespace System.Data.Objects.ELinq
         {
             get
             {
-                return CreateDonateableExpressionVisitor.Replace((LambdaExpression)base.Expression, ObjectContext, _parameterValues);
+                return CreateDonateableExpressionVisitor.Replace(
+                    (LambdaExpression)base.Expression,
+                    ObjectContext,
+                    _parameterValues
+                );
             }
         }
 
@@ -215,7 +289,11 @@ namespace System.Data.Objects.ELinq
         protected override ExpressionConverter CreateExpressionConverter()
         {
             LambdaExpression lambda = (LambdaExpression)base.Expression;
-            Funcletizer funcletizer = Funcletizer.CreateCompiledQueryEvaluationFuncletizer(this.ObjectContext, lambda.Parameters.First(), lambda.Parameters.Skip(1).ToList().AsReadOnly());
+            Funcletizer funcletizer = Funcletizer.CreateCompiledQueryEvaluationFuncletizer(
+                this.ObjectContext,
+                lambda.Parameters.First(),
+                lambda.Parameters.Skip(1).ToList().AsReadOnly()
+            );
             // Return a new expression converter that uses the initialized command tree and binding context.
             return new ExpressionConverter(funcletizer, lambda.Body);
         }
@@ -228,16 +306,21 @@ namespace System.Data.Objects.ELinq
         {
             private readonly Dictionary<ParameterExpression, object> _parameterToValueLookup;
 
-            private CreateDonateableExpressionVisitor(Dictionary<ParameterExpression, object> parameterToValueLookup)
+            private CreateDonateableExpressionVisitor(
+                Dictionary<ParameterExpression, object> parameterToValueLookup
+            )
             {
                 _parameterToValueLookup = parameterToValueLookup;
             }
 
-            internal static Expression Replace(LambdaExpression query, ObjectContext objectContext, object[] parameterValues)
+            internal static Expression Replace(
+                LambdaExpression query,
+                ObjectContext objectContext,
+                object[] parameterValues
+            )
             {
                 Dictionary<ParameterExpression, object> parameterLookup = query
-                    .Parameters
-                    .Skip(1)
+                    .Parameters.Skip(1)
                     .Zip(parameterValues)
                     .ToDictionary(pair => pair.Key, pair => pair.Value);
                 parameterLookup.Add(query.Parameters.First(), objectContext);

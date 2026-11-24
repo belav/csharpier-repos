@@ -6,7 +6,8 @@ namespace System.Speech.Synthesis
     public class VoiceChangeEventArgs : PromptEventArgs
     {
         #region Constructors
-        internal VoiceChangeEventArgs(Prompt prompt, VoiceInfo voice) : base(prompt)
+        internal VoiceChangeEventArgs(Prompt prompt, VoiceInfo voice)
+            : base(prompt)
         {
             _voice = voice;
         }
@@ -16,10 +17,7 @@ namespace System.Speech.Synthesis
         #region public Properties
         public VoiceInfo Voice
         {
-            get
-            {
-                return _voice;
-            }
+            get { return _voice; }
         }
 
         #endregion

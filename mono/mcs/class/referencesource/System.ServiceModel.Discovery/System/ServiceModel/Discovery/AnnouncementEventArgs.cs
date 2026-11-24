@@ -11,8 +11,9 @@ namespace System.ServiceModel.Discovery
     public class AnnouncementEventArgs : EventArgs
     {
         internal AnnouncementEventArgs(
-            DiscoveryMessageSequence messageSequence, 
-            EndpointDiscoveryMetadata endpointDiscoveryMetadata)
+            DiscoveryMessageSequence messageSequence,
+            EndpointDiscoveryMetadata endpointDiscoveryMetadata
+        )
         {
             this.MessageSequence = messageSequence;
             this.EndpointDiscoveryMetadata = endpointDiscoveryMetadata;

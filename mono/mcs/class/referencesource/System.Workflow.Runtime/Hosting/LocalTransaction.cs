@@ -7,11 +7,11 @@
 #region Using directives
 
 using System;
-using System.Diagnostics;
-using System.Transactions;
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Threading;
+using System.Transactions;
 
 #endregion
 
@@ -66,9 +66,7 @@ namespace System.Workflow.Runtime.Hosting
 
         #region IPromotableSinglePhaseNotification Members
 
-        public void Initialize()
-        {
-        }
+        public void Initialize() { }
 
         public void SinglePhaseCommit(SinglePhaseEnlistment en)
         {
@@ -128,7 +126,7 @@ namespace System.Workflow.Runtime.Hosting
                 // about. Move on.
             }
             // DbTransaction.Dispose will call Rollback if the DbTransaction is not Zombied.
-            // Not safe to call DbTransaction.Rollback here as the the underlining 
+            // Not safe to call DbTransaction.Rollback here as the the underlining
             // DbTransaction may have already been Rolled back
             lock (syncRoot)
             {
@@ -147,8 +145,7 @@ namespace System.Workflow.Runtime.Hosting
 
         public byte[] Promote()
         {
-            throw new TransactionPromotionException(
-                ExecutionStringManager.PromotionNotSupported);
+            throw new TransactionPromotionException(ExecutionStringManager.PromotionNotSupported);
         }
 
         #endregion IPromotableSinglePhaseNotification Members

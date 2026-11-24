@@ -7,22 +7,21 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Data.Common.Utils;
 using System.Collections.Generic;
+using System.Data.Common.Utils;
 using System.Data.Mapping.ViewGeneration.Validation;
-using System.Text;
-using System.Diagnostics;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {
-
     /// <summary>
     /// This class contains a pair of cell queries which is essentially a
     /// constraint that they are equal. A cell is initialized with a C or an
     /// S Query which it exposes as properties but it also has the notion of
     /// "Left" and "Right" queries -- left refers to the side for which a
-    /// view is being generated 
+    /// view is being generated
     /// For example, to
     /// specify a mapping for CPerson to an SPerson table, we have
     ///
@@ -31,15 +30,15 @@ namespace System.Data.Mapping.ViewGeneration.Structures
     /// (p.name, name)
     ///
     /// This really denotes the equality of two queries:
-    /// (C) SELECT (p type Person) AS D1, p.pid, p.name FROM p in P WHERE D1 
-    /// (S) SELECT True AS D1, pid, name FROM SPerson WHERE D1  
+    /// (C) SELECT (p type Person) AS D1, p.pid, p.name FROM p in P WHERE D1
+    /// (S) SELECT True AS D1, pid, name FROM SPerson WHERE D1
     ///
     /// For more details, see the design doc
     /// </summary>
     internal class Cell : InternalBase
     {
         #region Constructor
-        // effects: Creates a cell with the C and S queries 
+        // effects: Creates a cell with the C and S queries
         private Cell(CellQuery cQuery, CellQuery sQuery, CellLabel label, int cellNumber)
         {
             Debug.Assert(label != null, "Cell lacks label");
@@ -47,9 +46,12 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             m_sQuery = sQuery;
             m_label = label;
             m_cellNumber = cellNumber;
-            Debug.Assert(m_sQuery.NumProjectedSlots == m_cQuery.NumProjectedSlots,
-                         "Cell queries disagree on the number of projected fields");
+            Debug.Assert(
+                m_sQuery.NumProjectedSlots == m_cQuery.NumProjectedSlots,
+                "Cell queries disagree on the number of projected fields"
+            );
         }
+
         /// <summary>
         /// Copy Constructor
         /// </summary>
@@ -68,6 +70,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         private CellQuery m_sQuery;
         private int m_cellNumber; // cell number that identifies this cell
         private CellLabel m_label; // The File and Path Info for the CSMappingFragment
+
         // that the Cell was constructed over.
         // The view cell relation for all projected slots in this
         private ViewCellRelation m_viewCellRelation;
@@ -162,7 +165,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         }
 
         // effects: Returns the relation that contains all the slots being
-        // projected in this cell 
+        // projected in this cell
         internal ViewCellRelation CreateViewCellRelation(int cellNumber)
         {
             if (m_viewCellRelation != null)
@@ -178,8 +181,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             // Generate the view cell relation
             List<ViewCellSlot> projectedSlots = new List<ViewCellSlot>();
             // construct a ViewCellSlot for each slot
-            Debug.Assert(CQuery.NumProjectedSlots == SQuery.NumProjectedSlots,
-                         "Cell queries in cell have a different number of slots");
+            Debug.Assert(
+                CQuery.NumProjectedSlots == SQuery.NumProjectedSlots,
+                "Cell queries in cell have a different number of slots"
+            );
             for (int i = 0; i < CQuery.NumProjectedSlots; i++)
             {
                 ProjectedSlot cSlot = CQuery.ProjectedSlotAt(i);
@@ -188,8 +193,14 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 Debug.Assert(sSlot != null, "Has cell query been normalized?");
 
                 // These slots better be MemberProjectedSlots. We do not have constants etc at this point.
-                Debug.Assert(cSlot is MemberProjectedSlot, "cSlot is expected to be MemberProjectedSlot");
-                Debug.Assert(sSlot is MemberProjectedSlot, "sSlot is expected to be MemberProjectedSlot");
+                Debug.Assert(
+                    cSlot is MemberProjectedSlot,
+                    "cSlot is expected to be MemberProjectedSlot"
+                );
+                Debug.Assert(
+                    sSlot is MemberProjectedSlot,
+                    "sSlot is expected to be MemberProjectedSlot"
+                );
 
                 MemberProjectedSlot cJoinSlot = (MemberProjectedSlot)cSlot;
                 MemberProjectedSlot sJoinSlot = (MemberProjectedSlot)sSlot;
@@ -224,7 +235,9 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         {
             // Print mapping
             builder.AppendLine();
-            builder.AppendLine("=========================================================================");
+            builder.AppendLine(
+                "========================================================================="
+            );
             foreach (Cell cell in cells)
             {
                 builder.AppendLine();
@@ -245,7 +258,12 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         #endregion
 
         #region Factory methods
-        internal static Cell CreateCS(CellQuery cQuery, CellQuery sQuery, CellLabel label, int cellNumber)
+        internal static Cell CreateCS(
+            CellQuery cQuery,
+            CellQuery sQuery,
+            CellLabel label,
+            int cellNumber
+        )
         {
             return new Cell(cQuery, sQuery, label, cellNumber);
         }

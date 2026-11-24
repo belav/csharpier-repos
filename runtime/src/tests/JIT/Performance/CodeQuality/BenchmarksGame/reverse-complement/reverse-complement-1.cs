@@ -13,8 +13,8 @@
 */
 
 using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 using System.Security.Cryptography;
 using Xunit;
 
@@ -24,11 +24,16 @@ namespace BenchmarksGame
     {
         struct Block
         {
-            public byte[] Data; public int Count;
+            public byte[] Data;
+            public int Count;
+
             public int Read(BinaryReader r)
             {
-                Data = r.ReadBytes(16384); Count++; return Data.Length;
+                Data = r.ReadBytes(16384);
+                Count++;
+                return Data.Length;
             }
+
             public Index IndexOf(byte b, int o)
             {
                 return new Index { Block = Count, Pos = Array.IndexOf(Data, b, o) };
@@ -37,9 +42,14 @@ namespace BenchmarksGame
 
         struct Index
         {
-            public int Block; public int Pos;
+            public int Block;
+            public int Pos;
             public static readonly Index None = new Index { Block = -1, Pos = -1 };
-            public bool InBlock(Block b) { return Block == b.Count; }
+
+            public bool InBlock(Block b)
+            {
+                return Block == b.Count;
+            }
         }
 
         const byte Gt = (byte)'>';
@@ -77,7 +87,9 @@ namespace BenchmarksGame
             InitComplements();
             var seq = new List<byte[]>();
             var b = new Block { Count = -1 };
-            Index line = Index.None, start = Index.None, end = Index.None;
+            Index line = Index.None,
+                start = Index.None,
+                end = Index.None;
             using (var r = new BinaryReader(input))
             {
                 using (var w = output)
@@ -85,7 +97,8 @@ namespace BenchmarksGame
                     while (b.Read(r) > 0)
                     {
                         seq.Add(b.Data);
-                        if (line.Pos < 0) line = b.IndexOf(Gt, 0);
+                        if (line.Pos < 0)
+                            line = b.IndexOf(Gt, 0);
                         while (line.Pos >= 0)
                         {
                             if (start.Pos < 0)
@@ -95,18 +108,23 @@ namespace BenchmarksGame
                                 if (start.Pos < 0)
                                 {
                                     w.Write(b.Data, off, b.Data.Length - off);
-                                    seq.Clear(); break;
+                                    seq.Clear();
+                                    break;
                                 }
                                 w.Write(b.Data, off, start.Pos + 1 - off);
                             }
                             if (end.Pos < 0)
                             {
                                 end = b.IndexOf(Gt, start.InBlock(b) ? start.Pos : 0);
-                                if (end.Pos < 0) break;
+                                if (end.Pos < 0)
+                                    break;
                             }
                             Reverse(w, start.Pos, end.Pos, seq);
-                            if (seq.Count > 1) seq.RemoveRange(0, seq.Count - 1);
-                            line = end; end = Index.None; start = Index.None;
+                            if (seq.Count > 1)
+                                seq.RemoveRange(0, seq.Count - 1);
+                            line = end;
+                            end = Index.None;
+                            start = Index.None;
                         }
                     }
                     if (start.Pos >= 0 && end.Pos < 0)
@@ -121,10 +139,12 @@ namespace BenchmarksGame
 
         static void InitComplements()
         {
-            for (byte i = 0; i < 255; i++) comp[i] = i;
+            for (byte i = 0; i < 255; i++)
+                comp[i] = i;
             for (int i = 0; i < Seq.Length; i++)
                 comp[(byte)Seq[i]] = (byte)Rev[i];
-            comp[Lf] = 0; comp[(byte)' '] = 0;
+            comp[Lf] = 0;
+            comp[(byte)' '] = 0;
         }
 
         const int LineLen = 61;
@@ -133,26 +153,35 @@ namespace BenchmarksGame
 
         static void Reverse(Stream w, int si, int ei, List<byte[]> bl)
         {
-            int bi = 0, line = LineLen - 1;
+            int bi = 0,
+                line = LineLen - 1;
             for (int ri = bl.Count - 1; ri >= 0; ri--)
             {
-                var b = bl[ri]; int off = ri == 0 ? si : 0;
+                var b = bl[ri];
+                int off = ri == 0 ? si : 0;
                 for (int i = (ri == bl.Count - 1 ? ei : b.Length) - 1; i >= off; i--)
                 {
-                    var c = comp[b[i]]; if (c > 0) buf[bi++] = c;
+                    var c = comp[b[i]];
+                    if (c > 0)
+                        buf[bi++] = c;
                     if (bi == line)
                     {
-                        buf[bi++] = Lf; line += LineLen;
+                        buf[bi++] = Lf;
+                        line += LineLen;
                         if (bi == BufSize)
                         {
-                            w.Write(buf, 0, BufSize); bi = 0; line = LineLen - 1;
+                            w.Write(buf, 0, BufSize);
+                            bi = 0;
+                            line = LineLen - 1;
                         }
                     }
                 }
             }
             if (bi > 0)
             {
-                if (buf[bi - 1] != Lf) buf[bi++] = Lf; w.Write(buf, 0, bi);
+                if (buf[bi - 1] != Lf)
+                    buf[bi++] = Lf;
+                w.Write(buf, 0, bi);
             }
         }
     }

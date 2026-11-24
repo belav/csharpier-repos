@@ -38,8 +38,12 @@ namespace System.Web.Http.WebHost
             // Arrange
             Task expectedTask = CreateTask();
             Mock<IExceptionHandler> mock = new Mock<IExceptionHandler>();
-            mock
-                .Setup(h => h.HandleAsync(It.IsAny<ExceptionHandlerContext>(), It.IsAny<CancellationToken>()))
+            mock.Setup(h =>
+                    h.HandleAsync(
+                        It.IsAny<ExceptionHandlerContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+                )
                 .Returns(expectedTask);
             IExceptionHandler innerHandler = mock.Object;
 
@@ -55,7 +59,10 @@ namespace System.Web.Http.WebHost
                 Task task = product.HandleAsync(expectedContext, expectedCancellationToken);
 
                 // Assert
-                mock.Verify(h => h.HandleAsync(expectedContext, expectedCancellationToken), Times.Once());
+                mock.Verify(
+                    h => h.HandleAsync(expectedContext, expectedCancellationToken),
+                    Times.Once()
+                );
                 Assert.Same(expectedTask, task);
             }
         }
@@ -71,7 +78,10 @@ namespace System.Web.Http.WebHost
             CancellationToken cancellationToken = CancellationToken.None;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => product.HandleAsync(context, cancellationToken), "context");
+            Assert.ThrowsArgumentNull(
+                () => product.HandleAsync(context, cancellationToken),
+                "context"
+            );
         }
 
         [Fact]
@@ -85,10 +95,16 @@ namespace System.Web.Http.WebHost
             using (HttpResponseMessage originalResponse = CreateResponse())
             {
                 originalResponse.Content = new StringContent("Error");
-                originalResponse.Content.Headers.ContentType = new MediaTypeHeaderValue("text/plain");
-                expectedRequest.SetRequestContext(new HttpRequestContext { IncludeErrorDetail = true });
-                ExceptionHandlerContext context = CreateValidContext(expectedRequest,
-                    WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent);
+                originalResponse.Content.Headers.ContentType = new MediaTypeHeaderValue(
+                    "text/plain"
+                );
+                expectedRequest.SetRequestContext(
+                    new HttpRequestContext { IncludeErrorDetail = true }
+                );
+                ExceptionHandlerContext context = CreateValidContext(
+                    expectedRequest,
+                    WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent
+                );
                 context.ExceptionContext.Response = originalResponse;
                 CancellationToken cancellationToken = CancellationToken.None;
 
@@ -100,10 +116,16 @@ namespace System.Web.Http.WebHost
                 ResponseMessageResult typedResult = Assert.IsType<ResponseMessageResult>(result);
 
                 using (HttpResponseMessage response = typedResult.Response)
-                using (HttpResponseMessage expectedResponse = expectedRequest.CreateErrorResponse(
-                    HttpStatusCode.InternalServerError, new InvalidOperationException("The 'StringContent' type " +
-                        "failed to serialize the response body for content type 'text/plain'.",
-                        context.ExceptionContext.Exception)))
+                using (
+                    HttpResponseMessage expectedResponse = expectedRequest.CreateErrorResponse(
+                        HttpStatusCode.InternalServerError,
+                        new InvalidOperationException(
+                            "The 'StringContent' type "
+                                + "failed to serialize the response body for content type 'text/plain'.",
+                            context.ExceptionContext.Exception
+                        )
+                    )
+                )
                 {
                     AssertErrorResponse(expectedResponse, response);
                 }
@@ -122,9 +144,13 @@ namespace System.Web.Http.WebHost
             {
                 originalResponse.Content = new StringContent("Error");
                 originalResponse.Content.Headers.ContentType = null;
-                expectedRequest.SetRequestContext(new HttpRequestContext { IncludeErrorDetail = true });
-                ExceptionHandlerContext context = CreateValidContext(expectedRequest,
-                    WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent);
+                expectedRequest.SetRequestContext(
+                    new HttpRequestContext { IncludeErrorDetail = true }
+                );
+                ExceptionHandlerContext context = CreateValidContext(
+                    expectedRequest,
+                    WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent
+                );
                 context.ExceptionContext.Response = originalResponse;
                 CancellationToken cancellationToken = CancellationToken.None;
 
@@ -136,10 +162,15 @@ namespace System.Web.Http.WebHost
                 ResponseMessageResult typedResult = Assert.IsType<ResponseMessageResult>(result);
 
                 using (HttpResponseMessage response = typedResult.Response)
-                using (HttpResponseMessage expectedResponse = expectedRequest.CreateErrorResponse(
-                    HttpStatusCode.InternalServerError, new InvalidOperationException(
-                        "The 'StringContent' type failed to serialize the response body.",
-                        context.ExceptionContext.Exception)))
+                using (
+                    HttpResponseMessage expectedResponse = expectedRequest.CreateErrorResponse(
+                        HttpStatusCode.InternalServerError,
+                        new InvalidOperationException(
+                            "The 'StringContent' type failed to serialize the response body.",
+                            context.ExceptionContext.Exception
+                        )
+                    )
+                )
                 {
                     AssertErrorResponse(expectedResponse, response);
                 }
@@ -160,13 +191,17 @@ namespace System.Web.Http.WebHost
                 configuration.Formatters.Clear();
 
                 originalResponse.Content = new StringContent("Error");
-                expectedRequest.SetRequestContext(new HttpRequestContext
-                {
-                    IncludeErrorDetail = true,
-                    Configuration = configuration
-                });
-                ExceptionHandlerContext context = CreateValidContext(expectedRequest,
-                    WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent);
+                expectedRequest.SetRequestContext(
+                    new HttpRequestContext
+                    {
+                        IncludeErrorDetail = true,
+                        Configuration = configuration,
+                    }
+                );
+                ExceptionHandlerContext context = CreateValidContext(
+                    expectedRequest,
+                    WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent
+                );
                 context.ExceptionContext.Response = originalResponse;
                 CancellationToken cancellationToken = CancellationToken.None;
 
@@ -200,13 +235,17 @@ namespace System.Web.Http.WebHost
                 configuration.Services.Clear(typeof(IContentNegotiator));
 
                 originalResponse.Content = new StringContent("Error");
-                expectedRequest.SetRequestContext(new HttpRequestContext
-                {
-                    IncludeErrorDetail = true,
-                    Configuration = configuration
-                });
-                ExceptionHandlerContext context = CreateValidContext(expectedRequest,
-                    WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent);
+                expectedRequest.SetRequestContext(
+                    new HttpRequestContext
+                    {
+                        IncludeErrorDetail = true,
+                        Configuration = configuration,
+                    }
+                );
+                ExceptionHandlerContext context = CreateValidContext(
+                    expectedRequest,
+                    WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent
+                );
                 context.ExceptionContext.Response = originalResponse;
                 CancellationToken cancellationToken = CancellationToken.None;
 
@@ -237,14 +276,20 @@ namespace System.Web.Http.WebHost
             using (HttpResponseMessage response = CreateResponse())
             {
                 ExceptionHandlerContext context = CreateContext(
-                    CreateMinimalValidExceptionContext(WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent));
+                    CreateMinimalValidExceptionContext(
+                        WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent
+                    )
+                );
 
                 Assert.Null(context.ExceptionContext.Request); // Guard
                 CancellationToken cancellationToken = CancellationToken.None;
 
                 // Act & Assert
-                Assert.ThrowsArgument(() => product.HandleAsync(context, cancellationToken), "context",
-                    "ExceptionContext.Request must not be null.");
+                Assert.ThrowsArgument(
+                    () => product.HandleAsync(context, cancellationToken),
+                    "context",
+                    "ExceptionContext.Request must not be null."
+                );
             }
         }
 
@@ -257,14 +302,19 @@ namespace System.Web.Http.WebHost
             // Arrange
             using (HttpRequestMessage request = CreateRequest())
             {
-                ExceptionHandlerContext context = CreateValidContext(request,
-                    WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent);
+                ExceptionHandlerContext context = CreateValidContext(
+                    request,
+                    WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent
+                );
                 Assert.Null(context.ExceptionContext.Response); // Guard
                 CancellationToken cancellationToken = CancellationToken.None;
 
                 // Act & Assert
-                Assert.ThrowsArgument(() => product.HandleAsync(context, cancellationToken), "context",
-                    "ExceptionContext.Response must not be null.");
+                Assert.ThrowsArgument(
+                    () => product.HandleAsync(context, cancellationToken),
+                    "context",
+                    "ExceptionContext.Response must not be null."
+                );
             }
         }
 
@@ -278,27 +328,39 @@ namespace System.Web.Http.WebHost
             using (HttpRequestMessage request = CreateRequest())
             using (HttpResponseMessage response = CreateResponse())
             {
-                ExceptionHandlerContext context = CreateValidContext(request,
-                    WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent);
+                ExceptionHandlerContext context = CreateValidContext(
+                    request,
+                    WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent
+                );
                 context.ExceptionContext.Response = response;
                 Assert.Null(context.ExceptionContext.Request.Content); // Guard
                 CancellationToken cancellationToken = CancellationToken.None;
 
                 // Act & Assert
-                Assert.ThrowsArgument(() => product.HandleAsync(context, cancellationToken), "context",
-                    "HttpResponseMessage.Content must not be null.");
+                Assert.ThrowsArgument(
+                    () => product.HandleAsync(context, cancellationToken),
+                    "context",
+                    "HttpResponseMessage.Content must not be null."
+                );
             }
         }
 
-        private static void AssertErrorResponse(HttpResponseMessage expected, HttpResponseMessage actual)
+        private static void AssertErrorResponse(
+            HttpResponseMessage expected,
+            HttpResponseMessage actual
+        )
         {
             Assert.NotNull(expected); // Guard
-            ObjectContent<HttpError> expectedContent = Assert.IsType<ObjectContent<HttpError>>(expected.Content); // Guard
+            ObjectContent<HttpError> expectedContent = Assert.IsType<ObjectContent<HttpError>>(
+                expected.Content
+            ); // Guard
             Assert.NotNull(expectedContent.Formatter); // Guard
 
             Assert.NotNull(actual);
             Assert.Equal(expected.StatusCode, actual.StatusCode);
-            ObjectContent<HttpError> actualContent = Assert.IsType<ObjectContent<HttpError>>(actual.Content);
+            ObjectContent<HttpError> actualContent = Assert.IsType<ObjectContent<HttpError>>(
+                actual.Content
+            );
             Assert.NotNull(actualContent.Formatter);
             Assert.Same(expectedContent.Formatter.GetType(), actualContent.Formatter.GetType());
             Assert.Equal(Flatten(expectedContent.Value), Flatten(actualContent.Value));
@@ -319,8 +381,11 @@ namespace System.Web.Http.WebHost
             return flattened;
         }
 
-        private static void AddValues(IDictionary<string, object> source, string prefix,
-            IDictionary<string, object> destination)
+        private static void AddValues(
+            IDictionary<string, object> source,
+            string prefix,
+            IDictionary<string, object> destination
+        )
         {
             foreach (string key in source.Keys)
             {
@@ -353,7 +418,9 @@ namespace System.Web.Http.WebHost
 
         private static ExceptionHandlerContext CreateContext()
         {
-            return CreateContext(new ExceptionContext(new Exception(), ExceptionCatchBlocks.HttpServer));
+            return CreateContext(
+                new ExceptionContext(new Exception(), ExceptionCatchBlocks.HttpServer)
+            );
         }
 
         private static ExceptionHandlerContext CreateContext(ExceptionContext exceptionContext)
@@ -371,7 +438,9 @@ namespace System.Web.Http.WebHost
             return new Mock<IHttpActionResult>(MockBehavior.Strict).Object;
         }
 
-        private static WebHostExceptionHandler CreateProductUnderTest(IExceptionHandler innerHandler)
+        private static WebHostExceptionHandler CreateProductUnderTest(
+            IExceptionHandler innerHandler
+        )
         {
             return new WebHostExceptionHandler(innerHandler);
         }
@@ -392,18 +461,23 @@ namespace System.Web.Http.WebHost
             return source.Task;
         }
 
-        private static ExceptionHandlerContext CreateValidContext(HttpRequestMessage request,
-            ExceptionContextCatchBlock catchBlock)
+        private static ExceptionHandlerContext CreateValidContext(
+            HttpRequestMessage request,
+            ExceptionContextCatchBlock catchBlock
+        )
         {
             return CreateContext(CreateMinimalValidExceptionContext(catchBlock, request));
         }
 
-        private static ExceptionContext CreateMinimalValidExceptionContext(ExceptionContextCatchBlock catchBlock, HttpRequestMessage request = null)
+        private static ExceptionContext CreateMinimalValidExceptionContext(
+            ExceptionContextCatchBlock catchBlock,
+            HttpRequestMessage request = null
+        )
         {
             return new ExceptionContext(new InvalidOperationException(), catchBlock)
-                        {
-                            Request = request,
-                        };
+            {
+                Request = request,
+            };
         }
     }
 }

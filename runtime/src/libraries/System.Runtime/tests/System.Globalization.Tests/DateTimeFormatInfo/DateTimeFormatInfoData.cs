@@ -28,14 +28,22 @@ namespace System.Globalization.Tests
 
         public static string[] FrFRDayNames()
         {
-            return new string[] { "dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi" };
+            return new string[]
+            {
+                "dimanche",
+                "lundi",
+                "mardi",
+                "mercredi",
+                "jeudi",
+                "vendredi",
+                "samedi",
+            };
         }
 
         public static string[] FrFRAbbreviatedDayNames()
         {
             return new string[] { "dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam." };
         }
-
 
         public static CalendarWeekRule BrFRCalendarWeekRule()
         {
@@ -54,9 +62,13 @@ namespace System.Globalization.Tests
 
         public static Exception GetCultureNotSupportedException(CultureInfo cultureInfo)
         {
-            return new NotSupportedException(string.Format("The culture '{0}' with calendar '{1}' is not supported.",
-                cultureInfo.Name,
-                cultureInfo.Calendar.GetType().Name));
+            return new NotSupportedException(
+                string.Format(
+                    "The culture '{0}' with calendar '{1}' is not supported.",
+                    cultureInfo.Name,
+                    cultureInfo.Calendar.GetType().Name
+                )
+            );
         }
     }
 }

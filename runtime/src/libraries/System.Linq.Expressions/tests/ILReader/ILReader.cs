@@ -12,8 +12,12 @@ namespace System.Linq.Expressions.Tests
 {
     public sealed class ILReader : IEnumerable<ILInstruction>, IEnumerable
     {
-        private static readonly Type s_runtimeMethodInfoType = Type.GetType("System.Reflection.RuntimeMethodInfo");
-        private static readonly Type s_runtimeConstructorInfoType = Type.GetType("System.Reflection.RuntimeConstructorInfo");
+        private static readonly Type s_runtimeMethodInfoType = Type.GetType(
+            "System.Reflection.RuntimeMethodInfo"
+        );
+        private static readonly Type s_runtimeConstructorInfoType = Type.GetType(
+            "System.Reflection.RuntimeConstructorInfo"
+        );
 
         private static readonly OpCode[] s_OneByteOpCodes;
         private static readonly OpCode[] s_TwoByteOpCodes;
@@ -23,7 +27,9 @@ namespace System.Linq.Expressions.Tests
             s_OneByteOpCodes = new OpCode[0x100];
             s_TwoByteOpCodes = new OpCode[0x100];
 
-            foreach (FieldInfo fi in typeof(OpCodes).GetFields(BindingFlags.Public | BindingFlags.Static))
+            foreach (
+                FieldInfo fi in typeof(OpCodes).GetFields(BindingFlags.Public | BindingFlags.Static)
+            )
             {
                 OpCode opCode = (OpCode)fi.GetValue(null);
                 ushort value = unchecked((ushort)opCode.Value);
@@ -175,7 +181,9 @@ namespace System.Linq.Expressions.Tests
                     return new InlineSwitchInstruction(offset, opCode, deltas);
 
                 default:
-                    throw new BadImageFormatException("unexpected OperandType " + opCode.OperandType);
+                    throw new BadImageFormatException(
+                        "unexpected OperandType " + opCode.OperandType
+                    );
             }
         }
 
@@ -191,6 +199,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         private byte ReadByte() => _byteArray[_position++];
+
         private sbyte ReadSByte() => (sbyte)ReadByte();
 
         private ushort ReadUInt16()

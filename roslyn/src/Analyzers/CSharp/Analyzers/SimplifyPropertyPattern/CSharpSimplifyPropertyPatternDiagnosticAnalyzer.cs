@@ -13,27 +13,36 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyPropertyPattern
 {
     /// <summary>
     /// Looks for code of the form:
-    /// 
+    ///
     ///     <c>x is { a: { b: ... } }</c>
-    ///     
+    ///
     /// and converts it to:
-    /// 
+    ///
     ///     <c>x is { a.b: ... }</c>
     /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class CSharpSimplifyPropertyPatternDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal class CSharpSimplifyPropertyPatternDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public CSharpSimplifyPropertyPatternDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.SimplifyPropertyPatternDiagnosticId,
-                   EnforceOnBuildValues.SimplifyPropertyPattern,
-                   CSharpCodeStyleOptions.PreferExtendedPropertyPattern,
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Property_pattern_can_be_simplified), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Simplify_property_pattern), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.SimplifyPropertyPatternDiagnosticId,
+                EnforceOnBuildValues.SimplifyPropertyPattern,
+                CSharpCodeStyleOptions.PreferExtendedPropertyPattern,
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Property_pattern_can_be_simplified),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Simplify_property_pattern),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context)
         {
@@ -52,22 +61,33 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyPropertyPattern
         private void AnalyzeSubpattern(SyntaxNodeAnalysisContext syntaxContext)
         {
             // Bail immediately if the user has disabled this feature.
-            var styleOption = syntaxContext.GetCSharpAnalyzerOptions().PreferExtendedPropertyPattern;
+            var styleOption = syntaxContext
+                .GetCSharpAnalyzerOptions()
+                .PreferExtendedPropertyPattern;
             if (!styleOption.Value || ShouldSkipAnalysis(syntaxContext, styleOption.Notification))
                 return;
 
             var subpattern = (SubpatternSyntax)syntaxContext.Node;
-            if (!SimplifyPropertyPatternHelpers.IsSimplifiable(subpattern, out _, out var expressionColon))
+            if (
+                !SimplifyPropertyPatternHelpers.IsSimplifiable(
+                    subpattern,
+                    out _,
+                    out var expressionColon
+                )
+            )
                 return;
 
             // If the diagnostic is not hidden, then just place the user visible part
             // on the local being initialized with the lambda.
-            syntaxContext.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                expressionColon.GetLocation(),
-                styleOption.Notification,
-                ImmutableArray.Create(subpattern.GetLocation()),
-                properties: null));
+            syntaxContext.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    expressionColon.GetLocation(),
+                    styleOption.Notification,
+                    ImmutableArray.Create(subpattern.GetLocation()),
+                    properties: null
+                )
+            );
         }
     }
 }

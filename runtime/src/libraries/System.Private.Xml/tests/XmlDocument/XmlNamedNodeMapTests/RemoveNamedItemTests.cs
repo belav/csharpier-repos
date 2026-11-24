@@ -11,7 +11,9 @@ namespace System.Xml.XmlDocumentTests
         public static void NamedItemDoesNotExist()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<elem1 child1='' child2='duu' child3='e1;e2;' child4='a1' child5='goody'> text node two text node three </elem1>");
+            xmlDocument.LoadXml(
+                "<elem1 child1='' child2='duu' child3='e1;e2;' child4='a1' child5='goody'> text node two text node three </elem1>"
+            );
 
             var namedNodeMap = (XmlNamedNodeMap)xmlDocument.FirstChild.Attributes;
             Assert.Equal(5, namedNodeMap.Count);
@@ -26,7 +28,9 @@ namespace System.Xml.XmlDocumentTests
         public static void RemoveFirstItem()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<elem1 child1='' child2='duu' child3='e1;e2;' child4='a1' child5='goody'> text node two text node three </elem1>");
+            xmlDocument.LoadXml(
+                "<elem1 child1='' child2='duu' child3='e1;e2;' child4='a1' child5='goody'> text node two text node three </elem1>"
+            );
 
             var namedNodeMap = (XmlNamedNodeMap)xmlDocument.FirstChild.Attributes;
             var item = namedNodeMap.Item(0);
@@ -43,7 +47,9 @@ namespace System.Xml.XmlDocumentTests
         public static void RemoveMiddleItem()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<elem1 child1='' child2='duu' child3='e1;e2;' child4='a1' child5='goody'> text node two text node three </elem1>");
+            xmlDocument.LoadXml(
+                "<elem1 child1='' child2='duu' child3='e1;e2;' child4='a1' child5='goody'> text node two text node three </elem1>"
+            );
 
             var namedNodeMap = (XmlNamedNodeMap)xmlDocument.FirstChild.Attributes;
             var item = namedNodeMap.Item(1);
@@ -60,7 +66,9 @@ namespace System.Xml.XmlDocumentTests
         public static void RemoveLastItem()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<elem1 child1='' child2='duu' child3='e1;e2;' child4='a1' child5='goody'> text node two text node three </elem1>");
+            xmlDocument.LoadXml(
+                "<elem1 child1='' child2='duu' child3='e1;e2;' child4='a1' child5='goody'> text node two text node three </elem1>"
+            );
 
             var namedNodeMap = (XmlNamedNodeMap)xmlDocument.FirstChild.Attributes;
             var item = namedNodeMap.Item(4);
@@ -76,7 +84,8 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void ExistingNameWrongNamespace()
         {
-            var xml = "<elem1 xmlns=\"ns1\" xmlns:bb=\"ns2\" xmlns:cc=\"ns3\" bb:att1=\"foo\" attr=\"some\" cc:att2=\"bar\"></elem1>";
+            var xml =
+                "<elem1 xmlns=\"ns1\" xmlns:bb=\"ns2\" xmlns:cc=\"ns3\" bb:att1=\"foo\" attr=\"some\" cc:att2=\"bar\"></elem1>";
             var xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(xml);
 
@@ -91,7 +100,8 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void WrongNameExistingNamespace()
         {
-            var xml = "<elem1 xmlns=\"ns1\" xmlns:bb=\"ns2\" xmlns:cc=\"ns3\" bb:att1=\"foo\" attr=\"some\" cc:att2=\"bar\"></elem1>";
+            var xml =
+                "<elem1 xmlns=\"ns1\" xmlns:bb=\"ns2\" xmlns:cc=\"ns3\" bb:att1=\"foo\" attr=\"some\" cc:att2=\"bar\"></elem1>";
             var xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(xml);
 
@@ -106,7 +116,8 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void WrongNameWrongNamespace()
         {
-            var xml = "<elem1 xmlns=\"ns1\" xmlns:bb=\"ns2\" xmlns:cc=\"ns3\" bb:att1=\"foo\" attr=\"some\" cc:att2=\"bar\"></elem1>";
+            var xml =
+                "<elem1 xmlns=\"ns1\" xmlns:bb=\"ns2\" xmlns:cc=\"ns3\" bb:att1=\"foo\" attr=\"some\" cc:att2=\"bar\"></elem1>";
             var xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(xml);
 

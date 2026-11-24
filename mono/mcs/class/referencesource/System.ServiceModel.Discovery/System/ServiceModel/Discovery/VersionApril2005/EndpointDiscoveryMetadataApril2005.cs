@@ -25,7 +25,9 @@ namespace System.ServiceModel.Discovery.VersionApril2005
             this.endpointDiscoveryMetadata = endpointDiscoveryMetadata;
         }
 
-        public static EndpointDiscoveryMetadataApril2005 FromEndpointDiscoveryMetadata(EndpointDiscoveryMetadata endpointDiscoveryMetadata)
+        public static EndpointDiscoveryMetadataApril2005 FromEndpointDiscoveryMetadata(
+            EndpointDiscoveryMetadata endpointDiscoveryMetadata
+        )
         {
             if (endpointDiscoveryMetadata == null)
             {
@@ -42,7 +44,10 @@ namespace System.ServiceModel.Discovery.VersionApril2005
                 throw FxTrace.Exception.ArgumentNull("schemaSet");
             }
 
-            return SchemaUtility.EnsureProbeMatchSchema(DiscoveryVersion.WSDiscoveryApril2005, schemaSet);
+            return SchemaUtility.EnsureProbeMatchSchema(
+                DiscoveryVersion.WSDiscoveryApril2005,
+                schemaSet
+            );
         }
 
         public EndpointDiscoveryMetadata ToEndpointDiscoveryMetadata()
@@ -55,7 +60,10 @@ namespace System.ServiceModel.Discovery.VersionApril2005
             return null;
         }
 
-        [Fx.Tag.InheritThrows(From = "ReadFrom", FromDeclaringType = typeof(EndpointDiscoveryMetadata))]
+        [Fx.Tag.InheritThrows(
+            From = "ReadFrom",
+            FromDeclaringType = typeof(EndpointDiscoveryMetadata)
+        )]
         public void ReadXml(XmlReader reader)
         {
             this.endpointDiscoveryMetadata.ReadFrom(DiscoveryVersion.WSDiscoveryApril2005, reader);
@@ -64,6 +72,6 @@ namespace System.ServiceModel.Discovery.VersionApril2005
         public void WriteXml(XmlWriter writer)
         {
             this.endpointDiscoveryMetadata.WriteTo(DiscoveryVersion.WSDiscoveryApril2005, writer);
-        }        
+        }
     }
 }

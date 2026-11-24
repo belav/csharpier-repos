@@ -11,18 +11,21 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel.Dispatcher;
     using System.ServiceModel.PeerResolvers;
 
-    [ObsoleteAttribute ("PeerChannel feature is obsolete and will be removed in the future.", false)]
+    [ObsoleteAttribute("PeerChannel feature is obsolete and will be removed in the future.", false)]
     public sealed class PeerCustomResolverBindingElement : PeerResolverBindingElement
     {
         EndpointAddress address;
         Binding binding;
-        string bindingSection, bindingConfiguration;
+        string bindingSection,
+            bindingConfiguration;
+
         //this should be PeerCustomResolver?
         PeerResolver resolver;
         ClientCredentials credentials;
         PeerReferralPolicy referralPolicy;
 
         public PeerCustomResolverBindingElement() { }
+
         public PeerCustomResolverBindingElement(PeerCustomResolverBindingElement other)
             : base(other)
         {
@@ -46,55 +49,53 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public PeerCustomResolverBindingElement(BindingContext context, PeerCustomResolverSettings settings)
+        public PeerCustomResolverBindingElement(
+            BindingContext context,
+            PeerCustomResolverSettings settings
+        )
             : this(settings)
         {
             if (context == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("context"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("context")
+                );
 
 #pragma warning suppress 56506 // Microsoft, context.BindingParameters is never null
             credentials = context.BindingParameters.Find<ClientCredentials>();
         }
+
         public override T GetProperty<T>(System.ServiceModel.Channels.BindingContext context)
         {
 #pragma warning suppress 56506 // context could be null. Pre-4.0 behaviour, won't fix in Dev10.
             return context.GetInnerProperty<T>();
         }
+
         public EndpointAddress Address
         {
-            get
-            {
-                return address;
-            }
-            set
-            {
-                address = value;
-            }
+            get { return address; }
+            set { address = value; }
         }
 
         public Binding Binding
         {
-            get
-            {
-                return binding;
-            }
-            set
-            {
-                binding = value;
-            }
+            get { return binding; }
+            set { binding = value; }
         }
 
         public override PeerReferralPolicy ReferralPolicy
         {
-            get
-            {
-                return referralPolicy;
-            }
+            get { return referralPolicy; }
             set
             {
                 if (!PeerReferralPolicyHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidEnumArgumentException("value", (int)value, typeof(PeerReferralPolicy)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidEnumArgumentException(
+                            "value",
+                            (int)value,
+                            typeof(PeerReferralPolicy)
+                        )
+                    );
                 }
                 referralPolicy = value;
             }
@@ -105,10 +106,14 @@ namespace System.ServiceModel.Channels
             return new PeerCustomResolverBindingElement(this);
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("context"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("context")
+                );
 
 #pragma warning suppress 56506 // Microsoft, context.BindingParameters is never null
             context.BindingParameters.Add(this);
@@ -119,17 +124,23 @@ namespace System.ServiceModel.Channels
         public override bool CanBuildChannelFactory<TChannel>(BindingContext context)
         {
             if (context == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("context"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("context")
+                );
 #pragma warning suppress 56506 // Microsoft, context.BindingParameters is never null
             this.credentials = context.BindingParameters.Find<ClientCredentials>();
             context.BindingParameters.Add(this);
             return context.CanBuildInnerChannelFactory<TChannel>();
         }
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("context"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("context")
+                );
 
 #pragma warning suppress 56506 // Microsoft, context.BindingParameters is never null
             context.BindingParameters.Add(this);
@@ -140,7 +151,9 @@ namespace System.ServiceModel.Channels
         public override bool CanBuildChannelListener<TChannel>(BindingContext context)
         {
             if (context == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("context"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("context")
+                );
 #pragma warning suppress 56506 // Microsoft, context.BindingParameters is never null
             this.credentials = context.BindingParameters.Find<ClientCredentials>();
             context.BindingParameters.Add(this);
@@ -151,11 +164,23 @@ namespace System.ServiceModel.Channels
         {
             if (resolver == null)
             {
-                if (address == null || ((binding == null) && (String.IsNullOrEmpty(this.bindingSection) || String.IsNullOrEmpty(this.bindingConfiguration))))
+                if (
+                    address == null
+                    || (
+                        (binding == null)
+                        && (
+                            String.IsNullOrEmpty(this.bindingSection)
+                            || String.IsNullOrEmpty(this.bindingConfiguration)
+                        )
+                    )
+                )
                     PeerExceptionHelper.ThrowArgument_InsufficientResolverSettings();
                 if (binding == null)
                 {
-                    this.binding = ConfigLoader.LookupBinding(this.bindingSection, this.bindingConfiguration);
+                    this.binding = ConfigLoader.LookupBinding(
+                        this.bindingSection,
+                        this.bindingConfiguration
+                    );
                     if (binding == null)
                         PeerExceptionHelper.ThrowArgument_InsufficientResolverSettings();
                 }
@@ -167,11 +192,11 @@ namespace System.ServiceModel.Channels
                 if (resolver is PeerDefaultCustomResolverClient)
                 {
                     (resolver as PeerDefaultCustomResolverClient).BindingName = this.bindingSection;
-                    (resolver as PeerDefaultCustomResolverClient).BindingConfigurationName = this.bindingConfiguration;
+                    (resolver as PeerDefaultCustomResolverClient).BindingConfigurationName =
+                        this.bindingConfiguration;
                 }
             }
             return resolver;
         }
     }
 }
-

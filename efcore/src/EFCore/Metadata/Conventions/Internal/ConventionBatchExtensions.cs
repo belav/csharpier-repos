@@ -22,6 +22,6 @@ public static class ConventionBatchExtensions
     [DebuggerStepThrough]
     public static InternalForeignKeyBuilder? Run(
         this IConventionBatch batch,
-        InternalForeignKeyBuilder relationshipBuilder)
-        => (InternalForeignKeyBuilder?)batch.Run(relationshipBuilder.Metadata)?.Builder;
+        InternalForeignKeyBuilder relationshipBuilder
+    ) => (InternalForeignKeyBuilder?)batch.Run(relationshipBuilder.Metadata)?.Builder;
 }

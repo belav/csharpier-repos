@@ -22,7 +22,6 @@ namespace System.Reflection.Metadata.Ecma335
         public bool Equals(EditAndContinueLogEntry other) =>
             Operation == other.Operation && Handle == other.Handle;
 
-        public override int GetHashCode() =>
-            (int)Operation ^ Handle.GetHashCode();
+        public override int GetHashCode() => (int)Operation ^ Handle.GetHashCode();
     }
 }

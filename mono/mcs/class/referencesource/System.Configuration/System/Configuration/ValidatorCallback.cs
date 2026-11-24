@@ -6,18 +6,19 @@
 
 using System;
 using System.Collections;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Security.Permissions;
-using System.Xml;
-using System.Collections.Specialized;
-using System.Globalization;
-using System.ComponentModel;
 using System.Security;
+using System.Security.Permissions;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml;
 
-namespace System.Configuration {
+namespace System.Configuration
+{
     // Call back validator. Uses a validation callback to avoid creation of new types
     public delegate void ValidatorCallback(object value);
 }

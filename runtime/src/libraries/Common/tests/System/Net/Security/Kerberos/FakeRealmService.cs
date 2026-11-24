@@ -11,7 +11,12 @@ class FakeRealmService : IRealmService
     private readonly IPrincipalService _principalService;
     private readonly KerberosCompatibilityFlags _compatibilityFlags;
 
-    public FakeRealmService(string realm, Krb5Config config, IPrincipalService principalService, KerberosCompatibilityFlags compatibilityFlags = KerberosCompatibilityFlags.None)
+    public FakeRealmService(
+        string realm,
+        Krb5Config config,
+        IPrincipalService principalService,
+        KerberosCompatibilityFlags compatibilityFlags = KerberosCompatibilityFlags.None
+    )
     {
         Name = realm;
         Configuration = config;

@@ -7,8 +7,8 @@ namespace NetClient
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
-    using System.Text;
     using System.Runtime.InteropServices;
+    using System.Text;
     using Xunit;
 
     class StringTests
@@ -26,10 +26,12 @@ namespace NetClient
             Tuple.Create("a", "\u7ED3\u5408"),
             Tuple.Create("\u7ED3\u5408", "a"),
             Tuple.Create("\u7ED3\u5408", "\u7ED3\u5408"),
-
             // String marshalling is optimized where strings shorter than MAX_PATH are
             // allocated on the stack. Longer strings have memory allocated for them.
-            Tuple.Create("123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901", "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901")
+            Tuple.Create(
+                "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901",
+                "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901"
+            ),
         };
 
         private readonly IEnumerable<string> reversibleStrings = new string[]
@@ -39,14 +41,14 @@ namespace NetClient
             "abc",
             "reversible string",
             "Unicode \u76F8\u53CD Unicode",
-
             // Long string optimization validation
-            "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901"
+            "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901",
         };
 
         public StringTests()
         {
-            this.server = (Server.Contract.Servers.StringTesting)new Server.Contract.Servers.StringTestingClass();
+            this.server = (Server.Contract.Servers.StringTesting)
+                new Server.Contract.Servers.StringTestingClass();
         }
 
         public void Run()
@@ -57,14 +59,14 @@ namespace NetClient
             this.Marshal_LCID();
         }
 
-        static private string Reverse(string s)
+        private static string Reverse(string s)
         {
             var chars = s.ToCharArray();
             Array.Reverse(chars);
             return new string(chars);
         }
 
-        static private bool AllAscii(string s)
+        private static bool AllAscii(string s)
         {
             const int MaxAscii = 0x7f;
             return s.ToCharArray().All(c => c <= MaxAscii);
@@ -72,7 +74,7 @@ namespace NetClient
 
         private void Marshal_LPString()
         {
-            Console.WriteLine($"Marshal strings as { UnmanagedType.LPStr }");
+            Console.WriteLine($"Marshal strings as {UnmanagedType.LPStr}");
             foreach (var p in addPairs)
             {
                 if (!AllAscii(p.Item1) || !AllAscii(p.Item2))
@@ -163,7 +165,7 @@ namespace NetClient
 
         private void Marshal_LPWString()
         {
-            Console.WriteLine($"Marshal strings as { UnmanagedType.LPWStr }");
+            Console.WriteLine($"Marshal strings as {UnmanagedType.LPWStr}");
             foreach (var p in addPairs)
             {
                 string expected = p.Item1 + p.Item2;
@@ -192,7 +194,9 @@ namespace NetClient
                 Assert.Equal(expected, actual);
 
                 actual = local;
-                Assert.Throws<MarshalDirectiveException>( () => this.server.Reverse_LPWStr_OutAttr(local, actual));
+                Assert.Throws<MarshalDirectiveException>(() =>
+                    this.server.Reverse_LPWStr_OutAttr(local, actual)
+                );
             }
 
             foreach (var s in reversibleStrings)
@@ -235,7 +239,7 @@ namespace NetClient
 
         private void Marshal_BStrString()
         {
-            Console.WriteLine($"Marshal strings as { UnmanagedType.BStr }");
+            Console.WriteLine($"Marshal strings as {UnmanagedType.BStr}");
             foreach (var p in addPairs)
             {
                 string expected = p.Item1 + p.Item2;

@@ -59,11 +59,16 @@ namespace System.Security.Cryptography
         }
 
         public SafeEvpPKeyHandle DuplicateKeyHandle() => null!;
+
         public override byte[] CreateSignature(byte[] rgbHash) => null!;
+
         public override DSAParameters ExportParameters(bool includePrivateParameters) => default;
+
         public override void ImportParameters(DSAParameters parameters) { }
+
         public override bool VerifySignature(byte[] rgbHash, byte[] rgbSignature) => false;
     }
+
     public sealed class ECDiffieHellmanOpenSsl : ECDiffieHellman
     {
         [UnsupportedOSPlatform("android")]
@@ -117,10 +122,14 @@ namespace System.Security.Cryptography
         }
 
         public SafeEvpPKeyHandle DuplicateKeyHandle() => null!;
+
         public override ECDiffieHellmanPublicKey PublicKey => null!;
+
         public override ECParameters ExportParameters(bool includePrivateParameters) => default;
+
         public override void ImportParameters(ECParameters parameters) { }
     }
+
     public sealed class ECDsaOpenSsl : ECDsa
     {
         [UnsupportedOSPlatform("android")]
@@ -174,9 +183,12 @@ namespace System.Security.Cryptography
         }
 
         public SafeEvpPKeyHandle DuplicateKeyHandle() => null!;
+
         public override byte[] SignHash(byte[] hash) => null!;
+
         public override bool VerifyHash(byte[] hash, byte[] signature) => default;
     }
+
     public sealed class RSAOpenSsl : RSA
     {
         [UnsupportedOSPlatform("android")]
@@ -230,9 +242,12 @@ namespace System.Security.Cryptography
         }
 
         public SafeEvpPKeyHandle DuplicateKeyHandle() => null!;
+
         public override RSAParameters ExportParameters(bool includePrivateParameters) => default;
+
         public override void ImportParameters(RSAParameters parameters) { }
     }
+
     public sealed class SafeEvpPKeyHandle : SafeHandle
     {
         [UnsupportedOSPlatform("android")]
@@ -240,7 +255,8 @@ namespace System.Security.Cryptography
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("windows")]
-        public SafeEvpPKeyHandle() : base(IntPtr.Zero, false)
+        public SafeEvpPKeyHandle()
+            : base(IntPtr.Zero, false)
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_CryptographyOpenSSL);
         }
@@ -250,7 +266,8 @@ namespace System.Security.Cryptography
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("windows")]
-        public SafeEvpPKeyHandle(IntPtr handle, bool ownsHandle) : base(handle, ownsHandle)
+        public SafeEvpPKeyHandle(IntPtr handle, bool ownsHandle)
+            : base(handle, ownsHandle)
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_CryptographyOpenSSL);
         }
@@ -280,7 +297,9 @@ namespace System.Security.Cryptography
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_CryptographyOpenSSL);
 
         public SafeEvpPKeyHandle DuplicateHandle() => null!;
+
         public override bool IsInvalid => true;
+
         protected override bool ReleaseHandle() => false;
     }
 }

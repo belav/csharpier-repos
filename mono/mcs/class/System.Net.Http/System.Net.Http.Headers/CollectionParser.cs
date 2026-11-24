@@ -30,88 +30,112 @@ using System.Collections.Generic;
 
 namespace System.Net.Http.Headers
 {
-	delegate bool ElementTryParser<T> (Lexer lexer, out T parsedValue, out Token token);
+    delegate bool ElementTryParser<T>(Lexer lexer, out T parsedValue, out Token token);
 
-	static class CollectionParser
-	{
-		public static bool TryParse<T> (string input, int minimalCount, ElementTryParser<T> parser, out List<T> result) where T : class
-		{
-			var lexer = new Lexer (input);
-			result = new List<T> ();
+    static class CollectionParser
+    {
+        public static bool TryParse<T>(
+            string input,
+            int minimalCount,
+            ElementTryParser<T> parser,
+            out List<T> result
+        )
+            where T : class
+        {
+            var lexer = new Lexer(input);
+            result = new List<T>();
 
-			while (true) {
-				Token token;
-				T parsedValue;
-				if (!parser (lexer, out parsedValue, out token))
-					return false;
+            while (true)
+            {
+                Token token;
+                T parsedValue;
+                if (!parser(lexer, out parsedValue, out token))
+                    return false;
 
-				if (parsedValue != null)
-					result.Add (parsedValue);
+                if (parsedValue != null)
+                    result.Add(parsedValue);
 
-				if (token == Token.Type.SeparatorComma)
-					continue;
+                if (token == Token.Type.SeparatorComma)
+                    continue;
 
-				if (token == Token.Type.End) {
-					if (minimalCount > result.Count) {
-						result = null;
-						return false;
-					}
-						
-					return true;
-				}
+                if (token == Token.Type.End)
+                {
+                    if (minimalCount > result.Count)
+                    {
+                        result = null;
+                        return false;
+                    }
 
-				result = null;
-				return false;
-			}
-		}
+                    return true;
+                }
 
-		public static bool TryParse (string input, int minimalCount, out List<string> result)
-		{
-			return TryParse (input, minimalCount, TryParseStringElement, out result);
-		}
+                result = null;
+                return false;
+            }
+        }
 
-		public static bool TryParseRepetition (string input, int minimalCount, out List<string> result)
-		{
-			return TryParseRepetition (input, minimalCount, TryParseStringElement, out result);
-		}
+        public static bool TryParse(string input, int minimalCount, out List<string> result)
+        {
+            return TryParse(input, minimalCount, TryParseStringElement, out result);
+        }
 
-		static bool TryParseStringElement (Lexer lexer, out string parsedValue, out Token t)
-		{
-			t = lexer.Scan ();
-			if (t == Token.Type.Token) {
-				parsedValue = lexer.GetStringValue (t);
-				if (parsedValue.Length == 0)
-					parsedValue = null;
+        public static bool TryParseRepetition(
+            string input,
+            int minimalCount,
+            out List<string> result
+        )
+        {
+            return TryParseRepetition(input, minimalCount, TryParseStringElement, out result);
+        }
 
-				t = lexer.Scan ();
-			} else {
-				parsedValue = null;
-			}
+        static bool TryParseStringElement(Lexer lexer, out string parsedValue, out Token t)
+        {
+            t = lexer.Scan();
+            if (t == Token.Type.Token)
+            {
+                parsedValue = lexer.GetStringValue(t);
+                if (parsedValue.Length == 0)
+                    parsedValue = null;
 
-			return true;
-		}
+                t = lexer.Scan();
+            }
+            else
+            {
+                parsedValue = null;
+            }
 
-		public static bool TryParseRepetition<T> (string input, int minimalCount, ElementTryParser<T> parser, out List<T> result) where T : class
-		{
-			var lexer = new Lexer (input);
-			result = new List<T> ();
+            return true;
+        }
 
-			while (true) {
-				Token token;
-				T parsedValue;
-				if (!parser (lexer, out parsedValue, out token))
-					return false;
+        public static bool TryParseRepetition<T>(
+            string input,
+            int minimalCount,
+            ElementTryParser<T> parser,
+            out List<T> result
+        )
+            where T : class
+        {
+            var lexer = new Lexer(input);
+            result = new List<T>();
 
-				if (parsedValue != null)
-					result.Add (parsedValue);
+            while (true)
+            {
+                Token token;
+                T parsedValue;
+                if (!parser(lexer, out parsedValue, out token))
+                    return false;
 
-				if (token == Token.Type.End) {
-					if (minimalCount > result.Count)
-						return false;
-						
-					return true;
-				}
-			}
-		}
-	}
+                if (parsedValue != null)
+                    result.Add(parsedValue);
+
+                if (token == Token.Type.End)
+                {
+                    if (minimalCount > result.Count)
+                        return false;
+
+                    return true;
+                }
+            }
+        }
+    }
 }

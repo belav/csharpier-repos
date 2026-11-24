@@ -23,11 +23,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             this.Type = type;
         }
 
-        public override int GetHashCode()
-            => Hash.Combine(Node, Hash.Combine(ParentNode, ((int)Type).GetHashCode()));
+        public override int GetHashCode() =>
+            Hash.Combine(Node, Hash.Combine(ParentNode, ((int)Type).GetHashCode()));
 
-        public override bool Equals(object obj)
-            => Equals(obj as CodeModelEvent);
+        public override bool Equals(object obj) => Equals(obj as CodeModelEvent);
 
         public bool Equals(CodeModelEvent other)
         {
@@ -36,9 +35,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 return false;
             }
 
-            return Node == other.Node
-                && ParentNode == other.ParentNode
-                && Type == other.Type;
+            return Node == other.Node && ParentNode == other.ParentNode && Type == other.Type;
         }
     }
 }

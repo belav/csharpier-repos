@@ -111,7 +111,8 @@ namespace System.Security.Cryptography.X509Certificates
             DateTimeOffset nextUpdate,
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding? rsaSignaturePadding = null,
-            DateTimeOffset? thisUpdate = null)
+            DateTimeOffset? thisUpdate = null
+        )
         {
             return Build(
                 issuerCertificate,
@@ -119,7 +120,8 @@ namespace System.Security.Cryptography.X509Certificates
                 nextUpdate,
                 thisUpdate.GetValueOrDefault(DateTimeOffset.UtcNow),
                 hashAlgorithm,
-                rsaSignaturePadding);
+                rsaSignaturePadding
+            );
         }
 
         private byte[] Build(
@@ -128,14 +130,16 @@ namespace System.Security.Cryptography.X509Certificates
             DateTimeOffset nextUpdate,
             DateTimeOffset thisUpdate,
             HashAlgorithmName hashAlgorithm,
-            RSASignaturePadding? rsaSignaturePadding)
+            RSASignaturePadding? rsaSignaturePadding
+        )
         {
             ArgumentNullException.ThrowIfNull(issuerCertificate);
 
             if (!issuerCertificate.HasPrivateKey)
                 throw new ArgumentException(
                     SR.Cryptography_CertReq_IssuerRequiresPrivateKey,
-                    nameof(issuerCertificate));
+                    nameof(issuerCertificate)
+                );
             ArgumentOutOfRangeException.ThrowIfNegative(crlNumber);
             if (nextUpdate <= thisUpdate)
                 throw new ArgumentException(SR.Cryptography_CRLBuilder_DatesReversed);
@@ -147,30 +151,34 @@ namespace System.Security.Cryptography.X509Certificates
             // to determine if the CRL is valid; and a user can easily call the X509SignatureGenerator overload to
             // bypass this validation.  We're simply helping them at signing time understand that they've
             // chosen the wrong cert.
-            var basicConstraints = (X509BasicConstraintsExtension?)issuerCertificate.Extensions[Oids.BasicConstraints2];
+            var basicConstraints = (X509BasicConstraintsExtension?)
+                issuerCertificate.Extensions[Oids.BasicConstraints2];
             var keyUsage = (X509KeyUsageExtension?)issuerCertificate.Extensions[Oids.KeyUsage];
-            var subjectKeyIdentifier =
-                (X509SubjectKeyIdentifierExtension?)issuerCertificate.Extensions[Oids.SubjectKeyIdentifier];
+            var subjectKeyIdentifier = (X509SubjectKeyIdentifierExtension?)
+                issuerCertificate.Extensions[Oids.SubjectKeyIdentifier];
 
             if (basicConstraints == null)
             {
                 throw new ArgumentException(
                     SR.Cryptography_CertReq_BasicConstraintsRequired,
-                    nameof(issuerCertificate));
+                    nameof(issuerCertificate)
+                );
             }
 
             if (!basicConstraints.CertificateAuthority)
             {
                 throw new ArgumentException(
                     SR.Cryptography_CertReq_IssuerBasicConstraintsInvalid,
-                    nameof(issuerCertificate));
+                    nameof(issuerCertificate)
+                );
             }
 
             if (keyUsage != null && (keyUsage.KeyUsages & X509KeyUsageFlags.CrlSign) == 0)
             {
                 throw new ArgumentException(
                     SR.Cryptography_CRLBuilder_IssuerKeyUsageInvalid,
-                    nameof(issuerCertificate));
+                    nameof(issuerCertificate)
+                );
             }
 
             AsymmetricAlgorithm? key = null;
@@ -199,20 +207,24 @@ namespace System.Security.Cryptography.X509Certificates
                     default:
                         throw new ArgumentException(
                             SR.Format(SR.Cryptography_UnknownKeyAlgorithm, keyAlgorithm),
-                            nameof(issuerCertificate));
+                            nameof(issuerCertificate)
+                        );
                 }
 
                 X509AuthorityKeyIdentifierExtension akid;
 
                 if (subjectKeyIdentifier is not null)
                 {
-                    akid = X509AuthorityKeyIdentifierExtension.CreateFromSubjectKeyIdentifier(subjectKeyIdentifier);
+                    akid = X509AuthorityKeyIdentifierExtension.CreateFromSubjectKeyIdentifier(
+                        subjectKeyIdentifier
+                    );
                 }
                 else
                 {
                     akid = X509AuthorityKeyIdentifierExtension.CreateFromIssuerNameAndSerialNumber(
                         issuerCertificate.IssuerName,
-                        issuerCertificate.SerialNumberBytes.Span);
+                        issuerCertificate.SerialNumberBytes.Span
+                    );
                 }
 
                 return Build(
@@ -222,7 +234,8 @@ namespace System.Security.Cryptography.X509Certificates
                     nextUpdate,
                     thisUpdate,
                     hashAlgorithm,
-                    akid);
+                    akid
+                );
             }
             finally
             {
@@ -296,7 +309,8 @@ namespace System.Security.Cryptography.X509Certificates
             DateTimeOffset nextUpdate,
             HashAlgorithmName hashAlgorithm,
             X509AuthorityKeyIdentifierExtension authorityKeyIdentifier,
-            DateTimeOffset? thisUpdate = null)
+            DateTimeOffset? thisUpdate = null
+        )
         {
             return Build(
                 issuerName,
@@ -305,7 +319,8 @@ namespace System.Security.Cryptography.X509Certificates
                 nextUpdate,
                 thisUpdate.GetValueOrDefault(DateTimeOffset.UtcNow),
                 hashAlgorithm,
-                authorityKeyIdentifier);
+                authorityKeyIdentifier
+            );
         }
 
         private byte[] Build(
@@ -315,7 +330,8 @@ namespace System.Security.Cryptography.X509Certificates
             DateTimeOffset nextUpdate,
             DateTimeOffset thisUpdate,
             HashAlgorithmName hashAlgorithm,
-            X509AuthorityKeyIdentifierExtension authorityKeyIdentifier)
+            X509AuthorityKeyIdentifierExtension authorityKeyIdentifier
+        )
         {
             ArgumentNullException.ThrowIfNull(issuerName);
             ArgumentNullException.ThrowIfNull(generator);
@@ -334,7 +350,10 @@ namespace System.Security.Cryptography.X509Certificates
 
                 // Deserialization also does validation of the value (except for Parameters,
                 // which have to be validated separately).
-                signatureAlgorithmAsn = AlgorithmIdentifierAsn.Decode(signatureAlgId, AsnEncodingRules.DER);
+                signatureAlgorithmAsn = AlgorithmIdentifierAsn.Decode(
+                    signatureAlgId,
+                    AsnEncodingRules.DER
+                );
 
                 if (signatureAlgorithmAsn.Parameters.HasValue)
                 {

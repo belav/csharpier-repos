@@ -30,8 +30,8 @@ namespace System.Reflection
     public sealed class EnumInfo<TStorage> : EnumInfo
         where TStorage : struct, INumber<TStorage>
     {
-        public EnumInfo(Type underlyingType, TStorage[] values, string[] names, bool isFlags) :
-            base(underlyingType, names, isFlags)
+        public EnumInfo(Type underlyingType, TStorage[] values, string[] names, bool isFlags)
+            : base(underlyingType, names, isFlags)
         {
             Debug.Assert(values.Length == names.Length);
             Debug.Assert(Enum.AreSorted(values));
@@ -44,7 +44,8 @@ namespace System.Reflection
         internal bool ValuesAreSequentialFromZero { get; }
 
         /// <summary>Create a copy of <see cref="Values"/>.</summary>
-        public unsafe TResult[] CloneValues<TResult>() where TResult : struct
+        public unsafe TResult[] CloneValues<TResult>()
+            where TResult : struct
         {
             Debug.Assert(sizeof(TStorage) == sizeof(TResult));
             return MemoryMarshal.Cast<TStorage, TResult>(Values).ToArray();

@@ -29,7 +29,11 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         // this instance doesn't own the image
         public Metadata Metadata { get; }
 
-        internal MetadataShadowCopy(FileShadowCopy primaryModule, FileShadowCopy documentationFileOpt, Metadata metadataCopy)
+        internal MetadataShadowCopy(
+            FileShadowCopy primaryModule,
+            FileShadowCopy documentationFileOpt,
+            Metadata metadataCopy
+        )
         {
             Debug.Assert(primaryModule != null);
             Debug.Assert(metadataCopy != null);

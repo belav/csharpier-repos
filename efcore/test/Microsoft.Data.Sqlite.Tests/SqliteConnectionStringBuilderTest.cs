@@ -24,8 +24,14 @@ public class SqliteConnectionStringBuilderTest
     [Fact]
     public void Ctor_parses_SharedCache()
     {
-        Assert.Equal(SqliteCacheMode.Private, new SqliteConnectionStringBuilder("Cache=Private").Cache);
-        Assert.Equal(SqliteCacheMode.Shared, new SqliteConnectionStringBuilder("Cache=Shared").Cache);
+        Assert.Equal(
+            SqliteCacheMode.Private,
+            new SqliteConnectionStringBuilder("Cache=Private").Cache
+        );
+        Assert.Equal(
+            SqliteCacheMode.Shared,
+            new SqliteConnectionStringBuilder("Cache=Shared").Cache
+        );
     }
 
     [Fact]
@@ -97,7 +103,9 @@ public class SqliteConnectionStringBuilderTest
     [Fact]
     public void It_takes_last_alias_specified()
     {
-        var builder = new SqliteConnectionStringBuilder("Filename=ignore me.db; Data Source=and me too.db; DataSource=this_one.db");
+        var builder = new SqliteConnectionStringBuilder(
+            "Filename=ignore me.db; Data Source=and me too.db; DataSource=this_one.db"
+        );
 
         Assert.Equal("this_one.db", builder.DataSource);
     }
@@ -113,8 +121,8 @@ public class SqliteConnectionStringBuilderTest
     }
 
     [Fact]
-    public void DataSource_defaults_to_empty()
-        => Assert.Empty(new SqliteConnectionStringBuilder().DataSource);
+    public void DataSource_defaults_to_empty() =>
+        Assert.Empty(new SqliteConnectionStringBuilder().DataSource);
 
     [Fact]
     public void Mode_works()
@@ -127,20 +135,20 @@ public class SqliteConnectionStringBuilderTest
     }
 
     [Fact]
-    public void Mode_defaults_to_ReadWriteCreate()
-        => Assert.Equal(SqliteOpenMode.ReadWriteCreate, new SqliteConnectionStringBuilder().Mode);
+    public void Mode_defaults_to_ReadWriteCreate() =>
+        Assert.Equal(SqliteOpenMode.ReadWriteCreate, new SqliteConnectionStringBuilder().Mode);
 
     [Fact]
-    public void Cache_defaults()
-        => Assert.Equal(SqliteCacheMode.Default, new SqliteConnectionStringBuilder().Cache);
+    public void Cache_defaults() =>
+        Assert.Equal(SqliteCacheMode.Default, new SqliteConnectionStringBuilder().Cache);
 
     [Fact]
-    public void Password_defaults_to_empty()
-        => Assert.Empty(new SqliteConnectionStringBuilder().Password);
+    public void Password_defaults_to_empty() =>
+        Assert.Empty(new SqliteConnectionStringBuilder().Password);
 
     [Fact]
-    public void DefaultTimeout_defaults_to_30()
-        => Assert.Equal(30, new SqliteConnectionStringBuilder().DefaultTimeout);
+    public void DefaultTimeout_defaults_to_30() =>
+        Assert.Equal(30, new SqliteConnectionStringBuilder().DefaultTimeout);
 
     [Fact]
     public void Keys_works()
@@ -171,10 +179,14 @@ public class SqliteConnectionStringBuilderTest
     [Fact]
     public void Item_validates_argument()
     {
-        var ex = Assert.Throws<ArgumentException>(() => new SqliteConnectionStringBuilder()["Invalid"]);
+        var ex = Assert.Throws<ArgumentException>(() =>
+            new SqliteConnectionStringBuilder()["Invalid"]
+        );
         Assert.Equal(Resources.KeywordNotSupported("Invalid"), ex.Message);
 
-        ex = Assert.Throws<ArgumentException>(() => new SqliteConnectionStringBuilder()["Invalid"] = 0);
+        ex = Assert.Throws<ArgumentException>(() =>
+            new SqliteConnectionStringBuilder()["Invalid"] = 0
+        );
         Assert.Equal(Resources.KeywordNotSupported("Invalid"), ex.Message);
     }
 
@@ -268,7 +280,8 @@ public class SqliteConnectionStringBuilderTest
     public void Clear_resets_everything()
     {
         var builder = new SqliteConnectionStringBuilder(
-            "Data Source=test.db;Mode=Memory;Cache=Shared;Password=test;Foreign Keys=True;Recursive Triggers=True;Default Timeout=1");
+            "Data Source=test.db;Mode=Memory;Cache=Shared;Password=test;Foreign Keys=True;Recursive Triggers=True;Default Timeout=1"
+        );
 
         builder.Clear();
 
@@ -282,16 +295,16 @@ public class SqliteConnectionStringBuilderTest
     }
 
     [Fact]
-    public void ContainsKey_returns_true_when_exists()
-        => Assert.True(new SqliteConnectionStringBuilder().ContainsKey("Data Source"));
+    public void ContainsKey_returns_true_when_exists() =>
+        Assert.True(new SqliteConnectionStringBuilder().ContainsKey("Data Source"));
 
     [Fact]
-    public void ContainsKey_returns_false_when_not_exists()
-        => Assert.False(new SqliteConnectionStringBuilder().ContainsKey("Invalid"));
+    public void ContainsKey_returns_false_when_not_exists() =>
+        Assert.False(new SqliteConnectionStringBuilder().ContainsKey("Invalid"));
 
     [Fact]
-    public void Remove_returns_false_when_not_exists()
-        => Assert.False(new SqliteConnectionStringBuilder().Remove("Invalid"));
+    public void Remove_returns_false_when_not_exists() =>
+        Assert.False(new SqliteConnectionStringBuilder().Remove("Invalid"));
 
     [Fact]
     public void Remove_resets_option()
@@ -305,12 +318,12 @@ public class SqliteConnectionStringBuilderTest
     }
 
     [Fact]
-    public void ShouldSerialize_returns_false_when_not_exists()
-        => Assert.False(new SqliteConnectionStringBuilder().ShouldSerialize("Invalid"));
+    public void ShouldSerialize_returns_false_when_not_exists() =>
+        Assert.False(new SqliteConnectionStringBuilder().ShouldSerialize("Invalid"));
 
     [Fact]
-    public void ShouldSerialize_returns_false_when_unset()
-        => Assert.False(new SqliteConnectionStringBuilder().ShouldSerialize("Data Source"));
+    public void ShouldSerialize_returns_false_when_unset() =>
+        Assert.False(new SqliteConnectionStringBuilder().ShouldSerialize("Data Source"));
 
     [Fact]
     public void ShouldSerialize_returns_true_when_set()
@@ -351,12 +364,13 @@ public class SqliteConnectionStringBuilderTest
             Password = "test",
             ForeignKeys = true,
             RecursiveTriggers = true,
-            DefaultTimeout = 1
+            DefaultTimeout = 1,
         };
 
         Assert.Equal(
             "Data Source=test.db;Mode=Memory;Cache=Shared;Password=test;Foreign Keys=True;Recursive Triggers=True;Default Timeout=1",
-            builder.ToString());
+            builder.ToString()
+        );
     }
 
     [Fact]

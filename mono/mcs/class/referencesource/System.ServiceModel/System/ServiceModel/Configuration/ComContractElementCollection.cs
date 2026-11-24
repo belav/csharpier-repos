@@ -8,12 +8,15 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Globalization;
 
-    [ConfigurationCollection(typeof(ComContractElement), AddItemName = ConfigurationStrings.ComContract)]
-    public sealed class ComContractElementCollection : ServiceModelEnhancedConfigurationElementCollection<ComContractElement>
+    [ConfigurationCollection(
+        typeof(ComContractElement),
+        AddItemName = ConfigurationStrings.ComContract
+    )]
+    public sealed class ComContractElementCollection
+        : ServiceModelEnhancedConfigurationElementCollection<ComContractElement>
     {
         public ComContractElementCollection()
-            : base(ConfigurationStrings.ComContract)
-        { }
+            : base(ConfigurationStrings.ComContract) { }
 
         protected override bool ThrowOnDuplicate
         {
@@ -32,5 +35,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-

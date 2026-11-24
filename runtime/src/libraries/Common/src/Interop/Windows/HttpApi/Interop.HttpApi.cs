@@ -14,16 +14,27 @@ internal static partial class Interop
 {
     internal static partial class HttpApi
     {
-        internal static readonly HTTPAPI_VERSION s_version = new HTTPAPI_VERSION() { HttpApiMajorVersion = 2, HttpApiMinorVersion = 0 };
+        internal static readonly HTTPAPI_VERSION s_version = new HTTPAPI_VERSION()
+        {
+            HttpApiMajorVersion = 2,
+            HttpApiMinorVersion = 0,
+        };
         internal static readonly bool s_supported = InitHttpApi(s_version);
         internal static IPEndPoint s_any = new IPEndPoint(IPAddress.Any, IPEndPoint.MinPort);
-        internal static IPEndPoint s_ipv6Any = new IPEndPoint(IPAddress.IPv6Any, IPEndPoint.MinPort);
+        internal static IPEndPoint s_ipv6Any = new IPEndPoint(
+            IPAddress.IPv6Any,
+            IPEndPoint.MinPort
+        );
         internal const int IPv4AddressSize = 16;
         internal const int IPv6AddressSize = 28;
 
         private static bool InitHttpApi(HTTPAPI_VERSION version)
         {
-            uint statusCode = HttpInitialize(version, (uint)HTTP_FLAGS.HTTP_INITIALIZE_SERVER, IntPtr.Zero);
+            uint statusCode = HttpInitialize(
+                version,
+                (uint)HTTP_FLAGS.HTTP_INITIALIZE_SERVER,
+                IntPtr.Zero
+            );
             return statusCode == ERROR_SUCCESS;
         }
 
@@ -370,52 +381,50 @@ internal static partial class Interop
                 return s_strings[position];
             }
 
-            private static readonly string[] s_strings = {
-                    "Cache-Control",
-                    "Connection",
-                    "Date",
-                    "Keep-Alive",
-                    "Pragma",
-                    "Trailer",
-                    "Transfer-Encoding",
-                    "Upgrade",
-                    "Via",
-                    "Warning",
-
-                    "Allow",
-                    "Content-Length",
-                    "Content-Type",
-                    "Content-Encoding",
-                    "Content-Language",
-                    "Content-Location",
-                    "Content-MD5",
-                    "Content-Range",
-                    "Expires",
-                    "Last-Modified",
-
-                    "Accept",
-                    "Accept-Charset",
-                    "Accept-Encoding",
-                    "Accept-Language",
-                    "Authorization",
-                    "Cookie",
-                    "Expect",
-                    "From",
-                    "Host",
-                    "If-Match",
-
-                    "If-Modified-Since",
-                    "If-None-Match",
-                    "If-Range",
-                    "If-Unmodified-Since",
-                    "Max-Forwards",
-                    "Proxy-Authorization",
-                    "Referer",
-                    "Range",
-                    "Te",
-                    "Translate",
-                    "User-Agent",
-                };
+            private static readonly string[] s_strings =
+            {
+                "Cache-Control",
+                "Connection",
+                "Date",
+                "Keep-Alive",
+                "Pragma",
+                "Trailer",
+                "Transfer-Encoding",
+                "Upgrade",
+                "Via",
+                "Warning",
+                "Allow",
+                "Content-Length",
+                "Content-Type",
+                "Content-Encoding",
+                "Content-Language",
+                "Content-Location",
+                "Content-MD5",
+                "Content-Range",
+                "Expires",
+                "Last-Modified",
+                "Accept",
+                "Accept-Charset",
+                "Accept-Encoding",
+                "Accept-Language",
+                "Authorization",
+                "Cookie",
+                "Expect",
+                "From",
+                "Host",
+                "If-Match",
+                "If-Modified-Since",
+                "If-None-Match",
+                "If-Range",
+                "If-Unmodified-Since",
+                "Max-Forwards",
+                "Proxy-Authorization",
+                "Referer",
+                "Range",
+                "Te",
+                "Translate",
+                "User-Agent",
+            };
         }
 
         internal enum HTTP_TIMEOUT_TYPE
@@ -454,52 +463,140 @@ internal static partial class Interop
             internal IntPtr RequestQueueHandle;
         }
 
+        [LibraryImport(Libraries.HttpApi, SetLastError = true)]
+        internal static partial uint HttpInitialize(
+            HTTPAPI_VERSION version,
+            uint flags,
+            IntPtr pReserved
+        );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static partial uint HttpInitialize(HTTPAPI_VERSION version, uint flags, IntPtr pReserved);
+        internal static unsafe partial uint HttpSetUrlGroupProperty(
+            ulong urlGroupId,
+            HTTP_SERVER_PROPERTY serverProperty,
+            void* pPropertyInfo,
+            uint propertyInfoLength
+        );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static unsafe partial uint HttpSetUrlGroupProperty(ulong urlGroupId, HTTP_SERVER_PROPERTY serverProperty, void* pPropertyInfo, uint propertyInfoLength);
+        internal static unsafe partial uint HttpCreateServerSession(
+            HTTPAPI_VERSION version,
+            ulong* serverSessionId,
+            uint reserved
+        );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static unsafe partial uint HttpCreateServerSession(HTTPAPI_VERSION version, ulong* serverSessionId, uint reserved);
-
-        [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static unsafe partial uint HttpCreateUrlGroup(ulong serverSessionId, ulong* urlGroupId, uint reserved);
+        internal static unsafe partial uint HttpCreateUrlGroup(
+            ulong serverSessionId,
+            ulong* urlGroupId,
+            uint reserved
+        );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
         internal static partial uint HttpCloseUrlGroup(ulong urlGroupId);
 
-        [LibraryImport(Libraries.HttpApi,  SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
-        internal static unsafe partial uint HttpCreateRequestQueue(HTTPAPI_VERSION version, string pName,
-            Interop.Kernel32.SECURITY_ATTRIBUTES* pSecurityAttributes, uint flags, out HttpRequestQueueV2Handle pReqQueueHandle);
+        [LibraryImport(
+            Libraries.HttpApi,
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
+        internal static unsafe partial uint HttpCreateRequestQueue(
+            HTTPAPI_VERSION version,
+            string pName,
+            Interop.Kernel32.SECURITY_ATTRIBUTES* pSecurityAttributes,
+            uint flags,
+            out HttpRequestQueueV2Handle pReqQueueHandle
+        );
 
-        [LibraryImport(Libraries.HttpApi,  SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial uint HttpAddUrlToUrlGroup(ulong urlGroupId, string pFullyQualifiedUrl, ulong context, uint pReserved);
+        [LibraryImport(
+            Libraries.HttpApi,
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
+        internal static partial uint HttpAddUrlToUrlGroup(
+            ulong urlGroupId,
+            string pFullyQualifiedUrl,
+            ulong context,
+            uint pReserved
+        );
 
-        [LibraryImport(Libraries.HttpApi,  SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial uint HttpRemoveUrlFromUrlGroup(ulong urlGroupId, string pFullyQualifiedUrl, uint flags);
+        [LibraryImport(
+            Libraries.HttpApi,
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
+        internal static partial uint HttpRemoveUrlFromUrlGroup(
+            ulong urlGroupId,
+            string pFullyQualifiedUrl,
+            uint flags
+        );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static unsafe partial uint HttpReceiveHttpRequest(SafeHandle requestQueueHandle, ulong requestId, uint flags, HTTP_REQUEST* pRequestBuffer, uint requestBufferLength, uint* pBytesReturned, NativeOverlapped* pOverlapped);
+        internal static unsafe partial uint HttpReceiveHttpRequest(
+            SafeHandle requestQueueHandle,
+            ulong requestId,
+            uint flags,
+            HTTP_REQUEST* pRequestBuffer,
+            uint requestBufferLength,
+            uint* pBytesReturned,
+            NativeOverlapped* pOverlapped
+        );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static unsafe partial uint HttpSendHttpResponse(SafeHandle requestQueueHandle, ulong requestId, uint flags, HTTP_RESPONSE* pHttpResponse, void* pCachePolicy, uint* pBytesSent, void* pRequestBuffer, uint requestBufferLength, NativeOverlapped* pOverlapped, void* pLogData);
+        internal static unsafe partial uint HttpSendHttpResponse(
+            SafeHandle requestQueueHandle,
+            ulong requestId,
+            uint flags,
+            HTTP_RESPONSE* pHttpResponse,
+            void* pCachePolicy,
+            uint* pBytesSent,
+            void* pRequestBuffer,
+            uint requestBufferLength,
+            NativeOverlapped* pOverlapped,
+            void* pLogData
+        );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static unsafe partial uint HttpWaitForDisconnect(SafeHandle requestQueueHandle, ulong connectionId, NativeOverlapped* pOverlapped);
+        internal static unsafe partial uint HttpWaitForDisconnect(
+            SafeHandle requestQueueHandle,
+            ulong connectionId,
+            NativeOverlapped* pOverlapped
+        );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static unsafe partial uint HttpReceiveRequestEntityBody(SafeHandle requestQueueHandle, ulong requestId, uint flags, void* pEntityBuffer, uint entityBufferLength, out uint bytesReturned, NativeOverlapped* pOverlapped);
+        internal static unsafe partial uint HttpReceiveRequestEntityBody(
+            SafeHandle requestQueueHandle,
+            ulong requestId,
+            uint flags,
+            void* pEntityBuffer,
+            uint entityBufferLength,
+            out uint bytesReturned,
+            NativeOverlapped* pOverlapped
+        );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static unsafe partial uint HttpSendResponseEntityBody(SafeHandle requestQueueHandle, ulong requestId, uint flags, ushort entityChunkCount, HTTP_DATA_CHUNK* pEntityChunks, uint* pBytesSent, void* pRequestBuffer, uint requestBufferLength, NativeOverlapped* pOverlapped, void* pLogData);
+        internal static unsafe partial uint HttpSendResponseEntityBody(
+            SafeHandle requestQueueHandle,
+            ulong requestId,
+            uint flags,
+            ushort entityChunkCount,
+            HTTP_DATA_CHUNK* pEntityChunks,
+            uint* pBytesSent,
+            void* pRequestBuffer,
+            uint requestBufferLength,
+            NativeOverlapped* pOverlapped,
+            void* pLogData
+        );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
         internal static partial uint HttpCloseRequestQueue(IntPtr pReqQueueHandle);
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static partial uint HttpCancelHttpRequest(SafeHandle requestQueueHandle, ulong requestId, IntPtr pOverlapped);
+        internal static partial uint HttpCancelHttpRequest(
+            SafeHandle requestQueueHandle,
+            ulong requestId,
+            IntPtr pOverlapped
+        );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
         internal static partial uint HttpCloseServerSession(ulong serverSessionId);
@@ -531,10 +628,26 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static unsafe partial uint HttpReceiveClientCertificate(SafeHandle requestQueueHandle, ulong connectionId, uint flags, HTTP_SSL_CLIENT_CERT_INFO* pSslClientCertInfo, uint sslClientCertInfoSize, uint* pBytesReceived, NativeOverlapped* pOverlapped);
+        internal static unsafe partial uint HttpReceiveClientCertificate(
+            SafeHandle requestQueueHandle,
+            ulong connectionId,
+            uint flags,
+            HTTP_SSL_CLIENT_CERT_INFO* pSslClientCertInfo,
+            uint sslClientCertInfoSize,
+            uint* pBytesReceived,
+            NativeOverlapped* pOverlapped
+        );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static unsafe partial uint HttpReceiveClientCertificate(SafeHandle requestQueueHandle, ulong connectionId, uint flags, byte* pSslClientCertInfo, uint sslClientCertInfoSize, uint* pBytesReceived, NativeOverlapped* pOverlapped);
+        internal static unsafe partial uint HttpReceiveClientCertificate(
+            SafeHandle requestQueueHandle,
+            ulong connectionId,
+            uint flags,
+            byte* pSslClientCertInfo,
+            uint sslClientCertInfoSize,
+            uint* pBytesReceived,
+            NativeOverlapped* pOverlapped
+        );
 
         internal static readonly string?[] HttpVerbs = new string?[]
         {
@@ -564,46 +677,44 @@ internal static partial class Interop
         {
             internal enum Enum
             {
-                HttpHeaderCacheControl = 0,    // general-header [section 4.5]
-                HttpHeaderConnection = 1,    // general-header [section 4.5]
-                HttpHeaderDate = 2,    // general-header [section 4.5]
-                HttpHeaderKeepAlive = 3,    // general-header [not in rfc]
-                HttpHeaderPragma = 4,    // general-header [section 4.5]
-                HttpHeaderTrailer = 5,    // general-header [section 4.5]
-                HttpHeaderTransferEncoding = 6,    // general-header [section 4.5]
-                HttpHeaderUpgrade = 7,    // general-header [section 4.5]
-                HttpHeaderVia = 8,    // general-header [section 4.5]
-                HttpHeaderWarning = 9,    // general-header [section 4.5]
+                HttpHeaderCacheControl = 0, // general-header [section 4.5]
+                HttpHeaderConnection = 1, // general-header [section 4.5]
+                HttpHeaderDate = 2, // general-header [section 4.5]
+                HttpHeaderKeepAlive = 3, // general-header [not in rfc]
+                HttpHeaderPragma = 4, // general-header [section 4.5]
+                HttpHeaderTrailer = 5, // general-header [section 4.5]
+                HttpHeaderTransferEncoding = 6, // general-header [section 4.5]
+                HttpHeaderUpgrade = 7, // general-header [section 4.5]
+                HttpHeaderVia = 8, // general-header [section 4.5]
+                HttpHeaderWarning = 9, // general-header [section 4.5]
 
-                HttpHeaderAllow = 10,   // entity-header  [section 7.1]
-                HttpHeaderContentLength = 11,   // entity-header  [section 7.1]
-                HttpHeaderContentType = 12,   // entity-header  [section 7.1]
-                HttpHeaderContentEncoding = 13,   // entity-header  [section 7.1]
-                HttpHeaderContentLanguage = 14,   // entity-header  [section 7.1]
-                HttpHeaderContentLocation = 15,   // entity-header  [section 7.1]
-                HttpHeaderContentMd5 = 16,   // entity-header  [section 7.1]
-                HttpHeaderContentRange = 17,   // entity-header  [section 7.1]
-                HttpHeaderExpires = 18,   // entity-header  [section 7.1]
-                HttpHeaderLastModified = 19,   // entity-header  [section 7.1]
-
+                HttpHeaderAllow = 10, // entity-header  [section 7.1]
+                HttpHeaderContentLength = 11, // entity-header  [section 7.1]
+                HttpHeaderContentType = 12, // entity-header  [section 7.1]
+                HttpHeaderContentEncoding = 13, // entity-header  [section 7.1]
+                HttpHeaderContentLanguage = 14, // entity-header  [section 7.1]
+                HttpHeaderContentLocation = 15, // entity-header  [section 7.1]
+                HttpHeaderContentMd5 = 16, // entity-header  [section 7.1]
+                HttpHeaderContentRange = 17, // entity-header  [section 7.1]
+                HttpHeaderExpires = 18, // entity-header  [section 7.1]
+                HttpHeaderLastModified = 19, // entity-header  [section 7.1]
 
                 // Response Headers
 
-                HttpHeaderAcceptRanges = 20,   // response-header [section 6.2]
-                HttpHeaderAge = 21,   // response-header [section 6.2]
-                HttpHeaderEtag = 22,   // response-header [section 6.2]
-                HttpHeaderLocation = 23,   // response-header [section 6.2]
-                HttpHeaderProxyAuthenticate = 24,   // response-header [section 6.2]
-                HttpHeaderRetryAfter = 25,   // response-header [section 6.2]
-                HttpHeaderServer = 26,   // response-header [section 6.2]
-                HttpHeaderSetCookie = 27,   // response-header [not in rfc]
-                HttpHeaderVary = 28,   // response-header [section 6.2]
-                HttpHeaderWwwAuthenticate = 29,   // response-header [section 6.2]
+                HttpHeaderAcceptRanges = 20, // response-header [section 6.2]
+                HttpHeaderAge = 21, // response-header [section 6.2]
+                HttpHeaderEtag = 22, // response-header [section 6.2]
+                HttpHeaderLocation = 23, // response-header [section 6.2]
+                HttpHeaderProxyAuthenticate = 24, // response-header [section 6.2]
+                HttpHeaderRetryAfter = 25, // response-header [section 6.2]
+                HttpHeaderServer = 26, // response-header [section 6.2]
+                HttpHeaderSetCookie = 27, // response-header [not in rfc]
+                HttpHeaderVary = 28, // response-header [section 6.2]
+                HttpHeaderWwwAuthenticate = 29, // response-header [section 6.2]
 
                 HttpHeaderResponseMaximum = 30,
 
-
-                HttpHeaderMaximum = 41
+                HttpHeaderMaximum = 41,
             }
 
             private static readonly string[] s_strings =
@@ -618,7 +729,6 @@ internal static partial class Interop
                 "Upgrade",
                 "Via",
                 "Warning",
-
                 "Allow",
                 "Content-Length",
                 "Content-Type",
@@ -629,7 +739,6 @@ internal static partial class Interop
                 "Content-Range",
                 "Expires",
                 "Last-Modified",
-
                 "Accept-Ranges",
                 "Age",
                 "ETag",
@@ -661,7 +770,11 @@ internal static partial class Interop
             }
         }
 
-        private static unsafe string? GetKnownHeader(HTTP_REQUEST* request, long fixup, int headerIndex)
+        private static unsafe string? GetKnownHeader(
+            HTTP_REQUEST* request,
+            long fixup,
+            int headerIndex
+        )
         {
             string? header = null;
 
@@ -669,15 +782,25 @@ internal static partial class Interop
 
             if (NetEventSource.Log.IsEnabled())
             {
-                NetEventSource.Info(null, $"HttpApi::GetKnownHeader() pKnownHeader:0x{(IntPtr)pKnownHeader}");
-                NetEventSource.Info(null, $"HttpApi::GetKnownHeader() pRawValue:0x{(IntPtr)pKnownHeader->pRawValue} RawValueLength:{pKnownHeader->RawValueLength}");
+                NetEventSource.Info(
+                    null,
+                    $"HttpApi::GetKnownHeader() pKnownHeader:0x{(IntPtr)pKnownHeader}"
+                );
+                NetEventSource.Info(
+                    null,
+                    $"HttpApi::GetKnownHeader() pRawValue:0x{(IntPtr)pKnownHeader->pRawValue} RawValueLength:{pKnownHeader->RawValueLength}"
+                );
             }
 
             // For known headers, when header value is empty, RawValueLength will be 0 and
             // pRawValue will point to empty string
             if (pKnownHeader->pRawValue != null)
             {
-                header = new string(pKnownHeader->pRawValue + fixup, 0, pKnownHeader->RawValueLength);
+                header = new string(
+                    pKnownHeader->pRawValue + fixup,
+                    0,
+                    pKnownHeader->RawValueLength
+                );
             }
 
             return header;
@@ -692,7 +815,10 @@ internal static partial class Interop
         {
             string? verb = null;
 
-            if ((int)request->Verb > (int)HTTP_VERB.HttpVerbUnknown && (int)request->Verb < (int)HTTP_VERB.HttpVerbMaximum)
+            if (
+                (int)request->Verb > (int)HTTP_VERB.HttpVerbUnknown
+                && (int)request->Verb < (int)HTTP_VERB.HttpVerbMaximum
+            )
             {
                 verb = HttpVerbs[(int)request->Verb];
             }
@@ -711,12 +837,18 @@ internal static partial class Interop
 
         internal static unsafe string? GetVerb(IntPtr memoryBlob, IntPtr originalAddress)
         {
-            return GetVerb((HTTP_REQUEST*)memoryBlob.ToPointer(), (byte*)memoryBlob - (byte*)originalAddress);
+            return GetVerb(
+                (HTTP_REQUEST*)memoryBlob.ToPointer(),
+                (byte*)memoryBlob - (byte*)originalAddress
+            );
         }
 
         // Server API
 
-        internal static unsafe WebHeaderCollection GetHeaders(IntPtr memoryBlob, IntPtr originalAddress)
+        internal static unsafe WebHeaderCollection GetHeaders(
+            IntPtr memoryBlob,
+            IntPtr originalAddress
+        )
         {
             // Return value.
             WebHeaderCollection headerCollection = new WebHeaderCollection();
@@ -728,18 +860,28 @@ internal static partial class Interop
             // unknown headers
             if (request->Headers.UnknownHeaderCount != 0)
             {
-                HTTP_UNKNOWN_HEADER* pUnknownHeader = (HTTP_UNKNOWN_HEADER*)(fixup + (byte*)request->Headers.pUnknownHeaders);
+                HTTP_UNKNOWN_HEADER* pUnknownHeader = (HTTP_UNKNOWN_HEADER*)(
+                    fixup + (byte*)request->Headers.pUnknownHeaders
+                );
                 for (index = 0; index < request->Headers.UnknownHeaderCount; index++)
                 {
                     // For unknown headers, when header value is empty, RawValueLength will be 0 and
                     // pRawValue will be null.
                     if (pUnknownHeader->pName != null && pUnknownHeader->NameLength > 0)
                     {
-                        string headerName = new string(pUnknownHeader->pName + fixup, 0, pUnknownHeader->NameLength);
+                        string headerName = new string(
+                            pUnknownHeader->pName + fixup,
+                            0,
+                            pUnknownHeader->NameLength
+                        );
                         string headerValue;
                         if (pUnknownHeader->pRawValue != null && pUnknownHeader->RawValueLength > 0)
                         {
-                            headerValue = new string(pUnknownHeader->pRawValue + fixup, 0, pUnknownHeader->RawValueLength);
+                            headerValue = new string(
+                                pUnknownHeader->pRawValue + fixup,
+                                0,
+                                pUnknownHeader->RawValueLength
+                            );
                         }
                         else
                         {
@@ -759,7 +901,11 @@ internal static partial class Interop
                 // pRawValue will point to empty string ("\0")
                 if (pKnownHeader->pRawValue != null)
                 {
-                    string headerValue = new string(pKnownHeader->pRawValue + fixup, 0, pKnownHeader->RawValueLength);
+                    string headerValue = new string(
+                        pKnownHeader->pRawValue + fixup,
+                        0,
+                        pKnownHeader->RawValueLength
+                    );
                     headerCollection.Add(HTTP_REQUEST_HEADER_ID.ToString(index), headerValue);
                 }
                 pKnownHeader++;
@@ -768,7 +914,15 @@ internal static partial class Interop
             return headerCollection;
         }
 
-        internal static unsafe uint GetChunks(IntPtr memoryBlob, IntPtr originalAddress, ref int dataChunkIndex, ref uint dataChunkOffset, byte[] buffer, int offset, int size)
+        internal static unsafe uint GetChunks(
+            IntPtr memoryBlob,
+            IntPtr originalAddress,
+            ref int dataChunkIndex,
+            ref uint dataChunkOffset,
+            byte[] buffer,
+            int offset,
+            int size
+        )
         {
             // Return value.
             uint dataRead = 0;
@@ -776,9 +930,15 @@ internal static partial class Interop
             HTTP_REQUEST* request = (HTTP_REQUEST*)pMemoryBlob;
             long fixup = pMemoryBlob - (byte*)originalAddress;
 
-            if (request->EntityChunkCount > 0 && dataChunkIndex < request->EntityChunkCount && dataChunkIndex != -1)
+            if (
+                request->EntityChunkCount > 0
+                && dataChunkIndex < request->EntityChunkCount
+                && dataChunkIndex != -1
+            )
             {
-                HTTP_DATA_CHUNK* pDataChunk = (HTTP_DATA_CHUNK*)(fixup + (byte*)&request->pEntityChunks[dataChunkIndex]);
+                HTTP_DATA_CHUNK* pDataChunk = (HTTP_DATA_CHUNK*)(
+                    fixup + (byte*)&request->pEntityChunks[dataChunkIndex]
+                );
 
                 fixed (byte* pReadBuffer = buffer)
                 {
@@ -826,7 +986,10 @@ internal static partial class Interop
             HTTP_VERB verb = HTTP_VERB.HttpVerbUnknown;
 
             HTTP_REQUEST* request = (HTTP_REQUEST*)memoryBlob.ToPointer();
-            if ((int)request->Verb > (int)HTTP_VERB.HttpVerbUnparsed && (int)request->Verb < (int)HTTP_VERB.HttpVerbMaximum)
+            if (
+                (int)request->Verb > (int)HTTP_VERB.HttpVerbUnparsed
+                && (int)request->Verb < (int)HTTP_VERB.HttpVerbMaximum
+            )
             {
                 verb = request->Verb;
             }
@@ -834,37 +997,71 @@ internal static partial class Interop
             return verb;
         }
 
-        internal static unsafe IPEndPoint? GetRemoteEndPoint(IntPtr memoryBlob, IntPtr originalAddress)
+        internal static unsafe IPEndPoint? GetRemoteEndPoint(
+            IntPtr memoryBlob,
+            IntPtr originalAddress
+        )
         {
-            SocketAddress? v4address = new SocketAddress(AddressFamily.InterNetwork, IPv4AddressSize);
-            SocketAddress? v6address = new SocketAddress(AddressFamily.InterNetworkV6, IPv6AddressSize);
+            SocketAddress? v4address = new SocketAddress(
+                AddressFamily.InterNetwork,
+                IPv4AddressSize
+            );
+            SocketAddress? v6address = new SocketAddress(
+                AddressFamily.InterNetworkV6,
+                IPv6AddressSize
+            );
 
             byte* pMemoryBlob = (byte*)memoryBlob;
             HTTP_REQUEST* request = (HTTP_REQUEST*)pMemoryBlob;
-            IntPtr address = request->Address.pRemoteAddress != null ? (IntPtr)(pMemoryBlob - (byte*)originalAddress + (byte*)request->Address.pRemoteAddress) : IntPtr.Zero;
+            IntPtr address =
+                request->Address.pRemoteAddress != null
+                    ? (IntPtr)(
+                        pMemoryBlob
+                        - (byte*)originalAddress
+                        + (byte*)request->Address.pRemoteAddress
+                    )
+                    : IntPtr.Zero;
             CopyOutAddress(address, ref v4address, ref v6address);
 
             IPEndPoint? endpoint = null;
             if (v4address != null)
             {
-                endpoint = new IPEndPoint(IPAddress.Any, IPEndPoint.MinPort).Create(v4address) as IPEndPoint;
+                endpoint =
+                    new IPEndPoint(IPAddress.Any, IPEndPoint.MinPort).Create(v4address)
+                    as IPEndPoint;
             }
             else if (v6address != null)
             {
-                endpoint = new IPEndPoint(IPAddress.IPv6Any, IPEndPoint.MinPort).Create(v6address) as IPEndPoint;
+                endpoint =
+                    new IPEndPoint(IPAddress.IPv6Any, IPEndPoint.MinPort).Create(v6address)
+                    as IPEndPoint;
             }
 
             return endpoint;
         }
 
-        internal static unsafe IPEndPoint? GetLocalEndPoint(IntPtr memoryBlob, IntPtr originalAddress)
+        internal static unsafe IPEndPoint? GetLocalEndPoint(
+            IntPtr memoryBlob,
+            IntPtr originalAddress
+        )
         {
-            SocketAddress? v4address = new SocketAddress(AddressFamily.InterNetwork, IPv4AddressSize);
-            SocketAddress? v6address = new SocketAddress(AddressFamily.InterNetworkV6, IPv6AddressSize);
+            SocketAddress? v4address = new SocketAddress(
+                AddressFamily.InterNetwork,
+                IPv4AddressSize
+            );
+            SocketAddress? v6address = new SocketAddress(
+                AddressFamily.InterNetworkV6,
+                IPv6AddressSize
+            );
 
             byte* pMemoryBlob = (byte*)memoryBlob;
             HTTP_REQUEST* request = (HTTP_REQUEST*)pMemoryBlob;
-            IntPtr address = request->Address.pLocalAddress != null ? (IntPtr)(pMemoryBlob - (byte*)originalAddress + (byte*)request->Address.pLocalAddress) : IntPtr.Zero;
+            IntPtr address =
+                request->Address.pLocalAddress != null
+                    ? (IntPtr)(
+                        pMemoryBlob - (byte*)originalAddress + (byte*)request->Address.pLocalAddress
+                    )
+                    : IntPtr.Zero;
             CopyOutAddress(address, ref v4address, ref v6address);
 
             IPEndPoint? endpoint = null;
@@ -880,7 +1077,11 @@ internal static partial class Interop
             return endpoint;
         }
 
-        private static unsafe void CopyOutAddress(IntPtr address, ref SocketAddress? v4address, ref SocketAddress? v6address)
+        private static unsafe void CopyOutAddress(
+            IntPtr address,
+            ref SocketAddress? v4address,
+            ref SocketAddress? v6address
+        )
         {
             if (address != IntPtr.Zero)
             {

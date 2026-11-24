@@ -40,7 +40,7 @@ namespace hello_cascadedcatch_general_cs
 
         static int i;
 
-        static public void inTry()
+        public static void inTry()
         {
             Console.WriteLine("in Try");
             i++;
@@ -48,27 +48,28 @@ namespace hello_cascadedcatch_general_cs
                 throw new Exception();
         }
 
-        static public void inCatch()
+        public static void inCatch()
         {
             Console.WriteLine("in Catch");
         }
 
-        static public void inFinally()
+        public static void inFinally()
         {
             Console.WriteLine("in Finally");
         }
 
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
-            string[] args = new string[] {};
+            string[] args = new string[] { };
 
             //Start recording
             testLog.StartRecording();
 
             i = 0;
             L1:
-            if (i > 0) goto L3;
+            if (i > 0)
+                goto L3;
             try
             {
                 inTry();
@@ -86,7 +87,8 @@ namespace hello_cascadedcatch_general_cs
                         L5:
                         Console.WriteLine("L5");
                         inCatch();
-                        if (i == 5) goto L1;
+                        if (i == 5)
+                            goto L1;
                         try
                         { // catch System
                             inTry();
@@ -94,11 +96,14 @@ namespace hello_cascadedcatch_general_cs
                         catch (Exception e1)
                         {
                             inCatch();
-                            if (i == 0) goto L1;
-                            if (i == 1) goto L2;
+                            if (i == 0)
+                                goto L1;
+                            if (i == 1)
+                                goto L2;
                             L4:
                             Console.WriteLine("L4");
-                            if (i == 5) goto L5;
+                            if (i == 5)
+                                goto L5;
                             try
                             {
                                 inTry();
@@ -106,9 +111,12 @@ namespace hello_cascadedcatch_general_cs
                             catch (Exception e2)
                             {
                                 inCatch();
-                                if (i == 0) goto L3;
-                                if (i == 1) goto L2;
-                                if (i > 1) goto L4;
+                                if (i == 0)
+                                    goto L3;
+                                if (i == 1)
+                                    goto L2;
+                                if (i > 1)
+                                    goto L4;
                                 Console.WriteLine("Unreached\n");
                                 try
                                 {
@@ -129,10 +137,14 @@ namespace hello_cascadedcatch_general_cs
                                     Console.WriteLine("Unreached catch\n");
                                     switch (i)
                                     {
-                                        case 0: goto L1;
-                                        case 3: goto L2;
-                                        case 4: goto L4;
-                                        default: break;
+                                        case 0:
+                                            goto L1;
+                                        case 3:
+                                            goto L2;
+                                        case 4:
+                                            goto L4;
+                                        default:
+                                            break;
                                     }
                                     goto L5;
                                 }
@@ -158,4 +170,3 @@ namespace hello_cascadedcatch_general_cs
         } // Main
     } // class
 } // namespace
-

@@ -4,20 +4,34 @@
 
 namespace System
 {
-	public class Object {}
-    public struct Byte {}
+    public class Object { }
+
+    public struct Byte { }
+
     public struct Int16 { }
+
     public struct Int32 { }
+
     public struct Int64 { }
+
     public struct Single { }
+
     public struct Double { }
+
     public struct Char { }
+
     public struct Boolean { }
+
     public struct SByte { }
+
     public struct UInt16 { }
+
     public struct UInt32 { }
+
     public struct UInt64 { }
+
     public struct IntPtr { }
+
     public struct UIntPtr { }
 
     // LEAVE THIS CLASS INTACT
@@ -26,9 +40,9 @@ namespace System
     //  - IS MISSING THE CHARS PROPERTY
     //  - HAS A SETTER FOR THE ARRAY.LENGTH PROPERTY
 
-    public class String {
-
-   public static bool op_Equality(String a, String b)
+    public class String
+    {
+        public static bool op_Equality(String a, String b)
         {
             if ((Object)a == (Object)b)
             {
@@ -40,24 +54,31 @@ namespace System
                 return false;
             }
 
-                return true;
+            return true;
         }
+    }
 
+    public class Delegate { }
 
+    public class MulticastDelegate { }
 
-}
-    public class Delegate {}
-    public class MulticastDelegate {}
-    public class Array {
+    public class Array
+    {
         public int Length { get; set; }
     }
-    public class Exception {}
-    public class Type {}
-    public class ValueType {}
-    public class Enum {}
+
+    public class Exception { }
+
+    public class Type { }
+
+    public class ValueType { }
+
+    public class Enum { }
+
     public struct Void { }
 
     public struct RuntimeTypeHandle { }
+
     public struct RuntimeFieldHandle { }
 
     public interface IDisposable { }
@@ -69,6 +90,7 @@ namespace System
     public sealed class AttributeUsageAttribute : Attribute
     {
         public AttributeUsageAttribute(AttributeTargets validOn) { }
+
         public bool AllowMultiple { get; set; }
         public bool Inherited { get; set; }
         public AttributeTargets ValidOn { get; set; }
@@ -94,15 +116,15 @@ namespace System
         Parameter = 0x800,
         Property = 0x80,
         ReturnValue = 0x2000,
-        Struct = 8
+        Struct = 8,
     }
-
 }
 
 namespace System.Collections
 {
-    public interface IEnumerable {}
-    public interface IEnumerator { }    
+    public interface IEnumerable { }
+
+    public interface IEnumerator { }
 }
 
 namespace System.Runtime.InteropServices
@@ -114,17 +136,14 @@ namespace System.Runtime.InteropServices
 namespace System.Reflection
 {
     [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Struct | AttributeTargets.Class)]
-    public class DefaultMemberAttribute : Attribute {}
+    public class DefaultMemberAttribute : Attribute { }
 }
-
 
 // This shouldn't be necessary, remove when bug #15911 is fixed.
 // Right now we can't define delegates without these types defined in corlib.
 namespace System
 {
-    public interface IAsyncResult
-    {
-    }
+    public interface IAsyncResult { }
 
     public delegate void AsyncCallback(IAsyncResult ar);
 }

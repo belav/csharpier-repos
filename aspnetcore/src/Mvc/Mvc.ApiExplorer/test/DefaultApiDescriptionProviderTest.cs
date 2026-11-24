@@ -1828,16 +1828,14 @@ public class DefaultApiDescriptionProviderTest
         Assert.Same(BindingSource.ModelBinding, quantity.Source);
         Assert.Equal(typeof(int), quantity.Type);
 
-        var productId = Assert.Single(
-            description.ParameterDescriptions,
-            p => p.Name == "Product.Id"
+        var productId = Assert.Single(description.ParameterDescriptions, p =>
+            p.Name == "Product.Id"
         );
         Assert.Same(BindingSource.ModelBinding, productId.Source);
         Assert.Equal(typeof(int), productId.Type);
 
-        var price = Assert.Single(
-            description.ParameterDescriptions,
-            p => p.Name == "Product.Price"
+        var price = Assert.Single(description.ParameterDescriptions, p =>
+            p.Name == "Product.Price"
         );
         Assert.Same(BindingSource.Query, price.Source);
         Assert.Equal(typeof(decimal), price.Type);
@@ -1866,16 +1864,14 @@ public class DefaultApiDescriptionProviderTest
         Assert.Same(BindingSource.Query, quantity.Source);
         Assert.Equal(typeof(int), quantity.Type);
 
-        var productId = Assert.Single(
-            description.ParameterDescriptions,
-            p => p.Name == "Product.Id"
+        var productId = Assert.Single(description.ParameterDescriptions, p =>
+            p.Name == "Product.Id"
         );
         Assert.Same(BindingSource.Query, productId.Source);
         Assert.Equal(typeof(int), productId.Type);
 
-        var productPrice = Assert.Single(
-            description.ParameterDescriptions,
-            p => p.Name == "Product.Price"
+        var productPrice = Assert.Single(description.ParameterDescriptions, p =>
+            p.Name == "Product.Price"
         );
         Assert.Same(BindingSource.Query, productPrice.Source);
         Assert.Equal(typeof(decimal), productPrice.Type);
@@ -1899,16 +1895,14 @@ public class DefaultApiDescriptionProviderTest
 
         foreach (var parentName in parentNames)
         {
-            var id = Assert.Single(
-                description.ParameterDescriptions,
-                p => p.Name == $"{parentName}.Child.Id"
+            var id = Assert.Single(description.ParameterDescriptions, p =>
+                p.Name == $"{parentName}.Child.Id"
             );
             Assert.Same(BindingSource.Query, id.Source);
             Assert.Equal(typeof(int), id.Type);
 
-            var name = Assert.Single(
-                description.ParameterDescriptions,
-                p => p.Name == $"{parentName}.Child.Name"
+            var name = Assert.Single(description.ParameterDescriptions, p =>
+                p.Name == $"{parentName}.Child.Name"
             );
             Assert.Same(BindingSource.Query, name.Source);
             Assert.Equal(typeof(string), name.Type);
@@ -1936,16 +1930,14 @@ public class DefaultApiDescriptionProviderTest
         {
             foreach (var parentName in parentNames)
             {
-                var id = Assert.Single(
-                    description.ParameterDescriptions,
-                    p => p.Name == $"{groupName}.{parentName}.Child.Id"
+                var id = Assert.Single(description.ParameterDescriptions, p =>
+                    p.Name == $"{groupName}.{parentName}.Child.Id"
                 );
                 Assert.Same(BindingSource.Query, id.Source);
                 Assert.Equal(typeof(int), id.Type);
 
-                var name = Assert.Single(
-                    description.ParameterDescriptions,
-                    p => p.Name == $"{groupName}.{parentName}.Child.Name"
+                var name = Assert.Single(description.ParameterDescriptions, p =>
+                    p.Name == $"{groupName}.{parentName}.Child.Name"
                 );
                 Assert.Same(BindingSource.Query, name.Source);
                 Assert.Equal(typeof(string), name.Type);

@@ -12,56 +12,316 @@ namespace System.Security.AccessControl.Tests
     {
         public static IEnumerable<object[]> DiscretionaryACL_Constructor3()
         {
-            yield return new object[] { false, false, "0:1:1:BA:false:0#0:1:0:BG:false:0#16:1:2:BO:false:0                 ", "0:1:1:BA:false:0#16:1:2:BO:false:0                 ", true };
-            yield return new object[] { false, false, "9:1:1:BA:false:0#0:0:1:BG:false:0#16:1:2:BO:false:0                 ", "0:0:1:BG:false:0#16:1:2:BO:false:0                 ", true };
-            yield return new object[] { true, false, "9:1:1:BA:false:0#0:1:1:BG:false:0#16:1:2:BO:false:0                 ", "9:1:1:BA:false:0#0:1:1:BG:false:0#16:1:2:BO:false:0", true };
-            yield return new object[] { false, false, "7:1:1:BA:false:0                                                    ", "0:1:1:BA:false:0                                   ", true };
-            yield return new object[] { true, false, "7:1:1:BA:false:0                                                    ", "7:1:1:BA:false:0                                   ", true };
-            yield return new object[] { false, false, "0:1:0:BG:false:0#8:1:1:BA:false:0#0:1:1:BO:false:0                  ", "0:1:1:BO:false:0                                   ", true };
-            yield return new object[] { true, false, "0:1:1:BA:false:0#16:1:2:BO:false:0#8:0:1:BG:false:0                 ", "0:1:1:BA:false:0#16:1:2:BO:false:0                 ", true };
-            yield return new object[] { true, false, "4:1:1:BA:false:0                                                    ", "0:1:1:BA:false:0                                   ", true };
-            yield return new object[] { true, false, "192:1:1:BA:false:0                                                  ", "0:1:1:BA:false:0                                   ", true };
-            yield return new object[] { false, false, "0:2:1:BA:false:0#0:1:1:BG:false:0                                   ", "0:1:1:BG:false:0                                   ", true };
-            yield return new object[] { false, false, "0:3:1:BA:false:0#0:1:1:BG:false:0                                   ", "0:1:1:BG:false:0                                   ", true };
-            yield return new object[] { false, false, "0:1:1:BA:false:0#0:0:2:BG:false:0#16:1:3:BO:false:0#0:2:1:AN:false:0", "0:1:1:BA:false:0#0:0:2:BG:false:0#16:1:3:BO:false:0", true };
-            yield return new object[] { false, false, "0:0:1:BA:false:0                                                    ", "0:0:1:BA:false:0                                   ", true };
-            yield return new object[] { false, false, "0:1:3:BO:false:0                                                    ", "0:1:3:BO:false:0                                   ", true };
-            yield return new object[] { false, false, "16:0:2:BG:false:0                                                   ", "16:0:2:BG:false:0                                  ", true };
-            yield return new object[] { false, false, "0:1:3:BO:false:0#0:0:1:BA:false:0                                   ", "0:1:3:BO:false:0#0:0:1:BA:false:0                  ", true };
-            yield return new object[] { false, false, "0:0:1:BA:false:0#0:1:3:BO:false:0                                   ", "0:0:1:BA:false:0#0:1:3:BO:false:0                  ", false };
-            yield return new object[] { false, false, "0:1:3:BO:false:0#16:0:2:BG:false:0                                  ", "0:1:3:BO:false:0#16:0:2:BG:false:0                 ", true };
-            yield return new object[] { false, false, "16:0:2:BG:false:0#0:1:3:BO:false:0                                  ", "16:0:2:BG:false:0#0:1:3:BO:false:0                 ", false };
-            yield return new object[] { false, false, "0:0:1:BA:false:0#16:0:2:BG:false:0                                  ", "0:0:1:BA:false:0#16:0:2:BG:false:0                 ", true };
-            yield return new object[] { false, false, "16:0:2:BG:false:0#0:0:1:BA:false:0                                  ", "16:0:2:BG:false:0#0:0:1:BA:false:0                 ", false };
-            yield return new object[] { false, false, "0:1:3:BO:false:0#0:0:1:BA:false:0#16:0:2:BG:false:0                 ", "0:1:3:BO:false:0#0:0:1:BA:false:0#16:0:2:BG:false:0", true };
-            yield return new object[] { false, false, "16:0:2:BG:false:0#0:0:1:BA:false:0#0:1:3:BO:false:0                 ", "16:0:2:BG:false:0#0:0:1:BA:false:0#0:1:3:BO:false:0", false };
-            yield return new object[] { false, false, "16:0:2:BG:false:0#0:1:3:BO:false:0#0:0:1:BA:false:0                 ", "16:0:2:BG:false:0#0:1:3:BO:false:0#0:0:1:BA:false:0", false };
-            yield return new object[] { false, false, "0:0:1:BA:false:0#16:0:2:BG:false:0#0:1:3:BO:false:0                 ", "0:0:1:BA:false:0#16:0:2:BG:false:0#0:1:3:BO:false:0", false };
-            yield return new object[] { false, false, "0:0:1:BA:false:0#0:1:3:BO:false:0#16:0:2:BG:false:0                 ", "0:0:1:BA:false:0#0:1:3:BO:false:0#16:0:2:BG:false:0", false };
-            yield return new object[] { false, false, "0:1:3:BO:false:0#16:0:2:BG:false:0#0:0:1:BA:false:0                 ", "0:1:3:BO:false:0#16:0:2:BG:false:0#0:0:1:BA:false:0", false };
-            yield return new object[] { false, false, "16:1:2:BG:false:0#16:0:1:BA:false:0                                 ", "16:1:2:BG:false:0#16:0:1:BA:false:0                ", true };
-            yield return new object[] { false, false, "0:1:1:BG:false:0#0:2:1:BA:false:0#0:2:1:BO:false:0                  ", "0:1:1:BG:false:0                                   ", true };
-            yield return new object[] { false, false, "0:0:1:BG:false:0#0:1:1:BA:false:0#16:1:2:BA:false:0                 ", "0:0:1:BG:false:0#0:1:1:BA:false:0#16:1:2:BA:false:0", false };
-            yield return new object[] { false, false, "0:1:1:BA:false:0#0:0:2:BA:false:0#0:0:1:BG:false:0                  ", "0:1:1:BA:false:0#0:0:2:BA:false:0#0:0:1:BG:false:0 ", true };
-            yield return new object[] { false, false, "0:0:1:BG:false:0#0:1:1:BA:false:0#0:1:2:BO:false:0                  ", "0:0:1:BG:false:0#0:1:1:BA:false:0#0:1:2:BO:false:0 ", false };
-            yield return new object[] { false, false, "0:0:1:BG:false:0#0:1:1:BA:false:0#0:1:2:BA:false:0                  ", "0:0:1:BG:false:0#0:1:1:BA:false:0#0:1:2:BA:false:0 ", false };
-            yield return new object[] { false, false, "0:0:1:BG:false:0#0:1:1:BA:false:0#0:1:1:BA:false:0                  ", "0:0:1:BG:false:0#0:1:1:BA:false:0#0:1:1:BA:false:0 ", false };
-            yield return new object[] { true, false, "0:1:1:BO:false:0#1:0:1:BA:false:0#10:0:1:BA:false:0#0:0:2:BG:false:0", "0:1:1:BO:false:0#3:0:1:BA:false:0#0:0:2:BG:false:0 ", true };
-            yield return new object[] { true, false, "0:1:1:BO:false:0#1:0:1:BA:false:0#15:0:1:BA:false:0                 ", "0:1:1:BO:false:0#1:0:1:BA:false:0#15:0:1:BA:false:0", true };
+            yield return new object[]
+            {
+                false,
+                false,
+                "0:1:1:BA:false:0#0:1:0:BG:false:0#16:1:2:BO:false:0                 ",
+                "0:1:1:BA:false:0#16:1:2:BO:false:0                 ",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "9:1:1:BA:false:0#0:0:1:BG:false:0#16:1:2:BO:false:0                 ",
+                "0:0:1:BG:false:0#16:1:2:BO:false:0                 ",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                "9:1:1:BA:false:0#0:1:1:BG:false:0#16:1:2:BO:false:0                 ",
+                "9:1:1:BA:false:0#0:1:1:BG:false:0#16:1:2:BO:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "7:1:1:BA:false:0                                                    ",
+                "0:1:1:BA:false:0                                   ",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                "7:1:1:BA:false:0                                                    ",
+                "7:1:1:BA:false:0                                   ",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "0:1:0:BG:false:0#8:1:1:BA:false:0#0:1:1:BO:false:0                  ",
+                "0:1:1:BO:false:0                                   ",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                "0:1:1:BA:false:0#16:1:2:BO:false:0#8:0:1:BG:false:0                 ",
+                "0:1:1:BA:false:0#16:1:2:BO:false:0                 ",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                "4:1:1:BA:false:0                                                    ",
+                "0:1:1:BA:false:0                                   ",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                "192:1:1:BA:false:0                                                  ",
+                "0:1:1:BA:false:0                                   ",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "0:2:1:BA:false:0#0:1:1:BG:false:0                                   ",
+                "0:1:1:BG:false:0                                   ",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "0:3:1:BA:false:0#0:1:1:BG:false:0                                   ",
+                "0:1:1:BG:false:0                                   ",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "0:1:1:BA:false:0#0:0:2:BG:false:0#16:1:3:BO:false:0#0:2:1:AN:false:0",
+                "0:1:1:BA:false:0#0:0:2:BG:false:0#16:1:3:BO:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "0:0:1:BA:false:0                                                    ",
+                "0:0:1:BA:false:0                                   ",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "0:1:3:BO:false:0                                                    ",
+                "0:1:3:BO:false:0                                   ",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "16:0:2:BG:false:0                                                   ",
+                "16:0:2:BG:false:0                                  ",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "0:1:3:BO:false:0#0:0:1:BA:false:0                                   ",
+                "0:1:3:BO:false:0#0:0:1:BA:false:0                  ",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "0:0:1:BA:false:0#0:1:3:BO:false:0                                   ",
+                "0:0:1:BA:false:0#0:1:3:BO:false:0                  ",
+                false,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "0:1:3:BO:false:0#16:0:2:BG:false:0                                  ",
+                "0:1:3:BO:false:0#16:0:2:BG:false:0                 ",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "16:0:2:BG:false:0#0:1:3:BO:false:0                                  ",
+                "16:0:2:BG:false:0#0:1:3:BO:false:0                 ",
+                false,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "0:0:1:BA:false:0#16:0:2:BG:false:0                                  ",
+                "0:0:1:BA:false:0#16:0:2:BG:false:0                 ",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "16:0:2:BG:false:0#0:0:1:BA:false:0                                  ",
+                "16:0:2:BG:false:0#0:0:1:BA:false:0                 ",
+                false,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "0:1:3:BO:false:0#0:0:1:BA:false:0#16:0:2:BG:false:0                 ",
+                "0:1:3:BO:false:0#0:0:1:BA:false:0#16:0:2:BG:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "16:0:2:BG:false:0#0:0:1:BA:false:0#0:1:3:BO:false:0                 ",
+                "16:0:2:BG:false:0#0:0:1:BA:false:0#0:1:3:BO:false:0",
+                false,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "16:0:2:BG:false:0#0:1:3:BO:false:0#0:0:1:BA:false:0                 ",
+                "16:0:2:BG:false:0#0:1:3:BO:false:0#0:0:1:BA:false:0",
+                false,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "0:0:1:BA:false:0#16:0:2:BG:false:0#0:1:3:BO:false:0                 ",
+                "0:0:1:BA:false:0#16:0:2:BG:false:0#0:1:3:BO:false:0",
+                false,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "0:0:1:BA:false:0#0:1:3:BO:false:0#16:0:2:BG:false:0                 ",
+                "0:0:1:BA:false:0#0:1:3:BO:false:0#16:0:2:BG:false:0",
+                false,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "0:1:3:BO:false:0#16:0:2:BG:false:0#0:0:1:BA:false:0                 ",
+                "0:1:3:BO:false:0#16:0:2:BG:false:0#0:0:1:BA:false:0",
+                false,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "16:1:2:BG:false:0#16:0:1:BA:false:0                                 ",
+                "16:1:2:BG:false:0#16:0:1:BA:false:0                ",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "0:1:1:BG:false:0#0:2:1:BA:false:0#0:2:1:BO:false:0                  ",
+                "0:1:1:BG:false:0                                   ",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "0:0:1:BG:false:0#0:1:1:BA:false:0#16:1:2:BA:false:0                 ",
+                "0:0:1:BG:false:0#0:1:1:BA:false:0#16:1:2:BA:false:0",
+                false,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "0:1:1:BA:false:0#0:0:2:BA:false:0#0:0:1:BG:false:0                  ",
+                "0:1:1:BA:false:0#0:0:2:BA:false:0#0:0:1:BG:false:0 ",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "0:0:1:BG:false:0#0:1:1:BA:false:0#0:1:2:BO:false:0                  ",
+                "0:0:1:BG:false:0#0:1:1:BA:false:0#0:1:2:BO:false:0 ",
+                false,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "0:0:1:BG:false:0#0:1:1:BA:false:0#0:1:2:BA:false:0                  ",
+                "0:0:1:BG:false:0#0:1:1:BA:false:0#0:1:2:BA:false:0 ",
+                false,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "0:0:1:BG:false:0#0:1:1:BA:false:0#0:1:1:BA:false:0                  ",
+                "0:0:1:BG:false:0#0:1:1:BA:false:0#0:1:1:BA:false:0 ",
+                false,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                "0:1:1:BO:false:0#1:0:1:BA:false:0#10:0:1:BA:false:0#0:0:2:BG:false:0",
+                "0:1:1:BO:false:0#3:0:1:BA:false:0#0:0:2:BG:false:0 ",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                "0:1:1:BO:false:0#1:0:1:BA:false:0#15:0:1:BA:false:0                 ",
+                "0:1:1:BO:false:0#1:0:1:BA:false:0#15:0:1:BA:false:0",
+                true,
+            };
         }
 
-        private static bool VerifyACL(DiscretionaryAcl discretionaryAcl, bool isContainer, bool isDS, bool wasCanonicalInitially, RawAcl rawAcl)
+        private static bool VerifyACL(
+            DiscretionaryAcl discretionaryAcl,
+            bool isContainer,
+            bool isDS,
+            bool wasCanonicalInitially,
+            RawAcl rawAcl
+        )
         {
             bool result = true;
             byte[] dAclBinaryForm = null;
             byte[] rAclBinaryForm = null;
 
-            if (discretionaryAcl.IsContainer == isContainer &&
-                discretionaryAcl.IsDS == isDS &&
-                discretionaryAcl.Revision == rawAcl.Revision &&
-                discretionaryAcl.Count == rawAcl.Count &&
-                discretionaryAcl.BinaryLength == rawAcl.BinaryLength &&
-                discretionaryAcl.IsCanonical == wasCanonicalInitially)
+            if (
+                discretionaryAcl.IsContainer == isContainer
+                && discretionaryAcl.IsDS == isDS
+                && discretionaryAcl.Revision == rawAcl.Revision
+                && discretionaryAcl.Count == rawAcl.Count
+                && discretionaryAcl.BinaryLength == rawAcl.BinaryLength
+                && discretionaryAcl.IsCanonical == wasCanonicalInitially
+            )
             {
                 dAclBinaryForm = new byte[discretionaryAcl.BinaryLength];
                 rAclBinaryForm = new byte[rawAcl.BinaryLength];
@@ -78,12 +338,10 @@ namespace System.Security.AccessControl.Tests
                         result = false;
                         break;
                     }
-
                 }
             }
             else
             {
-
                 result = false;
             }
 
@@ -92,13 +350,21 @@ namespace System.Security.AccessControl.Tests
 
         [Theory]
         [MemberData(nameof(DiscretionaryACL_Constructor3))]
-        public static void Constructor3(bool isContainer, bool isDS, string initialRaqAclStr, string verifierRawAclStr, bool wasCanonicalInitially)
+        public static void Constructor3(
+            bool isContainer,
+            bool isDS,
+            string initialRaqAclStr,
+            string verifierRawAclStr,
+            bool wasCanonicalInitially
+        )
         {
             RawAcl rawAcl = Utils.CreateRawAclFromString(initialRaqAclStr);
             DiscretionaryAcl discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
             rawAcl = Utils.CreateRawAclFromString(verifierRawAclStr);
 
-            Assert.True(VerifyACL(discretionaryAcl, isContainer, isDS, wasCanonicalInitially, rawAcl));
+            Assert.True(
+                VerifyACL(discretionaryAcl, isContainer, isDS, wasCanonicalInitially, rawAcl)
+            );
         }
 
         [Fact]
@@ -136,8 +402,14 @@ namespace System.Security.AccessControl.Tests
             revision = 0;
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);
-            gAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 0,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)), false, null);
+            gAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessAllowed,
+                0,
+                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             isContainer = false;
             isDS = false;
@@ -154,8 +426,14 @@ namespace System.Security.AccessControl.Tests
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);
             //15 has all inheritance AceFlags but Inherited
-            gAce = new CommonAce((AceFlags)15, AceQualifier.AccessDenied, 1,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)), false, null);
+            gAce = new CommonAce(
+                (AceFlags)15,
+                AceQualifier.AccessDenied,
+                1,
+                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             isContainer = false;
             isDS = false;
@@ -171,8 +449,14 @@ namespace System.Security.AccessControl.Tests
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);
             //8 has inheritOnly
-            gAce = new CommonAce((AceFlags)8, AceQualifier.AccessAllowed, 1,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)), false, null);
+            gAce = new CommonAce(
+                (AceFlags)8,
+                AceQualifier.AccessAllowed,
+                1,
+                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             isContainer = true;
             isDS = false;
@@ -207,8 +491,12 @@ namespace System.Security.AccessControl.Tests
             aceFlag = (AceFlags)2;
             accessMask = 1;
             compoundAceType = CompoundAceType.Impersonation;
-            gAce = new CompoundAce(aceFlag, accessMask, compoundAceType,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)));
+            gAce = new CompoundAce(
+                aceFlag,
+                accessMask,
+                compoundAceType,
+                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid))
+            );
             rawAcl.InsertAce(0, gAce);
             isContainer = true;
             isDS = false;
@@ -218,7 +506,6 @@ namespace System.Security.AccessControl.Tests
             //Mark changes design to make ACL with any CustomAce, CompoundAce uncanonical
             Assert.True(VerifyACL(discretionaryAcl, isContainer, isDS, false, rawAcl));
 
-
             //case 6, 1 ObjectAce
             revision = 127;
             capacity = 1;
@@ -226,11 +513,21 @@ namespace System.Security.AccessControl.Tests
             aceFlag = (AceFlags)15; //all inheritance flags ored together but Inherited
             aceQualifier = AceQualifier.AccessAllowed;
             accessMask = 1;
-            objectAceFlag = ObjectAceFlags.ObjectAceTypePresent | ObjectAceFlags.InheritedObjectAceTypePresent;
+            objectAceFlag =
+                ObjectAceFlags.ObjectAceTypePresent | ObjectAceFlags.InheritedObjectAceTypePresent;
             objectAceType = new Guid("11111111-1111-1111-1111-111111111111");
             inheritedObjectAceType = new Guid("22222222-2222-2222-2222-222222222222");
-            gAce = new ObjectAce(aceFlag, aceQualifier, accessMask,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)), objectAceFlag, objectAceType, inheritedObjectAceType, false, null);
+            gAce = new ObjectAce(
+                aceFlag,
+                aceQualifier,
+                accessMask,
+                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
+                objectAceFlag,
+                objectAceType,
+                inheritedObjectAceType,
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             isContainer = true;
             isDS = true;
@@ -238,7 +535,6 @@ namespace System.Security.AccessControl.Tests
             discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
 
             Assert.True(VerifyACL(discretionaryAcl, isContainer, isDS, true, rawAcl));
-
 
             //case 7, no Ace
             revision = 127;
@@ -251,32 +547,61 @@ namespace System.Security.AccessControl.Tests
 
             Assert.True(VerifyACL(discretionaryAcl, isContainer, isDS, true, rawAcl));
 
-
             //case 8, all Aces from case 1, and 3 to 6
             revision = 127;
             capacity = 5;
-            sid = new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")).ToString();
+            sid = new SecurityIdentifier(
+                Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+            ).ToString();
             rawAcl = new RawAcl(revision, capacity);
             //0 access Mask
-            gAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 0,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid + 1.ToString())), false, null);
+            gAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessAllowed,
+                0,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(sid + 1.ToString())
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(rawAcl.Count, gAce);
 
             //an inherit-only AccessAllowed ACE without ContainerInherit or ObjectInherit flags on a container object is meaningless, will be removed
 
-            gAce = new CommonAce((AceFlags)8, AceQualifier.AccessAllowed, 1,
-            new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid + 2.ToString())), false, null);
+            gAce = new CommonAce(
+                (AceFlags)8,
+                AceQualifier.AccessAllowed,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(sid + 2.ToString())
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(rawAcl.Count, gAce);
 
             // ObjectAce
             aceFlag = (AceFlags)15; //all inheritance flags ored together but Inherited
             aceQualifier = AceQualifier.AccessAllowed;
             accessMask = 1;
-            objectAceFlag = ObjectAceFlags.ObjectAceTypePresent | ObjectAceFlags.InheritedObjectAceTypePresent;
+            objectAceFlag =
+                ObjectAceFlags.ObjectAceTypePresent | ObjectAceFlags.InheritedObjectAceTypePresent;
             objectAceType = new Guid("11111111-1111-1111-1111-111111111111");
             inheritedObjectAceType = new Guid("22222222-2222-2222-2222-222222222222");
-            gAce = new ObjectAce(aceFlag, aceQualifier, accessMask,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid + 3.ToString())), objectAceFlag, objectAceType, inheritedObjectAceType, false, null);
+            gAce = new ObjectAce(
+                aceFlag,
+                aceQualifier,
+                accessMask,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(sid + 3.ToString())
+                ),
+                objectAceFlag,
+                objectAceType,
+                inheritedObjectAceType,
+                false,
+                null
+            );
             rawAcl.InsertAce(rawAcl.Count, gAce);
 
             // CustomAce
@@ -290,8 +615,14 @@ namespace System.Security.AccessControl.Tests
             aceFlag = (AceFlags)2;
             accessMask = 1;
             compoundAceType = CompoundAceType.Impersonation;
-            gAce = new CompoundAce(aceFlag, accessMask, compoundAceType,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid + 4.ToString())));
+            gAce = new CompoundAce(
+                aceFlag,
+                accessMask,
+                compoundAceType,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(sid + 4.ToString())
+                )
+            );
             rawAcl.InsertAce(rawAcl.Count, gAce);
 
             isContainer = true;
@@ -305,8 +636,6 @@ namespace System.Security.AccessControl.Tests
 
             Assert.True(VerifyACL(discretionaryAcl, isContainer, isDS, false, rawAcl));
 
-
-
             discretionaryAcl = null;
             isContainer = false;
             isDS = false;
@@ -316,13 +645,9 @@ namespace System.Security.AccessControl.Tests
             rawAcl = new RawAcl(isDS ? GenericAcl.AclRevisionDS : GenericAcl.AclRevision, 1);
             Assert.True(VerifyACL(discretionaryAcl, isContainer, isDS, true, rawAcl));
 
-
-
             discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
             rawAcl = new RawAcl(isDS ? GenericAcl.AclRevisionDS : GenericAcl.AclRevision, 1);
             Assert.True(VerifyACL(discretionaryAcl, isContainer, isDS, true, rawAcl));
-
-
         }
     }
 }

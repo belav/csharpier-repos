@@ -25,7 +25,6 @@ namespace Microsoft.VSDesigner.WCFModel
     public class GeneratedContractType
 #endif
     {
-
         private string m_TargetNamespace;
         private string m_Name;
         private string m_ContractType;
@@ -34,10 +33,8 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <remarks>required by xml serializer</remarks> 
-        public GeneratedContractType()
-        {
-        }
+        /// <remarks>required by xml serializer</remarks>
+        public GeneratedContractType() { }
 
         /// <summary>
         /// Constructor
@@ -46,8 +43,13 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <param name="portName"></param>
         /// <param name="contractType"></param>
         /// <param name="configurationName"></param>
-        /// <remarks></remarks> 
-        public GeneratedContractType(string targetNamespace, string portName, string contractType, string configurationName)
+        /// <remarks></remarks>
+        public GeneratedContractType(
+            string targetNamespace,
+            string portName,
+            string contractType,
+            string configurationName
+        )
         {
             m_TargetNamespace = targetNamespace;
             m_Name = portName;
@@ -59,75 +61,48 @@ namespace Microsoft.VSDesigner.WCFModel
         /// The TargetNamespace of this contract type in the WSDL file
         /// </summary>
         /// <value></value>
-        /// <remarks></remarks> 
+        /// <remarks></remarks>
         [XmlSerialization.XmlAttribute()]
         public string TargetNamespace
         {
-            get
-            {
-                return m_TargetNamespace;
-            }
-            set
-            {
-                m_TargetNamespace = value;
-            }
+            get { return m_TargetNamespace; }
+            set { m_TargetNamespace = value; }
         }
 
         /// <summary>
         /// The portTypeName of this contract type in the WSDL file
         /// </summary>
         /// <value></value>
-        /// <remarks></remarks> 
+        /// <remarks></remarks>
         [XmlSerialization.XmlAttribute()]
         public string Name
         {
-            get
-            {
-                return m_Name;
-            }
-            set
-            {
-                m_Name = value;
-            }
+            get { return m_Name; }
+            set { m_Name = value; }
         }
 
         /// <summary>
         /// The generated CLR type name of this contract type
         /// </summary>
         /// <value></value>
-        /// <remarks></remarks> 
+        /// <remarks></remarks>
         [XmlSerialization.XmlAttribute()]
         public string ContractType
         {
-            get
-            {
-                return m_ContractType;
-            }
-            set
-            {
-                m_ContractType = value;
-            }
+            get { return m_ContractType; }
+            set { m_ContractType = value; }
         }
 
         /// <summary>
         /// The name of this contract in the config file
         /// </summary>
         /// <value></value>
-        /// <remarks></remarks> 
+        /// <remarks></remarks>
         [XmlSerialization.XmlAttribute()]
         public string ConfigurationName
         {
-            get
-            {
-                return m_ConfigurationName;
-            }
-            set
-            {
-                m_ConfigurationName = value;
-            }
+            get { return m_ConfigurationName; }
+            set { m_ConfigurationName = value; }
         }
-
     }
-
 }
-

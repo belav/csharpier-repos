@@ -29,7 +29,8 @@ namespace System.Linq.Parallel
     /// A class with some shared implementation between all aggregation enumerators.
     /// </summary>
     /// <typeparam name="TIntermediate"></typeparam>
-    internal abstract class InlinedAggregationOperatorEnumerator<TIntermediate> : QueryOperatorEnumerator<TIntermediate, int>
+    internal abstract class InlinedAggregationOperatorEnumerator<TIntermediate>
+        : QueryOperatorEnumerator<TIntermediate, int>
     {
         private readonly int _partitionIndex; // This partition's unique index.
         private bool _done;
@@ -39,7 +40,10 @@ namespace System.Linq.Parallel
         // Instantiates a new aggregation operator.
         //
 
-        internal InlinedAggregationOperatorEnumerator(int partitionIndex, CancellationToken cancellationToken)
+        internal InlinedAggregationOperatorEnumerator(
+            int partitionIndex,
+            CancellationToken cancellationToken
+        )
         {
             _partitionIndex = partitionIndex;
             _cancellationToken = cancellationToken;
@@ -51,7 +55,10 @@ namespace System.Linq.Parallel
         // and then one that is used for extensibility by subclasses.
         //
 
-        internal sealed override bool MoveNext([MaybeNullWhen(false), AllowNull] ref TIntermediate currentElement, ref int currentKey)
+        internal sealed override bool MoveNext(
+            [MaybeNullWhen(false), AllowNull] ref TIntermediate currentElement,
+            ref int currentKey
+        )
         {
             if (!_done && MoveNextCore(ref currentElement))
             {
@@ -64,6 +71,8 @@ namespace System.Linq.Parallel
             return false;
         }
 
-        protected abstract bool MoveNextCore([MaybeNullWhen(false), AllowNull] ref TIntermediate currentElement);
+        protected abstract bool MoveNextCore(
+            [MaybeNullWhen(false), AllowNull] ref TIntermediate currentElement
+        );
     }
 }

@@ -27,8 +27,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return object.Equals(_Field1, other._Field1);
             }
 
-            public override int GetHashCode()
-                => _Field1?.GetHashCode() ?? 0;
+            public override int GetHashCode() => _Field1?.GetHashCode() ?? 0;
         }
 
         internal abstract class Base<T1, T2>(T1? field1, T2? field2) : Base<T2>(field2)
@@ -45,8 +44,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return object.Equals(_Field2, other._Field2) && base.Equals(other);
             }
 
-            public override int GetHashCode()
-                => Hash.Combine(_Field2?.GetHashCode() ?? 0, base.GetHashCode());
+            public override int GetHashCode() =>
+                Hash.Combine(_Field2?.GetHashCode() ?? 0, base.GetHashCode());
         }
     }
 }

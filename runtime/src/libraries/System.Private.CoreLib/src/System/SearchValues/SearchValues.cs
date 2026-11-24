@@ -78,7 +78,9 @@ namespace System.Buffers
             if (values.Length == 1)
             {
                 char value = values[0];
-                return PackedSpanHelpers.PackedIndexOfIsSupported && PackedSpanHelpers.CanUsePackedIndexOf(value)
+                return
+                    PackedSpanHelpers.PackedIndexOfIsSupported
+                    && PackedSpanHelpers.CanUsePackedIndexOf(value)
                     ? new SingleCharSearchValues<TrueConst>(value)
                     : new SingleCharSearchValues<FalseConst>(value);
             }
@@ -86,7 +88,10 @@ namespace System.Buffers
             // RangeCharSearchValues is slower than SingleCharSearchValues, but faster than Any2CharSearchValues
             if (TryGetSingleRange(values, out char minInclusive, out char maxInclusive))
             {
-                return PackedSpanHelpers.PackedIndexOfIsSupported && PackedSpanHelpers.CanUsePackedIndexOf(minInclusive) && PackedSpanHelpers.CanUsePackedIndexOf(maxInclusive)
+                return
+                    PackedSpanHelpers.PackedIndexOfIsSupported
+                    && PackedSpanHelpers.CanUsePackedIndexOf(minInclusive)
+                    && PackedSpanHelpers.CanUsePackedIndexOf(maxInclusive)
                     ? new RangeCharSearchValues<TrueConst>(minInclusive, maxInclusive)
                     : new RangeCharSearchValues<FalseConst>(minInclusive, maxInclusive);
             }
@@ -95,7 +100,10 @@ namespace System.Buffers
             {
                 char value0 = values[0];
                 char value1 = values[1];
-                return PackedSpanHelpers.PackedIndexOfIsSupported && PackedSpanHelpers.CanUsePackedIndexOf(value0) && PackedSpanHelpers.CanUsePackedIndexOf(value1)
+                return
+                    PackedSpanHelpers.PackedIndexOfIsSupported
+                    && PackedSpanHelpers.CanUsePackedIndexOf(value0)
+                    && PackedSpanHelpers.CanUsePackedIndexOf(value1)
                     ? new Any2CharSearchValues<TrueConst>(value0, value1)
                     : new Any2CharSearchValues<FalseConst>(value0, value1);
             }
@@ -105,7 +113,11 @@ namespace System.Buffers
                 char value0 = values[0];
                 char value1 = values[1];
                 char value2 = values[2];
-                return PackedSpanHelpers.PackedIndexOfIsSupported && PackedSpanHelpers.CanUsePackedIndexOf(value0) && PackedSpanHelpers.CanUsePackedIndexOf(value1) && PackedSpanHelpers.CanUsePackedIndexOf(value2)
+                return
+                    PackedSpanHelpers.PackedIndexOfIsSupported
+                    && PackedSpanHelpers.CanUsePackedIndexOf(value0)
+                    && PackedSpanHelpers.CanUsePackedIndexOf(value1)
+                    && PackedSpanHelpers.CanUsePackedIndexOf(value2)
                     ? new Any3CharSearchValues<TrueConst>(value0, value1, value2)
                     : new Any3CharSearchValues<FalseConst>(value0, value1, value2);
             }
@@ -114,14 +126,17 @@ namespace System.Buffers
             if (IndexOfAnyAsciiSearcher.IsVectorizationSupported && maxInclusive < 128)
             {
                 return (Ssse3.IsSupported || PackedSimd.IsSupported) && minInclusive == 0
-                    ? new AsciiCharSearchValues<IndexOfAnyAsciiSearcher.Ssse3AndWasmHandleZeroInNeedle>(values)
+                    ? new AsciiCharSearchValues<IndexOfAnyAsciiSearcher.Ssse3AndWasmHandleZeroInNeedle>(
+                        values
+                    )
                     : new AsciiCharSearchValues<IndexOfAnyAsciiSearcher.Default>(values);
             }
 
             // Vector128<char> isn't valid. Treat the values as shorts instead.
             ReadOnlySpan<short> shortValues = MemoryMarshal.CreateReadOnlySpan(
                 ref Unsafe.As<char, short>(ref MemoryMarshal.GetReference(values)),
-                values.Length);
+                values.Length
+            );
 
             if (values.Length == 4)
             {
@@ -150,9 +165,15 @@ namespace System.Buffers
                 // If we have both ASCII and non-ASCII characters, use an implementation that
                 // does an optimistic ASCII fast-path and then falls back to the ProbabilisticMap.
 
-                return (Ssse3.IsSupported || PackedSimd.IsSupported) && probabilisticValues.Contains('\0')
-                    ? new ProbabilisticWithAsciiCharSearchValues<IndexOfAnyAsciiSearcher.Ssse3AndWasmHandleZeroInNeedle>(probabilisticValues)
-                    : new ProbabilisticWithAsciiCharSearchValues<IndexOfAnyAsciiSearcher.Default>(probabilisticValues);
+                return
+                    (Ssse3.IsSupported || PackedSimd.IsSupported)
+                    && probabilisticValues.Contains('\0')
+                    ? new ProbabilisticWithAsciiCharSearchValues<IndexOfAnyAsciiSearcher.Ssse3AndWasmHandleZeroInNeedle>(
+                        probabilisticValues
+                    )
+                    : new ProbabilisticWithAsciiCharSearchValues<IndexOfAnyAsciiSearcher.Default>(
+                        probabilisticValues
+                    );
             }
 
             // We prefer using the ProbabilisticMap over Latin1CharSearchValues if the former is vectorized.
@@ -172,17 +193,33 @@ namespace System.Buffers
         /// <param name="comparisonType">Specifies whether to use <see cref="StringComparison.Ordinal"/> or <see cref="StringComparison.OrdinalIgnoreCase"/> search semantics.</param>
         /// <returns>The optimized representation of <paramref name="values"/> used for efficient searching.</returns>
         /// <remarks>Only <see cref="StringComparison.Ordinal"/> or <see cref="StringComparison.OrdinalIgnoreCase"/> may be used.</remarks>
-        public static SearchValues<string> Create(ReadOnlySpan<string> values, StringComparison comparisonType)
+        public static SearchValues<string> Create(
+            ReadOnlySpan<string> values,
+            StringComparison comparisonType
+        )
         {
-            if (comparisonType is not (StringComparison.Ordinal or StringComparison.OrdinalIgnoreCase))
+            if (
+                comparisonType
+                is not (StringComparison.Ordinal or StringComparison.OrdinalIgnoreCase)
+            )
             {
-                throw new ArgumentException(SR.Argument_SearchValues_UnsupportedStringComparison, nameof(comparisonType));
+                throw new ArgumentException(
+                    SR.Argument_SearchValues_UnsupportedStringComparison,
+                    nameof(comparisonType)
+                );
             }
 
-            return StringSearchValues.Create(values, ignoreCase: comparisonType == StringComparison.OrdinalIgnoreCase);
+            return StringSearchValues.Create(
+                values,
+                ignoreCase: comparisonType == StringComparison.OrdinalIgnoreCase
+            );
         }
 
-        private static bool TryGetSingleRange<T>(ReadOnlySpan<T> values, out T minInclusive, out T maxInclusive)
+        private static bool TryGetSingleRange<T>(
+            ReadOnlySpan<T> values,
+            out T minInclusive,
+            out T maxInclusive
+        )
             where T : struct, INumber<T>, IMinMaxValue<T>
         {
             T min = T.MaxValue;

@@ -3,9 +3,9 @@
 //----------------------------------------------------------------
 namespace System.Activities.Core.Presentation.Themes
 {
-    using System.Windows;
-    using System.Runtime;
     using System.Activities.Presentation.View;
+    using System.Runtime;
+    using System.Windows;
 
     sealed partial class EditorCategoryTemplateDictionary
     {

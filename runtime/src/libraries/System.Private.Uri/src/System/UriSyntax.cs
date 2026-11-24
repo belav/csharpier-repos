@@ -17,8 +17,8 @@ namespace System
     {
         None = 0x0,
 
-        MustHaveAuthority = 0x1,  // must have "//" after scheme:
-        OptionalAuthority = 0x2,  // used by generic parser due to unknown Uri syntax
+        MustHaveAuthority = 0x1, // must have "//" after scheme:
+        OptionalAuthority = 0x2, // used by generic parser due to unknown Uri syntax
         MayHaveUserInfo = 0x4,
         MayHavePort = 0x8,
         MayHavePath = 0x10,
@@ -41,15 +41,15 @@ namespace System
         BuiltInSyntax = 0x40000, // This is a simple Uri plus it is hardcoded in the product
         ParserSchemeOnly = 0x80000, // This is a Parser that does only Uri scheme parsing
 
-        AllowDOSPath = 0x100000,  // will check for "x:\"
-        PathIsRooted = 0x200000,  // For an authority based Uri the first path char is '/'
-        ConvertPathSlashes = 0x400000,  // will turn '\' into '/'
-        CompressPath = 0x800000,  // For an authority based Uri remove/compress /./ /../ in the path
+        AllowDOSPath = 0x100000, // will check for "x:\"
+        PathIsRooted = 0x200000, // For an authority based Uri the first path char is '/'
+        ConvertPathSlashes = 0x400000, // will turn '\' into '/'
+        CompressPath = 0x800000, // For an authority based Uri remove/compress /./ /../ in the path
         CanonicalizeAsFilePath = 0x1000000, // remove/convert sequences /.../ /x../ /x./ dangerous for a DOS path
         UnEscapeDotsAndSlashes = 0x2000000, // additionally unescape dots and slashes before doing path compression
-        AllowIdn = 0x4000000,    // IDN host conversion allowed
-        AllowIriParsing = 0x10000000,   // Iri parsing. String is normalized, bidi control
-                                        // characters are removed, unicode char limits are checked etc.
+        AllowIdn = 0x4000000, // IDN host conversion allowed
+        AllowIriParsing = 0x10000000, // Iri parsing. String is normalized, bidi control
+        // characters are removed, unicode char limits are checked etc.
 
         //      KeepTailLWS             = 0x8000000,
     }
@@ -61,23 +61,83 @@ namespace System
     {
         // These are always available without paying hashtable lookup cost
         // Note: see UpdateStaticSyntaxReference()
-        internal static readonly UriParser HttpUri = new BuiltInUriParser("http", 80, HttpSyntaxFlags);
-        internal static readonly UriParser HttpsUri = new BuiltInUriParser("https", 443, HttpUri._flags);
+        internal static readonly UriParser HttpUri = new BuiltInUriParser(
+            "http",
+            80,
+            HttpSyntaxFlags
+        );
+        internal static readonly UriParser HttpsUri = new BuiltInUriParser(
+            "https",
+            443,
+            HttpUri._flags
+        );
         internal static readonly UriParser WsUri = new BuiltInUriParser("ws", 80, HttpSyntaxFlags);
-        internal static readonly UriParser WssUri = new BuiltInUriParser("wss", 443, HttpSyntaxFlags);
+        internal static readonly UriParser WssUri = new BuiltInUriParser(
+            "wss",
+            443,
+            HttpSyntaxFlags
+        );
         internal static readonly UriParser FtpUri = new BuiltInUriParser("ftp", 21, FtpSyntaxFlags);
-        internal static readonly UriParser FileUri = new BuiltInUriParser("file", NoDefaultPort, FileSyntaxFlags);
-        internal static readonly UriParser UnixFileUri = new BuiltInUriParser("file", NoDefaultPort, UnixFileSyntaxFlags);
-        internal static readonly UriParser GopherUri = new BuiltInUriParser("gopher", 70, GopherSyntaxFlags);
-        internal static readonly UriParser NntpUri = new BuiltInUriParser("nntp", 119, NntpSyntaxFlags);
-        internal static readonly UriParser NewsUri = new BuiltInUriParser("news", NoDefaultPort, NewsSyntaxFlags);
-        internal static readonly UriParser MailToUri = new BuiltInUriParser("mailto", 25, MailtoSyntaxFlags);
-        internal static readonly UriParser UuidUri = new BuiltInUriParser("uuid", NoDefaultPort, NewsUri._flags);
-        internal static readonly UriParser TelnetUri = new BuiltInUriParser("telnet", 23, TelnetSyntaxFlags);
-        internal static readonly UriParser LdapUri = new BuiltInUriParser("ldap", 389, LdapSyntaxFlags);
-        internal static readonly UriParser NetTcpUri = new BuiltInUriParser("net.tcp", 808, NetTcpSyntaxFlags);
-        internal static readonly UriParser NetPipeUri = new BuiltInUriParser("net.pipe", NoDefaultPort, NetPipeSyntaxFlags);
-        internal static readonly UriParser VsMacrosUri = new BuiltInUriParser("vsmacros", NoDefaultPort, VsmacrosSyntaxFlags);
+        internal static readonly UriParser FileUri = new BuiltInUriParser(
+            "file",
+            NoDefaultPort,
+            FileSyntaxFlags
+        );
+        internal static readonly UriParser UnixFileUri = new BuiltInUriParser(
+            "file",
+            NoDefaultPort,
+            UnixFileSyntaxFlags
+        );
+        internal static readonly UriParser GopherUri = new BuiltInUriParser(
+            "gopher",
+            70,
+            GopherSyntaxFlags
+        );
+        internal static readonly UriParser NntpUri = new BuiltInUriParser(
+            "nntp",
+            119,
+            NntpSyntaxFlags
+        );
+        internal static readonly UriParser NewsUri = new BuiltInUriParser(
+            "news",
+            NoDefaultPort,
+            NewsSyntaxFlags
+        );
+        internal static readonly UriParser MailToUri = new BuiltInUriParser(
+            "mailto",
+            25,
+            MailtoSyntaxFlags
+        );
+        internal static readonly UriParser UuidUri = new BuiltInUriParser(
+            "uuid",
+            NoDefaultPort,
+            NewsUri._flags
+        );
+        internal static readonly UriParser TelnetUri = new BuiltInUriParser(
+            "telnet",
+            23,
+            TelnetSyntaxFlags
+        );
+        internal static readonly UriParser LdapUri = new BuiltInUriParser(
+            "ldap",
+            389,
+            LdapSyntaxFlags
+        );
+        internal static readonly UriParser NetTcpUri = new BuiltInUriParser(
+            "net.tcp",
+            808,
+            NetTcpSyntaxFlags
+        );
+        internal static readonly UriParser NetPipeUri = new BuiltInUriParser(
+            "net.pipe",
+            NoDefaultPort,
+            NetPipeSyntaxFlags
+        );
+        internal static readonly UriParser VsMacrosUri = new BuiltInUriParser(
+            "vsmacros",
+            NoDefaultPort,
+            VsmacrosSyntaxFlags
+        );
 
         private static readonly Hashtable s_table = new Hashtable(16) // Hashtable used instead of Dictionary<> for lock-free reads
         {
@@ -113,8 +173,14 @@ namespace System
             //
             // All BuiltIn parsers use that ctor. They are marked with "simple" and "built-in" flags
             //
-            internal BuiltInUriParser(string lwrCaseScheme, int defaultPort, UriSyntaxFlags syntaxFlags)
-                : base((syntaxFlags | UriSyntaxFlags.SimpleUserSyntax | UriSyntaxFlags.BuiltInSyntax))
+            internal BuiltInUriParser(
+                string lwrCaseScheme,
+                int defaultPort,
+                UriSyntaxFlags syntaxFlags
+            )
+                : base(
+                    (syntaxFlags | UriSyntaxFlags.SimpleUserSyntax | UriSyntaxFlags.BuiltInSyntax)
+                )
             {
                 _scheme = lwrCaseScheme;
                 _port = defaultPort;
@@ -123,10 +189,7 @@ namespace System
 
         internal UriSyntaxFlags Flags
         {
-            get
-            {
-                return _flags;
-            }
+            get { return _flags; }
         }
 
         internal bool NotAny(UriSyntaxFlags flags)
@@ -164,14 +227,18 @@ namespace System
         private static void FetchSyntax(UriParser syntax, string lwrCaseSchemeName, int defaultPort)
         {
             if (syntax.SchemeName.Length != 0)
-                throw new InvalidOperationException(SR.Format(SR.net_uri_NeedFreshParser, syntax.SchemeName));
+                throw new InvalidOperationException(
+                    SR.Format(SR.net_uri_NeedFreshParser, syntax.SchemeName)
+                );
 
             lock (s_table)
             {
                 syntax._flags &= ~UriSyntaxFlags.V1_UnknownUri;
                 UriParser? oldSyntax = (UriParser?)s_table[lwrCaseSchemeName];
                 if (oldSyntax != null)
-                    throw new InvalidOperationException(SR.Format(SR.net_uri_AlreadyRegistered, oldSyntax.SchemeName));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.net_uri_AlreadyRegistered, oldSyntax.SchemeName)
+                    );
 
                 oldSyntax = (UriParser?)s_tempTable[syntax.SchemeName];
                 if (oldSyntax != null)
@@ -191,6 +258,7 @@ namespace System
         }
 
         private const int c_MaxCapacity = 512;
+
         //schemeStr must be in lower case!
         internal static UriParser FindOrFetchAsUnknownV1Syntax(string lwrCaseScheme)
         {
@@ -225,17 +293,15 @@ namespace System
         //
         internal bool IsSimple
         {
-            get
-            {
-                return InFact(UriSyntaxFlags.SimpleUserSyntax);
-            }
+            get { return InFact(UriSyntaxFlags.SimpleUserSyntax); }
         }
 
         internal void CheckSetIsSimpleFlag()
         {
             Type type = this.GetType();
 
-            if (type == typeof(GenericUriParser)
+            if (
+                type == typeof(GenericUriParser)
                 || type == typeof(HttpStyleUriParser)
                 || type == typeof(FtpStyleUriParser)
                 || type == typeof(FileStyleUriParser)
@@ -244,7 +310,7 @@ namespace System
                 || type == typeof(NetPipeStyleUriParser)
                 || type == typeof(NetTcpStyleUriParser)
                 || type == typeof(LdapStyleUriParser)
-                )
+            )
             {
                 _flags |= UriSyntaxFlags.SimpleUserSyntax;
             }
@@ -273,10 +339,17 @@ namespace System
 
             // InitializeAndValidate should not be called outside of the constructor
             Debug.Assert(sizeof(Uri.Flags) == sizeof(ulong));
-            Interlocked.Or(ref Unsafe.As<Uri.Flags, ulong>(ref thisUri._flags), (ulong)Uri.Flags.CustomParser_ParseMinimalAlreadyCalled);
+            Interlocked.Or(
+                ref Unsafe.As<Uri.Flags, ulong>(ref thisUri._flags),
+                (ulong)Uri.Flags.CustomParser_ParseMinimalAlreadyCalled
+            );
         }
 
-        internal string? InternalResolve(Uri thisBaseUri, Uri uriLink, out UriFormatException? parsingError)
+        internal string? InternalResolve(
+            Uri thisBaseUri,
+            Uri uriLink,
+            out UriFormatException? parsingError
+        )
         {
             return Resolve(thisBaseUri, uriLink, out parsingError);
         }
@@ -286,7 +359,11 @@ namespace System
             return IsBaseOf(thisBaseUri, uriLink);
         }
 
-        internal string InternalGetComponents(Uri thisUri, UriComponents uriComponents, UriFormat uriFormat)
+        internal string InternalGetComponents(
+            Uri thisUri,
+            UriComponents uriComponents,
+            UriFormat uriFormat
+        )
         {
             return GetComponents(thisUri, uriComponents, uriFormat);
         }
@@ -300,216 +377,256 @@ namespace System
         // Various Uri scheme syntax flags
         //
         private const UriSyntaxFlags UnknownV1SyntaxFlags =
-                                            UriSyntaxFlags.V1_UnknownUri | // This flag must be always set here
-                                            UriSyntaxFlags.OptionalAuthority |
-                                            //
-                                            UriSyntaxFlags.MayHaveUserInfo |
-                                            UriSyntaxFlags.MayHavePort |
-                                            UriSyntaxFlags.MayHavePath |
-                                            UriSyntaxFlags.MayHaveQuery |
-                                            UriSyntaxFlags.MayHaveFragment |
-                                            //
-                                            UriSyntaxFlags.AllowEmptyHost |
-                                            UriSyntaxFlags.AllowUncHost |       // V1 compat
-                                            UriSyntaxFlags.AllowAnInternetHost |
-                                            UriSyntaxFlags.PathIsRooted |
-                                            UriSyntaxFlags.AllowDOSPath |        // V1 compat, actually we should not parse DOS file out of an unknown scheme
-                                            UriSyntaxFlags.ConvertPathSlashes |  // V1 compat, it will always convert backslashes
-                                            UriSyntaxFlags.CompressPath |        // V1 compat, it will always compress path even for non hierarchical Uris
-                                            UriSyntaxFlags.AllowIdn |
-                                            UriSyntaxFlags.AllowIriParsing;
+            UriSyntaxFlags.V1_UnknownUri
+            | // This flag must be always set here
+            UriSyntaxFlags.OptionalAuthority
+            |
+            //
+            UriSyntaxFlags.MayHaveUserInfo
+            | UriSyntaxFlags.MayHavePort
+            | UriSyntaxFlags.MayHavePath
+            | UriSyntaxFlags.MayHaveQuery
+            | UriSyntaxFlags.MayHaveFragment
+            |
+            //
+            UriSyntaxFlags.AllowEmptyHost
+            | UriSyntaxFlags.AllowUncHost
+            | // V1 compat
+            UriSyntaxFlags.AllowAnInternetHost
+            | UriSyntaxFlags.PathIsRooted
+            | UriSyntaxFlags.AllowDOSPath
+            | // V1 compat, actually we should not parse DOS file out of an unknown scheme
+            UriSyntaxFlags.ConvertPathSlashes
+            | // V1 compat, it will always convert backslashes
+            UriSyntaxFlags.CompressPath
+            | // V1 compat, it will always compress path even for non hierarchical Uris
+            UriSyntaxFlags.AllowIdn
+            | UriSyntaxFlags.AllowIriParsing;
 
         private const UriSyntaxFlags HttpSyntaxFlags =
-                                        UriSyntaxFlags.MustHaveAuthority |
-                                        //
-                                        UriSyntaxFlags.MayHaveUserInfo |
-                                        UriSyntaxFlags.MayHavePort |
-                                        UriSyntaxFlags.MayHavePath |
-                                        UriSyntaxFlags.MayHaveQuery |
-                                        UriSyntaxFlags.MayHaveFragment |
-                                        //
-                                        UriSyntaxFlags.AllowUncHost |       // V1 compat
-                                        UriSyntaxFlags.AllowAnInternetHost |
-                                        //
-                                        UriSyntaxFlags.PathIsRooted |
-                                        //
-                                        UriSyntaxFlags.ConvertPathSlashes |
-                                        UriSyntaxFlags.CompressPath |
-                                        UriSyntaxFlags.CanonicalizeAsFilePath |
-                                        UriSyntaxFlags.AllowIdn |
-                                        UriSyntaxFlags.AllowIriParsing;
+            UriSyntaxFlags.MustHaveAuthority
+            |
+            //
+            UriSyntaxFlags.MayHaveUserInfo
+            | UriSyntaxFlags.MayHavePort
+            | UriSyntaxFlags.MayHavePath
+            | UriSyntaxFlags.MayHaveQuery
+            | UriSyntaxFlags.MayHaveFragment
+            |
+            //
+            UriSyntaxFlags.AllowUncHost
+            | // V1 compat
+            UriSyntaxFlags.AllowAnInternetHost
+            |
+            //
+            UriSyntaxFlags.PathIsRooted
+            |
+            //
+            UriSyntaxFlags.ConvertPathSlashes
+            | UriSyntaxFlags.CompressPath
+            | UriSyntaxFlags.CanonicalizeAsFilePath
+            | UriSyntaxFlags.AllowIdn
+            | UriSyntaxFlags.AllowIriParsing;
 
         private const UriSyntaxFlags FtpSyntaxFlags =
-                                        UriSyntaxFlags.MustHaveAuthority |
-                                        //
-                                        UriSyntaxFlags.MayHaveUserInfo |
-                                        UriSyntaxFlags.MayHavePort |
-                                        UriSyntaxFlags.MayHavePath |
-                                        UriSyntaxFlags.MayHaveFragment |
-                                        //
-                                        UriSyntaxFlags.AllowUncHost |       // V1 compat
-                                        UriSyntaxFlags.AllowAnInternetHost |
-                                        //
-                                        UriSyntaxFlags.PathIsRooted |
-                                        //
-                                        UriSyntaxFlags.ConvertPathSlashes |
-                                        UriSyntaxFlags.CompressPath |
-                                        UriSyntaxFlags.CanonicalizeAsFilePath |
-                                        UriSyntaxFlags.AllowIdn |
-                                        UriSyntaxFlags.AllowIriParsing;
+            UriSyntaxFlags.MustHaveAuthority
+            |
+            //
+            UriSyntaxFlags.MayHaveUserInfo
+            | UriSyntaxFlags.MayHavePort
+            | UriSyntaxFlags.MayHavePath
+            | UriSyntaxFlags.MayHaveFragment
+            |
+            //
+            UriSyntaxFlags.AllowUncHost
+            | // V1 compat
+            UriSyntaxFlags.AllowAnInternetHost
+            |
+            //
+            UriSyntaxFlags.PathIsRooted
+            |
+            //
+            UriSyntaxFlags.ConvertPathSlashes
+            | UriSyntaxFlags.CompressPath
+            | UriSyntaxFlags.CanonicalizeAsFilePath
+            | UriSyntaxFlags.AllowIdn
+            | UriSyntaxFlags.AllowIriParsing;
 
         private const UriSyntaxFlags FileSyntaxFlags =
-                                        UriSyntaxFlags.MustHaveAuthority |
-                                        //
-                                        UriSyntaxFlags.AllowEmptyHost |
-                                        UriSyntaxFlags.AllowUncHost |
-                                        UriSyntaxFlags.AllowAnInternetHost |
-                                        //
-                                        UriSyntaxFlags.MayHavePath |
-                                        UriSyntaxFlags.MayHaveFragment |
-                                        UriSyntaxFlags.MayHaveQuery |
-                                        //
-                                        UriSyntaxFlags.FileLikeUri |
-                                        //
-                                        UriSyntaxFlags.PathIsRooted |
-                                        UriSyntaxFlags.AllowDOSPath |
-                                        //
-                                        UriSyntaxFlags.ConvertPathSlashes |
-                                        UriSyntaxFlags.CompressPath |
-                                        UriSyntaxFlags.CanonicalizeAsFilePath |
-                                        UriSyntaxFlags.UnEscapeDotsAndSlashes |
-                                        UriSyntaxFlags.AllowIdn |
-                                        UriSyntaxFlags.AllowIriParsing;
+            UriSyntaxFlags.MustHaveAuthority
+            |
+            //
+            UriSyntaxFlags.AllowEmptyHost
+            | UriSyntaxFlags.AllowUncHost
+            | UriSyntaxFlags.AllowAnInternetHost
+            |
+            //
+            UriSyntaxFlags.MayHavePath
+            | UriSyntaxFlags.MayHaveFragment
+            | UriSyntaxFlags.MayHaveQuery
+            |
+            //
+            UriSyntaxFlags.FileLikeUri
+            |
+            //
+            UriSyntaxFlags.PathIsRooted
+            | UriSyntaxFlags.AllowDOSPath
+            |
+            //
+            UriSyntaxFlags.ConvertPathSlashes
+            | UriSyntaxFlags.CompressPath
+            | UriSyntaxFlags.CanonicalizeAsFilePath
+            | UriSyntaxFlags.UnEscapeDotsAndSlashes
+            | UriSyntaxFlags.AllowIdn
+            | UriSyntaxFlags.AllowIriParsing;
 
         private const UriSyntaxFlags UnixFileSyntaxFlags =
-                                        FileSyntaxFlags & ~UriSyntaxFlags.ConvertPathSlashes;
+            FileSyntaxFlags & ~UriSyntaxFlags.ConvertPathSlashes;
 
         private const UriSyntaxFlags VsmacrosSyntaxFlags =
-                                        UriSyntaxFlags.MustHaveAuthority |
-                                        //
-                                        UriSyntaxFlags.AllowEmptyHost |
-                                        UriSyntaxFlags.AllowUncHost |
-                                        UriSyntaxFlags.AllowAnInternetHost |
-                                        //
-                                        UriSyntaxFlags.MayHavePath |
-                                        UriSyntaxFlags.MayHaveFragment |
-                                        //
-                                        UriSyntaxFlags.FileLikeUri |
-                                        //
-                                        UriSyntaxFlags.AllowDOSPath |
-                                        UriSyntaxFlags.ConvertPathSlashes |
-                                        UriSyntaxFlags.CompressPath |
-                                        UriSyntaxFlags.CanonicalizeAsFilePath |
-                                        UriSyntaxFlags.UnEscapeDotsAndSlashes |
-                                        UriSyntaxFlags.AllowIdn |
-                                        UriSyntaxFlags.AllowIriParsing;
+            UriSyntaxFlags.MustHaveAuthority
+            |
+            //
+            UriSyntaxFlags.AllowEmptyHost
+            | UriSyntaxFlags.AllowUncHost
+            | UriSyntaxFlags.AllowAnInternetHost
+            |
+            //
+            UriSyntaxFlags.MayHavePath
+            | UriSyntaxFlags.MayHaveFragment
+            |
+            //
+            UriSyntaxFlags.FileLikeUri
+            |
+            //
+            UriSyntaxFlags.AllowDOSPath
+            | UriSyntaxFlags.ConvertPathSlashes
+            | UriSyntaxFlags.CompressPath
+            | UriSyntaxFlags.CanonicalizeAsFilePath
+            | UriSyntaxFlags.UnEscapeDotsAndSlashes
+            | UriSyntaxFlags.AllowIdn
+            | UriSyntaxFlags.AllowIriParsing;
 
         private const UriSyntaxFlags GopherSyntaxFlags =
-                                        UriSyntaxFlags.MustHaveAuthority |
-                                        //
-                                        UriSyntaxFlags.MayHaveUserInfo |
-                                        UriSyntaxFlags.MayHavePort |
-                                        UriSyntaxFlags.MayHavePath |
-                                        UriSyntaxFlags.MayHaveFragment |
-                                        //
-                                        UriSyntaxFlags.AllowUncHost |       // V1 compat
-                                        UriSyntaxFlags.AllowAnInternetHost |
-                                        //
-                                        UriSyntaxFlags.PathIsRooted |
-                                        UriSyntaxFlags.AllowIdn |
-                                        UriSyntaxFlags.AllowIriParsing;
+            UriSyntaxFlags.MustHaveAuthority
+            |
+            //
+            UriSyntaxFlags.MayHaveUserInfo
+            | UriSyntaxFlags.MayHavePort
+            | UriSyntaxFlags.MayHavePath
+            | UriSyntaxFlags.MayHaveFragment
+            |
+            //
+            UriSyntaxFlags.AllowUncHost
+            | // V1 compat
+            UriSyntaxFlags.AllowAnInternetHost
+            |
+            //
+            UriSyntaxFlags.PathIsRooted
+            | UriSyntaxFlags.AllowIdn
+            | UriSyntaxFlags.AllowIriParsing;
 
         //                                        UriSyntaxFlags.KeepTailLWS |
 
         //Note that NNTP and NEWS are quite different in syntax
         private const UriSyntaxFlags NewsSyntaxFlags =
-                                        UriSyntaxFlags.MayHavePath |
-                                        UriSyntaxFlags.MayHaveFragment |
-                                        UriSyntaxFlags.AllowIriParsing;
+            UriSyntaxFlags.MayHavePath
+            | UriSyntaxFlags.MayHaveFragment
+            | UriSyntaxFlags.AllowIriParsing;
 
         private const UriSyntaxFlags NntpSyntaxFlags =
-                                        UriSyntaxFlags.MustHaveAuthority |
-                                        //
-                                        UriSyntaxFlags.MayHaveUserInfo |
-                                        UriSyntaxFlags.MayHavePort |
-                                        UriSyntaxFlags.MayHavePath |
-                                        UriSyntaxFlags.MayHaveFragment |
-                                        //
-                                        UriSyntaxFlags.AllowUncHost |       // V1 compat
-                                        UriSyntaxFlags.AllowAnInternetHost |
-                                        //
-                                        UriSyntaxFlags.PathIsRooted |
-                                        UriSyntaxFlags.AllowIdn |
-                                        UriSyntaxFlags.AllowIriParsing;
-
+            UriSyntaxFlags.MustHaveAuthority
+            |
+            //
+            UriSyntaxFlags.MayHaveUserInfo
+            | UriSyntaxFlags.MayHavePort
+            | UriSyntaxFlags.MayHavePath
+            | UriSyntaxFlags.MayHaveFragment
+            |
+            //
+            UriSyntaxFlags.AllowUncHost
+            | // V1 compat
+            UriSyntaxFlags.AllowAnInternetHost
+            |
+            //
+            UriSyntaxFlags.PathIsRooted
+            | UriSyntaxFlags.AllowIdn
+            | UriSyntaxFlags.AllowIriParsing;
 
         private const UriSyntaxFlags TelnetSyntaxFlags =
-                                        UriSyntaxFlags.MustHaveAuthority |
-                                        //
-                                        UriSyntaxFlags.MayHaveUserInfo |
-                                        UriSyntaxFlags.MayHavePort |
-                                        UriSyntaxFlags.MayHavePath |
-                                        UriSyntaxFlags.MayHaveFragment |
-                                        //
-                                        UriSyntaxFlags.AllowUncHost |       // V1 compat
-                                        UriSyntaxFlags.AllowAnInternetHost |
-                                        //
-                                        UriSyntaxFlags.PathIsRooted |
-                                        UriSyntaxFlags.AllowIdn |
-                                        UriSyntaxFlags.AllowIriParsing;
-
+            UriSyntaxFlags.MustHaveAuthority
+            |
+            //
+            UriSyntaxFlags.MayHaveUserInfo
+            | UriSyntaxFlags.MayHavePort
+            | UriSyntaxFlags.MayHavePath
+            | UriSyntaxFlags.MayHaveFragment
+            |
+            //
+            UriSyntaxFlags.AllowUncHost
+            | // V1 compat
+            UriSyntaxFlags.AllowAnInternetHost
+            |
+            //
+            UriSyntaxFlags.PathIsRooted
+            | UriSyntaxFlags.AllowIdn
+            | UriSyntaxFlags.AllowIriParsing;
 
         private const UriSyntaxFlags LdapSyntaxFlags =
-                                        UriSyntaxFlags.MustHaveAuthority |
-                                        //
-                                        UriSyntaxFlags.AllowEmptyHost |
-                                        UriSyntaxFlags.AllowUncHost |       // V1 compat
-                                        UriSyntaxFlags.AllowAnInternetHost |
-                                        //
-                                        UriSyntaxFlags.MayHaveUserInfo |
-                                        UriSyntaxFlags.MayHavePort |
-                                        UriSyntaxFlags.MayHavePath |
-                                        UriSyntaxFlags.MayHaveQuery |
-                                        UriSyntaxFlags.MayHaveFragment |
-                                        //
-                                        UriSyntaxFlags.PathIsRooted |
-                                        UriSyntaxFlags.AllowIdn |
-                                        UriSyntaxFlags.AllowIriParsing;
-
+            UriSyntaxFlags.MustHaveAuthority
+            |
+            //
+            UriSyntaxFlags.AllowEmptyHost
+            | UriSyntaxFlags.AllowUncHost
+            | // V1 compat
+            UriSyntaxFlags.AllowAnInternetHost
+            |
+            //
+            UriSyntaxFlags.MayHaveUserInfo
+            | UriSyntaxFlags.MayHavePort
+            | UriSyntaxFlags.MayHavePath
+            | UriSyntaxFlags.MayHaveQuery
+            | UriSyntaxFlags.MayHaveFragment
+            |
+            //
+            UriSyntaxFlags.PathIsRooted
+            | UriSyntaxFlags.AllowIdn
+            | UriSyntaxFlags.AllowIriParsing;
 
         private const UriSyntaxFlags MailtoSyntaxFlags =
-                                        //
-                                        UriSyntaxFlags.AllowEmptyHost |
-                                        UriSyntaxFlags.AllowUncHost |       // V1 compat
-                                        UriSyntaxFlags.AllowAnInternetHost |
-                                        //
-                                        UriSyntaxFlags.MayHaveUserInfo |
-                                        UriSyntaxFlags.MayHavePort |
-                                        UriSyntaxFlags.MayHavePath |
-                                        UriSyntaxFlags.MayHaveFragment |
-                                        UriSyntaxFlags.MayHaveQuery | //to maintain compat
-                                                                      //
-                                        UriSyntaxFlags.MailToLikeUri |
-                                        UriSyntaxFlags.AllowIdn |
-                                        UriSyntaxFlags.AllowIriParsing;
-
-
+            //
+            UriSyntaxFlags.AllowEmptyHost
+            | UriSyntaxFlags.AllowUncHost
+            | // V1 compat
+            UriSyntaxFlags.AllowAnInternetHost
+            |
+            //
+            UriSyntaxFlags.MayHaveUserInfo
+            | UriSyntaxFlags.MayHavePort
+            | UriSyntaxFlags.MayHavePath
+            | UriSyntaxFlags.MayHaveFragment
+            | UriSyntaxFlags.MayHaveQuery
+            | //to maintain compat
+            //
+            UriSyntaxFlags.MailToLikeUri
+            | UriSyntaxFlags.AllowIdn
+            | UriSyntaxFlags.AllowIriParsing;
 
         private const UriSyntaxFlags NetPipeSyntaxFlags =
-                                        UriSyntaxFlags.MustHaveAuthority |
-                                        UriSyntaxFlags.MayHavePath |
-                                        UriSyntaxFlags.MayHaveQuery |
-                                        UriSyntaxFlags.MayHaveFragment |
-                                        UriSyntaxFlags.AllowAnInternetHost |
-                                        UriSyntaxFlags.PathIsRooted |
-                                        UriSyntaxFlags.ConvertPathSlashes |
-                                        UriSyntaxFlags.CompressPath |
-                                        UriSyntaxFlags.CanonicalizeAsFilePath |
-                                        UriSyntaxFlags.UnEscapeDotsAndSlashes |
-                                        UriSyntaxFlags.AllowIdn |
-                                        UriSyntaxFlags.AllowIriParsing;
+            UriSyntaxFlags.MustHaveAuthority
+            | UriSyntaxFlags.MayHavePath
+            | UriSyntaxFlags.MayHaveQuery
+            | UriSyntaxFlags.MayHaveFragment
+            | UriSyntaxFlags.AllowAnInternetHost
+            | UriSyntaxFlags.PathIsRooted
+            | UriSyntaxFlags.ConvertPathSlashes
+            | UriSyntaxFlags.CompressPath
+            | UriSyntaxFlags.CanonicalizeAsFilePath
+            | UriSyntaxFlags.UnEscapeDotsAndSlashes
+            | UriSyntaxFlags.AllowIdn
+            | UriSyntaxFlags.AllowIriParsing;
 
-
-        private const UriSyntaxFlags NetTcpSyntaxFlags = NetPipeSyntaxFlags | UriSyntaxFlags.MayHavePort;
+        private const UriSyntaxFlags NetTcpSyntaxFlags =
+            NetPipeSyntaxFlags | UriSyntaxFlags.MayHavePort;
     }
 }

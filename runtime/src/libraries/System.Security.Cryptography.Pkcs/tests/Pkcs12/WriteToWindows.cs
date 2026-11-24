@@ -12,7 +12,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
         private static readonly PbeParameters s_win7Pbe = new PbeParameters(
             PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
             HashAlgorithmName.SHA1,
-            2068);
+            2068
+        );
 
         [Theory]
         [InlineData(1)]
@@ -34,8 +35,11 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             byte[] emptyPfx = builder.Encode();
 
-            ImportedCollection coll =
-                ImportedCollection.Import(emptyPfx, password, X509KeyStorageFlags.EphemeralKeySet);
+            ImportedCollection coll = ImportedCollection.Import(
+                emptyPfx,
+                password,
+                X509KeyStorageFlags.EphemeralKeySet
+            );
 
             using (coll)
             {
@@ -62,8 +66,11 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             builder.SealWithMac(password, HashAlgorithmName.SHA1, 1024);
             byte[] pfx = builder.Encode();
 
-            ImportedCollection coll =
-                ImportedCollection.Import(pfx, password, X509KeyStorageFlags.EphemeralKeySet);
+            ImportedCollection coll = ImportedCollection.Import(
+                pfx,
+                password,
+                X509KeyStorageFlags.EphemeralKeySet
+            );
 
             using (coll)
             {
@@ -88,16 +95,16 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             const string password = nameof(WriteOneCertNoKeys_NoEncryption);
 
             Pkcs12Builder builder = new Pkcs12Builder();
-            builder.AddSafeContentsEncrypted(
-                contents,
-                password,
-                s_win7Pbe);
+            builder.AddSafeContentsEncrypted(contents, password, s_win7Pbe);
 
             builder.SealWithMac(password, HashAlgorithmName.SHA1, 1024);
             byte[] pfx = builder.Encode();
 
-            ImportedCollection coll =
-                ImportedCollection.Import(pfx, password, X509KeyStorageFlags.EphemeralKeySet);
+            ImportedCollection coll = ImportedCollection.Import(
+                pfx,
+                password,
+                X509KeyStorageFlags.EphemeralKeySet
+            );
 
             using (coll)
             {
@@ -115,7 +122,10 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             Pkcs9LocalKeyId localKeyId = new Pkcs9LocalKeyId(new byte[] { 1 });
 
-            using (X509Certificate2 cert = Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey(true))
+            using (
+                X509Certificate2 cert =
+                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey(true)
+            )
             using (RSA certKey = cert.GetRSAPrivateKey())
             using (RSA exportableKey = certKey.MakeExportable())
             {
@@ -132,16 +142,16 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             Pkcs12Builder builder = new Pkcs12Builder();
 
-            builder.AddSafeContentsEncrypted(
-                contents,
-                password,
-                s_win7Pbe);
+            builder.AddSafeContentsEncrypted(contents, password, s_win7Pbe);
 
             builder.SealWithMac(password, HashAlgorithmName.SHA1, 1024);
             byte[] pfx = builder.Encode();
 
-            ImportedCollection coll =
-                ImportedCollection.Import(pfx, password, X509KeyStorageFlags.EphemeralKeySet);
+            ImportedCollection coll = ImportedCollection.Import(
+                pfx,
+                password,
+                X509KeyStorageFlags.EphemeralKeySet
+            );
 
             using (coll)
             {
@@ -161,7 +171,10 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Pkcs9LocalKeyId localKeyId = new Pkcs9LocalKeyId(new byte[] { 1 });
             const string password = nameof(WriteOneCertWithKey_LikeWindows);
 
-            using (X509Certificate2 cert = Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey(true))
+            using (
+                X509Certificate2 cert =
+                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey(true)
+            )
             {
                 Pkcs12CertBag certBag = safe1.AddCertificate(cert);
                 certBag.Attributes.Add(localKeyId);
@@ -172,10 +185,7 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
                 using (RSA rsa = cert.GetRSAPrivateKey())
                 {
-                    keyBag = safe2.AddShroudedKey(
-                        rsa,
-                        password,
-                        s_win7Pbe);
+                    keyBag = safe2.AddShroudedKey(rsa, password, s_win7Pbe);
                 }
 
                 keyBag.Attributes.Add(localKeyId);
@@ -183,18 +193,18 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             Pkcs12Builder builder = new Pkcs12Builder();
 
-            builder.AddSafeContentsEncrypted(
-                safe1,
-                password,
-                s_win7Pbe);
+            builder.AddSafeContentsEncrypted(safe1, password, s_win7Pbe);
 
             builder.AddSafeContentsUnencrypted(safe2);
 
             builder.SealWithMac(password, HashAlgorithmName.SHA1, 2068);
             byte[] pfx = builder.Encode();
 
-            ImportedCollection coll =
-                ImportedCollection.Import(pfx, password, X509KeyStorageFlags.EphemeralKeySet);
+            ImportedCollection coll = ImportedCollection.Import(
+                pfx,
+                password,
+                X509KeyStorageFlags.EphemeralKeySet
+            );
 
             using (coll)
             {
@@ -228,8 +238,11 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             builder.SealWithMac(password, HashAlgorithmName.SHA1, 1024);
             byte[] pfx = builder.Encode();
 
-            ImportedCollection coll =
-                ImportedCollection.Import(pfx, password, X509KeyStorageFlags.EphemeralKeySet);
+            ImportedCollection coll = ImportedCollection.Import(
+                pfx,
+                password,
+                X509KeyStorageFlags.EphemeralKeySet
+            );
 
             using (coll)
             {

@@ -8,7 +8,11 @@ namespace System.Composition.Hosting.Util
     // only one writer at a time allowed.
     internal sealed class SmallSparseInitonlyArray
     {
-        private sealed class Element { public int Index; public object Value; }
+        private sealed class Element
+        {
+            public int Index;
+            public object Value;
+        }
 
         private const int ElementsCapacity = 128;
         private const int ElementIndexMask = 127;
@@ -48,7 +52,10 @@ namespace System.Composition.Hosting.Util
 
                 if (e.Index == index)
                 {
-                    throw new ArgumentException(SR.Format(SR.Key_Already_Exist, index), nameof(index));
+                    throw new ArgumentException(
+                        SR.Format(SR.Key_Already_Exist, index),
+                        nameof(index)
+                    );
                 }
             }
 

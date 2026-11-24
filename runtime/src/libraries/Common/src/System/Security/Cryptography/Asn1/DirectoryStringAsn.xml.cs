@@ -25,7 +25,9 @@ namespace System.Security.Cryptography.Asn1
             {
                 if (usedTags.TryGetValue(tag, out string? existing))
                 {
-                    throw new InvalidOperationException($"Tag '{tag}' is in use by both '{existing}' and '{fieldName}'");
+                    throw new InvalidOperationException(
+                        $"Tag '{tag}' is in use by both '{existing}' and '{fieldName}'"
+                    );
                 }
 
                 usedTags.Add(tag, fieldName);
@@ -68,8 +70,13 @@ namespace System.Security.Cryptography.Asn1
 
                 // Validator for tag constraint for UniversalString
                 {
-                    if (!Asn1Tag.TryDecode(UniversalString.Value.Span, out Asn1Tag validateTag, out _) ||
-                        !validateTag.HasSameClassAndValue(new Asn1Tag((UniversalTagNumber)28)))
+                    if (
+                        !Asn1Tag.TryDecode(
+                            UniversalString.Value.Span,
+                            out Asn1Tag validateTag,
+                            out _
+                        ) || !validateTag.HasSameClassAndValue(new Asn1Tag((UniversalTagNumber)28))
+                    )
                     {
                         throw new CryptographicException();
                     }
@@ -110,7 +117,10 @@ namespace System.Security.Cryptography.Asn1
             }
         }
 
-        internal static DirectoryStringAsn Decode(ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static DirectoryStringAsn Decode(
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             try
             {
@@ -126,7 +136,11 @@ namespace System.Security.Cryptography.Asn1
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out DirectoryStringAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out DirectoryStringAsn decoded
+        )
         {
             try
             {
@@ -138,7 +152,11 @@ namespace System.Security.Cryptography.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out DirectoryStringAsn decoded)
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out DirectoryStringAsn decoded
+        )
         {
             decoded = default;
             Asn1Tag tag = reader.PeekTag();
@@ -152,12 +170,16 @@ namespace System.Security.Cryptography.Asn1
             }
             else if (tag.HasSameClassAndValue(new Asn1Tag(UniversalTagNumber.PrintableString)))
             {
-                decoded.PrintableString = reader.ReadCharacterString(UniversalTagNumber.PrintableString);
+                decoded.PrintableString = reader.ReadCharacterString(
+                    UniversalTagNumber.PrintableString
+                );
             }
             else if (tag.HasSameClassAndValue(new Asn1Tag((UniversalTagNumber)28)))
             {
                 tmpSpan = reader.ReadEncodedValue();
-                decoded.UniversalString = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
+                decoded.UniversalString = rebindSpan.Overlaps(tmpSpan, out offset)
+                    ? rebind.Slice(offset, tmpSpan.Length)
+                    : tmpSpan.ToArray();
             }
             else if (tag.HasSameClassAndValue(new Asn1Tag(UniversalTagNumber.UTF8String)))
             {

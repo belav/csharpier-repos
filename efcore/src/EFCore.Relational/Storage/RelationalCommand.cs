@@ -37,7 +37,8 @@ public class RelationalCommand : IRelationalCommand
     public RelationalCommand(
         RelationalCommandBuilderDependencies dependencies,
         string commandText,
-        IReadOnlyList<IRelationalParameter> parameters)
+        IReadOnlyList<IRelationalParameter> parameters
+    )
     {
         Dependencies = dependencies;
         CommandText = commandText;
@@ -66,7 +67,11 @@ public class RelationalCommand : IRelationalCommand
     /// <returns>The number of rows affected.</returns>
     public virtual int ExecuteNonQuery(RelationalCommandParameterObject parameterObject)
     {
-        var (connection, context, logger) = (parameterObject.Connection, parameterObject.Context, parameterObject.Logger);
+        var (connection, context, logger) = (
+            parameterObject.Connection,
+            parameterObject.Context,
+            parameterObject.Logger
+        );
 
         var startTime = DateTimeOffset.UtcNow;
 
@@ -74,7 +79,8 @@ public class RelationalCommand : IRelationalCommand
         var shouldLogCommandExecute = logger?.ShouldLogCommandExecute(startTime) == true;
 
         // Guid.NewGuid is expensive, do it only if needed
-        var commandId = shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
+        var commandId =
+            shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
 
         var command = CreateDbCommand(parameterObject, commandId, DbCommandMethod.ExecuteNonQuery);
 
@@ -87,30 +93,30 @@ public class RelationalCommand : IRelationalCommand
             if (shouldLogCommandExecute)
             {
                 var interceptionResult = logger?.CommandNonQueryExecuting(
-                        connection,
-                        command,
-                        context,
-                        commandId,
-                        connection.ConnectionId,
-                        startTime,
-                        parameterObject.CommandSource)
-                    ?? default;
+                    connection,
+                    command,
+                    context,
+                    commandId,
+                    connection.ConnectionId,
+                    startTime,
+                    parameterObject.CommandSource
+                ) ?? default;
 
                 var nonQueryResult = interceptionResult.HasResult
                     ? interceptionResult.Result
                     : command.ExecuteNonQuery();
 
                 return logger?.CommandNonQueryExecuted(
-                        connection,
-                        command,
-                        context,
-                        commandId,
-                        connection.ConnectionId,
-                        nonQueryResult,
-                        startTime,
-                        stopwatch.Elapsed,
-                        parameterObject.CommandSource)
-                    ?? nonQueryResult;
+                    connection,
+                    command,
+                    context,
+                    commandId,
+                    connection.ConnectionId,
+                    nonQueryResult,
+                    startTime,
+                    stopwatch.Elapsed,
+                    parameterObject.CommandSource
+                ) ?? nonQueryResult;
             }
             else
             {
@@ -130,7 +136,8 @@ public class RelationalCommand : IRelationalCommand
                     connection.ConnectionId,
                     startTime,
                     stopwatch.Elapsed,
-                    parameterObject.CommandSource);
+                    parameterObject.CommandSource
+                );
             }
             else
             {
@@ -144,7 +151,8 @@ public class RelationalCommand : IRelationalCommand
                     exception,
                     startTime,
                     stopwatch.Elapsed,
-                    parameterObject.CommandSource);
+                    parameterObject.CommandSource
+                );
             }
 
             throw;
@@ -166,9 +174,14 @@ public class RelationalCommand : IRelationalCommand
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     public virtual async Task<int> ExecuteNonQueryAsync(
         RelationalCommandParameterObject parameterObject,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
-        var (connection, context, logger) = (parameterObject.Connection, parameterObject.Context, parameterObject.Logger);
+        var (connection, context, logger) = (
+            parameterObject.Connection,
+            parameterObject.Context,
+            parameterObject.Logger
+        );
 
         var startTime = DateTimeOffset.UtcNow;
 
@@ -176,7 +189,8 @@ public class RelationalCommand : IRelationalCommand
         var shouldLogCommandExecute = logger?.ShouldLogCommandExecute(startTime) == true;
 
         // Guid.NewGuid is expensive, do it only if needed
-        var commandId = shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
+        var commandId =
+            shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
 
         var command = CreateDbCommand(parameterObject, commandId, DbCommandMethod.ExecuteNonQuery);
 
@@ -188,18 +202,21 @@ public class RelationalCommand : IRelationalCommand
         {
             if (shouldLogCommandExecute)
             {
-                var interceptionResult = logger == null
-                    ? default
-                    : await logger.CommandNonQueryExecutingAsync(
-                            connection,
-                            command,
-                            context,
-                            commandId,
-                            connection.ConnectionId,
-                            startTime,
-                            parameterObject.CommandSource,
-                            cancellationToken)
-                        .ConfigureAwait(false);
+                var interceptionResult =
+                    logger == null
+                        ? default
+                        : await logger
+                            .CommandNonQueryExecutingAsync(
+                                connection,
+                                command,
+                                context,
+                                commandId,
+                                connection.ConnectionId,
+                                startTime,
+                                parameterObject.CommandSource,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
 
                 var result = interceptionResult.HasResult
                     ? interceptionResult.Result
@@ -207,7 +224,8 @@ public class RelationalCommand : IRelationalCommand
 
                 if (logger != null)
                 {
-                    result = await logger.CommandNonQueryExecutedAsync(
+                    result = await logger
+                        .CommandNonQueryExecutedAsync(
                             connection,
                             command,
                             context,
@@ -217,7 +235,8 @@ public class RelationalCommand : IRelationalCommand
                             startTime,
                             stopwatch.Elapsed,
                             parameterObject.CommandSource,
-                            cancellationToken)
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
                 }
 
@@ -234,7 +253,8 @@ public class RelationalCommand : IRelationalCommand
             {
                 if (Dependencies.ExceptionDetector.IsCancellation(exception, cancellationToken))
                 {
-                    await logger.CommandCanceledAsync(
+                    await logger
+                        .CommandCanceledAsync(
                             connection,
                             command,
                             context,
@@ -244,12 +264,14 @@ public class RelationalCommand : IRelationalCommand
                             startTime,
                             stopwatch.Elapsed,
                             parameterObject.CommandSource,
-                            cancellationToken)
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
                 }
                 else
                 {
-                    await logger.CommandErrorAsync(
+                    await logger
+                        .CommandErrorAsync(
                             connection,
                             command,
                             context,
@@ -260,7 +282,8 @@ public class RelationalCommand : IRelationalCommand
                             startTime,
                             stopwatch.Elapsed,
                             parameterObject.CommandSource,
-                            cancellationToken)
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
                 }
             }
@@ -280,7 +303,11 @@ public class RelationalCommand : IRelationalCommand
     /// <returns>The result of the command.</returns>
     public virtual object? ExecuteScalar(RelationalCommandParameterObject parameterObject)
     {
-        var (connection, context, logger) = (parameterObject.Connection, parameterObject.Context, parameterObject.Logger);
+        var (connection, context, logger) = (
+            parameterObject.Connection,
+            parameterObject.Context,
+            parameterObject.Logger
+        );
 
         var startTime = DateTimeOffset.UtcNow;
 
@@ -288,7 +315,8 @@ public class RelationalCommand : IRelationalCommand
         var shouldLogCommandExecute = logger?.ShouldLogCommandExecute(startTime) == true;
 
         // Guid.NewGuid is expensive, do it only if needed
-        var commandId = shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
+        var commandId =
+            shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
 
         var command = CreateDbCommand(parameterObject, commandId, DbCommandMethod.ExecuteScalar);
 
@@ -301,30 +329,30 @@ public class RelationalCommand : IRelationalCommand
             if (shouldLogCommandExecute)
             {
                 var interceptionResult = logger?.CommandScalarExecuting(
-                        connection,
-                        command,
-                        context,
-                        commandId,
-                        connection.ConnectionId,
-                        startTime,
-                        parameterObject.CommandSource)
-                    ?? default;
+                    connection,
+                    command,
+                    context,
+                    commandId,
+                    connection.ConnectionId,
+                    startTime,
+                    parameterObject.CommandSource
+                ) ?? default;
 
                 var result = interceptionResult.HasResult
                     ? interceptionResult.Result
                     : command.ExecuteScalar();
 
                 return logger?.CommandScalarExecuted(
-                        connection,
-                        command,
-                        context,
-                        commandId,
-                        connection.ConnectionId,
-                        result,
-                        startTime,
-                        stopwatch.Elapsed,
-                        parameterObject.CommandSource)
-                    ?? result;
+                    connection,
+                    command,
+                    context,
+                    commandId,
+                    connection.ConnectionId,
+                    result,
+                    startTime,
+                    stopwatch.Elapsed,
+                    parameterObject.CommandSource
+                ) ?? result;
             }
             else
             {
@@ -344,7 +372,8 @@ public class RelationalCommand : IRelationalCommand
                     connection.ConnectionId,
                     startTime,
                     stopwatch.Elapsed,
-                    parameterObject.CommandSource);
+                    parameterObject.CommandSource
+                );
             }
             else
             {
@@ -358,7 +387,8 @@ public class RelationalCommand : IRelationalCommand
                     exception,
                     startTime,
                     stopwatch.Elapsed,
-                    parameterObject.CommandSource);
+                    parameterObject.CommandSource
+                );
             }
 
             throw;
@@ -380,9 +410,14 @@ public class RelationalCommand : IRelationalCommand
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     public virtual async Task<object?> ExecuteScalarAsync(
         RelationalCommandParameterObject parameterObject,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
-        var (connection, context, logger) = (parameterObject.Connection, parameterObject.Context, parameterObject.Logger);
+        var (connection, context, logger) = (
+            parameterObject.Connection,
+            parameterObject.Context,
+            parameterObject.Logger
+        );
 
         var startTime = DateTimeOffset.UtcNow;
 
@@ -390,7 +425,8 @@ public class RelationalCommand : IRelationalCommand
         var shouldLogCommandExecute = logger?.ShouldLogCommandExecute(startTime) == true;
 
         // Guid.NewGuid is expensive, do it only if needed
-        var commandId = shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
+        var commandId =
+            shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
 
         var command = CreateDbCommand(parameterObject, commandId, DbCommandMethod.ExecuteScalar);
 
@@ -402,18 +438,21 @@ public class RelationalCommand : IRelationalCommand
         {
             if (shouldLogCommandExecute)
             {
-                var interceptionResult = logger == null
-                    ? default
-                    : await logger.CommandScalarExecutingAsync(
-                            connection,
-                            command,
-                            context,
-                            commandId,
-                            connection.ConnectionId,
-                            startTime,
-                            parameterObject.CommandSource,
-                            cancellationToken)
-                        .ConfigureAwait(false);
+                var interceptionResult =
+                    logger == null
+                        ? default
+                        : await logger
+                            .CommandScalarExecutingAsync(
+                                connection,
+                                command,
+                                context,
+                                commandId,
+                                connection.ConnectionId,
+                                startTime,
+                                parameterObject.CommandSource,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
 
                 var result = interceptionResult.HasResult
                     ? interceptionResult.Result
@@ -421,17 +460,20 @@ public class RelationalCommand : IRelationalCommand
 
                 if (logger != null)
                 {
-                    result = await logger.CommandScalarExecutedAsync(
-                        connection,
-                        command,
-                        context,
-                        commandId,
-                        connection.ConnectionId,
-                        result,
-                        startTime,
-                        stopwatch.Elapsed,
-                        parameterObject.CommandSource,
-                        cancellationToken).ConfigureAwait(false);
+                    result = await logger
+                        .CommandScalarExecutedAsync(
+                            connection,
+                            command,
+                            context,
+                            commandId,
+                            connection.ConnectionId,
+                            result,
+                            startTime,
+                            stopwatch.Elapsed,
+                            parameterObject.CommandSource,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
 
                 return result;
@@ -447,7 +489,8 @@ public class RelationalCommand : IRelationalCommand
             {
                 if (Dependencies.ExceptionDetector.IsCancellation(exception, cancellationToken))
                 {
-                    await logger.CommandCanceledAsync(
+                    await logger
+                        .CommandCanceledAsync(
                             connection,
                             command,
                             context,
@@ -457,12 +500,14 @@ public class RelationalCommand : IRelationalCommand
                             startTime,
                             stopwatch.Elapsed,
                             parameterObject.CommandSource,
-                            cancellationToken)
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
                 }
                 else
                 {
-                    await logger.CommandErrorAsync(
+                    await logger
+                        .CommandErrorAsync(
                             connection,
                             command,
                             context,
@@ -473,7 +518,8 @@ public class RelationalCommand : IRelationalCommand
                             startTime,
                             stopwatch.Elapsed,
                             parameterObject.CommandSource,
-                            cancellationToken)
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
                 }
             }
@@ -491,7 +537,9 @@ public class RelationalCommand : IRelationalCommand
     /// </summary>
     /// <param name="parameterObject">Parameters for this method.</param>
     /// <returns>The result of the command.</returns>
-    public virtual RelationalDataReader ExecuteReader(RelationalCommandParameterObject parameterObject)
+    public virtual RelationalDataReader ExecuteReader(
+        RelationalCommandParameterObject parameterObject
+    )
     {
         var connection = parameterObject.Connection;
         var context = parameterObject.Context;
@@ -505,7 +553,8 @@ public class RelationalCommand : IRelationalCommand
         var shouldLogCommandExecute = logger?.ShouldLogCommandExecute(startTime) == true;
 
         // Guid.NewGuid is expensive, do it only if needed
-        var commandId = shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
+        var commandId =
+            shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
 
         connection.Open();
 
@@ -525,7 +574,8 @@ public class RelationalCommand : IRelationalCommand
                     commandId,
                     connection.ConnectionId,
                     startTime,
-                    parameterObject.CommandSource);
+                    parameterObject.CommandSource
+                );
 
                 reader = interceptionResult.HasResult
                     ? interceptionResult.Result
@@ -540,7 +590,8 @@ public class RelationalCommand : IRelationalCommand
                     reader,
                     startTime,
                     stopwatch.Elapsed,
-                    parameterObject.CommandSource);
+                    parameterObject.CommandSource
+                );
             }
             else
             {
@@ -560,7 +611,8 @@ public class RelationalCommand : IRelationalCommand
                     connection.ConnectionId,
                     startTime,
                     stopwatch.Elapsed,
-                    parameterObject.CommandSource);
+                    parameterObject.CommandSource
+                );
             }
             else
             {
@@ -574,7 +626,8 @@ public class RelationalCommand : IRelationalCommand
                     exception,
                     startTime,
                     stopwatch.Elapsed,
-                    parameterObject.CommandSource);
+                    parameterObject.CommandSource
+                );
             }
 
             CleanupCommand(command, connection);
@@ -586,12 +639,20 @@ public class RelationalCommand : IRelationalCommand
         {
             if (readerColumns != null)
             {
-                reader = new BufferedDataReader(reader, detailedErrorsEnabled).Initialize(readerColumns);
+                reader = new BufferedDataReader(reader, detailedErrorsEnabled).Initialize(
+                    readerColumns
+                );
             }
 
             _relationalReader ??= CreateRelationalDataReader();
 
-            _relationalReader.Initialize(parameterObject.Connection, command, reader, commandId, logger);
+            _relationalReader.Initialize(
+                parameterObject.Connection,
+                command,
+                reader,
+                commandId,
+                logger
+            );
 
             readerOpen = true;
 
@@ -617,7 +678,8 @@ public class RelationalCommand : IRelationalCommand
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     public virtual async Task<RelationalDataReader> ExecuteReaderAsync(
         RelationalCommandParameterObject parameterObject,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var connection = parameterObject.Connection;
         var context = parameterObject.Context;
@@ -631,7 +693,8 @@ public class RelationalCommand : IRelationalCommand
         var shouldLogCommandExecute = logger?.ShouldLogCommandExecute(startTime) == true;
 
         // Guid.NewGuid is expensive, do it only if needed
-        var commandId = shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
+        var commandId =
+            shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
 
         await connection.OpenAsync(cancellationToken).ConfigureAwait(false);
 
@@ -644,7 +707,8 @@ public class RelationalCommand : IRelationalCommand
         {
             if (shouldLogCommandExecute)
             {
-                var interceptionResult = await logger!.CommandReaderExecutingAsync(
+                var interceptionResult = await logger!
+                    .CommandReaderExecutingAsync(
                         connection,
                         command,
                         context,
@@ -652,14 +716,16 @@ public class RelationalCommand : IRelationalCommand
                         connection.ConnectionId,
                         startTime,
                         parameterObject.CommandSource,
-                        cancellationToken)
+                        cancellationToken
+                    )
                     .ConfigureAwait(false);
 
                 reader = interceptionResult.HasResult
                     ? interceptionResult.Result
                     : await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-                reader = await logger.CommandReaderExecutedAsync(
+                reader = await logger
+                    .CommandReaderExecutedAsync(
                         connection,
                         command,
                         context,
@@ -669,7 +735,8 @@ public class RelationalCommand : IRelationalCommand
                         startTime,
                         stopwatch.Elapsed,
                         parameterObject.CommandSource,
-                        cancellationToken)
+                        cancellationToken
+                    )
                     .ConfigureAwait(false);
             }
             else
@@ -683,7 +750,8 @@ public class RelationalCommand : IRelationalCommand
             {
                 if (Dependencies.ExceptionDetector.IsCancellation(exception, cancellationToken))
                 {
-                    await logger.CommandCanceledAsync(
+                    await logger
+                        .CommandCanceledAsync(
                             connection,
                             command,
                             context,
@@ -693,12 +761,14 @@ public class RelationalCommand : IRelationalCommand
                             startTime,
                             stopwatch.Elapsed,
                             parameterObject.CommandSource,
-                            cancellationToken)
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
                 }
                 else
                 {
-                    await logger.CommandErrorAsync(
+                    await logger
+                        .CommandErrorAsync(
                             connection,
                             command,
                             context,
@@ -709,7 +779,8 @@ public class RelationalCommand : IRelationalCommand
                             startTime,
                             stopwatch.Elapsed,
                             parameterObject.CommandSource,
-                            cancellationToken)
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
                 }
             }
@@ -723,13 +794,20 @@ public class RelationalCommand : IRelationalCommand
         {
             if (readerColumns != null)
             {
-                reader = await new BufferedDataReader(reader, detailedErrorsEnabled).InitializeAsync(readerColumns, cancellationToken)
+                reader = await new BufferedDataReader(reader, detailedErrorsEnabled)
+                    .InitializeAsync(readerColumns, cancellationToken)
                     .ConfigureAwait(false);
             }
 
             _relationalReader ??= CreateRelationalDataReader();
 
-            _relationalReader.Initialize(parameterObject.Connection, command, reader, commandId, logger);
+            _relationalReader.Initialize(
+                parameterObject.Connection,
+                command,
+                reader,
+                commandId,
+                logger
+            );
 
             readerOpen = true;
 
@@ -762,9 +840,14 @@ public class RelationalCommand : IRelationalCommand
     public virtual DbCommand CreateDbCommand(
         RelationalCommandParameterObject parameterObject,
         Guid commandId,
-        DbCommandMethod commandMethod)
+        DbCommandMethod commandMethod
+    )
     {
-        var (connection, context, logger) = (parameterObject.Connection, parameterObject.Context, parameterObject.Logger);
+        var (connection, context, logger) = (
+            parameterObject.Connection,
+            parameterObject.Context,
+            parameterObject.Logger
+        );
         var connectionId = connection.ConnectionId;
 
         var startTime = DateTimeOffset.UtcNow;
@@ -777,8 +860,14 @@ public class RelationalCommand : IRelationalCommand
         if (logCommandCreate)
         {
             var interceptionResult = logger!.CommandCreating(
-                connection, commandMethod, context, commandId, connectionId, startTime,
-                parameterObject.CommandSource);
+                connection,
+                commandMethod,
+                context,
+                commandId,
+                connectionId,
+                startTime,
+                parameterObject.CommandSource
+            );
 
             command = interceptionResult.HasResult
                 ? interceptionResult.Result
@@ -793,7 +882,8 @@ public class RelationalCommand : IRelationalCommand
                 connectionId,
                 startTime,
                 stopwatch.Elapsed,
-                parameterObject.CommandSource);
+                parameterObject.CommandSource
+            );
         }
         else
         {
@@ -828,15 +918,14 @@ public class RelationalCommand : IRelationalCommand
                 connectionId,
                 startTime,
                 stopwatch.Elapsed,
-                parameterObject.CommandSource);
+                parameterObject.CommandSource
+            );
         }
 
         return command;
     }
 
-    private static void CleanupCommand(
-        DbCommand command,
-        IRelationalConnection connection)
+    private static void CleanupCommand(DbCommand command, IRelationalConnection connection)
     {
         command.Parameters.Clear();
         command.Dispose();
@@ -845,7 +934,8 @@ public class RelationalCommand : IRelationalCommand
 
     private static async Task CleanupCommandAsync(
         DbCommand command,
-        IRelationalConnection connection)
+        IRelationalConnection connection
+    )
     {
         command.Parameters.Clear();
         await command.DisposeAsync().ConfigureAwait(false);
@@ -864,8 +954,7 @@ public class RelationalCommand : IRelationalCommand
     ///     </para>
     /// </summary>
     /// <returns>The created <see cref="RelationalDataReader" />.</returns>
-    protected virtual RelationalDataReader CreateRelationalDataReader()
-        => new();
+    protected virtual RelationalDataReader CreateRelationalDataReader() => new();
 
     /// <summary>
     ///     Populates this command from the provided <paramref name="commandTemplate" />.

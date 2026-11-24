@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using System.Runtime.Serialization;
 using System;
 using System.Collections.Immutable;
+using System.Runtime.Serialization;
 
 namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue;
 
@@ -20,7 +20,8 @@ internal readonly struct ManagedHotReloadUpdate(
     ImmutableArray<int> updatedMethods,
     ImmutableArray<SequencePointUpdates> sequencePoints,
     ImmutableArray<ManagedActiveStatementUpdate> activeStatements,
-    ImmutableArray<ManagedExceptionRegionUpdate> exceptionRegions)
+    ImmutableArray<ManagedExceptionRegionUpdate> exceptionRegions
+)
 {
     [DataMember(Name = "module")]
     public Guid Module { get; } = module;
@@ -50,8 +51,10 @@ internal readonly struct ManagedHotReloadUpdate(
     public ImmutableArray<SequencePointUpdates> SequencePoints { get; } = sequencePoints;
 
     [DataMember(Name = "activeStatements")]
-    public ImmutableArray<ManagedActiveStatementUpdate> ActiveStatements { get; } = activeStatements;
+    public ImmutableArray<ManagedActiveStatementUpdate> ActiveStatements { get; } =
+        activeStatements;
 
     [DataMember(Name = "exceptionRegions")]
-    public ImmutableArray<ManagedExceptionRegionUpdate> ExceptionRegions { get; } = exceptionRegions;
+    public ImmutableArray<ManagedExceptionRegionUpdate> ExceptionRegions { get; } =
+        exceptionRegions;
 }

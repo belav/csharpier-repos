@@ -81,7 +81,11 @@ namespace System.ComponentModel.TypeConverterTests
 
         protected void TestConvertToString(T value, string str)
         {
-            Assert.Equal(str, (string)Converter.ConvertTo(null, CultureInfo.InvariantCulture, value, typeof(string)));
+            Assert.Equal(
+                str,
+                (string)
+                    Converter.ConvertTo(null, CultureInfo.InvariantCulture, value, typeof(string))
+            );
         }
 
         protected void ConvertFromThrowsArgumentExceptionForString(string value)

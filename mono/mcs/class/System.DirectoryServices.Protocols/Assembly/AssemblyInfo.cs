@@ -10,30 +10,30 @@
 using System;
 using System.Reflection;
 using System.Resources;
-using System.Security;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Security;
 
 // General Information about the system assembly
 
-[assembly: AssemblyTitle ("System.DirectoryServices.Protocols.dll")]
-[assembly: AssemblyDescription ("System.DirectoryServices.Protocols.dll")]
-[assembly: AssemblyDefaultAlias ("System.DirectoryServices.Protocols.dll")]
+[assembly: AssemblyTitle("System.DirectoryServices.Protocols.dll")]
+[assembly: AssemblyDescription("System.DirectoryServices.Protocols.dll")]
+[assembly: AssemblyDefaultAlias("System.DirectoryServices.Protocols.dll")]
 
-[assembly: AssemblyCompany (Consts.MonoCompany)]
-[assembly: AssemblyProduct (Consts.MonoProduct)]
-[assembly: AssemblyCopyright (Consts.MonoCopyright)]
-[assembly: AssemblyVersion (Consts.FxVersion)]
-[assembly: SatelliteContractVersion (Consts.FxVersion)]
-[assembly: AssemblyInformationalVersion (Consts.FxFileVersion)]
+[assembly: AssemblyCompany(Consts.MonoCompany)]
+[assembly: AssemblyProduct(Consts.MonoProduct)]
+[assembly: AssemblyCopyright(Consts.MonoCopyright)]
+[assembly: AssemblyVersion(Consts.FxVersion)]
+[assembly: SatelliteContractVersion(Consts.FxVersion)]
+[assembly: AssemblyInformationalVersion(Consts.FxFileVersion)]
 
-[assembly: NeutralResourcesLanguage ("en-US")]
+[assembly: NeutralResourcesLanguage("en-US")]
 
-[assembly: ComVisible (false)]
+[assembly: ComVisible(false)]
 
-	[assembly: CLSCompliant (true)]
-	[assembly: AssemblyDelaySign (true)]
+[assembly: CLSCompliant(true)]
+[assembly: AssemblyDelaySign(true)]
 
-[assembly: AssemblyFileVersion (Consts.FxFileVersion)]
+[assembly: AssemblyFileVersion(Consts.FxFileVersion)]
 [assembly: AllowPartiallyTrustedCallers]
-[assembly: CompilationRelaxations (CompilationRelaxations.NoStringInterning)]
+[assembly: CompilationRelaxations(CompilationRelaxations.NoStringInterning)]

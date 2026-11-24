@@ -14,8 +14,11 @@ using Xunit;
 [StructLayout(LayoutKind.Explicit, Size = 32)]
 public readonly unsafe struct SmallString
 {
-    [FieldOffset(0)] private readonly byte _length;
-    [FieldOffset(1)] private readonly byte _firstByte;
+    [FieldOffset(0)]
+    private readonly byte _length;
+
+    [FieldOffset(1)]
+    private readonly byte _firstByte;
 
     public SmallString(string value)
     {
@@ -42,6 +45,7 @@ public readonly unsafe struct SmallString
 public static class Program
 {
     static int result = 0;
+
     [Fact]
     public static int TestEntryPoint()
     {

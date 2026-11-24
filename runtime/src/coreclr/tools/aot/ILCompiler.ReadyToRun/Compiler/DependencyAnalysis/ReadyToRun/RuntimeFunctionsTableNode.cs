@@ -3,10 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-
 using Internal.Text;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
@@ -59,7 +57,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             if (_methodNodes == null)
                 LayoutRuntimeFunctions();
@@ -92,7 +95,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     }
                     else
                     {
-                        Debug.Assert((method.FrameInfos.Length + method.ColdFrameInfos.Length) == funcletOffsets.Length);
+                        Debug.Assert(
+                            (method.FrameInfos.Length + method.ColdFrameInfos.Length)
+                                == funcletOffsets.Length
+                        );
                         startIndex = method.FrameInfos.Length;
                         endIndex = funcletOffsets.Length;
                     }
@@ -104,7 +110,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
                         if (frameIndex >= method.FrameInfos.Length)
                         {
-                            frameInfo = method.ColdFrameInfos[frameIndex - method.FrameInfos.Length];
+                            frameInfo = method.ColdFrameInfos[
+                                frameIndex - method.FrameInfos.Length
+                            ];
                             symbol = method.ColdCodeNode;
 
                             if (frameIndex == method.FrameInfos.Length)
@@ -119,14 +127,29 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                             symbol = method;
                         }
 
-                        runtimeFunctionsBuilder.EmitReloc(symbol, RelocType.IMAGE_REL_BASED_ADDR32NB, delta: frameInfo.StartOffset + _nodeFactory.Target.CodeDelta);
-                        if (!relocsOnly && _nodeFactory.Target.Architecture == TargetArchitecture.X64)
+                        runtimeFunctionsBuilder.EmitReloc(
+                            symbol,
+                            RelocType.IMAGE_REL_BASED_ADDR32NB,
+                            delta: frameInfo.StartOffset + _nodeFactory.Target.CodeDelta
+                        );
+                        if (
+                            !relocsOnly
+                            && _nodeFactory.Target.Architecture == TargetArchitecture.X64
+                        )
                         {
                             // On Amd64, the 2nd word contains the EndOffset of the runtime function
                             Debug.Assert(frameInfo.StartOffset != frameInfo.EndOffset);
-                            runtimeFunctionsBuilder.EmitReloc(symbol, RelocType.IMAGE_REL_BASED_ADDR32NB, delta: frameInfo.EndOffset);
+                            runtimeFunctionsBuilder.EmitReloc(
+                                symbol,
+                                RelocType.IMAGE_REL_BASED_ADDR32NB,
+                                delta: frameInfo.EndOffset
+                            );
                         }
-                        runtimeFunctionsBuilder.EmitReloc(factory.RuntimeFunctionsGCInfo, RelocType.IMAGE_REL_BASED_ADDR32NB, funcletOffsets[frameIndex]);
+                        runtimeFunctionsBuilder.EmitReloc(
+                            factory.RuntimeFunctionsGCInfo,
+                            RelocType.IMAGE_REL_BASED_ADDR32NB,
+                            funcletOffsets[frameIndex]
+                        );
                         runtimeFunctionIndex++;
                     }
                 }

@@ -16,11 +16,9 @@ using System.Reflection.Runtime.TypeInfos;
 using System.Reflection.Runtime.TypeInfos.NativeFormat;
 using System.Runtime.CompilerServices;
 using System.Text;
-
 using Internal.Metadata.NativeFormat;
 using Internal.Reflection.Core;
 using Internal.Reflection.Core.Execution;
-
 using NativeFormatMethodSemanticsAttributes = global::Internal.Metadata.NativeFormat.MethodSemanticsAttributes;
 
 namespace System.Reflection.Runtime.PropertyInfos.NativeFormat
@@ -50,8 +48,13 @@ namespace System.Reflection.Runtime.PropertyInfos.NativeFormat
         //
         //  We don't report any DeclaredMembers for arrays or generic parameters so those don't apply.
         //
-        private NativeFormatRuntimePropertyInfo(PropertyHandle propertyHandle, NativeFormatRuntimeNamedTypeInfo definingTypeInfo, RuntimeTypeInfo contextTypeInfo, RuntimeTypeInfo reflectedType) :
-            base(contextTypeInfo, reflectedType)
+        private NativeFormatRuntimePropertyInfo(
+            PropertyHandle propertyHandle,
+            NativeFormatRuntimeNamedTypeInfo definingTypeInfo,
+            RuntimeTypeInfo contextTypeInfo,
+            RuntimeTypeInfo reflectedType
+        )
+            : base(contextTypeInfo, reflectedType)
         {
             _propertyHandle = propertyHandle;
             _definingTypeInfo = definingTypeInfo;
@@ -61,24 +64,27 @@ namespace System.Reflection.Runtime.PropertyInfos.NativeFormat
 
         public sealed override PropertyAttributes Attributes
         {
-            get
-            {
-                return _property.Flags;
-            }
+            get { return _property.Flags; }
         }
 
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes
         {
             get
             {
-                return RuntimeCustomAttributeData.GetCustomAttributes(_reader, _property.CustomAttributes);
+                return RuntimeCustomAttributeData.GetCustomAttributes(
+                    _reader,
+                    _property.CustomAttributes
+                );
             }
         }
 
         public override Type GetModifiedPropertyType()
         {
-            return ModifiedType.Create(PropertyType, _reader, _reader.GetPropertySignature(_property.Signature).Type);
-
+            return ModifiedType.Create(
+                PropertyType,
+                _reader,
+                _reader.GetPropertySignature(_property.Signature).Type
+            );
         }
 
         public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other)
@@ -118,27 +124,39 @@ namespace System.Reflection.Runtime.PropertyInfos.NativeFormat
 
         public sealed override int MetadataToken
         {
-            get
-            {
-                throw new InvalidOperationException(SR.NoMetadataTokenAvailable);
-            }
+            get { throw new InvalidOperationException(SR.NoMetadataTokenAvailable); }
         }
 
         protected sealed override QSignatureTypeHandle PropertyTypeHandle
         {
             get
             {
-                return new QSignatureTypeHandle(_reader, _property.Signature.GetPropertySignature(_reader).Type);
+                return new QSignatureTypeHandle(
+                    _reader,
+                    _property.Signature.GetPropertySignature(_reader).Type
+                );
             }
         }
 
         protected sealed override bool GetDefaultValueIfAny(bool raw, out object? defaultValue)
         {
-            return DefaultValueParser.GetDefaultValueFromConstantIfAny(_reader, _property.DefaultValue, PropertyType, raw, out defaultValue)
-                || DefaultValueParser.GetDefaultValueFromAttributeIfAny(CustomAttributes, raw, out defaultValue);
+            return DefaultValueParser.GetDefaultValueFromConstantIfAny(
+                    _reader,
+                    _property.DefaultValue,
+                    PropertyType,
+                    raw,
+                    out defaultValue
+                )
+                || DefaultValueParser.GetDefaultValueFromAttributeIfAny(
+                    CustomAttributes,
+                    raw,
+                    out defaultValue
+                );
         }
 
-        protected sealed override RuntimeNamedMethodInfo GetPropertyMethod(PropertyMethodSemantics whichMethod)
+        protected sealed override RuntimeNamedMethodInfo GetPropertyMethod(
+            PropertyMethodSemantics whichMethod
+        )
         {
             NativeFormatMethodSemanticsAttributes localMethodSemantics;
             switch (whichMethod)
@@ -171,7 +189,14 @@ namespace System.Reflection.Runtime.PropertyInfos.NativeFormat
                             continue;
                     }
 
-                    return RuntimeNamedMethodInfo<NativeFormatMethodCommon>.GetRuntimeNamedMethodInfo(new NativeFormatMethodCommon(methodHandle, _definingTypeInfo, ContextTypeInfo), _reflectedType);
+                    return RuntimeNamedMethodInfo<NativeFormatMethodCommon>.GetRuntimeNamedMethodInfo(
+                        new NativeFormatMethodCommon(
+                            methodHandle,
+                            _definingTypeInfo,
+                            ContextTypeInfo
+                        ),
+                        _reflectedType
+                    );
                 }
             }
 
@@ -180,18 +205,12 @@ namespace System.Reflection.Runtime.PropertyInfos.NativeFormat
 
         protected sealed override string MetadataName
         {
-            get
-            {
-                return _property.Name.GetString(_reader);
-            }
+            get { return _property.Name.GetString(_reader); }
         }
 
         protected sealed override RuntimeTypeInfo DefiningTypeInfo
         {
-            get
-            {
-                return _definingTypeInfo;
-            }
+            get { return _definingTypeInfo; }
         }
 
         private readonly NativeFormatRuntimeNamedTypeInfo _definingTypeInfo;

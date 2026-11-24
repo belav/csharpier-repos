@@ -12,12 +12,10 @@ public class Program
         System.Reflection.FieldInfo field = type.GetField("TestField");
         Console.WriteLine("about to get value of 'TestField'");
         Console.WriteLine("got field 'TestField'");
-	int val = (int)field.GetValue(null);
+        int val = (int)field.GetValue(null);
         Console.WriteLine("Value of field: " + val);
-	if (val == 1)
-		return 0;
-	return 1;
+        if (val == 1)
+            return 0;
+        return 1;
     }
 }
-
-

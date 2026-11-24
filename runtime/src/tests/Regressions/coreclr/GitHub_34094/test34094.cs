@@ -22,7 +22,9 @@ public class Test34094
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Sse)}.{nameof(Sse.CompareGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Sse)}.{nameof(Sse.CompareGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -43,7 +45,9 @@ public class Test34094
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Sse)}.{nameof(Sse.CompareGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Sse)}.{nameof(Sse.CompareGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -64,7 +68,9 @@ public class Test34094
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Sse)}.{nameof(Sse.CompareNotGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Sse)}.{nameof(Sse.CompareNotGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -85,7 +91,9 @@ public class Test34094
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Sse)}.{nameof(Sse.CompareNotGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Sse)}.{nameof(Sse.CompareNotGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -106,7 +114,9 @@ public class Test34094
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Sse)}.{nameof(Sse.CompareScalarGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Sse)}.{nameof(Sse.CompareScalarGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -127,7 +137,9 @@ public class Test34094
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Sse)}.{nameof(Sse.CompareScalarGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Sse)}.{nameof(Sse.CompareScalarGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -148,7 +160,9 @@ public class Test34094
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Sse)}.{nameof(Sse.CompareScalarNotGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Sse)}.{nameof(Sse.CompareScalarNotGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -169,7 +183,9 @@ public class Test34094
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Sse)}.{nameof(Sse.CompareScalarNotGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Sse)}.{nameof(Sse.CompareScalarNotGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -190,7 +206,9 @@ public class Test34094
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Sse2)}.{nameof(Sse2.CompareGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Sse2)}.{nameof(Sse2.CompareGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -211,7 +229,9 @@ public class Test34094
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Sse2)}.{nameof(Sse2.CompareGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Sse2)}.{nameof(Sse2.CompareGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -232,7 +252,9 @@ public class Test34094
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Sse2)}.{nameof(Sse2.CompareNotGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Sse2)}.{nameof(Sse2.CompareNotGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -253,7 +275,9 @@ public class Test34094
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Sse2)}.{nameof(Sse2.CompareNotGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Sse2)}.{nameof(Sse2.CompareNotGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -274,7 +298,9 @@ public class Test34094
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Sse2)}.{nameof(Sse2.CompareScalarGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Sse2)}.{nameof(Sse2.CompareScalarGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -295,7 +321,9 @@ public class Test34094
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Sse2)}.{nameof(Sse2.CompareScalarGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Sse2)}.{nameof(Sse2.CompareScalarGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -316,7 +344,9 @@ public class Test34094
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Sse2)}.{nameof(Sse2.CompareScalarNotGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Sse2)}.{nameof(Sse2.CompareScalarNotGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -337,7 +367,9 @@ public class Test34094
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Sse2)}.{nameof(Sse2.CompareScalarNotGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Sse2)}.{nameof(Sse2.CompareScalarNotGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -350,15 +382,35 @@ public class Test34094
         {
             const int expectedResult = 0b0010_0100;
 
-            Vector256<float> value1 = Vector256.Create(float.NaN, 1.0f, 2.0f, 3.0f, 0.0f, 2.0f, 1.0f, 3.0f);
-            Vector256<float> value2 = Vector256.Create(0.0f, 2.0f, 1.0f, 3.0f, float.NaN, 1.0f, 2.0f, 3.0f);
+            Vector256<float> value1 = Vector256.Create(
+                float.NaN,
+                1.0f,
+                2.0f,
+                3.0f,
+                0.0f,
+                2.0f,
+                1.0f,
+                3.0f
+            );
+            Vector256<float> value2 = Vector256.Create(
+                0.0f,
+                2.0f,
+                1.0f,
+                3.0f,
+                float.NaN,
+                1.0f,
+                2.0f,
+                3.0f
+            );
             Vector256<float> result = Avx.CompareGreaterThan(value1, value2);
 
             int actualResult = Avx.MoveMask(result);
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Avx)}.{nameof(Avx.CompareGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Avx)}.{nameof(Avx.CompareGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -371,15 +423,35 @@ public class Test34094
         {
             const int expectedResult = 0b1010_1100;
 
-            Vector256<float> value1 = Vector256.Create(float.NaN, 1.0f, 2.0f, 3.0f, 0.0f, 2.0f, 1.0f, 3.0f);
-            Vector256<float> value2 = Vector256.Create(0.0f, 2.0f, 1.0f, 3.0f, float.NaN, 1.0f, 2.0f, 3.0f);
+            Vector256<float> value1 = Vector256.Create(
+                float.NaN,
+                1.0f,
+                2.0f,
+                3.0f,
+                0.0f,
+                2.0f,
+                1.0f,
+                3.0f
+            );
+            Vector256<float> value2 = Vector256.Create(
+                0.0f,
+                2.0f,
+                1.0f,
+                3.0f,
+                float.NaN,
+                1.0f,
+                2.0f,
+                3.0f
+            );
             Vector256<float> result = Avx.CompareGreaterThanOrEqual(value1, value2);
 
             int actualResult = Avx.MoveMask(result);
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Avx)}.{nameof(Avx.CompareGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Avx)}.{nameof(Avx.CompareGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -392,15 +464,35 @@ public class Test34094
         {
             const int expectedResult = 0b1101_1011;
 
-            Vector256<float> value1 = Vector256.Create(float.NaN, 1.0f, 2.0f, 3.0f, 0.0f, 2.0f, 1.0f, 3.0f);
-            Vector256<float> value2 = Vector256.Create(0.0f, 2.0f, 1.0f, 3.0f, float.NaN, 1.0f, 2.0f, 3.0f);
+            Vector256<float> value1 = Vector256.Create(
+                float.NaN,
+                1.0f,
+                2.0f,
+                3.0f,
+                0.0f,
+                2.0f,
+                1.0f,
+                3.0f
+            );
+            Vector256<float> value2 = Vector256.Create(
+                0.0f,
+                2.0f,
+                1.0f,
+                3.0f,
+                float.NaN,
+                1.0f,
+                2.0f,
+                3.0f
+            );
             Vector256<float> result = Avx.CompareNotGreaterThan(value1, value2);
 
             int actualResult = Avx.MoveMask(result);
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Avx)}.{nameof(Avx.CompareNotGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Avx)}.{nameof(Avx.CompareNotGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -413,15 +505,35 @@ public class Test34094
         {
             const int expectedResult = 0b0101_0011;
 
-            Vector256<float> value1 = Vector256.Create(float.NaN, 1.0f, 2.0f, 3.0f, 0.0f, 2.0f, 1.0f, 3.0f);
-            Vector256<float> value2 = Vector256.Create(0.0f, 2.0f, 1.0f, 3.0f, float.NaN, 1.0f, 2.0f, 3.0f);
+            Vector256<float> value1 = Vector256.Create(
+                float.NaN,
+                1.0f,
+                2.0f,
+                3.0f,
+                0.0f,
+                2.0f,
+                1.0f,
+                3.0f
+            );
+            Vector256<float> value2 = Vector256.Create(
+                0.0f,
+                2.0f,
+                1.0f,
+                3.0f,
+                float.NaN,
+                1.0f,
+                2.0f,
+                3.0f
+            );
             Vector256<float> result = Avx.CompareNotGreaterThanOrEqual(value1, value2);
 
             int actualResult = Avx.MoveMask(result);
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Avx)}.{nameof(Avx.CompareNotGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Avx)}.{nameof(Avx.CompareNotGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -442,7 +554,9 @@ public class Test34094
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Avx)}.{nameof(Avx.CompareGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Avx)}.{nameof(Avx.CompareGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -463,7 +577,9 @@ public class Test34094
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Avx)}.{nameof(Avx.CompareGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Avx)}.{nameof(Avx.CompareGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -484,7 +600,9 @@ public class Test34094
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Avx)}.{nameof(Avx.CompareNotGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Avx)}.{nameof(Avx.CompareNotGreaterThan)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -505,7 +623,9 @@ public class Test34094
 
             if (actualResult != expectedResult)
             {
-                Console.WriteLine($"{nameof(Avx)}.{nameof(Avx.CompareNotGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}");
+                Console.WriteLine(
+                    $"{nameof(Avx)}.{nameof(Avx.CompareNotGreaterThanOrEqual)}({value1}, {value2}) returned {Convert.ToString(actualResult, 2)}; expected {Convert.ToString(expectedResult, 2)}"
+                );
                 return false;
             }
         }
@@ -530,29 +650,32 @@ public class Test34094
             Console.WriteLine("AVX is not supported");
         }
 
-        return TestSseCompareGreaterThan()
-             & TestSseCompareGreaterThanOrEqual()
-             & TestSseCompareNotGreaterThan()
-             & TestSseCompareNotGreaterThanOrEqual()
-             & TestSseCompareScalarGreaterThan()
-             & TestSseCompareScalarGreaterThanOrEqual()
-             & TestSseCompareScalarNotGreaterThan()
-             & TestSseCompareScalarNotGreaterThanOrEqual()
-             & TestSse2CompareGreaterThan()
-             & TestSse2CompareGreaterThanOrEqual()
-             & TestSse2CompareNotGreaterThan()
-             & TestSse2CompareNotGreaterThanOrEqual()
-             & TestSse2CompareScalarGreaterThan()
-             & TestSse2CompareScalarGreaterThanOrEqual()
-             & TestSse2CompareScalarNotGreaterThan()
-             & TestSse2CompareScalarNotGreaterThanOrEqual()
-             & TestAvxCompareGreaterThanSingle()
-             & TestAvxCompareGreaterThanOrEqualSingle()
-             & TestAvxCompareNotGreaterThanSingle()
-             & TestAvxCompareNotGreaterThanOrEqualSingle()
-             & TestAvxCompareGreaterThanDouble()
-             & TestAvxCompareGreaterThanOrEqualDouble()
-             & TestAvxCompareNotGreaterThanDouble()
-             & TestAvxCompareNotGreaterThanOrEqualDouble() ? 100 : 0;
+        return
+            TestSseCompareGreaterThan()
+            & TestSseCompareGreaterThanOrEqual()
+            & TestSseCompareNotGreaterThan()
+            & TestSseCompareNotGreaterThanOrEqual()
+            & TestSseCompareScalarGreaterThan()
+            & TestSseCompareScalarGreaterThanOrEqual()
+            & TestSseCompareScalarNotGreaterThan()
+            & TestSseCompareScalarNotGreaterThanOrEqual()
+            & TestSse2CompareGreaterThan()
+            & TestSse2CompareGreaterThanOrEqual()
+            & TestSse2CompareNotGreaterThan()
+            & TestSse2CompareNotGreaterThanOrEqual()
+            & TestSse2CompareScalarGreaterThan()
+            & TestSse2CompareScalarGreaterThanOrEqual()
+            & TestSse2CompareScalarNotGreaterThan()
+            & TestSse2CompareScalarNotGreaterThanOrEqual()
+            & TestAvxCompareGreaterThanSingle()
+            & TestAvxCompareGreaterThanOrEqualSingle()
+            & TestAvxCompareNotGreaterThanSingle()
+            & TestAvxCompareNotGreaterThanOrEqualSingle()
+            & TestAvxCompareGreaterThanDouble()
+            & TestAvxCompareGreaterThanOrEqualDouble()
+            & TestAvxCompareNotGreaterThanDouble()
+            & TestAvxCompareNotGreaterThanOrEqualDouble()
+            ? 100
+            : 0;
     }
 }

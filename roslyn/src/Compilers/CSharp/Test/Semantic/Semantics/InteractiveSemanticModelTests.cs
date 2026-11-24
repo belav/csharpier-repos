@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void NamespaceBindingInInteractiveCode()
         {
-            var compilation = CreateCompilation(@"
+            var compilation = CreateCompilation(
+                @"
 using Z = Goo.Bar.Script.C;
 
 class C { }
@@ -38,30 +39,37 @@ namespace Goo.Bar
 
             var tree = compilation.SyntaxTrees[0];
             var root = tree.GetCompilationUnitRoot();
-            var classB = (root.Members[1] as NamespaceDeclarationSyntax).Members[0] as TypeDeclarationSyntax;
+            var classB =
+                (root.Members[1] as NamespaceDeclarationSyntax).Members[0] as TypeDeclarationSyntax;
             var model = compilation.GetSemanticModel(tree);
             var symbol = model.GetDeclaredSymbol(classB);
             var baseType = symbol?.BaseType;
             Assert.NotNull(baseType);
             Assert.Equal(TypeKind.Error, baseType.TypeKind);
-            Assert.Equal(LookupResultKind.Inaccessible, baseType.GetSymbol<ErrorTypeSymbol>().ResultKind); // Script class members are private.
+            Assert.Equal(
+                LookupResultKind.Inaccessible,
+                baseType.GetSymbol<ErrorTypeSymbol>().ResultKind
+            ); // Script class members are private.
         }
 
         [Fact]
         public void CompilationChain_OverloadsWithParams()
         {
-            CompileAndVerifyBindInfo(@"
+            CompileAndVerifyBindInfo(
+                @"
 public static string[] str = null;
 public static void Goo(string[] r, string i) { str = r;}
 public static void Goo(params string[] r) { str = r;}
 /*<bind>*/ Goo(""1"", ""2"") /*</bind>*/;",
-"Goo(params string[])");
+                "Goo(params string[])"
+            );
         }
 
         [Fact]
         public void CompilationChain_NestedTypesClass()
         {
-            CompileAndVerifyBindInfo(@"
+            CompileAndVerifyBindInfo(
+                @"
 class InnerClass
 {
    public string innerStr = null;
@@ -69,13 +77,15 @@ class InnerClass
 }
 InnerClass iC = new InnerClass();
 /*<bind>*/ iC.Goo(); /*</bind>*/",
-"InnerClass.Goo()");
+                "InnerClass.Goo()"
+            );
         }
 
         [Fact]
         public void MethodCallBinding()
         {
-            var testSrc = @"
+            var testSrc =
+                @"
 void Goo() {};
 /*<bind>*/Goo()/*</bind>*/;
 ";
@@ -98,7 +108,8 @@ void Goo() {};
         [Fact]
         public void BindBooleanField()
         {
-            var testSrc = @"
+            var testSrc =
+                @"
 bool result = true ;
 /*<bind>*/ result /*</bind>*/= false;
 ";
@@ -111,7 +122,8 @@ bool result = true ;
         [Fact]
         public void BindLocals()
         {
-            var testSrc = @"
+            var testSrc =
+                @"
 const int constantField = 1;
 int field = constantField;
 {
@@ -133,7 +145,8 @@ int field = constantField;
         [Fact]
         public void BindVariableInGlobalStatement()
         {
-            var testSrc = @"
+            var testSrc =
+                @"
 int i = 2;
 ++/*<bind>*/i/*</bind>*/;";
             // Get the bind info for the text identified within the commented <bind> </bind> tags
@@ -148,7 +161,8 @@ int i = 2;
         [Fact]
         public void BindVarKeyword()
         {
-            var testSrc = @"
+            var testSrc =
+                @"
 /*<bind>*/var/*</bind>*/ rand = new System.Random();";
 
             // Get the bind info for the text identified within the commented <bind> </bind> tags
@@ -173,7 +187,8 @@ int i = 2;
         [Fact]
         public void BindVarKeyword_MultipleDeclarators()
         {
-            string testSrc = @"
+            string testSrc =
+                @"
 /*<bind>*/var/*</bind>*/ i = new int(), j = new char();
 ";
             // Get the bind info for the text identified within the commented <bind> </bind> tags
@@ -198,7 +213,8 @@ int i = 2;
         [Fact]
         public void BindVarNamedType()
         {
-            string testSrc = @"
+            string testSrc =
+                @"
 public class var { }
 /*<bind>*/var/*</bind>*/ x = new var();
 ";
@@ -224,7 +240,8 @@ public class var { }
         [Fact]
         public void BindVarNamedType_Ambiguous()
         {
-            string testSrc = @"
+            string testSrc =
+                @"
 using System;
 public class var { }
 public struct var { }
@@ -242,7 +259,9 @@ public struct var { }
             Assert.Null(semanticInfo.Symbol);
             Assert.Equal(CandidateReason.Ambiguous, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
-            var sortedCandidates = semanticInfo.CandidateSymbols.OrderBy(s => s.ToTestDisplayString()).ToArray();
+            var sortedCandidates = semanticInfo
+                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString())
+                .ToArray();
             Assert.Equal("Script.var", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
             Assert.Equal("Script.var", sortedCandidates[1].ToTestDisplayString());
@@ -257,7 +276,8 @@ public struct var { }
         [Fact]
         public void BindQueryVariable()
         {
-            string testSrc = @"
+            string testSrc =
+                @"
 using System.Linq;
 
 var x = from c in ""goo"" select /*<bind>*/c/*</bind>*/";
@@ -275,7 +295,10 @@ var x = from c in ""goo"" select /*<bind>*/c/*</bind>*/";
             return GetExprSyntaxList(syntaxTree.GetCompilationUnitRoot(), null);
         }
 
-        private List<ExpressionSyntax> GetExprSyntaxList(SyntaxNode node, List<ExpressionSyntax> exprSynList)
+        private List<ExpressionSyntax> GetExprSyntaxList(
+            SyntaxNode node,
+            List<ExpressionSyntax> exprSynList
+        )
         {
             if (exprSynList == null)
                 exprSynList = new List<ExpressionSyntax>();

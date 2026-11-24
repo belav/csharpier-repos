@@ -238,16 +238,15 @@ public class RendererSynchronizationContextTest
         var e6 = new ManualResetEventSlim();
 
         // Force task2 to execute in the background
-        var task1 = Task.Run(
-            () =>
-                context.Send(
-                    (_) =>
-                    {
-                        e1.Set();
-                        Assert.True(e2.Wait(Timeout), "timeout");
-                    },
-                    null
-                )
+        var task1 = Task.Run(() =>
+            context.Send(
+                (_) =>
+                {
+                    e1.Set();
+                    Assert.True(e2.Wait(Timeout), "timeout");
+                },
+                null
+            )
         );
 
         Assert.True(e1.Wait(Timeout), "timeout");
@@ -360,15 +359,14 @@ public class RendererSynchronizationContextTest
         var context = new RendererSynchronizationContext();
 
         // Act & Assert
-        Assert.Throws<InvalidTimeZoneException>(
-            () =>
-                context.Send(
-                    (_) =>
-                    {
-                        throw new InvalidTimeZoneException();
-                    },
-                    null
-                )
+        Assert.Throws<InvalidTimeZoneException>(() =>
+            context.Send(
+                (_) =>
+                {
+                    throw new InvalidTimeZoneException();
+                },
+                null
+            )
         );
     }
 

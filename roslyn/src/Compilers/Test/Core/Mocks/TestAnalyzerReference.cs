@@ -14,7 +14,11 @@ namespace Roslyn.Test.Utilities
         private readonly string? _display;
         private readonly object? _id;
 
-        public TestAnalyzerReference(string? fullPath = null, string? display = null, object? id = null)
+        public TestAnalyzerReference(
+            string? fullPath = null,
+            string? display = null,
+            object? id = null
+        )
         {
             _fullPath = fullPath;
             _display = display;
@@ -25,7 +29,10 @@ namespace Roslyn.Test.Utilities
         public override string FullPath => _fullPath ?? throw new NotImplementedException();
         public override object Id => _id ?? throw new NotImplementedException();
 
-        public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzers(string language) => throw new NotImplementedException();
-        public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzersForAllLanguages() => throw new NotImplementedException();
+        public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzers(string language) =>
+            throw new NotImplementedException();
+
+        public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzersForAllLanguages() =>
+            throw new NotImplementedException();
     }
 }

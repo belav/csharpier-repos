@@ -14,15 +14,21 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Debugger
 {
     internal sealed class GlassTestsHotReloadService
     {
-        private static readonly ActiveStatementSpanProvider s_noActiveStatementSpanProvider =
-           (_, _, _) => ValueTaskFactory.FromResult(ImmutableArray<ActiveStatementSpan>.Empty);
+        private static readonly ActiveStatementSpanProvider s_noActiveStatementSpanProvider = (
+            _,
+            _,
+            _
+        ) => ValueTaskFactory.FromResult(ImmutableArray<ActiveStatementSpan>.Empty);
 
         private readonly IManagedHotReloadService _debuggerService;
 
         private readonly IEditAndContinueService _encService;
         private DebuggingSessionId _sessionId;
 
-        public GlassTestsHotReloadService(HostWorkspaceServices services, IManagedHotReloadService debuggerService)
+        public GlassTestsHotReloadService(
+            HostWorkspaceServices services,
+            IManagedHotReloadService debuggerService
+        )
         {
             _encService = services.GetRequiredService<IEditAndContinueWorkspaceService>().Service;
             _debuggerService = debuggerService;
@@ -30,14 +36,17 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Debugger
 
         public async Task StartSessionAsync(Solution solution, CancellationToken cancellationToken)
         {
-            var newSessionId = await _encService.StartDebuggingSessionAsync(
-                solution,
-                new ManagedHotReloadServiceImpl(_debuggerService),
-                NullPdbMatchingSourceTextProvider.Instance,
-                captureMatchingDocuments: ImmutableArray<DocumentId>.Empty,
-                captureAllMatchingDocuments: true,
-                reportDiagnostics: false,
-                cancellationToken).ConfigureAwait(false);
+            var newSessionId = await _encService
+                .StartDebuggingSessionAsync(
+                    solution,
+                    new ManagedHotReloadServiceImpl(_debuggerService),
+                    NullPdbMatchingSourceTextProvider.Instance,
+                    captureMatchingDocuments: ImmutableArray<DocumentId>.Empty,
+                    captureAllMatchingDocuments: true,
+                    reportDiagnostics: false,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             Contract.ThrowIfFalse(_sessionId == default, "Session already started");
             _sessionId = newSessionId;
@@ -82,11 +91,33 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Debugger
             _sessionId = default;
         }
 
-        public async ValueTask<ManagedHotReloadUpdates> GetUpdatesAsync(Solution solution, CancellationToken cancellationToken)
+        public async ValueTask<ManagedHotReloadUpdates> GetUpdatesAsync(
+            Solution solution,
+            CancellationToken cancellationToken
+        )
         {
-            var result = await _encService.EmitSolutionUpdateAsync(GetSessionId(), solution, s_noActiveStatementSpanProvider, cancellationToken).ConfigureAwait(false);
-            var diagnostics = await EmitSolutionUpdateResults.GetHotReloadDiagnosticsAsync(solution, result.Diagnostics.ToDiagnosticData(solution), result.RudeEdits, result.GetSyntaxErrorData(solution), result.ModuleUpdates.Status, cancellationToken).ConfigureAwait(false);
-            return new ManagedHotReloadUpdates(result.ModuleUpdates.Updates.FromContract(), diagnostics.FromContract());
+            var result = await _encService
+                .EmitSolutionUpdateAsync(
+                    GetSessionId(),
+                    solution,
+                    s_noActiveStatementSpanProvider,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            var diagnostics = await EmitSolutionUpdateResults
+                .GetHotReloadDiagnosticsAsync(
+                    solution,
+                    result.Diagnostics.ToDiagnosticData(solution),
+                    result.RudeEdits,
+                    result.GetSyntaxErrorData(solution),
+                    result.ModuleUpdates.Status,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            return new ManagedHotReloadUpdates(
+                result.ModuleUpdates.Updates.FromContract(),
+                diagnostics.FromContract()
+            );
         }
     }
 }

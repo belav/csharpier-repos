@@ -5,6 +5,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
+
 public class Program
 {
     [Fact]
@@ -19,8 +20,7 @@ public class Program
     {
         for (int i = 0; i < 10; ++i)
         {
-            if (String.IsNullOrEmpty(x))
-            { }
+            if (String.IsNullOrEmpty(x)) { }
         }
     }
 }

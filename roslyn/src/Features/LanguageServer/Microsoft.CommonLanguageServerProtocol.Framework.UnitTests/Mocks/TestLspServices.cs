@@ -14,28 +14,36 @@ internal class TestLspServices : ILspServices
     private readonly bool _supportsGetRegisteredServices;
     private readonly IEnumerable<(Type type, object instance)> _services;
 
-    public TestLspServices(IEnumerable<(Type type, object instance)> services, bool supportsGetRegisteredServices)
+    public TestLspServices(
+        IEnumerable<(Type type, object instance)> services,
+        bool supportsGetRegisteredServices
+    )
     {
         _services = services;
         _supportsGetRegisteredServices = supportsGetRegisteredServices;
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 
-    public ImmutableArray<Type> GetRegisteredServices()
-        => _services.Select(s => s.instance.GetType()).ToImmutableArray();
+    public ImmutableArray<Type> GetRegisteredServices() =>
+        _services.Select(s => s.instance.GetType()).ToImmutableArray();
 
-    public T GetRequiredService<T>() where T : notnull
-        => (T?)TryGetService(typeof(T)) ?? throw new InvalidOperationException($"{typeof(T).Name} did not have a service");
+    public T GetRequiredService<T>()
+        where T : notnull =>
+        (T?)TryGetService(typeof(T))
+        ?? throw new InvalidOperationException($"{typeof(T).Name} did not have a service");
 
-    public IEnumerable<T> GetRequiredServices<T>()
-        => _supportsGetRegisteredServices ? Array.Empty<T>() : _services.Where(s => s.instance is T).Select(s => (T)s.instance);
+    public IEnumerable<T> GetRequiredServices<T>() =>
+        _supportsGetRegisteredServices
+            ? Array.Empty<T>()
+            : _services.Where(s => s.instance is T).Select(s => (T)s.instance);
 
-    public bool SupportsGetRegisteredServices()
-        => _supportsGetRegisteredServices;
+    public bool SupportsGetRegisteredServices() => _supportsGetRegisteredServices;
 
-    public object? TryGetService(Type type)
-        => _services.FirstOrDefault(s => (_supportsGetRegisteredServices ? s.instance.GetType() : s.type) == type).instance;
+    public object? TryGetService(Type type) =>
+        _services
+            .FirstOrDefault(s =>
+                (_supportsGetRegisteredServices ? s.instance.GetType() : s.type) == type
+            )
+            .instance;
 }

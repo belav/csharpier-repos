@@ -4,15 +4,14 @@
 
 #nullable disable
 
-using System.Collections.Immutable;
-using Microsoft.CodeAnalysis.CSharp.Symbols;
-using Microsoft.CodeAnalysis.Emit;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
-using Cci = Microsoft.Cci;
 using Microsoft.CodeAnalysis.CodeGen;
-
+using Microsoft.CodeAnalysis.CSharp.Symbols;
+using Microsoft.CodeAnalysis.Emit;
+using Cci = Microsoft.Cci;
 #if !DEBUG
 using ParameterSymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.ParameterSymbol;
 #endif
@@ -22,23 +21,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
     internal sealed class EmbeddedParameter : EmbeddedTypesManager.CommonEmbeddedParameter
     {
         public EmbeddedParameter(
-            EmbeddedTypesManager.CommonEmbeddedMember containingPropertyOrMethod, ParameterSymbolAdapter underlyingParameter) :
-            base(containingPropertyOrMethod, underlyingParameter)
+            EmbeddedTypesManager.CommonEmbeddedMember containingPropertyOrMethod,
+            ParameterSymbolAdapter underlyingParameter
+        )
+            : base(containingPropertyOrMethod, underlyingParameter)
         {
             Debug.Assert(underlyingParameter.AdaptedParameterSymbol.IsDefinition);
         }
 
         protected override bool HasDefaultValue
         {
-            get
-            {
-                return UnderlyingParameter.AdaptedParameterSymbol.HasMetadataConstantValue;
-            }
+            get { return UnderlyingParameter.AdaptedParameterSymbol.HasMetadataConstantValue; }
         }
 
-        protected override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(PEModuleBuilder moduleBuilder)
+        protected override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
+            PEModuleBuilder moduleBuilder
+        )
         {
-            return UnderlyingParameter.AdaptedParameterSymbol.GetCustomAttributesToEmit(moduleBuilder);
+            return UnderlyingParameter.AdaptedParameterSymbol.GetCustomAttributesToEmit(
+                moduleBuilder
+            );
         }
 
         protected override MetadataConstant GetDefaultValue(EmitContext context)
@@ -48,50 +50,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
 
         protected override bool IsIn
         {
-            get
-            {
-                return UnderlyingParameter.AdaptedParameterSymbol.IsMetadataIn;
-            }
+            get { return UnderlyingParameter.AdaptedParameterSymbol.IsMetadataIn; }
         }
 
         protected override bool IsOut
         {
-            get
-            {
-                return UnderlyingParameter.AdaptedParameterSymbol.IsMetadataOut;
-            }
+            get { return UnderlyingParameter.AdaptedParameterSymbol.IsMetadataOut; }
         }
 
         protected override bool IsOptional
         {
-            get
-            {
-                return UnderlyingParameter.AdaptedParameterSymbol.IsMetadataOptional;
-            }
+            get { return UnderlyingParameter.AdaptedParameterSymbol.IsMetadataOptional; }
         }
 
         protected override bool IsMarshalledExplicitly
         {
-            get
-            {
-                return UnderlyingParameter.AdaptedParameterSymbol.IsMarshalledExplicitly;
-            }
+            get { return UnderlyingParameter.AdaptedParameterSymbol.IsMarshalledExplicitly; }
         }
 
         protected override Cci.IMarshallingInformation MarshallingInformation
         {
-            get
-            {
-                return UnderlyingParameter.AdaptedParameterSymbol.MarshallingInformation;
-            }
+            get { return UnderlyingParameter.AdaptedParameterSymbol.MarshallingInformation; }
         }
 
         protected override ImmutableArray<byte> MarshallingDescriptor
         {
-            get
-            {
-                return UnderlyingParameter.AdaptedParameterSymbol.MarshallingDescriptor;
-            }
+            get { return UnderlyingParameter.AdaptedParameterSymbol.MarshallingDescriptor; }
         }
 
         protected override string Name
@@ -101,18 +85,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
 
         protected override Cci.IParameterTypeInformation UnderlyingParameterTypeInformation
         {
-            get
-            {
-                return (Cci.IParameterTypeInformation)UnderlyingParameter;
-            }
+            get { return (Cci.IParameterTypeInformation)UnderlyingParameter; }
         }
 
         protected override ushort Index
         {
-            get
-            {
-                return (ushort)UnderlyingParameter.AdaptedParameterSymbol.Ordinal;
-            }
+            get { return (ushort)UnderlyingParameter.AdaptedParameterSymbol.Ordinal; }
         }
     }
 }

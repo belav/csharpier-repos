@@ -14,9 +14,9 @@
 */
 
 using System;
-using System.IO;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.IO;
 using System.Security.Cryptography;
 using System.Threading;
 using Xunit;
@@ -26,14 +26,17 @@ namespace BenchmarksGame
     class RevCompSequence
     {
         public List<byte[]> Pages;
-        public int StartHeader, EndExclusive;
+        public int StartHeader,
+            EndExclusive;
         public Thread ReverseThread;
     }
 
     public class ReverseComplement_6
     {
         const int READER_BUFFER_SIZE = 1024 * 1024;
-        const byte LF = 10, GT = (byte)'>', SP = 32;
+        const byte LF = 10,
+            GT = (byte)'>',
+            SP = 32;
         static BlockingCollection<byte[]> readQue;
         static BlockingCollection<RevCompSequence> writeQue;
         static byte[] map;
@@ -42,10 +45,12 @@ namespace BenchmarksGame
         {
             var bytesRead = stream.Read(buffer, offset, count);
             return bytesRead == count ? offset + count
-                 : bytesRead == 0 ? offset
-                 : read(stream, buffer, offset + bytesRead, count - bytesRead);
+                : bytesRead == 0 ? offset
+                : read(stream, buffer, offset + bytesRead, count - bytesRead);
         }
+
         static Stream ReaderStream;
+
         static void Reader()
         {
             using (var stream = ReaderStream)
@@ -61,11 +66,13 @@ namespace BenchmarksGame
             }
         }
 
-        static bool tryTake<T>(BlockingCollection<T> q, out T t) where T : class
+        static bool tryTake<T>(BlockingCollection<T> q, out T t)
+            where T : class
         {
             t = null;
             var wait = new SpinWait();
-            while (!q.IsCompleted && !q.TryTake(out t)) wait.SpinOnce();
+            while (!q.IsCompleted && !q.TryTake(out t))
+                wait.SpinOnce();
             return t != null;
         }
 
@@ -73,7 +80,8 @@ namespace BenchmarksGame
         {
             // Set up complements map
             map = new byte[256];
-            for (byte b = 0; b < 255; b++) map[b] = b;
+            for (byte b = 0; b < 255; b++)
+                map[b] = b;
             map[(byte)'A'] = (byte)'T';
             map[(byte)'B'] = (byte)'V';
             map[(byte)'C'] = (byte)'G';
@@ -113,7 +121,7 @@ namespace BenchmarksGame
                     {
                         Pages = data,
                         StartHeader = startHeader,
-                        EndExclusive = i
+                        EndExclusive = i,
                     };
                     if (afterFirst)
                         (sequence.ReverseThread = new Thread(() => Reverse(sequence))).Start();
@@ -129,7 +137,7 @@ namespace BenchmarksGame
             {
                 Pages = data,
                 StartHeader = startHeader,
-                EndExclusive = i == -1 ? data[data.Count - 1].Length : i
+                EndExclusive = i == -1 ? data[data.Count - 1].Length : i,
             };
             Reverse(lastSequence);
             writeQue.Add(lastSequence);
@@ -151,7 +159,8 @@ namespace BenchmarksGame
 
             var endPageId = sequence.Pages.Count - 1;
             var endIndex = sequence.EndExclusive - 1;
-            if (endIndex == -1) endIndex = sequence.Pages[--endPageId].Length - 1;
+            if (endIndex == -1)
+                endIndex = sequence.Pages[--endPageId].Length - 1;
             var endBytes = sequence.Pages[endPageId];
 
             // Swap in place across pages
@@ -165,7 +174,8 @@ namespace BenchmarksGame
                         startBytes = sequence.Pages[++startPageId];
                         startIndex = 0;
                     }
-                    if (startIndex == endIndex && startPageId == endPageId) break;
+                    if (startIndex == endIndex && startPageId == endPageId)
+                        break;
                     startByte = startBytes[startIndex];
                 }
                 var endByte = endBytes[endIndex];
@@ -176,7 +186,8 @@ namespace BenchmarksGame
                         endBytes = sequence.Pages[--endPageId];
                         endIndex = endBytes.Length - 1;
                     }
-                    if (startIndex == endIndex && startPageId == endPageId) break;
+                    if (startIndex == endIndex && startPageId == endPageId)
+                        break;
                     endByte = endBytes[endIndex];
                 }
 
@@ -193,11 +204,15 @@ namespace BenchmarksGame
                     endBytes = sequence.Pages[--endPageId];
                     endIndex = endBytes.Length - 1;
                 }
-            } while (startPageId < endPageId || (startPageId == endPageId && startIndex < endIndex));
-            if (startIndex == endIndex) startBytes[startIndex] = map[startBytes[startIndex]];
+            } while (
+                startPageId < endPageId || (startPageId == endPageId && startIndex < endIndex)
+            );
+            if (startIndex == endIndex)
+                startBytes[startIndex] = map[startBytes[startIndex]];
         }
 
         static Stream WriterStream;
+
         static void Writer()
         {
             using (var stream = WriterStream)
@@ -223,7 +238,11 @@ namespace BenchmarksGame
                         stream.Write(bytes, startIndex, bytes.Length - startIndex);
                         startIndex = 0;
                     }
-                    stream.Write(pages[pages.Count - 1], startIndex, sequence.EndExclusive - startIndex);
+                    stream.Write(
+                        pages[pages.Count - 1],
+                        startIndex,
+                        sequence.EndExclusive - startIndex
+                    );
                 }
             }
         }

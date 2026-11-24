@@ -9,28 +9,39 @@ using Xunit;
 
 namespace System.Memory.Tests
 {
-    public class ReadOnlySequenceTestsCommonChar: ReadOnlySequenceTestsCommon<char>
+    public class ReadOnlySequenceTestsCommonChar : ReadOnlySequenceTestsCommon<char>
     {
         #region Constructor
 
         [Fact]
         public void Ctor_Array_Offset()
         {
-            var buffer = new ReadOnlySequence<char>(new char[] { (char)1, (char)2, (char)3, (char)4, (char)5 }, 2, 3);
+            var buffer = new ReadOnlySequence<char>(
+                new char[] { (char)1, (char)2, (char)3, (char)4, (char)5 },
+                2,
+                3
+            );
             Assert.Equal(buffer.ToArray(), new char[] { (char)3, (char)4, (char)5 });
         }
 
         [Fact]
         public void Ctor_Array_NoOffset()
         {
-            var buffer = new ReadOnlySequence<char>(new char[] { (char)1, (char)2, (char)3, (char)4, (char)5 });
-            Assert.Equal(buffer.ToArray(), new char[] { (char)1, (char)2, (char)3, (char)4, (char)5 });
+            var buffer = new ReadOnlySequence<char>(
+                new char[] { (char)1, (char)2, (char)3, (char)4, (char)5 }
+            );
+            Assert.Equal(
+                buffer.ToArray(),
+                new char[] { (char)1, (char)2, (char)3, (char)4, (char)5 }
+            );
         }
 
         [Fact]
         public void Ctor_Memory()
         {
-            var memory = new ReadOnlyMemory<char>(new char[] { (char)1, (char)2, (char)3, (char)4, (char)5 });
+            var memory = new ReadOnlyMemory<char>(
+                new char[] { (char)1, (char)2, (char)3, (char)4, (char)5 }
+            );
             var buffer = new ReadOnlySequence<char>(memory.Slice(2, 3));
             Assert.Equal(new char[] { (char)3, (char)4, (char)5 }, buffer.ToArray());
         }
@@ -54,12 +65,18 @@ namespace System.Memory.Tests
 
             string items = "Hello World";
             string firstItems = new string('a', blockSize - 5) + items.Substring(0, 5);
-            string secondItems = items.Substring(5) + new string('a', blockSize - (items.Length - 5));
+            string secondItems =
+                items.Substring(5) + new string('a', blockSize - (items.Length - 5));
 
             var firstSegment = new BufferSegment<char>(firstItems.AsMemory());
             BufferSegment<char> secondSegment = firstSegment.Append(secondItems.AsMemory());
 
-            var  buffer = new ReadOnlySequence<char>(firstSegment, 0, secondSegment, items.Length - 5);
+            var buffer = new ReadOnlySequence<char>(
+                firstSegment,
+                0,
+                secondSegment,
+                items.Length - 5
+            );
             Assert.False(buffer.IsSingleSegment);
             ReadOnlySequence<char> helloBuffer = buffer.Slice(blockSize - 5);
             Assert.False(helloBuffer.IsSingleSegment);

@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //=============================================================================
 //
 // Class: __HResults
-// 
+//
 // <OWNER>kimhamil</OWNER>
 //
 // Author: Automatically generated
@@ -16,13 +16,15 @@
 // Date: 98/08/31 11:57:11 AM
 //
 //===========================================================================*/
-namespace System.IO {
+namespace System.IO
+{
     using System;
+
     // Only static data no need to serialize
     internal static class __HResults
     {
         // These use an error code from WinError.h
-        public const int COR_E_ENDOFSTREAM = unchecked((int)0x80070026);  // OS defined
+        public const int COR_E_ENDOFSTREAM = unchecked((int)0x80070026); // OS defined
         public const int COR_E_FILELOAD = unchecked((int)0x80131621);
         public const int COR_E_FILENOTFOUND = unchecked((int)0x80070002);
         public const int COR_E_DIRECTORYNOTFOUND = unchecked((int)0x80070003);

@@ -4,7 +4,6 @@
 using System.Runtime.InteropServices;
 using Internal.Cryptography;
 using Microsoft.Win32.SafeHandles;
-
 using SafeX509ChainHandle = Microsoft.Win32.SafeHandles.SafeX509ChainHandle;
 
 namespace System.Security.Cryptography.X509Certificates
@@ -26,46 +25,91 @@ namespace System.Security.Cryptography.X509Certificates
             X509ChainTrustMode trustMode,
             DateTime verificationTime,
             TimeSpan timeout,
-            bool disableAia)
+            bool disableAia
+        )
         {
             CertificatePal certificatePal = (CertificatePal)cert;
 
             unsafe
             {
-                using (SafeChainEngineHandle storeHandle = GetChainEngine(trustMode, customTrustStore, useMachineContext))
+                using (
+                    SafeChainEngineHandle storeHandle = GetChainEngine(
+                        trustMode,
+                        customTrustStore,
+                        useMachineContext
+                    )
+                )
                 using (SafeCertStoreHandle extraStoreHandle = ConvertStoreToSafeHandle(extraStore))
                 {
                     Interop.Crypt32.CERT_CHAIN_PARA chainPara = default;
                     chainPara.cbSize = Marshal.SizeOf<Interop.Crypt32.CERT_CHAIN_PARA>();
 
                     int applicationPolicyCount;
-                    using (SafeHandle applicationPolicyOids = applicationPolicy!.ToLpstrArray(out applicationPolicyCount))
+                    using (
+                        SafeHandle applicationPolicyOids = applicationPolicy!.ToLpstrArray(
+                            out applicationPolicyCount
+                        )
+                    )
                     {
                         if (!applicationPolicyOids.IsInvalid)
                         {
-                            chainPara.RequestedUsage.dwType = Interop.Crypt32.CertUsageMatchType.USAGE_MATCH_TYPE_AND;
-                            chainPara.RequestedUsage.Usage.cUsageIdentifier = applicationPolicyCount;
-                            chainPara.RequestedUsage.Usage.rgpszUsageIdentifier = applicationPolicyOids.DangerousGetHandle();
+                            chainPara.RequestedUsage.dwType = Interop
+                                .Crypt32
+                                .CertUsageMatchType
+                                .USAGE_MATCH_TYPE_AND;
+                            chainPara.RequestedUsage.Usage.cUsageIdentifier =
+                                applicationPolicyCount;
+                            chainPara.RequestedUsage.Usage.rgpszUsageIdentifier =
+                                applicationPolicyOids.DangerousGetHandle();
                         }
 
                         int certificatePolicyCount;
-                        using (SafeHandle certificatePolicyOids = certificatePolicy!.ToLpstrArray(out certificatePolicyCount))
+                        using (
+                            SafeHandle certificatePolicyOids = certificatePolicy!.ToLpstrArray(
+                                out certificatePolicyCount
+                            )
+                        )
                         {
                             if (!certificatePolicyOids.IsInvalid)
                             {
-                                chainPara.RequestedIssuancePolicy.dwType = Interop.Crypt32.CertUsageMatchType.USAGE_MATCH_TYPE_AND;
-                                chainPara.RequestedIssuancePolicy.Usage.cUsageIdentifier = certificatePolicyCount;
-                                chainPara.RequestedIssuancePolicy.Usage.rgpszUsageIdentifier = certificatePolicyOids.DangerousGetHandle();
+                                chainPara.RequestedIssuancePolicy.dwType = Interop
+                                    .Crypt32
+                                    .CertUsageMatchType
+                                    .USAGE_MATCH_TYPE_AND;
+                                chainPara.RequestedIssuancePolicy.Usage.cUsageIdentifier =
+                                    certificatePolicyCount;
+                                chainPara.RequestedIssuancePolicy.Usage.rgpszUsageIdentifier =
+                                    certificatePolicyOids.DangerousGetHandle();
                             }
 
-                            chainPara.dwUrlRetrievalTimeout = (int)Math.Floor(timeout.TotalMilliseconds);
+                            chainPara.dwUrlRetrievalTimeout = (int)
+                                Math.Floor(timeout.TotalMilliseconds);
 
-                            Interop.Crypt32.FILETIME ft = Interop.Crypt32.FILETIME.FromDateTime(verificationTime);
-                            Interop.Crypt32.CertChainFlags flags = MapRevocationFlags(revocationMode, revocationFlag, disableAia);
+                            Interop.Crypt32.FILETIME ft = Interop.Crypt32.FILETIME.FromDateTime(
+                                verificationTime
+                            );
+                            Interop.Crypt32.CertChainFlags flags = MapRevocationFlags(
+                                revocationMode,
+                                revocationFlag,
+                                disableAia
+                            );
                             SafeX509ChainHandle chain;
-                            using (SafeCertContextHandle certContext = certificatePal.GetCertContext())
+                            using (
+                                SafeCertContextHandle certContext = certificatePal.GetCertContext()
+                            )
                             {
-                                if (!Interop.Crypt32.CertGetCertificateChain(storeHandle.DangerousGetHandle(), certContext, &ft, extraStoreHandle, ref chainPara, flags, IntPtr.Zero, out chain))
+                                if (
+                                    !Interop.Crypt32.CertGetCertificateChain(
+                                        storeHandle.DangerousGetHandle(),
+                                        certContext,
+                                        &ft,
+                                        extraStoreHandle,
+                                        ref chainPara,
+                                        flags,
+                                        IntPtr.Zero,
+                                        out chain
+                                    )
+                                )
                                 {
                                     chain.Dispose();
                                     return null;
@@ -82,45 +126,65 @@ namespace System.Security.Cryptography.X509Certificates
         private static SafeChainEngineHandle GetChainEngine(
             X509ChainTrustMode trustMode,
             X509Certificate2Collection? customTrustStore,
-            bool useMachineContext)
+            bool useMachineContext
+        )
         {
             SafeChainEngineHandle chainEngineHandle;
             if (trustMode == X509ChainTrustMode.CustomRootTrust)
             {
                 // Need to get a valid SafeCertStoreHandle otherwise the default stores will be trusted
-                using (SafeCertStoreHandle customTrustStoreHandle = ConvertStoreToSafeHandle(customTrustStore, true))
+                using (
+                    SafeCertStoreHandle customTrustStoreHandle = ConvertStoreToSafeHandle(
+                        customTrustStore,
+                        true
+                    )
+                )
                 {
                     Interop.Crypt32.CERT_CHAIN_ENGINE_CONFIG customChainEngine = default;
-                    customChainEngine.cbSize = Marshal.SizeOf<Interop.Crypt32.CERT_CHAIN_ENGINE_CONFIG>();
+                    customChainEngine.cbSize =
+                        Marshal.SizeOf<Interop.Crypt32.CERT_CHAIN_ENGINE_CONFIG>();
                     customChainEngine.hExclusiveRoot = customTrustStoreHandle.DangerousGetHandle();
-                    chainEngineHandle = Interop.crypt32.CertCreateCertificateChainEngine(ref customChainEngine);
+                    chainEngineHandle = Interop.crypt32.CertCreateCertificateChainEngine(
+                        ref customChainEngine
+                    );
                 }
             }
             else
             {
-                chainEngineHandle = useMachineContext ? SafeChainEngineHandle.MachineChainEngine : SafeChainEngineHandle.UserChainEngine;
+                chainEngineHandle = useMachineContext
+                    ? SafeChainEngineHandle.MachineChainEngine
+                    : SafeChainEngineHandle.UserChainEngine;
             }
 
             return chainEngineHandle;
         }
 
-        private static SafeCertStoreHandle ConvertStoreToSafeHandle(X509Certificate2Collection? extraStore, bool returnEmptyHandle = false)
+        private static SafeCertStoreHandle ConvertStoreToSafeHandle(
+            X509Certificate2Collection? extraStore,
+            bool returnEmptyHandle = false
+        )
         {
             if ((extraStore == null || extraStore.Count == 0) && !returnEmptyHandle)
                 return SafeCertStoreHandle.InvalidHandle;
 
-            return ((StorePal)StorePal.LinkFromCertificateCollection(extraStore!)).SafeCertStoreHandle;
+            return (
+                (StorePal)StorePal.LinkFromCertificateCollection(extraStore!)
+            ).SafeCertStoreHandle;
         }
 
         private static Interop.Crypt32.CertChainFlags MapRevocationFlags(
             X509RevocationMode revocationMode,
             X509RevocationFlag revocationFlag,
-            bool disableAia)
+            bool disableAia
+        )
         {
             const Interop.Crypt32.CertChainFlags AiaDisabledFlags =
-                Interop.Crypt32.CertChainFlags.CERT_CHAIN_DISABLE_AIA | Interop.Crypt32.CertChainFlags.CERT_CHAIN_DISABLE_AUTH_ROOT_AUTO_UPDATE;
+                Interop.Crypt32.CertChainFlags.CERT_CHAIN_DISABLE_AIA
+                | Interop.Crypt32.CertChainFlags.CERT_CHAIN_DISABLE_AUTH_ROOT_AUTO_UPDATE;
 
-            Interop.Crypt32.CertChainFlags dwFlags = disableAia ? AiaDisabledFlags : Interop.Crypt32.CertChainFlags.None;
+            Interop.Crypt32.CertChainFlags dwFlags = disableAia
+                ? AiaDisabledFlags
+                : Interop.Crypt32.CertChainFlags.None;
 
             if (revocationMode == X509RevocationMode.NoCheck)
                 return dwFlags;
@@ -133,7 +197,10 @@ namespace System.Security.Cryptography.X509Certificates
             else if (revocationFlag == X509RevocationFlag.EntireChain)
                 dwFlags |= Interop.Crypt32.CertChainFlags.CERT_CHAIN_REVOCATION_CHECK_CHAIN;
             else
-                dwFlags |= Interop.Crypt32.CertChainFlags.CERT_CHAIN_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT;
+                dwFlags |= Interop
+                    .Crypt32
+                    .CertChainFlags
+                    .CERT_CHAIN_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT;
 
             return dwFlags;
         }

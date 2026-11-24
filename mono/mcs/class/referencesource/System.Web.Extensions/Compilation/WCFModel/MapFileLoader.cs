@@ -14,7 +14,6 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-
 #if WEB_EXTENSIONS_CODE
 using System.Web.Resources;
 #else
@@ -58,7 +57,7 @@ namespace Microsoft.VSDesigner.WCFModel
 
         /// <summary>
         /// Load the map file.
-        /// </summary>        
+        /// </summary>
         /// <returns>Concrete map file instance.</returns>
         public MapFile LoadMapFile()
         {
@@ -68,21 +67,23 @@ namespace Microsoft.VSDesigner.WCFModel
             {
                 var proxyGenerationErrors = new List<ProxyGenerationError>();
 
-                ValidationEventHandler handler =
-                    (sender, e) =>
-                    {
-                        bool isError = (e.Severity == XmlSeverityType.Error);
-                        proxyGenerationErrors.Add(
-                            new ProxyGenerationError(ProxyGenerationError.GeneratorState.LoadMetadata,
-                                                     MapFileName,
-                                                     e.Exception,
-                                                     !isError));
+                ValidationEventHandler handler = (sender, e) =>
+                {
+                    bool isError = (e.Severity == XmlSeverityType.Error);
+                    proxyGenerationErrors.Add(
+                        new ProxyGenerationError(
+                            ProxyGenerationError.GeneratorState.LoadMetadata,
+                            MapFileName,
+                            e.Exception,
+                            !isError
+                        )
+                    );
 
-                        if (isError)
-                        {
-                            throw e.Exception;
-                        }
-                    };
+                    if (isError)
+                    {
+                        throw e.Exception;
+                    }
+                };
 
                 var readerSettings = new XmlReaderSettings()
                 {
@@ -91,7 +92,9 @@ namespace Microsoft.VSDesigner.WCFModel
                     ValidationFlags = XmlSchemaValidationFlags.ReportValidationWarnings,
                 };
 
-                using (XmlReader reader = XmlReader.Create(mapFileReader, readerSettings, string.Empty))
+                using (
+                    XmlReader reader = XmlReader.Create(mapFileReader, readerSettings, string.Empty)
+                )
                 {
                     try
                     {
@@ -266,14 +269,18 @@ namespace Microsoft.VSDesigner.WCFModel
                     if (schemaException.LineNumber > 0)
                     {
                         // append line/position to the message
-                        throw new XmlSchemaException(String.Format(CultureInfo.CurrentCulture,
-                                                                   WCFModelStrings.ReferenceGroup_AppendLinePosition,
-                                                                   schemaException.Message,
-                                                                   schemaException.LineNumber,
-                                                                   schemaException.LinePosition),
-                                                     schemaException,
-                                                     schemaException.LineNumber,
-                                                     schemaException.LinePosition);
+                        throw new XmlSchemaException(
+                            String.Format(
+                                CultureInfo.CurrentCulture,
+                                WCFModelStrings.ReferenceGroup_AppendLinePosition,
+                                schemaException.Message,
+                                schemaException.LineNumber,
+                                schemaException.LinePosition
+                            ),
+                            schemaException,
+                            schemaException.LineNumber,
+                            schemaException.LinePosition
+                        );
                     }
                     else
                     {
@@ -327,8 +334,12 @@ namespace Microsoft.VSDesigner.WCFModel
 
         private void ValidateMapFile(MapFile mapFile)
         {
-            var metadataFileNames = mapFile.MetadataList.Select(p => p.FileName).Where(p => !string.IsNullOrEmpty(p));
-            var extensionFileNames = mapFile.Extensions.Select(p => p.FileName).Where(p => !string.IsNullOrEmpty(p));
+            var metadataFileNames = mapFile
+                .MetadataList.Select(p => p.FileName)
+                .Where(p => !string.IsNullOrEmpty(p));
+            var extensionFileNames = mapFile
+                .Extensions.Select(p => p.FileName)
+                .Where(p => !string.IsNullOrEmpty(p));
 
             var fileNameSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             foreach (string fileName in metadataFileNames.Concat(extensionFileNames))
@@ -339,14 +350,21 @@ namespace Microsoft.VSDesigner.WCFModel
                 }
                 else
                 {
-                    throw new FormatException(String.Format(CultureInfo.CurrentCulture,
-                                                            WCFModelStrings.ReferenceGroup_TwoExternalFilesWithSameName,
-                                                            fileName));
+                    throw new FormatException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            WCFModelStrings.ReferenceGroup_TwoExternalFilesWithSameName,
+                            fileName
+                        )
+                    );
                 }
             }
         }
 
-        private void SetMapFileLoadErrors(MapFile mapFile, IEnumerable<ProxyGenerationError> proxyGenerationErrors)
+        private void SetMapFileLoadErrors(
+            MapFile mapFile,
+            IEnumerable<ProxyGenerationError> proxyGenerationErrors
+        )
         {
             mapFile.LoadErrors = proxyGenerationErrors;
         }

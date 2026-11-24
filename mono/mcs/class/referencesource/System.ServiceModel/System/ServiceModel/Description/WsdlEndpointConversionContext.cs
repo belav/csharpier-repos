@@ -4,47 +4,59 @@
 
 namespace System.ServiceModel.Description
 {
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.IO;
     using System.ServiceModel.Channels;
     using System.Xml;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using WsdlNS = System.Web.Services.Description;
 
     public class WsdlEndpointConversionContext
     {
-
         readonly ServiceEndpoint endpoint;
         readonly WsdlNS.Binding wsdlBinding;
         readonly WsdlNS.Port wsdlPort;
         readonly WsdlContractConversionContext contractContext;
 
         readonly Dictionary<OperationDescription, WsdlNS.OperationBinding> wsdlOperationBindings;
-        readonly Dictionary<WsdlNS.OperationBinding, OperationDescription> operationDescriptionBindings;
+        readonly Dictionary<
+            WsdlNS.OperationBinding,
+            OperationDescription
+        > operationDescriptionBindings;
         readonly Dictionary<MessageDescription, WsdlNS.MessageBinding> wsdlMessageBindings;
         readonly Dictionary<FaultDescription, WsdlNS.FaultBinding> wsdlFaultBindings;
         readonly Dictionary<WsdlNS.MessageBinding, MessageDescription> messageDescriptionBindings;
         readonly Dictionary<WsdlNS.FaultBinding, FaultDescription> faultDescriptionBindings;
-        
-        internal WsdlEndpointConversionContext(WsdlContractConversionContext contractContext, ServiceEndpoint endpoint, WsdlNS.Binding wsdlBinding, WsdlNS.Port wsdlport)
-        {
 
+        internal WsdlEndpointConversionContext(
+            WsdlContractConversionContext contractContext,
+            ServiceEndpoint endpoint,
+            WsdlNS.Binding wsdlBinding,
+            WsdlNS.Port wsdlport
+        )
+        {
             this.endpoint = endpoint;
             this.wsdlBinding = wsdlBinding;
             this.wsdlPort = wsdlport;
             this.contractContext = contractContext;
 
-            this.wsdlOperationBindings = new Dictionary<OperationDescription, WsdlNS.OperationBinding>();
-            this.operationDescriptionBindings = new Dictionary<WsdlNS.OperationBinding, OperationDescription>();
+            this.wsdlOperationBindings =
+                new Dictionary<OperationDescription, WsdlNS.OperationBinding>();
+            this.operationDescriptionBindings =
+                new Dictionary<WsdlNS.OperationBinding, OperationDescription>();
             this.wsdlMessageBindings = new Dictionary<MessageDescription, WsdlNS.MessageBinding>();
-            this.messageDescriptionBindings = new Dictionary<WsdlNS.MessageBinding, MessageDescription>();
+            this.messageDescriptionBindings =
+                new Dictionary<WsdlNS.MessageBinding, MessageDescription>();
             this.wsdlFaultBindings = new Dictionary<FaultDescription, WsdlNS.FaultBinding>();
             this.faultDescriptionBindings = new Dictionary<WsdlNS.FaultBinding, FaultDescription>();
         }
 
-        internal WsdlEndpointConversionContext(WsdlEndpointConversionContext bindingContext, ServiceEndpoint endpoint, WsdlNS.Port wsdlport)
+        internal WsdlEndpointConversionContext(
+            WsdlEndpointConversionContext bindingContext,
+            ServiceEndpoint endpoint,
+            WsdlNS.Port wsdlport
+        )
         {
-
             this.endpoint = endpoint;
             this.wsdlBinding = bindingContext.WsdlBinding;
             this.wsdlPort = wsdlport;
@@ -62,17 +74,25 @@ namespace System.ServiceModel.Description
         {
             get
             {
-                foreach (IWsdlExportExtension extension in endpoint.Behaviors.FindAll<IWsdlExportExtension>())
+                foreach (
+                    IWsdlExportExtension extension in endpoint.Behaviors.FindAll<IWsdlExportExtension>()
+                )
                 {
                     yield return extension;
                 }
 
-                foreach (IWsdlExportExtension extension in endpoint.Binding.CreateBindingElements().FindAll<IWsdlExportExtension>())
+                foreach (
+                    IWsdlExportExtension extension in endpoint
+                        .Binding.CreateBindingElements()
+                        .FindAll<IWsdlExportExtension>()
+                )
                 {
                     yield return extension;
                 }
 
-                foreach (IWsdlExportExtension extension in endpoint.Contract.Behaviors.FindAll<IWsdlExportExtension>())
+                foreach (
+                    IWsdlExportExtension extension in endpoint.Contract.Behaviors.FindAll<IWsdlExportExtension>()
+                )
                 {
                     yield return extension;
                 }
@@ -87,8 +107,9 @@ namespace System.ServiceModel.Description
                     // In 3.0SP1, the DCSOB and XSOB were moved from before to after the custom behaviors.  For
                     // IWsdlExportExtension compat, run them in the pre-SP1 order.
                     // TEF QFE 367607
-                    Collection<IWsdlExportExtension> extensions = operation.Behaviors.FindAll<IWsdlExportExtension>();
-                    for (int i = 0; i < extensions.Count;)
+                    Collection<IWsdlExportExtension> extensions =
+                        operation.Behaviors.FindAll<IWsdlExportExtension>();
+                    for (int i = 0; i < extensions.Count; )
                     {
                         if (WsdlExporter.IsBuiltInOperationBehavior(extensions[i]))
                         {
@@ -108,10 +129,22 @@ namespace System.ServiceModel.Description
             }
         }
 
-        public ServiceEndpoint Endpoint { get { return endpoint; } }
-        public WsdlNS.Binding WsdlBinding { get { return wsdlBinding; } }
-        public WsdlNS.Port WsdlPort { get { return wsdlPort; } }
-        public WsdlContractConversionContext ContractConversionContext { get { return contractContext; } }
+        public ServiceEndpoint Endpoint
+        {
+            get { return endpoint; }
+        }
+        public WsdlNS.Binding WsdlBinding
+        {
+            get { return wsdlBinding; }
+        }
+        public WsdlNS.Port WsdlPort
+        {
+            get { return wsdlPort; }
+        }
+        public WsdlContractConversionContext ContractConversionContext
+        {
+            get { return contractContext; }
+        }
 
         public WsdlNS.OperationBinding GetOperationBinding(OperationDescription operation)
         {
@@ -128,7 +161,9 @@ namespace System.ServiceModel.Description
             return this.wsdlFaultBindings[fault];
         }
 
-        public OperationDescription GetOperationDescription(WsdlNS.OperationBinding operationBinding)
+        public OperationDescription GetOperationDescription(
+            WsdlNS.OperationBinding operationBinding
+        )
         {
             return this.operationDescriptionBindings[operationBinding];
         }
@@ -145,23 +180,31 @@ namespace System.ServiceModel.Description
 
         // --------------------------------------------------------------------------------------------------
 
-        internal void AddOperationBinding(OperationDescription operationDescription, WsdlNS.OperationBinding wsdlOperationBinding)
+        internal void AddOperationBinding(
+            OperationDescription operationDescription,
+            WsdlNS.OperationBinding wsdlOperationBinding
+        )
         {
             this.wsdlOperationBindings.Add(operationDescription, wsdlOperationBinding);
             this.operationDescriptionBindings.Add(wsdlOperationBinding, operationDescription);
         }
 
-        internal void AddMessageBinding(MessageDescription messageDescription, WsdlNS.MessageBinding wsdlMessageBinding)
+        internal void AddMessageBinding(
+            MessageDescription messageDescription,
+            WsdlNS.MessageBinding wsdlMessageBinding
+        )
         {
             this.wsdlMessageBindings.Add(messageDescription, wsdlMessageBinding);
             this.messageDescriptionBindings.Add(wsdlMessageBinding, messageDescription);
         }
 
-        internal void AddFaultBinding(FaultDescription faultDescription, WsdlNS.FaultBinding wsdlFaultBinding)
+        internal void AddFaultBinding(
+            FaultDescription faultDescription,
+            WsdlNS.FaultBinding wsdlFaultBinding
+        )
         {
             this.wsdlFaultBindings.Add(faultDescription, wsdlFaultBinding);
             this.faultDescriptionBindings.Add(wsdlFaultBinding, faultDescription);
         }
     }
-
 }

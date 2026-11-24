@@ -26,8 +26,7 @@ public class ApiConventionApplicationModelConvention : IActionModelConvention
         ProducesErrorResponseTypeAttribute defaultErrorResponseType
     )
     {
-        DefaultErrorResponseType =
-            defaultErrorResponseType
+        DefaultErrorResponseType = defaultErrorResponseType
             ?? throw new ArgumentNullException(nameof(defaultErrorResponseType));
     }
 
@@ -89,8 +88,9 @@ public class ApiConventionApplicationModelConvention : IActionModelConvention
 
     private void DiscoverErrorResponseType(ActionModel action)
     {
-        var errorTypeAttribute =
-            action.Attributes.OfType<ProducesErrorResponseTypeAttribute>().FirstOrDefault()
+        var errorTypeAttribute = action
+            .Attributes.OfType<ProducesErrorResponseTypeAttribute>()
+            .FirstOrDefault()
             ?? action
                 .Controller.Attributes.OfType<ProducesErrorResponseTypeAttribute>()
                 .FirstOrDefault()

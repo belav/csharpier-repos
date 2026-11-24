@@ -374,19 +374,16 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         var path = Assert.Single(description.ParameterDescriptions, p => p.Name == "path");
         Assert.Equal("Path", path.Source);
 
-        var pathAndQuery = Assert.Single(
-            description.ParameterDescriptions,
-            p => p.Name == "pathAndQuery"
+        var pathAndQuery = Assert.Single(description.ParameterDescriptions, p =>
+            p.Name == "pathAndQuery"
         );
         Assert.Equal("Path", pathAndQuery.Source);
 
-        Assert.Single(
-            description.ParameterDescriptions,
-            p => p.Name == "pathAndFromBody" && p.Source == "Body"
+        Assert.Single(description.ParameterDescriptions, p =>
+            p.Name == "pathAndFromBody" && p.Source == "Body"
         );
-        Assert.Single(
-            description.ParameterDescriptions,
-            p => p.Name == "pathAndFromBody" && p.Source == "Path"
+        Assert.Single(description.ParameterDescriptions, p =>
+            p.Name == "pathAndFromBody" && p.Source == "Path"
         );
     }
 
@@ -980,9 +977,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
             typeof(XmlDataContractSerializerOutputFormatter).FullName,
             textXml.FormatterType
         );
-        var applicationXml = Assert.Single(
-            responseType.ResponseFormats,
-            f => f.MediaType == "application/xml"
+        var applicationXml = Assert.Single(responseType.ResponseFormats, f =>
+            f.MediaType == "application/xml"
         );
         Assert.Equal(
             typeof(XmlDataContractSerializerOutputFormatter).FullName,
@@ -991,9 +987,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
 
         var textJson = Assert.Single(responseType.ResponseFormats, f => f.MediaType == "text/json");
         Assert.Equal(typeof(NewtonsoftJsonOutputFormatter).FullName, textJson.FormatterType);
-        var applicationJson = Assert.Single(
-            responseType.ResponseFormats,
-            f => f.MediaType == "application/json"
+        var applicationJson = Assert.Single(responseType.ResponseFormats, f =>
+            f.MediaType == "application/json"
         );
         Assert.Equal(typeof(NewtonsoftJsonOutputFormatter).FullName, applicationJson.FormatterType);
     }
@@ -1015,9 +1010,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         var responseType = Assert.Single(description.SupportedResponseTypes);
         Assert.Equal(2, responseType.ResponseFormats.Count);
 
-        var applicationJson = Assert.Single(
-            responseType.ResponseFormats,
-            format => format.MediaType == "application/json"
+        var applicationJson = Assert.Single(responseType.ResponseFormats, format =>
+            format.MediaType == "application/json"
         );
         Assert.Equal(typeof(NewtonsoftJsonOutputFormatter).FullName, applicationJson.FormatterType);
 
@@ -1245,9 +1239,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         Assert.Equal(BindingSource.Form.Id, productName.Source);
         Assert.Equal(typeof(string).FullName, productName.Type);
 
-        var shippingInstructions = Assert.Single(
-            parameters,
-            p => p.Name == "Comments.ShippingInstructions"
+        var shippingInstructions = Assert.Single(parameters, p =>
+            p.Name == "Comments.ShippingInstructions"
         );
         Assert.Equal(BindingSource.Query.Id, shippingInstructions.Source);
         Assert.Equal(typeof(string).FullName, shippingInstructions.Type);

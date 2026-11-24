@@ -4,6 +4,7 @@
 // instance method
 using System;
 using Xunit;
+
 namespace Precise
 {
     public class Driver_xprecise2
@@ -13,7 +14,9 @@ namespace Precise
         {
             try
             {
-                Console.WriteLine("Testing .cctor() invocation by calling instance method across assembly");
+                Console.WriteLine(
+                    "Testing .cctor() invocation by calling instance method across assembly"
+                );
                 Console.WriteLine();
                 Console.WriteLine("Before calling instance method");
                 // .cctor should not run yet
@@ -43,5 +46,4 @@ namespace Precise
             return 100;
         }
     }
-
 }

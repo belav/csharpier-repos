@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,50 +31,55 @@ using System.Collections.Generic;
 
 namespace System.ServiceModel
 {
-	[MonoTODO ("It is untested.")]
-	public class UriSchemeKeyedCollection
-		: SynchronizedKeyedCollection<string, Uri>
-	{
-		public UriSchemeKeyedCollection (params Uri [] addresses)
-			: base (new object ())
-		{
-			if (addresses == null)
-				/* FIXME: masterinfo says, param name should be
-				   baseAddresses */
-				throw new ArgumentNullException ("addresses");
+    [MonoTODO("It is untested.")]
+    public class UriSchemeKeyedCollection : SynchronizedKeyedCollection<string, Uri>
+    {
+        public UriSchemeKeyedCollection(params Uri[] addresses)
+            : base(new object())
+        {
+            if (addresses == null)
+                /* FIXME: masterinfo says, param name should be
+                   baseAddresses */
+                throw new ArgumentNullException("addresses");
 
-			for (int i = 0; i < addresses.Length; i ++) {
-				if (!addresses [i].IsAbsoluteUri)
-					throw new ArgumentException ("Only an absolute URI can be used as a base address");
+            for (int i = 0; i < addresses.Length; i++)
+            {
+                if (!addresses[i].IsAbsoluteUri)
+                    throw new ArgumentException(
+                        "Only an absolute URI can be used as a base address"
+                    );
 
-				if (Contains (addresses [i].Scheme))
-					throw new ArgumentException ("Collection already contains an address with scheme "+ addresses [i].Scheme);
-				if (addresses [i].Query != String.Empty)
-					throw new ArgumentException ("A base address cannot contain a query string.");
+                if (Contains(addresses[i].Scheme))
+                    throw new ArgumentException(
+                        "Collection already contains an address with scheme " + addresses[i].Scheme
+                    );
+                if (addresses[i].Query != String.Empty)
+                    throw new ArgumentException("A base address cannot contain a query string.");
 
-				InsertItem (i, addresses [i]);
-			}
-		}
+                InsertItem(i, addresses[i]);
+            }
+        }
 
-		protected override string GetKeyForItem (Uri item)
-		{
-			return item.Scheme;
-		}
+        protected override string GetKeyForItem(Uri item)
+        {
+            return item.Scheme;
+        }
 
-		[MonoTODO ("hmm, what should I do further?")]
-		protected override void InsertItem (int index, Uri item)
-		{
-			base.InsertItem (index, item);
-		}
+        [MonoTODO("hmm, what should I do further?")]
+        protected override void InsertItem(int index, Uri item)
+        {
+            base.InsertItem(index, item);
+        }
 
-		[MonoTODO ("hmm, what should I do further?")]
-		protected override void SetItem (int index, Uri item)
-		{
-			base.SetItem (index, item);
-		}
+        [MonoTODO("hmm, what should I do further?")]
+        protected override void SetItem(int index, Uri item)
+        {
+            base.SetItem(index, item);
+        }
 
-		internal IList<Uri> InternalItems {
-			get { return base.Items; }
-		}
-	}
+        internal IList<Uri> InternalItems
+        {
+            get { return base.Items; }
+        }
+    }
 }

@@ -11,14 +11,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 {
     [Export(typeof(IRazorAsynchronousOperationListenerProviderAccessor))]
     [Shared]
-    internal sealed class RazorAsynchronousOperationListenerProviderAccessor : IRazorAsynchronousOperationListenerProviderAccessor
+    internal sealed class RazorAsynchronousOperationListenerProviderAccessor
+        : IRazorAsynchronousOperationListenerProviderAccessor
     {
         private readonly IAsynchronousOperationListenerProvider _implementation;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public RazorAsynchronousOperationListenerProviderAccessor(
-            IAsynchronousOperationListenerProvider implementation)
+            IAsynchronousOperationListenerProvider implementation
+        )
         {
             _implementation = implementation;
         }

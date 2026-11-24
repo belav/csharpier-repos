@@ -34,8 +34,8 @@ public class InferParameterBindingInfoConvention : IActionModelConvention
     /// <param name="modelMetadataProvider">The model metadata provider.</param>
     public InferParameterBindingInfoConvention(IModelMetadataProvider modelMetadataProvider)
     {
-        _modelMetadataProvider =
-            modelMetadataProvider ?? throw new ArgumentNullException(nameof(modelMetadataProvider));
+        _modelMetadataProvider = modelMetadataProvider
+            ?? throw new ArgumentNullException(nameof(modelMetadataProvider));
     }
 
     /// <summary>
@@ -49,8 +49,7 @@ public class InferParameterBindingInfoConvention : IActionModelConvention
     )
         : this(modelMetadataProvider)
     {
-        _serviceProviderIsService =
-            serviceProviderIsService
+        _serviceProviderIsService = serviceProviderIsService
             ?? throw new ArgumentNullException(nameof(serviceProviderIsService));
     }
 

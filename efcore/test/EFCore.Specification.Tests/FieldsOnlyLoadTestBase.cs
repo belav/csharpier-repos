@@ -31,7 +31,7 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
             Single = new Single { Id = 21 },
             SingleAk = new SingleAk { Id = 42 },
             SingleShadowFk = new SingleShadowFk { Id = 62 },
-            SingleCompositeKey = new SingleCompositeKey { Id = 62 }
+            SingleCompositeKey = new SingleCompositeKey { Id = 62 },
         };
 
         context.Attach(parent);
@@ -72,7 +72,7 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
             Single = new Single { Id = 21 },
             SingleAk = new SingleAk { Id = 42 },
             SingleShadowFk = new SingleShadowFk { Id = 62 },
-            SingleCompositeKey = new SingleCompositeKey { Id = 62 }
+            SingleCompositeKey = new SingleCompositeKey { Id = 62 },
         };
 
         context.Attach(parent);
@@ -109,10 +109,26 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
         {
             Id = 707,
             AlternateId = "Root",
-            Children = new List<Child> { new() { Id = 11 }, new() { Id = 12 } },
-            ChildrenAk = new List<ChildAk> { new() { Id = 31 }, new() { Id = 32 } },
-            ChildrenShadowFk = new List<ChildShadowFk> { new() { Id = 51 }, new() { Id = 52 } },
-            ChildrenCompositeKey = new List<ChildCompositeKey> { new() { Id = 51 }, new() { Id = 52 } }
+            Children = new List<Child>
+            {
+                new() { Id = 11 },
+                new() { Id = 12 },
+            },
+            ChildrenAk = new List<ChildAk>
+            {
+                new() { Id = 31 },
+                new() { Id = 32 },
+            },
+            ChildrenShadowFk = new List<ChildShadowFk>
+            {
+                new() { Id = 51 },
+                new() { Id = 52 },
+            },
+            ChildrenCompositeKey = new List<ChildCompositeKey>
+            {
+                new() { Id = 51 },
+                new() { Id = 52 },
+            },
         };
 
         context.Attach(parent);
@@ -121,10 +137,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
         {
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            foreach (var child in parent.Children.Cast<object>()
-                         .Concat(parent.ChildrenAk)
-                         .Concat(parent.ChildrenShadowFk)
-                         .Concat(parent.ChildrenCompositeKey))
+            foreach (
+                var child in parent
+                    .Children.Cast<object>()
+                    .Concat(parent.ChildrenAk)
+                    .Concat(parent.ChildrenShadowFk)
+                    .Concat(parent.ChildrenCompositeKey)
+            )
             {
                 context.Entry(child).State = state;
             }
@@ -153,13 +172,29 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    public virtual async Task Load_collection(EntityState state, QueryTrackingBehavior queryTrackingBehavior, bool async)
+    public virtual async Task Load_collection(
+        EntityState state,
+        QueryTrackingBehavior queryTrackingBehavior,
+        bool async
+    )
     {
         using var context = CreateContext();
 
@@ -300,7 +335,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_when_NoTracking_behavior(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_when_NoTracking_behavior(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
@@ -392,7 +430,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_principal(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_principal(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<SinglePkToPk>().Single();
@@ -441,7 +482,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_dependent(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_dependent(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -518,7 +562,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<Child>().Single(e => e.Id == 12);
@@ -562,7 +609,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<Single>().Single();
@@ -606,7 +656,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -641,7 +694,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_principal_using_Query(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_principal_using_Query(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<SinglePkToPk>().Single();
@@ -685,7 +741,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_dependent_using_Query(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_dependent_using_Query(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -720,11 +779,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_null_FK(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_null_FK(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var child = context.Attach(
-            new Child { Id = 767, ParentId = null }).Entity;
+        var child = context.Attach(new Child { Id = 767, ParentId = null }).Entity;
 
         ClearLog();
 
@@ -758,11 +819,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_null_FK(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_null_FK(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var single = context.Attach(
-            new Single { Id = 767, ParentId = null }).Entity;
+        var single = context.Attach(new Single { Id = 767, ParentId = null }).Entity;
 
         ClearLog();
 
@@ -797,11 +860,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_null_FK(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_null_FK(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var child = context.Attach(
-            new Child { Id = 767, ParentId = null }).Entity;
+        var child = context.Attach(new Child { Id = 767, ParentId = null }).Entity;
 
         ClearLog();
 
@@ -832,11 +897,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_null_FK(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_null_FK(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var single = context.Attach(
-            new Single { Id = 767, ParentId = null }).Entity;
+        var single = context.Attach(new Single { Id = 767, ParentId = null }).Entity;
 
         ClearLog();
 
@@ -870,8 +937,7 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Load_collection_not_found(EntityState state, bool async)
     {
         using var context = CreateContext();
-        var parent = context.Attach(
-            new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
+        var parent = context.Attach(new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
 
         ClearLog();
 
@@ -905,11 +971,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_not_found(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_not_found(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var child = context.Attach(
-            new Child { Id = 767, ParentId = 787 }).Entity;
+        var child = context.Attach(new Child { Id = 767, ParentId = 787 }).Entity;
 
         ClearLog();
 
@@ -943,11 +1011,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_not_found(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_not_found(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var single = context.Attach(
-            new Single { Id = 767, ParentId = 787 }).Entity;
+        var single = context.Attach(new Single { Id = 767, ParentId = 787 }).Entity;
 
         ClearLog();
 
@@ -982,11 +1052,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_not_found(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_not_found(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var parent = context.Attach(
-            new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
+        var parent = context.Attach(new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
 
         ClearLog();
 
@@ -1024,8 +1096,7 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Load_collection_using_Query_not_found(EntityState state, bool async)
     {
         using var context = CreateContext();
-        var parent = context.Attach(
-            new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
+        var parent = context.Attach(new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
 
         ClearLog();
 
@@ -1056,11 +1127,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_not_found(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_not_found(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var child = context.Attach(
-            new Child { Id = 767, ParentId = 787 }).Entity;
+        var child = context.Attach(new Child { Id = 767, ParentId = 787 }).Entity;
 
         ClearLog();
 
@@ -1091,11 +1164,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_not_found(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_not_found(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var single = context.Attach(
-            new Single { Id = 767, ParentId = 787 }).Entity;
+        var single = context.Attach(new Single { Id = 767, ParentId = 787 }).Entity;
 
         ClearLog();
 
@@ -1126,11 +1201,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_not_found(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_not_found(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var parent = context.Attach(
-            new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
+        var parent = context.Attach(new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
 
         ClearLog();
 
@@ -1167,7 +1244,11 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false, CascadeTiming.OnSaveChanges)]
     [InlineData(EntityState.Deleted, true, CascadeTiming.OnSaveChanges)]
     [InlineData(EntityState.Deleted, false, CascadeTiming.OnSaveChanges)]
-    public virtual async Task Load_collection_already_loaded(EntityState state, bool async, CascadeTiming deleteOrphansTiming)
+    public virtual async Task Load_collection_already_loaded(
+        EntityState state,
+        bool async,
+        CascadeTiming deleteOrphansTiming
+    )
     {
         using var context = CreateContext();
         context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
@@ -1197,8 +1278,7 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
 
         Assert.Equal(2, parent.Children.Count());
 
-        if (state == EntityState.Deleted
-            && deleteOrphansTiming != CascadeTiming.Never)
+        if (state == EntityState.Deleted && deleteOrphansTiming != CascadeTiming.Never)
         {
             Assert.All(parent.Children.Select(e => e.Parent), c => Assert.Null(c));
         }
@@ -1217,7 +1297,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_already_loaded(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_already_loaded(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<Child>().Include(e => e.Parent).Single(e => e.Id == 12);
@@ -1267,7 +1350,8 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Load_one_to_one_reference_to_principal_already_loaded(
         EntityState state,
         bool async,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         using var context = CreateContext();
         context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
@@ -1319,7 +1403,8 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Load_one_to_one_reference_to_dependent_already_loaded(
         EntityState state,
         bool async,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         using var context = CreateContext();
         context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
@@ -1353,8 +1438,7 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
 
         Assert.Same(single, parent.Single);
 
-        if (state == EntityState.Deleted
-            && deleteOrphansTiming != CascadeTiming.Never)
+        if (state == EntityState.Deleted && deleteOrphansTiming != CascadeTiming.Never)
         {
             Assert.Null(single.Parent);
         }
@@ -1371,7 +1455,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_principal_already_loaded(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_principal_already_loaded(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<SinglePkToPk>().Include(e => e.Parent).Single();
@@ -1412,7 +1499,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_dependent_already_loaded(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_dependent_already_loaded(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Include(e => e.SinglePkToPk).Single();
@@ -1462,7 +1552,8 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Load_collection_using_Query_already_loaded(
         EntityState state,
         bool async,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         using var context = CreateContext();
         context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
@@ -1500,7 +1591,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_already_loaded(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_already_loaded(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<Child>().Include(e => e.Parent).Single(e => e.Id == 12);
@@ -1535,7 +1629,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_already_loaded(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_already_loaded(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<Single>().Include(e => e.Parent).Single();
@@ -1579,7 +1676,8 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_already_loaded(
         EntityState state,
         bool async,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         using var context = CreateContext();
         context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
@@ -1616,7 +1714,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_principal_using_Query_already_loaded(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_principal_using_Query_already_loaded(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<SinglePkToPk>().Include(e => e.Parent).Single();
@@ -1651,7 +1752,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_dependent_using_Query_already_loaded(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_dependent_using_Query_already_loaded(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Include(e => e.SinglePkToPk).Single();
@@ -1725,7 +1829,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_untyped(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<Child>().Single(e => e.Id == 12);
@@ -1774,7 +1881,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_untyped(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<Single>().Single();
@@ -1823,7 +1933,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_untyped(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -1901,7 +2014,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_untyped(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<Child>().Single(e => e.Id == 12);
@@ -1946,7 +2062,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_untyped(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<Single>().Single();
@@ -1991,7 +2110,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_untyped(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -2030,8 +2152,7 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Load_collection_not_found_untyped(EntityState state, bool async)
     {
         using var context = CreateContext();
-        var parent = context.Attach(
-            new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
+        var parent = context.Attach(new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
 
         ClearLog();
 
@@ -2065,11 +2186,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_not_found_untyped(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_not_found_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var child = context.Attach(
-            new Child { Id = 767, ParentId = 787 }).Entity;
+        var child = context.Attach(new Child { Id = 767, ParentId = 787 }).Entity;
 
         ClearLog();
 
@@ -2103,11 +2226,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_not_found_untyped(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_not_found_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var single = context.Attach(
-            new Single { Id = 767, ParentId = 787 }).Entity;
+        var single = context.Attach(new Single { Id = 767, ParentId = 787 }).Entity;
 
         ClearLog();
 
@@ -2142,11 +2267,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_not_found_untyped(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_not_found_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var parent = context.Attach(
-            new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
+        var parent = context.Attach(new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
 
         ClearLog();
 
@@ -2181,11 +2308,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_collection_using_Query_not_found_untyped(EntityState state, bool async)
+    public virtual async Task Load_collection_using_Query_not_found_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var parent = context.Attach(
-            new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
+        var parent = context.Attach(new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
 
         ClearLog();
 
@@ -2217,11 +2346,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_not_found_untyped(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_not_found_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var child = context.Attach(
-            new Child { Id = 767, ParentId = 787 }).Entity;
+        var child = context.Attach(new Child { Id = 767, ParentId = 787 }).Entity;
 
         ClearLog();
 
@@ -2253,11 +2384,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_not_found_untyped(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_not_found_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var single = context.Attach(
-            new Single { Id = 767, ParentId = 787 }).Entity;
+        var single = context.Attach(new Single { Id = 767, ParentId = 787 }).Entity;
 
         ClearLog();
 
@@ -2289,11 +2422,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_not_found_untyped(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_not_found_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var parent = context.Attach(
-            new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
+        var parent = context.Attach(new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
 
         ClearLog();
 
@@ -2331,7 +2466,11 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false, CascadeTiming.OnSaveChanges)]
     [InlineData(EntityState.Deleted, true, CascadeTiming.OnSaveChanges)]
     [InlineData(EntityState.Deleted, false, CascadeTiming.OnSaveChanges)]
-    public virtual async Task Load_collection_already_loaded_untyped(EntityState state, bool async, CascadeTiming deleteOrphansTiming)
+    public virtual async Task Load_collection_already_loaded_untyped(
+        EntityState state,
+        bool async,
+        CascadeTiming deleteOrphansTiming
+    )
     {
         using var context = CreateContext();
         context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
@@ -2361,8 +2500,7 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
 
         Assert.Equal(2, parent.Children.Count());
 
-        if (state == EntityState.Deleted
-            && deleteOrphansTiming != CascadeTiming.Never)
+        if (state == EntityState.Deleted && deleteOrphansTiming != CascadeTiming.Never)
         {
             Assert.All(parent.Children.Select(e => e.Parent), c => Assert.Null(c));
         }
@@ -2381,7 +2519,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_already_loaded_untyped(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_already_loaded_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<Child>().Include(e => e.Parent).Single(e => e.Id == 12);
@@ -2422,7 +2563,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_already_loaded_untyped(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_already_loaded_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<Single>().Include(e => e.Parent).Single();
@@ -2472,7 +2616,8 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Load_one_to_one_reference_to_dependent_already_loaded_untyped(
         EntityState state,
         bool async,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         using var context = CreateContext();
         context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
@@ -2506,8 +2651,7 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
 
         Assert.Same(single, parent.Single);
 
-        if (state == EntityState.Deleted
-            && deleteOrphansTiming != CascadeTiming.Never)
+        if (state == EntityState.Deleted && deleteOrphansTiming != CascadeTiming.Never)
         {
             Assert.Null(single.Parent);
         }
@@ -2533,7 +2677,8 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Load_collection_using_Query_already_loaded_untyped(
         EntityState state,
         bool async,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         using var context = CreateContext();
         context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
@@ -2572,7 +2717,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_already_loaded_untyped(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_already_loaded_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<Child>().Include(e => e.Parent).Single(e => e.Id == 12);
@@ -2608,7 +2756,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_already_loaded_untyped(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_already_loaded_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<Single>().Include(e => e.Parent).Single();
@@ -2653,7 +2804,8 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_already_loaded_untyped(
         EntityState state,
         bool async,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         using var context = CreateContext();
         context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
@@ -2732,7 +2884,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_alternate_key(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<ChildAk>().Single(e => e.Id == 32);
@@ -2781,7 +2936,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_alternate_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<SingleAk>().Single();
@@ -2830,7 +2988,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_alternate_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -2871,7 +3032,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_collection_using_Query_alternate_key(EntityState state, bool async)
+    public virtual async Task Load_collection_using_Query_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -2907,7 +3071,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_alternate_key(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<ChildAk>().Single(e => e.Id == 32);
@@ -2951,7 +3118,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_alternate_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<SingleAk>().Single();
@@ -2995,7 +3165,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_alternate_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -3030,11 +3203,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_null_FK_alternate_key(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_null_FK_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var child = context.Attach(
-            new ChildAk { Id = 767, ParentId = null }).Entity;
+        var child = context.Attach(new ChildAk { Id = 767, ParentId = null }).Entity;
 
         ClearLog();
 
@@ -3068,11 +3243,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_null_FK_alternate_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_null_FK_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var single = context.Attach(
-            new SingleAk { Id = 767, ParentId = null }).Entity;
+        var single = context.Attach(new SingleAk { Id = 767, ParentId = null }).Entity;
 
         ClearLog();
 
@@ -3107,11 +3284,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_null_FK_alternate_key(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_null_FK_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var child = context.Attach(
-            new ChildAk { Id = 767, ParentId = null }).Entity;
+        var child = context.Attach(new ChildAk { Id = 767, ParentId = null }).Entity;
 
         ClearLog();
 
@@ -3142,11 +3321,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_null_FK_alternate_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_null_FK_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var single = context.Attach(
-            new SingleAk { Id = 767, ParentId = null }).Entity;
+        var single = context.Attach(new SingleAk { Id = 767, ParentId = null }).Entity;
 
         ClearLog();
 
@@ -3216,7 +3397,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_shadow_fk(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<ChildShadowFk>().Single(e => e.Id == 52);
@@ -3265,7 +3449,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_shadow_fk(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<SingleShadowFk>().Single();
@@ -3314,7 +3501,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_shadow_fk(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -3391,7 +3581,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_shadow_fk(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<ChildShadowFk>().Single(e => e.Id == 52);
@@ -3435,7 +3628,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_shadow_fk(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<SingleShadowFk>().Single();
@@ -3479,7 +3675,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_shadow_fk(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -3514,7 +3713,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_null_FK_shadow_fk(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_null_FK_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Attach(new ChildShadowFk { Id = 767 }).Entity;
@@ -3552,7 +3754,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_null_FK_shadow_fk(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_null_FK_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Attach(new SingleShadowFk { Id = 767 }).Entity;
@@ -3591,7 +3796,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_null_FK_shadow_fk(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_null_FK_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Attach(new ChildShadowFk { Id = 767 }).Entity;
@@ -3626,7 +3834,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_null_FK_shadow_fk(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_null_FK_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Attach(new SingleShadowFk { Id = 767 }).Entity;
@@ -3700,7 +3911,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_composite_key(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<ChildCompositeKey>().Single(e => e.Id == 52);
@@ -3749,7 +3963,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_composite_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<SingleCompositeKey>().Single();
@@ -3798,7 +4015,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_composite_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -3839,7 +4059,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_collection_using_Query_composite_key(EntityState state, bool async)
+    public virtual async Task Load_collection_using_Query_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -3875,7 +4098,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_composite_key(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<ChildCompositeKey>().Single(e => e.Id == 52);
@@ -3919,7 +4145,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_composite_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<SingleCompositeKey>().Single();
@@ -3963,7 +4192,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_composite_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -3998,11 +4230,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_null_FK_composite_key(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_null_FK_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var child = context.Attach(
-            new ChildCompositeKey { Id = 767, ParentId = 567 }).Entity;
+        var child = context.Attach(new ChildCompositeKey { Id = 767, ParentId = 567 }).Entity;
 
         ClearLog();
 
@@ -4036,11 +4270,15 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_null_FK_composite_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_null_FK_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var single = context.Attach(
-            new SingleCompositeKey { Id = 767, ParentAlternateId = "Boot" }).Entity;
+        var single = context
+            .Attach(new SingleCompositeKey { Id = 767, ParentAlternateId = "Boot" })
+            .Entity;
 
         ClearLog();
 
@@ -4075,11 +4313,15 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_null_FK_composite_key(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_null_FK_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var child = context.Attach(
-            new ChildCompositeKey { Id = 767, ParentAlternateId = "Boot" }).Entity;
+        var child = context
+            .Attach(new ChildCompositeKey { Id = 767, ParentAlternateId = "Boot" })
+            .Entity;
 
         ClearLog();
 
@@ -4110,11 +4352,13 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_null_FK_composite_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_null_FK_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var single = context.Attach(
-            new SingleCompositeKey { Id = 767, ParentId = 567 }).Entity;
+        var single = context.Attach(new SingleCompositeKey { Id = 767, ParentId = 567 }).Entity;
 
         ClearLog();
 
@@ -4204,7 +4448,8 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
 
         Assert.Equal(
             CoreStrings.ReferenceMustBeLoaded("Parent", typeof(Child).Name),
-            Assert.Throws<InvalidOperationException>(() => referenceEntry.IsLoaded = false).Message);
+            Assert.Throws<InvalidOperationException>(() => referenceEntry.IsLoaded = false).Message
+        );
     }
 
     [ConditionalTheory]
@@ -4239,7 +4484,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false, false)]
     [InlineData(true, true)]
     [InlineData(false, true)]
-    public virtual async Task Load_collection_using_string_for_detached_throws(bool async, bool noTracking)
+    public virtual async Task Load_collection_using_string_for_detached_throws(
+        bool async,
+        bool noTracking
+    )
     {
         using var context = CreateContext(noTracking: noTracking);
         var parent = context.Set<Parent>().Single();
@@ -4266,7 +4514,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false, false)]
     [InlineData(true, true)]
     [InlineData(false, true)]
-    public virtual async Task Load_collection_with_navigation_for_detached_throws(bool async, bool noTracking)
+    public virtual async Task Load_collection_with_navigation_for_detached_throws(
+        bool async,
+        bool noTracking
+    )
     {
         using var context = CreateContext(noTracking: noTracking);
         var parent = context.Set<Parent>().Single();
@@ -4293,7 +4544,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false, false)]
     [InlineData(true, true)]
     [InlineData(false, true)]
-    public virtual async Task Load_reference_to_principal_for_detached_throws(bool async, bool noTracking)
+    public virtual async Task Load_reference_to_principal_for_detached_throws(
+        bool async,
+        bool noTracking
+    )
     {
         using var context = CreateContext(noTracking: noTracking);
         var child = context.Set<Child>().Single(e => e.Id == 12);
@@ -4320,7 +4574,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false, false)]
     [InlineData(true, true)]
     [InlineData(false, true)]
-    public virtual async Task Load_reference_with_navigation_to_principal_for_detached_throws(bool async, bool noTracking)
+    public virtual async Task Load_reference_with_navigation_to_principal_for_detached_throws(
+        bool async,
+        bool noTracking
+    )
     {
         using var context = CreateContext(noTracking: noTracking);
         var child = context.Set<Child>().Single(e => e.Id == 12);
@@ -4347,7 +4604,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false, false)]
     [InlineData(true, true)]
     [InlineData(false, true)]
-    public virtual async Task Load_reference_using_string_to_principal_for_detached_throws(bool async, bool noTracking)
+    public virtual async Task Load_reference_using_string_to_principal_for_detached_throws(
+        bool async,
+        bool noTracking
+    )
     {
         using var context = CreateContext(noTracking: noTracking);
         var child = context.Set<Child>().Single(e => e.Id == 12);
@@ -4374,7 +4634,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false, false)]
     [InlineData(true, true)]
     [InlineData(false, true)]
-    public virtual async Task Load_reference_to_dependent_for_detached_throws(bool async, bool noTracking)
+    public virtual async Task Load_reference_to_dependent_for_detached_throws(
+        bool async,
+        bool noTracking
+    )
     {
         using var context = CreateContext(noTracking: noTracking);
         var parent = context.Set<Parent>().Single();
@@ -4401,7 +4664,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false, false)]
     [InlineData(true, true)]
     [InlineData(false, true)]
-    public virtual async Task Load_reference_to_dependent_with_navigation_for_detached_throws(bool async, bool noTracking)
+    public virtual async Task Load_reference_to_dependent_with_navigation_for_detached_throws(
+        bool async,
+        bool noTracking
+    )
     {
         using var context = CreateContext(noTracking: noTracking);
         var parent = context.Set<Parent>().Single();
@@ -4428,7 +4694,10 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false, false)]
     [InlineData(true, true)]
     [InlineData(false, true)]
-    public virtual async Task Load_reference_to_dependent_using_string_for_detached_throws(bool async, bool noTracking)
+    public virtual async Task Load_reference_to_dependent_using_string_for_detached_throws(
+        bool async,
+        bool noTracking
+    )
     {
         using var context = CreateContext(noTracking: noTracking);
         var parent = context.Set<Parent>().Single();
@@ -4525,7 +4794,9 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public virtual void Query_reference_with_navigation_to_principal_for_detached_throws(bool noTracking)
+    public virtual void Query_reference_with_navigation_to_principal_for_detached_throws(
+        bool noTracking
+    )
     {
         using var context = CreateContext(noTracking: noTracking);
         var child = context.Set<Child>().Single(e => e.Id == 12);
@@ -4543,7 +4814,9 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public virtual void Query_reference_using_string_to_principal_for_detached_throws(bool noTracking)
+    public virtual void Query_reference_using_string_to_principal_for_detached_throws(
+        bool noTracking
+    )
     {
         using var context = CreateContext(noTracking: noTracking);
         var child = context.Set<Child>().Single(e => e.Id == 12);
@@ -4579,7 +4852,9 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public virtual void Query_reference_to_dependent_with_navigation_for_detached_throws(bool noTracking)
+    public virtual void Query_reference_to_dependent_with_navigation_for_detached_throws(
+        bool noTracking
+    )
     {
         using var context = CreateContext(noTracking: noTracking);
         var parent = context.Set<Parent>().Single();
@@ -4597,7 +4872,9 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public virtual void Query_reference_to_dependent_using_string_for_detached_throws(bool noTracking)
+    public virtual void Query_reference_to_dependent_using_string_for_detached_throws(
+        bool noTracking
+    )
     {
         using var context = CreateContext(noTracking: noTracking);
         var parent = context.Set<Parent>().Single();
@@ -4701,22 +4978,17 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
         return context;
     }
 
-    protected virtual void ClearLog()
-    {
-    }
+    protected virtual void ClearLog() { }
 
-    protected virtual void RecordLog()
-    {
-    }
+    protected virtual void RecordLog() { }
 
     protected class ChangeDetectorProxy : ChangeDetector
     {
         public ChangeDetectorProxy(
             IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> logger,
-            ILoggingOptions loggingOptions)
-            : base(logger, loggingOptions)
-        {
-        }
+            ILoggingOptions loggingOptions
+        )
+            : base(logger, loggingOptions) { }
 
         public bool DetectChangesCalled { get; set; }
 
@@ -4730,124 +5002,112 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
 
     public abstract class FieldsOnlyLoadFixtureBase : SharedStoreFixtureBase<PoolableDbContext>
     {
-        protected override string StoreName
-            => "FieldsOnlyLoadTest";
+        protected override string StoreName => "FieldsOnlyLoadTest";
 
-        protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
-            => base.AddServices(serviceCollection.AddScoped<IChangeDetector, ChangeDetectorProxy>());
+        protected override IServiceCollection AddServices(IServiceCollection serviceCollection) =>
+            base.AddServices(serviceCollection.AddScoped<IChangeDetector, ChangeDetectorProxy>());
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {
-            modelBuilder.Entity<SingleShadowFk>()
-                .Property<int?>("ParentId");
+            modelBuilder.Entity<SingleShadowFk>().Property<int?>("ParentId");
 
-            modelBuilder.Entity<Parent>(
-                b =>
-                {
-                    b.Property(e => e.Id).ValueGeneratedNever();
-                    b.Property(e => e.AlternateId).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Parent>(b =>
+            {
+                b.Property(e => e.Id).ValueGeneratedNever();
+                b.Property(e => e.AlternateId).ValueGeneratedOnAdd();
 
-                    b.HasMany<Child>(nameof(Parent.Children))
-                        .WithOne(nameof(Child.Parent))
-                        .HasForeignKey(e => e.ParentId);
+                b.HasMany<Child>(nameof(Parent.Children))
+                    .WithOne(nameof(Child.Parent))
+                    .HasForeignKey(e => e.ParentId);
 
-                    b.HasOne<SinglePkToPk>(nameof(Parent.SinglePkToPk))
-                        .WithOne(nameof(SinglePkToPk.Parent))
-                        .HasForeignKey<SinglePkToPk>(e => e.Id)
-                        .IsRequired();
+                b.HasOne<SinglePkToPk>(nameof(Parent.SinglePkToPk))
+                    .WithOne(nameof(SinglePkToPk.Parent))
+                    .HasForeignKey<SinglePkToPk>(e => e.Id)
+                    .IsRequired();
 
-                    b.HasOne<Single>(nameof(Parent.Single))
-                        .WithOne(e => e.Parent)
-                        .HasForeignKey<Single>(e => e.ParentId);
+                b.HasOne<Single>(nameof(Parent.Single))
+                    .WithOne(e => e.Parent)
+                    .HasForeignKey<Single>(e => e.ParentId);
 
-                    b.HasMany<ChildAk>(nameof(Parent.ChildrenAk))
-                        .WithOne(e => e.Parent)
-                        .HasPrincipalKey(e => e.AlternateId)
-                        .HasForeignKey(e => e.ParentId);
+                b.HasMany<ChildAk>(nameof(Parent.ChildrenAk))
+                    .WithOne(e => e.Parent)
+                    .HasPrincipalKey(e => e.AlternateId)
+                    .HasForeignKey(e => e.ParentId);
 
-                    b.HasOne<SingleAk>(nameof(Parent.SingleAk))
-                        .WithOne(e => e.Parent)
-                        .HasPrincipalKey<Parent>(e => e.AlternateId)
-                        .HasForeignKey<SingleAk>(e => e.ParentId);
+                b.HasOne<SingleAk>(nameof(Parent.SingleAk))
+                    .WithOne(e => e.Parent)
+                    .HasPrincipalKey<Parent>(e => e.AlternateId)
+                    .HasForeignKey<SingleAk>(e => e.ParentId);
 
-                    b.HasMany(e => e.ChildrenShadowFk)
-                        .WithOne(nameof(ChildShadowFk.Parent))
-                        .HasPrincipalKey(e => e.Id)
-                        .HasForeignKey("ParentId");
+                b.HasMany(e => e.ChildrenShadowFk)
+                    .WithOne(nameof(ChildShadowFk.Parent))
+                    .HasPrincipalKey(e => e.Id)
+                    .HasForeignKey("ParentId");
 
-                    b.HasOne<SingleShadowFk>(nameof(Parent.SingleShadowFk))
-                        .WithOne(e => e.Parent)
-                        .HasPrincipalKey<Parent>(e => e.Id)
-                        .HasForeignKey<SingleShadowFk>("ParentId");
+                b.HasOne<SingleShadowFk>(nameof(Parent.SingleShadowFk))
+                    .WithOne(e => e.Parent)
+                    .HasPrincipalKey<Parent>(e => e.Id)
+                    .HasForeignKey<SingleShadowFk>("ParentId");
 
-                    b.HasMany(e => e.ChildrenCompositeKey)
-                        .WithOne(e => e.Parent)
-                        .HasPrincipalKey(
-                            e => new { e.AlternateId, e.Id })
-                        .HasForeignKey(
-                            e => new { e.ParentAlternateId, e.ParentId });
+                b.HasMany(e => e.ChildrenCompositeKey)
+                    .WithOne(e => e.Parent)
+                    .HasPrincipalKey(e => new { e.AlternateId, e.Id })
+                    .HasForeignKey(e => new { e.ParentAlternateId, e.ParentId });
 
-                    b.HasOne<SingleCompositeKey>(nameof(Parent.SingleCompositeKey))
-                        .WithOne(e => e.Parent)
-                        .HasPrincipalKey<Parent>(
-                            e => new { e.AlternateId, e.Id })
-                        .HasForeignKey<SingleCompositeKey>(
-                            e => new { e.ParentAlternateId, e.ParentId });
-                });
+                b.HasOne<SingleCompositeKey>(nameof(Parent.SingleCompositeKey))
+                    .WithOne(e => e.Parent)
+                    .HasPrincipalKey<Parent>(e => new { e.AlternateId, e.Id })
+                    .HasForeignKey<SingleCompositeKey>(e => new
+                    {
+                        e.ParentAlternateId,
+                        e.ParentId,
+                    });
+            });
 
-            modelBuilder.Entity<SingleShadowFk>(
-                b =>
-                {
-                    b.Property(e => e.Id).ValueGeneratedNever();
-                });
+            modelBuilder.Entity<SingleShadowFk>(b =>
+            {
+                b.Property(e => e.Id).ValueGeneratedNever();
+            });
 
-            modelBuilder.Entity<ChildShadowFk>(
-                b =>
-                {
-                    b.Property(e => e.Id).ValueGeneratedNever();
-                });
+            modelBuilder.Entity<ChildShadowFk>(b =>
+            {
+                b.Property(e => e.Id).ValueGeneratedNever();
+            });
 
-            modelBuilder.Entity<SingleCompositeKey>(
-                b =>
-                {
-                    b.Property(e => e.Id).ValueGeneratedNever();
-                });
+            modelBuilder.Entity<SingleCompositeKey>(b =>
+            {
+                b.Property(e => e.Id).ValueGeneratedNever();
+            });
 
-            modelBuilder.Entity<ChildCompositeKey>(
-                b =>
-                {
-                    b.Property(e => e.Id).ValueGeneratedNever();
-                });
+            modelBuilder.Entity<ChildCompositeKey>(b =>
+            {
+                b.Property(e => e.Id).ValueGeneratedNever();
+            });
 
-            modelBuilder.Entity<SingleAk>(
-                b =>
-                {
-                    b.Property(e => e.Id).ValueGeneratedNever();
-                });
+            modelBuilder.Entity<SingleAk>(b =>
+            {
+                b.Property(e => e.Id).ValueGeneratedNever();
+            });
 
-            modelBuilder.Entity<ChildAk>(
-                b =>
-                {
-                    b.Property(e => e.Id).ValueGeneratedNever();
-                });
+            modelBuilder.Entity<ChildAk>(b =>
+            {
+                b.Property(e => e.Id).ValueGeneratedNever();
+            });
 
-            modelBuilder.Entity<Single>(
-                b =>
-                {
-                    b.Property(e => e.Id).ValueGeneratedNever();
-                });
+            modelBuilder.Entity<Single>(b =>
+            {
+                b.Property(e => e.Id).ValueGeneratedNever();
+            });
 
-            modelBuilder.Entity<SinglePkToPk>(
-                b =>
-                {
-                    b.Property(e => e.Id).ValueGeneratedNever();
-                });
+            modelBuilder.Entity<SinglePkToPk>(b =>
+            {
+                b.Property(e => e.Id).ValueGeneratedNever();
+            });
 
-            modelBuilder.Entity<Child>(
-                b =>
-                {
-                    b.Property(e => e.Id).ValueGeneratedNever();
-                });
+            modelBuilder.Entity<Child>(b =>
+            {
+                b.Property(e => e.Id).ValueGeneratedNever();
+            });
         }
 
         protected override void Seed(PoolableDbContext context)
@@ -4857,16 +5117,33 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     Id = 707,
                     AlternateId = "Root",
-                    Children = new List<Child> { new() { Id = 11 }, new() { Id = 12 } },
+                    Children = new List<Child>
+                    {
+                        new() { Id = 11 },
+                        new() { Id = 12 },
+                    },
                     SinglePkToPk = new SinglePkToPk { Id = 707 },
                     Single = new Single { Id = 21 },
-                    ChildrenAk = new List<ChildAk> { new() { Id = 31 }, new() { Id = 32 } },
+                    ChildrenAk = new List<ChildAk>
+                    {
+                        new() { Id = 31 },
+                        new() { Id = 32 },
+                    },
                     SingleAk = new SingleAk { Id = 42 },
-                    ChildrenShadowFk = new List<ChildShadowFk> { new() { Id = 51 }, new() { Id = 52 } },
+                    ChildrenShadowFk = new List<ChildShadowFk>
+                    {
+                        new() { Id = 51 },
+                        new() { Id = 52 },
+                    },
                     SingleShadowFk = new SingleShadowFk { Id = 62 },
-                    ChildrenCompositeKey = new List<ChildCompositeKey> { new() { Id = 51 }, new() { Id = 52 } },
-                    SingleCompositeKey = new SingleCompositeKey { Id = 62 }
-                });
+                    ChildrenCompositeKey = new List<ChildCompositeKey>
+                    {
+                        new() { Id = 51 },
+                        new() { Id = 52 },
+                    },
+                    SingleCompositeKey = new SingleCompositeKey { Id = 62 },
+                }
+            );
 
             // context.Add(
             //     new SimpleProduct { Deposit = new Deposit() });

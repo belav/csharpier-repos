@@ -1,20 +1,19 @@
 /* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Microsoft Public License. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Microsoft Public License, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Microsoft Public License. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Microsoft Public License, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Microsoft Public License.
  *
  * You must not remove this notice, or any other, from this software.
  *
  *
  * ***************************************************************************/
-using System; using Microsoft;
-
-
+using System;
+using Microsoft;
 #if !SILVERLIGHT // ComObject
 
 using System.Collections.Generic;
@@ -26,9 +25,11 @@ using System.Security;
 using ComTypes = System.Runtime.InteropServices.ComTypes;
 
 #if CODEPLEX_40
-namespace System.Dynamic {
+namespace System.Dynamic
+{
 #else
-namespace Microsoft.Scripting {
+namespace Microsoft.Scripting
+{
 #endif
     /// <summary>
     /// This class implements an event sink for a particular RCW.
@@ -36,17 +37,17 @@ namespace Microsoft.Scripting {
     /// we will create only one event sink per RCW (theoretically RCW might have
     /// several ComEventSink evenk sinks - but all these implement different source intefaces).
     /// Each ComEventSink contains a list of ComEventSinkMethod objects - which represent
-    /// a single method on the source interface an a multicast delegate to redirect 
-    /// the calls. Notice that we are chaining multicast delegates so that same 
+    /// a single method on the source interface an a multicast delegate to redirect
+    /// the calls. Notice that we are chaining multicast delegates so that same
     /// ComEventSinkMedhod can invoke multiple event handlers).
-    /// 
+    ///
     /// ComEventSink implements an IDisposable pattern to Unadvise from the connection point.
-    /// Typically, when RCW is finalized the corresponding Dispose will be triggered by 
+    /// Typically, when RCW is finalized the corresponding Dispose will be triggered by
     /// ComEventSinksContainer finalizer. Notice that lifetime of ComEventSinksContainer
-    /// is bound to the lifetime of the RCW. 
+    /// is bound to the lifetime of the RCW.
     /// </summary>
-    internal sealed class ComEventSink : MarshalByRefObject, IReflect, IDisposable {
-
+    internal sealed class ComEventSink : MarshalByRefObject, IReflect, IDisposable
+    {
         #region private fields
 
         private Guid _sourceIid;
@@ -54,7 +55,6 @@ namespace Microsoft.Scripting {
         private int _adviseCookie;
         private List<ComEventSinkMethod> _comEventSinkMethods;
         private object _lockObject = new object(); // We cannot lock on ComEventSink since it causes a DoNotLockOnObjectsWithWeakIdentity warning
-
         #endregion
 
         #region private classes
@@ -63,7 +63,8 @@ namespace Microsoft.Scripting {
         /// Contains a methods DISPID (in a string formatted of "[DISPID=N]"
         /// and a chained list of delegates to invoke
         /// </summary>
-        private class ComEventSinkMethod {
+        private class ComEventSinkMethod
+        {
             public string _name;
             public Func<object[], object> _handlers;
         }
@@ -72,18 +73,23 @@ namespace Microsoft.Scripting {
         #region ctor
 
         [SecurityCritical]
-        private ComEventSink(object rcw, Guid sourceIid) {
+        private ComEventSink(object rcw, Guid sourceIid)
+        {
             Initialize(rcw, sourceIid);
         }
 
         #endregion
 
         [SecurityCritical]
-        private void Initialize(object rcw, Guid sourceIid) {
+        private void Initialize(object rcw, Guid sourceIid)
+        {
             _sourceIid = sourceIid;
             _adviseCookie = -1;
 
-            Debug.Assert(_connectionPoint == null, "re-initializing event sink w/o unadvising from connection point");
+            Debug.Assert(
+                _connectionPoint == null,
+                "re-initializing event sink w/o unadvising from connection point"
+            );
 
             ComTypes.IConnectionPointContainer cpc = rcw as ComTypes.IConnectionPointContainer;
             if (cpc == null)
@@ -101,29 +107,43 @@ namespace Microsoft.Scripting {
         #region static methods
 
         [SecurityCritical]
-        public static ComEventSink FromRuntimeCallableWrapper(object rcw, Guid sourceIid, bool createIfNotFound) {
-            List<ComEventSink> comEventSinks = ComEventSinksContainer.FromRuntimeCallableWrapper(rcw, createIfNotFound);
+        public static ComEventSink FromRuntimeCallableWrapper(
+            object rcw,
+            Guid sourceIid,
+            bool createIfNotFound
+        )
+        {
+            List<ComEventSink> comEventSinks = ComEventSinksContainer.FromRuntimeCallableWrapper(
+                rcw,
+                createIfNotFound
+            );
 
-            if (comEventSinks == null) {
+            if (comEventSinks == null)
+            {
                 return null;
             }
 
             ComEventSink comEventSink = null;
-            lock (comEventSinks) {
-
-                foreach (ComEventSink sink in comEventSinks) {
-                    if (sink._sourceIid == sourceIid) {
+            lock (comEventSinks)
+            {
+                foreach (ComEventSink sink in comEventSinks)
+                {
+                    if (sink._sourceIid == sourceIid)
+                    {
                         comEventSink = sink;
                         break;
-                    } else if (sink._sourceIid == Guid.Empty) {
-                        // we found a ComEventSink object that 
+                    }
+                    else if (sink._sourceIid == Guid.Empty)
+                    {
+                        // we found a ComEventSink object that
                         // was previously disposed. Now we will reuse it.
                         sink.Initialize(rcw, sourceIid);
                         comEventSink = sink;
                     }
                 }
 
-                if (comEventSink == null && createIfNotFound == true) {
+                if (comEventSink == null && createIfNotFound == true)
+                {
                     comEventSink = new ComEventSink(rcw, sourceIid);
                     comEventSinks.Add(comEventSink);
                 }
@@ -134,15 +154,19 @@ namespace Microsoft.Scripting {
 
         #endregion
 
-        public void AddHandler(int dispid, object func) {
+        public void AddHandler(int dispid, object func)
+        {
             string name = String.Format(CultureInfo.InvariantCulture, "[DISPID={0}]", dispid);
 
-            lock (_lockObject) {
+            lock (_lockObject)
+            {
                 ComEventSinkMethod sinkMethod;
                 sinkMethod = FindSinkMethod(name);
 
-                if (sinkMethod == null) {
-                    if (_comEventSinkMethods == null) {
+                if (sinkMethod == null)
+                {
+                    if (_comEventSinkMethods == null)
+                    {
                         _comEventSinkMethods = new List<ComEventSinkMethod>();
                     }
 
@@ -156,14 +180,15 @@ namespace Microsoft.Scripting {
         }
 
         [SecurityCritical]
-        public void RemoveHandler(int dispid, object func) {
-
+        public void RemoveHandler(int dispid, object func)
+        {
             string name = String.Format(CultureInfo.InvariantCulture, "[DISPID={0}]", dispid);
 
-            lock (_lockObject) {
-
+            lock (_lockObject)
+            {
                 ComEventSinkMethod sinkEntry = FindSinkMethod(name);
-                if (sinkEntry == null){
+                if (sinkEntry == null)
+                {
                     return;
                 }
 
@@ -173,24 +198,27 @@ namespace Microsoft.Scripting {
                 // easy since we Target property of the delegate object
                 // is a ComEventCallContext object.
                 Delegate[] delegates = sinkEntry._handlers.GetInvocationList();
-                foreach (Delegate d in delegates) {
+                foreach (Delegate d in delegates)
+                {
                     SplatCallSite callContext = d.Target as SplatCallSite;
-                    if (callContext != null && callContext._callable.Equals(func)) {
+                    if (callContext != null && callContext._callable.Equals(func))
+                    {
                         sinkEntry._handlers -= d as Func<object[], object>;
                         break;
                     }
                 }
 
-                // If the delegates chain is empty - we can remove 
+                // If the delegates chain is empty - we can remove
                 // corresponding ComEvenSinkEntry
                 if (sinkEntry._handlers == null)
                     _comEventSinkMethods.Remove(sinkEntry);
 
                 // We can Unadvise from the ConnectionPoint if no more sink entries
-                // are registered for this interface 
+                // are registered for this interface
                 //(calling Dispose will call IConnectionPoint.Unadvise).
-                if (_comEventSinkMethods.Count == 0) {
-                    // notice that we do not remove 
+                if (_comEventSinkMethods.Count == 0)
+                {
+                    // notice that we do not remove
                     // ComEventSinkEntry from the list, we will re-use this data structure
                     // if a new handler needs to be attached.
                     Dispose();
@@ -198,11 +226,13 @@ namespace Microsoft.Scripting {
             }
         }
 
-        public object ExecuteHandler(string name, object[] args) {
+        public object ExecuteHandler(string name, object[] args)
+        {
             ComEventSinkMethod site;
             site = FindSinkMethod(name);
 
-            if (site != null && site._handlers != null) {
+            if (site != null && site._handlers != null)
+            {
                 return site._handlers(args);
             }
 
@@ -213,52 +243,74 @@ namespace Microsoft.Scripting {
 
         #region Unimplemented members
 
-        public FieldInfo GetField(string name, BindingFlags bindingAttr) {
+        public FieldInfo GetField(string name, BindingFlags bindingAttr)
+        {
             return null;
         }
 
-        public FieldInfo[] GetFields(BindingFlags bindingAttr) {
+        public FieldInfo[] GetFields(BindingFlags bindingAttr)
+        {
             return new FieldInfo[0];
         }
 
-        public MemberInfo[] GetMember(string name, BindingFlags bindingAttr) {
+        public MemberInfo[] GetMember(string name, BindingFlags bindingAttr)
+        {
             return new MemberInfo[0];
         }
 
-        public MemberInfo[] GetMembers(BindingFlags bindingAttr) {
+        public MemberInfo[] GetMembers(BindingFlags bindingAttr)
+        {
             return new MemberInfo[0];
         }
 
-        public MethodInfo GetMethod(string name, BindingFlags bindingAttr) {
+        public MethodInfo GetMethod(string name, BindingFlags bindingAttr)
+        {
             return null;
         }
 
-        public MethodInfo GetMethod(string name, BindingFlags bindingAttr, Binder binder, Type[] types, ParameterModifier[] modifiers) {
+        public MethodInfo GetMethod(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
+        {
             return null;
         }
 
-        public MethodInfo[] GetMethods(BindingFlags bindingAttr) {
+        public MethodInfo[] GetMethods(BindingFlags bindingAttr)
+        {
             return new MethodInfo[0];
         }
 
-        public PropertyInfo GetProperty(string name, BindingFlags bindingAttr, Binder binder, Type returnType, Type[] types, ParameterModifier[] modifiers) {
+        public PropertyInfo GetProperty(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            Type returnType,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
+        {
             return null;
         }
 
-        public PropertyInfo GetProperty(string name, BindingFlags bindingAttr) {
+        public PropertyInfo GetProperty(string name, BindingFlags bindingAttr)
+        {
             return null;
         }
 
-        public PropertyInfo[] GetProperties(BindingFlags bindingAttr) {
+        public PropertyInfo[] GetProperties(BindingFlags bindingAttr)
+        {
             return new PropertyInfo[0];
         }
 
         #endregion
 
-        public Type UnderlyingSystemType {
-            get {
-                return typeof(object);
-            }
+        public Type UnderlyingSystemType
+        {
+            get { return typeof(object); }
         }
 
         public object InvokeMember(
@@ -269,8 +321,9 @@ namespace Microsoft.Scripting {
             object[] args,
             ParameterModifier[] modifiers,
             CultureInfo culture,
-            string[] namedParameters) {
-
+            string[] namedParameters
+        )
+        {
             return ExecuteHandler(name, args);
         }
 
@@ -283,7 +336,8 @@ namespace Microsoft.Scripting {
 #else
         [SecuritySafeCritical]
 #endif
-        public void Dispose() {
+        public void Dispose()
+        {
             DisposeAll();
             GC.SuppressFinalize(this);
         }
@@ -295,21 +349,26 @@ namespace Microsoft.Scripting {
 #else
         [SecuritySafeCritical]
 #endif
-        ~ComEventSink() {
+        ~ComEventSink()
+        {
             DisposeAll();
         }
 
         [SecurityCritical]
-        private void DisposeAll() {
-            if (_connectionPoint == null) {
+        private void DisposeAll()
+        {
+            if (_connectionPoint == null)
+            {
                 return;
             }
 
-            if (_adviseCookie == -1) {
+            if (_adviseCookie == -1)
+            {
                 return;
             }
 
-            try {
+            try
+            {
                 _connectionPoint.Unadvise(_adviseCookie);
 
                 // _connectionPoint has entered the CLR in the constructor
@@ -318,23 +377,32 @@ namespace Microsoft.Scripting {
                 // hence it is safe to call RCO on it w/o worrying about
                 // killing the RCW for other objects that link to it.
                 Marshal.ReleaseComObject(_connectionPoint);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 // if something has gone wrong, and the object is no longer attached to the CLR,
                 // the Unadvise is going to throw.  In this case, since we're going away anyway,
                 // we'll ignore the failure and quietly go on our merry way.
                 COMException exCOM = ex as COMException;
-                if (exCOM != null && exCOM.ErrorCode == ComHresults.CONNECT_E_NOCONNECTION) {
-                    Debug.Assert(false, "IConnectionPoint::Unadvise returned CONNECT_E_NOCONNECTION.");
+                if (exCOM != null && exCOM.ErrorCode == ComHresults.CONNECT_E_NOCONNECTION)
+                {
+                    Debug.Assert(
+                        false,
+                        "IConnectionPoint::Unadvise returned CONNECT_E_NOCONNECTION."
+                    );
                     throw;
                 }
-            } finally {
+            }
+            finally
+            {
                 _connectionPoint = null;
                 _adviseCookie = -1;
                 _sourceIid = Guid.Empty;
             }
         }
 
-        private ComEventSinkMethod FindSinkMethod(string name) {
+        private ComEventSinkMethod FindSinkMethod(string name)
+        {
             if (_comEventSinkMethods == null)
                 return null;
 

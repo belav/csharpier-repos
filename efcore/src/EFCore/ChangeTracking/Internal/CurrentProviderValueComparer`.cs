@@ -23,7 +23,8 @@ public class CurrentProviderValueComparer<TModel, TProvider> : IComparer<IUpdate
     /// </summary>
     public CurrentProviderValueComparer(
         IPropertyBase property,
-        ValueConverter<TModel, TProvider> converter)
+        ValueConverter<TModel, TProvider> converter
+    )
     {
         _property = property;
         _converter = converter.ConvertToProviderExpression.Compile();
@@ -55,6 +56,7 @@ public class CurrentProviderValueComparer<TModel, TProvider> : IComparer<IUpdate
 
         return _underlyingComparer.Compare(
             _converter(x.GetCurrentValue<TModel>(_property)),
-            _converter(y.GetCurrentValue<TModel>(_property)));
+            _converter(y.GetCurrentValue<TModel>(_property))
+        );
     }
 }

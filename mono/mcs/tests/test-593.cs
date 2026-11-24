@@ -2,17 +2,15 @@ using System;
 
 interface I
 {
-	void Finalize ();
+    void Finalize();
 }
 
 class MainClass
 {
-	void Foo (I i)
-	{
-		i.Finalize ();
-	}
+    void Foo(I i)
+    {
+        i.Finalize();
+    }
 
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

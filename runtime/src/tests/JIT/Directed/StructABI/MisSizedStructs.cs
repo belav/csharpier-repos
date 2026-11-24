@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Xunit;
 
 public unsafe class MisSizedStructs
@@ -98,13 +98,15 @@ public unsafe class MisSizedStructs
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static bool ProblemWithStructWithThirteenBytes(byte* bytes)
     {
-        return CallForStructWithThirteenBytes(default, *(StructWithThirteenBytes*)bytes) != ByteValue;
+        return CallForStructWithThirteenBytes(default, *(StructWithThirteenBytes*)bytes)
+            != ByteValue;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static bool ProblemWithStructWithFourteenBytes(byte* bytes)
     {
-        return CallForStructWithFourteenBytes(default, *(StructWithFourteenBytes*)bytes) != ByteValue;
+        return CallForStructWithFourteenBytes(default, *(StructWithFourteenBytes*)bytes)
+            != ByteValue;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -116,35 +118,59 @@ public unsafe class MisSizedStructs
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static bool ProblemWithStructWithNineteenBytes(byte* bytes)
     {
-        return CallForStructWithNineteenBytes(default, *(StructWithNineteenBytes*)bytes) != ByteValue;
+        return CallForStructWithNineteenBytes(default, *(StructWithNineteenBytes*)bytes)
+            != ByteValue;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static byte CallForStructWithThreeBytes(ForceStackUsage fs, StructWithThreeBytes value) => value.Bytes[2];
+    private static byte CallForStructWithThreeBytes(
+        ForceStackUsage fs,
+        StructWithThreeBytes value
+    ) => value.Bytes[2];
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static byte CallForStructWithFiveBytes(ForceStackUsage fs, StructWithFiveBytes value) => value.Bytes[4];
+    private static byte CallForStructWithFiveBytes(ForceStackUsage fs, StructWithFiveBytes value) =>
+        value.Bytes[4];
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static byte CallForStructWithSixBytes(ForceStackUsage fs, StructWithSixBytes value) => value.Bytes[5];
+    private static byte CallForStructWithSixBytes(ForceStackUsage fs, StructWithSixBytes value) =>
+        value.Bytes[5];
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static byte CallForStructWithSevenBytes(ForceStackUsage fs, StructWithSevenBytes value) => value.Bytes[6];
+    private static byte CallForStructWithSevenBytes(
+        ForceStackUsage fs,
+        StructWithSevenBytes value
+    ) => value.Bytes[6];
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static byte CallForStructWithElevenBytes(ForceStackUsage fs, StructWithElevenBytes value) => value.Bytes[10];
+    private static byte CallForStructWithElevenBytes(
+        ForceStackUsage fs,
+        StructWithElevenBytes value
+    ) => value.Bytes[10];
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static byte CallForStructWithThirteenBytes(ForceStackUsage fs, StructWithThirteenBytes value) => value.Bytes[12];
+    private static byte CallForStructWithThirteenBytes(
+        ForceStackUsage fs,
+        StructWithThirteenBytes value
+    ) => value.Bytes[12];
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static byte CallForStructWithFourteenBytes(ForceStackUsage fs, StructWithFourteenBytes value) => value.Bytes[13];
+    private static byte CallForStructWithFourteenBytes(
+        ForceStackUsage fs,
+        StructWithFourteenBytes value
+    ) => value.Bytes[13];
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static byte CallForStructWithFifteenBytes(ForceStackUsage fs, StructWithFifteenBytes value) => value.Bytes[14];
+    private static byte CallForStructWithFifteenBytes(
+        ForceStackUsage fs,
+        StructWithFifteenBytes value
+    ) => value.Bytes[14];
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static byte CallForStructWithNineteenBytes(ForceStackUsage fs, StructWithNineteenBytes value) => value.Bytes[18];
+    private static byte CallForStructWithNineteenBytes(
+        ForceStackUsage fs,
+        StructWithNineteenBytes value
+    ) => value.Bytes[18];
 
     struct ForceStackUsage
     {

@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -24,12 +24,15 @@ namespace System.Runtime.InteropServices.ComTypes
     {
         // IPersist portion
         void GetClassID(out Guid pClassID);
-        
+
         // IPersistFile portion
         [PreserveSig]
         int IsDirty();
         void Load([MarshalAs(UnmanagedType.LPWStr)] String pszFileName, int dwMode);
-        void Save([MarshalAs(UnmanagedType.LPWStr)] String pszFileName, [MarshalAs(UnmanagedType.Bool)] bool fRemember);
+        void Save(
+            [MarshalAs(UnmanagedType.LPWStr)] String pszFileName,
+            [MarshalAs(UnmanagedType.Bool)] bool fRemember
+        );
         void SaveCompleted([MarshalAs(UnmanagedType.LPWStr)] String pszFileName);
         void GetCurFile([MarshalAs(UnmanagedType.LPWStr)] out String ppszFileName);
     }

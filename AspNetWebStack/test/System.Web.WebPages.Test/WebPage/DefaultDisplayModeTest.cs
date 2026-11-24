@@ -15,7 +15,11 @@ namespace System.Web.WebPages.Test
             DefaultDisplayMode displayMode = new DefaultDisplayMode();
 
             // Act
-            DisplayInfo info = displayMode.GetDisplayInfo(new Mock<HttpContextBase>(MockBehavior.Strict).Object, "/bar/baz.aspx", virtualPath => true);
+            DisplayInfo info = displayMode.GetDisplayInfo(
+                new Mock<HttpContextBase>(MockBehavior.Strict).Object,
+                "/bar/baz.aspx",
+                virtualPath => true
+            );
 
             // Assert
             Assert.Equal(String.Empty, displayMode.DisplayModeId);
@@ -29,7 +33,11 @@ namespace System.Web.WebPages.Test
             DefaultDisplayMode displayMode = new DefaultDisplayMode(null);
 
             // Act
-            DisplayInfo info = displayMode.GetDisplayInfo(new Mock<HttpContextBase>(MockBehavior.Strict).Object, "/bar/baz.aspx", virtualPath => true);
+            DisplayInfo info = displayMode.GetDisplayInfo(
+                new Mock<HttpContextBase>(MockBehavior.Strict).Object,
+                "/bar/baz.aspx",
+                virtualPath => true
+            );
 
             // Assert
             Assert.Equal(String.Empty, displayMode.DisplayModeId);
@@ -53,7 +61,11 @@ namespace System.Web.WebPages.Test
             DefaultDisplayMode displayMode = new DefaultDisplayMode("foo");
 
             // Act
-            DisplayInfo info = displayMode.GetDisplayInfo(new Mock<HttpContextBase>(MockBehavior.Strict).Object, "/bar/baz.aspx", virtualPath => true);
+            DisplayInfo info = displayMode.GetDisplayInfo(
+                new Mock<HttpContextBase>(MockBehavior.Strict).Object,
+                "/bar/baz.aspx",
+                virtualPath => true
+            );
 
             // Assert
             Assert.IsType<DefaultDisplayMode>(info.DisplayMode);
@@ -67,7 +79,11 @@ namespace System.Web.WebPages.Test
             DefaultDisplayMode displayMode = new DefaultDisplayMode("foo");
 
             // Act
-            DisplayInfo info = displayMode.GetDisplayInfo(new Mock<HttpContextBase>(MockBehavior.Strict).Object, "/bar/baz.aspx", virtualPath => true);
+            DisplayInfo info = displayMode.GetDisplayInfo(
+                new Mock<HttpContextBase>(MockBehavior.Strict).Object,
+                "/bar/baz.aspx",
+                virtualPath => true
+            );
 
             // Assert
             Assert.IsType<DefaultDisplayMode>(info.DisplayMode);
@@ -81,7 +97,11 @@ namespace System.Web.WebPages.Test
             DefaultDisplayMode displayMode = new DefaultDisplayMode("foo");
 
             // Act
-            DisplayInfo info = displayMode.GetDisplayInfo(new Mock<HttpContextBase>(MockBehavior.Strict).Object, "/bar/baz.txt.aspx", virtualPath => true);
+            DisplayInfo info = displayMode.GetDisplayInfo(
+                new Mock<HttpContextBase>(MockBehavior.Strict).Object,
+                "/bar/baz.txt.aspx",
+                virtualPath => true
+            );
 
             // Assert
             Assert.Equal("/bar/baz.txt.foo.aspx", info.FilePath);
@@ -94,7 +114,11 @@ namespace System.Web.WebPages.Test
             DefaultDisplayMode displayMode = new DefaultDisplayMode("foo");
 
             // Act
-            DisplayInfo info = displayMode.GetDisplayInfo(new Mock<HttpContextBase>(MockBehavior.Strict).Object, "/bar/baz", virtualPath => true);
+            DisplayInfo info = displayMode.GetDisplayInfo(
+                new Mock<HttpContextBase>(MockBehavior.Strict).Object,
+                "/bar/baz",
+                virtualPath => true
+            );
 
             // Assert
             Assert.Equal("/bar/baz.foo", info.FilePath);
@@ -107,7 +131,11 @@ namespace System.Web.WebPages.Test
             DefaultDisplayMode displayMode = new DefaultDisplayMode("foo");
 
             // Act
-            DisplayInfo info = displayMode.GetDisplayInfo(new Mock<HttpContextBase>(MockBehavior.Strict).Object, virtualPath: null, virtualPathExists: virtualPath => true);
+            DisplayInfo info = displayMode.GetDisplayInfo(
+                new Mock<HttpContextBase>(MockBehavior.Strict).Object,
+                virtualPath: null,
+                virtualPathExists: virtualPath => true
+            );
 
             // Assert
             Assert.Null(info);
@@ -120,7 +148,11 @@ namespace System.Web.WebPages.Test
             DefaultDisplayMode displayMode = new DefaultDisplayMode("foo");
 
             // Act
-            DisplayInfo info = displayMode.GetDisplayInfo(new Mock<HttpContextBase>(MockBehavior.Strict).Object, String.Empty, virtualPath => true);
+            DisplayInfo info = displayMode.GetDisplayInfo(
+                new Mock<HttpContextBase>(MockBehavior.Strict).Object,
+                String.Empty,
+                virtualPath => true
+            );
 
             // Assert
             Assert.Equal(String.Empty, info.FilePath);
@@ -133,7 +165,11 @@ namespace System.Web.WebPages.Test
             DefaultDisplayMode displayMode = new DefaultDisplayMode("foo");
 
             // Act
-            DisplayInfo info = displayMode.GetDisplayInfo(new Mock<HttpContextBase>(MockBehavior.Strict).Object, "/bar/baz", virtualPath => false);
+            DisplayInfo info = displayMode.GetDisplayInfo(
+                new Mock<HttpContextBase>(MockBehavior.Strict).Object,
+                "/bar/baz",
+                virtualPath => false
+            );
 
             // Assert
             Assert.Null(info);

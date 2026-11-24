@@ -19,10 +19,9 @@ public class SqlServerEvaluatableExpressionFilter : RelationalEvaluatableExpress
     /// </summary>
     public SqlServerEvaluatableExpressionFilter(
         EvaluatableExpressionFilterDependencies dependencies,
-        RelationalEvaluatableExpressionFilterDependencies relationalDependencies)
-        : base(dependencies, relationalDependencies)
-    {
-    }
+        RelationalEvaluatableExpressionFilterDependencies relationalDependencies
+    )
+        : base(dependencies, relationalDependencies) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -32,8 +31,10 @@ public class SqlServerEvaluatableExpressionFilter : RelationalEvaluatableExpress
     /// </summary>
     public override bool IsEvaluatableExpression(Expression expression, IModel model)
     {
-        if (expression is MethodCallExpression methodCallExpression
-            && methodCallExpression.Method.DeclaringType == typeof(SqlServerDbFunctionsExtensions))
+        if (
+            expression is MethodCallExpression methodCallExpression
+            && methodCallExpression.Method.DeclaringType == typeof(SqlServerDbFunctionsExtensions)
+        )
         {
             return false;
         }

@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.WebSockets {
+namespace System.Web.WebSockets
+{
     using System;
     using System.Net.WebSockets;
     using System.Runtime.InteropServices;
@@ -14,8 +15,8 @@ namespace System.Web.WebSockets {
 
     // Provides an abstraction over the WebSocketPipe
 
-    internal interface IWebSocketPipe {
-
+    internal interface IWebSocketPipe
+    {
         [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
         void CloseTcpConnection();
 
@@ -26,7 +27,10 @@ namespace System.Web.WebSockets {
         Task WriteCloseFragmentAsync(WebSocketCloseStatus closeStatus, string statusDescription);
 
         [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
-        Task WriteFragmentAsync(ArraySegment<byte> buffer, bool isUtf8Encoded, bool isFinalFragment);
-
+        Task WriteFragmentAsync(
+            ArraySegment<byte> buffer,
+            bool isUtf8Encoded,
+            bool isFinalFragment
+        );
     }
 }

@@ -15,12 +15,20 @@ namespace System.DirectoryServices.AccountManagement
     {
         internal static bool IsOfObjectClass(DirectoryEntry de, string classToCompare)
         {
-            return string.Equals(de.SchemaClassName, classToCompare, StringComparison.OrdinalIgnoreCase);
+            return string.Equals(
+                de.SchemaClassName,
+                classToCompare,
+                StringComparison.OrdinalIgnoreCase
+            );
         }
 
         internal static readonly char[] s_dot = new char[] { '.' };
 
-        internal static bool GetOSVersion(DirectoryEntry computerDE, out int versionMajor, out int versionMinor)
+        internal static bool GetOSVersion(
+            DirectoryEntry computerDE,
+            out int versionMajor,
+            out int versionMinor
+        )
         {
             Debug.Assert(SAMUtils.IsOfObjectClass(computerDE, "Computer"));
 
@@ -40,10 +48,14 @@ namespace System.DirectoryServices.AccountManagement
             }
             catch (COMException e)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Error, "SAMUtils", "GetOSVersion: caught COMException with message " + e.Message);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Error,
+                    "SAMUtils",
+                    "GetOSVersion: caught COMException with message " + e.Message
+                );
 
                 // Couldn't retrieve the value
-                if (e.ErrorCode == unchecked((int)0x80070035))  // ERROR_BAD_NETPATH
+                if (e.ErrorCode == unchecked((int)0x80070035)) // ERROR_BAD_NETPATH
                     return false;
 
                 throw;
@@ -60,7 +72,7 @@ namespace System.DirectoryServices.AccountManagement
             // each component into an int.
             string[] versionComponents = version.Split(s_dot);
 
-            Debug.Assert(versionComponents.Length >= 1);    // since version was a non-empty string
+            Debug.Assert(versionComponents.Length >= 1); // since version was a non-empty string
 
             try
             {
@@ -72,18 +84,24 @@ namespace System.DirectoryServices.AccountManagement
                 // Sanity check: there are no negetive OS versions, nor is there a version "0".
                 if (versionMajor <= 0 || versionMinor < 0)
                 {
-                    Debug.Fail("SAMUtils.GetOSVersion: {computerDE.Path} claims to have negetive OS version, {version}");
+                    Debug.Fail(
+                        "SAMUtils.GetOSVersion: {computerDE.Path} claims to have negetive OS version, {version}"
+                    );
                     return false;
                 }
             }
             catch (FormatException)
             {
-                Debug.Fail($"SAMUtils.GetOSVersion: FormatException on {version} for {computerDE.Path}");
+                Debug.Fail(
+                    $"SAMUtils.GetOSVersion: FormatException on {version} for {computerDE.Path}"
+                );
                 return false;
             }
             catch (OverflowException)
             {
-                Debug.Fail($"SAMUtils.GetOSVersion: OverflowException on {version} for {computerDE.Path}");
+                Debug.Fail(
+                    $"SAMUtils.GetOSVersion: OverflowException on {version} for {computerDE.Path}"
+                );
                 return false;
             }
 
@@ -97,15 +115,19 @@ namespace System.DirectoryServices.AccountManagement
             // provider, we'll get back the DirectoryEntry of the remote object itself --- ADSI does
             // the domain vs. local resolution for us.
 
-            if (SAMUtils.IsOfObjectClass(de, "Computer") ||
-                 SAMUtils.IsOfObjectClass(de, "User") ||
-                 SAMUtils.IsOfObjectClass(de, "Group"))
+            if (
+                SAMUtils.IsOfObjectClass(de, "Computer")
+                || SAMUtils.IsOfObjectClass(de, "User")
+                || SAMUtils.IsOfObjectClass(de, "Group")
+            )
             {
                 return storeCtx.GetAsPrincipal(de, null);
             }
             else
             {
-                Debug.Fail($"SAMUtils.DirectoryEntryAsPrincipal: fell off end, Path={de.Path}, SchemaClassName={de.SchemaClassName}");
+                Debug.Fail(
+                    $"SAMUtils.DirectoryEntryAsPrincipal: fell off end, Path={de.Path}, SchemaClassName={de.SchemaClassName}"
+                );
                 return null;
             }
         }
@@ -149,11 +171,11 @@ namespace System.DirectoryServices.AccountManagement
                     switch (c)
                     {
                         case '(':
-                            sb.Append(@"\(");          //   (  --> \(
+                            sb.Append(@"\("); //   (  --> \(
                             break;
 
                         case ')':
-                            sb.Append(@"\)");          //   )  --> \)
+                            sb.Append(@"\)"); //   )  --> \)
                             break;
 
                         case '\\':
@@ -161,11 +183,11 @@ namespace System.DirectoryServices.AccountManagement
                             break;
 
                         case '*':
-                            sb.Append(@".*");          //   * --> .*
+                            sb.Append(@".*"); //   * --> .*
                             break;
 
                         default:
-                            sb.Append(c);   //   x  --> x
+                            sb.Append(c); //   x  --> x
                             break;
                     }
                 }
@@ -176,24 +198,24 @@ namespace System.DirectoryServices.AccountManagement
                     switch (c)
                     {
                         case '(':
-                            sb.Append(@"\(");          //      \( --> \(
+                            sb.Append(@"\("); //      \( --> \(
                             break;
 
                         case ')':
-                            sb.Append(@"\)");          //      \) --> \)
+                            sb.Append(@"\)"); //      \) --> \)
                             break;
 
                         case '*':
-                            sb.Append(@"\*");          //      \* --> \*
+                            sb.Append(@"\*"); //      \* --> \*
                             break;
 
                         case '\\':
-                            sb.Append(@"\\\\");          //      \\ --> \\
+                            sb.Append(@"\\\\"); //      \\ --> \\
                             break;
 
                         default:
                             sb.Append(@"\\");
-                            sb.Append(c);    //      \x --> \x
+                            sb.Append(c); //      \x --> \x
                             break;
                     }
                 }
@@ -208,11 +230,12 @@ namespace System.DirectoryServices.AccountManagement
             }
 
             GlobalDebug.WriteLineIf(
-                            GlobalDebug.Info,
-                            "SAMUtils",
-                            "PAPIQueryToRegexString: mapped '{0}' to '{1}'",
-                            papiString,
-                            sb.ToString());
+                GlobalDebug.Info,
+                "SAMUtils",
+                "PAPIQueryToRegexString: mapped '{0}' to '{1}'",
+                papiString,
+                sb.ToString()
+            );
 
             sb.Append(@"\z");
 

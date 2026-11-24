@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             int tabSize,
             int indentationSize,
             TokenStream? tokenStream,
-            IHeaderFacts headerFacts)
+            IHeaderFacts headerFacts
+        )
         {
             Contract.ThrowIfNull(formattingRules);
 
@@ -41,7 +42,11 @@ namespace Microsoft.CodeAnalysis.Formatting
         }
 
         public int? FromIndentBlockOperations(
-            SyntaxTree tree, SyntaxToken token, int position, CancellationToken cancellationToken)
+            SyntaxTree tree,
+            SyntaxToken token,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             // we use operation service to see whether it is a starting point of new indentation.
             // ex)
@@ -56,11 +61,18 @@ namespace Microsoft.CodeAnalysis.Formatting
                 // make sure we found new starting point of new indentation.
                 // such operation should start span after the token (a token that is right before the new indentation),
                 // contains current position, and position should be before the existing next token
-                if (token.Span.End <= operation.TextSpan.Start &&
-                    operation.TextSpan.IntersectsWith(position) &&
-                    position <= token.GetNextToken(includeZeroWidth: true).SpanStart)
+                if (
+                    token.Span.End <= operation.TextSpan.Start
+                    && operation.TextSpan.IntersectsWith(position)
+                    && position <= token.GetNextToken(includeZeroWidth: true).SpanStart
+                )
                 {
-                    return GetIndentationOfCurrentPosition(tree, token, position, cancellationToken);
+                    return GetIndentationOfCurrentPosition(
+                        tree,
+                        token,
+                        position,
+                        cancellationToken
+                    );
                 }
             }
 
@@ -72,8 +84,7 @@ namespace Microsoft.CodeAnalysis.Formatting
             // let's check whether there is any missing token under us and whether
             // there is an align token operation for that missing token.
             var nextToken = token.GetNextToken(includeZeroWidth: true);
-            if (nextToken.RawKind != 0 &&
-                nextToken.Width() <= 0)
+            if (nextToken.RawKind != 0 && nextToken.Width() <= 0)
             {
                 // looks like we have one. find whether there is a align token operation for this token
                 var alignmentBaseToken = GetAlignmentBaseTokenFor(nextToken);
@@ -87,39 +98,61 @@ namespace Microsoft.CodeAnalysis.Formatting
         }
 
         public int GetIndentationOfCurrentPosition(
-            SyntaxTree tree, SyntaxToken token, int position, CancellationToken cancellationToken)
+            SyntaxTree tree,
+            SyntaxToken token,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            return GetIndentationOfCurrentPosition(tree, token, position, extraSpaces: 0, cancellationToken: cancellationToken);
+            return GetIndentationOfCurrentPosition(
+                tree,
+                token,
+                position,
+                extraSpaces: 0,
+                cancellationToken: cancellationToken
+            );
         }
 
         public int GetIndentationOfCurrentPosition(
-            SyntaxTree tree, SyntaxToken token, int position, int extraSpaces, CancellationToken cancellationToken)
+            SyntaxTree tree,
+            SyntaxToken token,
+            int position,
+            int extraSpaces,
+            CancellationToken cancellationToken
+        )
         {
-            // gather all indent operations 
+            // gather all indent operations
             var list = GetParentIndentBlockOperations(token);
 
             return GetIndentationOfCurrentPosition(
                 tree.GetRoot(cancellationToken),
-                list, position, extraSpaces,
+                list,
+                position,
+                extraSpaces,
                 t => tree.GetTokenColumn(t, _tabSize),
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         public int GetIndentationOfCurrentPosition(
             SyntaxNode root,
             IndentBlockOperation startingOperation,
             Func<SyntaxToken, int> tokenColumnGetter,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var token = startingOperation.StartToken;
 
-            // gather all indent operations 
+            // gather all indent operations
             var list = GetParentIndentBlockOperations(token);
 
             // remove one that is smaller than current one
             for (var i = list.Count - 1; i >= 0; i--)
             {
-                if (CommonFormattingHelpers.IndentBlockOperationComparer(startingOperation, list[i]) < 0)
+                if (
+                    CommonFormattingHelpers.IndentBlockOperationComparer(startingOperation, list[i])
+                    < 0
+                )
                 {
                     list.RemoveAt(i);
                 }
@@ -129,7 +162,14 @@ namespace Microsoft.CodeAnalysis.Formatting
                 }
             }
 
-            return GetIndentationOfCurrentPosition(root, list, token.SpanStart, /* extraSpaces */ 0, tokenColumnGetter, cancellationToken);
+            return GetIndentationOfCurrentPosition(
+                root,
+                list,
+                token.SpanStart, /* extraSpaces */
+                0,
+                tokenColumnGetter,
+                cancellationToken
+            );
         }
 
         private int GetIndentationOfCurrentPosition(
@@ -138,7 +178,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             int position,
             int extraSpaces,
             Func<SyntaxToken, int> tokenColumnGetter,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var tuple = GetIndentationRuleOfCurrentPosition(root, list, position);
             var indentationLevel = tuple.indentation;
@@ -163,8 +204,12 @@ namespace Microsoft.CodeAnalysis.Formatting
                     }
                     else
                     {
-                        var textLine = baseToken.SyntaxTree.GetText(cancellationToken).Lines.GetLineFromPosition(baseToken.SpanStart);
-                        baseToken = baseToken.SyntaxTree.GetRoot(cancellationToken).FindToken(textLine.Start);
+                        var textLine = baseToken
+                            .SyntaxTree.GetText(cancellationToken)
+                            .Lines.GetLineFromPosition(baseToken.SpanStart);
+                        baseToken = baseToken
+                            .SyntaxTree.GetRoot(cancellationToken)
+                            .FindToken(textLine.Start);
                     }
                 }
 
@@ -181,8 +226,14 @@ namespace Microsoft.CodeAnalysis.Formatting
             throw ExceptionUtilities.Unreachable();
         }
 
-        private (int indentation, IndentBlockOperation? operation) GetIndentationRuleOfCurrentPosition(
-            SyntaxNode root, List<IndentBlockOperation> list, int position)
+        private (
+            int indentation,
+            IndentBlockOperation? operation
+        ) GetIndentationRuleOfCurrentPosition(
+            SyntaxNode root,
+            List<IndentBlockOperation> list,
+            int position
+        )
         {
             var indentationLevel = 0;
             var operations = GetIndentBlockOperationsFromSmallestSpan(root, list, position);
@@ -190,7 +241,10 @@ namespace Microsoft.CodeAnalysis.Formatting
             {
                 if (operation.Option.IsOn(IndentBlockOption.AbsolutePosition))
                 {
-                    return (operation.IndentationDeltaOrPosition + _indentationSize * indentationLevel, operation);
+                    return (
+                        operation.IndentationDeltaOrPosition + _indentationSize * indentationLevel,
+                        operation
+                    );
                 }
 
                 if (operation.Option == IndentBlockOption.RelativeToFirstTokenOnBaseTokenLine)
@@ -214,7 +268,7 @@ namespace Microsoft.CodeAnalysis.Formatting
         {
             var allNodes = GetParentNodes(token);
 
-            // gather all indent operations 
+            // gather all indent operations
             var list = new List<IndentBlockOperation>();
             allNodes.Do(n => _formattingRules.AddIndentBlockOperations(list, n));
 
@@ -275,7 +329,11 @@ namespace Microsoft.CodeAnalysis.Formatting
             return default;
         }
 
-        private IndentBlockOperation? GetIndentationDataFor(SyntaxNode root, SyntaxToken token, int position)
+        private IndentBlockOperation? GetIndentationDataFor(
+            SyntaxNode root,
+            SyntaxToken token,
+            int position
+        )
         {
             var startNode = token.Parent;
 
@@ -308,7 +366,11 @@ namespace Microsoft.CodeAnalysis.Formatting
             return GetIndentBlockOperationsFromSmallestSpan(root, list, position).FirstOrDefault();
         }
 
-        private static IEnumerable<IndentBlockOperation> GetIndentBlockOperationsFromSmallestSpan(SyntaxNode root, List<IndentBlockOperation> list, int position)
+        private static IEnumerable<IndentBlockOperation> GetIndentBlockOperationsFromSmallestSpan(
+            SyntaxNode root,
+            List<IndentBlockOperation> list,
+            int position
+        )
         {
             var lastVisibleToken = default(SyntaxToken);
             var map = new HashSet<TextSpan>();
@@ -343,7 +405,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                 var nextToken = operation.EndToken.GetNextToken(includeZeroWidth: true);
 
                 // special case where position is same as end position of an operation and
-                // its next token is missing token. in this case, we will consider current position 
+                // its next token is missing token. in this case, we will consider current position
                 // to belong to current operation.
                 // this can happen in malformed code where end of indentation is missing
                 if (operation.TextSpan.End == position && nextToken.IsMissing)
@@ -370,7 +432,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 }
 
                 // more expensive check
-                lastVisibleToken = (lastVisibleToken.RawKind == 0) ? root.GetLastToken() : lastVisibleToken;
+                lastVisibleToken =
+                    (lastVisibleToken.RawKind == 0) ? root.GetLastToken() : lastVisibleToken;
                 if (lastVisibleToken.Span.End <= position && operation.TextSpan.End == position)
                 {
                     yield return operation;

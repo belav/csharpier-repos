@@ -4,12 +4,12 @@
 
 #nullable disable
 
-using Microsoft.CodeAnalysis.VisualBasic;
-using Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator;
-using Roslyn.Test.Utilities;
 using System;
 using System.Collections.Immutable;
 using System.Linq;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator;
+using Roslyn.Test.Utilities;
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             }
 
             var actualKeywordKinds = builder.ToImmutable();
-            var expectedKeywordKinds = ImmutableHashSet.CreateRange(SyntaxFacts.GetReservedKeywordKinds());
+            var expectedKeywordKinds = ImmutableHashSet.CreateRange(
+                SyntaxFacts.GetReservedKeywordKinds()
+            );
             AssertEx.SetEqual(actualKeywordKinds, expectedKeywordKinds);
         }
 
@@ -77,82 +79,49 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         public void Parsing()
         {
             // Method name only.
-            VerifySignature("F",
-                SignatureNameOnly(
-                    Name("F")));
+            VerifySignature("F", SignatureNameOnly(Name("F")));
             // Method name and empty parameters.
-            VerifySignature("F()",
-                Signature(
-                    Name("F")));
+            VerifySignature("F()", Signature(Name("F")));
             // Method name and parameters.
-            VerifySignature("F(A, B)",
-                Signature(
-                    Name("F"),
-                    Identifier("A"),
-                    Identifier("B")));
+            VerifySignature("F(A, B)", Signature(Name("F"), Identifier("A"), Identifier("B")));
             // Type and method name.
-            VerifySignature("C.F",
-                SignatureNameOnly(
-                    Qualified(Name("C"), "F")));
+            VerifySignature("C.F", SignatureNameOnly(Qualified(Name("C"), "F")));
             // Qualified type and method name.
-            VerifySignature("A.B.F",
-                SignatureNameOnly(
-                    Qualified(
-                        Qualified(
-                            Name("A"),
-                            "B"),
-                        "F")));
+            VerifySignature("A.B.F", SignatureNameOnly(Qualified(Qualified(Name("A"), "B"), "F")));
             // Generic types and method names.
-            VerifySignature("A(Of T).B(Of U).F(Of V)",
+            VerifySignature(
+                "A(Of T).B(Of U).F(Of V)",
                 SignatureNameOnly(
                     Generic(
-                        Qualified(
-                            Generic(
-                                Qualified(
-                                    Generic(
-                                        Name("A"),
-                                        "T"),
-                                    "B"),
-                                "U"),
-                            "F"),
-                        "V")));
+                        Qualified(Generic(Qualified(Generic(Name("A"), "T"), "B"), "U"), "F"),
+                        "V"
+                    )
+                )
+            );
         }
 
         [Fact]
         public void Spaces()
         {
-            VerifySignature(" \tC . F ( System.Object\t,object) ",
+            VerifySignature(
+                " \tC . F ( System.Object\t,object) ",
                 Signature(
                     Qualified(Name("C"), "F"),
                     Qualified("System", "Object"),
-                    Qualified("System", "Object")));
+                    Qualified("System", "Object")
+                )
+            );
         }
 
         [Fact]
         public void Arrays()
         {
-            VerifySignature("F(C(,,,))",
-                Signature(
-                    Name("F"),
-                    Array(
-                        Identifier("C"),
-                        4)));
-            VerifySignature("F(C(,)())",
-                Signature(
-                    Name("F"),
-                    Array(
-                        Array(
-                            Identifier("C"),
-                            2),
-                        1)));
-            VerifySignature("F(C(Of T(,)))",
-                Signature(
-                    Name("F"),
-                    Generic(
-                        Identifier("C"),
-                        Array(
-                            Identifier("T"),
-                            2))));
+            VerifySignature("F(C(,,,))", Signature(Name("F"), Array(Identifier("C"), 4)));
+            VerifySignature("F(C(,)())", Signature(Name("F"), Array(Array(Identifier("C"), 2), 1)));
+            VerifySignature(
+                "F(C(Of T(,)))",
+                Signature(Name("F"), Generic(Identifier("C"), Array(Identifier("T"), 2)))
+            );
         }
 
         [Fact]
@@ -192,11 +161,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         [Fact]
         public void ByRef()
         {
-            VerifySignature("F(ByVal A, ByRef B)",
-                Signature(
-                    Name("F"),
-                    Identifier("A"),
-                    Identifier("B")));
+            VerifySignature(
+                "F(ByVal A, ByRef B)",
+                Signature(Name("F"), Identifier("A"), Identifier("B"))
+            );
             Assert.Null(MemberSignatureParser.Parse("F(ByVal, B)"));
             Assert.Null(MemberSignatureParser.Parse("F(A, ByRef)"));
             Assert.Null(MemberSignatureParser.Parse("F(ByVal ByRef A, B)"));
@@ -217,45 +185,44 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             // Method name only.
             Assert.Null(MemberSignatureParser.Parse("Integer"));
             Assert.Null(MemberSignatureParser.Parse("paramarray"));
-            VerifySignature("[Integer]",
-                SignatureNameOnly(
-                    Name("Integer")));
+            VerifySignature("[Integer]", SignatureNameOnly(Name("Integer")));
             // Type and method name.
-            VerifySignature("[Object].Integer",
-                SignatureNameOnly(
-                    Qualified(
-                        Name("Object"),
-                        "Integer")));
+            VerifySignature(
+                "[Object].Integer",
+                SignatureNameOnly(Qualified(Name("Object"), "Integer"))
+            );
             // Type parameters.
-            VerifySignature("F(Of Void)",
-                SignatureNameOnly(
-                    Generic(Name("F"),
-                    "Void")));
+            VerifySignature("F(Of Void)", SignatureNameOnly(Generic(Name("F"), "Void")));
             Assert.Null(MemberSignatureParser.Parse("F(Of boolean)"));
             Assert.Null(MemberSignatureParser.Parse("F(Of char)"));
             Assert.Null(MemberSignatureParser.Parse("F(Of SBYTE)"));
             Assert.Null(MemberSignatureParser.Parse("F(Of BYTE)"));
             Assert.Null(MemberSignatureParser.Parse("F(Of Short)"));
             Assert.Null(MemberSignatureParser.Parse("F(Of UShort)"));
-            VerifySignature("F(Of [Boolean], [Char], [sbyte], [byte], [SHORT], [USHORT], [Integer], [UInteger], [Long], [ULong], [Single], [Double], [String], [Object], [Decimal], [Date])()",
+            VerifySignature(
+                "F(Of [Boolean], [Char], [sbyte], [byte], [SHORT], [USHORT], [Integer], [UInteger], [Long], [ULong], [Single], [Double], [String], [Object], [Decimal], [Date])()",
                 Signature(
-                    Generic(Name("F"),
-                    "Boolean",
-                    "Char",
-                    "sbyte",
-                    "byte",
-                    "SHORT",
-                    "USHORT",
-                    "Integer",
-                    "UInteger",
-                    "Long",
-                    "ULong",
-                    "Single",
-                    "Double",
-                    "String",
-                    "Object",
-                    "Decimal",
-                    "Date")));
+                    Generic(
+                        Name("F"),
+                        "Boolean",
+                        "Char",
+                        "sbyte",
+                        "byte",
+                        "SHORT",
+                        "USHORT",
+                        "Integer",
+                        "UInteger",
+                        "Long",
+                        "ULong",
+                        "Single",
+                        "Double",
+                        "String",
+                        "Object",
+                        "Decimal",
+                        "Date"
+                    )
+                )
+            );
         }
 
         // Special types are recognized in type references.
@@ -263,7 +230,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         public void SpecialTypes_TypeReferences()
         {
             // Parameters.
-            VerifySignature("F(boolean, char, sbyte, byte, short, ushort, integer, uinteger, long, ulong, single, double, string, object, decimal, date)",
+            VerifySignature(
+                "F(boolean, char, sbyte, byte, short, ushort, integer, uinteger, long, ulong, single, double, string, object, decimal, date)",
                 Signature(
                     Name("F"),
                     Qualified("System", "Boolean"),
@@ -281,9 +249,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
                     Qualified("System", "String"),
                     Qualified("System", "Object"),
                     Qualified("System", "Decimal"),
-                    Qualified("System", "DateTime")));
+                    Qualified("System", "DateTime")
+                )
+            );
             // Type arguments.
-            VerifySignature("F(C(OF DECIMAL, INTEGER, STRING, OBJECT))",
+            VerifySignature(
+                "F(C(OF DECIMAL, INTEGER, STRING, OBJECT))",
                 Signature(
                     Name("F"),
                     Generic(
@@ -291,67 +262,58 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
                         Qualified("System", "Decimal"),
                         Qualified("System", "Int32"),
                         Qualified("System", "String"),
-                        Qualified("System", "Object"))));
+                        Qualified("System", "Object")
+                    )
+                )
+            );
             // Not special types.
-            VerifySignature("F(Void, Int, [Object], A.[Integer], B.Single)",
+            VerifySignature(
+                "F(Void, Int, [Object], A.[Integer], B.Single)",
                 Signature(
                     Name("F"),
                     Identifier("Void"),
                     Identifier("Int"),
                     Identifier("Object"),
                     Qualified("A", "Integer"),
-                    Qualified("B", "Single")));
+                    Qualified("B", "Single")
+                )
+            );
         }
 
         [Fact]
         public void EscapedNames()
         {
-            VerifySignature("[F3]",
-                SignatureNameOnly(
-                    Name("F3")));
-            VerifySignature("[_]",
-                SignatureNameOnly(
-                    Name("_")));
-            VerifySignature("[Integer]",
-                SignatureNameOnly(
-                    Name("Integer")));
-            VerifySignature("A.B.[Integer]",
-                SignatureNameOnly(
-                    Qualified(
-                        Qualified(
-                            Name("A"),
-                            "B"),
-                        "Integer")));
-            VerifySignature("F([Integer])",
-                Signature(
-                    Name("F"),
-                    Identifier("Integer")));
-            VerifySignature("F(System.[Integer])",
-                Signature(
-                    Name("F"),
-                    Qualified(
-                        Identifier("System"),
-                        "Integer")));
-            VerifySignature("A(Of [Object]).B(Of [Integer]).F(Of [Of])",
+            VerifySignature("[F3]", SignatureNameOnly(Name("F3")));
+            VerifySignature("[_]", SignatureNameOnly(Name("_")));
+            VerifySignature("[Integer]", SignatureNameOnly(Name("Integer")));
+            VerifySignature(
+                "A.B.[Integer]",
+                SignatureNameOnly(Qualified(Qualified(Name("A"), "B"), "Integer"))
+            );
+            VerifySignature("F([Integer])", Signature(Name("F"), Identifier("Integer")));
+            VerifySignature(
+                "F(System.[Integer])",
+                Signature(Name("F"), Qualified(Identifier("System"), "Integer"))
+            );
+            VerifySignature(
+                "A(Of [Object]).B(Of [Integer]).F(Of [Of])",
                 SignatureNameOnly(
                     Generic(
                         Qualified(
-                            Generic(
-                                Qualified(
-                                    Generic(
-                                        Name("A"),
-                                        "Object"),
-                                    "B"),
-                                "Integer"),
-                            "F"),
-                        "Of")));
-            VerifySignature("F(C(Of Integer, [Date]))",
+                            Generic(Qualified(Generic(Name("A"), "Object"), "B"), "Integer"),
+                            "F"
+                        ),
+                        "Of"
+                    )
+                )
+            );
+            VerifySignature(
+                "F(C(Of Integer, [Date]))",
                 Signature(
                     Name("F"),
-                    Generic(
-                        Identifier("C"),
-                        Qualified("System", "Int32"),
-                        Identifier("Date"))));
+                    Generic(Identifier("C"), Qualified("System", "Int32"), Identifier("Date"))
+                )
+            );
             Assert.Null(MemberSignatureParser.Parse("@"));
             Assert.Null(MemberSignatureParser.Parse("@Integer"));
             Assert.Null(MemberSignatureParser.Parse("["));

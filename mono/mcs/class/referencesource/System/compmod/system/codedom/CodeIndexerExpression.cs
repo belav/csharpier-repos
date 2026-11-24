@@ -1,30 +1,27 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeIndexerExpression.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>
     ///       Represents an array indexer expression.
     ///    </para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeIndexerExpression : CodeExpression {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodeIndexerExpression : CodeExpression
+    {
         private CodeExpression targetObject;
         private CodeExpressionCollection indices;
 
@@ -33,8 +30,7 @@ namespace System.CodeDom {
         ///       Initializes a new instance of <see cref='System.CodeDom.CodeIndexerExpression'/>.
         ///    </para>
         /// </devdoc>
-        public CodeIndexerExpression() {
-        }
+        public CodeIndexerExpression() { }
 
         /// <devdoc>
         ///    <para>
@@ -42,7 +38,8 @@ namespace System.CodeDom {
         ///       object and index.
         ///    </para>
         /// </devdoc>
-        public CodeIndexerExpression(CodeExpression targetObject, params CodeExpression[] indices) {
+        public CodeIndexerExpression(CodeExpression targetObject, params CodeExpression[] indices)
+        {
             this.targetObject = targetObject;
             this.indices = new CodeExpressionCollection();
             this.indices.AddRange(indices);
@@ -54,13 +51,10 @@ namespace System.CodeDom {
         ///       the target object.
         ///    </para>
         /// </devdoc>
-        public CodeExpression TargetObject {
-            get {
-                return targetObject;
-            }
-            set {
-                targetObject = value;
-            }
+        public CodeExpression TargetObject
+        {
+            get { return targetObject; }
+            set { targetObject = value; }
         }
 
         /// <devdoc>
@@ -69,9 +63,12 @@ namespace System.CodeDom {
         ///       the index.
         ///    </para>
         /// </devdoc>
-        public CodeExpressionCollection Indices {
-            get {
-                if (indices == null) {
+        public CodeExpressionCollection Indices
+        {
+            get
+            {
+                if (indices == null)
+                {
                     indices = new CodeExpressionCollection();
                 }
                 return indices;

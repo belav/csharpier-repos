@@ -27,10 +27,17 @@ class HelloWorld
 }
 
 // ----------------------------------------------------------------------------
-class A<T,U>
+class A<T, U>
 {
-    public virtual string Print(T t) { return "A.Print(T)"; }
-    public virtual string Print(U u) { return "A.Print(U)"; }
+    public virtual string Print(T t)
+    {
+        return "A.Print(T)";
+    }
+
+    public virtual string Print(U u)
+    {
+        return "A.Print(U)";
+    }
 }
 
 interface I
@@ -43,10 +50,6 @@ interface J<T>
     string Print(T t);
 }
 
-class A2_IntInt : A<int,int>, I, J<int>
-{
-}
+class A2_IntInt : A<int, int>, I, J<int> { }
 
-class A2_StringString : A<string,string>, J<string>
-{
-}
+class A2_StringString : A<string, string>, J<string> { }

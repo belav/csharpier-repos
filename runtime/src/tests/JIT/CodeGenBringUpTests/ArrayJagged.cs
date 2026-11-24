@@ -15,15 +15,16 @@ public class BringUpTest_ArrayJagged
     static int ArrayJagged(int i)
     {
         int[][] a = new int[2][];
-        a[0] = new int[2] {0, 1};
-        a[1] = new int[2] {2, 3};
+        a[0] = new int[2] { 0, 1 };
+        a[1] = new int[2] { 2, 3 };
         return a[1][i];
     }
 
     [Fact]
     public static int TestEntryPoint()
     {
-        if (ArrayJagged(1) != 3) return Fail;
+        if (ArrayJagged(1) != 3)
+            return Fail;
         return Pass;
     }
 }

@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using System.Linq;
 using System.Collections.Immutable;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Classification;
@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.ValueTracking
             TextSpan textSpan,
             DocumentId documentId,
             Glyph glyph,
-            ValueTrackedItem? parent)
+            ValueTrackedItem? parent
+        )
         {
             SymbolKey = symbolKey;
             Parent = parent;
@@ -46,12 +47,20 @@ namespace Microsoft.CodeAnalysis.ValueTracking
             return subText.ToString();
         }
 
-        public static async ValueTask<ValueTrackedItem?> TryCreateAsync(Solution solution, Location location, ISymbol symbol, ValueTrackedItem? parent = null, CancellationToken cancellationToken = default)
+        public static async ValueTask<ValueTrackedItem?> TryCreateAsync(
+            Solution solution,
+            Location location,
+            ISymbol symbol,
+            ValueTrackedItem? parent = null,
+            CancellationToken cancellationToken = default
+        )
         {
             Contract.ThrowIfNull(location.SourceTree);
 
             var document = solution.GetRequiredDocument(location.SourceTree);
-            var syntaxTree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+            var syntaxTree = await document
+                .GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
             var sourceText = await syntaxTree.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
             return new ValueTrackedItem(
@@ -60,7 +69,8 @@ namespace Microsoft.CodeAnalysis.ValueTracking
                 location.SourceSpan,
                 document.Id,
                 symbol.GetGlyph(),
-                parent);
+                parent
+            );
         }
     }
 }

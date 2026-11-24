@@ -71,14 +71,11 @@ public class ApiActionsDoNotRequireExplicitModelValidationCheckAnalyzerIntegrati
         var result = await AnalyzerRunner.GetDiagnosticsAsync(testSource.Source);
 
         // Assert
-        Assert.Collection(
-            result,
-            diagnostic =>
-            {
-                Assert.Equal(descriptor.Id, diagnostic.Id);
-                Assert.Same(descriptor, diagnostic.Descriptor);
-                AnalyzerAssert.DiagnosticLocation(expectedLocation, diagnostic.Location);
-            }
-        );
+        Assert.Collection(result, diagnostic =>
+        {
+            Assert.Equal(descriptor.Id, diagnostic.Id);
+            Assert.Same(descriptor, diagnostic.Descriptor);
+            AnalyzerAssert.DiagnosticLocation(expectedLocation, diagnostic.Location);
+        });
     }
 }

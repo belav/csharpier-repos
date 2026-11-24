@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis
             return memory.Slice(0, length);
         }
 
-        internal static ReadOnlyMemory<char> Trim(this ReadOnlyMemory<char> memory) => memory.TrimStart().TrimEnd();
+        internal static ReadOnlyMemory<char> Trim(this ReadOnlyMemory<char> memory) =>
+            memory.TrimStart().TrimEnd();
 #endif
 
         internal static bool IsNullOrEmpty(this ReadOnlyMemory<char>? memory) =>
@@ -75,7 +76,8 @@ namespace Microsoft.CodeAnalysis
             return true;
         }
 
-        internal static bool StartsWith(this ReadOnlyMemory<char> memory, char c) => memory.Length > 0 && memory.Span[0] == c;
+        internal static bool StartsWith(this ReadOnlyMemory<char> memory, char c) =>
+            memory.Length > 0 && memory.Span[0] == c;
 
         internal static ReadOnlyMemory<char> Unquote(this ReadOnlyMemory<char> memory)
         {

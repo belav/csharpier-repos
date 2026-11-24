@@ -10,12 +10,11 @@ namespace System.Reflection.Metadata
         private const int PoolSize = 128;
         private const int ChunkSize = 1024;
 
-        private static readonly ObjectPool<PooledBlobBuilder> s_chunkPool = new ObjectPool<PooledBlobBuilder>(() => new PooledBlobBuilder(ChunkSize), PoolSize);
+        private static readonly ObjectPool<PooledBlobBuilder> s_chunkPool =
+            new ObjectPool<PooledBlobBuilder>(() => new PooledBlobBuilder(ChunkSize), PoolSize);
 
         private PooledBlobBuilder(int size)
-            : base(size)
-        {
-        }
+            : base(size) { }
 
         public static PooledBlobBuilder GetInstance()
         {

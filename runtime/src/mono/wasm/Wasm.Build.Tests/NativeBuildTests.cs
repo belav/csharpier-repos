@@ -14,10 +14,11 @@ namespace Wasm.Build.Tests
 {
     public class NativeBuildTests : TestMainJsTestBase
     {
-        public NativeBuildTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-            : base(output, buildContext)
-        {
-        }
+        public NativeBuildTests(
+            ITestOutputHelper output,
+            SharedBuildPerTestClassFixture buildContext
+        )
+            : base(output, buildContext) { }
 
         [Theory]
         [BuildAndRun]
@@ -26,17 +27,32 @@ namespace Wasm.Build.Tests
             string projectName = $"simple_native_build_{buildArgs.Config}_{buildArgs.AOT}";
 
             buildArgs = buildArgs with { ProjectName = projectName };
-            buildArgs = ExpandBuildArgs(buildArgs, extraProperties: "<WasmBuildNative>true</WasmBuildNative>");
+            buildArgs = ExpandBuildArgs(
+                buildArgs,
+                extraProperties: "<WasmBuildNative>true</WasmBuildNative>"
+            );
 
-            BuildProject(buildArgs,
-                            id: id,
-                            new BuildProjectOptions(
-                                InitProject: () => File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), s_mainReturns42),
-                                DotnetWasmFromRuntimePack: false));
+            BuildProject(
+                buildArgs,
+                id: id,
+                new BuildProjectOptions(
+                    InitProject: () =>
+                        File.WriteAllText(
+                            Path.Combine(_projectDir!, "Program.cs"),
+                            s_mainReturns42
+                        ),
+                    DotnetWasmFromRuntimePack: false
+                )
+            );
 
-            RunAndTestWasmApp(buildArgs, buildDir: _projectDir, expectedExitCode: 42,
-                        test: output => { },
-                        host: host, id: id);
+            RunAndTestWasmApp(
+                buildArgs,
+                buildDir: _projectDir,
+                expectedExitCode: 42,
+                test: output => { },
+                host: host,
+                id: id
+            );
         }
 
         [Theory]
@@ -45,16 +61,26 @@ namespace Wasm.Build.Tests
         {
             string projectName = $"mono_aot_cross_{buildArgs.Config}_{buildArgs.AOT}";
 
-            buildArgs = buildArgs with { ProjectName = projectName, ExtraBuildArgs = "-p:PublishTrimmed=false" };
+            buildArgs = buildArgs with
+            {
+                ProjectName = projectName,
+                ExtraBuildArgs = "-p:PublishTrimmed=false",
+            };
             buildArgs = ExpandBuildArgs(buildArgs);
 
             (_, string output) = BuildProject(
-                                    buildArgs,
-                                    id: id,
-                                    new BuildProjectOptions(
-                                        InitProject: () => File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), s_mainReturns42),
-                                        DotnetWasmFromRuntimePack: false,
-                                        ExpectSuccess: false));
+                buildArgs,
+                id: id,
+                new BuildProjectOptions(
+                    InitProject: () =>
+                        File.WriteAllText(
+                            Path.Combine(_projectDir!, "Program.cs"),
+                            s_mainReturns42
+                        ),
+                    DotnetWasmFromRuntimePack: false,
+                    ExpectSuccess: false
+                )
+            );
 
             Assert.Contains("AOT is not supported without IL trimming", output);
         }
@@ -63,7 +89,8 @@ namespace Wasm.Build.Tests
         [BuildAndRun(host: RunHost.None, aot: true)]
         public void IntermediateBitcodeToObjectFilesAreNotLLVMIR(BuildArgs buildArgs, string id)
         {
-            string printFileTypeTarget = @"
+            string printFileTypeTarget =
+                @"
                 <Target Name=""PrintIntermediateFileType"" AfterTargets=""WasmNestedPublishApp"">
                     <Exec Command=""wasm-dis &quot;$(_WasmIntermediateOutputPath)System.Private.CoreLib.dll.o&quot; -o &quot;$(_WasmIntermediateOutputPath)wasm-dis-out.txt&quot;""
                           EnvironmentVariables=""@(EmscriptenEnvVars)""
@@ -82,16 +109,24 @@ namespace Wasm.Build.Tests
             buildArgs = buildArgs with { ProjectName = projectName };
             buildArgs = ExpandBuildArgs(buildArgs, insertAtEnd: printFileTypeTarget);
 
-            (_, string output) = BuildProject(buildArgs,
-                                    id: id,
-                                    new BuildProjectOptions(
-                                        InitProject: () => File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), s_mainReturns42),
-                                        DotnetWasmFromRuntimePack: false));
+            (_, string output) = BuildProject(
+                buildArgs,
+                id: id,
+                new BuildProjectOptions(
+                    InitProject: () =>
+                        File.WriteAllText(
+                            Path.Combine(_projectDir!, "Program.cs"),
+                            s_mainReturns42
+                        ),
+                    DotnetWasmFromRuntimePack: false
+                )
+            );
 
             if (!output.Contains("** wasm-dis exit code: 0"))
-                throw new XunitException($"Expected to successfully run wasm-dis on System.Private.CoreLib.dll.o ."
-                                            + " It might fail if it was incorrectly compiled to a bitcode file, instead of wasm.");
+                throw new XunitException(
+                    $"Expected to successfully run wasm-dis on System.Private.CoreLib.dll.o ."
+                        + " It might fail if it was incorrectly compiled to a bitcode file, instead of wasm."
+                );
         }
-
     }
 }

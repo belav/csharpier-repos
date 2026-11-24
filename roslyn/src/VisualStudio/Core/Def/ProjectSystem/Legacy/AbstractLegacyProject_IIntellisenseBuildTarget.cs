@@ -8,8 +8,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
 {
     internal partial class AbstractLegacyProject : IIntellisenseBuildTarget
     {
-        void IIntellisenseBuildTarget.SetIntellisenseBuildResult(bool succeeded, string reason)
-        {
-        }
+        void IIntellisenseBuildTarget.SetIntellisenseBuildResult(bool succeeded, string reason) { }
     }
 }

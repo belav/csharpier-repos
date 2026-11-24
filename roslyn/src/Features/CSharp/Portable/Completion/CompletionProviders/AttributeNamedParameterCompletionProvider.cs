@@ -23,7 +23,10 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 {
-    [ExportCompletionProvider(nameof(AttributeNamedParameterCompletionProvider), LanguageNames.CSharp)]
+    [ExportCompletionProvider(
+        nameof(AttributeNamedParameterCompletionProvider),
+        LanguageNames.CSharp
+    )]
     [ExtensionOrder(After = nameof(FirstBuiltInCompletionProvider))]
     [Shared]
     internal class AttributeNamedParameterCompletionProvider : LSPCompletionProvider
@@ -32,21 +35,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         private const string SpaceEqualsString = " =";
         private const string ColonString = ":";
 
-        private static readonly CompletionItemRules _spaceItemFilterRule = CompletionItemRules.Default.WithFilterCharacterRule(
-            CharacterSetModificationRule.Create(CharacterSetModificationKind.Remove, ' '));
+        private static readonly CompletionItemRules _spaceItemFilterRule =
+            CompletionItemRules.Default.WithFilterCharacterRule(
+                CharacterSetModificationRule.Create(CharacterSetModificationKind.Remove, ' ')
+            );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AttributeNamedParameterCompletionProvider()
-        {
-        }
+        public AttributeNamedParameterCompletionProvider() { }
 
         internal override string Language => LanguageNames.CSharp;
 
-        public override bool IsInsertionTrigger(SourceText text, int characterPosition, CompletionOptions options)
-            => CompletionUtilities.IsTriggerCharacter(text, characterPosition, options);
+        public override bool IsInsertionTrigger(
+            SourceText text,
+            int characterPosition,
+            CompletionOptions options
+        ) => CompletionUtilities.IsTriggerCharacter(text, characterPosition, options);
 
-        public override ImmutableHashSet<char> TriggerCharacters { get; } = CompletionUtilities.CommonTriggerCharacters;
+        public override ImmutableHashSet<char> TriggerCharacters { get; } =
+            CompletionUtilities.CommonTriggerCharacters;
 
         public override async Task ProvideCompletionsAsync(CompletionContext context)
         {
@@ -56,7 +63,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 var position = context.Position;
                 var cancellationToken = context.CancellationToken;
 
-                var syntaxTree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+                var syntaxTree = await document
+                    .GetRequiredSyntaxTreeAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 if (syntaxTree.IsInNonUserCode(position, cancellationToken))
                 {
                     return;
@@ -70,7 +79,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     return;
                 }
 
-                if (token.Parent!.Parent is not AttributeSyntax attributeSyntax || token.Parent is not AttributeArgumentListSyntax attributeArgumentList)
+                if (
+                    token.Parent!.Parent is not AttributeSyntax attributeSyntax
+                    || token.Parent is not AttributeArgumentListSyntax attributeArgumentList
+                )
                 {
                     return;
                 }
@@ -83,13 +95,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 // We actually want to collect two sets of named parameters to present the user.  The
                 // normal named parameters that come from the attribute constructors.  These will be
                 // presented like "goo:".  And also the named parameters that come from the writable
-                // fields/properties in the attribute.  These will be presented like "bar =".  
+                // fields/properties in the attribute.  These will be presented like "bar =".
 
-                var existingNamedParameters = GetExistingNamedParameters(attributeArgumentList, position);
+                var existingNamedParameters = GetExistingNamedParameters(
+                    attributeArgumentList,
+                    position
+                );
 
-                var semanticModel = await document.ReuseExistingSpeculativeModelAsync(attributeSyntax, cancellationToken).ConfigureAwait(false);
-                var nameColonItems = GetNameColonItems(context, semanticModel, token, attributeSyntax, existingNamedParameters);
-                var nameEqualsItems = GetNameEqualsItems(context, semanticModel, token, attributeSyntax, existingNamedParameters);
+                var semanticModel = await document
+                    .ReuseExistingSpeculativeModelAsync(attributeSyntax, cancellationToken)
+                    .ConfigureAwait(false);
+                var nameColonItems = GetNameColonItems(
+                    context,
+                    semanticModel,
+                    token,
+                    attributeSyntax,
+                    existingNamedParameters
+                );
+                var nameEqualsItems = GetNameEqualsItems(
+                    context,
+                    semanticModel,
+                    token,
+                    attributeSyntax,
+                    existingNamedParameters
+                );
 
                 context.AddItems(nameEqualsItems);
 
@@ -108,7 +137,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
         private static bool IsAfterNameColonArgument(SyntaxToken token)
         {
-            if (token.Kind() == SyntaxKind.CommaToken && token.Parent is AttributeArgumentListSyntax argumentList)
+            if (
+                token.Kind() == SyntaxKind.CommaToken
+                && token.Parent is AttributeArgumentListSyntax argumentList
+            )
             {
                 foreach (var item in argumentList.Arguments.GetWithSeparators())
                 {
@@ -130,7 +162,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
         private static bool IsAfterNameEqualsArgument(SyntaxToken token)
         {
-            if (token.Kind() == SyntaxKind.CommaToken && token.Parent is AttributeArgumentListSyntax argumentList)
+            if (
+                token.Kind() == SyntaxKind.CommaToken
+                && token.Parent is AttributeArgumentListSyntax argumentList
+            )
             {
                 foreach (var item in argumentList.Arguments.GetWithSeparators())
                 {
@@ -151,66 +186,114 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         }
 
         private static ImmutableArray<CompletionItem> GetNameEqualsItems(
-            CompletionContext context, SemanticModel semanticModel,
-            SyntaxToken token, AttributeSyntax attributeSyntax, ISet<string> existingNamedParameters)
+            CompletionContext context,
+            SemanticModel semanticModel,
+            SyntaxToken token,
+            AttributeSyntax attributeSyntax,
+            ISet<string> existingNamedParameters
+        )
         {
-            var attributeNamedParameters = GetAttributeNamedParameters(semanticModel, context.Position, attributeSyntax, context.CancellationToken);
-            var unspecifiedNamedParameters = attributeNamedParameters.Where(p => !existingNamedParameters.Contains(p.Name));
+            var attributeNamedParameters = GetAttributeNamedParameters(
+                semanticModel,
+                context.Position,
+                attributeSyntax,
+                context.CancellationToken
+            );
+            var unspecifiedNamedParameters = attributeNamedParameters.Where(p =>
+                !existingNamedParameters.Contains(p.Name)
+            );
 
-            var rightToken = semanticModel.SyntaxTree.FindTokenOnRightOfPosition(context.Position, context.CancellationToken);
-            var displayTextSuffix = rightToken.IsKind(SyntaxKind.EqualsToken) ? null : SpaceEqualsString;
+            var rightToken = semanticModel.SyntaxTree.FindTokenOnRightOfPosition(
+                context.Position,
+                context.CancellationToken
+            );
+            var displayTextSuffix = rightToken.IsKind(SyntaxKind.EqualsToken)
+                ? null
+                : SpaceEqualsString;
 
-            var q = from p in attributeNamedParameters
-                    where !existingNamedParameters.Contains(p.Name)
-                    select SymbolCompletionItem.CreateWithSymbolId(
-                       displayText: p.Name.ToIdentifierToken().ToString(),
-                       displayTextSuffix: displayTextSuffix,
-                       insertionText: null,
-                       symbols: ImmutableArray.Create(p),
-                       contextPosition: token.SpanStart,
-                       sortText: p.Name,
-                       rules: _spaceItemFilterRule);
+            var q =
+                from p in attributeNamedParameters
+                where !existingNamedParameters.Contains(p.Name)
+                select SymbolCompletionItem.CreateWithSymbolId(
+                    displayText: p.Name.ToIdentifierToken().ToString(),
+                    displayTextSuffix: displayTextSuffix,
+                    insertionText: null,
+                    symbols: ImmutableArray.Create(p),
+                    contextPosition: token.SpanStart,
+                    sortText: p.Name,
+                    rules: _spaceItemFilterRule
+                );
             return q.ToImmutableArray();
         }
 
         private static IEnumerable<CompletionItem> GetNameColonItems(
-            CompletionContext context, SemanticModel semanticModel, SyntaxToken token, AttributeSyntax attributeSyntax, ISet<string> existingNamedParameters)
+            CompletionContext context,
+            SemanticModel semanticModel,
+            SyntaxToken token,
+            AttributeSyntax attributeSyntax,
+            ISet<string> existingNamedParameters
+        )
         {
-            var parameterLists = GetParameterLists(semanticModel, context.Position, attributeSyntax, context.CancellationToken);
+            var parameterLists = GetParameterLists(
+                semanticModel,
+                context.Position,
+                attributeSyntax,
+                context.CancellationToken
+            );
             parameterLists = parameterLists.Where(pl => IsValid(pl, existingNamedParameters));
 
-            var rightToken = semanticModel.SyntaxTree.FindTokenOnRightOfPosition(context.Position, context.CancellationToken);
+            var rightToken = semanticModel.SyntaxTree.FindTokenOnRightOfPosition(
+                context.Position,
+                context.CancellationToken
+            );
             var displayTextSuffix = rightToken.IsKind(SyntaxKind.ColonToken) ? null : ColonString;
 
             return from pl in parameterLists
-                   from p in pl
-                   where !existingNamedParameters.Contains(p.Name)
-                   select SymbolCompletionItem.CreateWithSymbolId(
-                       displayText: p.Name.ToIdentifierToken().ToString(),
-                       displayTextSuffix: displayTextSuffix,
-                       insertionText: null,
-                       symbols: ImmutableArray.Create(p),
-                       contextPosition: token.SpanStart,
-                       sortText: p.Name,
-                       rules: CompletionItemRules.Default);
+                from p in pl
+                where !existingNamedParameters.Contains(p.Name)
+                select SymbolCompletionItem.CreateWithSymbolId(
+                    displayText: p.Name.ToIdentifierToken().ToString(),
+                    displayTextSuffix: displayTextSuffix,
+                    insertionText: null,
+                    symbols: ImmutableArray.Create(p),
+                    contextPosition: token.SpanStart,
+                    sortText: p.Name,
+                    rules: CompletionItemRules.Default
+                );
         }
 
-        internal override Task<CompletionDescription> GetDescriptionWorkerAsync(Document document, CompletionItem item, CompletionOptions options, SymbolDescriptionOptions displayOptions, CancellationToken cancellationToken)
-            => SymbolCompletionItem.GetDescriptionAsync(item, document, displayOptions, cancellationToken);
+        internal override Task<CompletionDescription> GetDescriptionWorkerAsync(
+            Document document,
+            CompletionItem item,
+            CompletionOptions options,
+            SymbolDescriptionOptions displayOptions,
+            CancellationToken cancellationToken
+        ) =>
+            SymbolCompletionItem.GetDescriptionAsync(
+                item,
+                document,
+                displayOptions,
+                cancellationToken
+            );
 
-        private static bool IsValid(ImmutableArray<IParameterSymbol> parameterList, ISet<string> existingNamedParameters)
-            => existingNamedParameters.Except(parameterList.Select(p => p.Name)).IsEmpty();
+        private static bool IsValid(
+            ImmutableArray<IParameterSymbol> parameterList,
+            ISet<string> existingNamedParameters
+        ) => existingNamedParameters.Except(parameterList.Select(p => p.Name)).IsEmpty();
 
-        private static ISet<string> GetExistingNamedParameters(AttributeArgumentListSyntax argumentList, int position)
+        private static ISet<string> GetExistingNamedParameters(
+            AttributeArgumentListSyntax argumentList,
+            int position
+        )
         {
-            var existingArguments1 =
-                argumentList.Arguments.Where(a => a.Span.End <= position)
-                                      .Where(a => a.NameColon != null)
-                                      .Select(a => a.NameColon!.Name.Identifier.ValueText);
-            var existingArguments2 =
-                argumentList.Arguments.Where(a => a.Span.End <= position)
-                                      .Where(a => a.NameEquals != null)
-                                      .Select(a => a.NameEquals!.Name.Identifier.ValueText);
+            var existingArguments1 = argumentList
+                .Arguments.Where(a => a.Span.End <= position)
+                .Where(a => a.NameColon != null)
+                .Select(a => a.NameColon!.Name.Identifier.ValueText);
+            var existingArguments2 = argumentList
+                .Arguments.Where(a => a.Span.End <= position)
+                .Where(a => a.NameEquals != null)
+                .Select(a => a.NameEquals!.Name.Identifier.ValueText);
 
             return existingArguments1.Concat(existingArguments2).ToSet();
         }
@@ -219,13 +302,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SemanticModel semanticModel,
             int position,
             AttributeSyntax attribute,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var within = semanticModel.GetEnclosingNamedTypeOrAssembly(position, cancellationToken);
-            if (within != null && semanticModel.GetTypeInfo(attribute, cancellationToken).Type is INamedTypeSymbol attributeType)
+            if (
+                within != null
+                && semanticModel.GetTypeInfo(attribute, cancellationToken).Type
+                    is INamedTypeSymbol attributeType
+            )
             {
-                return attributeType.InstanceConstructors.Where(c => c.IsAccessibleWithin(within))
-                                                         .Select(c => c.Parameters);
+                return attributeType
+                    .InstanceConstructors.Where(c => c.IsAccessibleWithin(within))
+                    .Select(c => c.Parameters);
             }
 
             return SpecializedCollections.EmptyEnumerable<ImmutableArray<IParameterSymbol>>();
@@ -235,16 +324,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             SemanticModel semanticModel,
             int position,
             AttributeSyntax attribute,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var within = semanticModel.GetEnclosingNamedTypeOrAssembly(position, cancellationToken);
-            var attributeType = (INamedTypeSymbol?)semanticModel.GetTypeInfo(attribute, cancellationToken).Type;
+            var attributeType = (INamedTypeSymbol?)
+                semanticModel.GetTypeInfo(attribute, cancellationToken).Type;
             Contract.ThrowIfNull(attributeType);
             return attributeType.GetAttributeNamedParameters(semanticModel.Compilation, within);
         }
 
-        protected override Task<TextChange?> GetTextChangeAsync(CompletionItem selectedItem, char? ch, CancellationToken cancellationToken)
-            => Task.FromResult(GetTextChange(selectedItem, ch));
+        protected override Task<TextChange?> GetTextChangeAsync(
+            CompletionItem selectedItem,
+            char? ch,
+            CancellationToken cancellationToken
+        ) => Task.FromResult(GetTextChange(selectedItem, ch));
 
         private static TextChange? GetTextChange(CompletionItem selectedItem, char? ch)
         {
@@ -256,21 +350,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 // typed space character will be passed through to the editor, and they can then type the '='.
                 if (ch == ' ' && displayText.EndsWith(SpaceEqualsString, StringComparison.Ordinal))
                 {
-                    return new TextChange(selectedItem.Span, displayText.Remove(displayText.Length - SpaceEqualsString.Length));
+                    return new TextChange(
+                        selectedItem.Span,
+                        displayText.Remove(displayText.Length - SpaceEqualsString.Length)
+                    );
                 }
 
-                // If the user types '=', do not complete the '=' at the end of the named parameter because the typed '=' 
+                // If the user types '=', do not complete the '=' at the end of the named parameter because the typed '='
                 // will be passed through to the editor.
                 if (ch == '=' && displayText.EndsWith(EqualsString, StringComparison.Ordinal))
                 {
-                    return new TextChange(selectedItem.Span, displayText.Remove(displayText.Length - EqualsString.Length));
+                    return new TextChange(
+                        selectedItem.Span,
+                        displayText.Remove(displayText.Length - EqualsString.Length)
+                    );
                 }
 
-                // If the user types ':', do not complete the ':' at the end of the named parameter because the typed ':' 
+                // If the user types ':', do not complete the ':' at the end of the named parameter because the typed ':'
                 // will be passed through to the editor.
                 if (ch == ':' && displayText.EndsWith(ColonString, StringComparison.Ordinal))
                 {
-                    return new TextChange(selectedItem.Span, displayText.Remove(displayText.Length - ColonString.Length));
+                    return new TextChange(
+                        selectedItem.Span,
+                        displayText.Remove(displayText.Length - ColonString.Length)
+                    );
                 }
             }
 

@@ -14,8 +14,7 @@ public class AuthMiddlewareUsingRequireAuthTest
         MvcTestFixture<SecurityWebSite.StartupWithRequireAuth> fixture
     )
     {
-        var factory =
-            fixture.Factories.FirstOrDefault()
+        var factory = fixture.Factories.FirstOrDefault()
             ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = factory.CreateDefaultClient();
     }

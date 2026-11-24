@@ -4,7 +4,6 @@ using BlazorWeb_CSharp.Client;
 using Microsoft.AspNetCore.Components.Authorization;
 #endif
 
-
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
 #if (IndividualLocalAuth)

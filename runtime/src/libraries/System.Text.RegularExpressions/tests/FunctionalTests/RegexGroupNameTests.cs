@@ -1,11 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System;
-using System.Text.RegularExpressions;
 using System.Collections;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
+using Xunit;
 
 namespace System.Text.RegularExpressions.Tests
 {
@@ -19,7 +19,8 @@ namespace System.Text.RegularExpressions.Tests
         {
             //Debugger.Launch();
 
-            string pattern = @"\b(?<FirstWord>\w+)\s?((\w+)\s)*(?<LastWord>\w+)?(?<Punctuation>\p{Po})";
+            string pattern =
+                @"\b(?<FirstWord>\w+)\s?((\w+)\s)*(?<LastWord>\w+)?(?<Punctuation>\p{Po})";
             string input = "The cow jumped over the moon.";
             Regex regex = new Regex(pattern);
             Match match = regex.Match(input);

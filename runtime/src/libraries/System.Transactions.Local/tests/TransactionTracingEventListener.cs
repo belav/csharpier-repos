@@ -3,10 +3,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Text;
-
-using System.Diagnostics.Tracing;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,7 +15,10 @@ namespace System.Transactions.Tests
     {
         private List<EventWrittenEventArgs> _recordedEvents = new List<EventWrittenEventArgs>();
 
-        public List<EventWrittenEventArgs> RecordedEvents { get { return _recordedEvents; } }
+        public List<EventWrittenEventArgs> RecordedEvents
+        {
+            get { return _recordedEvents; }
+        }
 
         protected override void OnEventWritten(EventWrittenEventArgs eventData)
         {
@@ -94,8 +96,7 @@ namespace System.Transactions.Tests
 
         private void EnableSourceIfMatch(EventSource source)
         {
-            if (source.Name.Equals(_targetSourceName) ||
-                source.Guid.Equals(_targetSourceGuid))
+            if (source.Name.Equals(_targetSourceName) || source.Guid.Equals(_targetSourceGuid))
             {
                 EnableEvents(source, _level);
             }
@@ -104,15 +105,30 @@ namespace System.Transactions.Tests
         public void RunWithCallback(Action<EventWrittenEventArgs> handler, Action body)
         {
             _eventWritten = handler;
-            try { body(); }
-            finally { _eventWritten = null; }
+            try
+            {
+                body();
+            }
+            finally
+            {
+                _eventWritten = null;
+            }
         }
 
-        public async Task RunWithCallbackAsync(Action<EventWrittenEventArgs> handler, Func<Task> body)
+        public async Task RunWithCallbackAsync(
+            Action<EventWrittenEventArgs> handler,
+            Func<Task> body
+        )
         {
             _eventWritten = handler;
-            try { await body().ConfigureAwait(false); }
-            finally { _eventWritten = null; }
+            try
+            {
+                await body().ConfigureAwait(false);
+            }
+            finally
+            {
+                _eventWritten = null;
+            }
         }
 
         protected override void OnEventWritten(EventWrittenEventArgs eventData)
@@ -120,5 +136,4 @@ namespace System.Transactions.Tests
             _eventWritten?.Invoke(eventData);
         }
     }
-
 }

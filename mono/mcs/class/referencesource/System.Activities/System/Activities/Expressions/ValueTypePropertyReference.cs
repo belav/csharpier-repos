@@ -5,14 +5,15 @@
 namespace System.Activities.Expressions
 {
     using System;
+    using System.Activities.Statements;
     using System.ComponentModel;
     using System.Reflection;
     using System.Runtime;
     using System.Runtime.Serialization;
-    using System.Activities.Statements;
     using System.Threading;
 
-    public sealed class ValueTypePropertyReference<TOperand, TResult> : CodeActivity<Location<TResult>>
+    public sealed class ValueTypePropertyReference<TOperand, TResult>
+        : CodeActivity<Location<TResult>>
     {
         PropertyInfo propertyInfo;
         Func<object, object[], object> getFunc;
@@ -21,23 +22,17 @@ namespace System.Activities.Expressions
         MethodInfo getMethod;
         MethodInfo setMethod;
 
-        static MruCache<MethodInfo, Func<object, object[], object>> funcCache =
-            new MruCache<MethodInfo, Func<object, object[], object>>(MethodCallExpressionHelper.FuncCacheCapacity);
+        static MruCache<MethodInfo, Func<object, object[], object>> funcCache = new MruCache<
+            MethodInfo,
+            Func<object, object[], object>
+        >(MethodCallExpressionHelper.FuncCacheCapacity);
         static ReaderWriterLockSlim locker = new ReaderWriterLockSlim();
 
         [DefaultValue(null)]
-        public string PropertyName
-        {
-            get;
-            set;
-        }
+        public string PropertyName { get; set; }
 
         [DefaultValue(null)]
-        public InOutArgument<TOperand> OperandLocation
-        {
-            get;
-            set;
-        }
+        public InOutArgument<TOperand> OperandLocation { get; set; }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
@@ -51,18 +46,24 @@ namespace System.Activities.Expressions
 
             if (typeof(TOperand).IsEnum)
             {
-                metadata.AddValidationError(SR.TargetTypeCannotBeEnum(this.GetType().Name, this.DisplayName));
+                metadata.AddValidationError(
+                    SR.TargetTypeCannotBeEnum(this.GetType().Name, this.DisplayName)
+                );
             }
             else if (String.IsNullOrEmpty(this.PropertyName))
             {
-                metadata.AddValidationError(SR.ActivityPropertyMustBeSet("PropertyName", this.DisplayName));
+                metadata.AddValidationError(
+                    SR.ActivityPropertyMustBeSet("PropertyName", this.DisplayName)
+                );
             }
             else
             {
                 this.propertyInfo = typeof(TOperand).GetProperty(this.PropertyName);
                 if (this.propertyInfo == null)
                 {
-                    metadata.AddValidationError(SR.MemberNotFound(PropertyName, typeof(TOperand).Name));
+                    metadata.AddValidationError(
+                        SR.MemberNotFound(PropertyName, typeof(TOperand).Name)
+                    );
                 }
             }
 
@@ -74,24 +75,53 @@ namespace System.Activities.Expressions
 
                 if (setMethod == null)
                 {
-                    metadata.AddValidationError(SR.MemberIsReadOnly(propertyInfo.Name, typeof(TOperand)));
+                    metadata.AddValidationError(
+                        SR.MemberIsReadOnly(propertyInfo.Name, typeof(TOperand))
+                    );
                 }
                 if (setMethod != null && !setMethod.IsStatic)
                 {
                     isRequired = true;
                 }
             }
-            MemberExpressionHelper.AddOperandLocationArgument<TOperand>(metadata, this.OperandLocation, isRequired);
+            MemberExpressionHelper.AddOperandLocationArgument<TOperand>(
+                metadata,
+                this.OperandLocation,
+                isRequired
+            );
 
             if (this.propertyInfo != null)
             {
-                if (MethodCallExpressionHelper.NeedRetrieve(this.getMethod, oldGetMethod, this.getFunc))
+                if (
+                    MethodCallExpressionHelper.NeedRetrieve(
+                        this.getMethod,
+                        oldGetMethod,
+                        this.getFunc
+                    )
+                )
                 {
-                    this.getFunc = MethodCallExpressionHelper.GetFunc(metadata, this.getMethod, funcCache, locker);
+                    this.getFunc = MethodCallExpressionHelper.GetFunc(
+                        metadata,
+                        this.getMethod,
+                        funcCache,
+                        locker
+                    );
                 }
-                if (MethodCallExpressionHelper.NeedRetrieve(this.setMethod, oldSetMethod, this.setFunc))
+                if (
+                    MethodCallExpressionHelper.NeedRetrieve(
+                        this.setMethod,
+                        oldSetMethod,
+                        this.setFunc
+                    )
+                )
                 {
-                    this.setFunc = MethodCallExpressionHelper.GetFunc(metadata, this.setMethod, funcCache, locker, true);
+                    this.setFunc = MethodCallExpressionHelper.GetFunc(
+                        metadata,
+                        this.setMethod,
+                        funcCache,
+                        locker,
+                        true
+                    );
                 }
             }
         }
@@ -101,7 +131,12 @@ namespace System.Activities.Expressions
             Location<TOperand> operandLocationValue = this.OperandLocation.GetLocation(context);
             Fx.Assert(operandLocationValue != null, "OperandLocation must not be null");
             Fx.Assert(this.propertyInfo != null, "propertyInfo must not be null");
-            return new PropertyLocation(this.propertyInfo, this.getFunc, this.setFunc, operandLocationValue);
+            return new PropertyLocation(
+                this.propertyInfo,
+                this.getFunc,
+                this.setFunc,
+                operandLocationValue
+            );
         }
 
         [DataContract]
@@ -114,8 +149,12 @@ namespace System.Activities.Expressions
             Func<object, object[], object> getFunc;
             Func<object, object[], object> setFunc;
 
-            public PropertyLocation(PropertyInfo propertyInfo, Func<object, object[], object> getFunc,
-                Func<object, object[], object> setFunc, Location<TOperand> ownerLocation)
+            public PropertyLocation(
+                PropertyInfo propertyInfo,
+                Func<object, object[], object> getFunc,
+                Func<object, object[], object> setFunc,
+                Location<TOperand> ownerLocation
+            )
                 : base()
             {
                 this.propertyInfo = propertyInfo;
@@ -129,7 +168,7 @@ namespace System.Activities.Expressions
             {
                 get
                 {
-                    // Only allow access to public properties, EXCEPT that Locations are top-level variables 
+                    // Only allow access to public properties, EXCEPT that Locations are top-level variables
                     // from the other's perspective, not internal properties, so they're okay as a special case.
                     // E.g. "[N]" from the user's perspective is not accessing a nonpublic property, even though
                     // at an implementation level it is.
@@ -137,9 +176,22 @@ namespace System.Activities.Expressions
                     {
                         return (TResult)this.getFunc(this.ownerLocation.Value, new object[0]);
                     }
-                    if (this.propertyInfo.GetGetMethod() == null && TypeHelper.AreTypesCompatible(this.propertyInfo.DeclaringType, typeof(Location)) == false)
+                    if (
+                        this.propertyInfo.GetGetMethod() == null
+                        && TypeHelper.AreTypesCompatible(
+                            this.propertyInfo.DeclaringType,
+                            typeof(Location)
+                        ) == false
+                    )
                     {
-                        throw FxTrace.Exception.AsError(new InvalidOperationException(SR.WriteonlyPropertyCannotBeRead(this.propertyInfo.DeclaringType, this.propertyInfo.Name)));
+                        throw FxTrace.Exception.AsError(
+                            new InvalidOperationException(
+                                SR.WriteonlyPropertyCannotBeRead(
+                                    this.propertyInfo.DeclaringType,
+                                    this.propertyInfo.Name
+                                )
+                            )
+                        );
                     }
 
                     return (TResult)this.propertyInfo.GetValue(this.ownerLocation.Value, null);

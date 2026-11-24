@@ -7,8 +7,12 @@ using Xunit;
 
 public class ValueNumberingUnorderedComparisonsOfConstants
 {
-    private static readonly double _quietDoubleNaN = BitConverter.Int64BitsToDouble(unchecked((long)0xfff8000000000001));
-    private static readonly float _quietFloatNaN = BitConverter.Int32BitsToSingle(unchecked((int)0xffc00001));
+    private static readonly double _quietDoubleNaN = BitConverter.Int64BitsToDouble(
+        unchecked((long)0xfff8000000000001)
+    );
+    private static readonly float _quietFloatNaN = BitConverter.Int32BitsToSingle(
+        unchecked((int)0xffc00001)
+    );
 
     private static int _counter = 100;
 
@@ -31,7 +35,10 @@ public class ValueNumberingUnorderedComparisonsOfConstants
     // We rely on these static readonly fields being constants at compile time.
     // This means that by the time the test methods are being compiled, the static constructor must have run.
     [ModuleInitializer]
-    internal static void InitializeNaNs() => RuntimeHelpers.RunClassConstructor(typeof(ValueNumberingUnorderedComparisonsOfConstants).TypeHandle);
+    internal static void InitializeNaNs() =>
+        RuntimeHelpers.RunClassConstructor(
+            typeof(ValueNumberingUnorderedComparisonsOfConstants).TypeHandle
+        );
 
     private static void TestDoubleComparisonsEvaluatingToTrue()
     {

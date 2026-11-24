@@ -10,18 +10,20 @@ namespace System.Runtime.Serialization
     using System.Security;
     using System.Xml;
 
-    [Fx.Tag.SecurityNote(Critical = "Class holds static instances used for code generation during serialization."
-        + "Static fields are marked SecurityCritical or readonly to prevent data from being modified or leaked to other components in appdomain.",
-        Safe = "All get-only properties marked safe since they only need to be protected for write.")]
+    [Fx.Tag.SecurityNote(
+        Critical = "Class holds static instances used for code generation during serialization."
+            + "Static fields are marked SecurityCritical or readonly to prevent data from being modified or leaked to other components in appdomain.",
+        Safe = "All get-only properties marked safe since they only need to be protected for write."
+    )]
 #if USE_REFEMIT
     public static class JsonFormatGeneratorStatics
 #else
     internal static class JsonFormatGeneratorStatics
 #endif
     {
-
         [SecurityCritical]
         static MethodInfo boxPointer;
+
         [SecurityCritical]
         static PropertyInfo collectionItemNameProperty;
 
@@ -146,7 +148,11 @@ namespace System.Runtime.Serialization
             {
                 if (collectionItemNameProperty == null)
                 {
-                    collectionItemNameProperty = typeof(XmlObjectSerializerWriteContextComplexJson).GetProperty("CollectionItemName", Globals.ScanAllMembers);
+                    collectionItemNameProperty =
+                        typeof(XmlObjectSerializerWriteContextComplexJson).GetProperty(
+                            "CollectionItemName",
+                            Globals.ScanAllMembers
+                        );
                 }
                 return collectionItemNameProperty;
             }
@@ -158,7 +164,12 @@ namespace System.Runtime.Serialization
             {
                 if (extensionDataObjectCtor == null)
                 {
-                    extensionDataObjectCtor = typeof(ExtensionDataObject).GetConstructor(Globals.ScanAllMembers, null, new Type[] { }, null);
+                    extensionDataObjectCtor = typeof(ExtensionDataObject).GetConstructor(
+                        Globals.ScanAllMembers,
+                        null,
+                        new Type[] { },
+                        null
+                    );
                 }
                 return extensionDataObjectCtor;
             }
@@ -170,7 +181,9 @@ namespace System.Runtime.Serialization
             {
                 if (extensionDataProperty == null)
                 {
-                    extensionDataProperty = typeof(IExtensibleDataObject).GetProperty("ExtensionData");
+                    extensionDataProperty = typeof(IExtensibleDataObject).GetProperty(
+                        "ExtensionData"
+                    );
                 }
                 return extensionDataProperty;
             }
@@ -182,7 +195,9 @@ namespace System.Runtime.Serialization
             {
                 if (ienumeratorGetCurrentMethod == null)
                 {
-                    ienumeratorGetCurrentMethod = typeof(IEnumerator).GetProperty("Current").GetGetMethod();
+                    ienumeratorGetCurrentMethod = typeof(IEnumerator)
+                        .GetProperty("Current")
+                        .GetGetMethod();
                 }
                 return ienumeratorGetCurrentMethod;
             }
@@ -194,7 +209,9 @@ namespace System.Runtime.Serialization
             {
                 if (getItemContractMethod == null)
                 {
-                    getItemContractMethod = typeof(CollectionDataContract).GetProperty("ItemContract", Globals.ScanAllMembers).GetGetMethod(true); // nonPublic
+                    getItemContractMethod = typeof(CollectionDataContract)
+                        .GetProperty("ItemContract", Globals.ScanAllMembers)
+                        .GetGetMethod(true); // nonPublic
                 }
                 return getItemContractMethod;
             }
@@ -206,7 +223,10 @@ namespace System.Runtime.Serialization
             {
                 if (getJsonDataContractMethod == null)
                 {
-                    getJsonDataContractMethod = typeof(JsonDataContract).GetMethod("GetJsonDataContract", Globals.ScanAllMembers);
+                    getJsonDataContractMethod = typeof(JsonDataContract).GetMethod(
+                        "GetJsonDataContract",
+                        Globals.ScanAllMembers
+                    );
                 }
                 return getJsonDataContractMethod;
             }
@@ -218,7 +238,11 @@ namespace System.Runtime.Serialization
             {
                 if (getJsonMemberIndexMethod == null)
                 {
-                    getJsonMemberIndexMethod = typeof(XmlObjectSerializerReadContextComplexJson).GetMethod("GetJsonMemberIndex", Globals.ScanAllMembers);
+                    getJsonMemberIndexMethod =
+                        typeof(XmlObjectSerializerReadContextComplexJson).GetMethod(
+                            "GetJsonMemberIndex",
+                            Globals.ScanAllMembers
+                        );
                 }
                 return getJsonMemberIndexMethod;
             }
@@ -230,7 +254,11 @@ namespace System.Runtime.Serialization
             {
                 if (getRevisedItemContractMethod == null)
                 {
-                    getRevisedItemContractMethod = typeof(XmlObjectSerializerWriteContextComplexJson).GetMethod("GetRevisedItemContract", Globals.ScanAllMembers);
+                    getRevisedItemContractMethod =
+                        typeof(XmlObjectSerializerWriteContextComplexJson).GetMethod(
+                            "GetRevisedItemContract",
+                            Globals.ScanAllMembers
+                        );
                 }
                 return getRevisedItemContractMethod;
             }
@@ -242,7 +270,13 @@ namespace System.Runtime.Serialization
             {
                 if (getUninitializedObjectMethod == null)
                 {
-                    getUninitializedObjectMethod = typeof(XmlFormatReaderGenerator).GetMethod("UnsafeGetUninitializedObject", Globals.ScanAllMembers, null, new Type[] { typeof(int) }, null);
+                    getUninitializedObjectMethod = typeof(XmlFormatReaderGenerator).GetMethod(
+                        "UnsafeGetUninitializedObject",
+                        Globals.ScanAllMembers,
+                        null,
+                        new Type[] { typeof(int) },
+                        null
+                    );
                 }
                 return getUninitializedObjectMethod;
             }
@@ -254,7 +288,13 @@ namespace System.Runtime.Serialization
             {
                 if (isStartElementMethod0 == null)
                 {
-                    isStartElementMethod0 = typeof(XmlReaderDelegator).GetMethod("IsStartElement", Globals.ScanAllMembers, null, new Type[] { }, null);
+                    isStartElementMethod0 = typeof(XmlReaderDelegator).GetMethod(
+                        "IsStartElement",
+                        Globals.ScanAllMembers,
+                        null,
+                        new Type[] { },
+                        null
+                    );
                 }
                 return isStartElementMethod0;
             }
@@ -266,7 +306,13 @@ namespace System.Runtime.Serialization
             {
                 if (isStartElementMethod2 == null)
                 {
-                    isStartElementMethod2 = typeof(XmlReaderDelegator).GetMethod("IsStartElement", Globals.ScanAllMembers, null, new Type[] { typeof(XmlDictionaryString), typeof(XmlDictionaryString) }, null);
+                    isStartElementMethod2 = typeof(XmlReaderDelegator).GetMethod(
+                        "IsStartElement",
+                        Globals.ScanAllMembers,
+                        null,
+                        new Type[] { typeof(XmlDictionaryString), typeof(XmlDictionaryString) },
+                        null
+                    );
                 }
                 return isStartElementMethod2;
             }
@@ -278,7 +324,10 @@ namespace System.Runtime.Serialization
             {
                 if (localNameProperty == null)
                 {
-                    localNameProperty = typeof(XmlReaderDelegator).GetProperty("LocalName", Globals.ScanAllMembers);
+                    localNameProperty = typeof(XmlReaderDelegator).GetProperty(
+                        "LocalName",
+                        Globals.ScanAllMembers
+                    );
                 }
                 return localNameProperty;
             }
@@ -290,7 +339,10 @@ namespace System.Runtime.Serialization
             {
                 if (namespaceProperty == null)
                 {
-                    namespaceProperty = typeof(XmlReaderDelegator).GetProperty("NamespaceProperty", Globals.ScanAllMembers);
+                    namespaceProperty = typeof(XmlReaderDelegator).GetProperty(
+                        "NamespaceProperty",
+                        Globals.ScanAllMembers
+                    );
                 }
                 return namespaceProperty;
             }
@@ -314,7 +366,10 @@ namespace System.Runtime.Serialization
             {
                 if (moveToContentMethod == null)
                 {
-                    moveToContentMethod = typeof(XmlReaderDelegator).GetMethod("MoveToContent", Globals.ScanAllMembers);
+                    moveToContentMethod = typeof(XmlReaderDelegator).GetMethod(
+                        "MoveToContent",
+                        Globals.ScanAllMembers
+                    );
                 }
                 return moveToContentMethod;
             }
@@ -326,7 +381,10 @@ namespace System.Runtime.Serialization
             {
                 if (nodeTypeProperty == null)
                 {
-                    nodeTypeProperty = typeof(XmlReaderDelegator).GetProperty("NodeType", Globals.ScanAllMembers);
+                    nodeTypeProperty = typeof(XmlReaderDelegator).GetProperty(
+                        "NodeType",
+                        Globals.ScanAllMembers
+                    );
                 }
                 return nodeTypeProperty;
             }
@@ -338,7 +396,9 @@ namespace System.Runtime.Serialization
             {
                 if (onDeserializationMethod == null)
                 {
-                    onDeserializationMethod = typeof(IDeserializationCallback).GetMethod("OnDeserialization");
+                    onDeserializationMethod = typeof(IDeserializationCallback).GetMethod(
+                        "OnDeserialization"
+                    );
                 }
                 return onDeserializationMethod;
             }
@@ -350,7 +410,10 @@ namespace System.Runtime.Serialization
             {
                 if (readJsonValueMethod == null)
                 {
-                    readJsonValueMethod = typeof(DataContractJsonSerializer).GetMethod("ReadJsonValue", Globals.ScanAllMembers);
+                    readJsonValueMethod = typeof(DataContractJsonSerializer).GetMethod(
+                        "ReadJsonValue",
+                        Globals.ScanAllMembers
+                    );
                 }
                 return readJsonValueMethod;
             }
@@ -362,7 +425,9 @@ namespace System.Runtime.Serialization
             {
                 if (serializationExceptionCtor == null)
                 {
-                    serializationExceptionCtor = typeof(SerializationException).GetConstructor(new Type[] { typeof(string) });
+                    serializationExceptionCtor = typeof(SerializationException).GetConstructor(
+                        new Type[] { typeof(string) }
+                    );
                 }
                 return serializationExceptionCtor;
             }
@@ -374,7 +439,11 @@ namespace System.Runtime.Serialization
             {
                 if (serInfoCtorArgs == null)
                 {
-                    serInfoCtorArgs = new Type[] { typeof(SerializationInfo), typeof(StreamingContext) };
+                    serInfoCtorArgs = new Type[]
+                    {
+                        typeof(SerializationInfo),
+                        typeof(StreamingContext),
+                    };
                 }
                 return serInfoCtorArgs;
             }
@@ -386,7 +455,11 @@ namespace System.Runtime.Serialization
             {
                 if (throwDuplicateMemberExceptionMethod == null)
                 {
-                    throwDuplicateMemberExceptionMethod = typeof(XmlObjectSerializerReadContextComplexJson).GetMethod("ThrowDuplicateMemberException", Globals.ScanAllMembers);
+                    throwDuplicateMemberExceptionMethod =
+                        typeof(XmlObjectSerializerReadContextComplexJson).GetMethod(
+                            "ThrowDuplicateMemberException",
+                            Globals.ScanAllMembers
+                        );
                 }
                 return throwDuplicateMemberExceptionMethod;
             }
@@ -398,7 +471,11 @@ namespace System.Runtime.Serialization
             {
                 if (throwMissingRequiredMembersMethod == null)
                 {
-                    throwMissingRequiredMembersMethod = typeof(XmlObjectSerializerReadContextComplexJson).GetMethod("ThrowMissingRequiredMembers", Globals.ScanAllMembers);
+                    throwMissingRequiredMembersMethod =
+                        typeof(XmlObjectSerializerReadContextComplexJson).GetMethod(
+                            "ThrowMissingRequiredMembers",
+                            Globals.ScanAllMembers
+                        );
                 }
                 return throwMissingRequiredMembersMethod;
             }
@@ -434,7 +511,11 @@ namespace System.Runtime.Serialization
             {
                 if (useSimpleDictionaryFormatReadProperty == null)
                 {
-                    useSimpleDictionaryFormatReadProperty = typeof(XmlObjectSerializerReadContextComplexJson).GetProperty("UseSimpleDictionaryFormat", Globals.ScanAllMembers);
+                    useSimpleDictionaryFormatReadProperty =
+                        typeof(XmlObjectSerializerReadContextComplexJson).GetProperty(
+                            "UseSimpleDictionaryFormat",
+                            Globals.ScanAllMembers
+                        );
                 }
                 return useSimpleDictionaryFormatReadProperty;
             }
@@ -446,7 +527,11 @@ namespace System.Runtime.Serialization
             {
                 if (useSimpleDictionaryFormatWriteProperty == null)
                 {
-                    useSimpleDictionaryFormatWriteProperty = typeof(XmlObjectSerializerWriteContextComplexJson).GetProperty("UseSimpleDictionaryFormat", Globals.ScanAllMembers);
+                    useSimpleDictionaryFormatWriteProperty =
+                        typeof(XmlObjectSerializerWriteContextComplexJson).GetProperty(
+                            "UseSimpleDictionaryFormat",
+                            Globals.ScanAllMembers
+                        );
                 }
                 return useSimpleDictionaryFormatWriteProperty;
             }
@@ -458,7 +543,19 @@ namespace System.Runtime.Serialization
             {
                 if (writeAttributeStringMethod == null)
                 {
-                    writeAttributeStringMethod = typeof(XmlWriterDelegator).GetMethod("WriteAttributeString", Globals.ScanAllMembers, null, new Type[] { typeof(string), typeof(string), typeof(string), typeof(string) }, null);
+                    writeAttributeStringMethod = typeof(XmlWriterDelegator).GetMethod(
+                        "WriteAttributeString",
+                        Globals.ScanAllMembers,
+                        null,
+                        new Type[]
+                        {
+                            typeof(string),
+                            typeof(string),
+                            typeof(string),
+                            typeof(string),
+                        },
+                        null
+                    );
                 }
                 return writeAttributeStringMethod;
             }
@@ -470,7 +567,13 @@ namespace System.Runtime.Serialization
             {
                 if (writeEndElementMethod == null)
                 {
-                    writeEndElementMethod = typeof(XmlWriterDelegator).GetMethod("WriteEndElement", Globals.ScanAllMembers, null, new Type[] { }, null);
+                    writeEndElementMethod = typeof(XmlWriterDelegator).GetMethod(
+                        "WriteEndElement",
+                        Globals.ScanAllMembers,
+                        null,
+                        new Type[] { },
+                        null
+                    );
                 }
                 return writeEndElementMethod;
             }
@@ -482,7 +585,11 @@ namespace System.Runtime.Serialization
             {
                 if (writeJsonISerializableMethod == null)
                 {
-                    writeJsonISerializableMethod = typeof(XmlObjectSerializerWriteContextComplexJson).GetMethod("WriteJsonISerializable", Globals.ScanAllMembers);
+                    writeJsonISerializableMethod =
+                        typeof(XmlObjectSerializerWriteContextComplexJson).GetMethod(
+                            "WriteJsonISerializable",
+                            Globals.ScanAllMembers
+                        );
                 }
                 return writeJsonISerializableMethod;
             }
@@ -494,7 +601,11 @@ namespace System.Runtime.Serialization
             {
                 if (writeJsonNameWithMappingMethod == null)
                 {
-                    writeJsonNameWithMappingMethod = typeof(XmlObjectSerializerWriteContextComplexJson).GetMethod("WriteJsonNameWithMapping", Globals.ScanAllMembers);
+                    writeJsonNameWithMappingMethod =
+                        typeof(XmlObjectSerializerWriteContextComplexJson).GetMethod(
+                            "WriteJsonNameWithMapping",
+                            Globals.ScanAllMembers
+                        );
                 }
                 return writeJsonNameWithMappingMethod;
             }
@@ -506,7 +617,10 @@ namespace System.Runtime.Serialization
             {
                 if (writeJsonValueMethod == null)
                 {
-                    writeJsonValueMethod = typeof(DataContractJsonSerializer).GetMethod("WriteJsonValue", Globals.ScanAllMembers);
+                    writeJsonValueMethod = typeof(DataContractJsonSerializer).GetMethod(
+                        "WriteJsonValue",
+                        Globals.ScanAllMembers
+                    );
                 }
                 return writeJsonValueMethod;
             }
@@ -518,7 +632,13 @@ namespace System.Runtime.Serialization
             {
                 if (writeStartElementMethod == null)
                 {
-                    writeStartElementMethod = typeof(XmlWriterDelegator).GetMethod("WriteStartElement", Globals.ScanAllMembers, null, new Type[] { typeof(XmlDictionaryString), typeof(XmlDictionaryString) }, null);
+                    writeStartElementMethod = typeof(XmlWriterDelegator).GetMethod(
+                        "WriteStartElement",
+                        Globals.ScanAllMembers,
+                        null,
+                        new Type[] { typeof(XmlDictionaryString), typeof(XmlDictionaryString) },
+                        null
+                    );
                 }
                 return writeStartElementMethod;
             }
@@ -531,7 +651,13 @@ namespace System.Runtime.Serialization
             {
                 if (writeStartElementStringMethod == null)
                 {
-                    writeStartElementStringMethod = typeof(XmlWriterDelegator).GetMethod("WriteStartElement", Globals.ScanAllMembers, null, new Type[] { typeof(string), typeof(string) }, null);
+                    writeStartElementStringMethod = typeof(XmlWriterDelegator).GetMethod(
+                        "WriteStartElement",
+                        Globals.ScanAllMembers,
+                        null,
+                        new Type[] { typeof(string), typeof(string) },
+                        null
+                    );
                 }
                 return writeStartElementStringMethod;
             }
@@ -544,7 +670,13 @@ namespace System.Runtime.Serialization
             {
                 if (parseEnumMethod == null)
                 {
-                    parseEnumMethod = typeof(Enum).GetMethod("Parse", BindingFlags.Static | BindingFlags.Public, null, new Type[] { typeof(Type), typeof(string) }, null);
+                    parseEnumMethod = typeof(Enum).GetMethod(
+                        "Parse",
+                        BindingFlags.Static | BindingFlags.Public,
+                        null,
+                        new Type[] { typeof(Type), typeof(string) },
+                        null
+                    );
                 }
                 return parseEnumMethod;
             }
@@ -557,7 +689,14 @@ namespace System.Runtime.Serialization
             {
                 if (getJsonMemberNameMethod == null)
                 {
-                    getJsonMemberNameMethod = typeof(XmlObjectSerializerReadContextComplexJson).GetMethod("GetJsonMemberName", Globals.ScanAllMembers, null, new Type[] { typeof(XmlReaderDelegator) }, null);
+                    getJsonMemberNameMethod =
+                        typeof(XmlObjectSerializerReadContextComplexJson).GetMethod(
+                            "GetJsonMemberName",
+                            Globals.ScanAllMembers,
+                            null,
+                            new Type[] { typeof(XmlReaderDelegator) },
+                            null
+                        );
                 }
                 return getJsonMemberNameMethod;
             }

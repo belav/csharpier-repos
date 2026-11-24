@@ -40,7 +40,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespac
         Newline,
         CarriageReturn,
         CarriageReturnNewline,
-        NotSet
+        NotSet,
     }
 
     internal class NewLineViewModel : EnumSettingViewModel<NewLineSetting>
@@ -90,7 +90,10 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespac
             {
                 yield return (ServicesVSResources.Newline_n, NewLineSetting.Newline);
                 yield return (ServicesVSResources.Carriage_Return_r, NewLineSetting.CarriageReturn);
-                yield return (ServicesVSResources.Carriage_Return_Newline_rn, NewLineSetting.CarriageReturnNewline);
+                yield return (
+                    ServicesVSResources.Carriage_Return_Newline_rn,
+                    NewLineSetting.CarriageReturnNewline
+                );
             }
         }
     }

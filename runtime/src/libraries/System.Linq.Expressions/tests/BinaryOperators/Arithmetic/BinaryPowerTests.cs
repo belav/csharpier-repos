@@ -117,7 +117,18 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckFloatPowerTest(bool useInterpreter)
         {
-            float[] array = new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
+            float[] array = new float[]
+            {
+                0,
+                1,
+                -1,
+                float.MinValue,
+                float.MaxValue,
+                float.Epsilon,
+                float.NegativeInfinity,
+                float.PositiveInfinity,
+                float.NaN,
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = 0; j < array.Length; j++)
@@ -130,7 +141,18 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckDoublePowerTest(bool useInterpreter)
         {
-            double[] array = new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
+            double[] array = new double[]
+            {
+                0,
+                1,
+                -1,
+                double.MinValue,
+                double.MaxValue,
+                double.Epsilon,
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+                double.NaN,
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = 0; j < array.Length; j++)
@@ -143,7 +165,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckDecimalPowerTest(bool useInterpreter)
         {
-            decimal[] array = new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
+            decimal[] array = new decimal[]
+            {
+                decimal.Zero,
+                decimal.One,
+                decimal.MinusOne,
+                decimal.MinValue,
+                decimal.MaxValue,
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = 0; j < array.Length; j++)
@@ -172,13 +201,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyBytePower(byte a, byte b, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(byte)),
-                        Expression.Constant(b, typeof(byte)),
-                        typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerByte")
-                    ));
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(byte)),
+                    Expression.Constant(b, typeof(byte)),
+                    typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerByte")
+                )
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             Assert.Equal(PowerByte(a, b), f());
@@ -186,13 +215,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySBytePower(sbyte a, sbyte b, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(sbyte)),
-                        Expression.Constant(b, typeof(sbyte)),
-                        typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerSByte")
-                    ));
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(sbyte)),
+                    Expression.Constant(b, typeof(sbyte)),
+                    typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerSByte")
+                )
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             Assert.Equal(PowerSByte(a, b), f());
@@ -200,13 +229,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortPower(ushort a, ushort b, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(ushort)),
-                        Expression.Constant(b, typeof(ushort)),
-                        typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerUShort")
-                    ));
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(ushort)),
+                    Expression.Constant(b, typeof(ushort)),
+                    typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerUShort")
+                )
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             Assert.Equal(PowerUShort(a, b), f());
@@ -214,13 +243,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortPower(short a, short b, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(short)),
-                        Expression.Constant(b, typeof(short)),
-                        typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerShort")
-                    ));
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(short)),
+                    Expression.Constant(b, typeof(short)),
+                    typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerShort")
+                )
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             Assert.Equal(PowerShort(a, b), f());
@@ -228,13 +257,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntPower(uint a, uint b, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(uint)),
-                        Expression.Constant(b, typeof(uint)),
-                        typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerUInt")
-                    ));
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(uint)),
+                    Expression.Constant(b, typeof(uint)),
+                    typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerUInt")
+                )
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             Assert.Equal(PowerUInt(a, b), f());
@@ -242,13 +271,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntPower(int a, int b, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(int)),
-                        Expression.Constant(b, typeof(int)),
-                        typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerInt")
-                    ));
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(int)),
+                    Expression.Constant(b, typeof(int)),
+                    typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerInt")
+                )
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             Assert.Equal(PowerInt(a, b), f());
@@ -256,13 +285,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongPower(ulong a, ulong b, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(ulong)),
-                        Expression.Constant(b, typeof(ulong)),
-                        typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerULong")
-                    ));
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(ulong)),
+                    Expression.Constant(b, typeof(ulong)),
+                    typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerULong")
+                )
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             Assert.Equal(PowerULong(a, b), f());
@@ -270,13 +299,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongPower(long a, long b, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(long)),
-                        Expression.Constant(b, typeof(long)),
-                        typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerLong")
-                    ));
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(long)),
+                    Expression.Constant(b, typeof(long)),
+                    typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerLong")
+                )
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             Assert.Equal(PowerLong(a, b), f());
@@ -284,13 +313,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatPower(float a, float b, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(float)),
-                        Expression.Constant(b, typeof(float)),
-                        typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerFloat")
-                    ));
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(float)),
+                    Expression.Constant(b, typeof(float)),
+                    typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerFloat")
+                )
+            );
             Func<float> f = e.Compile(useInterpreter);
 
             Assert.Equal(PowerFloat(a, b), f());
@@ -298,13 +327,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoublePower(double a, double b, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(double)),
-                        Expression.Constant(b, typeof(double)),
-                        typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerDouble")
-                    ));
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(double)),
+                    Expression.Constant(b, typeof(double)),
+                    typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerDouble")
+                )
+            );
             Func<double> f = e.Compile(useInterpreter);
 
             Assert.Equal(PowerDouble(a, b), f());
@@ -312,13 +341,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalPower(decimal a, decimal b, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(decimal)),
-                        Expression.Constant(b, typeof(decimal)),
-                        typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerDecimal")
-                    ));
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(decimal)),
+                    Expression.Constant(b, typeof(decimal)),
+                    typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerDecimal")
+                )
+            );
             Func<decimal> f = e.Compile(useInterpreter);
 
             decimal expected = 0;
@@ -337,13 +366,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCharPower(char a, char b, bool useInterpreter)
         {
-            Expression<Func<char>> e =
-                Expression.Lambda<Func<char>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(char)),
-                        Expression.Constant(b, typeof(char)),
-                        typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerChar")
-                    ));
+            Expression<Func<char>> e = Expression.Lambda<Func<char>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(char)),
+                    Expression.Constant(b, typeof(char)),
+                    typeof(BinaryPowerTests).GetTypeInfo().GetDeclaredMethod("PowerChar")
+                )
+            );
             Func<char> f = e.Compile(useInterpreter);
 
             Assert.Equal(PowerChar(a, b), f());
@@ -352,7 +381,10 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void ToStringTest()
         {
-            BinaryExpression e = Expression.Power(Expression.Parameter(typeof(double), "a"), Expression.Parameter(typeof(double), "b"));
+            BinaryExpression e = Expression.Power(
+                Expression.Parameter(typeof(double), "a"),
+                Expression.Parameter(typeof(double), "b")
+            );
             Assert.Equal("(a ** b)", e.ToString());
         }
 

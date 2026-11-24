@@ -35,38 +35,24 @@ namespace System.Diagnostics.Tracing
     /// contain personally-identifiable information.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
-    public class EventFieldAttribute
-        : Attribute
+    public class EventFieldAttribute : Attribute
     {
         /// <summary>
         /// User defined options for the field. These are not interpreted by the EventSource
         /// but are available to the Listener. See EventFieldSettings for details
         /// </summary>
-        public EventFieldTags Tags
-        {
-            get;
-            set;
-        }
+        public EventFieldTags Tags { get; set; }
 
         /// <summary>
         /// Gets or sets the name to use for the field. This defaults to null.
         /// If null, the name of the corresponding property will be used
         /// as the event field's name.
-        /// 
-
-        internal string Name
-        {
-            get;
-            set;
-        }
+        ///
+        internal string Name { get; set; }
 
         /// <summary>
         /// Gets or sets a field formatting hint.
         /// </summary>
-        public EventFieldFormat Format
-        {
-            get;
-            set;
-        }
+        public EventFieldFormat Format { get; set; }
     }
 }

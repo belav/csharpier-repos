@@ -72,20 +72,34 @@ namespace Microsoft.Extensions.Diagnostics.Tests
         {
             public string Name => "Fake";
 
-            public MeasurementHandlers GetMeasurementHandlers() => throw new NotImplementedException();
-            public void Initialize(IObservableInstrumentsSource source) => throw new NotImplementedException();
-            public bool InstrumentPublished(Instrument instrument, out object? userState) => throw new NotImplementedException();
-            public void MeasurementsCompleted(Instrument instrument, object? userState) => throw new NotImplementedException();
+            public MeasurementHandlers GetMeasurementHandlers() =>
+                throw new NotImplementedException();
+
+            public void Initialize(IObservableInstrumentsSource source) =>
+                throw new NotImplementedException();
+
+            public bool InstrumentPublished(Instrument instrument, out object? userState) =>
+                throw new NotImplementedException();
+
+            public void MeasurementsCompleted(Instrument instrument, object? userState) =>
+                throw new NotImplementedException();
         }
 
         private class FakeListenerB : IMetricsListener
         {
             public string Name => "Fake";
 
-            public MeasurementHandlers GetMeasurementHandlers() => throw new NotImplementedException();
-            public void Initialize(IObservableInstrumentsSource source) => throw new NotImplementedException();
-            public bool InstrumentPublished(Instrument instrument, out object? userState) => throw new NotImplementedException();
-            public void MeasurementsCompleted(Instrument instrument, object? userState) => throw new NotImplementedException();
+            public MeasurementHandlers GetMeasurementHandlers() =>
+                throw new NotImplementedException();
+
+            public void Initialize(IObservableInstrumentsSource source) =>
+                throw new NotImplementedException();
+
+            public bool InstrumentPublished(Instrument instrument, out object? userState) =>
+                throw new NotImplementedException();
+
+            public void MeasurementsCompleted(Instrument instrument, object? userState) =>
+                throw new NotImplementedException();
         }
     }
 }

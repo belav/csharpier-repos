@@ -9,6 +9,6 @@ namespace System.IO.Ports
         DsrChanged = 0x10,
         CDChanged = 0x20,
         Ring = 0x100,
-        Break = 0x40
+        Break = 0x40,
     }
 }

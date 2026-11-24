@@ -17,9 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private readonly CSharpSyntaxFormattingOptions _options;
 
         public QueryExpressionFormattingRule()
-            : this(CSharpSyntaxFormattingOptions.Default)
-        {
-        }
+            : this(CSharpSyntaxFormattingOptions.Default) { }
 
         private QueryExpressionFormattingRule(CSharpSyntaxFormattingOptions options)
         {
@@ -28,9 +26,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
         public override AbstractFormattingRule WithOptions(SyntaxFormattingOptions options)
         {
-            var newOptions = options as CSharpSyntaxFormattingOptions ?? CSharpSyntaxFormattingOptions.Default;
+            var newOptions =
+                options as CSharpSyntaxFormattingOptions ?? CSharpSyntaxFormattingOptions.Default;
 
-            if (_options.NewLines.HasFlag(NewLinePlacement.BetweenQueryExpressionClauses) == newOptions.NewLines.HasFlag(NewLinePlacement.BetweenQueryExpressionClauses))
+            if (
+                _options.NewLines.HasFlag(NewLinePlacement.BetweenQueryExpressionClauses)
+                == newOptions.NewLines.HasFlag(NewLinePlacement.BetweenQueryExpressionClauses)
+            )
             {
                 return this;
             }
@@ -38,17 +40,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             return new QueryExpressionFormattingRule(newOptions);
         }
 
-        public override void AddSuppressOperations(List<SuppressOperation> list, SyntaxNode node, in NextSuppressOperationAction nextOperation)
+        public override void AddSuppressOperations(
+            List<SuppressOperation> list,
+            SyntaxNode node,
+            in NextSuppressOperationAction nextOperation
+        )
         {
             nextOperation.Invoke();
 
             if (node is QueryExpressionSyntax queryExpression)
             {
-                AddSuppressWrappingIfOnSingleLineOperation(list, queryExpression.GetFirstToken(includeZeroWidth: true), queryExpression.GetLastToken(includeZeroWidth: true));
+                AddSuppressWrappingIfOnSingleLineOperation(
+                    list,
+                    queryExpression.GetFirstToken(includeZeroWidth: true),
+                    queryExpression.GetLastToken(includeZeroWidth: true)
+                );
             }
         }
 
-        private static void AddIndentBlockOperationsForFromClause(List<IndentBlockOperation> list, FromClauseSyntax fromClause)
+        private static void AddIndentBlockOperationsForFromClause(
+            List<IndentBlockOperation> list,
+            FromClauseSyntax fromClause
+        )
         {
             // Only add the indent block operation if the 'in' keyword is present. Otherwise, we'll get the following:
             //
@@ -78,7 +91,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             AddIndentBlockOperation(list, baseToken, startToken, endToken);
         }
 
-        public override void AddIndentBlockOperations(List<IndentBlockOperation> list, SyntaxNode node, in NextIndentBlockOperationAction nextOperation)
+        public override void AddIndentBlockOperations(
+            List<IndentBlockOperation> list,
+            SyntaxNode node,
+            in NextIndentBlockOperationAction nextOperation
+        )
         {
             nextOperation.Invoke();
 
@@ -106,32 +123,52 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             }
         }
 
-        public override void AddAnchorIndentationOperations(List<AnchorIndentationOperation> list, SyntaxNode node, in NextAnchorIndentationOperationAction nextOperation)
+        public override void AddAnchorIndentationOperations(
+            List<AnchorIndentationOperation> list,
+            SyntaxNode node,
+            in NextAnchorIndentationOperationAction nextOperation
+        )
         {
             nextOperation.Invoke();
             switch (node)
             {
                 case QueryClauseSyntax queryClause:
-                    {
-                        var firstToken = queryClause.GetFirstToken(includeZeroWidth: true);
-                        AddAnchorIndentationOperation(list, firstToken, queryClause.GetLastToken(includeZeroWidth: true));
-                        return;
-                    }
+                {
+                    var firstToken = queryClause.GetFirstToken(includeZeroWidth: true);
+                    AddAnchorIndentationOperation(
+                        list,
+                        firstToken,
+                        queryClause.GetLastToken(includeZeroWidth: true)
+                    );
+                    return;
+                }
 
                 case SelectOrGroupClauseSyntax selectOrGroupClause:
-                    {
-                        var firstToken = selectOrGroupClause.GetFirstToken(includeZeroWidth: true);
-                        AddAnchorIndentationOperation(list, firstToken, selectOrGroupClause.GetLastToken(includeZeroWidth: true));
-                        return;
-                    }
+                {
+                    var firstToken = selectOrGroupClause.GetFirstToken(includeZeroWidth: true);
+                    AddAnchorIndentationOperation(
+                        list,
+                        firstToken,
+                        selectOrGroupClause.GetLastToken(includeZeroWidth: true)
+                    );
+                    return;
+                }
 
                 case QueryContinuationSyntax continuation:
-                    AddAnchorIndentationOperation(list, continuation.IntoKeyword, continuation.GetLastToken(includeZeroWidth: true));
+                    AddAnchorIndentationOperation(
+                        list,
+                        continuation.IntoKeyword,
+                        continuation.GetLastToken(includeZeroWidth: true)
+                    );
                     return;
             }
         }
 
-        public override AdjustNewLinesOperation? GetAdjustNewLinesOperation(in SyntaxToken previousToken, in SyntaxToken currentToken, in NextGetAdjustNewLinesOperation nextOperation)
+        public override AdjustNewLinesOperation? GetAdjustNewLinesOperation(
+            in SyntaxToken previousToken,
+            in SyntaxToken currentToken,
+            in NextGetAdjustNewLinesOperation nextOperation
+        )
         {
             if (previousToken.IsNestedQueryExpression())
             {
@@ -155,13 +192,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 case SyntaxKind.SelectKeyword:
                     if (currentToken.GetAncestor<QueryExpressionSyntax>() != null)
                     {
-                        if (_options.NewLines.HasFlag(NewLinePlacement.BetweenQueryExpressionClauses))
+                        if (
+                            _options.NewLines.HasFlag(
+                                NewLinePlacement.BetweenQueryExpressionClauses
+                            )
+                        )
                         {
-                            return CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.PreserveLines);
+                            return CreateAdjustNewLinesOperation(
+                                1,
+                                AdjustNewLinesOption.PreserveLines
+                            );
                         }
                         else
                         {
-                            return CreateAdjustNewLinesOperation(0, AdjustNewLinesOption.PreserveLines);
+                            return CreateAdjustNewLinesOperation(
+                                0,
+                                AdjustNewLinesOption.PreserveLines
+                            );
                         }
                     }
 

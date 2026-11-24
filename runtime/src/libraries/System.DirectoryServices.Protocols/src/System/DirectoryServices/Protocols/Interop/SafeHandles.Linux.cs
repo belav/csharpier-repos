@@ -10,20 +10,21 @@ namespace System.DirectoryServices.Protocols
         internal bool _needDispose;
 
         public ConnectionHandle()
-            :base(true)
+            : base(true)
         {
             Interop.Ldap.ldap_initialize(out handle, null);
             _needDispose = true;
         }
 
         internal ConnectionHandle(string uri)
-            :base(true)
+            : base(true)
         {
             Interop.Ldap.ldap_initialize(out handle, uri);
             _needDispose = true;
         }
 
-        internal ConnectionHandle(IntPtr value, bool disposeHandle) : base(true)
+        internal ConnectionHandle(IntPtr value, bool disposeHandle)
+            : base(true)
         {
             _needDispose = disposeHandle;
             if (value == IntPtr.Zero)
@@ -51,7 +52,8 @@ namespace System.DirectoryServices.Protocols
 
     internal sealed class SafeBerHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafeBerHandle() : base(true)
+        public SafeBerHandle()
+            : base(true)
         {
             SetHandle(Interop.Ldap.ber_alloc(1));
             if (handle == IntPtr.Zero)
@@ -60,7 +62,8 @@ namespace System.DirectoryServices.Protocols
             }
         }
 
-        internal SafeBerHandle(BerVal value) : base(true)
+        internal SafeBerHandle(BerVal value)
+            : base(true)
         {
             // In Linux if bv_val is null ber_init will segFault instead of returning IntPtr.Zero.
             // In Linux if bv_len is 0 ber_init returns a valid pointer which will then fail when trying to use it,

@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.EditorFeatures.Intents;
 [IntentProvider(WellKnownIntents.DeleteParameter, LanguageNames.CSharp), Shared]
 [method: ImportingConstructor]
 [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-internal sealed class DeleteParameterIntentProvider(IGlobalOptionService globalOptionService) : IIntentProvider
+internal sealed class DeleteParameterIntentProvider(IGlobalOptionService globalOptionService)
+    : IIntentProvider
 {
     private readonly IGlobalOptionService _globalOptionService = globalOptionService;
 
@@ -31,11 +32,20 @@ internal sealed class DeleteParameterIntentProvider(IGlobalOptionService globalO
         TextSpan priorSelection,
         Document currentDocument,
         IntentDataProvider intentDataProvider,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
-        var changeSignatureService = priorDocument.GetRequiredLanguageService<AbstractChangeSignatureService>();
-        var contextResult = await changeSignatureService.GetChangeSignatureContextAsync(
-            priorDocument, priorSelection.Start, restrictToDeclarations: false, _globalOptionService.CreateProvider(), cancellationToken).ConfigureAwait(false);
+        var changeSignatureService =
+            priorDocument.GetRequiredLanguageService<AbstractChangeSignatureService>();
+        var contextResult = await changeSignatureService
+            .GetChangeSignatureContextAsync(
+                priorDocument,
+                priorSelection.Start,
+                restrictToDeclarations: false,
+                _globalOptionService.CreateProvider(),
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         if (contextResult is not ChangeSignatureAnalysisSucceededContext context)
         {
@@ -54,16 +64,37 @@ internal sealed class DeleteParameterIntentProvider(IGlobalOptionService globalO
 
         var newParameters = parameters.RemoveAt(parameterIndexToDelete);
 
-        var signatureChange = new SignatureChange(context.ParameterConfiguration, ParameterConfiguration.Create(newParameters, isExtensionMethod, selectedIndex: 0));
-        var changeSignatureOptionResult = new ChangeSignatureOptionsResult(signatureChange, previewChanges: false);
+        var signatureChange = new SignatureChange(
+            context.ParameterConfiguration,
+            ParameterConfiguration.Create(newParameters, isExtensionMethod, selectedIndex: 0)
+        );
+        var changeSignatureOptionResult = new ChangeSignatureOptionsResult(
+            signatureChange,
+            previewChanges: false
+        );
 
-        var changeSignatureResult = await changeSignatureService.ChangeSignatureWithContextAsync(context, changeSignatureOptionResult, cancellationToken).ConfigureAwait(false);
+        var changeSignatureResult = await changeSignatureService
+            .ChangeSignatureWithContextAsync(
+                context,
+                changeSignatureOptionResult,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
         if (!changeSignatureResult.Succeeded)
         {
             return ImmutableArray<IntentProcessorResult>.Empty;
         }
 
-        var changedDocuments = changeSignatureResult.UpdatedSolution.GetChangedDocuments(priorDocument.Project.Solution).ToImmutableArray();
-        return ImmutableArray.Create(new IntentProcessorResult(changeSignatureResult.UpdatedSolution, changedDocuments, EditorFeaturesResources.Change_Signature, WellKnownIntents.DeleteParameter));
+        var changedDocuments = changeSignatureResult
+            .UpdatedSolution.GetChangedDocuments(priorDocument.Project.Solution)
+            .ToImmutableArray();
+        return ImmutableArray.Create(
+            new IntentProcessorResult(
+                changeSignatureResult.UpdatedSolution,
+                changedDocuments,
+                EditorFeaturesResources.Change_Signature,
+                WellKnownIntents.DeleteParameter
+            )
+        );
     }
 }

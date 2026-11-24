@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="ReadOnlyAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel {
-
+namespace System.ComponentModel
+{
     using System;
     using System.Diagnostics;
     using System.Security.Permissions;
@@ -17,7 +17,8 @@ namespace System.ComponentModel {
     ///       is read-only or read/write.</para>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.All)]
-    public sealed class ReadOnlyAttribute : Attribute {
+    public sealed class ReadOnlyAttribute : Attribute
+    {
         private bool isReadOnly = false;
 
         /// <devdoc>
@@ -50,7 +51,8 @@ namespace System.ComponentModel {
         ///       Initializes a new instance of the <see cref='System.ComponentModel.ReadOnlyAttribute'/> class.
         ///    </para>
         /// </devdoc>
-        public ReadOnlyAttribute(bool isReadOnly) {
+        public ReadOnlyAttribute(bool isReadOnly)
+        {
             this.isReadOnly = isReadOnly;
         }
 
@@ -60,18 +62,18 @@ namespace System.ComponentModel {
         ///       read-only.
         ///    </para>
         /// </devdoc>
-        public bool IsReadOnly {
-            get {
-                return isReadOnly;
-            }
+        public bool IsReadOnly
+        {
+            get { return isReadOnly; }
         }
 
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        public override bool Equals(object value) {
-
-            if (this == value) {
+        public override bool Equals(object value)
+        {
+            if (this == value)
+            {
                 return true;
             }
 
@@ -85,7 +87,8 @@ namespace System.ComponentModel {
         ///       Returns the hashcode for this object.
         ///    </para>
         /// </devdoc>
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return base.GetHashCode();
         }
 
@@ -95,9 +98,9 @@ namespace System.ComponentModel {
         ///       Determines if this attribute is the default.
         ///    </para>
         /// </devdoc>
-        public override bool IsDefaultAttribute() {
+        public override bool IsDefaultAttribute()
+        {
             return (this.IsReadOnly == Default.IsReadOnly);
         }
     }
 }
-

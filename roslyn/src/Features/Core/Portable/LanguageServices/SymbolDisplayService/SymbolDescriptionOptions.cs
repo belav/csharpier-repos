@@ -11,12 +11,14 @@ namespace Microsoft.CodeAnalysis.LanguageService;
 [DataContract]
 internal readonly record struct SymbolDescriptionOptions
 {
-    [DataMember] public QuickInfoOptions QuickInfoOptions { get; init; } = QuickInfoOptions.Default;
-    [DataMember] public ClassificationOptions ClassificationOptions { get; init; } = ClassificationOptions.Default;
+    [DataMember]
+    public QuickInfoOptions QuickInfoOptions { get; init; } = QuickInfoOptions.Default;
 
-    public SymbolDescriptionOptions()
-    {
-    }
+    [DataMember]
+    public ClassificationOptions ClassificationOptions { get; init; } =
+        ClassificationOptions.Default;
+
+    public SymbolDescriptionOptions() { }
 
     public static readonly SymbolDescriptionOptions Default = new();
 }

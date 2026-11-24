@@ -45,7 +45,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
 
         public bool NeedsCleanUp => _needsCleanUp;
 
-        public CleanableWeakComHandleTable(IThreadingContext threadingContext, int? cleanUpThreshold = null, TimeSpan? cleanUpTimeSlice = null)
+        public CleanableWeakComHandleTable(
+            IThreadingContext threadingContext,
+            int? cleanUpThreshold = null,
+            TimeSpan? cleanUpTimeSlice = null
+        )
             : base(threadingContext)
         {
             _table = new Dictionary<TKey, WeakComHandle<TValue, TValue>>();
@@ -63,9 +67,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
         {
             using var _ = listener.BeginAsyncOperation(nameof(CleanUpDeadObjectsAsync));
 
-            Debug.Assert(ThreadingContext.JoinableTaskContext.IsOnMainThread, "This method is optimized for cases where calls do not yield before checking _needsCleanUp.");
+            Debug.Assert(
+                ThreadingContext.JoinableTaskContext.IsOnMainThread,
+                "This method is optimized for cases where calls do not yield before checking _needsCleanUp."
+            );
 
-            await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(ThreadingContext.DisposalToken);
+            await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                ThreadingContext.DisposalToken
+            );
 
             if (!_needsCleanUp)
             {
@@ -137,7 +146,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
 
             async Task ResetTimeSliceAsync()
             {
-                await listener.Delay(DelayTimeSpan.NearImmediate, ThreadingContext.DisposalToken).ConfigureAwait(true);
+                await listener
+                    .Delay(DelayTimeSpan.NearImmediate, ThreadingContext.DisposalToken)
+                    .ConfigureAwait(true);
                 timeSlice = new TimeSlice(CleanUpTimeSlice);
             }
         }
@@ -153,7 +164,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
 
             if (_table.ContainsKey(key))
             {
-                throw new InvalidOperationException($"Key already exists in table: {(key != null ? key.ToString() : "<null>")}.");
+                throw new InvalidOperationException(
+                    $"Key already exists in table: {(key != null ? key.ToString() : "<null>")}."
+                );
             }
 
             _itemsAddedSinceLastCleanUp++;

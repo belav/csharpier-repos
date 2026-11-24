@@ -29,7 +29,12 @@ namespace System.Net.Mail
         // - -1 if the beginning of the data string is reached.
         //
         // A FormatException will be thrown or false is returned if a CR or LF is found NOT in the sequence CRLF.
-        internal static bool TryReadFwsReverse(string data, int index, out int outIndex, bool throwExceptionIfFail)
+        internal static bool TryReadFwsReverse(
+            string data,
+            int index,
+            out int outIndex,
+            bool throwExceptionIfFail
+        )
         {
             Debug.Assert(!string.IsNullOrEmpty(data), "data was null or empty");
             Debug.Assert(index < data.Length, "index was outside the bounds of the string");
@@ -112,7 +117,12 @@ namespace System.Net.Mail
         //   e.g. " (comment) " returns -1
         //
         // Throws a FormatException or false is returned for mismatched '(' and ')', or for unescaped characters not allowed in comments.
-        internal static bool TryReadCfwsReverse(string data, int index, out int outIndex, bool throwExceptionIfFail)
+        internal static bool TryReadCfwsReverse(
+            string data,
+            int index,
+            out int outIndex,
+            bool throwExceptionIfFail
+        )
         {
             Debug.Assert(!string.IsNullOrEmpty(data), "data was null or empty");
             Debug.Assert(index < data.Length, "index was outside the bounds of the string");
@@ -129,7 +139,15 @@ namespace System.Net.Mail
             while (index >= 0)
             {
                 // Check for escaped characters.  They must be within comments.
-                if (!QuotedPairReader.TryCountQuotedChars(data, index, true, out int quotedCharCount, throwExceptionIfFail))
+                if (
+                    !QuotedPairReader.TryCountQuotedChars(
+                        data,
+                        index,
+                        true,
+                        out int quotedCharCount,
+                        throwExceptionIfFail
+                    )
+                )
                 {
                     outIndex = default;
                     return false;
@@ -154,8 +172,12 @@ namespace System.Net.Mail
                         if (throwExceptionIfFail)
                         {
                             // Mismatched '('
-                            throw new FormatException(SR.Format(SR.MailHeaderFieldInvalidCharacter,
-                                MailBnfHelper.StartComment));
+                            throw new FormatException(
+                                SR.Format(
+                                    SR.MailHeaderFieldInvalidCharacter,
+                                    MailBnfHelper.StartComment
+                                )
+                            );
                         }
                         else
                         {
@@ -166,8 +188,10 @@ namespace System.Net.Mail
                     index--;
                 }
                 // Check for valid characters within comments.  Allow Unicode, as we won't transmit any comments.
-                else if (commentDepth > 0
-                    && (!Ascii.IsValid(data[index]) || MailBnfHelper.Ctext[data[index]]))
+                else if (
+                    commentDepth > 0
+                    && (!Ascii.IsValid(data[index]) || MailBnfHelper.Ctext[data[index]])
+                )
                 {
                     index--;
                 }
@@ -176,7 +200,9 @@ namespace System.Net.Mail
                 {
                     if (throwExceptionIfFail)
                     {
-                        throw new FormatException(SR.Format(SR.MailHeaderFieldInvalidCharacter, data[index]));
+                        throw new FormatException(
+                            SR.Format(SR.MailHeaderFieldInvalidCharacter, data[index])
+                        );
                     }
                     else
                     {
@@ -203,7 +229,9 @@ namespace System.Net.Mail
                 if (throwExceptionIfFail)
                 {
                     // Mismatched ')', throw
-                    throw new FormatException(SR.Format(SR.MailHeaderFieldInvalidCharacter, MailBnfHelper.EndComment));
+                    throw new FormatException(
+                        SR.Format(SR.MailHeaderFieldInvalidCharacter, MailBnfHelper.EndComment)
+                    );
                 }
                 else
                 {

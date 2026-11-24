@@ -51,9 +51,8 @@ public class HeadModificationPrerenderingTest
 
         // Check that head metadata can be changed after prerendering.
         Browser.Equal("Updated title 1", () => Browser.Title);
-        Browser.Equal(
-            "Updated description 1",
-            () => Browser.FindElement(By.Id("meta-description")).GetAttribute("content")
+        Browser.Equal("Updated description 1", () =>
+            Browser.FindElement(By.Id("meta-description")).GetAttribute("content")
         );
     }
 
@@ -62,12 +61,11 @@ public class HeadModificationPrerenderingTest
         Browser.Exists(By.Id("load-boot-script")).Click();
 
         var javascript = (IJavaScriptExecutor)Browser;
-        Browser.True(
-            () =>
-                (bool)
-                    javascript.ExecuteScript(
-                        "return window['__aspnetcore__testing__blazor__started__'] === true;"
-                    )
+        Browser.True(() =>
+            (bool)
+                javascript.ExecuteScript(
+                    "return window['__aspnetcore__testing__blazor__started__'] === true;"
+                )
         );
     }
 }

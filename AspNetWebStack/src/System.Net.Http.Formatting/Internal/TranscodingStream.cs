@@ -60,7 +60,12 @@ namespace System.Text
         private int _readBufferOffset;
         private int _readBufferCount;
 
-        internal TranscodingStream(Stream innerStream, Encoding innerEncoding, Encoding thisEncoding, bool leaveOpen = false)
+        internal TranscodingStream(
+            Stream innerStream,
+            Encoding innerEncoding,
+            Encoding thisEncoding,
+            bool leaveOpen = false
+        )
         {
             _innerStream = innerStream ?? throw Error.ArgumentNull(nameof(innerStream));
             _leaveOpen = leaveOpen;
@@ -80,7 +85,8 @@ namespace System.Text
 
         public override bool CanWrite => _innerStream?.CanWrite ?? false;
 
-        public override long Length => throw Error.NotSupported(Properties.Resources.NotSupported_UnseekableStream);
+        public override long Length =>
+            throw Error.NotSupported(Properties.Resources.NotSupported_UnseekableStream);
 
         public override long Position
         {
@@ -196,7 +202,9 @@ namespace System.Text
                 // re-create the segment as needed once the array is repopulated.
 
 #if NET5_0_OR_GREATER
-                _readBuffer = GC.AllocateUninitializedArray<byte>(_thisEncoding.GetMaxByteCount(_readCharBufferMaxSize));
+                _readBuffer = GC.AllocateUninitializedArray<byte>(
+                    _thisEncoding.GetMaxByteCount(_readCharBufferMaxSize)
+                );
 #else
                 _readBuffer = new byte[_thisEncoding.GetMaxByteCount(_readCharBufferMaxSize)];
 #endif
@@ -327,7 +335,11 @@ namespace System.Text
                         // a larger-than-expected array, but our worst-case expansion calculations
                         // performed earlier didn't take that into account.
 
-                        int innerBytesReadJustNow = _innerStream.Read(rentedBytes, 0, DefaultReadByteBufferSize);
+                        int innerBytesReadJustNow = _innerStream.Read(
+                            rentedBytes,
+                            0,
+                            DefaultReadByteBufferSize
+                        );
                         isEofReached = (innerBytesReadJustNow == 0);
 
                         // Convert bytes [inner] -> chars, then convert chars -> bytes [this].
@@ -336,8 +348,22 @@ namespace System.Text
                         // since it can't yet make forward progress on the input data. If this happens, we'll
                         // loop so that we don't return 0 to our caller until we truly see inner stream EOF.
 
-                        int charsDecodedJustNow = _innerDecoder.GetChars(rentedBytes, 0, innerBytesReadJustNow, rentedChars, 0, flush: isEofReached);
-                        pendingReadDataPopulatedJustNow = _thisEncoder.GetBytes(rentedChars, 0, charsDecodedJustNow, _readBuffer, 0, flush: isEofReached);
+                        int charsDecodedJustNow = _innerDecoder.GetChars(
+                            rentedBytes,
+                            0,
+                            innerBytesReadJustNow,
+                            rentedChars,
+                            0,
+                            flush: isEofReached
+                        );
+                        pendingReadDataPopulatedJustNow = _thisEncoder.GetBytes(
+                            rentedChars,
+                            0,
+                            charsDecodedJustNow,
+                            _readBuffer,
+                            0,
+                            flush: isEofReached
+                        );
                     } while (!isEofReached && pendingReadDataPopulatedJustNow == 0);
 
                     _readBufferOffset = 0;
@@ -362,7 +388,12 @@ namespace System.Text
             return bytesToReturn;
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
 
@@ -389,7 +420,10 @@ namespace System.Text
             }
 
             return ReadAsyncCore(buffer, cancellationToken);
-            async ValueTask<int> ReadAsyncCore(Memory<byte> buffer, CancellationToken cancellationToken)
+            async ValueTask<int> ReadAsyncCore(
+                Memory<byte> buffer,
+                CancellationToken cancellationToken
+            )
             {
                 // If there's no data in our pending read buffer, we'll need to populate it from
                 // the inner stream. We read the inner stream's bytes, decode that to chars using
@@ -416,7 +450,14 @@ namespace System.Text
                             // a larger-than-expected array, but our worst-case expansion calculations
                             // performed earlier didn't take that into account.
 
-                            int innerBytesReadJustNow = await _innerStream.ReadAsync(rentedBytes, 0, DefaultReadByteBufferSize, cancellationToken).ConfigureAwait(false);
+                            int innerBytesReadJustNow = await _innerStream
+                                .ReadAsync(
+                                    rentedBytes,
+                                    0,
+                                    DefaultReadByteBufferSize,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false);
                             isEofReached = (innerBytesReadJustNow == 0);
 
                             // Convert bytes [inner] -> chars, then convert chars -> bytes [this].
@@ -425,8 +466,22 @@ namespace System.Text
                             // since it can't yet make forward progress on the input data. If this happens, we'll
                             // loop so that we don't return 0 to our caller until we truly see inner stream EOF.
 
-                            int charsDecodedJustNow = _innerDecoder.GetChars(rentedBytes, 0, innerBytesReadJustNow, rentedChars, 0, flush: isEofReached);
-                            pendingReadDataPopulatedJustNow = _thisEncoder.GetBytes(rentedChars, 0, charsDecodedJustNow, _readBuffer, 0, flush: isEofReached);
+                            int charsDecodedJustNow = _innerDecoder.GetChars(
+                                rentedBytes,
+                                0,
+                                innerBytesReadJustNow,
+                                rentedChars,
+                                0,
+                                flush: isEofReached
+                            );
+                            pendingReadDataPopulatedJustNow = _thisEncoder.GetBytes(
+                                rentedChars,
+                                0,
+                                charsDecodedJustNow,
+                                _readBuffer,
+                                0,
+                                flush: isEofReached
+                            );
                         } while (!isEofReached && pendingReadDataPopulatedJustNow == 0);
 
                         _readBufferOffset = 0;
@@ -457,11 +512,11 @@ namespace System.Text
             return Read(_singleByteBuffer, offset: 0, count: 1) != 0 ? _singleByteBuffer[0] : -1;
         }
 
-        public override long Seek(long offset, SeekOrigin origin)
-            => throw Error.NotSupported(Properties.Resources.NotSupported_UnseekableStream);
+        public override long Seek(long offset, SeekOrigin origin) =>
+            throw Error.NotSupported(Properties.Resources.NotSupported_UnseekableStream);
 
-        public override void SetLength(long value)
-            => throw Error.NotSupported(Properties.Resources.NotSupported_UnseekableStream);
+        public override void SetLength(long value) =>
+            throw Error.NotSupported(Properties.Resources.NotSupported_UnseekableStream);
 
 #if NET6_0_OR_GREATER
         [StackTraceHidden]
@@ -480,7 +535,10 @@ namespace System.Text
 #endif
         private void ThrowObjectDisposedException()
         {
-            throw new ObjectDisposedException(GetType().Name, Properties.Resources.ObjectDisposed_StreamClosed);
+            throw new ObjectDisposedException(
+                GetType().Name,
+                Properties.Resources.ObjectDisposed_StreamClosed
+            );
         }
 
         public override void Write(byte[] buffer, int offset, int count)
@@ -504,16 +562,18 @@ namespace System.Text
                 return;
             }
 
-            int rentalLength = buffer.Length < MinWriteRentedArraySize ? MinWriteRentedArraySize :
-                buffer.Length > MaxWriteRentedArraySize ? MaxWriteRentedArraySize :
-                buffer.Length;
+            int rentalLength =
+                buffer.Length < MinWriteRentedArraySize ? MinWriteRentedArraySize
+                : buffer.Length > MaxWriteRentedArraySize ? MaxWriteRentedArraySize
+                : buffer.Length;
 
             char[] scratchChars = ArrayPool<char>.Shared.Rent(rentalLength);
             byte[] scratchBytes = ArrayPool<byte>.Shared.Rent(rentalLength);
 
             try
             {
-                bool decoderFinished, encoderFinished;
+                bool decoderFinished,
+                    encoderFinished;
                 do
                 {
                     // convert bytes [this] -> chars
@@ -524,7 +584,8 @@ namespace System.Text
                         flush: false,
                         out int bytesConsumed,
                         out int charsWritten,
-                        out decoderFinished);
+                        out decoderFinished
+                    );
 
                     buffer = buffer.Slice(bytesConsumed);
 
@@ -540,7 +601,8 @@ namespace System.Text
                             flush: false,
                             out int charsConsumed,
                             out int bytesWritten,
-                            out encoderFinished);
+                            out encoderFinished
+                        );
 
                         decodedChars = decodedChars.Slice(charsConsumed);
 
@@ -567,16 +629,18 @@ namespace System.Text
                 return;
             }
 
-            int rentalLength = buffer.Length < MinWriteRentedArraySize ? MinWriteRentedArraySize :
-                buffer.Length > MaxWriteRentedArraySize ? MaxWriteRentedArraySize :
-                buffer.Length;
+            int rentalLength =
+                buffer.Length < MinWriteRentedArraySize ? MinWriteRentedArraySize
+                : buffer.Length > MaxWriteRentedArraySize ? MaxWriteRentedArraySize
+                : buffer.Length;
 
             char[] scratchChars = ArrayPool<char>.Shared.Rent(rentalLength);
             byte[] scratchBytes = ArrayPool<byte>.Shared.Rent(rentalLength);
 
             try
             {
-                bool decoderFinished, encoderFinished;
+                bool decoderFinished,
+                    encoderFinished;
                 do
                 {
                     // convert bytes [this] -> chars
@@ -591,7 +655,8 @@ namespace System.Text
                         flush: false,
                         out int bytesConsumed,
                         out int charsWritten,
-                        out decoderFinished);
+                        out decoderFinished
+                    );
 
                     offset += bytesConsumed;
                     count -= bytesConsumed;
@@ -611,7 +676,8 @@ namespace System.Text
                             flush: false,
                             out int charsConsumed,
                             out int bytesWritten,
-                            out encoderFinished);
+                            out encoderFinished
+                        );
 
                         scratchOffset += charsConsumed;
                         charsWritten -= charsConsumed;
@@ -631,19 +697,28 @@ namespace System.Text
         }
 #endif
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
 
 #if NETCOREAPP || NETSTANDARD2_1
-            return WriteAsync(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken).AsTask();
+            return WriteAsync(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken)
+                .AsTask();
 #else
             return WriteAsyncCore(buffer, offset, count, cancellationToken).AsTask();
 #endif
         }
 
 #if NETCOREAPP || NETSTANDARD2_1
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             EnsurePreWriteConditions();
 
@@ -659,18 +734,25 @@ namespace System.Text
             }
 
             return WriteAsyncCore(buffer, cancellationToken);
-            async ValueTask WriteAsyncCore(ReadOnlyMemory<byte> remainingOuterEncodedBytes, CancellationToken cancellationToken)
+            async ValueTask WriteAsyncCore(
+                ReadOnlyMemory<byte> remainingOuterEncodedBytes,
+                CancellationToken cancellationToken
+            )
             {
-                int rentalLength = remainingOuterEncodedBytes.Length < MinWriteRentedArraySize ? MinWriteRentedArraySize :
-                    remainingOuterEncodedBytes.Length > MaxWriteRentedArraySize ? MaxWriteRentedArraySize:
-                    remainingOuterEncodedBytes.Length;
+                int rentalLength =
+                    remainingOuterEncodedBytes.Length < MinWriteRentedArraySize
+                        ? MinWriteRentedArraySize
+                    : remainingOuterEncodedBytes.Length > MaxWriteRentedArraySize
+                        ? MaxWriteRentedArraySize
+                    : remainingOuterEncodedBytes.Length;
 
                 char[] scratchChars = ArrayPool<char>.Shared.Rent(rentalLength);
                 byte[] scratchBytes = ArrayPool<byte>.Shared.Rent(rentalLength);
 
                 try
                 {
-                    bool decoderFinished, encoderFinished;
+                    bool decoderFinished,
+                        encoderFinished;
                     do
                     {
                         // convert bytes [this] -> chars
@@ -681,7 +763,8 @@ namespace System.Text
                             flush: false,
                             out int bytesConsumed,
                             out int charsWritten,
-                            out decoderFinished);
+                            out decoderFinished
+                        );
 
                         buffer = buffer.Slice(bytesConsumed);
 
@@ -697,11 +780,14 @@ namespace System.Text
                                 flush: false,
                                 out int charsConsumed,
                                 out int bytesWritten,
-                                out encoderFinished);
+                                out encoderFinished
+                            );
 
                             decodedChars = decodedChars.Slice(charsConsumed);
 
-                            await _innerStream.WriteAsync(scratchBytes, 0, bytesWritten, cancellationToken).ConfigureAwait(false);
+                            await _innerStream
+                                .WriteAsync(scratchBytes, 0, bytesWritten, cancellationToken)
+                                .ConfigureAwait(false);
                         } while (!encoderFinished);
                     } while (!decoderFinished);
                 }
@@ -713,7 +799,12 @@ namespace System.Text
             }
         }
 #else
-        private ValueTask WriteAsyncCore(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        private ValueTask WriteAsyncCore(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             EnsurePreWriteConditions();
 
@@ -734,18 +825,25 @@ namespace System.Text
             }
 
             return WriteAsyncCore(buffer, cancellationToken);
-            async ValueTask WriteAsyncCore(ReadOnlyMemory<byte> remainingOuterEncodedBytes, CancellationToken cancellationToken)
+            async ValueTask WriteAsyncCore(
+                ReadOnlyMemory<byte> remainingOuterEncodedBytes,
+                CancellationToken cancellationToken
+            )
             {
-                int rentalLength = remainingOuterEncodedBytes.Length < MinWriteRentedArraySize ? MinWriteRentedArraySize :
-                    remainingOuterEncodedBytes.Length > MaxWriteRentedArraySize ? MaxWriteRentedArraySize :
-                    remainingOuterEncodedBytes.Length;
+                int rentalLength =
+                    remainingOuterEncodedBytes.Length < MinWriteRentedArraySize
+                        ? MinWriteRentedArraySize
+                    : remainingOuterEncodedBytes.Length > MaxWriteRentedArraySize
+                        ? MaxWriteRentedArraySize
+                    : remainingOuterEncodedBytes.Length;
 
                 char[] scratchChars = ArrayPool<char>.Shared.Rent(rentalLength);
                 byte[] scratchBytes = ArrayPool<byte>.Shared.Rent(rentalLength);
 
                 try
                 {
-                    bool decoderFinished, encoderFinished;
+                    bool decoderFinished,
+                        encoderFinished;
                     do
                     {
                         // convert bytes [this] -> chars
@@ -760,7 +858,8 @@ namespace System.Text
                             flush: false,
                             out int bytesConsumed,
                             out int charsWritten,
-                            out decoderFinished);
+                            out decoderFinished
+                        );
 
                         offset += bytesConsumed;
                         count -= bytesConsumed;
@@ -780,12 +879,15 @@ namespace System.Text
                                 flush: false,
                                 out int charsConsumed,
                                 out int bytesWritten,
-                                out encoderFinished);
+                                out encoderFinished
+                            );
 
                             scratchOffset += charsConsumed;
                             charsWritten -= charsConsumed;
 
-                            await _innerStream.WriteAsync(scratchBytes, 0, bytesWritten, cancellationToken).ConfigureAwait(false);
+                            await _innerStream
+                                .WriteAsync(scratchBytes, 0, bytesWritten, cancellationToken)
+                                .ConfigureAwait(false);
                         } while (!encoderFinished);
                     } while (!decoderFinished);
                 }
@@ -821,7 +923,11 @@ namespace System.Text
 
             if ((uint)count > buffer.Length - offset)
             {
-                throw Error.ArgumentOutOfRange(nameof(count), count, Properties.Resources.Argument_InvalidOffLen);
+                throw Error.ArgumentOutOfRange(
+                    nameof(count),
+                    count,
+                    Properties.Resources.Argument_InvalidOffLen
+                );
             }
         }
     }

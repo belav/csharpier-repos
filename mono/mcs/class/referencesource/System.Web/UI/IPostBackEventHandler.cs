@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="IPostBackEventHandler.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
@@ -9,24 +9,25 @@
  *
  * Copyright (c) 1999 Microsoft Corporation
  */
-namespace System.Web.UI {
-using System;
-
-/// <devdoc>
-///    <para> Defines the contract that controls must implement to
-///       handle low-level post back events.</para>
-/// </devdoc>
-public interface IPostBackEventHandler {
-    /*
-     * Process the event that this control wanted fired from a form post back.
-     */
+namespace System.Web.UI
+{
+    using System;
 
     /// <devdoc>
-    ///    <para>
-    ///       Enables a control to process the event fired by a form post back.
-    ///    </para>
+    ///    <para> Defines the contract that controls must implement to
+    ///       handle low-level post back events.</para>
     /// </devdoc>
-    void RaisePostBackEvent(string eventArgument);
-}
+    public interface IPostBackEventHandler
+    {
+        /*
+         * Process the event that this control wanted fired from a form post back.
+         */
 
+        /// <devdoc>
+        ///    <para>
+        ///       Enables a control to process the event fired by a form post back.
+        ///    </para>
+        /// </devdoc>
+        void RaisePostBackEvent(string eventArgument);
+    }
 }

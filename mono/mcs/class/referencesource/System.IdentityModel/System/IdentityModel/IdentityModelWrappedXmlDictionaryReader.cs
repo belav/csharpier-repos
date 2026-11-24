@@ -7,10 +7,10 @@ namespace System.IdentityModel
     using System.Xml;
 
     /// <summary>
-    /// This class wraps a given _reader and delegates all calls to it. 
+    /// This class wraps a given _reader and delegates all calls to it.
     /// XmlDictionaryReader class does not provide a way to set the _reader
     /// Quotas on the XmlDictionaryReader.CreateDictionaryReader(XmlReader)
-    /// API. This class overrides XmlDictionaryReader.Quotas property and 
+    /// API. This class overrides XmlDictionaryReader.Quotas property and
     /// hence custom quotas can be specified.
     /// </summary>
     internal class IdentityModelWrappedXmlDictionaryReader : XmlDictionaryReader, IXmlLineInfo
@@ -18,18 +18,21 @@ namespace System.IdentityModel
         XmlReader _reader;
         XmlDictionaryReaderQuotas _xmlDictionaryReaderQuotas;
 
-        public IdentityModelWrappedXmlDictionaryReader( 
-            XmlReader reader, 
-            XmlDictionaryReaderQuotas xmlDictionaryReaderQuotas )
+        public IdentityModelWrappedXmlDictionaryReader(
+            XmlReader reader,
+            XmlDictionaryReaderQuotas xmlDictionaryReaderQuotas
+        )
         {
             if (reader == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "reader" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             }
 
-            if ( xmlDictionaryReaderQuotas == null )
+            if (xmlDictionaryReaderQuotas == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "xmlDictionaryReaderQuotas" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "xmlDictionaryReaderQuotas"
+                );
             }
 
             _reader = reader;
@@ -38,18 +41,12 @@ namespace System.IdentityModel
 
         public override int AttributeCount
         {
-            get
-            {
-                return _reader.AttributeCount;
-            }
+            get { return _reader.AttributeCount; }
         }
 
         public override string BaseURI
         {
-            get
-            {
-                return _reader.BaseURI;
-            }
+            get { return _reader.BaseURI; }
         }
 
         public override bool CanReadBinaryContent
@@ -69,95 +66,77 @@ namespace System.IdentityModel
 
         public override int Depth
         {
-            get
-            {
-                return _reader.Depth;
-            }
+            get { return _reader.Depth; }
         }
 
         public override bool EOF
         {
-            get
-            {
-                return _reader.EOF;
-            }
+            get { return _reader.EOF; }
         }
 
-        public override string GetAttribute( int index )
+        public override string GetAttribute(int index)
         {
-            return _reader.GetAttribute( index );
+            return _reader.GetAttribute(index);
         }
 
-        public override string GetAttribute( string name )
+        public override string GetAttribute(string name)
         {
-            return _reader.GetAttribute( name );
+            return _reader.GetAttribute(name);
         }
 
-        public override string GetAttribute( string name, string namespaceUri )
+        public override string GetAttribute(string name, string namespaceUri)
         {
-            return _reader.GetAttribute( name, namespaceUri );
+            return _reader.GetAttribute(name, namespaceUri);
         }
 
         public override bool HasValue
         {
-            get
-            {
-                return _reader.HasValue;
-            }
+            get { return _reader.HasValue; }
         }
 
         public override bool IsDefault
         {
-            get
-            {
-                return _reader.IsDefault;
-            }
+            get { return _reader.IsDefault; }
         }
 
         public override bool IsEmptyElement
         {
-            get
-            {
-                return _reader.IsEmptyElement;
-            }
+            get { return _reader.IsEmptyElement; }
         }
 
-        public override bool IsStartElement( string name )
+        public override bool IsStartElement(string name)
         {
-            return _reader.IsStartElement( name );
+            return _reader.IsStartElement(name);
         }
 
-        public override bool IsStartElement( string localName, string namespaceUri )
+        public override bool IsStartElement(string localName, string namespaceUri)
         {
-            return _reader.IsStartElement( localName, namespaceUri );
+            return _reader.IsStartElement(localName, namespaceUri);
         }
 
         public override string LocalName
         {
-            get
-            {
-                return _reader.LocalName;
-            }
+            get { return _reader.LocalName; }
         }
 
-        public override string LookupNamespace( string namespaceUri )
+        public override string LookupNamespace(string namespaceUri)
         {
-            return _reader.LookupNamespace( namespaceUri );
+            return _reader.LookupNamespace(namespaceUri);
         }
 
-        public override void MoveToAttribute( int index )
+        public override void MoveToAttribute(int index)
         {
-            _reader.MoveToAttribute( index );
+            _reader.MoveToAttribute(index);
         }
 
-        public override bool MoveToAttribute( string name )
+        public override bool MoveToAttribute(string name)
         {
-            return _reader.MoveToAttribute( name );
+            return _reader.MoveToAttribute(name);
         }
 
-        public override bool MoveToAttribute( string name, string namespaceUri )
+        public override bool MoveToAttribute(string name, string namespaceUri)
         {
-            return _reader.MoveToAttribute( name, namespaceUri );
+            return _reader.MoveToAttribute(name, namespaceUri);
         }
 
         public override bool MoveToElement()
@@ -177,50 +156,32 @@ namespace System.IdentityModel
 
         public override string Name
         {
-            get
-            {
-                return _reader.Name;
-            }
+            get { return _reader.Name; }
         }
 
         public override string NamespaceURI
         {
-            get
-            {
-                return _reader.NamespaceURI;
-            }
+            get { return _reader.NamespaceURI; }
         }
 
         public override XmlNameTable NameTable
         {
-            get
-            {
-                return _reader.NameTable;
-            }
+            get { return _reader.NameTable; }
         }
 
         public override XmlNodeType NodeType
         {
-            get
-            {
-                return _reader.NodeType;
-            }
+            get { return _reader.NodeType; }
         }
 
         public override string Prefix
         {
-            get
-            {
-                return _reader.Prefix;
-            }
+            get { return _reader.Prefix; }
         }
 
         public override char QuoteChar
         {
-            get
-            {
-                return _reader.QuoteChar;
-            }
+            get { return _reader.QuoteChar; }
         }
 
         public override bool Read()
@@ -233,14 +194,14 @@ namespace System.IdentityModel
             return _reader.ReadAttributeValue();
         }
 
-        public override string ReadElementString( string name )
+        public override string ReadElementString(string name)
         {
-            return _reader.ReadElementString( name );
+            return _reader.ReadElementString(name);
         }
 
-        public override string ReadElementString( string localName, string namespaceUri )
+        public override string ReadElementString(string localName, string namespaceUri)
         {
-            return _reader.ReadElementString( localName, namespaceUri );
+            return _reader.ReadElementString(localName, namespaceUri);
         }
 
         public override string ReadInnerXml()
@@ -253,14 +214,14 @@ namespace System.IdentityModel
             return _reader.ReadOuterXml();
         }
 
-        public override void ReadStartElement( string name )
+        public override void ReadStartElement(string name)
         {
-            _reader.ReadStartElement( name );
+            _reader.ReadStartElement(name);
         }
 
-        public override void ReadStartElement( string localName, string namespaceUri )
+        public override void ReadStartElement(string localName, string namespaceUri)
         {
-            _reader.ReadStartElement( localName, namespaceUri );
+            _reader.ReadStartElement(localName, namespaceUri);
         }
 
         public override void ReadEndElement()
@@ -275,10 +236,7 @@ namespace System.IdentityModel
 
         public override ReadState ReadState
         {
-            get
-            {
-                return _reader.ReadState;
-            }
+            get { return _reader.ReadState; }
         }
 
         public override void ResolveEntity()
@@ -288,83 +246,62 @@ namespace System.IdentityModel
 
         public override string this[int index]
         {
-            get
-            {
-                return _reader[index];
-            }
+            get { return _reader[index]; }
         }
 
         public override string this[string name]
         {
-            get
-            {
-                return _reader[name];
-            }
+            get { return _reader[name]; }
         }
 
         public override string this[string name, string namespaceUri]
         {
-            get
-            {
-                return _reader[name, namespaceUri];
-            }
+            get { return _reader[name, namespaceUri]; }
         }
 
         public override string Value
         {
-            get
-            {
-                return _reader.Value;
-            }
+            get { return _reader.Value; }
         }
 
         public override string XmlLang
         {
-            get
-            {
-                return _reader.XmlLang;
-            }
+            get { return _reader.XmlLang; }
         }
 
         public override XmlSpace XmlSpace
         {
-            get
-            {
-                return _reader.XmlSpace;
-            }
+            get { return _reader.XmlSpace; }
         }
 
-        public override int ReadElementContentAsBase64( byte[] buffer, int offset, int count )
+        public override int ReadElementContentAsBase64(byte[] buffer, int offset, int count)
         {
-            return _reader.ReadElementContentAsBase64( buffer, offset, count );
+            return _reader.ReadElementContentAsBase64(buffer, offset, count);
         }
 
-        public override int ReadContentAsBase64( byte[] buffer, int offset, int count )
+        public override int ReadContentAsBase64(byte[] buffer, int offset, int count)
         {
-            return _reader.ReadContentAsBase64( buffer, offset, count );
+            return _reader.ReadContentAsBase64(buffer, offset, count);
         }
 
-        public override int ReadElementContentAsBinHex( byte[] buffer, int offset, int count )
+        public override int ReadElementContentAsBinHex(byte[] buffer, int offset, int count)
         {
-            return _reader.ReadElementContentAsBinHex( buffer, offset, count );
+            return _reader.ReadElementContentAsBinHex(buffer, offset, count);
         }
 
-        public override int ReadContentAsBinHex( byte[] buffer, int offset, int count )
+        public override int ReadContentAsBinHex(byte[] buffer, int offset, int count)
         {
-            return _reader.ReadContentAsBinHex( buffer, offset, count );
+            return _reader.ReadContentAsBinHex(buffer, offset, count);
         }
 
-        public override int ReadValueChunk( char[] chars, int offset, int count )
+        public override int ReadValueChunk(char[] chars, int offset, int count)
         {
-            return _reader.ReadValueChunk( chars, offset, count );
+            return _reader.ReadValueChunk(chars, offset, count);
         }
 
         public override Type ValueType
         {
-            get
-            {
-                return _reader.ValueType;
-            }
+            get { return _reader.ValueType; }
         }
 
         public override Boolean ReadContentAsBoolean()
@@ -379,7 +316,7 @@ namespace System.IdentityModel
 
         public override Decimal ReadContentAsDecimal()
         {
-            return (Decimal)_reader.ReadContentAs( typeof( Decimal ), null );
+            return (Decimal)_reader.ReadContentAs(typeof(Decimal), null);
         }
 
         public override Double ReadContentAsDouble()
@@ -407,16 +344,19 @@ namespace System.IdentityModel
             return _reader.ReadContentAsString();
         }
 
-        public override object ReadContentAs( Type valueType, IXmlNamespaceResolver namespaceResolver )
+        public override object ReadContentAs(
+            Type valueType,
+            IXmlNamespaceResolver namespaceResolver
+        )
         {
-            return _reader.ReadContentAs( valueType, namespaceResolver );
+            return _reader.ReadContentAs(valueType, namespaceResolver);
         }
 
         public bool HasLineInfo()
         {
             IXmlLineInfo lineInfo = _reader as IXmlLineInfo;
 
-            if ( lineInfo == null )
+            if (lineInfo == null)
             {
                 return false;
             }
@@ -430,7 +370,7 @@ namespace System.IdentityModel
             {
                 IXmlLineInfo lineInfo = _reader as IXmlLineInfo;
 
-                if ( lineInfo == null )
+                if (lineInfo == null)
                 {
                     return 1;
                 }
@@ -445,7 +385,7 @@ namespace System.IdentityModel
             {
                 IXmlLineInfo lineInfo = _reader as IXmlLineInfo;
 
-                if ( lineInfo == null )
+                if (lineInfo == null)
                 {
                     return 1;
                 }
@@ -456,10 +396,7 @@ namespace System.IdentityModel
 
         public override XmlDictionaryReaderQuotas Quotas
         {
-            get
-            {
-                return _xmlDictionaryReaderQuotas;
-            }
+            get { return _xmlDictionaryReaderQuotas; }
         }
     }
 }

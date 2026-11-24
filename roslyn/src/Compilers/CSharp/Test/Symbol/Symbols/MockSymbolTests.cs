@@ -23,9 +23,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             CSharpCompilation compilation = CSharpCompilation.Create("Test");
 
-            NamedTypeSymbol elementType = new MockNamedTypeSymbol("TestClass", Enumerable.Empty<Symbol>());   // this can be any type.
+            NamedTypeSymbol elementType = new MockNamedTypeSymbol(
+                "TestClass",
+                Enumerable.Empty<Symbol>()
+            ); // this can be any type.
 
-            ArrayTypeSymbol ats1 = ArrayTypeSymbol.CreateCSharpArray(compilation.Assembly, TypeWithAnnotations.Create(elementType), rank: 1);
+            ArrayTypeSymbol ats1 = ArrayTypeSymbol.CreateCSharpArray(
+                compilation.Assembly,
+                TypeWithAnnotations.Create(elementType),
+                rank: 1
+            );
             Assert.Equal(1, ats1.Rank);
             Assert.True(ats1.IsSZArray);
             Assert.Same(elementType, ats1.ElementType);
@@ -34,7 +41,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.False(ats1.IsValueType);
             Assert.Equal("TestClass[]", ats1.ToTestDisplayString());
 
-            ArrayTypeSymbol ats2 = ArrayTypeSymbol.CreateCSharpArray(compilation.Assembly, TypeWithAnnotations.Create(elementType), rank: 2);
+            ArrayTypeSymbol ats2 = ArrayTypeSymbol.CreateCSharpArray(
+                compilation.Assembly,
+                TypeWithAnnotations.Create(elementType),
+                rank: 2
+            );
             Assert.Equal(2, ats2.Rank);
             Assert.Same(elementType, ats2.ElementType);
             Assert.Equal(SymbolKind.ArrayType, ats2.Kind);
@@ -42,7 +53,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.False(ats2.IsValueType);
             Assert.Equal("TestClass[,]", ats2.ToTestDisplayString());
 
-            ArrayTypeSymbol ats3 = ArrayTypeSymbol.CreateCSharpArray(compilation.Assembly, TypeWithAnnotations.Create(elementType), rank: 3);
+            ArrayTypeSymbol ats3 = ArrayTypeSymbol.CreateCSharpArray(
+                compilation.Assembly,
+                TypeWithAnnotations.Create(elementType),
+                rank: 3
+            );
             Assert.Equal(3, ats3.Rank);
             Assert.Equal("TestClass[,,]", ats3.ToTestDisplayString());
         }
@@ -50,9 +65,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestPointerType()
         {
-            NamedTypeSymbol pointedAtType = new MockNamedTypeSymbol("TestClass", Enumerable.Empty<Symbol>());   // this can be any type.
+            NamedTypeSymbol pointedAtType = new MockNamedTypeSymbol(
+                "TestClass",
+                Enumerable.Empty<Symbol>()
+            ); // this can be any type.
 
-            PointerTypeSymbol pts1 = new PointerTypeSymbol(TypeWithAnnotations.Create(pointedAtType));
+            PointerTypeSymbol pts1 = new PointerTypeSymbol(
+                TypeWithAnnotations.Create(pointedAtType)
+            );
             Assert.Same(pointedAtType, pts1.PointedAtType);
             Assert.Equal(SymbolKind.PointerType, pts1.Kind);
             Assert.False(pts1.IsReferenceType);
@@ -66,9 +86,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             AssemblyIdentity missingAssemblyId = new AssemblyIdentity("goo");
             AssemblySymbol assem = new MockAssemblySymbol("banana");
             ModuleSymbol module = new MissingModuleSymbol(assem, ordinal: -1);
-            NamedTypeSymbol container = new MockNamedTypeSymbol("TestClass", Enumerable.Empty<Symbol>(), TypeKind.Class);
+            NamedTypeSymbol container = new MockNamedTypeSymbol(
+                "TestClass",
+                Enumerable.Empty<Symbol>(),
+                TypeKind.Class
+            );
 
-            var mms1 = new MissingMetadataTypeSymbol.TopLevel(new MissingAssemblySymbol(missingAssemblyId).Modules[0], "Elvis", "Lives", 2, true);
+            var mms1 = new MissingMetadataTypeSymbol.TopLevel(
+                new MissingAssemblySymbol(missingAssemblyId).Modules[0],
+                "Elvis",
+                "Lives",
+                2,
+                true
+            );
             Assert.Equal(2, mms1.Arity);
             Assert.Equal("Elvis", mms1.NamespaceName);
             Assert.Equal("Lives", mms1.Name);
@@ -103,8 +133,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         private Symbol CreateMockSymbol(NamespaceExtent extent, XElement xel)
         {
             Symbol result;
-            var childSymbols = from childElement in xel.Elements()
-                               select CreateMockSymbol(extent, childElement);
+            var childSymbols =
+                from childElement in xel.Elements()
+                select CreateMockSymbol(extent, childElement);
 
             string name = xel.Attribute("name").Value;
             switch (xel.Name.LocalName)
@@ -133,11 +164,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             if (sym is NamespaceSymbol)
             {
-                builder.AppendFormat("namespace {0} [{1}]", sym.Name, (sym as NamespaceSymbol).Extent);
+                builder.AppendFormat(
+                    "namespace {0} [{1}]",
+                    sym.Name,
+                    (sym as NamespaceSymbol).Extent
+                );
             }
             else if (sym is NamedTypeSymbol)
             {
-                builder.AppendFormat("{0} {1}", (sym as NamedTypeSymbol).TypeKind.ToString().ToLower(), sym.Name);
+                builder.AppendFormat(
+                    "{0} {1}",
+                    (sym as NamedTypeSymbol).TypeKind.ToString().ToLower(),
+                    sym.Name
+                );
             }
             else
             {
@@ -147,9 +186,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             if (sym is NamespaceOrTypeSymbol namespaceOrType && namespaceOrType.GetMembers().Any())
             {
                 builder.AppendLine(" { ");
-                var q = from c in namespaceOrType.GetMembers()
-                        orderby c.Name
-                        select c;
+                var q = from c in namespaceOrType.GetMembers() orderby c.Name select c;
 
                 foreach (Symbol child in q)
                 {
@@ -181,9 +218,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestMergedNamespaces()
         {
-            NamespaceSymbol root1 = (NamespaceSymbol)CreateMockSymbol(new NamespaceExtent(new MockAssemblySymbol("Assem1")),
-                                                                       XElement.Parse(
-@"<ns name=''> 
+            NamespaceSymbol root1 = (NamespaceSymbol)CreateMockSymbol(
+                new NamespaceExtent(new MockAssemblySymbol("Assem1")),
+                XElement.Parse(
+                    @"<ns name=''> 
     <ns name='A'> 
          <ns name='D'/>
          <ns name='E'/>
@@ -195,22 +233,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     <ns name='C'/>
     <ns name='U'/>
     <class name='X'/>
-</ns>"));
+</ns>"
+                )
+            );
 
-            NamespaceSymbol root2 = (NamespaceSymbol)CreateMockSymbol(new NamespaceExtent(new MockAssemblySymbol("Assem2")),
-                                                                       XElement.Parse(
-@"<ns name=''>
+            NamespaceSymbol root2 = (NamespaceSymbol)CreateMockSymbol(
+                new NamespaceExtent(new MockAssemblySymbol("Assem2")),
+                XElement.Parse(
+                    @"<ns name=''>
     <ns name='B'>
          <ns name='K'/>
     </ns>
     <ns name='C'/>
     <class name='X'/>
     <class name='Y'/>
-</ns>"));
+</ns>"
+                )
+            );
 
-            NamespaceSymbol root3 = (NamespaceSymbol)CreateMockSymbol(new NamespaceExtent(new MockAssemblySymbol("Assem3")),
-                                                                       XElement.Parse(
-@"<ns name=''> 
+            NamespaceSymbol root3 = (NamespaceSymbol)CreateMockSymbol(
+                new NamespaceExtent(new MockAssemblySymbol("Assem3")),
+                XElement.Parse(
+                    @"<ns name=''> 
     <ns name='A'>
         <ns name='D'/>
         <ns name='E'>
@@ -224,12 +268,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         </ns>
     </ns> 
     <class name='Z'/>
-</ns>"));
+</ns>"
+                )
+            );
 
-            NamespaceSymbol merged = MergedNamespaceSymbol.Create(new NamespaceExtent(new MockAssemblySymbol("Merged")), null,
-                                                                  new NamespaceSymbol[] { root1, root2, root3 }.AsImmutable());
-            string expected =
-@"namespace  [Assembly: Merged] { 
+            NamespaceSymbol merged = MergedNamespaceSymbol.Create(
+                new NamespaceExtent(new MockAssemblySymbol("Merged")),
+                null,
+                new NamespaceSymbol[] { root1, root2, root3 }.AsImmutable()
+            );
+            string expected = @"namespace  [Assembly: Merged] { 
     namespace A [Assembly: Merged] { 
         namespace D [Assembly: Merged]
         namespace E [Assembly: Merged] { 
@@ -251,14 +299,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     class X
     class Y
     class Z
-}".Replace("Assembly: Merged", "Assembly: Merged, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null")
-  .Replace("Assembly: Assem1", "Assembly: Assem1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null")
-  .Replace("Assembly: Assem3", "Assembly: Assem3, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null");
+}".Replace(
+                "Assembly: Merged",
+                "Assembly: Merged, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+            ).Replace(
+                "Assembly: Assem1",
+                "Assembly: Assem1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+            ).Replace(
+                "Assembly: Assem3",
+                "Assembly: Assem3, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+            );
 
             Assert.Equal(expected, DumpSymbol(merged));
 
-            NamespaceSymbol merged2 = MergedNamespaceSymbol.Create(new NamespaceExtent(new MockAssemblySymbol("Merged2")), null,
-                                                                  new NamespaceSymbol[] { root1 }.AsImmutable());
+            NamespaceSymbol merged2 = MergedNamespaceSymbol.Create(
+                new NamespaceExtent(new MockAssemblySymbol("Merged2")),
+                null,
+                new NamespaceSymbol[] { root1 }.AsImmutable()
+            );
             Assert.Same(merged2, root1);
         }
     }

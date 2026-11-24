@@ -10,8 +10,8 @@ using System.Composition;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.CodeCleanup;
-using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.CodeGeneration;
+using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Remote;
 using Microsoft.CodeAnalysis.Text;
 
@@ -19,10 +19,14 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
 {
     internal interface IRemoteEncapsulateFieldService
     {
-        // TODO https://github.com/microsoft/vs-streamjsonrpc/issues/789 
+        // TODO https://github.com/microsoft/vs-streamjsonrpc/issues/789
         internal interface ICallback // : IRemoteOptionsCallback<CleanCodeGenerationOptions>
         {
-            ValueTask<CleanCodeGenerationOptions> GetOptionsAsync(RemoteServiceCallbackId callbackId, string language, CancellationToken cancellationToken);
+            ValueTask<CleanCodeGenerationOptions> GetOptionsAsync(
+                RemoteServiceCallbackId callbackId,
+                string language,
+                CancellationToken cancellationToken
+            );
         }
 
         ValueTask<ImmutableArray<(DocumentId, ImmutableArray<TextChange>)>> EncapsulateFieldsAsync(
@@ -31,19 +35,26 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             DocumentId documentId,
             ImmutableArray<string> fieldSymbolKeys,
             bool updateReferences,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 
     [ExportRemoteServiceCallbackDispatcher(typeof(IRemoteEncapsulateFieldService)), Shared]
-    internal sealed class RemoteConvertTupleToStructCodeRefactoringServiceCallbackDispatcher : RemoteServiceCallbackDispatcher, IRemoteEncapsulateFieldService.ICallback
+    internal sealed class RemoteConvertTupleToStructCodeRefactoringServiceCallbackDispatcher
+        : RemoteServiceCallbackDispatcher,
+            IRemoteEncapsulateFieldService.ICallback
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteConvertTupleToStructCodeRefactoringServiceCallbackDispatcher()
-        {
-        }
+        public RemoteConvertTupleToStructCodeRefactoringServiceCallbackDispatcher() { }
 
-        public ValueTask<CleanCodeGenerationOptions> GetOptionsAsync(RemoteServiceCallbackId callbackId, string language, CancellationToken cancellationToken)
-            => ((RemoteOptionsProvider<CleanCodeGenerationOptions>)GetCallback(callbackId)).GetOptionsAsync(language, cancellationToken);
+        public ValueTask<CleanCodeGenerationOptions> GetOptionsAsync(
+            RemoteServiceCallbackId callbackId,
+            string language,
+            CancellationToken cancellationToken
+        ) =>
+            (
+                (RemoteOptionsProvider<CleanCodeGenerationOptions>)GetCallback(callbackId)
+            ).GetOptionsAsync(language, cancellationToken);
     }
 }

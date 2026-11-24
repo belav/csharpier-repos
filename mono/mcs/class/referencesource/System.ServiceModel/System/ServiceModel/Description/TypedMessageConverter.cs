@@ -13,70 +13,138 @@ namespace System.ServiceModel.Description
     {
         public static TypedMessageConverter Create(Type messageContract, string action)
         {
-            return Create(messageContract, action, null, TypeLoader.DefaultDataContractFormatAttribute);
+            return Create(
+                messageContract,
+                action,
+                null,
+                TypeLoader.DefaultDataContractFormatAttribute
+            );
         }
 
-        public static TypedMessageConverter Create(Type messageContract, string action, string defaultNamespace)
+        public static TypedMessageConverter Create(
+            Type messageContract,
+            string action,
+            string defaultNamespace
+        )
         {
-            return Create(messageContract, action, defaultNamespace, TypeLoader.DefaultDataContractFormatAttribute);
+            return Create(
+                messageContract,
+                action,
+                defaultNamespace,
+                TypeLoader.DefaultDataContractFormatAttribute
+            );
         }
 
-        public static TypedMessageConverter Create(Type messageContract, string action, XmlSerializerFormatAttribute formatterAttribute)
+        public static TypedMessageConverter Create(
+            Type messageContract,
+            string action,
+            XmlSerializerFormatAttribute formatterAttribute
+        )
         {
             return Create(messageContract, action, null, formatterAttribute);
         }
 
-        public static TypedMessageConverter Create(Type messageContract, string action, DataContractFormatAttribute formatterAttribute)
+        public static TypedMessageConverter Create(
+            Type messageContract,
+            string action,
+            DataContractFormatAttribute formatterAttribute
+        )
         {
             return Create(messageContract, action, null, formatterAttribute);
         }
 
-        public static TypedMessageConverter Create(Type messageContract, String action, String defaultNamespace, XmlSerializerFormatAttribute formatterAttribute)
+        public static TypedMessageConverter Create(
+            Type messageContract,
+            String action,
+            String defaultNamespace,
+            XmlSerializerFormatAttribute formatterAttribute
+        )
         {
             if (messageContract == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("messageContract"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("messageContract")
+                );
 
             if (defaultNamespace == null)
                 defaultNamespace = NamingHelper.DefaultNamespace;
 
-            return new XmlMessageConverter(GetOperationFormatter(messageContract, formatterAttribute, defaultNamespace, action));
+            return new XmlMessageConverter(
+                GetOperationFormatter(messageContract, formatterAttribute, defaultNamespace, action)
+            );
         }
 
-        public static TypedMessageConverter Create(Type messageContract, String action, String defaultNamespace, DataContractFormatAttribute formatterAttribute)
+        public static TypedMessageConverter Create(
+            Type messageContract,
+            String action,
+            String defaultNamespace,
+            DataContractFormatAttribute formatterAttribute
+        )
         {
             if (messageContract == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("messageContract"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("messageContract")
+                );
 
             if (!messageContract.IsDefined(typeof(MessageContractAttribute), false))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.SFxMessageContractAttributeRequired, messageContract), "messageContract"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(SR.SFxMessageContractAttributeRequired, messageContract),
+                        "messageContract"
+                    )
+                );
 
             if (defaultNamespace == null)
                 defaultNamespace = NamingHelper.DefaultNamespace;
 
-            return new XmlMessageConverter(GetOperationFormatter(messageContract, formatterAttribute, defaultNamespace, action));
+            return new XmlMessageConverter(
+                GetOperationFormatter(messageContract, formatterAttribute, defaultNamespace, action)
+            );
         }
 
         public abstract Message ToMessage(Object typedMessage);
         public abstract Message ToMessage(Object typedMessage, MessageVersion version);
         public abstract Object FromMessage(Message message);
 
-        static OperationFormatter GetOperationFormatter(Type t, Attribute formatAttribute, string defaultNS, string action)
+        static OperationFormatter GetOperationFormatter(
+            Type t,
+            Attribute formatAttribute,
+            string defaultNS,
+            string action
+        )
         {
             bool isXmlSerializer = (formatAttribute is XmlSerializerFormatAttribute);
             TypeLoader typeLoader = new TypeLoader();
-            MessageDescription message = typeLoader.CreateTypedMessageDescription(t, null, null, defaultNS, action, MessageDirection.Output);
+            MessageDescription message = typeLoader.CreateTypedMessageDescription(
+                t,
+                null,
+                null,
+                defaultNS,
+                action,
+                MessageDirection.Output
+            );
             ContractDescription contract = new ContractDescription("dummy_contract", defaultNS);
-            OperationDescription operation = new OperationDescription(NamingHelper.XmlName(t.Name), contract, false);
+            OperationDescription operation = new OperationDescription(
+                NamingHelper.XmlName(t.Name),
+                contract,
+                false
+            );
             operation.Messages.Add(message);
 
             if (isXmlSerializer)
-                return XmlSerializerOperationBehavior.CreateOperationFormatter(operation, (XmlSerializerFormatAttribute)formatAttribute);
+                return XmlSerializerOperationBehavior.CreateOperationFormatter(
+                    operation,
+                    (XmlSerializerFormatAttribute)formatAttribute
+                );
             else
-                return new DataContractSerializerOperationFormatter(operation, (DataContractFormatAttribute)formatAttribute, null);
+                return new DataContractSerializerOperationFormatter(
+                    operation,
+                    (DataContractFormatAttribute)formatAttribute,
+                    null
+                );
         }
     }
 
-    internal class XmlMessageConverter : TypedMessageConverter 
+    internal class XmlMessageConverter : TypedMessageConverter
     {
         OperationFormatter formatter;
 
@@ -85,7 +153,10 @@ namespace System.ServiceModel.Description
             this.formatter = formatter;
         }
 
-        internal string Action { get { return formatter.RequestAction; } }
+        internal string Action
+        {
+            get { return formatter.RequestAction; }
+        }
 
         public override Message ToMessage(Object typedMessage)
         {
@@ -95,7 +166,9 @@ namespace System.ServiceModel.Description
         public override Message ToMessage(Object typedMessage, MessageVersion version)
         {
             if (typedMessage == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("typedMessage"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("typedMessage")
+                );
 
             return formatter.SerializeRequest(version, new object[] { typedMessage });
         }
@@ -103,8 +176,16 @@ namespace System.ServiceModel.Description
         public override Object FromMessage(Message message)
         {
             Fx.Assert(message.Headers != null, "");
-            if (this.Action != null && message.Headers.Action != null && message.Headers.Action != this.Action)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxActionMismatch, this.Action, message.Headers.Action)));
+            if (
+                this.Action != null
+                && message.Headers.Action != null
+                && message.Headers.Action != this.Action
+            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxActionMismatch, this.Action, message.Headers.Action)
+                    )
+                );
 
             object[] result = new object[1];
             formatter.DeserializeRequest(message, result);

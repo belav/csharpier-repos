@@ -24,11 +24,21 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
             Tag = tag;
         }
 
-        public static Range FromTextSpan(TextSpan textSpan, SourceText sourceText, RangeTag? tag, IdFactory idFactory)
+        public static Range FromTextSpan(
+            TextSpan textSpan,
+            SourceText sourceText,
+            RangeTag? tag,
+            IdFactory idFactory
+        )
         {
             var linePositionSpan = sourceText.Lines.GetLinePositionSpan(textSpan);
 
-            return new Range(start: ConvertLinePositionToPosition(linePositionSpan.Start), end: ConvertLinePositionToPosition(linePositionSpan.End), tag, idFactory);
+            return new Range(
+                start: ConvertLinePositionToPosition(linePositionSpan.Start),
+                end: ConvertLinePositionToPosition(linePositionSpan.End),
+                tag,
+                idFactory
+            );
         }
 
         internal static Position ConvertLinePositionToPosition(LinePosition linePosition)

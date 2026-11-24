@@ -5,17 +5,17 @@ namespace System.Workflow.ComponentModel.Design
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Diagnostics;
-    using System.Reflection;
     using System.Globalization;
+    using System.Reflection;
 
     internal sealed class ReferenceService : IReferenceService, IDisposable
     {
         private static readonly Attribute[] Attributes = new Attribute[] { BrowsableAttribute.Yes };
-        private IServiceProvider provider;   // service provider we use to get to other services
-        private ArrayList addedComponents;   // list of newly added components
+        private IServiceProvider provider; // service provider we use to get to other services
+        private ArrayList addedComponents; // list of newly added components
         private ArrayList removedComponents; // list of newly removed components
         private ArrayList changedComponents; // list of changed components, we will re-cylcle their references too
-        private ArrayList references;        // our current list of references
+        private ArrayList references; // our current list of references
 
         internal ReferenceService(IServiceProvider provider)
         {
@@ -32,13 +32,19 @@ namespace System.Workflow.ComponentModel.Design
             CreateReferences(string.Empty, component, component);
         }
 
-        private void CreateReferences(string trailingName, object reference, IComponent sitedComponent)
+        private void CreateReferences(
+            string trailingName,
+            object reference,
+            IComponent sitedComponent
+        )
         {
             if (object.ReferenceEquals(reference, null))
                 return;
 
             this.references.Add(new ReferenceHolder(trailingName, reference, sitedComponent));
-            foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(reference, Attributes))
+            foreach (
+                PropertyDescriptor property in TypeDescriptor.GetProperties(reference, Attributes)
+            )
             {
                 object value = null;
                 try
@@ -51,10 +57,20 @@ namespace System.Workflow.ComponentModel.Design
                 }
                 if (value != null)
                 {
-                    BrowsableAttribute[] browsableAttrs = (BrowsableAttribute[])(value.GetType().GetCustomAttributes(typeof(BrowsableAttribute), true));
+                    BrowsableAttribute[] browsableAttrs = (BrowsableAttribute[])(
+                        value.GetType().GetCustomAttributes(typeof(BrowsableAttribute), true)
+                    );
                     if (browsableAttrs.Length > 0 && browsableAttrs[0].Browsable)
                     {
-                        CreateReferences(string.Format(CultureInfo.InvariantCulture, "{0}.{1}", new object[] { trailingName, property.Name }), property.GetValue(reference), sitedComponent);
+                        CreateReferences(
+                            string.Format(
+                                CultureInfo.InvariantCulture,
+                                "{0}.{1}",
+                                new object[] { trailingName, property.Name }
+                            ),
+                            property.GetValue(reference),
+                            sitedComponent
+                        );
                     }
                 }
             }
@@ -73,14 +89,18 @@ namespace System.Workflow.ComponentModel.Design
                     throw new ObjectDisposedException("IReferenceService");
                 }
 
-                IComponentChangeService cs = this.provider.GetService(typeof(IComponentChangeService)) as IComponentChangeService;
+                IComponentChangeService cs =
+                    this.provider.GetService(typeof(IComponentChangeService))
+                    as IComponentChangeService;
                 Debug.Assert(cs != null, "Reference service relies on IComponentChangeService");
                 if (cs != null)
                 {
                     cs.ComponentAdded += new ComponentEventHandler(this.OnComponentAdded);
                     cs.ComponentRemoved += new ComponentEventHandler(this.OnComponentRemoved);
                     cs.ComponentRename += new ComponentRenameEventHandler(this.OnComponentRename);
-                    cs.ComponentChanged += new ComponentChangedEventHandler(this.OnComponentChanged);
+                    cs.ComponentChanged += new ComponentChangedEventHandler(
+                        this.OnComponentChanged
+                    );
                 }
 
                 TypeDescriptor.Refreshed += new RefreshEventHandler(OnComponentRefreshed);
@@ -142,8 +162,10 @@ namespace System.Workflow.ComponentModel.Design
 
             if (comp != null)
             {
-                if ((this.addedComponents == null || !this.addedComponents.Contains(comp)) &&
-                    (this.removedComponents == null || !this.removedComponents.Contains(comp)))
+                if (
+                    (this.addedComponents == null || !this.addedComponents.Contains(comp))
+                    && (this.removedComponents == null || !this.removedComponents.Contains(comp))
+                )
                 {
                     if (this.changedComponents == null)
                     {
@@ -193,10 +215,14 @@ namespace System.Workflow.ComponentModel.Design
                 }
             }
         }
+
         private void OnComponentRefreshed(RefreshEventArgs e)
         {
             if (e.ComponentChanged != null)
-                OnComponentChanged(this, new ComponentChangedEventArgs(e.ComponentChanged, null, null, null));
+                OnComponentChanged(
+                    this,
+                    new ComponentChangedEventArgs(e.ComponentChanged, null, null, null)
+                );
         }
 
         private void RemoveReferences(IComponent component)
@@ -206,7 +232,12 @@ namespace System.Workflow.ComponentModel.Design
                 int size = this.references.Count;
                 for (int i = size - 1; i >= 0; i--)
                 {
-                    if (object.ReferenceEquals(((ReferenceHolder)this.references[i]).SitedComponent, component))
+                    if (
+                        object.ReferenceEquals(
+                            ((ReferenceHolder)this.references[i]).SitedComponent,
+                            component
+                        )
+                    )
                         this.references.RemoveAt(i);
                 }
             }
@@ -222,13 +253,17 @@ namespace System.Workflow.ComponentModel.Design
         {
             if (this.references != null && this.provider != null)
             {
-                IComponentChangeService cs = this.provider.GetService(typeof(IComponentChangeService)) as IComponentChangeService;
+                IComponentChangeService cs =
+                    this.provider.GetService(typeof(IComponentChangeService))
+                    as IComponentChangeService;
                 if (cs != null)
                 {
                     cs.ComponentAdded -= new ComponentEventHandler(this.OnComponentAdded);
                     cs.ComponentRemoved -= new ComponentEventHandler(this.OnComponentRemoved);
                     cs.ComponentRename -= new ComponentRenameEventHandler(this.OnComponentRename);
-                    cs.ComponentChanged -= new ComponentChangedEventHandler(this.OnComponentChanged);
+                    cs.ComponentChanged -= new ComponentChangedEventHandler(
+                        this.OnComponentChanged
+                    );
                 }
 
                 TypeDescriptor.Refreshed -= new RefreshEventHandler(OnComponentRefreshed);
@@ -252,6 +287,7 @@ namespace System.Workflow.ComponentModel.Design
             }
             return null;
         }
+
         string IReferenceService.GetName(object reference)
         {
             if (object.ReferenceEquals(reference, null))
@@ -266,6 +302,7 @@ namespace System.Workflow.ComponentModel.Design
             }
             return null;
         }
+
         object IReferenceService.GetReference(string name)
         {
             if (name == null)
@@ -320,7 +357,11 @@ namespace System.Workflow.ComponentModel.Design
             private IComponent sitedComponent;
             private string fullName;
 
-            internal ReferenceHolder(string trailingName, object reference, IComponent sitedComponent)
+            internal ReferenceHolder(
+                string trailingName,
+                object reference,
+                IComponent sitedComponent
+            )
             {
                 this.trailingName = trailingName;
                 this.reference = reference;
@@ -333,9 +374,15 @@ namespace System.Workflow.ComponentModel.Design
 
                 Debug.Assert(sitedComponent != null, "Expected a sited component");
                 if (sitedComponent != null)
-                    Debug.Assert(sitedComponent.Site != null, "Sited component is not really sited: " + sitedComponent.ToString());
+                    Debug.Assert(
+                        sitedComponent.Site != null,
+                        "Sited component is not really sited: " + sitedComponent.ToString()
+                    );
                 if (sitedComponent != null && sitedComponent.Site != null)
-                    Debug.Assert(sitedComponent.Site.Name != null, "Sited component has no name: " + sitedComponent.ToString());
+                    Debug.Assert(
+                        sitedComponent.Site.Name != null,
+                        "Sited component has no name: " + sitedComponent.ToString()
+                    );
 
 #endif // DEBUG
             }
@@ -351,18 +398,33 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     if (this.fullName == null)
                     {
-                        if (this.sitedComponent != null && this.sitedComponent.Site != null && this.sitedComponent.Site.Name != null)
+                        if (
+                            this.sitedComponent != null
+                            && this.sitedComponent.Site != null
+                            && this.sitedComponent.Site.Name != null
+                        )
                         {
-                            this.fullName = string.Format(CultureInfo.InvariantCulture, "{0}{1}", new object[] { this.sitedComponent.Site.Name, this.trailingName });
+                            this.fullName = string.Format(
+                                CultureInfo.InvariantCulture,
+                                "{0}{1}",
+                                new object[] { this.sitedComponent.Site.Name, this.trailingName }
+                            );
                         }
                         else
                         {
 #if DEBUG
                             Debug.Assert(this.sitedComponent != null, "Expected a sited component");
                             if (this.sitedComponent != null)
-                                Debug.Assert(this.sitedComponent.Site != null, "Sited component is not really sited: " + this.sitedComponent.ToString());
+                                Debug.Assert(
+                                    this.sitedComponent.Site != null,
+                                    "Sited component is not really sited: "
+                                        + this.sitedComponent.ToString()
+                                );
                             if (this.sitedComponent != null && this.sitedComponent.Site != null)
-                                Debug.Assert(this.sitedComponent.Site.Name != null, "Sited component has no name: " + this.sitedComponent.ToString());
+                                Debug.Assert(
+                                    this.sitedComponent.Site.Name != null,
+                                    "Sited component has no name: " + this.sitedComponent.ToString()
+                                );
 #endif // DEBUG
                             this.fullName = string.Empty;
                         }
@@ -373,20 +435,13 @@ namespace System.Workflow.ComponentModel.Design
 
             internal object Reference
             {
-                get
-                {
-                    return this.reference;
-                }
+                get { return this.reference; }
             }
 
             internal IComponent SitedComponent
             {
-                get
-                {
-                    return this.sitedComponent;
-                }
+                get { return this.sitedComponent; }
             }
         }
     }
 }
-

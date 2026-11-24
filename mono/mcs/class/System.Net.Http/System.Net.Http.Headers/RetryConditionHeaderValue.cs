@@ -30,80 +30,83 @@ using System.Globalization;
 
 namespace System.Net.Http.Headers
 {
-	public class RetryConditionHeaderValue : ICloneable
-	{
-		public RetryConditionHeaderValue (DateTimeOffset date)
-		{
-			Date = date;
-		}
+    public class RetryConditionHeaderValue : ICloneable
+    {
+        public RetryConditionHeaderValue(DateTimeOffset date)
+        {
+            Date = date;
+        }
 
-		public RetryConditionHeaderValue (TimeSpan delta)
-		{
-			if (delta.TotalSeconds > uint.MaxValue)
-				throw new ArgumentOutOfRangeException ("delta");
+        public RetryConditionHeaderValue(TimeSpan delta)
+        {
+            if (delta.TotalSeconds > uint.MaxValue)
+                throw new ArgumentOutOfRangeException("delta");
 
-			Delta = delta;
-		}
+            Delta = delta;
+        }
 
-		public DateTimeOffset? Date { get; private set; }
-		public TimeSpan? Delta { get; private set; }
+        public DateTimeOffset? Date { get; private set; }
+        public TimeSpan? Delta { get; private set; }
 
-		object ICloneable.Clone ()
-		{
-			return MemberwiseClone ();
-		}
+        object ICloneable.Clone()
+        {
+            return MemberwiseClone();
+        }
 
-		public override bool Equals (object obj)
-		{
-			var source = obj as RetryConditionHeaderValue;
-			return source != null && source.Date == Date && source.Delta == Delta;
-		}
+        public override bool Equals(object obj)
+        {
+            var source = obj as RetryConditionHeaderValue;
+            return source != null && source.Date == Date && source.Delta == Delta;
+        }
 
-		public override int GetHashCode ()
-		{
-			return Date.GetHashCode () ^ Delta.GetHashCode ();
-		}
+        public override int GetHashCode()
+        {
+            return Date.GetHashCode() ^ Delta.GetHashCode();
+        }
 
-		public static RetryConditionHeaderValue Parse (string input)
-		{
-			RetryConditionHeaderValue value;
-			if (TryParse (input, out value))
-				return value;
+        public static RetryConditionHeaderValue Parse(string input)
+        {
+            RetryConditionHeaderValue value;
+            if (TryParse(input, out value))
+                return value;
 
-			throw new FormatException (input);
-		}
+            throw new FormatException(input);
+        }
 
-		public static bool TryParse (string input, out RetryConditionHeaderValue parsedValue)
-		{
-			parsedValue = null;
+        public static bool TryParse(string input, out RetryConditionHeaderValue parsedValue)
+        {
+            parsedValue = null;
 
-			var lexer = new Lexer (input);
-			var t = lexer.Scan ();
-			if (t != Token.Type.Token)
-				return false;
+            var lexer = new Lexer(input);
+            var t = lexer.Scan();
+            if (t != Token.Type.Token)
+                return false;
 
-			var ts = lexer.TryGetTimeSpanValue (t);
-			if (ts != null) {
-				if (lexer.Scan () != Token.Type.End)
-					return false;
+            var ts = lexer.TryGetTimeSpanValue(t);
+            if (ts != null)
+            {
+                if (lexer.Scan() != Token.Type.End)
+                    return false;
 
-				parsedValue = new RetryConditionHeaderValue (ts.Value);
-			} else {
-				DateTimeOffset date;
-				if (!Lexer.TryGetDateValue (input, out date))
-					return false;
+                parsedValue = new RetryConditionHeaderValue(ts.Value);
+            }
+            else
+            {
+                DateTimeOffset date;
+                if (!Lexer.TryGetDateValue(input, out date))
+                    return false;
 
-				parsedValue = new RetryConditionHeaderValue (date);
-			}
+                parsedValue = new RetryConditionHeaderValue(date);
+            }
 
-			return true;
-		}
+            return true;
+        }
 
-		public override string ToString ()
-		{
-			return Delta != null ?
-				Delta.Value.TotalSeconds.ToString (CultureInfo.InvariantCulture) :
-				Date.Value.ToString ("r", CultureInfo.InvariantCulture);
-		}
-	}
+        public override string ToString()
+        {
+            return Delta != null
+                ? Delta.Value.TotalSeconds.ToString(CultureInfo.InvariantCulture)
+                : Date.Value.ToString("r", CultureInfo.InvariantCulture);
+        }
+    }
 }

@@ -48,7 +48,8 @@ public sealed record RelationalAggregateMethodCallTranslatorProviderDependencies
     public RelationalAggregateMethodCallTranslatorProviderDependencies(
         ISqlExpressionFactory sqlExpressionFactory,
         IEnumerable<IAggregateMethodCallTranslatorPlugin> plugins,
-        IRelationalTypeMappingSource typeMappingSource)
+        IRelationalTypeMappingSource typeMappingSource
+    )
     {
         SqlExpressionFactory = sqlExpressionFactory;
         Plugins = plugins;

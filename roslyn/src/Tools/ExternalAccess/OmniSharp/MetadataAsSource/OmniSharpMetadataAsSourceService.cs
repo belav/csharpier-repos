@@ -30,19 +30,28 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.MetadataAsSource
         /// <param name="cancellationToken">To cancel document operations</param>
         /// <returns>The updated document</returns>
         [Obsolete("Use overloads that takes formatting options")]
-        public static async Task<Document> AddSourceToAsync(Document document, Compilation symbolCompilation, ISymbol symbol, CancellationToken cancellationToken)
+        public static async Task<Document> AddSourceToAsync(
+            Document document,
+            Compilation symbolCompilation,
+            ISymbol symbol,
+            CancellationToken cancellationToken
+        )
         {
             var service = document.GetRequiredLanguageService<IMetadataAsSourceService>();
 
-            var cleanupOptions = await document.GetCodeCleanupOptionsAsync(CodeActionOptions.DefaultProvider, cancellationToken).ConfigureAwait(false);
+            var cleanupOptions = await document
+                .GetCodeCleanupOptionsAsync(CodeActionOptions.DefaultProvider, cancellationToken)
+                .ConfigureAwait(false);
 
             var options = new CleanCodeGenerationOptions()
             {
                 GenerationOptions = CodeGenerationOptions.GetDefault(document.Project.Services),
-                CleanupOptions = cleanupOptions
+                CleanupOptions = cleanupOptions,
             };
 
-            return await service.AddSourceToAsync(document, symbolCompilation, symbol, options, cancellationToken).ConfigureAwait(false);
+            return await service
+                .AddSourceToAsync(document, symbolCompilation, symbol, options, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -56,17 +65,29 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.MetadataAsSource
         /// <param name="formattingOptions">Options to use to format the document.</param>
         /// <param name="cancellationToken">To cancel document operations</param>
         /// <returns>The updated document</returns>
-        public static Task<Document> AddSourceToAsync(Document document, Compilation symbolCompilation, ISymbol symbol, OmniSharpSyntaxFormattingOptionsWrapper formattingOptions, CancellationToken cancellationToken)
+        public static Task<Document> AddSourceToAsync(
+            Document document,
+            Compilation symbolCompilation,
+            ISymbol symbol,
+            OmniSharpSyntaxFormattingOptionsWrapper formattingOptions,
+            CancellationToken cancellationToken
+        )
         {
             var service = document.GetRequiredLanguageService<IMetadataAsSourceService>();
 
             var options = new CleanCodeGenerationOptions()
             {
                 GenerationOptions = CodeGenerationOptions.GetDefault(document.Project.Services),
-                CleanupOptions = formattingOptions.CleanupOptions
+                CleanupOptions = formattingOptions.CleanupOptions,
             };
 
-            return service.AddSourceToAsync(document, symbolCompilation, symbol, options, cancellationToken);
+            return service.AddSourceToAsync(
+                document,
+                symbolCompilation,
+                symbol,
+                options,
+                cancellationToken
+            );
         }
     }
 }

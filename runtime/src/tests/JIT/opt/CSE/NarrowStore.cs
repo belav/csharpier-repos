@@ -6,11 +6,11 @@ using Xunit;
 
 namespace NarrowStore
 {
-    public class Program 
-    { 
+    public class Program
+    {
         byte x01;
         byte t01;
-    
+
         int Test()
         {
             x01 = 3;
@@ -28,13 +28,12 @@ namespace NarrowStore
         }
 
         [Fact]
-        public static int TestEntryPoint() 
-        { 
+        public static int TestEntryPoint()
+        {
             Program prog = new Program();
-            
+
             int result = prog.Test();
             return result;
         }
     }
 }
-

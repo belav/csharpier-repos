@@ -11,9 +11,7 @@ namespace Microsoft.Win32.SafeHandles
     internal sealed class SafeCertContextHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         public SafeCertContextHandle()
-            : base(ownsHandle: true)
-        {
-        }
+            : base(ownsHandle: true) { }
 
         public SafeCertContextHandle(IntPtr handle, bool ownsHandle)
             : base(ownsHandle)
@@ -35,7 +33,8 @@ namespace Microsoft.Win32.SafeHandles
                 this,
                 propertyId,
                 null,
-                ref cb);
+                ref cb
+            );
 
             return hasProperty;
         }

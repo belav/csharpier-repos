@@ -20,47 +20,43 @@ namespace System.Activities.Statements
         CompletionCallback<bool> onConditionComplete;
 
         public ParallelForEach()
-            : base()
-        {
-        }
+            : base() { }
 
         [DefaultValue(null)]
-        public ActivityAction<T> Body
-        {
-            get;
-            set;
-        }
+        public ActivityAction<T> Body { get; set; }
 
         [DefaultValue(null)]
-        public Activity<bool> CompletionCondition
-        {
-            get;
-            set;
-        }
+        public Activity<bool> CompletionCondition { get; set; }
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<IEnumerable<T>> Values
-        {
-            get;
-            set;
-        }
+        public InArgument<IEnumerable<T>> Values { get; set; }
 
-        protected override void OnCreateDynamicUpdateMap(NativeActivityUpdateMapMetadata metadata, Activity originalActivity)
+        protected override void OnCreateDynamicUpdateMap(
+            NativeActivityUpdateMapMetadata metadata,
+            Activity originalActivity
+        )
         {
             metadata.AllowUpdateInsideThisActivity();
         }
 
         protected override void CacheMetadata(NativeActivityMetadata metadata)
         {
-            RuntimeArgument valuesArgument = new RuntimeArgument("Values", typeof(IEnumerable<T>), ArgumentDirection.In, true);
+            RuntimeArgument valuesArgument = new RuntimeArgument(
+                "Values",
+                typeof(IEnumerable<T>),
+                ArgumentDirection.In,
+                true
+            );
             metadata.Bind(this.Values, valuesArgument);
             metadata.SetArgumentsCollection(new Collection<RuntimeArgument> { valuesArgument });
 
             // declare the CompletionCondition as a child
             if (this.CompletionCondition != null)
             {
-                metadata.SetChildrenCollection(new Collection<Activity> { this.CompletionCondition });
+                metadata.SetChildrenCollection(
+                    new Collection<Activity> { this.CompletionCondition }
+                );
             }
 
             // declare the hasCompleted variable
@@ -82,7 +78,11 @@ namespace System.Activities.Statements
             IEnumerable<T> values = this.Values.Get(context);
             if (values == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.ParallelForEachRequiresNonNullValues(this.DisplayName)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.ParallelForEachRequiresNonNullValues(this.DisplayName)
+                    )
+                );
             }
 
             IEnumerator<T> valueEnumerator = values.GetEnumerator();
@@ -103,26 +103,35 @@ namespace System.Activities.Statements
             // for the completion condition, we handle cancelation ourselves
             if (this.CompletionCondition != null && !this.hasCompleted.Get(context))
             {
-                if (completedInstance.State != ActivityInstanceState.Closed && context.IsCancellationRequested)
+                if (
+                    completedInstance.State != ActivityInstanceState.Closed
+                    && context.IsCancellationRequested
+                )
                 {
                     // If we hadn't completed before getting canceled
                     // or one of our iteration of body cancels then we'll consider
                     // ourself canceled.
                     context.MarkCanceled();
                     this.hasCompleted.Set(context, true);
-                }            
-                else 
+                }
+                else
                 {
                     if (this.onConditionComplete == null)
                     {
-                        this.onConditionComplete = new CompletionCallback<bool>(OnConditionComplete);
+                        this.onConditionComplete = new CompletionCallback<bool>(
+                            OnConditionComplete
+                        );
                     }
-                    context.ScheduleActivity(CompletionCondition, this.onConditionComplete);              
+                    context.ScheduleActivity(CompletionCondition, this.onConditionComplete);
                 }
             }
         }
 
-        void OnConditionComplete(NativeActivityContext context, ActivityInstance completedInstance, bool result)
+        void OnConditionComplete(
+            NativeActivityContext context,
+            ActivityInstance completedInstance,
+            bool result
+        )
         {
             if (result)
             {

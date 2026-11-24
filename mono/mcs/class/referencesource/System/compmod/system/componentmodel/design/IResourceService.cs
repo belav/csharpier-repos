@@ -1,31 +1,31 @@
 //------------------------------------------------------------------------------
 // <copyright file="IResourceService.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel.Design {
-
+namespace System.ComponentModel.Design
+{
     using System.Globalization;
     using System.Resources;
 
     /// <devdoc>
-    ///    <para> 
+    ///    <para>
     ///       Provides designers a way to
     ///       access a resource for the current design-time
     ///       object.</para>
     /// </devdoc>
-    public interface IResourceService {
-    
+    public interface IResourceService
+    {
         /// <devdoc>
-        ///    <para> 
+        ///    <para>
         ///       Locates the resource reader for the specified culture and
         ///       returns it.</para>
         /// </devdoc>
         IResourceReader GetResourceReader(CultureInfo info);
-    
+
         /// <devdoc>
         ///    <para>Locates the resource writer for the specified culture
         ///       and returns it. This will create a new resource for
@@ -35,4 +35,3 @@ namespace System.ComponentModel.Design {
         IResourceWriter GetResourceWriter(CultureInfo info);
     }
 }
-

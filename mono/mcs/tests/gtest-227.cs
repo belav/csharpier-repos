@@ -8,23 +8,20 @@ using System.Runtime.CompilerServices;
 
 public interface Indexed
 {
-	[IndexerName("Foo")]
-	int this [int ix] {
-		get;
-	}
+    [IndexerName("Foo")]
+    int this[int ix] { get; }
 }
 
 public class Foo<G>
-	where G : Indexed
+    where G : Indexed
 {
-	public static void Bar()
-	{
-		int i = default(G) [0];
-	}
+    public static void Bar()
+    {
+        int i = default(G)[0];
+    }
 }
 
 class X
 {
-	public static void Main ()
-	{ }
+    public static void Main() { }
 }

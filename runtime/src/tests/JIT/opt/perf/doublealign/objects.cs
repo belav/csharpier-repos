@@ -5,17 +5,19 @@ using System;
 using System.Runtime.CompilerServices;
 using Xunit;
 
-public class CMyException : System.Exception
-{
-}
+public class CMyException : System.Exception { }
 
 public class Class1
 {
     public Class1(double d1, byte b, double d2, Class1 c, double d3)
     {
-        m_d1 = d1; m_b = b; m_d2 = d2; m_d3 = d3;
+        m_d1 = d1;
+        m_b = b;
+        m_d2 = d2;
+        m_d3 = d3;
         _pLink = c;
     }
+
     public double m_d1;
     public byte m_b;
     public double m_d2;
@@ -31,15 +33,10 @@ public class CTest
     private static int s_unalignedCount = 0;
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void UseShort(short x)
-    {
-    }
+    private static void UseShort(short x) { }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void UseByte(byte x)
-    {
-    }
-
+    private static void UseByte(byte x) { }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     private static unsafe bool CheckDoubleAlignment(double* p)
@@ -67,12 +64,19 @@ public class CTest
             int beforeCount = GC.CollectionCount(0);
             Class1 c1 = new Class1(b, c++, d, prev, b + d);
 
-            fixed (double* p1 = &c1.m_d1, p2 = &c1.m_d2, p3 = &c1.m_d3)
+            fixed (
+                double* p1 = &c1.m_d1,
+                    p2 = &c1.m_d2,
+                    p3 = &c1.m_d3
+            )
             {
                 bool aligned = true;
-                if (!CheckDoubleAlignment(p1)) aligned = false;
-                if (!CheckDoubleAlignment(p2)) aligned = false;
-                if (!CheckDoubleAlignment(p3)) aligned = false;
+                if (!CheckDoubleAlignment(p1))
+                    aligned = false;
+                if (!CheckDoubleAlignment(p2))
+                    aligned = false;
+                if (!CheckDoubleAlignment(p3))
+                    aligned = false;
 
                 if (!aligned)
                 {
@@ -100,8 +104,12 @@ public class CTest
 
         float maxUnalignmentsAllowed = (float)(s_unalignedCount + s_alignedCount) * 0.02f;
 
-        Console.WriteLine("MaxUnalignmentsAllowed (2%): {0} UnalignedCount: {1} AlignedCount: {2}",
-            maxUnalignmentsAllowed, s_unalignedCount, s_alignedCount);
+        Console.WriteLine(
+            "MaxUnalignmentsAllowed (2%): {0} UnalignedCount: {1} AlignedCount: {2}",
+            maxUnalignmentsAllowed,
+            s_unalignedCount,
+            s_alignedCount
+        );
 
         if (s_unalignedCount > maxUnalignmentsAllowed)
         {

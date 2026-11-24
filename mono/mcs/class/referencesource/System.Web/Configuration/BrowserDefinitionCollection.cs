@@ -4,13 +4,13 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
     using System.Collections;
 
-    internal class BrowserDefinitionCollection : ArrayList {
-
-        internal BrowserDefinitionCollection() {
-        }
+    internal class BrowserDefinitionCollection : ArrayList
+    {
+        internal BrowserDefinitionCollection() { }
     }
 }

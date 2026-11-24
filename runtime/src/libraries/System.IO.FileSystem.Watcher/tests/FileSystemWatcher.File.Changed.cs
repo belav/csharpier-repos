@@ -14,7 +14,8 @@ namespace System.IO.Tests
             string file = CreateTestFile(TestDirectory, "file");
             using (var watcher = new FileSystemWatcher(TestDirectory, Path.GetFileName(file)))
             {
-                Action action = () => Directory.SetLastWriteTime(file, DateTime.Now + TimeSpan.FromSeconds(10));
+                Action action = () =>
+                    Directory.SetLastWriteTime(file, DateTime.Now + TimeSpan.FromSeconds(10));
 
                 WatcherChangeTypes expected = WatcherChangeTypes.Changed;
                 ExpectEvent(watcher, expected, action, expectedPath: file);
@@ -33,10 +34,13 @@ namespace System.IO.Tests
                 watcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.Attributes;
 
                 var attributes = File.GetAttributes(nestedFile);
-                Action action = () => File.SetAttributes(nestedFile, attributes | FileAttributes.ReadOnly);
+                Action action = () =>
+                    File.SetAttributes(nestedFile, attributes | FileAttributes.ReadOnly);
                 Action cleanup = () => File.SetAttributes(nestedFile, attributes);
 
-                WatcherChangeTypes expected = includeSubdirectories ? WatcherChangeTypes.Changed : 0;
+                WatcherChangeTypes expected = includeSubdirectories
+                    ? WatcherChangeTypes.Changed
+                    : 0;
                 ExpectEvent(watcher, expected, action, cleanup, nestedFile);
             }
         }
@@ -67,7 +71,13 @@ namespace System.IO.Tests
             using (var watcher = new FileSystemWatcher(dir, "*"))
             {
                 watcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.Size;
-                Assert.True(MountHelper.CreateSymbolicLink(Path.Combine(dir, GetRandomLinkName()), file, false));
+                Assert.True(
+                    MountHelper.CreateSymbolicLink(
+                        Path.Combine(dir, GetRandomLinkName()),
+                        file,
+                        false
+                    )
+                );
 
                 Action action = () => File.AppendAllText(file, "longtext");
                 Action cleanup = () => File.AppendAllText(file, "short");
@@ -85,7 +95,8 @@ namespace System.IO.Tests
                 TestISynchronizeInvoke invoker = new TestISynchronizeInvoke();
                 watcher.SynchronizingObject = invoker;
 
-                Action action = () => Directory.SetLastWriteTime(file, DateTime.Now + TimeSpan.FromSeconds(10));
+                Action action = () =>
+                    Directory.SetLastWriteTime(file, DateTime.Now + TimeSpan.FromSeconds(10));
 
                 ExpectEvent(watcher, WatcherChangeTypes.Changed, action, expectedPath: file);
                 Assert.True(invoker.BeginInvoke_Called);

@@ -5,13 +5,13 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Roslyn.Test.Utilities;
-using System.Collections.Generic;
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Retargeting
@@ -20,20 +20,37 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Retargeting
     {
         internal class Test01
         {
-            public CSharpCompilationReference c1, c2;
-            public AssemblySymbol c1MscorLibAssemblyRef, c2MscorlibAssemblyRef;
-            public NamedTypeSymbol oldMsCorLib_debuggerTypeProxyAttributeType, newMsCorLib_debuggerTypeProxyAttributeType;
-            public MethodSymbol oldMsCorLib_debuggerTypeProxyAttributeCtor, newMsCorLib_debuggerTypeProxyAttributeCtor;
-            public NamedTypeSymbol oldMsCorLib_systemType, newMsCorLib_systemType;
+            public CSharpCompilationReference c1,
+                c2;
+            public AssemblySymbol c1MscorLibAssemblyRef,
+                c2MscorlibAssemblyRef;
+            public NamedTypeSymbol oldMsCorLib_debuggerTypeProxyAttributeType,
+                newMsCorLib_debuggerTypeProxyAttributeType;
+            public MethodSymbol oldMsCorLib_debuggerTypeProxyAttributeCtor,
+                newMsCorLib_debuggerTypeProxyAttributeCtor;
+            public NamedTypeSymbol oldMsCorLib_systemType,
+                newMsCorLib_systemType;
 
             private static readonly AttributeDescription s_attribute = new AttributeDescription(
                 "System.Diagnostics",
                 "DebuggerTypeProxyAttribute",
-                new byte[][] { new byte[] { (byte)SignatureAttributes.Instance, 1, (byte)SignatureTypeCode.Void, (byte)SignatureTypeCode.TypeHandle, (byte)AttributeDescription.TypeHandleTarget.SystemType } });
+                new byte[][]
+                {
+                    new byte[]
+                    {
+                        (byte)SignatureAttributes.Instance,
+                        1,
+                        (byte)SignatureTypeCode.Void,
+                        (byte)SignatureTypeCode.TypeHandle,
+                        (byte)AttributeDescription.TypeHandleTarget.SystemType,
+                    },
+                }
+            );
 
             public Test01()
             {
-                string source = @"
+                string source =
+                    @"
 using System.Diagnostics;
 
 [assembly: DebuggerTypeProxyAttribute(typeof(System.Type), Target = typeof(int[]), TargetTypeName = ""IntArrayType"" )]
@@ -65,12 +82,20 @@ class TestClass
         return testParameter;
     }
 }";
-                var compilation1 = CSharpCompilation.Create("C1", new[] { Parse(source) }, new[] { OldMsCorLib }, TestOptions.ReleaseDll);
+                var compilation1 = CSharpCompilation.Create(
+                    "C1",
+                    new[] { Parse(source) },
+                    new[] { OldMsCorLib },
+                    TestOptions.ReleaseDll
+                );
                 c1 = new CSharpCompilationReference(compilation1);
 
                 var c1Assembly = compilation1.Assembly;
 
-                var compilation2 = CSharpCompilation.Create("C2", references: new MetadataReference[] { NewMsCorLib, c1 });
+                var compilation2 = CSharpCompilation.Create(
+                    "C2",
+                    references: new MetadataReference[] { NewMsCorLib, c1 }
+                );
                 c2 = new CSharpCompilationReference(compilation2);
 
                 var c1AsmRef = compilation2.GetReferencedAssemblySymbol(c1);
@@ -84,17 +109,47 @@ class TestClass
                 newMsCorLib_systemType = c2MscorlibAssemblyRef.GetTypeByMetadataName("System.Type");
                 Assert.NotSame(oldMsCorLib_systemType, newMsCorLib_systemType);
 
-                oldMsCorLib_debuggerTypeProxyAttributeType = c1MscorLibAssemblyRef.GetTypeByMetadataName("System.Diagnostics.DebuggerTypeProxyAttribute");
-                newMsCorLib_debuggerTypeProxyAttributeType = c2MscorlibAssemblyRef.GetTypeByMetadataName("System.Diagnostics.DebuggerTypeProxyAttribute");
-                Assert.NotSame(oldMsCorLib_debuggerTypeProxyAttributeType, newMsCorLib_debuggerTypeProxyAttributeType);
+                oldMsCorLib_debuggerTypeProxyAttributeType =
+                    c1MscorLibAssemblyRef.GetTypeByMetadataName(
+                        "System.Diagnostics.DebuggerTypeProxyAttribute"
+                    );
+                newMsCorLib_debuggerTypeProxyAttributeType =
+                    c2MscorlibAssemblyRef.GetTypeByMetadataName(
+                        "System.Diagnostics.DebuggerTypeProxyAttribute"
+                    );
+                Assert.NotSame(
+                    oldMsCorLib_debuggerTypeProxyAttributeType,
+                    newMsCorLib_debuggerTypeProxyAttributeType
+                );
 
-                oldMsCorLib_debuggerTypeProxyAttributeCtor = (MethodSymbol)oldMsCorLib_debuggerTypeProxyAttributeType.GetMembers(".ctor").Single(
-                    m => ((MethodSymbol)m).ParameterCount == 1 && TypeSymbol.Equals(((MethodSymbol)m).GetParameterType(0), oldMsCorLib_systemType, TypeCompareKind.ConsiderEverything2));
+                oldMsCorLib_debuggerTypeProxyAttributeCtor = (MethodSymbol)
+                    oldMsCorLib_debuggerTypeProxyAttributeType
+                        .GetMembers(".ctor")
+                        .Single(m =>
+                            ((MethodSymbol)m).ParameterCount == 1
+                            && TypeSymbol.Equals(
+                                ((MethodSymbol)m).GetParameterType(0),
+                                oldMsCorLib_systemType,
+                                TypeCompareKind.ConsiderEverything2
+                            )
+                        );
 
-                newMsCorLib_debuggerTypeProxyAttributeCtor = (MethodSymbol)newMsCorLib_debuggerTypeProxyAttributeType.GetMembers(".ctor").Single(
-                    m => ((MethodSymbol)m).ParameterCount == 1 && TypeSymbol.Equals(((MethodSymbol)m).GetParameterType(0), newMsCorLib_systemType, TypeCompareKind.ConsiderEverything2));
+                newMsCorLib_debuggerTypeProxyAttributeCtor = (MethodSymbol)
+                    newMsCorLib_debuggerTypeProxyAttributeType
+                        .GetMembers(".ctor")
+                        .Single(m =>
+                            ((MethodSymbol)m).ParameterCount == 1
+                            && TypeSymbol.Equals(
+                                ((MethodSymbol)m).GetParameterType(0),
+                                newMsCorLib_systemType,
+                                TypeCompareKind.ConsiderEverything2
+                            )
+                        );
 
-                Assert.NotSame(oldMsCorLib_debuggerTypeProxyAttributeCtor, newMsCorLib_debuggerTypeProxyAttributeCtor);
+                Assert.NotSame(
+                    oldMsCorLib_debuggerTypeProxyAttributeCtor,
+                    newMsCorLib_debuggerTypeProxyAttributeCtor
+                );
             }
 
             public void TestAttributeRetargeting(Symbol symbol)
@@ -103,13 +158,17 @@ class TestClass
                 TestAttributeRetargeting(symbol.GetAttributes());
 
                 // Verify GetAttributes(AttributeType from Retargeted assembly)
-                TestAttributeRetargeting(symbol.GetAttributes(newMsCorLib_debuggerTypeProxyAttributeType));
+                TestAttributeRetargeting(
+                    symbol.GetAttributes(newMsCorLib_debuggerTypeProxyAttributeType)
+                );
 
                 // Verify GetAttributes(AttributeType from Underlying assembly)
                 Assert.Empty(symbol.GetAttributes(oldMsCorLib_debuggerTypeProxyAttributeType));
 
                 // Verify GetAttributes(AttributeCtor from Retargeted assembly)
-                TestAttributeRetargeting(symbol.GetAttributes(newMsCorLib_debuggerTypeProxyAttributeType));
+                TestAttributeRetargeting(
+                    symbol.GetAttributes(newMsCorLib_debuggerTypeProxyAttributeType)
+                );
 
                 // Verify GetAttributes(AttributeCtor from Underlying assembly)
                 Assert.Empty(symbol.GetAttributes(oldMsCorLib_debuggerTypeProxyAttributeType));
@@ -124,16 +183,48 @@ class TestClass
                 TestAttributeRetargeting(symbol.GetReturnTypeAttributes());
 
                 // Verify GetReturnTypeAttributes(AttributeType from Retargeted assembly)
-                TestAttributeRetargeting(symbol.GetReturnTypeAttributes().Where(a => TypeSymbol.Equals(a.AttributeClass, newMsCorLib_debuggerTypeProxyAttributeType, TypeCompareKind.ConsiderEverything2)));
+                TestAttributeRetargeting(
+                    symbol
+                        .GetReturnTypeAttributes()
+                        .Where(a =>
+                            TypeSymbol.Equals(
+                                a.AttributeClass,
+                                newMsCorLib_debuggerTypeProxyAttributeType,
+                                TypeCompareKind.ConsiderEverything2
+                            )
+                        )
+                );
 
                 // Verify GetReturnTypeAttributes(AttributeType from Underlying assembly) returns nothing. Shouldn't match to old attr type
-                Assert.Empty(symbol.GetReturnTypeAttributes().Where(a => TypeSymbol.Equals(a.AttributeClass, oldMsCorLib_debuggerTypeProxyAttributeType, TypeCompareKind.ConsiderEverything2)));
+                Assert.Empty(
+                    symbol
+                        .GetReturnTypeAttributes()
+                        .Where(a =>
+                            TypeSymbol.Equals(
+                                a.AttributeClass,
+                                oldMsCorLib_debuggerTypeProxyAttributeType,
+                                TypeCompareKind.ConsiderEverything2
+                            )
+                        )
+                );
 
                 // Verify GetReturnTypeAttributes(AttributeCtor from Retargeted assembly)
-                TestAttributeRetargeting(symbol.GetReturnTypeAttributes().Where(a => a.AttributeConstructor == newMsCorLib_debuggerTypeProxyAttributeCtor));
+                TestAttributeRetargeting(
+                    symbol
+                        .GetReturnTypeAttributes()
+                        .Where(a =>
+                            a.AttributeConstructor == newMsCorLib_debuggerTypeProxyAttributeCtor
+                        )
+                );
 
                 // Verify GetReturnTypeAttributes(AttributeCtor from Underlying assembly) returns nothing. Shouldn't match to old attr type.
-                Assert.Empty(symbol.GetReturnTypeAttributes().Where(a => a.AttributeConstructor == oldMsCorLib_debuggerTypeProxyAttributeCtor));
+                Assert.Empty(
+                    symbol
+                        .GetReturnTypeAttributes()
+                        .Where(a =>
+                            a.AttributeConstructor == oldMsCorLib_debuggerTypeProxyAttributeCtor
+                        )
+                );
             }
 
             private void TestAttributeRetargeting(IEnumerable<CSharpAttributeData> attributes)
@@ -144,32 +235,42 @@ class TestClass
                 Assert.IsType<RetargetingAttributeData>(attribute);
 
                 Assert.Same(newMsCorLib_debuggerTypeProxyAttributeType, attribute.AttributeClass);
-                Assert.Same(newMsCorLib_debuggerTypeProxyAttributeCtor, attribute.AttributeConstructor);
-                Assert.Same(newMsCorLib_systemType, attribute.AttributeConstructor.GetParameterType(0));
+                Assert.Same(
+                    newMsCorLib_debuggerTypeProxyAttributeCtor,
+                    attribute.AttributeConstructor
+                );
+                Assert.Same(
+                    newMsCorLib_systemType,
+                    attribute.AttributeConstructor.GetParameterType(0)
+                );
 
                 Assert.Equal(1, attribute.CommonConstructorArguments.Length);
                 attribute.VerifyValue(0, TypedConstantKind.Type, newMsCorLib_systemType);
 
                 Assert.Equal(2, attribute.CommonNamedArguments.Length);
-                attribute.VerifyNamedArgumentValue<object>(0, "Target", TypedConstantKind.Type, typeof(int[]));
-                attribute.VerifyNamedArgumentValue(1, "TargetTypeName", TypedConstantKind.Primitive, "IntArrayType");
+                attribute.VerifyNamedArgumentValue<object>(
+                    0,
+                    "Target",
+                    TypedConstantKind.Type,
+                    typeof(int[])
+                );
+                attribute.VerifyNamedArgumentValue(
+                    1,
+                    "TargetTypeName",
+                    TypedConstantKind.Primitive,
+                    "IntArrayType"
+                );
             }
         }
 
         private static MetadataReference OldMsCorLib
         {
-            get
-            {
-                return TestMetadata.Net40.mscorlib;
-            }
+            get { return TestMetadata.Net40.mscorlib; }
         }
 
         private static MetadataReference NewMsCorLib
         {
-            get
-            {
-                return TestMetadata.Net451.mscorlib;
-            }
+            get { return TestMetadata.Net451.mscorlib; }
         }
 
         [Fact]
@@ -195,7 +296,9 @@ class TestClass
         public void Test01_NamedTypeAttribute()
         {
             Test01 test = new Test01();
-            var testClass = test.c2.Compilation.GlobalNamespace.GetTypeMembers("TestClass").Single();
+            var testClass = test
+                .c2.Compilation.GlobalNamespace.GetTypeMembers("TestClass")
+                .Single();
             Assert.IsType<RetargetingNamedTypeSymbol>(testClass);
             test.TestAttributeRetargeting(testClass);
         }
@@ -204,8 +307,13 @@ class TestClass
         public void Test01_FieldAttribute()
         {
             Test01 test = new Test01();
-            var testClass = test.c2.Compilation.GlobalNamespace.GetTypeMembers("TestClass").Single();
-            FieldSymbol testField = testClass.GetMembers("testField").OfType<FieldSymbol>().Single();
+            var testClass = test
+                .c2.Compilation.GlobalNamespace.GetTypeMembers("TestClass")
+                .Single();
+            FieldSymbol testField = testClass
+                .GetMembers("testField")
+                .OfType<FieldSymbol>()
+                .Single();
             Assert.IsType<RetargetingFieldSymbol>(testField);
             test.TestAttributeRetargeting(testField);
         }
@@ -214,8 +322,13 @@ class TestClass
         public void Test01_PropertyAttribute()
         {
             Test01 test = new Test01();
-            var testClass = test.c2.Compilation.GlobalNamespace.GetTypeMembers("TestClass").Single();
-            PropertySymbol testProperty = testClass.GetMembers("TestProperty").OfType<PropertySymbol>().Single();
+            var testClass = test
+                .c2.Compilation.GlobalNamespace.GetTypeMembers("TestClass")
+                .Single();
+            PropertySymbol testProperty = testClass
+                .GetMembers("TestProperty")
+                .OfType<PropertySymbol>()
+                .Single();
             Assert.IsType<RetargetingPropertySymbol>(testProperty);
             test.TestAttributeRetargeting(testProperty);
 
@@ -228,8 +341,13 @@ class TestClass
         public void Test01_MethodAttribute()
         {
             Test01 test = new Test01();
-            var testClass = test.c2.Compilation.GlobalNamespace.GetTypeMembers("TestClass").Single();
-            MethodSymbol testMethod = testClass.GetMembers("TestMethod").OfType<MethodSymbol>().Single();
+            var testClass = test
+                .c2.Compilation.GlobalNamespace.GetTypeMembers("TestClass")
+                .Single();
+            MethodSymbol testMethod = testClass
+                .GetMembers("TestMethod")
+                .OfType<MethodSymbol>()
+                .Single();
             Assert.IsType<RetargetingMethodSymbol>(testMethod);
             test.TestAttributeRetargeting(testMethod);
         }
@@ -238,8 +356,13 @@ class TestClass
         public void Test01_TypeParameterAttribute()
         {
             Test01 test = new Test01();
-            var testClass = test.c2.Compilation.GlobalNamespace.GetTypeMembers("TestClass").Single();
-            MethodSymbol testMethod = testClass.GetMembers("TestMethod").OfType<MethodSymbol>().Single();
+            var testClass = test
+                .c2.Compilation.GlobalNamespace.GetTypeMembers("TestClass")
+                .Single();
+            MethodSymbol testMethod = testClass
+                .GetMembers("TestMethod")
+                .OfType<MethodSymbol>()
+                .Single();
             Assert.IsType<RetargetingMethodSymbol>(testMethod);
             TypeParameterSymbol testTypeParameter = testMethod.TypeParameters[0];
             Assert.IsType<RetargetingTypeParameterSymbol>(testTypeParameter);
@@ -250,8 +373,13 @@ class TestClass
         public void Test01_ParameterAttribute()
         {
             Test01 test = new Test01();
-            var testClass = test.c2.Compilation.GlobalNamespace.GetTypeMembers("TestClass").Single();
-            MethodSymbol testMethod = testClass.GetMembers("TestMethod").OfType<MethodSymbol>().Single();
+            var testClass = test
+                .c2.Compilation.GlobalNamespace.GetTypeMembers("TestClass")
+                .Single();
+            MethodSymbol testMethod = testClass
+                .GetMembers("TestMethod")
+                .OfType<MethodSymbol>()
+                .Single();
             Assert.IsType<RetargetingMethodSymbol>(testMethod);
             ParameterSymbol testParameter = testMethod.Parameters[0];
             Assert.IsType<RetargetingMethodParameterSymbol>(testParameter);
@@ -262,17 +390,26 @@ class TestClass
         public void Test01_ReturnTypeAttribute()
         {
             Test01 test = new Test01();
-            var testClass = test.c2.Compilation.GlobalNamespace.GetTypeMembers("TestClass").Single();
-            MethodSymbol testMethod = testClass.GetMembers("TestMethod").OfType<MethodSymbol>().Single();
+            var testClass = test
+                .c2.Compilation.GlobalNamespace.GetTypeMembers("TestClass")
+                .Single();
+            MethodSymbol testMethod = testClass
+                .GetMembers("TestMethod")
+                .OfType<MethodSymbol>()
+                .Single();
             Assert.IsType<RetargetingMethodSymbol>(testMethod);
             test.TestAttributeRetargeting_ReturnTypeAttributes(testMethod);
         }
 
         [Fact]
-        [WorkItem(569089, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/569089"), WorkItem(575948, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/575948")]
+        [
+            WorkItem(569089, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/569089"),
+            WorkItem(575948, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/575948")
+        ]
         public void NullArrays()
         {
-            var source1 = @"
+            var source1 =
+                @"
 using System;
 
 public class A : Attribute
@@ -291,11 +428,15 @@ public class C
 }
 ";
 
-            var source2 = @"
+            var source2 =
+                @"
 ";
 
             var c1 = CreateEmptyCompilation(source1, new[] { OldMsCorLib });
-            var c2 = CreateEmptyCompilation(source2, new MetadataReference[] { NewMsCorLib, new CSharpCompilationReference(c1) });
+            var c2 = CreateEmptyCompilation(
+                source2,
+                new MetadataReference[] { NewMsCorLib, new CSharpCompilationReference(c1) }
+            );
 
             var c = c2.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
             Assert.IsType<RetargetingNamedTypeSymbol>(c);
@@ -326,7 +467,8 @@ public class C
         [WorkItem(65048, "https://github.com/dotnet/roslyn/issues/65048")]
         public void MissingAttributeType()
         {
-            var source1 = @"
+            var source1 =
+                @"
 using System;
 
 public class A : Attribute
@@ -336,14 +478,23 @@ public class A : Attribute
 
             var comp1 = CreateCompilation(source1, options: TestOptions.DebugDll);
 
-            var source2 = @"
+            var source2 =
+                @"
 [A]
 public class C1
 {}
 ";
 
-            var comp2 = CreateCompilation(source2, references: new[] { comp1.ToMetadataReference() }, options: TestOptions.DebugDll);
-            var comp3 = CreateCompilation("", references: new[] { comp2.ToMetadataReference() }, options: TestOptions.DebugDll);
+            var comp2 = CreateCompilation(
+                source2,
+                references: new[] { comp1.ToMetadataReference() },
+                options: TestOptions.DebugDll
+            );
+            var comp3 = CreateCompilation(
+                "",
+                references: new[] { comp2.ToMetadataReference() },
+                options: TestOptions.DebugDll
+            );
 
             var c1 = comp3.GetTypeByMetadataName("C1");
             var a = c1.GetAttributes().Single();
@@ -356,7 +507,8 @@ public class C1
         [WorkItem(65048, "https://github.com/dotnet/roslyn/issues/65048")]
         public void MissingAttributeConstructor()
         {
-            var source1_1 = @"
+            var source1_1 =
+                @"
 using System;
 
 public class A : Attribute
@@ -364,17 +516,27 @@ public class A : Attribute
 }
 ";
 
-            var comp1_1 = CreateCompilation(source1_1, options: TestOptions.DebugDll, assemblyName: "Lib65048");
+            var comp1_1 = CreateCompilation(
+                source1_1,
+                options: TestOptions.DebugDll,
+                assemblyName: "Lib65048"
+            );
 
-            var source2 = @"
+            var source2 =
+                @"
 [A]
 public class C1
 {}
 ";
 
-            var comp2 = CreateCompilation(source2, references: new[] { comp1_1.ToMetadataReference() }, options: TestOptions.DebugDll);
+            var comp2 = CreateCompilation(
+                source2,
+                references: new[] { comp1_1.ToMetadataReference() },
+                options: TestOptions.DebugDll
+            );
 
-            var source1_2 = @"
+            var source1_2 =
+                @"
 using System;
 
 public class A : Attribute
@@ -383,9 +545,17 @@ public class A : Attribute
 }
 ";
 
-            var comp1_2 = CreateCompilation(source1_2, options: TestOptions.DebugDll, assemblyName: "Lib65048");
+            var comp1_2 = CreateCompilation(
+                source1_2,
+                options: TestOptions.DebugDll,
+                assemblyName: "Lib65048"
+            );
 
-            var comp3 = CreateCompilation("", references: new[] { comp2.ToMetadataReference(), comp1_2.ToMetadataReference() }, options: TestOptions.DebugDll);
+            var comp3 = CreateCompilation(
+                "",
+                references: new[] { comp2.ToMetadataReference(), comp1_2.ToMetadataReference() },
+                options: TestOptions.DebugDll
+            );
 
             var c1 = comp3.GetTypeByMetadataName("C1");
             var a = c1.GetAttributes().Single();

@@ -16,10 +16,15 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         /// <summary>
         /// For <c>string~</c> types.
         /// </summary>
-        public static readonly SyntaxAnnotation Oblivious = new($"{nameof(NullableSyntaxAnnotation)}.{Oblivious}");
+        public static readonly SyntaxAnnotation Oblivious = new(
+            $"{nameof(NullableSyntaxAnnotation)}.{Oblivious}"
+        );
+
         /// <summary>
         /// For <c>string!</c> or <c>string?</c> types.
         /// </summary>
-        public static readonly SyntaxAnnotation AnnotatedOrNotAnnotated = new($"{nameof(NullableSyntaxAnnotation)}.{AnnotatedOrNotAnnotated}");
+        public static readonly SyntaxAnnotation AnnotatedOrNotAnnotated = new(
+            $"{nameof(NullableSyntaxAnnotation)}.{AnnotatedOrNotAnnotated}"
+        );
     }
 }

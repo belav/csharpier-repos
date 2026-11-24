@@ -12,20 +12,21 @@ namespace System.Web.Mvc.Test
     {
         private static readonly NameValueCollection _backingStore = new NameValueCollection()
         {
-            { "foo", "fooValue" }
+            { "foo", "fooValue" },
         };
 
-        private static readonly NameValueCollection _unvalidatedBackingStore = new NameValueCollection()
-        {
-            { "foo", "fooUnvalidated" }
-        };
+        private static readonly NameValueCollection _unvalidatedBackingStore =
+            new NameValueCollection() { { "foo", "fooUnvalidated" } };
 
         [Fact]
         public void GetValueProvider()
         {
             // Arrange
-            Mock<MockableUnvalidatedRequestValues> mockUnvalidatedValues = new Mock<MockableUnvalidatedRequestValues>();
-            FormValueProviderFactory factory = new FormValueProviderFactory(_ => mockUnvalidatedValues.Object);
+            Mock<MockableUnvalidatedRequestValues> mockUnvalidatedValues =
+                new Mock<MockableUnvalidatedRequestValues>();
+            FormValueProviderFactory factory = new FormValueProviderFactory(_ =>
+                mockUnvalidatedValues.Object
+            );
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
             mockControllerContext.Setup(o => o.HttpContext.Request.Form).Returns(_backingStore);
@@ -46,15 +47,19 @@ namespace System.Web.Mvc.Test
         public void GetValueProvider_GetValue_SkipValidation()
         {
             // Arrange
-            Mock<MockableUnvalidatedRequestValues> mockUnvalidatedValues = new Mock<MockableUnvalidatedRequestValues>();
+            Mock<MockableUnvalidatedRequestValues> mockUnvalidatedValues =
+                new Mock<MockableUnvalidatedRequestValues>();
             mockUnvalidatedValues.Setup(o => o.Form).Returns(_unvalidatedBackingStore);
-            FormValueProviderFactory factory = new FormValueProviderFactory(_ => mockUnvalidatedValues.Object);
+            FormValueProviderFactory factory = new FormValueProviderFactory(_ =>
+                mockUnvalidatedValues.Object
+            );
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
             mockControllerContext.Setup(o => o.HttpContext.Request.Form).Returns(_backingStore);
 
             // Act
-            IUnvalidatedValueProvider valueProvider = (IUnvalidatedValueProvider)factory.GetValueProvider(mockControllerContext.Object);
+            IUnvalidatedValueProvider valueProvider = (IUnvalidatedValueProvider)
+                factory.GetValueProvider(mockControllerContext.Object);
 
             // Assert
             Assert.Equal(typeof(FormValueProvider), valueProvider.GetType());
@@ -73,7 +78,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { factory.GetValueProvider(null); }, "controllerContext");
+                delegate
+                {
+                    factory.GetValueProvider(null);
+                },
+                "controllerContext"
+            );
         }
     }
 }

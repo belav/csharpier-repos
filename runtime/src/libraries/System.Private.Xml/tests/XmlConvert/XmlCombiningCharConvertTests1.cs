@@ -14,7 +14,13 @@ namespace System.Xml.XmlConvertTests
         {
             for (int i = 0; i < _byte_CombiningChar.Length; i = i + 2)
             {
-                AddVariation(new CVariation(this, "EncodeName-EncodeLocalName : " + _Expbyte_CombiningChar[i / 2], XmlEncodeName1));
+                AddVariation(
+                    new CVariation(
+                        this,
+                        "EncodeName-EncodeLocalName : " + _Expbyte_CombiningChar[i / 2],
+                        XmlEncodeName1
+                    )
+                );
             }
         }
 
@@ -27,7 +33,8 @@ namespace System.Xml.XmlConvertTests
             int i = ((CurVariation.id) - 1) * 2;
             string strEnVal = string.Empty;
 
-            char c = (char)BinaryPrimitives.ReadUInt16LittleEndian(new Span<byte>(_byte_CombiningChar, i, 2));
+            char c = (char)
+                BinaryPrimitives.ReadUInt16LittleEndian(new Span<byte>(_byte_CombiningChar, i, 2));
             strEnVal = XmlConvert.EncodeName(c.ToString());
             CError.Compare(strEnVal, _Expbyte_CombiningChar[i / 2], "Comparison failed at " + i);
             return TEST_PASS;

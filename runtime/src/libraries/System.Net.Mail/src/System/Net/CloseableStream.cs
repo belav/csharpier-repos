@@ -12,7 +12,8 @@ namespace System.Net
         private readonly EventHandler? _onClose;
         private int _closed;
 
-        internal ClosableStream(Stream stream, EventHandler? onClose) : base(stream)
+        internal ClosableStream(Stream stream, EventHandler? onClose)
+            : base(stream)
         {
             _onClose = onClose;
         }

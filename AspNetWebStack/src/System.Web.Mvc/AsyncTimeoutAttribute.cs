@@ -6,8 +6,16 @@ using System.Web.Mvc.Async;
 
 namespace System.Web.Mvc
 {
-    [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "Unsealed so that subclassed types can set properties in the default constructor.")]
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1813:AvoidUnsealedAttributes",
+        Justification = "Unsealed so that subclassed types can set properties in the default constructor."
+    )]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        Inherited = true,
+        AllowMultiple = false
+    )]
     public class AsyncTimeoutAttribute : ActionFilterAttribute
     {
         // duration is specified in milliseconds
@@ -33,7 +41,9 @@ namespace System.Web.Mvc
             IAsyncManagerContainer container = filterContext.Controller as IAsyncManagerContainer;
             if (container == null)
             {
-                throw Error.AsyncCommon_ControllerMustImplementIAsyncManagerContainer(filterContext.Controller.GetType());
+                throw Error.AsyncCommon_ControllerMustImplementIAsyncManagerContainer(
+                    filterContext.Controller.GetType()
+                );
             }
 
             container.AsyncManager.Timeout = Duration;

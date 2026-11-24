@@ -21,10 +21,10 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Xunit;
+using System.Data.SqlTypes;
 using System.IO;
 using System.Xml;
-using System.Data.SqlTypes;
+using Xunit;
 
 namespace System.Data.Tests.SqlTypes
 {
@@ -47,6 +47,7 @@ namespace System.Data.Tests.SqlTypes
             Assert.Throws<ArgumentOutOfRangeException>(() => bytes[-1]);
             Assert.Throws<ArgumentOutOfRangeException>(() => bytes[10]);
         }
+
         [Fact]
         public void SqlBytesLength()
         {
@@ -61,6 +62,7 @@ namespace System.Data.Tests.SqlTypes
             bytes = new SqlBytes(b);
             Assert.Equal(10, bytes.Length);
         }
+
         [Fact]
         public void SqlBytesMaxLength()
         {
@@ -73,12 +75,14 @@ namespace System.Data.Tests.SqlTypes
             bytes = new SqlBytes(b);
             Assert.Equal(10, bytes.MaxLength);
         }
+
         [Fact]
         public void SqlBytesNull()
         {
             SqlBytes bytes = SqlBytes.Null;
             Assert.True(bytes.IsNull);
         }
+
         [Fact]
         public void SqlBytesStorage()
         {
@@ -97,6 +101,7 @@ namespace System.Data.Tests.SqlTypes
             bytes = new SqlBytes(fs);
             Assert.Throws<SqlNullValueException>(() => bytes.Storage);
         }
+
         [Fact]
         public void SqlBytesValue()
         {
@@ -108,6 +113,7 @@ namespace System.Data.Tests.SqlTypes
             Assert.Equal(0, b1[0]);
             Assert.Equal(10, b2[0]);
         }
+
         [Fact]
         public void SqlBytesSetLength()
         {
@@ -123,6 +129,7 @@ namespace System.Data.Tests.SqlTypes
             bytes.SetLength(2);
             Assert.Equal(2, bytes.Length);
         }
+
         [Fact]
         public void SqlBytesSetNull()
         {
@@ -133,6 +140,7 @@ namespace System.Data.Tests.SqlTypes
             Assert.Throws<SqlNullValueException>(() => bytes.Length);
             Assert.True(bytes.IsNull);
         }
+
         [Fact]
         public void GetXsdTypeTest()
         {
@@ -301,7 +309,9 @@ namespace System.Data.Tests.SqlTypes
             byte[] b2 = new byte[10];
             SqlBytes bytes = new SqlBytes(b2);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => bytes.Write(0, b1, b1.Length + 5, b1.Length));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                bytes.Write(0, b1, b1.Length + 5, b1.Length)
+            );
         }
 
         [Fact]
@@ -399,8 +409,11 @@ namespace System.Data.Tests.SqlTypes
 
         private sealed class TrickleStream : MemoryStream
         {
-            public TrickleStream(byte[] bytes) : base(bytes) { }
-            public override int Read(byte[] buffer, int offset, int count) => base.Read(buffer, offset, Math.Min(count, 1));
+            public TrickleStream(byte[] bytes)
+                : base(bytes) { }
+
+            public override int Read(byte[] buffer, int offset, int count) =>
+                base.Read(buffer, offset, Math.Min(count, 1));
         }
     }
 }

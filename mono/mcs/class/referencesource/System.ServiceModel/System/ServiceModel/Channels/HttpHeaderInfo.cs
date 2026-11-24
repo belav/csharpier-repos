@@ -17,19 +17,19 @@ namespace System.ServiceModel.Channels
     internal class HttpHeaderInfo
     {
         private static readonly HttpHeaderInfo[] knownContentHeaders = new HttpHeaderInfo[]
-            {
-                new HttpHeaderInfo("Allow") { IsContentHeader = true },
-                new HttpHeaderInfo("Content-Encoding") { IsContentHeader = true },
-                new HttpHeaderInfo("Content-Language") { IsContentHeader = true },
-                new HttpHeaderInfo("Content-Length") { IsContentHeader = true },
-                new HttpHeaderInfo("Content-Location") { IsContentHeader = true },
-                new HttpHeaderInfo("Content-MD5") { IsContentHeader = true },
-                new HttpHeaderInfo("Content-Range") { IsContentHeader = true },
-                new HttpHeaderInfo("Content-Type") { IsContentHeader = true },
-                new HttpHeaderInfo("Expires") { IsContentHeader = true },
-                new HttpHeaderInfo("Last-Modified") { IsContentHeader = true },
-                new HttpHeaderInfo("Content-Disposition") { IsContentHeader = true }       
-            };
+        {
+            new HttpHeaderInfo("Allow") { IsContentHeader = true },
+            new HttpHeaderInfo("Content-Encoding") { IsContentHeader = true },
+            new HttpHeaderInfo("Content-Language") { IsContentHeader = true },
+            new HttpHeaderInfo("Content-Length") { IsContentHeader = true },
+            new HttpHeaderInfo("Content-Location") { IsContentHeader = true },
+            new HttpHeaderInfo("Content-MD5") { IsContentHeader = true },
+            new HttpHeaderInfo("Content-Range") { IsContentHeader = true },
+            new HttpHeaderInfo("Content-Type") { IsContentHeader = true },
+            new HttpHeaderInfo("Expires") { IsContentHeader = true },
+            new HttpHeaderInfo("Last-Modified") { IsContentHeader = true },
+            new HttpHeaderInfo("Content-Disposition") { IsContentHeader = true },
+        };
 
         private static readonly Type httpRequestHeaderType = typeof(HttpRequestHeader);
         private static readonly Type httpResponseHeaderType = typeof(HttpResponseHeader);
@@ -40,19 +40,31 @@ namespace System.ServiceModel.Channels
 
         static HttpHeaderInfo()
         {
-            // Create the known headers list with the content headers 
+            // Create the known headers list with the content headers
             knownHeadersInfos = new ConcurrentDictionary<string, HttpHeaderInfo>(
-                knownContentHeaders.ToDictionary(headerInfo => headerInfo.Name), 
-                StringComparer.OrdinalIgnoreCase);
+                knownContentHeaders.ToDictionary(headerInfo => headerInfo.Name),
+                StringComparer.OrdinalIgnoreCase
+            );
 
             // Add the request and response headers to the known headers list
-            AddKnownHeaders(Enum.GetNames(httpRequestHeaderType).Select(enumString => GetHeaderString(enumString)), true);
-            AddKnownHeaders(Enum.GetNames(httpResponseHeaderType).Select(enumString => GetHeaderString(enumString)), false);
+            AddKnownHeaders(
+                Enum.GetNames(httpRequestHeaderType)
+                    .Select(enumString => GetHeaderString(enumString)),
+                true
+            );
+            AddKnownHeaders(
+                Enum.GetNames(httpResponseHeaderType)
+                    .Select(enumString => GetHeaderString(enumString)),
+                false
+            );
         }
 
         private HttpHeaderInfo(string name, bool isUnknownHeader = false)
         {
-            Fx.Assert(!string.IsNullOrWhiteSpace(name), "The 'name' parameter should not be null or whitespace.");
+            Fx.Assert(
+                !string.IsNullOrWhiteSpace(name),
+                "The 'name' parameter should not be null or whitespace."
+            );
             this.Name = name;
 
             this.isUnknownHeader = isUnknownHeader;
@@ -74,12 +86,15 @@ namespace System.ServiceModel.Channels
 
         public static HttpHeaderInfo Create(string headerName)
         {
-            Fx.Assert(!string.IsNullOrWhiteSpace(headerName), "The 'headerName' should not be null or whitespace.");
+            Fx.Assert(
+                !string.IsNullOrWhiteSpace(headerName),
+                "The 'headerName' should not be null or whitespace."
+            );
 
             HttpHeaderInfo headerInfo;
             if (!knownHeadersInfos.TryGetValue(headerName, out headerInfo))
             {
-                headerInfo = new HttpHeaderInfo(headerName, true);           
+                headerInfo = new HttpHeaderInfo(headerName, true);
             }
 
             return headerInfo;
@@ -100,7 +115,7 @@ namespace System.ServiceModel.Channels
         public bool TryRemoveHeader(HttpHeaders headers)
         {
             Fx.Assert(headers != null, "The 'headers' parameter should never be null.");
-            
+
             try
             {
                 headers.Remove(this.Name);
@@ -118,7 +133,7 @@ namespace System.ServiceModel.Channels
         public IEnumerable<string> TryGetHeader(HttpHeaders headers)
         {
             Fx.Assert(headers != null, "The 'headers' parameter should never be null.");
-            
+
             IEnumerable<string> values = null;
 
             if (!headers.TryGetValues(this.Name, out values))
@@ -164,7 +179,13 @@ namespace System.ServiceModel.Channels
         private static string GetHeaderString(string headerEnumString)
         {
             // Have to special case 'ETag' as it should not be hypenated
-            if (string.Equals(headerEnumString, HttpResponseHeader.ETag.ToString(), StringComparison.Ordinal))
+            if (
+                string.Equals(
+                    headerEnumString,
+                    HttpResponseHeader.ETag.ToString(),
+                    StringComparison.Ordinal
+                )
+            )
             {
                 return headerEnumString;
             }

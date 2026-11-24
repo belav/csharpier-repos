@@ -17,12 +17,16 @@ namespace System.ComponentModel.Design
     {
         internal const byte BinaryWriterMagic = 255;
 
-        private static bool EnableUnsafeBinaryFormatterInDesigntimeLicenseContextSerialization { get; } = AppContext.TryGetSwitch("System.ComponentModel.TypeConverter.EnableUnsafeBinaryFormatterInDesigntimeLicenseContextSerialization", out bool isEnabled) ? isEnabled : false;
+        private static bool EnableUnsafeBinaryFormatterInDesigntimeLicenseContextSerialization { get; } =
+            AppContext.TryGetSwitch(
+                "System.ComponentModel.TypeConverter.EnableUnsafeBinaryFormatterInDesigntimeLicenseContextSerialization",
+                out bool isEnabled
+            )
+                ? isEnabled
+                : false;
 
         // Not creatable.
-        private DesigntimeLicenseContextSerializer()
-        {
-        }
+        private DesigntimeLicenseContextSerializer() { }
 
         /// <summary>
         /// Serializes the licenses within the specified design-time license context
@@ -36,7 +40,13 @@ namespace System.ComponentModel.Design
             }
             else
             {
-                using (BinaryWriter writer = new BinaryWriter(o, encoding: Text.Encoding.UTF8, leaveOpen: true))
+                using (
+                    BinaryWriter writer = new BinaryWriter(
+                        o,
+                        encoding: Text.Encoding.UTF8,
+                        leaveOpen: true
+                    )
+                )
                 {
                     writer.Write(BinaryWriterMagic); // flag to identify BinaryWriter
                     writer.Write(cryptoKey);
@@ -50,7 +60,11 @@ namespace System.ComponentModel.Design
             }
         }
 
-        private static void SerializeWithBinaryFormatter(Stream o, string cryptoKey, DesigntimeLicenseContext context)
+        private static void SerializeWithBinaryFormatter(
+            Stream o,
+            string cryptoKey,
+            DesigntimeLicenseContext context
+        )
         {
 #pragma warning disable SYSLIB0011
 #pragma warning disable IL2026 // suppressed in ILLink.Suppressions.LibraryBuild.xml
@@ -81,7 +95,11 @@ namespace System.ComponentModel.Design
 
             public override long Length => _stream.Length;
 
-            public override long Position { get => _stream.Position; set => _stream.Position = value; }
+            public override long Position
+            {
+                get => _stream.Position;
+                set => _stream.Position = value;
+            }
 
             public override void Flush() => _stream.Flush();
 
@@ -101,11 +119,13 @@ namespace System.ComponentModel.Design
                 return _stream.Read(buffer);
             }
 
-            public override long Seek(long offset, SeekOrigin origin) => _stream.Seek(offset, origin);
+            public override long Seek(long offset, SeekOrigin origin) =>
+                _stream.Seek(offset, origin);
 
             public override void SetLength(long value) => _stream.SetLength(value);
 
-            public override void Write(byte[] buffer, int offset, int count) => _stream.Write(buffer, offset, count);
+            public override void Write(byte[] buffer, int offset, int count) =>
+                _stream.Write(buffer, offset, count);
 
             public override int ReadByte()
             {
@@ -131,7 +151,11 @@ namespace System.ComponentModel.Design
             return true;
         }
 
-        private static void DeserializeUsingBinaryFormatter(StreamWrapper wrappedStream, string cryptoKey, RuntimeLicenseContext context)
+        private static void DeserializeUsingBinaryFormatter(
+            StreamWrapper wrappedStream,
+            string cryptoKey,
+            RuntimeLicenseContext context
+        )
         {
             if (EnableUnsafeBinaryFormatterInDesigntimeLicenseContextSerialization)
             {
@@ -168,10 +192,19 @@ namespace System.ComponentModel.Design
             }
             else
             {
-                using (BinaryReader reader = new BinaryReader(wrappedStream, encoding: Text.Encoding.UTF8, leaveOpen: true))
+                using (
+                    BinaryReader reader = new BinaryReader(
+                        wrappedStream,
+                        encoding: Text.Encoding.UTF8,
+                        leaveOpen: true
+                    )
+                )
                 {
                     byte binaryWriterIdentifier = wrappedStream._firstByte;
-                    Debug.Assert(binaryWriterIdentifier == BinaryWriterMagic, $"Expected the first byte to be {BinaryWriterMagic}");
+                    Debug.Assert(
+                        binaryWriterIdentifier == BinaryWriterMagic,
+                        $"Expected the first byte to be {BinaryWriterMagic}"
+                    );
                     string streamCryptoKey = reader.ReadString();
                     int numEntries = reader.ReadInt32();
                     if (streamCryptoKey == cryptoKey)

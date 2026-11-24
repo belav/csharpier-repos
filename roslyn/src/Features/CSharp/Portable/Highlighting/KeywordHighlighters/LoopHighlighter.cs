@@ -22,15 +22,16 @@ namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting.KeywordHighlighters
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public LoopHighlighter()
-        {
-        }
+        public LoopHighlighter() { }
 
-        protected override bool IsHighlightableNode(SyntaxNode node)
-            => node.IsContinuableConstruct();
+        protected override bool IsHighlightableNode(SyntaxNode node) =>
+            node.IsContinuableConstruct();
 
         protected override void AddHighlightsForNode(
-            SyntaxNode node, List<TextSpan> spans, CancellationToken cancellationToken)
+            SyntaxNode node,
+            List<TextSpan> spans,
+            CancellationToken cancellationToken
+        )
         {
             switch (node)
             {
@@ -58,20 +59,30 @@ namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting.KeywordHighlighters
             spans.Add(EmptySpan(statement.SemicolonToken.Span.End));
         }
 
-        private static void HighlightForStatement(ForStatementSyntax statement, List<TextSpan> spans)
-            => spans.Add(statement.ForKeyword.Span);
+        private static void HighlightForStatement(
+            ForStatementSyntax statement,
+            List<TextSpan> spans
+        ) => spans.Add(statement.ForKeyword.Span);
 
-        private static void HighlightForEachStatement(CommonForEachStatementSyntax statement, List<TextSpan> spans)
-            => spans.Add(statement.ForEachKeyword.Span);
+        private static void HighlightForEachStatement(
+            CommonForEachStatementSyntax statement,
+            List<TextSpan> spans
+        ) => spans.Add(statement.ForEachKeyword.Span);
 
-        private static void HighlightWhileStatement(WhileStatementSyntax statement, List<TextSpan> spans)
-            => spans.Add(statement.WhileKeyword.Span);
+        private static void HighlightWhileStatement(
+            WhileStatementSyntax statement,
+            List<TextSpan> spans
+        ) => spans.Add(statement.WhileKeyword.Span);
 
         /// <summary>
         /// Finds all breaks and continues that are a child of this node, and adds the appropriate spans to the spans list.
         /// </summary>
-        private static void HighlightRelatedKeywords(SyntaxNode node, List<TextSpan> spans,
-            bool highlightBreaks, bool highlightContinues)
+        private static void HighlightRelatedKeywords(
+            SyntaxNode node,
+            List<TextSpan> spans,
+            bool highlightBreaks,
+            bool highlightContinues
+        )
         {
             Debug.Assert(highlightBreaks || highlightContinues);
 
@@ -90,12 +101,18 @@ namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting.KeywordHighlighters
                 foreach (var child in node.ChildNodes())
                 {
                     var highlightBreaksForChild = highlightBreaks && !child.IsBreakableConstruct();
-                    var highlightContinuesForChild = highlightContinues && !child.IsContinuableConstruct();
+                    var highlightContinuesForChild =
+                        highlightContinues && !child.IsContinuableConstruct();
 
                     // Only recurse if we have anything to do
                     if (highlightBreaksForChild || highlightContinuesForChild)
                     {
-                        HighlightRelatedKeywords(child, spans, highlightBreaksForChild, highlightContinuesForChild);
+                        HighlightRelatedKeywords(
+                            child,
+                            spans,
+                            highlightBreaksForChild,
+                            highlightContinuesForChild
+                        );
                     }
                 }
             }

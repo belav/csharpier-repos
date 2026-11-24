@@ -49,9 +49,11 @@ public sealed record RelationalQueryableMethodTranslatingExpressionVisitorDepend
         IRelationalSqlTranslatingExpressionVisitorFactory relationalSqlTranslatingExpressionVisitorFactory,
         ISqlExpressionFactory sqlExpressionFactory,
         IRelationalTypeMappingSource typeMappingSource,
-        IModel model)
+        IModel model
+    )
     {
-        RelationalSqlTranslatingExpressionVisitorFactory = relationalSqlTranslatingExpressionVisitorFactory;
+        RelationalSqlTranslatingExpressionVisitorFactory =
+            relationalSqlTranslatingExpressionVisitorFactory;
         SqlExpressionFactory = sqlExpressionFactory;
         TypeMappingSource = typeMappingSource;
         Model = model;

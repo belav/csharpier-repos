@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 using System;
 using System.Collections.Generic;
@@ -45,10 +45,7 @@ namespace DbMetal.Generator
         // required by TextWriter
         public override Encoding Encoding
         {
-            get
-            {
-                return TextWriter.Encoding;
-            }
+            get { return TextWriter.Encoding; }
         }
 
         public string IndentationPattern { get; set; }
@@ -132,17 +129,24 @@ namespace DbMetal.Generator
             return name;
         }
 
-        public abstract IDisposable WriteEnum(SpecificationDefinition specificationDefinition, string name);
+        public abstract IDisposable WriteEnum(
+            SpecificationDefinition specificationDefinition,
+            string name
+        );
 
-        public virtual void WriteEnum(SpecificationDefinition specificationDefinition, string name, IDictionary<string, int> values)
+        public virtual void WriteEnum(
+            SpecificationDefinition specificationDefinition,
+            string name,
+            IDictionary<string, int> values
+        )
         {
             using (WriteEnum(specificationDefinition, name))
             {
                 var orderedValues = from nv in values orderby nv.Value select nv;
-                int currentValue = 1, counter = 0;
+                int currentValue = 1,
+                    counter = 0;
                 foreach (var nameValue in orderedValues)
                 {
-
                     var suffix = ++counter < orderedValues.Count() ? "," : "";
 
                     if (nameValue.Value == currentValue)
@@ -150,7 +154,9 @@ namespace DbMetal.Generator
                     else
                     {
                         currentValue = nameValue.Value;
-                        WriteLine(string.Format("{0} = {1}{2}", nameValue.Key, nameValue.Value, suffix));
+                        WriteLine(
+                            string.Format("{0} = {1}{2}", nameValue.Key, nameValue.Value, suffix)
+                        );
                     }
                     currentValue++;
                 }
@@ -193,6 +199,7 @@ namespace DbMetal.Generator
         #region Code generation - Language write
 
         public abstract void WriteCommentLine(string line);
+
         public virtual void WriteCommentLines(string comments)
         {
             string[] commentLines = comments.Split('\n');
@@ -208,31 +215,65 @@ namespace DbMetal.Generator
         /// <param name="name"></param>
         public abstract void WriteUsingNamespace(string name);
         public abstract IDisposable WriteNamespace(string name);
-        public abstract IDisposable WriteClass(SpecificationDefinition specificationDefinition, string name,
-                                               string baseClass, params string[] interfaces);
+        public abstract IDisposable WriteClass(
+            SpecificationDefinition specificationDefinition,
+            string name,
+            string baseClass,
+            params string[] interfaces
+        );
 
         public abstract IDisposable WriteRegion(string name);
         public abstract IDisposable WriteAttribute(AttributeDefinition attributeDefinition);
 
-        public abstract IDisposable WriteCtor(SpecificationDefinition specificationDefinition, string name,
-                                              ParameterDefinition[] parameters, IList<string> baseCallParameters);
-        public abstract IDisposable WriteMethod(SpecificationDefinition specificationDefinition, string name, Type returnType,
-                                                params ParameterDefinition[] parameters);
+        public abstract IDisposable WriteCtor(
+            SpecificationDefinition specificationDefinition,
+            string name,
+            ParameterDefinition[] parameters,
+            IList<string> baseCallParameters
+        );
+        public abstract IDisposable WriteMethod(
+            SpecificationDefinition specificationDefinition,
+            string name,
+            Type returnType,
+            params ParameterDefinition[] parameters
+        );
 
-        public abstract IDisposable WriteProperty(SpecificationDefinition specificationDefinition, string name, string propertyType);
+        public abstract IDisposable WriteProperty(
+            SpecificationDefinition specificationDefinition,
+            string name,
+            string propertyType
+        );
         public abstract void WriteAutomaticPropertyGetSet();
         public abstract IDisposable WritePropertyGet();
         public abstract IDisposable WritePropertySet();
 
-        public abstract void WritePropertyWithBackingField(SpecificationDefinition specificationDefinition, string name, string propertyType, bool privateSetter);
-        public virtual void WritePropertyWithBackingField(SpecificationDefinition specificationDefinition, string name, string propertyType)
+        public abstract void WritePropertyWithBackingField(
+            SpecificationDefinition specificationDefinition,
+            string name,
+            string propertyType,
+            bool privateSetter
+        );
+
+        public virtual void WritePropertyWithBackingField(
+            SpecificationDefinition specificationDefinition,
+            string name,
+            string propertyType
+        )
         {
             WritePropertyWithBackingField(specificationDefinition, name, propertyType, false);
         }
 
-        public abstract void WriteField(SpecificationDefinition specificationDefinition, string name, string fieldType);
+        public abstract void WriteField(
+            SpecificationDefinition specificationDefinition,
+            string name,
+            string fieldType
+        );
 
-        public abstract void WriteEvent(SpecificationDefinition specificationDefinition, string name, string eventDelegate);
+        public abstract void WriteEvent(
+            SpecificationDefinition specificationDefinition,
+            string name,
+            string eventDelegate
+        );
 
         public abstract IDisposable WriteIf(string expression);
 
@@ -302,7 +343,10 @@ namespace DbMetal.Generator
 
         public abstract string GetArray(string array, string literalIndex);
 
-        public virtual string GetMethodCallExpression(string method, params string[] literalParameters)
+        public virtual string GetMethodCallExpression(
+            string method,
+            params string[] literalParameters
+        )
         {
             return string.Format("{0}({1})", method, string.Join(", ", literalParameters));
         }
@@ -324,7 +368,11 @@ namespace DbMetal.Generator
         public abstract string GetXOrExpression(string a, string b);
         public abstract string GetAndExpression(string a, string b);
 
-        public abstract string GetTernaryExpression(string conditionExpression, string trueExpression, string falseExpression);
+        public abstract string GetTernaryExpression(
+            string conditionExpression,
+            string trueExpression,
+            string falseExpression
+        );
 
         public abstract string GetNullValueExpression(string literalType);
 
@@ -344,7 +392,11 @@ namespace DbMetal.Generator
         /// <param name="variableName"></param>
         /// <param name="expression"></param>
         /// <returns></returns>
-        public abstract string GetVariableDeclarationInitialization(string variableType, string variableName, string expression);
+        public abstract string GetVariableDeclarationInitialization(
+            string variableType,
+            string variableName,
+            string expression
+        );
 
         /// <summary>
         /// Writes the raw if.

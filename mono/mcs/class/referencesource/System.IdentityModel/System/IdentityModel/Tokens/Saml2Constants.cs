@@ -7,7 +7,7 @@
 namespace System.IdentityModel.Tokens
 {
     using System;
-    
+
     /// <summary>
     /// Contains constants related to SAML2.
     /// </summary>
@@ -36,11 +36,12 @@ namespace System.IdentityModel.Tokens
 
             /// <summary>
             /// UNIX file permissions [Saml2Core, 8.1.4]
-            /// </summary> 
+            /// </summary>
             public static readonly Uri Unix = new Uri(UnixString);
 
             public const string RwedcString = "urn:oasis:names:tc:SAML:1.0:action:rwedc";
-            public const string RwedcNegationString = "urn:oasis:names:tc:SAML:1.0:action:rwedc-negation";
+            public const string RwedcNegationString =
+                "urn:oasis:names:tc:SAML:1.0:action:rwedc-negation";
             public const string GhppString = "urn:oasis:names:tc:SAML:1.0:action:ghpp";
             public const string UnixString = "urn:oasis:names:tc:SAML:1.0:action:unix";
         }
@@ -80,28 +81,40 @@ namespace System.IdentityModel.Tokens
             public static readonly Uri InternetProtocol = new Uri(InternetProtocolString);
 
             // [Saml2AuthnContext, 3.4.2]
-            public static readonly Uri InternetProtocolPassword = new Uri(InternetProtocolPasswordString);
+            public static readonly Uri InternetProtocolPassword = new Uri(
+                InternetProtocolPasswordString
+            );
 
             // [Saml2AuthnContext, 3.4.3]
             public static readonly Uri Kerberos = new Uri(KerberosString);
 
             // [Saml2AuthnContext, 3.4.4]
-            public static readonly Uri MobileOneFactorUnregistered = new Uri(MobileOneFactorUnregisteredString);
+            public static readonly Uri MobileOneFactorUnregistered = new Uri(
+                MobileOneFactorUnregisteredString
+            );
 
             // [Saml2AuthnContext, 3.4.5]
-            public static readonly Uri MobileTwoFactorUnregistered = new Uri(MobileTwoFactorUnregisteredString);
+            public static readonly Uri MobileTwoFactorUnregistered = new Uri(
+                MobileTwoFactorUnregisteredString
+            );
 
             // [Saml2AuthnContext, 3.4.6]
-            public static readonly Uri MobileOneFactorContract = new Uri(MobileOneFactorContractString);
+            public static readonly Uri MobileOneFactorContract = new Uri(
+                MobileOneFactorContractString
+            );
 
             // [Saml2AuthnContext, 3.4.7]
-            public static readonly Uri MobileTwoFactorContract = new Uri(MobileTwoFactorContractString);
+            public static readonly Uri MobileTwoFactorContract = new Uri(
+                MobileTwoFactorContractString
+            );
 
             // [Saml2AuthnContext, 3.4.8]
             public static readonly Uri Password = new Uri(PasswordString);
 
             // [Saml2AuthnContext, 3.4.9]
-            public static readonly Uri PasswordProtectedTransport = new Uri(PasswordProtectedTransportString);
+            public static readonly Uri PasswordProtectedTransport = new Uri(
+                PasswordProtectedTransportString
+            );
 
             // [Saml2AuthnContext, 3.4.10]
             public static readonly Uri PreviousSession = new Uri(PreviousSessionString);
@@ -137,7 +150,9 @@ namespace System.IdentityModel.Tokens
             public static readonly Uri PersonalTelephony = new Uri(PersonalTelephonyString);
 
             // [Saml2AuthnContext, 3.4.21]
-            public static readonly Uri AuthenticatedTelephony = new Uri(AuthenticatedTelephonyString);
+            public static readonly Uri AuthenticatedTelephony = new Uri(
+                AuthenticatedTelephonyString
+            );
 
             // [Saml2AuthnContext, 3.4.22]
             public static readonly Uri SecureRemotePassword = new Uri(SecureRemotePasswordString);
@@ -151,32 +166,52 @@ namespace System.IdentityModel.Tokens
             // [Saml2AuthnContext, 3.4.25]
             public static readonly Uri Unspecified = new Uri(UnspecifiedString);
 
-            public const string InternetProtocolString = "urn:oasis:names:tc:SAML:2.0:ac:classes:InternetProtocol";
-            public const string InternetProtocolPasswordString = "urn:oasis:names:tc:SAML:2.0:ac:classes:InternetProtocolPassword";
+            public const string InternetProtocolString =
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:InternetProtocol";
+            public const string InternetProtocolPasswordString =
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:InternetProtocolPassword";
             public const string KerberosString = "urn:oasis:names:tc:SAML:2.0:ac:classes:Kerberos";
-            public const string MobileOneFactorUnregisteredString = "urn:oasis:names:tc:SAML:2.0:ac:classes:MobileOneFactorUnregistered";
-            public const string MobileTwoFactorUnregisteredString = "urn:oasis:names:tc:SAML:2.0:ac:classes:MobileTwoFactorUnregistered";
-            public const string MobileOneFactorContractString = "urn:oasis:names:tc:SAML:2.0:ac:classes:MobileOneFactorContract";
-            public const string MobileTwoFactorContractString = "urn:oasis:names:tc:SAML:2.0:ac:classes:MobileTwoFactorContract";
+            public const string MobileOneFactorUnregisteredString =
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:MobileOneFactorUnregistered";
+            public const string MobileTwoFactorUnregisteredString =
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:MobileTwoFactorUnregistered";
+            public const string MobileOneFactorContractString =
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:MobileOneFactorContract";
+            public const string MobileTwoFactorContractString =
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:MobileTwoFactorContract";
             public const string PasswordString = "urn:oasis:names:tc:SAML:2.0:ac:classes:Password";
-            public const string PasswordProtectedTransportString = "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport";
-            public const string PreviousSessionString = "urn:oasis:names:tc:SAML:2.0:ac:classes:PreviousSession";
+            public const string PasswordProtectedTransportString =
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport";
+            public const string PreviousSessionString =
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:PreviousSession";
             public const string X509String = "urn:oasis:names:tc:SAML:2.0:ac:classes:X509";
             public const string PgpString = "urn:oasis:names:tc:SAML:2.0:ac:classes:PGP";
             public const string SpkiString = "urn:oasis:names:tc:SAML:2.0:ac:classes:SPKI";
             public const string XmlDsigString = "urn:oasis:names:tc:SAML:2.0:ac:classes:XMLDSig";
-            public const string SecureRempotePasswordString = "urn:oasis:names:tc:SAML:2.0:ac:classes:SecureRemotePassword";
-            public const string SmartcardString = "urn:oasis:names:tc:SAML:2.0:ac:classes:Smartcard";
-            public const string SmartcardPkiString = "urn:oasis:names:tc:SAML:2.0:ac:classes:SmartcardPKI";
-            public const string SoftwarePkiString = "urn:oasis:names:tc:SAML:2.0:ac:classes:SoftwarePKI";
-            public const string TelephonyString = "urn:oasis:names:tc:SAML:2.0:ac:classes:Telephony";
-            public const string NomadTelephonyString = "urn:oasis:names:tc:SAML:2.0:ac:classes:NomadTelephony";
-            public const string PersonalTelephonyString = "urn:oasis:names:tc:SAML:2.0:ac:classes:PersonalTelephony";
-            public const string AuthenticatedTelephonyString = "urn:oasis:names:tc:SAML:2.0:ac:classes:AuthenticatedTelephony";
-            public const string SecureRemotePasswordString = "urn:oasis:names:tc:SAML:2.0:ac:classes:SecureRemotePassword";
-            public const string TlsClientString = "urn:oasis:names:tc:SAML:2.0:ac:classes:TLSClient";
-            public const string TimeSyncTokenString = "urn:oasis:names:tc:SAML:2.0:ac:classes:TimeSyncToken";
-            public const string UnspecifiedString = "urn:oasis:names:tc:SAML:2.0:ac:classes:Unspecified";
+            public const string SecureRempotePasswordString =
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:SecureRemotePassword";
+            public const string SmartcardString =
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:Smartcard";
+            public const string SmartcardPkiString =
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:SmartcardPKI";
+            public const string SoftwarePkiString =
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:SoftwarePKI";
+            public const string TelephonyString =
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:Telephony";
+            public const string NomadTelephonyString =
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:NomadTelephony";
+            public const string PersonalTelephonyString =
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:PersonalTelephony";
+            public const string AuthenticatedTelephonyString =
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:AuthenticatedTelephony";
+            public const string SecureRemotePasswordString =
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:SecureRemotePassword";
+            public const string TlsClientString =
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:TLSClient";
+            public const string TimeSyncTokenString =
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:TimeSyncToken";
+            public const string UnspecifiedString =
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:Unspecified";
             public const string WindowsString = "urn:federation:authentication:windows";
         }
 
@@ -184,7 +219,8 @@ namespace System.IdentityModel.Tokens
         {
             public const string BearerString = "urn:oasis:names:tc:SAML:2.0:cm:bearer";
             public const string HolderOfKeyString = "urn:oasis:names:tc:SAML:2.0:cm:holder-of-key";
-            public const string SenderVouchesString = "urn:oasis:names:tc:SAML:2.0:cm:sender-vouches";
+            public const string SenderVouchesString =
+                "urn:oasis:names:tc:SAML:2.0:cm:sender-vouches";
 
             /// <summary>
             /// The subject of the assertion is the bearer of the assertion. [Saml2Prof, 3.3]
@@ -198,7 +234,7 @@ namespace System.IdentityModel.Tokens
             public static readonly Uri HolderOfKey = new Uri(HolderOfKeyString);
 
             /// <summary>
-            /// Indicates that no other information is available about the context of use of the 
+            /// Indicates that no other information is available about the context of use of the
             /// assertion. [Saml2Prof, 3.2]
             /// </summary>
             public static readonly Uri SenderVouches = new Uri(SenderVouchesString);
@@ -250,14 +286,14 @@ namespace System.IdentityModel.Tokens
         internal static class NameIdentifierFormats
         {
             /// <summary>
-            /// The interpretation of the content of the element is left to 
+            /// The interpretation of the content of the element is left to
             /// individual implementations. [Saml2Core, 8.3.1]
             /// </summary>
             public static readonly Uri Unspecified = new Uri(UnspecifiedString);
 
             /// <summary>
-            /// Indicates that the content of the element is in the form of an 
-            /// email address, specifically "addr-spec" as defined in 
+            /// Indicates that the content of the element is in the form of an
+            /// email address, specifically "addr-spec" as defined in
             /// [RFC 2822, 3.4.1]. [Saml2Core, 8.3.2]
             /// </summary>
             public static readonly Uri EmailAddress = new Uri(EmailAddressString);
@@ -270,13 +306,15 @@ namespace System.IdentityModel.Tokens
             public static readonly Uri X509SubjectName = new Uri(X509SubjectNameString);
 
             /// <summary>
-            /// Indicates that the content of the element is a Windows domain 
+            /// Indicates that the content of the element is a Windows domain
             /// qualified name. [Saml2Core, 8.3.4]
             /// </summary>
-            public static readonly Uri WindowsDomainQualifiedName = new Uri(WindowsDomainQualifiedNameString);
+            public static readonly Uri WindowsDomainQualifiedName = new Uri(
+                WindowsDomainQualifiedNameString
+            );
 
             /// <summary>
-            /// Indicates that the content of the element is in the form of a 
+            /// Indicates that the content of the element is in the form of a
             /// Kerberos principal name using the format name[/instance]@REALM.
             /// [Saml2Core, 8.3.5]
             /// </summary>
@@ -286,13 +324,13 @@ namespace System.IdentityModel.Tokens
             /// Indicates that the content of the element is a URI identifying an
             /// entity that provides SAML-based services (such as a SAML authority,
             /// requester, or responder) or is a participant in SAML profiles (such
-            /// as a service provider supporting the browser SSO profile). 
+            /// as a service provider supporting the browser SSO profile).
             /// [Saml2Core, 8.3.6]
             /// </summary>
             public static readonly Uri Entity = new Uri(EntityString);
 
             /// <summary>
-            /// Indicates that the content of the element is a persistent opaque 
+            /// Indicates that the content of the element is a persistent opaque
             /// identifier for a principal that is specific to an identity provider
             /// and a service provider or affiliation of service providers.
             /// [Saml2Core, 8.3.7] (See also for many restrictions on the data.)
@@ -300,8 +338,8 @@ namespace System.IdentityModel.Tokens
             public static readonly Uri Persistent = new Uri(PersistentString);
 
             /// <summary>
-            /// Indicates that the content of the element is an identifier with 
-            /// transient semantics and SHOULD be treated as an opaque and 
+            /// Indicates that the content of the element is an identifier with
+            /// transient semantics and SHOULD be treated as an opaque and
             /// temporary value by the relying party. [Saml2Core, 8.3.8]
             /// </summary>
             public static readonly Uri Transient = new Uri(TransientString);
@@ -312,35 +350,43 @@ namespace System.IdentityModel.Tokens
             /// </summary>
             public static readonly Uri Encrypted = new Uri(EncryptedString);
 
-            public const string UnspecifiedString = "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified";
-            public const string EmailAddressString = "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress";
-            public const string X509SubjectNameString = "urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName";
-            public const string WindowsDomainQualifiedNameString = "urn:oasis:names:tc:SAML:1.1:nameid-format:WindowsDomainQualifiedName";
-            public const string KerberosString = "urn:oasis:names:tc:SAML:2.0:nameid-format:kerberos";
+            public const string UnspecifiedString =
+                "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified";
+            public const string EmailAddressString =
+                "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress";
+            public const string X509SubjectNameString =
+                "urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName";
+            public const string WindowsDomainQualifiedNameString =
+                "urn:oasis:names:tc:SAML:1.1:nameid-format:WindowsDomainQualifiedName";
+            public const string KerberosString =
+                "urn:oasis:names:tc:SAML:2.0:nameid-format:kerberos";
             public const string EntityString = "urn:oasis:names:tc:SAML:2.0:nameid-format:entity";
-            public const string PersistentString = "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent";
-            public const string TransientString = "urn:oasis:names:tc:SAML:2.0:nameid-format:transient";
-            public const string EncryptedString = "urn:oasis:names:tc:SAML:2.0:nameid-format:encrypted";
+            public const string PersistentString =
+                "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent";
+            public const string TransientString =
+                "urn:oasis:names:tc:SAML:2.0:nameid-format:transient";
+            public const string EncryptedString =
+                "urn:oasis:names:tc:SAML:2.0:nameid-format:encrypted";
         }
 
         internal static class Types
         {
             public const string ActionType = "ActionType";
             public const string AdviceType = "AdviceType";
-            public const string AssertionType = "AssertionType";           
-            public const string AttributeStatementType = "AttributeStatementType";            
-            public const string AttributeType = "AttributeType";            
-            public const string AudienceRestrictionType = "AudienceRestrictionType";            
-            public const string AuthnContextType = "AuthnContextType";            
-            public const string AuthnStatementType = "AuthnStatementType";            
-            public const string AuthzDecisionStatementType = "AuthzDecisionStatementType";            
-            public const string BaseIDAbstractType = "BaseIDAbstractType";            
-            public const string ConditionAbstractType = "ConditionAbstractType";            
-            public const string ConditionsType = "ConditionsType";            
-            public const string EncryptedElementType = "EncryptedElementType";            
-            public const string EvidenceType = "EvidenceType";            
-            public const string KeyInfoConfirmationDataType = "KeyInfoConfirmationDataType";            
-            public const string NameIDType = "NameIDType";            
+            public const string AssertionType = "AssertionType";
+            public const string AttributeStatementType = "AttributeStatementType";
+            public const string AttributeType = "AttributeType";
+            public const string AudienceRestrictionType = "AudienceRestrictionType";
+            public const string AuthnContextType = "AuthnContextType";
+            public const string AuthnStatementType = "AuthnStatementType";
+            public const string AuthzDecisionStatementType = "AuthzDecisionStatementType";
+            public const string BaseIDAbstractType = "BaseIDAbstractType";
+            public const string ConditionAbstractType = "ConditionAbstractType";
+            public const string ConditionsType = "ConditionsType";
+            public const string EncryptedElementType = "EncryptedElementType";
+            public const string EvidenceType = "EvidenceType";
+            public const string KeyInfoConfirmationDataType = "KeyInfoConfirmationDataType";
+            public const string NameIDType = "NameIDType";
             public const string OneTimeUseType = "OneTimeUseType";
             public const string ProxyRestrictionType = "ProxyRestrictionType";
             public const string SubjectType = "SubjectType";

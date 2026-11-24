@@ -3,12 +3,12 @@
 //------------------------------------------------------------------------------
 
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 //
 // ClaimsPrincipal.cs
@@ -40,7 +40,7 @@ namespace System.Security.Claims
         {
             None = 0,
             HasIdentities = 1,
-            UserData = 2
+            UserData = 2,
         }
 
         [NonSerialized]
@@ -48,39 +48,44 @@ namespace System.Security.Claims
 
         [NonSerialized]
         const string PreFix = "System.Security.ClaimsPrincipal.";
+
         [NonSerialized]
         const string IdentitiesKey = PreFix + "Identities";
+
         [NonSerialized]
         const string VersionKey = PreFix + "Version";
+
         [OptionalField(VersionAdded = 2)]
         string m_version = "1.0";
+
         [OptionalField(VersionAdded = 2)]
         string m_serializedClaimsIdentities;
 
         // ==== Important
         //
-        // adding identities to this principal will have an effect on Authorization 
+        // adding identities to this principal will have an effect on Authorization
         // it is a critical as adding sids and claims to the NTToken.
         // adding claimsIdentities to this list will affect the Authorization for this Principal
         // an attempt was made to mark this as SecurityCritical, however because enumerators access it
         // we would need to extend SecuritySafeCritical to the enumerator methods AND the contstructors.
         // In the end, this requires addional [SecuritySafeCritical] attributes.  So is any additional access
-        // is added to 'm_identities' then this must be carefully monitored.  This is equivalent to adding sids to the 
+        // is added to 'm_identities' then this must be carefully monitored.  This is equivalent to adding sids to the
         // NTToken and will be used up the stack to make Authorization decisions.
         //
-        
+
         [NonSerialized]
         List<ClaimsIdentity> m_identities = new List<ClaimsIdentity>();
 
         [NonSerialized]
-        static Func<IEnumerable<ClaimsIdentity>, ClaimsIdentity> s_identitySelector = SelectPrimaryIdentity;
+        static Func<IEnumerable<ClaimsIdentity>, ClaimsIdentity> s_identitySelector =
+            SelectPrimaryIdentity;
 
         [NonSerialized]
         static Func<ClaimsPrincipal> s_principalSelector = ClaimsPrincipalSelector;
 
         /// <summary>
         /// This method iterates through the collection of ClaimsIdentities and chooses an identity as the primary.
-        /// The choice is made by examining all the identities in order and choosing the first on that is 
+        /// The choice is made by examining all the identities in order and choosing the first on that is
         /// a WindowsIdentity OR in the case of no WindowsIdentities, the first identity
         /// </summary>
         static ClaimsIdentity SelectPrimaryIdentity(IEnumerable<ClaimsIdentity> identities)
@@ -136,44 +141,30 @@ namespace System.Security.Claims
 
         public static Func<IEnumerable<ClaimsIdentity>, ClaimsIdentity> PrimaryIdentitySelector
         {
-            get
-            {
-                return s_identitySelector;
-            }
+            get { return s_identitySelector; }
             [SecurityCritical]
-            set
-            {
-                s_identitySelector = value;
-            }
+            set { s_identitySelector = value; }
         }
 
         public static Func<ClaimsPrincipal> ClaimsPrincipalSelector
         {
-            get
-            {
-                return s_principalSelector;
-            }
+            get { return s_principalSelector; }
             [SecurityCritical]
-            set
-            {
-                s_principalSelector = value;
-            }
+            set { s_principalSelector = value; }
         }
-       
+
         #region ClaimsPrincipal Constructors
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsPrincipal"/>
         /// </summary>
-        public ClaimsPrincipal()
-        {
-        }
+        public ClaimsPrincipal() { }
 
         /// <summary>
         /// Initializes an instance of <see cref="Principal"/>
         /// </summary>
         /// <param name="identities">Collection of <see cref="ClaimsIdentity"/> representing the subjects in the principal. </param>
-        /// 
+        ///
         public ClaimsPrincipal(IEnumerable<ClaimsIdentity> identities)
         {
             if (identities == null)
@@ -190,7 +181,7 @@ namespace System.Security.Claims
         /// Initializes an instance of <see cref="ClaimsPrincipal"/>
         /// </summary>
         /// <param name="identity">Collection of <see cref="ClaimsIdentity"/> representing the subjects in the principal. </param>
-        /// 
+        ///
         public ClaimsPrincipal(IIdentity identity)
         {
             if (identity == null)
@@ -256,7 +247,6 @@ namespace System.Security.Claims
             Initialize(reader);
         }
 
-
         [SecurityCritical]
         protected ClaimsPrincipal(SerializationInfo info, StreamingContext context)
         {
@@ -273,10 +263,7 @@ namespace System.Security.Claims
         /// </summary>
         protected virtual byte[] CustomSerializationData
         {
-            get
-            {
-                return m_userSerializationData;
-            }
+            get { return m_userSerializationData; }
         }
 
         /// <summary>
@@ -304,7 +291,7 @@ namespace System.Security.Claims
         }
 
         #endregion ClaimsPrincipal Constructors
-        
+
         [OnSerializing()]
         [SecurityCritical]
         private void OnSerializingMethod(StreamingContext context)
@@ -339,7 +326,6 @@ namespace System.Security.Claims
 
             info.AddValue(IdentitiesKey, SerializeIdentities());
             info.AddValue(VersionKey, m_version);
-
         }
 
         [SecurityCritical]
@@ -372,13 +358,13 @@ namespace System.Security.Claims
         }
 
         /// <summary>
-        /// Deserializes a base64 string of a List of ClaimsIdentity. 
+        /// Deserializes a base64 string of a List of ClaimsIdentity.
         /// The layout is a list of strings where each ClaimsIdentity occupies two entries.
         /// [ int | string.Empty, Base64(ClaimsIdentity), ...]
         /// If a non-null string is found, assume it is the handle and this indicates that a we are rehydrating a WindowsIdentity.
         /// This design was put together to solve failures when users, create a restricted appdomain {sandbox}
         /// and have WindowsIdentity as an Identity.
-        /// 
+        ///
         /// In PartialTrust scenarios, it is necessary to call BinaryFormatter.Deserialize(x, x, false). The false
         /// parameter controls if the serializer will perform a demand.
         /// </summary>
@@ -400,22 +386,39 @@ namespace System.Security.Claims
                     for (int i = 0; i < listOfIdentities.Count; i += 2)
                     {
                         ClaimsIdentity claimsIdentity = null;
-                        using (MemoryStream claimsIdentityStream = new MemoryStream(Convert.FromBase64String(listOfIdentities[i + 1])))
+                        using (
+                            MemoryStream claimsIdentityStream = new MemoryStream(
+                                Convert.FromBase64String(listOfIdentities[i + 1])
+                            )
+                        )
                         {
-                            claimsIdentity = (ClaimsIdentity)formatter.Deserialize(claimsIdentityStream, null, false);
+                            claimsIdentity = (ClaimsIdentity)
+                                formatter.Deserialize(claimsIdentityStream, null, false);
                         }
 
                         // found a WindowsIdentity
                         if (!string.IsNullOrEmpty(listOfIdentities[i]))
                         {
                             Int64 handle;
-                            if (Int64.TryParse(listOfIdentities[i], NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out handle))
+                            if (
+                                Int64.TryParse(
+                                    listOfIdentities[i],
+                                    NumberStyles.Integer,
+                                    NumberFormatInfo.InvariantInfo,
+                                    out handle
+                                )
+                            )
                             {
-                                claimsIdentity = new WindowsIdentity(claimsIdentity, new IntPtr(handle));
+                                claimsIdentity = new WindowsIdentity(
+                                    claimsIdentity,
+                                    new IntPtr(handle)
+                                );
                             }
                             else
                             {
-                                throw new SerializationException(Environment.GetResourceString("Serialization_CorruptedStream"));
+                                throw new SerializationException(
+                                    Environment.GetResourceString("Serialization_CorruptedStream")
+                                );
                             }
                         }
 
@@ -424,6 +427,7 @@ namespace System.Security.Claims
                 }
             }
         }
+
         /// <summary>
         /// Package up all identities into a stream.
         /// Special case windows identity, since deserializing it fails in PT scenarios. Internal access has been added
@@ -431,7 +435,7 @@ namespace System.Security.Claims
         /// the WindowsIdentity can be reconstituted when deserialized.
         /// NOTE: that the type check is an exact match, if users have overridden the Windows Identity, then they are on their own.
         /// That is OK because they will have to implement ISerializable.
-        /// 
+        ///
         /// In PartialTrust scenarios, it is necessary to call BinaryFormatter.Serialize(x, x, x, false). The false
         /// parameter controls if the serializer will perform a demand.
         /// </summary>
@@ -447,11 +451,27 @@ namespace System.Security.Claims
                 if (identity.GetType() == typeof(WindowsIdentity))
                 {
                     WindowsIdentity windowsIdentity = identity as WindowsIdentity;
-                    identities.Add(windowsIdentity.GetTokenInternal().ToInt64().ToString(NumberFormatInfo.InvariantInfo));
+                    identities.Add(
+                        windowsIdentity
+                            .GetTokenInternal()
+                            .ToInt64()
+                            .ToString(NumberFormatInfo.InvariantInfo)
+                    );
                     using (MemoryStream claimsIdentityStream = new MemoryStream())
                     {
-                        formatter.Serialize(claimsIdentityStream, windowsIdentity.CloneAsBase(), null, false);
-                        identities.Add(Convert.ToBase64String(claimsIdentityStream.GetBuffer(), 0, (int)claimsIdentityStream.Length));
+                        formatter.Serialize(
+                            claimsIdentityStream,
+                            windowsIdentity.CloneAsBase(),
+                            null,
+                            false
+                        );
+                        identities.Add(
+                            Convert.ToBase64String(
+                                claimsIdentityStream.GetBuffer(),
+                                0,
+                                (int)claimsIdentityStream.Length
+                            )
+                        );
                     }
                 }
                 else
@@ -460,7 +480,13 @@ namespace System.Security.Claims
                     {
                         identities.Add("");
                         formatter.Serialize(claimsIdentityStream, identity, null, false);
-                        identities.Add(Convert.ToBase64String(claimsIdentityStream.GetBuffer(), 0, (int)claimsIdentityStream.Length));
+                        identities.Add(
+                            Convert.ToBase64String(
+                                claimsIdentityStream.GetBuffer(),
+                                0,
+                                (int)claimsIdentityStream.Length
+                            )
+                        );
                     }
                 }
             }
@@ -470,10 +496,9 @@ namespace System.Security.Claims
                 formatter.Serialize(ms, identities, null, false);
                 return Convert.ToBase64String(ms.GetBuffer(), 0, (int)ms.Length);
             }
-
         }
 
-        // adding identities to this principal will have an effect on Authorization 
+        // adding identities to this principal will have an effect on Authorization
         // it is as critical as adding sids and claims to the NTToken.
         [SecurityCritical]
         public virtual void AddIdentity(ClaimsIdentity identity)
@@ -488,8 +513,8 @@ namespace System.Security.Claims
             m_identities.Add(identity);
         }
 
-        // adding identities to this principal will have an effect on Authorization 
-        // it is as critical as adding sids and claims to the NTToken. 
+        // adding identities to this principal will have an effect on Authorization
+        // it is as critical as adding sids and claims to the NTToken.
         //
         [SecurityCritical]
         public virtual void AddIdentities(IEnumerable<ClaimsIdentity> identities)
@@ -541,14 +566,14 @@ namespace System.Security.Claims
             }
         }
 #else
-        public static ClaimsPrincipal Current => throw new PlatformNotSupportedException ();
+        public static ClaimsPrincipal Current => throw new PlatformNotSupportedException();
 #endif
 
         /// <summary>
         /// Retrieves a <see cref="IEnumerable{Claim}"/> where each claim is matched by <param name="match"/>.
         /// </summary>
         /// <param name="match">The predicate that performs the matching logic.</param>
-        /// <returns>A <see cref="IEnumerable{Claim}"/> of matched claims.</returns>  
+        /// <returns>A <see cref="IEnumerable{Claim}"/> of matched claims.</returns>
         /// <remarks>Returns claims from all Identities</remarks>
         /// SafeCritical since it access m_identities
         public virtual IEnumerable<Claim> FindAll(Predicate<Claim> match)
@@ -580,7 +605,7 @@ namespace System.Security.Claims
         /// Retrieves a <see cref="IEnumerable{Claim}"/> where each Claim.Type equals <paramref name="type"/>.
         /// </summary>
         /// <param name="type">The type of the claim to match.</param>
-        /// <returns>A <see cref="IEnumerable{Claim}"/> of matched claims.</returns>   
+        /// <returns>A <see cref="IEnumerable{Claim}"/> of matched claims.</returns>
         /// <remarks>Comparison is made using Ordinal case in-sensitive on type.<</remarks>public IEnumerable<Claim> FindAll(string claimType)
         /// SafeCritical since it access m_identities
         public virtual IEnumerable<Claim> FindAll(string type)
@@ -805,7 +830,7 @@ namespace System.Security.Claims
                 numPropertiesRead++;
                 int numberOfIdentities = reader.ReadInt32();
                 for (int index = 0; index < numberOfIdentities; ++index)
-                {                    
+                {
                     // directly add to m_identities as that is what we serialized from
                     m_identities.Add(CreateClaimsIdentity(reader));
                 }
@@ -813,7 +838,7 @@ namespace System.Security.Claims
 
             if ((mask & SerializationMask.UserData) == SerializationMask.UserData)
             {
-                // 
+                //
                 int cb = reader.ReadInt32();
                 m_userSerializationData = reader.ReadBytes(cb);
                 numPropertiesRead++;
@@ -842,7 +867,6 @@ namespace System.Security.Claims
         /// <exception cref="ArgumentNullException">if 'writer' is null.</exception>
         protected virtual void WriteTo(BinaryWriter writer, byte[] userData)
         {
-
             if (writer == null)
             {
                 throw new ArgumentNullException("writer");
@@ -883,4 +907,3 @@ namespace System.Security.Claims
         }
     }
 }
-

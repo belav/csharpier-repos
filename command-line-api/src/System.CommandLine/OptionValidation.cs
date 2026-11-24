@@ -28,7 +28,9 @@ namespace System.CommandLine
         /// </summary>
         /// <param name="option">The option to configure.</param>
         /// <returns>The option being extended.</returns>
-        public static CliOption<DirectoryInfo> AcceptExistingOnly(this CliOption<DirectoryInfo> option)
+        public static CliOption<DirectoryInfo> AcceptExistingOnly(
+            this CliOption<DirectoryInfo> option
+        )
         {
             option._argument.AcceptExistingOnly();
             return option;
@@ -39,7 +41,9 @@ namespace System.CommandLine
         /// </summary>
         /// <param name="option">The option to configure.</param>
         /// <returns>The option being extended.</returns>
-        public static CliOption<FileSystemInfo> AcceptExistingOnly(this CliOption<FileSystemInfo> option)
+        public static CliOption<FileSystemInfo> AcceptExistingOnly(
+            this CliOption<FileSystemInfo> option
+        )
         {
             option._argument.AcceptExistingOnly();
             return option;

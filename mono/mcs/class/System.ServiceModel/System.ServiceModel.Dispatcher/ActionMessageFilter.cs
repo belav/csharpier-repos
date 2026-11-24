@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,56 +32,59 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
-namespace System.ServiceModel.Dispatcher {
-	[DataContract]
-	public class ActionMessageFilter : MessageFilter
-	{
-		ReadOnlyCollection<string> actions;
+namespace System.ServiceModel.Dispatcher
+{
+    [DataContract]
+    public class ActionMessageFilter : MessageFilter
+    {
+        ReadOnlyCollection<string> actions;
 
-		public ActionMessageFilter (params string [] actions)
-		{
-			if (actions == null)
-				throw new ArgumentNullException ("actions");
+        public ActionMessageFilter(params string[] actions)
+        {
+            if (actions == null)
+                throw new ArgumentNullException("actions");
 
-			// remove duplicates
-			List<string> l = new List<string> ();
+            // remove duplicates
+            List<string> l = new List<string>();
 
-			foreach (string action in actions) {
-				if (action == null)
-					throw new ArgumentNullException ("actions");
-				if (l.Contains (action) == false)
-					l.Add (action);
-			}
+            foreach (string action in actions)
+            {
+                if (action == null)
+                    throw new ArgumentNullException("actions");
+                if (l.Contains(action) == false)
+                    l.Add(action);
+            }
 
-			this.actions = new ReadOnlyCollection<string> (l);
-		}
+            this.actions = new ReadOnlyCollection<string>(l);
+        }
 
-		protected internal override IMessageFilterTable<FilterData> CreateFilterTable<FilterData> ()
-		{
-			return new ActionMessageFilterTable<FilterData> ();
-		}
+        protected internal override IMessageFilterTable<FilterData> CreateFilterTable<FilterData>()
+        {
+            return new ActionMessageFilterTable<FilterData>();
+        }
 
-		public override bool Match (Message message)
-		{
- 			foreach (string action in actions)
- 				if (message.Headers.Action == action || action == "*")
- 					return true;
+        public override bool Match(Message message)
+        {
+            foreach (string action in actions)
+                if (message.Headers.Action == action || action == "*")
+                    return true;
 
-			return false;
-		}
+            return false;
+        }
 
-		public override bool Match (MessageBuffer messageBuffer)
-		{
-			bool retval;
-			Message m = messageBuffer.CreateMessage ();
-			retval = Match (m);
-			m.Close ();
-			
-			return retval;
-		}
+        public override bool Match(MessageBuffer messageBuffer)
+        {
+            bool retval;
+            Message m = messageBuffer.CreateMessage();
+            retval = Match(m);
+            m.Close();
 
-		public ReadOnlyCollection<string> Actions {
-			get { return actions; }
-		}
-	}
+            return retval;
+        }
+
+        public ReadOnlyCollection<string> Actions
+        {
+            get { return actions; }
+        }
+    }
 }

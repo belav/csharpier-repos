@@ -6,22 +6,22 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 
-namespace System.Xml {
-
+namespace System.Xml
+{
     //
     // IDtdInfo interface
     //
     /// <summary>
-    /// This is an interface for a compiled DTD information. 
+    /// This is an interface for a compiled DTD information.
     /// It exposes information and functionality that XmlReader need in order to be able
-    /// to expand entities, add default attributes and correctly normalize attribute values 
+    /// to expand entities, add default attributes and correctly normalize attribute values
     /// according to their data types.
     /// </summary>
-    internal interface IDtdInfo {
-
+    internal interface IDtdInfo
+    {
         /// <summary>
         /// DOCTYPE name
         /// </summary>
@@ -38,13 +38,13 @@ namespace System.Xml {
         bool HasDefaultAttributes { get; }
 
         /// <summary>
-        /// Returns true if the DTD contains any declaration of an attribute 
+        /// Returns true if the DTD contains any declaration of an attribute
         /// whose type is other than CDATA
         /// </summary>
         bool HasNonCDataAttributes { get; }
 
         /// <summary>
-        /// Looks up a DTD attribute list definition by its name. 
+        /// Looks up a DTD attribute list definition by its name.
         /// </summary>
         /// <param name="prefix">The prefix of the attribute list to look for</param>
         /// <param name="localName">The local name of the attribute list to look for</param>
@@ -68,24 +68,28 @@ namespace System.Xml {
     // IDtdAttributeListInfo interface
     //
     /// <summary>
-    /// Exposes information about attributes declared in an attribute list in a DTD 
-    /// that XmlReader need in order to be able to add default attributes 
+    /// Exposes information about attributes declared in an attribute list in a DTD
+    /// that XmlReader need in order to be able to add default attributes
     /// and correctly normalize attribute values according to their data types.
     /// </summary>
-    internal interface IDtdAttributeListInfo {
+    internal interface IDtdAttributeListInfo
+    {
         /// <summary>
         /// Prefix of an element this attribute list belongs to.
         /// </summary>
         string Prefix { get; }
+
         /// <summary>
         /// Local name of an element this attribute list belongs to.
         /// </summary>
-        string LocalName { get;}
+        string LocalName { get; }
+
         /// <summary>
         /// Returns true if the attribute list has some declared attributes with
         /// type other than CDATA.
         /// </summary>
         bool HasNonCDataAttributes { get; }
+
         /// <summary>
         /// Looks up a DTD attribute definition by its name.
         /// </summary>
@@ -93,12 +97,14 @@ namespace System.Xml {
         /// <param name="localName">The local name of the attribute to look for</param>
         /// <returns>Interface representing an attribute or null is none was found</returns>
         IDtdAttributeInfo LookupAttribute(string prefix, string localName);
+
         /// <summary>
         /// Returns enumeration of all default attributes
         /// defined in this attribute list.
         /// </summary>
         /// <returns>Enumerator of default attribute.</returns>
         IEnumerable<IDtdDefaultAttributeInfo> LookupDefaultAttributes();
+
         /// <summary>
         /// Looks up a ID attribute defined in the attribute list. Returns
         /// null if the attribute list does define an ID attribute.
@@ -110,35 +116,42 @@ namespace System.Xml {
     // IDtdAttributeInfo interface
     //
     /// <summary>
-    /// Exposes information about an attribute declared in a DTD 
-    /// that XmlReader need in order to be able to correctly normalize 
+    /// Exposes information about an attribute declared in a DTD
+    /// that XmlReader need in order to be able to correctly normalize
     /// the attribute value according to its data types.
     /// </summary>
-    internal interface IDtdAttributeInfo {
+    internal interface IDtdAttributeInfo
+    {
         /// <summary>
         /// The prefix of the attribute
         /// </summary>
         string Prefix { get; }
+
         /// <summary>
         /// The local name of the attribute
         /// </summary>
-        string LocalName { get;}
+        string LocalName { get; }
+
         /// <summary>
         /// The line number of the DTD attribute definition
         /// </summary>
         int LineNumber { get; }
+
         /// <summary>
         /// The line position of the DTD attribute definition
         /// </summary>
         int LinePosition { get; }
+
         /// <summary>
         /// Returns true if the attribute is of a different type than CDATA
         /// </summary>
         bool IsNonCDataType { get; }
+
         /// <summary>
         /// Returns true if the attribute was declared in an external DTD subset
         /// </summary>
         bool IsDeclaredInExternal { get; }
+
         /// <summary>
         /// Returns true if the attribute is xml:space or xml:lang
         /// </summary>
@@ -149,12 +162,13 @@ namespace System.Xml {
     // IDtdDefaultAttributeInfo interface
     //
     /// <summary>
-    /// Exposes information about a default attribute 
-    /// declared in a DTD that XmlReader need in order to be able to add 
-    /// this attribute to the XML document (it is not present already) 
+    /// Exposes information about a default attribute
+    /// declared in a DTD that XmlReader need in order to be able to add
+    /// this attribute to the XML document (it is not present already)
     /// or correctly normalize the attribute value according to its data types.
     /// </summary>
-    internal interface IDtdDefaultAttributeInfo : IDtdAttributeInfo {
+    internal interface IDtdDefaultAttributeInfo : IDtdAttributeInfo
+    {
         /// <summary>
         /// The expanded default value of the attribute
         /// the consumer assumes that all entity references
@@ -162,13 +176,17 @@ namespace System.Xml {
         /// is correctly normalized.
         /// </summary>
         string DefaultValueExpanded { get; }
+
         /// <summary>
         /// The typed default value of the attribute.
         /// </summary>
-        object DefaultValueTyped { get; }        /// <summary>
+        object DefaultValueTyped { get; }
+
+        /// <summary>
         /// The line number of the default value (in the DTD)
         /// </summary>
         int ValueLineNumber { get; }
+
         /// <summary>
         /// The line position of the default value (in the DTD)
         /// </summary>
@@ -179,55 +197,67 @@ namespace System.Xml {
     // IDtdEntityInfo interface
     //
     /// <summary>
-    /// Exposes information about a general entity 
+    /// Exposes information about a general entity
     /// declared in a DTD that XmlReader need in order to be able
     /// to expand the entity.
     /// </summary>
-    internal interface IDtdEntityInfo {
+    internal interface IDtdEntityInfo
+    {
         /// <summary>
         /// The name of the entity
         /// </summary>
         string Name { get; }
+
         /// <summary>
         /// true if the entity is external (its value is in an external input)
         /// </summary>
         bool IsExternal { get; }
+
         /// <summary>
         /// true if the entity was declared in external DTD subset
         /// </summary>
         bool IsDeclaredInExternal { get; }
+
         /// <summary>
         /// true if this is an unparsed entity
         /// </summary>
         bool IsUnparsedEntity { get; }
+
         /// <summary>
         /// true if this is a parameter entity
         /// </summary>
         bool IsParameterEntity { get; }
+
         /// <summary>
         /// The base URI of the entity value
         /// </summary>
         string BaseUriString { get; }
+
         /// <summary>
         /// The URI of the XML document where the entity was declared
         /// </summary>
         string DeclaredUriString { get; }
+
         /// <summary>
         /// SYSTEM identifier (URI) of the entity value - only used for external entities
         /// </summary>
         string SystemId { get; }
+
         /// <summary>
         /// PUBLIC identifier of the entity value - only used for external entities
         /// </summary>
         string PublicId { get; }
+
         /// <summary>
         /// Replacement text of an entity. Valid only for internal entities.
         /// </summary>
         string Text { get; }
+
         /// <summary>
         /// The line number of the entity value
         /// </summary>
         int LineNumber { get; }
+
         /// <summary>
         /// The line position of the entity value
         /// </summary>

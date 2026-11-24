@@ -44,7 +44,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             IUIThreadOperationExecutor operationExecutor,
             InheritanceMarginTag tag,
             IWpfTextView textView,
-            IAsynchronousOperationListener listener)
+            IAsynchronousOperationListener listener
+        )
         {
             _threadingContext = threadingContext;
             _streamingFindUsagesPresenter = streamingFindUsagesPresenter;
@@ -61,24 +62,47 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             MouseLeave += InheritanceMargin_OnMouseLeave;
             KeyUp += OnKeyUp;
 
-            Resources.Add(ToolTipStyleKey, new Style(typeof(ToolTip))
-            {
-                Setters =
+            Resources.Add(
+                ToolTipStyleKey,
+                new Style(typeof(ToolTip))
                 {
-                    new Setter(BackgroundProperty, new DynamicResourceExtension(EnvironmentColors.ToolTipBrushKey)),
-                    new Setter(BorderBrushProperty, new DynamicResourceExtension(EnvironmentColors.ToolTipBorderBrushKey)),
-                    new Setter(ForegroundProperty, new DynamicResourceExtension(EnvironmentColors.ToolTipTextBrushKey)),
-                },
-            });
+                    Setters =
+                    {
+                        new Setter(
+                            BackgroundProperty,
+                            new DynamicResourceExtension(EnvironmentColors.ToolTipBrushKey)
+                        ),
+                        new Setter(
+                            BorderBrushProperty,
+                            new DynamicResourceExtension(EnvironmentColors.ToolTipBorderBrushKey)
+                        ),
+                        new Setter(
+                            ForegroundProperty,
+                            new DynamicResourceExtension(EnvironmentColors.ToolTipTextBrushKey)
+                        ),
+                    },
+                }
+            );
 
-            var viewModel = InheritanceMarginGlyphViewModel.Create(classificationTypeMap, classificationFormatMap, tag, textView.ZoomLevel);
+            var viewModel = InheritanceMarginGlyphViewModel.Create(
+                classificationTypeMap,
+                classificationFormatMap,
+                tag,
+                textView.ZoomLevel
+            );
             SetValue(AutomationProperties.NameProperty, viewModel.AutomationName);
 
             // Control template only shows the image
             var templateBorder = new FrameworkElementFactory(typeof(Border), "Border");
             templateBorder.SetValue(Border.BorderThicknessProperty, new Thickness(1));
-            templateBorder.SetValue(Border.BackgroundProperty, new TemplateBindingExtension(BackgroundProperty));
-            templateBorder.SetValue(Border.BorderBrushProperty, new TemplateBindingExtension(BorderBrushProperty));
+            templateBorder.SetValue(
+                Border.BackgroundProperty,
+                new TemplateBindingExtension(BackgroundProperty)
+            );
+            templateBorder.SetValue(
+                Border.BorderBrushProperty,
+                new TemplateBindingExtension(BorderBrushProperty)
+            );
 
             var templateImage = new FrameworkElementFactory(typeof(CrispImage));
             templateImage.SetValue(CrispImage.MonikerProperty, viewModel.ImageMoniker);
@@ -98,7 +122,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             if (ToolTip == s_toolTipPlaceholder)
             {
                 var viewModel = (InheritanceMarginGlyphViewModel)DataContext;
-                ToolTip = new ToolTip { Content = viewModel.ToolTipTextBlock, Style = (Style)FindResource(ToolTipStyleKey) };
+                ToolTip = new ToolTip
+                {
+                    Content = viewModel.ToolTipTextBlock,
+                    Style = (Style)FindResource(ToolTipStyleKey),
+                };
             }
 
             base.OnToolTipOpening(e);
@@ -116,7 +144,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             {
                 var viewModel = (InheritanceMarginGlyphViewModel)DataContext;
 
-                ContextMenu = new InheritanceMarginContextMenu(_threadingContext, _streamingFindUsagesPresenter, _operationExecutor, _workspace, _listener);
+                ContextMenu = new InheritanceMarginContextMenu(
+                    _threadingContext,
+                    _streamingFindUsagesPresenter,
+                    _operationExecutor,
+                    _workspace,
+                    _listener
+                );
                 ContextMenu.DataContext = viewModel;
                 ContextMenu.ItemsSource = viewModel.MenuItemViewModels;
                 ContextMenu.Opened += ContextMenu_OnOpen;
@@ -163,8 +197,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
 
         private void ContextMenu_OnOpen(object sender, RoutedEventArgs e)
         {
-            if (e.OriginalSource is ContextMenu { DataContext: InheritanceMarginGlyphViewModel inheritanceMarginViewModel }
-                && inheritanceMarginViewModel.MenuItemViewModels.Any(static vm => vm is TargetMenuItemViewModel))
+            if (
+                e.OriginalSource
+                    is ContextMenu
+                    {
+                        DataContext: InheritanceMarginGlyphViewModel inheritanceMarginViewModel
+                    }
+                && inheritanceMarginViewModel.MenuItemViewModels.Any(static vm =>
+                    vm is TargetMenuItemViewModel
+                )
+            )
             {
                 // We have two kinds of context menu. e.g.
                 // 1. [margin] -> Header

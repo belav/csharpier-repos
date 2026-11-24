@@ -39,6 +39,6 @@ namespace NetCoreServer
             buffer.AppendLine("Last Modified: " + File.GetLastWriteTime(path));
 
             return buffer.ToString();
-        }        
+        }
     }
 }

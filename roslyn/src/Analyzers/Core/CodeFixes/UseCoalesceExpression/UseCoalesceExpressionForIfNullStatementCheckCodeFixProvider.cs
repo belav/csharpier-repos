@@ -18,44 +18,68 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.UseCoalesceExpression
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, LanguageNames.VisualBasic, Name = PredefinedCodeFixProviderNames.UseCoalesceExpressionForIfNullStatementCheck), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic,
+            Name = PredefinedCodeFixProviderNames.UseCoalesceExpressionForIfNullStatementCheck
+        ),
+        Shared
+    ]
     [ExtensionOrder(Before = PredefinedCodeFixProviderNames.AddBraces)]
-    internal class UseCoalesceExpressionForIfNullStatementCheckCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    internal class UseCoalesceExpressionForIfNullStatementCheckCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public UseCoalesceExpressionForIfNullStatementCheckCodeFixProvider()
-        {
-        }
+        public UseCoalesceExpressionForIfNullStatementCheckCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.UseCoalesceExpressionForIfNullCheckDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.UseCoalesceExpressionForIfNullCheckDiagnosticId);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            RegisterCodeFix(context, AnalyzersResources.Use_coalesce_expression, nameof(AnalyzersResources.Use_coalesce_expression));
+            RegisterCodeFix(
+                context,
+                AnalyzersResources.Use_coalesce_expression,
+                nameof(AnalyzersResources.Use_coalesce_expression)
+            );
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var generator = editor.Generator;
 
             foreach (var diagnostic in diagnostics)
             {
-                var expressionToCoalesce = diagnostic.AdditionalLocations[0].FindNode(getInnermostNodeForTie: true, cancellationToken);
-                var ifStatement = diagnostic.AdditionalLocations[1].FindNode(getInnermostNodeForTie: true, cancellationToken);
-                var whenTrueStatement = diagnostic.AdditionalLocations[2].FindNode(getInnermostNodeForTie: true, cancellationToken);
+                var expressionToCoalesce = diagnostic
+                    .AdditionalLocations[0]
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
+                var ifStatement = diagnostic
+                    .AdditionalLocations[1]
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
+                var whenTrueStatement = diagnostic
+                    .AdditionalLocations[2]
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
 
                 editor.RemoveNode(ifStatement);
                 editor.ReplaceNode(
                     expressionToCoalesce,
-                    generator.CoalesceExpression(
-                        expressionToCoalesce.WithoutTrivia(),
-                        GetWhenNullExpression(whenTrueStatement).WithoutTrailingTrivia()).WithTriviaFrom(expressionToCoalesce));
+                    generator
+                        .CoalesceExpression(
+                            expressionToCoalesce.WithoutTrivia(),
+                            GetWhenNullExpression(whenTrueStatement).WithoutTrailingTrivia()
+                        )
+                        .WithTriviaFrom(expressionToCoalesce)
+                );
             }
 
             return Task.CompletedTask;
@@ -64,7 +88,11 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
             {
                 if (syntaxFacts.IsSimpleAssignmentStatement(whenTrueStatement))
                 {
-                    syntaxFacts.GetPartsOfAssignmentStatement(whenTrueStatement, out _, out var right);
+                    syntaxFacts.GetPartsOfAssignmentStatement(
+                        whenTrueStatement,
+                        out _,
+                        out var right
+                    );
                     return right;
                 }
                 else if (syntaxFacts.IsThrowStatement(whenTrueStatement))

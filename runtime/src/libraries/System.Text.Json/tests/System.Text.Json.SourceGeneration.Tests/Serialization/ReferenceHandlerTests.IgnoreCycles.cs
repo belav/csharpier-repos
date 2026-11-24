@@ -10,28 +10,33 @@ using System.Text.Json.Serialization.Tests;
 
 namespace System.Text.Json.SourceGeneration.Tests
 {
-    public sealed class ReferenceHandlerTests_IgnoreCycles_Metadata_String : ReferenceHandlerTests_IgnoreCycles_Metadata
+    public sealed class ReferenceHandlerTests_IgnoreCycles_Metadata_String
+        : ReferenceHandlerTests_IgnoreCycles_Metadata
     {
         public ReferenceHandlerTests_IgnoreCycles_Metadata_String()
-            : base(new StringSerializerWrapper(ReferenceHandlerTests_IgnoreCyclesContext_Metadata.Default))
-        {
-        }
+            : base(
+                new StringSerializerWrapper(
+                    ReferenceHandlerTests_IgnoreCyclesContext_Metadata.Default
+                )
+            ) { }
     }
 
-    public sealed class ReferenceHandlerTests_IgnoreCycles_Metadata_AsyncStream : ReferenceHandlerTests_IgnoreCycles_Metadata
+    public sealed class ReferenceHandlerTests_IgnoreCycles_Metadata_AsyncStream
+        : ReferenceHandlerTests_IgnoreCycles_Metadata
     {
         public ReferenceHandlerTests_IgnoreCycles_Metadata_AsyncStream()
-            : base(new AsyncStreamSerializerWrapper(ReferenceHandlerTests_IgnoreCyclesContext_Metadata.Default))
-        {
-        }
+            : base(
+                new AsyncStreamSerializerWrapper(
+                    ReferenceHandlerTests_IgnoreCyclesContext_Metadata.Default
+                )
+            ) { }
     }
 
-    public abstract partial class ReferenceHandlerTests_IgnoreCycles_Metadata : ReferenceHandlerTests_IgnoreCycles
+    public abstract partial class ReferenceHandlerTests_IgnoreCycles_Metadata
+        : ReferenceHandlerTests_IgnoreCycles
     {
         public ReferenceHandlerTests_IgnoreCycles_Metadata(JsonSerializerWrapper serializer)
-            : base(serializer)
-        {
-        }
+            : base(serializer) { }
 
         [JsonSourceGenerationOptions(GenerationMode = JsonSourceGenerationMode.Metadata)]
         [JsonSerializable(typeof(Dictionary<string, object>))]
@@ -89,33 +94,37 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(TreeNode<List<string>>))]
         [JsonSerializable(typeof(TreeNode<object>))]
         [JsonSerializable(typeof(int))]
-        internal sealed partial class ReferenceHandlerTests_IgnoreCyclesContext_Metadata : JsonSerializerContext
-        {
-        }
+        internal sealed partial class ReferenceHandlerTests_IgnoreCyclesContext_Metadata
+            : JsonSerializerContext { }
     }
 
-    public sealed class ReferenceHandlerTests_IgnoreCycles_Default_String : ReferenceHandlerTests_IgnoreCycles_Default
+    public sealed class ReferenceHandlerTests_IgnoreCycles_Default_String
+        : ReferenceHandlerTests_IgnoreCycles_Default
     {
         public ReferenceHandlerTests_IgnoreCycles_Default_String()
-            : base(new StringSerializerWrapper(ReferenceHandlerTests_IgnoreCyclesContext_Default.Default))
-        {
-        }
+            : base(
+                new StringSerializerWrapper(
+                    ReferenceHandlerTests_IgnoreCyclesContext_Default.Default
+                )
+            ) { }
     }
 
-    public sealed class ReferenceHandlerTests_IgnoreCycles_Default_AsyncStream : ReferenceHandlerTests_IgnoreCycles_Default
+    public sealed class ReferenceHandlerTests_IgnoreCycles_Default_AsyncStream
+        : ReferenceHandlerTests_IgnoreCycles_Default
     {
         public ReferenceHandlerTests_IgnoreCycles_Default_AsyncStream()
-            : base(new AsyncStreamSerializerWrapper(ReferenceHandlerTests_IgnoreCyclesContext_Default.Default))
-        {
-        }
+            : base(
+                new AsyncStreamSerializerWrapper(
+                    ReferenceHandlerTests_IgnoreCyclesContext_Default.Default
+                )
+            ) { }
     }
 
-    public abstract partial class ReferenceHandlerTests_IgnoreCycles_Default : ReferenceHandlerTests_IgnoreCycles
+    public abstract partial class ReferenceHandlerTests_IgnoreCycles_Default
+        : ReferenceHandlerTests_IgnoreCycles
     {
         public ReferenceHandlerTests_IgnoreCycles_Default(JsonSerializerWrapper serializer)
-            : base(serializer)
-        {
-        }
+            : base(serializer) { }
 
         [JsonSerializable(typeof(Dictionary<string, object>))]
         [JsonSerializable(typeof(GenericIDictionaryWrapper<string, object>))]
@@ -172,8 +181,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(TreeNode<List<string>>))]
         [JsonSerializable(typeof(TreeNode<object>))]
         [JsonSerializable(typeof(int))]
-        internal sealed partial class ReferenceHandlerTests_IgnoreCyclesContext_Default : JsonSerializerContext
-        {
-        }
+        internal sealed partial class ReferenceHandlerTests_IgnoreCyclesContext_Default
+            : JsonSerializerContext { }
     }
 }

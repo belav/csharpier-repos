@@ -19,7 +19,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// Use this helper to register multiple refactorings (<paramref name="actions"/>).
         /// </summary>
         public static void RegisterRefactorings<TCodeAction>(
-            this CodeRefactoringContext context, ImmutableArray<TCodeAction> actions, TextSpan? applicableToSpan = null)
+            this CodeRefactoringContext context,
+            ImmutableArray<TCodeAction> actions,
+            TextSpan? applicableToSpan = null
+        )
             where TCodeAction : CodeAction
         {
             if (!actions.IsDefault)
@@ -38,36 +41,101 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             }
         }
 
-        public static Task<TSyntaxNode?> TryGetRelevantNodeAsync<TSyntaxNode>(this CodeRefactoringContext context) where TSyntaxNode : SyntaxNode
-            => TryGetRelevantNodeAsync<TSyntaxNode>(context, allowEmptyNode: false);
+        public static Task<TSyntaxNode?> TryGetRelevantNodeAsync<TSyntaxNode>(
+            this CodeRefactoringContext context
+        )
+            where TSyntaxNode : SyntaxNode =>
+            TryGetRelevantNodeAsync<TSyntaxNode>(context, allowEmptyNode: false);
 
-        public static Task<TSyntaxNode?> TryGetRelevantNodeAsync<TSyntaxNode>(this CodeRefactoringContext context, bool allowEmptyNode) where TSyntaxNode : SyntaxNode
-            => TryGetRelevantNodeAsync<TSyntaxNode>(context.Document, context.Span, allowEmptyNode, context.CancellationToken);
+        public static Task<TSyntaxNode?> TryGetRelevantNodeAsync<TSyntaxNode>(
+            this CodeRefactoringContext context,
+            bool allowEmptyNode
+        )
+            where TSyntaxNode : SyntaxNode =>
+            TryGetRelevantNodeAsync<TSyntaxNode>(
+                context.Document,
+                context.Span,
+                allowEmptyNode,
+                context.CancellationToken
+            );
 
-        public static Task<ImmutableArray<TSyntaxNode>> GetRelevantNodesAsync<TSyntaxNode>(this CodeRefactoringContext context) where TSyntaxNode : SyntaxNode
-            => GetRelevantNodesAsync<TSyntaxNode>(context, allowEmptyNodes: false);
+        public static Task<ImmutableArray<TSyntaxNode>> GetRelevantNodesAsync<TSyntaxNode>(
+            this CodeRefactoringContext context
+        )
+            where TSyntaxNode : SyntaxNode =>
+            GetRelevantNodesAsync<TSyntaxNode>(context, allowEmptyNodes: false);
 
-        public static Task<ImmutableArray<TSyntaxNode>> GetRelevantNodesAsync<TSyntaxNode>(this CodeRefactoringContext context, bool allowEmptyNodes) where TSyntaxNode : SyntaxNode
-            => GetRelevantNodesAsync<TSyntaxNode>(context.Document, context.Span, allowEmptyNodes, context.CancellationToken);
+        public static Task<ImmutableArray<TSyntaxNode>> GetRelevantNodesAsync<TSyntaxNode>(
+            this CodeRefactoringContext context,
+            bool allowEmptyNodes
+        )
+            where TSyntaxNode : SyntaxNode =>
+            GetRelevantNodesAsync<TSyntaxNode>(
+                context.Document,
+                context.Span,
+                allowEmptyNodes,
+                context.CancellationToken
+            );
 
-        public static Task<TSyntaxNode?> TryGetRelevantNodeAsync<TSyntaxNode>(this Document document, TextSpan span, CancellationToken cancellationToken) where TSyntaxNode : SyntaxNode
-            => TryGetRelevantNodeAsync<TSyntaxNode>(document, span, allowEmptyNode: false, cancellationToken);
+        public static Task<TSyntaxNode?> TryGetRelevantNodeAsync<TSyntaxNode>(
+            this Document document,
+            TextSpan span,
+            CancellationToken cancellationToken
+        )
+            where TSyntaxNode : SyntaxNode =>
+            TryGetRelevantNodeAsync<TSyntaxNode>(
+                document,
+                span,
+                allowEmptyNode: false,
+                cancellationToken
+            );
 
-        public static async Task<TSyntaxNode?> TryGetRelevantNodeAsync<TSyntaxNode>(this Document document, TextSpan span, bool allowEmptyNode, CancellationToken cancellationToken) where TSyntaxNode : SyntaxNode
+        public static async Task<TSyntaxNode?> TryGetRelevantNodeAsync<TSyntaxNode>(
+            this Document document,
+            TextSpan span,
+            bool allowEmptyNode,
+            CancellationToken cancellationToken
+        )
+            where TSyntaxNode : SyntaxNode
         {
-            var potentialNodes = await GetRelevantNodesAsync<TSyntaxNode>(document, span, allowEmptyNode, cancellationToken).ConfigureAwait(false);
+            var potentialNodes = await GetRelevantNodesAsync<TSyntaxNode>(
+                    document,
+                    span,
+                    allowEmptyNode,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return potentialNodes.FirstOrDefault();
         }
 
         public static Task<ImmutableArray<TSyntaxNode>> GetRelevantNodesAsync<TSyntaxNode>(
-            this Document document, TextSpan span, CancellationToken cancellationToken) where TSyntaxNode : SyntaxNode
-            => GetRelevantNodesAsync<TSyntaxNode>(document, span, allowEmptyNodes: false, cancellationToken);
+            this Document document,
+            TextSpan span,
+            CancellationToken cancellationToken
+        )
+            where TSyntaxNode : SyntaxNode =>
+            GetRelevantNodesAsync<TSyntaxNode>(
+                document,
+                span,
+                allowEmptyNodes: false,
+                cancellationToken
+            );
 
         public static Task<ImmutableArray<TSyntaxNode>> GetRelevantNodesAsync<TSyntaxNode>(
-            this Document document, TextSpan span, bool allowEmptyNodes, CancellationToken cancellationToken) where TSyntaxNode : SyntaxNode
+            this Document document,
+            TextSpan span,
+            bool allowEmptyNodes,
+            CancellationToken cancellationToken
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var helpers = document.GetRequiredLanguageService<IRefactoringHelpersService>();
-            return helpers.GetRelevantNodesAsync<TSyntaxNode>(document, span, allowEmptyNodes, cancellationToken);
+            return helpers.GetRelevantNodesAsync<TSyntaxNode>(
+                document,
+                span,
+                allowEmptyNodes,
+                cancellationToken
+            );
         }
     }
 }

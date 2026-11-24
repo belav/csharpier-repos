@@ -16,7 +16,9 @@ class CsWriter : IDisposable
         _writer = new StreamWriter(filename);
 
         _writer.WriteLine("// Licensed to the .NET Foundation under one or more agreements.");
-        _writer.WriteLine("// The .NET Foundation licenses this file to you under the MIT license.");
+        _writer.WriteLine(
+            "// The .NET Foundation licenses this file to you under the MIT license."
+        );
         _writer.WriteLine();
         _writer.WriteLine("// NOTE: This is a generated file - do not manually edit!");
         _writer.WriteLine();

@@ -14,13 +14,13 @@ namespace System.IdentityModel
     /// </summary>
     /// <remarks>
     /// <para>
-    /// <see cref="RsaSignatureCookieTransform"/> adds an RSA MAC to 
+    /// <see cref="RsaSignatureCookieTransform"/> adds an RSA MAC to
     /// the cookie data. This provides integrity but not confidentiality. By
     /// default the MAC uses SHA-256, but SHA-1 may be requested.
     /// </para>
     /// <para>
-    /// Cookies signed with this transform may be read 
-    /// by any machine that shares the same RSA private key (generally 
+    /// Cookies signed with this transform may be read
+    /// by any machine that shares the same RSA private key (generally
     /// associated with an X509 certificate).
     /// </para>
     /// </remarks>
@@ -30,7 +30,7 @@ namespace System.IdentityModel
         List<RSA> _verificationKeys = new List<RSA>();
         string _hashName = "SHA256";
 
-         /// <summary>
+        /// <summary>
         /// Creates a new instance of <see cref="RsaSignatureCookieTransform"/>.
         /// </summary>
         /// <param name="key">The provided key will be used as the signing and verification key by default.</param>
@@ -78,7 +78,10 @@ namespace System.IdentityModel
                 {
                     if (algorithm == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.ID6034, value));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            "value",
+                            SR.GetString(SR.ID6034, value)
+                        );
                     }
                     _hashName = value;
                 }
@@ -89,9 +92,7 @@ namespace System.IdentityModel
         /// Creates a new instance of <see cref="RsaSignatureCookieTransform"/>.
         /// The instance created by this constructor is not usable until the signing and verification keys are set.
         /// </summary>
-        internal RsaSignatureCookieTransform()
-        {
-        }
+        internal RsaSignatureCookieTransform() { }
 
         /// <summary>
         /// Gets or sets the RSA key used for signing
@@ -112,10 +113,7 @@ namespace System.IdentityModel
         /// </summary>
         protected virtual ReadOnlyCollection<RSA> VerificationKeys
         {
-            get
-            {
-                return _verificationKeys.AsReadOnly();
-            }
+            get { return _verificationKeys.AsReadOnly(); }
         }
 
         // Format:
@@ -143,7 +141,10 @@ namespace System.IdentityModel
 
             if (0 == encoded.Length)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("encoded", SR.GetString(SR.ID6045));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "encoded",
+                    SR.GetString(SR.ID6045)
+                );
             }
 
             ReadOnlyCollection<RSA> verificationKeys = VerificationKeys;
@@ -159,18 +160,24 @@ namespace System.IdentityModel
             // SignatureLength : 4-byte big-endian integer
             if (encoded.Length < sizeof(Int32))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new FormatException(SR.GetString(SR.ID1012)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new FormatException(SR.GetString(SR.ID1012))
+                );
             }
             Int32 signatureLength = BitConverter.ToInt32(encoded, currentIndex);
 
             if (signatureLength < 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new FormatException(SR.GetString(SR.ID1005, signatureLength)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new FormatException(SR.GetString(SR.ID1005, signatureLength))
+                );
             }
 
             if (signatureLength >= encoded.Length - sizeof(Int32))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new FormatException(SR.GetString(SR.ID1013)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new FormatException(SR.GetString(SR.ID1013))
+                );
             }
             currentIndex += sizeof(Int32);
 
@@ -194,8 +201,12 @@ namespace System.IdentityModel
                     foreach (RSA rsa in verificationKeys)
                     {
                         AsymmetricSignatureDeformatter verifier = GetSignatureDeformatter(rsa);
-                        if ((isSha256() && CryptoHelper.VerifySignatureForSha256(verifier, hash, signature)) ||
-                              verifier.VerifySignature(hash, signature))
+                        if (
+                            (
+                                isSha256()
+                                && CryptoHelper.VerifySignatureForSha256(verifier, hash, signature)
+                            ) || verifier.VerifySignature(hash, signature)
+                        )
                         {
                             verified = true;
                             break;
@@ -203,16 +214,22 @@ namespace System.IdentityModel
                     }
                 }
             }
-
             // Not all algorithms are supported on all OS
             catch (CryptographicException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ID6035, HashName, verificationKeys[0].GetType().FullName), e));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(SR.ID6035, HashName, verificationKeys[0].GetType().FullName),
+                        e
+                    )
+                );
             }
 
             if (!verified)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CryptographicException(SR.GetString(SR.ID1014)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CryptographicException(SR.GetString(SR.ID1014))
+                );
             }
 
             return cookieValue;
@@ -238,7 +255,10 @@ namespace System.IdentityModel
 
             if (0 == value.Length)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.ID6044));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "value",
+                    SR.GetString(SR.ID6044)
+                );
             }
 
             RSA signingKey = SigningKey;
@@ -247,7 +267,8 @@ namespace System.IdentityModel
                 throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID6042));
             }
 
-            RSACryptoServiceProvider rsaCryptoServiceProvider = signingKey as RSACryptoServiceProvider;
+            RSACryptoServiceProvider rsaCryptoServiceProvider =
+                signingKey as RSACryptoServiceProvider;
             if (rsaCryptoServiceProvider == null && LocalAppContextSwitches.DisableCngCertificates)
             {
                 throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID6042));
@@ -279,7 +300,12 @@ namespace System.IdentityModel
                 // Not all algorithms are supported on all OS
                 catch (CryptographicException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ID6035, HashName, signingKey.GetType().FullName), e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.ID6035, HashName, signingKey.GetType().FullName),
+                            e
+                        )
+                    );
                 }
             }
 
@@ -345,9 +371,14 @@ namespace System.IdentityModel
         /// <returns></returns>
         bool isSha256()
         {
-            return (StringComparer.OrdinalIgnoreCase.Equals(HashName, "SHA256")
-            || StringComparer.OrdinalIgnoreCase.Equals(HashName, "SHA-256")
-            || StringComparer.OrdinalIgnoreCase.Equals(HashName, "System.Security.Cryptography.SHA256"));
+            return (
+                StringComparer.OrdinalIgnoreCase.Equals(HashName, "SHA256")
+                || StringComparer.OrdinalIgnoreCase.Equals(HashName, "SHA-256")
+                || StringComparer.OrdinalIgnoreCase.Equals(
+                    HashName,
+                    "System.Security.Cryptography.SHA256"
+                )
+            );
         }
     }
 }

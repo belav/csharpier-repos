@@ -31,8 +31,12 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static bool TryFormat(byte value, Span<byte> destination, out int bytesWritten, StandardFormat format = default) =>
-            TryFormat((uint)value, destination, out bytesWritten, format);
+        public static bool TryFormat(
+            byte value,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format = default
+        ) => TryFormat((uint)value, destination, out bytesWritten, format);
 
         /// <summary>
         /// Formats an SByte as a UTF-8 string.
@@ -56,8 +60,12 @@ namespace System.Buffers.Text
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
         [CLSCompliant(false)]
-        public static bool TryFormat(sbyte value, Span<byte> destination, out int bytesWritten, StandardFormat format = default) =>
-            TryFormat(value, 0xFF, destination, out bytesWritten, format);
+        public static bool TryFormat(
+            sbyte value,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format = default
+        ) => TryFormat(value, 0xFF, destination, out bytesWritten, format);
 
         /// <summary>
         /// Formats a Unt16 as a UTF-8 string.
@@ -81,8 +89,12 @@ namespace System.Buffers.Text
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
         [CLSCompliant(false)]
-        public static bool TryFormat(ushort value, Span<byte> destination, out int bytesWritten, StandardFormat format = default) =>
-            TryFormat((uint)value, destination, out bytesWritten, format);
+        public static bool TryFormat(
+            ushort value,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format = default
+        ) => TryFormat((uint)value, destination, out bytesWritten, format);
 
         /// <summary>
         /// Formats an Int16 as a UTF-8 string.
@@ -105,8 +117,12 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static bool TryFormat(short value, Span<byte> destination, out int bytesWritten, StandardFormat format = default) =>
-            TryFormat(value, 0xFFFF, destination, out bytesWritten, format);
+        public static bool TryFormat(
+            short value,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format = default
+        ) => TryFormat(value, 0xFFFF, destination, out bytesWritten, format);
 
         /// <summary>
         /// Formats a UInt32 as a UTF-8 string.
@@ -131,7 +147,12 @@ namespace System.Buffers.Text
         /// </exceptions>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
-        public static bool TryFormat(uint value, Span<byte> destination, out int bytesWritten, StandardFormat format = default)
+        public static bool TryFormat(
+            uint value,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format = default
+        )
         {
             if (format.IsDefault)
             {
@@ -141,15 +162,32 @@ namespace System.Buffers.Text
             switch (format.Symbol | 0x20)
             {
                 case 'd':
-                    return Number.TryUInt32ToDecStr(value, format.PrecisionOrZero, destination, out bytesWritten);
+                    return Number.TryUInt32ToDecStr(
+                        value,
+                        format.PrecisionOrZero,
+                        destination,
+                        out bytesWritten
+                    );
 
                 case 'x':
-                    return Number.TryInt32ToHexStr((int)value, Number.GetHexBase(format.Symbol), format.PrecisionOrZero, destination, out bytesWritten);
+                    return Number.TryInt32ToHexStr(
+                        (int)value,
+                        Number.GetHexBase(format.Symbol),
+                        format.PrecisionOrZero,
+                        destination,
+                        out bytesWritten
+                    );
 
                 case 'n':
-                    return FormattingHelpers.TryFormat(value, destination, out bytesWritten, format);
+                    return FormattingHelpers.TryFormat(
+                        value,
+                        destination,
+                        out bytesWritten,
+                        format
+                    );
 
-                case 'g' or 'r':
+                case 'g'
+                or 'r':
                     if (format.HasPrecision)
                     {
                         ThrowGWithPrecisionNotSupported();
@@ -183,33 +221,72 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static bool TryFormat(int value, Span<byte> destination, out int bytesWritten, StandardFormat format = default) =>
-            TryFormat(value, ~0, destination, out bytesWritten, format);
+        public static bool TryFormat(
+            int value,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format = default
+        ) => TryFormat(value, ~0, destination, out bytesWritten, format);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool TryFormat(int value, int hexMask, Span<byte> destination, out int bytesWritten, StandardFormat format = default)
+        private static bool TryFormat(
+            int value,
+            int hexMask,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format = default
+        )
         {
             if (format.IsDefault)
             {
-                return value >= 0 ?
-                    Number.TryUInt32ToDecStr((uint)value, destination, out bytesWritten) :
-                    Number.TryNegativeInt32ToDecStr(value, format.PrecisionOrZero, "-"u8, destination, out bytesWritten);
+                return value >= 0
+                    ? Number.TryUInt32ToDecStr((uint)value, destination, out bytesWritten)
+                    : Number.TryNegativeInt32ToDecStr(
+                        value,
+                        format.PrecisionOrZero,
+                        "-"u8,
+                        destination,
+                        out bytesWritten
+                    );
             }
 
             switch (format.Symbol | 0x20)
             {
                 case 'd':
-                    return value >= 0 ?
-                        Number.TryUInt32ToDecStr((uint)value, format.PrecisionOrZero, destination, out bytesWritten) :
-                        Number.TryNegativeInt32ToDecStr(value, format.PrecisionOrZero, "-"u8, destination, out bytesWritten);
+                    return value >= 0
+                        ? Number.TryUInt32ToDecStr(
+                            (uint)value,
+                            format.PrecisionOrZero,
+                            destination,
+                            out bytesWritten
+                        )
+                        : Number.TryNegativeInt32ToDecStr(
+                            value,
+                            format.PrecisionOrZero,
+                            "-"u8,
+                            destination,
+                            out bytesWritten
+                        );
 
                 case 'x':
-                    return Number.TryInt32ToHexStr(value & hexMask, Number.GetHexBase(format.Symbol), format.PrecisionOrZero, destination, out bytesWritten);
+                    return Number.TryInt32ToHexStr(
+                        value & hexMask,
+                        Number.GetHexBase(format.Symbol),
+                        format.PrecisionOrZero,
+                        destination,
+                        out bytesWritten
+                    );
 
                 case 'n':
-                    return FormattingHelpers.TryFormat(value, destination, out bytesWritten, format);
+                    return FormattingHelpers.TryFormat(
+                        value,
+                        destination,
+                        out bytesWritten,
+                        format
+                    );
 
-                case 'g' or 'r':
+                case 'g'
+                or 'r':
                     if (format.HasPrecision)
                     {
                         ThrowGWithPrecisionNotSupported();
@@ -245,7 +322,12 @@ namespace System.Buffers.Text
         /// </exceptions>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
-        public static bool TryFormat(ulong value, Span<byte> destination, out int bytesWritten, StandardFormat format = default)
+        public static bool TryFormat(
+            ulong value,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format = default
+        )
         {
             if (format.IsDefault)
             {
@@ -255,15 +337,32 @@ namespace System.Buffers.Text
             switch (format.Symbol | 0x20)
             {
                 case 'd':
-                    return Number.TryUInt64ToDecStr(value, format.PrecisionOrZero, destination, out bytesWritten);
+                    return Number.TryUInt64ToDecStr(
+                        value,
+                        format.PrecisionOrZero,
+                        destination,
+                        out bytesWritten
+                    );
 
                 case 'x':
-                    return Number.TryInt64ToHexStr((long)value, Number.GetHexBase(format.Symbol), format.PrecisionOrZero, destination, out bytesWritten);
+                    return Number.TryInt64ToHexStr(
+                        (long)value,
+                        Number.GetHexBase(format.Symbol),
+                        format.PrecisionOrZero,
+                        destination,
+                        out bytesWritten
+                    );
 
                 case 'n':
-                    return FormattingHelpers.TryFormat(value, destination, out bytesWritten, format);
+                    return FormattingHelpers.TryFormat(
+                        value,
+                        destination,
+                        out bytesWritten,
+                        format
+                    );
 
-                case 'g' or 'r':
+                case 'g'
+                or 'r':
                     if (format.HasPrecision)
                     {
                         ThrowGWithPrecisionNotSupported();
@@ -298,29 +397,63 @@ namespace System.Buffers.Text
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryFormat(long value, Span<byte> destination, out int bytesWritten, StandardFormat format = default)
+        public static bool TryFormat(
+            long value,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format = default
+        )
         {
             if (format.IsDefault)
             {
-                return value >= 0 ?
-                    Number.TryUInt64ToDecStr((ulong)value, destination, out bytesWritten) :
-                    Number.TryNegativeInt64ToDecStr(value, format.PrecisionOrZero, "-"u8, destination, out bytesWritten);
+                return value >= 0
+                    ? Number.TryUInt64ToDecStr((ulong)value, destination, out bytesWritten)
+                    : Number.TryNegativeInt64ToDecStr(
+                        value,
+                        format.PrecisionOrZero,
+                        "-"u8,
+                        destination,
+                        out bytesWritten
+                    );
             }
 
             switch (format.Symbol | 0x20)
             {
                 case 'd':
-                    return value >= 0 ?
-                        Number.TryUInt64ToDecStr((ulong)value, format.PrecisionOrZero, destination, out bytesWritten) :
-                        Number.TryNegativeInt64ToDecStr(value, format.PrecisionOrZero, "-"u8, destination, out bytesWritten);
+                    return value >= 0
+                        ? Number.TryUInt64ToDecStr(
+                            (ulong)value,
+                            format.PrecisionOrZero,
+                            destination,
+                            out bytesWritten
+                        )
+                        : Number.TryNegativeInt64ToDecStr(
+                            value,
+                            format.PrecisionOrZero,
+                            "-"u8,
+                            destination,
+                            out bytesWritten
+                        );
 
                 case 'x':
-                    return Number.TryInt64ToHexStr(value, Number.GetHexBase(format.Symbol), format.PrecisionOrZero, destination, out bytesWritten);
+                    return Number.TryInt64ToHexStr(
+                        value,
+                        Number.GetHexBase(format.Symbol),
+                        format.PrecisionOrZero,
+                        destination,
+                        out bytesWritten
+                    );
 
                 case 'n':
-                    return FormattingHelpers.TryFormat(value, destination, out bytesWritten, format);
+                    return FormattingHelpers.TryFormat(
+                        value,
+                        destination,
+                        out bytesWritten,
+                        format
+                    );
 
-                case 'g' or 'r':
+                case 'g'
+                or 'r':
                     if (format.HasPrecision)
                     {
                         ThrowGWithPrecisionNotSupported();

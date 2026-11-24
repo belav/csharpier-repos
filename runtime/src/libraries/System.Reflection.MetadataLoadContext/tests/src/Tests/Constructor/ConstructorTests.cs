@@ -18,7 +18,11 @@ namespace System.Reflection.Tests
 
         private static void TestConstructors1Worker(Type t)
         {
-            const BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.ExactBinding;
+            const BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.ExactBinding;
             Type theT = t.GetGenericArguments()[0];
             Type[] argumentTypes = { typeof(int).Project(), theT };
             ConstructorInfo c = t.GetConstructor(bf, null, argumentTypes, null);
@@ -30,9 +34,18 @@ namespace System.Reflection.Tests
             Assert.False(c.IsGenericMethodDefinition);
             Assert.False(c.IsConstructedGenericMethod());
             Assert.False(c.IsGenericMethod);
-            Assert.Equal(MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName, c.Attributes);
+            Assert.Equal(
+                MethodAttributes.Public
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.RTSpecialName,
+                c.Attributes
+            );
             Assert.Equal(MethodImplAttributes.IL, c.MethodImplementationFlags);
-            Assert.Equal(CallingConventions.Standard | CallingConventions.HasThis, c.CallingConvention);
+            Assert.Equal(
+                CallingConventions.Standard | CallingConventions.HasThis,
+                c.CallingConvention
+            );
 
             ParameterInfo[] ps = c.GetParameters();
             Assert.Equal(2, ps.Length);

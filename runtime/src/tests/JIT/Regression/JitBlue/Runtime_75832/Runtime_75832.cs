@@ -8,8 +8,7 @@ using Xunit;
 public class Runtime_75832
 {
     [Fact]
-    public static void TestEntryPoint()
-        => Assert.Throws<DivideByZeroException>(() => Test(0));
+    public static void TestEntryPoint() => Assert.Throws<DivideByZeroException>(() => Test(0));
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void Test(int i) => GetAction()(100 / i);

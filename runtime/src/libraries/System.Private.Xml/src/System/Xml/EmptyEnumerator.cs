@@ -13,16 +13,11 @@ namespace System.Xml
             return false;
         }
 
-        void IEnumerator.Reset()
-        {
-        }
+        void IEnumerator.Reset() { }
 
         object IEnumerator.Current
         {
-            get
-            {
-                throw new InvalidOperationException(SR.Xml_InvalidOperation);
-            }
+            get { throw new InvalidOperationException(SR.Xml_InvalidOperation); }
         }
     }
 }

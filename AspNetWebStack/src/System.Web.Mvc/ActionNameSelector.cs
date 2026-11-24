@@ -3,5 +3,8 @@
 
 namespace System.Web.Mvc
 {
-    internal delegate bool ActionNameSelector(ControllerContext controllerContext, string actionName);
+    internal delegate bool ActionNameSelector(
+        ControllerContext controllerContext,
+        string actionName
+    );
 }

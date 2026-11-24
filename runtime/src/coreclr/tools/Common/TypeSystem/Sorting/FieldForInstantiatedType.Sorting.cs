@@ -12,7 +12,10 @@ namespace Internal.TypeSystem
         {
             var otherField = (FieldForInstantiatedType)other;
 
-            int result = comparer.CompareWithinClass(_instantiatedType, otherField._instantiatedType);
+            int result = comparer.CompareWithinClass(
+                _instantiatedType,
+                otherField._instantiatedType
+            );
             if (result != 0)
                 return result;
 

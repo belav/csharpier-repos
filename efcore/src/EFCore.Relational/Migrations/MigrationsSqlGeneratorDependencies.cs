@@ -54,7 +54,8 @@ public sealed record MigrationsSqlGeneratorDependencies
         IModificationCommandFactory modificationCommandFactory,
         ILoggingOptions loggingOptions,
         IRelationalCommandDiagnosticsLogger logger,
-        IDiagnosticsLogger<DbLoggerCategory.Migrations> migrationsLogger)
+        IDiagnosticsLogger<DbLoggerCategory.Migrations> migrationsLogger
+    )
     {
         CommandBuilderFactory = commandBuilderFactory;
         SqlGenerationHelper = sqlGenerationHelper;

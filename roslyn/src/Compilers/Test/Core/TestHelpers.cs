@@ -24,18 +24,26 @@ namespace Roslyn.Test.Utilities
     {
         public static ImmutableDictionary<K, V> CreateImmutableDictionary<K, V>(
             IEqualityComparer<K> comparer,
-            params (K, V)[] entries)
-            => ImmutableDictionary.CreateRange(comparer, entries.Select(KeyValuePair.ToKeyValuePair));
+            params (K, V)[] entries
+        ) => ImmutableDictionary.CreateRange(comparer, entries.Select(KeyValuePair.ToKeyValuePair));
 
-        public static ImmutableDictionary<K, V> CreateImmutableDictionary<K, V>(params (K, V)[] entries)
-            => ImmutableDictionary.CreateRange(entries.Select(KeyValuePair.ToKeyValuePair));
+        public static ImmutableDictionary<K, V> CreateImmutableDictionary<K, V>(
+            params (K, V)[] entries
+        ) => ImmutableDictionary.CreateRange(entries.Select(KeyValuePair.ToKeyValuePair));
 
-        public static IEnumerable<Type> GetAllTypesWithStaticFieldsImplementingType(Assembly assembly, Type type)
+        public static IEnumerable<Type> GetAllTypesWithStaticFieldsImplementingType(
+            Assembly assembly,
+            Type type
+        )
         {
-            return assembly.GetTypes().Where(t =>
-            {
-                return t.GetFields(BindingFlags.Public | BindingFlags.Static).Any(f => type.IsAssignableFrom(f.FieldType));
-            }).ToList();
+            return assembly
+                .GetTypes()
+                .Where(t =>
+                {
+                    return t.GetFields(BindingFlags.Public | BindingFlags.Static)
+                        .Any(f => type.IsAssignableFrom(f.FieldType));
+                })
+                .ToList();
         }
 
         public static string GetCultureInvariantString(object value)
@@ -51,7 +59,10 @@ namespace Roslyn.Test.Utilities
 
             if (valueType == typeof(DateTime))
             {
-                return ((DateTime)value).ToString("M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture);
+                return ((DateTime)value).ToString(
+                    "M/d/yyyy h:mm:ss tt",
+                    CultureInfo.InvariantCulture
+                );
             }
 
             if (valueType == typeof(float))
@@ -99,12 +110,15 @@ namespace Roslyn.Test.Utilities
             LinePosition? startLocation = null,
             Func<SyntaxNode, bool> syntaxNodePredicate = null,
             bool argumentOrderDoesNotMatter = false,
-            bool isSuppressed = false)
+            bool isSuppressed = false
+        )
         {
-            Debug.Assert(code is Microsoft.CodeAnalysis.CSharp.ErrorCode ||
-                         code is Microsoft.CodeAnalysis.VisualBasic.ERRID ||
-                         code is int ||
-                         code is string);
+            Debug.Assert(
+                code is Microsoft.CodeAnalysis.CSharp.ErrorCode
+                    || code is Microsoft.CodeAnalysis.VisualBasic.ERRID
+                    || code is int
+                    || code is string
+            );
 
             return new DiagnosticDescription(
                 code as string ?? (object)(int)code,
@@ -115,17 +129,19 @@ namespace Roslyn.Test.Utilities
                 syntaxNodePredicate,
                 argumentOrderDoesNotMatter,
                 code.GetType(),
-                isSuppressed: isSuppressed);
+                isSuppressed: isSuppressed
+            );
         }
 
         internal static DiagnosticDescription Diagnostic(
-           object code,
-           XCData squiggledText,
-           object[] arguments = null,
-           LinePosition? startLocation = null,
-           Func<SyntaxNode, bool> syntaxNodePredicate = null,
-           bool argumentOrderDoesNotMatter = false,
-           bool isSuppressed = false)
+            object code,
+            XCData squiggledText,
+            object[] arguments = null,
+            LinePosition? startLocation = null,
+            Func<SyntaxNode, bool> syntaxNodePredicate = null,
+            bool argumentOrderDoesNotMatter = false,
+            bool isSuppressed = false
+        )
         {
             return Diagnostic(
                 code,
@@ -134,7 +150,8 @@ namespace Roslyn.Test.Utilities
                 startLocation,
                 syntaxNodePredicate,
                 argumentOrderDoesNotMatter,
-                isSuppressed: isSuppressed);
+                isSuppressed: isSuppressed
+            );
         }
 
         public static string NormalizeNewLines(XCData data)

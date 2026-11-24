@@ -39,7 +39,7 @@ namespace Microsoft.CodeAnalysis
         bool IsUnboundGenericType { get; }
 
         /// <summary>
-        /// Returns true if the type is a Script class. 
+        /// Returns true if the type is a Script class.
         /// It might be an interactive submission class or a Script class in a csx file.
         /// </summary>
         bool IsScriptClass { get; }
@@ -68,12 +68,12 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Returns the type parameters that this type has. If this is a non-generic type,
-        /// returns an empty ImmutableArray.  
+        /// returns an empty ImmutableArray.
         /// </summary>
         ImmutableArray<ITypeParameterSymbol> TypeParameters { get; }
 
         /// <summary>
-        /// Returns the type arguments that have been substituted for the type parameters. 
+        /// Returns the type arguments that have been substituted for the type parameters.
         /// If nothing has been substituted for a given type parameter,
         /// then the type parameter itself is considered the type argument.
         /// </summary>
@@ -87,7 +87,7 @@ namespace Microsoft.CodeAnalysis
         ImmutableArray<NullableAnnotation> TypeArgumentNullableAnnotations { get; }
 
         /// <summary>
-        /// Returns custom modifiers for the type argument that has been substituted for the type parameter. 
+        /// Returns custom modifiers for the type argument that has been substituted for the type parameter.
         /// The modifiers correspond to the type argument at the same ordinal within the <see cref="TypeArguments"/>
         /// array. Returns an empty array if there are no modifiers.
         /// </summary>
@@ -132,7 +132,10 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Returns a constructed type given its type arguments and type argument nullable annotations.
         /// </summary>
-        INamedTypeSymbol Construct(ImmutableArray<ITypeSymbol> typeArguments, ImmutableArray<NullableAnnotation> typeArgumentNullableAnnotations);
+        INamedTypeSymbol Construct(
+            ImmutableArray<ITypeSymbol> typeArguments,
+            ImmutableArray<NullableAnnotation> typeArgumentNullableAnnotations
+        );
 
         /// <summary>
         /// Returns an unbound generic type of this named type.
@@ -158,14 +161,14 @@ namespace Microsoft.CodeAnalysis
         /// For implicitly declared delegate types returns the EventSymbol that caused this
         /// delegate type to be generated.
         /// For all other types returns null.
-        /// Note, the set of possible associated symbols might be expanded in the future to 
+        /// Note, the set of possible associated symbols might be expanded in the future to
         /// reflect changes in the languages.
         /// </summary>
         ISymbol? AssociatedSymbol { get; }
 
         /// <summary>
-        /// Determines if the symbol might contain extension methods. 
-        /// If false, the symbol does not contain extension methods. 
+        /// Determines if the symbol might contain extension methods.
+        /// If false, the symbol does not contain extension methods.
         /// </summary>
         bool MightContainExtensionMethods { get; }
 
@@ -173,7 +176,7 @@ namespace Microsoft.CodeAnalysis
         /// If this is a tuple type with element names, returns the symbol for the tuple type without names.
         /// Otherwise, returns null.
         /// The type argument corresponding to the type of the extension field (VT[8].Rest),
-        /// which is at the 8th (one based) position is always a symbol for another tuple, 
+        /// which is at the 8th (one based) position is always a symbol for another tuple,
         /// rather than its underlying type.
         /// </summary>
         INamedTypeSymbol? TupleUnderlyingType { get; }

@@ -18,7 +18,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         {
             private readonly ComplexTrivia _original;
 
-            public ModifiedComplexTrivia(SyntaxFormattingOptions options, ComplexTrivia original, int lineBreaks, int space)
+            public ModifiedComplexTrivia(
+                SyntaxFormattingOptions options,
+                ComplexTrivia original,
+                int lineBreaks,
+                int space
+            )
                 : base(options, original.Token1.Language)
             {
                 Contract.ThrowIfNull(original);
@@ -33,10 +38,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
             public override bool ContainsChanges
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public override bool TreatAsElastic
@@ -49,19 +51,42 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 get { return false; }
             }
 
-            public override TriviaData WithSpace(int space, FormattingContext context, ChainedFormattingRules formattingRules)
-                => _original.WithSpace(space, context, formattingRules);
+            public override TriviaData WithSpace(
+                int space,
+                FormattingContext context,
+                ChainedFormattingRules formattingRules
+            ) => _original.WithSpace(space, context, formattingRules);
 
             public override TriviaData WithLine(
-                int line, int indentation, FormattingContext context, ChainedFormattingRules formattingRules, CancellationToken cancellationToken)
+                int line,
+                int indentation,
+                FormattingContext context,
+                ChainedFormattingRules formattingRules,
+                CancellationToken cancellationToken
+            )
             {
-                return _original.WithLine(line, indentation, context, formattingRules, cancellationToken);
+                return _original.WithLine(
+                    line,
+                    indentation,
+                    context,
+                    formattingRules,
+                    cancellationToken
+                );
             }
 
             public override TriviaData WithIndentation(
-                int indentation, FormattingContext context, ChainedFormattingRules formattingRules, CancellationToken cancellationToken)
+                int indentation,
+                FormattingContext context,
+                ChainedFormattingRules formattingRules,
+                CancellationToken cancellationToken
+            )
             {
-                return _original.WithIndentation(indentation, context, formattingRules, cancellationToken);
+                return _original.WithIndentation(
+                    indentation,
+                    context,
+                    formattingRules,
+                    cancellationToken
+                );
             }
 
             public override void Format(
@@ -69,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 ChainedFormattingRules formattingRules,
                 Action<int, TokenStream, TriviaData> formattingResultApplier,
                 CancellationToken cancellationToken,
-                int tokenPairIndex = TokenPairIndexNotNeeded)
+                int tokenPairIndex = TokenPairIndexNotNeeded
+            )
             {
                 Contract.ThrowIfFalse(this.SecondTokenIsFirstTokenOnLine);
 
@@ -85,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     return;
                 }
 
-                formattingResultApplier(tokenPairIndex,
+                formattingResultApplier(
+                    tokenPairIndex,
                     context.TokenStream,
                     new FormattedComplexTrivia(
                         context,
@@ -95,14 +122,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                         this.LineBreaks,
                         this.Spaces,
                         _original.OriginalString,
-                        cancellationToken));
+                        cancellationToken
+                    )
+                );
             }
 
-            public override SyntaxTriviaList GetTriviaList(CancellationToken cancellationToken)
-                => throw new NotImplementedException();
+            public override SyntaxTriviaList GetTriviaList(CancellationToken cancellationToken) =>
+                throw new NotImplementedException();
 
-            public override IEnumerable<TextChange> GetTextChanges(TextSpan span)
-                => throw new NotImplementedException();
+            public override IEnumerable<TextChange> GetTextChanges(TextSpan span) =>
+                throw new NotImplementedException();
         }
     }
 }

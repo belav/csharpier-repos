@@ -11,7 +11,8 @@ namespace System.Net.Http
         /// <typeparam name="T">The type of the cloneable object.</typeparam>
         /// <param name="value">The cloneable object.</param>
         /// <returns>The result of cloning the <paramref name="value"/>.</returns>
-        internal static T Clone<T>(this T value) where T : ICloneable
+        internal static T Clone<T>(this T value)
+            where T : ICloneable
         {
             return (T)value.Clone();
         }

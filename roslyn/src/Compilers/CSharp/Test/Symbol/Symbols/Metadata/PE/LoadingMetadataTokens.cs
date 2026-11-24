@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         public void LoadPESymbols()
         {
             var compilation = CreateCompilation(
-@"
+                @"
 public class C
 {
     public int f = 0;
@@ -37,7 +37,8 @@ public class C
 public struct S
 {
 }",
-                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute());
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute()
+            );
 
             CompileAndVerify(compilation, symbolValidator: module =>
             {
@@ -79,7 +80,7 @@ public struct S
         public void LoadSourceSymbols()
         {
             var compilation = CreateCompilation(
-@"
+                @"
 public class C
 {
     public int f = 0;
@@ -99,7 +100,8 @@ public class C
 
 public struct S
 {
-}");
+}"
+            );
 
             var assembly = compilation.Assembly;
             Assert.Equal(0, assembly.MetadataToken);

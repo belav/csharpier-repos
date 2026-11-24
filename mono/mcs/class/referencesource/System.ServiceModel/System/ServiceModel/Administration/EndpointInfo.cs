@@ -33,7 +33,10 @@ namespace System.ServiceModel.Administration
             this.behaviors = endpoint.Behaviors;
             this.serviceName = serviceName;
 
-            this.binding = null == endpoint.Binding ? new CustomBinding() : new CustomBinding(endpoint.Binding);
+            this.binding =
+                null == endpoint.Binding
+                    ? new CustomBinding()
+                    : new CustomBinding(endpoint.Binding);
             this.contract = endpoint.Contract;
         }
 
@@ -49,10 +52,7 @@ namespace System.ServiceModel.Administration
 
         public KeyedByTypeCollection<IEndpointBehavior> Behaviors
         {
-            get
-            {
-                return this.behaviors;
-            }
+            get { return this.behaviors; }
         }
 
         public ContractDescription Contract

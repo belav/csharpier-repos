@@ -9,7 +9,7 @@ internal delegate T GenDelegate<T>(T p1, out T p2);
 
 internal class Foo
 {
-    virtual public int Function(int i, out int j)
+    public virtual int Function(int i, out int j)
     {
         j = i;
         return i;
@@ -21,7 +21,8 @@ public class Test_Delegate003
     [Fact]
     public static int TestEntryPoint()
     {
-        int i, j;
+        int i,
+            j;
         Foo inst = new Foo();
         GenDelegate<int> MyDelegate = new GenDelegate<int>(inst.Function);
         i = MyDelegate(10, out j);
@@ -36,4 +37,3 @@ public class Test_Delegate003
         return 100;
     }
 }
-

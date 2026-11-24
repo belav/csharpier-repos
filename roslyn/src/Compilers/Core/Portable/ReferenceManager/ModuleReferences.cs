@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis
         public readonly ImmutableArray<TAssemblySymbol> Symbols;
 
         /// <summary>
-        /// A subset of <see cref="Symbols"/> that correspond to references with non-matching (unified) 
+        /// A subset of <see cref="Symbols"/> that correspond to references with non-matching (unified)
         /// version along with unification details.
         /// </summary>
         public readonly ImmutableArray<UnifiedAssembly<TAssemblySymbol>> UnifiedAssemblies;
@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis
         public ModuleReferences(
             ImmutableArray<AssemblyIdentity> identities,
             ImmutableArray<TAssemblySymbol> symbols,
-            ImmutableArray<UnifiedAssembly<TAssemblySymbol>> unifiedAssemblies)
+            ImmutableArray<UnifiedAssembly<TAssemblySymbol>> unifiedAssemblies
+        )
         {
             Debug.Assert(!identities.IsDefault);
             Debug.Assert(!symbols.IsDefault);

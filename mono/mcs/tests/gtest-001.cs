@@ -1,9 +1,6 @@
-class Stack < type > {
+class Stack<type> { }
 
-}
-
-class Boot {
-	public static void Main ()
-	{
-	}
+class Boot
+{
+    public static void Main() { }
 }

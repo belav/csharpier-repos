@@ -9,6 +9,6 @@ namespace System.Activities.Debugger
         StartLine,
         StartColumn,
         EndLine,
-        EndColumn
+        EndColumn,
     }
 }

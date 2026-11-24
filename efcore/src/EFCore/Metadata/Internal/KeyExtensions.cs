@@ -20,9 +20,7 @@ public static class KeyExtensions
     public static int IndexOf(this IReadOnlyKey key, IReadOnlyProperty property)
     {
         var index = 0;
-        for (; index < key.Properties.Count && key.Properties[index] != property; index++)
-        {
-        }
+        for (; index < key.Properties.Count && key.Properties[index] != property; index++) { }
 
         return index == key.Properties.Count ? -1 : index;
     }

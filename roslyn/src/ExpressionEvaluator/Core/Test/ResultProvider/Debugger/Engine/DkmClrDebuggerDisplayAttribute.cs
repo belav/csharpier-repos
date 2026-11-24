@@ -18,8 +18,6 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
         public string Value { get; internal set; }
 
         public DkmClrDebuggerDisplayAttribute(string targetMember)
-            : base(targetMember)
-        {
-        }
+            : base(targetMember) { }
     }
 }

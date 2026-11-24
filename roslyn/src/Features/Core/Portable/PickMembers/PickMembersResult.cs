@@ -19,13 +19,13 @@ namespace Microsoft.CodeAnalysis.PickMembers
         /// </summary>
         public readonly bool SelectedAll;
 
-        private PickMembersResult(bool isCanceled)
-            => IsCanceled = isCanceled;
+        private PickMembersResult(bool isCanceled) => IsCanceled = isCanceled;
 
         public PickMembersResult(
             ImmutableArray<ISymbol> members,
             ImmutableArray<PickMembersOption> options,
-            bool selectedAll)
+            bool selectedAll
+        )
         {
             Members = members;
             Options = options;

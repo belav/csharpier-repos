@@ -16,17 +16,25 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void WebConfig_HelpPageReferencesCorrectMvcHostVersion()
         {
             // Arrange
-            Version mvcVersion = VersionTestHelper.GetVersionFromAssembly("System.Web.Mvc", typeof(Controller));
-            string expectedFactoryType = "System.Web.Mvc.MvcWebRazorHostFactory, System.Web.Mvc, Version=" + mvcVersion
+            Version mvcVersion = VersionTestHelper.GetVersionFromAssembly(
+                "System.Web.Mvc",
+                typeof(Controller)
+            );
+            string expectedFactoryType =
+                "System.Web.Mvc.MvcWebRazorHostFactory, System.Web.Mvc, Version="
+                + mvcVersion
                 + ", Culture=neutral, PublicKeyToken=31BF3856AD364E35";
-            using (Stream webConfigStream = typeof(WebConfigTest).Assembly
-                .GetManifestResourceStream(@"WebApiHelpPage.TestFiles.Web.config"))
+            using (
+                Stream webConfigStream = typeof(WebConfigTest).Assembly.GetManifestResourceStream(
+                    @"WebApiHelpPage.TestFiles.Web.config"
+                )
+            )
             {
                 XDocument document = XDocument.Load(webConfigStream);
 
                 // Act
-                string actualFactoryType = document.Root
-                    .Element("system.web.webPages.razor")
+                string actualFactoryType = document
+                    .Root.Element("system.web.webPages.razor")
                     .Element("host")
                     .Attribute("factoryType")
                     .Value;

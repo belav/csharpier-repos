@@ -25,9 +25,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         private AggregateType _ats;
         private Symbol _sym;
 
-        public SymWithType()
-        {
-        }
+        public SymWithType() { }
 
         public SymWithType(Symbol sym, AggregateType ats)
         {
@@ -81,7 +79,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         {
             Debug.Fail("Sub-optimal equality called. Check if this is correct.");
             SymWithType other = obj as SymWithType;
-            if (other == null) return false;
+            if (other == null)
+                return false;
             return Sym == other.Sym && Ats == other.Ats;
         }
 
@@ -136,9 +135,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
     internal class MethPropWithType : SymWithType
     {
-        public MethPropWithType()
-        {
-        }
+        public MethPropWithType() { }
 
         public MethPropWithType(MethodOrPropertySymbol mps, AggregateType ats)
         {
@@ -148,9 +145,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
     internal sealed class MethWithType : MethPropWithType
     {
-        public MethWithType()
-        {
-        }
+        public MethWithType() { }
 
         public MethWithType(MethodSymbol meth, AggregateType ats)
         {
@@ -200,9 +195,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         }
 
         public MethPropWithInst(MethodOrPropertySymbol mps, AggregateType ats)
-            : this(mps, ats, null)
-        {
-        }
+            : this(mps, ats, null) { }
 
         public MethPropWithInst(MethodOrPropertySymbol mps, AggregateType ats, TypeArray typeArgs)
         {
@@ -231,13 +224,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     internal sealed class MethWithInst : MethPropWithInst
     {
         public MethWithInst(MethodSymbol meth, AggregateType ats)
-            : this(meth, ats, null)
-        {
-        }
+            : this(meth, ats, null) { }
+
         public MethWithInst(MethodSymbol meth, AggregateType ats, TypeArray typeArgs)
         {
             Set(meth, ats, typeArgs);
         }
+
         public MethWithInst(MethPropWithInst mpwi)
         {
             Set(mpwi.Sym as MethodSymbol, mpwi.Ats, mpwi.TypeArgs);

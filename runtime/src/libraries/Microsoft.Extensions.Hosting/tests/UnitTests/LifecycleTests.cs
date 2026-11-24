@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.Hosting.Tests
 
         // Tests that actually delay this long should be [OuterLoop]:
         private static TimeSpan s_shortDelay = TimeSpan.FromSeconds(.5);
-        private static TimeSpan s_longDelay = TimeSpan.FromSeconds(5); 
+        private static TimeSpan s_longDelay = TimeSpan.FromSeconds(5);
 
         public static IHostBuilder CreateHostBuilder(Action<IServiceCollection> configure) =>
             new HostBuilder().ConfigureServices(configure);
@@ -60,8 +60,14 @@ namespace Microsoft.Extensions.Hosting.Tests
             {
                 services
                     .AddHostedService<CallbackOrder_Impl>()
-                    .AddSingleton((sp) => sp.GetServices<IHostedService>().OfType<CallbackOrder_Impl>().First())
-                    .AddSingleton<IHostLifetime>((sp) => sp.GetServices<IHostedService>().OfType<CallbackOrder_Impl>().First())
+                    .AddSingleton(
+                        (sp) =>
+                            sp.GetServices<IHostedService>().OfType<CallbackOrder_Impl>().First()
+                    )
+                    .AddSingleton<IHostLifetime>(
+                        (sp) =>
+                            sp.GetServices<IHostedService>().OfType<CallbackOrder_Impl>().First()
+                    )
                     .Configure<HostOptions>(opts => opts.ServicesStartConcurrently = concurrently)
                     .Configure<HostOptions>(opts => opts.ServicesStopConcurrently = concurrently);
             });
@@ -157,6 +163,7 @@ namespace Microsoft.Extensions.Hosting.Tests
                 _stopOrder = ++_callCount;
                 return Task.CompletedTask;
             }
+
             public Task StoppedAsync(CancellationToken cancellationToken)
             {
                 _stoppedOrder = ++_callCount;
@@ -185,9 +192,7 @@ namespace Microsoft.Extensions.Hosting.Tests
             public bool ThrowOnStarted;
             public bool ThrowOnShutdown;
 
-            public ExceptionImpl(
-                bool throwAfterAsyncCall,
-                bool throwOnShutdown)
+            public ExceptionImpl(bool throwAfterAsyncCall, bool throwOnShutdown)
             {
                 _throwAfterAsyncCall = throwAfterAsyncCall;
                 ThrowOnShutdown = throwOnShutdown;
@@ -197,7 +202,8 @@ namespace Microsoft.Extensions.Hosting.Tests
                 bool throwAfterAsyncCall,
                 bool throwOnStarting,
                 bool throwOnStart,
-                bool throwOnStarted)
+                bool throwOnStarted
+            )
             {
                 _throwAfterAsyncCall = throwAfterAsyncCall;
                 ThrowOnStarting = throwOnStarting;
@@ -292,6 +298,7 @@ namespace Microsoft.Extensions.Hosting.Tests
 
         // These are used to close open generic types:
         private sealed class Impl1 { }
+
         private sealed class Impl2 { }
     }
 }

@@ -16,23 +16,42 @@ namespace System.Numerics
         /// <summary>
         /// Returns the vector (0,0,0).
         /// </summary>
-        public static Vector3 Zero { get { return new Vector3(); } }
+        public static Vector3 Zero
+        {
+            get { return new Vector3(); }
+        }
+
         /// <summary>
         /// Returns the vector (1,1,1).
         /// </summary>
-        public static Vector3 One { get { return new Vector3(1.0f, 1.0f, 1.0f); } }
+        public static Vector3 One
+        {
+            get { return new Vector3(1.0f, 1.0f, 1.0f); }
+        }
+
         /// <summary>
         /// Returns the vector (1,0,0).
         /// </summary>
-        public static Vector3 UnitX { get { return new Vector3(1.0f, 0.0f, 0.0f); } }
+        public static Vector3 UnitX
+        {
+            get { return new Vector3(1.0f, 0.0f, 0.0f); }
+        }
+
         /// <summary>
         /// Returns the vector (0,1,0).
         /// </summary>
-        public static Vector3 UnitY { get { return new Vector3(0.0f, 1.0f, 0.0f); } }
+        public static Vector3 UnitY
+        {
+            get { return new Vector3(0.0f, 1.0f, 0.0f); }
+        }
+
         /// <summary>
         /// Returns the vector (0,0,1).
         /// </summary>
-        public static Vector3 UnitZ { get { return new Vector3(0.0f, 0.0f, 1.0f); } }
+        public static Vector3 UnitZ
+        {
+            get { return new Vector3(0.0f, 0.0f, 1.0f); }
+        }
         #endregion Public Static Properties
 
         #region Public Instance Methods
@@ -82,7 +101,7 @@ namespace System.Numerics
         }
 
         /// <summary>
-        /// Returns a String representing this Vector3 instance, using the specified format to format individual elements 
+        /// Returns a String representing this Vector3 instance, using the specified format to format individual elements
         /// and the given IFormatProvider.
         /// </summary>
         /// <param name="format">The format of individual elements.</param>
@@ -226,7 +245,8 @@ namespace System.Numerics
             return new Vector3(
                 vector1.Y * vector2.Z - vector1.Z * vector2.Y,
                 vector1.Z * vector2.X - vector1.X * vector2.Z,
-                vector1.X * vector2.Y - vector1.Y * vector2.X);
+                vector1.X * vector2.Y - vector1.Y * vector2.X
+            );
         }
 
         /// <summary>
@@ -303,7 +323,8 @@ namespace System.Numerics
                 return new Vector3(
                     value1.X + (value2.X - value1.X) * amount,
                     value1.Y + (value2.Y - value1.Y) * amount,
-                    value1.Z + (value2.Z - value1.Z) * amount);
+                    value1.Z + (value2.Z - value1.Z) * amount
+                );
             }
         }
 
@@ -317,9 +338,19 @@ namespace System.Numerics
         public static Vector3 Transform(Vector3 position, Matrix4x4 matrix)
         {
             return new Vector3(
-                position.X * matrix.M11 + position.Y * matrix.M21 + position.Z * matrix.M31 + matrix.M41,
-                position.X * matrix.M12 + position.Y * matrix.M22 + position.Z * matrix.M32 + matrix.M42,
-                position.X * matrix.M13 + position.Y * matrix.M23 + position.Z * matrix.M33 + matrix.M43);
+                position.X * matrix.M11
+                    + position.Y * matrix.M21
+                    + position.Z * matrix.M31
+                    + matrix.M41,
+                position.X * matrix.M12
+                    + position.Y * matrix.M22
+                    + position.Z * matrix.M32
+                    + matrix.M42,
+                position.X * matrix.M13
+                    + position.Y * matrix.M23
+                    + position.Z * matrix.M33
+                    + matrix.M43
+            );
         }
 
         /// <summary>
@@ -334,7 +365,8 @@ namespace System.Numerics
             return new Vector3(
                 normal.X * matrix.M11 + normal.Y * matrix.M21 + normal.Z * matrix.M31,
                 normal.X * matrix.M12 + normal.Y * matrix.M22 + normal.Z * matrix.M32,
-                normal.X * matrix.M13 + normal.Y * matrix.M23 + normal.Z * matrix.M33);
+                normal.X * matrix.M13 + normal.Y * matrix.M23 + normal.Z * matrix.M33
+            );
         }
 
         /// <summary>
@@ -363,7 +395,8 @@ namespace System.Numerics
             return new Vector3(
                 value.X * (1.0f - yy2 - zz2) + value.Y * (xy2 - wz2) + value.Z * (xz2 + wy2),
                 value.X * (xy2 + wz2) + value.Y * (1.0f - xx2 - zz2) + value.Z * (yz2 - wx2),
-                value.X * (xz2 - wy2) + value.Y * (yz2 + wx2) + value.Z * (1.0f - xx2 - yy2));
+                value.X * (xz2 - wy2) + value.Y * (yz2 + wx2) + value.Z * (1.0f - xx2 - yy2)
+            );
         }
         #endregion Public Static Methods
 

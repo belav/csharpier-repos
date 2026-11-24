@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -17,7 +17,7 @@ using System.Diagnostics.Contracts;
 namespace System.Linq.Parallel
 {
     /// <summary>
-    /// A partitioned stream just partitions some data source using an extensible 
+    /// A partitioned stream just partitions some data source using an extensible
     /// partitioning algorithm and exposes a set of N enumerators that are consumed by
     /// their ordinal index [0..N). It is used to build up a set of streaming computations.
     /// At instantiation time, the actual data source to be partitioned is supplied; and
@@ -39,7 +39,11 @@ namespace System.Linq.Parallel
         private readonly IComparer<TKey> m_keyComparer; // Comparer for order keys.
         private readonly OrdinalIndexState m_indexState; // State of the order keys.
 
-        internal PartitionedStream(int partitionCount, IComparer<TKey> keyComparer, OrdinalIndexState indexState)
+        internal PartitionedStream(
+            int partitionCount,
+            IComparer<TKey> keyComparer,
+            OrdinalIndexState indexState
+        )
         {
             Contract.Assert(partitionCount > 0);
             m_partitions = new QueryOperatorEnumerator<TElement, TKey>[partitionCount];
@@ -66,7 +70,7 @@ namespace System.Linq.Parallel
             {
                 Contract.Assert(m_partitions != null);
                 Contract.Assert(value != null);
-                Contract.Assert(0 <= index && index < m_partitions.Length, "index out of bounds");                
+                Contract.Assert(0 <= index && index < m_partitions.Length, "index out of bounds");
                 m_partitions[index] = value;
             }
         }

@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             SyntaxNode bodyOpt,
 #endif
             UnitTestingInvocationReasons reasons,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         Task AnalyzeProjectAsync(
             Project project,
@@ -37,7 +38,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             bool semanticsChanged,
 #endif
             UnitTestingInvocationReasons reasons,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         void RemoveDocument(DocumentId documentId);
     }

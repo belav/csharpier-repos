@@ -24,18 +24,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override GeneratedLabelSymbol BreakLabel
         {
-            get
-            {
-                return _breakLabel;
-            }
+            get { return _breakLabel; }
         }
 
         internal override GeneratedLabelSymbol ContinueLabel
         {
-            get
-            {
-                return _continueLabel;
-            }
+            get { return _continueLabel; }
         }
     }
 }

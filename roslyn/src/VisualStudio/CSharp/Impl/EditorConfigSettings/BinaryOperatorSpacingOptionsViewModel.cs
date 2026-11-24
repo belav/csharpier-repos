@@ -10,7 +10,8 @@ using Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings
 {
-    internal class BinaryOperatorSpacingOptionsViewModel : EnumSettingViewModel<BinaryOperatorSpacingOptions>
+    internal class BinaryOperatorSpacingOptionsViewModel
+        : EnumSettingViewModel<BinaryOperatorSpacingOptions>
     {
         private readonly Setting _setting;
 
@@ -29,15 +30,30 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings
             return (BinaryOperatorSpacingOptions)_setting.GetValue()!;
         }
 
-        protected override IReadOnlyDictionary<string, BinaryOperatorSpacingOptions> GetValuesAndDescriptions()
+        protected override IReadOnlyDictionary<
+            string,
+            BinaryOperatorSpacingOptions
+        > GetValuesAndDescriptions()
         {
             return EnumerateOptions().ToDictionary(x => x.description, x => x.value);
 
-            static IEnumerable<(string description, BinaryOperatorSpacingOptions value)> EnumerateOptions()
+            static IEnumerable<(
+                string description,
+                BinaryOperatorSpacingOptions value
+            )> EnumerateOptions()
             {
-                yield return (CSharpVSResources.Ignore_spaces_around_binary_operators, BinaryOperatorSpacingOptions.Ignore);
-                yield return (CSharpVSResources.Remove_spaces_before_and_after_binary_operators, BinaryOperatorSpacingOptions.Remove);
-                yield return (CSharpVSResources.Insert_space_before_and_after_binary_operators, BinaryOperatorSpacingOptions.Single);
+                yield return (
+                    CSharpVSResources.Ignore_spaces_around_binary_operators,
+                    BinaryOperatorSpacingOptions.Ignore
+                );
+                yield return (
+                    CSharpVSResources.Remove_spaces_before_and_after_binary_operators,
+                    BinaryOperatorSpacingOptions.Remove
+                );
+                yield return (
+                    CSharpVSResources.Insert_space_before_and_after_binary_operators,
+                    BinaryOperatorSpacingOptions.Single
+                );
             }
         }
     }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,56 +39,45 @@ using System.Web.UI;
 
 namespace System.Web.ClientServices
 {
-	public class ClientFormsIdentity : IDisposable, IIdentity
-	{
-		string Password {
-			get;
-			set;
-		}
-		
-		public CookieContainer AuthenticationCookies {
-			get;
-			private set;
-		}
-		
-		public string AuthenticationType {
-			get;
-			private set;
-		}
-		
-		public bool IsAuthenticated {
-			get;
-			private set;
-		}
-		
-		public string Name {
-			get;
-			private set;
-		}
-		
-		public MembershipProvider Provider {
-			get;
-			private set;
-		}
-		
-		public ClientFormsIdentity (string name, string password, MembershipProvider provider, string authenticationType, bool isAuthenticated, CookieContainer authenticationCookies)
-		{
-			Password = password;
-			Name = name;
-			Provider = provider;
-			AuthenticationType = authenticationType;
-			IsAuthenticated = isAuthenticated;
-			AuthenticationCookies = authenticationCookies;
-		}
-		
-		public void Dispose ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void RevalidateUser ()
-		{
-			throw new NotImplementedException ();
-		}		
-	}
+    public class ClientFormsIdentity : IDisposable, IIdentity
+    {
+        string Password { get; set; }
+
+        public CookieContainer AuthenticationCookies { get; private set; }
+
+        public string AuthenticationType { get; private set; }
+
+        public bool IsAuthenticated { get; private set; }
+
+        public string Name { get; private set; }
+
+        public MembershipProvider Provider { get; private set; }
+
+        public ClientFormsIdentity(
+            string name,
+            string password,
+            MembershipProvider provider,
+            string authenticationType,
+            bool isAuthenticated,
+            CookieContainer authenticationCookies
+        )
+        {
+            Password = password;
+            Name = name;
+            Provider = provider;
+            AuthenticationType = authenticationType;
+            IsAuthenticated = isAuthenticated;
+            AuthenticationCookies = authenticationCookies;
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RevalidateUser()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

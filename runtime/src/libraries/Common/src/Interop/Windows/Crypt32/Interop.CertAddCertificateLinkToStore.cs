@@ -12,6 +12,11 @@ internal static partial class Interop
 
         [LibraryImport(Interop.Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CertAddCertificateLinkToStore(SafeCertStoreHandle hCertStore, SafeCertContextHandle pCertContext, uint dwAddDisposition, SafeCertContextHandle ppStoreContext);
+        internal static partial bool CertAddCertificateLinkToStore(
+            SafeCertStoreHandle hCertStore,
+            SafeCertContextHandle pCertContext,
+            uint dwAddDisposition,
+            SafeCertContextHandle ppStoreContext
+        );
     }
 }

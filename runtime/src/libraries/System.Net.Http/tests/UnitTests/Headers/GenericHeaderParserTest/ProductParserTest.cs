@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
-
 using Xunit;
 
 namespace System.Net.Http.Tests
@@ -29,9 +28,24 @@ namespace System.Net.Http.Tests
         public void TryParse_SetOfValidValueStrings_ParsedCorrectly()
         {
             CheckValidParsedValue("X y/1 ", 1, new ProductHeaderValue("y", "1"), 6);
-            CheckValidParsedValue(", , custom / 1.0 ,,Y", 0, new ProductHeaderValue("custom", "1.0"), 19);
-            CheckValidParsedValue(", , custom / 1.0 ,,", 0, new ProductHeaderValue("custom", "1.0"), 19);
-            CheckValidParsedValue(", , custom / 1.0", 0, new ProductHeaderValue("custom", "1.0"), 16);
+            CheckValidParsedValue(
+                ", , custom / 1.0 ,,Y",
+                0,
+                new ProductHeaderValue("custom", "1.0"),
+                19
+            );
+            CheckValidParsedValue(
+                ", , custom / 1.0 ,,",
+                0,
+                new ProductHeaderValue("custom", "1.0"),
+                19
+            );
+            CheckValidParsedValue(
+                ", , custom / 1.0",
+                0,
+                new ProductHeaderValue("custom", "1.0"),
+                16
+            );
 
             CheckValidParsedValue(null, 0, null, 0);
             CheckValidParsedValue(string.Empty, 0, null, 0);
@@ -50,13 +64,19 @@ namespace System.Net.Http.Tests
 
         #region Helper methods
 
-        private void CheckValidParsedValue(string input, int startIndex, ProductHeaderValue expectedResult,
-            int expectedIndex)
+        private void CheckValidParsedValue(
+            string input,
+            int startIndex,
+            ProductHeaderValue expectedResult,
+            int expectedIndex
+        )
         {
             HttpHeaderParser parser = GenericHeaderParser.MultipleValueProductParser;
             object result = null;
-            Assert.True(parser.TryParseValue(input, null, ref startIndex, out result),
-                string.Format("TryParse returned false. Input: '{0}'", input));
+            Assert.True(
+                parser.TryParseValue(input, null, ref startIndex, out result),
+                string.Format("TryParse returned false. Input: '{0}'", input)
+            );
             Assert.Equal(expectedIndex, startIndex);
             Assert.Equal(result, expectedResult);
         }
@@ -66,8 +86,10 @@ namespace System.Net.Http.Tests
             HttpHeaderParser parser = GenericHeaderParser.MultipleValueProductParser;
             object result = null;
             int newIndex = startIndex;
-            Assert.False(parser.TryParseValue(input, null, ref newIndex, out result),
-                string.Format("TryParse returned true. Input: '{0}'", input));
+            Assert.False(
+                parser.TryParseValue(input, null, ref newIndex, out result),
+                string.Format("TryParse returned true. Input: '{0}'", input)
+            );
             Assert.Null(result);
             Assert.Equal(startIndex, newIndex);
         }

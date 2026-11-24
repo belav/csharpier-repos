@@ -85,7 +85,9 @@ namespace Microsoft.CodeAnalysis
             // Currently, the following are always inherited from the descriptor and therefore will be
             // captured as rule metadata and need not be logged here. IsWarningAsError is also omitted
             // because it can be inferred from level vs. defaultLevel in the log.
-            Debug.Assert(diagnostic.CustomTags.SequenceEqual(diagnostic.Descriptor.ImmutableCustomTags));
+            Debug.Assert(
+                diagnostic.CustomTags.SequenceEqual(diagnostic.Descriptor.ImmutableCustomTags)
+            );
             Debug.Assert(diagnostic.Category == diagnostic.Descriptor.Category);
             Debug.Assert(diagnostic.DefaultSeverity == diagnostic.Descriptor.DefaultSeverity);
             Debug.Assert(diagnostic.IsEnabledByDefault == diagnostic.Descriptor.IsEnabledByDefault);
@@ -103,7 +105,12 @@ namespace Microsoft.CodeAnalysis
                 {
                     _writer.WriteObjectStart("customProperties");
 
-                    foreach (var pair in diagnostic.Properties.OrderBy(x => x.Key, StringComparer.Ordinal))
+                    foreach (
+                        var pair in diagnostic.Properties.OrderBy(
+                            x => x.Key,
+                            StringComparer.Ordinal
+                        )
+                    )
                     {
                         _writer.Write(pair.Key, pair.Value);
                     }

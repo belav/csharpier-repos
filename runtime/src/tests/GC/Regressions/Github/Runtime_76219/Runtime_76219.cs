@@ -38,7 +38,5 @@ public class Runtime_76219
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Consume(string str)
-    {
-    }
+    private static void Consume(string str) { }
 }

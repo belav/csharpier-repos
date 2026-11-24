@@ -34,17 +34,33 @@ internal partial class TestRunner(ILoggerFactory loggerFactory)
         bool attachDebugger,
         string? runSettings,
         IClientLanguageServerManager clientLanguageServerManager,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
-        var initialProgress = new TestProgress
-        {
-            TotalTests = testCases.Length
-        };
-        progress.Report(new RunTestsPartialResult(LanguageServerResources.Running_tests, $"{Environment.NewLine}{LanguageServerResources.Starting_test_run}", initialProgress));
+        var initialProgress = new TestProgress { TotalTests = testCases.Length };
+        progress.Report(
+            new RunTestsPartialResult(
+                LanguageServerResources.Running_tests,
+                $"{Environment.NewLine}{LanguageServerResources.Starting_test_run}",
+                initialProgress
+            )
+        );
 
         var handler = new TestRunHandler(progress, initialProgress, _logger);
 
-        var runTask = Task.Run(() => RunTests(testCases, progress, vsTestConsoleWrapper, handler, attachDebugger, runSettings, clientLanguageServerManager), cancellationToken);
+        var runTask = Task.Run(
+            () =>
+                RunTests(
+                    testCases,
+                    progress,
+                    vsTestConsoleWrapper,
+                    handler,
+                    attachDebugger,
+                    runSettings,
+                    clientLanguageServerManager
+                ),
+            cancellationToken
+        );
         cancellationToken.Register(() => vsTestConsoleWrapper.CancelTestRun());
         await runTask;
     }
@@ -56,13 +72,19 @@ internal partial class TestRunner(ILoggerFactory loggerFactory)
         TestRunHandler handler,
         bool attachDebugger,
         string? runSettings,
-        IClientLanguageServerManager clientLanguageServerManager)
+        IClientLanguageServerManager clientLanguageServerManager
+    )
     {
         runSettings ??= DefaultRunSettings;
         if (attachDebugger)
         {
             // When we want to debug tests we need to use a custom test launcher so that we get called back with the process to attach to.
-            vsTestConsoleWrapper.RunTestsWithCustomTestHost(testCases, runSettings: runSettings, handler, new DebugTestHostLauncher(progress, clientLanguageServerManager));
+            vsTestConsoleWrapper.RunTestsWithCustomTestHost(
+                testCases,
+                runSettings: runSettings,
+                handler,
+                new DebugTestHostLauncher(progress, clientLanguageServerManager)
+            );
         }
         else
         {

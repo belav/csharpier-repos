@@ -1,4 +1,3 @@
-
 using System;
 
 namespace System.Net.NetworkInformation
@@ -6,7 +5,6 @@ namespace System.Net.NetworkInformation
     /// Provides Internet Protocol (IP) statistical data for the local machine.
     public abstract class IPGlobalStatistics
     {
-
         /// Gets the default time-to-live (TTL) value for Internet Protocol (IP) packets.
         public abstract int DefaultTtl { get; }
 
@@ -40,7 +38,7 @@ namespace System.Net.NetworkInformation
         /// Gets the number of Internet Protocol (IP) packets that were not successfully reassembled.
         public abstract long PacketReassemblyFailures { get; }
 
-        /// Gets the maximum amount of time within which all fragments of an Internet Protocol (IP) packet must arrive. 
+        /// Gets the maximum amount of time within which all fragments of an Internet Protocol (IP) packet must arrive.
         public abstract long PacketReassemblyTimeout { get; }
 
         /// Gets the number of Internet Protocol (IP) packets fragmented.
@@ -73,6 +71,4 @@ namespace System.Net.NetworkInformation
         /// Gets the number of routes in the Internet Protocol (IP) routing table.
         public abstract int NumberOfRoutes { get; }
     }
- 
 }
-

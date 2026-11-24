@@ -28,11 +28,11 @@ public unsafe class Runtime_58874
     private class EndOfPage : IDisposable
     {
         private void* _addr;
-        private EndOfPage()
-        {
-        }
+
+        private EndOfPage() { }
 
         public Test* Pointer => (Test*)((byte*)_addr + 0x1000 - sizeof(Test));
+
         public void Dispose()
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -84,7 +84,12 @@ public unsafe class Runtime_58874
         }
 
         [DllImport("kernel32")]
-        private static extern void* VirtualAlloc(void* lpAddress, nuint dwSize, uint flAllocationType, uint flProtect);
+        private static extern void* VirtualAlloc(
+            void* lpAddress,
+            nuint dwSize,
+            uint flAllocationType,
+            uint flProtect
+        );
 
         [DllImport("kernel32")]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -94,5 +99,6 @@ public unsafe class Runtime_58874
 
 struct Test
 {
-    public byte A, B;
+    public byte A,
+        B;
 }

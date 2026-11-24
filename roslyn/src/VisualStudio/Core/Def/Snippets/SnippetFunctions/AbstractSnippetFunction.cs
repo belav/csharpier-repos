@@ -22,7 +22,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
 
         protected AbstractSnippetExpansionClient snippetExpansionClient;
 
-        public AbstractSnippetFunction(AbstractSnippetExpansionClient snippetExpansionClient, ITextBuffer subjectBuffer, IThreadingContext threadingContext)
+        public AbstractSnippetFunction(
+            AbstractSnippetExpansionClient snippetExpansionClient,
+            ITextBuffer subjectBuffer,
+            IThreadingContext threadingContext
+        )
         {
             this.snippetExpansionClient = snippetExpansionClient;
             _subjectBuffer = subjectBuffer;
@@ -35,30 +39,54 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             return document != null;
         }
 
-        private int GetDefaultValue(CancellationToken cancellationToken, out string value, out int hasDefaultValue)
+        private int GetDefaultValue(
+            CancellationToken cancellationToken,
+            out string value,
+            out int hasDefaultValue
+        )
         {
-            var (ExitCode, Value, HasDefaultValue) = _threadingContext.JoinableTaskFactory.Run(() => GetDefaultValueAsync(cancellationToken));
+            var (ExitCode, Value, HasDefaultValue) = _threadingContext.JoinableTaskFactory.Run(() =>
+                GetDefaultValueAsync(cancellationToken)
+            );
             value = Value;
             hasDefaultValue = HasDefaultValue;
             return ExitCode;
         }
 
-        protected virtual Task<(int ExitCode, string Value, int HasDefaultValue)> GetDefaultValueAsync(CancellationToken cancellationToken)
+        protected virtual Task<(
+            int ExitCode,
+            string Value,
+            int HasDefaultValue
+        )> GetDefaultValueAsync(CancellationToken cancellationToken)
         {
-            return Task.FromResult((ExitCode: VSConstants.S_OK, Value: string.Empty, HasDefaultValue: 0));
+            return Task.FromResult(
+                (ExitCode: VSConstants.S_OK, Value: string.Empty, HasDefaultValue: 0)
+            );
         }
 
-        private int GetCurrentValue(CancellationToken cancellationToken, out string value, out int hasCurrentValue)
+        private int GetCurrentValue(
+            CancellationToken cancellationToken,
+            out string value,
+            out int hasCurrentValue
+        )
         {
-            var (ExitCode, Value, HasCurrentValue) = _threadingContext.JoinableTaskFactory.Run(() => GetCurrentValueAsync(cancellationToken));
+            var (ExitCode, Value, HasCurrentValue) = _threadingContext.JoinableTaskFactory.Run(() =>
+                GetCurrentValueAsync(cancellationToken)
+            );
             value = Value;
             hasCurrentValue = HasCurrentValue;
             return ExitCode;
         }
 
-        protected virtual Task<(int ExitCode, string Value, int HasCurrentValue)> GetCurrentValueAsync(CancellationToken cancellationToken)
+        protected virtual Task<(
+            int ExitCode,
+            string Value,
+            int HasCurrentValue
+        )> GetCurrentValueAsync(CancellationToken cancellationToken)
         {
-            return Task.FromResult((ExitCode: VSConstants.S_OK, Value: string.Empty, HasDefaultValue: 0));
+            return Task.FromResult(
+                (ExitCode: VSConstants.S_OK, Value: string.Empty, HasDefaultValue: 0)
+            );
         }
 
         protected virtual int FieldChanged(string field, out int requeryFunction)

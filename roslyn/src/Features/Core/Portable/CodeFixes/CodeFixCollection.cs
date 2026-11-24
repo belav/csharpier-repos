@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         ImmutableArray<CodeFix> fixes,
         FixAllState fixAllState,
         ImmutableArray<FixAllScope> supportedScopes,
-        Diagnostic firstDiagnostic)
+        Diagnostic firstDiagnostic
+    )
     {
         public object Provider { get; } = provider;
         public TextSpan TextSpan { get; } = span;

@@ -10,18 +10,17 @@ namespace System.IdentityModel.Configuration
 #pragma warning disable 1591
     public sealed partial class CustomTypeElement : ConfigurationElementInterceptor
     {
-        public CustomTypeElement()
-        {
-        }
+        public CustomTypeElement() { }
 
-        internal CustomTypeElement( Type typeName )
+        internal CustomTypeElement(Type typeName)
         {
             this.Type = typeName;
         }
 
-        public static T Resolve<T>( CustomTypeElement customTypeElement ) where T : class
+        public static T Resolve<T>(CustomTypeElement customTypeElement)
+            where T : class
         {
-            return TypeResolveHelper.Resolve<T>( customTypeElement, customTypeElement.Type );
+            return TypeResolveHelper.Resolve<T>(customTypeElement, customTypeElement.Type);
         }
 
         /// <summary>
@@ -31,11 +30,16 @@ namespace System.IdentityModel.Configuration
         {
             get
             {
-                return ( ( ElementInformation.Properties[ConfigurationStrings.Type].ValueOrigin != PropertyValueOrigin.Default ) );
+                return (
+                    (
+                        ElementInformation.Properties[ConfigurationStrings.Type].ValueOrigin
+                        != PropertyValueOrigin.Default
+                    )
+                );
             }
         }
 
-        [ConfigurationProperty( ConfigurationStrings.Type, IsRequired = true, IsKey = true )]
+        [ConfigurationProperty(ConfigurationStrings.Type, IsRequired = true, IsKey = true)]
         [TypeConverter(typeof(System.Configuration.TypeNameConverter))]
         public Type Type
         {

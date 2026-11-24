@@ -45,8 +45,10 @@ namespace System.Web.Mvc
             }
             if (verbOverride != null)
             {
-                if (!String.Equals(verbOverride, "GET", StringComparison.OrdinalIgnoreCase) &&
-                    !String.Equals(verbOverride, "POST", StringComparison.OrdinalIgnoreCase))
+                if (
+                    !String.Equals(verbOverride, "GET", StringComparison.OrdinalIgnoreCase)
+                    && !String.Equals(verbOverride, "POST", StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     incomingVerb = verbOverride;
                 }

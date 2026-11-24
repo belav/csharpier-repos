@@ -17,12 +17,17 @@ namespace System.ServiceModel.Diagnostics
 
         public CollectionTraceRecord(string collectionName, string elementName, IEnumerable entries)
         {
-            this.collectionName = String.IsNullOrEmpty(collectionName) ? "Elements" : collectionName;
+            this.collectionName = String.IsNullOrEmpty(collectionName)
+                ? "Elements"
+                : collectionName;
             this.elementName = String.IsNullOrEmpty(elementName) ? "Element" : elementName;
             this.entries = entries;
         }
 
-        internal override string EventId { get { return BuildEventId("Collection"); } }
+        internal override string EventId
+        {
+            get { return BuildEventId("Collection"); }
+        }
 
         internal override void WriteTo(XmlWriter xml)
         {
@@ -31,11 +36,13 @@ namespace System.ServiceModel.Diagnostics
                 xml.WriteStartElement(this.collectionName);
                 foreach (object element in this.entries)
                 {
-                    xml.WriteElementString(this.elementName, element == null ? "null" : element.ToString());
+                    xml.WriteElementString(
+                        this.elementName,
+                        element == null ? "null" : element.ToString()
+                    );
                 }
                 xml.WriteEndElement();
             }
         }
     }
-
 }

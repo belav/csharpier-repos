@@ -12,10 +12,23 @@ namespace System.Speech.Internal.SrgsParser
         void RemoveAllRules();
 
         IElementText CreateText(IElement parent, string value);
-        IToken CreateToken(IElement parent, string content, string pronumciation, string display, float reqConfidence);
+        IToken CreateToken(
+            IElement parent,
+            string content,
+            string pronumciation,
+            string display,
+            float reqConfidence
+        );
         IPropertyTag CreatePropertyTag(IElement parent);
         ISemanticTag CreateSemanticTag(IElement parent);
-        IItem CreateItem(IElement parent, IRule rule, int minRepeat, int maxRepeat, float repeatProbability, float weight);
+        IItem CreateItem(
+            IElement parent,
+            IRule rule,
+            int minRepeat,
+            int maxRepeat,
+            float repeatProbability,
+            float weight
+        );
         IRuleRef CreateRuleRef(IElement parent, Uri srgsUri);
         IRuleRef CreateRuleRef(IElement parent, Uri srgsUri, string semanticKey, string parameters);
         void InitSpecialRuleRef(IElement parent, IRuleRef special);

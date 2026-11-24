@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void IDynamicMemberReferenceExpression_SimplePropertyAccess()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 namespace ConsoleApp1
@@ -31,7 +32,8 @@ namespace ConsoleApp1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicMemberReferenceOperation (Member Name: ""Prop1"", Containing Type: null) (OperationKind.DynamicMemberReference, Type: dynamic) (Syntax: 'd.Prop1')
   Type Arguments(0)
   Instance Receiver: 
@@ -39,14 +41,19 @@ IDynamicMemberReferenceOperation (Member Name: ""Prop1"", Containing Type: null)
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IDynamicMemberReferenceExpression_InvalidPropertyAccess()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 namespace ConsoleApp1
@@ -61,26 +68,33 @@ namespace ConsoleApp1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicMemberReferenceOperation (Member Name: """", Containing Type: null) (OperationKind.DynamicMemberReference, Type: dynamic, IsInvalid) (Syntax: 'd./*</bind>*/')
   Type Arguments(0)
   Instance Receiver: 
     ILocalReferenceOperation: d (OperationKind.LocalReference, Type: dynamic) (Syntax: 'd')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1001: Identifier expected
                 //             int i = /*<bind>*/d./*</bind>*/;
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(11, 44)
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(11, 44),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IDynamicMemberReferenceExpression_SimpleMethodCall()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 namespace ConsoleApp1
@@ -95,7 +109,8 @@ namespace ConsoleApp1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicInvocationOperation (OperationKind.DynamicInvocation, Type: dynamic) (Syntax: 'd.GetValue()')
   Expression: 
     IDynamicMemberReferenceOperation (Member Name: ""GetValue"", Containing Type: null) (OperationKind.DynamicMemberReference, Type: dynamic) (Syntax: 'd.GetValue')
@@ -108,14 +123,19 @@ IDynamicInvocationOperation (OperationKind.DynamicInvocation, Type: dynamic) (Sy
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IDynamicMemberReferenceExpression_InvalidMethodCall_MissingName()
         {
-            string source = @"
+            string source =
+                @"
 namespace ConsoleApp1
 {
     class C1
@@ -128,7 +148,8 @@ namespace ConsoleApp1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicInvocationOperation (OperationKind.DynamicInvocation, Type: dynamic, IsInvalid) (Syntax: 'd.()')
   Expression: 
     IDynamicMemberReferenceOperation (Member Name: """", Containing Type: null) (OperationKind.DynamicMemberReference, Type: dynamic, IsInvalid) (Syntax: 'd.')
@@ -139,20 +160,26 @@ IDynamicInvocationOperation (OperationKind.DynamicInvocation, Type: dynamic, IsI
   ArgumentNames(0)
   ArgumentRefKinds(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1001: Identifier expected
                 //             /*<bind>*/d.()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "(").WithLocation(9, 25)
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "(").WithLocation(9, 25),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IDynamicMemberReferenceExpression_InvalidMethodCall_MissingCloseParen()
         {
-            string source = @"
+            string source =
+                @"
 namespace ConsoleApp1
 {
     class C1
@@ -165,7 +192,8 @@ namespace ConsoleApp1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicInvocationOperation (OperationKind.DynamicInvocation, Type: dynamic, IsInvalid) (Syntax: 'd.GetValue(/*</bind>*/')
   Expression: 
     IDynamicMemberReferenceOperation (Member Name: ""GetValue"", Containing Type: null) (OperationKind.DynamicMemberReference, Type: dynamic) (Syntax: 'd.GetValue')
@@ -176,20 +204,26 @@ IDynamicInvocationOperation (OperationKind.DynamicInvocation, Type: dynamic, IsI
   ArgumentNames(0)
   ArgumentRefKinds(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1026: ) expected
                 //             /*<bind>*/d.GetValue(/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_CloseParenExpected, ";").WithLocation(9, 45)
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, ";").WithLocation(9, 45),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IDynamicMemberReference_GenericMethodCall_SingleGeneric()
         {
-            string source = @"
+            string source =
+                @"
 namespace ConsoleApp1
 {
     class C1
@@ -202,7 +236,8 @@ namespace ConsoleApp1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicInvocationOperation (OperationKind.DynamicInvocation, Type: dynamic) (Syntax: 'd.GetValue<int>()')
   Expression: 
     IDynamicMemberReferenceOperation (Member Name: ""GetValue"", Containing Type: null) (OperationKind.DynamicMemberReference, Type: dynamic) (Syntax: 'd.GetValue<int>')
@@ -216,14 +251,19 @@ IDynamicInvocationOperation (OperationKind.DynamicInvocation, Type: dynamic) (Sy
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IDynamicMemberReference_GenericMethodCall_MultipleGeneric()
         {
-            string source = @"
+            string source =
+                @"
 namespace ConsoleApp1
 {
     class C1
@@ -236,7 +276,8 @@ namespace ConsoleApp1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicInvocationOperation (OperationKind.DynamicInvocation, Type: dynamic) (Syntax: 'd.GetValue<int, C1>()')
   Expression: 
     IDynamicMemberReferenceOperation (Member Name: ""GetValue"", Containing Type: null) (OperationKind.DynamicMemberReference, Type: dynamic) (Syntax: 'd.GetValue<int, C1>')
@@ -251,14 +292,19 @@ IDynamicInvocationOperation (OperationKind.DynamicInvocation, Type: dynamic) (Sy
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IDynamicMemberReferenceExpression_GenericPropertyAccess()
         {
-            string source = @"
+            string source =
+                @"
 namespace ConsoleApp1
 {
     class C1
@@ -271,7 +317,8 @@ namespace ConsoleApp1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicMemberReferenceOperation (Member Name: ""GetValue"", Containing Type: null) (OperationKind.DynamicMemberReference, Type: dynamic, IsInvalid) (Syntax: 'd.GetValue<int, C1>')
   Type Arguments(2):
     Symbol: System.Int32
@@ -279,23 +326,32 @@ IDynamicMemberReferenceOperation (Member Name: ""GetValue"", Containing Type: nu
   Instance Receiver: 
     ILocalReferenceOperation: d (OperationKind.LocalReference, Type: dynamic, IsInvalid) (Syntax: 'd')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0307: The property 'GetValue' cannot be used with type arguments
                 //             /*<bind>*/d.GetValue<int, C1>/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_TypeArgsNotAllowed, "GetValue<int, C1>").WithArguments("GetValue", "property").WithLocation(9, 25),
+                Diagnostic(ErrorCode.ERR_TypeArgsNotAllowed, "GetValue<int, C1>")
+                    .WithArguments("GetValue", "property")
+                    .WithLocation(9, 25),
                 // CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                 //             /*<bind>*/d.GetValue<int, C1>/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_IllegalStatement, "d.GetValue<int, C1>").WithLocation(9, 23)
+                Diagnostic(ErrorCode.ERR_IllegalStatement, "d.GetValue<int, C1>")
+                    .WithLocation(9, 23),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IDynamicMemberReferenceExpression_GenericMethodCall_InvalidGenericParam()
         {
-            string source = @"
+            string source =
+                @"
 namespace ConsoleApp1
 {
     class C1
@@ -308,7 +364,8 @@ namespace ConsoleApp1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicInvocationOperation (OperationKind.DynamicInvocation, Type: dynamic, IsInvalid) (Syntax: 'd.GetValue<int,>()')
   Expression: 
     IDynamicMemberReferenceOperation (Member Name: ""GetValue"", Containing Type: null) (OperationKind.DynamicMemberReference, Type: dynamic, IsInvalid) (Syntax: 'd.GetValue<int,>')
@@ -321,20 +378,26 @@ IDynamicInvocationOperation (OperationKind.DynamicInvocation, Type: dynamic, IsI
   ArgumentNames(0)
   ArgumentRefKinds(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1031: Type expected
                 //             /*<bind>*/d.GetValue<int,>()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_TypeExpected, ">").WithLocation(9, 38)
+                Diagnostic(ErrorCode.ERR_TypeExpected, ">").WithLocation(9, 38),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IDynamicMemberReferenceExpression_NestedDynamicPropertyAccess()
         {
-            string source = @"
+            string source =
+                @"
 namespace ConsoleApp1
 {
     class C1
@@ -347,7 +410,8 @@ namespace ConsoleApp1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicMemberReferenceOperation (Member Name: ""Prop2"", Containing Type: null) (OperationKind.DynamicMemberReference, Type: dynamic) (Syntax: 'd.Prop1.Prop2')
   Type Arguments(0)
   Instance Receiver: 
@@ -358,14 +422,19 @@ IDynamicMemberReferenceOperation (Member Name: ""Prop2"", Containing Type: null)
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IDynamicMemberReferenceExpression_NestedDynamicMethodAccess()
         {
-            string source = @"
+            string source =
+                @"
 namespace ConsoleApp1
 {
     class C1
@@ -378,7 +447,8 @@ namespace ConsoleApp1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicInvocationOperation (OperationKind.DynamicInvocation, Type: dynamic) (Syntax: 'd.Method1().Method2()')
   Expression: 
     IDynamicMemberReferenceOperation (Member Name: ""Method2"", Containing Type: null) (OperationKind.DynamicMemberReference, Type: dynamic) (Syntax: 'd.Method1().Method2')
@@ -399,14 +469,19 @@ IDynamicInvocationOperation (OperationKind.DynamicInvocation, Type: dynamic) (Sy
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IDynamicMemberReferenceExpression_NestedDynamicPropertyAndMethodAccess()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 namespace ConsoleApp1
@@ -421,7 +496,8 @@ namespace ConsoleApp1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicMemberReferenceOperation (Member Name: ""Prop2"", Containing Type: null) (OperationKind.DynamicMemberReference, Type: dynamic) (Syntax: 'd.Method1<int>().Prop2')
   Type Arguments(0)
   Instance Receiver: 
@@ -438,14 +514,19 @@ IDynamicMemberReferenceOperation (Member Name: ""Prop2"", Containing Type: null)
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void DynamicMemberReference_NoControlFlow()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 namespace ConsoleApp1
@@ -459,7 +540,8 @@ namespace ConsoleApp1
     }
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -484,14 +566,19 @@ Block[B2] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void DynamicMemberReference_ControlFlowInReceiver()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 namespace ConsoleApp1
@@ -505,7 +592,8 @@ namespace ConsoleApp1
     }
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -584,14 +672,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void DynamicMemberReference_ControlFlowInReceiver_TypeArguments()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 namespace ConsoleApp1
@@ -605,7 +698,8 @@ namespace ConsoleApp1
     }
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -683,13 +777,20 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(10,28): error CS0307: The property 'Prop1' cannot be used with type arguments
                 //             p = (d1 ?? d2).Prop1<int>;
-                Diagnostic(ErrorCode.ERR_TypeArgsNotAllowed, "Prop1<int>").WithArguments("Prop1", "property").WithLocation(10, 28)
+                Diagnostic(ErrorCode.ERR_TypeArgsNotAllowed, "Prop1<int>")
+                    .WithArguments("Prop1", "property")
+                    .WithLocation(10, 28),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
     }
 }

@@ -3,7 +3,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -30,161 +30,154 @@ using System.Runtime.Serialization;
 using System.Security.Permissions;
 using System.Xml;
 
-namespace Microsoft.Build.BuildEngine {
-	[Serializable]
-	public sealed class InvalidProjectFileException : Exception {
-		
-		int	columnNumber;
-		int	endColumnNumber;
-		string	errorCode;
-		string	errorSubcategory;
-		string	helpKeyword;
-		int	lineNumber;
-		int	endLineNumber;
-		string	projectFile;
-		
-		public InvalidProjectFileException ()
-			: base ("Invalid project file exception has occured")
-		{
-		}
+namespace Microsoft.Build.BuildEngine
+{
+    [Serializable]
+    public sealed class InvalidProjectFileException : Exception
+    {
+        int columnNumber;
+        int endColumnNumber;
+        string errorCode;
+        string errorSubcategory;
+        string helpKeyword;
+        int lineNumber;
+        int endLineNumber;
+        string projectFile;
 
-		public InvalidProjectFileException (string message)
-			: base (message)
-		{
-		}
+        public InvalidProjectFileException()
+            : base("Invalid project file exception has occured") { }
 
-		public InvalidProjectFileException (string projectFile,
-						    int lineNumber,
-						    int columnNumber,
-						    int endLineNumber,
-						    int endColumnNumber,
-						    string message,
-						    string errorSubcategory,
-						    string errorCode,
-						    string helpKeyword)
-			: base (message)
-		{
-			this.projectFile = projectFile;
-			this.lineNumber = lineNumber;
-			this.columnNumber = columnNumber;
-			this.endLineNumber = endLineNumber;
-			this.endColumnNumber = endColumnNumber;
-			this.errorSubcategory = errorSubcategory;
-			this.errorCode = errorCode;
-			this.helpKeyword = helpKeyword;
-		}
+        public InvalidProjectFileException(string message)
+            : base(message) { }
 
-		public InvalidProjectFileException (string message,
-						    Exception innerException)
-			: base (message, innerException)
-		{
-		}
+        public InvalidProjectFileException(
+            string projectFile,
+            int lineNumber,
+            int columnNumber,
+            int endLineNumber,
+            int endColumnNumber,
+            string message,
+            string errorSubcategory,
+            string errorCode,
+            string helpKeyword
+        )
+            : base(message)
+        {
+            this.projectFile = projectFile;
+            this.lineNumber = lineNumber;
+            this.columnNumber = columnNumber;
+            this.endLineNumber = endLineNumber;
+            this.endColumnNumber = endColumnNumber;
+            this.errorSubcategory = errorSubcategory;
+            this.errorCode = errorCode;
+            this.helpKeyword = helpKeyword;
+        }
 
-		// FIXME: set line/column numbers?
-		[MonoTODO]
-		public InvalidProjectFileException (XmlNode xmlNode,
-						    string message,
-						    string errorSubcategory,
-						    string errorCode,
-						    string helpKeyword)
-			: base (message)
-		{
-			this.errorSubcategory = errorSubcategory;
-			this.errorCode = errorCode;
-			this.helpKeyword = helpKeyword;
-		}
+        public InvalidProjectFileException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-		// FIXME: private temporarily
-		private InvalidProjectFileException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-			this.columnNumber = info.GetInt32 ("columnNumber");
-			this.endColumnNumber = info.GetInt32 ("endColumnNumber");
-			this.errorCode = info.GetString ("errorCode");
-			this.errorSubcategory = info.GetString ("errorSubcategory");
-			this.helpKeyword = info.GetString ("helpKeyword");
-			this.lineNumber = info.GetInt32 ("lineNumber");
-			this.endLineNumber = info.GetInt32 ("endLineNumber");
-			this.projectFile = info.GetString ("projectFile");
-		}
+        // FIXME: set line/column numbers?
+        [MonoTODO]
+        public InvalidProjectFileException(
+            XmlNode xmlNode,
+            string message,
+            string errorSubcategory,
+            string errorCode,
+            string helpKeyword
+        )
+            : base(message)
+        {
+            this.errorSubcategory = errorSubcategory;
+            this.errorCode = errorCode;
+            this.helpKeyword = helpKeyword;
+        }
 
-		[SecurityPermission (SecurityAction.LinkDemand, SerializationFormatter = true)]
-		public override void GetObjectData (SerializationInfo info,
-						    StreamingContext context)
-		{
-			base.GetObjectData (info, context);
-			info.AddValue ("columnNumber", columnNumber);
-			info.AddValue ("endColumnNumber", endColumnNumber);
-			info.AddValue ("errorCode", errorCode);
-			info.AddValue ("errorSubcategory", errorSubcategory);
-			info.AddValue ("helpKeyword", helpKeyword);
-			info.AddValue ("lineNumber", lineNumber);
-			info.AddValue ("endLineNumber", endLineNumber);
-			info.AddValue ("projectFile", projectFile);
-		}
+        // FIXME: private temporarily
+        private InvalidProjectFileException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+            this.columnNumber = info.GetInt32("columnNumber");
+            this.endColumnNumber = info.GetInt32("endColumnNumber");
+            this.errorCode = info.GetString("errorCode");
+            this.errorSubcategory = info.GetString("errorSubcategory");
+            this.helpKeyword = info.GetString("helpKeyword");
+            this.lineNumber = info.GetInt32("lineNumber");
+            this.endLineNumber = info.GetInt32("endLineNumber");
+            this.projectFile = info.GetString("projectFile");
+        }
 
-		public string BaseMessage {
-			get {
-				return base.Message;
-			}
-		}
+        [SecurityPermission(SecurityAction.LinkDemand, SerializationFormatter = true)]
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("columnNumber", columnNumber);
+            info.AddValue("endColumnNumber", endColumnNumber);
+            info.AddValue("errorCode", errorCode);
+            info.AddValue("errorSubcategory", errorSubcategory);
+            info.AddValue("helpKeyword", helpKeyword);
+            info.AddValue("lineNumber", lineNumber);
+            info.AddValue("endLineNumber", endLineNumber);
+            info.AddValue("projectFile", projectFile);
+        }
 
-		public int ColumnNumber {
-			get {
-				return columnNumber;
-			}
-		}
+        public string BaseMessage
+        {
+            get { return base.Message; }
+        }
 
-		public int EndColumnNumber {
-			get {
-				return endColumnNumber;
-			}
-		}
+        public int ColumnNumber
+        {
+            get { return columnNumber; }
+        }
 
-		public int EndLineNumber {
-			get {
-				return endLineNumber;
-			}
-		}
+        public int EndColumnNumber
+        {
+            get { return endColumnNumber; }
+        }
 
-		public string ErrorCode {
-			get {
-				return errorCode;
-			}
-		}
+        public int EndLineNumber
+        {
+            get { return endLineNumber; }
+        }
 
-		public string ErrorSubcategory {
-			get {
-				return errorSubcategory;
-			}
-		}
+        public string ErrorCode
+        {
+            get { return errorCode; }
+        }
 
-		public string HelpKeyword {
-			get {
-				return helpKeyword;
-			}
-		}
+        public string ErrorSubcategory
+        {
+            get { return errorSubcategory; }
+        }
 
-		public int LineNumber {
-			get {
-				return lineNumber;
-			}
-		}
+        public string HelpKeyword
+        {
+            get { return helpKeyword; }
+        }
 
-		public override string Message {
-			get {
-				if (projectFile == null || projectFile == String.Empty) {
-					return BaseMessage;
-				} else {
-					return BaseMessage + "  " + ProjectFile;
-				}
-			}
-		}
+        public int LineNumber
+        {
+            get { return lineNumber; }
+        }
 
-		public string ProjectFile {
-			get {
-				return projectFile;
-			}
-		}
-	}
+        public override string Message
+        {
+            get
+            {
+                if (projectFile == null || projectFile == String.Empty)
+                {
+                    return BaseMessage;
+                }
+                else
+                {
+                    return BaseMessage + "  " + ProjectFile;
+                }
+            }
+        }
+
+        public string ProjectFile
+        {
+            get { return projectFile; }
+        }
+    }
 }

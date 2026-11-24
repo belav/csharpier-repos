@@ -5,18 +5,17 @@
 namespace System.ServiceModel.Description
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Xml;
     using System.Runtime.Serialization;
+    using System.ServiceModel.Channels;
+    using System.Xml;
 
-    public class MessagePropertyDescriptionCollection : KeyedCollection<string, MessagePropertyDescription>
+    public class MessagePropertyDescriptionCollection
+        : KeyedCollection<string, MessagePropertyDescription>
     {
-        internal MessagePropertyDescriptionCollection() : base(null, 4)
-        {
-
-        }
+        internal MessagePropertyDescriptionCollection()
+            : base(null, 4) { }
 
         protected override string GetKeyForItem(MessagePropertyDescription item)
         {

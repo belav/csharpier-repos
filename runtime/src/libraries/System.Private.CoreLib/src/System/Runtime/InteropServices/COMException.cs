@@ -14,7 +14,9 @@ namespace System.Runtime.InteropServices
     /// recognize the HResult.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class COMException : ExternalException
     {
         public COMException()
@@ -41,11 +43,14 @@ namespace System.Runtime.InteropServices
             HResult = errorCode;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected COMException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected COMException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         public override string ToString()
         {
@@ -62,7 +67,8 @@ namespace System.Runtime.InteropServices
             Exception? innerException = InnerException;
             if (innerException != null)
             {
-                s.Append(Environment.NewLineConst + InnerExceptionPrefix).Append(innerException.ToString());
+                s.Append(Environment.NewLineConst + InnerExceptionPrefix)
+                    .Append(innerException.ToString());
             }
 
             string? stackTrace = StackTrace;

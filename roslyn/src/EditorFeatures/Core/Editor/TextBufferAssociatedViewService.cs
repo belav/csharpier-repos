@@ -23,31 +23,36 @@ namespace Microsoft.CodeAnalysis.Editor
     [ContentType(ContentTypeNames.XamlContentType)]
     [TextViewRole(PredefinedTextViewRoles.Interactive)]
     [Export(typeof(ITextBufferAssociatedViewService))]
-    internal class TextBufferAssociatedViewService : ITextViewConnectionListener, ITextBufferAssociatedViewService
+    internal class TextBufferAssociatedViewService
+        : ITextViewConnectionListener,
+            ITextBufferAssociatedViewService
     {
 #if DEBUG
         private static readonly HashSet<ITextView> s_registeredViews = new();
 #endif
 
         private static readonly object s_gate = new();
-        private static readonly ConditionalWeakTable<ITextBuffer, HashSet<ITextView>> s_map =
-            new();
+        private static readonly ConditionalWeakTable<ITextBuffer, HashSet<ITextView>> s_map = new();
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TextBufferAssociatedViewService()
-        {
-        }
+        public TextBufferAssociatedViewService() { }
 
         public event EventHandler<SubjectBuffersConnectedEventArgs> SubjectBuffersConnected;
         public event EventHandler<SubjectBuffersConnectedEventArgs> SubjectBuffersDisconnected;
 
-        void ITextViewConnectionListener.SubjectBuffersConnected(ITextView textView, ConnectionReason reason, IReadOnlyCollection<ITextBuffer> subjectBuffers)
+        void ITextViewConnectionListener.SubjectBuffersConnected(
+            ITextView textView,
+            ConnectionReason reason,
+            IReadOnlyCollection<ITextBuffer> subjectBuffers
+        )
         {
             lock (s_gate)
             {
                 // only add roslyn type to tracking map
-                foreach (var buffer in subjectBuffers.Where(b => IsSupportedContentType(b.ContentType)))
+                foreach (
+                    var buffer in subjectBuffers.Where(b => IsSupportedContentType(b.ContentType))
+                )
                 {
                     if (!s_map.TryGetValue(buffer, out var set))
                     {
@@ -60,14 +65,24 @@ namespace Microsoft.CodeAnalysis.Editor
                 }
             }
 
-            this.SubjectBuffersConnected?.Invoke(this, new SubjectBuffersConnectedEventArgs(textView, subjectBuffers.ToReadOnlyCollection()));
+            this.SubjectBuffersConnected?.Invoke(
+                this,
+                new SubjectBuffersConnectedEventArgs(
+                    textView,
+                    subjectBuffers.ToReadOnlyCollection()
+                )
+            );
         }
 
-        void ITextViewConnectionListener.SubjectBuffersDisconnected(ITextView textView, ConnectionReason reason, IReadOnlyCollection<ITextBuffer> subjectBuffers)
+        void ITextViewConnectionListener.SubjectBuffersDisconnected(
+            ITextView textView,
+            ConnectionReason reason,
+            IReadOnlyCollection<ITextBuffer> subjectBuffers
+        )
         {
             lock (s_gate)
             {
-                // we need to check all buffers reported since we will be called after actual changes have happened. 
+                // we need to check all buffers reported since we will be called after actual changes have happened.
                 // for example, if content type of a buffer changed, we will be called after it is changed, rather than before it.
                 foreach (var buffer in subjectBuffers)
                 {
@@ -82,14 +97,20 @@ namespace Microsoft.CodeAnalysis.Editor
                 }
             }
 
-            this.SubjectBuffersDisconnected?.Invoke(this, new SubjectBuffersConnectedEventArgs(textView, subjectBuffers.ToReadOnlyCollection()));
+            this.SubjectBuffersDisconnected?.Invoke(
+                this,
+                new SubjectBuffersConnectedEventArgs(
+                    textView,
+                    subjectBuffers.ToReadOnlyCollection()
+                )
+            );
         }
 
         private static bool IsSupportedContentType(IContentType contentType)
         {
             // This list should match the list of exported content types above
-            return contentType.IsOfType(ContentTypeNames.RoslynContentType) ||
-                   contentType.IsOfType(ContentTypeNames.XamlContentType);
+            return contentType.IsOfType(ContentTypeNames.RoslynContentType)
+                || contentType.IsOfType(ContentTypeNames.XamlContentType);
         }
 
         private static IList<ITextView> GetTextViews(ITextBuffer textBuffer)
@@ -105,11 +126,10 @@ namespace Microsoft.CodeAnalysis.Editor
             }
         }
 
-        public IEnumerable<ITextView> GetAssociatedTextViews(ITextBuffer textBuffer)
-            => GetTextViews(textBuffer);
+        public IEnumerable<ITextView> GetAssociatedTextViews(ITextBuffer textBuffer) =>
+            GetTextViews(textBuffer);
 
-        private static bool HasFocus(ITextView textView)
-            => textView.HasAggregateFocus;
+        private static bool HasFocus(ITextView textView) => textView.HasAggregateFocus;
 
         public static bool AnyAssociatedViewHasFocus(ITextBuffer textBuffer)
         {
@@ -146,7 +166,11 @@ namespace Microsoft.CodeAnalysis.Editor
 
             lock (s_gate)
             {
-                foreach (var buffer in view.BufferGraph.GetTextBuffers(b => IsSupportedContentType(b.ContentType)))
+                foreach (
+                    var buffer in view.BufferGraph.GetTextBuffers(b =>
+                        IsSupportedContentType(b.ContentType)
+                    )
+                )
                 {
                     if (s_map.TryGetValue(buffer, out var set))
                     {

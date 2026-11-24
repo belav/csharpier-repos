@@ -18,7 +18,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
 {
     internal partial class EventHookupCommandHandler : IChainedCommandHandler<TypeCharCommandArgs>
     {
-        public void ExecuteCommand(TypeCharCommandArgs args, Action nextHandler, CommandExecutionContext context)
+        public void ExecuteCommand(
+            TypeCharCommandArgs args,
+            Action nextHandler,
+            CommandExecutionContext context
+        )
         {
             _threadingContext.ThrowIfNotOnUIThread();
             nextHandler();
@@ -35,14 +39,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             {
                 if (args.TypedChar == '=')
                 {
-                    // They've typed an equals. Cancel existing sessions and potentially start a 
+                    // They've typed an equals. Cancel existing sessions and potentially start a
                     // new session.
 
                     EventHookupSessionManager.CancelAndDismissExistingSessions();
 
                     if (IsTextualPlusEquals(args.TextView, args.SubjectBuffer))
                     {
-                        EventHookupSessionManager.BeginSession(this, args.TextView, args.SubjectBuffer, _asyncListener, TESTSessionHookupMutex);
+                        EventHookupSessionManager.BeginSession(
+                            this,
+                            args.TextView,
+                            args.SubjectBuffer,
+                            _asyncListener,
+                            TESTSessionHookupMutex
+                        );
                     }
                 }
                 else
@@ -67,10 +77,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             }
 
             var position = caretPoint.Value.Position;
-            return position - 2 >= 0 && subjectBuffer.CurrentSnapshot.GetText(position - 2, 2) == "+=";
+            return position - 2 >= 0
+                && subjectBuffer.CurrentSnapshot.GetText(position - 2, 2) == "+=";
         }
 
-        public CommandState GetCommandState(TypeCharCommandArgs args, Func<CommandState> nextHandler)
+        public CommandState GetCommandState(
+            TypeCharCommandArgs args,
+            Func<CommandState> nextHandler
+        )
         {
             _threadingContext.ThrowIfNotOnUIThread();
             return nextHandler();

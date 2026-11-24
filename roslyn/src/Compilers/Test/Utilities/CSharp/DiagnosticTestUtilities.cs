@@ -20,12 +20,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     public struct ErrorDescription
     {
         public bool IsWarning;
-        public int Code, Line, Column;
+        public int Code,
+            Line,
+            Column;
         public string[] Parameters;
 
         public override string ToString()
         {
-            return string.Format("Line={0}, Column={1}, Code={2}, IsWarning={3}", this.Line, this.Column, this.Code, this.IsWarning);
+            return string.Format(
+                "Line={0}, Column={1}, Code={2}, IsWarning={3}",
+                this.Line,
+                this.Column,
+                this.Code,
+                this.IsWarning
+            );
         }
     }
 
@@ -34,17 +42,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         /// <summary>
         /// OBSOLETE: Use VerifyDiagnostics from Roslyn.Compilers.CSharp.Test.Utilities instead.
         /// </summary>
-        public static CSharpCompilation VerifyErrorsAndGetCompilationWithMscorlib(string text, params ErrorDescription[] expectedErrorDesp)
+        public static CSharpCompilation VerifyErrorsAndGetCompilationWithMscorlib(
+            string text,
+            params ErrorDescription[] expectedErrorDesp
+        )
         {
-            return VerifyErrorsAndGetCompilationWithMscorlib(new string[] { text }, expectedErrorDesp);
+            return VerifyErrorsAndGetCompilationWithMscorlib(
+                new string[] { text },
+                expectedErrorDesp
+            );
         }
 
         /// <summary>
         /// OBSOLETE: Use VerifyDiagnostics from Roslyn.Compilers.CSharp.Test.Utilities instead.
         /// </summary>
-        protected internal static CSharpCompilation VerifyErrorsAndGetCompilationWithMscorlib(string[] srcs, params ErrorDescription[] expectedErrorDesp)
+        protected internal static CSharpCompilation VerifyErrorsAndGetCompilationWithMscorlib(
+            string[] srcs,
+            params ErrorDescription[] expectedErrorDesp
+        )
         {
-            var comp = CSharpTestBase.CreateCompilation(srcs, parseOptions: TestOptions.RegularPreview);
+            var comp = CSharpTestBase.CreateCompilation(
+                srcs,
+                parseOptions: TestOptions.RegularPreview
+            );
             var actualErrors = comp.GetDiagnostics();
             VerifyErrorCodes(actualErrors, expectedErrorDesp);
             return comp;
@@ -53,18 +73,34 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         /// <summary>
         /// OBSOLETE: Use VerifyDiagnostics from Roslyn.Compilers.CSharp.Test.Utilities instead.
         /// </summary>
-        protected internal static CSharpCompilation VerifyErrorsAndGetCompilationWithMscorlib(string text, IEnumerable<MetadataReference> refs, params ErrorDescription[] expectedErrorDesp)
+        protected internal static CSharpCompilation VerifyErrorsAndGetCompilationWithMscorlib(
+            string text,
+            IEnumerable<MetadataReference> refs,
+            params ErrorDescription[] expectedErrorDesp
+        )
         {
-            return VerifyErrorsAndGetCompilationWithMscorlib(new List<string> { text }, refs, expectedErrorDesp);
+            return VerifyErrorsAndGetCompilationWithMscorlib(
+                new List<string> { text },
+                refs,
+                expectedErrorDesp
+            );
         }
 
         /// <summary>
         /// OBSOLETE: Use VerifyDiagnostics from Roslyn.Compilers.CSharp.Test.Utilities instead.
         /// </summary>
-        protected internal static CSharpCompilation VerifyErrorsAndGetCompilationWithMscorlib(List<string> srcs, IEnumerable<MetadataReference> refs, params ErrorDescription[] expectedErrorDesp)
+        protected internal static CSharpCompilation VerifyErrorsAndGetCompilationWithMscorlib(
+            List<string> srcs,
+            IEnumerable<MetadataReference> refs,
+            params ErrorDescription[] expectedErrorDesp
+        )
         {
-            var synTrees = (from text in srcs
-                            select SyntaxFactory.ParseSyntaxTree(SourceText.From(text, encoding: null, SourceHashAlgorithms.Default))).ToArray();
+            var synTrees = (
+                from text in srcs
+                select SyntaxFactory.ParseSyntaxTree(
+                    SourceText.From(text, encoding: null, SourceHashAlgorithms.Default)
+                )
+            ).ToArray();
 
             return VerifyErrorsAndGetCompilationWithMscorlib(synTrees, refs, expectedErrorDesp);
         }
@@ -72,17 +108,34 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         /// <summary>
         /// OBSOLETE: Use VerifyDiagnostics from Roslyn.Compilers.CSharp.Test.Utilities instead.
         /// </summary>
-        protected internal static CSharpCompilation VerifyErrorsAndGetCompilationWithMscorlib(SyntaxTree[] trees, IEnumerable<MetadataReference> refs, params ErrorDescription[] expectedErrorDesp)
+        protected internal static CSharpCompilation VerifyErrorsAndGetCompilationWithMscorlib(
+            SyntaxTree[] trees,
+            IEnumerable<MetadataReference> refs,
+            params ErrorDescription[] expectedErrorDesp
+        )
         {
-            return VerifyErrorsAndGetCompilation(trees, refs.Concat(CSharpTestBase.MscorlibRef), expectedErrorDesp);
+            return VerifyErrorsAndGetCompilation(
+                trees,
+                refs.Concat(CSharpTestBase.MscorlibRef),
+                expectedErrorDesp
+            );
         }
 
         /// <summary>
         /// OBSOLETE: Use VerifyDiagnostics from Roslyn.Compilers.CSharp.Test.Utilities instead.
         /// </summary>
-        protected internal static CSharpCompilation VerifyErrorsAndGetCompilation(IEnumerable<SyntaxTree> synTrees, IEnumerable<MetadataReference> refs = null, params ErrorDescription[] expectedErrorDesp)
+        protected internal static CSharpCompilation VerifyErrorsAndGetCompilation(
+            IEnumerable<SyntaxTree> synTrees,
+            IEnumerable<MetadataReference> refs = null,
+            params ErrorDescription[] expectedErrorDesp
+        )
         {
-            var comp = CSharpCompilation.Create(assemblyName: "DiagnosticsTest", options: TestOptions.ReleaseDll, syntaxTrees: synTrees, references: refs);
+            var comp = CSharpCompilation.Create(
+                assemblyName: "DiagnosticsTest",
+                options: TestOptions.ReleaseDll,
+                syntaxTrees: synTrees,
+                references: refs
+            );
             var actualErrors = comp.GetDiagnostics();
 
             VerifyErrorCodes(actualErrors, expectedErrorDesp);
@@ -93,7 +146,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         /// <summary>
         /// OBSOLETE: Use VerifyDiagnostics from Roslyn.Compilers.CSharp.Test.Utilities instead.
         /// </summary>
-        public static void VerifyErrorCodes(IEnumerable<Diagnostic> actualErrors, params ErrorDescription[] expectedErrorDesp)
+        public static void VerifyErrorCodes(
+            IEnumerable<Diagnostic> actualErrors,
+            params ErrorDescription[] expectedErrorDesp
+        )
         {
             if (expectedErrorDesp == null)
                 return;
@@ -108,26 +164,35 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     expectedLength,
                     actualLength,
                     Environment.NewLine,
-                    actualLength == 0 ? "<none>" : string.Join(Environment.NewLine, actualErrors)));
+                    actualLength == 0 ? "<none>" : string.Join(Environment.NewLine, actualErrors)
+                )
+            );
 
-            var actualSortedDesp = (from ae in
-                                        (from e in actualErrors
-                                         let lineSpan = e.Location.GetMappedLineSpan()
-                                         select new ErrorDescription
-                                         {
-                                             Code = e.Code,
-                                             Line = lineSpan.IsValid ? lineSpan.StartLinePosition.Line + 1 : 0,
-                                             Column = lineSpan.IsValid ? lineSpan.StartLinePosition.Character + 1 : 0,
-                                             IsWarning = e.Severity == DiagnosticSeverity.Warning,
-                                             Parameters = (e.Arguments != null && e.Arguments.Count > 0 && e.Arguments[0] != null) ?
-                                                e.Arguments.Select(x => x != null ? x.ToString() : null).ToArray() : Array.Empty<string>()
-                                         })
-                                    orderby ae.Code, ae.Line, ae.Column
-                                    select ae).ToList();
+            var actualSortedDesp = (
+                from ae in (
+                    from e in actualErrors
+                    let lineSpan = e.Location.GetMappedLineSpan()
+                    select new ErrorDescription
+                    {
+                        Code = e.Code,
+                        Line = lineSpan.IsValid ? lineSpan.StartLinePosition.Line + 1 : 0,
+                        Column = lineSpan.IsValid ? lineSpan.StartLinePosition.Character + 1 : 0,
+                        IsWarning = e.Severity == DiagnosticSeverity.Warning,
+                        Parameters =
+                            (e.Arguments != null && e.Arguments.Count > 0 && e.Arguments[0] != null)
+                                ? e.Arguments.Select(x => x != null ? x.ToString() : null).ToArray()
+                                : Array.Empty<string>(),
+                    }
+                )
+                orderby ae.Code, ae.Line, ae.Column
+                select ae
+            ).ToList();
 
-            var expectedSortedDesp = (from ee in expectedErrorDesp
-                                      orderby ee.Code, ee.Line, ee.Column
-                                      select ee).ToList();
+            var expectedSortedDesp = (
+                from ee in expectedErrorDesp
+                orderby ee.Code, ee.Line, ee.Column
+                select ee
+            ).ToList();
 
             int idx = 0;
             // actual >= expected
@@ -148,16 +213,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 Assert.Equal(experr.Code, acterr.Code);
                 if (experr.Line > 0 && experr.Column > 0)
                 {
-                    Assert.True(experr.Line == acterr.Line, String.Format("Line {0}!={1}", experr.Line, acterr.Line));
-                    Assert.True(experr.Column == acterr.Column, String.Format("Col {0}!={1}", experr.Column, acterr.Column));
+                    Assert.True(
+                        experr.Line == acterr.Line,
+                        String.Format("Line {0}!={1}", experr.Line, acterr.Line)
+                    );
+                    Assert.True(
+                        experr.Column == acterr.Column,
+                        String.Format("Col {0}!={1}", experr.Column, acterr.Column)
+                    );
                 }
 
-                Assert.True(experr.IsWarning == acterr.IsWarning, String.Format("IsWarning {0}!={1}", experr.IsWarning, acterr.IsWarning));
+                Assert.True(
+                    experr.IsWarning == acterr.IsWarning,
+                    String.Format("IsWarning {0}!={1}", experr.IsWarning, acterr.IsWarning)
+                );
 
                 //if the expected contains parameters, validate those too.
                 if (experr.Parameters != null)
                 {
-                    Assert.True(experr.Parameters.SequenceEqual(acterr.Parameters), String.Format("Param: {0}!={1}", experr.Parameters.Count(), acterr.Parameters.Count()));
+                    Assert.True(
+                        experr.Parameters.SequenceEqual(acterr.Parameters),
+                        String.Format(
+                            "Param: {0}!={1}",
+                            experr.Parameters.Count(),
+                            acterr.Parameters.Count()
+                        )
+                    );
                 }
 
                 idx++;
@@ -167,7 +248,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         /// <summary>
         /// OBSOLETE: Use VerifyDiagnostics from Roslyn.Compilers.CSharp.Test.Utilities instead.
         /// </summary>
-        public static void VerifyErrorCodesNoLineColumn(IEnumerable<Diagnostic> actualErrors, params ErrorDescription[] expectedErrorDesp)
+        public static void VerifyErrorCodesNoLineColumn(
+            IEnumerable<Diagnostic> actualErrors,
+            params ErrorDescription[] expectedErrorDesp
+        )
         {
             if (expectedErrorDesp == null)
                 return;
@@ -178,13 +262,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             // allow actual errors contain more same errors, no line & column check
             Assert.InRange(expectedErrorDesp.Length, 0, actualErrors.Count());
 
-            var expectedCodes = (from e in expectedErrorDesp
-                                 orderby e.Code
-                                 group e by e.Code).ToList();
+            var expectedCodes = (
+                from e in expectedErrorDesp
+                orderby e.Code
+                group e by e.Code
+            ).ToList();
 
-            var actualCodes = (from e in actualErrors
-                               orderby e.Code
-                               group e by e.Code).ToList();
+            var actualCodes = (from e in actualErrors orderby e.Code group e by e.Code).ToList();
 
             foreach (var expectedGroup in expectedCodes)
             {

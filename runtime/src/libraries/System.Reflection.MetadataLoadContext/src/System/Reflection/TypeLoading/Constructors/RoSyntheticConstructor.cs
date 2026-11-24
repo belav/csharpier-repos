@@ -14,10 +14,14 @@ namespace System.Reflection.TypeLoading
     internal sealed partial class RoSyntheticConstructor : RoConstructor
     {
         private readonly RoType _declaringType;
-        private readonly int _uniquifier;  // Since all array methods have the same "MetadataToken", this serves as a distinguisher so they don't all compare Equal
+        private readonly int _uniquifier; // Since all array methods have the same "MetadataToken", this serves as a distinguisher so they don't all compare Equal
         private readonly RoType[] _parameterTypes;
 
-        internal RoSyntheticConstructor(RoType declaringType, int uniquifier, params RoType[] parameterTypes)
+        internal RoSyntheticConstructor(
+            RoType declaringType,
+            int uniquifier,
+            params RoType[] parameterTypes
+        )
             : base()
         {
             Debug.Assert(declaringType != null);
@@ -27,14 +31,25 @@ namespace System.Reflection.TypeLoading
         }
 
         internal sealed override RoType GetRoDeclaringType() => _declaringType;
+
         internal sealed override RoModule GetRoModule() => GetRoDeclaringType().GetRoModule();
 
         protected sealed override string ComputeName() => ConstructorInfo.ConstructorName;
+
         public sealed override int MetadataToken => 0x06000000;
-        public sealed override IEnumerable<CustomAttributeData> CustomAttributes => Array.Empty<CustomAttributeData>();
-        protected sealed override MethodAttributes ComputeAttributes() => MethodAttributes.PrivateScope | MethodAttributes.Public | MethodAttributes.RTSpecialName;
-        protected sealed override CallingConventions ComputeCallingConvention() => CallingConventions.Standard | CallingConventions.HasThis;
-        protected sealed override MethodImplAttributes ComputeMethodImplementationFlags() => MethodImplAttributes.IL;
+        public sealed override IEnumerable<CustomAttributeData> CustomAttributes =>
+            Array.Empty<CustomAttributeData>();
+
+        protected sealed override MethodAttributes ComputeAttributes() =>
+            MethodAttributes.PrivateScope
+            | MethodAttributes.Public
+            | MethodAttributes.RTSpecialName;
+
+        protected sealed override CallingConventions ComputeCallingConvention() =>
+            CallingConventions.Standard | CallingConventions.HasThis;
+
+        protected sealed override MethodImplAttributes ComputeMethodImplementationFlags() =>
+            MethodImplAttributes.IL;
 
         protected sealed override MethodSig<RoParameter> ComputeMethodSig()
         {
@@ -44,7 +59,11 @@ namespace System.Reflection.TypeLoading
             sig[-1] = new RoThinMethodParameter(this, -1, returnType);
             for (int position = 0; position < parameterCount; position++)
             {
-                sig[position] = new RoThinMethodParameter(this, position, _parameterTypes[position]);
+                sig[position] = new RoThinMethodParameter(
+                    this,
+                    position,
+                    _parameterTypes[position]
+                );
             }
             return sig;
         }
@@ -77,7 +96,8 @@ namespace System.Reflection.TypeLoading
             return true;
         }
 
-        public sealed override int GetHashCode() => DeclaringType.GetHashCode() ^ _uniquifier.GetHashCode();
+        public sealed override int GetHashCode() =>
+            DeclaringType.GetHashCode() ^ _uniquifier.GetHashCode();
 
         public sealed override TypeContext TypeContext => default;
     }

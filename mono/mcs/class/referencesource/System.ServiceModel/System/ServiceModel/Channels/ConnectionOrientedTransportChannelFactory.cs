@@ -11,7 +11,9 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel.Diagnostics;
     using System.Threading;
 
-    abstract class ConnectionOrientedTransportChannelFactory<TChannel> : TransportChannelFactory<TChannel>, IConnectionOrientedTransportChannelFactorySettings
+    abstract class ConnectionOrientedTransportChannelFactory<TChannel>
+        : TransportChannelFactory<TChannel>,
+            IConnectionOrientedTransportChannelFactorySettings
     {
         int connectionBufferSize;
         IConnectionInitiator connectionInitiator;
@@ -28,15 +30,26 @@ namespace System.ServiceModel.Channels
         bool flowIdentity;
 
         internal ConnectionOrientedTransportChannelFactory(
-            ConnectionOrientedTransportBindingElement bindingElement, BindingContext context,
-            string connectionPoolGroupName, TimeSpan idleTimeout, int maxOutboundConnectionsPerEndpoint, bool supportsImpersonationDuringAsyncOpen)
+            ConnectionOrientedTransportBindingElement bindingElement,
+            BindingContext context,
+            string connectionPoolGroupName,
+            TimeSpan idleTimeout,
+            int maxOutboundConnectionsPerEndpoint,
+            bool supportsImpersonationDuringAsyncOpen
+        )
             : base(bindingElement, context)
         {
-            if (bindingElement.TransferMode == TransferMode.Buffered && bindingElement.MaxReceivedMessageSize > int.MaxValue)
+            if (
+                bindingElement.TransferMode == TransferMode.Buffered
+                && bindingElement.MaxReceivedMessageSize > int.MaxValue
+            )
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("bindingElement.MaxReceivedMessageSize",
-                    SR.GetString(SR.MaxReceivedMessageSizeMustBeInIntegerRange)));
+                    new ArgumentOutOfRangeException(
+                        "bindingElement.MaxReceivedMessageSize",
+                        SR.GetString(SR.MaxReceivedMessageSizeMustBeInIntegerRange)
+                    )
+                );
             }
 
             this.connectionBufferSize = bindingElement.ConnectionBufferSize;
@@ -53,13 +66,21 @@ namespace System.ServiceModel.Channels
 
             if (upgradeBindingElements.Count > 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MultipleStreamUpgradeProvidersInParameters)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.MultipleStreamUpgradeProvidersInParameters)
+                    )
+                );
             }
-            else if ((upgradeBindingElements.Count == 1) && this.SupportsUpgrade(upgradeBindingElements[0]))
+            else if (
+                (upgradeBindingElements.Count == 1)
+                && this.SupportsUpgrade(upgradeBindingElements[0])
+            )
             {
                 this.upgrade = upgradeBindingElements[0].BuildClientStreamUpgradeProvider(context);
                 context.BindingParameters.Remove<StreamUpgradeBindingElement>();
-                this.securityCapabilities = upgradeBindingElements[0].GetProperty<ISecurityCapabilities>(context);
+                this.securityCapabilities = upgradeBindingElements[0]
+                    .GetProperty<ISecurityCapabilities>(context);
                 // flow the identity only if the channel factory supports impersonating during an async open AND
                 // there is the binding is configured with security
                 this.flowIdentity = supportsImpersonationDuringAsyncOpen;
@@ -68,10 +89,7 @@ namespace System.ServiceModel.Channels
 
         public int ConnectionBufferSize
         {
-            get
-            {
-                return this.connectionBufferSize;
-            }
+            get { return this.connectionBufferSize; }
         }
 
         internal IConnectionInitiator ConnectionInitiator
@@ -87,8 +105,12 @@ namespace System.ServiceModel.Channels
                             this.connectionInitiator = GetConnectionInitiator();
                             if (DiagnosticUtility.ShouldUseActivity)
                             {
-                                this.connectionInitiator = new TracingConnectionInitiator(this.connectionInitiator,
-                                    ServiceModelActivity.Current != null && ServiceModelActivity.Current.ActivityType == ActivityType.OpenClient);
+                                this.connectionInitiator = new TracingConnectionInitiator(
+                                    this.connectionInitiator,
+                                    ServiceModelActivity.Current != null
+                                        && ServiceModelActivity.Current.ActivityType
+                                            == ActivityType.OpenClient
+                                );
                             }
                         }
                     }
@@ -100,42 +122,27 @@ namespace System.ServiceModel.Channels
 
         public string ConnectionPoolGroupName
         {
-            get
-            {
-                return connectionPoolGroupName;
-            }
+            get { return connectionPoolGroupName; }
         }
 
         public TimeSpan IdleTimeout
         {
-            get
-            {
-                return this.idleTimeout;
-            }
+            get { return this.idleTimeout; }
         }
 
         public int MaxBufferSize
         {
-            get
-            {
-                return maxBufferSize;
-            }
+            get { return maxBufferSize; }
         }
 
         public int MaxOutboundConnectionsPerEndpoint
         {
-            get
-            {
-                return maxOutboundConnectionsPerEndpoint;
-            }
+            get { return maxOutboundConnectionsPerEndpoint; }
         }
 
         public TimeSpan MaxOutputDelay
         {
-            get
-            {
-                return maxOutputDelay;
-            }
+            get { return maxOutputDelay; }
         }
 
         public StreamUpgradeProvider Upgrade
@@ -150,10 +157,7 @@ namespace System.ServiceModel.Channels
 
         public TransferMode TransferMode
         {
-            get
-            {
-                return transferMode;
-            }
+            get { return transferMode; }
         }
 
         int IConnectionOrientedTransportFactorySettings.MaxBufferSize
@@ -174,7 +178,14 @@ namespace System.ServiceModel.Channels
         ServiceSecurityAuditBehavior IConnectionOrientedTransportFactorySettings.AuditBehavior
         {
 #pragma warning suppress 56503 // Internal method.
-            get { throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.SecurityAuditNotSupportedOnChannelFactory))); }
+            get
+            {
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(SR.SecurityAuditNotSupportedOnChannelFactory)
+                    )
+                );
+            }
         }
 
         public override T GetProperty<T>()
@@ -211,16 +222,37 @@ namespace System.ServiceModel.Channels
             if (TransferMode == TransferMode.Buffered)
             {
                 // typeof(TChannel) == typeof(IDuplexSessionChannel)
-                return (TChannel)(object)new ClientFramingDuplexSessionChannel(this, this, address, via,
-                    ConnectionInitiator, connectionPool, exposeConnectionProperty, this.flowIdentity);
+                return (TChannel)
+                    (object)
+                        new ClientFramingDuplexSessionChannel(
+                            this,
+                            this,
+                            address,
+                            via,
+                            ConnectionInitiator,
+                            connectionPool,
+                            exposeConnectionProperty,
+                            this.flowIdentity
+                        );
             }
 
             // typeof(TChannel) == typeof(IRequestChannel)
-            return (TChannel)(object)new StreamedFramingRequestChannel(this, this, address, via,
-                ConnectionInitiator, connectionPool);
+            return (TChannel)
+                (object)
+                    new StreamedFramingRequestChannel(
+                        this,
+                        this,
+                        address,
+                        via,
+                        ConnectionInitiator,
+                        connectionPool
+                    );
         }
 
-        bool GetUpgradeAndConnectionPool(out StreamUpgradeProvider upgradeCopy, out ConnectionPool poolCopy)
+        bool GetUpgradeAndConnectionPool(
+            out StreamUpgradeProvider upgradeCopy,
+            out ConnectionPool poolCopy
+        )
         {
             if (this.upgrade != null || this.connectionPool != null)
             {
@@ -260,7 +292,11 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CloseAsyncResult(this, timeout, callback, state);
         }
@@ -298,7 +334,11 @@ namespace System.ServiceModel.Channels
             Fx.Assert(this.connectionPool != null, "ConnectionPool should always be found");
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new OpenAsyncResult(this.Upgrade, timeout, callback, state);
         }
@@ -311,9 +351,16 @@ namespace System.ServiceModel.Channels
         class OpenAsyncResult : AsyncResult
         {
             ICommunicationObject communicationObject;
-            static AsyncCallback onOpenComplete = Fx.ThunkCallback(new AsyncCallback(OnOpenComplete));
+            static AsyncCallback onOpenComplete = Fx.ThunkCallback(
+                new AsyncCallback(OnOpenComplete)
+            );
 
-            public OpenAsyncResult(ICommunicationObject communicationObject, TimeSpan timeout, AsyncCallback callback, object state)
+            public OpenAsyncResult(
+                ICommunicationObject communicationObject,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.communicationObject = communicationObject;
@@ -324,7 +371,11 @@ namespace System.ServiceModel.Channels
                     return;
                 }
 
-                IAsyncResult result = this.communicationObject.BeginOpen(timeout, onOpenComplete, this);
+                IAsyncResult result = this.communicationObject.BeginOpen(
+                    timeout,
+                    onOpenComplete,
+                    this
+                );
                 if (result.CompletedSynchronously)
                 {
                     this.communicationObject.EndOpen(result);
@@ -381,17 +432,26 @@ namespace System.ServiceModel.Channels
             ConnectionPool connectionPool;
             StreamUpgradeProvider upgradeProvider;
             TimeoutHelper timeoutHelper;
-            static AsyncCallback onCloseComplete = Fx.ThunkCallback(new AsyncCallback(OnCloseComplete));
+            static AsyncCallback onCloseComplete = Fx.ThunkCallback(
+                new AsyncCallback(OnCloseComplete)
+            );
             static Action<object> onReleaseConnectionPoolScheduled;
 
-            public CloseAsyncResult(ConnectionOrientedTransportChannelFactory<TChannel> parent, TimeSpan timeout,
-                AsyncCallback callback, object state)
+            public CloseAsyncResult(
+                ConnectionOrientedTransportChannelFactory<TChannel> parent,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.parent = parent;
                 this.timeoutHelper = new TimeoutHelper(timeout);
 
-                this.parent.GetUpgradeAndConnectionPool(out this.upgradeProvider, out this.connectionPool);
+                this.parent.GetUpgradeAndConnectionPool(
+                    out this.upgradeProvider,
+                    out this.connectionPool
+                );
 
                 if (this.connectionPool == null)
                 {
@@ -404,7 +464,9 @@ namespace System.ServiceModel.Channels
                 {
                     if (onReleaseConnectionPoolScheduled == null)
                     {
-                        onReleaseConnectionPoolScheduled = new Action<object>(OnReleaseConnectionPoolScheduled);
+                        onReleaseConnectionPoolScheduled = new Action<object>(
+                            OnReleaseConnectionPoolScheduled
+                        );
                     }
                     ActionItem.Schedule(onReleaseConnectionPoolScheduled, this);
                 }
@@ -418,8 +480,11 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    IAsyncResult result = this.upgradeProvider.BeginClose(this.timeoutHelper.RemainingTime(),
-                        onCloseComplete, this);
+                    IAsyncResult result = this.upgradeProvider.BeginClose(
+                        this.timeoutHelper.RemainingTime(),
+                        onCloseComplete,
+                        this
+                    );
 
                     if (result.CompletedSynchronously)
                     {
@@ -432,7 +497,10 @@ namespace System.ServiceModel.Channels
 
             bool OnReleaseConnectionPoolScheduled()
             {
-                this.parent.ReleaseConnectionPool(this.connectionPool, this.timeoutHelper.RemainingTime());
+                this.parent.ReleaseConnectionPool(
+                    this.connectionPool,
+                    this.timeoutHelper.RemainingTime()
+                );
                 return this.HandleReleaseConnectionPoolComplete();
             }
 

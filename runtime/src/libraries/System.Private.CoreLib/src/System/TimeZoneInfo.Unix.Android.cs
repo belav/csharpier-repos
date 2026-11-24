@@ -75,7 +75,7 @@ namespace System
             int min = 0;
             for (; where < name.Length; where++)
             {
-                char c = name [where];
+                char c = name[where];
 
                 if (char.IsAsciiDigit(c))
                 {
@@ -105,11 +105,27 @@ namespace System
         {
             if (name == "GMT" || name == "UTC")
             {
-                return new TimeZoneInfo(id, TimeSpan.FromSeconds(0), id, name, name, null, disableDaylightSavingTime:true);
+                return new TimeZoneInfo(
+                    id,
+                    TimeSpan.FromSeconds(0),
+                    id,
+                    name,
+                    name,
+                    null,
+                    disableDaylightSavingTime: true
+                );
             }
             if (name.Length >= 3 && name[0] == 'G' && name[1] == 'M' && name[2] == 'T')
             {
-                return new TimeZoneInfo(id, TimeSpan.FromSeconds(ParseGMTNumericZone(name)), id, name, name, null, disableDaylightSavingTime:true);
+                return new TimeZoneInfo(
+                    id,
+                    TimeSpan.FromSeconds(ParseGMTNumericZone(name)),
+                    id,
+                    name,
+                    name,
+                    null,
+                    disableDaylightSavingTime: true
+                );
             }
 
             try
@@ -142,14 +158,23 @@ namespace System
             return Utc;
         }
 
-        private static TimeZoneInfoResult TryGetTimeZoneFromLocalMachineCore(string id, out TimeZoneInfo? value, out Exception? e)
+        private static TimeZoneInfoResult TryGetTimeZoneFromLocalMachineCore(
+            string id,
+            out TimeZoneInfo? value,
+            out Exception? e
+        )
         {
-
             value = id == LocalId ? GetLocalTimeZoneCore() : GetTimeZone(id, id);
 
             if (value == null)
             {
-                e = new InvalidTimeZoneException(SR.Format(SR.InvalidTimeZone_InvalidFileData, id, AndroidTzDataInstance.GetTimeZoneDirectory() + TimeZoneFileName));
+                e = new InvalidTimeZoneException(
+                    SR.Format(
+                        SR.InvalidTimeZone_InvalidFileData,
+                        id,
+                        AndroidTzDataInstance.GetTimeZoneDirectory() + TimeZoneFileName
+                    )
+                );
                 return TimeZoneInfoResult.TimeZoneNotFoundException;
             }
 
@@ -224,10 +249,13 @@ namespace System
                 // On Android, time zone data is found in tzdata
                 // Based on https://github.com/mono/mono/blob/main/mcs/class/corlib/System/TimeZoneInfo.Android.cs
                 // Also follows the locations found at the bottom of https://github.com/aosp-mirror/platform_bionic/blob/master/libc/tzcode/bionic.cpp
-                string[] tzFileDirList = new string[] {GetApexTimeDataRoot() + "/etc/tz/", // Android 10+, TimeData module where the updates land
-                                                       GetApexRuntimeRoot() + "/etc/tz/", // Android 10+, Fallback location if the above isn't found or corrupted
-                                                       Environment.GetEnvironmentVariable("ANDROID_DATA") + "/misc/zoneinfo/",
-                                                       Environment.GetEnvironmentVariable("ANDROID_ROOT") + DefaultTimeZoneDirectory};
+                string[] tzFileDirList = new string[]
+                {
+                    GetApexTimeDataRoot() + "/etc/tz/", // Android 10+, TimeData module where the updates land
+                    GetApexRuntimeRoot() + "/etc/tz/", // Android 10+, Fallback location if the above isn't found or corrupted
+                    Environment.GetEnvironmentVariable("ANDROID_DATA") + "/misc/zoneinfo/",
+                    Environment.GetEnvironmentVariable("ANDROID_ROOT") + DefaultTimeZoneDirectory,
+                };
                 foreach (var tzFileDir in tzFileDirList)
                 {
                     string tzFilePath = Path.Combine(tzFileDir, TimeZoneFileName);
@@ -279,11 +307,17 @@ namespace System
                         string? tzLookupLine;
                         while (sr.Peek() >= 0)
                         {
-                            if (!(tzLookupLine = sr.ReadLine())!.AsSpan().TrimStart().StartsWith("<id", StringComparison.Ordinal))
+                            if (
+                                !(tzLookupLine = sr.ReadLine())!
+                                    .AsSpan()
+                                    .TrimStart()
+                                    .StartsWith("<id", StringComparison.Ordinal)
+                            )
                                 continue;
 
                             int idStart = tzLookupLine!.IndexOf('>') + 1;
-                            int idLength = tzLookupLine.LastIndexOf("</", StringComparison.Ordinal) - idStart;
+                            int idLength =
+                                tzLookupLine.LastIndexOf("</", StringComparison.Ordinal) - idStart;
                             if (idStart <= 0 || idLength < 0)
                             {
                                 // Either the start tag <id ... > or the end tag </id> are not found
@@ -323,7 +357,7 @@ namespace System
                     }
                     return true;
                 }
-                catch {}
+                catch { }
 
                 return false;
             }
@@ -343,7 +377,11 @@ namespace System
                 ReadIndex(tzFileDir, fs, indexOffset, dataOffset);
             }
 
-            private static void LoadHeader(Span<byte> buffer, out int indexOffset, out int dataOffset)
+            private static void LoadHeader(
+                Span<byte> buffer,
+                out int indexOffset,
+                out int dataOffset
+            )
             {
                 // tzdata files are expected to start with the form of "tzdata2012f\0" depending on the year of the tzdata used which is 2012 in this example
                 // since we're not differentiating on year, check for tzdata and the ending \0
@@ -359,7 +397,9 @@ namespace System
                         b.Append(' ').Append(HexConverter.ToCharLower(buffer[i]));
                     }
 
-                    throw new InvalidOperationException(SR.Format(SR.InvalidOperation_BadTZHeader, TimeZoneFileName, b.ToString()));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.InvalidOperation_BadTZHeader, TimeZoneFileName, b.ToString())
+                    );
                 }
 
                 indexOffset = TZif_ToInt32(buffer.Slice(12, 4));
@@ -382,7 +422,13 @@ namespace System
                 HashSet<string>? tzLookupIDs = FilterBackwardIDs(tzFileDir);
                 for (int i = 0; i < entryCount; ++i)
                 {
-                    LoadEntryAt(fs, indexOffset + (entrySize*i), out string id, out int byteOffset, out int length);
+                    LoadEntryAt(
+                        fs,
+                        indexOffset + (entrySize * i),
+                        out string id,
+                        out int byteOffset,
+                        out int length
+                    );
 
                     _byteOffsets[i] = byteOffset + dataOffset;
                     _ids[i] = id;
@@ -418,11 +464,26 @@ namespace System
 
                 if (bytesLeft != 0)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.InvalidOperation_ReadTZError, _tzFilePath, position, buffer.Length, bytesRead, buffer.Length));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.InvalidOperation_ReadTZError,
+                            _tzFilePath,
+                            position,
+                            buffer.Length,
+                            bytesRead,
+                            buffer.Length
+                        )
+                    );
                 }
             }
 
-            private void LoadEntryAt(Stream fs, long position, out string id, out int byteOffset, out int length)
+            private void LoadEntryAt(
+                Stream fs,
+                long position,
+                out string id,
+                out int byteOffset,
+                out int length
+            )
             {
                 const int size = 52; // data entry size
                 Span<byte> entryBuffer = stackalloc byte[size];
@@ -465,7 +526,9 @@ namespace System
                 int i = Array.BinarySearch(_ids, id, StringComparer.Ordinal);
                 if (i < 0)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.TimeZoneNotFound_MissingData, id));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.TimeZoneNotFound_MissingData, id)
+                    );
                 }
 
                 int offset = _byteOffsets[i];

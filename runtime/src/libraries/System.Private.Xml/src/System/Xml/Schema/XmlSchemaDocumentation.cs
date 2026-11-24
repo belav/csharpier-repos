@@ -13,7 +13,10 @@ namespace System.Xml.Schema
         private string? _source;
         private string? _language;
         private XmlNode?[]? _markup;
-        private static readonly XmlSchemaSimpleType s_languageType = DatatypeImplementation.GetSimpleTypeFromXsdType(new XmlQualifiedName("language", XmlReservedNs.NsXs))!;
+        private static readonly XmlSchemaSimpleType s_languageType =
+            DatatypeImplementation.GetSimpleTypeFromXsdType(
+                new XmlQualifiedName("language", XmlReservedNs.NsXs)
+            )!;
 
         [XmlAttribute("source", DataType = "anyURI")]
         public string? Source
@@ -27,7 +30,15 @@ namespace System.Xml.Schema
         public string? Language
         {
             get { return _language; }
-            set { _language = (string)s_languageType.Datatype!.ParseValue(value, (XmlNameTable?)null, (IXmlNamespaceResolver?)null); }
+            set
+            {
+                _language = (string)
+                    s_languageType.Datatype!.ParseValue(
+                        value,
+                        (XmlNameTable?)null,
+                        (IXmlNamespaceResolver?)null
+                    );
+            }
         }
 
         [XmlText, XmlAnyElement]

@@ -6,7 +6,9 @@ namespace System.ServiceModel.Dispatcher
     using System;
     using System.ServiceModel.Description;
 
-    [Obsolete("The WF3 types are deprecated.  Instead, please use the new WF4 types from System.Activities.*")]
+    [Obsolete(
+        "The WF3 types are deprecated.  Instead, please use the new WF4 types from System.Activities.*"
+    )]
     public static class DurableOperationContext
     {
         public static Guid InstanceId
@@ -49,7 +51,8 @@ namespace System.ServiceModel.Dispatcher
 
             if (operationContext != null)
             {
-                DurableOperationContext.IsInOperation isInOperation = operationContext.Extensions.Find<DurableOperationContext.IsInOperation>();
+                DurableOperationContext.IsInOperation isInOperation =
+                    operationContext.Extensions.Find<DurableOperationContext.IsInOperation>();
 
                 if (isInOperation != null)
                 {
@@ -66,9 +69,12 @@ namespace System.ServiceModel.Dispatcher
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new InvalidOperationException(
-                    SR2.GetString(
-                    SR2.OnlyCallableFromServiceOperation,
-                    typeof(DurableOperationContext).Name)));
+                        SR2.GetString(
+                            SR2.OnlyCallableFromServiceOperation,
+                            typeof(DurableOperationContext).Name
+                        )
+                    )
+                );
             }
 
             IsInOperation isInOperation = operationContext.Extensions.Find<IsInOperation>();
@@ -77,9 +83,12 @@ namespace System.ServiceModel.Dispatcher
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new InvalidOperationException(
-                    SR2.GetString(
-                    SR2.OnlyCallableWhileInOperation,
-                    typeof(DurableOperationContext).Name)));
+                        SR2.GetString(
+                            SR2.OnlyCallableWhileInOperation,
+                            typeof(DurableOperationContext).Name
+                        )
+                    )
+                );
             }
 
             InstanceContext currentInstanceContext = operationContext.InstanceContext;
@@ -88,9 +97,12 @@ namespace System.ServiceModel.Dispatcher
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new InvalidOperationException(
-                    SR2.GetString(
-                    SR2.OnlyCallableFromServiceOperation,
-                    typeof(DurableOperationContext).Name)));
+                        SR2.GetString(
+                            SR2.OnlyCallableFromServiceOperation,
+                            typeof(DurableOperationContext).Name
+                        )
+                    )
+                );
             }
 
             ServiceDurableInstance durableInstance =
@@ -100,10 +112,13 @@ namespace System.ServiceModel.Dispatcher
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new InvalidOperationException(
-                    SR2.GetString(
-                    SR2.OnlyCallableFromDurableService,
-                    typeof(DurableOperationContext).Name,
-                    typeof(DurableServiceAttribute).Name)));
+                        SR2.GetString(
+                            SR2.OnlyCallableFromDurableService,
+                            typeof(DurableOperationContext).Name,
+                            typeof(DurableServiceAttribute).Name
+                        )
+                    )
+                );
             }
 
             return durableInstance;
@@ -111,13 +126,9 @@ namespace System.ServiceModel.Dispatcher
 
         class IsInOperation : IExtension<OperationContext>
         {
-            public void Attach(OperationContext owner)
-            {
-            }
+            public void Attach(OperationContext owner) { }
 
-            public void Detach(OperationContext owner)
-            {
-            }
+            public void Detach(OperationContext owner) { }
         }
     }
 }

@@ -9,15 +9,16 @@ namespace System.Web.Helpers.AntiXsrf
     // Interfaces with the System.Web.MachineKey static class using the 4.5 Protect / Unprotect methods.
     internal sealed class MachineKey45CryptoSystem : ICryptoSystem
     {
-        private static readonly string[] _purposes = new string[] { "System.Web.Helpers.AntiXsrf.AntiForgeryToken.v1" };
-        private static readonly MachineKey45CryptoSystem _singletonInstance = GetSingletonInstance();
+        private static readonly string[] _purposes = new string[]
+        {
+            "System.Web.Helpers.AntiXsrf.AntiForgeryToken.v1",
+        };
+        private static readonly MachineKey45CryptoSystem _singletonInstance =
+            GetSingletonInstance();
 
         public static MachineKey45CryptoSystem Instance
         {
-            get
-            {
-                return _singletonInstance;
-            }
+            get { return _singletonInstance; }
         }
 
         private static MachineKey45CryptoSystem GetSingletonInstance()

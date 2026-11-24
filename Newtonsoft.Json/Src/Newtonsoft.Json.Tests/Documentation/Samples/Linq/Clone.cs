@@ -45,11 +45,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
         public void Example()
         {
             #region Usage
-            JObject o1 = new JObject
-            {
-                { "String", "A string!" },
-                { "Items", new JArray(1, 2) }
-            };
+            JObject o1 = new JObject { { "String", "A string!" }, { "Items", new JArray(1, 2) } };
 
             Console.WriteLine(o1.ToString());
             // {

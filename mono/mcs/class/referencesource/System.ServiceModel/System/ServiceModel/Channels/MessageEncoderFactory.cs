@@ -7,19 +7,11 @@ namespace System.ServiceModel.Channels
 
     public abstract class MessageEncoderFactory
     {
-        protected MessageEncoderFactory()
-        {
-        }
+        protected MessageEncoderFactory() { }
 
-        public abstract MessageEncoder Encoder
-        {
-            get;
-        }
+        public abstract MessageEncoder Encoder { get; }
 
-        public abstract MessageVersion MessageVersion
-        {
-            get;
-        }
+        public abstract MessageVersion MessageVersion { get; }
 
         public virtual MessageEncoder CreateSessionEncoder()
         {

@@ -8,8 +8,10 @@ using System.Linq;
 
 internal static class IOInputs
 {
-    public static bool SupportsSettingCreationTime => PlatformDetection.IsWindows || PlatformDetection.IsOSXLike;
-    public static bool SupportsGettingCreationTime => PlatformDetection.IsWindows || PlatformDetection.IsOSXLike;
+    public static bool SupportsSettingCreationTime =>
+        PlatformDetection.IsWindows || PlatformDetection.IsOSXLike;
+    public static bool SupportsGettingCreationTime =>
+        PlatformDetection.IsWindows || PlatformDetection.IsOSXLike;
 
     // Max path length (minus trailing \0). Unix values vary system to system; just using really long values here likely to be more than on the average system.
     public static readonly int MaxPath = OperatingSystem.IsWindows() ? 259 : 10000;
@@ -18,7 +20,9 @@ internal static class IOInputs
     public static readonly int MaxExtendedPath = short.MaxValue - 1;
 
     // Same as MaxPath on Unix
-    public static readonly int MaxLongPath = OperatingSystem.IsWindows() ? MaxExtendedPath : MaxPath;
+    public static readonly int MaxLongPath = OperatingSystem.IsWindows()
+        ? MaxExtendedPath
+        : MaxPath;
 
     // Windows specific, this is the maximum length that can be passed to APIs taking directory names, such as Directory.CreateDirectory & Directory.Move.
     // Does not include the trailing \0.
@@ -118,7 +122,9 @@ internal static class IOInputs
 
     public static IEnumerable<string> GetUncPathsWithoutShareName()
     {
-        foreach (char slash in new[] { Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar })
+        foreach (
+            char slash in new[] { Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar }
+        )
         {
             if (!PlatformDetection.IsWindows && slash == '/') // Unc paths must start with '\' on Unix
             {
@@ -146,7 +152,11 @@ internal static class IOInputs
             yield return deviceName;
             yield return Path.Combine(root, deviceName);
             yield return Path.Combine(root, "Directory", deviceName);
-            yield return Path.Combine(new string(Path.DirectorySeparatorChar, 2), "LOCALHOST", deviceName);
+            yield return Path.Combine(
+                new string(Path.DirectorySeparatorChar, 2),
+                "LOCALHOST",
+                deviceName
+            );
         }
     }
 
@@ -201,14 +211,20 @@ internal static class IOInputs
         yield return GetLongPath(rootPath, MaxDirectory + 3);
     }
 
-    public static IEnumerable<string> GetPathsLongerThanMaxPath(string rootPath, bool useExtendedSyntax = false)
+    public static IEnumerable<string> GetPathsLongerThanMaxPath(
+        string rootPath,
+        bool useExtendedSyntax = false
+    )
     {
         yield return GetLongPath(rootPath, MaxPath + 1, useExtendedSyntax);
         yield return GetLongPath(rootPath, MaxPath + 2, useExtendedSyntax);
         yield return GetLongPath(rootPath, MaxPath + 3, useExtendedSyntax);
     }
 
-    public static IEnumerable<string> GetPathsLongerThanMaxLongPath(string rootPath, bool useExtendedSyntax = false)
+    public static IEnumerable<string> GetPathsLongerThanMaxLongPath(
+        string rootPath,
+        bool useExtendedSyntax = false
+    )
     {
         yield return GetLongPath(rootPath, MaxExtendedPath + 1, useExtendedSyntax);
         yield return GetLongPath(rootPath, MaxExtendedPath + 2, useExtendedSyntax);
@@ -220,7 +236,7 @@ internal static class IOInputs
     }
 
     public static IEnumerable<string> GetReservedDeviceNames()
-    {   // See: https://docs.microsoft.com/en-us/windows/win32/fileio/naming-a-file
+    { // See: https://docs.microsoft.com/en-us/windows/win32/fileio/naming-a-file
         //
         // Note - Recent versions of Win10 relax this restriction and allow reserved
         // device names as filenames.

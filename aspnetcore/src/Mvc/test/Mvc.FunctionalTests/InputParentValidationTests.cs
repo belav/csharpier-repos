@@ -20,8 +20,7 @@ public class InputParentValidationTests
     {
         protected BaseTests(MvcTestFixture<TStartup> fixture)
         {
-            var factory =
-                fixture.Factories.FirstOrDefault()
+            var factory = fixture.Factories.FirstOrDefault()
                 ?? fixture.WithWebHostBuilder(builder => builder.UseStartup<TStartup>());
 
             Client = factory.CreateDefaultClient();

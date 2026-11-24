@@ -7,8 +7,7 @@ namespace System.ServiceModel.Channels
     using System.Runtime;
     using System.ServiceModel;
 
-    abstract class MsmqInputChannelBase
-        : ChannelBase, IInputChannel
+    abstract class MsmqInputChannelBase : ChannelBase, IInputChannel
     {
         EndpointAddress localAddress;
         MsmqReceiveHelper receiver;
@@ -16,16 +15,28 @@ namespace System.ServiceModel.Channels
         MsmqInputChannelListenerBase listener;
         MsmqReceiveContextLockManager receiveContextManager;
 
-        public MsmqInputChannelBase(MsmqInputChannelListenerBase listener, IMsmqMessagePool messagePool)
+        public MsmqInputChannelBase(
+            MsmqInputChannelListenerBase listener,
+            IMsmqMessagePool messagePool
+        )
             : base(listener)
         {
             this.receiveParameters = listener.ReceiveParameters;
-            this.receiver = new MsmqReceiveHelper(listener.ReceiveParameters, listener.Uri, messagePool, this, listener);
+            this.receiver = new MsmqReceiveHelper(
+                listener.ReceiveParameters,
+                listener.Uri,
+                messagePool,
+                this,
+                listener
+            );
             this.localAddress = new EndpointAddress(listener.Uri);
             this.listener = listener;
             if (this.receiveParameters.ReceiveContextSettings.Enabled)
             {
-                this.receiveContextManager = new MsmqReceiveContextLockManager(this.receiveParameters.ReceiveContextSettings, this.receiver.Queue);
+                this.receiveContextManager = new MsmqReceiveContextLockManager(
+                    this.receiveParameters.ReceiveContextSettings,
+                    this.receiver.Queue
+                );
             }
         }
 
@@ -65,7 +76,11 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             OnOpenCore();
             return new CompletedAsyncResult(callback, state);
@@ -86,7 +101,11 @@ namespace System.ServiceModel.Channels
             OnCloseCore(true);
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             OnCloseCore(false);
             return new CompletedAsyncResult(callback, state);
@@ -108,7 +127,10 @@ namespace System.ServiceModel.Channels
             base.OnFaulted();
         }
 
-        abstract protected Message DecodeMsmqMessage(MsmqInputMessage msmqMessage, MsmqMessageProperty property);
+        protected abstract Message DecodeMsmqMessage(
+            MsmqInputMessage msmqMessage,
+            MsmqMessageProperty property
+        );
 
         internal void FaultChannel()
         {
@@ -120,11 +142,13 @@ namespace System.ServiceModel.Channels
         {
             return this.Receive(this.DefaultReceiveTimeout);
         }
+
         //
         public Message Receive(TimeSpan timeout)
         {
             return InputChannel.HelpReceive(this, timeout);
         }
+
         //
         public IAsyncResult BeginReceive(AsyncCallback callback, object state)
         {
@@ -160,8 +184,11 @@ namespace System.ServiceModel.Channels
                     bool retval = this.receiver.TryReceive(
                         msmqMessage,
                         timeout,
-                        this.ReceiveParameters.ExactlyOnce ? MsmqTransactionMode.CurrentOrNone : MsmqTransactionMode.None,
-                        out property);
+                        this.ReceiveParameters.ExactlyOnce
+                            ? MsmqTransactionMode.CurrentOrNone
+                            : MsmqTransactionMode.None,
+                        out property
+                    );
                     if (retval)
                     {
                         if (null != property)
@@ -171,7 +198,10 @@ namespace System.ServiceModel.Channels
 
                             if (this.receiveParameters.ReceiveContextSettings.Enabled)
                             {
-                                message.Properties[MsmqReceiveContext.Name] = this.receiveContextManager.CreateMsmqReceiveContext(msmqMessage.LookupId.Value);
+                                message.Properties[MsmqReceiveContext.Name] =
+                                    this.receiveContextManager.CreateMsmqReceiveContext(
+                                        msmqMessage.LookupId.Value
+                                    );
                             }
                             MsmqDiagnostics.DatagramReceived(msmqMessage.MessageId, message);
                             this.listener.RaiseMessageReceived();
@@ -209,9 +239,12 @@ namespace System.ServiceModel.Channels
             return this.receiver.BeginTryReceive(
                 msmqMessage,
                 timeout,
-                this.ReceiveParameters.ExactlyOnce ? MsmqTransactionMode.CurrentOrNone : MsmqTransactionMode.None,
+                this.ReceiveParameters.ExactlyOnce
+                    ? MsmqTransactionMode.CurrentOrNone
+                    : MsmqTransactionMode.None,
                 callback,
-                state);
+                state
+            );
         }
 
         public bool EndTryReceive(IAsyncResult result, out Message message)
@@ -239,7 +272,10 @@ namespace System.ServiceModel.Channels
 
                         if (this.receiveParameters.ReceiveContextSettings.Enabled)
                         {
-                            message.Properties[MsmqReceiveContext.Name] = this.receiveContextManager.CreateMsmqReceiveContext(msmqMessage.LookupId.Value);
+                            message.Properties[MsmqReceiveContext.Name] =
+                                this.receiveContextManager.CreateMsmqReceiveContext(
+                                    msmqMessage.LookupId.Value
+                                );
                         }
 
                         MsmqDiagnostics.DatagramReceived(msmqMessage.MessageId, message);
@@ -290,7 +326,11 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public IAsyncResult BeginWaitForMessage(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForMessage(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (DoneReceivingInCurrentState())
                 return new DoneReceivingAsyncResult(callback, state);

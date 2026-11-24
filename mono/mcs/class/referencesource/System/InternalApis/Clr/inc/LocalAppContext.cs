@@ -1,12 +1,12 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
-// There are cases where we have multiple assemblies that are going to import this file and 
+// There are cases where we have multiple assemblies that are going to import this file and
 // if they are going to also have InternalsVisibleTo between them, there will be a compiler warning
-// that the type is found both in the source and in a referenced assembly. The compiler will prefer 
+// that the type is found both in the source and in a referenced assembly. The compiler will prefer
 // the version of the type defined in the source
 //
 // In order to disable the warning for this type we are disabling this warning for this entire file.
@@ -38,7 +38,7 @@ namespace System
             // Try to setup the callback into the central AppContext
             s_canForwardCalls = SetupDelegate();
 
-            // Populate the default values of the local app context 
+            // Populate the default values of the local app context
             AppContextDefaultValues.PopulateDefaultValues();
 
             // Cache the value of the switch that help with testing
@@ -64,7 +64,8 @@ namespace System
         private static bool IsSwitchEnabledLocal(string switchName)
         {
             // read the value from the set of local defaults
-            bool isEnabled, isPresent;
+            bool isEnabled,
+                isPresent;
             lock (s_switchMap)
             {
                 isPresent = s_switchMap.TryGetValue(switchName, out isEnabled);
@@ -88,16 +89,18 @@ namespace System
                 return false;
 
             MethodInfo method = appContextType.GetMethod(
-                                            "TryGetSwitch",  // the method name
-                                            BindingFlags.Static | BindingFlags.Public,  // binding flags
-                                            null, // use the default binder
-                                            new Type[] { typeof(string), typeof(bool).MakeByRefType() },
-                                            null); // parameterModifiers - this is ignored by the default binder 
+                "TryGetSwitch", // the method name
+                BindingFlags.Static | BindingFlags.Public, // binding flags
+                null, // use the default binder
+                new Type[] { typeof(string), typeof(bool).MakeByRefType() },
+                null
+            ); // parameterModifiers - this is ignored by the default binder
             if (method == null)
                 return false;
 
             // Create delegate if we found the method.
-            TryGetSwitchFromCentralAppContext = (TryGetSwitchDelegate)Delegate.CreateDelegate(typeof(TryGetSwitchDelegate), method);
+            TryGetSwitchFromCentralAppContext = (TryGetSwitchDelegate)
+                Delegate.CreateDelegate(typeof(TryGetSwitchDelegate), method);
 
             return true;
         }
@@ -105,8 +108,10 @@ namespace System
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool GetCachedSwitchValue(string switchName, ref int switchValue)
         {
-            if (switchValue < 0) return false;
-            if (switchValue > 0) return true;
+            if (switchValue < 0)
+                return false;
+            if (switchValue > 0)
+                return true;
 
             return GetCachedSwitchValueInternal(switchName, ref switchValue);
         }
@@ -119,12 +124,15 @@ namespace System
             }
 
             bool isEnabled = LocalAppContext.IsSwitchEnabled(switchName);
-            switchValue = isEnabled ? 1 /*true*/ : -1 /*false*/;
+            switchValue = isEnabled
+                ? 1 /*true*/
+                : -1 /*false*/
+            ;
             return isEnabled;
         }
 
         /// <summary>
-        /// This method is going to be called from the AppContextDefaultValues class when setting up the 
+        /// This method is going to be called from the AppContextDefaultValues class when setting up the
         /// default values for the switches. !!!! This method is called during the static constructor so it does not
         /// take a lock !!!! If you are planning to use this outside of that, please ensure proper locking.
         /// </summary>

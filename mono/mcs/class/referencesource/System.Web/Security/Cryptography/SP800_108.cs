@@ -1,10 +1,11 @@
 ﻿//------------------------------------------------------------------------------
 // <copyright file="SP800_108.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Security.Cryptography {
+namespace System.Web.Security.Cryptography
+{
     using System;
     using System.Security.Cryptography;
 
@@ -35,10 +36,11 @@ namespace System.Web.Security.Cryptography {
     // OUTPUT:
     // Result := K_1 || K_2 || ... || K_n, truncated to be L bits in length
 
-    internal static class SP800_108 {
-
+    internal static class SP800_108
+    {
         // Implements the KeyDerivationFunction delegate signature; public entry point to the API.
-        public static CryptographicKey DeriveKey(CryptographicKey keyDerivationKey, Purpose purpose) {
+        public static CryptographicKey DeriveKey(CryptographicKey keyDerivationKey, Purpose purpose)
+        {
             // After consultation with the crypto board, we have decided to use HMACSHA512 as the PRF
             // to our KDF. The reason for this is that our PRF is an HMAC, so the total entropy of the
             // PRF is given by MIN(key derivation key length, HMAC block size). It is conceivable that
@@ -52,8 +54,14 @@ namespace System.Web.Security.Cryptography {
             // try to cache the derived CryptographicKey wherever we can, so this shouldn't be a
             // bottleneck regardless.
 
-            using (HMACSHA512 hmac = CryptoAlgorithms.CreateHMACSHA512(keyDerivationKey.GetKeyMaterial())) {
-                byte[] label, context;
+            using (
+                HMACSHA512 hmac = CryptoAlgorithms.CreateHMACSHA512(
+                    keyDerivationKey.GetKeyMaterial()
+                )
+            )
+            {
+                byte[] label,
+                    context;
                 purpose.GetKeyDerivationParameters(out label, out context);
 
                 byte[] derivedKey = DeriveKeyImpl(hmac, label, context, keyDerivationKey.KeyLength);
@@ -64,25 +72,43 @@ namespace System.Web.Security.Cryptography {
         // NOTE: This method also exists in Win8 (as BCryptKeyDerivation) and QTD (as DeriveKeySP800_108).
         // However, the QTD implementation is currently incorrect, so we can't depend on it here. The below
         // is a correct implementation. When we take a Win8 dependency, we can call into BCryptKeyDerivation.
-        private static byte[] DeriveKeyImpl(HMAC hmac, byte[] label, byte[] context, int keyLengthInBits) {
+        private static byte[] DeriveKeyImpl(
+            HMAC hmac,
+            byte[] label,
+            byte[] context,
+            int keyLengthInBits
+        )
+        {
             // This entire method is checked because according to SP800-108 it is an error
             // for any single operation to result in overflow.
-            checked {
-
+            checked
+            {
                 // Make a buffer which is ____ || label || 0x00 || context || [l]_2.
                 // We can reuse this buffer during each round.
 
                 int labelLength = (label != null) ? label.Length : 0;
                 int contextLength = (context != null) ? context.Length : 0;
-                byte[] buffer = new byte[4 /* [i]_2 */ + labelLength /* label */ + 1 /* 0x00 */ + contextLength /* context */ + 4 /* [L]_2 */];
+                byte[] buffer = new byte[
+                    4 /* [i]_2 */
+                        + labelLength /* label */
+                        + 1 /* 0x00 */
+                        + contextLength /* context */
+                        + 4 /* [L]_2 */
+                ];
 
-                if (labelLength != 0) {
+                if (labelLength != 0)
+                {
                     Buffer.BlockCopy(label, 0, buffer, 4, labelLength); // the 4 accounts for the [i]_2 length
                 }
-                if (contextLength != 0) {
+                if (contextLength != 0)
+                {
                     Buffer.BlockCopy(context, 0, buffer, 5 + labelLength, contextLength); // the '5 +' accounts for the [i]_2 length, the label, and the 0x00 byte
                 }
-                WriteUInt32ToByteArrayBigEndian((uint)keyLengthInBits, buffer, 5 + labelLength + contextLength); // the '5 +' accounts for the [i]_2 length, the label, the 0x00 byte, and the context
+                WriteUInt32ToByteArrayBigEndian(
+                    (uint)keyLengthInBits,
+                    buffer,
+                    5 + labelLength + contextLength
+                ); // the '5 +' accounts for the [i]_2 length, the label, the 0x00 byte, and the context
 
                 // Initialization
 
@@ -92,7 +118,8 @@ namespace System.Web.Security.Cryptography {
 
                 // Calculate each K_i value and copy the leftmost bits to the output buffer as appropriate.
 
-                for (uint i = 1; numBytesRemaining > 0; i++) {
+                for (uint i = 1; numBytesRemaining > 0; i++)
+                {
                     WriteUInt32ToByteArrayBigEndian(i, buffer, 0); // set the first 32 bits of the buffer to be the current iteration value
                     byte[] K_i = hmac.ComputeHash(buffer);
 
@@ -108,12 +135,12 @@ namespace System.Web.Security.Cryptography {
             }
         }
 
-        private static void WriteUInt32ToByteArrayBigEndian(uint value, byte[] buffer, int offset) {
+        private static void WriteUInt32ToByteArrayBigEndian(uint value, byte[] buffer, int offset)
+        {
             buffer[offset + 0] = (byte)(value >> 24);
             buffer[offset + 1] = (byte)(value >> 16);
             buffer[offset + 2] = (byte)(value >> 8);
             buffer[offset + 3] = (byte)(value);
         }
-
     }
 }

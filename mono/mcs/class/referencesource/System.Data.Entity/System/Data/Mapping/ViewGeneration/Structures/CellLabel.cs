@@ -7,17 +7,14 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-
 using System.Data.Common.Utils;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {
-
     // A class that abstracts the notion of identifying table mapping
     // fragments or cells, e.g., line numbers, etc
     internal class CellLabel
     {
-
         #region Constructors
 
         /// <summary>
@@ -30,8 +27,12 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             this.m_sourceLocation = source.m_sourceLocation;
         }
 
-        internal CellLabel(StorageMappingFragment fragmentInfo) :
-            this(fragmentInfo.StartLineNumber, fragmentInfo.StartLinePosition, fragmentInfo.SourceLocation) { }
+        internal CellLabel(StorageMappingFragment fragmentInfo)
+            : this(
+                fragmentInfo.StartLineNumber,
+                fragmentInfo.StartLinePosition,
+                fragmentInfo.SourceLocation
+            ) { }
 
         internal CellLabel(int startLineNumber, int startLinePosition, string sourceLocation)
         {

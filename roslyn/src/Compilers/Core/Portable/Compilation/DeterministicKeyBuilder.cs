@@ -20,31 +20,30 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// The string returned from this function represents the inputs to the compiler which impact determinism.  It is 
+    /// The string returned from this function represents the inputs to the compiler which impact determinism.  It is
     /// meant to be inline with the specification here:
-    /// 
+    ///
     ///     - https://github.com/dotnet/roslyn/blob/main/docs/compilers/Deterministic%20Inputs.md
-    /// 
+    ///
     /// Options which can cause compilation failure, but doesn't impact the result of a successful
     /// compilation should be included. That is because it is interesting to describe error states
     /// not just success states. Think about caching build failures as well as build successes.
     ///
     /// When an option is omitted, say if there is no value for a public crypto key, we should emit
-    /// the property with a null value vs. omitting the property. Either approach would produce 
+    /// the property with a null value vs. omitting the property. Either approach would produce
     /// correct results the preference is to be declarative that an option is omitted.
     /// </summary>
     internal abstract class DeterministicKeyBuilder
     {
-        protected DeterministicKeyBuilder()
-        {
-        }
+        protected DeterministicKeyBuilder() { }
 
         protected void WriteFilePath(
             JsonWriter writer,
             string propertyName,
             string? filePath,
             ImmutableArray<KeyValuePair<string, string>> pathMap,
-            DeterministicKeyOptions options)
+            DeterministicKeyOptions options
+        )
         {
             if ((options & DeterministicKeyOptions.IgnorePaths) != 0)
             {
@@ -73,8 +72,11 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        protected static void WriteByteArrayValue(JsonWriter writer, string name, ReadOnlySpan<byte> value) =>
-            writer.Write(name, EncodeByteArrayValue(value));
+        protected static void WriteByteArrayValue(
+            JsonWriter writer,
+            string name,
+            ReadOnlySpan<byte> value
+        ) => writer.Write(name, EncodeByteArrayValue(value));
 
         protected static void WriteVersion(JsonWriter writer, string key, Version version)
         {
@@ -128,7 +130,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<KeyValuePair<string, string>> pathMap,
             EmitOptions? emitOptions,
             DeterministicKeyOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             additionalTexts = additionalTexts.NullToEmpty();
             analyzers = analyzers.NullToEmpty();
@@ -139,7 +142,16 @@ namespace Microsoft.CodeAnalysis
             writer.WriteObjectStart();
 
             writer.WriteKey("compilation");
-            WriteCompilation(writer, compilationOptions, syntaxTrees, references, publicKey, pathMap, options, cancellationToken);
+            WriteCompilation(
+                writer,
+                compilationOptions,
+                syntaxTrees,
+                references,
+                publicKey,
+                pathMap,
+                options,
+                cancellationToken
+            );
             writer.WriteKey("additionalTexts");
             writeAdditionalTexts();
             writer.WriteKey("analyzers");
@@ -202,7 +214,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<byte> publicKey,
             ImmutableArray<KeyValuePair<string, string>> pathMap,
             DeterministicKeyOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             writer.WriteObjectStart();
             writeToolsVersions();
@@ -236,10 +249,14 @@ namespace Microsoft.CodeAnalysis
                 writer.WriteObjectStart();
                 if ((options & DeterministicKeyOptions.IgnoreToolVersions) == 0)
                 {
-                    var compilerVersion = typeof(Compilation).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+                    var compilerVersion = typeof(Compilation)
+                        .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                        ?.InformationalVersion;
                     writer.Write("compilerVersion", compilerVersion);
 
-                    var runtimeVersion = typeof(object).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+                    var runtimeVersion = typeof(object)
+                        .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                        ?.InformationalVersion;
                     writer.Write("runtimeVersion", runtimeVersion);
 
                     writer.Write("frameworkDescription", RuntimeInformation.FrameworkDescription);
@@ -255,7 +272,8 @@ namespace Microsoft.CodeAnalysis
             SyntaxTreeKey syntaxTree,
             ImmutableArray<KeyValuePair<string, string>> pathMap,
             DeterministicKeyOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             writer.WriteObjectStart();
             WriteFilePath(writer, "fileName", syntaxTree.FilePath, pathMap, options);
@@ -286,7 +304,8 @@ namespace Microsoft.CodeAnalysis
             MetadataReference reference,
             ImmutableArray<KeyValuePair<string, string>> pathMap,
             DeterministicKeyOptions deterministicKeyOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             writer.WriteObjectStart();
             if (reference is PortableExecutableReference peReference)
@@ -317,7 +336,6 @@ namespace Microsoft.CodeAnalysis
 
                 writer.WriteKey("properties");
                 writeMetadataReferenceProperties(writer, reference.Properties);
-
             }
             else if (reference is CompilationReference compilationReference)
             {
@@ -332,7 +350,8 @@ namespace Microsoft.CodeAnalysis
                     compilation.Assembly.Identity.PublicKey,
                     pathMap,
                     deterministicKeyOptions,
-                    cancellationToken);
+                    cancellationToken
+                );
             }
             else
             {
@@ -352,7 +371,11 @@ namespace Microsoft.CodeAnalysis
                     var assemblyDef = peReader.GetAssemblyDefinition();
                     writer.Write("name", peReader.GetString(assemblyDef.Name));
                     WriteVersion(writer, "version", assemblyDef.Version);
-                    WriteByteArrayValue(writer, "publicKey", peReader.GetBlobBytes(assemblyDef.PublicKey).AsSpan());
+                    WriteByteArrayValue(
+                        writer,
+                        "publicKey",
+                        peReader.GetBlobBytes(assemblyDef.PublicKey).AsSpan()
+                    );
                 }
                 else
                 {
@@ -363,7 +386,10 @@ namespace Microsoft.CodeAnalysis
                 writer.Write("mvid", GetGuidValue(moduleMetadata.GetModuleVersionId()));
             }
 
-            static void writeMetadataReferenceProperties(JsonWriter writer, MetadataReferenceProperties properties)
+            static void writeMetadataReferenceProperties(
+                JsonWriter writer,
+                MetadataReferenceProperties properties
+            )
             {
                 writer.WriteObjectStart();
                 writer.Write("kind", properties.Kind);
@@ -383,7 +409,8 @@ namespace Microsoft.CodeAnalysis
             JsonWriter writer,
             EmitOptions? options,
             ImmutableArray<KeyValuePair<string, string>> pathMap,
-            DeterministicKeyOptions deterministicKeyOptions)
+            DeterministicKeyOptions deterministicKeyOptions
+        )
         {
             if (options is null)
             {
@@ -412,11 +439,20 @@ namespace Microsoft.CodeAnalysis
             writer.WriteInvariant("baseAddress", options.BaseAddress);
             writer.Write("debugInformationFormat", options.DebugInformationFormat);
             writer.Write("outputNameOverride", options.OutputNameOverride);
-            WriteFilePath(writer, "pdbFilePath", options.PdbFilePath, pathMap, deterministicKeyOptions);
+            WriteFilePath(
+                writer,
+                "pdbFilePath",
+                options.PdbFilePath,
+                pathMap,
+                deterministicKeyOptions
+            );
             writer.Write("pdbChecksumAlgorithm", options.PdbChecksumAlgorithm.Name);
             writer.Write("runtimeMetadataVersion", options.RuntimeMetadataVersion);
             writer.Write("defaultSourceFileEncoding", options.DefaultSourceFileEncoding?.CodePage);
-            writer.Write("fallbackSourceFileEncoding", options.FallbackSourceFileEncoding?.CodePage);
+            writer.Write(
+                "fallbackSourceFileEncoding",
+                options.FallbackSourceFileEncoding?.CodePage
+            );
             writer.WriteObjectEnd();
 
             static void writeSubsystemVersion(JsonWriter writer, SubsystemVersion version)
@@ -436,7 +472,10 @@ namespace Microsoft.CodeAnalysis
             writer.WriteObjectEnd();
         }
 
-        protected virtual void WriteCompilationOptionsCore(JsonWriter writer, CompilationOptions options)
+        protected virtual void WriteCompilationOptionsCore(
+            JsonWriter writer,
+            CompilationOptions options
+        )
         {
             // CompilationOption values
             writer.Write("outputKind", options.OutputKind);
@@ -454,13 +493,18 @@ namespace Microsoft.CodeAnalysis
             writer.Write("warningLevel", options.WarningLevel);
             writer.Write("deterministic", options.Deterministic);
             writer.Write("debugPlusMode", options.DebugPlusMode);
-            writer.Write("referencesSupersedeLowerVersions", options.ReferencesSupersedeLowerVersions);
+            writer.Write(
+                "referencesSupersedeLowerVersions",
+                options.ReferencesSupersedeLowerVersions
+            );
             writer.Write("reportSuppressedDiagnostics", options.ReportSuppressedDiagnostics);
             writer.Write("nullableContextOptions", options.NullableContextOptions);
 
             writer.WriteKey("specificDiagnosticOptions");
             writer.WriteArrayStart();
-            foreach (var key in options.SpecificDiagnosticOptions.Keys.OrderBy(StringComparer.Ordinal))
+            foreach (
+                var key in options.SpecificDiagnosticOptions.Keys.OrderBy(StringComparer.Ordinal)
+            )
             {
                 writer.WriteObjectStart();
                 writer.Write(key, options.SpecificDiagnosticOptions[key]);
@@ -478,9 +522,9 @@ namespace Microsoft.CodeAnalysis
                 writer.Write("deterministic", false);
                 writer.WriteInvariant("localtime", options.CurrentLocalTime);
 
-                // When using /deterministic- the compiler will *always* emit different binaries hence the 
+                // When using /deterministic- the compiler will *always* emit different binaries hence the
                 // key we generate here also must be different. We cannot depend on the `localtime` property
-                // to provide this as the same compilation can occur on different machines at the same 
+                // to provide this as the same compilation can occur on different machines at the same
                 // time. Force the issue here.
                 writer.Write("nondeterministicMvid", GetGuidValue(Guid.NewGuid()));
             }
@@ -489,20 +533,36 @@ namespace Microsoft.CodeAnalysis
             // - ConcurrentBuild
             // - MetadataImportOptions:
             // - Options.Features: deprecated
-            // 
+            //
 
             // Not really options but they can impact compilation so we record the types. For the majority
-            // of compilations this is roughly the equivalent of recording the compiler version but it 
+            // of compilations this is roughly the equivalent of recording the compiler version but it
             // could differ when customers host the compiler via the API.
             writer.WriteKey("extensions");
             writer.WriteObjectStart();
 
-            WriteType(writer, "syntaxTreeOptionsProvider", options.SyntaxTreeOptionsProvider?.GetType());
-            WriteType(writer, "metadataReferenceResolver", options.MetadataReferenceResolver?.GetType());
+            WriteType(
+                writer,
+                "syntaxTreeOptionsProvider",
+                options.SyntaxTreeOptionsProvider?.GetType()
+            );
+            WriteType(
+                writer,
+                "metadataReferenceResolver",
+                options.MetadataReferenceResolver?.GetType()
+            );
             WriteType(writer, "xmlReferenceResolver", options.XmlReferenceResolver?.GetType());
-            WriteType(writer, "sourceReferenceResolver", options.SourceReferenceResolver?.GetType());
+            WriteType(
+                writer,
+                "sourceReferenceResolver",
+                options.SourceReferenceResolver?.GetType()
+            );
             WriteType(writer, "strongNameProvider", options.StrongNameProvider?.GetType());
-            WriteType(writer, "assemblyIdentityComparer", options.AssemblyIdentityComparer?.GetType());
+            WriteType(
+                writer,
+                "assemblyIdentityComparer",
+                options.AssemblyIdentityComparer?.GetType()
+            );
             writer.WriteObjectEnd();
         }
 

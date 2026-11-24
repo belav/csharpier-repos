@@ -3,7 +3,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2006 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -27,72 +27,75 @@
 
 using System;
 using System.Collections.Generic;
-using Microsoft.Build.Framework;
-using System.Reflection;
 using System.Globalization;
-using Microsoft.Build.Utilities;
+using System.Reflection;
 using System.Text;
+using Microsoft.Build.Framework;
+using Microsoft.Build.Utilities;
 
-namespace Microsoft.Build.Tasks {
-	public class GetAssemblyIdentity : TaskExtension {
+namespace Microsoft.Build.Tasks
+{
+    public class GetAssemblyIdentity : TaskExtension
+    {
+        ITaskItem[] assemblies;
+        ITaskItem[] assembly_files;
 
-		ITaskItem [] assemblies;
-		ITaskItem [] assembly_files;
+        public GetAssemblyIdentity() { }
 
-		public GetAssemblyIdentity ()
-		{
-		}
+        [MonoTODO("Error handling")]
+        public override bool Execute()
+        {
+            assemblies = new ITaskItem[assembly_files.Length];
 
-		[MonoTODO ("Error handling")]
-		public override bool Execute ()
-		{
-			assemblies = new ITaskItem [assembly_files.Length];
+            for (int i = 0; i < assemblies.Length; i++)
+            {
+                string file = assembly_files[i].ItemSpec;
+                AssemblyName an = AssemblyName.GetAssemblyName(file);
+                TaskItem item = new TaskItem(an.FullName);
 
-			for (int i = 0; i < assemblies.Length; i++) {
-				string file = assembly_files [i].ItemSpec;
-				AssemblyName an = AssemblyName.GetAssemblyName (file);
-				TaskItem item = new TaskItem (an.FullName);
+                item.SetMetadata("Version", an.Version.ToString());
 
-				item.SetMetadata ("Version", an.Version.ToString ());
+                byte[] pk = an.GetPublicKeyToken();
+                string pkStr = pk != null ? ByteArrayToString(pk) : "null";
+                item.SetMetadata("PublicKeyToken", pkStr);
 
-				byte[] pk = an.GetPublicKeyToken ();
-				string pkStr = pk != null? ByteArrayToString (pk) : "null";
-				item.SetMetadata ("PublicKeyToken", pkStr);
+                CultureInfo culture = an.CultureInfo;
+                if (culture != null)
+                {
+                    string cn;
+                    if (culture.LCID == CultureInfo.InvariantCulture.LCID)
+                        cn = "neutral";
+                    else
+                        cn = culture.Name;
+                    item.SetMetadata("Culture", cn);
+                }
 
-				CultureInfo culture = an.CultureInfo;
-				if (culture != null) {
-					string cn;
-					if (culture.LCID == CultureInfo.InvariantCulture.LCID)
-						cn = "neutral";
-					else
-						cn = culture.Name;
-					item.SetMetadata ("Culture", cn);
-				}
+                assemblies[i] = item;
+            }
 
-				assemblies[i] = item;
-			}
+            return true;
+        }
 
-			return true;
-		}
+        static string ByteArrayToString(byte[] arr)
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < arr.Length; i++)
+                sb.Append(arr[i].ToString("x2"));
+            return sb.ToString();
+        }
 
-		static string ByteArrayToString (byte[] arr)
-		{
-			StringBuilder sb = new StringBuilder ();
-			for (int i = 0; i < arr.Length; i++)
-				sb.Append (arr[i].ToString ("x2"));
-			return sb.ToString ();
-		}
+        [Output]
+        public ITaskItem[] Assemblies
+        {
+            get { return assemblies; }
+            set { assemblies = value; }
+        }
 
-		[Output]
-		public ITaskItem [] Assemblies {
-			get { return assemblies; }
-			set { assemblies = value; }
-		}
-
-		[Required]
-		public ITaskItem [] AssemblyFiles {
-			get { return assembly_files; }
-			set { assembly_files = value; }
-		}
-	}
+        [Required]
+        public ITaskItem[] AssemblyFiles
+        {
+            get { return assembly_files; }
+            set { assembly_files = value; }
+        }
+    }
 }

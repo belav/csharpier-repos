@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="IContainer.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
-
+namespace System.ComponentModel
+{
     /*
      * A "container" is an object that logically contains zero or more child
      * components.
@@ -20,8 +20,8 @@ namespace System.ComponentModel {
     ///       functionality for containers. Containers are objects that logically contain zero or more components.</para>
     /// </devdoc>
     [System.Runtime.InteropServices.ComVisible(true)]
-    public interface IContainer : IDisposable {
-
+    public interface IContainer : IDisposable
+    {
         // Adds a component to the container.
         /// <devdoc>
         /// <para>Adds the specified <see cref='System.ComponentModel.IComponent'/> to the <see cref='System.ComponentModel.IContainer'/>
@@ -40,7 +40,7 @@ namespace System.ComponentModel {
         /// <devdoc>
         /// <para>Gets all the components in the <see cref='System.ComponentModel.IContainer'/>.</para>
         /// </devdoc>
-        ComponentCollection Components {get;}
+        ComponentCollection Components { get; }
 
         // Removes a component from the container.
         /// <devdoc>

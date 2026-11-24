@@ -16,7 +16,10 @@ namespace System.Threading.Channels
         private static void QueueUserWorkItem(Action<object?> action, object? state) =>
             ThreadPool.QueueUserWorkItem(action, state, preferLocal: false);
 
-        private static CancellationTokenRegistration UnsafeRegister(CancellationToken cancellationToken, Action<object?> action, object? state) =>
-            cancellationToken.UnsafeRegister(action, state);
+        private static CancellationTokenRegistration UnsafeRegister(
+            CancellationToken cancellationToken,
+            Action<object?> action,
+            object? state
+        ) => cancellationToken.UnsafeRegister(action, state);
     }
 }

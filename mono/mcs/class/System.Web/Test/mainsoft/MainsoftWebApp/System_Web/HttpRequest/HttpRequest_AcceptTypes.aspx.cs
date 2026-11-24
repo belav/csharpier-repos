@@ -35,62 +35,71 @@ using System.Drawing;
 using System.Web;
 using System.Web.SessionState;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web
 {
-	public class HttpRequest_AcceptTypes
-		: GHTBaseWeb 
-	{
+    public class HttpRequest_AcceptTypes : GHTBaseWeb
+    {
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
+            GHTTestBegin(frm);
+            // Need more testing on different
+            // application paths. Needs for that multiple virtual directories
+            this.GHTSubTestBegin("AcceptedTypes1");
+            try
+            {
+                string[] textArray1 = this.Request.AcceptTypes;
+                int num2 = textArray1.Length - 1;
+                for (int num1 = 0; num1 <= num2; num1++)
+                {
+                    string[] textArray2 = new string[]
+                    {
+                        "Accept Type ",
+                        num1.ToString(),
+                        ": ",
+                        textArray1[num1],
+                        "<br>",
+                    };
+                    this.GHTSubTestAddResult(string.Concat(textArray2));
+                }
+            }
+            catch (Exception exception2)
+            {
+                // ProjectData.SetProjectError(exception2);
+                Exception exception1 = exception2;
+                this.GHTSubTestAddResult(
+                    "unxpected "
+                        + exception1.GetType().Name
+                        + " exception was caught-"
+                        + exception1.Message
+                );
+                // ProjectData.ClearProjectError();
+            }
+            this.GHTSubTestEnd();
+            this.GHTTestEnd();
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
-			GHTTestBegin(frm);
-			// Need more testing on different
-			// application paths. Needs for that multiple virtual directories
-			this.GHTSubTestBegin("AcceptedTypes1");
-			try
-			{
-				string[] textArray1 = this.Request.AcceptTypes;
-				int num2 = textArray1.Length - 1;
-				for (int num1 = 0; num1 <= num2; num1++)
-				{
-					string[] textArray2 = new string[] { "Accept Type ", num1.ToString(), ": ", textArray1[num1], "<br>" } ;
-					this.GHTSubTestAddResult(string.Concat(textArray2));
-				}
-			}
-			catch (Exception exception2)
-			{
-				// ProjectData.SetProjectError(exception2);
-				Exception exception1 = exception2;
-				this.GHTSubTestAddResult("unxpected " + exception1.GetType().Name + " exception was caught-" + exception1.Message);
-				// ProjectData.ClearProjectError();
-			}
-			this.GHTSubTestEnd();
-			this.GHTTestEnd();
-		}
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e)
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
-
-	}
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
+    }
 }

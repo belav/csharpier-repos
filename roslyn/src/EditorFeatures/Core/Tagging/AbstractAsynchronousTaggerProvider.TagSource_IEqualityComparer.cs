@@ -12,8 +12,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
     {
         private partial class TagSource : IEqualityComparer<ITagSpan<TTag>>
         {
-            public bool Equals(ITagSpan<TTag>? x, ITagSpan<TTag>? y)
-                => x != null && y != null && x.Span == y.Span && _dataSource.TagEquals(x.Tag, y.Tag);
+            public bool Equals(ITagSpan<TTag>? x, ITagSpan<TTag>? y) =>
+                x != null && y != null && x.Span == y.Span && _dataSource.TagEquals(x.Tag, y.Tag);
 
             /// <summary>
             /// For the purposes of hashing, just hash spans.  This will prevent most collisions.  And the rare
@@ -21,8 +21,7 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             /// through <see cref="Equals(ITagSpan{TTag}, ITagSpan{TTag})"/>.  This prevents us from having to
             /// define a suitable hashing strategy for all our tags.
             /// </summary>
-            public int GetHashCode(ITagSpan<TTag> obj)
-                => obj.Span.Span.GetHashCode();
+            public int GetHashCode(ITagSpan<TTag> obj) => obj.Span.Span.GetHashCode();
         }
     }
 }

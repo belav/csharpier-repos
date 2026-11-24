@@ -10,7 +10,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Test.Utilities
 {
     /// <summary>
-    /// Helpers for testing equality APIs. 
+    /// Helpers for testing equality APIs.
     /// Gives us more control than calling Assert.Equals.
     /// </summary>
     public static class EqualityTesting

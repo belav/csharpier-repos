@@ -12,6 +12,7 @@ internal static partial class Interop
         internal static partial UIntPtr VirtualQuery(
             SafeHandle lpAddress,
             ref MEMORY_BASIC_INFORMATION lpBuffer,
-            UIntPtr dwLength);
+            UIntPtr dwLength
+        );
     }
 }

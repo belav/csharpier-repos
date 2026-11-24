@@ -20,8 +20,10 @@ namespace Microsoft.CodeAnalysis
     {
         private const int XXHash128SizeBytes = 128 / 8;
 
-        private static readonly ObjectPool<XxHash128> s_incrementalHashPool =
-            new(() => new(), size: 20);
+        private static readonly ObjectPool<XxHash128> s_incrementalHashPool = new(
+            () => new(),
+            size: 20
+        );
 
         public static Checksum Create(IEnumerable<string?> values)
         {
@@ -68,11 +70,11 @@ namespace Microsoft.CodeAnalysis
             return Create(stream);
         }
 
-        public static Checksum Create(Checksum checksum1, Checksum checksum2)
-            => Create(stackalloc[] { checksum1, checksum2 });
+        public static Checksum Create(Checksum checksum1, Checksum checksum2) =>
+            Create(stackalloc[] { checksum1, checksum2 });
 
-        public static Checksum Create(Checksum checksum1, Checksum checksum2, Checksum checksum3)
-            => Create(stackalloc[] { checksum1, checksum2, checksum3 });
+        public static Checksum Create(Checksum checksum1, Checksum checksum2, Checksum checksum3) =>
+            Create(stackalloc[] { checksum1, checksum2, checksum3 });
 
         public static Checksum Create(ReadOnlySpan<Checksum> hashes)
         {

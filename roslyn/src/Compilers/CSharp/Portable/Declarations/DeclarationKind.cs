@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         Submission,
         ImplicitClass,
         Record,
-        RecordStruct
+        RecordStruct,
     }
 
     internal static partial class EnumConversions
@@ -32,16 +32,23 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             switch (kind)
             {
-                case SyntaxKind.ClassDeclaration: return DeclarationKind.Class;
-                case SyntaxKind.InterfaceDeclaration: return DeclarationKind.Interface;
-                case SyntaxKind.StructDeclaration: return DeclarationKind.Struct;
+                case SyntaxKind.ClassDeclaration:
+                    return DeclarationKind.Class;
+                case SyntaxKind.InterfaceDeclaration:
+                    return DeclarationKind.Interface;
+                case SyntaxKind.StructDeclaration:
+                    return DeclarationKind.Struct;
                 case SyntaxKind.NamespaceDeclaration:
                 case SyntaxKind.FileScopedNamespaceDeclaration:
                     return DeclarationKind.Namespace;
-                case SyntaxKind.EnumDeclaration: return DeclarationKind.Enum;
-                case SyntaxKind.DelegateDeclaration: return DeclarationKind.Delegate;
-                case SyntaxKind.RecordDeclaration: return DeclarationKind.Record;
-                case SyntaxKind.RecordStructDeclaration: return DeclarationKind.RecordStruct;
+                case SyntaxKind.EnumDeclaration:
+                    return DeclarationKind.Enum;
+                case SyntaxKind.DelegateDeclaration:
+                    return DeclarationKind.Delegate;
+                case SyntaxKind.RecordDeclaration:
+                    return DeclarationKind.Record;
+                case SyntaxKind.RecordStructDeclaration:
+                    return DeclarationKind.RecordStruct;
                 default:
                     throw ExceptionUtilities.UnexpectedValue(kind);
             }

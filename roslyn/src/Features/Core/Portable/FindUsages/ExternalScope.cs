@@ -9,6 +9,6 @@ namespace Microsoft.CodeAnalysis.FindUsages
         Default = 0,
         Repository = 1,
         Organization = 2,
-        Global = 3
+        Global = 3,
     }
 }

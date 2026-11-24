@@ -9,13 +9,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Common.CommandTrees;
+using System.Data.Metadata.Edm;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Xml;
-
-using System.Data.Metadata.Edm;
-using System.Data.Common.CommandTrees;
 
 namespace System.Data.Common.CommandTrees.Internal
 {
@@ -24,14 +23,18 @@ namespace System.Data.Common.CommandTrees.Internal
     /// </summary>
     internal class XmlExpressionDumper : ExpressionDumper
     {
-        internal static Encoding DefaultEncoding { get { return Encoding.UTF8; } }
+        internal static Encoding DefaultEncoding
+        {
+            get { return Encoding.UTF8; }
+        }
 
         private XmlWriter _writer;
 
         internal XmlExpressionDumper(Stream stream)
-            : this(stream, XmlExpressionDumper.DefaultEncoding, true) {}
-        
-        internal XmlExpressionDumper(Stream stream, Encoding encoding, bool indent) : base()
+            : this(stream, XmlExpressionDumper.DefaultEncoding, true) { }
+
+        internal XmlExpressionDumper(Stream stream, Encoding encoding, bool indent)
+            : base()
         {
             XmlWriterSettings settings = new XmlWriterSettings();
             settings.CheckCharacters = false;
@@ -55,10 +58,12 @@ namespace System.Data.Common.CommandTrees.Internal
             {
                 foreach (KeyValuePair<string, object> attr in attrs)
                 {
-
-                    _writer.WriteAttributeString(attr.Key, (null == attr.Value ? "" : attr.Value.ToString()));
+                    _writer.WriteAttributeString(
+                        attr.Key,
+                        (null == attr.Value ? "" : attr.Value.ToString())
+                    );
                 }
-            }  
+            }
         }
 
         internal override void End(string name)

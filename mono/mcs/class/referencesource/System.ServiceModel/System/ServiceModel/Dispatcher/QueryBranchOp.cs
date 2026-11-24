@@ -19,10 +19,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal Opcode Jump
         {
-            get
-            {
-                return this.jump;
-            }
+            get { return this.jump; }
             set
             {
                 Fx.Assert(value.ID == OpcodeID.BlockEnd, "");
@@ -115,7 +112,6 @@ namespace System.ServiceModel.Dispatcher
                 this.jump.Trim();
             }
         }
-
     }
 
     class JumpIfOpcode : JumpOpcode
@@ -123,9 +119,7 @@ namespace System.ServiceModel.Dispatcher
         protected bool test;
 
         internal JumpIfOpcode(Opcode jump, bool test)
-            : this(OpcodeID.JumpIfNot, jump, test)
-        {
-        }
+            : this(OpcodeID.JumpIfNot, jump, test) { }
 
         protected JumpIfOpcode(OpcodeID id, Opcode jump, bool test)
             : base(id, jump)
@@ -135,10 +129,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal bool Test
         {
-            get
-            {
-                return this.test;
-            }
+            get { return this.test; }
         }
 
         internal override bool Equals(Opcode op)
@@ -181,14 +172,10 @@ namespace System.ServiceModel.Dispatcher
     class ApplyBooleanOpcode : JumpIfOpcode
     {
         internal ApplyBooleanOpcode(Opcode jump, bool test)
-            : this(OpcodeID.ApplyBoolean, jump, test)
-        {
-        }
+            : this(OpcodeID.ApplyBoolean, jump, test) { }
 
         protected ApplyBooleanOpcode(OpcodeID id, Opcode jump, bool test)
-            : base(id, jump, test)
-        {
-        }
+            : base(id, jump, test) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
@@ -209,7 +196,11 @@ namespace System.ServiceModel.Dispatcher
             Value[] values = context.Values;
             int testCount = 0;
 
-            for (int maskIndex = resultMask.basePtr, resultIndex = results.basePtr; maskIndex <= resultMask.endPtr; ++maskIndex)
+            for (
+                int maskIndex = resultMask.basePtr, resultIndex = results.basePtr;
+                maskIndex <= resultMask.endPtr;
+                ++maskIndex
+            )
             {
                 if (this.test == values[maskIndex].Boolean)
                 {
@@ -312,9 +303,7 @@ namespace System.ServiceModel.Dispatcher
     class EndBooleanOpcode : ApplyBooleanOpcode
     {
         internal EndBooleanOpcode(Opcode jump, bool test)
-            : base(OpcodeID.EndBoolean, jump, test)
-        {
-        }
+            : base(OpcodeID.EndBoolean, jump, test) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
@@ -333,9 +322,7 @@ namespace System.ServiceModel.Dispatcher
     class NoOpOpcode : Opcode
     {
         internal NoOpOpcode(OpcodeID id)
-            : base(id)
-        {
-        }
+            : base(id) { }
     }
 
     class BlockEndOpcode : Opcode
@@ -367,12 +354,12 @@ namespace System.ServiceModel.Dispatcher
             }
             base.Remove();
         }
-
     }
 
     class TypecastOpcode : Opcode
     {
         ValueDataType newType;
+
 #if NO
         internal TypecastOpcode(OpcodeID opcode, ValueDataType newType)
             : base(opcode)
@@ -380,6 +367,7 @@ namespace System.ServiceModel.Dispatcher
             this.newType = newType;
         }
 #endif
+
         internal TypecastOpcode(ValueDataType newType)
             : base(OpcodeID.Cast)
         {
@@ -453,12 +441,12 @@ namespace System.ServiceModel.Dispatcher
     {
         internal Opcode branch;
         internal int id;
+
 #if NO
         internal QueryBranch(Opcode branch)
-            : this(branch, int.MinValue)
-        {
-        }
+            : this(branch, int.MinValue) { }
 #endif
+
         internal QueryBranch(Opcode branch, int id)
         {
             this.branch = branch;
@@ -467,24 +455,15 @@ namespace System.ServiceModel.Dispatcher
 
         internal Opcode Branch
         {
-            get
-            {
-                return this.branch;
-            }
+            get { return this.branch; }
 #if NO
-            set
-            {
-                this.branch = value;
-            }
+            set { this.branch = value; }
 #endif
         }
 
         internal int ID
         {
-            get
-            {
-                return this.id;
-            }
+            get { return this.id; }
         }
     }
 
@@ -494,9 +473,7 @@ namespace System.ServiceModel.Dispatcher
         QueryBranch[] branches;
 
         internal QueryBranchTable()
-            : this(1)
-        {
-        }
+            : this(1) { }
 
         internal QueryBranchTable(int capacity)
         {
@@ -505,19 +482,14 @@ namespace System.ServiceModel.Dispatcher
 
         internal int Count
         {
-            get
-            {
-                return this.count;
-            }
+            get { return this.count; }
         }
 
         internal QueryBranch this[int index]
         {
-            get
-            {
-                return this.branches[index];
-            }
+            get { return this.branches[index]; }
         }
+
 #if NO
         internal void Add(QueryBranch entry)
         {
@@ -525,6 +497,7 @@ namespace System.ServiceModel.Dispatcher
             this.InsertAt(this.count, entry);
         }
 #endif
+
         internal void AddInOrder(QueryBranch branch)
         {
             // Insert in sorted order always
@@ -585,6 +558,7 @@ namespace System.ServiceModel.Dispatcher
             return -1;
         }
 #endif
+
         internal void InsertAt(int index, QueryBranch branch)
         {
             if (this.count == this.branches.Length)
@@ -650,9 +624,7 @@ namespace System.ServiceModel.Dispatcher
         OpcodeList branches;
 
         internal BranchOpcode()
-            : this(OpcodeID.Branch)
-        {
-        }
+            : this(OpcodeID.Branch) { }
 
         internal BranchOpcode(OpcodeID id)
             : base(id)
@@ -663,10 +635,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal OpcodeList Branches
         {
-            get
-            {
-                return this.branches;
-            }
+            get { return this.branches; }
         }
 
         internal override void Add(Opcode opcode)
@@ -716,6 +685,7 @@ namespace System.ServiceModel.Dispatcher
                 this.prev.DelinkFromConditional(child);
             }
         }
+
         internal override Opcode Eval(ProcessingContext context)
         {
             QueryProcessor processor = context.Processor;
@@ -734,7 +704,7 @@ namespace System.ServiceModel.Dispatcher
                     if (--branchCount > 0)
                     {
                         // Evaluate all but the first branch with a clone of the current context
-                        // The first branch (right most) can be evaluated with the current context                        
+                        // The first branch (right most) can be evaluated with the current context
                         BranchContext branchContext = new BranchContext(context); // struct. fast
                         for (; i < branchCount; ++i)
                         {
@@ -752,8 +722,8 @@ namespace System.ServiceModel.Dispatcher
                                     branch = branch.Eval(newContext);
                                 }
                             }
-                            contextNode.CurrentPosition = pos;  // restore the navigator to its original position
-                            processor.CounterMarker = marker;   // and the node count marker
+                            contextNode.CurrentPosition = pos; // restore the navigator to its original position
+                            processor.CounterMarker = marker; // and the node count marker
                         }
                         branchContext.Release();
                     }
@@ -902,19 +872,14 @@ namespace System.ServiceModel.Dispatcher
 
         internal QueryBranch Branch
         {
-            get
-            {
-                return this.branch;
-            }
+            get { return this.branch; }
         }
 
         internal int ValIndex
         {
-            get
-            {
-                return this.valIndex;
-            }
+            get { return this.valIndex; }
         }
+
 #if NO
         internal void Set(QueryBranch branch, int valIndex)
         {
@@ -931,9 +896,7 @@ namespace System.ServiceModel.Dispatcher
         internal static SortComparer comparer = new SortComparer();
 
         internal QueryBranchResultSet()
-            : this(2)
-        {
-        }
+            : this(2) { }
 
         internal QueryBranchResultSet(int capacity)
         {
@@ -942,30 +905,18 @@ namespace System.ServiceModel.Dispatcher
 
         internal int Count
         {
-            get
-            {
-                return this.results.count;
-            }
+            get { return this.results.count; }
         }
 
         internal QueryBranchResult this[int index]
         {
-            get
-            {
-                return this.results[index];
-            }
+            get { return this.results[index]; }
         }
 
         internal QueryBranchResultSet Next
         {
-            get
-            {
-                return this.next;
-            }
-            set
-            {
-                this.next = value;
-            }
+            get { return this.next; }
+            set { this.next = value; }
         }
 
         internal void Add(QueryBranch branch, int valIndex)
@@ -989,6 +940,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 return x.branch.id == y.branch.id;
             }
+
             public int Compare(QueryBranchResult x, QueryBranchResult y)
             {
                 return x.branch.id - y.branch.id;
@@ -1014,10 +966,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal QueryBranchResultSet ResultTable
         {
-            get
-            {
-                return this.resultTable;
-            }
+            get { return this.resultTable; }
         }
 
         void InitResults(ProcessingContext context)
@@ -1049,17 +998,17 @@ namespace System.ServiceModel.Dispatcher
         void InvokeMultiMatch(ProcessingContext context)
         {
             int marker = context.Processor.CounterMarker;
-            BranchContext branchContext = new BranchContext(context);   // struct. quick.
+            BranchContext branchContext = new BranchContext(context); // struct. quick.
             int resultTableCount = this.resultTable.Count;
             for (int i = 0; i < resultTableCount; )
             {
                 QueryBranchResult result = this.resultTable[i];
                 QueryBranch branch = result.Branch;
-                // Branches can arbitrarily alter context stacks, rendering them unuseable to other branches. 
+                // Branches can arbitrarily alter context stacks, rendering them unuseable to other branches.
                 // Therefore, before following a branch, we have to clone the context. Cloning is relatively efficient because
-                // can avoid allocating memory in most cases. We cannot, unfortunately, avoid Array copies. 
+                // can avoid allocating memory in most cases. We cannot, unfortunately, avoid Array copies.
                 //
-                // Optimization: 
+                // Optimization:
                 // We can avoid cloning altogether when we can predict that the branch does NOT tamper with the stack,
                 // or does so in a predictable way. If we are sure that we can restore the stack easily after the branch
                 // completes, we have no reason to copy the stack.
@@ -1078,14 +1027,14 @@ namespace System.ServiceModel.Dispatcher
 
                 //
                 // Matches are sorted by their branch ID.
-                // It is very possible that the a literal matches multiple times, especially when the value being 
-                // compared is a sequence. A literal may match multiple items in a single sequence 
-                // OR multiple items in multiple sequences. If there were 4 context sequences, the literal may have 
+                // It is very possible that the a literal matches multiple times, especially when the value being
+                // compared is a sequence. A literal may match multiple items in a single sequence
+                // OR multiple items in multiple sequences. If there were 4 context sequences, the literal may have
                 // matched one item each in 3 of them. The branchID for that literal will be present 3 times in the
                 // resultTable.
                 // Sorting the matches groups them by their branch Ids. We only want to take the branch ONCE, so now we
                 // iterate over all the duplicate matches..
-                // result.ValIndex will give us the index of the value that was matched. Thus if the 3rd sequence 
+                // result.ValIndex will give us the index of the value that was matched. Thus if the 3rd sequence
                 // matched, ValIndex == 2 (0 based)
                 newContext.Values[newContext.TopArg[result.ValIndex]].Boolean = true;
                 while (++i < resultTableCount)
@@ -1106,11 +1055,15 @@ namespace System.ServiceModel.Dispatcher
                 }
                 catch (XPathNavigatorException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(e.Process(nextOpcode));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        e.Process(nextOpcode)
+                    );
                 }
                 catch (NavigatorInvalidBodyAccessException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(e.Process(nextOpcode));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        e.Process(nextOpcode)
+                    );
                 }
                 context.Processor.CounterMarker = marker;
             }
@@ -1127,7 +1080,8 @@ namespace System.ServiceModel.Dispatcher
             int matchIndex = 0;
             while (matchIndex < this.resultTable.Count && nonMatchIndex < nonMatchTable.Count)
             {
-                int compare = this.resultTable[matchIndex].Branch.ID - nonMatchTable[nonMatchIndex].ID;
+                int compare =
+                    this.resultTable[matchIndex].Branch.ID - nonMatchTable[nonMatchIndex].ID;
                 if (compare > 0)
                 {
                     // Nonmatch < match
@@ -1188,11 +1142,15 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (XPathNavigatorException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(e.Process(result.Branch.Branch.Next));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    e.Process(result.Branch.Branch.Next)
+                );
             }
             catch (NavigatorInvalidBodyAccessException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(e.Process(result.Branch.Branch.Next));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    e.Process(result.Branch.Branch.Next)
+                );
             }
 
             context.Processor.CounterMarker = marker;
@@ -1206,15 +1164,8 @@ namespace System.ServiceModel.Dispatcher
 
     abstract class QueryBranchIndex
     {
-        internal abstract int Count
-        {
-            get;
-        }
-        internal abstract QueryBranch this[object key]
-        {
-            get;
-            set;
-        }
+        internal abstract int Count { get; }
+        internal abstract QueryBranch this[object key] { get; set; }
 
         internal abstract void CollectXPathFilters(ICollection<MessageFilter> filters);
 
@@ -1256,12 +1207,10 @@ namespace System.ServiceModel.Dispatcher
 #if NO
         internal QueryBranchIndex BranchIndex
         {
-            get
-            {
-                return this.branchIndex;
-            }
+            get { return this.branchIndex; }
         }
 #endif
+
         internal override void Add(Opcode opcode)
         {
             LiteralRelationOpcode literal = this.ValidateOpcode(opcode);
@@ -1349,7 +1298,11 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        internal virtual void CollectMatches(int valIndex, ref Value val, QueryBranchResultSet results)
+        internal virtual void CollectMatches(
+            int valIndex,
+            ref Value val,
+            QueryBranchResultSet results
+        )
         {
             this.branchIndex.Match(valIndex, ref val, results);
         }
@@ -1436,21 +1389,21 @@ namespace System.ServiceModel.Dispatcher
             //
             // If the literal is within a boolean conjunction, the succeeding opcode will either be a JumpIfNot
             // Or a BlockEnd.
-            // 
+            //
             // -If the JumpIfNot is multiway, then always evaluate if it contains ANY non-result only opcodes.
             // -If JumpIfNot(False) -i.e. AND - only evaluate if the opcode succeeding the jump is NOT a result opcode.
             // -If JumpIfNot(True) - i.e. OR - always evaluate
-            // 
+            //
             // -If BlockEnd - evaluate only if not followed by a result
             //
-            // When branching for matching literals, we push trues onto the ValueStack corresponding to the items that 
+            // When branching for matching literals, we push trues onto the ValueStack corresponding to the items that
             // matched. When branching for non-matching literals, we push ALL FALSE values... and then eval.
 
             // is it a the termination of a conditional?
             JumpIfOpcode jump = next as JumpIfOpcode;
             if (null != jump)
             {
-                // Is the conditional JumpIfNot(False) = i.e. OR? 
+                // Is the conditional JumpIfNot(False) = i.e. OR?
                 if (!jump.Test)
                 {
                     return true;
@@ -1589,7 +1542,9 @@ namespace System.ServiceModel.Dispatcher
 
         internal override void Replace(Opcode replace, Opcode with)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new NotImplementedException(SR.GetString(SR.FilterUnexpectedError)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                new NotImplementedException(SR.GetString(SR.FilterUnexpectedError))
+            );
         }
 
         internal override void Trim()

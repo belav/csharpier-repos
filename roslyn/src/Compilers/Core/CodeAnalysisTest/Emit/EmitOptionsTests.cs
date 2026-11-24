@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private void TestProperty<T>(
             Func<EmitOptions, T, EmitOptions> factory,
             Func<EmitOptions, T> getter,
-            T validNonDefaultValue)
+            T validNonDefaultValue
+        )
         {
             var oldOpt1 = EmitOptions.Default;
 
@@ -51,20 +52,69 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void WithXxx()
         {
-            TestProperty((old, value) => old.WithFileAlignment(value), opt => opt.FileAlignment, 2048);
+            TestProperty(
+                (old, value) => old.WithFileAlignment(value),
+                opt => opt.FileAlignment,
+                2048
+            );
             TestProperty((old, value) => old.WithBaseAddress(value), opt => opt.BaseAddress, 100UL);
-            TestProperty((old, value) => old.WithHighEntropyVirtualAddressSpace(value), opt => opt.HighEntropyVirtualAddressSpace, true);
-            TestProperty((old, value) => old.WithSubsystemVersion(value), opt => opt.SubsystemVersion, SubsystemVersion.Windows2000);
-            TestProperty((old, value) => old.WithRuntimeMetadataVersion(value), opt => opt.RuntimeMetadataVersion, "v12345");
-            TestProperty((old, value) => old.WithPdbFilePath(value), opt => opt.PdbFilePath, @"c:\temp\a.pdb");
-            TestProperty((old, value) => old.WithPdbChecksumAlgorithm(value), opt => opt.PdbChecksumAlgorithm, new HashAlgorithmName());
-            TestProperty((old, value) => old.WithPdbChecksumAlgorithm(value), opt => opt.PdbChecksumAlgorithm, HashAlgorithmName.SHA384);
-            TestProperty((old, value) => old.WithOutputNameOverride(value), opt => opt.OutputNameOverride, @"x.dll");
-            TestProperty((old, value) => old.WithDebugInformationFormat(value), opt => opt.DebugInformationFormat,
-                PathUtilities.IsUnixLikePlatform ? DebugInformationFormat.Pdb : DebugInformationFormat.PortablePdb);
-            TestProperty((old, value) => old.WithTolerateErrors(value), opt => opt.TolerateErrors, true);
-            TestProperty((old, value) => old.WithIncludePrivateMembers(value), opt => opt.IncludePrivateMembers, false);
-            TestProperty((old, value) => old.WithInstrumentationKinds(value), opt => opt.InstrumentationKinds, ImmutableArray.Create(InstrumentationKind.TestCoverage));
+            TestProperty(
+                (old, value) => old.WithHighEntropyVirtualAddressSpace(value),
+                opt => opt.HighEntropyVirtualAddressSpace,
+                true
+            );
+            TestProperty(
+                (old, value) => old.WithSubsystemVersion(value),
+                opt => opt.SubsystemVersion,
+                SubsystemVersion.Windows2000
+            );
+            TestProperty(
+                (old, value) => old.WithRuntimeMetadataVersion(value),
+                opt => opt.RuntimeMetadataVersion,
+                "v12345"
+            );
+            TestProperty(
+                (old, value) => old.WithPdbFilePath(value),
+                opt => opt.PdbFilePath,
+                @"c:\temp\a.pdb"
+            );
+            TestProperty(
+                (old, value) => old.WithPdbChecksumAlgorithm(value),
+                opt => opt.PdbChecksumAlgorithm,
+                new HashAlgorithmName()
+            );
+            TestProperty(
+                (old, value) => old.WithPdbChecksumAlgorithm(value),
+                opt => opt.PdbChecksumAlgorithm,
+                HashAlgorithmName.SHA384
+            );
+            TestProperty(
+                (old, value) => old.WithOutputNameOverride(value),
+                opt => opt.OutputNameOverride,
+                @"x.dll"
+            );
+            TestProperty(
+                (old, value) => old.WithDebugInformationFormat(value),
+                opt => opt.DebugInformationFormat,
+                PathUtilities.IsUnixLikePlatform
+                    ? DebugInformationFormat.Pdb
+                    : DebugInformationFormat.PortablePdb
+            );
+            TestProperty(
+                (old, value) => old.WithTolerateErrors(value),
+                opt => opt.TolerateErrors,
+                true
+            );
+            TestProperty(
+                (old, value) => old.WithIncludePrivateMembers(value),
+                opt => opt.IncludePrivateMembers,
+                false
+            );
+            TestProperty(
+                (old, value) => old.WithInstrumentationKinds(value),
+                opt => opt.InstrumentationKinds,
+                ImmutableArray.Create(InstrumentationKind.TestCoverage)
+            );
         }
 
         /// <summary>
@@ -92,7 +142,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 nameof(EmitOptions.IncludePrivateMembers),
                 nameof(EmitOptions.InstrumentationKinds),
                 nameof(EmitOptions.DefaultSourceFileEncoding),
-                nameof(EmitOptions.FallbackSourceFileEncoding));
+                nameof(EmitOptions.FallbackSourceFileEncoding)
+            );
         }
 
         [Fact]
@@ -109,7 +160,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 subsystemVersion: SubsystemVersion.Windows2000,
                 runtimeMetadataVersion: "C",
                 tolerateErrors: true,
-                includePrivateMembers: false);
+                includePrivateMembers: false
+            );
 
             var options2 = new EmitOptions(
                 metadataOnly: true,
@@ -123,7 +175,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 runtimeMetadataVersion: "C",
                 tolerateErrors: true,
                 includePrivateMembers: false,
-                instrumentationKinds: ImmutableArray.Create(InstrumentationKind.TestCoverage));
+                instrumentationKinds: ImmutableArray.Create(InstrumentationKind.TestCoverage)
+            );
 
             var options3 = new EmitOptions(
                 metadataOnly: true,
@@ -138,7 +191,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 tolerateErrors: true,
                 includePrivateMembers: false,
                 instrumentationKinds: ImmutableArray.Create(InstrumentationKind.TestCoverage),
-                pdbChecksumAlgorithm: HashAlgorithmName.MD5);
+                pdbChecksumAlgorithm: HashAlgorithmName.MD5
+            );
 
             Assert.Equal(options1, options2.WithInstrumentationKinds(default));
             Assert.Equal(options2, options3.WithPdbChecksumAlgorithm(HashAlgorithmName.SHA256));

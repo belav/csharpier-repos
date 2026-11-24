@@ -16,6 +16,6 @@ namespace System.Speech.Internal.SrgsParser
         onInit = 1,
         onParse = 2,
         onRecognition = 3,
-        onError
+        onError,
     }
 }

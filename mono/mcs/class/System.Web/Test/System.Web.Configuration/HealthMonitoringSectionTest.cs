@@ -1,5 +1,5 @@
 //
-// HealthMonitoringSectionTest.cs 
+// HealthMonitoringSectionTest.cs
 //	- unit tests for System.Web.Configuration.HealthMonitoringSection
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,33 +27,30 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-using NUnit.Framework;
-
 using System;
 using System.Configuration;
-using System.Web.Configuration;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Security;
+using NUnit.Framework;
 
-namespace MonoTests.System.Web.Configuration {
+namespace MonoTests.System.Web.Configuration
+{
+    [TestFixture]
+    public class HealthMonitoringSectionTest
+    {
+        [Test]
+        public void Defaults()
+        {
+            HealthMonitoringSection s = new HealthMonitoringSection();
 
-	[TestFixture]
-	public class HealthMonitoringSectionTest  {
-
-		[Test]
-		public void Defaults ()
-		{
-			HealthMonitoringSection s = new HealthMonitoringSection ();
-
-			Assert.IsNotNull (s.BufferModes, "A1");
-			Assert.IsTrue (s.Enabled, "A2");
-			Assert.IsNotNull (s.EventMappings, "A3");
-			Assert.AreEqual (TimeSpan.Zero, s.HeartbeatInterval, "A4");
-			Assert.IsNotNull (s.Profiles, "A5");
-			Assert.IsNotNull (s.Providers, "A6");
-			Assert.IsNotNull (s.Rules, "A7");
-		}
-	}
+            Assert.IsNotNull(s.BufferModes, "A1");
+            Assert.IsTrue(s.Enabled, "A2");
+            Assert.IsNotNull(s.EventMappings, "A3");
+            Assert.AreEqual(TimeSpan.Zero, s.HeartbeatInterval, "A4");
+            Assert.IsNotNull(s.Profiles, "A5");
+            Assert.IsNotNull(s.Providers, "A6");
+            Assert.IsNotNull(s.Rules, "A7");
+        }
+    }
 }
-

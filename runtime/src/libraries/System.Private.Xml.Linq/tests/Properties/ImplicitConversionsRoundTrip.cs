@@ -2,14 +2,14 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Reflection;
-using System.IO;
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Xml;
 using System.Xml.Linq;
-using System.Globalization;
 using Microsoft.Test.ModuleCore;
 
 namespace CoreXml.Test.XLinq
@@ -47,41 +47,42 @@ namespace CoreXml.Test.XLinq
                     case "Guid":
                         return (Guid)data;
                     case "Nullable`1":
+                    {
+                        switch (ret.ToString())
                         {
-                            switch (ret.ToString())
-                            {
-                                case "System.Nullable`1[System.Boolean]":
-                                    return (bool?)data;
-                                case "System.Nullable`1[System.Int32]":
-                                    return (int?)data;
-                                case "System.Nullable`1[System.Int64]":
-                                    return (long?)data;
-                                case "System.Nullable`1[System.UInt32]":
-                                    return (uint?)data;
-                                case "System.Nullable`1[System.UInt64]":
-                                    return (ulong?)data;
-                                case "System.Nullable`1[System.Single]":
-                                    return (float?)data;
-                                case "System.Nullable`1[System.Double]":
-                                    return (double?)data;
-                                case "System.Nullable`1[System.Decimal]":
-                                    return (decimal?)data;
-                                case "System.Nullable`1[System.DateTime]":
-                                    return (DateTime?)data;
-                                case "System.Nullable`1[System.DateTimeOffset]":
-                                    return (DateTimeOffset?)data;
-                                case "System.Nullable`1[System.TimeSpan]":
-                                    return (TimeSpan?)data;
-                                case "System.Nullable`1[System.Guid]":
-                                    return (Guid?)data;
-                                default:
-                                    throw new ArgumentOutOfRangeException();
-                            }
+                            case "System.Nullable`1[System.Boolean]":
+                                return (bool?)data;
+                            case "System.Nullable`1[System.Int32]":
+                                return (int?)data;
+                            case "System.Nullable`1[System.Int64]":
+                                return (long?)data;
+                            case "System.Nullable`1[System.UInt32]":
+                                return (uint?)data;
+                            case "System.Nullable`1[System.UInt64]":
+                                return (ulong?)data;
+                            case "System.Nullable`1[System.Single]":
+                                return (float?)data;
+                            case "System.Nullable`1[System.Double]":
+                                return (double?)data;
+                            case "System.Nullable`1[System.Decimal]":
+                                return (decimal?)data;
+                            case "System.Nullable`1[System.DateTime]":
+                                return (DateTime?)data;
+                            case "System.Nullable`1[System.DateTimeOffset]":
+                                return (DateTimeOffset?)data;
+                            case "System.Nullable`1[System.TimeSpan]":
+                                return (TimeSpan?)data;
+                            case "System.Nullable`1[System.Guid]":
+                                return (Guid?)data;
+                            default:
+                                throw new ArgumentOutOfRangeException();
                         }
+                    }
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
             }
+
             public static object Explicit(Type ret, XElement data)
             {
                 switch (ret.Name)
@@ -111,53 +112,52 @@ namespace CoreXml.Test.XLinq
                     case "Guid":
                         return (Guid)data;
                     case "Nullable`1":
+                    {
+                        switch (ret.ToString())
                         {
-                            switch (ret.ToString())
-                            {
-                                case "System.Nullable`1[System.Boolean]":
-                                    return (bool?)data;
-                                case "System.Nullable`1[System.Int32]":
-                                    return (int?)data;
-                                case "System.Nullable`1[System.Int64]":
-                                    return (long?)data;
-                                case "System.Nullable`1[System.UInt32]":
-                                    return (uint?)data;
-                                case "System.Nullable`1[System.UInt64]":
-                                    return (ulong?)data;
-                                case "System.Nullable`1[System.Single]":
-                                    return (float?)data;
-                                case "System.Nullable`1[System.Double]":
-                                    return (double?)data;
-                                case "System.Nullable`1[System.Decimal]":
-                                    return (decimal?)data;
-                                case "System.Nullable`1[System.DateTime]":
-                                    return (DateTime?)data;
-                                case "System.Nullable`1[System.DateTimeOffset]":
-                                    return (DateTimeOffset?)data;
-                                case "System.Nullable`1[System.TimeSpan]":
-                                    return (TimeSpan?)data;
-                                case "System.Nullable`1[System.Guid]":
-                                    return (Guid?)data;
-                                default:
-                                    throw new ArgumentOutOfRangeException();
-                            }
+                            case "System.Nullable`1[System.Boolean]":
+                                return (bool?)data;
+                            case "System.Nullable`1[System.Int32]":
+                                return (int?)data;
+                            case "System.Nullable`1[System.Int64]":
+                                return (long?)data;
+                            case "System.Nullable`1[System.UInt32]":
+                                return (uint?)data;
+                            case "System.Nullable`1[System.UInt64]":
+                                return (ulong?)data;
+                            case "System.Nullable`1[System.Single]":
+                                return (float?)data;
+                            case "System.Nullable`1[System.Double]":
+                                return (double?)data;
+                            case "System.Nullable`1[System.Decimal]":
+                                return (decimal?)data;
+                            case "System.Nullable`1[System.DateTime]":
+                                return (DateTime?)data;
+                            case "System.Nullable`1[System.DateTimeOffset]":
+                                return (DateTimeOffset?)data;
+                            case "System.Nullable`1[System.TimeSpan]":
+                                return (TimeSpan?)data;
+                            case "System.Nullable`1[System.Guid]":
+                                return (Guid?)data;
+                            default:
+                                throw new ArgumentOutOfRangeException();
                         }
+                    }
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
             }
 
-
             public enum ExplicitCastTestType
             {
                 RoundTrip,
-                XmlConvert
+                XmlConvert,
             }
 
             public enum NodeCreateType
             {
                 Constructor,
-                SetValue
+                SetValue,
             }
 
             //[TestCase(Name = "XElement - value conversion round trip   (constructor)", Params = new object[] { typeof(XElement), ExplicitCastTestType.RoundTrip, NodeCreateType.Constructor })]
@@ -170,45 +170,40 @@ namespace CoreXml.Test.XLinq
             //[TestCase(Name = "XAttribute - XmlConvert conformance      (SetValue)", Params = new object[] { typeof(XAttribute), ExplicitCastTestType.XmlConvert, NodeCreateType.SetValue })]
             public partial class XElement_Op_Eplicit : XLinqTestCase
             {
-                private object[] _data = new object[] {
+                private object[] _data = new object[]
+                {
                     // bool
                     true,
                     false,
-
                     // Int32
-                    (int) 1001,
-                    (int) 0,
-                    (int) (-321),
+                    (int)1001,
+                    (int)0,
+                    (int)(-321),
                     int.MaxValue,
                     int.MinValue,
-
                     // UInt32
-                    (uint) 1001,
-                    (uint) 0,
+                    (uint)1001,
+                    (uint)0,
                     uint.MaxValue,
                     uint.MinValue,
-
-                    (long) 0,
-                    (long) (-641),
+                    (long)0,
+                    (long)(-641),
                     long.MaxValue,
                     long.MinValue,
-
-                    (ulong) 1001,
-                    (ulong) 0,
+                    (ulong)1001,
+                    (ulong)0,
                     ulong.MaxValue,
                     ulong.MinValue,
-
                     // float
-                    (float) 12.1,
-                    (float) (-12.1),
-                    (float) 0.0,
+                    (float)12.1,
+                    (float)(-12.1),
+                    (float)0.0,
                     float.Epsilon,
                     float.NaN,
                     float.PositiveInfinity,
                     float.NegativeInfinity,
                     float.MinValue,
                     float.MaxValue,
-
                     // double
                     (double)12.1,
                     (double)(-12.1),
@@ -219,38 +214,34 @@ namespace CoreXml.Test.XLinq
                     double.NegativeInfinity,
                     double.MinValue,
                     double.MaxValue,
-
                     // decimal
                     (decimal)12.1,
                     (decimal)(-12.1),
-                    (decimal) 0.0,
+                    (decimal)0.0,
                     decimal.MinValue,
                     decimal.MaxValue,
                     decimal.MinusOne,
                     decimal.One,
                     decimal.Zero,
-
                     //// DateTimeOffset
                     DateTimeOffset.Now,
                     DateTimeOffset.MaxValue,
                     DateTimeOffset.MinValue,
                     DateTimeOffset.UtcNow,
-                    new DateTimeOffset (DateTime.Today),
-                    new DateTimeOffset (1989,11,17,19,30,00,TimeSpan.FromHours(8)),
-                    new DateTimeOffset (1989,11,17,19,30,00,TimeSpan.FromHours(-8)),
-
+                    new DateTimeOffset(DateTime.Today),
+                    new DateTimeOffset(1989, 11, 17, 19, 30, 00, TimeSpan.FromHours(8)),
+                    new DateTimeOffset(1989, 11, 17, 19, 30, 00, TimeSpan.FromHours(-8)),
                     // timespan
                     TimeSpan.MaxValue,
                     TimeSpan.MinValue,
                     TimeSpan.Zero,
-                    TimeSpan.FromHours (1.4),
-                    TimeSpan.FromMilliseconds (1.0),
-                    TimeSpan.FromMinutes (5.0),
-
+                    TimeSpan.FromHours(1.4),
+                    TimeSpan.FromMilliseconds(1.0),
+                    TimeSpan.FromMinutes(5.0),
                     // Guid
                     System.Guid.Empty,
                     System.Guid.NewGuid(),
-                    System.Guid.NewGuid()
+                    System.Guid.NewGuid(),
                 };
 
                 public static Dictionary<Type, Type> typeMapper;
@@ -295,7 +286,17 @@ namespace CoreXml.Test.XLinq
                         else
                             desc += o;
 
-                        AddChild(new ExplicitCastVariation(testType, createType, type, o, o.GetType(), this, desc));
+                        AddChild(
+                            new ExplicitCastVariation(
+                                testType,
+                                createType,
+                                type,
+                                o,
+                                o.GetType(),
+                                this,
+                                desc
+                            )
+                        );
                     }
 
                     // add Nullable types check (not applicable for XmlConvert tests)
@@ -312,11 +313,20 @@ namespace CoreXml.Test.XLinq
                                 desc += ((DateTimeOffset)o).ToString(CultureInfo.InvariantCulture);
                             else
                                 desc += o;
-                            AddChild(new ExplicitCastVariation(testType, createType, type, o, typeMapper[o.GetType()], this, desc));
+                            AddChild(
+                                new ExplicitCastVariation(
+                                    testType,
+                                    createType,
+                                    type,
+                                    o,
+                                    typeMapper[o.GetType()],
+                                    this,
+                                    desc
+                                )
+                            );
                         }
                     }
                 }
-
 
                 //[Variation(Desc = "XElement.SetValue(null)", Param = null)]
                 //[Variation(Desc = "XElement.SetValue(null)", Param = "")]
@@ -324,7 +334,10 @@ namespace CoreXml.Test.XLinq
                 //[Variation(Desc = "XElement.SetValue(null)", Param = typeof(XElement))]
                 public void SetValueNull()
                 {
-                    XElement el = new XElement("elem", Variation.Param is Type ? new XElement("X") : Variation.Param);
+                    XElement el = new XElement(
+                        "elem",
+                        Variation.Param is Type ? new XElement("X") : Variation.Param
+                    );
                     try
                     {
                         el.SetValue(null);
@@ -388,8 +401,14 @@ namespace CoreXml.Test.XLinq
                                 break;
                         }
 
-                        object retData = type == typeof(XElement) ? (bool)(node as XElement) : (bool)(node as XAttribute);
-                        TestLog.Compare(retData.Equals(expV), "Data verification for string :: " + data);
+                        object retData =
+                            type == typeof(XElement)
+                                ? (bool)(node as XElement)
+                                : (bool)(node as XAttribute);
+                        TestLog.Compare(
+                            retData.Equals(expV),
+                            "Data verification for string :: " + data
+                        );
                     }
                 }
             }
@@ -403,7 +422,15 @@ namespace CoreXml.Test.XLinq
                 private NodeCreateType _nodeCreateType;
                 private string _desc;
 
-                public ExplicitCastVariation(ExplicitCastTestType testType, NodeCreateType nodeCreateType, Type nodeType, object data, Type retType, TestCase testCase, string desc)
+                public ExplicitCastVariation(
+                    ExplicitCastTestType testType,
+                    NodeCreateType nodeCreateType,
+                    Type nodeType,
+                    object data,
+                    Type retType,
+                    TestCase testCase,
+                    string desc
+                )
                 {
                     _desc = desc;
                     _data = data;
@@ -444,7 +471,9 @@ namespace CoreXml.Test.XLinq
                         }
                     }
 
-                    throw new ArgumentOutOfRangeException("Unknown NodeCreateType: " + _nodeCreateType);
+                    throw new ArgumentOutOfRangeException(
+                        "Unknown NodeCreateType: " + _nodeCreateType
+                    );
                 }
 
                 public override TestResult Execute()
@@ -506,10 +535,15 @@ namespace CoreXml.Test.XLinq
                                     xmlConv = XmlConvert.ToString((Guid)_data);
                                     break;
                                 default:
-                                    TestLog.Skip("No XmlConvert.ToString (" + _data.GetType().Name + ")");
+                                    TestLog.Skip(
+                                        "No XmlConvert.ToString (" + _data.GetType().Name + ")"
+                                    );
                                     break;
                             }
-                            string value = node is XElement ? ((XElement)node).Value : ((XAttribute)node).Value;
+                            string value =
+                                node is XElement
+                                    ? ((XElement)node).Value
+                                    : ((XAttribute)node).Value;
                             TestLog.Compare(value == xmlConv, "XmlConvert verification");
                             break;
                         default:
@@ -528,21 +562,44 @@ namespace CoreXml.Test.XLinq
 
                     foreach (Type retType in XElement_Op_Eplicit.typeMapper.Values)
                     {
-                        AddChild(new ExplicitCastNullVariation(nodeType, retType, false, this, retType.ToString()));
+                        AddChild(
+                            new ExplicitCastNullVariation(
+                                nodeType,
+                                retType,
+                                false,
+                                this,
+                                retType.ToString()
+                            )
+                        );
                     }
                     foreach (Type retType in XElement_Op_Eplicit.typeMapper.Keys)
                     {
-                        AddChild(new ExplicitCastNullVariation(nodeType, retType, true, this, retType.ToString()));
+                        AddChild(
+                            new ExplicitCastNullVariation(
+                                nodeType,
+                                retType,
+                                true,
+                                this,
+                                retType.ToString()
+                            )
+                        );
                     }
                 }
             }
 
             public partial class ExplicitCastNullVariation : TestVariation
             {
-                private Type _nodeType, _retType;
+                private Type _nodeType,
+                    _retType;
                 private bool _shouldThrow;
 
-                public ExplicitCastNullVariation(Type nodeType, Type retType, bool shouldThrow, TestCase tc, string desc)
+                public ExplicitCastNullVariation(
+                    Type nodeType,
+                    Type retType,
+                    bool shouldThrow,
+                    TestCase tc,
+                    string desc
+                )
                 {
                     this.Desc = desc;
                     _nodeType = nodeType;
@@ -570,7 +627,10 @@ namespace CoreXml.Test.XLinq
                     }
                     catch (ArgumentNullException e)
                     {
-                        TestLog.Compare(e is ArgumentNullException, "e.InnerException is ArgumentNullException");
+                        TestLog.Compare(
+                            e is ArgumentNullException,
+                            "e.InnerException is ArgumentNullException"
+                        );
                         TestLog.Compare(_shouldThrow, "shouldThrow");
                     }
                     return TestResult.Passed;

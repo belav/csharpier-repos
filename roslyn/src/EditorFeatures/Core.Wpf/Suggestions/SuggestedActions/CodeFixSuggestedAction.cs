@@ -18,7 +18,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
     /// <summary>
     /// Represents light bulb menu item for code fixes.
     /// </summary>
-    internal sealed class CodeFixSuggestedAction : SuggestedActionWithNestedFlavors, ICodeFixSuggestedAction, ITelemetryDiagnosticID<string>
+    internal sealed class CodeFixSuggestedAction
+        : SuggestedActionWithNestedFlavors,
+            ICodeFixSuggestedAction,
+            ITelemetryDiagnosticID<string>
     {
         public CodeFix CodeFix { get; }
 
@@ -31,23 +34,24 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             CodeFix fix,
             object provider,
             CodeAction action,
-            SuggestedActionSet fixAllFlavors)
-            : base(threadingContext,
-                   sourceProvider,
-                   workspace,
-                   originalSolution,
-                   subjectBuffer,
-                   provider,
-                   action,
-                   fixAllFlavors)
+            SuggestedActionSet fixAllFlavors
+        )
+            : base(
+                threadingContext,
+                sourceProvider,
+                workspace,
+                originalSolution,
+                subjectBuffer,
+                provider,
+                action,
+                fixAllFlavors
+            )
         {
             CodeFix = fix;
         }
 
-        public string GetDiagnosticID()
-            => CodeFix.PrimaryDiagnostic.GetTelemetryDiagnosticID();
+        public string GetDiagnosticID() => CodeFix.PrimaryDiagnostic.GetTelemetryDiagnosticID();
 
-        protected override DiagnosticData GetDiagnostic()
-            => CodeFix.GetPrimaryDiagnosticData();
+        protected override DiagnosticData GetDiagnostic() => CodeFix.GetPrimaryDiagnosticData();
     }
 }

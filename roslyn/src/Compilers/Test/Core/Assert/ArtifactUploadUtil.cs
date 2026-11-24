@@ -14,10 +14,10 @@ namespace Roslyn.Test.Utilities
 {
     /// <summary>
     /// There are test failures that are virtually impossible to debug without artifacts generated during
-    /// the test execution. This utility is helpful at getting those artifacts attached to AzDO / Helix 
-    /// when executed in our CI process. 
-    /// 
-    /// The utilility works by collecting a set of file paths to artifacts. If the test succeeds it should 
+    /// the test execution. This utility is helpful at getting those artifacts attached to AzDO / Helix
+    /// when executed in our CI process.
+    ///
+    /// The utilility works by collecting a set of file paths to artifacts. If the test succeeds it should
     /// call the <see cref="SetSucceeded"/> method. Otherwise if the test fails an exception is generated,
     /// the call is skipped and in <see cref="Dispose"/> we prepare the artifacts for upload.
     /// </summary>
@@ -29,7 +29,10 @@ namespace Roslyn.Test.Utilities
         private readonly List<string> _directoryPaths = new List<string>();
         private bool _success = false;
 
-        public ArtifactUploadUtil(ITestOutputHelper testOutputHelper, string? baseDirectoryName = null)
+        public ArtifactUploadUtil(
+            ITestOutputHelper testOutputHelper,
+            string? baseDirectoryName = null
+        )
         {
             _testOutputHelper = testOutputHelper;
             _baseDirectoryName = baseDirectoryName ?? Guid.NewGuid().ToString();
@@ -90,12 +93,21 @@ namespace Roslyn.Test.Utilities
                     _testOutputHelper.WriteLine($"Copying directory {directory}");
                     var destDirectory = Path.Combine(uploadDir, Path.GetFileName(directory));
                     Directory.CreateDirectory(destDirectory);
-                    foreach (var filePath in Directory.EnumerateFiles(directory, searchPattern: "*.*", SearchOption.AllDirectories))
+                    foreach (
+                        var filePath in Directory.EnumerateFiles(
+                            directory,
+                            searchPattern: "*.*",
+                            SearchOption.AllDirectories
+                        )
+                    )
                     {
                         _testOutputHelper.WriteLine($"\tCopying file {filePath}");
 
                         var destFilePath = filePath.Substring(directory.Length);
-                        if (destFilePath.Length > 0 && destFilePath[0] == Path.DirectorySeparatorChar)
+                        if (
+                            destFilePath.Length > 0
+                            && destFilePath[0] == Path.DirectorySeparatorChar
+                        )
                         {
                             destFilePath = destFilePath.Substring(1);
                         }

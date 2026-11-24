@@ -26,8 +26,18 @@ namespace System.ComponentModel.Tests
             yield return new object[] { attribute, new DefaultPropertyAttribute("name2"), false };
             yield return new object[] { attribute, new DefaultPropertyAttribute(null), false };
 
-            yield return new object[] { new DefaultPropertyAttribute(null), new DefaultPropertyAttribute(null), true };
-            yield return new object[] { new DefaultPropertyAttribute(null), new DefaultPropertyAttribute("name"), false };
+            yield return new object[]
+            {
+                new DefaultPropertyAttribute(null),
+                new DefaultPropertyAttribute(null),
+                true,
+            };
+            yield return new object[]
+            {
+                new DefaultPropertyAttribute(null),
+                new DefaultPropertyAttribute("name"),
+                false,
+            };
             yield return new object[] { new DefaultPropertyAttribute(null), null, false };
 
             yield return new object[] { attribute, new object(), false };
@@ -36,7 +46,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Other_ReturnsExpected(DefaultPropertyAttribute attribute, object other, bool expected)
+        public void Equals_Other_ReturnsExpected(
+            DefaultPropertyAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
         }

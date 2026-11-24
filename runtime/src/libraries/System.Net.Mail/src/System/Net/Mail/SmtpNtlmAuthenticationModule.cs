@@ -9,13 +9,18 @@ namespace System.Net.Mail
 {
     internal sealed class SmtpNtlmAuthenticationModule : ISmtpAuthenticationModule
     {
-        private readonly Dictionary<object, NegotiateAuthentication> _sessions = new Dictionary<object, NegotiateAuthentication>();
+        private readonly Dictionary<object, NegotiateAuthentication> _sessions =
+            new Dictionary<object, NegotiateAuthentication>();
 
-        internal SmtpNtlmAuthenticationModule()
-        {
-        }
+        internal SmtpNtlmAuthenticationModule() { }
 
-        public Authorization? Authenticate(string? challenge, NetworkCredential? credential, object sessionCookie, string? spn, ChannelBinding? channelBindingToken)
+        public Authorization? Authenticate(
+            string? challenge,
+            NetworkCredential? credential,
+            object sessionCookie,
+            string? spn,
+            ChannelBinding? channelBindingToken
+        )
         {
             lock (_sessions)
             {
@@ -27,21 +32,23 @@ namespace System.Net.Mail
                         return null;
                     }
 
-                    _sessions[sessionCookie] = clientContext =
-                        new NegotiateAuthentication(
-                            new NegotiateAuthenticationClientOptions
-                            {
-                                Credential = credential,
-                                TargetName = spn,
-                                Binding = channelBindingToken
-                            });
+                    _sessions[sessionCookie] = clientContext = new NegotiateAuthentication(
+                        new NegotiateAuthenticationClientOptions
+                        {
+                            Credential = credential,
+                            TargetName = spn,
+                            Binding = channelBindingToken,
+                        }
+                    );
                 }
 
                 NegotiateAuthenticationStatusCode statusCode;
                 string? resp = clientContext.GetOutgoingBlob(challenge, out statusCode);
 
-                if (statusCode != NegotiateAuthenticationStatusCode.Completed &&
-                    statusCode != NegotiateAuthenticationStatusCode.ContinueNeeded)
+                if (
+                    statusCode != NegotiateAuthenticationStatusCode.Completed
+                    && statusCode != NegotiateAuthenticationStatusCode.ContinueNeeded
+                )
                 {
                     return null;
                 }
@@ -61,10 +68,7 @@ namespace System.Net.Mail
 
         public string AuthenticationType
         {
-            get
-            {
-                return "ntlm";
-            }
+            get { return "ntlm"; }
         }
 
         public void CloseContext(object sessionCookie)

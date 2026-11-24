@@ -43,8 +43,18 @@ namespace System.Globalization.Tests
 
             Source = EscapedToLiteralString(split[0], lineNumber);
 
-            UnicodeResult = new ConformanceIdnaUnicodeTestResult(EscapedToLiteralString(split[1], lineNumber), Source, EscapedToLiteralString(split[2], lineNumber), string.Empty);
-            ASCIIResult = new ConformanceIdnaTestResult(EscapedToLiteralString(split[3], lineNumber), UnicodeResult.Value, EscapedToLiteralString(split[4], lineNumber), UnicodeResult.StatusValue);
+            UnicodeResult = new ConformanceIdnaUnicodeTestResult(
+                EscapedToLiteralString(split[1], lineNumber),
+                Source,
+                EscapedToLiteralString(split[2], lineNumber),
+                string.Empty
+            );
+            ASCIIResult = new ConformanceIdnaTestResult(
+                EscapedToLiteralString(split[3], lineNumber),
+                UnicodeResult.Value,
+                EscapedToLiteralString(split[4], lineNumber),
+                UnicodeResult.StatusValue
+            );
 
             LineNumber = lineNumber;
         }

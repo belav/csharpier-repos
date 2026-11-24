@@ -30,23 +30,42 @@ namespace System.Runtime.CompilerServices
         ///          Otherwise, returns the localized failure message.
         /// </summary>
         [DebuggerNonUserCode]
-        public static string? RaiseContractFailedEvent(ContractFailureKind failureKind, string? userMessage, string? conditionText, Exception? innerException)
+        public static string? RaiseContractFailedEvent(
+            ContractFailureKind failureKind,
+            string? userMessage,
+            string? conditionText,
+            Exception? innerException
+        )
         {
-            if (failureKind < ContractFailureKind.Precondition || failureKind > ContractFailureKind.Assume)
-                throw new ArgumentException(SR.Format(SR.Arg_EnumIllegalVal, failureKind), nameof(failureKind));
+            if (
+                failureKind < ContractFailureKind.Precondition
+                || failureKind > ContractFailureKind.Assume
+            )
+                throw new ArgumentException(
+                    SR.Format(SR.Arg_EnumIllegalVal, failureKind),
+                    nameof(failureKind)
+                );
 
             string? returnValue;
-            string displayMessage = "contract failed.";  // Incomplete, but in case of OOM during resource lookup...
-            ContractFailedEventArgs? eventArgs = null;  // In case of OOM.
+            string displayMessage = "contract failed."; // Incomplete, but in case of OOM during resource lookup...
+            ContractFailedEventArgs? eventArgs = null; // In case of OOM.
 
             try
             {
                 displayMessage = GetDisplayMessage(failureKind, userMessage, conditionText);
-                EventHandler<ContractFailedEventArgs>? contractFailedEventLocal = InternalContractFailed;
+                EventHandler<ContractFailedEventArgs>? contractFailedEventLocal =
+                    InternalContractFailed;
                 if (contractFailedEventLocal != null)
                 {
-                    eventArgs = new ContractFailedEventArgs(failureKind, displayMessage, conditionText, innerException);
-                    foreach (EventHandler<ContractFailedEventArgs> handler in contractFailedEventLocal.GetInvocationList())
+                    eventArgs = new ContractFailedEventArgs(
+                        failureKind,
+                        displayMessage,
+                        conditionText,
+                        innerException
+                    );
+                    foreach (
+                        EventHandler<ContractFailedEventArgs> handler in contractFailedEventLocal.GetInvocationList()
+                    )
                     {
                         try
                         {
@@ -62,7 +81,13 @@ namespace System.Runtime.CompilerServices
                     {
                         // unwind
                         innerException ??= eventArgs.thrownDuringHandler;
-                        throw new ContractException(failureKind, displayMessage, userMessage, conditionText, innerException);
+                        throw new ContractException(
+                            failureKind,
+                            displayMessage,
+                            userMessage,
+                            conditionText,
+                            innerException
+                        );
                     }
                 }
             }
@@ -85,7 +110,13 @@ namespace System.Runtime.CompilerServices
         /// Rewriter calls this method to get the default failure behavior.
         /// </summary>
         [DebuggerNonUserCode]
-        public static void TriggerFailure(ContractFailureKind kind, string? displayMessage, string? userMessage, string? conditionText, Exception? innerException)
+        public static void TriggerFailure(
+            ContractFailureKind kind,
+            string? displayMessage,
+            string? userMessage,
+            string? conditionText,
+            Exception? innerException
+        )
         {
             if (string.IsNullOrEmpty(displayMessage))
             {
@@ -95,28 +126,43 @@ namespace System.Runtime.CompilerServices
             Debug.ContractFailure(displayMessage, string.Empty, GetFailureMessage(kind, null));
         }
 
-        private static string GetFailureMessage(ContractFailureKind failureKind, string? conditionText)
+        private static string GetFailureMessage(
+            ContractFailureKind failureKind,
+            string? conditionText
+        )
         {
             bool hasConditionText = !string.IsNullOrEmpty(conditionText);
             switch (failureKind)
             {
                 case ContractFailureKind.Assert:
-                    return hasConditionText ? SR.Format(SR.AssertionFailed_Cnd, conditionText) : SR.AssertionFailed;
+                    return hasConditionText
+                        ? SR.Format(SR.AssertionFailed_Cnd, conditionText)
+                        : SR.AssertionFailed;
 
                 case ContractFailureKind.Assume:
-                    return hasConditionText ? SR.Format(SR.AssumptionFailed_Cnd, conditionText) : SR.AssumptionFailed;
+                    return hasConditionText
+                        ? SR.Format(SR.AssumptionFailed_Cnd, conditionText)
+                        : SR.AssumptionFailed;
 
                 case ContractFailureKind.Precondition:
-                    return hasConditionText ? SR.Format(SR.PreconditionFailed_Cnd, conditionText) : SR.PreconditionFailed;
+                    return hasConditionText
+                        ? SR.Format(SR.PreconditionFailed_Cnd, conditionText)
+                        : SR.PreconditionFailed;
 
                 case ContractFailureKind.Postcondition:
-                    return hasConditionText ? SR.Format(SR.PostconditionFailed_Cnd, conditionText) : SR.PostconditionFailed;
+                    return hasConditionText
+                        ? SR.Format(SR.PostconditionFailed_Cnd, conditionText)
+                        : SR.PostconditionFailed;
 
                 case ContractFailureKind.Invariant:
-                    return hasConditionText ? SR.Format(SR.InvariantFailed_Cnd, conditionText) : SR.InvariantFailed;
+                    return hasConditionText
+                        ? SR.Format(SR.InvariantFailed_Cnd, conditionText)
+                        : SR.InvariantFailed;
 
                 case ContractFailureKind.PostconditionOnException:
-                    return hasConditionText ? SR.Format(SR.PostconditionOnExceptionFailed_Cnd, conditionText) : SR.PostconditionOnExceptionFailed;
+                    return hasConditionText
+                        ? SR.Format(SR.PostconditionOnExceptionFailed_Cnd, conditionText)
+                        : SR.PostconditionOnExceptionFailed;
 
                 default:
                     Contract.Assume(false, "Unreachable code");
@@ -124,7 +170,11 @@ namespace System.Runtime.CompilerServices
             }
         }
 
-        private static string GetDisplayMessage(ContractFailureKind failureKind, string? userMessage, string? conditionText)
+        private static string GetDisplayMessage(
+            ContractFailureKind failureKind,
+            string? userMessage,
+            string? conditionText
+        )
         {
             string failureMessage;
             // Well-formatted English messages will take one of four forms.  A sentence ending in

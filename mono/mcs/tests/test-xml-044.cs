@@ -4,22 +4,15 @@ using System.Xml;
 /// <summary />
 public class EntryPoint
 {
-  static void Main()
-  {
-  }
+    static void Main() { }
 
-  /// <summary>
-  /// <see cref="M:EntryPoint.B.Decide(System.Int32)" />
-  /// </summary>
-  internal class A
-  {
-    public virtual void Decide(int a)
+    /// <summary>
+    /// <see cref="M:EntryPoint.B.Decide(System.Int32)" />
+    /// </summary>
+    internal class A
     {
+        public virtual void Decide(int a) { }
     }
-  }
 
-  internal class B : A
-  {
-  }
+    internal class B : A { }
 }
-

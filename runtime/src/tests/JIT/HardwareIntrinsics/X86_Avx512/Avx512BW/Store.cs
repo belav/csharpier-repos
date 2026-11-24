@@ -5,8 +5,8 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
 
 namespace IntelHardwareIntrinsicTest._Avx512BW
@@ -20,7 +20,46 @@ namespace IntelHardwareIntrinsicTest._Avx512BW
 
             if (Avx512BW.IsSupported)
             {
-                using (TestTable<short> intTable = new TestTable<short>(new short[32] { 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4 }, new short[32]))
+                using (
+                    TestTable<short> intTable = new TestTable<short>(
+                        new short[32]
+                        {
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                        },
+                        new short[32]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector512<short>>(intTable.inArrayPtr);
                     Avx512BW.Store((short*)(intTable.outArrayPtr), vf);
@@ -37,7 +76,46 @@ namespace IntelHardwareIntrinsicTest._Avx512BW
                     }
                 }
 
-                using (TestTable<ushort> intTable = new TestTable<ushort>(new ushort[32] { 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4 }, new ushort[32]))
+                using (
+                    TestTable<ushort> intTable = new TestTable<ushort>(
+                        new ushort[32]
+                        {
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                        },
+                        new ushort[32]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector512<ushort>>(intTable.inArrayPtr);
                     Avx512BW.Store((ushort*)(intTable.outArrayPtr), vf);
@@ -54,7 +132,78 @@ namespace IntelHardwareIntrinsicTest._Avx512BW
                     }
                 }
 
-                using (TestTable<sbyte> intTable = new TestTable<sbyte>(new sbyte[64] { 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4 }, new sbyte[64]))
+                using (
+                    TestTable<sbyte> intTable = new TestTable<sbyte>(
+                        new sbyte[64]
+                        {
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                        },
+                        new sbyte[64]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector512<sbyte>>(intTable.inArrayPtr);
                     Avx512BW.Store((sbyte*)(intTable.outArrayPtr), vf);
@@ -71,7 +220,78 @@ namespace IntelHardwareIntrinsicTest._Avx512BW
                     }
                 }
 
-                using (TestTable<byte> intTable = new TestTable<byte>(new byte[64] { 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4 }, new byte[64]))
+                using (
+                    TestTable<byte> intTable = new TestTable<byte>(
+                        new byte[64]
+                        {
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                        },
+                        new byte[64]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector512<byte>>(intTable.inArrayPtr);
                     Avx512BW.Store((byte*)(intTable.outArrayPtr), vf);
@@ -87,7 +307,6 @@ namespace IntelHardwareIntrinsicTest._Avx512BW
                         testResult = Fail;
                     }
                 }
-
             }
 
             Assert.Equal(Pass, testResult);

@@ -20,26 +20,30 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
                 using (RSA rsa2 = RSA.Create())
                 {
-                    rsa2.ImportPkcs8PrivateKey(
-                        keyBag.Pkcs8PrivateKey.Span,
-                        out _);
+                    rsa2.ImportPkcs8PrivateKey(keyBag.Pkcs8PrivateKey.Span, out _);
 
                     byte[] sig = new byte[rsa.KeySize / 8];
 
-                    Assert.True(rsa2.TrySignData(
-                        keyBag.Pkcs8PrivateKey.Span,
-                        sig,
-                        HashAlgorithmName.MD5,
-                        RSASignaturePadding.Pkcs1,
-                        out int sigLen));
+                    Assert.True(
+                        rsa2.TrySignData(
+                            keyBag.Pkcs8PrivateKey.Span,
+                            sig,
+                            HashAlgorithmName.MD5,
+                            RSASignaturePadding.Pkcs1,
+                            out int sigLen
+                        )
+                    );
 
                     Assert.Equal(sig.Length, sigLen);
 
-                    Assert.True(rsa.VerifyData(
-                        keyBag.Pkcs8PrivateKey.Span,
-                        sig,
-                        HashAlgorithmName.MD5,
-                        RSASignaturePadding.Pkcs1));
+                    Assert.True(
+                        rsa.VerifyData(
+                            keyBag.Pkcs8PrivateKey.Span,
+                            sig,
+                            HashAlgorithmName.MD5,
+                            RSASignaturePadding.Pkcs1
+                        )
+                    );
                 }
             }
         }
@@ -53,15 +57,11 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             if (skipCopy)
             {
-                Assert.True(
-                    s_derNull.Span.Overlaps(keyBag.Pkcs8PrivateKey.Span),
-                    "Same memory");
+                Assert.True(s_derNull.Span.Overlaps(keyBag.Pkcs8PrivateKey.Span), "Same memory");
             }
             else
             {
-                Assert.False(
-                    s_derNull.Span.Overlaps(keyBag.Pkcs8PrivateKey.Span),
-                    "Same memory");
+                Assert.False(s_derNull.Span.Overlaps(keyBag.Pkcs8PrivateKey.Span), "Same memory");
             }
         }
 

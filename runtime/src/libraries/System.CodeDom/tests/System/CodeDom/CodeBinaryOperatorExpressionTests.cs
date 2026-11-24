@@ -6,7 +6,8 @@ using Xunit;
 
 namespace System.CodeDom.Tests
 {
-    public class CodeBinaryOperatorExpressionTests : CodeObjectTestBase<CodeBinaryOperatorExpression>
+    public class CodeBinaryOperatorExpressionTests
+        : CodeObjectTestBase<CodeBinaryOperatorExpression>
     {
         [Fact]
         public void Ctor_HasNullLeftRightAndOperator()
@@ -20,14 +21,33 @@ namespace System.CodeDom.Tests
         public static IEnumerable<object[]> Ctor_TestData()
         {
             yield return new object[] { null, (CodeBinaryOperatorType)(-1), null };
-            yield return new object[] { new CodePrimitiveExpression("Value1"), CodeBinaryOperatorType.Add, null };
-            yield return new object[] { null, CodeBinaryOperatorType.Add | CodeBinaryOperatorType.BitwiseAnd, new CodePrimitiveExpression("Value2") };
-            yield return new object[] { new CodePrimitiveExpression("Value1"), (CodeBinaryOperatorType)int.MaxValue, new CodePrimitiveExpression("Value2") };
+            yield return new object[]
+            {
+                new CodePrimitiveExpression("Value1"),
+                CodeBinaryOperatorType.Add,
+                null,
+            };
+            yield return new object[]
+            {
+                null,
+                CodeBinaryOperatorType.Add | CodeBinaryOperatorType.BitwiseAnd,
+                new CodePrimitiveExpression("Value2"),
+            };
+            yield return new object[]
+            {
+                new CodePrimitiveExpression("Value1"),
+                (CodeBinaryOperatorType)int.MaxValue,
+                new CodePrimitiveExpression("Value2"),
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_TestData))]
-        public void Ctor_CodeExpression_CodeBinaryOperatorType_CodeExpression(CodeExpression left, CodeBinaryOperatorType operatorType, CodeExpression right)
+        public void Ctor_CodeExpression_CodeBinaryOperatorType_CodeExpression(
+            CodeExpression left,
+            CodeBinaryOperatorType operatorType,
+            CodeExpression right
+        )
         {
             var binaryOperator = new CodeBinaryOperatorExpression(left, operatorType, right);
             Assert.Equal(left, binaryOperator.Left);

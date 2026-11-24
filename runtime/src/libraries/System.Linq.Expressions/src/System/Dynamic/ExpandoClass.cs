@@ -12,13 +12,13 @@ namespace System.Dynamic
     /// </summary>
     internal sealed class ExpandoClass
     {
-        private readonly string[] _keys;                            // list of names associated with each element in the data array, sorted
-        private readonly int _hashCode;                             // pre-calculated hash code of all the keys the class contains
-        private Dictionary<int, List<WeakReference>>? _transitions;  // cached transitions
+        private readonly string[] _keys; // list of names associated with each element in the data array, sorted
+        private readonly int _hashCode; // pre-calculated hash code of all the keys the class contains
+        private Dictionary<int, List<WeakReference>>? _transitions; // cached transitions
 
-        private const int EmptyHashCode = 6551;                     // hash code of the empty ExpandoClass.
+        private const int EmptyHashCode = 6551; // hash code of the empty ExpandoClass.
 
-        internal static readonly ExpandoClass Empty = new ExpandoClass();    // The empty Expando class - all Expando objects start off w/ this class.
+        internal static readonly ExpandoClass Empty = new ExpandoClass(); // The empty Expando class - all Expando objects start off w/ this class.
 
         /// <summary>
         /// Constructs the empty ExpandoClass.  This is the class used when an
@@ -65,7 +65,13 @@ namespace System.Dynamic
                         continue;
                     }
 
-                    if (string.Equals(klass._keys[klass._keys.Length - 1], newKey, StringComparison.Ordinal))
+                    if (
+                        string.Equals(
+                            klass._keys[klass._keys.Length - 1],
+                            newKey,
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         // the new key is the key we added in this transition
                         return klass;
@@ -122,10 +128,7 @@ namespace System.Dynamic
         {
             for (int i = 0; i < _keys.Length; i++)
             {
-                if (string.Equals(
-                    _keys[i],
-                    name,
-                    StringComparison.Ordinal))
+                if (string.Equals(_keys[i], name, StringComparison.Ordinal))
                 {
                     return i;
                 }
@@ -152,10 +155,7 @@ namespace System.Dynamic
             {
                 for (int i = _keys.Length - 1; i >= 0; i--)
                 {
-                    if (string.Equals(
-                        _keys[i],
-                        name,
-                        StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(_keys[i], name, StringComparison.OrdinalIgnoreCase))
                     {
                         //if the matching member is deleted, continue searching
                         if (!obj.IsDeletedMember(i))

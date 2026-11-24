@@ -53,13 +53,13 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
         /// <summary>
         /// The default namespace of the project ("" if not defined, which means global namespace),
-        /// or null if it is unknown or not applicable. 
+        /// or null if it is unknown or not applicable.
         /// </summary>
         /// <remarks>
-        /// Right now VB doesn't have the concept of "default namespace". But we conjure one in workspace 
-        /// by assigning the value of the project's root namespace to it. So various feature can choose to 
+        /// Right now VB doesn't have the concept of "default namespace". But we conjure one in workspace
+        /// by assigning the value of the project's root namespace to it. So various feature can choose to
         /// use it for their own purpose.
-        /// In the future, we might consider officially exposing "default namespace" for VB project 
+        /// In the future, we might consider officially exposing "default namespace" for VB project
         /// (e.g. through a "defaultnamespace" msbuild property)
         /// </remarks>
         [DataMember(Order = 6)]
@@ -133,8 +133,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
         [DataMember(Order = 17)]
         public string? ProjectAssetsFilePath { get; }
 
-        public override string ToString()
-            => RoslynString.IsNullOrWhiteSpace(TargetFramework)
+        public override string ToString() =>
+            RoslynString.IsNullOrWhiteSpace(TargetFramework)
                 ? FilePath ?? string.Empty
                 : $"{FilePath} ({TargetFramework})";
 
@@ -156,7 +156,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             ImmutableArray<ProjectFileReference> projectReferences,
             ImmutableArray<string> projectCapabilities,
             ImmutableArray<string> contentFilePaths,
-            bool isSdkStyle)
+            bool isSdkStyle
+        )
         {
             RoslynDebug.Assert(filePath != null);
 
@@ -197,8 +198,9 @@ namespace Microsoft.CodeAnalysis.MSBuild
             ImmutableArray<ProjectFileReference> projectReferences,
             ImmutableArray<string> projectCapabilities,
             ImmutableArray<string> contentFilePaths,
-            bool isSdkStyle)
-            => new(
+            bool isSdkStyle
+        ) =>
+            new(
                 isEmpty: false,
                 language,
                 filePath,
@@ -216,10 +218,11 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 projectReferences,
                 projectCapabilities,
                 contentFilePaths,
-                isSdkStyle);
+                isSdkStyle
+            );
 
-        public static ProjectFileInfo CreateEmpty(string language, string? filePath)
-            => new(
+        public static ProjectFileInfo CreateEmpty(string language, string? filePath) =>
+            new(
                 isEmpty: true,
                 language,
                 filePath,
@@ -237,6 +240,7 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 projectReferences: ImmutableArray<ProjectFileReference>.Empty,
                 projectCapabilities: ImmutableArray<string>.Empty,
                 contentFilePaths: ImmutableArray<string>.Empty,
-                isSdkStyle: false);
+                isSdkStyle: false
+            );
     }
 }

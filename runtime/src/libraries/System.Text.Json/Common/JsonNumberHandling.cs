@@ -44,6 +44,6 @@ namespace System.Text.Json.Serialization
         /// This behavior is not defined by the JSON specification. Altering the default number handling can potentially produce JSON that cannot be parsed by other JSON implementations.
         /// </remarks>
         /// </summary>
-        AllowNamedFloatingPointLiterals = 0x4
+        AllowNamedFloatingPointLiterals = 0x4,
     }
 }

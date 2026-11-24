@@ -26,9 +26,7 @@ namespace System.Web.Mvc.Test
         }
 
         [MyFilter(Order = 2112)]
-        private class ControllerWithTypeAttribute : Controller
-        {
-        }
+        private class ControllerWithTypeAttribute : Controller { }
 
         [Fact]
         public void GetFilters_IncludesAttributesOnControllerType()
@@ -36,10 +34,13 @@ namespace System.Web.Mvc.Test
             // Arrange
             var context = new ControllerContext { Controller = new ControllerWithTypeAttribute() };
             var controllerDescriptorMock = new Mock<ControllerDescriptor>();
-            controllerDescriptorMock.Setup(cd => cd.GetFilterAttributes(It.IsAny<bool>()))
+            controllerDescriptorMock
+                .Setup(cd => cd.GetFilterAttributes(It.IsAny<bool>()))
                 .Returns(new FilterAttribute[] { new MyFilterAttribute { Order = 2112 } });
             var actionDescriptorMock = new Mock<ActionDescriptor>();
-            actionDescriptorMock.Setup(ad => ad.ControllerDescriptor).Returns(controllerDescriptorMock.Object);
+            actionDescriptorMock
+                .Setup(ad => ad.ControllerDescriptor)
+                .Returns(controllerDescriptorMock.Object);
             var provider = new FilterAttributeFilterProvider();
 
             // Act
@@ -65,10 +66,19 @@ namespace System.Web.Mvc.Test
         public void GetFilters_IncludesAttributesOnActionMethod()
         {
             // Arrange
-            var context = new ControllerContext { Controller = new ControllerWithActionAttribute() };
-            var controllerDescriptor = new ReflectedControllerDescriptor(context.Controller.GetType());
+            var context = new ControllerContext
+            {
+                Controller = new ControllerWithActionAttribute(),
+            };
+            var controllerDescriptor = new ReflectedControllerDescriptor(
+                context.Controller.GetType()
+            );
             var action = context.Controller.GetType().GetMethod("MyActionMethod");
-            var actionDescriptor = new ReflectedActionDescriptor(action, "MyActionMethod", controllerDescriptor);
+            var actionDescriptor = new ReflectedActionDescriptor(
+                action,
+                "MyActionMethod",
+                controllerDescriptor
+            );
             var provider = new FilterAttributeFilterProvider();
 
             // Act
@@ -90,18 +100,22 @@ namespace System.Web.Mvc.Test
         }
 
         [MyFilter]
-        private class DerivedController : BaseController
-        {
-        }
+        private class DerivedController : BaseController { }
 
         [Fact]
         public void GetFilters_IncludesTypeAttributesFromDerivedTypeWhenMethodIsOnBaseClass()
         { // DDB #208062
             // Arrange
             var context = new ControllerContext { Controller = new DerivedController() };
-            var controllerDescriptor = new ReflectedControllerDescriptor(context.Controller.GetType());
+            var controllerDescriptor = new ReflectedControllerDescriptor(
+                context.Controller.GetType()
+            );
             var action = context.Controller.GetType().GetMethod("MyActionMethod");
-            var actionDescriptor = new ReflectedActionDescriptor(action, "MyActionMethod", controllerDescriptor);
+            var actionDescriptor = new ReflectedActionDescriptor(
+                action,
+                "MyActionMethod",
+                controllerDescriptor
+            );
             var provider = new FilterAttributeFilterProvider();
 
             // Act
@@ -111,9 +125,7 @@ namespace System.Web.Mvc.Test
             Assert.NotNull(filters.Select(f => f.Instance).Cast<MyFilterAttribute>().Single());
         }
 
-        private class MyFilterAttribute : FilterAttribute
-        {
-        }
+        private class MyFilterAttribute : FilterAttribute { }
 
         [Fact]
         public void GetFilters_RetrievesCachedAttributesByDefault()
@@ -122,10 +134,18 @@ namespace System.Web.Mvc.Test
             var provider = new FilterAttributeFilterProvider();
             var context = new ControllerContext { Controller = new DerivedController() };
             var controllerDescriptorMock = new Mock<ControllerDescriptor>();
-            controllerDescriptorMock.Setup(cd => cd.GetFilterAttributes(true)).Returns(Enumerable.Empty<FilterAttribute>()).Verifiable();
+            controllerDescriptorMock
+                .Setup(cd => cd.GetFilterAttributes(true))
+                .Returns(Enumerable.Empty<FilterAttribute>())
+                .Verifiable();
             var actionDescriptorMock = new Mock<ActionDescriptor>();
-            actionDescriptorMock.Setup(ad => ad.GetFilterAttributes(true)).Returns(Enumerable.Empty<FilterAttribute>()).Verifiable();
-            actionDescriptorMock.Setup(ad => ad.ControllerDescriptor).Returns(controllerDescriptorMock.Object);
+            actionDescriptorMock
+                .Setup(ad => ad.GetFilterAttributes(true))
+                .Returns(Enumerable.Empty<FilterAttribute>())
+                .Verifiable();
+            actionDescriptorMock
+                .Setup(ad => ad.ControllerDescriptor)
+                .Returns(controllerDescriptorMock.Object);
 
             // Act
             var result = provider.GetFilters(context, actionDescriptorMock.Object).ToList();
@@ -142,10 +162,18 @@ namespace System.Web.Mvc.Test
             var provider = new FilterAttributeFilterProvider(false);
             var context = new ControllerContext { Controller = new DerivedController() };
             var controllerDescriptorMock = new Mock<ControllerDescriptor>();
-            controllerDescriptorMock.Setup(cd => cd.GetFilterAttributes(false)).Returns(Enumerable.Empty<FilterAttribute>()).Verifiable();
+            controllerDescriptorMock
+                .Setup(cd => cd.GetFilterAttributes(false))
+                .Returns(Enumerable.Empty<FilterAttribute>())
+                .Verifiable();
             var actionDescriptorMock = new Mock<ActionDescriptor>();
-            actionDescriptorMock.Setup(ad => ad.GetFilterAttributes(false)).Returns(Enumerable.Empty<FilterAttribute>()).Verifiable();
-            actionDescriptorMock.Setup(ad => ad.ControllerDescriptor).Returns(controllerDescriptorMock.Object);
+            actionDescriptorMock
+                .Setup(ad => ad.GetFilterAttributes(false))
+                .Returns(Enumerable.Empty<FilterAttribute>())
+                .Verifiable();
+            actionDescriptorMock
+                .Setup(ad => ad.ControllerDescriptor)
+                .Returns(controllerDescriptorMock.Object);
 
             // Act
             var result = provider.GetFilters(context, actionDescriptorMock.Object).ToList();

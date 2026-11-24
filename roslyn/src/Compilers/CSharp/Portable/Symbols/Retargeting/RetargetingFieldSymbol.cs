@@ -8,14 +8,14 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
-using Roslyn.Utilities;
 using Microsoft.CodeAnalysis.CSharp.Emit;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 {
     /// <summary>
-    /// Represents a field in a RetargetingModuleSymbol. Essentially this is a wrapper around 
-    /// another FieldSymbol that is responsible for retargeting symbols from one assembly to another. 
+    /// Represents a field in a RetargetingModuleSymbol. Essentially this is a wrapper around
+    /// another FieldSymbol that is responsible for retargeting symbols from one assembly to another.
     /// It can retarget symbols for multiple assemblies at the same time.
     /// </summary>
     internal sealed class RetargetingFieldSymbol : WrappedFieldSymbol
@@ -30,9 +30,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         /// </summary>
         private ImmutableArray<CSharpAttributeData> _lazyCustomAttributes;
 
-        private CachedUseSiteInfo<AssemblySymbol> _lazyCachedUseSiteInfo = CachedUseSiteInfo<AssemblySymbol>.Uninitialized;
+        private CachedUseSiteInfo<AssemblySymbol> _lazyCachedUseSiteInfo =
+            CachedUseSiteInfo<AssemblySymbol>.Uninitialized;
 
-        public RetargetingFieldSymbol(RetargetingModuleSymbol retargetingModule, FieldSymbol underlyingField)
+        public RetargetingFieldSymbol(
+            RetargetingModuleSymbol retargetingModule,
+            FieldSymbol underlyingField
+        )
             : base(underlyingField)
         {
             Debug.Assert((object)retargetingModule != null);
@@ -43,62 +47,60 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         private RetargetingModuleSymbol.RetargetingSymbolTranslator RetargetingTranslator
         {
-            get
-            {
-                return _retargetingModule.RetargetingTranslator;
-            }
+            get { return _retargetingModule.RetargetingTranslator; }
         }
 
         public RetargetingModuleSymbol RetargetingModule
         {
-            get
-            {
-                return _retargetingModule;
-            }
+            get { return _retargetingModule; }
         }
 
         internal override TypeWithAnnotations GetFieldType(ConsList<FieldSymbol> fieldsBeingBound)
         {
-            return this.RetargetingTranslator.Retarget(_underlyingField.GetFieldType(fieldsBeingBound), RetargetOptions.RetargetPrimitiveTypesByTypeCode);
+            return this.RetargetingTranslator.Retarget(
+                _underlyingField.GetFieldType(fieldsBeingBound),
+                RetargetOptions.RetargetPrimitiveTypesByTypeCode
+            );
         }
 
         public override Symbol ContainingSymbol
         {
-            get
-            {
-                return this.RetargetingTranslator.Retarget(_underlyingField.ContainingSymbol);
-            }
+            get { return this.RetargetingTranslator.Retarget(_underlyingField.ContainingSymbol); }
         }
 
         public override RefKind RefKind => _underlyingField.RefKind;
 
         public override ImmutableArray<CustomModifier> RefCustomModifiers =>
-            this.RetargetingTranslator.RetargetModifiers(_underlyingField.RefCustomModifiers, out _);
+            this.RetargetingTranslator.RetargetModifiers(
+                _underlyingField.RefCustomModifiers,
+                out _
+            );
 
         public override ImmutableArray<CSharpAttributeData> GetAttributes()
         {
-            return this.RetargetingTranslator.GetRetargetedAttributes(_underlyingField.GetAttributes(), ref _lazyCustomAttributes);
+            return this.RetargetingTranslator.GetRetargetedAttributes(
+                _underlyingField.GetAttributes(),
+                ref _lazyCustomAttributes
+            );
         }
 
-        internal override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(PEModuleBuilder moduleBuilder)
+        internal override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
+            PEModuleBuilder moduleBuilder
+        )
         {
-            return this.RetargetingTranslator.RetargetAttributes(_underlyingField.GetCustomAttributesToEmit(moduleBuilder));
+            return this.RetargetingTranslator.RetargetAttributes(
+                _underlyingField.GetCustomAttributesToEmit(moduleBuilder)
+            );
         }
 
         public override AssemblySymbol ContainingAssembly
         {
-            get
-            {
-                return _retargetingModule.ContainingAssembly;
-            }
+            get { return _retargetingModule.ContainingAssembly; }
         }
 
         internal override ModuleSymbol ContainingModule
         {
-            get
-            {
-                return _retargetingModule;
-            }
+            get { return _retargetingModule; }
         }
 
         internal override MarshalPseudoCustomAttributeData MarshallingInformation
@@ -114,7 +116,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             get
             {
                 var associated = _underlyingField.AssociatedSymbol;
-                return (object)associated == null ? null : this.RetargetingTranslator.Retarget(associated);
+                return (object)associated == null
+                    ? null
+                    : this.RetargetingTranslator.Retarget(associated);
             }
         }
 

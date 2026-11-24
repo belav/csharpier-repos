@@ -10,6 +10,6 @@ namespace System.Activities
     {
         Abort = 0,
         Cancel,
-        Terminate
+        Terminate,
     }
 }

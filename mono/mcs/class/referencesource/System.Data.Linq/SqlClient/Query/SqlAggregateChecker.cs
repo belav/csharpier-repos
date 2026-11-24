@@ -1,37 +1,46 @@
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Data.Linq;
+using System.Linq.Expressions;
 
-namespace System.Data.Linq.SqlClient {
-
-    internal class SqlAggregateChecker {
+namespace System.Data.Linq.SqlClient
+{
+    internal class SqlAggregateChecker
+    {
         Visitor visitor;
 
-        internal SqlAggregateChecker() {
+        internal SqlAggregateChecker()
+        {
             this.visitor = new Visitor();
         }
 
-        internal bool HasAggregates(SqlNode node) {
+        internal bool HasAggregates(SqlNode node)
+        {
             visitor.hasAggregates = false;
             visitor.Visit(node);
             return visitor.hasAggregates;
         }
 
-        class Visitor : SqlVisitor {
+        class Visitor : SqlVisitor
+        {
             internal bool hasAggregates;
 
-            internal Visitor() {
-            }
+            internal Visitor() { }
 
-            internal override SqlExpression VisitSubSelect(SqlSubSelect ss) {
+            internal override SqlExpression VisitSubSelect(SqlSubSelect ss)
+            {
                 return ss;
             }
-            internal override SqlSource VisitSource(SqlSource source) {
+
+            internal override SqlSource VisitSource(SqlSource source)
+            {
                 return source;
             }
-            internal override SqlExpression VisitUnaryOperator(SqlUnary uo) {
-                switch (uo.NodeType) {
+
+            internal override SqlExpression VisitUnaryOperator(SqlUnary uo)
+            {
+                switch (uo.NodeType)
+                {
                     case SqlNodeType.Min:
                     case SqlNodeType.Max:
                     case SqlNodeType.Avg:

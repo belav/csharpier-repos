@@ -13,8 +13,10 @@ namespace System.Data
     /// a value or row is either deleted or updated.
     /// </summary>
     [DefaultProperty(nameof(ConstraintName))]
-    [Editor("Microsoft.VSDesigner.Data.Design.ForeignKeyConstraintEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [Editor(
+        "Microsoft.VSDesigner.Data.Design.ForeignKeyConstraintEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+        "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public class ForeignKeyConstraint : Constraint
     {
         // constants
@@ -39,15 +41,18 @@ namespace System.Data
         /// Initializes a new instance of the <see cref='System.Data.ForeignKeyConstraint'/> class with the specified parent and
         /// child <see cref='System.Data.DataColumn'/> objects.
         /// </summary>
-        public ForeignKeyConstraint(DataColumn parentColumn, DataColumn childColumn) : this(null, parentColumn, childColumn)
-        {
-        }
+        public ForeignKeyConstraint(DataColumn parentColumn, DataColumn childColumn)
+            : this(null, parentColumn, childColumn) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.ForeignKeyConstraint'/> class with the specified name,
         /// parent and child <see cref='System.Data.DataColumn'/> objects.
         /// </summary>
-        public ForeignKeyConstraint(string? constraintName, DataColumn parentColumn, DataColumn childColumn)
+        public ForeignKeyConstraint(
+            string? constraintName,
+            DataColumn parentColumn,
+            DataColumn childColumn
+        )
         {
             DataColumn[] parentColumns = new DataColumn[] { parentColumn };
             DataColumn[] childColumns = new DataColumn[] { childColumn };
@@ -58,23 +63,33 @@ namespace System.Data
         /// Initializes a new instance of the <see cref='System.Data.ForeignKeyConstraint'/> class with the specified arrays
         /// of parent and child <see cref='System.Data.DataColumn'/> objects.
         /// </summary>
-        public ForeignKeyConstraint(DataColumn[] parentColumns, DataColumn[] childColumns) : this(null, parentColumns, childColumns)
-        {
-        }
+        public ForeignKeyConstraint(DataColumn[] parentColumns, DataColumn[] childColumns)
+            : this(null, parentColumns, childColumns) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.ForeignKeyConstraint'/> class with the specified name,
         /// and arrays of parent and child <see cref='System.Data.DataColumn'/> objects.
         /// </summary>
-        public ForeignKeyConstraint(string? constraintName, DataColumn[] parentColumns, DataColumn[] childColumns)
+        public ForeignKeyConstraint(
+            string? constraintName,
+            DataColumn[] parentColumns,
+            DataColumn[] childColumns
+        )
         {
             Create(constraintName, parentColumns, childColumns);
         }
 
         // construct design time object
         [Browsable(false)]
-        public ForeignKeyConstraint(string? constraintName, string? parentTableName, string[] parentColumnNames, string[] childColumnNames,
-                                    AcceptRejectRule acceptRejectRule, Rule deleteRule, Rule updateRule)
+        public ForeignKeyConstraint(
+            string? constraintName,
+            string? parentTableName,
+            string[] parentColumnNames,
+            string[] childColumnNames,
+            AcceptRejectRule acceptRejectRule,
+            Rule deleteRule,
+            Rule updateRule
+        )
         {
             _constraintName = constraintName;
             _parentColumnNames = parentColumnNames;
@@ -87,8 +102,16 @@ namespace System.Data
 
         // construct design time object
         [Browsable(false)]
-        public ForeignKeyConstraint(string? constraintName, string? parentTableName, string? parentTableNamespace, string[] parentColumnNames,
-                                    string[] childColumnNames, AcceptRejectRule acceptRejectRule, Rule deleteRule, Rule updateRule)
+        public ForeignKeyConstraint(
+            string? constraintName,
+            string? parentTableName,
+            string? parentTableNamespace,
+            string[] parentColumnNames,
+            string[] childColumnNames,
+            AcceptRejectRule acceptRejectRule,
+            Rule deleteRule,
+            Rule updateRule
+        )
         {
             _constraintName = constraintName;
             _parentColumnNames = parentColumnNames;
@@ -148,13 +171,19 @@ namespace System.Data
             {
                 throw ExceptionBuilder.ConstraintAddFailed(constraints.Table);
             }
-            if (Table.Locale.LCID != RelatedTable.Locale.LCID || Table.CaseSensitive != RelatedTable.CaseSensitive)
+            if (
+                Table.Locale.LCID != RelatedTable.Locale.LCID
+                || Table.CaseSensitive != RelatedTable.CaseSensitive
+            )
             {
                 throw ExceptionBuilder.CaseLocaleMismatch();
             }
         }
 
-        internal override bool CanBeRemovedFromCollection(ConstraintCollection constraints, bool fThrowException) => true;
+        internal override bool CanBeRemovedFromCollection(
+            ConstraintCollection constraints,
+            bool fThrowException
+        ) => true;
 
         internal static bool IsKeyNull(object[] values)
         {
@@ -185,7 +214,11 @@ namespace System.Data
                     if (!parentIndex.IsKeyInIndex(childValues))
                     {
                         DataRow[] rows = childIndex.GetRows(childIndex.FindRecords(childValues));
-                        string error = SR.Format(SR.DataConstraint_ForeignKeyViolation, ConstraintName, ExceptionBuilder.KeysToString(childValues));
+                        string error = SR.Format(
+                            SR.DataConstraint_ForeignKeyViolation,
+                            ConstraintName,
+                            ExceptionBuilder.KeysToString(childValues)
+                        );
                         for (int j = 0; j < rows.Length; j++)
                         {
                             rows[j].RowError = error;
@@ -229,8 +262,17 @@ namespace System.Data
 
             if (_acceptRejectRule == AcceptRejectRule.Cascade)
             {
-                Index childIndex = _childKey.GetSortIndex(row.RowState == DataRowState.Deleted ? DataViewRowState.Deleted : DataViewRowState.CurrentRows);
-                object[] key = row.GetKeyValues(_parentKey, row.RowState == DataRowState.Deleted ? DataRowVersion.Original : DataRowVersion.Default);
+                Index childIndex = _childKey.GetSortIndex(
+                    row.RowState == DataRowState.Deleted
+                        ? DataViewRowState.Deleted
+                        : DataViewRowState.CurrentRows
+                );
+                object[] key = row.GetKeyValues(
+                    _parentKey,
+                    row.RowState == DataRowState.Deleted
+                        ? DataRowVersion.Original
+                        : DataRowVersion.Default
+                );
                 if (IsKeyNull(key))
                 {
                     return;
@@ -274,84 +316,84 @@ namespace System.Data
             switch (DeleteRule)
             {
                 case Rule.None:
+                {
+                    if (row.Table.DataSet.EnforceConstraints)
                     {
-                        if (row.Table.DataSet.EnforceConstraints)
+                        // if we're not cascading deletes, we should throw if we're going to strand a child row under enforceConstraints.
+                        Range range = childIndex.FindRecords(currentKey);
+                        if (!range.IsNull)
                         {
-                            // if we're not cascading deletes, we should throw if we're going to strand a child row under enforceConstraints.
-                            Range range = childIndex.FindRecords(currentKey);
-                            if (!range.IsNull)
-                            {
-                                if (range.Count == 1 && childIndex.GetRow(range.Min) == row)
-                                    return;
+                            if (range.Count == 1 && childIndex.GetRow(range.Min) == row)
+                                return;
 
-                                throw ExceptionBuilder.FailedCascadeDelete(ConstraintName);
-                            }
+                            throw ExceptionBuilder.FailedCascadeDelete(ConstraintName);
                         }
-                        break;
                     }
+                    break;
+                }
 
                 case Rule.Cascade:
+                {
+                    object[] key = row.GetKeyValues(_parentKey, DataRowVersion.Default);
+                    Range range = childIndex.FindRecords(key);
+                    if (!range.IsNull)
                     {
-                        object[] key = row.GetKeyValues(_parentKey, DataRowVersion.Default);
-                        Range range = childIndex.FindRecords(key);
-                        if (!range.IsNull)
-                        {
-                            DataRow[] rows = childIndex.GetRows(range);
+                        DataRow[] rows = childIndex.GetRows(range);
 
-                            for (int j = 0; j < rows.Length; j++)
-                            {
-                                DataRow r = rows[j];
-                                if (r._inCascade)
-                                    continue;
-                                r.Table.DeleteRow(r);
-                            }
+                        for (int j = 0; j < rows.Length; j++)
+                        {
+                            DataRow r = rows[j];
+                            if (r._inCascade)
+                                continue;
+                            r.Table.DeleteRow(r);
                         }
-                        break;
                     }
+                    break;
+                }
 
                 case Rule.SetNull:
+                {
+                    object[] proposedKey = new object[_childKey.ColumnsReference.Length];
+                    for (int i = 0; i < _childKey.ColumnsReference.Length; i++)
+                        proposedKey[i] = DBNull.Value;
+                    Range range = childIndex.FindRecords(currentKey);
+                    if (!range.IsNull)
                     {
-                        object[] proposedKey = new object[_childKey.ColumnsReference.Length];
-                        for (int i = 0; i < _childKey.ColumnsReference.Length; i++)
-                            proposedKey[i] = DBNull.Value;
-                        Range range = childIndex.FindRecords(currentKey);
-                        if (!range.IsNull)
+                        DataRow[] rows = childIndex.GetRows(range);
+                        for (int j = 0; j < rows.Length; j++)
                         {
-                            DataRow[] rows = childIndex.GetRows(range);
-                            for (int j = 0; j < rows.Length; j++)
-                            {
-                                // if (rows[j].inCascade)
-                                //    continue;
-                                if (row != rows[j])
-                                    rows[j].SetKeyValues(_childKey, proposedKey);
-                            }
+                            // if (rows[j].inCascade)
+                            //    continue;
+                            if (row != rows[j])
+                                rows[j].SetKeyValues(_childKey, proposedKey);
                         }
-                        break;
                     }
+                    break;
+                }
                 case Rule.SetDefault:
+                {
+                    object[] proposedKey = new object[_childKey.ColumnsReference.Length];
+                    for (int i = 0; i < _childKey.ColumnsReference.Length; i++)
+                        proposedKey[i] = _childKey.ColumnsReference[i].DefaultValue;
+                    Range range = childIndex.FindRecords(currentKey);
+                    if (!range.IsNull)
                     {
-                        object[] proposedKey = new object[_childKey.ColumnsReference.Length];
-                        for (int i = 0; i < _childKey.ColumnsReference.Length; i++)
-                            proposedKey[i] = _childKey.ColumnsReference[i].DefaultValue;
-                        Range range = childIndex.FindRecords(currentKey);
-                        if (!range.IsNull)
+                        DataRow[] rows = childIndex.GetRows(range);
+                        for (int j = 0; j < rows.Length; j++)
                         {
-                            DataRow[] rows = childIndex.GetRows(range);
-                            for (int j = 0; j < rows.Length; j++)
-                            {
-                                // if (rows[j].inCascade)
-                                //    continue;
-                                if (row != rows[j])
-                                    rows[j].SetKeyValues(_childKey, proposedKey);
-                            }
+                            // if (rows[j].inCascade)
+                            //    continue;
+                            if (row != rows[j])
+                                rows[j].SetKeyValues(_childKey, proposedKey);
                         }
-                        break;
                     }
+                    break;
+                }
                 default:
-                    {
-                        Debug.Fail("Unknown Rule value");
-                        break;
-                    }
+                {
+                    Debug.Fail("Unknown Rule value");
+                    break;
+                }
             }
         }
 
@@ -359,8 +401,17 @@ namespace System.Data
         {
             Debug.Assert(row.Table.DataSet != null);
 
-            Index childIndex = _childKey.GetSortIndex(row.RowState == DataRowState.Deleted ? DataViewRowState.OriginalRows : DataViewRowState.CurrentRows);
-            object[] key = row.GetKeyValues(_parentKey, row.RowState == DataRowState.Modified ? DataRowVersion.Current : DataRowVersion.Default);
+            Index childIndex = _childKey.GetSortIndex(
+                row.RowState == DataRowState.Deleted
+                    ? DataViewRowState.OriginalRows
+                    : DataViewRowState.CurrentRows
+            );
+            object[] key = row.GetKeyValues(
+                _parentKey,
+                row.RowState == DataRowState.Modified
+                    ? DataRowVersion.Current
+                    : DataRowVersion.Default
+            );
 
             if (IsKeyNull(key))
             {
@@ -392,7 +443,7 @@ namespace System.Data
                             return;
 
                         if (row.HasKeyChanged(_parentKey))
-                        {// if key is not changed, this will not cause child to be stranded
+                        { // if key is not changed, this will not cause child to be stranded
                             throw ExceptionBuilder.FailedCascadeUpdate(ConstraintName);
                         }
                     }
@@ -419,77 +470,80 @@ namespace System.Data
             switch (UpdateRule)
             {
                 case Rule.None:
+                {
+                    if (row.Table.DataSet.EnforceConstraints)
                     {
-                        if (row.Table.DataSet.EnforceConstraints)
+                        // if we're not cascading deletes, we should throw if we're going to strand a child row under enforceConstraints.
+                        Range range = childIndex.FindRecords(currentKey);
+                        if (!range.IsNull)
                         {
-                            // if we're not cascading deletes, we should throw if we're going to strand a child row under enforceConstraints.
-                            Range range = childIndex.FindRecords(currentKey);
-                            if (!range.IsNull)
-                            {
-                                throw ExceptionBuilder.FailedCascadeUpdate(ConstraintName);
-                            }
+                            throw ExceptionBuilder.FailedCascadeUpdate(ConstraintName);
                         }
-                        break;
                     }
+                    break;
+                }
 
                 case Rule.Cascade:
+                {
+                    Range range = childIndex.FindRecords(currentKey);
+                    if (!range.IsNull)
                     {
-                        Range range = childIndex.FindRecords(currentKey);
-                        if (!range.IsNull)
+                        object[] proposedKey = row.GetKeyValues(
+                            _parentKey,
+                            DataRowVersion.Proposed
+                        );
+                        DataRow[] rows = childIndex.GetRows(range);
+                        for (int j = 0; j < rows.Length; j++)
                         {
-                            object[] proposedKey = row.GetKeyValues(_parentKey, DataRowVersion.Proposed);
-                            DataRow[] rows = childIndex.GetRows(range);
-                            for (int j = 0; j < rows.Length; j++)
-                            {
-                                // if (rows[j].inCascade)
-                                //    continue;
-                                rows[j].SetKeyValues(_childKey, proposedKey);
-                            }
+                            // if (rows[j].inCascade)
+                            //    continue;
+                            rows[j].SetKeyValues(_childKey, proposedKey);
                         }
-                        break;
                     }
+                    break;
+                }
 
                 case Rule.SetNull:
+                {
+                    object[] proposedKey = new object[_childKey.ColumnsReference.Length];
+                    for (int i = 0; i < _childKey.ColumnsReference.Length; i++)
+                        proposedKey[i] = DBNull.Value;
+                    Range range = childIndex.FindRecords(currentKey);
+                    if (!range.IsNull)
                     {
-                        object[] proposedKey = new object[_childKey.ColumnsReference.Length];
-                        for (int i = 0; i < _childKey.ColumnsReference.Length; i++)
-                            proposedKey[i] = DBNull.Value;
-                        Range range = childIndex.FindRecords(currentKey);
-                        if (!range.IsNull)
+                        DataRow[] rows = childIndex.GetRows(range);
+                        for (int j = 0; j < rows.Length; j++)
                         {
-                            DataRow[] rows = childIndex.GetRows(range);
-                            for (int j = 0; j < rows.Length; j++)
-                            {
-                                // if (rows[j].inCascade)
-                                //    continue;
-                                rows[j].SetKeyValues(_childKey, proposedKey);
-                            }
+                            // if (rows[j].inCascade)
+                            //    continue;
+                            rows[j].SetKeyValues(_childKey, proposedKey);
                         }
-                        break;
                     }
+                    break;
+                }
                 case Rule.SetDefault:
+                {
+                    object[] proposedKey = new object[_childKey.ColumnsReference.Length];
+                    for (int i = 0; i < _childKey.ColumnsReference.Length; i++)
+                        proposedKey[i] = _childKey.ColumnsReference[i].DefaultValue;
+                    Range range = childIndex.FindRecords(currentKey);
+                    if (!range.IsNull)
                     {
-                        object[] proposedKey = new object[_childKey.ColumnsReference.Length];
-                        for (int i = 0; i < _childKey.ColumnsReference.Length; i++)
-                            proposedKey[i] = _childKey.ColumnsReference[i].DefaultValue;
-                        Range range = childIndex.FindRecords(currentKey);
-                        if (!range.IsNull)
+                        DataRow[] rows = childIndex.GetRows(range);
+                        for (int j = 0; j < rows.Length; j++)
                         {
-                            DataRow[] rows = childIndex.GetRows(range);
-                            for (int j = 0; j < rows.Length; j++)
-                            {
-                                // if (rows[j].inCascade)
-                                //    continue;
-                                rows[j].SetKeyValues(_childKey, proposedKey);
-                            }
+                            // if (rows[j].inCascade)
+                            //    continue;
+                            rows[j].SetKeyValues(_childKey, proposedKey);
                         }
-                        break;
                     }
+                    break;
+                }
                 default:
-                    {
-                        Debug.Fail("Unknown Rule value");
-                        break;
-                    }
+                {
+                    Debug.Fail("Unknown Rule value");
+                    break;
+                }
             }
         }
 
@@ -498,18 +552,28 @@ namespace System.Data
             Debug.Assert(Table?.DataSet != null);
             if (Table.DataSet.EnforceConstraints && Table.Rows.Count > 0)
             {
-                throw ExceptionBuilder.FailedClearParentTable(table.TableName, ConstraintName, Table.TableName);
+                throw ExceptionBuilder.FailedClearParentTable(
+                    table.TableName,
+                    ConstraintName,
+                    Table.TableName
+                );
             }
         }
 
         internal void CheckCanRemoveParentRow(DataRow row)
         {
-            Debug.Assert(Table?.DataSet != null, $"Relation {ConstraintName} isn't part of a DataSet, so this check shouldn't be happening.");
+            Debug.Assert(
+                Table?.DataSet != null,
+                $"Relation {ConstraintName} isn't part of a DataSet, so this check shouldn't be happening."
+            );
             if (!Table.DataSet.EnforceConstraints)
             {
                 return;
             }
-            if (DataRelation.GetChildRows(ParentKey, ChildKey, row, DataRowVersion.Default).Length > 0)
+            if (
+                DataRelation.GetChildRows(ParentKey, ChildKey, row, DataRowVersion.Default).Length
+                > 0
+            )
             {
                 throw ExceptionBuilder.RemoveParentRow(this);
             }
@@ -517,7 +581,10 @@ namespace System.Data
 
         internal void CheckCascade(DataRow row, DataRowAction action)
         {
-            Debug.Assert(Table?.DataSet != null, $"ForeignKeyConstraint {ConstraintName} isn't part of a DataSet, so this check shouldn't be happening.");
+            Debug.Assert(
+                Table?.DataSet != null,
+                $"ForeignKeyConstraint {ConstraintName} isn't part of a DataSet, so this check shouldn't be happening."
+            );
 
             if (row._inCascade)
             {
@@ -546,9 +613,7 @@ namespace System.Data
                 {
                     CascadeRollback(row);
                 }
-                else if (action == DataRowAction.Add)
-                {
-                }
+                else if (action == DataRowAction.Add) { }
                 else
                 {
                     Debug.Fail("attempt to cascade unknown action: " + action.ToString());
@@ -562,23 +627,39 @@ namespace System.Data
 
         internal override void CheckConstraint(DataRow childRow, DataRowAction action)
         {
-            if ((action == DataRowAction.Change ||
-                 action == DataRowAction.Add ||
-                 action == DataRowAction.Rollback) &&
-                Table!.DataSet != null && Table.DataSet.EnforceConstraints &&
-                childRow.HasKeyChanged(_childKey))
+            if (
+                (
+                    action == DataRowAction.Change
+                    || action == DataRowAction.Add
+                    || action == DataRowAction.Rollback
+                )
+                && Table!.DataSet != null
+                && Table.DataSet.EnforceConstraints
+                && childRow.HasKeyChanged(_childKey)
+            )
             {
                 // This branch is for cascading case verification.
-                DataRowVersion version = (action == DataRowAction.Rollback) ? DataRowVersion.Original : DataRowVersion.Current;
+                DataRowVersion version =
+                    (action == DataRowAction.Rollback)
+                        ? DataRowVersion.Original
+                        : DataRowVersion.Current;
                 object[] childKeyValues = childRow.GetKeyValues(_childKey);
                 // check to see if this is just a change to my parent's proposed value.
                 if (childRow.HasVersion(version))
                 {
                     // this is the new proposed value for the parent.
-                    DataRow? parentRow = DataRelation.GetParentRow(ParentKey, ChildKey, childRow, version);
+                    DataRow? parentRow = DataRelation.GetParentRow(
+                        ParentKey,
+                        ChildKey,
+                        childRow,
+                        version
+                    );
                     if (parentRow != null && parentRow._inCascade)
                     {
-                        object[] parentKeyValues = parentRow.GetKeyValues(_parentKey, action == DataRowAction.Rollback ? version : DataRowVersion.Default);
+                        object[] parentKeyValues = parentRow.GetKeyValues(
+                            _parentKey,
+                            action == DataRowAction.Rollback ? version : DataRowVersion.Default
+                        );
 
                         int parentKeyValuesRecord = childRow.Table.NewRecord();
                         DataTable.SetKeyValues(_childKey, parentKeyValues, parentKeyValuesRecord);
@@ -635,8 +716,23 @@ namespace System.Data
 
                 for (int i = 0; i < _parentKey.ColumnsReference.Length; i++)
                 {
-                    if (_parentKey.ColumnsReference[i].DataType != _childKey.ColumnsReference[i].DataType ||
-                        ((_parentKey.ColumnsReference[i].DataType == typeof(DateTime)) && (_parentKey.ColumnsReference[i].DateTimeMode != _childKey.ColumnsReference[i].DateTimeMode) && ((_parentKey.ColumnsReference[i].DateTimeMode & _childKey.ColumnsReference[i].DateTimeMode) != DataSetDateTime.Unspecified)))
+                    if (
+                        _parentKey.ColumnsReference[i].DataType
+                            != _childKey.ColumnsReference[i].DataType
+                        || (
+                            (_parentKey.ColumnsReference[i].DataType == typeof(DateTime))
+                            && (
+                                _parentKey.ColumnsReference[i].DateTimeMode
+                                != _childKey.ColumnsReference[i].DateTimeMode
+                            )
+                            && (
+                                (
+                                    _parentKey.ColumnsReference[i].DateTimeMode
+                                    & _childKey.ColumnsReference[i].DateTimeMode
+                                ) != DataSetDateTime.Unspecified
+                            )
+                        )
+                    )
                         throw ExceptionBuilder.ColumnsTypeMismatch();
                 }
 
@@ -708,7 +804,11 @@ namespace System.Data
             }
             else
             {
-                iDest = destination.Tables.IndexOf(RelatedTable.TableName, RelatedTable.Namespace, false); // pass false for last param
+                iDest = destination.Tables.IndexOf(
+                    RelatedTable.TableName,
+                    RelatedTable.Namespace,
+                    false
+                ); // pass false for last param
             }
             if (iDest < 0)
             {
@@ -739,7 +839,11 @@ namespace System.Data
                 }
                 relatedColumns[i] = relatedTable.Columns[iDest];
             }
-            ForeignKeyConstraint clone = new ForeignKeyConstraint(ConstraintName, relatedColumns, columns);
+            ForeignKeyConstraint clone = new ForeignKeyConstraint(
+                ConstraintName,
+                relatedColumns,
+                columns
+            );
             clone.UpdateRule = UpdateRule;
             clone.DeleteRule = DeleteRule;
             clone.AcceptRejectRule = AcceptRejectRule;
@@ -753,10 +857,12 @@ namespace System.Data
             return clone;
         }
 
-
         internal ForeignKeyConstraint? Clone(DataTable destination)
         {
-            Debug.Assert(Table == RelatedTable, "We call this clone just if we have the same datatable as parent and child ");
+            Debug.Assert(
+                Table == RelatedTable,
+                "We call this clone just if we have the same datatable as parent and child "
+            );
             int keys = Columns.Length;
             DataColumn[] columns = new DataColumn[keys];
             DataColumn[] relatedColumns = new DataColumn[keys];
@@ -779,7 +885,11 @@ namespace System.Data
                 }
                 relatedColumns[i] = destination.Columns[iDest];
             }
-            ForeignKeyConstraint clone = new ForeignKeyConstraint(ConstraintName, relatedColumns, columns);
+            ForeignKeyConstraint clone = new ForeignKeyConstraint(
+                ConstraintName,
+                relatedColumns,
+                columns
+            );
             clone.UpdateRule = UpdateRule;
             clone.DeleteRule = DeleteRule;
             clone.AcceptRejectRule = AcceptRejectRule;
@@ -793,7 +903,11 @@ namespace System.Data
             return clone;
         }
 
-        private void Create(string? relationName, DataColumn[] parentColumns, DataColumn[] childColumns)
+        private void Create(
+            string? relationName,
+            DataColumn[] parentColumns,
+            DataColumn[] childColumns
+        )
         {
             if (parentColumns.Length == 0 || childColumns.Length == 0)
             {

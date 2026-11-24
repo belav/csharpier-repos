@@ -11,7 +11,15 @@ namespace System.Web.Http.Filters
 {
     public interface IAuthorizationFilter : IFilter
     {
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "Represents a continuation call")]
-        Task<HttpResponseMessage> ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func<Task<HttpResponseMessage>> continuation);
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "Represents a continuation call"
+        )]
+        Task<HttpResponseMessage> ExecuteAuthorizationFilterAsync(
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken,
+            Func<Task<HttpResponseMessage>> continuation
+        );
     }
 }

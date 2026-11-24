@@ -18,7 +18,11 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             PropertyInfo expectedIndexer = typeof(string).GetProperty("Chars");
 
             // Act
-            IndexExpressionFingerprint fingerprint = new IndexExpressionFingerprint(expectedNodeType, expectedType, expectedIndexer);
+            IndexExpressionFingerprint fingerprint = new IndexExpressionFingerprint(
+                expectedNodeType,
+                expectedType,
+                expectedIndexer
+            );
 
             // Assert
             Assert.Equal(expectedNodeType, fingerprint.NodeType);
@@ -35,8 +39,16 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             PropertyInfo indexer = typeof(string).GetProperty("Chars");
 
             // Act
-            IndexExpressionFingerprint fingerprint1 = new IndexExpressionFingerprint(nodeType, type, indexer);
-            IndexExpressionFingerprint fingerprint2 = new IndexExpressionFingerprint(nodeType, type, indexer);
+            IndexExpressionFingerprint fingerprint1 = new IndexExpressionFingerprint(
+                nodeType,
+                type,
+                indexer
+            );
+            IndexExpressionFingerprint fingerprint2 = new IndexExpressionFingerprint(
+                nodeType,
+                type,
+                indexer
+            );
 
             // Assert
             Assert.Equal(fingerprint1, fingerprint2);
@@ -52,8 +64,15 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             PropertyInfo indexer = typeof(string).GetProperty("Chars");
 
             // Act
-            IndexExpressionFingerprint fingerprint1 = new IndexExpressionFingerprint(nodeType, type, indexer);
-            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(nodeType, type);
+            IndexExpressionFingerprint fingerprint1 = new IndexExpressionFingerprint(
+                nodeType,
+                type,
+                indexer
+            );
+            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(
+                nodeType,
+                type
+            );
 
             // Assert
             Assert.NotEqual<ExpressionFingerprint>(fingerprint1, fingerprint2);
@@ -68,8 +87,16 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             PropertyInfo indexer = typeof(string).GetProperty("Chars");
 
             // Act
-            IndexExpressionFingerprint fingerprint1 = new IndexExpressionFingerprint(nodeType, type, indexer);
-            IndexExpressionFingerprint fingerprint2 = new IndexExpressionFingerprint(nodeType, type, null /* indexer */);
+            IndexExpressionFingerprint fingerprint1 = new IndexExpressionFingerprint(
+                nodeType,
+                type,
+                indexer
+            );
+            IndexExpressionFingerprint fingerprint2 = new IndexExpressionFingerprint(
+                nodeType,
+                type,
+                null /* indexer */
+            );
 
             // Assert
             Assert.NotEqual(fingerprint1, fingerprint2);
@@ -84,8 +111,16 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             PropertyInfo indexer = typeof(string).GetProperty("Chars");
 
             // Act
-            IndexExpressionFingerprint fingerprint1 = new IndexExpressionFingerprint(nodeType, type, indexer);
-            IndexExpressionFingerprint fingerprint2 = new IndexExpressionFingerprint(nodeType, typeof(object), indexer);
+            IndexExpressionFingerprint fingerprint1 = new IndexExpressionFingerprint(
+                nodeType,
+                type,
+                indexer
+            );
+            IndexExpressionFingerprint fingerprint2 = new IndexExpressionFingerprint(
+                nodeType,
+                typeof(object),
+                indexer
+            );
 
             // Assert
             Assert.NotEqual(fingerprint1, fingerprint2);

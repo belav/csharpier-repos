@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis
         private const int InitialGlobalVersion = 10000;
 
         /// <summary>
-        /// global counter to avoid collision within same session. 
+        /// global counter to avoid collision within same session.
         /// it starts with a big initial number just for a clarity in debugging
         /// </summary>
         private static int s_globalVersion = InitialGlobalVersion;
@@ -41,20 +41,19 @@ namespace Microsoft.CodeAnalysis
         private readonly int _globalIncrement;
 
         private VersionStamp(DateTime utcLastModified)
-            : this(utcLastModified, 0)
-        {
-        }
+            : this(utcLastModified, 0) { }
 
         private VersionStamp(DateTime utcLastModified, int localIncrement)
-            : this(utcLastModified, localIncrement, GetNextGlobalVersion())
-        {
-        }
+            : this(utcLastModified, localIncrement, GetNextGlobalVersion()) { }
 
         private VersionStamp(DateTime utcLastModified, int localIncrement, int globalIncrement)
         {
             if (utcLastModified != default && utcLastModified.Kind != DateTimeKind.Utc)
             {
-                throw new ArgumentException(WorkspacesResources.DateTimeKind_must_be_Utc, nameof(utcLastModified));
+                throw new ArgumentException(
+                    WorkspacesResources.DateTimeKind_must_be_Utc,
+                    nameof(utcLastModified)
+                );
             }
 
             _utcLastModified = utcLastModified;
@@ -65,14 +64,12 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Creates a new instance of a VersionStamp.
         /// </summary>
-        public static VersionStamp Create()
-            => new(DateTime.UtcNow);
+        public static VersionStamp Create() => new(DateTime.UtcNow);
 
         /// <summary>
         /// Creates a new instance of a version stamp based on the specified DateTime.
         /// </summary>
-        public static VersionStamp Create(DateTime utcTimeLastModified)
-            => new(utcTimeLastModified);
+        public static VersionStamp Create(DateTime utcTimeLastModified) => new(utcTimeLastModified);
 
         /// <summary>
         /// compare two different versions and return either one of the versions if there is no collision, otherwise, create a new version
@@ -109,7 +106,11 @@ namespace Microsoft.CodeAnalysis
 
                 // mark it as global version
                 // global version can't be moved to newer version.
-                return new VersionStamp(_utcLastModified, (thisGlobalVersion > thatGlobalVersion) ? thisGlobalVersion : thatGlobalVersion, GlobalVersionMarker);
+                return new VersionStamp(
+                    _utcLastModified,
+                    (thisGlobalVersion > thatGlobalVersion) ? thisGlobalVersion : thatGlobalVersion,
+                    GlobalVersionMarker
+                );
             }
 
             return version;
@@ -139,8 +140,8 @@ namespace Microsoft.CodeAnalysis
             return _utcLastModified.ToString("o") + "-" + _globalIncrement + "-" + _localIncrement;
         }
 
-        public override int GetHashCode()
-            => Hash.Combine(_utcLastModified.GetHashCode(), _localIncrement);
+        public override int GetHashCode() =>
+            Hash.Combine(_utcLastModified.GetHashCode(), _localIncrement);
 
         public override bool Equals(object? obj)
         {
@@ -162,16 +163,18 @@ namespace Microsoft.CodeAnalysis
             return false;
         }
 
-        public static bool operator ==(VersionStamp left, VersionStamp right)
-            => left.Equals(right);
+        public static bool operator ==(VersionStamp left, VersionStamp right) => left.Equals(right);
 
-        public static bool operator !=(VersionStamp left, VersionStamp right)
-            => !left.Equals(right);
+        public static bool operator !=(VersionStamp left, VersionStamp right) =>
+            !left.Equals(right);
 
         /// <summary>
         /// Check whether given persisted version is re-usable. Used by VS for Mac
         /// </summary>
-        internal static bool CanReusePersistedVersion(VersionStamp baseVersion, VersionStamp persistedVersion)
+        internal static bool CanReusePersistedVersion(
+            VersionStamp baseVersion,
+            VersionStamp persistedVersion
+        )
         {
             if (baseVersion == persistedVersion)
             {
@@ -206,7 +209,9 @@ namespace Microsoft.CodeAnalysis
         private static int GetGlobalVersion(VersionStamp version)
         {
             // global increment < 0 means it is a global version which has its global increment in local increment
-            return version._globalIncrement >= 0 ? version._globalIncrement : version._localIncrement;
+            return version._globalIncrement >= 0
+                ? version._globalIncrement
+                : version._localIncrement;
         }
 
         private static int GetNextGlobalVersion()
@@ -224,12 +229,10 @@ namespace Microsoft.CodeAnalysis
             return globalVersion;
         }
 
-        internal TestAccessor GetTestAccessor()
-            => new(this);
+        internal TestAccessor GetTestAccessor() => new(this);
 
         internal readonly struct TestAccessor(VersionStamp versionStamp)
         {
-
             /// <summary>
             /// True if this VersionStamp is newer than the specified one.
             /// </summary>

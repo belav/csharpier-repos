@@ -109,7 +109,10 @@ namespace System
         {
             for (int i = 16; i != 80; i++)
             {
-                _w[i] = BitOperations.RotateLeft(_w[i - 3] ^ _w[i - 8] ^ _w[i - 14] ^ _w[i - 16], 1);
+                _w[i] = BitOperations.RotateLeft(
+                    _w[i - 3] ^ _w[i - 8] ^ _w[i - 14] ^ _w[i - 16],
+                    1
+                );
             }
 
             uint a = _w[80];
@@ -122,28 +125,48 @@ namespace System
             {
                 const uint k = 0x5A827999;
                 uint f = (b & c) | ((~b) & d);
-                uint temp = BitOperations.RotateLeft(a, 5) + f + e + k + _w[i]; e = d; d = c; c = BitOperations.RotateLeft(b, 30); b = a; a = temp;
+                uint temp = BitOperations.RotateLeft(a, 5) + f + e + k + _w[i];
+                e = d;
+                d = c;
+                c = BitOperations.RotateLeft(b, 30);
+                b = a;
+                a = temp;
             }
 
             for (int i = 20; i != 40; i++)
             {
                 uint f = b ^ c ^ d;
                 const uint k = 0x6ED9EBA1;
-                uint temp = BitOperations.RotateLeft(a, 5) + f + e + k + _w[i]; e = d; d = c; c = BitOperations.RotateLeft(b, 30); b = a; a = temp;
+                uint temp = BitOperations.RotateLeft(a, 5) + f + e + k + _w[i];
+                e = d;
+                d = c;
+                c = BitOperations.RotateLeft(b, 30);
+                b = a;
+                a = temp;
             }
 
             for (int i = 40; i != 60; i++)
             {
                 uint f = (b & c) | (b & d) | (c & d);
                 const uint k = 0x8F1BBCDC;
-                uint temp = BitOperations.RotateLeft(a, 5) + f + e + k + _w[i]; e = d; d = c; c = BitOperations.RotateLeft(b, 30); b = a; a = temp;
+                uint temp = BitOperations.RotateLeft(a, 5) + f + e + k + _w[i];
+                e = d;
+                d = c;
+                c = BitOperations.RotateLeft(b, 30);
+                b = a;
+                a = temp;
             }
 
             for (int i = 60; i != 80; i++)
             {
                 uint f = b ^ c ^ d;
                 const uint k = 0xCA62C1D6;
-                uint temp = BitOperations.RotateLeft(a, 5) + f + e + k + _w[i]; e = d; d = c; c = BitOperations.RotateLeft(b, 30); b = a; a = temp;
+                uint temp = BitOperations.RotateLeft(a, 5) + f + e + k + _w[i];
+                e = d;
+                d = c;
+                c = BitOperations.RotateLeft(b, 30);
+                b = a;
+                a = temp;
             }
 
             _w[80] += a;

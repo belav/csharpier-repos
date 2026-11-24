@@ -12,14 +12,16 @@ namespace System.Composition.Convention.Tests
     public class PartBuilderInterfaceTests
     {
         public interface IFirst { }
+
         public interface ISecond { }
+
         public interface IThird { }
+
         public interface IFourth { }
+
         public interface IFifth : IFourth { }
 
-        public class Standard : IFirst, ISecond, IThird, IFifth
-        {
-        }
+        public class Standard : IFirst, ISecond, IThird, IFifth { }
 
         public class Dippy : IFirst, ISecond, IThird, IFifth, IDisposable
         {
@@ -36,25 +38,34 @@ namespace System.Composition.Convention.Tests
         {
             [ImportMany]
             public IEnumerable<IFirst> First { get; set; }
+
             [ImportMany]
             public IEnumerable<ISecond> Second { get; set; }
+
             [ImportMany]
             public IEnumerable<IThird> Third { get; set; }
+
             [ImportMany]
             public IEnumerable<IFourth> Fourth { get; set; }
+
             [ImportMany]
             public IEnumerable<IFifth> Fifth { get; set; }
 
             [Import(AllowDefault = true)]
             public Base Base { get; set; }
+
             [Import(AllowDefault = true)]
             public Derived Derived { get; set; }
+
             [Import(AllowDefault = true)]
             public Dippy Dippy { get; set; }
+
             [Import(AllowDefault = true)]
             public Standard Standard { get; set; }
+
             [Import(AllowDefault = true)]
             public IDisposable Disposable { get; set; }
+
             [Import(AllowDefault = true)]
             public BareClass BareClass { get; set; }
         }
@@ -65,7 +76,16 @@ namespace System.Composition.Convention.Tests
             // Export all interfaces except IDisposable, Export contracts on types without interfaces. except for disposable types
             var builder = new ConventionBuilder();
             builder.ForTypesMatching((t) => true).ExportInterfaces();
-            builder.ForTypesMatching((t) => t.GetTypeInfo().ImplementedInterfaces.Where((iface) => iface != typeof(System.IDisposable)).Count() == 0).Export();
+            builder
+                .ForTypesMatching(
+                    (t) =>
+                        t.GetTypeInfo()
+                            .ImplementedInterfaces.Where(
+                                (iface) => iface != typeof(System.IDisposable)
+                            )
+                            .Count() == 0
+                )
+                .Export();
 
             CompositionHost container = new ContainerConfiguration()
                 .WithPart<Standard>(builder)
@@ -96,14 +116,24 @@ namespace System.Composition.Convention.Tests
             Assert.NotNull(importer.BareClass);
         }
 
-
         [Fact]
         public void StandardExportInterfacesInterfaceFilterDefaultContractShouldWork()
         {
             //Same test as above only using default export builder
             var builder = new ConventionBuilder();
-            builder.ForTypesMatching((t) => true).ExportInterfaces((iface) => iface != typeof(System.IDisposable));
-            builder.ForTypesMatching((t) => t.GetTypeInfo().ImplementedInterfaces.Where((iface) => iface != typeof(System.IDisposable)).Count() == 0).Export();
+            builder
+                .ForTypesMatching((t) => true)
+                .ExportInterfaces((iface) => iface != typeof(System.IDisposable));
+            builder
+                .ForTypesMatching(
+                    (t) =>
+                        t.GetTypeInfo()
+                            .ImplementedInterfaces.Where(
+                                (iface) => iface != typeof(System.IDisposable)
+                            )
+                            .Count() == 0
+                )
+                .Export();
 
             CompositionHost container = new ContainerConfiguration()
                 .WithPart<Standard>(builder)
@@ -139,8 +169,22 @@ namespace System.Composition.Convention.Tests
         {
             //Same test as above only using default export builder
             var builder = new ConventionBuilder();
-            builder.ForTypesMatching((t) => true).ExportInterfaces((iface) => iface != typeof(System.IDisposable), (iface, bldr) => bldr.AsContractType((Type)iface));
-            builder.ForTypesMatching((t) => t.GetTypeInfo().ImplementedInterfaces.Where((iface) => iface != typeof(System.IDisposable)).Count() == 0).Export();
+            builder
+                .ForTypesMatching((t) => true)
+                .ExportInterfaces(
+                    (iface) => iface != typeof(System.IDisposable),
+                    (iface, bldr) => bldr.AsContractType((Type)iface)
+                );
+            builder
+                .ForTypesMatching(
+                    (t) =>
+                        t.GetTypeInfo()
+                            .ImplementedInterfaces.Where(
+                                (iface) => iface != typeof(System.IDisposable)
+                            )
+                            .Count() == 0
+                )
+                .Export();
 
             CompositionHost container = new ContainerConfiguration()
                 .WithPart<Standard>(builder)

@@ -12,16 +12,15 @@ namespace Microsoft.Diagnostics.Tools.Pgo
     internal record class PreciseDebugInfo(
         ulong MethodID,
         InlineContext InlineTree,
-        List<PreciseIPMapping> Mappings);
+        List<PreciseIPMapping> Mappings
+    );
 
     internal record class InlineContext(
         uint Ordinal,
         ulong MethodID,
         string MethodName,
-        List<InlineContext> Inlinees);
+        List<InlineContext> Inlinees
+    );
 
-    internal record class PreciseIPMapping(
-        uint NativeOffset,
-        uint InlineContext,
-        uint ILOffset);
+    internal record class PreciseIPMapping(uint NativeOffset, uint InlineContext, uint ILOffset);
 }

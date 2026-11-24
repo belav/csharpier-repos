@@ -11,5 +11,8 @@ namespace Microsoft.CodeAnalysis.CodeDefinitionWindow;
 internal interface ICodeDefinitionWindowService
 {
     Task<bool> IsWindowOpenAsync(CancellationToken cancellationToken);
-    Task SetContextAsync(ImmutableArray<CodeDefinitionWindowLocation> locations, CancellationToken cancellationToken);
+    Task SetContextAsync(
+        ImmutableArray<CodeDefinitionWindowLocation> locations,
+        CancellationToken cancellationToken
+    );
 }

@@ -6,10 +6,10 @@ using System.Composition;
 using System.Threading;
 using Microsoft.CodeAnalysis.Completion;
 using Microsoft.CodeAnalysis.Host.Mef;
+using Microsoft.CodeAnalysis.LanguageService;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
-using Microsoft.CodeAnalysis.LanguageService;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.StarredSuggestions;
 
@@ -22,7 +22,9 @@ internal class StarredCompletionProvider : CompletionProvider
 
     public override async Task ProvideCompletionsAsync(CompletionContext context)
     {
-        var provider = await StarredCompletionAssemblyHelper.GetCompletionProviderAsync(context.CancellationToken);
+        var provider = await StarredCompletionAssemblyHelper.GetCompletionProviderAsync(
+            context.CancellationToken
+        );
         if (provider == null)
         {
             return; //no-op if provider cannot be retrieved from assembly
@@ -30,17 +32,46 @@ internal class StarredCompletionProvider : CompletionProvider
         await provider.ProvideCompletionsAsync(context);
     }
 
-    public override async Task<CompletionChange> GetChangeAsync(Document document, CompletionItem item, char? commitKey = null, CancellationToken cancellationToken = default)
+    public override async Task<CompletionChange> GetChangeAsync(
+        Document document,
+        CompletionItem item,
+        char? commitKey = null,
+        CancellationToken cancellationToken = default
+    )
     {
-        var provider = await StarredCompletionAssemblyHelper.GetCompletionProviderAsync(cancellationToken);
-        Contract.ThrowIfNull(provider, "ProvideCompletionsAsync must have completed successfully for GetChangeAsync to be called");
-        return await provider.GetChangeAsync(document, item, commitKey, cancellationToken).ConfigureAwait(false);
+        var provider = await StarredCompletionAssemblyHelper.GetCompletionProviderAsync(
+            cancellationToken
+        );
+        Contract.ThrowIfNull(
+            provider,
+            "ProvideCompletionsAsync must have completed successfully for GetChangeAsync to be called"
+        );
+        return await provider
+            .GetChangeAsync(document, item, commitKey, cancellationToken)
+            .ConfigureAwait(false);
     }
 
-    internal override async Task<CompletionDescription?> GetDescriptionAsync(Document document, CompletionItem item, CompletionOptions options, SymbolDescriptionOptions displayOptions, CancellationToken cancellationToken)
+    internal override async Task<CompletionDescription?> GetDescriptionAsync(
+        Document document,
+        CompletionItem item,
+        CompletionOptions options,
+        SymbolDescriptionOptions displayOptions,
+        CancellationToken cancellationToken
+    )
     {
-        var provider = await StarredCompletionAssemblyHelper.GetCompletionProviderAsync(cancellationToken);
-        Contract.ThrowIfNull(provider, "ProvideCompletionsAsync must have completed successfully for GetDescriptionAsync to be called");
-        return await provider.GetDescriptionAsync(document, item, options, displayOptions, cancellationToken);
+        var provider = await StarredCompletionAssemblyHelper.GetCompletionProviderAsync(
+            cancellationToken
+        );
+        Contract.ThrowIfNull(
+            provider,
+            "ProvideCompletionsAsync must have completed successfully for GetDescriptionAsync to be called"
+        );
+        return await provider.GetDescriptionAsync(
+            document,
+            item,
+            options,
+            displayOptions,
+            cancellationToken
+        );
     }
 }

@@ -42,7 +42,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 if (hasNext)
                 {
                     DumpAndCleanup();
-                    Assert.False(hasNext, $"Test contains unconsumed syntax left over from UsingNode()\r\n{(this._output as TestOutputHelper)?.Output}");
+                    Assert.False(
+                        hasNext,
+                        $"Test contains unconsumed syntax left over from UsingNode()\r\n{(this._output as TestOutputHelper)?.Output}"
+                    );
                 }
             }
         }
@@ -54,31 +57,44 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return false;
         }
 
-        public static void ParseAndValidate(string text, params DiagnosticDescription[] expectedErrors)
+        public static void ParseAndValidate(
+            string text,
+            params DiagnosticDescription[] expectedErrors
+        )
         {
             var parsedTree = ParseWithRoundTripCheck(text);
             var actualErrors = parsedTree.GetDiagnostics();
             actualErrors.Verify(expectedErrors);
         }
 
-        public static void ParseAndValidate(string text, CSharpParseOptions options, params DiagnosticDescription[] expectedErrors)
+        public static void ParseAndValidate(
+            string text,
+            CSharpParseOptions options,
+            params DiagnosticDescription[] expectedErrors
+        )
         {
             var parsedTree = ParseWithRoundTripCheck(text, options: options);
             var actualErrors = parsedTree.GetDiagnostics();
             actualErrors.Verify(expectedErrors);
         }
 
-        public static void ParseAndValidateFirst(string text, DiagnosticDescription expectedFirstError)
+        public static void ParseAndValidateFirst(
+            string text,
+            DiagnosticDescription expectedFirstError
+        )
         {
             var parsedTree = ParseWithRoundTripCheck(text);
             var actualErrors = parsedTree.GetDiagnostics();
             actualErrors.Take(1).Verify(expectedFirstError);
         }
 
-        protected virtual SyntaxTree ParseTree(string text, CSharpParseOptions? options) => SyntaxFactory.ParseSyntaxTree(text, options);
+        protected virtual SyntaxTree ParseTree(string text, CSharpParseOptions? options) =>
+            SyntaxFactory.ParseSyntaxTree(text, options);
 
-        public CompilationUnitSyntax ParseFile(string text, CSharpParseOptions? parseOptions = null) =>
-            SyntaxFactory.ParseCompilationUnit(text, options: parseOptions);
+        public CompilationUnitSyntax ParseFile(
+            string text,
+            CSharpParseOptions? parseOptions = null
+        ) => SyntaxFactory.ParseCompilationUnit(text, options: parseOptions);
 
         internal CompilationUnitSyntax ParseFileExperimental(string text, MessageID feature) =>
             ParseFile(text, parseOptions: TestOptions.Regular.WithExperimental(feature));
@@ -91,19 +107,39 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             UsingStatement(text, options: null, expectedErrors);
         }
 
-        internal void UsingStatement(string text, ParseOptions? options, params DiagnosticDescription[] expectedErrors)
+        internal void UsingStatement(
+            string text,
+            ParseOptions? options,
+            params DiagnosticDescription[] expectedErrors
+        )
         {
             var node = SyntaxFactory.ParseStatement(text, options: options);
             Validate(text, node, expectedErrors);
             UsingNode(node);
         }
 
-        internal void UsingDeclaration(string text, ParseOptions? options, params DiagnosticDescription[] expectedErrors)
+        internal void UsingDeclaration(
+            string text,
+            ParseOptions? options,
+            params DiagnosticDescription[] expectedErrors
+        )
         {
-            UsingDeclaration(text, offset: 0, options, consumeFullText: true, expectedErrors: expectedErrors);
+            UsingDeclaration(
+                text,
+                offset: 0,
+                options,
+                consumeFullText: true,
+                expectedErrors: expectedErrors
+            );
         }
 
-        internal void UsingDeclaration(string text, int offset = 0, ParseOptions? options = null, bool consumeFullText = true, params DiagnosticDescription[] expectedErrors)
+        internal void UsingDeclaration(
+            string text,
+            int offset = 0,
+            ParseOptions? options = null,
+            bool consumeFullText = true,
+            params DiagnosticDescription[] expectedErrors
+        )
         {
             var node = SyntaxFactory.ParseMemberDeclaration(text, offset, options, consumeFullText);
             Debug.Assert(node is object);
@@ -118,18 +154,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             UsingNode(node);
         }
 
-        internal void UsingExpression(string text, ParseOptions? options, params DiagnosticDescription[] expectedErrors)
+        internal void UsingExpression(
+            string text,
+            ParseOptions? options,
+            params DiagnosticDescription[] expectedErrors
+        )
         {
             UsingNode(text, SyntaxFactory.ParseExpression(text, options: options), expectedErrors);
         }
 
-        protected void UsingNode(string text, CSharpSyntaxNode node, params DiagnosticDescription[] expectedErrors)
+        protected void UsingNode(
+            string text,
+            CSharpSyntaxNode node,
+            params DiagnosticDescription[] expectedErrors
+        )
         {
             Validate(text, node, expectedErrors);
             UsingNode(node);
         }
 
-        protected void Validate(string text, CSharpSyntaxNode node, params DiagnosticDescription[] expectedErrors)
+        protected void Validate(
+            string text,
+            CSharpSyntaxNode node,
+            params DiagnosticDescription[] expectedErrors
+        )
         {
             // we validate the text roundtrips
             Assert.Equal(text, node.ToFullString());
@@ -147,7 +195,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return UsingTree(text, options: null, expectedErrors);
         }
 
-        protected SyntaxTree UsingTree(string text, CSharpParseOptions? options, params DiagnosticDescription[] expectedErrors)
+        protected SyntaxTree UsingTree(
+            string text,
+            CSharpParseOptions? options,
+            params DiagnosticDescription[] expectedErrors
+        )
         {
             VerifyEnumeratorConsumed();
             var tree = ParseTree(text, options);
@@ -170,7 +222,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return root;
         }
 
-        protected CSharpSyntaxNode UsingNode(string text, CSharpParseOptions options, params DiagnosticDescription[] expectedErrors)
+        protected CSharpSyntaxNode UsingNode(
+            string text,
+            CSharpParseOptions options,
+            params DiagnosticDescription[] expectedErrors
+        )
         {
             var node = ParseNode(text, options);
             UsingNode(text, node, expectedErrors);
@@ -309,7 +365,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         _output.WriteLine(@"N(SyntaxKind.{0}, ""{1}"");", node.Kind(), value);
                         break;
                     default:
-                        _output.WriteLine("{0}(SyntaxKind.{1});", node.IsMissing ? "M" : "N", node.Kind());
+                        _output.WriteLine(
+                            "{0}(SyntaxKind.{1});",
+                            node.IsMissing ? "M" : "N",
+                            node.Kind()
+                        );
                         break;
                 }
             }
@@ -358,16 +418,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     stringBuilder.Append(' ');
 
                     // Verify that we can parse and round-trip
-                    _ = SyntaxFactory.ParseSyntaxTree(stringBuilder.ToString(), TestOptions.RegularPreview);
+                    _ = SyntaxFactory.ParseSyntaxTree(
+                        stringBuilder.ToString(),
+                        TestOptions.RegularPreview
+                    );
                 }
             }
 
             static ImmutableArray<Syntax.InternalSyntax.SyntaxToken> getLexedTokens(string text)
             {
-                var lexer = new Syntax.InternalSyntax.Lexer(Text.SourceText.From(text), CSharpParseOptions.Default);
+                var lexer = new Syntax.InternalSyntax.Lexer(
+                    Text.SourceText.From(text),
+                    CSharpParseOptions.Default
+                );
                 var tokensBuilder = ArrayBuilder<Syntax.InternalSyntax.SyntaxToken>.GetInstance();
 
-                while (lexer.Lex(Syntax.InternalSyntax.LexerMode.Syntax) is var token && token.Kind != SyntaxKind.EndOfFileToken)
+                while (
+                    lexer.Lex(Syntax.InternalSyntax.LexerMode.Syntax) is var token
+                    && token.Kind != SyntaxKind.EndOfFileToken
+                )
                 {
                     tokensBuilder.Add(token);
                 }

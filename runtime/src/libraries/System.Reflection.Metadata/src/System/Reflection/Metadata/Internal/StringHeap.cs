@@ -27,24 +27,31 @@ namespace System.Reflection.Metadata.Ecma335
                 // when comparing to a text that ends with a high surrogate.
 
                 var values = new string[(int)StringHandle.VirtualIndex.Count];
-                values[(int)StringHandle.VirtualIndex.System_Runtime_WindowsRuntime] = "System.Runtime.WindowsRuntime";
+                values[(int)StringHandle.VirtualIndex.System_Runtime_WindowsRuntime] =
+                    "System.Runtime.WindowsRuntime";
                 values[(int)StringHandle.VirtualIndex.System_Runtime] = "System.Runtime";
                 values[(int)StringHandle.VirtualIndex.System_ObjectModel] = "System.ObjectModel";
-                values[(int)StringHandle.VirtualIndex.System_Runtime_WindowsRuntime_UI_Xaml] = "System.Runtime.WindowsRuntime.UI.Xaml";
-                values[(int)StringHandle.VirtualIndex.System_Runtime_InteropServices_WindowsRuntime] = "System.Runtime.InteropServices.WindowsRuntime";
-                values[(int)StringHandle.VirtualIndex.System_Numerics_Vectors] = "System.Numerics.Vectors";
+                values[(int)StringHandle.VirtualIndex.System_Runtime_WindowsRuntime_UI_Xaml] =
+                    "System.Runtime.WindowsRuntime.UI.Xaml";
+                values[
+                    (int)StringHandle.VirtualIndex.System_Runtime_InteropServices_WindowsRuntime
+                ] = "System.Runtime.InteropServices.WindowsRuntime";
+                values[(int)StringHandle.VirtualIndex.System_Numerics_Vectors] =
+                    "System.Numerics.Vectors";
 
                 values[(int)StringHandle.VirtualIndex.Dispose] = "Dispose";
 
                 values[(int)StringHandle.VirtualIndex.AttributeTargets] = "AttributeTargets";
-                values[(int)StringHandle.VirtualIndex.AttributeUsageAttribute] = "AttributeUsageAttribute";
+                values[(int)StringHandle.VirtualIndex.AttributeUsageAttribute] =
+                    "AttributeUsageAttribute";
                 values[(int)StringHandle.VirtualIndex.Color] = "Color";
                 values[(int)StringHandle.VirtualIndex.CornerRadius] = "CornerRadius";
                 values[(int)StringHandle.VirtualIndex.DateTimeOffset] = "DateTimeOffset";
                 values[(int)StringHandle.VirtualIndex.Duration] = "Duration";
                 values[(int)StringHandle.VirtualIndex.DurationType] = "DurationType";
                 values[(int)StringHandle.VirtualIndex.EventHandler1] = "EventHandler`1";
-                values[(int)StringHandle.VirtualIndex.EventRegistrationToken] = "EventRegistrationToken";
+                values[(int)StringHandle.VirtualIndex.EventRegistrationToken] =
+                    "EventRegistrationToken";
                 values[(int)StringHandle.VirtualIndex.Exception] = "Exception";
                 values[(int)StringHandle.VirtualIndex.GeneratorPosition] = "GeneratorPosition";
                 values[(int)StringHandle.VirtualIndex.GridLength] = "GridLength";
@@ -56,9 +63,12 @@ namespace System.Reflection.Metadata.Ecma335
                 values[(int)StringHandle.VirtualIndex.IEnumerable1] = "IEnumerable`1";
                 values[(int)StringHandle.VirtualIndex.IList] = "IList";
                 values[(int)StringHandle.VirtualIndex.IList1] = "IList`1";
-                values[(int)StringHandle.VirtualIndex.INotifyCollectionChanged] = "INotifyCollectionChanged";
-                values[(int)StringHandle.VirtualIndex.INotifyPropertyChanged] = "INotifyPropertyChanged";
-                values[(int)StringHandle.VirtualIndex.IReadOnlyDictionary2] = "IReadOnlyDictionary`2";
+                values[(int)StringHandle.VirtualIndex.INotifyCollectionChanged] =
+                    "INotifyCollectionChanged";
+                values[(int)StringHandle.VirtualIndex.INotifyPropertyChanged] =
+                    "INotifyPropertyChanged";
+                values[(int)StringHandle.VirtualIndex.IReadOnlyDictionary2] =
+                    "IReadOnlyDictionary`2";
                 values[(int)StringHandle.VirtualIndex.IReadOnlyList1] = "IReadOnlyList`1";
                 values[(int)StringHandle.VirtualIndex.KeyTime] = "KeyTime";
                 values[(int)StringHandle.VirtualIndex.KeyValuePair2] = "KeyValuePair`2";
@@ -66,14 +76,19 @@ namespace System.Reflection.Metadata.Ecma335
                 values[(int)StringHandle.VirtualIndex.Matrix3D] = "Matrix3D";
                 values[(int)StringHandle.VirtualIndex.Matrix3x2] = "Matrix3x2";
                 values[(int)StringHandle.VirtualIndex.Matrix4x4] = "Matrix4x4";
-                values[(int)StringHandle.VirtualIndex.NotifyCollectionChangedAction] = "NotifyCollectionChangedAction";
-                values[(int)StringHandle.VirtualIndex.NotifyCollectionChangedEventArgs] = "NotifyCollectionChangedEventArgs";
-                values[(int)StringHandle.VirtualIndex.NotifyCollectionChangedEventHandler] = "NotifyCollectionChangedEventHandler";
+                values[(int)StringHandle.VirtualIndex.NotifyCollectionChangedAction] =
+                    "NotifyCollectionChangedAction";
+                values[(int)StringHandle.VirtualIndex.NotifyCollectionChangedEventArgs] =
+                    "NotifyCollectionChangedEventArgs";
+                values[(int)StringHandle.VirtualIndex.NotifyCollectionChangedEventHandler] =
+                    "NotifyCollectionChangedEventHandler";
                 values[(int)StringHandle.VirtualIndex.Nullable1] = "Nullable`1";
                 values[(int)StringHandle.VirtualIndex.Plane] = "Plane";
                 values[(int)StringHandle.VirtualIndex.Point] = "Point";
-                values[(int)StringHandle.VirtualIndex.PropertyChangedEventArgs] = "PropertyChangedEventArgs";
-                values[(int)StringHandle.VirtualIndex.PropertyChangedEventHandler] = "PropertyChangedEventHandler";
+                values[(int)StringHandle.VirtualIndex.PropertyChangedEventArgs] =
+                    "PropertyChangedEventArgs";
+                values[(int)StringHandle.VirtualIndex.PropertyChangedEventHandler] =
+                    "PropertyChangedEventHandler";
                 values[(int)StringHandle.VirtualIndex.Quaternion] = "Quaternion";
                 values[(int)StringHandle.VirtualIndex.Rect] = "Rect";
                 values[(int)StringHandle.VirtualIndex.RepeatBehavior] = "RepeatBehavior";
@@ -81,11 +96,15 @@ namespace System.Reflection.Metadata.Ecma335
                 values[(int)StringHandle.VirtualIndex.Size] = "Size";
                 values[(int)StringHandle.VirtualIndex.System] = "System";
                 values[(int)StringHandle.VirtualIndex.System_Collections] = "System.Collections";
-                values[(int)StringHandle.VirtualIndex.System_Collections_Generic] = "System.Collections.Generic";
-                values[(int)StringHandle.VirtualIndex.System_Collections_Specialized] = "System.Collections.Specialized";
-                values[(int)StringHandle.VirtualIndex.System_ComponentModel] = "System.ComponentModel";
+                values[(int)StringHandle.VirtualIndex.System_Collections_Generic] =
+                    "System.Collections.Generic";
+                values[(int)StringHandle.VirtualIndex.System_Collections_Specialized] =
+                    "System.Collections.Specialized";
+                values[(int)StringHandle.VirtualIndex.System_ComponentModel] =
+                    "System.ComponentModel";
                 values[(int)StringHandle.VirtualIndex.System_Numerics] = "System.Numerics";
-                values[(int)StringHandle.VirtualIndex.System_Windows_Input] = "System.Windows.Input";
+                values[(int)StringHandle.VirtualIndex.System_Windows_Input] =
+                    "System.Windows.Input";
                 values[(int)StringHandle.VirtualIndex.Thickness] = "Thickness";
                 values[(int)StringHandle.VirtualIndex.TimeSpan] = "TimeSpan";
                 values[(int)StringHandle.VirtualIndex.Type] = "Type";
@@ -96,10 +115,14 @@ namespace System.Reflection.Metadata.Ecma335
                 values[(int)StringHandle.VirtualIndex.Windows_Foundation] = "Windows.Foundation";
                 values[(int)StringHandle.VirtualIndex.Windows_UI] = "Windows.UI";
                 values[(int)StringHandle.VirtualIndex.Windows_UI_Xaml] = "Windows.UI.Xaml";
-                values[(int)StringHandle.VirtualIndex.Windows_UI_Xaml_Controls_Primitives] = "Windows.UI.Xaml.Controls.Primitives";
-                values[(int)StringHandle.VirtualIndex.Windows_UI_Xaml_Media] = "Windows.UI.Xaml.Media";
-                values[(int)StringHandle.VirtualIndex.Windows_UI_Xaml_Media_Animation] = "Windows.UI.Xaml.Media.Animation";
-                values[(int)StringHandle.VirtualIndex.Windows_UI_Xaml_Media_Media3D] = "Windows.UI.Xaml.Media.Media3D";
+                values[(int)StringHandle.VirtualIndex.Windows_UI_Xaml_Controls_Primitives] =
+                    "Windows.UI.Xaml.Controls.Primitives";
+                values[(int)StringHandle.VirtualIndex.Windows_UI_Xaml_Media] =
+                    "Windows.UI.Xaml.Media";
+                values[(int)StringHandle.VirtualIndex.Windows_UI_Xaml_Media_Animation] =
+                    "Windows.UI.Xaml.Media.Animation";
+                values[(int)StringHandle.VirtualIndex.Windows_UI_Xaml_Media_Media3D] =
+                    "Windows.UI.Xaml.Media.Media3D";
 
                 s_virtualValues = values;
                 AssertFilled();
@@ -113,7 +136,10 @@ namespace System.Reflection.Metadata.Ecma335
         {
             for (int i = 0; i < s_virtualValues!.Length; i++)
             {
-                Debug.Assert(s_virtualValues[i] != null, $"Missing virtual value for StringHandle.VirtualIndex.{(StringHandle.VirtualIndex)i}");
+                Debug.Assert(
+                    s_virtualValues[i] != null,
+                    $"Missing virtual value for StringHandle.VirtualIndex.{(StringHandle.VirtualIndex)i}"
+                );
             }
         }
 
@@ -146,12 +172,16 @@ namespace System.Reflection.Metadata.Ecma335
 
         internal string GetString(StringHandle handle, MetadataStringDecoder utf8Decoder)
         {
-            return handle.IsVirtual ? GetVirtualHandleString(handle, utf8Decoder) : GetNonVirtualString(handle, utf8Decoder, prefixOpt: null);
+            return handle.IsVirtual
+                ? GetVirtualHandleString(handle, utf8Decoder)
+                : GetNonVirtualString(handle, utf8Decoder, prefixOpt: null);
         }
 
         internal MemoryBlock GetMemoryBlock(StringHandle handle)
         {
-            return handle.IsVirtual ? GetVirtualHandleMemoryBlock(handle) : GetNonVirtualStringMemoryBlock(handle);
+            return handle.IsVirtual
+                ? GetVirtualHandleMemoryBlock(handle)
+                : GetNonVirtualStringMemoryBlock(handle);
         }
 
         internal static string GetVirtualString(StringHandle.VirtualIndex index)
@@ -159,12 +189,22 @@ namespace System.Reflection.Metadata.Ecma335
             return s_virtualValues![(int)index];
         }
 
-        private string GetNonVirtualString(StringHandle handle, MetadataStringDecoder utf8Decoder, byte[]? prefixOpt)
+        private string GetNonVirtualString(
+            StringHandle handle,
+            MetadataStringDecoder utf8Decoder,
+            byte[]? prefixOpt
+        )
         {
             Debug.Assert(handle.StringKind != StringKind.Virtual);
 
             char otherTerminator = handle.StringKind == StringKind.DotTerminated ? '.' : '\0';
-            return Block.PeekUtf8NullTerminated(handle.GetHeapOffset(), prefixOpt, utf8Decoder, out _, otherTerminator);
+            return Block.PeekUtf8NullTerminated(
+                handle.GetHeapOffset(),
+                prefixOpt,
+                utf8Decoder,
+                out _,
+                otherTerminator
+            );
         }
 
         private unsafe MemoryBlock GetNonVirtualStringMemoryBlock(StringHandle handle)
@@ -189,14 +229,21 @@ namespace System.Reflection.Metadata.Ecma335
             return bytes;
         }
 
-        private string GetVirtualHandleString(StringHandle handle, MetadataStringDecoder utf8Decoder)
+        private string GetVirtualHandleString(
+            StringHandle handle,
+            MetadataStringDecoder utf8Decoder
+        )
         {
             Debug.Assert(handle.IsVirtual);
 
             return handle.StringKind switch
             {
                 StringKind.Virtual => GetVirtualString(handle.GetVirtualIndex()),
-                StringKind.WinRTPrefixed => GetNonVirtualString(handle, utf8Decoder, MetadataReader.WinRTPrefix),
+                StringKind.WinRTPrefixed => GetNonVirtualString(
+                    handle,
+                    utf8Decoder,
+                    MetadataReader.WinRTPrefix
+                ),
                 _ => throw ExceptionUtilities.UnexpectedValue(handle.StringKind),
             };
         }
@@ -212,8 +259,13 @@ namespace System.Reflection.Metadata.Ecma335
                 {
                     byte[] bytes = handle.StringKind switch
                     {
-                        StringKind.Virtual => Encoding.UTF8.GetBytes(GetVirtualString(handle.GetVirtualIndex())),
-                        StringKind.WinRTPrefixed => GetNonVirtualStringBytes(handle, MetadataReader.WinRTPrefix),
+                        StringKind.Virtual => Encoding.UTF8.GetBytes(
+                            GetVirtualString(handle.GetVirtualIndex())
+                        ),
+                        StringKind.WinRTPrefixed => GetNonVirtualStringBytes(
+                            handle,
+                            MetadataReader.WinRTPrefix
+                        ),
                         _ => throw ExceptionUtilities.UnexpectedValue(handle.StringKind),
                     };
                     block = heap.AddBlob(handle.RawValue, bytes);
@@ -244,14 +296,23 @@ namespace System.Reflection.Metadata.Ecma335
             return StringHandle.FromOffset(terminator + 1);
         }
 
-        internal bool Equals(StringHandle handle, string value, MetadataStringDecoder utf8Decoder, bool ignoreCase)
+        internal bool Equals(
+            StringHandle handle,
+            string value,
+            MetadataStringDecoder utf8Decoder,
+            bool ignoreCase
+        )
         {
             Debug.Assert(value != null);
 
             if (handle.IsVirtual)
             {
                 // TODO: This can allocate unnecessarily for <WinRT> prefixed handles.
-                return string.Equals(GetString(handle, utf8Decoder), value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
+                return string.Equals(
+                    GetString(handle, utf8Decoder),
+                    value,
+                    ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal
+                );
             }
 
             if (handle.IsNil)
@@ -260,17 +321,32 @@ namespace System.Reflection.Metadata.Ecma335
             }
 
             char otherTerminator = handle.StringKind == StringKind.DotTerminated ? '.' : '\0';
-            return this.Block.Utf8NullTerminatedEquals(handle.GetHeapOffset(), value, utf8Decoder, otherTerminator, ignoreCase);
+            return this.Block.Utf8NullTerminatedEquals(
+                handle.GetHeapOffset(),
+                value,
+                utf8Decoder,
+                otherTerminator,
+                ignoreCase
+            );
         }
 
-        internal bool StartsWith(StringHandle handle, string value, MetadataStringDecoder utf8Decoder, bool ignoreCase)
+        internal bool StartsWith(
+            StringHandle handle,
+            string value,
+            MetadataStringDecoder utf8Decoder,
+            bool ignoreCase
+        )
         {
             Debug.Assert(value != null);
 
             if (handle.IsVirtual)
             {
                 // TODO: This can allocate unnecessarily for <WinRT> prefixed handles.
-                return GetString(handle, utf8Decoder).StartsWith(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
+                return GetString(handle, utf8Decoder)
+                    .StartsWith(
+                        value,
+                        ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal
+                    );
             }
 
             if (handle.IsNil)
@@ -279,7 +355,13 @@ namespace System.Reflection.Metadata.Ecma335
             }
 
             char otherTerminator = handle.StringKind == StringKind.DotTerminated ? '.' : '\0';
-            return this.Block.Utf8NullTerminatedStartsWith(handle.GetHeapOffset(), value, utf8Decoder, otherTerminator, ignoreCase);
+            return this.Block.Utf8NullTerminatedStartsWith(
+                handle.GetHeapOffset(),
+                value,
+                utf8Decoder,
+                otherTerminator,
+                ignoreCase
+            );
         }
 
         /// <summary>
@@ -289,7 +371,10 @@ namespace System.Reflection.Metadata.Ecma335
         {
             Debug.Assert(!rawHandle.IsVirtual);
             Debug.Assert(rawHandle.StringKind != StringKind.DotTerminated, "Not supported");
-            return this.Block.CompareUtf8NullTerminatedStringWithAsciiString(rawHandle.GetHeapOffset(), asciiString) == 0;
+            return this.Block.CompareUtf8NullTerminatedStringWithAsciiString(
+                    rawHandle.GetHeapOffset(),
+                    asciiString
+                ) == 0;
         }
 
         /// <summary>
@@ -308,7 +393,10 @@ namespace System.Reflection.Metadata.Ecma335
         {
             Debug.Assert(!rawHandle.IsVirtual);
             Debug.Assert(rawHandle.StringKind != StringKind.DotTerminated, "Not supported");
-            return this.Block.Utf8NullTerminatedStringStartsWithAsciiPrefix(rawHandle.GetHeapOffset(), asciiPrefix);
+            return this.Block.Utf8NullTerminatedStringStartsWithAsciiPrefix(
+                rawHandle.GetHeapOffset(),
+                asciiPrefix
+            );
         }
 
         /// <summary>

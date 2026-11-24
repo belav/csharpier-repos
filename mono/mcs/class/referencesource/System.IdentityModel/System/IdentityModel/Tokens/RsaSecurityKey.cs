@@ -8,7 +8,7 @@ namespace System.IdentityModel.Tokens
     using System.Security.Cryptography;
     using System.Security.Cryptography.Xml;
 
-    sealed public class RsaSecurityKey : AsymmetricSecurityKey
+    public sealed class RsaSecurityKey : AsymmetricSecurityKey
     {
         PrivateKeyStatus privateKeyStatus = PrivateKeyStatus.AvailabilityNotDetermined;
         readonly RSA rsa;
@@ -38,8 +38,15 @@ namespace System.IdentityModel.Tokens
                     if (IsSupportedAlgorithm(algorithm))
                         return EncryptedXml.DecryptKey(keyData, rsa, false);
 
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CryptographicException(SR.GetString(SR.UnsupportedAlgorithmForCryptoOperation,
-                 algorithm, "DecryptKey")));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CryptographicException(
+                            SR.GetString(
+                                SR.UnsupportedAlgorithmForCryptoOperation,
+                                algorithm,
+                                "DecryptKey"
+                            )
+                        )
+                    );
             }
         }
 
@@ -55,16 +62,28 @@ namespace System.IdentityModel.Tokens
                     if (IsSupportedAlgorithm(algorithm))
                         return EncryptedXml.EncryptKey(keyData, rsa, false);
 
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CryptographicException(SR.GetString(SR.UnsupportedAlgorithmForCryptoOperation,
-                        algorithm, "EncryptKey")));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CryptographicException(
+                            SR.GetString(
+                                SR.UnsupportedAlgorithmForCryptoOperation,
+                                algorithm,
+                                "EncryptKey"
+                            )
+                        )
+                    );
             }
         }
 
-        public override AsymmetricAlgorithm GetAsymmetricAlgorithm(string algorithm, bool requiresPrivateKey)
+        public override AsymmetricAlgorithm GetAsymmetricAlgorithm(
+            string algorithm,
+            bool requiresPrivateKey
+        )
         {
             if (requiresPrivateKey && !HasPrivateKey())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CryptographicException(SR.GetString(SR.NoPrivateKeyAvailable)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CryptographicException(SR.GetString(SR.NoPrivateKeyAvailable))
+                );
             }
 
             return this.rsa;
@@ -74,7 +93,10 @@ namespace System.IdentityModel.Tokens
         {
             if (string.IsNullOrEmpty(algorithm))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(algorithm, SR.GetString(SR.EmptyOrNullArgumentString, "algorithm"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    algorithm,
+                    SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
+                );
             }
 
             object algorithmObject = CryptoHelper.GetAlgorithmFromConfig(algorithm);
@@ -89,8 +111,11 @@ namespace System.IdentityModel.Tokens
                 if (hashAlgorithm != null)
                     return hashAlgorithm;
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CryptographicException(SR.GetString(SR.UnsupportedCryptoAlgorithm,
-                        algorithm)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CryptographicException(
+                        SR.GetString(SR.UnsupportedCryptoAlgorithm, algorithm)
+                    )
+                );
             }
 
             switch (algorithm)
@@ -100,8 +125,15 @@ namespace System.IdentityModel.Tokens
                 case SecurityAlgorithms.RsaSha256Signature:
                     return CryptoHelper.NewSha256HashAlgorithm();
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CryptographicException(SR.GetString(SR.UnsupportedAlgorithmForCryptoOperation,
-                        algorithm, "GetHashAlgorithmForSignature")));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CryptographicException(
+                            SR.GetString(
+                                SR.UnsupportedAlgorithmForCryptoOperation,
+                                algorithm,
+                                "GetHashAlgorithmForSignature"
+                            )
+                        )
+                    );
             }
         }
 
@@ -109,7 +141,10 @@ namespace System.IdentityModel.Tokens
         {
             if (string.IsNullOrEmpty(algorithm))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(algorithm, SR.GetString(SR.EmptyOrNullArgumentString, "algorithm"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    algorithm,
+                    SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
+                );
             }
 
             object algorithmObject = CryptoHelper.GetAlgorithmFromConfig(algorithm);
@@ -121,7 +156,8 @@ namespace System.IdentityModel.Tokens
 
                 try
                 {
-                    AsymmetricSignatureDeformatter asymmetricSignatureDeformatter = algorithmObject as AsymmetricSignatureDeformatter;
+                    AsymmetricSignatureDeformatter asymmetricSignatureDeformatter =
+                        algorithmObject as AsymmetricSignatureDeformatter;
                     if (asymmetricSignatureDeformatter != null)
                     {
                         asymmetricSignatureDeformatter.SetKey(this.rsa);
@@ -130,11 +166,23 @@ namespace System.IdentityModel.Tokens
                 }
                 catch (InvalidCastException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.AlgorithmAndKeyMisMatch, algorithm), e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.AlgorithmAndKeyMisMatch, algorithm),
+                            e
+                        )
+                    );
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CryptographicException(SR.GetString(SR.UnsupportedAlgorithmForCryptoOperation,
-                       algorithm, "GetSignatureDeformatter")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CryptographicException(
+                        SR.GetString(
+                            SR.UnsupportedAlgorithmForCryptoOperation,
+                            algorithm,
+                            "GetSignatureDeformatter"
+                        )
+                    )
+                );
             }
 
             switch (algorithm)
@@ -143,8 +191,15 @@ namespace System.IdentityModel.Tokens
                 case SecurityAlgorithms.RsaSha256Signature:
                     return new RSAPKCS1SignatureDeformatter(rsa);
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CryptographicException(SR.GetString(SR.UnsupportedAlgorithmForCryptoOperation,
-                        algorithm, "GetSignatureDeformatter")));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CryptographicException(
+                            SR.GetString(
+                                SR.UnsupportedAlgorithmForCryptoOperation,
+                                algorithm,
+                                "GetSignatureDeformatter"
+                            )
+                        )
+                    );
             }
         }
 
@@ -152,7 +207,10 @@ namespace System.IdentityModel.Tokens
         {
             if (string.IsNullOrEmpty(algorithm))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(algorithm, SR.GetString(SR.EmptyOrNullArgumentString, "algorithm"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    algorithm,
+                    SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
+                );
             }
 
             object algorithmObject = CryptoHelper.GetAlgorithmFromConfig(algorithm);
@@ -164,7 +222,8 @@ namespace System.IdentityModel.Tokens
 
                 try
                 {
-                    AsymmetricSignatureFormatter asymmetricSignatureFormatter = algorithmObject as AsymmetricSignatureFormatter;
+                    AsymmetricSignatureFormatter asymmetricSignatureFormatter =
+                        algorithmObject as AsymmetricSignatureFormatter;
 
                     if (asymmetricSignatureFormatter != null)
                     {
@@ -174,11 +233,23 @@ namespace System.IdentityModel.Tokens
                 }
                 catch (InvalidCastException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.AlgorithmAndKeyMisMatch, algorithm), e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.AlgorithmAndKeyMisMatch, algorithm),
+                            e
+                        )
+                    );
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CryptographicException(SR.GetString(SR.UnsupportedAlgorithmForCryptoOperation,
-                       algorithm, "GetSignatureFormatter")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CryptographicException(
+                        SR.GetString(
+                            SR.UnsupportedAlgorithmForCryptoOperation,
+                            algorithm,
+                            "GetSignatureFormatter"
+                        )
+                    )
+                );
             }
 
             switch (algorithm)
@@ -188,8 +259,15 @@ namespace System.IdentityModel.Tokens
                     // Ensure that we have an RSA algorithm object.
                     return new RSAPKCS1SignatureFormatter(this.rsa);
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CryptographicException(SR.GetString(SR.UnsupportedAlgorithmForCryptoOperation,
-                        algorithm, "GetSignatureFormatter")));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CryptographicException(
+                            SR.GetString(
+                                SR.UnsupportedAlgorithmForCryptoOperation,
+                                algorithm,
+                                "GetSignatureFormatter"
+                            )
+                        )
+                    );
             }
         }
 
@@ -197,10 +275,13 @@ namespace System.IdentityModel.Tokens
         {
             if (this.privateKeyStatus == PrivateKeyStatus.AvailabilityNotDetermined)
             {
-                RSACryptoServiceProvider rsaCryptoServiceProvider = this.rsa as RSACryptoServiceProvider;
+                RSACryptoServiceProvider rsaCryptoServiceProvider =
+                    this.rsa as RSACryptoServiceProvider;
                 if (rsaCryptoServiceProvider != null)
                 {
-                    this.privateKeyStatus = rsaCryptoServiceProvider.PublicOnly ? PrivateKeyStatus.DoesNotHavePrivateKey : PrivateKeyStatus.HasPrivateKey;
+                    this.privateKeyStatus = rsaCryptoServiceProvider.PublicOnly
+                        ? PrivateKeyStatus.DoesNotHavePrivateKey
+                        : PrivateKeyStatus.HasPrivateKey;
                 }
                 else
                 {
@@ -223,7 +304,10 @@ namespace System.IdentityModel.Tokens
         {
             if (string.IsNullOrEmpty(algorithm))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(algorithm, SR.GetString(SR.EmptyOrNullArgumentString, "algorithm"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    algorithm,
+                    SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
+                );
             }
 
             return CryptoHelper.IsAsymmetricAlgorithm(algorithm);
@@ -233,7 +317,10 @@ namespace System.IdentityModel.Tokens
         {
             if (string.IsNullOrEmpty(algorithm))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(algorithm, SR.GetString(SR.EmptyOrNullArgumentString, "algorithm"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    algorithm,
+                    SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
+                );
             }
 
             object algorithmObject = null;
@@ -279,7 +366,7 @@ namespace System.IdentityModel.Tokens
         {
             AvailabilityNotDetermined,
             HasPrivateKey,
-            DoesNotHavePrivateKey
+            DoesNotHavePrivateKey,
         }
     }
 }

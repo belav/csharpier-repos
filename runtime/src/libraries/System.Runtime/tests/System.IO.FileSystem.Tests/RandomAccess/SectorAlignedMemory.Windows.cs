@@ -28,21 +28,23 @@ namespace System.IO.Tests
                 IntPtr.Zero.ToPointer(),
                 new UIntPtr((uint)(Marshal.SizeOf<T>() * length)),
                 MemOptions.MEM_COMMIT | MemOptions.MEM_RESERVE,
-                PageOptions.PAGE_READWRITE);
+                PageOptions.PAGE_READWRITE
+            );
 
             return new SectorAlignedMemory<T>(memory, length);
         }
 
         public bool IsDisposed => _disposed;
 
-        public unsafe override Span<T> GetSpan() => new Span<T>((void*)_memory, _length);
+        public override unsafe Span<T> GetSpan() => new Span<T>((void*)_memory, _length);
 
         public override MemoryHandle Pin(int elementIndex = 0)
         {
             unsafe
             {
                 Retain();
-                if ((uint)elementIndex > _length) throw new ArgumentOutOfRangeException(nameof(elementIndex));
+                if ((uint)elementIndex > _length)
+                    throw new ArgumentOutOfRangeException(nameof(elementIndex));
                 void* pointer = Unsafe.Add<T>((void*)_memory, elementIndex);
                 return new MemoryHandle(pointer, default, this);
             }
@@ -81,7 +83,8 @@ namespace System.IO.Tests
                 _memory.ToPointer(),
                 new UIntPtr((uint)(Marshal.SizeOf<T>() * _length)),
                 MemOptions.MEM_FREE,
-                PageOptions.PAGE_READWRITE);
+                PageOptions.PAGE_READWRITE
+            );
             _memory = IntPtr.Zero;
 
             _disposed = true;

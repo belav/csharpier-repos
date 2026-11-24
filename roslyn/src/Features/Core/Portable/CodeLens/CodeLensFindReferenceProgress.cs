@@ -27,12 +27,16 @@ namespace Microsoft.CodeAnalysis.CodeLens
         ISymbol queriedDefinition,
         SyntaxNode queriedNode,
         int searchCap,
-        CancellationToken cancellationToken) : IFindReferencesProgress, IDisposable
+        CancellationToken cancellationToken
+    ) : IFindReferencesProgress, IDisposable
     {
-        private readonly CancellationTokenSource _aggregateCancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        private readonly CancellationTokenSource _aggregateCancellationTokenSource =
+            CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
         private readonly SyntaxNode _queriedNode = queriedNode;
         private readonly ISymbol _queriedSymbol = queriedDefinition;
-        private readonly ConcurrentSet<Location> _locations = new ConcurrentSet<Location>(LocationComparer.Instance);
+        private readonly ConcurrentSet<Location> _locations = new ConcurrentSet<Location>(
+            LocationComparer.Instance
+        );
 
         /// <remarks>
         /// If the cap is 0, then there is no cap.
@@ -50,38 +54,38 @@ namespace Microsoft.CodeAnalysis.CodeLens
 
         public ImmutableArray<Location> Locations => _locations.ToImmutableArray();
 
-        public void OnStarted()
-        {
-        }
+        public void OnStarted() { }
 
-        public void OnCompleted()
-        {
-        }
+        public void OnCompleted() { }
 
-        public void OnFindInDocumentStarted(Document document)
-        {
-        }
+        public void OnFindInDocumentStarted(Document document) { }
 
-        public void OnFindInDocumentCompleted(Document document)
-        {
-        }
+        public void OnFindInDocumentCompleted(Document document) { }
 
         private static bool FilterDefinition(ISymbol definition)
         {
-            return definition.IsImplicitlyDeclared ||
-                   (definition as IMethodSymbol)?.AssociatedSymbol != null;
+            return definition.IsImplicitlyDeclared
+                || (definition as IMethodSymbol)?.AssociatedSymbol != null;
         }
 
         // Returns partial symbol locations whose node does not match the queried syntaxNode
-        private IEnumerable<Location> GetPartialLocations(ISymbol symbol, CancellationToken cancellationToken)
+        private IEnumerable<Location> GetPartialLocations(
+            ISymbol symbol,
+            CancellationToken cancellationToken
+        )
         {
             // Returns nodes from source not equal to actual location
             return from syntaxReference in symbol.DeclaringSyntaxReferences
-                   let candidateSyntaxNode = syntaxReference.GetSyntax(cancellationToken)
-                   where !(_queriedNode.Span == candidateSyntaxNode.Span &&
-                           _queriedNode.SyntaxTree.FilePath.Equals(candidateSyntaxNode.SyntaxTree.FilePath,
-                               StringComparison.OrdinalIgnoreCase))
-                   select candidateSyntaxNode.GetLocation();
+                let candidateSyntaxNode = syntaxReference.GetSyntax(cancellationToken)
+                where
+                    !(
+                        _queriedNode.Span == candidateSyntaxNode.Span
+                        && _queriedNode.SyntaxTree.FilePath.Equals(
+                            candidateSyntaxNode.SyntaxTree.FilePath,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                select candidateSyntaxNode.GetLocation();
         }
 
         public void OnDefinitionFound(ISymbol symbol)
@@ -95,7 +99,9 @@ namespace Microsoft.CodeAnalysis.CodeLens
             // Add remote locations for all the syntax references except the queried syntax node.
             // To query for the partial locations, filter definition locations that occur in source whose span is part of
             // span of any syntax node from Definition.DeclaringSyntaxReferences except for the queried syntax node.
-            var locations = symbol.Locations.Intersect(_queriedSymbol.Locations, LocationComparer.Instance).Any()
+            var locations = symbol
+                .Locations.Intersect(_queriedSymbol.Locations, LocationComparer.Instance)
+                .Any()
                 ? GetPartialLocations(symbol, _aggregateCancellationTokenSource.Token)
                 : symbol.Locations;
 
@@ -120,11 +126,12 @@ namespace Microsoft.CodeAnalysis.CodeLens
             // so should we. Otherwise named types may have a reference count of 0, even if there are calls to its constructors, which might cause
             // people think the class is not in use (#49636).
             // Invocations to implicit parameterless constructors need to be included too.
-            var isConstructorInvocation = _queriedSymbol.Kind == SymbolKind.NamedType &&
-                                          (definition as IMethodSymbol)?.MethodKind == MethodKind.Constructor;
-            return (isImplicitlyDeclared && !isConstructorInvocation) ||
-                   !reference.Location.IsInSource ||
-                   !definition.Locations.Any(static loc => loc.IsInSource);
+            var isConstructorInvocation =
+                _queriedSymbol.Kind == SymbolKind.NamedType
+                && (definition as IMethodSymbol)?.MethodKind == MethodKind.Constructor;
+            return (isImplicitlyDeclared && !isConstructorInvocation)
+                || !reference.Location.IsInSource
+                || !definition.Locations.Any(static loc => loc.IsInSource);
         }
 
         public void OnReferenceFound(ISymbol symbol, ReferenceLocation location)
@@ -142,11 +149,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
             }
         }
 
-        public void ReportProgress(int current, int maximum)
-        {
-        }
+        public void ReportProgress(int current, int maximum) { }
 
-        public void Dispose()
-            => _aggregateCancellationTokenSource.Dispose();
+        public void Dispose() => _aggregateCancellationTokenSource.Dispose();
     }
 }

@@ -51,7 +51,9 @@ namespace System.ServiceModel.Dispatcher
             get
             {
 #pragma warning suppress 56503 // Microsoft, the property is really not implemented, cannot lie, API not public
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException()); 
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotImplementedException()
+                );
             }
         }
 
@@ -77,17 +79,26 @@ namespace System.ServiceModel.Dispatcher
 
         public RequestContext CreateRequestContext(Message message)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
-        public IAsyncResult BeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             throw TraceUtility.ThrowHelperError(new NotImplementedException(), message);
         }
 
         public void EndSend(IAsyncResult result)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
         public void Send(Message message, TimeSpan timeout)
@@ -95,14 +106,21 @@ namespace System.ServiceModel.Dispatcher
             throw TraceUtility.ThrowHelperError(new NotImplementedException(), message);
         }
 
-        public IAsyncResult BeginRequest(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginRequest(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             throw TraceUtility.ThrowHelperError(new NotImplementedException(), message);
         }
 
         public Message EndRequest(IAsyncResult result)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
         public bool TryReceive(TimeSpan timeout, out RequestContext requestContext)
@@ -117,17 +135,27 @@ namespace System.ServiceModel.Dispatcher
 
         public bool WaitForMessage(TimeSpan timeout)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
-        public IAsyncResult BeginWaitForMessage(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForMessage(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
         public bool EndWaitForMessage(IAsyncResult result)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
     }
 }

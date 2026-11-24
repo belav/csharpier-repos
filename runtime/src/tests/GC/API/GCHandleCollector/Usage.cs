@@ -39,13 +39,11 @@ public class HandleCollectorTest
     }
 }
 
-
 public class Usage
 {
     private int _numTests = 0;
     private int _numInstances = 100;
     private const int deltaPercent = 10;
-
 
     // ensures GC Collections occur when handle count exceeds maximum
     private bool Case1()
@@ -119,7 +117,6 @@ public class Usage
         return false;
     }
 
-
     // ensures GC Collections frequency decrease by threshold
     private bool Case3()
     {
@@ -151,7 +148,9 @@ public class Usage
             // ensure threshold is increasing
             if (!CheckPercentageIncrease(handleCount, prevHandleCount))
             {
-                Console.WriteLine("Percentage not increasing, performing Collect/WFPF/Collect cycle");
+                Console.WriteLine(
+                    "Percentage not increasing, performing Collect/WFPF/Collect cycle"
+                );
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
                 GC.Collect();
@@ -165,11 +164,9 @@ public class Usage
             prevHandleCount = handleCount;
         }
 
-
         Console.WriteLine("Case 3 Passed!");
         return true;
     }
-
 
     // Checks that the threshold increases are within 0.2 error margine of deltaPercent
     private bool CheckPercentageIncrease(int current, int previous)
@@ -185,7 +182,6 @@ public class Usage
 
         return retValue;
     }
-
 
     public bool RunTest()
     {
@@ -212,7 +208,6 @@ public class Usage
 
         return (numPassed == _numTests);
     }
-
 
     public static int Main()
     {

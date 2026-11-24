@@ -62,7 +62,13 @@ namespace MonoTests.Common
             _callback(null);
         }
 
-        public void StartMonitoring(string filePath, OnChangedCallback onChangedCallback, out object state, out DateTimeOffset lastWriteTime, out long fileSize)
+        public void StartMonitoring(
+            string filePath,
+            OnChangedCallback onChangedCallback,
+            out object state,
+            out DateTimeOffset lastWriteTime,
+            out long fileSize
+        )
         {
             if (UseNullState)
                 state = null;
@@ -81,9 +87,21 @@ namespace MonoTests.Common
             StopMonitoringCallCount++;
         }
 
-        void IFileChangeNotificationSystem.StartMonitoring(string filePath, OnChangedCallback onChangedCallback, out object state, out DateTimeOffset lastWriteTime, out long fileSize)
+        void IFileChangeNotificationSystem.StartMonitoring(
+            string filePath,
+            OnChangedCallback onChangedCallback,
+            out object state,
+            out DateTimeOffset lastWriteTime,
+            out long fileSize
+        )
         {
-            StartMonitoring(filePath, onChangedCallback, out state, out lastWriteTime, out fileSize);
+            StartMonitoring(
+                filePath,
+                onChangedCallback,
+                out state,
+                out lastWriteTime,
+                out fileSize
+            );
         }
 
         void IFileChangeNotificationSystem.StopMonitoring(string filePath, object state)

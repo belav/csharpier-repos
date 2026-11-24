@@ -19,20 +19,29 @@ public static class Program
 
     private sealed class DummyStream : System.IO.Stream
     {
-        protected override void Dispose (bool disposing) => throw new NotImplementedException ();
+        protected override void Dispose(bool disposing) => throw new NotImplementedException();
 
-        public override int Read (byte[] buffer, int offset, int count)
+        public override int Read(byte[] buffer, int offset, int count)
         {
             buffer[0] = 41;
             return 1;
         }
 
-        public override long Seek (long offset, SeekOrigin origin) => 0;
-        public override void SetLength (long value) {}
-        public override void Write (byte[] buffer, int offset, int count) {}
-        public override void Flush () {}
+        public override long Seek(long offset, SeekOrigin origin) => 0;
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+        public override void SetLength(long value) { }
+
+        public override void Write(byte[] buffer, int offset, int count) { }
+
+        public override void Flush() { }
+
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             Console.WriteLine("BeginRead");
             return base.BeginRead(buffer, offset, count, callback, state);

@@ -7,7 +7,13 @@ namespace System.Globalization
 {
     public partial class TextInfo
     {
-        private unsafe void NlsChangeCase(char* pSource, int pSourceLen, char* pResult, int pResultLen, bool toUpper)
+        private unsafe void NlsChangeCase(
+            char* pSource,
+            int pSourceLen,
+            char* pResult,
+            int pResultLen,
+            bool toUpper
+        )
         {
             Debug.Assert(!GlobalizationMode.Invariant);
 #if TARGET_BROWSER
@@ -25,21 +31,26 @@ namespace System.Globalization
             // right for Invariant.
             uint linguisticCasing = IsInvariantLocale(_textInfoName) ? 0 : LCMAP_LINGUISTIC_CASING;
 
-            int ret = Interop.Kernel32.LCMapStringEx(_sortHandle != IntPtr.Zero ? null : _textInfoName,
-                                                     linguisticCasing | (toUpper ? LCMAP_UPPERCASE : LCMAP_LOWERCASE),
-                                                     pSource,
-                                                     pSourceLen,
-                                                     pResult,
-                                                     pSourceLen,
-                                                     null,
-                                                     null,
-                                                     _sortHandle);
+            int ret = Interop.Kernel32.LCMapStringEx(
+                _sortHandle != IntPtr.Zero ? null : _textInfoName,
+                linguisticCasing | (toUpper ? LCMAP_UPPERCASE : LCMAP_LOWERCASE),
+                pSource,
+                pSourceLen,
+                pResult,
+                pSourceLen,
+                null,
+                null,
+                _sortHandle
+            );
             if (ret == 0)
             {
                 throw new InvalidOperationException(SR.InvalidOperation_ReadOnly);
             }
 
-            Debug.Assert(ret == pSourceLen, "Expected getting the same length of the original string");
+            Debug.Assert(
+                ret == pSourceLen,
+                "Expected getting the same length of the original string"
+            );
         }
 
         // PAL Ends here

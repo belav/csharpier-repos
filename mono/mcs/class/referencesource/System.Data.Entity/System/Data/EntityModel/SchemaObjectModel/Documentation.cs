@@ -16,7 +16,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
     /// <summary>
     /// Summary description for Documentation.
     /// </summary>
-    internal sealed class DocumentationElement: SchemaElement
+    internal sealed class DocumentationElement : SchemaElement
     {
         #region Instance Fields
         Documentation _metdataDocumentation = new Documentation();
@@ -25,13 +25,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         #region Public Methods
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parentElement"></param>
         public DocumentationElement(SchemaElement parentElement)
-        :   base(parentElement)
-        {
-        }
+            : base(parentElement) { }
         #endregion
 
         #region Public Properties
@@ -47,7 +45,6 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 return _metdataDocumentation;
             }
         }
-
 
         #endregion
 
@@ -79,13 +76,17 @@ namespace System.Data.EntityModel.SchemaObjectModel
             string text = reader.Value;
             if (!StringUtil.IsNullOrEmptyOrWhiteSpace(text))
             {
-                AddError(ErrorCode.UnexpectedXmlElement, EdmSchemaErrorSeverity.Error, System.Data.Entity.Strings.InvalidDocumentationBothTextAndStructure);
+                AddError(
+                    ErrorCode.UnexpectedXmlElement,
+                    EdmSchemaErrorSeverity.Error,
+                    System.Data.Entity.Strings.InvalidDocumentationBothTextAndStructure
+                );
             }
             return true;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         private void HandleSummaryElement(XmlReader reader)
@@ -98,12 +99,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         private void HandleLongDescriptionElement(XmlReader reader)
         {
-
             TextElement text = new TextElement(this);
 
             text.Parse(reader);

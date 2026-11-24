@@ -10,9 +10,7 @@ namespace System.Activities.Expressions
     public sealed class VariableReference<T> : EnvironmentLocationReference<T>
     {
         public VariableReference()
-            : base()
-        {
-        }
+            : base() { }
 
         public VariableReference(Variable variable)
             : base()
@@ -20,11 +18,7 @@ namespace System.Activities.Expressions
             this.Variable = variable;
         }
 
-        public Variable Variable
-        {
-            get;
-            set;
-        }
+        public Variable Variable { get; set; }
 
         public override LocationReference LocationReference
         {
@@ -41,7 +35,9 @@ namespace System.Activities.Expressions
             {
                 if (!(this.Variable is Variable<T>))
                 {
-                    metadata.AddValidationError(SR.VariableTypeInvalid(this.Variable, typeof(T), this.Variable.Type));
+                    metadata.AddValidationError(
+                        SR.VariableTypeInvalid(this.Variable, typeof(T), this.Variable.Type)
+                    );
                 }
 
                 if (!this.Variable.IsInTree)

@@ -15,7 +15,7 @@ public class ReadUtf8
     public static void TestEntryPoint()
     {
         // Warm up for PGO
-        for (int i=0; i<200; i++)
+        for (int i = 0; i < 200; i++)
         {
             Test_empty();
             Test_hello();
@@ -50,7 +50,7 @@ public class ReadUtf8
         IsEmpty(bytes.AsSpan(span.Length)); // the rest is untouched
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static bool TryGetBytes_5(Span<byte> buffer, out int bytesWritten) => 
+        static bool TryGetBytes_5(Span<byte> buffer, out int bytesWritten) =>
             Encoding.UTF8.TryGetBytes("", buffer, out bytesWritten);
     }
 
@@ -94,7 +94,7 @@ public class ReadUtf8
         IsEmpty(bytes.AsSpan(span.Length)); // the rest is untouched
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static bool TryGetBytes_5(Span<byte> buffer, out int bytesWritten) => 
+        static bool TryGetBytes_5(Span<byte> buffer, out int bytesWritten) =>
             Encoding.UTF8.TryGetBytes("hello", buffer, out bytesWritten);
     }
 
@@ -110,7 +110,7 @@ public class ReadUtf8
         IsEmpty(bytes.AsSpan(span.Length)); // the rest is untouched
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static bool TryGetBytes_5(Span<byte> buffer, out int bytesWritten) => 
+        static bool TryGetBytes_5(Span<byte> buffer, out int bytesWritten) =>
             Encoding.UTF8.TryGetBytes("\u9244", buffer, out bytesWritten);
     }
 
@@ -162,7 +162,9 @@ public class ReadUtf8
         span = bytes.AsSpan(0, 64);
         AssertIsTrue(TryGetBytes_64(span, out bytesWritten));
         AssertEquals(64, bytesWritten);
-        AssertIsTrue(span.SequenceEqual("0000111122223333000011112222333300001111222233330000111122223333"u8));
+        AssertIsTrue(
+            span.SequenceEqual("0000111122223333000011112222333300001111222233330000111122223333"u8)
+        );
         IsEmpty(bytes.AsSpan(span.Length)); // the rest is untouched
 
         // Reset data
@@ -172,7 +174,11 @@ public class ReadUtf8
         span = bytes.AsSpan(0, 128);
         AssertIsTrue(TryGetBytes_128(span, out bytesWritten));
         AssertEquals(128, bytesWritten);
-        AssertIsTrue(span.SequenceEqual("00001111222233330000111122223333000011112222333300001111222233330000111122223333000011112222333300001111222233330000111122223333"u8));
+        AssertIsTrue(
+            span.SequenceEqual(
+                "00001111222233330000111122223333000011112222333300001111222233330000111122223333000011112222333300001111222233330000111122223333"u8
+            )
+        );
         IsEmpty(bytes.AsSpan(span.Length)); // the rest is untouched
 
         // Reset data
@@ -184,7 +190,6 @@ public class ReadUtf8
         AssertEquals(31, bytesWritten);
         AssertIsTrue(span.SequenceEqual("0000111122223333000011112222333"u8));
         IsEmpty(bytes.AsSpan(span.Length)); // the rest is untouched
-
 
         span = bytes.AsSpan();
         AssertIsTrue(!TryGetBytes_16(span.Slice(0, 15), out bytesWritten));
@@ -198,30 +203,37 @@ public class ReadUtf8
         AssertIsTrue(!TryGetBytes_128(span.Slice(0, 127), out bytesWritten));
         AssertEquals(0, bytesWritten);
 
-
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static bool TryGetBytes_15(Span<byte> buffer, out int bytesWritten) => 
+        static bool TryGetBytes_15(Span<byte> buffer, out int bytesWritten) =>
             Encoding.UTF8.TryGetBytes("000011112222333", buffer, out bytesWritten);
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static bool TryGetBytes_16(Span<byte> buffer, out int bytesWritten) => 
+        static bool TryGetBytes_16(Span<byte> buffer, out int bytesWritten) =>
             Encoding.UTF8.TryGetBytes("0000111122223333", buffer, out bytesWritten);
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static bool TryGetBytes_31(Span<byte> buffer, out int bytesWritten) => 
+        static bool TryGetBytes_31(Span<byte> buffer, out int bytesWritten) =>
             Encoding.UTF8.TryGetBytes("0000111122223333000011112222333", buffer, out bytesWritten);
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static bool TryGetBytes_32(Span<byte> buffer, out int bytesWritten) => 
+        static bool TryGetBytes_32(Span<byte> buffer, out int bytesWritten) =>
             Encoding.UTF8.TryGetBytes("00001111222233330000111122223333", buffer, out bytesWritten);
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static bool TryGetBytes_64(Span<byte> buffer, out int bytesWritten) => 
-            Encoding.UTF8.TryGetBytes("0000111122223333000011112222333300001111222233330000111122223333", buffer, out bytesWritten);
+        static bool TryGetBytes_64(Span<byte> buffer, out int bytesWritten) =>
+            Encoding.UTF8.TryGetBytes(
+                "0000111122223333000011112222333300001111222233330000111122223333",
+                buffer,
+                out bytesWritten
+            );
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static bool TryGetBytes_128(Span<byte> buffer, out int bytesWritten) => 
-            Encoding.UTF8.TryGetBytes("00001111222233330000111122223333000011112222333300001111222233330000111122223333000011112222333300001111222233330000111122223333", buffer, out bytesWritten);
+        static bool TryGetBytes_128(Span<byte> buffer, out int bytesWritten) =>
+            Encoding.UTF8.TryGetBytes(
+                "00001111222233330000111122223333000011112222333300001111222233330000111122223333000011112222333300001111222233330000111122223333",
+                buffer,
+                out bytesWritten
+            );
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -265,50 +277,169 @@ public class ReadUtf8
     static void Test_2()
     {
         var buffer = new byte[1024];
-        ValidateResult("12345", Utf8.TryWrite(buffer, $"12345", out var written1), buffer, written1);
-        ValidateResult("123456", Utf8.TryWrite(buffer, $"123456", out var written2), buffer, written2);
-        ValidateResult("1234567", Utf8.TryWrite(buffer, $"1234567", out var written3), buffer, written3);
-        ValidateResult("12345678", Utf8.TryWrite(buffer, $"12345678", out var written4), buffer, written4);
-        ValidateResult("123456789", Utf8.TryWrite(buffer, $"123456789", out var written5), buffer, written5);
+        ValidateResult(
+            "12345",
+            Utf8.TryWrite(buffer, $"12345", out var written1),
+            buffer,
+            written1
+        );
+        ValidateResult(
+            "123456",
+            Utf8.TryWrite(buffer, $"123456", out var written2),
+            buffer,
+            written2
+        );
+        ValidateResult(
+            "1234567",
+            Utf8.TryWrite(buffer, $"1234567", out var written3),
+            buffer,
+            written3
+        );
+        ValidateResult(
+            "12345678",
+            Utf8.TryWrite(buffer, $"12345678", out var written4),
+            buffer,
+            written4
+        );
+        ValidateResult(
+            "123456789",
+            Utf8.TryWrite(buffer, $"123456789", out var written5),
+            buffer,
+            written5
+        );
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void Test_3()
     {
         var buffer = new byte[1024];
-        ValidateResult("123456789A", Utf8.TryWrite(buffer, $"123456789A", out var written1), buffer, written1);
-        ValidateResult("123456789AB", Utf8.TryWrite(buffer, $"123456789AB", out var written2), buffer, written2);
-        ValidateResult("123456789ABC", Utf8.TryWrite(buffer, $"123456789ABC", out var written3), buffer, written3);
-        ValidateResult("123456789ABCD", Utf8.TryWrite(buffer, $"123456789ABCD", out var written4), buffer, written4);
-        ValidateResult("123456789ABCDE", Utf8.TryWrite(buffer, $"123456789ABCDE", out var written5), buffer, written5);
+        ValidateResult(
+            "123456789A",
+            Utf8.TryWrite(buffer, $"123456789A", out var written1),
+            buffer,
+            written1
+        );
+        ValidateResult(
+            "123456789AB",
+            Utf8.TryWrite(buffer, $"123456789AB", out var written2),
+            buffer,
+            written2
+        );
+        ValidateResult(
+            "123456789ABC",
+            Utf8.TryWrite(buffer, $"123456789ABC", out var written3),
+            buffer,
+            written3
+        );
+        ValidateResult(
+            "123456789ABCD",
+            Utf8.TryWrite(buffer, $"123456789ABCD", out var written4),
+            buffer,
+            written4
+        );
+        ValidateResult(
+            "123456789ABCDE",
+            Utf8.TryWrite(buffer, $"123456789ABCDE", out var written5),
+            buffer,
+            written5
+        );
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void Test_4()
     {
         var buffer = new byte[1024];
-        ValidateResult("123456789ABCDEF", Utf8.TryWrite(buffer, $"123456789ABCDEF", out var written1), buffer, written1);
-        ValidateResult("123456789ABCDEF\u0419", Utf8.TryWrite(buffer, $"123456789ABCDEF\u0419", out var written2), buffer, written2);
-        ValidateResult("123456789ABCDEF\u0419\u044C", Utf8.TryWrite(buffer, $"123456789ABCDEF\u0419\u044C", out var written3), buffer, written3);
-        ValidateResult("123456789ABCDEF\u0419\u044Cf", Utf8.TryWrite(buffer, $"123456789ABCDEF\u0419\u044Cf", out var written4), buffer, written4);
-        ValidateResult("123456789ABCDEF\u0419\u044Cf.", Utf8.TryWrite(buffer, $"123456789ABCDEF\u0419\u044Cf.", out var written5), buffer, written5);
+        ValidateResult(
+            "123456789ABCDEF",
+            Utf8.TryWrite(buffer, $"123456789ABCDEF", out var written1),
+            buffer,
+            written1
+        );
+        ValidateResult(
+            "123456789ABCDEF\u0419",
+            Utf8.TryWrite(buffer, $"123456789ABCDEF\u0419", out var written2),
+            buffer,
+            written2
+        );
+        ValidateResult(
+            "123456789ABCDEF\u0419\u044C",
+            Utf8.TryWrite(buffer, $"123456789ABCDEF\u0419\u044C", out var written3),
+            buffer,
+            written3
+        );
+        ValidateResult(
+            "123456789ABCDEF\u0419\u044Cf",
+            Utf8.TryWrite(buffer, $"123456789ABCDEF\u0419\u044Cf", out var written4),
+            buffer,
+            written4
+        );
+        ValidateResult(
+            "123456789ABCDEF\u0419\u044Cf.",
+            Utf8.TryWrite(buffer, $"123456789ABCDEF\u0419\u044Cf.", out var written5),
+            buffer,
+            written5
+        );
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void Test_5()
     {
         var buffer = new byte[1024];
-        ValidateResult("\uD800b", Utf8.TryWrite(buffer, $"\uD800b", out var written1), buffer, written1);
-        ValidateResult("1\uD800b", Utf8.TryWrite(buffer, $"1\uD800b", out var written2), buffer, written2);
-        ValidateResult("11\uD800b", Utf8.TryWrite(buffer, $"11\uD800b", out var written3), buffer, written3);
-        ValidateResult("\uD800b\uD800b", Utf8.TryWrite(buffer, $"\uD800b\uD800b", out var written4), buffer, written4);
-        ValidateResult("\uD800b435345435", Utf8.TryWrite(buffer, $"\uD800b435345435", out var written5), buffer, written5);
-        ValidateResult("342532523\uD800b\uD800b35235", Utf8.TryWrite(buffer, $"342532523\uD800b\uD800b35235", out var written6), buffer, written6);
-        ValidateResult("efewfwfwfwfwefwe\uD800bfewfw\uD800bwfwefew\uD800b", Utf8.TryWrite(buffer, $"efewfwfwfwfwefwe\uD800bfewfw\uD800bwfwefew\uD800b", out var written7), buffer, written7);
+        ValidateResult(
+            "\uD800b",
+            Utf8.TryWrite(buffer, $"\uD800b", out var written1),
+            buffer,
+            written1
+        );
+        ValidateResult(
+            "1\uD800b",
+            Utf8.TryWrite(buffer, $"1\uD800b", out var written2),
+            buffer,
+            written2
+        );
+        ValidateResult(
+            "11\uD800b",
+            Utf8.TryWrite(buffer, $"11\uD800b", out var written3),
+            buffer,
+            written3
+        );
+        ValidateResult(
+            "\uD800b\uD800b",
+            Utf8.TryWrite(buffer, $"\uD800b\uD800b", out var written4),
+            buffer,
+            written4
+        );
+        ValidateResult(
+            "\uD800b435345435",
+            Utf8.TryWrite(buffer, $"\uD800b435345435", out var written5),
+            buffer,
+            written5
+        );
+        ValidateResult(
+            "342532523\uD800b\uD800b35235",
+            Utf8.TryWrite(buffer, $"342532523\uD800b\uD800b35235", out var written6),
+            buffer,
+            written6
+        );
+        ValidateResult(
+            "efewfwfwfwfwefwe\uD800bfewfw\uD800bwfwefew\uD800b",
+            Utf8.TryWrite(
+                buffer,
+                $"efewfwfwfwfwefwe\uD800bfewfw\uD800bwfwefew\uD800b",
+                out var written7
+            ),
+            buffer,
+            written7
+        );
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void ValidateResult(string str, bool actualResult, byte[] actualData, int actualBytesWritten)
+    static void ValidateResult(
+        string str,
+        bool actualResult,
+        byte[] actualData,
+        int actualBytesWritten
+    )
     {
         byte[] expectedData = new byte[actualData.Length];
         bool expectedResult = Utf8.TryWrite(expectedData, $"{str}", out int expectedBytesWritten);
@@ -319,11 +450,17 @@ public class ReadUtf8
 
         if (actualBytesWritten != expectedBytesWritten)
         {
-            throw new Exception($"bytesWritten value: {actualBytesWritten} != {expectedBytesWritten}");
+            throw new Exception(
+                $"bytesWritten value: {actualBytesWritten} != {expectedBytesWritten}"
+            );
         }
 
-        if (expectedResult && !actualData.AsSpan(0, actualBytesWritten).SequenceEqual(
-                expectedData.AsSpan(0, expectedBytesWritten)))
+        if (
+            expectedResult
+            && !actualData
+                .AsSpan(0, actualBytesWritten)
+                .SequenceEqual(expectedData.AsSpan(0, expectedBytesWritten))
+        )
         {
             throw new Exception("actualData != expectedData");
         }

@@ -1,21 +1,21 @@
 /******************************************************************************
 * The MIT License
 * Copyright (c) 2003 Novell Inc.  www.novell.com
-* 
+*
 * Permission is hereby granted, free of charge, to any person obtaining  a copy
 * of this software and associated documentation files (the Software), to deal
 * in the Software without restriction, including  without limitation the rights
-* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
-* copies of the Software, and to  permit persons to whom the Software is 
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to  permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
-* The above copyright notice and this permission notice shall be included in 
+*
+* The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
-* THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+*
+* THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
@@ -33,175 +33,171 @@ using System;
 
 namespace Novell.Directory.Ldap
 {
-	
-	/// <summary> The <code>MessageVector</code> class implements additional semantics
-	/// to Vector needed for handling messages.
-	/// </summary>
-	/* package */
-	class MessageVector:System.Collections.IList
-	{
-		private readonly System.Collections.ArrayList _innerList;
-		/// <summary>Returns an array containing all of the elements in this MessageVector.
-		/// The elements returned are in the same order in the array as in the
-		/// Vector.  The contents of the vector are cleared.
-		/// 
-		/// </summary>
-		/// <returns> the array containing all of the elements.
-		/// </returns>
-		internal System.Object[] ObjectArray
-		{
-			/* package */
-			
-			get
-			{
-				lock (this.SyncRoot)
-				{
-					System.Object[] results = ToArray();
-					Clear();
-					return results;
-				}
-			}
-			
-		}
-		/* package */
-		internal MessageVector(int cap, int incr)
-		{
-			_innerList = System.Collections.ArrayList.Synchronized(new System.Collections.ArrayList(cap));
-			return ;
-		}
-		
-		/// <summary> Finds the Message object with the given MsgID, and returns the Message
-		/// object. It finds the object and returns it in an atomic operation.
-		/// 
-		/// </summary>
-		/// <param name="msgId">The msgId of the Message object to return
-		/// 
-		/// </param>
-		/// <returns> The Message object corresponding to this MsgId.
-		/// 
-		/// @throws NoSuchFieldException when no object with the corresponding
-		/// value for the MsgId field can be found.
-		/// </returns>
-		/* package */
-		internal Message findMessageById(int msgId)
-		{
-			lock (this.SyncRoot)
-			{
-				Message msg = null;
-				for (int i = 0; i < Count; i++)
-				{
-					if ((msg = (Message) this[i]) == null)
-					{
-						throw new System.FieldAccessException();
-					}
-					if (msg.MessageID == msgId)
-					{
-						return msg;
-					}
-				}
-				throw new System.FieldAccessException();
-			}
-		}
+    /// <summary> The <code>MessageVector</code> class implements additional semantics
+    /// to Vector needed for handling messages.
+    /// </summary>
+    /* package */
+    class MessageVector : System.Collections.IList
+    {
+        private readonly System.Collections.ArrayList _innerList;
 
-		#region ArrayList members
-		public object[] ToArray()
-		{
-			return _innerList.ToArray();
-		}
-		#endregion
+        /// <summary>Returns an array containing all of the elements in this MessageVector.
+        /// The elements returned are in the same order in the array as in the
+        /// Vector.  The contents of the vector are cleared.
+        ///
+        /// </summary>
+        /// <returns> the array containing all of the elements.
+        /// </returns>
+        internal System.Object[] ObjectArray
+        {
+            /* package */
 
-		#region IList Members
+            get
+            {
+                lock (this.SyncRoot)
+                {
+                    System.Object[] results = ToArray();
+                    Clear();
+                    return results;
+                }
+            }
+        }
 
-		public int Add(object value)
-		{
-			return _innerList.Add(value);
-		}
+        /* package */
+        internal MessageVector(int cap, int incr)
+        {
+            _innerList = System.Collections.ArrayList.Synchronized(
+                new System.Collections.ArrayList(cap)
+            );
+            return;
+        }
 
-		public void Clear()
-		{
-			_innerList.Clear();
-		}
+        /// <summary> Finds the Message object with the given MsgID, and returns the Message
+        /// object. It finds the object and returns it in an atomic operation.
+        ///
+        /// </summary>
+        /// <param name="msgId">The msgId of the Message object to return
+        ///
+        /// </param>
+        /// <returns> The Message object corresponding to this MsgId.
+        ///
+        /// @throws NoSuchFieldException when no object with the corresponding
+        /// value for the MsgId field can be found.
+        /// </returns>
+        /* package */
+        internal Message findMessageById(int msgId)
+        {
+            lock (this.SyncRoot)
+            {
+                Message msg = null;
+                for (int i = 0; i < Count; i++)
+                {
+                    if ((msg = (Message)this[i]) == null)
+                    {
+                        throw new System.FieldAccessException();
+                    }
+                    if (msg.MessageID == msgId)
+                    {
+                        return msg;
+                    }
+                }
+                throw new System.FieldAccessException();
+            }
+        }
 
-		public bool Contains(object value)
-		{
-			return _innerList.Contains(value);
-		}
+        #region ArrayList members
+        public object[] ToArray()
+        {
+            return _innerList.ToArray();
+        }
+        #endregion
 
-		public int IndexOf(object value)
-		{
-			return _innerList.IndexOf(value);
-		}
+        #region IList Members
 
-		public void Insert(int index, object value)
-		{
-			_innerList.Insert(index, value);
-		}
+        public int Add(object value)
+        {
+            return _innerList.Add(value);
+        }
 
-		public bool IsFixedSize
-		{
-			get { return _innerList.IsFixedSize; }
-		}
+        public void Clear()
+        {
+            _innerList.Clear();
+        }
 
-		public bool IsReadOnly
-		{
-			get { return _innerList.IsReadOnly; }
-		}
+        public bool Contains(object value)
+        {
+            return _innerList.Contains(value);
+        }
 
-		public void Remove(object value)
-		{
-			_innerList.Remove(value);
-		}
+        public int IndexOf(object value)
+        {
+            return _innerList.IndexOf(value);
+        }
 
-		public void RemoveAt(int index)
-		{
-			_innerList.RemoveAt(index);
-		}
+        public void Insert(int index, object value)
+        {
+            _innerList.Insert(index, value);
+        }
 
-		public object this[int index]
-		{
-			get
-			{
-				return _innerList[index];
-			}
-			set
-			{
-				_innerList[index] = value;
-			}
-		}
+        public bool IsFixedSize
+        {
+            get { return _innerList.IsFixedSize; }
+        }
 
-		#endregion
+        public bool IsReadOnly
+        {
+            get { return _innerList.IsReadOnly; }
+        }
 
-		#region ICollection Members
+        public void Remove(object value)
+        {
+            _innerList.Remove(value);
+        }
 
-		public void CopyTo(Array array, int index)
-		{
-			_innerList.CopyTo(array, index);
-		}
+        public void RemoveAt(int index)
+        {
+            _innerList.RemoveAt(index);
+        }
 
-		public int Count
-		{
-			get { return _innerList.Count; }
-		}
+        public object this[int index]
+        {
+            get { return _innerList[index]; }
+            set { _innerList[index] = value; }
+        }
 
-		public bool IsSynchronized
-		{
-			get { return _innerList.IsSynchronized; }
-		}
+        #endregion
 
-		public object SyncRoot
-		{
-			get { return _innerList.SyncRoot; }
-		}
+        #region ICollection Members
 
-		#endregion
+        public void CopyTo(Array array, int index)
+        {
+            _innerList.CopyTo(array, index);
+        }
 
-		#region IEnumerable Members
+        public int Count
+        {
+            get { return _innerList.Count; }
+        }
 
-		public System.Collections.IEnumerator GetEnumerator()
-		{
-			return _innerList.GetEnumerator();
-		}
+        public bool IsSynchronized
+        {
+            get { return _innerList.IsSynchronized; }
+        }
 
-		#endregion
-	}
+        public object SyncRoot
+        {
+            get { return _innerList.SyncRoot; }
+        }
+
+        #endregion
+
+        #region IEnumerable Members
+
+        public System.Collections.IEnumerator GetEnumerator()
+        {
+            return _innerList.GetEnumerator();
+        }
+
+        #endregion
+    }
 }

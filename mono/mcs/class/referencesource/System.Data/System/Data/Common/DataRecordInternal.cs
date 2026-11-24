@@ -6,8 +6,8 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.Common {
-
+namespace System.Data.Common
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
@@ -17,16 +17,29 @@ namespace System.Data.Common {
     using System.IO;
     using System.Threading;
 
-    internal sealed class DataRecordInternal : DbDataRecord, ICustomTypeDescriptor {
+    internal sealed class DataRecordInternal : DbDataRecord, ICustomTypeDescriptor
+    {
         private SchemaInfo[] _schemaInfo;
         private object[] _values;
         private PropertyDescriptorCollection _propertyDescriptors;
         private FieldNameLookup _fieldNameLookup; // MDAC 69015
 
         // copy all runtime data information
-        internal DataRecordInternal(SchemaInfo[] schemaInfo, object[] values, PropertyDescriptorCollection descriptors, FieldNameLookup fieldNameLookup) {
-            Debug.Assert(null != schemaInfo, "invalid attempt to instantiate DataRecordInternal with null schema information");
-            Debug.Assert(null != values, "invalid attempt to instantiate DataRecordInternal with null value[]");
+        internal DataRecordInternal(
+            SchemaInfo[] schemaInfo,
+            object[] values,
+            PropertyDescriptorCollection descriptors,
+            FieldNameLookup fieldNameLookup
+        )
+        {
+            Debug.Assert(
+                null != schemaInfo,
+                "invalid attempt to instantiate DataRecordInternal with null schema information"
+            );
+            Debug.Assert(
+                null != values,
+                "invalid attempt to instantiate DataRecordInternal with null value[]"
+            );
             _schemaInfo = schemaInfo;
             _values = values;
             _propertyDescriptors = descriptors;
@@ -34,78 +47,103 @@ namespace System.Data.Common {
         }
 
         // copy all runtime data information
-        internal DataRecordInternal(object[] values, PropertyDescriptorCollection descriptors, FieldNameLookup fieldNameLookup) {
-            Debug.Assert(null != values, "invalid attempt to instantiate DataRecordInternal with null value[]");
+        internal DataRecordInternal(
+            object[] values,
+            PropertyDescriptorCollection descriptors,
+            FieldNameLookup fieldNameLookup
+        )
+        {
+            Debug.Assert(
+                null != values,
+                "invalid attempt to instantiate DataRecordInternal with null value[]"
+            );
             _values = values;
             _propertyDescriptors = descriptors;
             _fieldNameLookup = fieldNameLookup;
         }
 
-        internal void SetSchemaInfo(SchemaInfo[] schemaInfo) {
-            Debug.Assert(null == _schemaInfo, "invalid attempt to override DataRecordInternal schema information");
+        internal void SetSchemaInfo(SchemaInfo[] schemaInfo)
+        {
+            Debug.Assert(
+                null == _schemaInfo,
+                "invalid attempt to override DataRecordInternal schema information"
+            );
             _schemaInfo = schemaInfo;
         }
 
-        public override int FieldCount {
-            get {
-                return _schemaInfo.Length;
-            }
+        public override int FieldCount
+        {
+            get { return _schemaInfo.Length; }
         }
 
-        public override int GetValues(object[] values) {
-            if (null == values) {
+        public override int GetValues(object[] values)
+        {
+            if (null == values)
+            {
                 throw ADP.ArgumentNull("values");
             }
 
             int copyLen = (values.Length < _schemaInfo.Length) ? values.Length : _schemaInfo.Length;
-            for (int i = 0; i < copyLen; i++) {
+            for (int i = 0; i < copyLen; i++)
+            {
                 values[i] = _values[i];
             }
             return copyLen;
         }
 
-        public override string GetName(int i) {
+        public override string GetName(int i)
+        {
             return _schemaInfo[i].name;
         }
 
-
-        public override object GetValue(int i) {
+        public override object GetValue(int i)
+        {
             return _values[i];
         }
 
-        public override string GetDataTypeName(int i) {
+        public override string GetDataTypeName(int i)
+        {
             return _schemaInfo[i].typeName;
         }
 
-        public override Type GetFieldType(int i) {
+        public override Type GetFieldType(int i)
+        {
             return _schemaInfo[i].type;
         }
 
-        public override int GetOrdinal(string name) { // MDAC 69015
+        public override int GetOrdinal(string name)
+        { // MDAC 69015
             return _fieldNameLookup.GetOrdinal(name); // MDAC 71470
         }
 
-        public override object this[int i] {
-            get {
-                return GetValue(i);
-            }
+        public override object this[int i]
+        {
+            get { return GetValue(i); }
         }
 
-        public override object this[string name] {
-            get {
-                return GetValue(GetOrdinal(name));
-            }
+        public override object this[string name]
+        {
+            get { return GetValue(GetOrdinal(name)); }
         }
 
-        public override bool GetBoolean(int i) {
-            return((bool) _values[i]);
+        public override bool GetBoolean(int i)
+        {
+            return ((bool)_values[i]);
         }
 
-        public override byte GetByte(int i) {
-            return((byte) _values[i]);
+        public override byte GetByte(int i)
+        {
+            return ((byte)_values[i]);
         }
 
-        public override long GetBytes(int i, long dataIndex, byte[] buffer, int bufferIndex, int length) {
+        public override long GetBytes(
+            int i,
+            long dataIndex,
+            byte[] buffer,
+            int bufferIndex,
+            int length
+        )
+        {
             int cbytes = 0;
             int ndataIndex;
 
@@ -116,7 +154,8 @@ namespace System.Data.Common {
             // since arrays can't handle 64 bit values and this interface doesn't
             // allow chunked access to data, a dataIndex outside the rang of Int32
             // is invalid
-            if (dataIndex > Int32.MaxValue) {
+            if (dataIndex > Int32.MaxValue)
+            {
                 throw ADP.InvalidSourceBufferIndex(cbytes, dataIndex, "dataIndex");
             }
 
@@ -126,8 +165,10 @@ namespace System.Data.Common {
             if (null == buffer)
                 return cbytes;
 
-            try {
-                if (ndataIndex < cbytes) {
+            try
+            {
+                if (ndataIndex < cbytes)
+                {
                     // help the user out in the case where there's less data than requested
                     if ((ndataIndex + length) > cbytes)
                         cbytes = cbytes - ndataIndex;
@@ -138,9 +179,11 @@ namespace System.Data.Common {
                 // until arrays are 64 bit, we have to do these casts
                 Array.Copy(data, ndataIndex, buffer, bufferIndex, (int)cbytes);
             }
-            catch (Exception e) {
-                // 
-                if (ADP.IsCatchableExceptionType(e)) {
+            catch (Exception e)
+            {
+                //
+                if (ADP.IsCatchableExceptionType(e))
+                {
                     cbytes = data.Length;
 
                     if (length < 0)
@@ -165,7 +208,8 @@ namespace System.Data.Common {
             return cbytes;
         }
 
-        public override char GetChar(int i) {
+        public override char GetChar(int i)
+        {
             string s;
 
             s = (string)_values[i];
@@ -173,7 +217,14 @@ namespace System.Data.Common {
             return c[0];
         }
 
-        public override long GetChars(int i, long dataIndex, char[] buffer, int bufferIndex, int length) {
+        public override long GetChars(
+            int i,
+            long dataIndex,
+            char[] buffer,
+            int bufferIndex,
+            int length
+        )
+        {
             int cchars = 0;
             string s;
             int ndataIndex;
@@ -188,19 +239,21 @@ namespace System.Data.Common {
             // since arrays can't handle 64 bit values and this interface doesn't
             // allow chunked access to data, a dataIndex outside the rang of Int32
             // is invalid
-            if (dataIndex > Int32.MaxValue) {
+            if (dataIndex > Int32.MaxValue)
+            {
                 throw ADP.InvalidSourceBufferIndex(cchars, dataIndex, "dataIndex");
             }
 
             ndataIndex = (int)dataIndex;
 
-
             // if no buffer is passed in, return the number of characters we have
             if (null == buffer)
                 return cchars;
 
-            try {
-                if (ndataIndex < cchars) {
+            try
+            {
+                if (ndataIndex < cchars)
+                {
                     // help the user out in the case where there's less data than requested
                     if ((ndataIndex + length) > cchars)
                         cchars = cchars - ndataIndex;
@@ -210,17 +263,23 @@ namespace System.Data.Common {
 
                 Array.Copy(data, ndataIndex, buffer, bufferIndex, cchars);
             }
-            catch (Exception e) {
-                // 
-                if (ADP.IsCatchableExceptionType(e)) {
+            catch (Exception e)
+            {
+                //
+                if (ADP.IsCatchableExceptionType(e))
+                {
                     cchars = data.Length;
 
                     if (length < 0)
-                       throw ADP.InvalidDataLength(length);
+                        throw ADP.InvalidDataLength(length);
 
                     // if bad buffer index, throw
                     if (bufferIndex < 0 || bufferIndex >= buffer.Length)
-                        throw ADP.InvalidDestinationBufferIndex(buffer.Length, bufferIndex, "bufferIndex");
+                        throw ADP.InvalidDestinationBufferIndex(
+                            buffer.Length,
+                            bufferIndex,
+                            "bufferIndex"
+                        );
 
                     // if bad data index, throw
                     if (ndataIndex < 0 || ndataIndex >= cchars)
@@ -237,44 +296,53 @@ namespace System.Data.Common {
             return cchars;
         }
 
-        public override Guid GetGuid(int i) {
+        public override Guid GetGuid(int i)
+        {
             return ((Guid)_values[i]);
         }
 
-
-        public override Int16 GetInt16(int i) {
-            return((Int16) _values[i]);
+        public override Int16 GetInt16(int i)
+        {
+            return ((Int16)_values[i]);
         }
 
-        public override Int32 GetInt32(int i) {
-            return((Int32) _values[i]);
+        public override Int32 GetInt32(int i)
+        {
+            return ((Int32)_values[i]);
         }
 
-        public override Int64 GetInt64(int i) {
-            return((Int64) _values[i]);
+        public override Int64 GetInt64(int i)
+        {
+            return ((Int64)_values[i]);
         }
 
-        public override float GetFloat(int i) {
-            return((float) _values[i]);
+        public override float GetFloat(int i)
+        {
+            return ((float)_values[i]);
         }
 
-        public override double GetDouble(int i) {
-            return((double) _values[i]);
+        public override double GetDouble(int i)
+        {
+            return ((double)_values[i]);
         }
 
-        public override string GetString(int i) {
-            return((string) _values[i]);
+        public override string GetString(int i)
+        {
+            return ((string)_values[i]);
         }
 
-        public override Decimal GetDecimal(int i) {
-            return((Decimal) _values[i]);
+        public override Decimal GetDecimal(int i)
+        {
+            return ((Decimal)_values[i]);
         }
 
-        public override DateTime GetDateTime(int i) {
-            return((DateTime) _values[i]);
+        public override DateTime GetDateTime(int i)
+        {
+            return ((DateTime)_values[i]);
         }
 
-        public override bool IsDBNull(int i) {
+        public override bool IsDBNull(int i)
+        {
             object o = _values[i];
             return (null == o || Convert.IsDBNull(o));
         }
@@ -283,62 +351,74 @@ namespace System.Data.Common {
         // ICustomTypeDescriptor
         //
 
-        AttributeCollection ICustomTypeDescriptor.GetAttributes() {
+        AttributeCollection ICustomTypeDescriptor.GetAttributes()
+        {
             return new AttributeCollection((Attribute[])null);
-
         }
 
-        string ICustomTypeDescriptor.GetClassName() {
+        string ICustomTypeDescriptor.GetClassName()
+        {
             return null;
         }
 
-        string ICustomTypeDescriptor.GetComponentName() {
+        string ICustomTypeDescriptor.GetComponentName()
+        {
             return null;
         }
 
-        TypeConverter ICustomTypeDescriptor.GetConverter() {
+        TypeConverter ICustomTypeDescriptor.GetConverter()
+        {
             return null;
         }
 
-        EventDescriptor ICustomTypeDescriptor.GetDefaultEvent() {
+        EventDescriptor ICustomTypeDescriptor.GetDefaultEvent()
+        {
             return null;
         }
 
-
-        PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty() {
+        PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty()
+        {
             return null;
         }
 
-        object ICustomTypeDescriptor.GetEditor(Type editorBaseType) {
+        object ICustomTypeDescriptor.GetEditor(Type editorBaseType)
+        {
             return null;
         }
 
-        EventDescriptorCollection ICustomTypeDescriptor.GetEvents() {
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents()
+        {
             return new EventDescriptorCollection(null);
         }
 
-        EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[] attributes) {
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[] attributes)
+        {
             return new EventDescriptorCollection(null);
         }
 
-        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties() {
-            return((ICustomTypeDescriptor)this).GetProperties(null);
+        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties()
+        {
+            return ((ICustomTypeDescriptor)this).GetProperties(null);
         }
 
-        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes) {
-            if(_propertyDescriptors == null) {
+        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes)
+        {
+            if (_propertyDescriptors == null)
+            {
                 _propertyDescriptors = new PropertyDescriptorCollection(null);
             }
             return _propertyDescriptors;
         }
 
-        object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor pd) {
+        object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor pd)
+        {
             return this;
         }
     }
 
     // this doesn't change per record, only alloc once
-    internal struct SchemaInfo {
+    internal struct SchemaInfo
+    {
         public string name;
         public string typeName;
         public Type type;

@@ -111,80 +111,80 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyArithmeticOnesComplementShort(short value, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.OnesComplement(Expression.Constant(value, typeof(short))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.OnesComplement(Expression.Constant(value, typeof(short))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
             Assert.Equal((short)(~value), f());
         }
 
         private static void VerifyArithmeticOnesComplementUShort(ushort value, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.OnesComplement(Expression.Constant(value, typeof(ushort))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.OnesComplement(Expression.Constant(value, typeof(ushort))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
             Assert.Equal(unchecked((ushort)(~value)), f());
         }
 
         private static void VerifyArithmeticOnesComplementInt(int value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.OnesComplement(Expression.Constant(value, typeof(int))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.OnesComplement(Expression.Constant(value, typeof(int))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal((int)(~value), f());
         }
 
         private static void VerifyArithmeticOnesComplementUInt(uint value, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.OnesComplement(Expression.Constant(value, typeof(uint))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.OnesComplement(Expression.Constant(value, typeof(uint))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
             Assert.Equal((uint)(~value), f());
         }
 
         private static void VerifyArithmeticOnesComplementLong(long value, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.OnesComplement(Expression.Constant(value, typeof(long))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.OnesComplement(Expression.Constant(value, typeof(long))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
             Assert.Equal((long)(~value), f());
         }
 
         private static void VerifyArithmeticOnesComplementULong(ulong value, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.OnesComplement(Expression.Constant(value, typeof(ulong))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.OnesComplement(Expression.Constant(value, typeof(ulong))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
             Assert.Equal((ulong)(~value), f());
         }
 
         private static void VerifyArithmeticOnesComplementByte(byte value, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.OnesComplement(Expression.Constant(value, typeof(byte))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.OnesComplement(Expression.Constant(value, typeof(byte))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
             Assert.Equal(unchecked((byte)(~value)), f());
         }
 
         private static void VerifyArithmeticOnesComplementSByte(sbyte value, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.OnesComplement(Expression.Constant(value, typeof(sbyte))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.OnesComplement(Expression.Constant(value, typeof(sbyte))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
             Assert.Equal((sbyte)(~value), f());
         }
@@ -204,7 +204,12 @@ namespace System.Linq.Expressions.Tests
         public static void MakeUnaryOnesComplement(int value, int expected, bool useInterpreter)
         {
             Expression<Func<int>> lambda = Expression.Lambda<Func<int>>(
-                Expression.MakeUnary(ExpressionType.OnesComplement, Expression.Constant(value), null));
+                Expression.MakeUnary(
+                    ExpressionType.OnesComplement,
+                    Expression.Constant(value),
+                    null
+                )
+            );
             Func<int> func = lambda.Compile(useInterpreter);
             Assert.Equal(expected, func());
         }
@@ -220,17 +225,20 @@ namespace System.Linq.Expressions.Tests
         {
             public int Value { get; set; }
 
-            public static Complementary operator ~(Complementary c) => new Complementary {Value = ~c.Value};
+            public static Complementary operator ~(Complementary c) =>
+                new Complementary { Value = ~c.Value };
 
-            public static Complementary OnesComplement(Complementary c) => new Complementary { Value = ~c.Value };
+            public static Complementary OnesComplement(Complementary c) =>
+                new Complementary { Value = ~c.Value };
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CustomOperatorOnesComplement(bool useInterpreter)
         {
-            Complementary value = new Complementary {Value = 43};
+            Complementary value = new Complementary { Value = 43 };
             Expression<Func<Complementary>> lambda = Expression.Lambda<Func<Complementary>>(
-                Expression.OnesComplement(Expression.Constant(value)));
+                Expression.OnesComplement(Expression.Constant(value))
+            );
             Func<Complementary> func = lambda.Compile(useInterpreter);
             Assert.Equal(~43, func().Value);
         }
@@ -238,10 +246,13 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ExplicitOperatorOnesComplement(bool useInterpreter)
         {
-            Complementary value = new Complementary {Value = 43};
-            MethodInfo method = typeof(Complementary).GetMethod(nameof(Complementary.OnesComplement));
+            Complementary value = new Complementary { Value = 43 };
+            MethodInfo method = typeof(Complementary).GetMethod(
+                nameof(Complementary.OnesComplement)
+            );
             Expression<Func<Complementary>> lambda = Expression.Lambda<Func<Complementary>>(
-                Expression.OnesComplement(Expression.Constant(value), method));
+                Expression.OnesComplement(Expression.Constant(value), method)
+            );
             Func<Complementary> func = lambda.Compile(useInterpreter);
             Assert.Equal(~43, func().Value);
         }

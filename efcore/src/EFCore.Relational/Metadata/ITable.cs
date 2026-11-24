@@ -66,8 +66,10 @@ public interface ITable : ITableBase
     /// <summary>
     ///     Gets the comment for this table.
     /// </summary>
-    public string? Comment
-        => EntityTypeMappings.Select(e => (e.TypeBase as IEntityType)?.GetComment()).FirstOrDefault(c => c != null);
+    public string? Comment =>
+        EntityTypeMappings
+            .Select(e => (e.TypeBase as IEntityType)?.GetComment())
+            .FirstOrDefault(c => c != null);
 
     /// <summary>
     ///     Gets the column with a given name. Returns <see langword="null" /> if no column with the given name is defined.
@@ -99,22 +101,16 @@ public interface ITable : ITableBase
 
         try
         {
-            builder
-                .Append(indentString)
-                .Append("Table: ");
+            builder.Append(indentString).Append("Table: ");
 
             if (Schema != null)
             {
-                builder
-                    .Append(Schema)
-                    .Append('.');
+                builder.Append(Schema).Append('.');
             }
 
             builder.Append(Name);
 
-            if (designTime
-                && EntityTypeMappings.Any()
-                && IsExcludedFromMigrations)
+            if (designTime && EntityTypeMappings.Any() && IsExcludedFromMigrations)
             {
                 builder.Append(" ExcludedFromMigrations");
             }
@@ -133,9 +129,11 @@ public interface ITable : ITableBase
                 builder.Append(PrimaryKey.ToDebugString(options, indent + 2));
             }
 
-            if ((options & MetadataDebugStringOptions.SingleLine) == 0
-                 && designTime
-                 && Comment != null)
+            if (
+                (options & MetadataDebugStringOptions.SingleLine) == 0
+                && designTime
+                && Comment != null
+            )
             {
                 builder
                     .AppendLine()
@@ -173,7 +171,9 @@ public interface ITable : ITableBase
                     builder.AppendLine().Append(indentString).Append("  ForeignKeyConstraints: ");
                     foreach (var foreignKeyConstraint in foreignKeyConstraints)
                     {
-                        builder.AppendLine().Append(foreignKeyConstraint.ToDebugString(options, indent + 4));
+                        builder
+                            .AppendLine()
+                            .Append(foreignKeyConstraint.ToDebugString(options, indent + 4));
                     }
                 }
 
@@ -187,13 +187,17 @@ public interface ITable : ITableBase
                     }
                 }
 
-                var uniqueConstraints = UniqueConstraints.Where(uc => !uc.GetIsPrimaryKey()).ToList();
+                var uniqueConstraints = UniqueConstraints
+                    .Where(uc => !uc.GetIsPrimaryKey())
+                    .ToList();
                 if (uniqueConstraints.Count != 0)
                 {
                     builder.AppendLine().Append(indentString).Append("  UniqueConstraints: ");
                     foreach (var uniqueConstraint in uniqueConstraints)
                     {
-                        builder.AppendLine().Append(uniqueConstraint.ToDebugString(options, indent + 4));
+                        builder
+                            .AppendLine()
+                            .Append(uniqueConstraint.ToDebugString(options, indent + 4));
                     }
                 }
 
@@ -205,7 +209,9 @@ public interface ITable : ITableBase
                         builder.AppendLine().Append(indentString).Append("  Check constraints: ");
                         foreach (var checkConstraint in checkConstraints)
                         {
-                            builder.AppendLine().Append(checkConstraint.ToDebugString(options, indent + 4));
+                            builder
+                                .AppendLine()
+                                .Append(checkConstraint.ToDebugString(options, indent + 4));
                         }
                     }
                 }

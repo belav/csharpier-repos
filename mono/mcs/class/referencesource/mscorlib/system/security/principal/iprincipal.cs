@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>ShawnFa</OWNER>
-// 
+//
 
 //
 // IPrincipal.cs
@@ -14,16 +14,17 @@
 
 namespace System.Security.Principal
 {
-    using System.Runtime.Remoting;
     using System;
+    using System.Runtime.Remoting;
     using System.Security.Util;
 
-[System.Runtime.InteropServices.ComVisible(true)]
-    public interface IPrincipal {
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public interface IPrincipal
+    {
         // Retrieve the identity object
         IIdentity Identity { get; }
 
         // Perform a check for a specific role
-        bool IsInRole (string role);
+        bool IsInRole(string role);
     }
 }

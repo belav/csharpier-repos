@@ -26,7 +26,8 @@ namespace SslStress.Utils
             return this;
         }
 
-        public StreamCounter Clone() => new StreamCounter() { BytesRead = BytesRead, BytesWritten = BytesWritten };
+        public StreamCounter Clone() =>
+            new StreamCounter() { BytesRead = BytesRead, BytesWritten = BytesWritten };
     }
 
     public class CountingStream : Stream
@@ -53,13 +54,19 @@ namespace SslStress.Utils
             return read;
         }
 
-        public override async ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        public override async ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             await _stream.WriteAsync(buffer, cancellationToken);
             Interlocked.Add(ref _counter.BytesWritten, buffer.Length);
         }
 
-        public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        public override async ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             int read = await _stream.ReadAsync(buffer, cancellationToken);
             Interlocked.Add(ref _counter.BytesRead, read);
@@ -82,7 +89,11 @@ namespace SslStress.Utils
 
         public override long Length => _stream.Length;
 
-        public override long Position { get => _stream.Position; set => _stream.Position = value; }
+        public override long Position
+        {
+            get => _stream.Position;
+            set => _stream.Position = value;
+        }
 
         public override void Flush() => _stream.Flush();
 

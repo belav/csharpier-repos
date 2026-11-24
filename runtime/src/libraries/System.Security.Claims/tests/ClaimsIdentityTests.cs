@@ -111,10 +111,12 @@ namespace System.Security.Claims
         public void Ctor_EnumerableClaim_WithName()
         {
             var id = new ClaimsIdentity(
-                       new[] {
-                    new Claim ("claim_type", "claim_value"),
-                    new Claim (ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
-                });
+                new[]
+                {
+                    new Claim("claim_type", "claim_value"),
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
+                }
+            );
             Assert.Null(id.AuthenticationType);
             Assert.Null(id.Actor);
             Assert.Null(id.BootstrapContext);
@@ -131,10 +133,12 @@ namespace System.Security.Claims
         public void Ctor_EnumerableClaim_WithoutName()
         {
             var id = new ClaimsIdentity(
-                       new[] {
-                    new Claim ("claim_type", "claim_value"),
-                    new Claim (ClaimsIdentity.DefaultNameClaimType + "_x", "claim_name_value"),
-                });
+                new[]
+                {
+                    new Claim("claim_type", "claim_value"),
+                    new Claim(ClaimsIdentity.DefaultNameClaimType + "_x", "claim_name_value"),
+                }
+            );
             Assert.Null(id.AuthenticationType);
             Assert.Null(id.Actor);
             Assert.Null(id.BootstrapContext);
@@ -150,12 +154,17 @@ namespace System.Security.Claims
         [Fact]
         public void Ctor_EnumerableClaimAuthNameRoleType()
         {
-            var id = new ClaimsIdentity(new[] {
-                new Claim ("claim_type", "claim_value"),
-                new Claim (ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
-                new Claim ("claim_role_type", "claim_role_value"),
-            },
-                       "test_auth_type", "test_name_type", "claim_role_type");
+            var id = new ClaimsIdentity(
+                new[]
+                {
+                    new Claim("claim_type", "claim_value"),
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
+                    new Claim("claim_role_type", "claim_role_value"),
+                },
+                "test_auth_type",
+                "test_name_type",
+                "claim_role_type"
+            );
             Assert.Equal("test_auth_type", id.AuthenticationType);
             Assert.Null(id.Actor);
             Assert.Null(id.BootstrapContext);
@@ -171,7 +180,12 @@ namespace System.Security.Claims
         [Fact]
         public void Ctor_EnumerableClaimAuthNameRoleType_AllNull()
         {
-            var id = new ClaimsIdentity((IEnumerable<Claim>)null, (string)null, (string)null, (string)null);
+            var id = new ClaimsIdentity(
+                (IEnumerable<Claim>)null,
+                (string)null,
+                (string)null,
+                (string)null
+            );
             Assert.Null(id.AuthenticationType);
             Assert.Null(id.Actor);
             Assert.Null(id.BootstrapContext);
@@ -204,11 +218,15 @@ namespace System.Security.Claims
         public void Ctor_EnumerableClaimAuthNameRoleType_TwoClaimsAndTypesEmpty()
         {
             var id = new ClaimsIdentity(
-                       new[] {
-                    new Claim ("claim_type", "claim_value"),
-                    new Claim (ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
+                new[]
+                {
+                    new Claim("claim_type", "claim_value"),
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
                 },
-                       "", "", "");
+                "",
+                "",
+                ""
+            );
             Assert.Equal(string.Empty, id.AuthenticationType);
             Assert.Null(id.Actor);
             Assert.Null(id.BootstrapContext);
@@ -225,11 +243,15 @@ namespace System.Security.Claims
         public void Ctor_EnumerableClaimAuthNameRoleType_TwoClaimsAndTypesNull()
         {
             var id = new ClaimsIdentity(
-                       new[] {
-                    new Claim ("claim_type", "claim_value"),
-                    new Claim (ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
+                new[]
+                {
+                    new Claim("claim_type", "claim_value"),
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
                 },
-                       (string)null, (string)null, (string)null);
+                (string)null,
+                (string)null,
+                (string)null
+            );
             Assert.Null(id.AuthenticationType);
             Assert.Null(id.Actor);
             Assert.Null(id.BootstrapContext);
@@ -245,7 +267,13 @@ namespace System.Security.Claims
         [Fact]
         public void Ctor_IdentityEnumerableClaimAuthNameRoleType()
         {
-            var id = new ClaimsIdentity((IIdentity)null, (IEnumerable<Claim>)null, (string)null, (string)null, (string)null);
+            var id = new ClaimsIdentity(
+                (IIdentity)null,
+                (IEnumerable<Claim>)null,
+                (string)null,
+                (string)null,
+                (string)null
+            );
             Assert.Null(id.AuthenticationType);
             Assert.Null(id.Actor);
             Assert.Null(id.BootstrapContext);
@@ -278,12 +306,16 @@ namespace System.Security.Claims
         public void Ctor_IdentityEnumerableClaimAuthNameRoleType_ClaimsArrayEmptyTypes()
         {
             var id = new ClaimsIdentity(
-                       null,
-                       new[] {
-                    new Claim ("claim_type", "claim_value"),
-                    new Claim (ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
+                null,
+                new[]
+                {
+                    new Claim("claim_type", "claim_value"),
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
                 },
-                       "", "", "");
+                "",
+                "",
+                ""
+            );
 
             Assert.Equal(string.Empty, id.AuthenticationType);
             Assert.Null(id.Actor);
@@ -301,12 +333,16 @@ namespace System.Security.Claims
         public void Ctor_IdentityEnumerableClaimAuthNameRoleType_NullClaimsArrayNulls()
         {
             var id = new ClaimsIdentity(
-                       null,
-                       new[] {
-                    new Claim ("claim_type", "claim_value"),
-                    new Claim (ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
+                null,
+                new[]
+                {
+                    new Claim("claim_type", "claim_value"),
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
                 },
-                       (string)null, (string)null, (string)null);
+                (string)null,
+                (string)null,
+                (string)null
+            );
             Assert.Null(id.AuthenticationType);
             Assert.Null(id.Actor);
             Assert.Null(id.BootstrapContext);
@@ -323,13 +359,17 @@ namespace System.Security.Claims
         public void Ctor_IdentityEnumerableClaimAuthNameRoleType_NullIdentityRestFilled()
         {
             var id = new ClaimsIdentity(
-                       null,
-                       new[] {
-                    new Claim ("claim_type", "claim_value"),
-                    new Claim (ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
-                    new Claim ("claim_role_type", "claim_role_value"),
+                null,
+                new[]
+                {
+                    new Claim("claim_type", "claim_value"),
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
+                    new Claim("claim_role_type", "claim_role_value"),
                 },
-                       "test_auth_type", "test_name_type", "claim_role_type");
+                "test_auth_type",
+                "test_name_type",
+                "claim_role_type"
+            );
             Assert.Equal("test_auth_type", id.AuthenticationType);
             Assert.Null(id.Actor);
             Assert.Null(id.BootstrapContext);
@@ -346,8 +386,9 @@ namespace System.Security.Claims
         public void Ctor_IdentityEnumerableClaimAuthNameRoleType_ClaimsIdentityRestFilled()
         {
             var baseId = new ClaimsIdentity(
-                           new[] { new Claim("base_claim_type", "base_claim_value") },
-                           "base_auth_type");
+                new[] { new Claim("base_claim_type", "base_claim_value") },
+                "base_auth_type"
+            );
 
             baseId.Actor = new ClaimsIdentity("base_actor");
             baseId.BootstrapContext = "bootstrap_context";
@@ -356,13 +397,17 @@ namespace System.Security.Claims
             Assert.True(baseId.IsAuthenticated, "#0");
 
             var id = new ClaimsIdentity(
-                       baseId,
-                       new[] {
-                    new Claim ("claim_type", "claim_value"),
-                    new Claim (ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
-                    new Claim ("claim_role_type", "claim_role_value"),
+                baseId,
+                new[]
+                {
+                    new Claim("claim_type", "claim_value"),
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
+                    new Claim("claim_role_type", "claim_role_value"),
                 },
-                       "test_auth_type", "test_name_type", "claim_role_type");
+                "test_auth_type",
+                "test_name_type",
+                "claim_role_type"
+            );
 
             Assert.Equal("test_auth_type", id.AuthenticationType);
 
@@ -382,16 +427,24 @@ namespace System.Security.Claims
         [Fact]
         public void Ctor_IdentityEnumerableClaimAuthNameRoleType_NonClaimsIdentityRestEmptyWorks()
         {
-            var baseId = new NonClaimsIdentity { Name = "base_name", AuthenticationType = "TestId_AuthType" };
+            var baseId = new NonClaimsIdentity
+            {
+                Name = "base_name",
+                AuthenticationType = "TestId_AuthType",
+            };
 
             var id = new ClaimsIdentity(
-                       baseId,
-                       new[] {
-                    new Claim ("claim_type", "claim_value"),
-                    new Claim (ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
-                    new Claim ("claim_role_type", "claim_role_value"),
+                baseId,
+                new[]
+                {
+                    new Claim("claim_type", "claim_value"),
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
+                    new Claim("claim_role_type", "claim_role_value"),
                 },
-                       "", "", "");
+                "",
+                "",
+                ""
+            );
 
             Assert.Equal("TestId_AuthType", id.AuthenticationType);
 
@@ -411,8 +464,11 @@ namespace System.Security.Claims
         public void Ctor_IdentityEnumerableClaimAuthNameRoleType_ClaimsIdentityClaim()
         {
             var baseId = new ClaimsIdentity(
-                           new[] { new Claim("base_claim_type", "base_claim_value") },
-                           "base_auth_type", "base_name_claim_type", null);
+                new[] { new Claim("base_claim_type", "base_claim_value") },
+                "base_auth_type",
+                "base_name_claim_type",
+                null
+            );
 
             baseId.Actor = new ClaimsIdentity("base_actor");
             baseId.BootstrapContext = "bootstrap_context";
@@ -421,12 +477,14 @@ namespace System.Security.Claims
             Assert.True(baseId.IsAuthenticated);
 
             var id = new ClaimsIdentity(
-                       baseId,
-                       new[] {
-                    new Claim ("claim_type", "claim_value"),
-                    new Claim (ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
-                    new Claim ("claim_role_type", "claim_role_value"),
-                });
+                baseId,
+                new[]
+                {
+                    new Claim("claim_type", "claim_value"),
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
+                    new Claim("claim_role_type", "claim_role_value"),
+                }
+            );
 
             Assert.Equal("base_auth_type", id.AuthenticationType);
 
@@ -449,16 +507,18 @@ namespace System.Security.Claims
             var baseId = new NonClaimsIdentity
             {
                 Name = "base_name",
-                AuthenticationType = "TestId_AuthType"
+                AuthenticationType = "TestId_AuthType",
             };
 
             var id = new ClaimsIdentity(
-                       baseId,
-                       new[] {
-                    new Claim ("claim_type", "claim_value"),
-                    new Claim (ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
-                    new Claim ("claim_role_type", "claim_role_value"),
-                });
+                baseId,
+                new[]
+                {
+                    new Claim("claim_type", "claim_value"),
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
+                    new Claim("claim_role_type", "claim_role_value"),
+                }
+            );
 
             Assert.Equal("TestId_AuthType", id.AuthenticationType);
 
@@ -480,7 +540,10 @@ namespace System.Security.Claims
             var claim_type = new Claim("TYpe", "value");
             var id = new ClaimsIdentity(
                 new[] { claim_type },
-                "base_auth_type", "base_name_claim_type", null);
+                "base_auth_type",
+                "base_name_claim_type",
+                null
+            );
 
             var f1 = id.FindFirst("tyPe");
             Assert.Equal("value", f1.Value);
@@ -493,11 +556,14 @@ namespace System.Security.Claims
         public void HasClaim_TypeValue()
         {
             var id = new ClaimsIdentity(
-            new[] {
-                new Claim ("claim_type", "claim_value"),
-                new Claim (ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
-                new Claim ("claim_role_type", "claim_role_value"),
-            }, "test_authority");
+                new[]
+                {
+                    new Claim("claim_type", "claim_value"),
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, "claim_name_value"),
+                    new Claim("claim_role_type", "claim_role_value"),
+                },
+                "test_authority"
+            );
 
             Assert.True(id.HasClaim("claim_type", "claim_value"));
             Assert.True(id.HasClaim("cLaIm_TyPe", "claim_value"));
@@ -509,13 +575,11 @@ namespace System.Security.Claims
         [Serializable]
         private sealed class CustomClaimsIdentity : ClaimsIdentity, ISerializable
         {
-            public CustomClaimsIdentity(string authenticationType, string nameType, string roleType) : base(authenticationType, nameType, roleType)
-            {
-            }
+            public CustomClaimsIdentity(string authenticationType, string nameType, string roleType)
+                : base(authenticationType, nameType, roleType) { }
 
-            public CustomClaimsIdentity(SerializationInfo info, StreamingContext context) : base(info, context)
-            {
-            }
+            public CustomClaimsIdentity(SerializationInfo info, StreamingContext context)
+                : base(info, context) { }
 
             void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
             {
@@ -527,7 +591,10 @@ namespace System.Security.Claims
     internal class NonClaimsIdentity : IIdentity
     {
         public string AuthenticationType { get; set; }
-        public bool IsAuthenticated { get { return true; } }
+        public bool IsAuthenticated
+        {
+            get { return true; }
+        }
         public string Name { get; set; }
     }
 }

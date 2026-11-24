@@ -20,14 +20,36 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
     {
         public int AutoInsertAsteriskForNewLinesOfBlockComments
         {
-            get { return GetBooleanOption(BlockCommentEditingOptionsStorage.AutoInsertBlockCommentStartString); }
-            set { SetBooleanOption(BlockCommentEditingOptionsStorage.AutoInsertBlockCommentStartString, value); }
+            get
+            {
+                return GetBooleanOption(
+                    BlockCommentEditingOptionsStorage.AutoInsertBlockCommentStartString
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    BlockCommentEditingOptionsStorage.AutoInsertBlockCommentStartString,
+                    value
+                );
+            }
         }
 
         public int AutomaticallyFixStringContentsOnPaste
         {
-            get { return GetBooleanOption(StringCopyPasteOptionsStorage.AutomaticallyFixStringContentsOnPaste); }
-            set { SetBooleanOption(StringCopyPasteOptionsStorage.AutomaticallyFixStringContentsOnPaste, value); }
+            get
+            {
+                return GetBooleanOption(
+                    StringCopyPasteOptionsStorage.AutomaticallyFixStringContentsOnPaste
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    StringCopyPasteOptionsStorage.AutomaticallyFixStringContentsOnPaste,
+                    value
+                );
+            }
         }
 
         public int DisplayLineSeparators
@@ -50,32 +72,82 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
         public int CollapseImportsWhenFirstOpened
         {
-            get { return GetBooleanOption(BlockStructureOptionsStorage.CollapseImportsWhenFirstOpened); }
-            set { SetBooleanOption(BlockStructureOptionsStorage.CollapseImportsWhenFirstOpened, value); }
+            get
+            {
+                return GetBooleanOption(
+                    BlockStructureOptionsStorage.CollapseImportsWhenFirstOpened
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    BlockStructureOptionsStorage.CollapseImportsWhenFirstOpened,
+                    value
+                );
+            }
         }
 
         public int CollapseRegionsWhenFirstOpened
         {
-            get { return GetBooleanOption(BlockStructureOptionsStorage.CollapseRegionsWhenFirstOpened); }
-            set { SetBooleanOption(BlockStructureOptionsStorage.CollapseRegionsWhenFirstOpened, value); }
+            get
+            {
+                return GetBooleanOption(
+                    BlockStructureOptionsStorage.CollapseRegionsWhenFirstOpened
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    BlockStructureOptionsStorage.CollapseRegionsWhenFirstOpened,
+                    value
+                );
+            }
         }
 
         public int CollapseMetadataSignatureFilesWhenFirstOpened
         {
-            get { return GetBooleanOption(BlockStructureOptionsStorage.CollapseMetadataSignatureFilesWhenFirstOpened); }
-            set { SetBooleanOption(BlockStructureOptionsStorage.CollapseMetadataSignatureFilesWhenFirstOpened, value); }
+            get
+            {
+                return GetBooleanOption(
+                    BlockStructureOptionsStorage.CollapseMetadataSignatureFilesWhenFirstOpened
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    BlockStructureOptionsStorage.CollapseMetadataSignatureFilesWhenFirstOpened,
+                    value
+                );
+            }
         }
 
         public int CollapseSourceLinkEmbeddedDecompiledFilesWhenFirstOpened
         {
-            get { return GetBooleanOption(BlockStructureOptionsStorage.CollapseSourceLinkEmbeddedDecompiledFilesWhenFirstOpened); }
-            set { SetBooleanOption(BlockStructureOptionsStorage.CollapseSourceLinkEmbeddedDecompiledFilesWhenFirstOpened, value); }
+            get
+            {
+                return GetBooleanOption(
+                    BlockStructureOptionsStorage.CollapseSourceLinkEmbeddedDecompiledFilesWhenFirstOpened
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    BlockStructureOptionsStorage.CollapseSourceLinkEmbeddedDecompiledFilesWhenFirstOpened,
+                    value
+                );
+            }
         }
 
         public int HighlightReferences
         {
-            get { return GetBooleanOption(ReferenceHighlightingOptionsStorage.ReferenceHighlighting); }
-            set { SetBooleanOption(ReferenceHighlightingOptionsStorage.ReferenceHighlighting, value); }
+            get
+            {
+                return GetBooleanOption(ReferenceHighlightingOptionsStorage.ReferenceHighlighting);
+            }
+            set
+            {
+                SetBooleanOption(ReferenceHighlightingOptionsStorage.ReferenceHighlighting, value);
+            }
         }
 
         public int Refactoring_Verification_Enabled
@@ -98,20 +170,48 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
         public int NavigateToDecompiledSources
         {
-            get { return GetBooleanOption(MetadataAsSourceOptionsStorage.NavigateToDecompiledSources); }
-            set { SetBooleanOption(MetadataAsSourceOptionsStorage.NavigateToDecompiledSources, value); }
+            get
+            {
+                return GetBooleanOption(MetadataAsSourceOptionsStorage.NavigateToDecompiledSources);
+            }
+            set
+            {
+                SetBooleanOption(MetadataAsSourceOptionsStorage.NavigateToDecompiledSources, value);
+            }
         }
 
         public int NavigateToSourceLinkAndEmbeddedSources
         {
-            get { return GetBooleanOption(MetadataAsSourceOptionsStorage.NavigateToSourceLinkAndEmbeddedSources); }
-            set { SetBooleanOption(MetadataAsSourceOptionsStorage.NavigateToSourceLinkAndEmbeddedSources, value); }
+            get
+            {
+                return GetBooleanOption(
+                    MetadataAsSourceOptionsStorage.NavigateToSourceLinkAndEmbeddedSources
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    MetadataAsSourceOptionsStorage.NavigateToSourceLinkAndEmbeddedSources,
+                    value
+                );
+            }
         }
 
         public int AlwaysUseDefaultSymbolServers
         {
-            get { return GetBooleanOption(MetadataAsSourceOptionsStorage.AlwaysUseDefaultSymbolServers); }
-            set { SetBooleanOption(MetadataAsSourceOptionsStorage.AlwaysUseDefaultSymbolServers, value); }
+            get
+            {
+                return GetBooleanOption(
+                    MetadataAsSourceOptionsStorage.AlwaysUseDefaultSymbolServers
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    MetadataAsSourceOptionsStorage.AlwaysUseDefaultSymbolServers,
+                    value
+                );
+            }
         }
 
         public int AddImportsOnPaste
@@ -128,14 +228,36 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
         public int AutomaticallyCompleteStatementOnSemicolon
         {
-            get { return GetBooleanOption(CompleteStatementOptionsStorage.AutomaticallyCompleteStatementOnSemicolon); }
-            set { SetBooleanOption(CompleteStatementOptionsStorage.AutomaticallyCompleteStatementOnSemicolon, value); }
+            get
+            {
+                return GetBooleanOption(
+                    CompleteStatementOptionsStorage.AutomaticallyCompleteStatementOnSemicolon
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    CompleteStatementOptionsStorage.AutomaticallyCompleteStatementOnSemicolon,
+                    value
+                );
+            }
         }
 
         public int SkipAnalyzersForImplicitlyTriggeredBuilds
         {
-            get { return GetBooleanOption(FeatureOnOffOptions.SkipAnalyzersForImplicitlyTriggeredBuilds); }
-            set { SetBooleanOption(FeatureOnOffOptions.SkipAnalyzersForImplicitlyTriggeredBuilds, value); }
+            get
+            {
+                return GetBooleanOption(
+                    FeatureOnOffOptions.SkipAnalyzersForImplicitlyTriggeredBuilds
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    FeatureOnOffOptions.SkipAnalyzersForImplicitlyTriggeredBuilds,
+                    value
+                );
+            }
         }
     }
 }

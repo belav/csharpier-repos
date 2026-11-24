@@ -15,8 +15,8 @@ namespace System.IdentityModel
     /// </summary>
     /// <remarks>
     /// <para>
-    /// Cookies encrypted with this transform may be decrypted 
-    /// by any machine that shares the same RSA private key (generally 
+    /// Cookies encrypted with this transform may be decrypted
+    /// by any machine that shares the same RSA private key (generally
     /// associated with an X509 certificate).
     /// </para>
     /// <para>
@@ -29,13 +29,13 @@ namespace System.IdentityModel
     {
         //
         // Produces an encrypted stream as follows:
-        // 
+        //
         // Hashsha?( RSA.ToString( false ) ) +
         // Length( EncryptRSA( Key + IV )    +
         // EncryptRSA( Key + IV )            +
         // Length( EncryptAES( Data )        +
         // EncryptAES( Data )
-        // 
+        //
 
         RSA _encryptionKey;
         List<RSA> _decryptionKeys = new List<RSA>();
@@ -77,9 +77,7 @@ namespace System.IdentityModel
         /// Creates a new instance of <see cref="RsaEncryptionCookieTransform"/>.
         /// The instance created by this constructor is not usable until the signing and verification keys are set.
         /// </summary>
-        internal RsaEncryptionCookieTransform()
-        {
-        }
+        internal RsaEncryptionCookieTransform() { }
 
         /// <summary>
         /// Gets or sets the RSA key used for encryption
@@ -100,10 +98,7 @@ namespace System.IdentityModel
         /// </summary>
         protected virtual ReadOnlyCollection<RSA> DecryptionKeys
         {
-            get
-            {
-                return _decryptionKeys.AsReadOnly();
-            }
+            get { return _decryptionKeys.AsReadOnly(); }
         }
 
         /// <summary>
@@ -122,7 +117,10 @@ namespace System.IdentityModel
                 {
                     if (algorithm == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.ID6034, value));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            "value",
+                            SR.GetString(SR.ID6034, value)
+                        );
                     }
                     _hashName = value;
                 }
@@ -147,7 +145,10 @@ namespace System.IdentityModel
 
             if (0 == encoded.Length)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("encoded", SR.GetString(SR.ID6045));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "encoded",
+                    SR.GetString(SR.ID6045)
+                );
             }
 
             ReadOnlyCollection<RSA> decryptionKeys = DecryptionKeys;
@@ -171,7 +172,9 @@ namespace System.IdentityModel
                     int encryptedKeyAndIVSize = br.ReadInt32();
                     if (encryptedKeyAndIVSize < 0)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new FormatException(SR.GetString(SR.ID1006, encryptedKeyAndIVSize)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new FormatException(SR.GetString(SR.ID1006, encryptedKeyAndIVSize))
+                        );
                     }
                     //
                     // Enforce upper limit on key size to prevent large buffer allocation in br.ReadBytes()
@@ -179,21 +182,27 @@ namespace System.IdentityModel
 
                     if (encryptedKeyAndIVSize > encoded.Length)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new FormatException(SR.GetString(SR.ID1007)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new FormatException(SR.GetString(SR.ID1007))
+                        );
                     }
                     encryptedKeyAndIV = br.ReadBytes(encryptedKeyAndIVSize);
 
                     int encryptedDataSize = br.ReadInt32();
                     if (encryptedDataSize < 0)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new FormatException(SR.GetString(SR.ID1008, encryptedDataSize)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new FormatException(SR.GetString(SR.ID1008, encryptedDataSize))
+                        );
                     }
                     //
                     // Enforce upper limit on data size to prevent large buffer allocation in br.ReadBytes()
                     //
                     if (encryptedDataSize > encoded.Length)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new FormatException(SR.GetString(SR.ID1009)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new FormatException(SR.GetString(SR.ID1009))
+                        );
                     }
 
                     encryptedData = br.ReadBytes(encryptedDataSize);
@@ -204,7 +213,9 @@ namespace System.IdentityModel
                 //
                 foreach (RSA key in decryptionKeys)
                 {
-                    byte[] hashedKey = hash.ComputeHash(Encoding.UTF8.GetBytes(key.ToXmlString(false)));
+                    byte[] hashedKey = hash.ComputeHash(
+                        Encoding.UTF8.GetBytes(key.ToXmlString(false))
+                    );
                     if (CryptoHelper.IsEqual(hashedKey, rsaHash))
                     {
                         rsaDecryptionKey = key;
@@ -218,11 +229,13 @@ namespace System.IdentityModel
                 throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID6040));
             }
 
-            byte[] decryptedKeyAndIV = CngLightup.OaepSha1Decrypt(rsaDecryptionKey, encryptedKeyAndIV);
+            byte[] decryptedKeyAndIV = CngLightup.OaepSha1Decrypt(
+                rsaDecryptionKey,
+                encryptedKeyAndIV
+            );
 
             using (SymmetricAlgorithm symmetricAlgorithm = CryptoHelper.NewDefaultEncryption())
             {
-
                 byte[] decryptionKey = new byte[symmetricAlgorithm.KeySize / 8];
 
                 //
@@ -230,7 +243,9 @@ namespace System.IdentityModel
                 //
                 if (decryptedKeyAndIV.Length < decryptionKey.Length)
                 {
-                    throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID6047, decryptedKeyAndIV.Length, decryptionKey.Length));
+                    throw DiagnosticUtility.ThrowHelperInvalidOperation(
+                        SR.GetString(SR.ID6047, decryptedKeyAndIV.Length, decryptionKey.Length)
+                    );
                 }
 
                 byte[] decryptionIV = new byte[decryptedKeyAndIV.Length - decryptionKey.Length];
@@ -240,9 +255,20 @@ namespace System.IdentityModel
                 // The remaining bytes are the IV copy those into a buffer as well.
                 //
                 Array.Copy(decryptedKeyAndIV, decryptionKey, decryptionKey.Length);
-                Array.Copy(decryptedKeyAndIV, decryptionKey.Length, decryptionIV, 0, decryptionIV.Length);
+                Array.Copy(
+                    decryptedKeyAndIV,
+                    decryptionKey.Length,
+                    decryptionIV,
+                    0,
+                    decryptionIV.Length
+                );
 
-                using (ICryptoTransform decryptor = symmetricAlgorithm.CreateDecryptor(decryptionKey, decryptionIV))
+                using (
+                    ICryptoTransform decryptor = symmetricAlgorithm.CreateDecryptor(
+                        decryptionKey,
+                        decryptionIV
+                    )
+                )
                 {
                     return decryptor.TransformFinalBlock(encryptedData, 0, encryptedData.Length);
                 }
@@ -250,7 +276,7 @@ namespace System.IdentityModel
         }
 
         /// <summary>
-        /// Encode the data.  The data is encrypted using the default encryption algorithm (AES-256), 
+        /// Encode the data.  The data is encrypted using the default encryption algorithm (AES-256),
         /// then the AES key is encrypted using RSA and the RSA public key is appended.
         /// </summary>
         /// <param name="value">The data to encode</param>
@@ -267,7 +293,10 @@ namespace System.IdentityModel
 
             if (0 == value.Length)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.ID6044));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "value",
+                    SR.GetString(SR.ID6044)
+                );
             }
 
             RSA encryptionKey = EncryptionKey;
@@ -283,7 +312,9 @@ namespace System.IdentityModel
 
             using (HashAlgorithm hash = CryptoHelper.CreateHashAlgorithm(_hashName))
             {
-                rsaHash = hash.ComputeHash(Encoding.UTF8.GetBytes(encryptionKey.ToXmlString(false)));
+                rsaHash = hash.ComputeHash(
+                    Encoding.UTF8.GetBytes(encryptionKey.ToXmlString(false))
+                );
             }
 
             using (SymmetricAlgorithm encryptionAlgorithm = CryptoHelper.NewDefaultEncryption())
@@ -298,17 +329,25 @@ namespace System.IdentityModel
 
                 RSACryptoServiceProvider provider = encryptionKey as RSACryptoServiceProvider;
 
-                if ( provider == null )
+                if (provider == null)
                 {
-                    throw DiagnosticUtility.ThrowHelperInvalidOperation( SR.GetString( SR.ID6041 ) );
+                    throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID6041));
                 }
 
                 //
                 // Concatenate the Key and IV in an attempt to avoid two minimum block lengths in the cookie
                 //
-                byte[] keyAndIV = new byte[encryptionAlgorithm.Key.Length + encryptionAlgorithm.IV.Length];
+                byte[] keyAndIV = new byte[
+                    encryptionAlgorithm.Key.Length + encryptionAlgorithm.IV.Length
+                ];
                 Array.Copy(encryptionAlgorithm.Key, keyAndIV, encryptionAlgorithm.Key.Length);
-                Array.Copy(encryptionAlgorithm.IV, 0, keyAndIV, encryptionAlgorithm.Key.Length, encryptionAlgorithm.IV.Length);
+                Array.Copy(
+                    encryptionAlgorithm.IV,
+                    0,
+                    keyAndIV,
+                    encryptionAlgorithm.Key.Length,
+                    encryptionAlgorithm.IV.Length
+                );
 
                 encryptedKeyAndIV = CngLightup.OaepSha1Encrypt(encryptionKey, keyAndIV);
             }

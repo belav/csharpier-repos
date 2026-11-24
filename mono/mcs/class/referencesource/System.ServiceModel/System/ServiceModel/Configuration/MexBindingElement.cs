@@ -4,22 +4,19 @@
 
 namespace System.ServiceModel.Configuration
 {
+    using System.ComponentModel;
     using System.Configuration;
-    using System.ServiceModel;
     using System.Globalization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
     using System.Text;
-    using System.ComponentModel;
-    using System.ServiceModel.Channels;
 
     public abstract class MexBindingElement<TStandardBinding> : StandardBindingElement
         where TStandardBinding : Binding
     {
-
         protected MexBindingElement(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         protected override Type BindingElementType
         {

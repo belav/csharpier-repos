@@ -3,9 +3,8 @@
 
 using System;
 using System.Numerics;
-
-using Point = System.Numerics.Vector2;
 using Xunit;
+using Point = System.Numerics.Vector2;
 
 namespace GitHub_21854
 {
@@ -14,7 +13,8 @@ namespace GitHub_21854
         [Fact]
         public static int TestEntryPoint()
         {
-            try {
+            try
+            {
                 var unused = new object[] { Vector<int>.Zero };
             }
             catch (Exception e)

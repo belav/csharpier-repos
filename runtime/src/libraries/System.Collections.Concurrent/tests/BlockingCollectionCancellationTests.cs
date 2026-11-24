@@ -21,7 +21,7 @@ namespace System.Collections.Concurrent.Tests
             // "InternalCancellation_WakingUpTake:  an IOE should be thrown if CompleteAdding occurs during blocking Take()");
             Assert.Throws<InvalidOperationException>(() => coll1.Add(1));
             // "InternalCancellation_WakingUpAdd:  an InvalidOpEx should be thrown if CompleteAdding occurs during blocking Add()");
-            Assert.Throws<InvalidOperationException>(() => coll1.TryAdd(1, 1000000));  //an indefinite wait to add.. 1000 seconds.
+            Assert.Throws<InvalidOperationException>(() => coll1.TryAdd(1, 1000000)); //an indefinite wait to add.. 1000 seconds.
             // "InternalCancellation_WakingUpTryAdd:  an InvalidOpEx should be thrown if CompleteAdding occurs during blocking Add()");
         }
 
@@ -33,8 +33,10 @@ namespace System.Collections.Concurrent.Tests
             {
                 BlockingCollection<int> coll1 = new BlockingCollection<int>(1);
                 coll1.Add(1); //fills the collection.
-                Assert.False(coll1.IsAddingCompleted,
-                   "InternalCancellation_WakingUp:  At this point CompleteAdding should not have occurred.");
+                Assert.False(
+                    coll1.IsAddingCompleted,
+                    "InternalCancellation_WakingUp:  At this point CompleteAdding should not have occurred."
+                );
 
                 // This is racy on what we want to test, in that it's possible this queued work could execute
                 // so quickly that CompleteAdding happens before the tested method gets invoked, but the test
@@ -55,8 +57,10 @@ namespace System.Collections.Concurrent.Tests
 
                 t.Wait();
 
-                Assert.True(coll1.IsAddingCompleted,
-                   "InternalCancellation_WakingUp:  At this point CompleteAdding should have occurred.");
+                Assert.True(
+                    coll1.IsAddingCompleted,
+                    "InternalCancellation_WakingUp:  At this point CompleteAdding should have occurred."
+                );
             }
         }
 
@@ -69,15 +73,16 @@ namespace System.Collections.Concurrent.Tests
             Task.Run(() => cs.Cancel());
 
             int item;
+            EnsureOperationCanceledExceptionThrown(() => bc.Take(cs.Token), cs.Token);
             EnsureOperationCanceledExceptionThrown(
-                () => bc.Take(cs.Token), cs.Token);
-            EnsureOperationCanceledExceptionThrown(
-                () => bc.TryTake(out item, 100000, cs.Token), cs.Token);
-            EnsureOperationCanceledExceptionThrown(
-                () => bc.Add(1, cs.Token), cs.Token);
+                () => bc.TryTake(out item, 100000, cs.Token),
+                cs.Token
+            );
+            EnsureOperationCanceledExceptionThrown(() => bc.Add(1, cs.Token), cs.Token);
             EnsureOperationCanceledExceptionThrown(
                 () => bc.TryAdd(1, 100000, cs.Token), // a long timeout.
-                cs.Token);
+                cs.Token
+            );
 
             BlockingCollection<int> bc1 = new BlockingCollection<int>(1);
             BlockingCollection<int> bc2 = new BlockingCollection<int>(1);
@@ -85,15 +90,18 @@ namespace System.Collections.Concurrent.Tests
             bc2.Add(1); //fill the bc.
             EnsureOperationCanceledExceptionThrown(
                 () => BlockingCollection<int>.AddToAny(new[] { bc1, bc2 }, 1, cs.Token),
-                cs.Token);
+                cs.Token
+            );
             EnsureOperationCanceledExceptionThrown(
-               () => BlockingCollection<int>.TryAddToAny(new[] { bc1, bc2 }, 1, 10000, cs.Token),
-               cs.Token);
+                () => BlockingCollection<int>.TryAddToAny(new[] { bc1, bc2 }, 1, 10000, cs.Token),
+                cs.Token
+            );
 
             IEnumerable<int> enumerable = bc.GetConsumingEnumerable(cs.Token);
             EnsureOperationCanceledExceptionThrown(
-               () => enumerable.GetEnumerator().MoveNext(),
-               cs.Token);
+                () => enumerable.GetEnumerator().MoveNext(),
+                cs.Token
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -118,10 +126,20 @@ namespace System.Collections.Concurrent.Tests
                             BlockingCollection<int>.AddToAny(new[] { bc1, bc2 }, 42, cs.Token);
                             break;
                         case 1:
-                            BlockingCollection<int>.TryAddToAny(new[] { bc1, bc2 }, 42, Timeout.Infinite, cs.Token);
+                            BlockingCollection<int>.TryAddToAny(
+                                new[] { bc1, bc2 },
+                                42,
+                                Timeout.Infinite,
+                                cs.Token
+                            );
                             break;
                         case 2:
-                            BlockingCollection<int>.TryAddToAny(new[] { bc1, bc2 }, 42, (int)TimeSpan.FromDays(1).TotalMilliseconds, cs.Token);
+                            BlockingCollection<int>.TryAddToAny(
+                                new[] { bc1, bc2 },
+                                42,
+                                (int)TimeSpan.FromDays(1).TotalMilliseconds,
+                                cs.Token
+                            );
                             break;
                     }
                 });
@@ -152,7 +170,10 @@ namespace System.Collections.Concurrent.Tests
 
         #region Helper Methods
 
-        private static void EnsureOperationCanceledExceptionThrown(Action action, CancellationToken token)
+        private static void EnsureOperationCanceledExceptionThrown(
+            Action action,
+            CancellationToken token
+        )
         {
             OperationCanceledException operationCanceledEx =
                 Assert.Throws<OperationCanceledException>(action); // "BlockingCollectionCancellationTests: OperationCanceledException not thrown.");

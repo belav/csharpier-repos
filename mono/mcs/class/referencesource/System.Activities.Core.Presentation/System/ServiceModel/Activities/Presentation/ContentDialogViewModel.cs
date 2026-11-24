@@ -28,18 +28,12 @@ namespace System.ServiceModel.Activities.Presentation
 
         public bool IsEditingEnabled
         {
-            get
-            {
-                return !this.Context.Items.GetValue<ReadOnlyState>().IsReadOnly;
-            }
+            get { return !this.Context.Items.GetValue<ReadOnlyState>().IsReadOnly; }
         }
 
         public bool IsMessageChecked
         {
-            get
-            {
-                return this.editingMode == EditingMode.Message;
-            }
+            get { return this.editingMode == EditingMode.Message; }
             set
             {
                 if (value != this.IsMessageChecked)
@@ -52,10 +46,7 @@ namespace System.ServiceModel.Activities.Presentation
 
         public bool IsParameterChecked
         {
-            get
-            {
-                return this.editingMode == EditingMode.Parameter;
-            }
+            get { return this.editingMode == EditingMode.Parameter; }
             set
             {
                 if (value != this.IsParameterChecked)
@@ -66,26 +57,16 @@ namespace System.ServiceModel.Activities.Presentation
             }
         }
 
-        public ModelItem ModelItem
-        {
-            get;
-            private set;
-        }
+        public ModelItem ModelItem { get; private set; }
 
         public EditingContext Context
         {
-            get
-            {
-                return this.ModelItem.GetEditingContext();
-            }
+            get { return this.ModelItem.GetEditingContext(); }
         }
 
         public ModelItem MessageExpression
         {
-            get
-            {
-                return this.messageExpression;
-            }
+            get { return this.messageExpression; }
             set
             {
                 this.messageExpression = value;
@@ -98,10 +79,7 @@ namespace System.ServiceModel.Activities.Presentation
 
         public Type DeclaredMessageType
         {
-            get
-            {
-                return this.declaredMessageType;
-            }
+            get { return this.declaredMessageType; }
             set
             {
                 this.declaredMessageType = value;
@@ -112,23 +90,11 @@ namespace System.ServiceModel.Activities.Presentation
             }
         }
 
-        public bool IsDictionary
-        {
-            get;
-            private set;
-        }
+        public bool IsDictionary { get; private set; }
 
-        public Type UnderlyingArgumentType
-        {
-            get;
-            private set;
-        }
+        public Type UnderlyingArgumentType { get; private set; }
 
-        public ObservableCollection<DynamicArgumentWrapperObject> DynamicArguments
-        {
-            get;
-            set;
-        }
+        public ObservableCollection<DynamicArgumentWrapperObject> DynamicArguments { get; set; }
 
         internal bool OnOk()
         {
@@ -136,9 +102,12 @@ namespace System.ServiceModel.Activities.Presentation
             if (this.editingMode == EditingMode.Parameter)
             {
                 contentProperty.SetValue(new TParameter());
-                DynamicArgumentDesigner.WrapperCollectionToModelItem(this.DynamicArguments,
-                                        contentProperty.Value.Properties["Parameters"].Value,
-                                        this.IsDictionary, this.UnderlyingArgumentType);
+                DynamicArgumentDesigner.WrapperCollectionToModelItem(
+                    this.DynamicArguments,
+                    contentProperty.Value.Properties["Parameters"].Value,
+                    this.IsDictionary,
+                    this.UnderlyingArgumentType
+                );
             }
             else
             {
@@ -150,7 +119,9 @@ namespace System.ServiceModel.Activities.Presentation
                 {
                     contentProperty.SetValue(new TMessage());
                     contentProperty.Value.Properties["Message"].SetValue(this.MessageExpression);
-                    contentProperty.Value.Properties["DeclaredMessageType"].SetValue(this.DeclaredMessageType);
+                    contentProperty
+                        .Value.Properties["DeclaredMessageType"]
+                        .SetValue(this.DeclaredMessageType);
                 }
             }
 
@@ -165,9 +136,15 @@ namespace System.ServiceModel.Activities.Presentation
             ModelItem contentModelItem = this.ModelItem.Properties["Content"].Value;
             if (contentModelItem == null)
             {
-                this.messageExpression = modelTreeManager.WrapAsModelItem(new TMessage()).Properties["Message"].Value;
+                this.messageExpression = modelTreeManager
+                    .WrapAsModelItem(new TMessage())
+                    .Properties["Message"]
+                    .Value;
                 this.declaredMessageType = null;
-                parameterModelItem = modelTreeManager.WrapAsModelItem(new TParameter()).Properties["Parameters"].Value;
+                parameterModelItem = modelTreeManager
+                    .WrapAsModelItem(new TParameter())
+                    .Properties["Parameters"]
+                    .Value;
             }
             else
             {
@@ -175,13 +152,20 @@ namespace System.ServiceModel.Activities.Presentation
                 {
                     this.editingMode = EditingMode.Message;
                     this.messageExpression = contentModelItem.Properties["Message"].Value;
-                    this.declaredMessageType = (Type)contentModelItem.Properties["DeclaredMessageType"].ComputedValue;
-                    parameterModelItem = modelTreeManager.WrapAsModelItem(new TParameter()).Properties["Parameters"].Value;
+                    this.declaredMessageType = (Type)
+                        contentModelItem.Properties["DeclaredMessageType"].ComputedValue;
+                    parameterModelItem = modelTreeManager
+                        .WrapAsModelItem(new TParameter())
+                        .Properties["Parameters"]
+                        .Value;
                 }
                 else
                 {
                     this.editingMode = EditingMode.Parameter;
-                    this.messageExpression = modelTreeManager.WrapAsModelItem(new TMessage()).Properties["Message"].Value;
+                    this.messageExpression = modelTreeManager
+                        .WrapAsModelItem(new TMessage())
+                        .Properties["Message"]
+                        .Value;
                     this.declaredMessageType = null;
                     parameterModelItem = contentModelItem.Properties["Parameters"].Value;
                 }
@@ -190,9 +174,10 @@ namespace System.ServiceModel.Activities.Presentation
             bool isDictionary;
             Type underlyingArgumentType;
             this.DynamicArguments = DynamicArgumentDesigner.ModelItemToWrapperCollection(
-                                                parameterModelItem,
-                                                out isDictionary,
-                                                out underlyingArgumentType);
+                parameterModelItem,
+                out isDictionary,
+                out underlyingArgumentType
+            );
 
             this.IsDictionary = isDictionary;
             this.UnderlyingArgumentType = underlyingArgumentType;
@@ -210,7 +195,7 @@ namespace System.ServiceModel.Activities.Presentation
         enum EditingMode
         {
             Message,
-            Parameter
+            Parameter,
         }
     }
 }

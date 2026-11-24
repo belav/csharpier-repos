@@ -61,7 +61,9 @@ namespace System.Numerics.Tests
 
                 Assert.Throws<DivideByZeroException>(() =>
                 {
-                    VerifyRemainderString(Print(tempByteArray2) + Print(tempByteArray1) + "bRemainder");
+                    VerifyRemainderString(
+                        Print(tempByteArray2) + Print(tempByteArray1) + "bRemainder"
+                    );
                 });
             }
 
@@ -74,7 +76,9 @@ namespace System.Numerics.Tests
 
                 Assert.Throws<DivideByZeroException>(() =>
                 {
-                    VerifyRemainderString(Print(tempByteArray2) + Print(tempByteArray1) + "bRemainder");
+                    VerifyRemainderString(
+                        Print(tempByteArray2) + Print(tempByteArray1) + "bRemainder"
+                    );
                 });
             }
         }
@@ -101,38 +105,71 @@ namespace System.Numerics.Tests
             byte[] tempByteArray2 = new byte[0];
 
             // Axiom: X%1 = 0
-            VerifyIdentityString(BigInteger.One + " " + int.MaxValue + " bRemainder", BigInteger.Zero.ToString());
-            VerifyIdentityString(BigInteger.One + " " + long.MaxValue + " bRemainder", BigInteger.Zero.ToString());
+            VerifyIdentityString(
+                BigInteger.One + " " + int.MaxValue + " bRemainder",
+                BigInteger.Zero.ToString()
+            );
+            VerifyIdentityString(
+                BigInteger.One + " " + long.MaxValue + " bRemainder",
+                BigInteger.Zero.ToString()
+            );
 
             for (int i = 0; i < s_samples; i++)
             {
                 string randBigInt = Print(GetRandomByteArray(s_random));
-                VerifyIdentityString(BigInteger.One + " " + randBigInt + "bRemainder", BigInteger.Zero.ToString());
+                VerifyIdentityString(
+                    BigInteger.One + " " + randBigInt + "bRemainder",
+                    BigInteger.Zero.ToString()
+                );
             }
 
             // Axiom: 0%X = 0
-            VerifyIdentityString(int.MaxValue + " " + BigInteger.Zero + " bRemainder", BigInteger.Zero.ToString());
-            VerifyIdentityString(long.MaxValue + " " + BigInteger.Zero + " bRemainder", BigInteger.Zero.ToString());
+            VerifyIdentityString(
+                int.MaxValue + " " + BigInteger.Zero + " bRemainder",
+                BigInteger.Zero.ToString()
+            );
+            VerifyIdentityString(
+                long.MaxValue + " " + BigInteger.Zero + " bRemainder",
+                BigInteger.Zero.ToString()
+            );
 
             for (int i = 0; i < s_samples; i++)
             {
                 string randBigInt = Print(GetRandomByteArray(s_random));
-                VerifyIdentityString(randBigInt + BigInteger.Zero + " bRemainder", BigInteger.Zero.ToString());
+                VerifyIdentityString(
+                    randBigInt + BigInteger.Zero + " bRemainder",
+                    BigInteger.Zero.ToString()
+                );
             }
 
             // Axiom: X%X = 0
-            VerifyIdentityString(int.MaxValue + " " + int.MaxValue + " bRemainder", BigInteger.Zero.ToString());
-            VerifyIdentityString(long.MaxValue + " " + long.MaxValue + " bRemainder", BigInteger.Zero.ToString());
+            VerifyIdentityString(
+                int.MaxValue + " " + int.MaxValue + " bRemainder",
+                BigInteger.Zero.ToString()
+            );
+            VerifyIdentityString(
+                long.MaxValue + " " + long.MaxValue + " bRemainder",
+                BigInteger.Zero.ToString()
+            );
 
             for (int i = 0; i < s_samples; i++)
             {
                 string randBigInt = Print(GetRandomByteArray(s_random));
-                VerifyIdentityString(randBigInt + randBigInt + "bRemainder", BigInteger.Zero.ToString());
+                VerifyIdentityString(
+                    randBigInt + randBigInt + "bRemainder",
+                    BigInteger.Zero.ToString()
+                );
             }
 
             // Axiom: X%(X + Y) = X where Y is 1 if x>=0 and -1 if x<0
-            VerifyIdentityString((new BigInteger(int.MaxValue) + 1) + " " + int.MaxValue + " bRemainder", Int32.MaxValue.ToString());
-            VerifyIdentityString((new BigInteger(long.MaxValue) + 1) + " " + long.MaxValue + " bRemainder", Int64.MaxValue.ToString());
+            VerifyIdentityString(
+                (new BigInteger(int.MaxValue) + 1) + " " + int.MaxValue + " bRemainder",
+                Int32.MaxValue.ToString()
+            );
+            VerifyIdentityString(
+                (new BigInteger(long.MaxValue) + 1) + " " + long.MaxValue + " bRemainder",
+                Int64.MaxValue.ToString()
+            );
 
             for (int i = 0; i < s_samples; i++)
             {
@@ -143,7 +180,10 @@ namespace System.Numerics.Tests
                 {
                     modify = BigInteger.Negate(modify);
                 }
-                VerifyIdentityString(randBigInt + modify.ToString() + " bAdd " + randBigInt + "bRemainder", randBigInt.Substring(0, randBigInt.Length - 1));
+                VerifyIdentityString(
+                    randBigInt + modify.ToString() + " bAdd " + randBigInt + "bRemainder",
+                    randBigInt.Substring(0, randBigInt.Length - 1)
+                );
             }
         }
 

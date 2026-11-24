@@ -12,13 +12,16 @@ namespace System.Web.Http.Validation.Validators
 {
     public class DataAnnotationsModelValidator : ModelValidator
     {
-        internal static readonly string UseLegacyValidationMemberNameKey = "webapi:UseLegacyValidationMemberName";
-        private static bool _useLegacyValidationMemberName =
-            GetUseLegacyValidationMemberName(ConfigurationManager.AppSettings);
+        internal static readonly string UseLegacyValidationMemberNameKey =
+            "webapi:UseLegacyValidationMemberName";
+        private static bool _useLegacyValidationMemberName = GetUseLegacyValidationMemberName(
+            ConfigurationManager.AppSettings
+        );
 
         public DataAnnotationsModelValidator(
             IEnumerable<ModelValidatorProvider> validatorProviders,
-            ValidationAttribute attribute)
+            ValidationAttribute attribute
+        )
             : base(validatorProviders)
         {
             if (attribute == null)
@@ -43,7 +46,10 @@ namespace System.Web.Http.Validation.Validators
             get { return Attribute is RequiredAttribute; }
         }
 
-        public override IEnumerable<ModelValidationResult> Validate(ModelMetadata metadata, object container)
+        public override IEnumerable<ModelValidationResult> Validate(
+            ModelMetadata metadata,
+            object container
+        )
         {
             string memberName;
             if (_useLegacyValidationMemberName)
@@ -90,7 +96,7 @@ namespace System.Web.Http.Validation.Validators
                 var validationResult = new ModelValidationResult
                 {
                     Message = result.ErrorMessage,
-                    MemberName = errorMemberName
+                    MemberName = errorMemberName,
                 };
 
                 return new ModelValidationResult[] { validationResult };
@@ -103,12 +109,13 @@ namespace System.Web.Http.Validation.Validators
         internal static bool GetUseLegacyValidationMemberName(NameValueCollection appSettings)
         {
             var useLegacyMemberNameArray = appSettings.GetValues(UseLegacyValidationMemberNameKey);
-            if (useLegacyMemberNameArray != null &&
-                useLegacyMemberNameArray.Length > 0)
+            if (useLegacyMemberNameArray != null && useLegacyMemberNameArray.Length > 0)
             {
                 bool useLegacyMemberName;
-                if (bool.TryParse(useLegacyMemberNameArray[0], out useLegacyMemberName) &&
-                    useLegacyMemberName)
+                if (
+                    bool.TryParse(useLegacyMemberNameArray[0], out useLegacyMemberName)
+                    && useLegacyMemberName
+                )
                 {
                     return true;
                 }

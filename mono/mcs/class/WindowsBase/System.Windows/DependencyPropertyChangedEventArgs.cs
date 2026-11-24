@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,58 +26,62 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Windows {
-	public struct DependencyPropertyChangedEventArgs {
+namespace System.Windows
+{
+    public struct DependencyPropertyChangedEventArgs
+    {
+        public DependencyPropertyChangedEventArgs(
+            DependencyProperty property,
+            object oldValue,
+            object newValue
+        )
+            : this()
+        {
+            this.Property = property;
+            this.OldValue = oldValue;
+            this.NewValue = newValue;
+        }
 
-		public DependencyPropertyChangedEventArgs (DependencyProperty property, object oldValue, object newValue)
-			: this ()
-		{
-			this.Property = property;
-			this.OldValue = oldValue;
-			this.NewValue = newValue;
-		}
+        public object NewValue { get; private set; }
 
-		public object NewValue {
-			get; private set;
-		}
+        public object OldValue { get; private set; }
 
-		public object OldValue {
-			get; private set;
-		}
+        public DependencyProperty Property { get; private set; }
 
-		public DependencyProperty Property {
-			get; private set;
-		}
+        public override bool Equals(object obj)
+        {
+            if (!(obj is DependencyPropertyChangedEventArgs))
+                return false;
 
-		public override bool Equals (object obj)
-		{
-			if (!(obj is DependencyPropertyChangedEventArgs))
-				return false;
+            return Equals((DependencyPropertyChangedEventArgs)obj);
+        }
 
-			return Equals ((DependencyPropertyChangedEventArgs)obj);
-		}
+        public bool Equals(DependencyPropertyChangedEventArgs args)
+        {
+            return (
+                Property == args.Property && NewValue == args.NewValue && OldValue == args.OldValue
+            );
+        }
 
-		public bool Equals (DependencyPropertyChangedEventArgs args)
-		{
-			return (Property == args.Property &&
-				NewValue == args.NewValue &&
-				OldValue == args.OldValue);
-		}
+        public static bool operator !=(
+            DependencyPropertyChangedEventArgs left,
+            DependencyPropertyChangedEventArgs right
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		public static bool operator != (DependencyPropertyChangedEventArgs left, DependencyPropertyChangedEventArgs right)
-		{
-			throw new NotImplementedException ();
-		}
+        public static bool operator ==(
+            DependencyPropertyChangedEventArgs left,
+            DependencyPropertyChangedEventArgs right
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		public static bool operator == (DependencyPropertyChangedEventArgs left, DependencyPropertyChangedEventArgs right)
-		{
-			throw new NotImplementedException ();
-		}
-
-		public override int GetHashCode()
-		{
-			throw new NotImplementedException ();
-		}
-
-	}
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

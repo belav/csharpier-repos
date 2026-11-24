@@ -12,119 +12,133 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
 [Trait(Traits.Feature, Traits.Features.Outlining)]
-public class OperatorDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTests<OperatorDeclarationSyntax>
+public class OperatorDeclarationStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<OperatorDeclarationSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new OperatorDeclarationStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new OperatorDeclarationStructureProvider();
 
     [Fact]
     public async Task TestOperator1()
     {
         var code = """
-                class C
+            class C
+            {
+                {|hint:$$public static int operator +(int i){|textspan:
                 {
-                    {|hint:$$public static int operator +(int i){|textspan:
-                    {
-                    }|}|}
-                }
-                """;
+                }|}|}
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
     public async Task TestOperator2()
     {
         var code = """
-                class C
+            class C
+            {
+                {|hint:$$public static int operator +(int i){|textspan:
                 {
-                    {|hint:$$public static int operator +(int i){|textspan:
-                    {
-                    }|}|}
-                    public static int operator -(int i)
-                    {
-                    }
+                }|}|}
+                public static int operator -(int i)
+                {
                 }
-                """;
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
     public async Task TestOperator3()
     {
         var code = """
-                class C
+            class C
+            {
+                {|hint:$$public static int operator +(int i){|textspan:
                 {
-                    {|hint:$$public static int operator +(int i){|textspan:
-                    {
-                    }|}|}
+                }|}|}
 
-                    public static int operator -(int i)
-                    {
-                    }
+                public static int operator -(int i)
+                {
                 }
-                """;
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
     public async Task TestOperator4()
     {
         var code = """
-                class C
+            class C
+            {
+                {|hint:$$public static int operator +(int i){|textspan:
                 {
-                    {|hint:$$public static int operator +(int i){|textspan:
-                    {
-                    }|}|}
-                    public static explicit operator C(int i)
-                    {
-                    }
+                }|}|}
+                public static explicit operator C(int i)
+                {
                 }
-                """;
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
     public async Task TestOperator5()
     {
         var code = """
-                class C
+            class C
+            {
+                {|hint:$$public static int operator +(int i){|textspan:
                 {
-                    {|hint:$$public static int operator +(int i){|textspan:
-                    {
-                    }|}|}
-                    public static explicit operator C(int i)
-                    {
-                    }
+                }|}|}
+                public static explicit operator C(int i)
+                {
                 }
-                """;
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
     public async Task TestOperatorWithLeadingComments()
     {
         var code = """
-                class C
+            class C
+            {
+                {|span1:// Goo
+                // Bar|}
+                {|hint2:$$public static int operator +(int i){|textspan2:
                 {
-                    {|span1:// Goo
-                    // Bar|}
-                    {|hint2:$$public static int operator +(int i){|textspan2:
-                    {
-                    }|}|}
-                }
-                """;
+                }|}|}
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
+        await VerifyBlockSpansAsync(
+            code,
             Region("span1", "// Goo ...", autoCollapse: true),
-            Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 }

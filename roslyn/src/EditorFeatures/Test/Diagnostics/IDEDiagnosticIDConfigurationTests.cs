@@ -25,14 +25,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.ConfigureSeverityL
     [UseExportProvider]
     public class IDEDiagnosticIDConfigurationTests
     {
-        private static ImmutableArray<(string diagnosticId, ImmutableHashSet<IOption2> codeStyleOptions)> GetIDEDiagnosticIdsAndOptions(
-            string languageName)
+        private static ImmutableArray<(
+            string diagnosticId,
+            ImmutableHashSet<IOption2> codeStyleOptions
+        )> GetIDEDiagnosticIdsAndOptions(string languageName)
         {
-            var diagnosticIdAndOptions = new List<(string diagnosticId, ImmutableHashSet<IOption2> options)>();
+            var diagnosticIdAndOptions =
+                new List<(string diagnosticId, ImmutableHashSet<IOption2> options)>();
             var uniqueDiagnosticIds = new HashSet<string>();
             foreach (var assembly in MefHostServices.DefaultAssemblies)
             {
-                var analyzerReference = new AnalyzerFileReference(assembly.Location, TestAnalyzerAssemblyLoader.LoadFromFile);
+                var analyzerReference = new AnalyzerFileReference(
+                    assembly.Location,
+                    TestAnalyzerAssemblyLoader.LoadFromFile
+                );
                 foreach (var analyzer in analyzerReference.GetAnalyzers(languageName))
                 {
                     foreach (var descriptor in analyzer.SupportedDiagnostics)
@@ -40,15 +46,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.ConfigureSeverityL
                         var diagnosticId = descriptor.Id;
                         ValidateHelpLinkForDiagnostic(diagnosticId, descriptor.HelpLinkUri);
 
-                        if (diagnosticId.StartsWith("ENC") ||
-                            !char.IsDigit(diagnosticId[^1]))
+                        if (diagnosticId.StartsWith("ENC") || !char.IsDigit(diagnosticId[^1]))
                         {
                             // Ignore non-IDE diagnostic IDs (such as ENCxxxx diagnostics) and
                             // diagnostic IDs for suggestions, fading, etc. (such as IDExxxxWithSuggestion)
                             continue;
                         }
 
-                        if (!IDEDiagnosticIdToOptionMappingHelper.TryGetMappedOptions(diagnosticId, languageName, out var options))
+                        if (
+                            !IDEDiagnosticIdToOptionMappingHelper.TryGetMappedOptions(
+                                diagnosticId,
+                                languageName,
+                                out var options
+                            )
+                        )
                         {
                             options = ImmutableHashSet<IOption2>.Empty;
                         }
@@ -59,7 +70,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.ConfigureSeverityL
                         }
                         else
                         {
-                            Assert.True(diagnosticIdAndOptions.All(tuple => tuple.diagnosticId != diagnosticId || tuple.options.SetEquals(options)));
+                            Assert.True(
+                                diagnosticIdAndOptions.All(tuple =>
+                                    tuple.diagnosticId != diagnosticId
+                                    || tuple.options.SetEquals(options)
+                                )
+                            );
                         }
                     }
                 }
@@ -71,15 +87,21 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.ConfigureSeverityL
 
         private static void ValidateHelpLinkForDiagnostic(string diagnosticId, string helpLinkUri)
         {
-            if (diagnosticId is "IDE0043" // Intentionally undocumented because it's being removed in favor of CA2241
+            if (
+                diagnosticId
+                is "IDE0043" // Intentionally undocumented because it's being removed in favor of CA2241
                     or "IDE1007"
                     or "RemoveUnnecessaryImportsFixable" // this diagnostic is hidden and not configurable.
                     or "IDE0005_gen" // this diagnostic is hidden and not configurable.
                     or "RE0001"
                     or "JSON001"
-                    or "JSON002") // Tracked by https://github.com/dotnet/roslyn/issues/48530
+                    or "JSON002"
+            ) // Tracked by https://github.com/dotnet/roslyn/issues/48530
             {
-                Assert.True(helpLinkUri == string.Empty, $"Expected empty help link for {diagnosticId}");
+                Assert.True(
+                    helpLinkUri == string.Empty,
+                    $"Expected empty help link for {diagnosticId}"
+                );
                 return;
             }
 
@@ -89,15 +111,24 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.ConfigureSeverityL
                 return;
             }
 
-            if (helpLinkUri != $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{diagnosticId.ToLowerInvariant()}")
+            if (
+                helpLinkUri
+                != $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{diagnosticId.ToLowerInvariant()}"
+            )
             {
                 Assert.True(false, $"Invalid help link for {diagnosticId}");
             }
         }
 
-        private static Dictionary<string, string> GetExpectedMap(string expected, out string[] expectedLines)
+        private static Dictionary<string, string> GetExpectedMap(
+            string expected,
+            out string[] expectedLines
+        )
         {
-            expectedLines = expected.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            expectedLines = expected.Split(
+                new[] { Environment.NewLine },
+                StringSplitOptions.RemoveEmptyEntries
+            );
             Assert.True(expectedLines.Length % 2 == 0);
             var expectedMap = new Dictionary<string, string>();
             for (var i = 0; i < expectedLines.Length; i += 2)
@@ -134,20 +165,26 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.ConfigureSeverityL
 
                 if (!expectedMap.TryGetValue(diagnosticIdString, out var expectedValue))
                 {
-                    Assert.False(true, $@"Missing entry:
+                    Assert.False(
+                        true,
+                        $@"Missing entry:
 
 {diagnosticIdString}
 {editorConfigString}
-");
+"
+                    );
                 }
 
                 // Verify entries match for diagnosticId
                 if (expectedValue != editorConfigString)
                 {
-                    Assert.False(true, $@"Mismatch for '{diagnosticId}'
+                    Assert.False(
+                        true,
+                        $@"Mismatch for '{diagnosticId}'
 Expected: {expectedValue}
 Actual: {editorConfigString}
-");
+"
+                    );
                 }
 
                 expectedMap.Remove(diagnosticIdString);
@@ -175,7 +212,8 @@ Actual: {editorConfigString}
         [Fact]
         public void CSharp_VerifyIDEDiagnosticSeveritiesAreConfigurable()
         {
-            var expected = @"
+            var expected =
+                @"
 # IDE0001
 dotnet_diagnostic.IDE0001.severity = %value%
 
@@ -528,7 +566,8 @@ dotnet_diagnostic.JSON002.severity = %value%
         [Fact]
         public void VisualBasic_VerifyIDEDiagnosticSeveritiesAreConfigurable()
         {
-            var expected = @"
+            var expected =
+                @"
 # IDE0001
 dotnet_diagnostic.IDE0001.severity = %value%
 
@@ -691,12 +730,18 @@ dotnet_diagnostic.JSON002.severity = %value%
             VerifyConfigureSeverityCore(expected, LanguageNames.VisualBasic);
         }
 
-        private static void VerifyConfigureCodeStyleOptionsCore((string diagnosticId, string optionName, string optionValue)[] expected, string languageName)
+        private static void VerifyConfigureCodeStyleOptionsCore(
+            (string diagnosticId, string optionName, string optionValue)[] expected,
+            string languageName
+        )
         {
             using var workspace = new TestWorkspace();
 
             var diagnosticIdAndOptions = GetIDEDiagnosticIdsAndOptions(languageName);
-            var expectedMap = expected.ToDictionary(entry => (entry.diagnosticId, entry.optionName), entry => entry.optionValue);
+            var expectedMap = expected.ToDictionary(
+                entry => (entry.diagnosticId, entry.optionName),
+                entry => entry.optionValue
+            );
 
             var baseline = new List<(string diagnosticId, string optionName, string optionValue)>();
             foreach (var (diagnosticId, options) in diagnosticIdAndOptions)
@@ -716,28 +761,37 @@ dotnet_diagnostic.JSON002.severity = %value%
 
             if (expected.IsEmpty())
             {
-                Assert.False(true,
-                    "Test Baseline:" +
-                    Environment.NewLine +
-                    string.Join(Environment.NewLine, baseline.Select(Inspect)));
+                Assert.False(
+                    true,
+                    "Test Baseline:"
+                        + Environment.NewLine
+                        + string.Join(Environment.NewLine, baseline.Select(Inspect))
+                );
             }
 
             if (expectedMap.Count > 0)
             {
-                var extraEntitiesBuilder = new List<(string diagnosticId, string optionName, string optionValue)>();
+                var extraEntitiesBuilder =
+                    new List<(string diagnosticId, string optionName, string optionValue)>();
                 foreach (var entry in expectedMap.OrderBy(kvp => kvp.Key))
                 {
-                    extraEntitiesBuilder.Add((entry.Key.diagnosticId, entry.Key.optionName, entry.Value));
+                    extraEntitiesBuilder.Add(
+                        (entry.Key.diagnosticId, entry.Key.optionName, entry.Value)
+                    );
                 }
 
-                Assert.False(true,
-                   "Unexpected entries:" +
-                    Environment.NewLine +
-                    string.Join(Environment.NewLine, extraEntitiesBuilder.Select(Inspect)));
+                Assert.False(
+                    true,
+                    "Unexpected entries:"
+                        + Environment.NewLine
+                        + string.Join(Environment.NewLine, extraEntitiesBuilder.Select(Inspect))
+                );
             }
 
-            static string Inspect((string diagnosticId, string optionName, string optionValue) item)
-                => @$"(""{item.diagnosticId}"", {(item.optionName != null ? '"' + item.optionName + '"' : "null")}, {(item.optionValue != null ? '"' + item.optionValue + '"' : "null")})";
+            static string Inspect(
+                (string diagnosticId, string optionName, string optionValue) item
+            ) =>
+                @$"(""{item.diagnosticId}"", {(item.optionName != null ? '"' + item.optionName + '"' : "null")}, {(item.optionValue != null ? '"' + item.optionValue + '"' : "null")})";
 
             return;
 
@@ -757,13 +811,19 @@ dotnet_diagnostic.JSON002.severity = %value%
 
                 if (!expectedMap.TryGetValue((diagnosticId, optionName), out var expectedValue))
                 {
-                    Assert.False(true, $@"Missing entry: {diagnosticId}, {optionName}, {optionValue}");
+                    Assert.False(
+                        true,
+                        $@"Missing entry: {diagnosticId}, {optionName}, {optionValue}"
+                    );
                 }
 
                 // Verify entries match for diagnosticId
                 if (expectedValue != optionValue)
                 {
-                    Assert.False(true, $@"Mismatch for: {diagnosticId}, {optionName}, {optionValue}");
+                    Assert.False(
+                        true,
+                        $@"Mismatch for: {diagnosticId}, {optionName}, {optionValue}"
+                    );
                 }
 
                 expectedMap.Remove((diagnosticId, optionName));
@@ -815,26 +875,62 @@ dotnet_diagnostic.JSON002.severity = %value%
                 ("IDE0033", "dotnet_style_explicit_tuple_names", "true"),
                 ("IDE0034", "csharp_prefer_simple_default_expression", "true"),
                 ("IDE0035", null, null),
-                ("IDE0036", "csharp_preferred_modifier_order", "public,private,protected,internal,file,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,required,volatile,async"),
+                (
+                    "IDE0036",
+                    "csharp_preferred_modifier_order",
+                    "public,private,protected,internal,file,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,required,volatile,async"
+                ),
                 ("IDE0037", "dotnet_style_prefer_inferred_tuple_names", "true"),
                 ("IDE0037", "dotnet_style_prefer_inferred_anonymous_type_member_names", "true"),
                 ("IDE0038", "csharp_style_pattern_matching_over_is_with_cast_check", "true"),
                 ("IDE0039", "csharp_style_prefer_local_over_anonymous_function", "true"),
-                ("IDE0040", "dotnet_style_require_accessibility_modifiers", "for_non_interface_members"),
-                ("IDE0041", "dotnet_style_prefer_is_null_check_over_reference_equality_method", "true"),
+                (
+                    "IDE0040",
+                    "dotnet_style_require_accessibility_modifiers",
+                    "for_non_interface_members"
+                ),
+                (
+                    "IDE0041",
+                    "dotnet_style_prefer_is_null_check_over_reference_equality_method",
+                    "true"
+                ),
                 ("IDE0042", "csharp_style_deconstructed_variable_declaration", "true"),
                 ("IDE0043", null, null),
                 ("IDE0044", "dotnet_style_readonly_field", "true"),
                 ("IDE0045", "dotnet_style_prefer_conditional_expression_over_assignment", "true"),
                 ("IDE0046", "dotnet_style_prefer_conditional_expression_over_return", "true"),
-                ("IDE0047", "dotnet_style_parentheses_in_arithmetic_binary_operators", "always_for_clarity"),
-                ("IDE0047", "dotnet_style_parentheses_in_other_binary_operators", "always_for_clarity"),
+                (
+                    "IDE0047",
+                    "dotnet_style_parentheses_in_arithmetic_binary_operators",
+                    "always_for_clarity"
+                ),
+                (
+                    "IDE0047",
+                    "dotnet_style_parentheses_in_other_binary_operators",
+                    "always_for_clarity"
+                ),
                 ("IDE0047", "dotnet_style_parentheses_in_other_operators", "never_if_unnecessary"),
-                ("IDE0047", "dotnet_style_parentheses_in_relational_binary_operators", "always_for_clarity"),
-                ("IDE0048", "dotnet_style_parentheses_in_arithmetic_binary_operators", "always_for_clarity"),
-                ("IDE0048", "dotnet_style_parentheses_in_other_binary_operators", "always_for_clarity"),
+                (
+                    "IDE0047",
+                    "dotnet_style_parentheses_in_relational_binary_operators",
+                    "always_for_clarity"
+                ),
+                (
+                    "IDE0048",
+                    "dotnet_style_parentheses_in_arithmetic_binary_operators",
+                    "always_for_clarity"
+                ),
+                (
+                    "IDE0048",
+                    "dotnet_style_parentheses_in_other_binary_operators",
+                    "always_for_clarity"
+                ),
                 ("IDE0048", "dotnet_style_parentheses_in_other_operators", "never_if_unnecessary"),
-                ("IDE0048", "dotnet_style_parentheses_in_relational_binary_operators", "always_for_clarity"),
+                (
+                    "IDE0048",
+                    "dotnet_style_parentheses_in_relational_binary_operators",
+                    "always_for_clarity"
+                ),
                 ("IDE0049", "dotnet_style_predefined_type_for_locals_parameters_members", "true"),
                 ("IDE0049", "dotnet_style_predefined_type_for_member_access", "true"),
                 ("IDE0051", null, null),
@@ -844,7 +940,11 @@ dotnet_diagnostic.JSON002.severity = %value%
                 ("IDE0055", null, null),
                 ("IDE0056", "csharp_style_prefer_index_operator", "true"),
                 ("IDE0057", "csharp_style_prefer_range_operator", "true"),
-                ("IDE0058", "csharp_style_unused_value_expression_statement_preference", "discard_variable"),
+                (
+                    "IDE0058",
+                    "csharp_style_unused_value_expression_statement_preference",
+                    "discard_variable"
+                ),
                 ("IDE0059", "csharp_style_unused_value_assignment_preference", "discard_variable"),
                 ("IDE0060", "dotnet_code_quality_unused_parameters", "all"),
                 ("IDE0061", "csharp_style_expression_bodied_local_functions", "false"),
@@ -879,7 +979,11 @@ dotnet_diagnostic.JSON002.severity = %value%
                 ("IDE0200", "csharp_style_prefer_method_group_conversion", "true"),
                 ("IDE0210", "csharp_style_prefer_top_level_statements", "true"),
                 ("IDE0211", "csharp_style_prefer_top_level_statements", "true"),
-                ("IDE0220", "dotnet_style_prefer_foreach_explicit_cast_in_source", "when_strongly_typed"),
+                (
+                    "IDE0220",
+                    "dotnet_style_prefer_foreach_explicit_cast_in_source",
+                    "when_strongly_typed"
+                ),
                 ("IDE0230", "csharp_style_prefer_utf8_string_literals", "true"),
                 ("IDE0240", null, null),
                 ("IDE0241", null, null),
@@ -899,12 +1003,36 @@ dotnet_diagnostic.JSON002.severity = %value%
                 ("IDE1006", null, null),
                 ("IDE1007", null, null),
                 ("IDE2000", "dotnet_style_allow_multiple_blank_lines_experimental", "true"),
-                ("IDE2001", "csharp_style_allow_embedded_statements_on_same_line_experimental", "true"),
-                ("IDE2002", "csharp_style_allow_blank_lines_between_consecutive_braces_experimental", "true"),
-                ("IDE2003", "dotnet_style_allow_statement_immediately_after_block_experimental", "true"),
-                ("IDE2004", "csharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental", "true"),
-                ("IDE2005", "csharp_style_allow_blank_line_after_token_in_conditional_expression_experimental", "true"),
-                ("IDE2006", "csharp_style_allow_blank_line_after_token_in_arrow_expression_clause_experimental", "true"),
+                (
+                    "IDE2001",
+                    "csharp_style_allow_embedded_statements_on_same_line_experimental",
+                    "true"
+                ),
+                (
+                    "IDE2002",
+                    "csharp_style_allow_blank_lines_between_consecutive_braces_experimental",
+                    "true"
+                ),
+                (
+                    "IDE2003",
+                    "dotnet_style_allow_statement_immediately_after_block_experimental",
+                    "true"
+                ),
+                (
+                    "IDE2004",
+                    "csharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental",
+                    "true"
+                ),
+                (
+                    "IDE2005",
+                    "csharp_style_allow_blank_line_after_token_in_conditional_expression_experimental",
+                    "true"
+                ),
+                (
+                    "IDE2006",
+                    "csharp_style_allow_blank_line_after_token_in_arrow_expression_clause_experimental",
+                    "true"
+                ),
                 ("RE0001", null, null),
                 ("JSON001", null, null),
                 ("JSON002", null, null),
@@ -938,31 +1066,75 @@ dotnet_diagnostic.JSON002.severity = %value%
                 ("IDE0031", "dotnet_style_null_propagation", "true"),
                 ("IDE0032", "dotnet_style_prefer_auto_properties", "true"),
                 ("IDE0033", "dotnet_style_explicit_tuple_names", "true"),
-                ("IDE0036", "visual_basic_preferred_modifier_order", "partial,default,private,protected,public,friend,notoverridable,overridable,mustoverride,overloads,overrides,mustinherit,notinheritable,static,shared,shadows,readonly,writeonly,dim,const,withevents,widening,narrowing,custom,async,iterator"),
+                (
+                    "IDE0036",
+                    "visual_basic_preferred_modifier_order",
+                    "partial,default,private,protected,public,friend,notoverridable,overridable,mustoverride,overloads,overrides,mustinherit,notinheritable,static,shared,shadows,readonly,writeonly,dim,const,withevents,widening,narrowing,custom,async,iterator"
+                ),
                 ("IDE0037", "dotnet_style_prefer_inferred_anonymous_type_member_names", "true"),
                 ("IDE0037", "dotnet_style_prefer_inferred_tuple_names", "true"),
-                ("IDE0040", "dotnet_style_require_accessibility_modifiers", "for_non_interface_members"),
-                ("IDE0041", "dotnet_style_prefer_is_null_check_over_reference_equality_method", "true"),
+                (
+                    "IDE0040",
+                    "dotnet_style_require_accessibility_modifiers",
+                    "for_non_interface_members"
+                ),
+                (
+                    "IDE0041",
+                    "dotnet_style_prefer_is_null_check_over_reference_equality_method",
+                    "true"
+                ),
                 ("IDE0043", null, null),
                 ("IDE0044", "dotnet_style_readonly_field", "true"),
                 ("IDE0045", "dotnet_style_prefer_conditional_expression_over_assignment", "true"),
                 ("IDE0046", "dotnet_style_prefer_conditional_expression_over_return", "true"),
-                ("IDE0047", "dotnet_style_parentheses_in_arithmetic_binary_operators", "always_for_clarity"),
-                ("IDE0047", "dotnet_style_parentheses_in_other_binary_operators", "always_for_clarity"),
+                (
+                    "IDE0047",
+                    "dotnet_style_parentheses_in_arithmetic_binary_operators",
+                    "always_for_clarity"
+                ),
+                (
+                    "IDE0047",
+                    "dotnet_style_parentheses_in_other_binary_operators",
+                    "always_for_clarity"
+                ),
                 ("IDE0047", "dotnet_style_parentheses_in_other_operators", "never_if_unnecessary"),
-                ("IDE0047", "dotnet_style_parentheses_in_relational_binary_operators", "always_for_clarity"),
-                ("IDE0048", "dotnet_style_parentheses_in_arithmetic_binary_operators", "always_for_clarity"),
-                ("IDE0048", "dotnet_style_parentheses_in_other_binary_operators", "always_for_clarity"),
+                (
+                    "IDE0047",
+                    "dotnet_style_parentheses_in_relational_binary_operators",
+                    "always_for_clarity"
+                ),
+                (
+                    "IDE0048",
+                    "dotnet_style_parentheses_in_arithmetic_binary_operators",
+                    "always_for_clarity"
+                ),
+                (
+                    "IDE0048",
+                    "dotnet_style_parentheses_in_other_binary_operators",
+                    "always_for_clarity"
+                ),
                 ("IDE0048", "dotnet_style_parentheses_in_other_operators", "never_if_unnecessary"),
-                ("IDE0048", "dotnet_style_parentheses_in_relational_binary_operators", "always_for_clarity"),
+                (
+                    "IDE0048",
+                    "dotnet_style_parentheses_in_relational_binary_operators",
+                    "always_for_clarity"
+                ),
                 ("IDE0049", "dotnet_style_predefined_type_for_locals_parameters_members", "true"),
                 ("IDE0049", "dotnet_style_predefined_type_for_member_access", "true"),
                 ("IDE0051", null, null),
                 ("IDE0052", null, null),
                 ("IDE0054", "dotnet_style_prefer_compound_assignment", "true"),
                 ("IDE0055", null, null),
-                ("IDE0058", "visual_basic_style_unused_value_expression_statement_preference", "unused_local_variable"),
-                ("IDE0059", "visual_basic_style_unused_value_assignment_preference", "unused_local_variable"),
+                (
+                    "IDE0058",
+                    "visual_basic_style_unused_value_expression_statement_preference",
+                    "unused_local_variable"
+                ),
+                (
+                    "IDE0059",
+                    "visual_basic_style_unused_value_assignment_preference",
+                    "unused_local_variable"
+                ),
                 ("IDE0060", "dotnet_code_quality_unused_parameters", "all"),
                 ("IDE0070", null, null),
                 ("IDE0071", "dotnet_style_prefer_simplified_interpolation", "true"),
@@ -981,7 +1153,11 @@ dotnet_diagnostic.JSON002.severity = %value%
                 ("IDE1006", null, null),
                 ("IDE1007", null, null),
                 ("IDE2000", "dotnet_style_allow_multiple_blank_lines_experimental", "true"),
-                ("IDE2003", "dotnet_style_allow_statement_immediately_after_block_experimental", "true"),
+                (
+                    "IDE2003",
+                    "dotnet_style_allow_statement_immediately_after_block_experimental",
+                    "true"
+                ),
                 ("JSON001", null, null),
                 ("JSON002", null, null),
                 ("RE0001", null, null),

@@ -9,15 +9,11 @@ public class DerivedComplexTypes : IntegrationTest<DerivedComplexTypes.DatabaseI
     }
 
     [ComplexType]
-    public class DerivedLocalizedString : LocalizedString
-    {
-    }
+    public class DerivedLocalizedString : LocalizedString { }
 
     public class Customer
     {
-        public Customer()
-        {
-        }
+        public Customer() { }
 
         [Key]
         public int Id { get; set; }
@@ -47,22 +43,25 @@ public class DerivedComplexTypes : IntegrationTest<DerivedComplexTypes.DatabaseI
     {
         protected override void Seed(Context context)
         {
-            context.Customers.Add(new Customer
-            {
-                FirstName = "Bob",
-                LastName = "Smith",
-                Address = new DerivedLocalizedString { Value = "home" }
-            });
+            context.Customers.Add(
+                new Customer
+                {
+                    FirstName = "Bob",
+                    LastName = "Smith",
+                    Address = new DerivedLocalizedString { Value = "home" },
+                }
+            );
 
             base.Seed(context);
         }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Customer, CustomerViewModel>();
-        cfg.CreateProjection<LocalizedString, string>().ConvertUsing(v => v.Value);
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Customer, CustomerViewModel>();
+            cfg.CreateProjection<LocalizedString, string>().ConvertUsing(v => v.Value);
+        });
 
     [Fact]
     public void Can_map_with_projection()

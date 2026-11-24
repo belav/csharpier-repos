@@ -4,11 +4,13 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
 
-    public sealed class RegisteredScript {
+    public sealed class RegisteredScript
+    {
         private RegisteredScriptType _scriptType;
         private Control _control;
         private string _key;
@@ -17,7 +19,8 @@ namespace System.Web.UI {
         private bool _addScriptTags;
         private string _url;
 
-        internal RegisteredScript(Control control, Type type, string key, string url) {
+        internal RegisteredScript(Control control, Type type, string key, string url)
+        {
             Debug.Assert(control != null);
             Debug.Assert(type != null);
             Debug.Assert(!String.IsNullOrEmpty(url));
@@ -29,17 +32,20 @@ namespace System.Web.UI {
             _url = url;
         }
 
-        internal RegisteredScript(RegisteredScriptType scriptType,
+        internal RegisteredScript(
+            RegisteredScriptType scriptType,
             Control control,
             Type type,
             string key,
             string script,
-            bool addScriptTags) {
-
+            bool addScriptTags
+        )
+        {
             Debug.Assert(control != null);
             Debug.Assert(
                 scriptType != RegisteredScriptType.OnSubmitStatement || !addScriptTags,
-                "OnSubmitStatements cannot have addScriptTags.");
+                "OnSubmitStatements cannot have addScriptTags."
+            );
             Debug.Assert(type != null);
             // null and empty "key" are treated different by asp.net script duplicate detection so null is allowed.
             // null script allowed
@@ -52,49 +58,58 @@ namespace System.Web.UI {
             _addScriptTags = addScriptTags;
         }
 
-        public bool AddScriptTags {
-            get {
-                return _addScriptTags;
-            }
+        public bool AddScriptTags
+        {
+            get { return _addScriptTags; }
         }
 
-        public Control Control {
-            get {
-                return _control;
-            }
+        public Control Control
+        {
+            get { return _control; }
         }
 
-        public string Key {
-            get {
+        public string Key
+        {
+            get
+            {
                 // may be null
                 return _key;
             }
         }
 
-        public string Script {
-            get {
+        public string Script
+        {
+            get
+            {
                 // may be null
                 return _script;
             }
         }
 
-        public RegisteredScriptType ScriptType {
-            get {
-                return _scriptType;
-            }
+        public RegisteredScriptType ScriptType
+        {
+            get { return _scriptType; }
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods",
-            Justification = "Refers to a Control, not my Object.GetType()")]
-        public Type Type {
-            get {
-                return _type;
-            }
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1721:PropertyNamesShouldNotMatchGetMethods",
+            Justification = "Refers to a Control, not my Object.GetType()"
+        )]
+        public Type Type
+        {
+            get { return _type; }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings", Justification = "Consistent with RegisterClientScriptInclude.")]
-        public string Url {
-            get {
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1056:UriPropertiesShouldNotBeStrings",
+            Justification = "Consistent with RegisterClientScriptInclude."
+        )]
+        public string Url
+        {
+            get
+            {
                 // null if this is not a client script include or resource
                 return _url;
             }

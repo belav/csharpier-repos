@@ -3,7 +3,6 @@
 
 using System;
 using System.Diagnostics;
-
 using Internal.TypeSystem;
 
 namespace Internal.IL
@@ -69,8 +68,10 @@ namespace Internal.IL
                     stackHeight = 0;
 
                 // Remeber the stack height at this offset.
-                Debug.Assert(stackHeights[currentOffset] == StackHeightNotSet
-                    || stackHeights[currentOffset] == stackHeight);
+                Debug.Assert(
+                    stackHeights[currentOffset] == StackHeightNotSet
+                        || stackHeights[currentOffset] == stackHeight
+                );
                 stackHeights[currentOffset] = stackHeight;
 
                 bool isVariableSize = false;
@@ -215,8 +216,10 @@ namespace Internal.IL
                             Debug.Assert(stackHeight >= adjustment);
                             stackHeight -= adjustment;
 
-                            Debug.Assert(stackHeights[target] == StackHeightNotSet
-                                || stackHeights[target] == stackHeight);
+                            Debug.Assert(
+                                stackHeights[target] == StackHeightNotSet
+                                    || stackHeights[target] == stackHeight
+                            );
 
                             // Forward branch carries information about stack height at a future
                             // offset. We need to remember it.
@@ -266,8 +269,10 @@ namespace Internal.IL
                             Debug.Assert(stackHeight >= adjustment);
                             stackHeight -= adjustment;
 
-                            Debug.Assert(stackHeights[target] == StackHeightNotSet
-                                || stackHeights[target] == stackHeight);
+                            Debug.Assert(
+                                stackHeights[target] == StackHeightNotSet
+                                    || stackHeights[target] == stackHeight
+                            );
 
                             // Forward branch carries information about stack height at a future
                             // offset. We need to remember it.
@@ -286,9 +291,10 @@ namespace Internal.IL
                         {
                             int token = ReadILToken(ilbytes, currentOffset + 1);
                             object obj = methodIL.GetObject(token);
-                            MethodSignature sig = obj is MethodSignature ?
-                                (MethodSignature)obj :
-                                ((MethodDesc)obj).Signature;
+                            MethodSignature sig =
+                                obj is MethodSignature
+                                    ? (MethodSignature)obj
+                                    : ((MethodDesc)obj).Signature;
                             int adjustment = sig.Length;
                             if (opcode == ILOpcode.newobj)
                             {
@@ -311,7 +317,11 @@ namespace Internal.IL
 
                     case ILOpcode.ret:
                         {
-                            bool hasReturnValue = !methodIL.OwningMethod.Signature.ReturnType.IsVoid;
+                            bool hasReturnValue = !methodIL
+                                .OwningMethod
+                                .Signature
+                                .ReturnType
+                                .IsVoid;
                             if (hasReturnValue)
                                 stackHeight -= 1;
 

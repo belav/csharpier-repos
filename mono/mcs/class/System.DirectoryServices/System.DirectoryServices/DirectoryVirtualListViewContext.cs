@@ -20,17 +20,16 @@
 * SOFTWARE.
 *******************************************************************************/
 using System;
+
 namespace System.DirectoryServices
 {
-	public class DirectoryVirtualListViewContext
-	{
-		public DirectoryVirtualListViewContext ()
-		{
-		}
+    public class DirectoryVirtualListViewContext
+    {
+        public DirectoryVirtualListViewContext() { }
 
-		public DirectoryVirtualListViewContext Copy ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public DirectoryVirtualListViewContext Copy()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

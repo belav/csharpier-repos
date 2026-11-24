@@ -11,8 +11,11 @@ namespace Microsoft.Extensions.DependencyModel
 {
     internal static class LinqHelpers
     {
-        public static IEnumerable<TResult> SelectMany<TSource, TResult, TParam1>(IEnumerable<TSource> src,
-            Func<TSource, TParam1, IEnumerable<TResult>> func, TParam1 param1)
+        public static IEnumerable<TResult> SelectMany<TSource, TResult, TParam1>(
+            IEnumerable<TSource> src,
+            Func<TSource, TParam1, IEnumerable<TResult>> func,
+            TParam1 param1
+        )
         {
             foreach (TSource? elem in src)
             {
@@ -23,8 +26,12 @@ namespace Microsoft.Extensions.DependencyModel
             }
         }
 
-        public static IEnumerable<TResult> SelectMany<TSource, TResult, TParam1, TParam2>(IEnumerable<TSource> src,
-            Func<TSource, TParam1, TParam2, IEnumerable<TResult>> func, TParam1 param1, TParam2 param2)
+        public static IEnumerable<TResult> SelectMany<TSource, TResult, TParam1, TParam2>(
+            IEnumerable<TSource> src,
+            Func<TSource, TParam1, TParam2, IEnumerable<TResult>> func,
+            TParam1 param1,
+            TParam2 param2
+        )
         {
             foreach (TSource? elem in src)
             {

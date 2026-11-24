@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -9,29 +9,28 @@
 ** and other miscellaneous stuff.
 **
 **
-** 
+**
 ===========================================================*/
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Security;
 using System.StubHelpers;
 using System.Threading.Tasks;
-
 #if FEATURE_COMINTEROP
 
 using System.Runtime.InteropServices.WindowsRuntime;
 
-[assembly:Guid("BED7F4EA-1A96-11d2-8F08-00A0C9A6186D")]
+[assembly: Guid("BED7F4EA-1A96-11d2-8F08-00A0C9A6186D")]
 
 // The following attribute are required to ensure COM compatibility.
-[assembly:System.Runtime.InteropServices.ComCompatibleVersion(1, 0, 3300, 0)]
-[assembly:System.Runtime.InteropServices.TypeLibVersion(2, 4)]
+[assembly: System.Runtime.InteropServices.ComCompatibleVersion(1, 0, 3300, 0)]
+[assembly: System.Runtime.InteropServices.TypeLibVersion(2, 4)]
 
 #endif // FEATURE_COMINTEROP
 
-[assembly:DefaultDependencyAttribute(LoadHint.Always)]
+[assembly: DefaultDependencyAttribute(LoadHint.Always)]
 // mscorlib would like to have its literal strings frozen if possible
 [assembly: System.Runtime.CompilerServices.StringFreezingAttribute()]
 
@@ -50,7 +49,7 @@ namespace System
 
         static void CommonlyUsedGenericInstantiations()
         {
-            // Make absolutely sure we include some of the most common 
+            // Make absolutely sure we include some of the most common
             // instantiations here in mscorlib's ngen image.
             // Note that reference type instantiations are already included
             // automatically for us.
@@ -58,7 +57,7 @@ namespace System
             System.Array.Sort<double>(null);
             System.Array.Sort<int>(null);
             System.Array.Sort<IntPtr>(null);
-            
+
             new ArraySegment<byte>(new byte[1], 0, 0);
 
             new Dictionary<Char, Object>();
@@ -76,7 +75,7 @@ namespace System
             new Dictionary<Object, Guid>();
             new Dictionary<Object, Int32>();
             new Dictionary<Object, Int64>(); // Added for Visual Studio 2010
-            new Dictionary<uint, WeakReference>();  // NCL team needs this
+            new Dictionary<uint, WeakReference>(); // NCL team needs this
             new Dictionary<Object, UInt32>();
             new Dictionary<UInt32, Object>();
             new Dictionary<Int64, Object>();
@@ -85,19 +84,19 @@ namespace System
             new Dictionary<Guid, Int32>();
 #endif
 
-        // Microsoft.Windows.Design
+            // Microsoft.Windows.Design
             new Dictionary<System.Reflection.MemberTypes, Object>();
             new EnumEqualityComparer<System.Reflection.MemberTypes>();
 
-        // Microsoft.Expression.DesignModel
-            new Dictionary<Object, KeyValuePair<Object,Object>>();
-            new Dictionary<KeyValuePair<Object,Object>, Object>();
+            // Microsoft.Expression.DesignModel
+            new Dictionary<Object, KeyValuePair<Object, Object>>();
+            new Dictionary<KeyValuePair<Object, Object>, Object>();
 
             NullableHelper<Boolean>();
             NullableHelper<Byte>();
             NullableHelper<Char>();
-            NullableHelper<DateTime>(); 
-            NullableHelper<Decimal>(); 
+            NullableHelper<DateTime>();
+            NullableHelper<Decimal>();
             NullableHelper<Double>();
             NullableHelper<Guid>();
             NullableHelper<Int16>();
@@ -105,7 +104,7 @@ namespace System
             NullableHelper<Int64>();
             NullableHelper<Single>();
             NullableHelper<TimeSpan>();
-            NullableHelper<DateTimeOffset>();  // For SQL
+            NullableHelper<DateTimeOffset>(); // For SQL
 
             new List<Boolean>();
             new List<Byte>();
@@ -125,13 +124,13 @@ namespace System
             new List<UInt64>();
             new List<IntPtr>();
             new List<KeyValuePair<Object, Object>>();
-            new List<GCHandle>();  // NCL team needs this
+            new List<GCHandle>(); // NCL team needs this
             new List<DateTimeOffset>();
 
             new KeyValuePair<Char, UInt16>('\0', UInt16.MinValue);
             new KeyValuePair<UInt16, Double>(UInt16.MinValue, Double.MinValue);
             new KeyValuePair<Object, Int32>(String.Empty, Int32.MinValue);
-            new KeyValuePair<Int32, Int32>(Int32.MinValue, Int32.MinValue);            
+            new KeyValuePair<Int32, Int32>(Int32.MinValue, Int32.MinValue);
             SZArrayHelper<Boolean>(null);
             SZArrayHelper<Byte>(null);
             SZArrayHelper<DateTime>(null);
@@ -162,13 +161,14 @@ namespace System
 #endif
         }
 
-        static T NullableHelper<T>() where T : struct
+        static T NullableHelper<T>()
+            where T : struct
         {
-            Nullable.Compare<T>(null, null);    
-            Nullable.Equals<T>(null, null); 
+            Nullable.Compare<T>(null, null);
+            Nullable.Equals<T>(null, null);
             Nullable<T> nullable = new Nullable<T>();
             return nullable.GetValueOrDefault();
-        }       
+        }
 
         static void SZArrayHelper<T>(SZArrayHelper oSZArrayHelper)
         {
@@ -185,6 +185,7 @@ namespace System
         {
             await Task.Delay(1);
         }
+
         // System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1[System.__Canon]
         // System.Runtime.CompilerServices.TaskAwaiter'[System.__Canon]
         static async Task<String> AsyncHelper2<T>()
@@ -223,28 +224,44 @@ namespace System
             WinRT_IEnumerable<float>(null, null, null);
             WinRT_IEnumerable<double>(null, null, null);
 
-            // The underlying WinRT types for shared instantiations have to be referenced explicitly. 
+            // The underlying WinRT types for shared instantiations have to be referenced explicitly.
             // They are not guaranteeed to be created indirectly because of generic code sharing.
-            WinRT_IEnumerable<string>(null, null, null); typeof(IIterable<string>).ToString(); typeof(IIterator<string>).ToString();
-            WinRT_IEnumerable<object>(null, null, null); typeof(IIterable<object>).ToString(); typeof(IIterator<object>).ToString();
+            WinRT_IEnumerable<string>(null, null, null);
+            typeof(IIterable<string>).ToString();
+            typeof(IIterator<string>).ToString();
+            WinRT_IEnumerable<object>(null, null, null);
+            typeof(IIterable<object>).ToString();
+            typeof(IIterator<object>).ToString();
 
             WinRT_IList<int>(null, null, null, null);
-            WinRT_IList<string>(null, null, null, null); typeof(IVector<string>).ToString();
-            WinRT_IList<object>(null, null, null, null); typeof(IVector<object>).ToString();
+            WinRT_IList<string>(null, null, null, null);
+            typeof(IVector<string>).ToString();
+            WinRT_IList<object>(null, null, null, null);
+            typeof(IVector<object>).ToString();
 
             WinRT_IReadOnlyList<int>(null, null, null);
-            WinRT_IReadOnlyList<string>(null, null, null); typeof(IVectorView<string>).ToString();
-            WinRT_IReadOnlyList<object>(null, null, null); typeof(IVectorView<object>).ToString();
+            WinRT_IReadOnlyList<string>(null, null, null);
+            typeof(IVectorView<string>).ToString();
+            WinRT_IReadOnlyList<object>(null, null, null);
+            typeof(IVectorView<object>).ToString();
 
-            WinRT_IDictionary<string, int>(null, null, null, null); typeof(IMap<string, int>).ToString();
-            WinRT_IDictionary<string, string>(null, null, null, null); typeof(IMap<string, string>).ToString();
-            WinRT_IDictionary<string, object>(null, null, null, null); typeof(IMap<string, object>).ToString();
-            WinRT_IDictionary<object, object>(null, null, null, null); typeof(IMap<object, object>).ToString();
+            WinRT_IDictionary<string, int>(null, null, null, null);
+            typeof(IMap<string, int>).ToString();
+            WinRT_IDictionary<string, string>(null, null, null, null);
+            typeof(IMap<string, string>).ToString();
+            WinRT_IDictionary<string, object>(null, null, null, null);
+            typeof(IMap<string, object>).ToString();
+            WinRT_IDictionary<object, object>(null, null, null, null);
+            typeof(IMap<object, object>).ToString();
 
-            WinRT_IReadOnlyDictionary<string, int>(null, null, null, null); typeof(IMapView<string, int>).ToString();
-            WinRT_IReadOnlyDictionary<string, string>(null, null, null, null); typeof(IMapView<string, string>).ToString();
-            WinRT_IReadOnlyDictionary<string, object>(null, null, null, null); typeof(IMapView<string, object>).ToString();
-            WinRT_IReadOnlyDictionary<object, object>(null, null, null, null); typeof(IMapView<object, object>).ToString();
+            WinRT_IReadOnlyDictionary<string, int>(null, null, null, null);
+            typeof(IMapView<string, int>).ToString();
+            WinRT_IReadOnlyDictionary<string, string>(null, null, null, null);
+            typeof(IMapView<string, string>).ToString();
+            WinRT_IReadOnlyDictionary<string, object>(null, null, null, null);
+            typeof(IMapView<string, object>).ToString();
+            WinRT_IReadOnlyDictionary<object, object>(null, null, null, null);
+            typeof(IMapView<object, object>).ToString();
 
             WinRT_Nullable<bool>();
             WinRT_Nullable<byte>();
@@ -257,7 +274,11 @@ namespace System
         }
 
         [SecurityCritical]
-        static void WinRT_IEnumerable<T>(IterableToEnumerableAdapter iterableToEnumerableAdapter, EnumerableToIterableAdapter enumerableToIterableAdapter, IIterable<T> iterable)
+        static void WinRT_IEnumerable<T>(
+            IterableToEnumerableAdapter iterableToEnumerableAdapter,
+            EnumerableToIterableAdapter enumerableToIterableAdapter,
+            IIterable<T> iterable
+        )
         {
             // instantiate stubs for the one method on IEnumerable<T> and the one method on IIterable<T>
             iterableToEnumerableAdapter.GetEnumerator_Stub<T>();
@@ -265,7 +286,12 @@ namespace System
         }
 
         [SecurityCritical]
-        static void WinRT_IList<T>(VectorToListAdapter vectorToListAdapter, VectorToCollectionAdapter vectorToCollectionAdapter, ListToVectorAdapter listToVectorAdapter, IVector<T> vector)
+        static void WinRT_IList<T>(
+            VectorToListAdapter vectorToListAdapter,
+            VectorToCollectionAdapter vectorToCollectionAdapter,
+            ListToVectorAdapter listToVectorAdapter,
+            IVector<T> vector
+        )
         {
             WinRT_IEnumerable<T>(null, null, null);
 
@@ -290,7 +316,9 @@ namespace System
         }
 
         [SecurityCritical]
-        static void WinRT_IReadOnlyCollection<T>(VectorViewToReadOnlyCollectionAdapter vectorViewToReadOnlyCollectionAdapter)
+        static void WinRT_IReadOnlyCollection<T>(
+            VectorViewToReadOnlyCollectionAdapter vectorViewToReadOnlyCollectionAdapter
+        )
         {
             WinRT_IEnumerable<T>(null, null, null);
 
@@ -299,7 +327,11 @@ namespace System
         }
 
         [SecurityCritical]
-        static void WinRT_IReadOnlyList<T>(IVectorViewToIReadOnlyListAdapter vectorToListAdapter, IReadOnlyListToIVectorViewAdapter listToVectorAdapter, IVectorView<T> vectorView)
+        static void WinRT_IReadOnlyList<T>(
+            IVectorViewToIReadOnlyListAdapter vectorToListAdapter,
+            IReadOnlyListToIVectorViewAdapter listToVectorAdapter,
+            IVectorView<T> vectorView
+        )
         {
             WinRT_IEnumerable<T>(null, null, null);
             WinRT_IReadOnlyCollection<T>(null);
@@ -313,7 +345,12 @@ namespace System
         }
 
         [SecurityCritical]
-        static void WinRT_IDictionary<K, V>(MapToDictionaryAdapter mapToDictionaryAdapter, MapToCollectionAdapter mapToCollectionAdapter, DictionaryToMapAdapter dictionaryToMapAdapter, IMap<K, V> map)
+        static void WinRT_IDictionary<K, V>(
+            MapToDictionaryAdapter mapToDictionaryAdapter,
+            MapToCollectionAdapter mapToCollectionAdapter,
+            DictionaryToMapAdapter dictionaryToMapAdapter,
+            IMap<K, V> map
+        )
         {
             WinRT_IEnumerable<KeyValuePair<K, V>>(null, null, null);
 
@@ -339,7 +376,12 @@ namespace System
         }
 
         [SecurityCritical]
-        static void WinRT_IReadOnlyDictionary<K, V>(IMapViewToIReadOnlyDictionaryAdapter mapToDictionaryAdapter, IReadOnlyDictionaryToIMapViewAdapter dictionaryToMapAdapter, IMapView<K, V> mapView, MapViewToReadOnlyCollectionAdapter mapViewToReadOnlyCollectionAdapter)
+        static void WinRT_IReadOnlyDictionary<K, V>(
+            IMapViewToIReadOnlyDictionaryAdapter mapToDictionaryAdapter,
+            IReadOnlyDictionaryToIMapViewAdapter dictionaryToMapAdapter,
+            IMapView<K, V> mapView,
+            MapViewToReadOnlyCollectionAdapter mapViewToReadOnlyCollectionAdapter
+        )
         {
             WinRT_IEnumerable<KeyValuePair<K, V>>(null, null, null);
             WinRT_IReadOnlyCollection<KeyValuePair<K, V>>(null);
@@ -360,7 +402,8 @@ namespace System
         }
 
         [SecurityCritical]
-        static void WinRT_Nullable<T>() where T : struct
+        static void WinRT_Nullable<T>()
+            where T : struct
         {
             Nullable<T> nullable = new Nullable<T>();
             NullableMarshaler.ConvertToNative(ref nullable);

@@ -34,19 +34,16 @@ public class EndpointRoutingMiddlewareFormOptionsTest
         var formOptionsMetadata = new FormOptionsMetadata(bufferBody: false, valueCountLimit: 54);
         var middleware = CreateMiddleware(
             logger: logger,
-            matcherFactory: new TestMatcherFactory(
-                isHandled: true,
-                setEndpointCallback: c =>
-                {
-                    c.SetEndpoint(
-                        new Endpoint(
-                            c => Task.CompletedTask,
-                            new EndpointMetadataCollection(formOptionsMetadata),
-                            "myapp"
-                        )
-                    );
-                }
-            )
+            matcherFactory: new TestMatcherFactory(isHandled: true, setEndpointCallback: c =>
+            {
+                c.SetEndpoint(
+                    new Endpoint(
+                        c => Task.CompletedTask,
+                        new EndpointMetadataCollection(formOptionsMetadata),
+                        "myapp"
+                    )
+                );
+            })
         );
 
         // Act
@@ -78,23 +75,20 @@ public class EndpointRoutingMiddlewareFormOptionsTest
         var formOptionsMetadata3 = new FormOptionsMetadata(bufferBody: true);
         var middleware = CreateMiddleware(
             logger: logger,
-            matcherFactory: new TestMatcherFactory(
-                isHandled: true,
-                setEndpointCallback: c =>
-                {
-                    c.SetEndpoint(
-                        new Endpoint(
-                            c => Task.CompletedTask,
-                            new EndpointMetadataCollection(
-                                formOptionsMetadata1,
-                                formOptionsMetadata2,
-                                formOptionsMetadata3
-                            ),
-                            "myapp"
-                        )
-                    );
-                }
-            )
+            matcherFactory: new TestMatcherFactory(isHandled: true, setEndpointCallback: c =>
+            {
+                c.SetEndpoint(
+                    new Endpoint(
+                        c => Task.CompletedTask,
+                        new EndpointMetadataCollection(
+                            formOptionsMetadata1,
+                            formOptionsMetadata2,
+                            formOptionsMetadata3
+                        ),
+                        "myapp"
+                    )
+                );
+            })
         );
 
         // Act
@@ -132,19 +126,16 @@ public class EndpointRoutingMiddlewareFormOptionsTest
         var formOptionsMetadata = new FormOptionsMetadata(bufferBody: false, valueCountLimit: 54);
         var middleware = CreateMiddleware(
             logger: logger,
-            matcherFactory: new TestMatcherFactory(
-                isHandled: true,
-                setEndpointCallback: c =>
-                {
-                    c.SetEndpoint(
-                        new Endpoint(
-                            c => Task.CompletedTask,
-                            new EndpointMetadataCollection(formOptionsMetadata),
-                            "myapp"
-                        )
-                    );
-                }
-            )
+            matcherFactory: new TestMatcherFactory(isHandled: true, setEndpointCallback: c =>
+            {
+                c.SetEndpoint(
+                    new Endpoint(
+                        c => Task.CompletedTask,
+                        new EndpointMetadataCollection(formOptionsMetadata),
+                        "myapp"
+                    )
+                );
+            })
         );
 
         // Act
@@ -181,19 +172,16 @@ public class EndpointRoutingMiddlewareFormOptionsTest
         var formOptionsMetadata = new FormOptionsMetadata(bufferBody: false, valueCountLimit: 54);
         var middleware = CreateMiddleware(
             logger: logger,
-            matcherFactory: new TestMatcherFactory(
-                isHandled: true,
-                setEndpointCallback: c =>
-                {
-                    c.SetEndpoint(
-                        new Endpoint(
-                            c => Task.CompletedTask,
-                            new EndpointMetadataCollection(formOptionsMetadata),
-                            "myapp"
-                        )
-                    );
-                }
-            )
+            matcherFactory: new TestMatcherFactory(isHandled: true, setEndpointCallback: c =>
+            {
+                c.SetEndpoint(
+                    new Endpoint(
+                        c => Task.CompletedTask,
+                        new EndpointMetadataCollection(formOptionsMetadata),
+                        "myapp"
+                    )
+                );
+            })
         );
 
         // Act
@@ -227,19 +215,16 @@ public class EndpointRoutingMiddlewareFormOptionsTest
         var formOptionsMetadata = new FormOptionsMetadata(bufferBody: false, valueCountLimit: 54);
         var middleware = CreateMiddleware(
             logger: logger,
-            matcherFactory: new TestMatcherFactory(
-                isHandled: true,
-                setEndpointCallback: c =>
-                {
-                    c.SetEndpoint(
-                        new Endpoint(
-                            c => Task.CompletedTask,
-                            new EndpointMetadataCollection(formOptionsMetadata),
-                            "myapp"
-                        )
-                    );
-                }
-            )
+            matcherFactory: new TestMatcherFactory(isHandled: true, setEndpointCallback: c =>
+            {
+                c.SetEndpoint(
+                    new Endpoint(
+                        c => Task.CompletedTask,
+                        new EndpointMetadataCollection(formOptionsMetadata),
+                        "myapp"
+                    )
+                );
+            })
         );
 
         // Act

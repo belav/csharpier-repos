@@ -22,7 +22,11 @@ namespace System.Net.Http.Headers
 
         public CacheControlHeaderValue? CacheControl
         {
-            get { return (CacheControlHeaderValue?)_parent.GetSingleParsedValue(KnownHeaders.CacheControl.Descriptor); }
+            get
+            {
+                return (CacheControlHeaderValue?)
+                    _parent.GetSingleParsedValue(KnownHeaders.CacheControl.Descriptor);
+            }
             set { _parent.SetOrRemoveParsedValue(KnownHeaders.CacheControl.Descriptor, value); }
         }
 
@@ -40,23 +44,39 @@ namespace System.Net.Http.Headers
                 if (value == true)
                 {
                     _connectionCloseSet = true;
-                    if (!_parent.ContainsParsedValue(KnownHeaders.Connection.Descriptor, HeaderUtilities.ConnectionClose))
+                    if (
+                        !_parent.ContainsParsedValue(
+                            KnownHeaders.Connection.Descriptor,
+                            HeaderUtilities.ConnectionClose
+                        )
+                    )
                     {
-                        _parent.AddParsedValue(KnownHeaders.Connection.Descriptor, HeaderUtilities.ConnectionClose);
+                        _parent.AddParsedValue(
+                            KnownHeaders.Connection.Descriptor,
+                            HeaderUtilities.ConnectionClose
+                        );
                     }
                 }
                 else
                 {
                     _connectionCloseSet = value != null;
                     // We intentionally ignore the return value. It's OK if "close" wasn't in the store.
-                    _parent.RemoveParsedValue(KnownHeaders.Connection.Descriptor, HeaderUtilities.ConnectionClose);
+                    _parent.RemoveParsedValue(
+                        KnownHeaders.Connection.Descriptor,
+                        HeaderUtilities.ConnectionClose
+                    );
                 }
             }
         }
 
         internal static bool? GetConnectionClose(HttpHeaders parent, HttpGeneralHeaders? headers)
         {
-            if (parent.ContainsParsedValue(KnownHeaders.Connection.Descriptor, HeaderUtilities.ConnectionClose))
+            if (
+                parent.ContainsParsedValue(
+                    KnownHeaders.Connection.Descriptor,
+                    HeaderUtilities.ConnectionClose
+                )
+            )
             {
                 return true;
             }
@@ -69,27 +89,55 @@ namespace System.Net.Http.Headers
 
         public DateTimeOffset? Date
         {
-            get { return HeaderUtilities.GetDateTimeOffsetValue(KnownHeaders.Date.Descriptor, _parent); }
+            get
+            {
+                return HeaderUtilities.GetDateTimeOffsetValue(
+                    KnownHeaders.Date.Descriptor,
+                    _parent
+                );
+            }
             set { _parent.SetOrRemoveParsedValue(KnownHeaders.Date.Descriptor, value); }
         }
 
         public HttpHeaderValueCollection<NameValueHeaderValue> Pragma =>
-            _pragma ??= new HttpHeaderValueCollection<NameValueHeaderValue>(KnownHeaders.Pragma.Descriptor, _parent);
+            _pragma ??= new HttpHeaderValueCollection<NameValueHeaderValue>(
+                KnownHeaders.Pragma.Descriptor,
+                _parent
+            );
 
         public HttpHeaderValueCollection<string> Trailer =>
-            _trailer ??= new HttpHeaderValueCollection<string>(KnownHeaders.Trailer.Descriptor, _parent);
+            _trailer ??= new HttpHeaderValueCollection<string>(
+                KnownHeaders.Trailer.Descriptor,
+                _parent
+            );
 
-        internal static bool? GetTransferEncodingChunked(HttpHeaders parent, HttpGeneralHeaders? headers)
+        internal static bool? GetTransferEncodingChunked(
+            HttpHeaders parent,
+            HttpGeneralHeaders? headers
+        )
         {
-            if (parent.TryGetHeaderValue(KnownHeaders.TransferEncoding.Descriptor, out object? value))
+            if (
+                parent.TryGetHeaderValue(
+                    KnownHeaders.TransferEncoding.Descriptor,
+                    out object? value
+                )
+            )
             {
                 // Fast-path for the very common case where "chunked" is the only value.
-                if (value is string stringValue && stringValue.Equals("chunked", StringComparison.OrdinalIgnoreCase))
+                if (
+                    value is string stringValue
+                    && stringValue.Equals("chunked", StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     return true;
                 }
 
-                if (parent.ContainsParsedValue(KnownHeaders.TransferEncoding.Descriptor, HeaderUtilities.TransferEncodingChunked))
+                if (
+                    parent.ContainsParsedValue(
+                        KnownHeaders.TransferEncoding.Descriptor,
+                        HeaderUtilities.TransferEncodingChunked
+                    )
+                )
                 {
                     return true;
                 }
@@ -117,34 +165,60 @@ namespace System.Net.Http.Headers
                 if (value == true)
                 {
                     _transferEncodingChunkedSet = true;
-                    if (!_parent.ContainsParsedValue(KnownHeaders.TransferEncoding.Descriptor, HeaderUtilities.TransferEncodingChunked))
+                    if (
+                        !_parent.ContainsParsedValue(
+                            KnownHeaders.TransferEncoding.Descriptor,
+                            HeaderUtilities.TransferEncodingChunked
+                        )
+                    )
                     {
-                        _parent.AddParsedValue(KnownHeaders.TransferEncoding.Descriptor, HeaderUtilities.TransferEncodingChunked);
+                        _parent.AddParsedValue(
+                            KnownHeaders.TransferEncoding.Descriptor,
+                            HeaderUtilities.TransferEncodingChunked
+                        );
                     }
                 }
                 else
                 {
                     _transferEncodingChunkedSet = value != null;
                     // We intentionally ignore the return value. It's OK if "chunked" wasn't in the store.
-                    _parent.RemoveParsedValue(KnownHeaders.TransferEncoding.Descriptor, HeaderUtilities.TransferEncodingChunked);
+                    _parent.RemoveParsedValue(
+                        KnownHeaders.TransferEncoding.Descriptor,
+                        HeaderUtilities.TransferEncodingChunked
+                    );
                 }
             }
         }
 
         public HttpHeaderValueCollection<ProductHeaderValue> Upgrade =>
-            _upgrade ??= new HttpHeaderValueCollection<ProductHeaderValue>(KnownHeaders.Upgrade.Descriptor, _parent);
+            _upgrade ??= new HttpHeaderValueCollection<ProductHeaderValue>(
+                KnownHeaders.Upgrade.Descriptor,
+                _parent
+            );
 
         public HttpHeaderValueCollection<ViaHeaderValue> Via =>
-            _via ??= new HttpHeaderValueCollection<ViaHeaderValue>(KnownHeaders.Via.Descriptor, _parent);
+            _via ??= new HttpHeaderValueCollection<ViaHeaderValue>(
+                KnownHeaders.Via.Descriptor,
+                _parent
+            );
 
         public HttpHeaderValueCollection<WarningHeaderValue> Warning =>
-            _warning ??= new HttpHeaderValueCollection<WarningHeaderValue>(KnownHeaders.Warning.Descriptor, _parent);
+            _warning ??= new HttpHeaderValueCollection<WarningHeaderValue>(
+                KnownHeaders.Warning.Descriptor,
+                _parent
+            );
 
         public HttpHeaderValueCollection<string> Connection =>
-            _connection ??= new HttpHeaderValueCollection<string>(KnownHeaders.Connection.Descriptor, _parent);
+            _connection ??= new HttpHeaderValueCollection<string>(
+                KnownHeaders.Connection.Descriptor,
+                _parent
+            );
 
         public HttpHeaderValueCollection<TransferCodingHeaderValue> TransferEncoding =>
-            _transferEncoding ??= new HttpHeaderValueCollection<TransferCodingHeaderValue>(KnownHeaders.TransferEncoding.Descriptor, _parent);
+            _transferEncoding ??= new HttpHeaderValueCollection<TransferCodingHeaderValue>(
+                KnownHeaders.TransferEncoding.Descriptor,
+                _parent
+            );
 
         internal HttpGeneralHeaders(HttpHeaders parent)
         {

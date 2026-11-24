@@ -9,10 +9,10 @@ public class foo
 {
     static double nan = 0.0 / 0.0;
     static double d = 1.1;
+
     [Fact]
     public static int TestEntryPoint()
     {
-
 #pragma warning disable 1718
         if (!(nan != d))
 #pragma warning restore

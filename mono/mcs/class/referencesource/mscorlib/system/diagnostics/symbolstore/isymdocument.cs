@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -15,36 +15,35 @@
 ** store. This interface also provides access to that source if it is
 ** present.
 **
-** 
+**
 ===========================================================*/
-namespace System.Diagnostics.SymbolStore {
-    
+namespace System.Diagnostics.SymbolStore
+{
     using System;
-    
+
     // Interface does not need to be marked with the serializable attribute
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface ISymbolDocument
     {
         // Properties of the document.
         String URL { get; }
         Guid DocumentType { get; }
-    
+
         // Language of the document.
         Guid Language { get; }
         Guid LanguageVendor { get; }
-    
+
         // Check sum information.
         Guid CheckSumAlgorithmId { get; }
         byte[] GetCheckSum();
-    
+
         // Given a line in this document that may or may not be a sequence
         // point, return the closest line that is a sequence point.
         int FindClosestLine(int line);
-        
+
         // Access to embedded source.
         bool HasEmbeddedSource { get; }
         int SourceLength { get; }
-        byte[] GetSourceRange(int startLine, int startColumn,
-                                      int endLine, int endColumn);
+        byte[] GetSourceRange(int startLine, int startColumn, int endLine, int endColumn);
     }
 }

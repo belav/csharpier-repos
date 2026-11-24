@@ -21,6 +21,6 @@ namespace System.DirectoryServices
         /// <devdoc>
         /// Searches the whole subtree, including all the children and the base object itself.
         /// </devdoc>
-        Subtree = 2
+        Subtree = 2,
     }
 }

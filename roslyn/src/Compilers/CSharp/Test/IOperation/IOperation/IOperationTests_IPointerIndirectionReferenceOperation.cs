@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.IOperation
         [Fact]
         public void PointerIndirectionFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     unsafe static void M(S s, S* sp)
@@ -33,7 +34,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -55,14 +57,20 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics, compilationOptions: TestOptions.UnsafeDebugDll);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                compilationOptions: TestOptions.UnsafeDebugDll
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void PointerIndirectionFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     unsafe static void M(S* sp, int i)
@@ -77,7 +85,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -113,7 +122,12 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics, compilationOptions: TestOptions.UnsafeDebugDll);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                compilationOptions: TestOptions.UnsafeDebugDll
+            );
         }
     }
 }

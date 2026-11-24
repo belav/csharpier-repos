@@ -33,8 +33,8 @@ internal partial class MigrationsBundleCommand
     }
 
 #if NET461
-    protected override int Execute(string[] args)
-        => throw new CommandException(Resources.VersionRequired("6.0.0"));
+    protected override int Execute(string[] args) =>
+        throw new CommandException(Resources.VersionRequired("6.0.0"));
 #else
     protected override int Execute(string[] args)
     {
@@ -58,8 +58,8 @@ internal partial class MigrationsBundleCommand
                 ["TargetFramework"] = Framework!.Value()!,
                 ["EFCoreVersion"] = EFCoreVersion!,
                 ["Project"] = Project!.Value()!,
-                ["StartupProject"] = StartupProject!.Value()!
-            }
+                ["StartupProject"] = StartupProject!.Value()!,
+            },
         };
         projectGenerator.Initialize();
 
@@ -74,8 +74,8 @@ internal partial class MigrationsBundleCommand
             {
                 ["ContextType"] = context,
                 ["Assembly"] = assembly,
-                ["StartupAssembly"] = startupAssembly
-            }
+                ["StartupAssembly"] = startupAssembly,
+            },
         };
         programGenerator.Initialize();
 
@@ -99,16 +99,17 @@ internal partial class MigrationsBundleCommand
                     {
                         nugetConfigs.Push(file);
                     }
-                    else if (globalJson == null
-                             && fileName.Equals("global.json", StringComparison.OrdinalIgnoreCase))
+                    else if (
+                        globalJson == null
+                        && fileName.Equals("global.json", StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         globalJson = file;
                     }
                 }
 
                 searchPath = Path.GetDirectoryName(searchPath);
-            }
-            while (searchPath != null);
+            } while (searchPath != null);
 
             while (nugetConfigs.Count > 1)
             {
@@ -138,24 +139,26 @@ internal partial class MigrationsBundleCommand
             publishArgs.Add("--runtime");
             publishArgs.Add(runtime);
 
-            var baseLength = runtime.IndexOfAny(new[] { '-', '.', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' });
+            var baseLength = runtime.IndexOfAny(
+                new[] { '-', '.', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' }
+            );
             var baseRid = runtime.Substring(0, baseLength);
             var exe = string.Equals(baseRid, "win", StringComparison.OrdinalIgnoreCase)
                 ? ".exe"
                 : null;
 
-            var outputPath = _output!.HasValue()
-                ? _output!.Value()!
-                : "efbundle" + exe;
+            var outputPath = _output!.HasValue() ? _output!.Value()! : "efbundle" + exe;
             var bundleName = Path.GetFileNameWithoutExtension(outputPath);
 
             File.WriteAllText(
                 Path.Combine(directory, bundleName + ".csproj"),
-                projectGenerator.TransformText());
+                projectGenerator.TransformText()
+            );
 
             File.WriteAllText(
                 Path.Combine(directory, "Program.cs"),
-                programGenerator.TransformText());
+                programGenerator.TransformText()
+            );
 
             var publishPath = Path.Combine(directory, "publish");
             publishArgs.Add("--output");
@@ -163,13 +166,14 @@ internal partial class MigrationsBundleCommand
             Directory.CreateDirectory(publishPath);
 
             publishArgs.Add(
-                _selfContained!.HasValue()
-                    ? "--self-contained"
-                    : "--no-self-contained");
+                _selfContained!.HasValue() ? "--self-contained" : "--no-self-contained"
+            );
 
             var configuration = Configuration!.Value();
-            if (string.Equals(configuration, "Debug", StringComparison.OrdinalIgnoreCase)
-                || string.Equals(configuration, "Release", StringComparison.OrdinalIgnoreCase))
+            if (
+                string.Equals(configuration, "Debug", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(configuration, "Release", StringComparison.OrdinalIgnoreCase)
+            )
             {
                 publishArgs.Add("--configuration");
                 publishArgs.Add(configuration!);
@@ -198,9 +202,7 @@ internal partial class MigrationsBundleCommand
                 Directory.CreateDirectory(destinationDir);
             }
 
-            File.Move(
-                Path.Combine(publishPath, bundleName + exe),
-                destination);
+            File.Move(Path.Combine(publishPath, bundleName + exe), destination);
 
             Reporter.WriteInformation(Resources.BuildBundleSucceeded(destination));
 

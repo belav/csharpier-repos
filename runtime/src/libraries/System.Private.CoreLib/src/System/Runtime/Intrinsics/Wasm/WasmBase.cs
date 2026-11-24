@@ -9,7 +9,10 @@ namespace System.Runtime.Intrinsics.Wasm
     [Intrinsic]
     internal abstract class WasmBase
     {
-        public static bool IsSupported { get => IsSupported; }
+        public static bool IsSupported
+        {
+            get => IsSupported;
+        }
 
         /// <summary>
         ///   i32.clz

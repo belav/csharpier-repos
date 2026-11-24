@@ -35,7 +35,9 @@ namespace Microsoft.Web.Mvc.Controls
         }
 
         [DefaultValue(-1)]
-        [Description("The length of the text at which to truncate the value. Set to -1 to never truncate.")]
+        [Description(
+            "The length of the text at which to truncate the value. Set to -1 to never truncate."
+        )]
         public int TruncateLength
         {
             get { return _truncateLength; }
@@ -43,14 +45,19 @@ namespace Microsoft.Web.Mvc.Controls
             {
                 if (value < -1)
                 {
-                    throw new ArgumentOutOfRangeException("value", "The TruncateLength property must be greater than or equal to -1.");
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        "The TruncateLength property must be greater than or equal to -1."
+                    );
                 }
                 _truncateLength = value;
             }
         }
 
         [DefaultValue("...")]
-        [Description("The text to display at the end of the string if it is truncated. This text is never encoded.")]
+        [Description(
+            "The text to display at the end of the string if it is truncated. This text is never encoded."
+        )]
         public string TruncateText
         {
             get { return _truncateText ?? String.Empty; }

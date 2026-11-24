@@ -1,21 +1,21 @@
 #pragma warning disable 1634, 1691
 using System;
-using System.Globalization;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel.Design.Serialization;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Threading;
-using System.Xml;
 using System.Transactions;
-using SES = System.EnterpriseServices;
 using System.Workflow.ComponentModel;
 using System.Workflow.Runtime.Hosting;
+using System.Xml;
+using SES = System.EnterpriseServices;
 
 namespace System.Workflow.Runtime
 {
@@ -62,6 +62,6 @@ namespace System.Workflow.Runtime
         HandlerInvoking,
         HandlerInvoked,
         ActivityExecuting,
-        Loading
+        Loading,
     }
 }

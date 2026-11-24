@@ -39,7 +39,8 @@ public class ShadowStateUpdateTest : IClassFixture<InMemoryFixture>
             Assert.Equal(42, customerFromStore.Id);
             Assert.Equal(
                 "Daenerys",
-                (string)context.Entry(customerFromStore).Property("Name").CurrentValue);
+                (string)context.Entry(customerFromStore).Property("Name").CurrentValue
+            );
         }
 
         using (var context = new DbContext(optionsBuilder.Options))
@@ -59,7 +60,8 @@ public class ShadowStateUpdateTest : IClassFixture<InMemoryFixture>
             Assert.Equal(42, customerFromStore.Id);
             Assert.Equal(
                 "Daenerys Targaryen",
-                (string)context.Entry(customerFromStore).Property("Name").CurrentValue);
+                (string)context.Entry(customerFromStore).Property("Name").CurrentValue
+            );
         }
 
         using (var context = new DbContext(optionsBuilder.Options))
@@ -89,9 +91,7 @@ public class ShadowStateUpdateTest : IClassFixture<InMemoryFixture>
             Id = (int)values[0];
         }
 
-        public Customer()
-        {
-        }
+        public Customer() { }
 
         public int Id { get; set; }
     }

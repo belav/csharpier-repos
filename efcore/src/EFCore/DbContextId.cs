@@ -25,24 +25,20 @@ public readonly struct DbContextId
     /// </summary>
     /// <param name="other">The other ID.</param>
     /// <returns><see langword="true" /> if they represent the same leased context; <see langword="false" /> otherwise.</returns>
-    public bool Equals(DbContextId other)
-        => InstanceId == other.InstanceId
-            && Lease == other.Lease;
+    public bool Equals(DbContextId other) => InstanceId == other.InstanceId && Lease == other.Lease;
 
     /// <summary>
     ///     Compares this ID to another ID to see if they represent the same leased context.
     /// </summary>
     /// <param name="obj">The other ID.</param>
     /// <returns><see langword="true" /> if they represent the same leased context; <see langword="false" /> otherwise.</returns>
-    public override bool Equals(object? obj)
-        => obj is DbContextId other && Equals(other);
+    public override bool Equals(object? obj) => obj is DbContextId other && Equals(other);
 
     /// <summary>
     ///     A hash code for this ID.
     /// </summary>
     /// <returns>The hash code.</returns>
-    public override int GetHashCode()
-        => HashCode.Combine(InstanceId, Lease);
+    public override int GetHashCode() => HashCode.Combine(InstanceId, Lease);
 
     /// <summary>
     ///     Compares one ID to another ID to see if they represent the same leased context.
@@ -50,8 +46,7 @@ public readonly struct DbContextId
     /// <param name="left">The first ID.</param>
     /// <param name="right">The second ID.</param>
     /// <returns><see langword="true" /> if they represent the same leased context; <see langword="false" /> otherwise.</returns>
-    public static bool operator ==(DbContextId left, DbContextId right)
-        => left.Equals(right);
+    public static bool operator ==(DbContextId left, DbContextId right) => left.Equals(right);
 
     /// <summary>
     ///     Compares one ID to another ID to see if they represent different leased contexts.
@@ -59,8 +54,7 @@ public readonly struct DbContextId
     /// <param name="left">The first ID.</param>
     /// <param name="right">The second ID.</param>
     /// <returns><see langword="true" /> if they represent different leased contexts; <see langword="false" /> otherwise.</returns>
-    public static bool operator !=(DbContextId left, DbContextId right)
-        => !left.Equals(right);
+    public static bool operator !=(DbContextId left, DbContextId right) => !left.Equals(right);
 
     /// <summary>
     ///     Creates a new <see cref="DbContextId" /> with the given <see cref="InstanceId" /> and lease number.
@@ -95,6 +89,6 @@ public readonly struct DbContextId
     ///     Returns the instance ID and lease number.
     /// </summary>
     /// <returns>The instance ID and lease number.</returns>
-    public override string ToString()
-        => InstanceId + ":" + Lease.ToString(CultureInfo.InvariantCulture);
+    public override string ToString() =>
+        InstanceId + ":" + Lease.ToString(CultureInfo.InvariantCulture);
 }

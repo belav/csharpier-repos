@@ -7,7 +7,12 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     public class ForestTrustRelationshipCollision
     {
-        internal ForestTrustRelationshipCollision(ForestTrustCollisionType collisionType, TopLevelNameCollisionOptions TLNFlag, DomainCollisionOptions domainFlag, string record)
+        internal ForestTrustRelationshipCollision(
+            ForestTrustCollisionType collisionType,
+            TopLevelNameCollisionOptions TLNFlag,
+            DomainCollisionOptions domainFlag,
+            string record
+        )
         {
             CollisionType = collisionType;
             TopLevelNameCollisionOption = TLNFlag;

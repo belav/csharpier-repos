@@ -10,7 +10,7 @@ using static Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles.SymbolSpe
 namespace Microsoft.CodeAnalysis.EditorConfig.Parsing.NamingStyles
 {
     /// <summary>
-    /// The root naming style option composed of several settings as well as a <see cref="TextSpan"/>s describing where they were all defined. 
+    /// The root naming style option composed of several settings as well as a <see cref="TextSpan"/>s describing where they were all defined.
     /// </summary>
     /// <param name="Section">The section of the editorconfig file this option applies to.</param>
     /// <param name="RuleName">The name given to thie option in the file.</param>
@@ -22,11 +22,11 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing.NamingStyles
         EditorConfigOption<string> RuleName,
         ApplicableSymbolInfo ApplicableSymbolInfo,
         NamingScheme NamingScheme,
-        EditorConfigOption<ReportDiagnostic> Severity)
-        : EditorConfigOption(Section, RuleName.Span);
+        EditorConfigOption<ReportDiagnostic> Severity
+    ) : EditorConfigOption(Section, RuleName.Span);
 
     /// <summary>
-    /// A description of the kinds of symbols a rule should apply to as well as a <see cref="TextSpan"/>s describing where they were all defined. 
+    /// A description of the kinds of symbols a rule should apply to as well as a <see cref="TextSpan"/>s describing where they were all defined.
     /// </summary>
     /// <param name="OptionName">The name given to thie option in the file.</param>
     /// <param name="SymbolKinds">The kinds of symbols this option applies to.</param>
@@ -36,10 +36,11 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing.NamingStyles
         EditorConfigOption<string> OptionName,
         EditorConfigOption<ImmutableArray<SymbolKindOrTypeKind>> SymbolKinds,
         EditorConfigOption<ImmutableArray<Accessibility>> Accessibilities,
-        EditorConfigOption<ImmutableArray<ModifierKind>> Modifiers);
+        EditorConfigOption<ImmutableArray<ModifierKind>> Modifiers
+    );
 
     /// <summary>
-    /// The rules about how the specified symbols must be named as well as a <see cref="TextSpan"/>s describing where they were all defined. 
+    /// The rules about how the specified symbols must be named as well as a <see cref="TextSpan"/>s describing where they were all defined.
     /// </summary>
     /// <param name="OptionName">The name given to thie option in the file.</param>
     /// <param name="Prefix">Required suffix</param>
@@ -51,5 +52,6 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing.NamingStyles
         EditorConfigOption<string?> Prefix,
         EditorConfigOption<string?> Suffix,
         EditorConfigOption<string?> WordSeparator,
-        EditorConfigOption<Capitalization> Capitalization);
+        EditorConfigOption<Capitalization> Capitalization
+    );
 }

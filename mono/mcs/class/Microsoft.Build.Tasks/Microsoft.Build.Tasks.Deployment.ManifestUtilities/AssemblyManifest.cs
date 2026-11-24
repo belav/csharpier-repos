@@ -25,33 +25,33 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-	
-	[ComVisible (false)]
-	public class AssemblyManifest : Manifest {
-	
-		ProxyStub[]	externalProxyStubs;
-		ProxyStub[]	xmlExternalProxyStubs;
-	
-		[MonoTODO]
-		public AssemblyManifest ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public ProxyStub[] ExternalProxyStubs {
-			get { return externalProxyStubs; }
-		}
-		
-		public ProxyStub[] XmlExternalProxyStubs {
-			get { return xmlExternalProxyStubs; }
-			set { xmlExternalProxyStubs = value; }
-		}
-	}
-}
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public class AssemblyManifest : Manifest
+    {
+        ProxyStub[] externalProxyStubs;
+        ProxyStub[] xmlExternalProxyStubs;
 
+        [MonoTODO]
+        public AssemblyManifest()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ProxyStub[] ExternalProxyStubs
+        {
+            get { return externalProxyStubs; }
+        }
+
+        public ProxyStub[] XmlExternalProxyStubs
+        {
+            get { return xmlExternalProxyStubs; }
+            set { xmlExternalProxyStubs = value; }
+        }
+    }
+}

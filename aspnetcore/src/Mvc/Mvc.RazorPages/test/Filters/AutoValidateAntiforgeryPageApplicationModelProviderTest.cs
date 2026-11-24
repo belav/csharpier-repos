@@ -34,9 +34,8 @@ public class AutoValidateAntiforgeryPageApplicationModelProviderTest
         applicationModelProvider.OnProvidersExecuting(context);
 
         // Assert
-        Assert.Collection(
-            applicationModel.Filters,
-            filter => Assert.IsType<AutoValidateAntiforgeryTokenAttribute>(filter)
+        Assert.Collection(applicationModel.Filters, filter =>
+            Assert.IsType<AutoValidateAntiforgeryTokenAttribute>(filter)
         );
     }
 
@@ -67,9 +66,8 @@ public class AutoValidateAntiforgeryPageApplicationModelProviderTest
         provider.OnProvidersExecuting(context);
 
         // Assert
-        Assert.Collection(
-            context.PageApplicationModel.Filters,
-            actual => Assert.Same(expected, actual)
+        Assert.Collection(context.PageApplicationModel.Filters, actual =>
+            Assert.Same(expected, actual)
         );
     }
 
@@ -100,9 +98,8 @@ public class AutoValidateAntiforgeryPageApplicationModelProviderTest
         provider.OnProvidersExecuting(context);
 
         // Assert
-        Assert.Collection(
-            context.PageApplicationModel.Filters,
-            actual => Assert.Same(expected, actual)
+        Assert.Collection(context.PageApplicationModel.Filters, actual =>
+            Assert.Same(expected, actual)
         );
     }
 }

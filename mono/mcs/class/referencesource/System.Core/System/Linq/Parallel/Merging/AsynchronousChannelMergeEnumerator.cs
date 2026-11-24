@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -11,8 +11,8 @@
 //
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-using System.Threading;
 using System.Diagnostics.Contracts;
+using System.Threading;
 #if SILVERLIGHT
 using System.Core; // for System.Core.SR
 #endif
@@ -36,21 +36,25 @@ namespace System.Linq.Parallel
     {
         private AsynchronousChannel<T>[] m_channels; // The channels being enumerated.
         private IntValueEvent m_consumerEvent; // The consumer event.
-        private bool[] m_done;       // Tracks which channels are done.
-        private int m_channelIndex;  // The next channel from which we'll dequeue.
-        private T m_currentElement;  // The remembered element from the previous MoveNext.
+        private bool[] m_done; // Tracks which channels are done.
+        private int m_channelIndex; // The next channel from which we'll dequeue.
+        private T m_currentElement; // The remembered element from the previous MoveNext.
 
         //-----------------------------------------------------------------------------------
         // Allocates a new enumerator over a set of one-to-one channels.
         //
 
         internal AsynchronousChannelMergeEnumerator(
-            QueryTaskGroupState taskGroupState, AsynchronousChannel<T>[] channels, IntValueEvent consumerEvent)
+            QueryTaskGroupState taskGroupState,
+            AsynchronousChannel<T>[] channels,
+            IntValueEvent consumerEvent
+        )
             : base(taskGroupState)
         {
             Contract.Assert(channels != null);
 #if DEBUG
-            foreach (AsynchronousChannel<T> c in channels) Contract.Assert(c != null);
+            foreach (AsynchronousChannel<T> c in channels)
+                Contract.Assert(c != null);
 #endif
 
             m_channels = channels;
@@ -73,7 +77,9 @@ namespace System.Linq.Parallel
             {
                 if (m_channelIndex == -1 || m_channelIndex == m_channels.Length)
                 {
-                    throw new InvalidOperationException(SR.GetString(SR.PLINQ_CommonEnumerator_Current_NotStarted));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.PLINQ_CommonEnumerator_Current_NotStarted)
+                    );
                 }
 
                 return m_currentElement;
@@ -153,20 +159,29 @@ namespace System.Linq.Parallel
                         if (!current.IsChunkBufferEmpty)
                         {
                             bool dequeueResult = current.TryDequeue(ref m_currentElement);
-                            Contract.Assert(dequeueResult, "channel isn't empty, yet the dequeue failed, hmm");
+                            Contract.Assert(
+                                dequeueResult,
+                                "channel isn't empty, yet the dequeue failed, hmm"
+                            );
                             return true;
                         }
 
                         // Mark this channel as being truly done. We won't consider it any longer.
-                        m_done[currChannelIndex] = true;                 
+                        m_done[currChannelIndex] = true;
                         isDone = true;
                         current.Dispose();
                     }
 
                     if (isDone)
                     {
-                        Contract.Assert(m_channels[currChannelIndex].IsDone, "thought this channel was done");
-                        Contract.Assert(m_channels[currChannelIndex].IsChunkBufferEmpty, "thought this channel was empty");
+                        Contract.Assert(
+                            m_channels[currChannelIndex].IsDone,
+                            "thought this channel was done"
+                        );
+                        Contract.Assert(
+                            m_channels[currChannelIndex].IsChunkBufferEmpty,
+                            "thought this channel was empty"
+                        );
 
                         // Increment the count of done channels that we've seen. If this reaches the
                         // total number of channels, we know we're finally done.
@@ -197,7 +212,11 @@ namespace System.Linq.Parallel
                             for (int i = 0; i < m_channels.Length; i++)
                             {
                                 bool channelIsDone = false;
-                                if (!m_done[i] && m_channels[i].TryDequeue(ref m_currentElement, ref channelIsDone))
+                                if (
+                                    !m_done[i]
+                                    && m_channels[i]
+                                        .TryDequeue(ref m_currentElement, ref channelIsDone)
+                                )
                                 {
                                     // The channel has received an item since the last time we checked.
                                     // Just return and let the consumer process the element returned.
@@ -225,7 +244,7 @@ namespace System.Linq.Parallel
                             {
                                 break;
                             }
-                            
+
                             //This Wait() does not require cancellation support as it will wake up when all the producers into the
                             //channel have finished.  Hence, if all the producers wake up on cancellation, so will this.
                             m_consumerEvent.Wait();
@@ -244,7 +263,7 @@ namespace System.Linq.Parallel
                             // that caused us to wake up.
                             //
 
-                            firstChannelIndex = currChannelIndex; 
+                            firstChannelIndex = currChannelIndex;
                             doneChannels = 0;
                         }
                         finally

@@ -22,293 +22,391 @@ namespace NativeVarargTest
         // the method as vararg.
         ////////////////////////////////////////////////////////////////////////
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static int TestPassingIntsNoVarargs(int one, 
-                                                   int two, 
-                                                   int three, 
-                                                   int four,
-                                                   int five, 
-                                                   int six, 
-                                                   int seven, 
-                                                   int eight,
-                                                   int nine,
-                                                   __arglist)
+        public static int TestPassingIntsNoVarargs(
+            int one,
+            int two,
+            int three,
+            int four,
+            int five,
+            int six,
+            int seven,
+            int eight,
+            int nine,
+            __arglist
+        )
         {
             return one + two + three + four + five + six + seven + eight + nine;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static long TestPassingLongsNoVarargs(long one, 
-                                                     long two, 
-                                                     long three, 
-                                                     long four,
-                                                     long five, 
-                                                     long six, 
-                                                     long seven, 
-                                                     long eight,
-                                                     long nine,
-                                                     __arglist)
+        public static long TestPassingLongsNoVarargs(
+            long one,
+            long two,
+            long three,
+            long four,
+            long five,
+            long six,
+            long seven,
+            long eight,
+            long nine,
+            __arglist
+        )
         {
             return one + two + three + four + five + six + seven + eight + nine;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static float TestPassingFloatsNoVarargs(float one, 
-                                                     float two, 
-                                                     float three, 
-                                                     float four,
-                                                     float five, 
-                                                     float six, 
-                                                     float seven, 
-                                                     float eight,
-                                                     float nine,
-                                                     __arglist)
+        public static float TestPassingFloatsNoVarargs(
+            float one,
+            float two,
+            float three,
+            float four,
+            float five,
+            float six,
+            float seven,
+            float eight,
+            float nine,
+            __arglist
+        )
         {
             return one + two + three + four + five + six + seven + eight + nine;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static double TestPassingDoublesNoVarargs(double one, 
-                                                         double two, 
-                                                         double three, 
-                                                         double four,
-                                                         double five, 
-                                                         double six, 
-                                                         double seven, 
-                                                         double eight,
-                                                         double nine,
-                                                         __arglist)
+        public static double TestPassingDoublesNoVarargs(
+            double one,
+            double two,
+            double three,
+            double four,
+            double five,
+            double six,
+            double seven,
+            double eight,
+            double nine,
+            __arglist
+        )
         {
             return one + two + three + four + five + six + seven + eight + nine;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static float TestPassingIntAndFloatsNoVarargs(int one, 
-                                                             int two, 
-                                                             int three, 
-                                                             int four,
-                                                             int five, 
-                                                             int six, 
-                                                             int seven, 
-                                                             int eight,
-                                                             int nine,
-                                                             float ten, 
-                                                             float eleven, 
-                                                             float twelve, 
-                                                             float thirteen,
-                                                             float fourteen, 
-                                                             float fifteen, 
-                                                             float sixteen, 
-                                                             float seventeen,
-                                                             float eighteen,
-                                                            __arglist)
+        public static float TestPassingIntAndFloatsNoVarargs(
+            int one,
+            int two,
+            int three,
+            int four,
+            int five,
+            int six,
+            int seven,
+            int eight,
+            int nine,
+            float ten,
+            float eleven,
+            float twelve,
+            float thirteen,
+            float fourteen,
+            float fifteen,
+            float sixteen,
+            float seventeen,
+            float eighteen,
+            __arglist
+        )
         {
             float sum = one + two + three + four + five + six + seven + eight + nine;
-            sum += ten + eleven + twelve + thirteen + fourteen + fifteen + sixteen + seventeen + eighteen;
+            sum +=
+                ten
+                + eleven
+                + twelve
+                + thirteen
+                + fourteen
+                + fifteen
+                + sixteen
+                + seventeen
+                + eighteen;
 
             return sum;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static float TestPassingFloatsAndIntNoVarargs(float one, 
-                                                             float two, 
-                                                             float three, 
-                                                             float four,
-                                                             float five, 
-                                                             float six, 
-                                                             float seven, 
-                                                             float eight,
-                                                             float nine,
-                                                             int ten, 
-                                                             int eleven, 
-                                                             int twelve, 
-                                                             int thirteen,
-                                                             int fourteen, 
-                                                             int fifteen, 
-                                                             int sixteen, 
-                                                             int seventeen,
-                                                             int eighteen,
-                                                            __arglist)
+        public static float TestPassingFloatsAndIntNoVarargs(
+            float one,
+            float two,
+            float three,
+            float four,
+            float five,
+            float six,
+            float seven,
+            float eight,
+            float nine,
+            int ten,
+            int eleven,
+            int twelve,
+            int thirteen,
+            int fourteen,
+            int fifteen,
+            int sixteen,
+            int seventeen,
+            int eighteen,
+            __arglist
+        )
         {
             float sum = one + two + three + four + five + six + seven + eight + nine;
-            sum += ten + eleven + twelve + thirteen + fourteen + fifteen + sixteen + seventeen + eighteen;
+            sum +=
+                ten
+                + eleven
+                + twelve
+                + thirteen
+                + fourteen
+                + fifteen
+                + sixteen
+                + seventeen
+                + eighteen;
 
             return sum;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static double TestPassingIntAndDoublesNoVarargs(int one, 
-                                                               int two, 
-                                                               int three, 
-                                                               int four,
-                                                               int five, 
-                                                               int six, 
-                                                               int seven, 
-                                                               int eight,
-                                                               int nine,
-                                                               double ten, 
-                                                               double eleven, 
-                                                               double twelve, 
-                                                               double thirteen,
-                                                               double fourteen, 
-                                                               double fifteen, 
-                                                               double sixteen, 
-                                                               double seventeen,
-                                                               double eighteen,
-                                                              __arglist)
+        public static double TestPassingIntAndDoublesNoVarargs(
+            int one,
+            int two,
+            int three,
+            int four,
+            int five,
+            int six,
+            int seven,
+            int eight,
+            int nine,
+            double ten,
+            double eleven,
+            double twelve,
+            double thirteen,
+            double fourteen,
+            double fifteen,
+            double sixteen,
+            double seventeen,
+            double eighteen,
+            __arglist
+        )
         {
             double sum = one + two + three + four + five + six + seven + eight + nine;
-            sum += ten + eleven + twelve + thirteen + fourteen + fifteen + sixteen + seventeen + eighteen;
+            sum +=
+                ten
+                + eleven
+                + twelve
+                + thirteen
+                + fourteen
+                + fifteen
+                + sixteen
+                + seventeen
+                + eighteen;
 
             return sum;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static double TestPassingDoublesAndIntNoVarargs(double one, 
-                                                               double two, 
-                                                               double three, 
-                                                               double four,
-                                                               double five, 
-                                                               double six, 
-                                                               double seven, 
-                                                               double eight,
-                                                               double nine,
-                                                               int ten, 
-                                                               int eleven, 
-                                                               int twelve, 
-                                                               int thirteen,
-                                                               int fourteen, 
-                                                               int fifteen, 
-                                                               int sixteen, 
-                                                               int seventeen,
-                                                               int eighteen,
-                                                              __arglist)
+        public static double TestPassingDoublesAndIntNoVarargs(
+            double one,
+            double two,
+            double three,
+            double four,
+            double five,
+            double six,
+            double seven,
+            double eight,
+            double nine,
+            int ten,
+            int eleven,
+            int twelve,
+            int thirteen,
+            int fourteen,
+            int fifteen,
+            int sixteen,
+            int seventeen,
+            int eighteen,
+            __arglist
+        )
         {
             double sum = one + two + three + four + five + six + seven + eight + nine;
-            sum += ten + eleven + twelve + thirteen + fourteen + fifteen + sixteen + seventeen + eighteen;
+            sum +=
+                ten
+                + eleven
+                + twelve
+                + thirteen
+                + fourteen
+                + fifteen
+                + sixteen
+                + seventeen
+                + eighteen;
 
             return sum;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static float TestPassingLongAndFloatsNoVarargs(long one, 
-                                                              long two, 
-                                                              long three, 
-                                                              long four,
-                                                              long five, 
-                                                              long six, 
-                                                              long seven, 
-                                                              long eight,
-                                                              long nine,
-                                                              float ten, 
-                                                              float eleven, 
-                                                              float twelve, 
-                                                              float thirteen,
-                                                              float fourteen, 
-                                                              float fifteen, 
-                                                              float sixteen, 
-                                                              float seventeen,
-                                                              float eighteen,
-                                                             __arglist)
+        public static float TestPassingLongAndFloatsNoVarargs(
+            long one,
+            long two,
+            long three,
+            long four,
+            long five,
+            long six,
+            long seven,
+            long eight,
+            long nine,
+            float ten,
+            float eleven,
+            float twelve,
+            float thirteen,
+            float fourteen,
+            float fifteen,
+            float sixteen,
+            float seventeen,
+            float eighteen,
+            __arglist
+        )
         {
             float sum = one + two + three + four + five + six + seven + eight + nine;
-            sum += ten + eleven + twelve + thirteen + fourteen + fifteen + sixteen + seventeen + eighteen;
+            sum +=
+                ten
+                + eleven
+                + twelve
+                + thirteen
+                + fourteen
+                + fifteen
+                + sixteen
+                + seventeen
+                + eighteen;
 
             return sum;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static float TestPassingFloatsAndlongNoVarargs(float one, 
-                                                              float two, 
-                                                              float three, 
-                                                              float four,
-                                                              float five, 
-                                                              float six, 
-                                                              float seven, 
-                                                              float eight,
-                                                              float nine,
-                                                              long ten, 
-                                                              long eleven, 
-                                                              long twelve, 
-                                                              long thirteen,
-                                                              long fourteen, 
-                                                              long fifteen, 
-                                                              long sixteen, 
-                                                              long seventeen,
-                                                              long eighteen,
-                                                             __arglist)
+        public static float TestPassingFloatsAndlongNoVarargs(
+            float one,
+            float two,
+            float three,
+            float four,
+            float five,
+            float six,
+            float seven,
+            float eight,
+            float nine,
+            long ten,
+            long eleven,
+            long twelve,
+            long thirteen,
+            long fourteen,
+            long fifteen,
+            long sixteen,
+            long seventeen,
+            long eighteen,
+            __arglist
+        )
         {
             float sum = one + two + three + four + five + six + seven + eight + nine;
-            sum += ten + eleven + twelve + thirteen + fourteen + fifteen + sixteen + seventeen + eighteen;
+            sum +=
+                ten
+                + eleven
+                + twelve
+                + thirteen
+                + fourteen
+                + fifteen
+                + sixteen
+                + seventeen
+                + eighteen;
 
             return sum;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static double TestPassinglongAndDoublesNoVarargs(long one, 
-                                                                long two, 
-                                                                long three, 
-                                                                long four,
-                                                                long five, 
-                                                                long six, 
-                                                                long seven, 
-                                                                long eight,
-                                                                long nine,
-                                                                double ten, 
-                                                                double eleven, 
-                                                                double twelve, 
-                                                                double thirteen,
-                                                                double fourteen, 
-                                                                double fifteen, 
-                                                                double sixteen, 
-                                                                double seventeen,
-                                                                double eighteen,
-                                                               __arglist)
+        public static double TestPassinglongAndDoublesNoVarargs(
+            long one,
+            long two,
+            long three,
+            long four,
+            long five,
+            long six,
+            long seven,
+            long eight,
+            long nine,
+            double ten,
+            double eleven,
+            double twelve,
+            double thirteen,
+            double fourteen,
+            double fifteen,
+            double sixteen,
+            double seventeen,
+            double eighteen,
+            __arglist
+        )
         {
             double sum = one + two + three + four + five + six + seven + eight + nine;
-            sum += ten + eleven + twelve + thirteen + fourteen + fifteen + sixteen + seventeen + eighteen;
+            sum +=
+                ten
+                + eleven
+                + twelve
+                + thirteen
+                + fourteen
+                + fifteen
+                + sixteen
+                + seventeen
+                + eighteen;
 
             return sum;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static double TestPassingDoublesAndlongNoVarargs(double one, 
-                                                                double two, 
-                                                                double three, 
-                                                                double four,
-                                                                double five, 
-                                                                double six, 
-                                                                double seven, 
-                                                                double eight,
-                                                                double nine,
-                                                                long ten, 
-                                                                long eleven, 
-                                                                long twelve, 
-                                                                long thirteen,
-                                                                long fourteen, 
-                                                                long fifteen, 
-                                                                long sixteen, 
-                                                                long seventeen,
-                                                                long eighteen,
-                                                               __arglist)
+        public static double TestPassingDoublesAndlongNoVarargs(
+            double one,
+            double two,
+            double three,
+            double four,
+            double five,
+            double six,
+            double seven,
+            double eight,
+            double nine,
+            long ten,
+            long eleven,
+            long twelve,
+            long thirteen,
+            long fourteen,
+            long fifteen,
+            long sixteen,
+            long seventeen,
+            long eighteen,
+            __arglist
+        )
         {
             double sum = one + two + three + four + five + six + seven + eight + nine;
-            sum += ten + eleven + twelve + thirteen + fourteen + fifteen + sixteen + seventeen + eighteen;
+            sum +=
+                ten
+                + eleven
+                + twelve
+                + thirteen
+                + fourteen
+                + fifteen
+                + sixteen
+                + seventeen
+                + eighteen;
 
             return sum;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static int TestPassingTwoIntStructsNoVarargs(TwoIntStruct one, 
-                                                            TwoIntStruct two, 
-                                                            TwoIntStruct three, 
-                                                            TwoIntStruct four,
-                                                            TwoIntStruct five, 
-                                                            TwoIntStruct six, 
-                                                            TwoIntStruct seven, 
-                                                            TwoIntStruct eight,
-                                                            TwoIntStruct nine,
-                                                            TwoIntStruct ten, 
-                                                            __arglist)
+        public static int TestPassingTwoIntStructsNoVarargs(
+            TwoIntStruct one,
+            TwoIntStruct two,
+            TwoIntStruct three,
+            TwoIntStruct four,
+            TwoIntStruct five,
+            TwoIntStruct six,
+            TwoIntStruct seven,
+            TwoIntStruct eight,
+            TwoIntStruct nine,
+            TwoIntStruct ten,
+            __arglist
+        )
         {
             int sum = one.a + one.b;
             sum += two.a + two.b;
@@ -325,17 +423,19 @@ namespace NativeVarargTest
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static int TestPassingFourIntStructsNoVarargs(FourIntStruct one, 
-                                                             FourIntStruct two, 
-                                                             FourIntStruct three, 
-                                                             FourIntStruct four,
-                                                             FourIntStruct five, 
-                                                             FourIntStruct six, 
-                                                             FourIntStruct seven, 
-                                                             FourIntStruct eight,
-                                                             FourIntStruct nine,
-                                                             FourIntStruct ten, 
-                                                             __arglist)
+        public static int TestPassingFourIntStructsNoVarargs(
+            FourIntStruct one,
+            FourIntStruct two,
+            FourIntStruct three,
+            FourIntStruct four,
+            FourIntStruct five,
+            FourIntStruct six,
+            FourIntStruct seven,
+            FourIntStruct eight,
+            FourIntStruct nine,
+            FourIntStruct ten,
+            __arglist
+        )
         {
             int sum = one.a + one.b + one.c + one.d;
             sum += two.a + two.b + two.c + two.d;
@@ -352,19 +452,21 @@ namespace NativeVarargTest
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static bool TestPassingTwoLongStructsNoVarargs(int count,
-                                                              long expected,
-                                                              TwoLongStruct one, 
-                                                              TwoLongStruct two, 
-                                                              TwoLongStruct three, 
-                                                              TwoLongStruct four,
-                                                              TwoLongStruct five, 
-                                                              TwoLongStruct six, 
-                                                              TwoLongStruct seven, 
-                                                              TwoLongStruct eight,
-                                                              TwoLongStruct nine,
-                                                              TwoLongStruct ten, 
-                                                              __arglist)
+        public static bool TestPassingTwoLongStructsNoVarargs(
+            int count,
+            long expected,
+            TwoLongStruct one,
+            TwoLongStruct two,
+            TwoLongStruct three,
+            TwoLongStruct four,
+            TwoLongStruct five,
+            TwoLongStruct six,
+            TwoLongStruct seven,
+            TwoLongStruct eight,
+            TwoLongStruct nine,
+            TwoLongStruct ten,
+            __arglist
+        )
         {
             long sum = one.a + one.b;
             sum += two.a + two.b;
@@ -381,17 +483,19 @@ namespace NativeVarargTest
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static long TestPassingTwoLongStructsNoVarargs(TwoLongStruct one, 
-                                                              TwoLongStruct two, 
-                                                              TwoLongStruct three, 
-                                                              TwoLongStruct four,
-                                                              TwoLongStruct five, 
-                                                              TwoLongStruct six, 
-                                                              TwoLongStruct seven, 
-                                                              TwoLongStruct eight,
-                                                              TwoLongStruct nine,
-                                                              TwoLongStruct ten, 
-                                                              __arglist)
+        public static long TestPassingTwoLongStructsNoVarargs(
+            TwoLongStruct one,
+            TwoLongStruct two,
+            TwoLongStruct three,
+            TwoLongStruct four,
+            TwoLongStruct five,
+            TwoLongStruct six,
+            TwoLongStruct seven,
+            TwoLongStruct eight,
+            TwoLongStruct nine,
+            TwoLongStruct ten,
+            __arglist
+        )
         {
             long sum = one.a + one.b;
             sum += two.a + two.b;
@@ -408,18 +512,20 @@ namespace NativeVarargTest
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static long TestPassingTwoLongStructsAndIntNoVarargs(int a,
-                                                           TwoLongStruct one, 
-                                                           TwoLongStruct two, 
-                                                           TwoLongStruct three, 
-                                                           TwoLongStruct four,
-                                                           TwoLongStruct five, 
-                                                           TwoLongStruct six, 
-                                                           TwoLongStruct seven, 
-                                                           TwoLongStruct eight,
-                                                           TwoLongStruct nine,
-                                                           TwoLongStruct ten, 
-                                                           __arglist)
+        public static long TestPassingTwoLongStructsAndIntNoVarargs(
+            int a,
+            TwoLongStruct one,
+            TwoLongStruct two,
+            TwoLongStruct three,
+            TwoLongStruct four,
+            TwoLongStruct five,
+            TwoLongStruct six,
+            TwoLongStruct seven,
+            TwoLongStruct eight,
+            TwoLongStruct nine,
+            TwoLongStruct ten,
+            __arglist
+        )
         {
             long sum = one.a + one.b;
             sum += two.a + two.b;
@@ -438,17 +544,19 @@ namespace NativeVarargTest
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static long TestPassingFourLongStructsNoVarargs(FourLongStruct one, 
-                                                               FourLongStruct two, 
-                                                               FourLongStruct three, 
-                                                               FourLongStruct four,
-                                                               FourLongStruct five, 
-                                                               FourLongStruct six, 
-                                                               FourLongStruct seven, 
-                                                               FourLongStruct eight,
-                                                               FourLongStruct nine,
-                                                               FourLongStruct ten, 
-                                                               __arglist)
+        public static long TestPassingFourLongStructsNoVarargs(
+            FourLongStruct one,
+            FourLongStruct two,
+            FourLongStruct three,
+            FourLongStruct four,
+            FourLongStruct five,
+            FourLongStruct six,
+            FourLongStruct seven,
+            FourLongStruct eight,
+            FourLongStruct nine,
+            FourLongStruct ten,
+            __arglist
+        )
         {
             long sum = one.a + one.b + one.c + one.d;
             sum += two.a + two.b + two.c + two.d;
@@ -465,17 +573,19 @@ namespace NativeVarargTest
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static float TestPassingTwoFloatStructsNoVarargs(TwoFloatStruct one, 
-                                                     TwoFloatStruct two, 
-                                                     TwoFloatStruct three, 
-                                                     TwoFloatStruct four,
-                                                     TwoFloatStruct five, 
-                                                     TwoFloatStruct six, 
-                                                     TwoFloatStruct seven, 
-                                                     TwoFloatStruct eight,
-                                                     TwoFloatStruct nine,
-                                                     TwoFloatStruct ten, 
-                                                     __arglist)
+        public static float TestPassingTwoFloatStructsNoVarargs(
+            TwoFloatStruct one,
+            TwoFloatStruct two,
+            TwoFloatStruct three,
+            TwoFloatStruct four,
+            TwoFloatStruct five,
+            TwoFloatStruct six,
+            TwoFloatStruct seven,
+            TwoFloatStruct eight,
+            TwoFloatStruct nine,
+            TwoFloatStruct ten,
+            __arglist
+        )
         {
             float sum = one.a + one.b;
             sum += two.a + two.b;
@@ -492,17 +602,19 @@ namespace NativeVarargTest
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static float TestPassingFourFloatStructsNoVarargs(FourFloatStruct one, 
-                                                        FourFloatStruct two, 
-                                                        FourFloatStruct three, 
-                                                        FourFloatStruct four,
-                                                        FourFloatStruct five, 
-                                                        FourFloatStruct six, 
-                                                        FourFloatStruct seven, 
-                                                        FourFloatStruct eight,
-                                                        FourFloatStruct nine,
-                                                        FourFloatStruct ten, 
-                                                        __arglist)
+        public static float TestPassingFourFloatStructsNoVarargs(
+            FourFloatStruct one,
+            FourFloatStruct two,
+            FourFloatStruct three,
+            FourFloatStruct four,
+            FourFloatStruct five,
+            FourFloatStruct six,
+            FourFloatStruct seven,
+            FourFloatStruct eight,
+            FourFloatStruct nine,
+            FourFloatStruct ten,
+            __arglist
+        )
         {
             float sum = one.a + one.b + one.c + one.d;
             sum += two.a + two.b + two.c + two.d;
@@ -519,17 +631,19 @@ namespace NativeVarargTest
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static double TestPassingTwoDoubleStructsNoVarargs(TwoDoubleStruct one, 
-                                                         TwoDoubleStruct two, 
-                                                         TwoDoubleStruct three, 
-                                                         TwoDoubleStruct four,
-                                                         TwoDoubleStruct five, 
-                                                         TwoDoubleStruct six, 
-                                                         TwoDoubleStruct seven, 
-                                                         TwoDoubleStruct eight,
-                                                         TwoDoubleStruct nine,
-                                                         TwoDoubleStruct ten, 
-                                                         __arglist)
+        public static double TestPassingTwoDoubleStructsNoVarargs(
+            TwoDoubleStruct one,
+            TwoDoubleStruct two,
+            TwoDoubleStruct three,
+            TwoDoubleStruct four,
+            TwoDoubleStruct five,
+            TwoDoubleStruct six,
+            TwoDoubleStruct seven,
+            TwoDoubleStruct eight,
+            TwoDoubleStruct nine,
+            TwoDoubleStruct ten,
+            __arglist
+        )
         {
             double sum = one.a + one.b;
             sum += two.a + two.b;
@@ -546,18 +660,20 @@ namespace NativeVarargTest
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static double TestPassingTwoDoubleStructsAndFloatNoVarargs(float a,
-                                                                    TwoDoubleStruct one, 
-                                                                    TwoDoubleStruct two, 
-                                                                    TwoDoubleStruct three, 
-                                                                    TwoDoubleStruct four,
-                                                                    TwoDoubleStruct five, 
-                                                                    TwoDoubleStruct six, 
-                                                                    TwoDoubleStruct seven, 
-                                                                    TwoDoubleStruct eight,
-                                                                    TwoDoubleStruct nine,
-                                                                    TwoDoubleStruct ten, 
-                                                             __arglist)
+        public static double TestPassingTwoDoubleStructsAndFloatNoVarargs(
+            float a,
+            TwoDoubleStruct one,
+            TwoDoubleStruct two,
+            TwoDoubleStruct three,
+            TwoDoubleStruct four,
+            TwoDoubleStruct five,
+            TwoDoubleStruct six,
+            TwoDoubleStruct seven,
+            TwoDoubleStruct eight,
+            TwoDoubleStruct nine,
+            TwoDoubleStruct ten,
+            __arglist
+        )
         {
             double sum = one.a + one.b;
             sum += two.a + two.b;
@@ -576,17 +692,19 @@ namespace NativeVarargTest
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static double TestPassingFourDoubleStructsNoVarargs(FourDoubleStruct one, 
-                                                                   FourDoubleStruct two, 
-                                                                   FourDoubleStruct three, 
-                                                                   FourDoubleStruct four,
-                                                                   FourDoubleStruct five, 
-                                                                   FourDoubleStruct six, 
-                                                                   FourDoubleStruct seven, 
-                                                                   FourDoubleStruct eight,
-                                                                   FourDoubleStruct nine,
-                                                                   FourDoubleStruct ten, 
-                                                                   __arglist)
+        public static double TestPassingFourDoubleStructsNoVarargs(
+            FourDoubleStruct one,
+            FourDoubleStruct two,
+            FourDoubleStruct three,
+            FourDoubleStruct four,
+            FourDoubleStruct five,
+            FourDoubleStruct six,
+            FourDoubleStruct seven,
+            FourDoubleStruct eight,
+            FourDoubleStruct nine,
+            FourDoubleStruct ten,
+            __arglist
+        )
         {
             double sum = one.a + one.b + one.c + one.d;
             sum += two.a + two.b + two.c + two.d;
@@ -646,7 +764,7 @@ namespace NativeVarargTest
         {
             return arg;
         }
-        
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static OneIntStruct TestEchoOneIntStructManagedNoVararg(OneIntStruct arg, __arglist)
         {
@@ -660,79 +778,118 @@ namespace NativeVarargTest
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static OneLongStruct TestEchoOneLongStructManagedNoVararg(OneLongStruct arg, __arglist)
+        public static OneLongStruct TestEchoOneLongStructManagedNoVararg(
+            OneLongStruct arg,
+            __arglist
+        )
         {
             return arg;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static TwoLongStruct TestEchoTwoLongStructManagedNoVararg(TwoLongStruct arg, __arglist)
+        public static TwoLongStruct TestEchoTwoLongStructManagedNoVararg(
+            TwoLongStruct arg,
+            __arglist
+        )
         {
             return arg;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static EightByteStruct TestEchoEightByteStructStructManagedNoVararg(EightByteStruct arg, __arglist)
-        {
-            return arg;
-        }
-        
-        [MethodImpl(MethodImplOptions.NoInlining)]
-        public static FourIntStruct TestEchoFourIntStructManagedNoVararg(FourIntStruct arg, __arglist)
-        {
-            return arg;
-        }
-
-        [MethodImpl(MethodImplOptions.NoInlining)]
-        public static SixteenByteStruct TestEchoSixteenByteStructManagedNoVararg(SixteenByteStruct arg, __arglist)
+        public static EightByteStruct TestEchoEightByteStructStructManagedNoVararg(
+            EightByteStruct arg,
+            __arglist
+        )
         {
             return arg;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static FourLongStruct TestEchoFourLongStructManagedNoVararg(FourLongStruct arg, __arglist)
+        public static FourIntStruct TestEchoFourIntStructManagedNoVararg(
+            FourIntStruct arg,
+            __arglist
+        )
         {
             return arg;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static OneFloatStruct TestEchoOneFloatStructManagedNoVararg(OneFloatStruct arg, __arglist) 
+        public static SixteenByteStruct TestEchoSixteenByteStructManagedNoVararg(
+            SixteenByteStruct arg,
+            __arglist
+        )
         {
             return arg;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static TwoFloatStruct TestEchoTwoFloatStructManagedNoVararg(TwoFloatStruct arg, __arglist)
+        public static FourLongStruct TestEchoFourLongStructManagedNoVararg(
+            FourLongStruct arg,
+            __arglist
+        )
         {
             return arg;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static OneDoubleStruct TestEchoOneDoubleStructManagedNoVararg(OneDoubleStruct arg, __arglist)
+        public static OneFloatStruct TestEchoOneFloatStructManagedNoVararg(
+            OneFloatStruct arg,
+            __arglist
+        )
         {
             return arg;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static TwoDoubleStruct TestEchoTwoDoubleStructManagedNoVararg(TwoDoubleStruct arg, __arglist)
+        public static TwoFloatStruct TestEchoTwoFloatStructManagedNoVararg(
+            TwoFloatStruct arg,
+            __arglist
+        )
         {
             return arg;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static ThreeDoubleStruct TestEchoThreeDoubleStructManagedNoVararg(ThreeDoubleStruct arg, __arglist)
+        public static OneDoubleStruct TestEchoOneDoubleStructManagedNoVararg(
+            OneDoubleStruct arg,
+            __arglist
+        )
         {
             return arg;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static FourFloatStruct TestEchoFourFloatStructManagedNoVararg(FourFloatStruct arg, __arglist)
+        public static TwoDoubleStruct TestEchoTwoDoubleStructManagedNoVararg(
+            TwoDoubleStruct arg,
+            __arglist
+        )
         {
             return arg;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static FourDoubleStruct TestEchoFourDoubleStructManagedNoVararg(FourDoubleStruct arg, __arglist)
+        public static ThreeDoubleStruct TestEchoThreeDoubleStructManagedNoVararg(
+            ThreeDoubleStruct arg,
+            __arglist
+        )
+        {
+            return arg;
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static FourFloatStruct TestEchoFourFloatStructManagedNoVararg(
+            FourFloatStruct arg,
+            __arglist
+        )
+        {
+            return arg;
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static FourDoubleStruct TestEchoFourDoubleStructManagedNoVararg(
+            FourDoubleStruct arg,
+            __arglist
+        )
         {
             return arg;
         }
@@ -759,8 +916,9 @@ namespace NativeVarargTest
                 ++calculatedCount;
             }
 
-            if (calculatedCount != count) return -1;
-            
+            if (calculatedCount != count)
+                return -1;
+
             return sum;
         }
 
@@ -779,8 +937,9 @@ namespace NativeVarargTest
                 ++calculatedCount;
             }
 
-            if (calculatedCount != count) return -1;
-            
+            if (calculatedCount != count)
+                return -1;
+
             return sum;
         }
 
@@ -799,8 +958,9 @@ namespace NativeVarargTest
                 ++calculatedCount;
             }
 
-            if (calculatedCount != count) return -1;
-            
+            if (calculatedCount != count)
+                return -1;
+
             return sum;
         }
 
@@ -819,8 +979,9 @@ namespace NativeVarargTest
                 ++calculatedCount;
             }
 
-            if (calculatedCount != count) return -1;
-            
+            if (calculatedCount != count)
+                return -1;
+
             return sum;
         }
 
@@ -846,7 +1007,11 @@ namespace NativeVarargTest
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static double TestPassingFloatsAndDoubles(int float_count, int double_count, __arglist)
+        public static double TestPassingFloatsAndDoubles(
+            int float_count,
+            int double_count,
+            __arglist
+        )
         {
             ArgIterator it = new ArgIterator(__arglist);
 
@@ -874,7 +1039,8 @@ namespace NativeVarargTest
 
             for (int index = 0; index < 6; ++index)
             {
-                if (index % 2 == 0) {
+                if (index % 2 == 0)
+                {
                     sum += __refvalue(it.GetNextArg(), int);
                 }
                 else
@@ -883,7 +1049,8 @@ namespace NativeVarargTest
                 }
             }
 
-            if (expected_value != 66.0f) return -1;
+            if (expected_value != 66.0f)
+                return -1;
 
             return sum;
         }
@@ -896,7 +1063,8 @@ namespace NativeVarargTest
 
             for (int index = 0; index < 6; ++index)
             {
-                if (index % 2 == 0) {
+                if (index % 2 == 0)
+                {
                     sum += __refvalue(it.GetNextArg(), long);
                 }
                 else
@@ -905,7 +1073,8 @@ namespace NativeVarargTest
                 }
             }
 
-            if (expected_value != 66.0) return -1;
+            if (expected_value != 66.0)
+                return -1;
 
             return sum;
         }
@@ -914,7 +1083,7 @@ namespace NativeVarargTest
         public static int CheckPassingStruct(int count, __arglist)
         {
             ArgIterator it = new ArgIterator(__arglist);
-    
+
             int passed = 0;
 
             bool is_b = __refvalue(it.GetNextArg(), int) == 1;
@@ -935,26 +1104,30 @@ namespace NativeVarargTest
                         long sum = 0;
                         long expected_value = __refvalue(it.GetNextArg(), long);
 
-                        while (struct_count-- != 0) {
+                        while (struct_count-- != 0)
+                        {
                             s = __refvalue(it.GetNextArg(), OneLongStruct);
                             sum += s.a;
                         }
 
-                        if (sum != expected_value) passed = 1;
+                        if (sum != expected_value)
+                            passed = 1;
                     }
                     else
                     {
                         TwoIntStruct s = new TwoIntStruct();
 
                         int sum = 0;
-                        int expected_value =  __refvalue(it.GetNextArg(), int);
+                        int expected_value = __refvalue(it.GetNextArg(), int);
 
-                        while (struct_count-- != 0) {
+                        while (struct_count-- != 0)
+                        {
                             s = __refvalue(it.GetNextArg(), TwoIntStruct);
                             sum += s.a + s.b;
                         }
 
-                        if (sum != expected_value) passed = 1;
+                        if (sum != expected_value)
+                            passed = 1;
                     }
                 }
                 else if (byte_count == 16)
@@ -967,12 +1140,14 @@ namespace NativeVarargTest
                         int sum = 0;
                         int expected_value = __refvalue(it.GetNextArg(), int);
 
-                        while (struct_count-- != 0) {
+                        while (struct_count-- != 0)
+                        {
                             s = __refvalue(it.GetNextArg(), FourIntStruct);
                             sum += s.a + s.b + s.c + s.d;
                         }
 
-                        if (sum != expected_value) passed = 1;
+                        if (sum != expected_value)
+                            passed = 1;
                     }
                     else
                     {
@@ -982,28 +1157,31 @@ namespace NativeVarargTest
                         long expected_value = __refvalue(it.GetNextArg(), long);
                         sum = 0;
 
-                        while (struct_count-- != 0) {
+                        while (struct_count-- != 0)
+                        {
                             s = __refvalue(it.GetNextArg(), TwoLongStruct);
                             sum += s.a + s.b;
                         }
 
-                        if (sum != expected_value) passed = 1;
+                        if (sum != expected_value)
+                            passed = 1;
                     }
                 }
-
                 else if (byte_count == 32)
                 {
                     FourLongStruct s = new FourLongStruct();
-                    
+
                     long sum = 0;
                     long expected_value = __refvalue(it.GetNextArg(), long);
 
-                    while (struct_count-- != 0) {
+                    while (struct_count-- != 0)
+                    {
                         s = __refvalue(it.GetNextArg(), FourLongStruct);
                         sum += s.a + s.b + s.c + s.d;
                     }
 
-                    if (sum != expected_value) passed = 1;
+                    if (sum != expected_value)
+                        passed = 1;
                 }
             }
             else
@@ -1018,12 +1196,14 @@ namespace NativeVarargTest
                         double sum = 0;
                         double expected_value = __refvalue(it.GetNextArg(), double);
 
-                        while (struct_count-- != 0) {
+                        while (struct_count-- != 0)
+                        {
                             s = __refvalue(it.GetNextArg(), OneDoubleStruct);
                             sum += s.a;
                         }
 
-                        if (sum != expected_value) passed = 1;
+                        if (sum != expected_value)
+                            passed = 1;
                     }
                     else
                     {
@@ -1032,12 +1212,14 @@ namespace NativeVarargTest
                         float sum = 0f;
                         float expected_value = __refvalue(it.GetNextArg(), float);
 
-                        while (struct_count-- != 0) {
+                        while (struct_count-- != 0)
+                        {
                             s = __refvalue(it.GetNextArg(), TwoFloatStruct);
                             sum += s.a + s.b;
                         }
 
-                        if (sum != expected_value) passed = 1;
+                        if (sum != expected_value)
+                            passed = 1;
                     }
                 }
                 else if (byte_count == 16)
@@ -1046,46 +1228,51 @@ namespace NativeVarargTest
                     if (is_b)
                     {
                         FourFloatStruct s = new FourFloatStruct();
-                        
+
                         float sum = 0;
                         float expected_value = __refvalue(it.GetNextArg(), float);
 
-                        while (struct_count-- != 0) {
+                        while (struct_count-- != 0)
+                        {
                             s = __refvalue(it.GetNextArg(), FourFloatStruct);
                             sum += s.a + s.b + s.c + s.d;
                         }
 
-                        if (sum != expected_value) passed = 1;
+                        if (sum != expected_value)
+                            passed = 1;
                     }
                     else
                     {
                         TwoDoubleStruct s = new TwoDoubleStruct();
-                        
+
                         double sum = 0;
                         double expected_value = __refvalue(it.GetNextArg(), double);
 
-                        while (struct_count-- != 0) {
+                        while (struct_count-- != 0)
+                        {
                             s = __refvalue(it.GetNextArg(), TwoDoubleStruct);
                             sum += s.a + s.b;
                         }
 
-                        if (sum != expected_value) passed = 1;
+                        if (sum != expected_value)
+                            passed = 1;
                     }
                 }
-
                 else if (byte_count == 32)
                 {
                     FourDoubleStruct s = new FourDoubleStruct();
-                    
+
                     double sum = 0;
                     double expected_value = __refvalue(it.GetNextArg(), double);
 
-                    while (struct_count-- != 0) {
+                    while (struct_count-- != 0)
+                    {
                         s = __refvalue(it.GetNextArg(), FourDoubleStruct);
                         sum += s.a + s.b + s.c + s.d;
                     }
 
-                    if (sum != expected_value) passed = 1;
+                    if (sum != expected_value)
+                        passed = 1;
                 }
             }
 
@@ -1102,7 +1289,8 @@ namespace NativeVarargTest
 
             long expected_value = __refvalue(it.GetNextArg(), long);
 
-            for (int index = 0; index < 4; ++index) {
+            for (int index = 0; index < 4; ++index)
+            {
                 TwoLongStruct s = __refvalue(it.GetNextArg(), TwoLongStruct);
 
                 calculated_value += s.a + s.b;
@@ -1179,7 +1367,7 @@ namespace NativeVarargTest
 
             return varArg;
         }
-        
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static OneIntStruct TestEchoOneIntStructManaged(OneIntStruct arg, __arglist)
         {
@@ -1217,14 +1405,17 @@ namespace NativeVarargTest
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static EightByteStruct TestEchoEightByteStructStructManaged(EightByteStruct arg, __arglist)
+        public static EightByteStruct TestEchoEightByteStructStructManaged(
+            EightByteStruct arg,
+            __arglist
+        )
         {
             ArgIterator it = new ArgIterator(__arglist);
             var varArg = __refvalue(it.GetNextArg(), EightByteStruct);
 
             return varArg;
         }
-        
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static FourIntStruct TestEchoFourIntStructManaged(FourIntStruct arg, __arglist)
         {
@@ -1235,7 +1426,10 @@ namespace NativeVarargTest
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static SixteenByteStruct TestEchoSixteenByteStructManaged(SixteenByteStruct arg, __arglist)
+        public static SixteenByteStruct TestEchoSixteenByteStructManaged(
+            SixteenByteStruct arg,
+            __arglist
+        )
         {
             ArgIterator it = new ArgIterator(__arglist);
             var varArg = __refvalue(it.GetNextArg(), SixteenByteStruct);
@@ -1253,7 +1447,7 @@ namespace NativeVarargTest
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static OneFloatStruct TestEchoOneFloatStructManaged(OneFloatStruct arg, __arglist) 
+        public static OneFloatStruct TestEchoOneFloatStructManaged(OneFloatStruct arg, __arglist)
         {
             ArgIterator it = new ArgIterator(__arglist);
             var varArg = __refvalue(it.GetNextArg(), OneFloatStruct);
@@ -1289,7 +1483,10 @@ namespace NativeVarargTest
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static ThreeDoubleStruct TestEchoThreeDoubleStructManaged(ThreeDoubleStruct arg, __arglist)
+        public static ThreeDoubleStruct TestEchoThreeDoubleStructManaged(
+            ThreeDoubleStruct arg,
+            __arglist
+        )
         {
             ArgIterator it = new ArgIterator(__arglist);
             var varArg = __refvalue(it.GetNextArg(), ThreeDoubleStruct);
@@ -1307,7 +1504,10 @@ namespace NativeVarargTest
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static FourDoubleStruct TestEchoFourDoubleStructManaged(FourDoubleStruct arg, __arglist)
+        public static FourDoubleStruct TestEchoFourDoubleStructManaged(
+            FourDoubleStruct arg,
+            __arglist
+        )
         {
             ArgIterator it = new ArgIterator(__arglist);
             var varArg = __refvalue(it.GetNextArg(), FourDoubleStruct);
@@ -1318,7 +1518,10 @@ namespace NativeVarargTest
         // Tests that take the address of a parameter of a vararg method
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static FourDoubleStruct TestEchoFourDoubleStructManagedViaAddress(FourDoubleStruct arg, __arglist)
+        public static FourDoubleStruct TestEchoFourDoubleStructManagedViaAddress(
+            FourDoubleStruct arg,
+            __arglist
+        )
         {
             ArgIterator it = new ArgIterator(__arglist);
             var varArg = __refvalue(it.GetNextArg(), FourDoubleStruct);
@@ -1327,15 +1530,29 @@ namespace NativeVarargTest
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static FourDoubleStruct NewFourDoubleStructViaAddress(ref double a, ref double b, ref double c, ref double d)
+        private static FourDoubleStruct NewFourDoubleStructViaAddress(
+            ref double a,
+            ref double b,
+            ref double c,
+            ref double d
+        )
         {
-            return new FourDoubleStruct { a = a, b = b, c = c, d = d };
+            return new FourDoubleStruct
+            {
+                a = a,
+                b = b,
+                c = c,
+                d = d,
+            };
         }
 
         // Miscellaneous tests
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static FourDoubleStruct TestEchoFourDoubleStructViaParameterAssign(FourDoubleStruct a, __arglist)
+        public static FourDoubleStruct TestEchoFourDoubleStructViaParameterAssign(
+            FourDoubleStruct a,
+            __arglist
+        )
         {
             // Tests that a multi-reg return from an inline candidate can be assigned successfully to a by-reference
             // parameter on Windows ARM64.

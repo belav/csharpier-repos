@@ -17,7 +17,14 @@ namespace Microsoft.CodeAnalysis.Collections
     /// collection uses segmented arrays to avoid placing objects on the Large Object Heap.
     /// </summary>
     /// <typeparam name="T">The type of elements stored in the array.</typeparam>
-    internal readonly struct SegmentedArray<T> : ICloneable, IList, IStructuralComparable, IStructuralEquatable, IList<T>, IReadOnlyList<T>, IEquatable<SegmentedArray<T>>
+    internal readonly struct SegmentedArray<T>
+        : ICloneable,
+            IList,
+            IStructuralComparable,
+            IStructuralEquatable,
+            IList<T>,
+            IReadOnlyList<T>,
+            IEquatable<SegmentedArray<T>>
     {
         /// <summary>
         /// The number of elements in each page of the segmented array of type <typeparamref name="T"/>.
@@ -32,10 +39,7 @@ namespace Microsoft.CodeAnalysis.Collections
         /// </remarks>
         private static int SegmentSize
         {
-            get
-            {
-                return SegmentedArrayHelper.GetSegmentSize<T>();
-            }
+            get { return SegmentedArrayHelper.GetSegmentSize<T>(); }
         }
 
         /// <summary>
@@ -43,10 +47,7 @@ namespace Microsoft.CodeAnalysis.Collections
         /// </summary>
         private static int SegmentShift
         {
-            get
-            {
-                return SegmentedArrayHelper.GetSegmentShift<T>();
-            }
+            get { return SegmentedArrayHelper.GetSegmentShift<T>(); }
         }
 
         /// <summary>
@@ -54,10 +55,7 @@ namespace Microsoft.CodeAnalysis.Collections
         /// </summary>
         private static int OffsetMask
         {
-            get
-            {
-                return SegmentedArrayHelper.GetOffsetMask<T>();
-            }
+            get { return SegmentedArrayHelper.GetOffsetMask<T>(); }
         }
 
         private readonly int _length;
@@ -113,10 +111,7 @@ namespace Microsoft.CodeAnalysis.Collections
         public ref T this[int index]
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return ref _items[index >> SegmentShift][index & OffsetMask];
-            }
+            get { return ref _items[index >> SegmentShift][index & OffsetMask]; }
         }
 
         int ICollection.Count => Length;
@@ -167,13 +162,11 @@ namespace Microsoft.CodeAnalysis.Collections
             }
         }
 
-        public Enumerator GetEnumerator()
-            => new(this);
+        public Enumerator GetEnumerator() => new(this);
 
         public override bool Equals(object? obj)
         {
-            return obj is SegmentedArray<T> other
-                && Equals(other);
+            return obj is SegmentedArray<T> other && Equals(other);
         }
 
         public override int GetHashCode()
@@ -294,11 +287,9 @@ namespace Microsoft.CodeAnalysis.Collections
             throw new NotSupportedException(SR.NotSupported_FixedSizeCollection);
         }
 
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
-            => GetEnumerator();
+        IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-            => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         int IStructuralComparable.CompareTo(object? other, IComparer comparer)
         {
@@ -307,10 +298,12 @@ namespace Microsoft.CodeAnalysis.Collections
 
             // Matches System.Array
             // https://github.com/dotnet/runtime/blob/e0ec035994179e8ebd6ccf081711ee11d4c5491b/src/libraries/System.Private.CoreLib/src/System/Array.cs#L320-L323
-            if (other is not SegmentedArray<T> o
-                || Length != o.Length)
+            if (other is not SegmentedArray<T> o || Length != o.Length)
             {
-                throw new ArgumentException(SR.ArgumentException_OtherNotArrayOfCorrectLength, nameof(other));
+                throw new ArgumentException(
+                    SR.ArgumentException_OtherNotArrayOfCorrectLength,
+                    nameof(other)
+                );
             }
 
             for (var i = 0; i < Length; i++)
@@ -365,8 +358,7 @@ namespace Microsoft.CodeAnalysis.Collections
             return ret;
         }
 
-        internal TestAccessor GetTestAccessor()
-            => new(this);
+        internal TestAccessor GetTestAccessor() => new(this);
 
         public struct Enumerator : IEnumerator<T>
         {
@@ -386,9 +378,7 @@ namespace Microsoft.CodeAnalysis.Collections
             public readonly T Current => _current;
             readonly object? IEnumerator.Current => Current;
 
-            public readonly void Dispose()
-            {
-            }
+            public readonly void Dispose() { }
 
             public bool MoveNext()
             {

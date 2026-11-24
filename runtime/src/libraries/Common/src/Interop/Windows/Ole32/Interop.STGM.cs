@@ -35,7 +35,7 @@ internal static partial class Interop
             STGM_CREATE = 0x00001000,
             STGM_CONVERT = 0x00020000,
             STGM_NOSNAPSHOT = 0x00200000,
-            STGM_DIRECT_SWMR = 0x00400000
+            STGM_DIRECT_SWMR = 0x00400000,
         }
     }
 }

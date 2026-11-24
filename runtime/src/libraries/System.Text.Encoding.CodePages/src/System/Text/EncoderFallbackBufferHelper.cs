@@ -15,6 +15,7 @@ namespace System.Text
             charEnd = charStart = null;
             encoder = null;
         }
+
         // Internal items to help us figure out what we're doing as far as error messages, etc.
         // These help us with our performance and messages internally
         internal unsafe char* charStart;
@@ -40,7 +41,12 @@ namespace System.Text
 
         // Set the above values
         // This can't be part of the constructor because EncoderFallbacks would have to know how to implement these.
-        internal unsafe void InternalInitialize(char* _charStart, char* _charEnd, EncoderNLS? _encoder, bool _setEncoder)
+        internal unsafe void InternalInitialize(
+            char* _charStart,
+            char* _charEnd,
+            EncoderNLS? _encoder,
+            bool _setEncoder
+        )
         {
             charStart = _charStart;
             charEnd = _charEnd;
@@ -56,7 +62,8 @@ namespace System.Text
             Debug.Assert(_fallbackBuffer != null);
             char ch = _fallbackBuffer!.GetNextChar();
             bFallingBack = (ch != 0);
-            if (ch == 0) iRecursionCount = 0;
+            if (ch == 0)
+                iRecursionCount = 0;
             return ch;
         }
 
@@ -71,7 +78,10 @@ namespace System.Text
         internal unsafe bool InternalFallback(char ch, ref char* chars)
         {
             // Shouldn't have null charStart or fallback buffer
-            Debug.Assert(charStart != null, "[EncoderFallback.InternalFallbackBuffer]Fallback buffer is not initialized");
+            Debug.Assert(
+                charStart != null,
+                "[EncoderFallback.InternalFallbackBuffer]Fallback buffer is not initialized"
+            );
             Debug.Assert(_fallbackBuffer != null);
 
             // Get our index, remember chars was preincremented to point at next char, so have to decrement
@@ -130,7 +140,10 @@ namespace System.Text
         internal static void ThrowLastCharRecursive(int charRecursive)
         {
             // Throw it, using our complete character
-            throw new ArgumentException(SR.Format(SR.Argument_RecursiveFallback, charRecursive), "chars");
+            throw new ArgumentException(
+                SR.Format(SR.Argument_RecursiveFallback, charRecursive),
+                "chars"
+            );
         }
     }
 }

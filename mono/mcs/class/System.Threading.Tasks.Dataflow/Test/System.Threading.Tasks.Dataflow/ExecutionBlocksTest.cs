@@ -1,17 +1,17 @@
 ﻿// ExecutionBlocksTest.cs
-//  
+//
 // Copyright (c) 2012 Petr Onderka
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -28,172 +28,190 @@ using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 using NUnit.Framework;
 
-namespace MonoTests.System.Threading.Tasks.Dataflow {
-	[TestFixture]
-	public class ExecutionBlocksTest {
-		static IEnumerable<ITargetBlock<int>> GetExecutionBlocksWithAction(Action action)
-		{
-			yield return new ActionBlock<int> (i => action());
-			yield return new TransformBlock<int, int> (i =>
-			{
-				action ();
-				return i;
-			});
-			yield return new TransformManyBlock<int, int> (i =>
-			{
-				action ();
-				return Enumerable.Empty<int> ();
-			});
-		}
+namespace MonoTests.System.Threading.Tasks.Dataflow
+{
+    [TestFixture]
+    public class ExecutionBlocksTest
+    {
+        static IEnumerable<ITargetBlock<int>> GetExecutionBlocksWithAction(Action action)
+        {
+            yield return new ActionBlock<int>(i => action());
+            yield return new TransformBlock<int, int>(i =>
+            {
+                action();
+                return i;
+            });
+            yield return new TransformManyBlock<int, int>(i =>
+            {
+                action();
+                return Enumerable.Empty<int>();
+            });
+        }
 
-		static IEnumerable<ITargetBlock<int>> GetExecutionBlocksWithAsyncAction (
-			Func<int, Task> action, ExecutionDataflowBlockOptions options)
-		{
-			yield return new ActionBlock<int> (action, options);
-			yield return new TransformBlock<int, int> (
-				i => action (i).ContinueWith (
-					t =>
-					{
-						t.Wait ();
-						return i;
-					}), options);
-			yield return new TransformManyBlock<int, int> (
-				i => action (i).ContinueWith (
-					t =>
-					{
-						t.Wait ();
-						return Enumerable.Empty<int> ();
-					}), options);
-		}
+        static IEnumerable<ITargetBlock<int>> GetExecutionBlocksWithAsyncAction(
+            Func<int, Task> action,
+            ExecutionDataflowBlockOptions options
+        )
+        {
+            yield return new ActionBlock<int>(action, options);
+            yield return new TransformBlock<int, int>(
+                i =>
+                    action(i)
+                        .ContinueWith(t =>
+                        {
+                            t.Wait();
+                            return i;
+                        }),
+                options
+            );
+            yield return new TransformManyBlock<int, int>(
+                i =>
+                    action(i)
+                        .ContinueWith(t =>
+                        {
+                            t.Wait();
+                            return Enumerable.Empty<int>();
+                        }),
+                options
+            );
+        }
 
-		[Test]
-		public void ExceptionTest ()
-		{
-			var exception = new Exception ();
-			var blocks = GetExecutionBlocksWithAction (() => { throw exception; });
-			foreach (var block in blocks) {
-				Assert.IsFalse (block.Completion.Wait (100));
+        [Test]
+        public void ExceptionTest()
+        {
+            var exception = new Exception();
+            var blocks = GetExecutionBlocksWithAction(() =>
+            {
+                throw exception;
+            });
+            foreach (var block in blocks)
+            {
+                Assert.IsFalse(block.Completion.Wait(100));
 
-				block.Post (1);
+                block.Post(1);
 
-				var ae =
-					AssertEx.Throws<AggregateException> (() => block.Completion.Wait (1000));
-				Assert.AreEqual (1, ae.InnerExceptions.Count);
-				Assert.AreSame (exception, ae.InnerException);
-			}
-		}
+                var ae = AssertEx.Throws<AggregateException>(() => block.Completion.Wait(1000));
+                Assert.AreEqual(1, ae.InnerExceptions.Count);
+                Assert.AreSame(exception, ae.InnerException);
+            }
+        }
 
-		[Test]
-		public void NoProcessingAfterFaultTest ()
-		{
-			int shouldRun = 1;
-			int ranAfterFault = 0;
-			var evt = new ManualResetEventSlim ();
+        [Test]
+        public void NoProcessingAfterFaultTest()
+        {
+            int shouldRun = 1;
+            int ranAfterFault = 0;
+            var evt = new ManualResetEventSlim();
 
-			var blocks = GetExecutionBlocksWithAction (() =>
-			{
-				if (Volatile.Read (ref shouldRun) == 0) {
-					ranAfterFault++;
-					return;
-				}
+            var blocks = GetExecutionBlocksWithAction(() =>
+            {
+                if (Volatile.Read(ref shouldRun) == 0)
+                {
+                    ranAfterFault++;
+                    return;
+                }
 
-				evt.Wait ();
-			});
+                evt.Wait();
+            });
 
-			foreach (var block in blocks) {
-				shouldRun = 1;
-				ranAfterFault = 0;
-				evt.Reset ();
+            foreach (var block in blocks)
+            {
+                shouldRun = 1;
+                ranAfterFault = 0;
+                evt.Reset();
 
-				Assert.IsTrue (block.Post (1));
-				Assert.IsTrue (block.Post (2));
+                Assert.IsTrue(block.Post(1));
+                Assert.IsTrue(block.Post(2));
 
-				Assert.IsFalse (block.Completion.Wait (100));
-				Assert.AreEqual (0, ranAfterFault);
+                Assert.IsFalse(block.Completion.Wait(100));
+                Assert.AreEqual(0, ranAfterFault);
 
-				block.Fault (new Exception ());
+                block.Fault(new Exception());
 
-				Assert.IsFalse (block.Completion.Wait (100));
+                Assert.IsFalse(block.Completion.Wait(100));
 
-				shouldRun = 0;
-				evt.Set ();
+                shouldRun = 0;
+                evt.Set();
 
-				AssertEx.Throws<AggregateException> (() => block.Completion.Wait (1000));
+                AssertEx.Throws<AggregateException>(() => block.Completion.Wait(1000));
 
-				Thread.Sleep (100);
+                Thread.Sleep(100);
 
-				Assert.AreEqual (0, Volatile.Read (ref ranAfterFault));
-			}
-		}
+                Assert.AreEqual(0, Volatile.Read(ref ranAfterFault));
+            }
+        }
 
-		[Test]
-		public void AsyncTest ()
-		{
-			var tcs = new TaskCompletionSource<int> ();
-			int result = 0;
+        [Test]
+        public void AsyncTest()
+        {
+            var tcs = new TaskCompletionSource<int>();
+            int result = 0;
 
-			var scheduler = new TestScheduler ();
+            var scheduler = new TestScheduler();
 
-			var blocks = GetExecutionBlocksWithAsyncAction (
-				i =>
-				tcs.Task.ContinueWith (t => Volatile.Write (ref result, i + t.Result)),
-				new ExecutionDataflowBlockOptions { TaskScheduler = scheduler });
+            var blocks = GetExecutionBlocksWithAsyncAction(
+                i => tcs.Task.ContinueWith(t => Volatile.Write(ref result, i + t.Result)),
+                new ExecutionDataflowBlockOptions { TaskScheduler = scheduler }
+            );
 
-			foreach (var block in blocks) {
-				Assert.IsTrue (block.Post (1));
+            foreach (var block in blocks)
+            {
+                Assert.IsTrue(block.Post(1));
 
-				scheduler.ExecuteAll ();
-				Thread.Sleep (100);
-				Thread.MemoryBarrier ();
+                scheduler.ExecuteAll();
+                Thread.Sleep(100);
+                Thread.MemoryBarrier();
 
-				Assert.AreEqual (0, result);
+                Assert.AreEqual(0, result);
 
-				tcs.SetResult (10);
+                tcs.SetResult(10);
 
-				Thread.Sleep (100);
+                Thread.Sleep(100);
 
-				// the continuation should be executed on the configured TaskScheduler
-				Assert.AreEqual (0, result);
+                // the continuation should be executed on the configured TaskScheduler
+                Assert.AreEqual(0, result);
 
-				scheduler.ExecuteAll ();
+                scheduler.ExecuteAll();
 
-				Assert.AreEqual (11, result);
+                Assert.AreEqual(11, result);
 
-				tcs = new TaskCompletionSource<int> ();
-				Volatile.Write (ref result, 0);
-			}
-		}
+                tcs = new TaskCompletionSource<int>();
+                Volatile.Write(ref result, 0);
+            }
+        }
 
-		[Test]
-		public void AsyncExceptionTest ()
-		{
-			var scheduler = new TestScheduler ();
-			var exception = new Exception ();
+        [Test]
+        public void AsyncExceptionTest()
+        {
+            var scheduler = new TestScheduler();
+            var exception = new Exception();
 
-			var blocks = GetExecutionBlocksWithAsyncAction (
-				i =>
-				{
-					var tcs = new TaskCompletionSource<int> ();
-					tcs.SetException (exception);
-					return tcs.Task;
-				},
-				new ExecutionDataflowBlockOptions { TaskScheduler = scheduler });
+            var blocks = GetExecutionBlocksWithAsyncAction(
+                i =>
+                {
+                    var tcs = new TaskCompletionSource<int>();
+                    tcs.SetException(exception);
+                    return tcs.Task;
+                },
+                new ExecutionDataflowBlockOptions { TaskScheduler = scheduler }
+            );
 
-			foreach (var block in blocks) {
-				Assert.IsTrue (block.Post (1));
+            foreach (var block in blocks)
+            {
+                Assert.IsTrue(block.Post(1));
 
-				// the task should be executed on the configured TaskScheduler
-				Assert.IsFalse (block.Completion.Wait (100));
+                // the task should be executed on the configured TaskScheduler
+                Assert.IsFalse(block.Completion.Wait(100));
 
-				scheduler.ExecuteAll ();
+                scheduler.ExecuteAll();
 
-				var ae =
-					AssertEx.Throws<AggregateException> (() => block.Completion.Wait (1000)).
-						Flatten ();
+                var ae = AssertEx
+                    .Throws<AggregateException>(() => block.Completion.Wait(1000))
+                    .Flatten();
 
-				Assert.AreEqual (1, ae.InnerExceptions.Count);
-				Assert.AreSame (exception, ae.InnerException);
-			}
-		}
-	}
+                Assert.AreEqual(1, ae.InnerExceptions.Count);
+                Assert.AreSame(exception, ae.InnerException);
+            }
+        }
+    }
 }

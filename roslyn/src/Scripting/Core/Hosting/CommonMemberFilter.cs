@@ -20,7 +20,10 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             var method = frame.GetMethod();
 
             // TODO (https://github.com/dotnet/roslyn/issues/23101): investigate which submission frames *can* be excluded
-            if (method.DeclaringType?.FullName.StartsWith("Submission#0").ToThreeState() == ThreeState.True)
+            if (
+                method.DeclaringType?.FullName.StartsWith("Submission#0").ToThreeState()
+                == ThreeState.True
+            )
             {
                 return true;
             }
@@ -45,7 +48,10 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 return false;
             }
 
-            if (type == typeof(ExceptionDispatchInfo) && method.Name == nameof(ExceptionDispatchInfo.Throw))
+            if (
+                type == typeof(ExceptionDispatchInfo)
+                && method.Name == nameof(ExceptionDispatchInfo.Throw)
+            )
             {
                 return false;
             }
@@ -62,10 +68,12 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         {
             while (info != null)
             {
-                // GetCustomAttributes returns null when called on DynamicMethod 
+                // GetCustomAttributes returns null when called on DynamicMethod
                 // (bug https://github.com/dotnet/corefx/issues/6402)
-                if (IsGeneratedMemberName(info.Name) ||
-                    info.GetCustomAttributes<DebuggerHiddenAttribute>()?.Any() == true)
+                if (
+                    IsGeneratedMemberName(info.Name)
+                    || info.GetCustomAttributes<DebuggerHiddenAttribute>()?.Any() == true
+                )
                 {
                     return true;
                 }
@@ -86,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             if (type?.GetTypeInfo().IsGenericType == true)
             {
                 var genericDef = type.GetTypeInfo().GetGenericTypeDefinition();
-                return genericDef == typeof(TaskAwaiter<>) || type == typeof(ConfiguredTaskAwaitable<>);
+                return genericDef == typeof(TaskAwaiter<>)
+                    || type == typeof(ConfiguredTaskAwaitable<>);
             }
 
             return false;

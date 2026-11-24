@@ -52,11 +52,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         Assert.True(result.Success);
                         result = comp.Emit(output, options: null);
                         Assert.True(result.Success);
-                        result = comp.Emit(output, options: EmitOptions.Default.WithHighEntropyVirtualAddressSpace(true));
+                        result = comp.Emit(
+                            output,
+                            options: EmitOptions.Default.WithHighEntropyVirtualAddressSpace(true)
+                        );
                         Assert.True(result.Success);
-                        result = comp.Emit(output, options: EmitOptions.Default.WithOutputNameOverride("goo"));
+                        result = comp.Emit(
+                            output,
+                            options: EmitOptions.Default.WithOutputNameOverride("goo")
+                        );
                         Assert.True(result.Success);
-                        result = comp.Emit(output, options: EmitOptions.Default.WithPdbFilePath("goo.pdb"));
+                        result = comp.Emit(
+                            output,
+                            options: EmitOptions.Default.WithPdbFilePath("goo.pdb")
+                        );
                         Assert.True(result.Success);
                     }
                 }
@@ -72,15 +81,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var peArray = new byte[100000];
             var peStream = new MemoryStream(peArray);
 
-            var c = CSharpCompilation.Create("a",
+            var c = CSharpCompilation.Create(
+                "a",
                 new[] { SyntaxFactory.ParseSyntaxTree("class C { static void Main() {} }") },
-                new[] { MscorlibRef });
+                new[] { MscorlibRef }
+            );
 
             var r = c.Emit(peStream, pdbStream);
             r.Diagnostics.Verify();
         }
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = ConditionalSkipReason.NativePdbRequiresDesktop)]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = ConditionalSkipReason.NativePdbRequiresDesktop
+        )]
         public void EmitToStreamWithNonZeroPosition()
         {
             var pdbStream = new MemoryStream();
@@ -88,15 +102,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var peStream = new MemoryStream();
             peStream.WriteByte(0x12);
 
-            var c = CSharpCompilation.Create("a",
+            var c = CSharpCompilation.Create(
+                "a",
                 new[] { SyntaxFactory.ParseSyntaxTree("class C { static void Main() {} }") },
-                new[] { MscorlibRef });
+                new[] { MscorlibRef }
+            );
 
             var r = c.Emit(peStream, pdbStream);
             r.Diagnostics.Verify();
 
-            AssertEx.Equal(new byte[] { 0x12, (byte)'M', (byte)'i', (byte)'c', (byte)'r', (byte)'o' }, pdbStream.GetBuffer().Take(6).ToArray());
-            AssertEx.Equal(new byte[] { 0x12, (byte)'M', (byte)'Z' }, peStream.GetBuffer().Take(3).ToArray());
+            AssertEx.Equal(
+                new byte[] { 0x12, (byte)'M', (byte)'i', (byte)'c', (byte)'r', (byte)'o' },
+                pdbStream.GetBuffer().Take(6).ToArray()
+            );
+            AssertEx.Equal(
+                new byte[] { 0x12, (byte)'M', (byte)'Z' },
+                peStream.GetBuffer().Take(3).ToArray()
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Pdb)]
@@ -105,9 +127,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var peStream = new TestStream(canRead: false, canSeek: false, canWrite: true);
             var pdbStream = new TestStream(canRead: false, canSeek: false, canWrite: true);
 
-            var c = CSharpCompilation.Create("a",
+            var c = CSharpCompilation.Create(
+                "a",
                 new[] { SyntaxFactory.ParseSyntaxTree("class C { static void Main() {} }") },
-                new[] { MscorlibRef });
+                new[] { MscorlibRef }
+            );
 
             var r = c.Emit(peStream, pdbStream);
             r.Diagnostics.Verify();
@@ -130,6 +154,5 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
             }
         }
-
     }
 }

@@ -25,24 +25,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     public class TestClass
     {
         public int field;
+
         public static implicit operator TestClass(Base2 p1)
         {
-            return new TestClass()
-            {
-                field = p1.field
-            }
-
-            ;
+            return new TestClass() { field = p1.field };
         }
 
         public static Base2 operator |(TestClass p1, Base1 p2)
         {
-            return new Base2()
-            {
-                field = (p1.field | p2.field)
-            }
-
-            ;
+            return new Base2() { field = (p1.field | p2.field) };
         }
     }
 
@@ -56,18 +47,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public static int MainMethod(string[] ars)
         {
-            TestClass l = new TestClass()
-            {
-                field = 8
-            }
-
-            ;
-            Base1 r = new Base1()
-            {
-                field = 2
-            }
-
-            ;
+            TestClass l = new TestClass() { field = 8 };
+            Base1 r = new Base1() { field = 2 };
             dynamic d0 = l;
             d0 |= r;
             dynamic d1 = l;
@@ -81,8 +62,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.conversion.conversion002.conversion002
 {
@@ -106,24 +85,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     public class TestClass
     {
         public int field;
+
         public static explicit operator TestClass(Base2 p1)
         {
-            return new TestClass()
-            {
-                field = p1.field
-            }
-
-            ;
+            return new TestClass() { field = p1.field };
         }
 
         public static Base2 operator |(TestClass p1, Base1 p2)
         {
-            return new Base2()
-            {
-                field = (p1.field | p2.field)
-            }
-
-            ;
+            return new Base2() { field = (p1.field | p2.field) };
         }
     }
 
@@ -137,18 +107,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public static int MainMethod(string[] ars)
         {
-            TestClass l = new TestClass()
-            {
-                field = 8
-            }
-
-            ;
-            Base1 r = new Base1()
-            {
-                field = 2
-            }
-
-            ;
+            TestClass l = new TestClass() { field = 8 };
+            Base1 r = new Base1() { field = 2 };
             int flag = 0;
             dynamic d0 = l;
             try
@@ -157,7 +117,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.NoImplicitConvCast, e.Message, "Base2", "TestClass"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.NoImplicitConvCast,
+                        e.Message,
+                        "Base2",
+                        "TestClass"
+                    )
+                )
                 {
                     flag++;
                 }
@@ -171,7 +138,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.NoImplicitConvCast, e.Message, "Base2", "TestClass"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.NoImplicitConvCast,
+                        e.Message,
+                        "Base2",
+                        "TestClass"
+                    )
+                )
                 {
                     flag++;
                 }
@@ -183,7 +157,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.NoImplicitConvCast, e.Message, "Base2", "TestClass"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.NoImplicitConvCast,
+                        e.Message,
+                        "Base2",
+                        "TestClass"
+                    )
+                )
                 {
                     flag++;
                 }
@@ -197,8 +178,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.conversion.conversion003.conversion003
 {
     // <Title> Compound operator in conversion.</Title>
@@ -211,24 +190,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     public class Test
     {
         public int field;
+
         public static implicit operator Test(string p1)
         {
-            return new Test()
-            {
-                field = 10
-            }
-
-            ;
+            return new Test() { field = 10 };
         }
 
         public static Test operator +(Test p1, Test p2)
         {
-            return new Test()
-            {
-                field = (p1.field + p2.field)
-            }
-
-            ;
+            return new Test() { field = (p1.field + p2.field) };
         }
 
         [Fact]
@@ -239,34 +209,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public static int MainMethod(string[] ars)
         {
-            dynamic d0 = new Test()
-            {
-                field = 2
-            }
-
-            ;
+            dynamic d0 = new Test() { field = 2 };
             d0 += "";
-            dynamic d1 = new Test()
-            {
-                field = 2
-            }
-
-            ;
+            dynamic d1 = new Test() { field = 2 };
             d1 += "A";
-            Test d2 = new Test()
-            {
-                field = 2
-            }
-
-            ;
+            Test d2 = new Test() { field = 2 };
             dynamic t2 = "";
             d2 += t2;
-            dynamic d3 = new Test()
-            {
-                field = 2
-            }
-
-            ;
+            dynamic d3 = new Test() { field = 2 };
             dynamic t3 = string.Empty;
             d3 += t3;
             if (d0.field == 12 && d1.field == 12 && d2.field == 12 && d3.field == 12)
@@ -276,8 +226,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.conversion.conversion005.conversion005
 {
@@ -301,24 +249,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     public struct TestStruct
     {
         public int field;
+
         public static explicit operator TestStruct(Base2 p1)
         {
-            return new TestStruct()
-            {
-                field = p1.field
-            }
-
-            ;
+            return new TestStruct() { field = p1.field };
         }
 
         public static Base2 operator *(TestStruct p1, Base1 p2)
         {
-            return new Base2()
-            {
-                field = (p1.field * 2)
-            }
-
-            ;
+            return new Base2() { field = (p1.field * 2) };
         }
     }
 
@@ -332,18 +271,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public static int MainMethod(string[] ars)
         {
-            TestStruct l = new TestStruct()
-            {
-                field = 8
-            }
-
-            ;
-            Base1 r = new Base1()
-            {
-                field = 2
-            }
-
-            ;
+            TestStruct l = new TestStruct() { field = 8 };
+            Base1 r = new Base1() { field = 2 };
             int flag = 0;
             dynamic d0 = l;
             try
@@ -352,7 +281,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.NoImplicitConvCast, e.Message, "Base2", "TestStruct"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.NoImplicitConvCast,
+                        e.Message,
+                        "Base2",
+                        "TestStruct"
+                    )
+                )
                 {
                     flag++;
                 }
@@ -365,7 +301,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.NoImplicitConvCast, e.Message, "Base2", "TestStruct"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.NoImplicitConvCast,
+                        e.Message,
+                        "Base2",
+                        "TestStruct"
+                    )
+                )
                 {
                     flag++;
                 }
@@ -379,7 +322,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.NoImplicitConvCast, e.Message, "Base2", "TestStruct"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.NoImplicitConvCast,
+                        e.Message,
+                        "Base2",
+                        "TestStruct"
+                    )
+                )
                 {
                     flag++;
                 }
@@ -391,7 +341,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.NoImplicitConvCast, e.Message, "Base2", "TestStruct"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.NoImplicitConvCast,
+                        e.Message,
+                        "Base2",
+                        "TestStruct"
+                    )
+                )
                 {
                     flag++;
                 }
@@ -404,8 +361,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.conversion.conversion006.conversion006
 {
@@ -432,12 +387,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         public static int MainMethod(string[] ars)
         {
             Test l = new Test();
-            Base1 r = new Base1()
-            {
-                field = 2
-            }
-
-            ;
+            Base1 r = new Base1() { field = 2 };
             try
             {
                 dynamic d0 = l;
@@ -445,7 +395,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, e.Message, "*=", "Test", "Base1"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        e.Message,
+                        "*=",
+                        "Test",
+                        "Base1"
+                    )
+                )
                     return 0;
             }
 
@@ -454,8 +412,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.conversion.conversion007.conversion007
 {
@@ -481,9 +437,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     public class Test
     {
         private int _f1 = 10;
-        public Test()
-        {
-        }
+
+        public Test() { }
 
         public Test(int p1)
         {

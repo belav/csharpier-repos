@@ -108,17 +108,14 @@ public class FormFileModelBindingIntegrationTest
 
         // ModelState
         Assert.True(modelState.IsValid);
-        Assert.Collection(
-            modelState.OrderBy(kvp => kvp.Key),
-            kvp =>
-            {
-                var (key, value) = kvp;
-                Assert.Equal("Address.File", kvp.Key);
-                Assert.Null(value.RawValue);
-                Assert.Empty(value.Errors);
-                Assert.Equal(ModelValidationState.Valid, value.ValidationState);
-            }
-        );
+        Assert.Collection(modelState.OrderBy(kvp => kvp.Key), kvp =>
+        {
+            var (key, value) = kvp;
+            Assert.Equal("Address.File", kvp.Key);
+            Assert.Null(value.RawValue);
+            Assert.Empty(value.Errors);
+            Assert.Equal(ModelValidationState.Valid, value.ValidationState);
+        });
     }
 
     [Fact]
@@ -162,17 +159,14 @@ public class FormFileModelBindingIntegrationTest
 
         // ModelState
         Assert.True(modelState.IsValid);
-        Assert.Collection(
-            modelState.OrderBy(kvp => kvp.Key),
-            kvp =>
-            {
-                var (key, value) = kvp;
-                Assert.Equal("Parameter1.Address.File", kvp.Key);
-                Assert.Null(value.RawValue);
-                Assert.Empty(value.Errors);
-                Assert.Equal(ModelValidationState.Valid, value.ValidationState);
-            }
-        );
+        Assert.Collection(modelState.OrderBy(kvp => kvp.Key), kvp =>
+        {
+            var (key, value) = kvp;
+            Assert.Equal("Parameter1.Address.File", kvp.Key);
+            Assert.Null(value.RawValue);
+            Assert.Empty(value.Errors);
+            Assert.Equal(ModelValidationState.Valid, value.ValidationState);
+        });
     }
 
     private class Group
@@ -975,26 +969,23 @@ public class FormFileModelBindingIntegrationTest
         var house = Assert.IsType<House>(modelBindingResult.Model);
         Assert.NotNull(house.Garage);
         Assert.NotNull(house.Garage.Cars);
-        Assert.Collection(
-            house.Garage.Cars,
-            car =>
-            {
-                Assert.Null(car.Name);
-                Assert.Collection(
-                    car.Specs,
-                    file =>
-                    {
-                        using var reader = new StreamReader(file.OpenReadStream());
-                        Assert.Equal(data + 1, reader.ReadToEnd());
-                    },
-                    file =>
-                    {
-                        using var reader = new StreamReader(file.OpenReadStream());
-                        Assert.Equal(data + 2, reader.ReadToEnd());
-                    }
-                );
-            }
-        );
+        Assert.Collection(house.Garage.Cars, car =>
+        {
+            Assert.Null(car.Name);
+            Assert.Collection(
+                car.Specs,
+                file =>
+                {
+                    using var reader = new StreamReader(file.OpenReadStream());
+                    Assert.Equal(data + 1, reader.ReadToEnd());
+                },
+                file =>
+                {
+                    using var reader = new StreamReader(file.OpenReadStream());
+                    Assert.Equal(data + 2, reader.ReadToEnd());
+                }
+            );
+        });
 
         // ModelState
         Assert.True(modelState.IsValid);

@@ -39,8 +39,7 @@ public class RequestLocalizationMiddleware
         ArgumentNullException.ThrowIfNull(options);
 
         _next = next ?? throw new ArgumentNullException(nameof(next));
-        _logger =
-            loggerFactory?.CreateLogger<RequestLocalizationMiddleware>()
+        _logger = loggerFactory?.CreateLogger<RequestLocalizationMiddleware>()
             ?? throw new ArgumentNullException(nameof(loggerFactory));
         _options = options.Value;
     }

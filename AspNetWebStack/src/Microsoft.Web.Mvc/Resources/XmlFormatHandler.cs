@@ -20,9 +20,20 @@ namespace Microsoft.Web.Mvc.Resources
             return requestFormat != null && IsCompatibleMediaType(requestFormat.MediaType);
         }
 
-        public object Deserialize(ControllerContext controllerContext, ModelBindingContext bindingContext, ContentType requestFormat)
+        public object Deserialize(
+            ControllerContext controllerContext,
+            ModelBindingContext bindingContext,
+            ContentType requestFormat
+        )
         {
-            DataContractSerializer xml = new DataContractSerializer(bindingContext.ModelType, null, Int32.MaxValue, true, true, null);
+            DataContractSerializer xml = new DataContractSerializer(
+                bindingContext.ModelType,
+                null,
+                Int32.MaxValue,
+                true,
+                true,
+                null
+            );
             return xml.ReadObject(controllerContext.HttpContext.Request.InputStream);
         }
 
@@ -33,7 +44,10 @@ namespace Microsoft.Web.Mvc.Resources
 
         public void Serialize(ControllerContext context, object model, ContentType responseFormat)
         {
-            DataContractXmlActionResult xml = new DataContractXmlActionResult(model, responseFormat);
+            DataContractXmlActionResult xml = new DataContractXmlActionResult(
+                model,
+                responseFormat
+            );
             xml.ExecuteResult(context);
         }
 

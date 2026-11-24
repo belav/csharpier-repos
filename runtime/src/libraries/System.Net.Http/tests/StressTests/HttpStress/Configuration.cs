@@ -13,11 +13,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 
-
 namespace HttpStress
 {
     [Flags]
-    public enum RunMode { server = 1, client = 2, both = server | client };
+    public enum RunMode
+    {
+        server = 1,
+        client = 2,
+        both = server | client,
+    };
 
     public class Configuration
     {
@@ -50,5 +54,4 @@ namespace HttpStress
         public int? ServerInitialConnectionWindowSize { get; set; }
         public int? ServerMaxRequestHeaderFieldSize { get; set; }
     }
-
 }

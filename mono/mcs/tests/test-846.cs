@@ -2,9 +2,9 @@
 
 class Test
 {
-	public static int Main ()
-	{
-		new B ().Foo ();
-		return 0;
-	}
+    public static int Main()
+    {
+        new B().Foo();
+        return 0;
+    }
 }

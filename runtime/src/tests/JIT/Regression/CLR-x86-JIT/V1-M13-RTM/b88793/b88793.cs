@@ -21,6 +21,7 @@ public class CC
             } while (a);
         }
     }
+
     [Fact]
     public static void TestEntryPoint()
     {

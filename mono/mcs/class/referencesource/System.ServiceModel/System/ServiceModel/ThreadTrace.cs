@@ -4,13 +4,13 @@
 namespace System.ServiceModel
 {
     using System;
-    using System.IO;
-    using System.Threading;
-    using System.Security;
-    using System.Runtime.InteropServices;
     using System.Collections.Generic;
+    using System.IO;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
+    using System.Security;
+    using System.Threading;
 
     // Enable this code to track which thread operations occur on
 #if false
@@ -280,17 +280,11 @@ namespace System.ServiceModel
 #else
     static class ThreadTrace
     {
-        public static void Trace(string operation)
-        {
-        }
+        public static void Trace(string operation) { }
 
-        public static void StopTracing()
-        {
-        }
+        public static void StopTracing() { }
 
-        public static void Save()
-        {
-        }
+        public static void Save() { }
     }
 #endif
 }

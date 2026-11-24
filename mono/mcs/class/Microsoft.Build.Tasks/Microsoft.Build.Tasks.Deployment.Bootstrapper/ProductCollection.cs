@@ -25,53 +25,55 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.Bootstrapper {
+namespace Microsoft.Build.Tasks.Deployment.Bootstrapper
+{
+    [ClassInterface(ClassInterfaceType.None)]
+    [Guid("EFFA164B-3E87-4195-88DB-8AC004DDFE2A")]
+    [ComVisible(true)]
+    public class ProductCollection : IProductCollection, IEnumerable
+    {
+        List<Product> list;
 
-	[ClassInterface (ClassInterfaceType.None)]
-	[Guid ("EFFA164B-3E87-4195-88DB-8AC004DDFE2A")]
-	[ComVisible (true)]
-	public class ProductCollection : IProductCollection, IEnumerable {
+        ProductCollection()
+        {
+            list = new List<Product>();
+        }
 
-		List <Product> list;
+        [MonoTODO]
+        public int Count
+        {
+            get { return list.Count; }
+        }
 
-		ProductCollection ()
-		{
-			list = new List <Product> ();
-		}
-		
-		[MonoTODO]
-		public int Count {
-			get { return list.Count; }
-		}
-		
-		[MonoTODO]
-		public IEnumerator GetEnumerator ()
-		{
-			return list.GetEnumerator ();
-		}
-		
-		[MonoTODO]
-		public Product Item (int index)
-		{
-			return list [index];
-		}
-		
-		[MonoTODO]
-		public Product Product (string productCode)
-		{
-			int idx = list.FindIndex (delegate (Product p) {
-				return p.ProductCode == productCode;
-			});
+        [MonoTODO]
+        public IEnumerator GetEnumerator()
+        {
+            return list.GetEnumerator();
+        }
 
-			return (idx == -1) ? null : list [idx];
-		}
-	}
+        [MonoTODO]
+        public Product Item(int index)
+        {
+            return list[index];
+        }
+
+        [MonoTODO]
+        public Product Product(string productCode)
+        {
+            int idx = list.FindIndex(
+                delegate(Product p)
+                {
+                    return p.ProductCode == productCode;
+                }
+            );
+
+            return (idx == -1) ? null : list[idx];
+        }
+    }
 }
-

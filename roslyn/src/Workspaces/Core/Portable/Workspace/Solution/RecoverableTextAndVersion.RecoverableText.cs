@@ -48,7 +48,8 @@ internal sealed partial class RecoverableTextAndVersion
         /// </summary>
         private WeakReference<SourceText>? _weakReference;
 
-        private SemaphoreSlim Gate => InterlockedOperations.Initialize(ref _lazyGate, SemaphoreSlimFactory.Instance);
+        private SemaphoreSlim Gate =>
+            InterlockedOperations.Initialize(ref _lazyGate, SemaphoreSlimFactory.Instance);
 
         /// <summary>
         /// Attempts to get the value, but only through the weak reference.  This will only succeed *after* the value
@@ -75,8 +76,8 @@ internal sealed partial class RecoverableTextAndVersion
             return TryGetWeakValue(out value);
         }
 
-        public bool TryGetValue([MaybeNullWhen(false)] out SourceText value)
-            => TryGetStrongOrWeakValue(out value);
+        public bool TryGetValue([MaybeNullWhen(false)] out SourceText value) =>
+            TryGetStrongOrWeakValue(out value);
 
         public SourceText GetValue(CancellationToken cancellationToken)
         {
@@ -139,22 +140,24 @@ internal sealed partial class RecoverableTextAndVersion
                 using (s_taskGuard.DisposableWait())
                 {
                     // force all save tasks to be in sequence so we don't hog all the threads.
-                    s_latestTask = s_latestTask.SafeContinueWithFromAsync(async _ =>
-                    {
-                        // Now defer to our subclass to actually save the instance to secondary storage.
-                        await SaveAsync(instance, CancellationToken.None).ConfigureAwait(false);
+                    s_latestTask = s_latestTask.SafeContinueWithFromAsync(
+                        async _ =>
+                        {
+                            // Now defer to our subclass to actually save the instance to secondary storage.
+                            await SaveAsync(instance, CancellationToken.None).ConfigureAwait(false);
 
-                        // Only set _initialValue to null if the saveTask completed successfully. If the save did not complete,
-                        // we want to keep it around to service future requests.  Once we do clear out this value, then all
-                        // future request will either retrieve the value from the weak reference (if anyone else is holding onto
-                        // it), or will recover from underlying storage.
-                        _initialValue = null;
-                    },
-                    CancellationToken.None,
-                    // Ensure we run continuations asynchronously so that we don't start running the continuation while
-                    // holding s_taskGuard.
-                    TaskContinuationOptions.RunContinuationsAsynchronously,
-                    TaskScheduler.Default);
+                            // Only set _initialValue to null if the saveTask completed successfully. If the save did not complete,
+                            // we want to keep it around to service future requests.  Once we do clear out this value, then all
+                            // future request will either retrieve the value from the weak reference (if anyone else is holding onto
+                            // it), or will recover from underlying storage.
+                            _initialValue = null;
+                        },
+                        CancellationToken.None,
+                        // Ensure we run continuations asynchronously so that we don't start running the continuation while
+                        // holding s_taskGuard.
+                        TaskContinuationOptions.RunContinuationsAsynchronously,
+                        TaskScheduler.Default
+                    );
                 }
             }
         }

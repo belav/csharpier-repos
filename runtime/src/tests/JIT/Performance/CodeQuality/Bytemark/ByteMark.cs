@@ -45,34 +45,33 @@ internal class global
     public static long min_ticks;
     public static int min_secs;
     public static bool allstats;
-    public static String ofile_name;    // Output file name
-    public static StreamWriter ofile;   // Output file
-    public static bool custrun;         // Custom run flag
-    public static bool write_to_file;   // Write output to file
-    public static int align;            // Memory alignment
+    public static String ofile_name; // Output file name
+    public static StreamWriter ofile; // Output file
+    public static bool custrun; // Custom run flag
+    public static bool write_to_file; // Write output to file
+    public static int align; // Memory alignment
 
     /*
     ** Following are global structures, one built for
     ** each of the tests.
     */
-    public static SortStruct numsortstruct_jagged;    // For numeric sort
-    public static SortStruct numsortstruct_rect;      // For numeric sort
-    public static StringSort strsortstruct;           // For string sort
-    public static BitOpStruct bitopstruct;            // For bitfield ops
+    public static SortStruct numsortstruct_jagged; // For numeric sort
+    public static SortStruct numsortstruct_rect; // For numeric sort
+    public static StringSort strsortstruct; // For string sort
+    public static BitOpStruct bitopstruct; // For bitfield ops
     public static EmFloatStruct emfloatstruct_struct; // For emul. float. pt.
-    public static EmFloatStruct emfloatstruct_class;  // For emul. float. pt.
-    public static FourierStruct fourierstruct;        // For fourier test
-    public static AssignStruct assignstruct_jagged;   // For assignment algs
-    public static AssignStruct assignstruct_rect;     // For assignment algs
-    public static IDEAStruct ideastruct;              // For IDEA encryption
-    public static HuffStruct huffstruct;              // For Huffman compression
-    public static NNetStruct nnetstruct_jagged;       // For Neural Net
-    public static NNetStruct nnetstruct_rect;         // For Neural Net
-    public static LUStruct lustruct;                  // For LU decomposition
+    public static EmFloatStruct emfloatstruct_class; // For emul. float. pt.
+    public static FourierStruct fourierstruct; // For fourier test
+    public static AssignStruct assignstruct_jagged; // For assignment algs
+    public static AssignStruct assignstruct_rect; // For assignment algs
+    public static IDEAStruct ideastruct; // For IDEA encryption
+    public static HuffStruct huffstruct; // For Huffman compression
+    public static NNetStruct nnetstruct_jagged; // For Neural Net
+    public static NNetStruct nnetstruct_rect; // For Neural Net
+    public static LUStruct lustruct; // For LU decomposition
 
     public const long TICKS_PER_SEC = 1000;
     public const long MINIMUM_TICKS = 60; // 60 msecs
-
 #if DEBUG
     public const int MINIMUM_SECONDS = 1;
 #else
@@ -82,6 +81,7 @@ internal class global
     public const int NUMNUMARRAYS = 1000;
     public const int NUMARRAYSIZE = 8111;
     public const int STRINGARRAYSIZE = 8111;
+
     // This is the upper limit of number of string arrays to sort in one
     // iteration. If we can sort more than this number of arrays in less
     // than MINIMUM_TICKS an exception is thrown.
@@ -96,7 +96,7 @@ internal class global
 
     // BitOps constants
 #if LONG64
-        public const int BITFARRAYSIZE = 16384;
+    public const int BITFARRAYSIZE = 16384;
 #else
     public const int BITFARRAYSIZE = 32768;
 #endif
@@ -129,8 +129,8 @@ public abstract class HarnessTest
 {
     public bool bRunTest = true;
     public double score;
-    public int adjust;        /* Set adjust code */
-    public int request_secs;  /* # of seconds requested */
+    public int adjust; /* Set adjust code */
+    public int request_secs; /* # of seconds requested */
 
     public abstract string Name();
     public abstract void ShowStats();
@@ -139,27 +139,25 @@ public abstract class HarnessTest
 
 public abstract class SortStruct : HarnessTest
 {
-    public short numarrays = global.NUMNUMARRAYS;   /* # of arrays */
-    public int arraysize = global.NUMARRAYSIZE;     /* # of elements in array */
+    public short numarrays = global.NUMNUMARRAYS; /* # of arrays */
+    public int arraysize = global.NUMARRAYSIZE; /* # of elements in array */
+
     public override void ShowStats()
     {
-        ByteMark.OutputString(
-            string.Format("  Number of arrays: {0}", numarrays));
-        ByteMark.OutputString(
-            string.Format("  Array size: {0}", arraysize));
+        ByteMark.OutputString(string.Format("  Number of arrays: {0}", numarrays));
+        ByteMark.OutputString(string.Format("  Array size: {0}", arraysize));
     }
 }
 
 public abstract class StringSortStruct : HarnessTest
 {
-    public short numarrays = global.NUMNUMARRAYS;   /* # of arrays */
-    public int arraysize = global.STRINGARRAYSIZE;     /* # of elements in array */
+    public short numarrays = global.NUMNUMARRAYS; /* # of arrays */
+    public int arraysize = global.STRINGARRAYSIZE; /* # of elements in array */
+
     public override void ShowStats()
     {
-        ByteMark.OutputString(
-            string.Format("  Number of arrays: {0}", numarrays));
-        ByteMark.OutputString(
-            string.Format("  Array size: {0}", arraysize));
+        ByteMark.OutputString(string.Format("  Number of arrays: {0}", numarrays));
+        ByteMark.OutputString(string.Format("  Array size: {0}", arraysize));
     }
 }
 
@@ -167,92 +165,88 @@ public abstract class HuffStruct : HarnessTest
 {
     public int arraysize = global.HUFFARRAYSIZE;
     public int loops = 0;
+
     public override void ShowStats()
     {
-        ByteMark.OutputString(
-            string.Format("  Array size: {0}", arraysize));
-        ByteMark.OutputString(
-            string.Format("  Number of loops: {0}", loops));
+        ByteMark.OutputString(string.Format("  Array size: {0}", arraysize));
+        ByteMark.OutputString(string.Format("  Number of loops: {0}", loops));
     }
 }
 
 public abstract class FourierStruct : HarnessTest
 {
     public int arraysize = global.FOURIERARRAYSIZE;
+
     public override void ShowStats()
     {
-        ByteMark.OutputString(
-            string.Format("  Number of coefficients: {0}", arraysize));
+        ByteMark.OutputString(string.Format("  Number of coefficients: {0}", arraysize));
     }
 }
 
 public abstract class AssignStruct : HarnessTest
 {
-    public short numarrays = global.NUMNUMARRAYS;   /* # of elements in array */
+    public short numarrays = global.NUMNUMARRAYS; /* # of elements in array */
+
     public override void ShowStats()
     {
-        ByteMark.OutputString(
-            string.Format("  Number of arrays: {0}", numarrays));
+        ByteMark.OutputString(string.Format("  Number of arrays: {0}", numarrays));
     }
 }
 
 public abstract class BitOpStruct : HarnessTest
 {
-    public int bitoparraysize;                      /* Total # of bitfield ops */
+    public int bitoparraysize; /* Total # of bitfield ops */
     public int bitfieldarraysize = global.BITFARRAYSIZE; /* Bit field array size */
+
     public override void ShowStats()
     {
-        ByteMark.OutputString(
-            string.Format("  Operations array size: {0}", bitoparraysize));
-        ByteMark.OutputString(
-            string.Format("  Bitfield array size: {0}", bitfieldarraysize));
+        ByteMark.OutputString(string.Format("  Operations array size: {0}", bitoparraysize));
+        ByteMark.OutputString(string.Format("  Bitfield array size: {0}", bitfieldarraysize));
     }
 }
 
 public abstract class IDEAStruct : HarnessTest
 {
-    public int arraysize = global.IDEAARRAYSIZE;    /* Size of array */
-    public int loops;                               /* # of times to convert */
+    public int arraysize = global.IDEAARRAYSIZE; /* Size of array */
+    public int loops; /* # of times to convert */
+
     public override void ShowStats()
     {
-        ByteMark.OutputString(
-            string.Format("  Array size: {0}", arraysize));
-        ByteMark.OutputString(
-            string.Format("  Number of loops: {0}", loops));
+        ByteMark.OutputString(string.Format("  Array size: {0}", arraysize));
+        ByteMark.OutputString(string.Format("  Number of loops: {0}", loops));
     }
 }
 
 public abstract class LUStruct : HarnessTest
 {
     public int numarrays;
+
     public override void ShowStats()
     {
-        ByteMark.OutputString(
-            string.Format("  Number of arrays: {0}", numarrays));
+        ByteMark.OutputString(string.Format("  Number of arrays: {0}", numarrays));
     }
 }
 
 public abstract class NNetStruct : HarnessTest
 {
-    public int loops;            /* # of times to learn */
-    public double iterspersec;     /* Results */
+    public int loops; /* # of times to learn */
+    public double iterspersec; /* Results */
+
     public override void ShowStats()
     {
-        ByteMark.OutputString(
-            string.Format("  Number of loops: {0}", loops));
+        ByteMark.OutputString(string.Format("  Number of loops: {0}", loops));
     }
 }
 
 public abstract class EmFloatStruct : HarnessTest
 {
-    public int arraysize = global.EMFARRAYSIZE;     /* Size of array */
-    public int loops;                               /* Loops per iterations */
+    public int arraysize = global.EMFARRAYSIZE; /* Size of array */
+    public int loops; /* Loops per iterations */
+
     public override void ShowStats()
     {
-        ByteMark.OutputString(
-            string.Format("  Number of loops: {0}", loops));
-        ByteMark.OutputString(
-            string.Format("  Array size: {0}", arraysize));
+        ByteMark.OutputString(string.Format("  Number of loops: {0}", loops));
+        ByteMark.OutputString(string.Format("  Array size: {0}", arraysize));
     }
 }
 
@@ -287,22 +281,23 @@ public class ByteMark
         */
         // JTR: Should make member of HarnessTest, but left
         // this way to keep similar to original test.
-        s_bindex = new double[14] {
-            38.993,                     /* Numeric sort */
-            38.993,                     /* Numeric sort */
-            2.238,                      /* String sort */
-            5829704,                    /* Bitfield */
-            2.084,                       /* FP Emulation */
-            2.084,                       /* FP Emulation */
-            879.278,                     /* Fourier */
-            .2628,                     /* Assignment */
-            .2628,                     /* Assignment */
-            65.382,                      /* IDEA */
-            36.062,                     /* Huffman */
-            .6225,                       /* Neural Net */
-            .6225,                       /* Neural Net */
-            19.3031                     /* LU Decomposition */
-            };
+        s_bindex = new double[14]
+        {
+            38.993, /* Numeric sort */
+            38.993, /* Numeric sort */
+            2.238, /* String sort */
+            5829704, /* Bitfield */
+            2.084, /* FP Emulation */
+            2.084, /* FP Emulation */
+            879.278, /* Fourier */
+            .2628, /* Assignment */
+            .2628, /* Assignment */
+            65.382, /* IDEA */
+            36.062, /* Huffman */
+            .6225, /* Neural Net */
+            .6225, /* Neural Net */
+            19.3031, /* LU Decomposition */
+        };
 
         s_tests = new HarnessTest[14]
         {
@@ -357,8 +352,7 @@ public class ByteMark
         {
             OutputString("========== ALL STATISTICS ==========");
             DateTime time_and_date = DateTime.Now;
-            OutputString("**" +
-                time_and_date.ToString("ddd MMM dd HH:mm:ss yyyy"));
+            OutputString("**" + time_and_date.ToString("ddd MMM dd HH:mm:ss yyyy"));
             OutputString("**" + global.SysName);
             OutputString("**" + global.CompilerName);
             OutputString("**" + global.CompilerVersion);
@@ -374,25 +368,24 @@ public class ByteMark
             */
             int fpcount = 0;
             int intcount = 0;
-            double intindex = 1.0;       /* Integer index */
-            double fpindex = 1.0;        /* Floating-point index */
+            double intindex = 1.0; /* Integer index */
+            double fpindex = 1.0; /* Floating-point index */
             for (int i = 0; i < s_tests.Length; i++)
             {
                 if (s_tests[i].bRunTest)
                 {
-                    double bmean;     /* Benchmark mean */
-                    double bstdev;    /* Benchmark stdev */
-                    int bnumrun;   /* # of runs */
-                    OutputStringPart(
-                        string.Format("{0}:", s_tests[i].Name()));
-                    bench_with_confidence(i,
-                            out bmean,
-                            out bstdev,
-                            out bnumrun);
+                    double bmean; /* Benchmark mean */
+                    double bstdev; /* Benchmark stdev */
+                    int bnumrun; /* # of runs */
+                    OutputStringPart(string.Format("{0}:", s_tests[i].Name()));
+                    bench_with_confidence(i, out bmean, out bstdev, out bnumrun);
                     OutputString(
-                        string.Format("  Iterations/sec: {0:F5}  Index: {1:F5}",
+                        string.Format(
+                            "  Iterations/sec: {0:F5}  Index: {1:F5}",
                             bmean,
-                            bmean / s_bindex[i]));
+                            bmean / s_bindex[i]
+                        )
+                    );
 
                     /*
                     ** Gather integer or FP indexes
@@ -414,10 +407,8 @@ public class ByteMark
 
                     if (global.allstats)
                     {
-                        OutputString(
-                        string.Format("  Standard Deviation: {0}", bstdev));
-                        OutputString(
-                        string.Format("  Number of runs: {0}", bnumrun));
+                        OutputString(string.Format("  Standard Deviation: {0}", bstdev));
+                        OutputString(string.Format("  Number of runs: {0}", bnumrun));
                         s_tests[i].ShowStats();
                     }
                 }
@@ -429,9 +420,17 @@ public class ByteMark
             {
                 OutputString("===========OVERALL============");
                 OutputString(
-                    string.Format("INTEGER INDEX: {0:F5}", Math.Pow(intindex, (double)1.0 / (double)intcount)));
+                    string.Format(
+                        "INTEGER INDEX: {0:F5}",
+                        Math.Pow(intindex, (double)1.0 / (double)intcount)
+                    )
+                );
                 OutputString(
-                    string.Format("FLOATING-POINT INDEX: {0:F5}", Math.Pow(fpindex, (double)1.0 / (double)fpcount)));
+                    string.Format(
+                        "FLOATING-POINT INDEX: {0:F5}",
+                        Math.Pow(fpindex, (double)1.0 / (double)fpcount)
+                    )
+                );
                 OutputString(" (90 MHz Dell Pentium = 1.00)");
                 OutputString("==============================");
             }
@@ -459,13 +458,14 @@ public class ByteMark
     */
     private int parse_arg(String arg)
     {
-        int i = 0;          /* Index */
-        StreamReader cfile = null;    /* Command file identifier */
+        int i = 0; /* Index */
+        StreamReader cfile = null; /* Command file identifier */
 
         /*
         ** First character has got to be a hyphen.
         */
-        if (arg[i++] != '-') return (-1);
+        if (arg[i++] != '-')
+            return (-1);
 
         /*
         ** Convert the rest of the argument to upper case
@@ -478,12 +478,13 @@ public class ByteMark
         */
         switch (arg[i++])
         {
-            case '?': return (-1);     /* Will display help */
+            case '?':
+                return (-1); /* Will display help */
 
-            case 'C':                       /* Command file name */
-                                            /*
-                                            ** First try to open the file for reading.
-                                            */
+            case 'C': /* Command file name */
+                /*
+                ** First try to open the file for reading.
+                */
                 String inputFileName = arg.Substring(i);
 
                 try
@@ -496,7 +497,7 @@ public class ByteMark
                     return (-1);
                 }
 
-                read_comfile(cfile);    /* Read commands */
+                read_comfile(cfile); /* Read commands */
                 break;
             default:
                 return (-1);
@@ -518,64 +519,65 @@ public class ByteMark
 
     private enum PF
     { // parameter flags
-        GMTICKS = 0,            /* GLOBALMINTICKS */
-        MINSECONDS = 1,         /* MINSECONDS */
-        ALLSTATS = 2,           /* ALLSTATS */
-        OUTFILE = 3,            /* OUTFILE */
-        CUSTOMRUN = 4,          /* CUSTOMRUN */
-        DONUM = 5,              /* DONUMSORT */
-        NUMNUMA = 6,            /* NUMNUMARRAYS */
-        NUMASIZE = 7,           /* NUMARRAYSIZE */
-        NUMMINS = 8,            /* NUMMINSECONDS */
-        DOSTR = 9,              /* DOSTRINGSORT */
-        STRASIZE = 10,          /* STRARRAYSIZE */
-        NUMSTRA = 11,           /* NUMSTRARRAYS */
-        STRMINS = 12,           /* STRMINSECONDS */
-        DOBITF = 13,            /* DOBITFIELD */
-        NUMBITOPS = 14,         /* NUMBITOPS */
-        BITFSIZE = 15,          /* BITFIELDSIZE */
-        BITMINS = 16,           /* BITMINSECONDS */
-        DOEMF = 17,             /* DOEMF */
-        EMFASIZE = 18,          /* EMFARRAYSIZE */
-        EMFLOOPS = 19,          /* EMFLOOPS */
-        EMFMINS = 20,           /* EMFMINSECOND */
-        DOFOUR = 21,            /* DOFOUR */
-        FOURASIZE = 22,         /* FOURASIZE */
-        FOURMINS = 23,          /* FOURMINSECONDS */
-        DOASSIGN = 24,          /* DOASSIGN */
-        AARRAYS = 25,           /* ASSIGNARRAYS */
-        ASSIGNMINS = 26,        /* ASSIGNMINSECONDS */
-        DOIDEA = 27,            /* DOIDEA */
-        IDEAASIZE = 28,         /* IDEAARRAYSIZE */
-        IDEALOOPS = 29,         /* IDEALOOPS */
-        IDEAMINS = 30,          /* IDEAMINSECONDS */
-        DOHUFF = 31,            /* DOHUFF */
-        HUFFASIZE = 32,         /* HUFFARRAYSIZE */
-        HUFFLOOPS = 33,         /* HUFFLOOPS */
-        HUFFMINS = 34,          /* HUFFMINSECONDS */
-        DONNET = 35,            /* DONNET */
-        NNETLOOPS = 36,         /* NNETLOOPS */
-        NNETMINS = 37,          /* NNETMINSECONDS */
-        DOLU = 38,              /* DOLU */
-        LUNARRAYS = 39,         /* LUNUMARRAYS */
-        LUMINS = 40,            /* LUMINSECONDS */
-        ALIGN = 41,         /* ALIGN */
+        GMTICKS = 0, /* GLOBALMINTICKS */
+        MINSECONDS = 1, /* MINSECONDS */
+        ALLSTATS = 2, /* ALLSTATS */
+        OUTFILE = 3, /* OUTFILE */
+        CUSTOMRUN = 4, /* CUSTOMRUN */
+        DONUM = 5, /* DONUMSORT */
+        NUMNUMA = 6, /* NUMNUMARRAYS */
+        NUMASIZE = 7, /* NUMARRAYSIZE */
+        NUMMINS = 8, /* NUMMINSECONDS */
+        DOSTR = 9, /* DOSTRINGSORT */
+        STRASIZE = 10, /* STRARRAYSIZE */
+        NUMSTRA = 11, /* NUMSTRARRAYS */
+        STRMINS = 12, /* STRMINSECONDS */
+        DOBITF = 13, /* DOBITFIELD */
+        NUMBITOPS = 14, /* NUMBITOPS */
+        BITFSIZE = 15, /* BITFIELDSIZE */
+        BITMINS = 16, /* BITMINSECONDS */
+        DOEMF = 17, /* DOEMF */
+        EMFASIZE = 18, /* EMFARRAYSIZE */
+        EMFLOOPS = 19, /* EMFLOOPS */
+        EMFMINS = 20, /* EMFMINSECOND */
+        DOFOUR = 21, /* DOFOUR */
+        FOURASIZE = 22, /* FOURASIZE */
+        FOURMINS = 23, /* FOURMINSECONDS */
+        DOASSIGN = 24, /* DOASSIGN */
+        AARRAYS = 25, /* ASSIGNARRAYS */
+        ASSIGNMINS = 26, /* ASSIGNMINSECONDS */
+        DOIDEA = 27, /* DOIDEA */
+        IDEAASIZE = 28, /* IDEAARRAYSIZE */
+        IDEALOOPS = 29, /* IDEALOOPS */
+        IDEAMINS = 30, /* IDEAMINSECONDS */
+        DOHUFF = 31, /* DOHUFF */
+        HUFFASIZE = 32, /* HUFFARRAYSIZE */
+        HUFFLOOPS = 33, /* HUFFLOOPS */
+        HUFFMINS = 34, /* HUFFMINSECONDS */
+        DONNET = 35, /* DONNET */
+        NNETLOOPS = 36, /* NNETLOOPS */
+        NNETMINS = 37, /* NNETMINSECONDS */
+        DOLU = 38, /* DOLU */
+        LUNARRAYS = 39, /* LUNUMARRAYS */
+        LUMINS = 40, /* LUMINSECONDS */
+        ALIGN = 41, /* ALIGN */
 
         // Added for control of new C# rect/jagged struct/class tests
-        DONUMJAGGED = 42,        /* DONUMSORTJAGGED */
-        DONUMRECT = 43,          /* DONUMSORTRECT */
-        DOEMFSTRUCT = 44,        /* DOEMFSTRUCT */
-        DOEMFCLASS = 45,         /* DOEMFCLASS */
-        DOASSIGNJAGGED = 46,     /* DOASSIGNJAGGED */
-        DOASSIGNRECT = 47,       /* DOASSIGNRECT */
-        DONNETJAGGED = 48,       /* DONNETJAGGED */
-        DONNETRECT = 49,         /* DONNETRECT */
+        DONUMJAGGED = 42, /* DONUMSORTJAGGED */
+        DONUMRECT = 43, /* DONUMSORTRECT */
+        DOEMFSTRUCT = 44, /* DOEMFSTRUCT */
+        DOEMFCLASS = 45, /* DOEMFCLASS */
+        DOASSIGNJAGGED = 46, /* DOASSIGNJAGGED */
+        DOASSIGNRECT = 47, /* DOASSIGNRECT */
+        DONNETJAGGED = 48, /* DONNETJAGGED */
+        DONNETRECT = 49, /* DONNETRECT */
 
-        MAXPARAM = 49
+        MAXPARAM = 49,
     }
 
     /* Parameter names */
-    private static String[] s_paramnames = {
+    private static String[] s_paramnames =
+    {
         "GLOBALMINTICKS",
         "MINSECONDS",
         "ALLSTATS",
@@ -618,7 +620,6 @@ public class ByteMark
         "LUNUMARRAYS",
         "LUMINSECONDS",
         "ALIGN",
-
         // Added for control of new C# rect/jagged struct/class tests
         "DONUMSORTJAGGED",
         "DONUMSORTRECT",
@@ -627,7 +628,7 @@ public class ByteMark
         "DOASSIGNJAGGED",
         "DOASSIGNRECT",
         "DONNETJAGGED",
-        "DONNETRECT"
+        "DONNETRECT",
     };
 
     /*****************
@@ -641,12 +642,12 @@ public class ByteMark
     {
         String inbuf;
 
-        String eptr;             /* Offset to "=" sign */
+        String eptr; /* Offset to "=" sign */
         /* markples: now the value half of the key=value pair */
 
-        int eIndex;      /* markples: now this is the "=" offset */
+        int eIndex; /* markples: now this is the "=" offset */
 
-        PF i;                 /* Index */
+        PF i; /* Index */
 
         /*
         ** Sit in a big loop, reading a line from the file at each
@@ -662,7 +663,7 @@ public class ByteMark
             {
                 Console.WriteLine("**COMMAND FILE ERROR at LINE:");
                 Console.WriteLine(" " + inbuf);
-                goto skipswitch;        /* A GOTO!!!! */
+                goto skipswitch; /* A GOTO!!!! */
             }
 
             /*
@@ -684,8 +685,7 @@ public class ByteMark
 
             if (i < 0)
             {
-                Console.WriteLine("**COMMAND FILE ERROR -- UNKNOWN PARAM: "
-                    + name);
+                Console.WriteLine("**COMMAND FILE ERROR -- UNKNOWN PARAM: " + name);
                 goto skipswitch;
             }
 
@@ -695,20 +695,20 @@ public class ByteMark
             */
             switch (i)
             {
-                case PF.GMTICKS:        /* GLOBALMINTICKS */
+                case PF.GMTICKS: /* GLOBALMINTICKS */
                     global.min_ticks = Int64.Parse(eptr);
                     break;
 
-                case PF.MINSECONDS:     /* MINSECONDS */
+                case PF.MINSECONDS: /* MINSECONDS */
                     global.min_secs = Int32.Parse(eptr);
                     SetRequestSecs();
                     break;
 
-                case PF.ALLSTATS:       /* ALLSTATS */
+                case PF.ALLSTATS: /* ALLSTATS */
                     global.allstats = getflag(eptr);
                     break;
 
-                case PF.OUTFILE:        /* OUTFILE */
+                case PF.OUTFILE: /* OUTFILE */
                     global.ofile_name = eptr;
                     try
                     {
@@ -725,7 +725,7 @@ public class ByteMark
                     }
                     break;
 
-                case PF.CUSTOMRUN:      /* CUSTOMRUN */
+                case PF.CUSTOMRUN: /* CUSTOMRUN */
                     global.custrun = getflag(eptr);
                     for (i = 0; (int)i < s_tests.Length; i++)
                     {
@@ -733,42 +733,43 @@ public class ByteMark
                     }
                     break;
 
-                case PF.DONUM:          /* DONUMSORT */
-                    global.numsortstruct_jagged.bRunTest =
-                        global.numsortstruct_rect.bRunTest = getflag(eptr);
+                case PF.DONUM: /* DONUMSORT */
+                    global.numsortstruct_jagged.bRunTest = global.numsortstruct_rect.bRunTest =
+                        getflag(eptr);
                     break;
 
-                case PF.NUMNUMA:        /* NUMNUMARRAYS */
+                case PF.NUMNUMA: /* NUMNUMARRAYS */
                     global.numsortstruct_rect.numarrays = Int16.Parse(eptr);
                     global.numsortstruct_jagged.numarrays = global.numsortstruct_rect.numarrays;
-                    global.numsortstruct_jagged.adjust =
-                        global.numsortstruct_rect.adjust = 1;
+                    global.numsortstruct_jagged.adjust = global.numsortstruct_rect.adjust = 1;
                     break;
 
-                case PF.NUMASIZE:       /* NUMARRAYSIZE */
+                case PF.NUMASIZE: /* NUMARRAYSIZE */
                     global.numsortstruct_rect.arraysize = Int32.Parse(eptr);
                     global.numsortstruct_jagged.arraysize = global.numsortstruct_rect.arraysize;
                     break;
 
-                case PF.NUMMINS:        /* NUMMINSECONDS */
+                case PF.NUMMINS: /* NUMMINSECONDS */
                     global.numsortstruct_rect.request_secs = Int32.Parse(eptr);
-                    global.numsortstruct_jagged.request_secs = global.numsortstruct_rect.request_secs;
+                    global.numsortstruct_jagged.request_secs = global
+                        .numsortstruct_rect
+                        .request_secs;
                     break;
 
-                case PF.DOSTR:          /* DOSTRINGSORT */
+                case PF.DOSTR: /* DOSTRINGSORT */
                     global.strsortstruct.bRunTest = getflag(eptr);
                     break;
 
-                case PF.STRASIZE:       /* STRARRAYSIZE */
+                case PF.STRASIZE: /* STRARRAYSIZE */
                     global.strsortstruct.arraysize = Int32.Parse(eptr);
                     break;
 
-                case PF.NUMSTRA:        /* NUMSTRARRAYS */
+                case PF.NUMSTRA: /* NUMSTRARRAYS */
                     global.strsortstruct.numarrays = Int16.Parse(eptr);
                     global.strsortstruct.adjust = 1;
                     break;
 
-                case PF.STRMINS:        /* STRMINSECONDS */
+                case PF.STRMINS: /* STRMINSECONDS */
                     global.strsortstruct.request_secs = Int32.Parse(eptr);
                     break;
 
@@ -776,62 +777,64 @@ public class ByteMark
                     global.bitopstruct.bRunTest = getflag(eptr);
                     break;
 
-                case PF.NUMBITOPS:      /* NUMBITOPS */
+                case PF.NUMBITOPS: /* NUMBITOPS */
                     global.bitopstruct.bitoparraysize = Int32.Parse(eptr);
                     global.bitopstruct.adjust = 1;
                     break;
 
-                case PF.BITFSIZE:       /* BITFIELDSIZE */
+                case PF.BITFSIZE: /* BITFIELDSIZE */
                     global.bitopstruct.bitfieldarraysize = Int32.Parse(eptr);
                     break;
 
-                case PF.BITMINS:        /* BITMINSECONDS */
+                case PF.BITMINS: /* BITMINSECONDS */
                     global.bitopstruct.request_secs = Int32.Parse(eptr);
                     break;
 
-                case PF.DOEMF:          /* DOEMF */
-                    global.emfloatstruct_struct.bRunTest =
-                    global.emfloatstruct_class.bRunTest = getflag(eptr);
+                case PF.DOEMF: /* DOEMF */
+                    global.emfloatstruct_struct.bRunTest = global.emfloatstruct_class.bRunTest =
+                        getflag(eptr);
                     break;
 
-                case PF.EMFASIZE:       /* EMFARRAYSIZE */
+                case PF.EMFASIZE: /* EMFARRAYSIZE */
                     global.emfloatstruct_class.arraysize = Int32.Parse(eptr);
                     global.emfloatstruct_struct.arraysize = global.emfloatstruct_class.arraysize;
                     break;
 
-                case PF.EMFLOOPS:       /* EMFLOOPS */
+                case PF.EMFLOOPS: /* EMFLOOPS */
                     global.emfloatstruct_class.loops = Int32.Parse(eptr);
                     break;
 
-                case PF.EMFMINS:        /* EMFMINSECOND */
+                case PF.EMFMINS: /* EMFMINSECOND */
                     global.emfloatstruct_class.request_secs = Int32.Parse(eptr);
-                    global.emfloatstruct_struct.request_secs = global.emfloatstruct_class.request_secs;
+                    global.emfloatstruct_struct.request_secs = global
+                        .emfloatstruct_class
+                        .request_secs;
                     break;
 
                 case PF.DOFOUR: /* DOFOUR */
                     global.fourierstruct.bRunTest = getflag(eptr);
                     break;
 
-                case PF.FOURASIZE:      /* FOURASIZE */
+                case PF.FOURASIZE: /* FOURASIZE */
                     global.fourierstruct.arraysize = Int32.Parse(eptr);
                     global.fourierstruct.adjust = 1;
                     break;
 
-                case PF.FOURMINS:       /* FOURMINSECONDS */
+                case PF.FOURMINS: /* FOURMINSECONDS */
                     global.fourierstruct.request_secs = Int32.Parse(eptr);
                     break;
 
-                case PF.DOASSIGN:       /* DOASSIGN */
-                    global.assignstruct_jagged.bRunTest =
-                    global.assignstruct_rect.bRunTest = getflag(eptr);
+                case PF.DOASSIGN: /* DOASSIGN */
+                    global.assignstruct_jagged.bRunTest = global.assignstruct_rect.bRunTest =
+                        getflag(eptr);
                     break;
 
-                case PF.AARRAYS:        /* ASSIGNARRAYS */
+                case PF.AARRAYS: /* ASSIGNARRAYS */
                     global.assignstruct_rect.numarrays = Int16.Parse(eptr);
                     global.assignstruct_jagged.numarrays = global.assignstruct_rect.numarrays;
                     break;
 
-                case PF.ASSIGNMINS:     /* ASSIGNMINSECONDS */
+                case PF.ASSIGNMINS: /* ASSIGNMINSECONDS */
                     global.assignstruct_rect.request_secs = Int32.Parse(eptr);
                     global.assignstruct_jagged.request_secs = global.assignstruct_rect.request_secs;
                     break;
@@ -840,15 +843,15 @@ public class ByteMark
                     global.ideastruct.bRunTest = getflag(eptr);
                     break;
 
-                case PF.IDEAASIZE:      /* IDEAARRAYSIZE */
+                case PF.IDEAASIZE: /* IDEAARRAYSIZE */
                     global.ideastruct.arraysize = Int32.Parse(eptr);
                     break;
 
-                case PF.IDEALOOPS:      /* IDEALOOPS */
+                case PF.IDEALOOPS: /* IDEALOOPS */
                     global.ideastruct.loops = Int32.Parse(eptr);
                     break;
 
-                case PF.IDEAMINS:       /* IDEAMINSECONDS */
+                case PF.IDEAMINS: /* IDEAMINSECONDS */
                     global.ideastruct.request_secs = Int32.Parse(eptr);
                     break;
 
@@ -856,41 +859,39 @@ public class ByteMark
                     global.huffstruct.bRunTest = getflag(eptr);
                     break;
 
-                case PF.HUFFASIZE:      /* HUFFARRAYSIZE */
+                case PF.HUFFASIZE: /* HUFFARRAYSIZE */
                     global.huffstruct.arraysize = Int32.Parse(eptr);
                     break;
 
-                case PF.HUFFLOOPS:      /* HUFFLOOPS */
+                case PF.HUFFLOOPS: /* HUFFLOOPS */
                     global.huffstruct.loops = Int32.Parse(eptr);
                     global.huffstruct.adjust = 1;
                     break;
 
-                case PF.HUFFMINS:       /* HUFFMINSECONDS */
+                case PF.HUFFMINS: /* HUFFMINSECONDS */
                     global.huffstruct.request_secs = Int32.Parse(eptr);
                     break;
 
                 case PF.DONNET: /* DONNET */
-                    global.nnetstruct_jagged.bRunTest =
-                        global.nnetstruct_rect.bRunTest = getflag(eptr);
+                    global.nnetstruct_jagged.bRunTest = global.nnetstruct_rect.bRunTest = getflag(eptr);
                     break;
 
-                case PF.NNETLOOPS:      /* NNETLOOPS */
+                case PF.NNETLOOPS: /* NNETLOOPS */
                     global.nnetstruct_rect.loops = Int32.Parse(eptr);
                     global.nnetstruct_jagged.loops = global.nnetstruct_rect.loops;
-                    global.nnetstruct_jagged.adjust =
-                        global.nnetstruct_rect.adjust = 1;
+                    global.nnetstruct_jagged.adjust = global.nnetstruct_rect.adjust = 1;
                     break;
 
-                case PF.NNETMINS:       /* NNETMINSECONDS */
+                case PF.NNETMINS: /* NNETMINSECONDS */
                     global.nnetstruct_rect.request_secs = Int32.Parse(eptr);
                     global.nnetstruct_jagged.request_secs = global.nnetstruct_rect.request_secs;
                     break;
 
-                case PF.DOLU:           /* DOLU */
+                case PF.DOLU: /* DOLU */
                     global.lustruct.bRunTest = getflag(eptr);
                     break;
 
-                case PF.LUNARRAYS:      /* LUNUMARRAYS */
+                case PF.LUNARRAYS: /* LUNUMARRAYS */
                     global.lustruct.numarrays = Int32.Parse(eptr);
                     global.lustruct.adjust = 1;
                     break;
@@ -899,31 +900,31 @@ public class ByteMark
                     global.lustruct.request_secs = Int32.Parse(eptr);
                     break;
 
-                case PF.ALIGN:          /* ALIGN */
+                case PF.ALIGN: /* ALIGN */
                     global.align = Int32.Parse(eptr);
                     break;
 
-                case PF.DONUMJAGGED:          /* DONUMSORTJAGGED */
+                case PF.DONUMJAGGED: /* DONUMSORTJAGGED */
                     global.numsortstruct_jagged.bRunTest = getflag(eptr);
                     break;
 
-                case PF.DONUMRECT:          /* DONUMSORTRECT */
+                case PF.DONUMRECT: /* DONUMSORTRECT */
                     global.numsortstruct_rect.bRunTest = getflag(eptr);
                     break;
 
-                case PF.DOEMFSTRUCT:          /* DOEMFSTRUCT */
+                case PF.DOEMFSTRUCT: /* DOEMFSTRUCT */
                     global.emfloatstruct_struct.bRunTest = getflag(eptr);
                     break;
 
-                case PF.DOEMFCLASS:          /* DOEMFCLASS */
+                case PF.DOEMFCLASS: /* DOEMFCLASS */
                     global.emfloatstruct_class.bRunTest = getflag(eptr);
                     break;
 
-                case PF.DOASSIGNJAGGED:       /* DOASSIGNJAGGED */
+                case PF.DOASSIGNJAGGED: /* DOASSIGNJAGGED */
                     global.assignstruct_jagged.bRunTest = getflag(eptr);
                     break;
 
-                case PF.DOASSIGNRECT:       /* DOASSIGNRECT */
+                case PF.DOASSIGNRECT: /* DOASSIGNRECT */
                     global.assignstruct_rect.bRunTest = getflag(eptr);
                     break;
 
@@ -935,9 +936,9 @@ public class ByteMark
                     global.nnetstruct_rect.bRunTest = getflag(eptr);
                     break;
             }
-        skipswitch:
+            skipswitch:
             continue;
-        }       /* End while */
+        } /* End while */
 
         return;
     }
@@ -978,16 +979,17 @@ public class ByteMark
     ** criteria.  Return 0 if ok, -1 if failure.
     ** Returns mean ans std. deviation of results if successful.
     */
-    private static
-    int bench_with_confidence(int fid,       /* Function id */
-            out double mean,                   /* Mean of scores */
-            out double stdev,                  /* Standard deviation */
-            out int numtries)                /* # of attempts */
+    private static int bench_with_confidence(
+        int fid, /* Function id */
+        out double mean, /* Mean of scores */
+        out double stdev, /* Standard deviation */
+        out int numtries
+    ) /* # of attempts */
     {
         double[] myscores = new double[5]; /* Need at least 5 scores */
-        double c_half_interval;         /* Confidence half interval */
-        int i;                          /* Index */
-        double newscore;                /* For improving confidence interval */
+        double c_half_interval; /* Confidence half interval */
+        int i; /* Index */
+        double newscore; /* For improving confidence interval */
 
         /*
         ** Get first 5 scores.  Then begin confidence testing.
@@ -996,7 +998,7 @@ public class ByteMark
         {
             myscores[i] = s_tests[fid].Run();
         }
-        numtries = 5;            /* Show 5 attempts */
+        numtries = 5; /* Show 5 attempts */
 
         /*
         ** The system allows a maximum of 10 tries before it gives
@@ -1011,10 +1013,7 @@ public class ByteMark
             /*
             ** Calculate confidence.
             */
-            calc_confidence(myscores,
-                    out c_half_interval,
-                    out mean,
-                    out stdev);
+            calc_confidence(myscores, out c_half_interval, out mean, out stdev);
 
             /*
             ** Is half interval 5% or less of mean?
@@ -1034,8 +1033,10 @@ public class ByteMark
                     return (-1);
                 newscore = s_tests[fid].Run();
                 numtries += 1;
-            } while (seek_confidence(myscores, ref newscore,
-                    out c_half_interval, out mean, out stdev) == 0);
+            } while (
+                seek_confidence(myscores, ref newscore, out c_half_interval, out mean, out stdev)
+                == 0
+            );
         }
 
         return (0);
@@ -1053,16 +1054,18 @@ public class ByteMark
     ** Return -1 if success.  Also returns new half-interval,
     ** mean, and stand. dev.
     */
-    private static int seek_confidence(double[] scores,
-                    ref double newscore,
-                    out double c_half_interval,
-                    out double smean,
-                    out double sdev)
+    private static int seek_confidence(
+        double[] scores,
+        ref double newscore,
+        out double c_half_interval,
+        out double smean,
+        out double sdev
+    )
     {
-        double sdev_to_beat;    /* Original sdev to be beaten */
-        double temp;            /* For doing a swap */
-        int is_beaten;          /* Indicates original was beaten */
-        int i;                  /* Index */
+        double sdev_to_beat; /* Original sdev to be beaten */
+        double temp; /* For doing a swap */
+        int is_beaten; /* Indicates original was beaten */
+        int i; /* Index */
 
         /*
         ** First calculate original standard deviation
@@ -1105,17 +1108,18 @@ public class ByteMark
     ** NOTE: This routines presumes a confidence of 95% and
     ** a confidence coefficient of .95
     */
-    private static void calc_confidence(double[] scores,    /* Array of scores */
-                    out double c_half_interval, /* Confidence half-int */
-                    out double smean,           /* Standard mean */
-                    out double sdev)            /* Sample stand dev */
+    private static void calc_confidence(
+        double[] scores, /* Array of scores */
+        out double c_half_interval, /* Confidence half-int */
+        out double smean, /* Standard mean */
+        out double sdev
+    ) /* Sample stand dev */
     {
-        int i;          /* Index */
+        int i; /* Index */
         /*
         ** First calculate mean.
         */
-        smean = (scores[0] + scores[1] + scores[2] + scores[3] + scores[4]) /
-                (double)5.0;
+        smean = (scores[0] + scores[1] + scores[2] + scores[3] + scores[4]) / (double)5.0;
 
         /*
         ** Get standard deviation - first get variance
@@ -1214,10 +1218,11 @@ public class ByteMark
     */
     public static int abs_randwc(int num)
     {
-        int temp;       /* Temporary storage */
+        int temp; /* Temporary storage */
 
         temp = randwc(num);
-        if (temp < 0) temp = 0 - temp;
+        if (temp < 0)
+            temp = 0 - temp;
 
         return temp;
     }
@@ -1235,8 +1240,10 @@ public class ByteMark
         int interm;
 
         if (lngval != 0L)
-        { s_randw[0] = 13; s_randw[1] = 117; }
-
+        {
+            s_randw[0] = 13;
+            s_randw[1] = 117;
+        }
         unchecked
         {
             interm = (s_randw[0] * 254754 + s_randw[1] * 529562) % 999563;

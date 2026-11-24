@@ -56,16 +56,16 @@ public class ValueGeneratorCache : IValueGeneratorCache
             _typeBase = typeBase.Name;
         }
 
-        public bool Equals(CacheKey other)
-            => (_property!.Equals(other._property, StringComparison.Ordinal)
-                    && _typeBase!.Equals(other._typeBase, StringComparison.Ordinal)
-                    && _modelId.Equals(other._modelId));
+        public bool Equals(CacheKey other) =>
+            (
+                _property!.Equals(other._property, StringComparison.Ordinal)
+                && _typeBase!.Equals(other._typeBase, StringComparison.Ordinal)
+                && _modelId.Equals(other._modelId)
+            );
 
-        public override bool Equals(object? obj)
-            => obj is CacheKey cacheKey && Equals(cacheKey);
+        public override bool Equals(object? obj) => obj is CacheKey cacheKey && Equals(cacheKey);
 
-        public override int GetHashCode()
-            => HashCode.Combine(_property!, _typeBase!, _modelId);
+        public override int GetHashCode() => HashCode.Combine(_property!, _typeBase!, _modelId);
     }
 
     /// <summary>
@@ -82,7 +82,11 @@ public class ValueGeneratorCache : IValueGeneratorCache
     public virtual ValueGenerator GetOrAdd(
         IProperty property,
         ITypeBase typeBase,
-        Func<IProperty, ITypeBase, ValueGenerator> factory)
-        => _cache.GetOrAdd(
-                new CacheKey(property, typeBase), static (ck, p) => p.factory(p.property, p.typeBase), (factory, typeBase, property));
+        Func<IProperty, ITypeBase, ValueGenerator> factory
+    ) =>
+        _cache.GetOrAdd(
+            new CacheKey(property, typeBase),
+            static (ck, p) => p.factory(p.property, p.typeBase),
+            (factory, typeBase, property)
+        );
 }

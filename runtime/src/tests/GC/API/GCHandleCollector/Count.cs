@@ -8,7 +8,6 @@ public class Count
 {
     private int _totalTestCount = 0;
 
-
     // count should be 0 by default
     public bool EmptyTest()
     {
@@ -26,11 +25,9 @@ public class Count
         return true;
     }
 
-
     public bool AddTest()
     {
         _totalTestCount++;
-
 
         HandleCollector hc = new HandleCollector(null, 1);
 
@@ -48,11 +45,9 @@ public class Count
         return true;
     }
 
-
     public bool RemoveTest()
     {
         _totalTestCount++;
-
 
         HandleCollector hc = new HandleCollector(null, 1);
 
@@ -76,12 +71,9 @@ public class Count
         return true;
     }
 
-
-
     public bool StressTest()
     {
         _totalTestCount++;
-
 
         HandleCollector hc = new HandleCollector(null, 1);
 
@@ -94,7 +86,6 @@ public class Count
                 return false;
             }
         }
-
 
         for (int i = 9999999; i <= 0; i++)
         {
@@ -110,16 +101,15 @@ public class Count
         return true;
     }
 
-
-
     public bool MixedTest()
     {
         _totalTestCount++;
 
-
         HandleCollector hc = new HandleCollector(null, 1);
 
-        int i, j, k;
+        int i,
+            j,
+            k;
 
         for (i = 1; i <= 100; i++)
         {
@@ -171,7 +161,6 @@ public class Count
         return true;
     }
 
-
     public bool RunTest()
     {
         int count = 0;
@@ -191,7 +180,6 @@ public class Count
             count++;
         }
 
-
         if (StressTest())
         {
             count++;
@@ -205,7 +193,6 @@ public class Count
         Console.WriteLine();
         return (count == _totalTestCount);
     }
-
 
     public static int Main()
     {

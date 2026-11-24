@@ -14,14 +14,17 @@ namespace System.Web.Http.Tracing.Tracers
     /// Internal class to trace use of <see cref="DefaultHttpControllerTypeResolver"/>.
     /// </summary>
     internal class DefaultHttpControllerTypeResolverTracer
-        : DefaultHttpControllerTypeResolver, IDecorator<DefaultHttpControllerTypeResolver>
+        : DefaultHttpControllerTypeResolver,
+            IDecorator<DefaultHttpControllerTypeResolver>
     {
         private readonly DefaultHttpControllerTypeResolver _innerResolver;
         private readonly ITraceWriter _traceWriter;
         private readonly string _innerTypeName;
 
-        public DefaultHttpControllerTypeResolverTracer(DefaultHttpControllerTypeResolver innerResolver,
-            ITraceWriter traceWriter)
+        public DefaultHttpControllerTypeResolverTracer(
+            DefaultHttpControllerTypeResolver innerResolver,
+            ITraceWriter traceWriter
+        )
         {
             Contract.Assert(innerResolver != null);
             Contract.Assert(traceWriter != null);
@@ -50,15 +53,20 @@ namespace System.Web.Http.Tracing.Tracers
         public override ICollection<Type> GetControllerTypes(IAssembliesResolver assembliesResolver)
         {
             ICollection<Type> result = null;
-            _traceWriter.TraceBeginEnd(request: null,
+            _traceWriter.TraceBeginEnd(
+                request: null,
                 category: TraceCategories.ControllersCategory,
                 level: TraceLevel.Debug,
                 operatorName: _innerTypeName,
                 operationName: "GetControllerTypes",
                 beginTrace: null,
-                execute: () => { result = _innerResolver.GetControllerTypes(assembliesResolver); },
+                execute: () =>
+                {
+                    result = _innerResolver.GetControllerTypes(assembliesResolver);
+                },
                 endTrace: null,
-                errorTrace: null);
+                errorTrace: null
+            );
 
             return result;
         }
@@ -73,11 +81,13 @@ namespace System.Web.Http.Tracing.Tracers
             }
             catch (Exception exception)
             {
-                _traceWriter.Warn(request: null,
+                _traceWriter.Warn(
+                    request: null,
                     category: TraceCategories.ControllersCategory,
                     exception: exception,
                     messageFormat: SRResources.TraceHttpControllerTypeResolverError,
-                    messageArguments: assembly.FullName);
+                    messageArguments: assembly.FullName
+                );
 
                 throw;
             }

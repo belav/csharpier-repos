@@ -22,67 +22,226 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestIsAssignable2()
         {
-            VerifyIsAssignableFrom("ListArray", typeof(IList<object>).Project().GetTypeInfo(), typeof(object[]).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("ArrayList", typeof(object[]).Project().GetTypeInfo(), typeof(IList<object>).Project().GetTypeInfo(), false);
+            VerifyIsAssignableFrom(
+                "ListArray",
+                typeof(IList<object>).Project().GetTypeInfo(),
+                typeof(object[]).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "ArrayList",
+                typeof(object[]).Project().GetTypeInfo(),
+                typeof(IList<object>).Project().GetTypeInfo(),
+                false
+            );
 
-            VerifyIsAssignableFrom("B&D", typeof(B).Project().GetTypeInfo(), typeof(D).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("B[]&D[]", typeof(B[]).Project().GetTypeInfo(), typeof(D[]).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("IList<object>&B[]", typeof(IList<object>).Project().GetTypeInfo(), typeof(B[]).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("IList<B>*B[]", typeof(IList<B>).Project().GetTypeInfo(), typeof(B[]).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("IList<B>&D[]", typeof(IList<B>).Project().GetTypeInfo(), typeof(D[]).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("IList<D> & D[]", typeof(IList<D>).Project().GetTypeInfo(), typeof(D[]).Project().GetTypeInfo(), true);
+            VerifyIsAssignableFrom(
+                "B&D",
+                typeof(B).Project().GetTypeInfo(),
+                typeof(D).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "B[]&D[]",
+                typeof(B[]).Project().GetTypeInfo(),
+                typeof(D[]).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "IList<object>&B[]",
+                typeof(IList<object>).Project().GetTypeInfo(),
+                typeof(B[]).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "IList<B>*B[]",
+                typeof(IList<B>).Project().GetTypeInfo(),
+                typeof(B[]).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "IList<B>&D[]",
+                typeof(IList<B>).Project().GetTypeInfo(),
+                typeof(D[]).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "IList<D> & D[]",
+                typeof(IList<D>).Project().GetTypeInfo(),
+                typeof(D[]).Project().GetTypeInfo(),
+                true
+            );
         }
 
         // Verify IsAssignableFrom for String and Objects
         [Fact]
         public static void TestIsAssignable3()
         {
-            VerifyIsAssignableFrom("I<object>&G2<object>", typeof(I<object>).Project().GetTypeInfo(), typeof(G2<object>).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("G<string>&G2<string>", typeof(G<string>).Project().GetTypeInfo(), typeof(G2<string>).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("G<string>&G<string>", typeof(G<string>).Project().GetTypeInfo(), typeof(G<string>).Project().GetTypeInfo(), true);
+            VerifyIsAssignableFrom(
+                "I<object>&G2<object>",
+                typeof(I<object>).Project().GetTypeInfo(),
+                typeof(G2<object>).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "G<string>&G2<string>",
+                typeof(G<string>).Project().GetTypeInfo(),
+                typeof(G2<string>).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "G<string>&G<string>",
+                typeof(G<string>).Project().GetTypeInfo(),
+                typeof(G<string>).Project().GetTypeInfo(),
+                true
+            );
 
-            VerifyIsAssignableFrom("G<string>&G<object>", typeof(G<string>).Project().GetTypeInfo(), typeof(G<object>).Project().GetTypeInfo(), false);
-            VerifyIsAssignableFrom("G<object>&G<string>", typeof(G<object>).Project().GetTypeInfo(), typeof(G<string>).Project().GetTypeInfo(), false);
-            VerifyIsAssignableFrom("G2<object>&G<object>", typeof(G2<object>).Project().GetTypeInfo(), typeof(G<object>).Project().GetTypeInfo(), false);
-            VerifyIsAssignableFrom("G<string>&I<string>", typeof(G<string>).Project().GetTypeInfo(), typeof(I<string>).Project().GetTypeInfo(), false);
+            VerifyIsAssignableFrom(
+                "G<string>&G<object>",
+                typeof(G<string>).Project().GetTypeInfo(),
+                typeof(G<object>).Project().GetTypeInfo(),
+                false
+            );
+            VerifyIsAssignableFrom(
+                "G<object>&G<string>",
+                typeof(G<object>).Project().GetTypeInfo(),
+                typeof(G<string>).Project().GetTypeInfo(),
+                false
+            );
+            VerifyIsAssignableFrom(
+                "G2<object>&G<object>",
+                typeof(G2<object>).Project().GetTypeInfo(),
+                typeof(G<object>).Project().GetTypeInfo(),
+                false
+            );
+            VerifyIsAssignableFrom(
+                "G<string>&I<string>",
+                typeof(G<string>).Project().GetTypeInfo(),
+                typeof(I<string>).Project().GetTypeInfo(),
+                false
+            );
         }
 
         // Verify IsAssignableFrom for Interfaces
         [Fact]
         public static void TestIsAssignable4()
         {
-            VerifyIsAssignableFrom("I2 I2", typeof(I2).Project().GetTypeInfo(), typeof(I2).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("I2 B", typeof(I2).Project().GetTypeInfo(), typeof(B).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("I2 D", typeof(I2).Project().GetTypeInfo(), typeof(D).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("I2 Gen<>", typeof(I2).Project().GetTypeInfo(), typeof(Gen<>).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("I2 Gen<string>", typeof(I2).Project().GetTypeInfo(), typeof(Gen<string>).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("D I1", typeof(D).Project().GetTypeInfo(), typeof(I1).Project().GetTypeInfo(), false);
+            VerifyIsAssignableFrom(
+                "I2 I2",
+                typeof(I2).Project().GetTypeInfo(),
+                typeof(I2).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "I2 B",
+                typeof(I2).Project().GetTypeInfo(),
+                typeof(B).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "I2 D",
+                typeof(I2).Project().GetTypeInfo(),
+                typeof(D).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "I2 Gen<>",
+                typeof(I2).Project().GetTypeInfo(),
+                typeof(Gen<>).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "I2 Gen<string>",
+                typeof(I2).Project().GetTypeInfo(),
+                typeof(Gen<string>).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "D I1",
+                typeof(D).Project().GetTypeInfo(),
+                typeof(I1).Project().GetTypeInfo(),
+                false
+            );
         }
 
         // Verify IsAssignableFrom for namespaces
         [Fact]
         public static void TestIsAssignable5()
         {
-            VerifyIsAssignableFrom("Case500.A Case500.B", typeof(Case500.A).Project().GetTypeInfo(), typeof(Case500.B).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("Case500.A Case500.C", typeof(Case500.A).Project().GetTypeInfo(), typeof(Case500.C).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("Case500.B Case500.C", typeof(Case500.B).Project().GetTypeInfo(), typeof(Case500.C).Project().GetTypeInfo(), true);
+            VerifyIsAssignableFrom(
+                "Case500.A Case500.B",
+                typeof(Case500.A).Project().GetTypeInfo(),
+                typeof(Case500.B).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "Case500.A Case500.C",
+                typeof(Case500.A).Project().GetTypeInfo(),
+                typeof(Case500.C).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "Case500.B Case500.C",
+                typeof(Case500.B).Project().GetTypeInfo(),
+                typeof(Case500.C).Project().GetTypeInfo(),
+                true
+            );
         }
-
 
         // Verify IsAssignableFrom
         // a T[] is assignable to IList<U> iff T[] is assignable to U[]
         [Fact]
         public static void TestIsAssignable6()
         {
-            VerifyIsAssignableFrom("I1[] S[]", typeof(I1[]).Project().GetTypeInfo(), typeof(S[]).Project().GetTypeInfo(), false);
-            VerifyIsAssignableFrom("I1[] D[]", typeof(I1[]).Project().GetTypeInfo(), typeof(D[]).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("IList<I1> S[]", typeof(IList<I1>).Project().GetTypeInfo(), typeof(S[]).Project().GetTypeInfo(), false);
-            VerifyIsAssignableFrom("IList<I1> D[]", typeof(IList<I1>).Project().GetTypeInfo(), typeof(D[]).Project().GetTypeInfo(), true);
+            VerifyIsAssignableFrom(
+                "I1[] S[]",
+                typeof(I1[]).Project().GetTypeInfo(),
+                typeof(S[]).Project().GetTypeInfo(),
+                false
+            );
+            VerifyIsAssignableFrom(
+                "I1[] D[]",
+                typeof(I1[]).Project().GetTypeInfo(),
+                typeof(D[]).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "IList<I1> S[]",
+                typeof(IList<I1>).Project().GetTypeInfo(),
+                typeof(S[]).Project().GetTypeInfo(),
+                false
+            );
+            VerifyIsAssignableFrom(
+                "IList<I1> D[]",
+                typeof(IList<I1>).Project().GetTypeInfo(),
+                typeof(D[]).Project().GetTypeInfo(),
+                true
+            );
 
-            VerifyIsAssignableFrom("int[] uint[]", typeof(int[]).Project().GetTypeInfo(), typeof(uint[]).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("uint[] int[]", typeof(uint[]).Project().GetTypeInfo(), typeof(int[]).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("IList<int> uint[]", typeof(IList<int>).Project().GetTypeInfo(), typeof(uint[]).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("IList<uint> int[]", typeof(IList<uint>).Project().GetTypeInfo(), typeof(int[]).Project().GetTypeInfo(), true);
+            VerifyIsAssignableFrom(
+                "int[] uint[]",
+                typeof(int[]).Project().GetTypeInfo(),
+                typeof(uint[]).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "uint[] int[]",
+                typeof(uint[]).Project().GetTypeInfo(),
+                typeof(int[]).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "IList<int> uint[]",
+                typeof(IList<int>).Project().GetTypeInfo(),
+                typeof(uint[]).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "IList<uint> int[]",
+                typeof(IList<uint>).Project().GetTypeInfo(),
+                typeof(int[]).Project().GetTypeInfo(),
+                true
+            );
         }
 
         // Assignability from generic type parameters.
@@ -93,17 +252,31 @@ namespace System.Reflection.Tests
             VerifyIsAssignableFrom("I1 T", typeof(I1).Project().GetTypeInfo(), theT, true);
             VerifyIsAssignableFrom("I2 T", typeof(I2).Project().GetTypeInfo(), theT, true);
             VerifyIsAssignableFrom("object T", typeof(object).Project().GetTypeInfo(), theT, true);
-            VerifyIsAssignableFrom("Gen<T> T", typeof(Gen<>).Project().MakeGenericType(theT.AsType()).GetTypeInfo(), theT, true);
+            VerifyIsAssignableFrom(
+                "Gen<T> T",
+                typeof(Gen<>).Project().MakeGenericType(theT.AsType()).GetTypeInfo(),
+                theT,
+                true
+            );
             VerifyIsAssignableFrom("String T", typeof(string).Project().GetTypeInfo(), theT, false);
 
             TypeInfo theTWithStructConstraint = typeof(Gen4<>).Project().Gp(0);
-            VerifyIsAssignableFrom("object T", typeof(object).Project().GetTypeInfo(), theTWithStructConstraint, true);
-            VerifyIsAssignableFrom("ValueType T", typeof(ValueType).Project().GetTypeInfo(), theTWithStructConstraint, true);
+            VerifyIsAssignableFrom(
+                "object T",
+                typeof(object).Project().GetTypeInfo(),
+                theTWithStructConstraint,
+                true
+            );
+            VerifyIsAssignableFrom(
+                "ValueType T",
+                typeof(ValueType).Project().GetTypeInfo(),
+                theTWithStructConstraint,
+                true
+            );
 
             TypeInfo theTThatDerivesFromU = typeof(Gen5<,>).Project().Gp(0);
             TypeInfo theU = typeof(Gen5<,>).Project().Gp(1);
             VerifyIsAssignableFrom("U T", theU, theTThatDerivesFromU, true);
-
         }
 
         // Variant assignability for arrays and byrefs.
@@ -126,19 +299,68 @@ namespace System.Reflection.Tests
             GC.KeepAlive(typeof(string[,]).Project());
             GC.KeepAlive(typeof(I1[,]).Project());
 
-            VerifyElementedTypeIsAssignableFrom("int[] int[]", typeof(int).Project(), typeof(int).Project(), true);
-            VerifyElementedTypeIsAssignableFrom("object[] string[]", typeof(object).Project(), typeof(string).Project(), true);
-            VerifyElementedTypeIsAssignableFrom("string[] object[]", typeof(string).Project(), typeof(object).Project(), false);
-            VerifyElementedTypeIsAssignableFrom("int[] Eint[]", typeof(int).Project(), typeof(Eint).Project(), true);
-            VerifyElementedTypeIsAssignableFrom("int[] Euint[]", typeof(int).Project(), typeof(Euint).Project(), true);
-            VerifyElementedTypeIsAssignableFrom("Eint[] Euint[]", typeof(Eint).Project(), typeof(Euint).Project(), true);
+            VerifyElementedTypeIsAssignableFrom(
+                "int[] int[]",
+                typeof(int).Project(),
+                typeof(int).Project(),
+                true
+            );
+            VerifyElementedTypeIsAssignableFrom(
+                "object[] string[]",
+                typeof(object).Project(),
+                typeof(string).Project(),
+                true
+            );
+            VerifyElementedTypeIsAssignableFrom(
+                "string[] object[]",
+                typeof(string).Project(),
+                typeof(object).Project(),
+                false
+            );
+            VerifyElementedTypeIsAssignableFrom(
+                "int[] Eint[]",
+                typeof(int).Project(),
+                typeof(Eint).Project(),
+                true
+            );
+            VerifyElementedTypeIsAssignableFrom(
+                "int[] Euint[]",
+                typeof(int).Project(),
+                typeof(Euint).Project(),
+                true
+            );
+            VerifyElementedTypeIsAssignableFrom(
+                "Eint[] Euint[]",
+                typeof(Eint).Project(),
+                typeof(Euint).Project(),
+                true
+            );
 
-            VerifyElementedTypeIsAssignableFrom("I1[] T[]", typeof(I1).Project(), typeof(Gen3<>).Project().Gp(0).AsType(), true);
+            VerifyElementedTypeIsAssignableFrom(
+                "I1[] T[]",
+                typeof(I1).Project(),
+                typeof(Gen3<>).Project().Gp(0).AsType(),
+                true
+            );
 
-
-            VerifyElementedTypeIsAssignableFrom("int[] short[]", typeof(int).Project(), typeof(short).Project(), false);
-            VerifyElementedTypeIsAssignableFrom("byte[] bool[]", typeof(byte).Project(), typeof(bool).Project(), false);
-            VerifyElementedTypeIsAssignableFrom("ushort[] char[]", typeof(ushort).Project(), typeof(char).Project(), false);
+            VerifyElementedTypeIsAssignableFrom(
+                "int[] short[]",
+                typeof(int).Project(),
+                typeof(short).Project(),
+                false
+            );
+            VerifyElementedTypeIsAssignableFrom(
+                "byte[] bool[]",
+                typeof(byte).Project(),
+                typeof(bool).Project(),
+                false
+            );
+            VerifyElementedTypeIsAssignableFrom(
+                "ushort[] char[]",
+                typeof(ushort).Project(),
+                typeof(char).Project(),
+                false
+            );
         }
 
         // SzArrays vs. rank 1 mdarrays: T[*] can be assigned from T[], but not vice-versa.
@@ -161,11 +383,31 @@ namespace System.Reflection.Tests
         {
             TypeInfo theT = typeof(Gen4<>).Project().Gp(0);
 
-            VerifyIsAssignableFrom("int? int", typeof(int?).Project().GetTypeInfo(), typeof(int).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("T? T", typeof(Nullable<>).Project().MakeGenericType(theT.AsType()).GetTypeInfo(), theT, false);
+            VerifyIsAssignableFrom(
+                "int? int",
+                typeof(int?).Project().GetTypeInfo(),
+                typeof(int).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "T? T",
+                typeof(Nullable<>).Project().MakeGenericType(theT.AsType()).GetTypeInfo(),
+                theT,
+                false
+            );
 
-            VerifyIsAssignableFrom("int int?", typeof(int).Project().GetTypeInfo(), typeof(int?).GetTypeInfo(), false);
-            VerifyIsAssignableFrom("T T?", theT, typeof(Nullable<>).Project().MakeGenericType(theT.AsType()).GetTypeInfo(), false);
+            VerifyIsAssignableFrom(
+                "int int?",
+                typeof(int).Project().GetTypeInfo(),
+                typeof(int?).GetTypeInfo(),
+                false
+            );
+            VerifyIsAssignableFrom(
+                "T T?",
+                theT,
+                typeof(Nullable<>).Project().MakeGenericType(theT.AsType()).GetTypeInfo(),
+                false
+            );
         }
 
         [Fact]
@@ -176,7 +418,12 @@ namespace System.Reflection.Tests
             //
             // Nevertheless, this returns "true" under the "X is always assignable to X" rule.
             //
-            VerifyIsAssignableFrom("GBase<> GBase<>", typeof(GBase<>).Project().GetTypeInfo(), typeof(GBase<>).Project().GetTypeInfo(), true);
+            VerifyIsAssignableFrom(
+                "GBase<> GBase<>",
+                typeof(GBase<>).Project().GetTypeInfo(),
+                typeof(GBase<>).Project().GetTypeInfo(),
+                true
+            );
 
             //
             // The fact that this returns "false" often surprises people. But it is the correct result under both .NET Native and the desktop. But they get there
@@ -189,51 +436,144 @@ namespace System.Reflection.Tests
             // (that is, the "T" in GBase<T>) However, "false" is still the appropriate answer since GDerived<T> derives from GBase closed over
             // GDerived's T, not GBase's T.
             //
-            VerifyIsAssignableFrom("GBase<> GDerived<>", typeof(GBase<>).Project().GetTypeInfo(), typeof(GDerived<>).Project().GetTypeInfo(), false);
+            VerifyIsAssignableFrom(
+                "GBase<> GDerived<>",
+                typeof(GBase<>).Project().GetTypeInfo(),
+                typeof(GDerived<>).Project().GetTypeInfo(),
+                false
+            );
 
             //
             // This test now corrects the "flaw" in the prior test. We close GBase over GDerived's "T" and ask if GDerived<> derives from that.
             //
-            VerifyIsAssignableFrom("GBase<T> GDerived<>", typeof(GBase<>).Project().MakeGenericType(typeof(GDerived<>).Project().Gp(0).AsType()).GetTypeInfo(), typeof(GDerived<>).Project().GetTypeInfo(), true);
+            VerifyIsAssignableFrom(
+                "GBase<T> GDerived<>",
+                typeof(GBase<>)
+                    .Project()
+                    .MakeGenericType(typeof(GDerived<>).Project().Gp(0).AsType())
+                    .GetTypeInfo(),
+                typeof(GDerived<>).Project().GetTypeInfo(),
+                true
+            );
         }
 
         // Contravariance
         [Fact]
         public static void TestIsAssignable12()
         {
-            VerifyIsAssignableFrom("IContravariant<string> IContravariance<object>", typeof(IContraVariant<string>).Project().GetTypeInfo(), typeof(IContraVariant<object>).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("IContravariant<int[]> IContravariance<uint[]>", typeof(IContraVariant<int[]>).Project().GetTypeInfo(), typeof(IContraVariant<uint[]>).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("IContravariant<int> IContravariance<uint>", typeof(IContraVariant<int>).Project().GetTypeInfo(), typeof(IContraVariant<uint>).Project().GetTypeInfo(), false);
-            VerifyIsAssignableFrom("IContravariant<int> IContravariance<int?>", typeof(IContraVariant<int>).Project().GetTypeInfo(), typeof(IContraVariant<int?>).Project().GetTypeInfo(), false);
+            VerifyIsAssignableFrom(
+                "IContravariant<string> IContravariance<object>",
+                typeof(IContraVariant<string>).Project().GetTypeInfo(),
+                typeof(IContraVariant<object>).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "IContravariant<int[]> IContravariance<uint[]>",
+                typeof(IContraVariant<int[]>).Project().GetTypeInfo(),
+                typeof(IContraVariant<uint[]>).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "IContravariant<int> IContravariance<uint>",
+                typeof(IContraVariant<int>).Project().GetTypeInfo(),
+                typeof(IContraVariant<uint>).Project().GetTypeInfo(),
+                false
+            );
+            VerifyIsAssignableFrom(
+                "IContravariant<int> IContravariance<int?>",
+                typeof(IContraVariant<int>).Project().GetTypeInfo(),
+                typeof(IContraVariant<int?>).Project().GetTypeInfo(),
+                false
+            );
 
             Type theT = typeof(G5<,>).Project().Gp(0).AsType();
             Type theU = typeof(G5<,>).Project().Gp(1).AsType();
 
             // Variance checks do check castability between generic type parameters but only if it can be proven that the type parameter never binds to a valuetype.
             // (either the type parameter has a "class" constraint (not one "inherited" from an ancestor), or has a non-interface, non-valuetype constraint.)
-            VerifyIsAssignableFrom("IContravariant<T> IContravariance<object>", typeof(IContraVariant<>).Project().MakeGenericType(theT).GetTypeInfo(), typeof(IContraVariant<object>).Project().GetTypeInfo(), false);
-            VerifyIsAssignableFrom("IContravariant<U> IContravariance<object>", typeof(IContraVariant<>).Project().MakeGenericType(theU).GetTypeInfo(), typeof(IContraVariant<object>).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("IContravariant<T> IContravariance<I1>", typeof(IContraVariant<>).Project().MakeGenericType(theT).GetTypeInfo(), typeof(IContraVariant<I1>).Project().GetTypeInfo(), false);
-            VerifyIsAssignableFrom("IContravariant<U> IContravariance<I1>", typeof(IContraVariant<>).Project().MakeGenericType(theU).GetTypeInfo(), typeof(IContraVariant<I1>).Project().GetTypeInfo(), true);
+            VerifyIsAssignableFrom(
+                "IContravariant<T> IContravariance<object>",
+                typeof(IContraVariant<>).Project().MakeGenericType(theT).GetTypeInfo(),
+                typeof(IContraVariant<object>).Project().GetTypeInfo(),
+                false
+            );
+            VerifyIsAssignableFrom(
+                "IContravariant<U> IContravariance<object>",
+                typeof(IContraVariant<>).Project().MakeGenericType(theU).GetTypeInfo(),
+                typeof(IContraVariant<object>).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "IContravariant<T> IContravariance<I1>",
+                typeof(IContraVariant<>).Project().MakeGenericType(theT).GetTypeInfo(),
+                typeof(IContraVariant<I1>).Project().GetTypeInfo(),
+                false
+            );
+            VerifyIsAssignableFrom(
+                "IContravariant<U> IContravariance<I1>",
+                typeof(IContraVariant<>).Project().MakeGenericType(theU).GetTypeInfo(),
+                typeof(IContraVariant<I1>).Project().GetTypeInfo(),
+                true
+            );
         }
 
         [Fact]
         public static void TestIsAssignable13()
         {
-            VerifyIsAssignableFrom("ICoVariant<object> ICoVariant<string>", typeof(ICoVariant<object>).Project().GetTypeInfo(), typeof(ICoVariant<string>).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("ICoVariant<uint[]> ICoVariant<int[]>", typeof(ICoVariant<uint[]>).Project().GetTypeInfo(), typeof(ICoVariant<int[]>).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("ICoVariant<uint> ICoVariant<int>", typeof(ICoVariant<uint>).Project().GetTypeInfo(), typeof(ICoVariant<int>).Project().GetTypeInfo(), false);
-            VerifyIsAssignableFrom("ICoVariant<int?> ICoVariant<int>", typeof(ICoVariant<int?>).Project().GetTypeInfo(), typeof(ICoVariant<int>).Project().GetTypeInfo(), false);
+            VerifyIsAssignableFrom(
+                "ICoVariant<object> ICoVariant<string>",
+                typeof(ICoVariant<object>).Project().GetTypeInfo(),
+                typeof(ICoVariant<string>).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "ICoVariant<uint[]> ICoVariant<int[]>",
+                typeof(ICoVariant<uint[]>).Project().GetTypeInfo(),
+                typeof(ICoVariant<int[]>).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "ICoVariant<uint> ICoVariant<int>",
+                typeof(ICoVariant<uint>).Project().GetTypeInfo(),
+                typeof(ICoVariant<int>).Project().GetTypeInfo(),
+                false
+            );
+            VerifyIsAssignableFrom(
+                "ICoVariant<int?> ICoVariant<int>",
+                typeof(ICoVariant<int?>).Project().GetTypeInfo(),
+                typeof(ICoVariant<int>).Project().GetTypeInfo(),
+                false
+            );
 
             Type theT = typeof(G5<,>).Project().Gp(0).AsType();
             Type theU = typeof(G5<,>).Project().Gp(1).AsType();
 
             // Variance checks do check castability between generic type parameters but only if it can be proven that the type parameter never binds to a valuetype.
             // (either the type parameter has a "class" constraint (not one "inherited" from an ancestor), or has a non-interface, non-valuetype constraint.)
-            VerifyIsAssignableFrom("ICoVariant<object> ICoVariant<T>", typeof(ICoVariant<object>).Project().GetTypeInfo(), typeof(ICoVariant<>).Project().MakeGenericType(theT).GetTypeInfo(), false);
-            VerifyIsAssignableFrom("ICoVariant<object> ICoVariant<U>", typeof(ICoVariant<object>).Project().GetTypeInfo(), typeof(ICoVariant<>).Project().MakeGenericType(theU).GetTypeInfo(), true);
-            VerifyIsAssignableFrom("ICoVariant<I1> ICoVariant<T>", typeof(ICoVariant<I1>).Project().GetTypeInfo(), typeof(ICoVariant<>).Project().MakeGenericType(theT).GetTypeInfo(), false);
-            VerifyIsAssignableFrom("ICoVariant<I1> ICoVariant<U>", typeof(ICoVariant<I1>).Project().GetTypeInfo(), typeof(ICoVariant<>).Project().MakeGenericType(theU).GetTypeInfo(), true);
+            VerifyIsAssignableFrom(
+                "ICoVariant<object> ICoVariant<T>",
+                typeof(ICoVariant<object>).Project().GetTypeInfo(),
+                typeof(ICoVariant<>).Project().MakeGenericType(theT).GetTypeInfo(),
+                false
+            );
+            VerifyIsAssignableFrom(
+                "ICoVariant<object> ICoVariant<U>",
+                typeof(ICoVariant<object>).Project().GetTypeInfo(),
+                typeof(ICoVariant<>).Project().MakeGenericType(theU).GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "ICoVariant<I1> ICoVariant<T>",
+                typeof(ICoVariant<I1>).Project().GetTypeInfo(),
+                typeof(ICoVariant<>).Project().MakeGenericType(theT).GetTypeInfo(),
+                false
+            );
+            VerifyIsAssignableFrom(
+                "ICoVariant<I1> ICoVariant<U>",
+                typeof(ICoVariant<I1>).Project().GetTypeInfo(),
+                typeof(ICoVariant<>).Project().MakeGenericType(theU).GetTypeInfo(),
+                true
+            );
         }
 
         // Interfaces are castable to System.Object
@@ -242,12 +582,27 @@ namespace System.Reflection.Tests
         {
             Type theT = typeof(Gen4<>).Project().Gp(0).AsType();
 
-            VerifyIsAssignableFrom("object I1", typeof(object).Project().GetTypeInfo(), typeof(I1).Project().GetTypeInfo(), true);
-            VerifyIsAssignableFrom("object ICoVariant<T>", typeof(object).Project().GetTypeInfo(), typeof(ICoVariant<>).Project().MakeGenericType(theT).GetTypeInfo(), true);
-
+            VerifyIsAssignableFrom(
+                "object I1",
+                typeof(object).Project().GetTypeInfo(),
+                typeof(I1).Project().GetTypeInfo(),
+                true
+            );
+            VerifyIsAssignableFrom(
+                "object ICoVariant<T>",
+                typeof(object).Project().GetTypeInfo(),
+                typeof(ICoVariant<>).Project().MakeGenericType(theT).GetTypeInfo(),
+                true
+            );
         }
+
         //private helper methods
-        private static void VerifyIsAssignableFrom(string TestName, TypeInfo left, TypeInfo right, bool expected)
+        private static void VerifyIsAssignableFrom(
+            string TestName,
+            TypeInfo left,
+            TypeInfo right,
+            bool expected
+        )
         {
             {
                 //Fix to initialize Reflection
@@ -258,11 +613,31 @@ namespace System.Reflection.Tests
             }
         }
 
-        private static void VerifyElementedTypeIsAssignableFrom(string TestName, Type leftElementType, Type rightElementType, bool expected)
+        private static void VerifyElementedTypeIsAssignableFrom(
+            string TestName,
+            Type leftElementType,
+            Type rightElementType,
+            bool expected
+        )
         {
-            VerifyIsAssignableFrom(TestName, leftElementType.MakeArrayType().GetTypeInfo(), rightElementType.MakeArrayType().GetTypeInfo(), expected);
-            VerifyIsAssignableFrom(TestName, leftElementType.MakeArrayType(2).GetTypeInfo(), rightElementType.MakeArrayType(2).GetTypeInfo(), expected);
-            VerifyIsAssignableFrom(TestName, leftElementType.MakeByRefType().GetTypeInfo(), rightElementType.MakeByRefType().GetTypeInfo(), expected);
+            VerifyIsAssignableFrom(
+                TestName,
+                leftElementType.MakeArrayType().GetTypeInfo(),
+                rightElementType.MakeArrayType().GetTypeInfo(),
+                expected
+            );
+            VerifyIsAssignableFrom(
+                TestName,
+                leftElementType.MakeArrayType(2).GetTypeInfo(),
+                rightElementType.MakeArrayType(2).GetTypeInfo(),
+                expected
+            );
+            VerifyIsAssignableFrom(
+                TestName,
+                leftElementType.MakeByRefType().GetTypeInfo(),
+                rightElementType.MakeByRefType().GetTypeInfo(),
+                expected
+            );
         }
 
         private static TypeInfo Gp(this Type t, int index)
@@ -273,25 +648,34 @@ namespace System.Reflection.Tests
 
     //Metadata for Reflection
     public interface I1 { }
+
     public interface I2 { }
 
     public struct S : I1 { }
 
     public class B : I1, I2 { }
+
     public class D : B { }
+
     public class Gen<T> : D { }
 
     public class I<T> { }
+
     public class G<T> : I<T> { }
+
     public class G2<T> : G<T> { }
 
-    public class Gen2<T> where T : Gen<T>, I1, I2 { }
+    public class Gen2<T>
+        where T : Gen<T>, I1, I2 { }
 
-    public class Gen3<T> where T : D { }
+    public class Gen3<T>
+        where T : D { }
 
-    public class Gen4<T> where T : struct { }
+    public class Gen4<T>
+        where T : struct { }
 
-    public class Gen5<T, U> where T : U { }
+    public class Gen5<T, U>
+        where T : U { }
 
     public class GBase<T> { }
 
@@ -300,22 +684,28 @@ namespace System.Reflection.Tests
     namespace Case500
     {
         public abstract class A { }
+
         public abstract class B : A { }
+
         public class C : B { }
     }
 
-    public class G10<T> where T : I1 { }
+    public class G10<T>
+        where T : I1 { }
 
     public enum Eint : int { }
+
     public enum Euint : uint { }
+
     public enum Eshort : short { }
+
     public enum Eushort : ushort { }
 
     public interface IContraVariant<in T> { }
+
     public interface ICoVariant<out T> { }
 
-    public class G5<T,U>
+    public class G5<T, U>
         where T : U
-        where U : class, I1
-    { }
+        where U : class, I1 { }
 }

@@ -20,32 +20,49 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void BytesToRead_Default()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying default BytesToRead");
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
                 com1.Open();
 
                 serPortProp.VerifyPropertiesAndPrint(com1);
             }
         }
 
-
         [ConditionalFact(nameof(HasNullModem))]
         public void BytesToRead_RcvRndNumBytes()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying BytesToRead after receiving a random number of bytes");
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
 
                 com1.Open();
                 com2.Open();
@@ -59,19 +76,21 @@ namespace System.IO.Ports.Tests
             }
         }
 
-
         [ConditionalFact(nameof(HasNullModem))]
         public void BytesToRead_Read_byte_int_int()
         {
-            Debug.WriteLine("Verifying BytesToRead with Read(byte[] buffer, int offset, int count)");
+            Debug.WriteLine(
+                "Verifying BytesToRead with Read(byte[] buffer, int offset, int count)"
+            );
             VerifyBytesToRead(Read_byte_int_int, DEFAULT_NUM_RND_BYTES, false);
         }
-
 
         [ConditionalFact(nameof(HasNullModem))]
         public void BytesToRead_Read_char_int_int()
         {
-            Debug.WriteLine("Verifying BytesToRead with Read(char[] buffer, int offset, int count)");
+            Debug.WriteLine(
+                "Verifying BytesToRead with Read(char[] buffer, int offset, int count)"
+            );
             VerifyBytesToRead(Read_char_int_int, DEFAULT_NUM_RND_BYTES, false);
         }
 
@@ -113,16 +132,31 @@ namespace System.IO.Ports.Tests
 
         #region Verification for Test Cases
 
-        private void VerifyBytesToRead(ReadMethodDelegate readMethod, int bufferSize, bool sendNewLine)
+        private void VerifyBytesToRead(
+            ReadMethodDelegate readMethod,
+            int bufferSize,
+            bool sendNewLine
+        )
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
                 int numNewLineBytes = 0;
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
 
                 com1.Open();
                 com2.Open();
@@ -143,42 +177,35 @@ namespace System.IO.Ports.Tests
             }
         }
 
-
         private void Read_byte_int_int(SerialPort com, int bufferSize)
         {
             com.Read(new byte[bufferSize], 0, bufferSize);
         }
-
 
         private void Read_char_int_int(SerialPort com, int bufferSize)
         {
             com.Read(new char[bufferSize], 0, bufferSize);
         }
 
-
         private void ReadByte(SerialPort com, int bufferSize)
         {
             com.ReadByte();
         }
-
 
         private void ReadChar(SerialPort com, int bufferSize)
         {
             com.ReadChar();
         }
 
-
         private void ReadLine(SerialPort com, int bufferSize)
         {
             com.ReadLine();
         }
 
-
         private void ReadTo(SerialPort com, int bufferSize)
         {
             com.ReadTo(com.NewLine);
         }
-
 
         private void ReadExisting(SerialPort com, int bufferSize)
         {

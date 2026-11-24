@@ -4,14 +4,15 @@
 
 using System;
 using System.Collections.Immutable;
-using Microsoft.CodeAnalysis.Emit;
 using Microsoft.CodeAnalysis.Contracts.EditAndContinue;
+using Microsoft.CodeAnalysis.Emit;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue
 {
     internal abstract class PendingUpdate(
         ImmutableArray<ProjectBaseline> projectBaselines,
-        ImmutableArray<ManagedHotReloadUpdate> deltas)
+        ImmutableArray<ManagedHotReloadUpdate> deltas
+    )
     {
         public readonly ImmutableArray<ProjectBaseline> ProjectBaselines = projectBaselines;
         public readonly ImmutableArray<ManagedHotReloadUpdate> Deltas = deltas;
@@ -21,9 +22,16 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         Solution solution,
         ImmutableArray<ProjectBaseline> projectBaselines,
         ImmutableArray<ManagedHotReloadUpdate> deltas,
-        ImmutableArray<(Guid ModuleId, ImmutableArray<(ManagedModuleMethodId Method, NonRemappableRegion Region)>)> nonRemappableRegions) : PendingUpdate(projectBaselines, deltas)
+        ImmutableArray<(
+            Guid ModuleId,
+            ImmutableArray<(ManagedModuleMethodId Method, NonRemappableRegion Region)>
+        )> nonRemappableRegions
+    ) : PendingUpdate(projectBaselines, deltas)
     {
         public readonly Solution Solution = solution;
-        public readonly ImmutableArray<(Guid ModuleId, ImmutableArray<(ManagedModuleMethodId Method, NonRemappableRegion Region)> Regions)> NonRemappableRegions = nonRemappableRegions;
+        public readonly ImmutableArray<(
+            Guid ModuleId,
+            ImmutableArray<(ManagedModuleMethodId Method, NonRemappableRegion Region)> Regions
+        )> NonRemappableRegions = nonRemappableRegions;
     }
 }

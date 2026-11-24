@@ -6,6 +6,7 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
     public class DESCryptoServiceProviderProvider : IDESProvider
     {
         public DES Create() => new DESCryptoServiceProvider();
+
         public bool OneShotSupported => false;
     }
 

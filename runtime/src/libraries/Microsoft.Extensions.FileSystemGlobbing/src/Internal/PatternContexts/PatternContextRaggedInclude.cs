@@ -10,9 +10,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
     public class PatternContextRaggedInclude : PatternContextRagged
     {
         public PatternContextRaggedInclude(IRaggedPattern pattern)
-            : base(pattern)
-        {
-        }
+            : base(pattern) { }
 
         public override void Declare(Action<IPathSegment, bool> onDeclare)
         {

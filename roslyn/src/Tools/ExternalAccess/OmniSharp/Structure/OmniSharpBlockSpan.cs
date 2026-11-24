@@ -45,15 +45,34 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Structure
 #pragma warning disable RS0059 // Do not add multiple public overloads with optional parameters
         public OmniSharpBlockSpan(
 #pragma warning restore RS0059 // Do not add multiple public overloads with optional parameters
-            string type, bool isCollapsible, TextSpan textSpan, string bannerText = Ellipses, bool autoCollapse = false, bool isDefaultCollapsed = false)
-            : this(type, isCollapsible, textSpan, textSpan, bannerText, autoCollapse, isDefaultCollapsed)
-        {
-        }
+            string type,
+            bool isCollapsible,
+            TextSpan textSpan,
+            string bannerText = Ellipses,
+            bool autoCollapse = false,
+            bool isDefaultCollapsed = false
+        )
+            : this(
+                type,
+                isCollapsible,
+                textSpan,
+                textSpan,
+                bannerText,
+                autoCollapse,
+                isDefaultCollapsed
+            ) { }
 
 #pragma warning disable RS0059 // Do not add multiple public overloads with optional parameters
         public OmniSharpBlockSpan(
 #pragma warning restore RS0059 // Do not add multiple public overloads with optional parameters
-            string type, bool isCollapsible, TextSpan textSpan, TextSpan hintSpan, string bannerText = Ellipses, bool autoCollapse = false, bool isDefaultCollapsed = false)
+            string type,
+            bool isCollapsible,
+            TextSpan textSpan,
+            TextSpan hintSpan,
+            string bannerText = Ellipses,
+            bool autoCollapse = false,
+            bool isDefaultCollapsed = false
+        )
         {
             TextSpan = textSpan;
             BannerText = bannerText;

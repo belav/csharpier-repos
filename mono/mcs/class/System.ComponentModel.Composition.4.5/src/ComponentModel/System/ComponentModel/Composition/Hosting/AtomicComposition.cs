@@ -18,18 +18,18 @@ namespace System.ComponentModel.Composition.Hosting
     /// rolled back when the atomicComposition is disposed, depending on the state of the
     /// CompleteOnDipose property which defaults to false.  The using(...) pattern in C# is a
     /// convenient mechanism for defining atomicComposition scopes.
-    /// 
+    ///
     /// The least obvious aspects of AtomicComposition deal with nesting.
-    /// 
+    ///
     /// Firstly, no complete actions are actually performed until the outermost atomicComposition is
     /// completed.  Completeting or rolling back nested atomicCompositions serves only to change which
     /// actions would be completed the outer atomicComposition.
-    /// 
+    ///
     /// Secondly, state is added in the form of queries associated with an object key.  The
     /// key represents a unique object the state is being held on behalf of.  The quieries are
     /// accessed throught the Query methods which provide automatic chaining to execute queries
     /// across the target atomicComposition and its inner atomicComposition as appropriate.
-    /// 
+    ///
     /// Lastly, when a nested atomicComposition is created for a given outer the outer atomicComposition is locked.
     /// It remains locked until the inner atomicComposition is disposed or completeed preventing the addition of
     /// state, actions or other inner atomicCompositions.
@@ -46,9 +46,7 @@ namespace System.ComponentModel.Composition.Hosting
         private bool _containsInnerAtomicComposition = false;
 
         public AtomicComposition()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         public AtomicComposition(AtomicComposition outerAtomicComposition)
         {
@@ -72,13 +70,13 @@ namespace System.ComponentModel.Composition.Hosting
             SetValueInternal(key, value);
         }
 
-        public bool TryGetValue<T>(object key, out T value) 
+        public bool TryGetValue<T>(object key, out T value)
         {
             return TryGetValue(key, false, out value);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
-        public bool TryGetValue<T>(object key, bool localAtomicCompositionOnly, out T value) 
+        public bool TryGetValue<T>(object key, bool localAtomicCompositionOnly, out T value)
         {
             ThrowIfDisposed();
             ThrowIfCompleted();
@@ -124,11 +122,11 @@ namespace System.ComponentModel.Composition.Hosting
             ThrowIfCompleted();
 
             if (this._outerAtomicComposition == null)
-            {   // Execute all the complete actions
+            { // Execute all the complete actions
                 FinalComplete();
             }
             else
-            {   // Copy the actions and state to the outer atomicComposition
+            { // Copy the actions and state to the outer atomicComposition
                 CopyComplete();
             }
 
@@ -212,7 +210,9 @@ namespace System.ComponentModel.Composition.Hosting
             for (var index = 0; index < this._valueCount; index++)
             {
                 this._outerAtomicComposition.SetValueInternal(
-                    this._values[index].Key, this._values[index].Value);
+                    this._values[index].Key,
+                    this._values[index].Value
+                );
             }
         }
 
@@ -228,7 +228,11 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        private bool TryGetValueInternal<T>(object key, bool localAtomicCompositionOnly, out T value) 
+        private bool TryGetValueInternal<T>(
+            object key,
+            bool localAtomicCompositionOnly,
+            out T value
+        )
         {
             for (var index = 0; index < this._valueCount; index++)
             {
@@ -243,7 +247,11 @@ namespace System.ComponentModel.Composition.Hosting
             // scope, where upon we go ahead and return null
             if (!localAtomicCompositionOnly && this._outerAtomicComposition != null)
             {
-                return this._outerAtomicComposition.TryGetValueInternal<T>(key, localAtomicCompositionOnly, out value);
+                return this._outerAtomicComposition.TryGetValueInternal<T>(
+                    key,
+                    localAtomicCompositionOnly,
+                    out value
+                );
             }
 
             value = default(T);
@@ -257,7 +265,7 @@ namespace System.ComponentModel.Composition.Hosting
             {
                 if (this._values[index].Key == key)
                 {
-                    this._values[index] = new KeyValuePair<object,object>(key, value);
+                    this._values[index] = new KeyValuePair<object, object>(key, value);
                     return;
                 }
             }
@@ -265,7 +273,9 @@ namespace System.ComponentModel.Composition.Hosting
             // Expand storage when needed
             if (this._values == null || this._valueCount == this._values.Length)
             {
-                var newQueries = new KeyValuePair<object, object>[this._valueCount == 0 ? 5 : this._valueCount * 2];
+                var newQueries = new KeyValuePair<object, object>[
+                    this._valueCount == 0 ? 5 : this._valueCount * 2
+                ];
                 if (this._values != null)
                 {
                     Array.Copy(this._values, newQueries, this._valueCount);
@@ -281,18 +291,28 @@ namespace System.ComponentModel.Composition.Hosting
 
         [DebuggerStepThrough]
         [ContractArgumentValidator]
-        [SuppressMessage("Microsoft.Contracts", "CC1053", Justification = "Suppressing warning because this validator has no public contract")]
+        [SuppressMessage(
+            "Microsoft.Contracts",
+            "CC1053",
+            Justification = "Suppressing warning because this validator has no public contract"
+        )]
         private void ThrowIfContainsInnerAtomicComposition()
         {
             if (this._containsInnerAtomicComposition)
             {
-                throw new InvalidOperationException(Strings.AtomicComposition_PartOfAnotherAtomicComposition);
+                throw new InvalidOperationException(
+                    Strings.AtomicComposition_PartOfAnotherAtomicComposition
+                );
             }
         }
 
         [DebuggerStepThrough]
         [ContractArgumentValidator]
-        [SuppressMessage("Microsoft.Contracts", "CC1053", Justification = "Suppressing warning because this validator has no public contract")]
+        [SuppressMessage(
+            "Microsoft.Contracts",
+            "CC1053",
+            Justification = "Suppressing warning because this validator has no public contract"
+        )]
         private void ThrowIfCompleted()
         {
             if (this._isCompleted)
@@ -303,7 +323,11 @@ namespace System.ComponentModel.Composition.Hosting
 
         [DebuggerStepThrough]
         [ContractArgumentValidator]
-        [SuppressMessage("Microsoft.Contracts", "CC1053", Justification = "Suppressing warning because this validator has no public contract")]
+        [SuppressMessage(
+            "Microsoft.Contracts",
+            "CC1053",
+            Justification = "Suppressing warning because this validator has no public contract"
+        )]
         private void ThrowIfDisposed()
         {
             if (this._isDisposed)

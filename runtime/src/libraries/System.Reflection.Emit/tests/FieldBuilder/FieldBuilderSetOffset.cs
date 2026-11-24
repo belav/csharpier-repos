@@ -15,7 +15,11 @@ namespace System.Reflection.Emit.Tests
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
 
-            FieldBuilder field = type.DefineField("Field_PosTest2", typeof(int), FieldAttributes.Public);
+            FieldBuilder field = type.DefineField(
+                "Field_PosTest2",
+                typeof(int),
+                FieldAttributes.Public
+            );
             field.SetOffset(offset);
         }
 
@@ -24,13 +28,25 @@ namespace System.Reflection.Emit.Tests
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
 
-            FieldBuilder field1 = type.DefineField("TestField1", typeof(int), FieldAttributes.Public);
+            FieldBuilder field1 = type.DefineField(
+                "TestField1",
+                typeof(int),
+                FieldAttributes.Public
+            );
             field1.SetOffset(0);
 
-            FieldBuilder field2 = type.DefineField("TestField2", typeof(int), FieldAttributes.Public);
+            FieldBuilder field2 = type.DefineField(
+                "TestField2",
+                typeof(int),
+                FieldAttributes.Public
+            );
             field2.SetOffset(4);
 
-            FieldBuilder field3 = type.DefineField("TestField3", typeof(int), FieldAttributes.Public);
+            FieldBuilder field3 = type.DefineField(
+                "TestField3",
+                typeof(int),
+                FieldAttributes.Public
+            );
             field3.SetOffset(4);
         }
 
@@ -39,10 +55,18 @@ namespace System.Reflection.Emit.Tests
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
 
-            FieldBuilder field1 = type.DefineField("TestField1", typeof(int), FieldAttributes.Public);
+            FieldBuilder field1 = type.DefineField(
+                "TestField1",
+                typeof(int),
+                FieldAttributes.Public
+            );
             field1.SetOffset(0);
 
-            FieldBuilder field2 = type.DefineField("TestField2", typeof(int), FieldAttributes.Public);
+            FieldBuilder field2 = type.DefineField(
+                "TestField2",
+                typeof(int),
+                FieldAttributes.Public
+            );
             field2.SetOffset(0);
         }
 

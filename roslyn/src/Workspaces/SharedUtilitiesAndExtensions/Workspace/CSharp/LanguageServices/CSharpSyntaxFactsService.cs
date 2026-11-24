@@ -25,7 +25,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             internal static new readonly CSharpSyntaxFactsService Instance = new();
 
-            public bool IsInNonUserCode(SyntaxTree syntaxTree, int position, CancellationToken cancellationToken)
+            public bool IsInNonUserCode(
+                SyntaxTree syntaxTree,
+                int position,
+                CancellationToken cancellationToken
+            )
             {
                 if (syntaxTree == null)
                 {
@@ -38,8 +42,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             private static readonly SyntaxAnnotation s_annotation = new();
 
             public void AddFirstMissingCloseBrace<TContextNode>(
-                SyntaxNode root, TContextNode contextNode,
-                out SyntaxNode newRoot, out TContextNode newContextNode) where TContextNode : SyntaxNode
+                SyntaxNode root,
+                TContextNode contextNode,
+                out SyntaxNode newRoot,
+                out TContextNode newContextNode
+            )
+                where TContextNode : SyntaxNode
             {
                 newRoot = new AddFirstMissingCloseBraceRewriter(contextNode).Visit(root);
                 newContextNode = (TContextNode)newRoot.GetAnnotatedNodes(s_annotation).Single();
@@ -51,8 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 private bool _seenContextNode = false;
                 private bool _addedFirstCloseCurly = false;
 
-                public AddFirstMissingCloseBraceRewriter(SyntaxNode contextNode)
-                    => _contextNode = contextNode;
+                public AddFirstMissingCloseBraceRewriter(SyntaxNode contextNode) =>
+                    _contextNode = contextNode;
 
                 public override SyntaxNode Visit(SyntaxNode node)
                 {
@@ -76,26 +84,29 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // rewritten.  (i.e. we added the annotation to the context node).
                     Debug.Assert(_seenContextNode);
 
-                    // Ok, we're past the context node now.  See if this is a node with 
-                    // curlies.  If so, if it has a missing close curly then add in the 
-                    // missing curly.  Also, even if it doesn't have missing curlies, 
-                    // then still ask to format its close curly to make sure all the 
+                    // Ok, we're past the context node now.  See if this is a node with
+                    // curlies.  If so, if it has a missing close curly then add in the
+                    // missing curly.  Also, even if it doesn't have missing curlies,
+                    // then still ask to format its close curly to make sure all the
                     // curlies up the stack are properly formatted.
                     var braces = rewritten.GetBraces();
-                    if (braces.openBrace.Kind() == SyntaxKind.None &&
-                        braces.closeBrace.Kind() == SyntaxKind.None)
+                    if (
+                        braces.openBrace.Kind() == SyntaxKind.None
+                        && braces.closeBrace.Kind() == SyntaxKind.None
+                    )
                     {
                         // Not an item with braces.  Just pass it up.
                         return rewritten;
                     }
 
-                    // See if the close brace is missing.  If it's the first missing one 
+                    // See if the close brace is missing.  If it's the first missing one
                     // we're seeing then definitely add it.
                     if (braces.closeBrace.IsMissing)
                     {
                         if (!_addedFirstCloseCurly)
                         {
-                            var closeBrace = SyntaxFactory.Token(SyntaxKind.CloseBraceToken)
+                            var closeBrace = SyntaxFactory
+                                .Token(SyntaxKind.CloseBraceToken)
                                 .WithAdditionalAnnotations(Formatter.Annotation);
                             rewritten = rewritten.ReplaceToken(braces.closeBrace, closeBrace);
                             _addedFirstCloseCurly = true;
@@ -105,16 +116,28 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         // Ask for the close brace to be formatted so that all the braces
                         // up the spine are in the right location.
-                        rewritten = rewritten.ReplaceToken(braces.closeBrace,
-                            braces.closeBrace.WithAdditionalAnnotations(Formatter.Annotation));
+                        rewritten = rewritten.ReplaceToken(
+                            braces.closeBrace,
+                            braces.closeBrace.WithAdditionalAnnotations(Formatter.Annotation)
+                        );
                     }
 
                     return rewritten;
                 }
             }
 
-            public Task<ImmutableArray<SyntaxNode>> GetSelectedFieldsAndPropertiesAsync(SyntaxTree tree, TextSpan textSpan, bool allowPartialSelection, CancellationToken cancellationToken)
-                => CSharpSelectedMembers.Instance.GetSelectedFieldsAndPropertiesAsync(tree, textSpan, allowPartialSelection, cancellationToken);
+            public Task<ImmutableArray<SyntaxNode>> GetSelectedFieldsAndPropertiesAsync(
+                SyntaxTree tree,
+                TextSpan textSpan,
+                bool allowPartialSelection,
+                CancellationToken cancellationToken
+            ) =>
+                CSharpSelectedMembers.Instance.GetSelectedFieldsAndPropertiesAsync(
+                    tree,
+                    textSpan,
+                    allowPartialSelection,
+                    cancellationToken
+                );
         }
     }
 }

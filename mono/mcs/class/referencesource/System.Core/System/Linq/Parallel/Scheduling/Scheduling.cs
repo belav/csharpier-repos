@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -16,17 +16,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using System.Threading;
-using System.Diagnostics.Contracts;
-using System.Threading.Tasks;
 using System.Security;
 using System.Security.Permissions;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace System.Linq.Parallel
 {
-
     //-----------------------------------------------------------------------------------
     // A simple helper class that offers common task scheduling functionality.
     //
@@ -38,23 +37,25 @@ namespace System.Linq.Parallel
 
         // The default degree of parallelism, or -1 if unspecified. Dev unit tests set this value
         // to change the default DOP.
-        internal static int DefaultDegreeOfParallelism = Math.Min(Environment.ProcessorCount, MAX_SUPPORTED_DOP);
+        internal static int DefaultDegreeOfParallelism = Math.Min(
+            Environment.ProcessorCount,
+            MAX_SUPPORTED_DOP
+        );
 
-        // The size to use for bounded buffers. 
+        // The size to use for bounded buffers.
         internal const int DEFAULT_BOUNDED_BUFFER_CAPACITY = 512;
 
         // The number of bytes we want "chunks" to be, when partitioning, etc. We choose 4 cache
         // lines worth, assuming 128b cache line.  Most (popular) architectures use 64b cache lines,
         // but choosing 128b works for 64b too whereas a multiple of 64b isn't necessarily sufficient
         // for 128b cache systems.  So 128b it is.
-        internal const int DEFAULT_BYTES_PER_CHUNK = 128 * 4; 
+        internal const int DEFAULT_BYTES_PER_CHUNK = 128 * 4;
 
         // The number of milliseconds before we assume a producer has been zombied.
         internal const int ZOMBIED_PRODUCER_TIMEOUT = Timeout.Infinite;
 
         // The largest number of partitions that PLINQ supports.
         internal const int MAX_SUPPORTED_DOP = 512;
-
 
         //-----------------------------------------------------------------------------------
         // Calculates the proper amount of DOP.  This takes into consideration dynamic nesting.
@@ -99,15 +100,20 @@ namespace System.Linq.Parallel
             }
             else
             {
-                Contract.Assert((DEFAULT_BYTES_PER_CHUNK % IntPtr.Size) == 0, "bytes per chunk should be a multiple of pointer size");
+                Contract.Assert(
+                    (DEFAULT_BYTES_PER_CHUNK % IntPtr.Size) == 0,
+                    "bytes per chunk should be a multiple of pointer size"
+                );
                 chunkSize = (DEFAULT_BYTES_PER_CHUNK / IntPtr.Size);
             }
 
-            TraceHelpers.TraceInfo("Scheduling::GetDefaultChunkSize({0}) -- returning {1}", typeof(T), chunkSize);
+            TraceHelpers.TraceInfo(
+                "Scheduling::GetDefaultChunkSize({0}) -- returning {1}",
+                typeof(T),
+                chunkSize
+            );
 
             return chunkSize;
         }
-
     }
-
 }

@@ -112,8 +112,7 @@ public abstract class RemoteAuthenticationHandler<TOptions>
             }
             else if (!authResult.Succeeded)
             {
-                exception =
-                    authResult.Failure
+                exception = authResult.Failure
                     ?? new InvalidOperationException("Invalid return state, unable to redirect.");
                 properties = authResult.Properties;
             }

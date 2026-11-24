@@ -10,9 +10,9 @@
 namespace System.Data.Common.EntitySql.AST
 {
     using System;
-    using System.Globalization;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Globalization;
 
     /// <summary>
     /// Represents CREATEREF(entitySet, keys) expression.
@@ -27,8 +27,8 @@ namespace System.Data.Common.EntitySql.AST
         /// Initializes CreateRefExpr.
         /// </summary>
         /// <param name="entitySet">expression representing the entity set</param>
-        internal CreateRefExpr(Node entitySet, Node keys) : this(entitySet, keys, null)
-        { }
+        internal CreateRefExpr(Node entitySet, Node keys)
+            : this(entitySet, keys, null) { }
 
         /// <summary>
         /// Initializes CreateRefExpr.

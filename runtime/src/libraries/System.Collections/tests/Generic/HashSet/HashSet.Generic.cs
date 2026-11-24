@@ -29,7 +29,8 @@ namespace System.Collections.Tests
         protected override bool DefaultValueAllowed => true;
     }
 
-    public class HashSet_Generic_Tests_int_With_Comparer_WrapStructural_Int : HashSet_Generic_Tests<int>
+    public class HashSet_Generic_Tests_int_With_Comparer_WrapStructural_Int
+        : HashSet_Generic_Tests<int>
     {
         protected override IEqualityComparer<int> GetIEqualityComparer()
         {
@@ -53,7 +54,8 @@ namespace System.Collections.Tests
         }
     }
 
-    public class HashSet_Generic_Tests_int_With_Comparer_WrapStructural_SimpleInt : HashSet_Generic_Tests<SimpleInt>
+    public class HashSet_Generic_Tests_int_With_Comparer_WrapStructural_SimpleInt
+        : HashSet_Generic_Tests<SimpleInt>
     {
         protected override IEqualityComparer<SimpleInt> GetIEqualityComparer()
         {
@@ -78,7 +80,8 @@ namespace System.Collections.Tests
     }
 
     [OuterLoop]
-    public class HashSet_Generic_Tests_EquatableBackwardsOrder : HashSet_Generic_Tests<EquatableBackwardsOrder>
+    public class HashSet_Generic_Tests_EquatableBackwardsOrder
+        : HashSet_Generic_Tests<EquatableBackwardsOrder>
     {
         protected override EquatableBackwardsOrder CreateT(int seed)
         {
@@ -93,7 +96,8 @@ namespace System.Collections.Tests
     }
 
     [OuterLoop]
-    public class HashSet_Generic_Tests_int_With_Comparer_SameAsDefaultComparer : HashSet_Generic_Tests<int>
+    public class HashSet_Generic_Tests_int_With_Comparer_SameAsDefaultComparer
+        : HashSet_Generic_Tests<int>
     {
         protected override IEqualityComparer<int> GetIEqualityComparer()
         {
@@ -113,7 +117,8 @@ namespace System.Collections.Tests
     }
 
     [OuterLoop]
-    public class HashSet_Generic_Tests_int_With_Comparer_HashCodeAlwaysReturnsZero : HashSet_Generic_Tests<int>
+    public class HashSet_Generic_Tests_int_With_Comparer_HashCodeAlwaysReturnsZero
+        : HashSet_Generic_Tests<int>
     {
         protected override IEqualityComparer<int> GetIEqualityComparer()
         {
@@ -178,7 +183,8 @@ namespace System.Collections.Tests
     }
 
     [OuterLoop]
-    public class HashSet_Generic_Tests_int_With_Comparer_BadIntEqualityComparer : HashSet_Generic_Tests<int>
+    public class HashSet_Generic_Tests_int_With_Comparer_BadIntEqualityComparer
+        : HashSet_Generic_Tests<int>
     {
         protected override IEqualityComparer<int> GetIEqualityComparer()
         {

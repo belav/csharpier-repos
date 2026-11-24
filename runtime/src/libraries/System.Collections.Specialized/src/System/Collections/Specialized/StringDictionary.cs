@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 using System.ComponentModel.Design.Serialization;
 
 namespace System.Collections.Specialized
@@ -13,9 +12,13 @@ namespace System.Collections.Specialized
     ///       with a proper StringComparer instance.</para>
     /// </devdoc>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
-    [DesignerSerializer("System.Diagnostics.Design.StringDictionaryCodeDomSerializer, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-                        "System.ComponentModel.Design.Serialization.CodeDomSerializer, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
+    [DesignerSerializer(
+        "System.Diagnostics.Design.StringDictionaryCodeDomSerializer, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+        "System.ComponentModel.Design.Serialization.CodeDomSerializer, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public class StringDictionary : IEnumerable
     {
         // For compatibility, we want the Keys property to return values in lower-case.
@@ -24,28 +27,21 @@ namespace System.Collections.Specialized
         // problem for some Georgian alphabets.
         private readonly Hashtable contents = new Hashtable(); // Do not rename (binary serialization)
 
-
         /// <devdoc>
         /// <para>Initializes a new instance of the StringDictionary class.</para>
         /// <para>If you're using file names, registry keys, etc, you want to use
         /// a Dictionary&lt;String, Object&gt; and use
         /// StringComparer.OrdinalIgnoreCase.</para>
         /// </devdoc>
-        public StringDictionary()
-        {
-        }
+        public StringDictionary() { }
 
         /// <devdoc>
         /// <para>Gets the number of key-and-value pairs in the StringDictionary.</para>
         /// </devdoc>
         public virtual int Count
         {
-            get
-            {
-                return contents.Count;
-            }
+            get { return contents.Count; }
         }
-
 
         /// <devdoc>
         /// <para>Indicates whether access to the StringDictionary is synchronized (thread-safe). This property is
@@ -53,10 +49,7 @@ namespace System.Collections.Specialized
         /// </devdoc>
         public virtual bool IsSynchronized
         {
-            get
-            {
-                return contents.IsSynchronized;
-            }
+            get { return contents.IsSynchronized; }
         }
 
         /// <devdoc>
@@ -83,22 +76,15 @@ namespace System.Collections.Specialized
         /// </devdoc>
         public virtual ICollection Keys
         {
-            get
-            {
-                return contents.Keys;
-            }
+            get { return contents.Keys; }
         }
-
 
         /// <devdoc>
         /// <para>Gets an object that can be used to synchronize access to the StringDictionary.</para>
         /// </devdoc>
         public virtual object SyncRoot
         {
-            get
-            {
-                return contents.SyncRoot;
-            }
+            get { return contents.SyncRoot; }
         }
 
         /// <devdoc>
@@ -106,10 +92,7 @@ namespace System.Collections.Specialized
         /// </devdoc>
         public virtual ICollection Values
         {
-            get
-            {
-                return contents.Values;
-            }
+            get { return contents.Values; }
         }
 
         /// <devdoc>

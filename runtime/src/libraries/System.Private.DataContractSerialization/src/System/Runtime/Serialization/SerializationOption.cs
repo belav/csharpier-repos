@@ -7,6 +7,6 @@ namespace System.Runtime.Serialization
     {
         CodeGenOnly = 0,
         ReflectionOnly = 1,
-        ReflectionAsBackup = 2
+        ReflectionAsBackup = 2,
     }
 }

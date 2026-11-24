@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,52 +40,60 @@ using System.Xml.Serialization;
 
 namespace System.ServiceModel
 {
-	[XmlSchemaProvider ("GetSchema")]
-	[XmlRoot ("EndpointReference", Namespace = "http://schemas.xmlsoap.org/ws/2004/08/addressing")]
-	public class EndpointAddressAugust2004 : IXmlSerializable
-	{
-		EndpointAddress address;
+    [XmlSchemaProvider("GetSchema")]
+    [XmlRoot("EndpointReference", Namespace = "http://schemas.xmlsoap.org/ws/2004/08/addressing")]
+    public class EndpointAddressAugust2004 : IXmlSerializable
+    {
+        EndpointAddress address;
 
-		internal EndpointAddressAugust2004 ()
-		{
-		}
+        internal EndpointAddressAugust2004() { }
 
-		internal EndpointAddressAugust2004 (EndpointAddress address)
-		{
-			this.address = address;
-		}
-		
-		public static EndpointAddressAugust2004 FromEndpointAddress (EndpointAddress address)
-		{
-			return new EndpointAddressAugust2004 (address);
-		}
+        internal EndpointAddressAugust2004(EndpointAddress address)
+        {
+            this.address = address;
+        }
 
-		public static XmlQualifiedName GetSchema (XmlSchemaSet xmlSchemaSet)
-		{
-			if (xmlSchemaSet == null)
-				throw new ArgumentNullException ("xmlSchemaSet");
-			xmlSchemaSet.Add (XmlSchema.Read (typeof (EndpointAddress10).Assembly.GetManifestResourceStream ("WS-Addressing.schema"), null));
-			return new XmlQualifiedName ("EndpointReferenceType", AddressingVersion.WSAddressingAugust2004.Namespace);
-		}
+        public static EndpointAddressAugust2004 FromEndpointAddress(EndpointAddress address)
+        {
+            return new EndpointAddressAugust2004(address);
+        }
 
-		public EndpointAddress ToEndpointAddress ()
-		{
-			return address;
-		}
+        public static XmlQualifiedName GetSchema(XmlSchemaSet xmlSchemaSet)
+        {
+            if (xmlSchemaSet == null)
+                throw new ArgumentNullException("xmlSchemaSet");
+            xmlSchemaSet.Add(
+                XmlSchema.Read(
+                    typeof(EndpointAddress10).Assembly.GetManifestResourceStream(
+                        "WS-Addressing.schema"
+                    ),
+                    null
+                )
+            );
+            return new XmlQualifiedName(
+                "EndpointReferenceType",
+                AddressingVersion.WSAddressingAugust2004.Namespace
+            );
+        }
 
-		XmlSchema IXmlSerializable.GetSchema ()
-		{
-			return null;
-		}
+        public EndpointAddress ToEndpointAddress()
+        {
+            return address;
+        }
 
-		void IXmlSerializable.ReadXml (XmlReader reader)
-		{
-			address = EndpointAddress.ReadFrom (AddressingVersion.WSAddressingAugust2004, reader);
-		}
+        XmlSchema IXmlSerializable.GetSchema()
+        {
+            return null;
+        }
 
-		void IXmlSerializable.WriteXml (XmlWriter writer)
-		{
-			address.WriteContentsTo (AddressingVersion.WSAddressingAugust2004, writer);
-		}
-	}
+        void IXmlSerializable.ReadXml(XmlReader reader)
+        {
+            address = EndpointAddress.ReadFrom(AddressingVersion.WSAddressingAugust2004, reader);
+        }
+
+        void IXmlSerializable.WriteXml(XmlWriter writer)
+        {
+            address.WriteContentsTo(AddressingVersion.WSAddressingAugust2004, writer);
+        }
+    }
 }

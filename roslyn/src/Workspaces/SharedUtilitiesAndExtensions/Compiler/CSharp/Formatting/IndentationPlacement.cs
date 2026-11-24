@@ -13,6 +13,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         BlockContents = 1 << 1,
         SwitchCaseContents = 1 << 2,
         SwitchCaseContentsWhenBlock = 1 << 3,
-        SwitchSection = 1 << 4
+        SwitchSection = 1 << 4,
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,55 +26,54 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Runtime.Serialization;
 using System.Security;
 using System.Security.Permissions;
 using System.Security.Policy;
 using System.Xml.XPath;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Xml.XPath {
+namespace MonoCasTests.System.Xml.XPath
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class XPathExceptionCas
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class XPathExceptionCas {
+        [Test]
+        [ExpectedException(typeof(SecurityException))]
+        [SecurityPermission(SecurityAction.Deny, SerializationFormatter = true)]
+        public void DenySerializationFormatter_GetObjectData()
+        {
+            StreamingContext sc = new StreamingContext(StreamingContextStates.All);
+            XPathException xe = new XPathException(String.Empty, null);
+            xe.GetObjectData(null, sc);
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [SecurityPermission(SecurityAction.PermitOnly, SerializationFormatter = true)]
+        public void PermitOnlySerializationFormatter_GetObjectData()
+        {
+            StreamingContext sc = new StreamingContext(StreamingContextStates.All);
+            XPathException xe = new XPathException(String.Empty, null);
+            xe.GetObjectData(null, sc);
+        }
 
-		[Test]
-		[ExpectedException (typeof (SecurityException))]
-		[SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
-		public void DenySerializationFormatter_GetObjectData ()
-		{
-			StreamingContext sc = new StreamingContext (StreamingContextStates.All);
-			XPathException xe = new XPathException (String.Empty, null);
-			xe.GetObjectData (null, sc);
-		}
-
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		[SecurityPermission (SecurityAction.PermitOnly, SerializationFormatter = true)]
-		public void PermitOnlySerializationFormatter_GetObjectData ()
-		{
-			StreamingContext sc = new StreamingContext (StreamingContextStates.All);
-			XPathException xe = new XPathException (String.Empty, null);
-			xe.GetObjectData (null, sc);
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void DenyUnrestricted ()
-		{
-			// can we call everything without a SecurityException ?
-			XPathException xe = new XPathException (String.Empty, null);
-			Assert.IsNotNull (xe.Message, "Message");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void DenyUnrestricted()
+        {
+            // can we call everything without a SecurityException ?
+            XPathException xe = new XPathException(String.Empty, null);
+            Assert.IsNotNull(xe.Message, "Message");
+        }
+    }
 }

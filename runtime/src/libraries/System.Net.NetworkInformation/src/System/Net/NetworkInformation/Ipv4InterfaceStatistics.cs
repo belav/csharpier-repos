@@ -11,6 +11,7 @@ namespace System.Net.NetworkInformation
     public abstract partial class IPv4InterfaceStatistics
     {
         protected IPv4InterfaceStatistics() { }
+
         public abstract long BytesReceived { get; }
         public abstract long BytesSent { get; }
         public abstract long IncomingPacketsDiscarded { get; }
@@ -18,6 +19,7 @@ namespace System.Net.NetworkInformation
         public abstract long IncomingUnknownProtocolPackets { get; }
         public abstract long NonUnicastPacketsReceived { get; }
         public abstract long NonUnicastPacketsSent { get; }
+
         [UnsupportedOSPlatform("osx")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]

@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -12,9 +13,14 @@ namespace Test
         float[] m_afField1;
 
         BB Method3(float param2, ulong[] param3)
-        { return new BB(); }
+        {
+            return new BB();
+        }
 
-        static bool Static1(float[] param1) { return false; }
+        static bool Static1(float[] param1)
+        {
+            return false;
+        }
 
         [Fact]
         public static int TestEntryPoint()

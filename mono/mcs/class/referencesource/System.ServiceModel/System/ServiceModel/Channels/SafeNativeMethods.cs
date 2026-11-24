@@ -21,12 +21,13 @@ namespace System.ServiceModel.Channels
             [Out] out uint increment,
             [Out] out uint adjustmentDisabled
         );
-        
+
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
         private static extern void GetSystemTimeAsFileTime([Out] out FILETIME time);
 
-        public static void GetSystemTimeAsFileTime(out long time) {
+        public static void GetSystemTimeAsFileTime(out long time)
+        {
             FILETIME fileTime;
             GetSystemTimeAsFileTime(out fileTime);
             time = 0;
@@ -35,8 +36,10 @@ namespace System.ServiceModel.Channels
             time |= (uint)fileTime.dwLowDateTime;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls critical method GetSystemTimeAdjustment.",
-            Safe = "Method is a SafeNativeMethod.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls critical method GetSystemTimeAdjustment.",
+            Safe = "Method is a SafeNativeMethod."
+        )]
         [SecuritySafeCritical]
         internal static long GetSystemTimeResolution()
         {
@@ -44,7 +47,13 @@ namespace System.ServiceModel.Channels
             uint increment;
             uint dummyAdjustmentDisabled;
 
-            if (GetSystemTimeAdjustment(out dummyAdjustment, out increment, out dummyAdjustmentDisabled) != 0)
+            if (
+                GetSystemTimeAdjustment(
+                    out dummyAdjustment,
+                    out increment,
+                    out dummyAdjustmentDisabled
+                ) != 0
+            )
             {
                 return (long)increment;
             }

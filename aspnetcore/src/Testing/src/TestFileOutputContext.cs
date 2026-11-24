@@ -149,8 +149,7 @@ public sealed class TestFileOutputContext
 
     public static string GetTestClassName(Type type)
     {
-        var shortNameAttribute =
-            type.GetCustomAttribute<ShortClassNameAttribute>()
+        var shortNameAttribute = type.GetCustomAttribute<ShortClassNameAttribute>()
             ?? type.Assembly.GetCustomAttribute<ShortClassNameAttribute>();
         var name = shortNameAttribute == null ? type.FullName : type.Name;
 

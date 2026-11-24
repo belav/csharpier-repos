@@ -6,18 +6,18 @@
 // probing the stack.
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Xunit;
 
 namespace BigFrames_skippage3
 {
-
     [StructLayout(LayoutKind.Explicit)]
     public struct LargeStruct
     {
         [FieldOffset(0)]
         public int i1;
+
         [FieldOffset(65512)]
         public int i2;
     }
@@ -44,9 +44,7 @@ namespace BigFrames_skippage3
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public static void Escape(ref LargeStruct s)
-        {
-        }
+        public static void Escape(ref LargeStruct s) { }
 
         // A lot of time the stack when we are called has a bunch of committed pages
         // before the guard page. So eat up a bunch of stack before doing our test,

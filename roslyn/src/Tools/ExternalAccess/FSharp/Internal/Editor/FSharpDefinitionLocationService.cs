@@ -16,16 +16,24 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor;
 [ExportLanguageService(typeof(IDefinitionLocationService), LanguageNames.FSharp), Shared]
 [method: ImportingConstructor]
 [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-internal sealed class FSharpDefinitionLocationService(
-    IFSharpGoToDefinitionService service) : IDefinitionLocationService
+internal sealed class FSharpDefinitionLocationService(IFSharpGoToDefinitionService service)
+    : IDefinitionLocationService
 {
-    public Task<DefinitionLocation?> GetDefinitionLocationAsync(Document document, int position, CancellationToken cancellationToken)
-        => DefinitionLocationServiceHelpers.GetDefinitionLocationFromLegacyImplementationsAsync(
-            document, position,
+    public Task<DefinitionLocation?> GetDefinitionLocationAsync(
+        Document document,
+        int position,
+        CancellationToken cancellationToken
+    ) =>
+        DefinitionLocationServiceHelpers.GetDefinitionLocationFromLegacyImplementationsAsync(
+            document,
+            position,
             async cancellationToken =>
             {
-                var items = await service.FindDefinitionsAsync(document, position, cancellationToken).ConfigureAwait(false);
+                var items = await service
+                    .FindDefinitionsAsync(document, position, cancellationToken)
+                    .ConfigureAwait(false);
                 return items?.Select(i => (i.Document, i.SourceSpan));
             },
-            cancellationToken);
+            cancellationToken
+        );
 }

@@ -212,11 +212,10 @@ internal sealed class ApiResponseTypeProvider
                         // Determine whether or not the type was provided by the user. If so, favor it over the default
                         // error type for 4xx client errors if no response type is specified..
                         var setByDefault =
-                            metadataAttribute
-                                is ProducesResponseTypeAttribute
-                                {
-                                    IsResponseTypeSetByDefault: true
-                                };
+                            metadataAttribute is ProducesResponseTypeAttribute
+                            {
+                                IsResponseTypeSetByDefault: true
+                            };
                         apiResponseType.Type = setByDefault
                             ? defaultErrorType
                             : apiResponseType.Type;

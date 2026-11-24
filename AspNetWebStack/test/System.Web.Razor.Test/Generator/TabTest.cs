@@ -8,6 +8,6 @@ namespace System.Web.Razor.Test.Generator
     {
         NoTabs = 1,
         Tabs = 2,
-        Both = 3
+        Both = 3,
     }
 }

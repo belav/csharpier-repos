@@ -107,7 +107,12 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 }
                 else
                 {
-                    Debug.Assert(_binaryTypeEnumA != null && _typeInformationA != null && _memberNames != null && _memberTypes != null);
+                    Debug.Assert(
+                        _binaryTypeEnumA != null
+                            && _typeInformationA != null
+                            && _memberNames != null
+                            && _memberTypes != null
+                    );
                     outBinaryTypeEnum = _binaryTypeEnumA[_count];
                     outTypeInformation = _typeInformationA[_count];
                     if (_count == 0)

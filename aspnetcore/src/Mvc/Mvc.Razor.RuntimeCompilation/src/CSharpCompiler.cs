@@ -31,8 +31,8 @@ internal class CSharpCompiler
     public CSharpCompiler(RazorReferenceManager manager, IWebHostEnvironment hostingEnvironment)
     {
         _referenceManager = manager ?? throw new ArgumentNullException(nameof(manager));
-        _hostingEnvironment =
-            hostingEnvironment ?? throw new ArgumentNullException(nameof(hostingEnvironment));
+        _hostingEnvironment = hostingEnvironment
+            ?? throw new ArgumentNullException(nameof(hostingEnvironment));
     }
 
     public virtual CSharpParseOptions ParseOptions

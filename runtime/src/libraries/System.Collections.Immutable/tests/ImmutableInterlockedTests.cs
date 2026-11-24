@@ -10,7 +10,10 @@ namespace System.Collections.Immutable.Tests
     public class ImmutableInterlockedTests
     {
         private delegate bool UpdateDelegate<T>(ref T location, Func<T, T> transformer);
-        private delegate bool UpdateArrayDelegate<T>(ref ImmutableArray<T> location, Func<ImmutableArray<T>, ImmutableArray<T>> transformer);
+        private delegate bool UpdateArrayDelegate<T>(
+            ref ImmutableArray<T> location,
+            Func<ImmutableArray<T>, ImmutableArray<T>> transformer
+        );
 
         [Fact]
         public void Update_StartWithNull()
@@ -18,7 +21,11 @@ namespace System.Collections.Immutable.Tests
             UpdateHelper<ImmutableList<int>>(func =>
             {
                 ImmutableList<int> list = null;
-                Assert.True(func(ref list, l => { Assert.Null(l); return ImmutableList.Create(1); }));
+                Assert.True(func(ref list, l =>
+                    {
+                        Assert.Null(l);
+                        return ImmutableList.Create(1);
+                    }));
                 Assert.Equal(1, list.Count);
                 Assert.Equal(1, list[0]);
             });
@@ -30,7 +37,11 @@ namespace System.Collections.Immutable.Tests
             UpdateArrayHelper<int>(func =>
             {
                 ImmutableArray<int> array = default;
-                Assert.True(func(ref array, l => { Assert.True(l.IsDefault); return ImmutableArray.Create(1); }));
+                Assert.True(func(ref array, l =>
+                    {
+                        Assert.True(l.IsDefault);
+                        return ImmutableArray.Create(1);
+                    }));
                 Assert.Equal(1, array.Length);
                 Assert.Equal(1, array[0]);
             });
@@ -42,7 +53,11 @@ namespace System.Collections.Immutable.Tests
             UpdateArrayHelper<int>(func =>
             {
                 ImmutableArray<int> array = ImmutableArray<int>.Empty;
-                Assert.True(func(ref array, l => { Assert.Equal(0, l.Length); return ImmutableArray.Create(1); }));
+                Assert.True(func(ref array, l =>
+                    {
+                        Assert.Equal(0, l.Length);
+                        return ImmutableArray.Create(1);
+                    }));
                 Assert.Equal(1, array.Length);
                 Assert.Equal(1, array[0]);
             });
@@ -80,7 +95,10 @@ namespace System.Collections.Immutable.Tests
             UpdateHelper<ImmutableList<int>>(func =>
             {
                 ImmutableList<int> list = ImmutableList.Create(1);
-                Assert.Throws<InvalidOperationException>(() => func(ref list, l => { throw new InvalidOperationException(); }));
+                Assert.Throws<InvalidOperationException>(() => func(ref list, l =>
+                    {
+                        throw new InvalidOperationException();
+                    }));
             });
         }
 
@@ -90,7 +108,9 @@ namespace System.Collections.Immutable.Tests
             UpdateArrayHelper<int>(func =>
             {
                 ImmutableArray<int> array = ImmutableArray.Create(42);
-                Assert.Throws<InvalidOperationException>(() => func(ref array, l => throw new InvalidOperationException()));
+                Assert.Throws<InvalidOperationException>(() =>
+                    func(ref array, l => throw new InvalidOperationException())
+                );
             });
         }
 
@@ -126,16 +146,21 @@ namespace System.Collections.Immutable.Tests
                 var barrier = new Barrier(tasks.Length);
                 for (int i = 0; i < tasks.Length; i++)
                 {
-                    tasks[i] = Task.Factory.StartNew(delegate
-                    {
-                        // Maximize concurrency by blocking this thread until all the other threads are ready to go as well.
-                        barrier.SignalAndWait();
-
-                        for (int j = 0; j < iterations; j++)
+                    tasks[i] = Task.Factory.StartNew(
+                        delegate
                         {
-                            Assert.True(func(ref list, l => l.Add(l.Count)));
-                        }
-                    }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+                            // Maximize concurrency by blocking this thread until all the other threads are ready to go as well.
+                            barrier.SignalAndWait();
+
+                            for (int j = 0; j < iterations; j++)
+                            {
+                                Assert.True(func(ref list, l => l.Add(l.Count)));
+                            }
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    );
                 }
 
                 Task.WaitAll(tasks);
@@ -159,16 +184,21 @@ namespace System.Collections.Immutable.Tests
                 var barrier = new Barrier(tasks.Length);
                 for (int i = 0; i < tasks.Length; i++)
                 {
-                    tasks[i] = Task.Factory.StartNew(delegate
-                    {
-                        // Maximize concurrency by blocking this thread until all the other threads are ready to go as well.
-                        barrier.SignalAndWait();
-
-                        for (int j = 0; j < iterations; j++)
+                    tasks[i] = Task.Factory.StartNew(
+                        delegate
                         {
-                            Assert.True(func(ref array, l => l.Add(l.Length)));
-                        }
-                    }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+                            // Maximize concurrency by blocking this thread until all the other threads are ready to go as well.
+                            barrier.SignalAndWait();
+
+                            for (int j = 0; j < iterations; j++)
+                            {
+                                Assert.True(func(ref array, l => l.Add(l.Length)));
+                            }
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    );
                 }
 
                 Task.WaitAll(tasks);
@@ -189,27 +219,26 @@ namespace System.Collections.Immutable.Tests
                 var task2TransformEntered = new AutoResetEvent(false);
                 var task1TransformExited = new AutoResetEvent(false);
 
-                Task task1 = Task.Run(delegate
-                {
-                    int transform1ExecutionCounter = 0;
-                    func(
-                        ref set,
-                        s =>
+                Task task1 = Task.Run(
+                    delegate
+                    {
+                        int transform1ExecutionCounter = 0;
+                        func(ref set, s =>
                         {
                             Assert.Equal(1, ++transform1ExecutionCounter);
                             task2TransformEntered.WaitOne();
                             return s.Add(1);
                         });
-                    task1TransformExited.Set();
-                    Assert.Equal(1, transform1ExecutionCounter);
-                });
+                        task1TransformExited.Set();
+                        Assert.Equal(1, transform1ExecutionCounter);
+                    }
+                );
 
-                Task task2 = Task.Run(delegate
-                {
-                    int transform2ExecutionCounter = 0;
-                    func(
-                        ref set,
-                        s =>
+                Task task2 = Task.Run(
+                    delegate
+                    {
+                        int transform2ExecutionCounter = 0;
+                        func(ref set, s =>
                         {
                             switch (++transform2ExecutionCounter)
                             {
@@ -227,9 +256,10 @@ namespace System.Collections.Immutable.Tests
                             return s.Add(2);
                         });
 
-                    // Verify that this transform had to execute twice.
-                    Assert.Equal(2, transform2ExecutionCounter);
-                });
+                        // Verify that this transform had to execute twice.
+                        Assert.Equal(2, transform2ExecutionCounter);
+                    }
+                );
 
                 // Wait for all tasks and rethrow any exceptions.
                 Task.WaitAll(task1, task2);
@@ -248,27 +278,26 @@ namespace System.Collections.Immutable.Tests
                 var task2TransformEntered = new AutoResetEvent(false);
                 var task1TransformExited = new AutoResetEvent(false);
 
-                Task task1 = Task.Run(delegate
-                {
-                    int transform1ExecutionCounter = 0;
-                    func(
-                        ref array,
-                        s =>
+                Task task1 = Task.Run(
+                    delegate
+                    {
+                        int transform1ExecutionCounter = 0;
+                        func(ref array, s =>
                         {
                             Assert.Equal(1, ++transform1ExecutionCounter);
                             task2TransformEntered.WaitOne();
                             return s.Add(1);
                         });
-                    task1TransformExited.Set();
-                    Assert.Equal(1, transform1ExecutionCounter);
-                });
+                        task1TransformExited.Set();
+                        Assert.Equal(1, transform1ExecutionCounter);
+                    }
+                );
 
-                Task task2 = Task.Run(delegate
-                {
-                    int transform2ExecutionCounter = 0;
-                    func(
-                        ref array,
-                        s =>
+                Task task2 = Task.Run(
+                    delegate
+                    {
+                        int transform2ExecutionCounter = 0;
+                        func(ref array, s =>
                         {
                             switch (++transform2ExecutionCounter)
                             {
@@ -286,9 +315,10 @@ namespace System.Collections.Immutable.Tests
                             return s.Add(2);
                         });
 
-                    // Verify that this transform had to execute twice.
-                    Assert.Equal(2, transform2ExecutionCounter);
-                });
+                        // Verify that this transform had to execute twice.
+                        Assert.Equal(2, transform2ExecutionCounter);
+                    }
+                );
 
                 // Wait for all tasks and rethrow any exceptions.
                 Task.WaitAll(task1, task2);
@@ -302,7 +332,10 @@ namespace System.Collections.Immutable.Tests
         public void InterlockedExchangeArrayDefault()
         {
             ImmutableArray<int> array = default(ImmutableArray<int>);
-            ImmutableArray<int> oldValue = ImmutableInterlocked.InterlockedExchange(ref array, ImmutableArray.Create<int>());
+            ImmutableArray<int> oldValue = ImmutableInterlocked.InterlockedExchange(
+                ref array,
+                ImmutableArray.Create<int>()
+            );
             Assert.True(oldValue.IsDefault);
             Assert.False(array.IsDefault);
         }
@@ -311,7 +344,10 @@ namespace System.Collections.Immutable.Tests
         public void InterlockedExchangeArrayNonDefault()
         {
             ImmutableArray<int> array = ImmutableArray.Create(1, 2, 3);
-            ImmutableArray<int> oldValue = ImmutableInterlocked.InterlockedExchange(ref array, ImmutableArray.Create<int>(4, 5, 6));
+            ImmutableArray<int> oldValue = ImmutableInterlocked.InterlockedExchange(
+                ref array,
+                ImmutableArray.Create<int>(4, 5, 6)
+            );
             Assert.Equal(new[] { 1, 2, 3 }, oldValue);
             Assert.Equal(new[] { 4, 5, 6 }, array);
         }
@@ -320,7 +356,11 @@ namespace System.Collections.Immutable.Tests
         public void InterlockedCompareExchangeArray_LocationDefault_EqualToComparand()
         {
             ImmutableArray<int> array = default(ImmutableArray<int>);
-            ImmutableArray<int> oldValue = ImmutableInterlocked.InterlockedCompareExchange(ref array, ImmutableArray.Create<int>(4, 5, 6), array);
+            ImmutableArray<int> oldValue = ImmutableInterlocked.InterlockedCompareExchange(
+                ref array,
+                ImmutableArray.Create<int>(4, 5, 6),
+                array
+            );
             Assert.True(oldValue.IsDefault);
             Assert.Equal(new[] { 4, 5, 6 }, array);
         }
@@ -329,7 +369,11 @@ namespace System.Collections.Immutable.Tests
         public void InterlockedCompareExchangeArray_LocationDefault_NotEqualToComparand()
         {
             ImmutableArray<int> array = default(ImmutableArray<int>);
-            ImmutableArray<int> oldValue = ImmutableInterlocked.InterlockedCompareExchange(ref array, ImmutableArray.Create<int>(4, 5, 6), ImmutableArray.Create<int>(1, 2, 3));
+            ImmutableArray<int> oldValue = ImmutableInterlocked.InterlockedCompareExchange(
+                ref array,
+                ImmutableArray.Create<int>(4, 5, 6),
+                ImmutableArray.Create<int>(1, 2, 3)
+            );
             Assert.True(oldValue.IsDefault);
             Assert.True(array.IsDefault);
         }
@@ -338,7 +382,11 @@ namespace System.Collections.Immutable.Tests
         public void InterlockedCompareExchangeArray_LocationNotDefault_EqualToComparand()
         {
             ImmutableArray<int> array = ImmutableArray.Create<int>(1, 2, 3);
-            ImmutableArray<int> oldValue = ImmutableInterlocked.InterlockedCompareExchange(ref array, ImmutableArray.Create<int>(4, 5, 6), array);
+            ImmutableArray<int> oldValue = ImmutableInterlocked.InterlockedCompareExchange(
+                ref array,
+                ImmutableArray.Create<int>(4, 5, 6),
+                array
+            );
             Assert.Equal(new[] { 1, 2, 3 }, oldValue);
             Assert.Equal(new[] { 4, 5, 6 }, array);
         }
@@ -347,7 +395,11 @@ namespace System.Collections.Immutable.Tests
         public void InterlockedCompareExchangeArray_LocationNotDefault_EqualToComparandDifferentInstance()
         {
             ImmutableArray<int> array = ImmutableArray.Create<int>(1, 2, 3);
-            ImmutableArray<int> oldValue = ImmutableInterlocked.InterlockedCompareExchange(ref array, ImmutableArray.Create<int>(4, 5, 6), ImmutableArray.Create<int>(1, 2, 3));
+            ImmutableArray<int> oldValue = ImmutableInterlocked.InterlockedCompareExchange(
+                ref array,
+                ImmutableArray.Create<int>(4, 5, 6),
+                ImmutableArray.Create<int>(1, 2, 3)
+            );
             Assert.Equal(new[] { 1, 2, 3 }, oldValue);
             Assert.Equal(new[] { 1, 2, 3 }, array);
         }
@@ -356,7 +408,11 @@ namespace System.Collections.Immutable.Tests
         public void InterlockedCompareExchangeArray_LocationNotDefault_NotEqualToDefaultComparand()
         {
             ImmutableArray<int> array = ImmutableArray.Create(1, 2, 3);
-            ImmutableArray<int> oldValue = ImmutableInterlocked.InterlockedCompareExchange(ref array, ImmutableArray.Create<int>(4, 5, 6), default(ImmutableArray<int>));
+            ImmutableArray<int> oldValue = ImmutableInterlocked.InterlockedCompareExchange(
+                ref array,
+                ImmutableArray.Create<int>(4, 5, 6),
+                default(ImmutableArray<int>)
+            );
             Assert.Equal(new[] { 1, 2, 3 }, oldValue);
             Assert.Equal(new[] { 1, 2, 3 }, array);
         }
@@ -365,7 +421,11 @@ namespace System.Collections.Immutable.Tests
         public void InterlockedCompareExchangeArray_LocationNotDefault_NotEqualToNonDefaultComparand()
         {
             ImmutableArray<int> array = ImmutableArray.Create(1, 2, 3);
-            ImmutableArray<int> oldValue = ImmutableInterlocked.InterlockedCompareExchange(ref array, ImmutableArray.Create<int>(4, 5, 6), array);
+            ImmutableArray<int> oldValue = ImmutableInterlocked.InterlockedCompareExchange(
+                ref array,
+                ImmutableArray.Create<int>(4, 5, 6),
+                array
+            );
             Assert.Equal(new[] { 1, 2, 3 }, oldValue);
             Assert.Equal(new[] { 4, 5, 6 }, array);
         }
@@ -374,9 +434,16 @@ namespace System.Collections.Immutable.Tests
         public void InterlockedInitializeArray()
         {
             ImmutableArray<int> array = default(ImmutableArray<int>);
-            Assert.True(ImmutableInterlocked.InterlockedInitialize(ref array, ImmutableArray.Create<int>()));
+            Assert.True(
+                ImmutableInterlocked.InterlockedInitialize(ref array, ImmutableArray.Create<int>())
+            );
             Assert.False(array.IsDefault);
-            Assert.False(ImmutableInterlocked.InterlockedInitialize(ref array, ImmutableArray.Create(1, 2, 3)));
+            Assert.False(
+                ImmutableInterlocked.InterlockedInitialize(
+                    ref array,
+                    ImmutableArray.Create(1, 2, 3)
+                )
+            );
             Assert.True(array.IsEmpty);
         }
 
@@ -394,20 +461,16 @@ namespace System.Collections.Immutable.Tests
         public void GetOrAddDictionaryValueFactory()
         {
             ImmutableDictionary<int, string> dictionary = ImmutableDictionary.Create<int, string>();
-            string value = ImmutableInterlocked.GetOrAdd(
-                ref dictionary,
-                1,
-                key =>
-                {
-                    Assert.Equal(1, key);
-                    return "a";
-                });
+            string value = ImmutableInterlocked.GetOrAdd(ref dictionary, 1, key =>
+            {
+                Assert.Equal(1, key);
+                return "a";
+            });
             Assert.Equal("a", value);
-            value = ImmutableInterlocked.GetOrAdd(
-                ref dictionary,
-                1,
-                key => { throw new ShouldNotBeInvokedException(); }
-                );
+            value = ImmutableInterlocked.GetOrAdd(ref dictionary, 1, key =>
+            {
+                throw new ShouldNotBeInvokedException();
+            });
             Assert.Equal("a", value);
         }
 
@@ -424,13 +487,18 @@ namespace System.Collections.Immutable.Tests
                     Assert.Equal(1, key);
                     return "a";
                 },
-                true);
+                true
+            );
             Assert.Equal("a", value);
             value = ImmutableInterlocked.GetOrAdd(
                 ref dictionary,
                 1,
-                (key, arg) => { throw new ShouldNotBeInvokedException(); },
-                true);
+                (key, arg) =>
+                {
+                    throw new ShouldNotBeInvokedException();
+                },
+                true
+            );
             Assert.Equal("a", value);
         }
 
@@ -438,11 +506,18 @@ namespace System.Collections.Immutable.Tests
         public void AddOrUpdateDictionaryAddValue()
         {
             ImmutableDictionary<int, string> dictionary = ImmutableDictionary.Create<int, string>();
-            string value = ImmutableInterlocked.AddOrUpdate(ref dictionary, 1, "a", (k, v) => { throw new ShouldNotBeInvokedException(); });
+            string value = ImmutableInterlocked.AddOrUpdate(ref dictionary, 1, "a", (k, v) =>
+            {
+                throw new ShouldNotBeInvokedException();
+            });
             Assert.Equal("a", value);
             Assert.Equal("a", dictionary[1]);
 
-            value = ImmutableInterlocked.AddOrUpdate(ref dictionary, 1, "c", (k, v) => { Assert.Equal("a", v); return "b"; });
+            value = ImmutableInterlocked.AddOrUpdate(ref dictionary, 1, "c", (k, v) =>
+            {
+                Assert.Equal("a", v);
+                return "b";
+            });
             Assert.Equal("b", value);
             Assert.Equal("b", dictionary[1]);
         }
@@ -451,11 +526,31 @@ namespace System.Collections.Immutable.Tests
         public void AddOrUpdateDictionaryAddValueFactory()
         {
             ImmutableDictionary<int, string> dictionary = ImmutableDictionary.Create<int, string>();
-            string value = ImmutableInterlocked.AddOrUpdate(ref dictionary, 1, k => "a", (k, v) => { throw new ShouldNotBeInvokedException(); });
+            string value = ImmutableInterlocked.AddOrUpdate(
+                ref dictionary,
+                1,
+                k => "a",
+                (k, v) =>
+                {
+                    throw new ShouldNotBeInvokedException();
+                }
+            );
             Assert.Equal("a", value);
             Assert.Equal("a", dictionary[1]);
 
-            value = ImmutableInterlocked.AddOrUpdate(ref dictionary, 1, k => { throw new ShouldNotBeInvokedException(); }, (k, v) => { Assert.Equal("a", v); return "b"; });
+            value = ImmutableInterlocked.AddOrUpdate(
+                ref dictionary,
+                1,
+                k =>
+                {
+                    throw new ShouldNotBeInvokedException();
+                },
+                (k, v) =>
+                {
+                    Assert.Equal("a", v);
+                    return "b";
+                }
+            );
             Assert.Equal("b", value);
             Assert.Equal("b", dictionary[1]);
         }
@@ -619,7 +714,8 @@ namespace System.Collections.Immutable.Tests
                     Assert.Equal(1, arg);
                     return transformer(t);
                 },
-                1);
+                1
+            );
         }
 
         /// <summary>
@@ -629,7 +725,10 @@ namespace System.Collections.Immutable.Tests
         /// <param name="location">The variable or field to be changed.</param>
         /// <param name="transformer">The function that transforms the value.</param>
         /// <returns>The result of the replacement function.</returns>
-        private static bool UpdateArrayWrapper<T>(ref ImmutableArray<T> location, Func<ImmutableArray<T>, ImmutableArray<T>> transformer)
+        private static bool UpdateArrayWrapper<T>(
+            ref ImmutableArray<T> location,
+            Func<ImmutableArray<T>, ImmutableArray<T>> transformer
+        )
         {
             return ImmutableInterlocked.Update<T, int>(
                 ref location,
@@ -638,7 +737,8 @@ namespace System.Collections.Immutable.Tests
                     Assert.Equal(1, arg);
                     return transformer(t);
                 },
-                1);
+                1
+            );
         }
     }
 }

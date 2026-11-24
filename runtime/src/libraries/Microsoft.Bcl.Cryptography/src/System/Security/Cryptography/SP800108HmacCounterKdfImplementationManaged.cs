@@ -8,7 +8,10 @@ namespace System.Security.Cryptography
 {
     internal sealed partial class SP800108HmacCounterKdfImplementationManaged
     {
-        public SP800108HmacCounterKdfImplementationManaged(ReadOnlySpan<byte> key, HashAlgorithmName hashAlgorithm)
+        public SP800108HmacCounterKdfImplementationManaged(
+            ReadOnlySpan<byte> key,
+            HashAlgorithmName hashAlgorithm
+        )
         {
             _key = key.ToArray();
             _hashAlgorithm = hashAlgorithm;
@@ -19,7 +22,8 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithm,
             ReadOnlySpan<byte> label,
             ReadOnlySpan<byte> context,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
             if (destination.IsEmpty)
             {
@@ -47,7 +51,8 @@ namespace System.Security.Cryptography
                         label.Length,
                         contextBuffer,
                         context.Length,
-                        destination);
+                        destination
+                    );
                 }
                 finally
                 {
@@ -63,17 +68,27 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithm,
             byte[] label,
             byte[] context,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
-            DeriveBytesOneShot(key, hashAlgorithm, label, label.Length, context, context.Length, destination);
+            DeriveBytesOneShot(
+                key,
+                hashAlgorithm,
+                label,
+                label.Length,
+                context,
+                context.Length,
+                destination
+            );
         }
 
-         internal static unsafe void DeriveBytesOneShot(
+        internal static unsafe void DeriveBytesOneShot(
             ReadOnlySpan<byte> key,
             HashAlgorithmName hashAlgorithm,
             ReadOnlySpan<char> label,
             ReadOnlySpan<char> context,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
             if (destination.Length == 0)
             {
@@ -84,8 +99,12 @@ namespace System.Security.Cryptography
             // the UTF8 encoding on the stack since that will just end up renting again anyway.
 
             Encoding utf8ThrowingEncoding = Utf8DataEncoding.ThrowingUtf8Encoding;
-            byte[] labelBuffer = CryptoPool.Rent(utf8ThrowingEncoding.GetMaxByteCount(label.Length));
-            byte[] contextBuffer = CryptoPool.Rent(utf8ThrowingEncoding.GetMaxByteCount(context.Length));
+            byte[] labelBuffer = CryptoPool.Rent(
+                utf8ThrowingEncoding.GetMaxByteCount(label.Length)
+            );
+            byte[] contextBuffer = CryptoPool.Rent(
+                utf8ThrowingEncoding.GetMaxByteCount(context.Length)
+            );
             int labelWritten = 0;
             int contextWritten = 0;
 
@@ -106,7 +125,8 @@ namespace System.Security.Cryptography
                         labelWritten,
                         contextBuffer,
                         contextWritten,
-                        destination);
+                        destination
+                    );
                 }
                 finally
                 {
@@ -124,7 +144,8 @@ namespace System.Security.Cryptography
             int labelLength,
             byte[] context,
             int contextLength,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
             if (destination.Length == 0)
             {
@@ -132,7 +153,6 @@ namespace System.Security.Cryptography
             }
 
             Debug.Assert(destination.Length <= 0x1FFFFFFF);
-
             // Do everything as checked. Over/underflows are never expected.
             checked
             {
@@ -159,7 +179,10 @@ namespace System.Security.Cryptography
                     {
                         rentedBuffer = CryptoPool.Rent(RentSize);
 
-                        WriteUInt32BigEndian((uint)destination.Length * 8U, rentedBuffer.AsSpan(LOffset, LLength));
+                        WriteUInt32BigEndian(
+                            (uint)destination.Length * 8U,
+                            rentedBuffer.AsSpan(LOffset, LLength)
+                        );
                         rentedBuffer[ZeroOffset] = 0;
 
                         for (uint i = 1; !destination.IsEmpty; i++)
@@ -170,7 +193,13 @@ namespace System.Security.Cryptography
                             Debug.Assert(written == ILength);
                             written = hash.TransformBlock(label, 0, labelLength, null, 0);
                             Debug.Assert(written == labelLength);
-                            written = hash.TransformBlock(rentedBuffer, ZeroOffset, ZeroLength, null, 0);
+                            written = hash.TransformBlock(
+                                rentedBuffer,
+                                ZeroOffset,
+                                ZeroLength,
+                                null,
+                                0
+                            );
                             Debug.Assert(written == ZeroLength);
                             written = hash.TransformBlock(context, 0, contextLength, null, 0);
                             Debug.Assert(written == contextLength);
@@ -211,7 +240,11 @@ namespace System.Security.Cryptography
             destination[3] = (byte)(value);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "Weak algorithms are used as instructed by the caller")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5350",
+            Justification = "Weak algorithms are used as instructed by the caller"
+        )]
         private static HMAC CreateHMAC(HashAlgorithmName hashAlgorithm, byte[] key)
         {
             switch (hashAlgorithm.Name)
@@ -226,7 +259,9 @@ namespace System.Security.Cryptography
                     return new HMACSHA512(key);
                 default:
                     Debug.Fail($"Unexpected HMAC algorithm '{hashAlgorithm.Name}'.");
-                    throw new CryptographicException(SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name));
+                    throw new CryptographicException(
+                        SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name)
+                    );
             }
         }
     }

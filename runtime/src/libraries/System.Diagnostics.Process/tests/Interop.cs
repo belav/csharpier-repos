@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using Microsoft.Win32.SafeHandles;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
+using Microsoft.Win32.SafeHandles;
 
 internal static partial class Interop
 {
@@ -73,7 +73,12 @@ internal static partial class Interop
     }
 
     [DllImport("kernel32.dll")]
-    public static extern bool GetProcessWorkingSetSizeEx(SafeProcessHandle hProcess, out IntPtr lpMinimumWorkingSetSize, out IntPtr lpMaximumWorkingSetSize, out uint flags);
+    public static extern bool GetProcessWorkingSetSizeEx(
+        SafeProcessHandle hProcess,
+        out IntPtr lpMinimumWorkingSetSize,
+        out IntPtr lpMaximumWorkingSetSize,
+        out uint flags
+    );
 
     [DllImport("kernel32.dll")]
     internal static extern bool ProcessIdToSessionId(uint dwProcessId, out uint pSessionId);
@@ -97,10 +102,20 @@ internal static partial class Interop
     internal static extern int SetConsoleOutputCP(int codePage);
 
     [DllImport("advapi32.dll")]
-    internal static extern bool OpenProcessToken(SafeProcessHandle ProcessHandle, uint DesiredAccess, out SafeProcessHandle TokenHandle);
+    internal static extern bool OpenProcessToken(
+        SafeProcessHandle ProcessHandle,
+        uint DesiredAccess,
+        out SafeProcessHandle TokenHandle
+    );
 
     [DllImport("advapi32.dll")]
-    internal static extern bool GetTokenInformation(SafeProcessHandle TokenHandle, uint TokenInformationClass, IntPtr TokenInformation, int TokenInformationLength, ref int ReturnLength);
+    internal static extern bool GetTokenInformation(
+        SafeProcessHandle TokenHandle,
+        uint TokenInformationClass,
+        IntPtr TokenInformation,
+        int TokenInformationLength,
+        ref int ReturnLength
+    );
 
     [DllImport("shell32.dll")]
     internal static extern int SHChangeNotify(int eventId, int flags, IntPtr item1, IntPtr item2);

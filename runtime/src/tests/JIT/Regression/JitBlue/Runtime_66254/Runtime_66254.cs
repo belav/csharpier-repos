@@ -11,11 +11,7 @@ public class Runtime_66254
 {
     internal static void t1()
     {
-        var a = new ValueTuple<int[], int>[]
-        {
-            new (new[] { 0 }, 1),
-            new (new[] { 2 }, 3)
-        };
+        var a = new ValueTuple<int[], int>[] { new(new[] { 0 }, 1), new(new[] { 2 }, 3) };
 
         for (var i1 = 0; i1 < a.Length; i1++)
         {
@@ -29,11 +25,7 @@ public class Runtime_66254
 
     internal static void t2()
     {
-        var a = new ValueTuple<int[], int>[]
-        {
-            new (new[] { 0 }, 1),
-            new (new[] { 2 }, 3)
-        };
+        var a = new ValueTuple<int[], int>[] { new(new[] { 0 }, 1), new(new[] { 2 }, 3) };
 
         for (var i1 = 0; i1 < a.Length; i1++)
         {
@@ -48,11 +40,7 @@ public class Runtime_66254
 
     internal static void t3()
     {
-        var a = new ValueTuple<int, int[]>[]
-        {
-            new (1, new[] { 2 }),
-            new (3, new[] { 4 })
-        };
+        var a = new ValueTuple<int, int[]>[] { new(1, new[] { 2 }), new(3, new[] { 4 }) };
 
         for (var i1 = 0; i1 < a.Length; i1++)
         {

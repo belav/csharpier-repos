@@ -15,7 +15,10 @@ namespace System.Text.Json.Serialization.Tests
         {
             string inputString = ">><++>>>\">>\\>>&>>>\u6f22\u5B57>>>"; // Non-ASCII text should remain unescaped. \u6f22 = \u6C49, \u5B57 = \u5B57
 
-            string actual = JsonSerializer.Serialize(inputString, new JsonSerializerOptions { Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
+            string actual = JsonSerializer.Serialize(
+                inputString,
+                new JsonSerializerOptions { Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping }
+            );
             string expected = "\">><++>>>\\\">>\\\\>>&>>>\u6f22\u5B57>>>\"";
             Assert.Equal(JsonConvert.SerializeObject(inputString), actual);
             Assert.Equal(expected, actual);
@@ -95,7 +98,10 @@ namespace System.Text.Json.Serialization.Tests
                 // "%20" gets turned into a space by Uri.ToString()
                 // https://coding.abel.nu/2014/10/beware-of-uri-tostring/
                 Uri uri = new Uri("http://localhost?p1=Value&p2=A%20B%26p3%3DFooled!");
-                Assert.Equal(@"""http://localhost?p1=Value\u0026p2=A%20B%26p3%3DFooled!""", JsonSerializer.Serialize(uri));
+                Assert.Equal(
+                    @"""http://localhost?p1=Value\u0026p2=A%20B%26p3%3DFooled!""",
+                    JsonSerializer.Serialize(uri)
+                );
             }
 
             {
@@ -120,12 +126,23 @@ namespace System.Text.Json.Serialization.Tests
 
             {
                 Version version = new Version(int.MaxValue, int.MaxValue, int.MaxValue);
-                Assert.Equal(@"""2147483647.2147483647.2147483647""", JsonSerializer.Serialize(version));
+                Assert.Equal(
+                    @"""2147483647.2147483647.2147483647""",
+                    JsonSerializer.Serialize(version)
+                );
             }
 
             {
-                Version version = new Version(int.MaxValue, int.MaxValue, int.MaxValue, int.MaxValue);
-                Assert.Equal(@"""2147483647.2147483647.2147483647.2147483647""", JsonSerializer.Serialize(version));
+                Version version = new Version(
+                    int.MaxValue,
+                    int.MaxValue,
+                    int.MaxValue,
+                    int.MaxValue
+                );
+                Assert.Equal(
+                    @"""2147483647.2147483647.2147483647.2147483647""",
+                    JsonSerializer.Serialize(version)
+                );
             }
         }
 

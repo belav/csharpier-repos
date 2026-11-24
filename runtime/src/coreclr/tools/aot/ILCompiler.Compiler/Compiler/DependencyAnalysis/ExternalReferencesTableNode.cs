@@ -3,9 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-
 using Internal.Text;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis
@@ -13,13 +11,17 @@ namespace ILCompiler.DependencyAnalysis
     /// <summary>
     /// Represents a node that points to various symbols and can be sequentially addressed.
     /// </summary>
-    public sealed class ExternalReferencesTableNode : ObjectNode, ISymbolDefinitionNode, INodeWithSize
+    public sealed class ExternalReferencesTableNode
+        : ObjectNode,
+            ISymbolDefinitionNode,
+            INodeWithSize
     {
         private int? _size;
         private readonly string _blobName;
         private readonly NodeFactory _nodeFactory;
 
-        private Dictionary<SymbolAndDelta, uint> _insertedSymbolsDictionary = new Dictionary<SymbolAndDelta, uint>();
+        private Dictionary<SymbolAndDelta, uint> _insertedSymbolsDictionary =
+            new Dictionary<SymbolAndDelta, uint>();
         private List<SymbolAndDelta> _insertedSymbols = new List<SymbolAndDelta>();
 
         public ExternalReferencesTableNode(string blobName, NodeFactory nodeFactory)
@@ -32,8 +34,10 @@ namespace ILCompiler.DependencyAnalysis
 
         public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
-            sb.Append(nameMangler.CompilationUnitPrefix).Append("__external_" + _blobName + "_references");
+            sb.Append(nameMangler.CompilationUnitPrefix)
+                .Append("__external_" + _blobName + "_references");
         }
+
         public int Offset => 0;
         public override bool IsShareable => false;
 
@@ -46,7 +50,9 @@ namespace ILCompiler.DependencyAnalysis
 #if DEBUG
             if (_nodeFactory.MarkingComplete)
             {
-                var node = symbol as ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<NodeFactory>;
+                var node =
+                    symbol
+                    as ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<NodeFactory>;
                 if (node != null)
                     Debug.Assert(node.Marked);
             }
@@ -75,26 +81,38 @@ namespace ILCompiler.DependencyAnalysis
 
         public override bool StaticDependenciesAreComputed => true;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             // This node does not trigger generation of other nodes.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             // Zero out the dictionary so that we AV if someone tries to insert after we're done.
             _insertedSymbolsDictionary = null;
 
             var builder = new ObjectDataBuilder(factory, relocsOnly);
-            builder.RequireInitialAlignment(factory.Target.SupportsRelativePointers ? 4 : factory.Target.PointerSize);
+            builder.RequireInitialAlignment(
+                factory.Target.SupportsRelativePointers ? 4 : factory.Target.PointerSize
+            );
 
             foreach (SymbolAndDelta symbolAndDelta in _insertedSymbols)
             {
                 if (factory.Target.SupportsRelativePointers)
                 {
                     // TODO: set low bit if the linkage of the symbol is IAT_PVALUE.
-                    builder.EmitReloc(symbolAndDelta.Symbol, RelocType.IMAGE_REL_BASED_RELPTR32, symbolAndDelta.Delta);
+                    builder.EmitReloc(
+                        symbolAndDelta.Symbol,
+                        RelocType.IMAGE_REL_BASED_RELPTR32,
+                        symbolAndDelta.Delta
+                    );
                 }
                 else
                 {
@@ -111,6 +129,7 @@ namespace ILCompiler.DependencyAnalysis
 
         protected internal override int Phase => (int)ObjectNodePhase.Ordered;
         public override int ClassCode => (int)ObjectNodeOrder.ExternalReferencesTableNode;
+
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
             return string.Compare(_blobName, ((ExternalReferencesTableNode)other)._blobName);

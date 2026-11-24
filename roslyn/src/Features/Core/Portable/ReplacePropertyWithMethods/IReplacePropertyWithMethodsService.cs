@@ -20,19 +20,25 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
 
         Task ReplaceReferenceAsync(
             Document document,
-            SyntaxEditor editor, SyntaxNode identifierName,
-            IPropertySymbol property, IFieldSymbol propertyBackingField,
-            string desiredGetMethodName, string desiredSetMethodName,
-            CancellationToken cancellationToken);
+            SyntaxEditor editor,
+            SyntaxNode identifierName,
+            IPropertySymbol property,
+            IFieldSymbol propertyBackingField,
+            string desiredGetMethodName,
+            string desiredSetMethodName,
+            CancellationToken cancellationToken
+        );
 
         Task<ImmutableArray<SyntaxNode>> GetReplacementMembersAsync(
             Document document,
-            IPropertySymbol property, SyntaxNode propertyDeclaration,
+            IPropertySymbol property,
+            SyntaxNode propertyDeclaration,
             IFieldSymbol propertyBackingField,
             string desiredGetMethodName,
             string desiredSetMethodName,
             CodeGenerationOptionsProvider fallbackOptions,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         SyntaxNode GetPropertyNodeToReplace(SyntaxNode propertyDeclaration);
     }

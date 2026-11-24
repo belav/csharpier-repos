@@ -19,15 +19,19 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 namespace Microsoft.CodeAnalysis.Formatting
 {
     [ExportNewDocumentFormattingProvider(LanguageNames.CSharp), Shared]
-    internal class CSharpAccessibilityModifiersNewDocumentFormattingProvider : INewDocumentFormattingProvider
+    internal class CSharpAccessibilityModifiersNewDocumentFormattingProvider
+        : INewDocumentFormattingProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAccessibilityModifiersNewDocumentFormattingProvider()
-        {
-        }
+        public CSharpAccessibilityModifiersNewDocumentFormattingProvider() { }
 
-        public async Task<Document> FormatNewDocumentAsync(Document document, Document? hintDocument, CodeCleanupOptions options, CancellationToken cancellationToken)
+        public async Task<Document> FormatNewDocumentAsync(
+            Document document,
+            Document? hintDocument,
+            CodeCleanupOptions options,
+            CancellationToken cancellationToken
+        )
         {
             var accessibilityPreferences = options.FormattingOptions.AccessibilityModifiersRequired;
             if (accessibilityPreferences == AccessibilityModifiersRequired.Never)
@@ -35,17 +39,30 @@ namespace Microsoft.CodeAnalysis.Formatting
                 return document;
             }
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var typeDeclarations = root.DescendantNodes().Where(node => syntaxFacts.IsTypeDeclaration(node));
+            var typeDeclarations = root.DescendantNodes()
+                .Where(node => syntaxFacts.IsTypeDeclaration(node));
             var editor = new SyntaxEditor(root, document.Project.Solution.Services);
 
             var service = document.GetRequiredLanguageService<IAddAccessibilityModifiersService>();
 
             foreach (var declaration in typeDeclarations)
             {
-                if (!service.ShouldUpdateAccessibilityModifier(CSharpAccessibilityFacts.Instance, declaration, accessibilityPreferences, out _, out _))
+                if (
+                    !service.ShouldUpdateAccessibilityModifier(
+                        CSharpAccessibilityFacts.Instance,
+                        declaration,
+                        accessibilityPreferences,
+                        out _,
+                        out _
+                    )
+                )
                     continue;
 
                 // Since we format each document as they are added to a project we can't assume we know about all
@@ -61,7 +78,12 @@ namespace Microsoft.CodeAnalysis.Formatting
                 // When we see File1, we don't know about File2, so would add an internal modifier, which would result in a compile
                 // error.
                 var modifiers = syntaxFacts.GetModifiers(declaration);
-                CSharpAccessibilityFacts.GetAccessibilityAndModifiers(modifiers, out _, out var declarationModifiers, out _);
+                CSharpAccessibilityFacts.GetAccessibilityAndModifiers(
+                    modifiers,
+                    out _,
+                    out var declarationModifiers,
+                    out _
+                );
                 if (declarationModifiers.IsPartial)
                     continue;
 

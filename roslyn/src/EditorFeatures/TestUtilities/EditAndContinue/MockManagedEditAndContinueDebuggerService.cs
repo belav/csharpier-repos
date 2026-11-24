@@ -19,10 +19,18 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         public Func<ImmutableArray<ManagedActiveStatementDebugInfo>>? GetActiveStatementsImpl;
         public Func<ImmutableArray<string>>? GetCapabilitiesImpl;
 
-        public ValueTask<ImmutableArray<ManagedActiveStatementDebugInfo>> GetActiveStatementsAsync(CancellationToken cancellationToken)
-            => ValueTaskFactory.FromResult(GetActiveStatementsImpl?.Invoke() ?? ImmutableArray<ManagedActiveStatementDebugInfo>.Empty);
+        public ValueTask<ImmutableArray<ManagedActiveStatementDebugInfo>> GetActiveStatementsAsync(
+            CancellationToken cancellationToken
+        ) =>
+            ValueTaskFactory.FromResult(
+                GetActiveStatementsImpl?.Invoke()
+                    ?? ImmutableArray<ManagedActiveStatementDebugInfo>.Empty
+            );
 
-        public ValueTask<ManagedHotReloadAvailability> GetAvailabilityAsync(Guid mvid, CancellationToken cancellationToken)
+        public ValueTask<ManagedHotReloadAvailability> GetAvailabilityAsync(
+            Guid mvid,
+            CancellationToken cancellationToken
+        )
         {
             if (IsEditAndContinueAvailable != null)
             {
@@ -31,16 +39,33 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             if (LoadedModules != null)
             {
-                return ValueTaskFactory.FromResult(LoadedModules.TryGetValue(mvid, out var result) ? result : new ManagedHotReloadAvailability(ManagedHotReloadAvailabilityStatus.ModuleNotLoaded));
+                return ValueTaskFactory.FromResult(
+                    LoadedModules.TryGetValue(mvid, out var result)
+                        ? result
+                        : new ManagedHotReloadAvailability(
+                            ManagedHotReloadAvailabilityStatus.ModuleNotLoaded
+                        )
+                );
             }
 
             throw new NotImplementedException();
         }
 
-        public ValueTask<ImmutableArray<string>> GetCapabilitiesAsync(CancellationToken cancellationToken)
-            => ValueTaskFactory.FromResult(GetCapabilitiesImpl?.Invoke() ?? ImmutableArray.Create("Baseline", "AddDefinitionToExistingType", "NewTypeDefinition"));
+        public ValueTask<ImmutableArray<string>> GetCapabilitiesAsync(
+            CancellationToken cancellationToken
+        ) =>
+            ValueTaskFactory.FromResult(
+                GetCapabilitiesImpl?.Invoke()
+                    ?? ImmutableArray.Create(
+                        "Baseline",
+                        "AddDefinitionToExistingType",
+                        "NewTypeDefinition"
+                    )
+            );
 
-        public ValueTask PrepareModuleForUpdateAsync(Guid mvid, CancellationToken cancellationToken)
-            => ValueTaskFactory.CompletedTask;
+        public ValueTask PrepareModuleForUpdateAsync(
+            Guid mvid,
+            CancellationToken cancellationToken
+        ) => ValueTaskFactory.CompletedTask;
     }
 }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,268 +29,308 @@
 //
 
 using System.Collections.Specialized;
+using System.IO;
 using System.Security.Permissions;
 using System.Security.Principal;
+using System.Text;
 using System.Web.Configuration;
 using System.Web.Util;
-using System.IO;
-using System.Text;
 
-namespace System.Web.Security {
+namespace System.Web.Security
+{
+    [Serializable]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public class RolePrincipal : IPrincipal
+    {
+        IIdentity _identity;
+        bool _listChanged;
+        string[] _cachedArray;
+        HybridDictionary _cachedRoles;
+        readonly string _providerName;
 
-	[Serializable]
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public
-	class RolePrincipal : IPrincipal {
+        int _version = 1;
+        string _cookiePath;
+        DateTime _issueDate;
+        DateTime _expireDate;
 
-		IIdentity _identity;
-		bool _listChanged;
-		string[] _cachedArray;
-		HybridDictionary _cachedRoles;
-		readonly string _providerName;
+        public RolePrincipal(IIdentity identity)
+        {
+            if (identity == null)
+                throw new ArgumentNullException("identity");
 
-		int _version = 1;
-		string _cookiePath;
-		DateTime _issueDate;
-		DateTime _expireDate;
+            this._identity = identity;
+            this._cookiePath = RoleManagerConfig.CookiePath;
+            this._issueDate = DateTime.Now;
+            this._expireDate = _issueDate.Add(RoleManagerConfig.CookieTimeout);
+        }
 
+        public RolePrincipal(IIdentity identity, string encryptedTicket)
+            : this(identity)
+        {
+            DecryptTicket(encryptedTicket);
+        }
 
-		public RolePrincipal (IIdentity identity)
-		{
-			if (identity == null)
-				throw new ArgumentNullException ("identity");
-			
-			this._identity = identity;
-			this._cookiePath = RoleManagerConfig.CookiePath;
-			this._issueDate = DateTime.Now;
-			this._expireDate = _issueDate.Add (RoleManagerConfig.CookieTimeout);
-		}
+        public RolePrincipal(string providerName, IIdentity identity)
+            : this(identity)
+        {
+            if (providerName == null)
+                throw new ArgumentNullException("providerName");
 
-		public RolePrincipal (IIdentity identity, string encryptedTicket)
-			: this (identity)
-		{
-			DecryptTicket (encryptedTicket);
-		}
+            this._providerName = providerName;
+        }
 
-		public RolePrincipal (string providerName, IIdentity identity)
-			: this (identity)
-		{
-			if (providerName == null)
-				throw new ArgumentNullException ("providerName");
+        public RolePrincipal(string providerName, IIdentity identity, string encryptedTicket)
+            : this(providerName, identity)
+        {
+            DecryptTicket(encryptedTicket);
+        }
 
-			this._providerName = providerName;
-		}
+        public string[] GetRoles()
+        {
+            if (!_identity.IsAuthenticated)
+                return new string[0];
 
-		public RolePrincipal (string providerName, IIdentity identity, string encryptedTicket)
-			: this (providerName, identity)
-		{
-			DecryptTicket (encryptedTicket);
-		}
+            if (!IsRoleListCached || Expired)
+            {
+                _cachedArray = Provider.GetRolesForUser(_identity.Name);
+                _cachedRoles = new HybridDictionary(true);
 
-		public string [] GetRoles ()
-		{
-			if (!_identity.IsAuthenticated)
-				return new string[0];
+                foreach (string r in _cachedArray)
+                    _cachedRoles.Add(r, r);
 
-			if (!IsRoleListCached || Expired) {
-				_cachedArray = Provider.GetRolesForUser (_identity.Name);
-				_cachedRoles = new HybridDictionary (true);
+                _listChanged = true;
+            }
 
-				foreach (string r in _cachedArray)
-					_cachedRoles.Add(r, r);
+            return _cachedArray;
+        }
 
-				_listChanged = true;
-			}
+        public bool IsInRole(string role)
+        {
+            if (!_identity.IsAuthenticated)
+                return false;
 
-			return _cachedArray;
-		}
-		
-		public bool IsInRole (string role)
-		{
-			if (!_identity.IsAuthenticated)
-				return false;
+            GetRoles();
 
-			GetRoles ();
+            return _cachedRoles[role] != null;
+        }
 
-			return _cachedRoles [role] != null;
-		}
-		
-		public string ToEncryptedTicket ()
-		{
-			string roles = string.Join (",", GetRoles ());
-			string cookiePath = RoleManagerConfig.CookiePath;
-			int approxTicketLen = roles.Length + cookiePath.Length + 64;
+        public string ToEncryptedTicket()
+        {
+            string roles = string.Join(",", GetRoles());
+            string cookiePath = RoleManagerConfig.CookiePath;
+            int approxTicketLen = roles.Length + cookiePath.Length + 64;
 
-			if (_cachedArray.Length > Roles.MaxCachedResults)
-			       return null;
+            if (_cachedArray.Length > Roles.MaxCachedResults)
+                return null;
 
-			MemoryStream ticket = new MemoryStream (approxTicketLen);
-			BinaryWriter writer = new BinaryWriter (ticket);
+            MemoryStream ticket = new MemoryStream(approxTicketLen);
+            BinaryWriter writer = new BinaryWriter(ticket);
 
-			// version
-			writer.Write (Version);
-		
-			// issue datetime
-			DateTime issueDate = DateTime.Now;
-			writer.Write (issueDate.Ticks);
+            // version
+            writer.Write(Version);
 
-			// expiration datetime
-			writer.Write (_expireDate.Ticks);
+            // issue datetime
+            DateTime issueDate = DateTime.Now;
+            writer.Write(issueDate.Ticks);
 
-			writer.Write (cookiePath);
-			writer.Write (roles);
+            // expiration datetime
+            writer.Write(_expireDate.Ticks);
 
-			CookieProtection cookieProtection = RoleManagerConfig.CookieProtection;
+            writer.Write(cookiePath);
+            writer.Write(roles);
 
-			byte[] ticket_data = ticket.GetBuffer ();
-			if (cookieProtection == CookieProtection.All) {
-				ticket_data = MachineKeySectionUtils.EncryptSign (MachineConfig, ticket_data);
-			} else if (cookieProtection == CookieProtection.Encryption) {
-				ticket_data = MachineKeySectionUtils.Encrypt (MachineConfig, ticket_data);
-			} else if (cookieProtection == CookieProtection.Validation) {
-				ticket_data = MachineKeySectionUtils.Sign (MachineConfig, ticket_data);
-			}
+            CookieProtection cookieProtection = RoleManagerConfig.CookieProtection;
 
-			return GetBase64FromBytes (ticket_data, 0, ticket_data.Length);
-		}
+            byte[] ticket_data = ticket.GetBuffer();
+            if (cookieProtection == CookieProtection.All)
+            {
+                ticket_data = MachineKeySectionUtils.EncryptSign(MachineConfig, ticket_data);
+            }
+            else if (cookieProtection == CookieProtection.Encryption)
+            {
+                ticket_data = MachineKeySectionUtils.Encrypt(MachineConfig, ticket_data);
+            }
+            else if (cookieProtection == CookieProtection.Validation)
+            {
+                ticket_data = MachineKeySectionUtils.Sign(MachineConfig, ticket_data);
+            }
 
-		void DecryptTicket (string encryptedTicket)
-		{
-			if (encryptedTicket == null || encryptedTicket == String.Empty)
-				throw new ArgumentException ("Invalid encrypted ticket", "encryptedTicket");
+            return GetBase64FromBytes(ticket_data, 0, ticket_data.Length);
+        }
 
-			byte [] ticketBytes = GetBytesFromBase64 (encryptedTicket);
-			byte [] decryptedTicketBytes = null;
+        void DecryptTicket(string encryptedTicket)
+        {
+            if (encryptedTicket == null || encryptedTicket == String.Empty)
+                throw new ArgumentException("Invalid encrypted ticket", "encryptedTicket");
 
-			CookieProtection cookieProtection = RoleManagerConfig.CookieProtection;
+            byte[] ticketBytes = GetBytesFromBase64(encryptedTicket);
+            byte[] decryptedTicketBytes = null;
 
-			if (cookieProtection == CookieProtection.All) {
-				decryptedTicketBytes = MachineKeySectionUtils.VerifyDecrypt (MachineConfig, ticketBytes);
-			} else if (cookieProtection == CookieProtection.Encryption) {
-				decryptedTicketBytes = MachineKeySectionUtils.Decrypt (MachineConfig, ticketBytes);
-			} else if (cookieProtection == CookieProtection.Validation) {
-				decryptedTicketBytes = MachineKeySectionUtils.Verify (MachineConfig, ticketBytes);
-			}
+            CookieProtection cookieProtection = RoleManagerConfig.CookieProtection;
 
-			if (decryptedTicketBytes == null)
-				throw new HttpException ("ticket validation failed");
+            if (cookieProtection == CookieProtection.All)
+            {
+                decryptedTicketBytes = MachineKeySectionUtils.VerifyDecrypt(
+                    MachineConfig,
+                    ticketBytes
+                );
+            }
+            else if (cookieProtection == CookieProtection.Encryption)
+            {
+                decryptedTicketBytes = MachineKeySectionUtils.Decrypt(MachineConfig, ticketBytes);
+            }
+            else if (cookieProtection == CookieProtection.Validation)
+            {
+                decryptedTicketBytes = MachineKeySectionUtils.Verify(MachineConfig, ticketBytes);
+            }
 
-			MemoryStream ticket = new MemoryStream (decryptedTicketBytes);
-			BinaryReader reader = new BinaryReader (ticket);
+            if (decryptedTicketBytes == null)
+                throw new HttpException("ticket validation failed");
 
-			// version
-			_version = reader.ReadInt32 ();
+            MemoryStream ticket = new MemoryStream(decryptedTicketBytes);
+            BinaryReader reader = new BinaryReader(ticket);
 
-			// issued date
-			_issueDate = new DateTime (reader.ReadInt64 ());
+            // version
+            _version = reader.ReadInt32();
 
-			// expire date
-			_expireDate = new DateTime (reader.ReadInt64 ());
+            // issued date
+            _issueDate = new DateTime(reader.ReadInt64());
 
-			// cookie path
-			_cookiePath = reader.ReadString ();
-			
-			// roles
-			string roles = reader.ReadString ();
+            // expire date
+            _expireDate = new DateTime(reader.ReadInt64());
 
-			if (!Expired) {
-				InitializeRoles (roles);
-				//update ticket if less than half of CookieTimeout remaining.
-				if (Roles.CookieSlidingExpiration){
-					if (_expireDate-DateTime.Now < TimeSpan.FromTicks (RoleManagerConfig.CookieTimeout.Ticks/2))	{
-						_issueDate = DateTime.Now;
-						_expireDate = DateTime.Now.Add (RoleManagerConfig.CookieTimeout);
-						SetDirty ();
-					}
-				}
-			} else {
-				// issue a new ticket
-				_issueDate = DateTime.Now;
-				_expireDate = _issueDate.Add (RoleManagerConfig.CookieTimeout);
-			}
-		}
+            // cookie path
+            _cookiePath = reader.ReadString();
 
-		void InitializeRoles (string decryptedRoles)
-		{
-			_cachedArray = decryptedRoles.Split (',');
-			_cachedRoles = new HybridDictionary (true);
+            // roles
+            string roles = reader.ReadString();
 
-			foreach (string r in _cachedArray)
-				_cachedRoles.Add (r, r);
-		}
+            if (!Expired)
+            {
+                InitializeRoles(roles);
+                //update ticket if less than half of CookieTimeout remaining.
+                if (Roles.CookieSlidingExpiration)
+                {
+                    if (
+                        _expireDate - DateTime.Now
+                        < TimeSpan.FromTicks(RoleManagerConfig.CookieTimeout.Ticks / 2)
+                    )
+                    {
+                        _issueDate = DateTime.Now;
+                        _expireDate = DateTime.Now.Add(RoleManagerConfig.CookieTimeout);
+                        SetDirty();
+                    }
+                }
+            }
+            else
+            {
+                // issue a new ticket
+                _issueDate = DateTime.Now;
+                _expireDate = _issueDate.Add(RoleManagerConfig.CookieTimeout);
+            }
+        }
 
-		public bool CachedListChanged {
-			get { return _listChanged; }
-		}
-		
-		public string CookiePath {
-			get { return _cookiePath; }
-		}
-		
-		public bool Expired {
-			get { return ExpireDate < DateTime.Now; }
-		}
-		
-		public DateTime ExpireDate {
-			get { return _expireDate; }
-		}
-		
-		public IIdentity Identity {
-			get { return _identity; }
-		}
-		
-		public bool IsRoleListCached {
-			get { return (_cachedRoles != null) && RoleManagerConfig.CacheRolesInCookie; }
-		}
-		
-		public DateTime IssueDate {
-			get { return _issueDate; }
-		}
-		
-		public string ProviderName {
-			get { return String.IsNullOrEmpty(_providerName) ? Provider.Name : _providerName; }
-		}
-		
-		public int Version {
-			get { return _version; }
-		}
+        void InitializeRoles(string decryptedRoles)
+        {
+            _cachedArray = decryptedRoles.Split(',');
+            _cachedRoles = new HybridDictionary(true);
 
-		RoleProvider Provider {
-			get {
-				if (String.IsNullOrEmpty (_providerName))
-					return Roles.Provider;
+            foreach (string r in _cachedArray)
+                _cachedRoles.Add(r, r);
+        }
 
-				return Roles.Providers [_providerName];
-			}
-		}
+        public bool CachedListChanged
+        {
+            get { return _listChanged; }
+        }
 
-		public void SetDirty ()
-		{
-			_listChanged = true;
-			_cachedRoles = null;
-			_cachedArray = null;
-		}
+        public string CookiePath
+        {
+            get { return _cookiePath; }
+        }
 
-		static string GetBase64FromBytes (byte [] bytes, int offset, int len)
-		{
-			return Convert.ToBase64String (bytes, offset, len);
-		}
+        public bool Expired
+        {
+            get { return ExpireDate < DateTime.Now; }
+        }
 
-		static byte [] GetBytesFromBase64 (string base64String)
-		{
-			return Convert.FromBase64String (base64String);
-		}
+        public DateTime ExpireDate
+        {
+            get { return _expireDate; }
+        }
 
-		RoleManagerSection RoleManagerConfig
-		{
-			get { return (RoleManagerSection) WebConfigurationManager.GetSection ("system.web/roleManager"); }
-		}
+        public IIdentity Identity
+        {
+            get { return _identity; }
+        }
 
-		MachineKeySection MachineConfig
-		{
-			get { return (MachineKeySection) WebConfigurationManager.GetSection ("system.web/machineKey"); }
-		}
-	}
+        public bool IsRoleListCached
+        {
+            get { return (_cachedRoles != null) && RoleManagerConfig.CacheRolesInCookie; }
+        }
+
+        public DateTime IssueDate
+        {
+            get { return _issueDate; }
+        }
+
+        public string ProviderName
+        {
+            get { return String.IsNullOrEmpty(_providerName) ? Provider.Name : _providerName; }
+        }
+
+        public int Version
+        {
+            get { return _version; }
+        }
+
+        RoleProvider Provider
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(_providerName))
+                    return Roles.Provider;
+
+                return Roles.Providers[_providerName];
+            }
+        }
+
+        public void SetDirty()
+        {
+            _listChanged = true;
+            _cachedRoles = null;
+            _cachedArray = null;
+        }
+
+        static string GetBase64FromBytes(byte[] bytes, int offset, int len)
+        {
+            return Convert.ToBase64String(bytes, offset, len);
+        }
+
+        static byte[] GetBytesFromBase64(string base64String)
+        {
+            return Convert.FromBase64String(base64String);
+        }
+
+        RoleManagerSection RoleManagerConfig
+        {
+            get
+            {
+                return (RoleManagerSection)
+                    WebConfigurationManager.GetSection("system.web/roleManager");
+            }
+        }
+
+        MachineKeySection MachineConfig
+        {
+            get
+            {
+                return (MachineKeySection)
+                    WebConfigurationManager.GetSection("system.web/machineKey");
+            }
+        }
+    }
 }
-
-

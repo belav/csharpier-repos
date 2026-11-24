@@ -29,52 +29,76 @@ namespace System.Security.Cryptography
         /// </summary>
         public HashAlgorithmName HashAlgorithm { get; }
 
-        [Obsolete(Obsoletions.Rfc2898OutdatedCtorMessage, DiagnosticId = Obsoletions.Rfc2898OutdatedCtorDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.Rfc2898OutdatedCtorMessage,
+            DiagnosticId = Obsoletions.Rfc2898OutdatedCtorDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public Rfc2898DeriveBytes(byte[] password, byte[] salt, int iterations)
-            : this(password, salt, iterations, HashAlgorithmName.SHA1)
-        {
-        }
+            : this(password, salt, iterations, HashAlgorithmName.SHA1) { }
 
-        public Rfc2898DeriveBytes(byte[] password, byte[] salt, int iterations, HashAlgorithmName hashAlgorithm)
-            :this(password, salt, iterations, hashAlgorithm, clearPassword: false)
-        {
-        }
+        public Rfc2898DeriveBytes(
+            byte[] password,
+            byte[] salt,
+            int iterations,
+            HashAlgorithmName hashAlgorithm
+        )
+            : this(password, salt, iterations, hashAlgorithm, clearPassword: false) { }
 
-        [Obsolete(Obsoletions.Rfc2898OutdatedCtorMessage, DiagnosticId = Obsoletions.Rfc2898OutdatedCtorDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.Rfc2898OutdatedCtorMessage,
+            DiagnosticId = Obsoletions.Rfc2898OutdatedCtorDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public Rfc2898DeriveBytes(string password, byte[] salt)
-             : this(password, salt, 1000)
-        {
-        }
+            : this(password, salt, 1000) { }
 
-        [Obsolete(Obsoletions.Rfc2898OutdatedCtorMessage, DiagnosticId = Obsoletions.Rfc2898OutdatedCtorDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.Rfc2898OutdatedCtorMessage,
+            DiagnosticId = Obsoletions.Rfc2898OutdatedCtorDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public Rfc2898DeriveBytes(string password, byte[] salt, int iterations)
-            : this(password, salt, iterations, HashAlgorithmName.SHA1)
-        {
-        }
+            : this(password, salt, iterations, HashAlgorithmName.SHA1) { }
 
-        public Rfc2898DeriveBytes(string password, byte[] salt, int iterations, HashAlgorithmName hashAlgorithm)
+        public Rfc2898DeriveBytes(
+            string password,
+            byte[] salt,
+            int iterations,
+            HashAlgorithmName hashAlgorithm
+        )
             : this(
-                Encoding.UTF8.GetBytes(password ?? throw new ArgumentNullException(nameof(password))),
+                Encoding.UTF8.GetBytes(
+                    password ?? throw new ArgumentNullException(nameof(password))
+                ),
                 salt,
                 iterations,
                 hashAlgorithm,
-                clearPassword: true)
-        {
-        }
+                clearPassword: true
+            ) { }
 
-        [Obsolete(Obsoletions.Rfc2898OutdatedCtorMessage, DiagnosticId = Obsoletions.Rfc2898OutdatedCtorDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.Rfc2898OutdatedCtorMessage,
+            DiagnosticId = Obsoletions.Rfc2898OutdatedCtorDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public Rfc2898DeriveBytes(string password, int saltSize)
-            : this(password, saltSize, 1000)
-        {
-        }
+            : this(password, saltSize, 1000) { }
 
-        [Obsolete(Obsoletions.Rfc2898OutdatedCtorMessage, DiagnosticId = Obsoletions.Rfc2898OutdatedCtorDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.Rfc2898OutdatedCtorMessage,
+            DiagnosticId = Obsoletions.Rfc2898OutdatedCtorDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public Rfc2898DeriveBytes(string password, int saltSize, int iterations)
-            : this(password, saltSize, iterations, HashAlgorithmName.SHA1)
-        {
-        }
+            : this(password, saltSize, iterations, HashAlgorithmName.SHA1) { }
 
-        public Rfc2898DeriveBytes(string password, int saltSize, int iterations, HashAlgorithmName hashAlgorithm)
+        public Rfc2898DeriveBytes(
+            string password,
+            int saltSize,
+            int iterations,
+            HashAlgorithmName hashAlgorithm
+        )
         {
             ArgumentOutOfRangeException.ThrowIfNegative(saltSize);
             ArgumentOutOfRangeException.ThrowIfNegativeOrZero(iterations);
@@ -92,12 +116,21 @@ namespace System.Security.Cryptography
             Initialize();
         }
 
-        internal Rfc2898DeriveBytes(byte[] password, byte[] salt, int iterations, HashAlgorithmName hashAlgorithm, bool clearPassword) :
-            this(
-                new ReadOnlySpan<byte>(password ?? throw new ArgumentNullException(nameof(password))),
+        internal Rfc2898DeriveBytes(
+            byte[] password,
+            byte[] salt,
+            int iterations,
+            HashAlgorithmName hashAlgorithm,
+            bool clearPassword
+        )
+            : this(
+                new ReadOnlySpan<byte>(
+                    password ?? throw new ArgumentNullException(nameof(password))
+                ),
                 new ReadOnlySpan<byte>(salt ?? throw new ArgumentNullException(nameof(salt))),
                 iterations,
-                hashAlgorithm)
+                hashAlgorithm
+            )
         {
             if (clearPassword)
             {
@@ -105,7 +138,12 @@ namespace System.Security.Cryptography
             }
         }
 
-        internal Rfc2898DeriveBytes(ReadOnlySpan<byte> password, ReadOnlySpan<byte> salt, int iterations, HashAlgorithmName hashAlgorithm)
+        internal Rfc2898DeriveBytes(
+            ReadOnlySpan<byte> password,
+            ReadOnlySpan<byte> salt,
+            int iterations,
+            HashAlgorithmName hashAlgorithm
+        )
         {
             ArgumentOutOfRangeException.ThrowIfNegativeOrZero(iterations);
 
@@ -121,11 +159,7 @@ namespace System.Security.Cryptography
 
         public int IterationCount
         {
-            get
-            {
-                return (int)_iterations;
-            }
-
+            get { return (int)_iterations; }
             set
             {
                 ArgumentOutOfRangeException.ThrowIfNegativeOrZero(value);
@@ -136,11 +170,7 @@ namespace System.Security.Cryptography
 
         public byte[] Salt
         {
-            get
-            {
-                return _salt.AsSpan(0, _salt.Length - sizeof(uint)).ToArray();
-            }
-
+            get { return _salt.AsSpan(0, _salt.Length - sizeof(uint)).ToArray(); }
             set
             {
                 ArgumentNullException.ThrowIfNull(value);
@@ -201,7 +231,10 @@ namespace System.Security.Cryptography
                 }
             }
 
-            Debug.Assert(_startIndex == 0 && _endIndex == 0, "Invalid start or end index in the internal buffer.");
+            Debug.Assert(
+                _startIndex == 0 && _endIndex == 0,
+                "Invalid start or end index in the internal buffer."
+            );
 
             while (offset < cb)
             {
@@ -222,7 +255,11 @@ namespace System.Security.Cryptography
             }
         }
 
-        [Obsolete(Obsoletions.Rfc2898CryptDeriveKeyMessage, DiagnosticId = Obsoletions.Rfc2898CryptDeriveKeyDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.Rfc2898CryptDeriveKeyMessage,
+            DiagnosticId = Obsoletions.Rfc2898CryptDeriveKeyDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public byte[] CryptDeriveKey(string algname, string alghashname, int keySize, byte[] rgbIV)
         {
             // If this were to be implemented here, CAPI would need to be used (not CNG) because of
@@ -249,15 +286,19 @@ namespace System.Security.Cryptography
             }
 
             // Restrict the HashAlgorithmName to known hashes, particularly excluding MD5.
-            if (hashAlgorithm != HashAlgorithmName.SHA1 &&
-                hashAlgorithm != HashAlgorithmName.SHA256 &&
-                hashAlgorithm != HashAlgorithmName.SHA384 &&
-                hashAlgorithm != HashAlgorithmName.SHA512 &&
-                hashAlgorithm != HashAlgorithmName.SHA3_256 &&
-                hashAlgorithm != HashAlgorithmName.SHA3_384 &&
-                hashAlgorithm != HashAlgorithmName.SHA3_512)
+            if (
+                hashAlgorithm != HashAlgorithmName.SHA1
+                && hashAlgorithm != HashAlgorithmName.SHA256
+                && hashAlgorithm != HashAlgorithmName.SHA384
+                && hashAlgorithm != HashAlgorithmName.SHA512
+                && hashAlgorithm != HashAlgorithmName.SHA3_256
+                && hashAlgorithm != HashAlgorithmName.SHA3_384
+                && hashAlgorithm != HashAlgorithmName.SHA3_512
+            )
             {
-                throw new CryptographicException(SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name));
+                throw new CryptographicException(
+                    SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name)
+                );
             }
 
             return IncrementalHash.CreateHMAC(hashAlgorithm, password);
@@ -283,7 +324,10 @@ namespace System.Security.Cryptography
             if (_block == uint.MaxValue)
                 throw new CryptographicException(SR.Cryptography_ExceedKdfExtractLimit);
 
-            BinaryPrimitives.WriteUInt32BigEndian(_salt.AsSpan(_salt.Length - sizeof(uint)), _block + 1);
+            BinaryPrimitives.WriteUInt32BigEndian(
+                _salt.AsSpan(_salt.Length - sizeof(uint)),
+                _block + 1
+            );
             Debug.Assert(_blockSize == _buffer.Length);
 
             // The biggest _blockSize we have is from SHA512, which is 64 bytes.

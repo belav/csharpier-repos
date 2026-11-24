@@ -112,7 +112,9 @@ namespace System.Text
         }
 
         public ReadOnlySpan<char> AsSpan() => _chars.Slice(0, _pos);
+
         public ReadOnlySpan<char> AsSpan(int start) => _chars.Slice(start, _pos - start);
+
         public ReadOnlySpan<char> AsSpan(int start, int length) => _chars.Slice(start, length);
 
         public bool TryCopyTo(Span<char> destination, out int charsWritten)
@@ -162,9 +164,9 @@ namespace System.Text
             _chars.Slice(index, remaining).CopyTo(_chars.Slice(index + count));
             s
 #if !NETCOREAPP
-                .AsSpan()
+            .AsSpan()
 #endif
-                .CopyTo(_chars.Slice(index));
+            .CopyTo(_chars.Slice(index));
             _pos += count;
         }
 
@@ -214,9 +216,9 @@ namespace System.Text
 
             s
 #if !NETCOREAPP
-                .AsSpan()
+            .AsSpan()
 #endif
-                .CopyTo(_chars.Slice(pos));
+            .CopyTo(_chars.Slice(pos));
             _pos += s.Length;
         }
 
@@ -295,15 +297,20 @@ namespace System.Text
         private void Grow(int additionalCapacityBeyondPos)
         {
             Debug.Assert(additionalCapacityBeyondPos > 0);
-            Debug.Assert(_pos > _chars.Length - additionalCapacityBeyondPos, "Grow called incorrectly, no resize is needed.");
+            Debug.Assert(
+                _pos > _chars.Length - additionalCapacityBeyondPos,
+                "Grow called incorrectly, no resize is needed."
+            );
 
             const uint ArrayMaxLength = 0x7FFFFFC7; // same as Array.MaxLength
 
             // Increase to at least the required size (_pos + additionalCapacityBeyondPos), but try
             // to double the size if possible, bounding the doubling to not go beyond the max array length.
-            int newCapacity = (int)Math.Max(
-                (uint)(_pos + additionalCapacityBeyondPos),
-                Math.Min((uint)_chars.Length * 2, ArrayMaxLength));
+            int newCapacity = (int)
+                Math.Max(
+                    (uint)(_pos + additionalCapacityBeyondPos),
+                    Math.Min((uint)_chars.Length * 2, ArrayMaxLength)
+                );
 
             // Make sure to let Rent throw an exception if the caller has a bug and the desired capacity is negative.
             // This could also go negative if the actual required length wraps around.

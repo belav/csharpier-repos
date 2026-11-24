@@ -1,10 +1,11 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
-namespace System.Security.Policy {
+namespace System.Security.Policy
+{
     /// <summary>
     ///     Interface for evidence objects that support being "unverified".  For instance, StrongName
     ///     evidence for a strong name signature which was not yet verified.  This interface is used to
@@ -13,15 +14,12 @@ namespace System.Security.Policy {
     ///     any verification on it.  (Since we didn't use it for policy resolution, it wouldn't have
     ///     mattered if the evidence was not present in the first place).
     /// </summary>
-    internal interface IDelayEvaluatedEvidence {
+    internal interface IDelayEvaluatedEvidence
+    {
         /// <summary>
         ///     Is this evidence object verified yet?
         /// </summary>
-        bool IsVerified 
-        { 
-            [System.Security.SecurityCritical]
-            get; 
-        }
+        bool IsVerified { [System.Security.SecurityCritical] get; }
 
         /// <summary>
         ///     Was this evidence object used during the course of policy evaluation?

@@ -19,10 +19,8 @@ public static class TupleExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static string FormatTables(this IEnumerable<(string Table, string? Schema)> tables)
-        => "{"
-            + string.Join(", ", tables.Select(t => "'" + FormatTable(t) + "'"))
-            + "}";
+    public static string FormatTables(this IEnumerable<(string Table, string? Schema)> tables) =>
+        "{" + string.Join(", ", tables.Select(t => "'" + FormatTable(t) + "'")) + "}";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -30,6 +28,6 @@ public static class TupleExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static string FormatTable(this (string Table, string? Schema) table)
-        => table.Schema == null ? table.Table : table.Schema + "." + table.Table;
+    public static string FormatTable(this (string Table, string? Schema) table) =>
+        table.Schema == null ? table.Table : table.Schema + "." + table.Table;
 }

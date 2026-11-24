@@ -27,16 +27,17 @@ namespace System.Net.Http.Functional.Tests
     {
         protected override Version UseVersion => HttpVersion.Version30;
 
-        public HttpClientHandlerTest_Http3(ITestOutputHelper output) : base(output)
-        {
-        }
+        public HttpClientHandlerTest_Http3(ITestOutputHelper output)
+            : base(output) { }
 
         private async Task AssertProtocolErrorAsync(long errorCode, Func<Task> task)
         {
             Exception outerEx = await Assert.ThrowsAnyAsync<Exception>(task);
             _output.WriteLine(outerEx.ToString());
             Assert.IsType<HttpRequestException>(outerEx);
-            HttpProtocolException protocolEx = Assert.IsType<HttpProtocolException>(outerEx.InnerException);
+            HttpProtocolException protocolEx = Assert.IsType<HttpProtocolException>(
+                outerEx.InnerException
+            );
             Assert.Equal(errorCode, protocolEx.ErrorCode);
         }
 
@@ -44,20 +45,28 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(10, 10240)] // 2 bytes settings value.
         [InlineData(100, 102400)] // 4 bytes settings value.
         [InlineData(10_000_000, int.MaxValue)] // 8 bytes settings value.
-        public async Task ClientSettingsReceived_Success(int headerSizeLimit, int expectedHeaderSizeLimitBytes)
+        public async Task ClientSettingsReceived_Success(
+            int headerSizeLimit,
+            int expectedHeaderSizeLimitBytes
+        )
         {
             using Http3LoopbackServer server = CreateHttp3LoopbackServer();
 
             Task serverTask = Task.Run(async () =>
             {
-                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
 
-                (Http3LoopbackStream settingsStream, Http3LoopbackStream requestStream) = await connection.AcceptControlAndRequestStreamAsync();
+                (Http3LoopbackStream settingsStream, Http3LoopbackStream requestStream) =
+                    await connection.AcceptControlAndRequestStreamAsync();
 
                 await using (settingsStream)
                 await using (requestStream)
                 {
-                    Assert.False(settingsStream.CanWrite, "Expected unidirectional control stream.");
+                    Assert.False(
+                        settingsStream.CanWrite,
+                        "Expected unidirectional control stream."
+                    );
                     Assert.Equal(expectedHeaderSizeLimitBytes, connection.MaxHeaderListSize);
 
                     await requestStream.ReadRequestDataAsync();
@@ -76,7 +85,7 @@ namespace System.Net.Http.Functional.Tests
                     Method = HttpMethod.Get,
                     RequestUri = server.Address,
                     Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
                 using HttpResponseMessage response = await client.SendAsync(request);
             });
@@ -90,14 +99,18 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(1000)]
         public async Task SendMoreThanStreamLimitRequests_Succeeds(int streamLimit)
         {
-            using Http3LoopbackServer server = CreateHttp3LoopbackServer(new Http3Options() { MaxInboundBidirectionalStreams = streamLimit });
+            using Http3LoopbackServer server = CreateHttp3LoopbackServer(
+                new Http3Options() { MaxInboundBidirectionalStreams = streamLimit }
+            );
 
             Task serverTask = Task.Run(async () =>
             {
-                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
                 for (int i = 0; i < streamLimit + 1; ++i)
                 {
-                    await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
+                    await using Http3LoopbackStream stream =
+                        await connection.AcceptRequestStreamAsync();
                     await stream.HandleRequestAsync();
                 }
             });
@@ -113,9 +126,11 @@ namespace System.Net.Http.Functional.Tests
                         Method = HttpMethod.Get,
                         RequestUri = server.Address,
                         Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                     };
-                    using var response = await client.SendAsync(request).WaitAsync(TimeSpan.FromSeconds(10));
+                    using var response = await client
+                        .SendAsync(request)
+                        .WaitAsync(TimeSpan.FromSeconds(10));
                 }
             });
 
@@ -128,14 +143,18 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(1000)]
         public async Task SendStreamLimitRequestsConcurrently_Succeeds(int streamLimit)
         {
-            using Http3LoopbackServer server = CreateHttp3LoopbackServer(new Http3Options() { MaxInboundBidirectionalStreams = streamLimit });
+            using Http3LoopbackServer server = CreateHttp3LoopbackServer(
+                new Http3Options() { MaxInboundBidirectionalStreams = streamLimit }
+            );
 
             Task serverTask = Task.Run(async () =>
             {
-                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
                 for (int i = 0; i < streamLimit; ++i)
                 {
-                    await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
+                    await using Http3LoopbackStream stream =
+                        await connection.AcceptRequestStreamAsync();
                     await stream.HandleRequestAsync();
                 }
             });
@@ -152,7 +171,7 @@ namespace System.Net.Http.Functional.Tests
                         Method = HttpMethod.Get,
                         RequestUri = server.Address,
                         Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                     };
 
                     tasks[i] = client.SendAsync(request);
@@ -174,13 +193,16 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(1000)]
         public async Task SendMoreThanStreamLimitRequestsConcurrently_LastWaits(int streamLimit)
         {
-            using Http3LoopbackServer server = CreateHttp3LoopbackServer(new Http3Options() { MaxInboundBidirectionalStreams = streamLimit });
+            using Http3LoopbackServer server = CreateHttp3LoopbackServer(
+                new Http3Options() { MaxInboundBidirectionalStreams = streamLimit }
+            );
             var lastRequestContentStarted = new TaskCompletionSource();
 
             Task serverTask = Task.Run(async () =>
             {
                 // Read the first streamLimit requests, keep the streams open to make the last one wait.
-                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
                 var streams = new Http3LoopbackStream[streamLimit];
                 for (int i = 0; i < streamLimit; ++i)
                 {
@@ -192,7 +214,8 @@ namespace System.Net.Http.Functional.Tests
                 // Make the last request running independently.
                 var lastRequest = Task.Run(async () =>
                 {
-                    await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
+                    await using Http3LoopbackStream stream =
+                        await connection.AcceptRequestStreamAsync();
                     await stream.HandleRequestAsync();
                 });
 
@@ -228,13 +251,16 @@ namespace System.Net.Http.Functional.Tests
                         RequestUri = server.Address,
                         Version = HttpVersion30,
                         VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                        Content = new StreamContent(new DelegateStream(
-                            canReadFunc: () => true,
-                            readFunc: (buffer, offset, count) =>
-                            {
-                                countdown.Signal();
-                                return 0;
-                            }))
+                        Content = new StreamContent(
+                            new DelegateStream(
+                                canReadFunc: () => true,
+                                readFunc: (buffer, offset, count) =>
+                                {
+                                    countdown.Signal();
+                                    return 0;
+                                }
+                            )
+                        ),
                     };
 
                     tasks[i] = client.SendAsync(request);
@@ -250,13 +276,16 @@ namespace System.Net.Http.Functional.Tests
                     RequestUri = server.Address,
                     Version = HttpVersion30,
                     VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    Content = new StreamContent(new DelegateStream(
-                        canReadFunc: () => true,
-                        readFunc: (buffer, offset, count) =>
-                        {
-                            lastRequestContentStarted.SetResult();
-                            return 0;
-                        }))
+                    Content = new StreamContent(
+                        new DelegateStream(
+                            canReadFunc: () => true,
+                            readFunc: (buffer, offset, count) =>
+                            {
+                                lastRequestContentStarted.SetResult();
+                                return 0;
+                            }
+                        )
+                    ),
                 };
                 var lastTask = client.SendAsync(last);
 
@@ -282,15 +311,21 @@ namespace System.Net.Http.Functional.Tests
 
             Task serverTask = Task.Run(async () =>
             {
-                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
+                await using Http3LoopbackStream stream =
+                    await connection.AcceptRequestStreamAsync();
 
-                QuicException ex = await AssertThrowsQuicExceptionAsync(QuicError.ConnectionAborted, async () =>
-                {
-                    await stream.SendFrameAsync(ReservedHttp2PriorityFrameId, new byte[8]);
-                    await stream.HandleRequestAsync();
-                    await using Http3LoopbackStream stream2 = await connection.AcceptRequestStreamAsync();
-                });
+                QuicException ex = await AssertThrowsQuicExceptionAsync(
+                    QuicError.ConnectionAborted,
+                    async () =>
+                    {
+                        await stream.SendFrameAsync(ReservedHttp2PriorityFrameId, new byte[8]);
+                        await stream.HandleRequestAsync();
+                        await using Http3LoopbackStream stream2 =
+                            await connection.AcceptRequestStreamAsync();
+                    }
+                );
 
                 Assert.Equal(UnexpectedFrameErrorCode, ex.ApplicationErrorCode);
             });
@@ -303,10 +338,12 @@ namespace System.Net.Http.Functional.Tests
                     Method = HttpMethod.Get,
                     RequestUri = server.Address,
                     Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
 
-                await AssertProtocolErrorAsync(UnexpectedFrameErrorCode, () => client.SendAsync(request));
+                await AssertProtocolErrorAsync(UnexpectedFrameErrorCode, () =>
+                    client.SendAsync(request)
+                );
             });
 
             await new[] { clientTask, serverTask }.WhenAllOrAnyFailed(20_000);
@@ -321,8 +358,10 @@ namespace System.Net.Http.Functional.Tests
 
             Task serverTask = Task.Run(async () =>
             {
-                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
+                await using Http3LoopbackStream stream =
+                    await connection.AcceptRequestStreamAsync();
 
                 await connection.CloseAsync(GeneralProtocolError);
             });
@@ -335,10 +374,12 @@ namespace System.Net.Http.Functional.Tests
                     Method = HttpMethod.Get,
                     RequestUri = server.Address,
                     Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
 
-                await AssertProtocolErrorAsync(GeneralProtocolError, () => client.SendAsync(request));
+                await AssertProtocolErrorAsync(GeneralProtocolError, () =>
+                    client.SendAsync(request)
+                );
             });
 
             await new[] { clientTask, serverTask }.WhenAllOrAnyFailed(20_000);
@@ -355,8 +396,10 @@ namespace System.Net.Http.Functional.Tests
             SemaphoreSlim semaphore = new SemaphoreSlim(0);
             Task serverTask = Task.Run(async () =>
             {
-                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
+                await using Http3LoopbackStream stream =
+                    await connection.AcceptRequestStreamAsync();
 
                 stream.Abort(GeneralProtocolError);
                 await semaphore.WaitAsync();
@@ -370,10 +413,12 @@ namespace System.Net.Http.Functional.Tests
                     Method = HttpMethod.Get,
                     RequestUri = server.Address,
                     Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
 
-                await AssertProtocolErrorAsync(GeneralProtocolError, () => client.SendAsync(request));
+                await AssertProtocolErrorAsync(GeneralProtocolError, () =>
+                    client.SendAsync(request)
+                );
                 semaphore.Release();
             });
 
@@ -387,9 +432,13 @@ namespace System.Net.Http.Functional.Tests
 
             Task serverTask = Task.Run(async () =>
             {
-                await using (Http3LoopbackConnection connection1 = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync())
+                await using (
+                    Http3LoopbackConnection connection1 = (Http3LoopbackConnection)
+                        await server.EstablishGenericConnectionAsync()
+                )
                 {
-                    await using Http3LoopbackStream stream = await connection1.AcceptRequestStreamAsync();
+                    await using Http3LoopbackStream stream =
+                        await connection1.AcceptRequestStreamAsync();
                     stream.Abort(0x10B); // H3_REQUEST_REJECTED
                     await stream.DisposeAsync();
                     // shutdown the connection gracefully via GOAWAY frame for good measure
@@ -397,9 +446,13 @@ namespace System.Net.Http.Functional.Tests
                 }
 
                 // expect second connection to be established by the client
-                await using (Http3LoopbackConnection connection2 = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync())
+                await using (
+                    Http3LoopbackConnection connection2 = (Http3LoopbackConnection)
+                        await server.EstablishGenericConnectionAsync()
+                )
                 {
-                    await using Http3LoopbackStream stream = await connection2.AcceptRequestStreamAsync();
+                    await using Http3LoopbackStream stream =
+                        await connection2.AcceptRequestStreamAsync();
                     await stream.HandleRequestAsync();
                 }
             });
@@ -412,7 +465,7 @@ namespace System.Net.Http.Functional.Tests
                     Method = HttpMethod.Get,
                     RequestUri = server.Address,
                     Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
 
                 await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
@@ -420,7 +473,6 @@ namespace System.Net.Http.Functional.Tests
 
             await new[] { clientTask, serverTask }.WhenAllOrAnyFailed(20_000);
         }
-
 
         [Fact]
         public async Task ServerClosesConnection_ResponseContentStream_ThrowsHttpProtocolException()
@@ -432,8 +484,10 @@ namespace System.Net.Http.Functional.Tests
             SemaphoreSlim semaphore = new SemaphoreSlim(0);
             Task serverTask = Task.Run(async () =>
             {
-                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
+                await using Http3LoopbackStream stream =
+                    await connection.AcceptRequestStreamAsync();
 
                 await stream.ReadRequestBodyAsync();
                 await stream.SendResponseHeadersAsync();
@@ -450,14 +504,19 @@ namespace System.Net.Http.Functional.Tests
                     Method = HttpMethod.Get,
                     RequestUri = server.Address,
                     Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
 
-                var response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+                var response = await client.SendAsync(
+                    request,
+                    HttpCompletionOption.ResponseHeadersRead
+                );
                 var stream = await response.Content.ReadAsStreamAsync();
                 await stream.ReadAsync(new byte[1024]);
                 semaphore.Release();
-                var ex = await Assert.ThrowsAsync<HttpProtocolException>(async () => await stream.ReadAsync(new byte[1024]));
+                var ex = await Assert.ThrowsAsync<HttpProtocolException>(async () =>
+                    await stream.ReadAsync(new byte[1024])
+                );
                 Assert.Equal(GeneralProtocolError, ex.ErrorCode);
             });
 
@@ -473,8 +532,10 @@ namespace System.Net.Http.Functional.Tests
 
             Task serverTask = Task.Run(async () =>
             {
-                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
+                await using Http3LoopbackStream stream =
+                    await connection.AcceptRequestStreamAsync();
                 HttpRequestData request = await stream.ReadRequestDataAsync();
                 await stream.SendResponseHeadersAsync();
 
@@ -492,7 +553,10 @@ namespace System.Net.Http.Functional.Tests
                         break;
                     }
                 }
-                Assert.True(hasFailed, $"Expected {nameof(QuicException)} with {nameof(QuicError.StreamAborted)}, instead ran successfully for {sw.Elapsed}");
+                Assert.True(
+                    hasFailed,
+                    $"Expected {nameof(QuicException)} with {nameof(QuicError.StreamAborted)}, instead ran successfully for {sw.Elapsed}"
+                );
             });
 
             Task clientTask = Task.Run(async () =>
@@ -503,10 +567,13 @@ namespace System.Net.Http.Functional.Tests
                     Method = HttpMethod.Get,
                     RequestUri = server.Address,
                     Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
 
-                var response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+                var response = await client.SendAsync(
+                    request,
+                    HttpCompletionOption.ResponseHeadersRead
+                );
                 var stream = await response.Content.ReadAsStreamAsync();
                 byte[] buffer = new byte[512];
                 for (int i = 0; i < 5; ++i)
@@ -531,8 +598,10 @@ namespace System.Net.Http.Functional.Tests
 
             Task serverTask = Task.Run(async () =>
             {
-                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
+                await using Http3LoopbackStream stream =
+                    await connection.AcceptRequestStreamAsync();
                 HttpRequestData request = await stream.ReadRequestDataAsync(false);
                 var body = await stream.ReadRequestBodyAsync(data.Length);
                 await stream.SendResponseHeadersAsync();
@@ -549,10 +618,13 @@ namespace System.Net.Http.Functional.Tests
                     RequestUri = server.Address,
                     Version = HttpVersion30,
                     VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    Content = requestContent
+                    Content = requestContent,
                 };
 
-                var responseTask = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+                var responseTask = client.SendAsync(
+                    request,
+                    HttpCompletionOption.ResponseHeadersRead
+                );
 
                 var requestStream = await requestContent.GetStreamAsync();
                 await requestStream.FlushAsync();
@@ -568,7 +640,6 @@ namespace System.Net.Http.Functional.Tests
             await new[] { clientTask, serverTask }.WhenAllOrAnyFailed(20_000);
         }
 
-
         [Fact]
         public async Task RequestSendingResponseDisposed_ThrowsOnServer()
         {
@@ -578,8 +649,10 @@ namespace System.Net.Http.Functional.Tests
 
             Task serverTask = Task.Run(async () =>
             {
-                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
+                await using Http3LoopbackStream stream =
+                    await connection.AcceptRequestStreamAsync();
                 HttpRequestData request = await stream.ReadRequestDataAsync(false);
                 await stream.SendResponseHeadersAsync();
 
@@ -598,7 +671,10 @@ namespace System.Net.Http.Functional.Tests
                         break;
                     }
                 }
-                Assert.True(hasFailed, $"Expected {nameof(QuicException)} with {nameof(QuicError.StreamAborted)}, instead ran successfully for {sw.Elapsed}");
+                Assert.True(
+                    hasFailed,
+                    $"Expected {nameof(QuicException)} with {nameof(QuicError.StreamAborted)}, instead ran successfully for {sw.Elapsed}"
+                );
             });
 
             Task clientTask = Task.Run(async () =>
@@ -610,10 +686,18 @@ namespace System.Net.Http.Functional.Tests
                     RequestUri = server.Address,
                     Version = HttpVersion30,
                     VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    Content = new ByteAtATimeContent(60 * 4, Task.CompletedTask, new TaskCompletionSource<bool>(), 250)
+                    Content = new ByteAtATimeContent(
+                        60 * 4,
+                        Task.CompletedTask,
+                        new TaskCompletionSource<bool>(),
+                        250
+                    ),
                 };
 
-                var response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+                var response = await client.SendAsync(
+                    request,
+                    HttpCompletionOption.ResponseHeadersRead
+                );
                 var stream = await response.Content.ReadAsStreamAsync();
 
                 // We haven't finished sending the whole request, but we're disposing the response, which should turn into an exception on the server-side.
@@ -643,10 +727,13 @@ namespace System.Net.Http.Functional.Tests
 
             Task serverTask = Task.Run(async () =>
             {
-                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
+                await using Http3LoopbackStream stream =
+                    await connection.AcceptRequestStreamAsync();
                 await stream.HandleRequestAsync();
-                await using Http3LoopbackStream stream2 = await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackStream stream2 =
+                    await connection.AcceptRequestStreamAsync();
                 await stream2.HandleRequestAsync();
             });
 
@@ -686,8 +773,10 @@ namespace System.Net.Http.Functional.Tests
 
             Task serverTask = Task.Run(async () =>
             {
-                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
+                await using Http3LoopbackStream stream =
+                    await connection.AcceptRequestStreamAsync();
 
                 // Receive headers and unblock the client.
                 await stream.ReadRequestDataAsync(false);
@@ -708,7 +797,7 @@ namespace System.Net.Http.Functional.Tests
                     RequestUri = server.Address,
                     Version = HttpVersion30,
                     VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    Content = requestContent
+                    Content = requestContent,
                 };
 
                 Task<HttpResponseMessage> responseTask = client.SendAsync(request);
@@ -735,7 +824,8 @@ namespace System.Net.Http.Functional.Tests
 
             Task serverTask = Task.Run(async () =>
             {
-                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
                 HttpRequestData request = await connection.ReadRequestDataAsync();
                 await connection.SendResponseAsync();
 
@@ -750,7 +840,7 @@ namespace System.Net.Http.Functional.Tests
                     Method = HttpMethod.Get,
                     RequestUri = server.Address,
                     Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
 
                 using HttpResponseMessage response = await client.SendAsync(request);
@@ -773,9 +863,11 @@ namespace System.Net.Http.Functional.Tests
                 Method = HttpMethod.Get,
                 RequestUri = new Uri(uri, UriKind.Absolute),
                 Version = HttpVersion.Version30,
-                VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
             };
-            using HttpResponseMessage response = await client.SendAsync(request).WaitAsync(TimeSpan.FromSeconds(20));
+            using HttpResponseMessage response = await client
+                .SendAsync(request)
+                .WaitAsync(TimeSpan.FromSeconds(20));
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(3, response.Version.Major);
@@ -792,9 +884,11 @@ namespace System.Net.Http.Functional.Tests
                 Method = HttpMethod.Get,
                 RequestUri = new Uri(uri, UriKind.Absolute),
                 Version = HttpVersion.Version30,
-                VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
             };
-            using HttpResponseMessage response = await client.SendAsync(request, HttpCompletionOption.ResponseContentRead).WaitAsync(TimeSpan.FromSeconds(20));
+            using HttpResponseMessage response = await client
+                .SendAsync(request, HttpCompletionOption.ResponseContentRead)
+                .WaitAsync(TimeSpan.FromSeconds(20));
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(3, response.Version.Major);
@@ -808,7 +902,11 @@ namespace System.Net.Http.Functional.Tests
         [MemberData(nameof(InteropUris))]
         public Task Public_Interop_Upgrade_Request3OrLower_Success(string uri)
         {
-            return Public_Interop_Upgrade_Core(uri, HttpVersion.Version30, HttpVersionPolicy.RequestVersionOrLower);
+            return Public_Interop_Upgrade_Core(
+                uri,
+                HttpVersion.Version30,
+                HttpVersionPolicy.RequestVersionOrLower
+            );
         }
 
         [Theory]
@@ -816,10 +914,18 @@ namespace System.Net.Http.Functional.Tests
         [MemberData(nameof(InteropUris))]
         public Task Public_Interop_Upgrade_Request2OrHigher_Success(string uri)
         {
-            return Public_Interop_Upgrade_Core(uri, HttpVersion.Version20, HttpVersionPolicy.RequestVersionOrHigher);
+            return Public_Interop_Upgrade_Core(
+                uri,
+                HttpVersion.Version20,
+                HttpVersionPolicy.RequestVersionOrHigher
+            );
         }
 
-        private async Task Public_Interop_Upgrade_Core(string uri, Version requestVersion, HttpVersionPolicy policy)
+        private async Task Public_Interop_Upgrade_Core(
+            string uri,
+            Version requestVersion,
+            HttpVersionPolicy policy
+        )
         {
             // Create the handler manually without passing in useVersion = Http3 to avoid using VersionHttpClientHandler,
             // because it overrides VersionPolicy on each request with RequestVersionExact (bypassing Alt-Svc code path completely).
@@ -827,17 +933,21 @@ namespace System.Net.Http.Functional.Tests
 
             // First request uses HTTP/1 or HTTP/2 and receives an Alt-Svc either by header or (with HTTP/2) by frame.
 
-            using (HttpRequestMessage requestA = new HttpRequestMessage
-            {
-                Method = HttpMethod.Get,
-                RequestUri = new Uri(uri, UriKind.Absolute),
-                Version = requestVersion,
-                VersionPolicy = policy
-            })
+            using (
+                HttpRequestMessage requestA = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = new Uri(uri, UriKind.Absolute),
+                    Version = requestVersion,
+                    VersionPolicy = policy,
+                }
+            )
             {
                 try
                 {
-                    using HttpResponseMessage responseA = await client.SendAsync(requestA).WaitAsync(TimeSpan.FromSeconds(20));
+                    using HttpResponseMessage responseA = await client
+                        .SendAsync(requestA)
+                        .WaitAsync(TimeSpan.FromSeconds(20));
                     Assert.Equal(HttpStatusCode.OK, responseA.StatusCode);
                     Assert.NotEqual(3, responseA.Version.Major);
                 }
@@ -846,9 +956,14 @@ namespace System.Net.Http.Functional.Tests
                     _output.WriteLine($"Unable to establish non-H/3 connection to {uri}: {ex}");
                     return;
                 }
-                catch (HttpRequestException ex) when
-                    (ex.InnerException is SocketException se &&
-                    (se.SocketErrorCode == SocketError.NetworkUnreachable || se.SocketErrorCode == SocketError.HostUnreachable || se.SocketErrorCode == SocketError.ConnectionRefused))
+                catch (HttpRequestException ex)
+                    when (ex.InnerException is SocketException se
+                        && (
+                            se.SocketErrorCode == SocketError.NetworkUnreachable
+                            || se.SocketErrorCode == SocketError.HostUnreachable
+                            || se.SocketErrorCode == SocketError.ConnectionRefused
+                        )
+                    )
                 {
                     _output.WriteLine($"Unable to establish non-H/3 connection to {uri}: {ex}");
                     return;
@@ -857,15 +972,19 @@ namespace System.Net.Http.Functional.Tests
 
             // Second request uses HTTP/3.
 
-            using (HttpRequestMessage requestB = new HttpRequestMessage
+            using (
+                HttpRequestMessage requestB = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = new Uri(uri, UriKind.Absolute),
+                    Version = requestVersion,
+                    VersionPolicy = policy,
+                }
+            )
             {
-                Method = HttpMethod.Get,
-                RequestUri = new Uri(uri, UriKind.Absolute),
-                Version = requestVersion,
-                VersionPolicy = policy
-            })
-            {
-                using HttpResponseMessage responseB = await client.SendAsync(requestB).WaitAsync(TimeSpan.FromSeconds(20));
+                using HttpResponseMessage responseB = await client
+                    .SendAsync(requestB)
+                    .WaitAsync(TimeSpan.FromSeconds(20));
 
                 Assert.Equal(HttpStatusCode.OK, responseB.StatusCode);
                 Assert.Equal(3, responseB.Version.Major);
@@ -875,7 +994,7 @@ namespace System.Net.Http.Functional.Tests
         public enum CancellationType
         {
             Dispose,
-            CancellationToken
+            CancellationToken,
         }
 
         [Theory]
@@ -890,16 +1009,25 @@ namespace System.Net.Http.Functional.Tests
 
             Task serverTask = Task.Run(async () =>
             {
-                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
+                await using Http3LoopbackStream stream =
+                    await connection.AcceptRequestStreamAsync();
 
                 HttpRequestData request = await stream.ReadRequestDataAsync().ConfigureAwait(false);
 
                 int contentLength = 2 * 1024 * 1024;
                 var headers = new List<HttpHeaderData>();
-                headers.Append(new HttpHeaderData("Content-Length", contentLength.ToString(CultureInfo.InvariantCulture)));
+                headers.Append(
+                    new HttpHeaderData(
+                        "Content-Length",
+                        contentLength.ToString(CultureInfo.InvariantCulture)
+                    )
+                );
 
-                await stream.SendResponseHeadersAsync(HttpStatusCode.OK, headers).ConfigureAwait(false);
+                await stream
+                    .SendResponseHeadersAsync(HttpStatusCode.OK, headers)
+                    .ConfigureAwait(false);
                 await stream.SendDataFrameAsync(new byte[1024]).ConfigureAwait(false);
 
                 await clientDone.WaitAsync();
@@ -908,7 +1036,9 @@ namespace System.Net.Http.Functional.Tests
                 // In that case even with synchronization via semaphores, first writes after peer aborting may "succeed" (get SEND_COMPLETE event)
                 // We are asserting that PEER_RECEIVE_ABORTED would still arrive eventually
 
-                var ex = await AssertThrowsQuicExceptionAsync(QuicError.StreamAborted, () => SendDataForever(stream).WaitAsync(TimeSpan.FromSeconds(10)));
+                var ex = await AssertThrowsQuicExceptionAsync(QuicError.StreamAborted, () =>
+                    SendDataForever(stream).WaitAsync(TimeSpan.FromSeconds(10))
+                );
                 Assert.Equal(268, ex.ApplicationErrorCode);
 
                 serverDone.Release();
@@ -923,9 +1053,11 @@ namespace System.Net.Http.Functional.Tests
                     Method = HttpMethod.Get,
                     RequestUri = server.Address,
                     Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
-                HttpResponseMessage response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).WaitAsync(TimeSpan.FromSeconds(10));
+                HttpResponseMessage response = await client
+                    .SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+                    .WaitAsync(TimeSpan.FromSeconds(10));
 
                 Stream stream = await response.Content.ReadAsStreamAsync();
 
@@ -938,9 +1070,12 @@ namespace System.Net.Http.Functional.Tests
                 {
                     cts.Token.Register(() => response.Dispose());
                 }
-                CancellationToken readCt = type == CancellationType.CancellationToken ? cts.Token : default;
+                CancellationToken readCt =
+                    type == CancellationType.CancellationToken ? cts.Token : default;
 
-                Exception ex = await Assert.ThrowsAnyAsync<Exception>(() => stream.ReadAsync(new byte[1024], cancellationToken: readCt).AsTask());
+                Exception ex = await Assert.ThrowsAnyAsync<Exception>(() =>
+                    stream.ReadAsync(new byte[1024], cancellationToken: readCt).AsTask()
+                );
 
                 if (type == CancellationType.CancellationToken)
                 {
@@ -971,16 +1106,25 @@ namespace System.Net.Http.Functional.Tests
 
             Task serverTask = Task.Run(async () =>
             {
-                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
+                await using Http3LoopbackStream stream =
+                    await connection.AcceptRequestStreamAsync();
 
                 HttpRequestData request = await stream.ReadRequestDataAsync().ConfigureAwait(false);
 
                 int contentLength = 2 * 1024 * 1024;
                 var headers = new List<HttpHeaderData>();
-                headers.Append(new HttpHeaderData("Content-Length", contentLength.ToString(CultureInfo.InvariantCulture)));
+                headers.Append(
+                    new HttpHeaderData(
+                        "Content-Length",
+                        contentLength.ToString(CultureInfo.InvariantCulture)
+                    )
+                );
 
-                await stream.SendResponseHeadersAsync(HttpStatusCode.OK, headers).ConfigureAwait(false);
+                await stream
+                    .SendResponseHeadersAsync(HttpStatusCode.OK, headers)
+                    .ConfigureAwait(false);
                 await stream.SendDataFrameAsync(new byte[1024]).ConfigureAwait(false);
 
                 await clientDone.WaitAsync();
@@ -989,9 +1133,18 @@ namespace System.Net.Http.Functional.Tests
                 // In that case even with synchronization via semaphores, first writes after peer aborting may "succeed" (get SEND_COMPLETE event)
                 // We are asserting that PEER_RECEIVE_ABORTED would still arrive eventually
 
-                QuicException ex = await AssertThrowsQuicExceptionAsync(QuicError.StreamAborted, () => SendDataForever(stream).WaitAsync(TimeSpan.FromSeconds(20)));
+                QuicException ex = await AssertThrowsQuicExceptionAsync(
+                    QuicError.StreamAborted,
+                    () => SendDataForever(stream).WaitAsync(TimeSpan.FromSeconds(20))
+                );
                 // exact error code depends on who won the race
-                Assert.True(ex.ApplicationErrorCode == 268 /* cancellation */ || ex.ApplicationErrorCode == 0xffffffff /* disposal */, $"Expected 268 or 0xffffffff, got {ex.ApplicationErrorCode}");
+                Assert.True(
+                    ex.ApplicationErrorCode == 268 /* cancellation */
+                        || ex.ApplicationErrorCode
+                            == 0xffffffff /* disposal */
+                    ,
+                    $"Expected 268 or 0xffffffff, got {ex.ApplicationErrorCode}"
+                );
 
                 serverDone.Release();
             });
@@ -1005,9 +1158,11 @@ namespace System.Net.Http.Functional.Tests
                     Method = HttpMethod.Get,
                     RequestUri = server.Address,
                     Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
-                HttpResponseMessage response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).WaitAsync(TimeSpan.FromSeconds(20));
+                HttpResponseMessage response = await client
+                    .SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+                    .WaitAsync(TimeSpan.FromSeconds(20));
 
                 Stream stream = await response.Content.ReadAsStreamAsync();
 
@@ -1017,7 +1172,9 @@ namespace System.Net.Http.Functional.Tests
                 var cts = new CancellationTokenSource(200);
                 cts.Token.Register(() => response.Dispose());
 
-                Exception ex = await Assert.ThrowsAnyAsync<Exception>(() => stream.ReadAsync(new byte[1024], cancellationToken: cts.Token).AsTask());
+                Exception ex = await Assert.ThrowsAnyAsync<Exception>(() =>
+                    stream.ReadAsync(new byte[1024], cancellationToken: cts.Token).AsTask()
+                );
 
                 // exact exception depends on who won the race
                 if (ex is not OperationCanceledException)
@@ -1053,8 +1210,10 @@ namespace System.Net.Http.Functional.Tests
             Http3LoopbackConnection connection = null;
             Task serverTask = Task.Run(async () =>
             {
-                connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
+                connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
+                await using Http3LoopbackStream stream =
+                    await connection.AcceptRequestStreamAsync();
                 await stream.HandleRequestAsync();
             });
 
@@ -1064,9 +1223,11 @@ namespace System.Net.Http.Functional.Tests
                 Method = HttpMethod.Get,
                 RequestUri = server.Address,
                 Version = HttpVersion30,
-                VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
             };
-            HttpResponseMessage response = await client.SendAsync(request).WaitAsync(TimeSpan.FromSeconds(10));
+            HttpResponseMessage response = await client
+                .SendAsync(request)
+                .WaitAsync(TimeSpan.FromSeconds(10));
             response.EnsureSuccessStatusCode();
             Assert.Equal(HttpVersion.Version30, response.Version);
 
@@ -1090,7 +1251,8 @@ namespace System.Net.Http.Functional.Tests
                 {
                     try
                     {
-                        connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                        connection = (Http3LoopbackConnection)
+                            await server.EstablishGenericConnectionAsync();
                         break;
                     }
                     catch (Exception ex) // Ignore exception and continue until a viable connection is established.
@@ -1105,25 +1267,29 @@ namespace System.Net.Http.Functional.Tests
             Task clientTask = Task.Run(async () =>
             {
                 using CancellationTokenSource cts = new CancellationTokenSource();
-                using HttpClient client = CreateHttpClient(new SocketsHttpHandler()
-                {
-                    SslOptions = new SslClientAuthenticationOptions()
+                using HttpClient client = CreateHttpClient(
+                    new SocketsHttpHandler()
                     {
-                        RemoteCertificateValidationCallback = (_, _, _, _) =>
+                        SslOptions = new SslClientAuthenticationOptions()
                         {
-                            cts.Cancel();
-                            return true;
-                        }
+                            RemoteCertificateValidationCallback = (_, _, _, _) =>
+                            {
+                                cts.Cancel();
+                                return true;
+                            },
+                        },
                     }
-                });
+                );
                 using HttpRequestMessage request = new()
                 {
                     Method = HttpMethod.Get,
                     RequestUri = server.Address,
                     Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await client.SendAsync(request, cts.Token));
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                    await client.SendAsync(request, cts.Token)
+                );
 
                 // Next call must succeed
                 using HttpRequestMessage request2 = new()
@@ -1131,7 +1297,7 @@ namespace System.Net.Http.Functional.Tests
                     Method = HttpMethod.Get,
                     RequestUri = server.Address,
                     Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
                 await client.SendAsync(request2);
             });
@@ -1148,7 +1314,8 @@ namespace System.Net.Http.Functional.Tests
             HttpRequestData requestData = null;
             Task serverTask = Task.Run(async () =>
             {
-                connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
                 requestData = await connection.ReadRequestDataAsync(readBody: false);
                 Assert.NotNull(connection);
                 Assert.Equal(0, requestData.GetHeaderValueCount("alt-used"));
@@ -1161,10 +1328,12 @@ namespace System.Net.Http.Functional.Tests
                 Method = HttpMethod.Get,
                 RequestUri = server.Address,
                 Version = HttpVersion30,
-                VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
             };
 
-            HttpResponseMessage response = await client.SendAsync(request).WaitAsync(TimeSpan.FromSeconds(10));
+            HttpResponseMessage response = await client
+                .SendAsync(request)
+                .WaitAsync(TimeSpan.FromSeconds(10));
             response.EnsureSuccessStatusCode();
             Assert.Equal(HttpVersion.Version30, response.Version);
 
@@ -1195,10 +1364,12 @@ namespace System.Net.Http.Functional.Tests
                     Method = HttpMethod.Get,
                     RequestUri = server.Address,
                     Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
 
-                HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(() => client.SendAsync(request).WaitAsync(TimeSpan.FromSeconds(10)));
+                HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                    client.SendAsync(request).WaitAsync(TimeSpan.FromSeconds(10))
+                );
 
                 Assert.IsType<AuthenticationException>(ex.InnerException);
 
@@ -1220,29 +1391,38 @@ namespace System.Net.Http.Functional.Tests
                 Method = HttpMethod.Get,
                 RequestUri = server.Address,
                 Version = HttpVersion30,
-                VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
             };
             using HttpRequestMessage request2 = new()
             {
                 Method = HttpMethod.Get,
                 RequestUri = server.Address,
                 Version = HttpVersion30,
-                VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
             };
-            HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(() => client.SendAsync(request).WaitAsync(TimeSpan.FromSeconds(10)));
+            HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                client.SendAsync(request).WaitAsync(TimeSpan.FromSeconds(10))
+            );
 
             // second request should throw the same exception as inner as the first one
-            HttpRequestException ex2 = await Assert.ThrowsAsync<HttpRequestException>(() => client.SendAsync(request2).WaitAsync(TimeSpan.FromSeconds(10)));
+            HttpRequestException ex2 = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                client.SendAsync(request2).WaitAsync(TimeSpan.FromSeconds(10))
+            );
 
             Assert.Equal(ex, ex2.InnerException);
         }
 
-
-        private SslApplicationProtocol ExtractMsQuicNegotiatedAlpn(Http3LoopbackConnection loopbackConnection)
+        private SslApplicationProtocol ExtractMsQuicNegotiatedAlpn(
+            Http3LoopbackConnection loopbackConnection
+        )
         {
-            FieldInfo quicConnectionField = loopbackConnection.GetType().GetField("_connection", BindingFlags.Instance | BindingFlags.NonPublic);
+            FieldInfo quicConnectionField = loopbackConnection
+                .GetType()
+                .GetField("_connection", BindingFlags.Instance | BindingFlags.NonPublic);
             Assert.NotNull(quicConnectionField);
-            QuicConnection quicConnection = Assert.IsType<QuicConnection>(quicConnectionField.GetValue(loopbackConnection));
+            QuicConnection quicConnection = Assert.IsType<QuicConnection>(
+                quicConnectionField.GetValue(loopbackConnection)
+            );
             return quicConnection.NegotiatedApplicationProtocol;
         }
 
@@ -1255,14 +1435,18 @@ namespace System.Net.Http.Functional.Tests
             Http3LoopbackConnection connection = null;
             Task serverTask = Task.Run(async () =>
             {
-                connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
-                await using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
+                connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
+                await using Http3LoopbackStream stream =
+                    await connection.AcceptRequestStreamAsync();
 
                 HttpRequestData request = await stream.ReadRequestDataAsync().ConfigureAwait(false);
 
                 if (qpackEncode)
                 {
-                    await stream.SendResponseHeadersWithEncodedStatusAsync(statusCode).ConfigureAwait(false);
+                    await stream
+                        .SendResponseHeadersWithEncodedStatusAsync(statusCode)
+                        .ConfigureAwait(false);
                 }
                 else
                 {
@@ -1276,9 +1460,11 @@ namespace System.Net.Http.Functional.Tests
                 Method = HttpMethod.Get,
                 RequestUri = server.Address,
                 Version = HttpVersion30,
-                VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
             };
-            HttpResponseMessage response = await client.SendAsync(request).WaitAsync(TimeSpan.FromSeconds(10));
+            HttpResponseMessage response = await client
+                .SendAsync(request)
+                .WaitAsync(TimeSpan.FromSeconds(10));
 
             Assert.Equal(statusCode, response.StatusCode);
 
@@ -1305,10 +1491,13 @@ namespace System.Net.Http.Functional.Tests
 
             Task serverTask = Task.Run(async () =>
             {
-                connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
                 serverStream = await connection.AcceptRequestStreamAsync();
 
-                HttpRequestData requestData = await serverStream.ReadRequestDataAsync(readBody: false).WaitAsync(TimeSpan.FromSeconds(30));
+                HttpRequestData requestData = await serverStream
+                    .ReadRequestDataAsync(readBody: false)
+                    .WaitAsync(TimeSpan.FromSeconds(30));
 
                 await serverStream.SendResponseHeadersAsync().ConfigureAwait(false);
 
@@ -1321,7 +1510,9 @@ namespace System.Net.Http.Functional.Tests
                         break;
                     }
                     // echo back
-                    await serverStream.SendDataFrameAsync(payload).WaitAsync(TimeSpan.FromSeconds(30));
+                    await serverStream
+                        .SendDataFrameAsync(payload)
+                        .WaitAsync(TimeSpan.FromSeconds(30));
                 }
                 // send FIN
                 await serverStream.SendResponseBodyAsync(Array.Empty<byte>(), isFinal: true);
@@ -1336,12 +1527,16 @@ namespace System.Net.Http.Functional.Tests
                 RequestUri = server.Address,
                 Version = HttpVersion30,
                 VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                Content = requestContent
+                Content = requestContent,
             };
 
-            var responseTask = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).WaitAsync(TimeSpan.FromSeconds(10));
+            var responseTask = client
+                .SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+                .WaitAsync(TimeSpan.FromSeconds(10));
 
-            Stream requestStream = await requestContent.GetStreamAsync().WaitAsync(TimeSpan.FromSeconds(10));
+            Stream requestStream = await requestContent
+                .GetStreamAsync()
+                .WaitAsync(TimeSpan.FromSeconds(10));
 
             // Send headers
             await requestStream.FlushAsync();
@@ -1353,17 +1548,29 @@ namespace System.Net.Http.Functional.Tests
             for (int i = 0; i < iters; ++i)
             {
                 random.NextBytes(message);
-                await requestStream.WriteAsync(message).AsTask().WaitAsync(TimeSpan.FromSeconds(10));
+                await requestStream
+                    .WriteAsync(message)
+                    .AsTask()
+                    .WaitAsync(TimeSpan.FromSeconds(10));
                 await requestStream.FlushAsync();
 
-                int bytesRead = await responseStream.ReadAsync(readBuffer).AsTask().WaitAsync(TimeSpan.FromSeconds(10));
+                int bytesRead = await responseStream
+                    .ReadAsync(readBuffer)
+                    .AsTask()
+                    .WaitAsync(TimeSpan.FromSeconds(10));
                 Assert.Equal(bytesRead, messageSize);
                 Assert.Equal(message, readBuffer[..bytesRead]);
             }
             // Send FIN
             requestContent.CompleteStream();
             // Receive FIN
-            Assert.Equal(0, await responseStream.ReadAsync(readBuffer).AsTask().WaitAsync(TimeSpan.FromSeconds(10)));
+            Assert.Equal(
+                0,
+                await responseStream
+                    .ReadAsync(readBuffer)
+                    .AsTask()
+                    .WaitAsync(TimeSpan.FromSeconds(10))
+            );
 
             await serverTask.WaitAsync(TimeSpan.FromSeconds(60));
 
@@ -1386,7 +1593,8 @@ namespace System.Net.Http.Functional.Tests
 
             Task serverTask = Task.Run(async () =>
             {
-                connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
                 serverStream = await connection.AcceptRequestStreamAsync();
 
                 await serverStream.HandleRequestAsync();
@@ -1404,12 +1612,14 @@ namespace System.Net.Http.Functional.Tests
                     RequestUri = server.Address,
                     Version = HttpVersion30,
                     VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    Content = requestContent
+                    Content = requestContent,
                 };
 
                 var responseTask = client.SendAsync(request);
 
-                Stream requestStream = await requestContent.GetStreamAsync().WaitAsync(TimeSpan.FromSeconds(10)); // the stream is Http3WriteStream
+                Stream requestStream = await requestContent
+                    .GetStreamAsync()
+                    .WaitAsync(TimeSpan.FromSeconds(10)); // the stream is Http3WriteStream
                 // Send headers
                 await requestStream.FlushAsync();
 
@@ -1419,7 +1629,9 @@ namespace System.Net.Http.Functional.Tests
                 await Task.Delay(TimeSpan.FromSeconds(11)); // longer than client.Timeout
 
                 // Http3WriteStream is disposed after cancellation fired
-                await Assert.ThrowsAsync<ObjectDisposedException>(() => requestStream.WriteAsync(message).AsTask());
+                await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                    requestStream.WriteAsync(message).AsTask()
+                );
                 // client is properly canceled on timeout
                 var tce = await Assert.ThrowsAsync<TaskCanceledException>(() => responseTask);
                 Assert.IsType<TimeoutException>(tce.InnerException);
@@ -1428,8 +1640,14 @@ namespace System.Net.Http.Functional.Tests
             await clientTask.WaitAsync(TimeSpan.FromSeconds(120));
 
             // server receives cancellation
-            QuicException ex = await AssertThrowsQuicExceptionAsync(QuicError.StreamAborted, () => serverTask.WaitAsync(TimeSpan.FromSeconds(120)));
-            Assert.Equal(268 /*H3_REQUEST_CANCELLED (0x10C)*/, ex.ApplicationErrorCode);
+            QuicException ex = await AssertThrowsQuicExceptionAsync(QuicError.StreamAborted, () =>
+                serverTask.WaitAsync(TimeSpan.FromSeconds(120))
+            );
+            Assert.Equal(
+                268 /*H3_REQUEST_CANCELLED (0x10C)*/
+                ,
+                ex.ApplicationErrorCode
+            );
 
             Assert.NotNull(serverStream);
             await serverStream.DisposeAsync();
@@ -1450,7 +1668,8 @@ namespace System.Net.Http.Functional.Tests
 
             Task serverTask = Task.Run(async () =>
             {
-                connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
                 serverStream = await connection.AcceptRequestStreamAsync();
 
                 await serverStream.HandleRequestAsync();
@@ -1467,14 +1686,16 @@ namespace System.Net.Http.Functional.Tests
                     RequestUri = server.Address,
                     Version = HttpVersion30,
                     VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    Content = requestContent
+                    Content = requestContent,
                 };
 
                 var cts = new CancellationTokenSource();
 
                 var responseTask = client.SendAsync(request, cts.Token);
 
-                Stream requestStream = await requestContent.GetStreamAsync().WaitAsync(TimeSpan.FromSeconds(10)); // the stream is Http3WriteStream
+                Stream requestStream = await requestContent
+                    .GetStreamAsync()
+                    .WaitAsync(TimeSpan.FromSeconds(10)); // the stream is Http3WriteStream
                 // Send headers
                 await requestStream.FlushAsync();
 
@@ -1485,7 +1706,9 @@ namespace System.Net.Http.Functional.Tests
                 await Task.Delay(250);
 
                 // Http3WriteStream is disposed after cancellation fired
-                await Assert.ThrowsAsync<ObjectDisposedException>(() => requestStream.WriteAsync(message).AsTask());
+                await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                    requestStream.WriteAsync(message).AsTask()
+                );
                 // client is properly canceled
                 await Assert.ThrowsAsync<TaskCanceledException>(() => responseTask);
             });
@@ -1493,8 +1716,14 @@ namespace System.Net.Http.Functional.Tests
             await clientTask.WaitAsync(TimeSpan.FromSeconds(120));
 
             // server receives cancellation
-            QuicException ex = await AssertThrowsQuicExceptionAsync(QuicError.StreamAborted, () => serverTask.WaitAsync(TimeSpan.FromSeconds(120)));
-            Assert.Equal(268 /*H3_REQUEST_CANCELLED (0x10C)*/, ex.ApplicationErrorCode);
+            QuicException ex = await AssertThrowsQuicExceptionAsync(QuicError.StreamAborted, () =>
+                serverTask.WaitAsync(TimeSpan.FromSeconds(120))
+            );
+            Assert.Equal(
+                268 /*H3_REQUEST_CANCELLED (0x10C)*/
+                ,
+                ex.ApplicationErrorCode
+            );
 
             Assert.NotNull(serverStream);
             await serverStream.DisposeAsync();
@@ -1515,10 +1744,13 @@ namespace System.Net.Http.Functional.Tests
 
             Task serverTask = Task.Run(async () =>
             {
-                connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
                 serverStream = await connection.AcceptRequestStreamAsync();
 
-                HttpRequestData requestData = await serverStream.ReadRequestDataAsync(readBody: false).WaitAsync(TimeSpan.FromSeconds(30));
+                HttpRequestData requestData = await serverStream
+                    .ReadRequestDataAsync(readBody: false)
+                    .WaitAsync(TimeSpan.FromSeconds(30));
 
                 await serverStream.SendResponseHeadersAsync().ConfigureAwait(false);
 
@@ -1540,14 +1772,20 @@ namespace System.Net.Http.Functional.Tests
                     RequestUri = server.Address,
                     Version = HttpVersion30,
                     VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    Content = requestContent
+                    Content = requestContent,
                 };
 
                 var cts = new CancellationTokenSource();
 
-                var responseTask = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cts.Token);
+                var responseTask = client.SendAsync(
+                    request,
+                    HttpCompletionOption.ResponseHeadersRead,
+                    cts.Token
+                );
 
-                Stream requestStream = await requestContent.GetStreamAsync().WaitAsync(TimeSpan.FromSeconds(10)); // the stream is Http3WriteStream
+                Stream requestStream = await requestContent
+                    .GetStreamAsync()
+                    .WaitAsync(TimeSpan.FromSeconds(10)); // the stream is Http3WriteStream
                 // Send headers
                 await requestStream.FlushAsync();
 
@@ -1598,10 +1836,13 @@ namespace System.Net.Http.Functional.Tests
 
             Task serverTask = Task.Run(async () =>
             {
-                connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
                 serverStream = await connection.AcceptRequestStreamAsync();
 
-                HttpRequestData requestData = await serverStream.ReadRequestDataAsync(readBody: false).WaitAsync(TimeSpan.FromSeconds(30));
+                HttpRequestData requestData = await serverStream
+                    .ReadRequestDataAsync(readBody: false)
+                    .WaitAsync(TimeSpan.FromSeconds(30));
 
                 // abort the connection, including the just-received connection
                 if (graceful)
@@ -1625,15 +1866,21 @@ namespace System.Net.Http.Functional.Tests
                     RequestUri = server.Address,
                     Version = HttpVersion30,
                     VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    Content = requestContent
+                    Content = requestContent,
                 };
 
                 var cts = new CancellationTokenSource();
 
-                var responseTask = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cts.Token);
+                var responseTask = client.SendAsync(
+                    request,
+                    HttpCompletionOption.ResponseHeadersRead,
+                    cts.Token
+                );
 
                 // wait for the content to start transferring
-                Stream requestStream = await requestContent.GetStreamAsync().WaitAsync(TimeSpan.FromSeconds(10)); // the stream is Http3WriteStream
+                Stream requestStream = await requestContent
+                    .GetStreamAsync()
+                    .WaitAsync(TimeSpan.FromSeconds(10)); // the stream is Http3WriteStream
 
                 CancellationToken serializeToken = requestContent.SerializeCancellationToken;
                 Assert.False(serializeToken.IsCancellationRequested);
@@ -1642,9 +1889,15 @@ namespace System.Net.Http.Functional.Tests
                 await requestStream.FlushAsync();
 
                 // wait for the server to abort the request, which should cancel the token provided to the HttpContent
-                TaskCompletionSource waitTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                TaskCompletionSource waitTcs = new TaskCompletionSource(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
                 {
-                    using CancellationTokenRegistration registration = serializeToken.UnsafeRegister(static tcs => ((TaskCompletionSource)tcs!).TrySetResult(), waitTcs);
+                    using CancellationTokenRegistration registration =
+                        serializeToken.UnsafeRegister(
+                            static tcs => ((TaskCompletionSource)tcs!).TrySetResult(),
+                            waitTcs
+                        );
                     await waitTcs.Task.WaitAsync(TimeSpan.FromSeconds(10));
                 }
 
@@ -1677,13 +1930,18 @@ namespace System.Net.Http.Functional.Tests
 
             Task serverTask = Task.Run(async () =>
             {
-                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
 
-                await using Http3LoopbackStream requestStream = await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackStream requestStream =
+                    await connection.AcceptRequestStreamAsync();
 
                 await requestStream.ReadRequestDataAsync();
                 await requestStream.SendResponseAsync(isFinal: false);
-                await requestStream.SendResponseHeadersAsync(null, new[] { new HttpHeaderData("MyHeader", "MyValue") });
+                await requestStream.SendResponseHeadersAsync(
+                    null,
+                    new[] { new HttpHeaderData("MyHeader", "MyValue") }
+                );
                 await clientFinishedSemaphore.WaitAsync(TimeSpan.FromSeconds(20));
             });
 
@@ -1696,7 +1954,7 @@ namespace System.Net.Http.Functional.Tests
                     Method = HttpMethod.Get,
                     RequestUri = server.Address,
                     Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
 
                 using HttpResponseMessage response = await client.SendAsync(request);
@@ -1708,7 +1966,6 @@ namespace System.Net.Http.Functional.Tests
             });
 
             await new[] { clientTask, serverTask }.WhenAllOrAnyFailed(200_000);
-
         }
 
         public enum CloseOutboundControlStream
@@ -1717,26 +1974,34 @@ namespace System.Net.Http.Functional.Tests
             Dispose,
             Abort,
         }
+
         [Theory]
         [InlineData(CloseOutboundControlStream.BogusData)]
         [InlineData(CloseOutboundControlStream.Dispose)]
         [InlineData(CloseOutboundControlStream.Abort)]
-        public async Task ServerClosesOutboundControlStream_ClientClosesConnection(CloseOutboundControlStream closeType)
+        public async Task ServerClosesOutboundControlStream_ClientClosesConnection(
+            CloseOutboundControlStream closeType
+        )
         {
             using Http3LoopbackServer server = CreateHttp3LoopbackServer();
 
             SemaphoreSlim semaphore = new SemaphoreSlim(0);
             Task serverTask = Task.Run(async () =>
             {
-                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
 
                 // wait for incoming request
-                await using Http3LoopbackStream requestStream = await connection.AcceptRequestStreamAsync();
+                await using Http3LoopbackStream requestStream =
+                    await connection.AcceptRequestStreamAsync();
 
                 // abort the control stream
                 if (closeType == CloseOutboundControlStream.BogusData)
                 {
-                    await connection.OutboundControlStream.SendResponseBodyAsync(Array.Empty<byte>(), isFinal: true);
+                    await connection.OutboundControlStream.SendResponseBodyAsync(
+                        Array.Empty<byte>(),
+                        isFinal: true
+                    );
                 }
                 else if (closeType == CloseOutboundControlStream.Dispose)
                 {
@@ -1747,7 +2012,9 @@ namespace System.Net.Http.Functional.Tests
                     int iterations = 5;
                     while (iterations-- > 0)
                     {
-                        connection.OutboundControlStream.Abort(Http3LoopbackConnection.H3_INTERNAL_ERROR);
+                        connection.OutboundControlStream.Abort(
+                            Http3LoopbackConnection.H3_INTERNAL_ERROR
+                        );
                         // This sends RESET_FRAME which might cause complete discard of any data including stream type, leading to client ignoring the stream.
                         // Attempt to establish the control stream again then.
                         if (await semaphore.WaitAsync(100))
@@ -1774,10 +2041,13 @@ namespace System.Net.Http.Functional.Tests
                     Method = HttpMethod.Get,
                     RequestUri = server.Address,
                     Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
 
-                await AssertProtocolErrorAsync(Http3LoopbackConnection.H3_CLOSED_CRITICAL_STREAM, () => client.SendAsync(request));
+                await AssertProtocolErrorAsync(
+                    Http3LoopbackConnection.H3_CLOSED_CRITICAL_STREAM,
+                    () => client.SendAsync(request)
+                );
                 semaphore.Release();
             });
 
@@ -1792,10 +2062,12 @@ namespace System.Net.Http.Functional.Tests
             SemaphoreSlim semaphore = new SemaphoreSlim(0);
             Task serverTask = Task.Run(async () =>
             {
-                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                await using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                    await server.EstablishGenericConnectionAsync();
 
                 // wait for incoming request
-                (Http3LoopbackStream controlStream, Http3LoopbackStream requestStream) = await connection.AcceptControlAndRequestStreamAsync();
+                (Http3LoopbackStream controlStream, Http3LoopbackStream requestStream) =
+                    await connection.AcceptControlAndRequestStreamAsync();
 
                 await using (controlStream)
                 await using (requestStream)
@@ -1804,7 +2076,6 @@ namespace System.Net.Http.Functional.Tests
                     // wait for client task before tearing down the requestStream and connection
                     await semaphore.WaitAsync();
                 }
-
             });
 
             Task clientTask = Task.Run(async () =>
@@ -1816,17 +2087,23 @@ namespace System.Net.Http.Functional.Tests
                     Method = HttpMethod.Get,
                     RequestUri = server.Address,
                     Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
 
-                await AssertProtocolErrorAsync(Http3LoopbackConnection.H3_CLOSED_CRITICAL_STREAM, () => client.SendAsync(request));
+                await AssertProtocolErrorAsync(
+                    Http3LoopbackConnection.H3_CLOSED_CRITICAL_STREAM,
+                    () => client.SendAsync(request)
+                );
                 semaphore.Release();
             });
 
             await new[] { clientTask, serverTask }.WhenAllOrAnyFailed(200_000);
         }
 
-        private static async Task<QuicException> AssertThrowsQuicExceptionAsync(QuicError expectedError, Func<Task> testCode)
+        private static async Task<QuicException> AssertThrowsQuicExceptionAsync(
+            QuicError expectedError,
+            Func<Task> testCode
+        )
         {
             QuicException ex = await Assert.ThrowsAsync<QuicException>(testCode);
             Assert.Equal(expectedError, ex.QuicError);
@@ -1835,7 +2112,9 @@ namespace System.Net.Http.Functional.Tests
 
         public static TheoryData<HttpStatusCode, bool> StatusCodesTestData()
         {
-            var statuses = Enum.GetValues(typeof(HttpStatusCode)).Cast<HttpStatusCode>().Where(s => s >= HttpStatusCode.OK); // exclude informational
+            var statuses = Enum.GetValues(typeof(HttpStatusCode))
+                .Cast<HttpStatusCode>()
+                .Where(s => s >= HttpStatusCode.OK); // exclude informational
             var data = new TheoryData<HttpStatusCode, bool>();
             foreach (var status in statuses)
             {
@@ -1856,7 +2135,7 @@ namespace System.Net.Http.Functional.Tests
                 //{ "https://www.litespeedtech.com/" }, // LiteSpeed
                 { "https://quic.tech:8443/" }, // Cloudflare
                 { "https://quic.aiortc.org:443/" }, // aioquic
-                { "https://h2o.examp1e.net/" } // h2o/quicly
+                { "https://h2o.examp1e.net/" }, // h2o/quicly
             };
 
         /// <summary>
@@ -1873,8 +2152,11 @@ namespace System.Net.Http.Functional.Tests
 
     internal class StreamingHttpContent : HttpContent
     {
-        private readonly TaskCompletionSource _completeTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        private readonly TaskCompletionSource<Stream> _getStreamTcs = new TaskCompletionSource<Stream>(TaskCreationOptions.RunContinuationsAsynchronously);
+        private readonly TaskCompletionSource _completeTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        private readonly TaskCompletionSource<Stream> _getStreamTcs =
+            new TaskCompletionSource<Stream>(TaskCreationOptions.RunContinuationsAsynchronously);
 
         public CancellationToken SerializeCancellationToken { get; private set; }
 
@@ -1883,7 +2165,11 @@ namespace System.Net.Http.Functional.Tests
             throw new NotSupportedException();
         }
 
-        protected override async Task SerializeToStreamAsync(Stream stream, TransportContext context, CancellationToken cancellationToken)
+        protected override async Task SerializeToStreamAsync(
+            Stream stream,
+            TransportContext context,
+            CancellationToken cancellationToken
+        )
         {
             SerializeCancellationToken = cancellationToken;
             _getStreamTcs.TrySetResult(stream);

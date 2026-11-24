@@ -23,7 +23,12 @@ namespace System.Workflow.Activities.Rules.Design
         private NameValidatorDelegate nameValidator;
         private BasicBrowserDialog parent;
 
-        public RenameRuleObjectDialog(IServiceProvider serviceProvider, string oldName, NameValidatorDelegate nameValidator, BasicBrowserDialog parent)
+        public RenameRuleObjectDialog(
+            IServiceProvider serviceProvider,
+            string oldName,
+            NameValidatorDelegate nameValidator,
+            BasicBrowserDialog parent
+        )
         {
             if (oldName == null)
                 throw (new ArgumentNullException("oldName"));
@@ -48,15 +53,11 @@ namespace System.Workflow.Activities.Rules.Design
             IUIService uisvc = (IUIService)this.serviceProvider.GetService(typeof(IUIService));
             if (uisvc != null)
                 this.Font = (Font)uisvc.Styles["DialogFont"];
-
         }
 
         public string RuleObjectName
         {
-            get
-            {
-                return this.name;
-            }
+            get { return this.name; }
         }
 
         private void OnCancel(object sender, EventArgs e)
@@ -76,7 +77,14 @@ namespace System.Workflow.Activities.Rules.Design
                 if (uisvc != null)
                     uisvc.ShowError(errorMessage);
                 else
-                    MessageBox.Show(errorMessage, Messages.InvalidConditionNameCaption, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, DetermineOptions(sender));
+                    MessageBox.Show(
+                        errorMessage,
+                        Messages.InvalidConditionNameCaption,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error,
+                        MessageBoxDefaultButton.Button1,
+                        DetermineOptions(sender)
+                    );
 
                 this.DialogResult = DialogResult.None;
             }
@@ -87,7 +95,14 @@ namespace System.Workflow.Activities.Rules.Design
                 if (uisvc != null)
                     uisvc.ShowError(errorMessage);
                 else
-                    MessageBox.Show(errorMessage, Messages.InvalidConditionNameCaption, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, DetermineOptions(sender));
+                    MessageBox.Show(
+                        errorMessage,
+                        Messages.InvalidConditionNameCaption,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error,
+                        MessageBoxDefaultButton.Button1,
+                        DetermineOptions(sender)
+                    );
 
                 this.DialogResult = DialogResult.None;
             }

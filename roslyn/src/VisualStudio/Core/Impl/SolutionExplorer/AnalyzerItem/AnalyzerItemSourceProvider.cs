@@ -16,19 +16,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
     [Export(typeof(IAttachedCollectionSourceProvider))]
     [Name(nameof(AnalyzerItemSourceProvider))]
     [Order]
-    [AppliesToProject("(CSharp | VB) & !CPS")]  // in the CPS case, the Analyzers items are created by the project system
-    internal sealed class AnalyzerItemSourceProvider : AttachedCollectionSourceProvider<AnalyzersFolderItem>
+    [AppliesToProject("(CSharp | VB) & !CPS")] // in the CPS case, the Analyzers items are created by the project system
+    internal sealed class AnalyzerItemSourceProvider
+        : AttachedCollectionSourceProvider<AnalyzersFolderItem>
     {
         [Import(typeof(AnalyzersCommandHandler))]
         private readonly IAnalyzersCommandHandler _commandHandler = null;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AnalyzerItemSourceProvider()
-        {
-        }
+        public AnalyzerItemSourceProvider() { }
 
-        protected override IAttachedCollectionSource CreateCollectionSource(AnalyzersFolderItem analyzersFolder, string relationshipName)
+        protected override IAttachedCollectionSource CreateCollectionSource(
+            AnalyzersFolderItem analyzersFolder,
+            string relationshipName
+        )
         {
             if (relationshipName == KnownRelationships.Contains)
             {

@@ -11,41 +11,35 @@ internal sealed class PrintCommand
 {
     public static void Register(ProjectCommandLineApplication app)
     {
-        app.Command(
-            "print",
-            cmd =>
+        app.Command("print", cmd =>
+        {
+            cmd.Description = Resources.PrintCommand_Description;
+
+            var idArgument = cmd.Argument("[id]", Resources.PrintCommand_IdArgument_Description);
+            var showAllOption = cmd.Option(
+                "--show-all",
+                Resources.PrintCommand_ShowAllOption_Description,
+                CommandOptionType.NoValue
+            );
+
+            cmd.HelpOption("-h|--help");
+
+            cmd.OnExecute(() =>
             {
-                cmd.Description = Resources.PrintCommand_Description;
-
-                var idArgument = cmd.Argument(
-                    "[id]",
-                    Resources.PrintCommand_IdArgument_Description
-                );
-                var showAllOption = cmd.Option(
-                    "--show-all",
-                    Resources.PrintCommand_ShowAllOption_Description,
-                    CommandOptionType.NoValue
-                );
-
-                cmd.HelpOption("-h|--help");
-
-                cmd.OnExecute(() =>
+                if (idArgument.Value is null)
                 {
-                    if (idArgument.Value is null)
-                    {
-                        cmd.ShowHelp();
-                        return 0;
-                    }
-                    return Execute(
-                        cmd.Reporter,
-                        cmd.ProjectOption.Value(),
-                        idArgument.Value,
-                        showAllOption.HasValue(),
-                        cmd.OutputOption.Value()
-                    );
-                });
-            }
-        );
+                    cmd.ShowHelp();
+                    return 0;
+                }
+                return Execute(
+                    cmd.Reporter,
+                    cmd.ProjectOption.Value(),
+                    idArgument.Value,
+                    showAllOption.HasValue(),
+                    cmd.OutputOption.Value()
+                );
+            });
+        });
     }
 
     private static int Execute(

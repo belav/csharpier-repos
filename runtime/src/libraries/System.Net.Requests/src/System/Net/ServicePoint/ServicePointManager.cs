@@ -14,8 +14,12 @@ namespace System.Net
         public const int DefaultNonPersistentConnectionLimit = 4;
         public const int DefaultPersistentConnectionLimit = 2;
 
-        private static readonly ConcurrentDictionary<string, WeakReference<ServicePoint>> s_servicePointTable = new ConcurrentDictionary<string, WeakReference<ServicePoint>>();
-        private static SecurityProtocolType s_securityProtocolType = SecurityProtocolType.SystemDefault;
+        private static readonly ConcurrentDictionary<
+            string,
+            WeakReference<ServicePoint>
+        > s_servicePointTable = new ConcurrentDictionary<string, WeakReference<ServicePoint>>();
+        private static SecurityProtocolType s_securityProtocolType =
+            SecurityProtocolType.SystemDefault;
         private static int s_connectionLimit = 2;
         private static int s_maxServicePoints;
         private static int s_maxServicePointIdleTime = 100 * 1000;
@@ -37,9 +41,12 @@ namespace System.Net
         {
             const SecurityProtocolType Allowed =
 #pragma warning disable CA5364 // Do Not Use Deprecated Security Protocols
-                SecurityProtocolType.Tls | SecurityProtocolType.Tls11 |
+                SecurityProtocolType.Tls
+                | SecurityProtocolType.Tls11
+                |
 #pragma warning restore CA5364
-                SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13;
+                SecurityProtocolType.Tls12
+                | SecurityProtocolType.Tls13;
             if ((value & ~Allowed) != 0)
             {
                 throw new NotSupportedException(SR.net_securityprotocolnotsupported);
@@ -95,15 +102,29 @@ namespace System.Net
         public static bool CheckCertificateRevocationList { get; set; }
 
         [UnsupportedOSPlatform("browser")]
-        public static EncryptionPolicy EncryptionPolicy { get; } = EncryptionPolicy.RequireEncryption;
+        public static EncryptionPolicy EncryptionPolicy { get; } =
+            EncryptionPolicy.RequireEncryption;
 
-        [Obsolete(Obsoletions.WebRequestMessage, DiagnosticId = Obsoletions.WebRequestDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.WebRequestMessage,
+            DiagnosticId = Obsoletions.WebRequestDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public static ServicePoint FindServicePoint(Uri address) => FindServicePoint(address, null);
 
-        [Obsolete(Obsoletions.WebRequestMessage, DiagnosticId = Obsoletions.WebRequestDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public static ServicePoint FindServicePoint(string uriString, IWebProxy? proxy) => FindServicePoint(new Uri(uriString), proxy);
+        [Obsolete(
+            Obsoletions.WebRequestMessage,
+            DiagnosticId = Obsoletions.WebRequestDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public static ServicePoint FindServicePoint(string uriString, IWebProxy? proxy) =>
+            FindServicePoint(new Uri(uriString), proxy);
 
-        [Obsolete(Obsoletions.WebRequestMessage, DiagnosticId = Obsoletions.WebRequestDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.WebRequestMessage,
+            DiagnosticId = Obsoletions.WebRequestDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public static ServicePoint FindServicePoint(Uri address, IWebProxy? proxy)
         {
             ArgumentNullException.ThrowIfNull(address);
@@ -130,7 +151,9 @@ namespace System.Net
 
                 // Any time we don't find what we're looking for in the table, take that as an opportunity
                 // to scavenge the table looking for entries that have lost their service point and removing them.
-                foreach (KeyValuePair<string, WeakReference<ServicePoint>> entry in s_servicePointTable)
+                foreach (
+                    KeyValuePair<string, WeakReference<ServicePoint>> entry in s_servicePointTable
+                )
                 {
                     if (!entry.Value.TryGetTarget(out _))
                     {
@@ -153,7 +176,7 @@ namespace System.Net
                     ConnectionLimit = DefaultConnectionLimit,
                     IdleSince = DateTime.Now,
                     Expect100Continue = Expect100Continue,
-                    UseNagleAlgorithm = UseNagleAlgorithm
+                    UseNagleAlgorithm = UseNagleAlgorithm,
                 };
                 s_servicePointTable[tableKey] = new WeakReference<ServicePoint>(sp);
 
@@ -176,7 +199,9 @@ namespace System.Net
                     {
                         if (proxyAddress.Scheme != Uri.UriSchemeHttp)
                         {
-                            throw new NotSupportedException(SR.Format(SR.net_proxyschemenotsupported, address.Scheme));
+                            throw new NotSupportedException(
+                                SR.Format(SR.net_proxyschemenotsupported, address.Scheme)
+                            );
                         }
 
                         address = proxyAddress;
@@ -196,9 +221,10 @@ namespace System.Net
             return false;
         }
 
-        private static string MakeQueryString(Uri address) => address.IsDefaultPort ?
-            $"{address.Scheme}://{address.DnsSafeHost}" :
-            $"{address.Scheme}://{address.DnsSafeHost}:{address.Port}";
+        private static string MakeQueryString(Uri address) =>
+            address.IsDefaultPort
+                ? $"{address.Scheme}://{address.DnsSafeHost}"
+                : $"{address.Scheme}://{address.DnsSafeHost}:{address.Port}";
 
         private static string MakeQueryString(Uri address, bool isProxy)
         {

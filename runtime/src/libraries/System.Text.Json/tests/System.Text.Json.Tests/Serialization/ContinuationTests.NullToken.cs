@@ -17,17 +17,17 @@ namespace System.Text.Json.Serialization.Tests
         {
             using (Stream stream = new MemoryStream(Encoding.UTF8.GetBytes(payload)))
             {
-                CustomerCollectionResponse response = await JsonSerializer.DeserializeAsync<CustomerCollectionResponse>(stream, new JsonSerializerOptions { IgnoreNullValues = true });
+                CustomerCollectionResponse response =
+                    await JsonSerializer.DeserializeAsync<CustomerCollectionResponse>(
+                        stream,
+                        new JsonSerializerOptions { IgnoreNullValues = true }
+                    );
                 Assert.Equal(50, response.Customers.Count);
             }
         }
 
-        public static IEnumerable<object[]> ContinuationAtNullTokenTestData
-            => new[]
-            {
-                new[] { SR.CustomerSearchApi108KB },
-                new[] { SR.CustomerSearchApi107KB },
-            };
+        public static IEnumerable<object[]> ContinuationAtNullTokenTestData =>
+            new[] { new[] { SR.CustomerSearchApi108KB }, new[] { SR.CustomerSearchApi107KB } };
 
         private class CustomerCollectionResponse
         {

@@ -14,14 +14,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
     public class ConvertIfToSwitchFixAllTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpConvertIfToSwitchCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpConvertIfToSwitchCodeRefactoringProvider();
 
         [Fact]
         public async Task ConvertIfToSwitchStatement_FixAllInDocument()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     int M(int i)
     {
@@ -51,7 +53,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         }
     }
 }",
-@"class C
+                @"class C
 {
     int M(int i)
     {
@@ -82,14 +84,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 return 0;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ConvertIfToSwitchExpression_FixAllInDocument()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     int M(int i)
     {
@@ -119,7 +122,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         }
     }
 }",
-@"class C
+                @"class C
 {
     int M(int i)
     {
@@ -142,14 +145,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
             _ => 0
         };
     }
-}", index: 1);
+}",
+                index: 1
+            );
         }
 
         [Fact]
         public async Task ConvertIfToSwitchStatement_Nested_FixAllInDocument()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     int M(int i, int j)
     {
@@ -168,7 +173,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         }
     }
 }",
-@"class C
+                @"class C
 {
     int M(int i, int j)
     {
@@ -192,14 +197,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
                 break;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ConvertIfToSwitchStatement_FixAllInProject()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -260,7 +266,7 @@ class C3
         </Document>
     </Project>
 </Workspace>",
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
 class C
@@ -321,14 +327,15 @@ class C3
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Fact]
         public async Task ConvertIfToSwitchStatement_FixAllInSolution()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -389,7 +396,7 @@ class C3
         </Document>
     </Project>
 </Workspace>",
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
 class C
@@ -451,14 +458,15 @@ class C3
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Fact]
         public async Task ConvertIfToSwitchStatement_FixAllInContainingMember()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     int M(int i)
     {
@@ -488,7 +496,7 @@ class C3
         }
     }
 }",
-@"class C
+                @"class C
 {
     int M(int i)
     {
@@ -518,14 +526,15 @@ class C3
             return 0;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ConvertIfToSwitchStatement_FixAllInContainingType()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     int M(int i)
     {
@@ -572,7 +581,7 @@ class C2
         }
     }
 }",
-@"class C
+                @"class C
 {
     int M(int i)
     {
@@ -620,7 +629,8 @@ class C2
             return 0;
         }
     }
-}");
+}"
+            );
         }
     }
 }

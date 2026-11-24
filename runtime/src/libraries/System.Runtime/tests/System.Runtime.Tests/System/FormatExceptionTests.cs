@@ -13,7 +13,11 @@ namespace System.Tests
         public static void Ctor_Empty()
         {
             var exception = new FormatException();
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_FORMAT, validateMessage: false);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_FORMAT,
+                validateMessage: false
+            );
         }
 
         [Fact]
@@ -21,7 +25,11 @@ namespace System.Tests
         {
             string message = "bad format";
             var exception = new FormatException(message);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_FORMAT, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_FORMAT,
+                message: message
+            );
         }
 
         [Fact]
@@ -30,7 +38,12 @@ namespace System.Tests
             string message = "bad format";
             var innerException = new Exception("Inner exception");
             var exception = new FormatException(message, innerException);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_FORMAT, innerException: innerException, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_FORMAT,
+                innerException: innerException,
+                message: message
+            );
         }
     }
 }

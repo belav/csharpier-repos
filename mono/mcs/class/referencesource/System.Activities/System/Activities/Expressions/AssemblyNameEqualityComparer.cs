@@ -12,9 +12,7 @@ namespace System.Activities.Expressions
 
     class AssemblyNameEqualityComparer : IEqualityComparer, IEqualityComparer<AssemblyName>
     {
-        public AssemblyNameEqualityComparer()
-        {
-        }
+        public AssemblyNameEqualityComparer() { }
 
         public new bool Equals(object xparam, object yparam)
         {

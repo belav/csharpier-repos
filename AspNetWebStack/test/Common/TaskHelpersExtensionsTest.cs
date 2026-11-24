@@ -14,8 +14,7 @@ namespace System.Threading.Tasks
         public async Task ConvertFromTaskOfStringShouldSucceed()
         {
             // Arrange
-            var task = Task.FromResult("StringResult")
-                .CastToObject();
+            var task = Task.FromResult("StringResult").CastToObject();
 
             // Act
             var result = await task;
@@ -29,8 +28,7 @@ namespace System.Threading.Tasks
         public async Task ConvertFromTaskOfIntShouldSucceed()
         {
             // Arrange
-            var task = Task.FromResult(123)
-                .CastToObject();
+            var task = Task.FromResult(123).CastToObject();
 
             // Act
             var result = await task;
@@ -44,7 +42,8 @@ namespace System.Threading.Tasks
         public async Task ConvertFromFaultedTaskOfObjectShouldBeHandled()
         {
             // Arrange
-            var task = TaskHelpers.FromError<object>(new InvalidOperationException())
+            var task = TaskHelpers
+                .FromError<object>(new InvalidOperationException())
                 .CastToObject();
 
             // Act & Assert
@@ -56,8 +55,7 @@ namespace System.Threading.Tasks
         public async Task ConvertFromCancelledTaskOfStringShouldBeHandled()
         {
             // Arrange
-            var task = TaskHelpers.Canceled<string>()
-                .CastToObject();
+            var task = TaskHelpers.Canceled<string>().CastToObject();
 
             // Act & Assert
             await Assert.ThrowsAsync<TaskCanceledException>(() => task);
@@ -71,8 +69,7 @@ namespace System.Threading.Tasks
         public async Task ConvertFromTaskShouldSucceed()
         {
             // Arrange
-            var task = TaskHelpers.Completed()
-                .CastToObject();
+            var task = TaskHelpers.Completed().CastToObject();
 
             // Act
             var result = await task;
@@ -86,8 +83,7 @@ namespace System.Threading.Tasks
         public async Task ConvertFromFaultedTaskShouldBeHandled()
         {
             // Arrange
-            var task = TaskHelpers.FromError(new InvalidOperationException())
-                .CastToObject();
+            var task = TaskHelpers.FromError(new InvalidOperationException()).CastToObject();
 
             // Act & Assert
             await Assert.ThrowsAsync<InvalidOperationException>(() => task);
@@ -98,8 +94,7 @@ namespace System.Threading.Tasks
         public async Task ConvertFromCancelledTaskShouldBeHandled()
         {
             // Arrange
-            var task = TaskHelpers.Canceled()
-                .CastToObject();
+            var task = TaskHelpers.Canceled().CastToObject();
 
             // Act & Assert
             await Assert.ThrowsAsync<TaskCanceledException>(() => task);
@@ -167,7 +162,7 @@ namespace System.Threading.Tasks
             Assert.False(result);
 
             incompleteTask.Start();
-            return incompleteTask;  // Make sure the task gets observed
+            return incompleteTask; // Make sure the task gets observed
         }
     }
 }

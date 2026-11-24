@@ -20,6 +20,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
         GlobalNamespace,
         MethodGroup,
         AnonMethod,
-        Lambda
+        Lambda,
     }
 }

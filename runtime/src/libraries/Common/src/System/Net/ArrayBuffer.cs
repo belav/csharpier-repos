@@ -34,9 +34,10 @@ namespace System.Net
             Debug.Assert(initialSize > 0 || usePool);
 
             _usePool = usePool;
-            _bytes = initialSize == 0
-                ? Array.Empty<byte>()
-                : usePool ? ArrayPool<byte>.Shared.Rent(initialSize) : new byte[initialSize];
+            _bytes =
+                initialSize == 0 ? Array.Empty<byte>()
+                : usePool ? ArrayPool<byte>.Shared.Rent(initialSize)
+                : new byte[initialSize];
             _activeStart = 0;
             _availableStart = 0;
         }
@@ -80,14 +81,19 @@ namespace System.Net
         }
 
         public int ActiveLength => _availableStart - _activeStart;
-        public Span<byte> ActiveSpan => new Span<byte>(_bytes, _activeStart, _availableStart - _activeStart);
-        public ReadOnlySpan<byte> ActiveReadOnlySpan => new ReadOnlySpan<byte>(_bytes, _activeStart, _availableStart - _activeStart);
-        public Memory<byte> ActiveMemory => new Memory<byte>(_bytes, _activeStart, _availableStart - _activeStart);
+        public Span<byte> ActiveSpan =>
+            new Span<byte>(_bytes, _activeStart, _availableStart - _activeStart);
+        public ReadOnlySpan<byte> ActiveReadOnlySpan =>
+            new ReadOnlySpan<byte>(_bytes, _activeStart, _availableStart - _activeStart);
+        public Memory<byte> ActiveMemory =>
+            new Memory<byte>(_bytes, _activeStart, _availableStart - _activeStart);
 
         public int AvailableLength => _bytes.Length - _availableStart;
         public Span<byte> AvailableSpan => _bytes.AsSpan(_availableStart);
         public Memory<byte> AvailableMemory => _bytes.AsMemory(_availableStart);
-        public Memory<byte> AvailableMemorySliced(int length) => new Memory<byte>(_bytes, _availableStart, length);
+
+        public Memory<byte> AvailableMemorySliced(int length) =>
+            new Memory<byte>(_bytes, _availableStart, length);
 
         public int Capacity => _bytes.Length;
         public int ActiveStartOffset => _activeStart;
@@ -152,9 +158,7 @@ namespace System.Net
                 newSize *= 2;
             } while (newSize < desiredSize);
 
-            byte[] newBytes = _usePool ?
-                ArrayPool<byte>.Shared.Rent(newSize) :
-                new byte[newSize];
+            byte[] newBytes = _usePool ? ArrayPool<byte>.Shared.Rent(newSize) : new byte[newSize];
             byte[] oldBytes = _bytes;
 
             if (ActiveLength != 0)

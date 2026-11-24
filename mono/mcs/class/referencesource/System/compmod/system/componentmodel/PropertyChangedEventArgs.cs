@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="PropertyChangedEventArgs.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
-    
+namespace System.ComponentModel
+{
     using System;
     using System.Diagnostics;
     using System.Security.Permissions;
@@ -17,24 +17,25 @@ namespace System.ComponentModel {
 #if !SILVERLIGHT
     [HostProtection(SharedState = true)]
 #endif
-    public class PropertyChangedEventArgs : EventArgs {
+    public class PropertyChangedEventArgs : EventArgs
+    {
         private readonly string propertyName;
 
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.ComponentModel.PropertyChangedEventArgs'/>
         /// class.</para>
         /// </devdoc>
-        public PropertyChangedEventArgs(string propertyName) {
+        public PropertyChangedEventArgs(string propertyName)
+        {
             this.propertyName = propertyName;
         }
 
         /// <devdoc>
         ///    <para>Indicates the name of the property that changed.</para>
         /// </devdoc>
-        public virtual string PropertyName {
-            get {
-                return propertyName;
-            }
+        public virtual string PropertyName
+        {
+            get { return propertyName; }
         }
     }
 }

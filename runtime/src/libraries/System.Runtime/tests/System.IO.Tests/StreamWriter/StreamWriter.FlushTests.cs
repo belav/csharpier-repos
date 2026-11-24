@@ -45,7 +45,10 @@ namespace System.IO.Tests
             cts.Cancel();
             Task t = sw.FlushAsync(cts.Token);
             Assert.Equal(TaskStatus.Canceled, t.Status);
-            Assert.Equal(cts.Token, (await Assert.ThrowsAnyAsync<OperationCanceledException>(() => t)).CancellationToken);
+            Assert.Equal(
+                cts.Token,
+                (await Assert.ThrowsAnyAsync<OperationCanceledException>(() => t)).CancellationToken
+            );
 
             cts = new CancellationTokenSource();
             sw.Write("hello");
@@ -73,14 +76,18 @@ namespace System.IO.Tests
             Task t = sw.FlushAsync(cts.Token);
             Assert.False(t.IsCompleted);
             cts.Cancel();
-            Assert.Equal(cts.Token, (await Assert.ThrowsAnyAsync<OperationCanceledException>(() => t)).CancellationToken);
+            Assert.Equal(
+                cts.Token,
+                (await Assert.ThrowsAnyAsync<OperationCanceledException>(() => t)).CancellationToken
+            );
         }
 
         private sealed class DerivedStreamWriter : StreamWriter
         {
             public bool NonCancelableFlushAsyncInvoked;
 
-            public DerivedStreamWriter(Stream stream) : base(stream) { }
+            public DerivedStreamWriter(Stream stream)
+                : base(stream) { }
 
             public override Task FlushAsync()
             {
@@ -91,7 +98,10 @@ namespace System.IO.Tests
 
         private sealed class WaitUntilCanceledWriteMemoryStream : MemoryStream
         {
-            public override ValueTask WriteAsync(ReadOnlyMemory<byte> source, CancellationToken cancellationToken)
+            public override ValueTask WriteAsync(
+                ReadOnlyMemory<byte> source,
+                CancellationToken cancellationToken
+            )
             {
                 return new ValueTask(Task.Delay(-1, cancellationToken));
             }

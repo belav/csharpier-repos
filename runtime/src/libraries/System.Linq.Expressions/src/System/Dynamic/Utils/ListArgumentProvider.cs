@@ -61,10 +61,7 @@ namespace System.Dynamic.Utils
                 return GetElement(index);
             }
             [ExcludeFromCodeCoverage(Justification = "Unreachable")]
-            set
-            {
-                throw ContractUtils.Unreachable;
-            }
+            set { throw ContractUtils.Unreachable; }
         }
 
         #endregion
@@ -164,6 +161,7 @@ namespace System.Dynamic.Utils
 
         protected override Expression First => _arg0;
         protected override int ElementCount => _provider.ArgumentCount;
+
         protected override Expression GetElement(int index) => _provider.GetArgument(index);
     }
 }

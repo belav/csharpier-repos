@@ -22,7 +22,7 @@ namespace System.Activities.Expressions
     {
         private const int AssemblyToAssemblyNameCacheInitSize = 100;
         private const int AssemblyCacheInitialSize = 100;
-        
+
         // cache for Assembly ==> AssemblyName
         // Assembly.GetName() is very very expensive
         private static object assemblyToAssemblyNameCacheLock = new object();
@@ -43,9 +43,7 @@ namespace System.Activities.Expressions
         private AssemblyName assemblyName;
         private bool isImmutable;
 
-        public AssemblyReference()
-        {
-        }
+        public AssemblyReference() { }
 
         // This immutable ctor is for the default references, so they can be shared freely
         internal AssemblyReference(Assembly assembly, AssemblyName assemblyName)
@@ -58,11 +56,7 @@ namespace System.Activities.Expressions
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Assembly Assembly
         {
-            get
-            {
-                return this.assembly;
-            }
-
+            get { return this.assembly; }
             set
             {
                 this.ThrowIfImmutable();
@@ -72,11 +66,7 @@ namespace System.Activities.Expressions
 
         public AssemblyName AssemblyName
         {
-            get
-            {
-                return this.assemblyName;
-            }
-
+            get { return this.assemblyName; }
             set
             {
                 this.ThrowIfImmutable();
@@ -84,15 +74,21 @@ namespace System.Activities.Expressions
             }
         }
 
-        [SuppressMessage(FxCop.Category.Usage, FxCop.Rule.OperatorOverloadsHaveNamedAlternates,
-            Justification = "A named method provides no advantage over the property setter.")]
+        [SuppressMessage(
+            FxCop.Category.Usage,
+            FxCop.Rule.OperatorOverloadsHaveNamedAlternates,
+            Justification = "A named method provides no advantage over the property setter."
+        )]
         public static implicit operator AssemblyReference(Assembly assembly)
         {
             return new AssemblyReference { Assembly = assembly };
         }
 
-        [SuppressMessage(FxCop.Category.Usage, FxCop.Rule.OperatorOverloadsHaveNamedAlternates,
-            Justification = "A named method provides no advantage over the property setter.")]
+        [SuppressMessage(
+            FxCop.Category.Usage,
+            FxCop.Rule.OperatorOverloadsHaveNamedAlternates,
+            Justification = "A named method provides no advantage over the property setter."
+        )]
         public static implicit operator AssemblyReference(AssemblyName assemblyName)
         {
             return new AssemblyReference { AssemblyName = assemblyName };
@@ -107,7 +103,10 @@ namespace System.Activities.Expressions
         }
 
         // this code is borrowed from XamlSchemaContext
-        internal static bool AssemblySatisfiesReference(AssemblyName assemblyName, AssemblyName reference)
+        internal static bool AssemblySatisfiesReference(
+            AssemblyName assemblyName,
+            AssemblyName reference
+        )
         {
             if (reference.Name != assemblyName.Name)
             {
@@ -119,7 +118,10 @@ namespace System.Activities.Expressions
                 return false;
             }
 
-            if (reference.CultureInfo != null && !reference.CultureInfo.Equals(assemblyName.CultureInfo))
+            if (
+                reference.CultureInfo != null
+                && !reference.CultureInfo.Equals(assemblyName.CultureInfo)
+            )
             {
                 return false;
             }
@@ -142,14 +144,17 @@ namespace System.Activities.Expressions
             // the following assembly resolution logic
             // emulates the Xaml's assembly resolution logic as closely as possible.
             // Should Xaml's assembly resolution logic ever change, this code needs update as well.
-            // please see XamlSchemaContext.ResolveAssembly() 
+            // please see XamlSchemaContext.ResolveAssembly()
             if (assemblyCache == null)
             {
                 lock (assemblyCacheLock)
                 {
                     if (assemblyCache == null)
                     {
-                        assemblyCache = new Hashtable(AssemblyCacheInitialSize, new AssemblyNameEqualityComparer());
+                        assemblyCache = new Hashtable(
+                            AssemblyCacheInitialSize,
+                            new AssemblyNameEqualityComparer()
+                        );
                     }
                 }
             }
@@ -161,8 +166,8 @@ namespace System.Activities.Expressions
             }
 
             // search current AppDomain first
-            // this for-loop part is to ensure that 
-            // loose AssemblyNames get resolved in the same way 
+            // this for-loop part is to ensure that
+            // loose AssemblyNames get resolved in the same way
             // as Xaml would do.  that is to find the first match
             // found starting from the end of the array of Assemblies
             // returned by AppDomain.GetAssemblies()
@@ -185,10 +190,21 @@ namespace System.Activities.Expressions
                 CultureInfo reqCulture = assemblyName.CultureInfo;
                 byte[] reqKeyToken = assemblyName.GetPublicKeyToken();
 
-                if ((String.Compare(curAsmName.Name, assemblyName.Name, StringComparison.OrdinalIgnoreCase) == 0) &&
-                         (reqVersion == null || reqVersion.Equals(curVersion)) &&
-                         (reqCulture == null || reqCulture.Equals(curCulture)) &&
-                         (reqKeyToken == null || AssemblyNameEqualityComparer.IsSameKeyToken(reqKeyToken, curKeyToken)))
+                if (
+                    (
+                        String.Compare(
+                            curAsmName.Name,
+                            assemblyName.Name,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
+                    && (reqVersion == null || reqVersion.Equals(curVersion))
+                    && (reqCulture == null || reqCulture.Equals(curCulture))
+                    && (
+                        reqKeyToken == null
+                        || AssemblyNameEqualityComparer.IsSameKeyToken(reqKeyToken, curKeyToken)
+                    )
+                )
                 {
                     lock (assemblyCacheLock)
                     {
@@ -226,7 +242,9 @@ namespace System.Activities.Expressions
                 {
                     if (assemblyToAssemblyNameCache == null)
                     {
-                        assemblyToAssemblyNameCache = new Hashtable(AssemblyToAssemblyNameCacheInitSize);
+                        assemblyToAssemblyNameCache = new Hashtable(
+                            AssemblyToAssemblyNameCacheInitSize
+                        );
                     }
                 }
             }
@@ -248,16 +266,22 @@ namespace System.Activities.Expressions
 
 #pragma warning disable 618
         [SuppressMessage(
-            "Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods",
+            "Microsoft.Reliability",
+            "CA2001:AvoidCallingProblematicMethods",
             MessageId = "System.Reflection.Assembly.LoadWithPartialName",
-            Justification = "Assembly.LoadWithPartialName is the only method with the right behavior.")]
+            Justification = "Assembly.LoadWithPartialName is the only method with the right behavior."
+        )]
         private static Assembly LoadAssembly(AssemblyName assemblyName)
         {
             Assembly loaded = null;
 
             Fx.Assert(assemblyName.Name != null, "AssemblyName.Name cannot be null");
             byte[] publicKeyToken = assemblyName.GetPublicKeyToken();
-            if (assemblyName.Version != null || assemblyName.CultureInfo != null || publicKeyToken != null)
+            if (
+                assemblyName.Version != null
+                || assemblyName.CultureInfo != null
+                || publicKeyToken != null
+            )
             {
                 // Assembly.Load(string)
                 try
@@ -266,11 +290,19 @@ namespace System.Activities.Expressions
                 }
                 catch (Exception ex)
                 {
-                    if (ex is FileNotFoundException ||
-                        ex is FileLoadException ||
-                        (ex is TargetInvocationException &&
-                        (((TargetInvocationException)ex).InnerException is FileNotFoundException ||
-                        ((TargetInvocationException)ex).InnerException is FileNotFoundException)))
+                    if (
+                        ex is FileNotFoundException
+                        || ex is FileLoadException
+                        || (
+                            ex is TargetInvocationException
+                            && (
+                                ((TargetInvocationException)ex).InnerException
+                                    is FileNotFoundException
+                                || ((TargetInvocationException)ex).InnerException
+                                    is FileNotFoundException
+                            )
+                        )
+                    )
                     {
                         loaded = null;
                         FxTrace.Exception.AsWarning(ex);
@@ -295,7 +327,9 @@ namespace System.Activities.Expressions
         {
             if (this.isImmutable)
             {
-                throw FxTrace.Exception.AsError(new NotSupportedException(SR.AssemblyReferenceIsImmutable));
+                throw FxTrace.Exception.AsError(
+                    new NotSupportedException(SR.AssemblyReferenceIsImmutable)
+                );
             }
         }
     }

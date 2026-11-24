@@ -5,7 +5,7 @@ using System.Threading;
 using Xunit;
 
 public class Test12224
-{    
+{
     // Regression test for EH getting stuck in an infinite loop when NullReferenceException
     // happens inside a handler of another NullReferenceException.
     static void ExecuteTest(object context)
@@ -22,10 +22,7 @@ public class Test12224
                 int x = s.Length;
             }
         }
-        catch (NullReferenceException)
-        {
-
-        }
+        catch (NullReferenceException) { }
     }
 
     [Fact]

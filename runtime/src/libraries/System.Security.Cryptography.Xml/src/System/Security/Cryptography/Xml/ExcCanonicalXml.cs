@@ -12,7 +12,13 @@ namespace System.Security.Cryptography.Xml
         private readonly CanonicalXmlDocument _c14nDoc;
         private readonly ExcAncestralNamespaceContextManager _ancMgr;
 
-        internal ExcCanonicalXml(Stream inputStream, bool includeComments, string inclusiveNamespacesPrefixList, XmlResolver resolver, string strBaseUri)
+        internal ExcCanonicalXml(
+            Stream inputStream,
+            bool includeComments,
+            string inclusiveNamespacesPrefixList,
+            XmlResolver resolver,
+            string strBaseUri
+        )
         {
             if (inputStream is null)
             {
@@ -25,7 +31,12 @@ namespace System.Security.Cryptography.Xml
             _ancMgr = new ExcAncestralNamespaceContextManager(inclusiveNamespacesPrefixList);
         }
 
-        internal ExcCanonicalXml(XmlDocument document, bool includeComments, string inclusiveNamespacesPrefixList, XmlResolver resolver)
+        internal ExcCanonicalXml(
+            XmlDocument document,
+            bool includeComments,
+            string inclusiveNamespacesPrefixList,
+            XmlResolver resolver
+        )
         {
             if (document is null)
             {
@@ -38,7 +49,12 @@ namespace System.Security.Cryptography.Xml
             _ancMgr = new ExcAncestralNamespaceContextManager(inclusiveNamespacesPrefixList);
         }
 
-        internal ExcCanonicalXml(XmlNodeList nodeList, bool includeComments, string inclusiveNamespacesPrefixList, XmlResolver resolver)
+        internal ExcCanonicalXml(
+            XmlNodeList nodeList,
+            bool includeComments,
+            string inclusiveNamespacesPrefixList,
+            XmlResolver resolver
+        )
         {
             if (nodeList is null)
             {
@@ -74,7 +90,11 @@ namespace System.Security.Cryptography.Xml
             return res;
         }
 
-        private static void MarkInclusionStateForNodes(XmlNodeList nodeList, XmlDocument inputRoot, XmlDocument root)
+        private static void MarkInclusionStateForNodes(
+            XmlNodeList nodeList,
+            XmlDocument inputRoot,
+            XmlDocument root
+        )
         {
             CanonicalXmlNodeList elementList = new CanonicalXmlNodeList();
             CanonicalXmlNodeList elementListCanonical = new CanonicalXmlNodeList();

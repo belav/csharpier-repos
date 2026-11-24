@@ -13,28 +13,33 @@ namespace Microsoft.CodeAnalysis.CSharp
         private partial void Validate()
         {
 #if DEBUG
-            Debug.Assert(!IsValue || GetItemOrSliceHelper == WellKnownMember.System_ReadOnlySpan_T__get_Item);
+            Debug.Assert(
+                !IsValue || GetItemOrSliceHelper == WellKnownMember.System_ReadOnlySpan_T__get_Item
+            );
 #pragma warning disable format
-            Debug.Assert(Argument.Type is
-                             { SpecialType: SpecialType.System_Int32 } or
-                             NamedTypeSymbol
-                                 {
-                                     ContainingSymbol: NamespaceSymbol
-                                                       {
-                                                           Name: "System",
-                                                           ContainingSymbol: NamespaceSymbol { IsGlobalNamespace: true }
-                                                       },
-                                     Name: "Index" or "Range",
-                                     IsGenericType: false
-                                 }
-                             );
+            Debug.Assert(
+                Argument.Type
+                    is { SpecialType: SpecialType.System_Int32 }
+                        or NamedTypeSymbol
+                        {
+                            ContainingSymbol: NamespaceSymbol
+                            {
+                                Name: "System",
+                                ContainingSymbol: NamespaceSymbol { IsGlobalNamespace: true }
+                            },
+                            Name: "Index" or "Range",
+                            IsGenericType: false
+                        }
+            );
 #pragma warning restore format
 
             if (Argument.Type.Name == "Range")
             {
-                Debug.Assert(GetItemOrSliceHelper is
-                                WellKnownMember.System_ReadOnlySpan_T__Slice_Int_Int or
-                                WellKnownMember.System_Span_T__Slice_Int_Int);
+                Debug.Assert(
+                    GetItemOrSliceHelper
+                        is WellKnownMember.System_ReadOnlySpan_T__Slice_Int_Int
+                            or WellKnownMember.System_Span_T__Slice_Int_Int
+                );
 
                 if (GetItemOrSliceHelper is WellKnownMember.System_ReadOnlySpan_T__Slice_Int_Int)
                 {
@@ -46,31 +51,46 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
 #pragma warning disable format
-                Debug.Assert(Type is
-                                 NamedTypeSymbol
-                                     {
-                                         ContainingSymbol: NamespaceSymbol
-                                                           {
-                                                               Name: "System",
-                                                               ContainingSymbol: NamespaceSymbol { IsGlobalNamespace: true }
-                                                           },
-                                         Arity: 1
-                                     }
-                                 );
+                Debug.Assert(
+                    Type
+                        is NamedTypeSymbol
+                        {
+                            ContainingSymbol: NamespaceSymbol
+                            {
+                                Name: "System",
+                                ContainingSymbol: NamespaceSymbol { IsGlobalNamespace: true }
+                            },
+                            Arity: 1
+                        }
+                );
 #pragma warning restore format
 
-                Debug.Assert(((NamedTypeSymbol)Type).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0].Equals(Expression.Type?.TryGetInlineArrayElementField()?.TypeWithAnnotations ?? default, TypeCompareKind.ConsiderEverything));
+                Debug.Assert(
+                    ((NamedTypeSymbol)Type)
+                        .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]
+                        .Equals(
+                            Expression.Type?.TryGetInlineArrayElementField()?.TypeWithAnnotations
+                                ?? default,
+                            TypeCompareKind.ConsiderEverything
+                        )
+                );
             }
             else
             {
-                Debug.Assert(GetItemOrSliceHelper is
-                                WellKnownMember.System_ReadOnlySpan_T__get_Item or
-                                WellKnownMember.System_Span_T__get_Item);
+                Debug.Assert(
+                    GetItemOrSliceHelper
+                        is WellKnownMember.System_ReadOnlySpan_T__get_Item
+                            or WellKnownMember.System_Span_T__get_Item
+                );
 
-                Debug.Assert(Type.Equals(Expression.Type?.TryGetInlineArrayElementField()?.Type, TypeCompareKind.ConsiderEverything));
+                Debug.Assert(
+                    Type.Equals(
+                        Expression.Type?.TryGetInlineArrayElementField()?.Type,
+                        TypeCompareKind.ConsiderEverything
+                    )
+                );
             }
 #endif
         }
     }
 }
-

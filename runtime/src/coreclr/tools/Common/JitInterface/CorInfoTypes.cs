@@ -25,60 +25,33 @@ namespace Internal.JitInterface
         public const ushort CORINFO_NO_SIZE_CHECK = 0xffff;
     }
 
-    public struct CORINFO_METHOD_STRUCT_
-    {
-    }
+    public struct CORINFO_METHOD_STRUCT_ { }
 
-    public struct CORINFO_FIELD_STRUCT_
-    {
-    }
+    public struct CORINFO_FIELD_STRUCT_ { }
 
-    public struct CORINFO_OBJECT_STRUCT_
-    {
-    }
+    public struct CORINFO_OBJECT_STRUCT_ { }
 
-    public struct CORINFO_CLASS_STRUCT_
-    {
-    }
+    public struct CORINFO_CLASS_STRUCT_ { }
 
-    public struct CORINFO_ARG_LIST_STRUCT_
-    {
-    }
+    public struct CORINFO_ARG_LIST_STRUCT_ { }
 
-    public struct CORINFO_MODULE_STRUCT_
-    {
-    }
+    public struct CORINFO_MODULE_STRUCT_ { }
 
-    public struct CORINFO_ASSEMBLY_STRUCT_
-    {
-    }
+    public struct CORINFO_ASSEMBLY_STRUCT_ { }
 
-    public struct CORINFO_CONTEXT_STRUCT
-    {
-    }
+    public struct CORINFO_CONTEXT_STRUCT { }
 
-    public struct CORINFO_GENERIC_STRUCT_
-    {
-    }
+    public struct CORINFO_GENERIC_STRUCT_ { }
 
-    public struct CORINFO_JUST_MY_CODE_HANDLE_
-    {
-    }
+    public struct CORINFO_JUST_MY_CODE_HANDLE_ { }
 
-    public struct CORINFO_VarArgInfo
-    {
-    }
+    public struct CORINFO_VarArgInfo { }
 
-    public struct PatchpointInfo
-    {
-    }
+    public struct PatchpointInfo { }
 
-    public struct MethodSignatureInfo
-    {
-    }
+    public struct MethodSignatureInfo { }
 
-    public enum _EXCEPTION_POINTERS
-    { }
+    public enum _EXCEPTION_POINTERS { }
 
     public unsafe struct CORINFO_SIG_INST
     {
@@ -88,38 +61,81 @@ namespace Internal.JitInterface
         public CORINFO_CLASS_STRUCT_** methInst; // (representative, not exact) instantiation for method type variables in signature
     }
 
-    public enum mdToken : uint
-    { }
+    public enum mdToken : uint { }
 
-    public enum HRESULT {
+    public enum HRESULT
+    {
         S_OK = 0,
-        E_NOTIMPL = -2147467263
+        E_NOTIMPL = -2147467263,
     }
 
     public unsafe struct CORINFO_SIG_INFO
     {
         public CorInfoCallConv callConv;
-        public CORINFO_CLASS_STRUCT_* retTypeClass;     // if the return type is a value class, this is its handle (enums are normalized)
-        public CORINFO_CLASS_STRUCT_* retTypeSigClass;  // returns the value class as it is in the sig (enums are not converted to primitives)
+        public CORINFO_CLASS_STRUCT_* retTypeClass; // if the return type is a value class, this is its handle (enums are normalized)
+        public CORINFO_CLASS_STRUCT_* retTypeSigClass; // returns the value class as it is in the sig (enums are not converted to primitives)
         public byte _retType;
-        public CorInfoSigInfoFlags flags;               // used by IL stubs code
+        public CorInfoSigInfoFlags flags; // used by IL stubs code
         public ushort numArgs;
-        public CORINFO_SIG_INST sigInst;                // information about how type variables are being instantiated in generic code
+        public CORINFO_SIG_INST sigInst; // information about how type variables are being instantiated in generic code
         public CORINFO_ARG_LIST_STRUCT_* args;
         public byte* pSig;
         public uint cbSig;
-        public MethodSignatureInfo* methodSignature;    // used in place of pSig and cbSig to reference a method signature object handle
-        public CORINFO_MODULE_STRUCT_* scope;           // passed to getArgClass
+        public MethodSignatureInfo* methodSignature; // used in place of pSig and cbSig to reference a method signature object handle
+        public CORINFO_MODULE_STRUCT_* scope; // passed to getArgClass
         public mdToken token;
 
-        public CorInfoType retType { get { return (CorInfoType)_retType; } set { _retType = (byte)value; } }
-        private CorInfoCallConv getCallConv() { return (CorInfoCallConv)((callConv & CorInfoCallConv.CORINFO_CALLCONV_MASK)); }
-        private bool hasThis() { return ((callConv & CorInfoCallConv.CORINFO_CALLCONV_HASTHIS) != 0); }
-        private bool hasExplicitThis() { return ((callConv & CorInfoCallConv.CORINFO_CALLCONV_EXPLICITTHIS) != 0); }
-        private bool hasImplicitThis() { return ((callConv & (CorInfoCallConv.CORINFO_CALLCONV_HASTHIS | CorInfoCallConv.CORINFO_CALLCONV_EXPLICITTHIS)) == CorInfoCallConv.CORINFO_CALLCONV_HASTHIS); }
-        private uint totalILArgs() { return (uint)(numArgs + (hasImplicitThis() ? 1 : 0)); }
-        private bool isVarArg() { return ((getCallConv() == CorInfoCallConv.CORINFO_CALLCONV_VARARG) || (getCallConv() == CorInfoCallConv.CORINFO_CALLCONV_NATIVEVARARG)); }
-        internal bool hasTypeArg() { return ((callConv & CorInfoCallConv.CORINFO_CALLCONV_PARAMTYPE) != 0); }
+        public CorInfoType retType
+        {
+            get { return (CorInfoType)_retType; }
+            set { _retType = (byte)value; }
+        }
+
+        private CorInfoCallConv getCallConv()
+        {
+            return (CorInfoCallConv)((callConv & CorInfoCallConv.CORINFO_CALLCONV_MASK));
+        }
+
+        private bool hasThis()
+        {
+            return ((callConv & CorInfoCallConv.CORINFO_CALLCONV_HASTHIS) != 0);
+        }
+
+        private bool hasExplicitThis()
+        {
+            return ((callConv & CorInfoCallConv.CORINFO_CALLCONV_EXPLICITTHIS) != 0);
+        }
+
+        private bool hasImplicitThis()
+        {
+            return (
+                (
+                    callConv
+                    & (
+                        CorInfoCallConv.CORINFO_CALLCONV_HASTHIS
+                        | CorInfoCallConv.CORINFO_CALLCONV_EXPLICITTHIS
+                    )
+                ) == CorInfoCallConv.CORINFO_CALLCONV_HASTHIS
+            );
+        }
+
+        private uint totalILArgs()
+        {
+            return (uint)(numArgs + (hasImplicitThis() ? 1 : 0));
+        }
+
+        private bool isVarArg()
+        {
+            return (
+                (getCallConv() == CorInfoCallConv.CORINFO_CALLCONV_VARARG)
+                || (getCallConv() == CorInfoCallConv.CORINFO_CALLCONV_NATIVEVARARG)
+            );
+        }
+
+        internal bool hasTypeArg()
+        {
+            return ((callConv & CorInfoCallConv.CORINFO_CALLCONV_PARAMTYPE) != 0);
+        }
     };
 
     //----------------------------------------------------------------------------
@@ -187,8 +203,16 @@ namespace Internal.JitInterface
 
         // _value represent the union of handle and addr
         private IntPtr _value;
-        public CORINFO_GENERIC_STRUCT_* handle { get { return (CORINFO_GENERIC_STRUCT_*)_value; } set { _value = (IntPtr)value; } }
-        public void* addr { get { return (void*)_value; } set { _value = (IntPtr)value; } }
+        public CORINFO_GENERIC_STRUCT_* handle
+        {
+            get { return (CORINFO_GENERIC_STRUCT_*)_value; }
+            set { _value = (IntPtr)value; }
+        }
+        public void* addr
+        {
+            get { return (void*)_value; }
+            set { _value = (IntPtr)value; }
+        }
     };
 
     public enum CORINFO_RUNTIME_LOOKUP_KIND
@@ -202,7 +226,11 @@ namespace Internal.JitInterface
     public unsafe struct CORINFO_LOOKUP_KIND
     {
         private byte _needsRuntimeLookup;
-        public bool needsRuntimeLookup { get { return _needsRuntimeLookup != 0; } set { _needsRuntimeLookup = value ? (byte)1 : (byte)0; } }
+        public bool needsRuntimeLookup
+        {
+            get { return _needsRuntimeLookup != 0; }
+            set { _needsRuntimeLookup = value ? (byte)1 : (byte)0; }
+        }
         public CORINFO_RUNTIME_LOOKUP_KIND runtimeLookupKind;
 
         // The 'runtimeLookupFlags' and 'runtimeLookupArgs' fields
@@ -232,7 +260,11 @@ namespace Internal.JitInterface
 
         // If set, test for null and branch to helper if null
         public byte _testForNull;
-        public bool testForNull { get { return _testForNull != 0; } set { _testForNull = value ? (byte)1 : (byte)0; } }
+        public bool testForNull
+        {
+            get { return _testForNull != 0; }
+            set { _testForNull = value ? (byte)1 : (byte)0; }
+        }
 
         public ushort sizeOffset;
         public IntPtr offset0;
@@ -241,11 +273,18 @@ namespace Internal.JitInterface
         public IntPtr offset3;
 
         public byte _indirectFirstOffset;
-        public bool indirectFirstOffset { get { return _indirectFirstOffset != 0; } set { _indirectFirstOffset = value ? (byte)1 : (byte)0; } }
+        public bool indirectFirstOffset
+        {
+            get { return _indirectFirstOffset != 0; }
+            set { _indirectFirstOffset = value ? (byte)1 : (byte)0; }
+        }
 
         public byte _indirectSecondOffset;
-        public bool indirectSecondOffset { get { return _indirectSecondOffset != 0; } set { _indirectSecondOffset = value ? (byte)1 : (byte)0; } }
-
+        public bool indirectSecondOffset
+        {
+            get { return _indirectSecondOffset != 0; }
+            set { _indirectSecondOffset = value ? (byte)1 : (byte)0; }
+        }
     }
 
     // Result of calling embedGenericHandle
@@ -268,8 +307,8 @@ namespace Internal.JitInterface
             {
                 // constLookup is union with runtimeLookup
                 Debug.Assert(sizeof(CORINFO_RUNTIME_LOOKUP) >= sizeof(CORINFO_CONST_LOOKUP));
-                fixed (CORINFO_RUNTIME_LOOKUP * p = &runtimeLookup)
-                    return ref *(CORINFO_CONST_LOOKUP *)p;
+                fixed (CORINFO_RUNTIME_LOOKUP* p = &runtimeLookup)
+                    return ref *(CORINFO_CONST_LOOKUP*)p;
             }
         }
     }
@@ -279,9 +318,9 @@ namespace Internal.JitInterface
         //
         // [In] arguments of resolveToken
         //
-        public CORINFO_CONTEXT_STRUCT* tokenContext;       //Context for resolution of generic arguments
+        public CORINFO_CONTEXT_STRUCT* tokenContext; //Context for resolution of generic arguments
         public CORINFO_MODULE_STRUCT_* tokenScope;
-        public mdToken token;              //The source token
+        public mdToken token; //The source token
         public CorInfoTokenKind tokenType;
 
         //
@@ -348,6 +387,7 @@ namespace Internal.JitInterface
     public enum CorInfoMethodRuntimeFlags
     {
         CORINFO_FLG_BAD_INLINEE = 0x00000001, // The method is not suitable for inlining
+
         // unused = 0x00000002,
         // unused = 0x00000004,
         CORINFO_FLG_SWITCHED_TO_MIN_OPT = 0x00000008, // The JIT decided to switch to MinOpt for this method, when it was not requested
@@ -361,6 +401,7 @@ namespace Internal.JitInterface
         // These correspond to CorCallingConvention
 
         CORINFO_CALLCONV_DEFAULT = 0x0,
+
         // Instead of using the below values, use the CorInfoCallConvExtension enum for unmanaged calling conventions.
         // CORINFO_CALLCONV_C = 0x1,
         // CORINFO_CALLCONV_STDCALL = 0x2,
@@ -371,13 +412,13 @@ namespace Internal.JitInterface
         CORINFO_CALLCONV_LOCAL_SIG = 0x7,
         CORINFO_CALLCONV_PROPERTY = 0x8,
         CORINFO_CALLCONV_UNMANAGED = 0x9,
-        CORINFO_CALLCONV_NATIVEVARARG = 0xb,    // used ONLY for IL stub PInvoke vararg calls
+        CORINFO_CALLCONV_NATIVEVARARG = 0xb, // used ONLY for IL stub PInvoke vararg calls
 
-        CORINFO_CALLCONV_MASK = 0x0f,     // Calling convention is bottom 4 bits
+        CORINFO_CALLCONV_MASK = 0x0f, // Calling convention is bottom 4 bits
         CORINFO_CALLCONV_GENERIC = 0x10,
         CORINFO_CALLCONV_HASTHIS = 0x20,
         CORINFO_CALLCONV_EXPLICITTHIS = 0x40,
-        CORINFO_CALLCONV_PARAMTYPE = 0x80,     // Passed last. Same as CORINFO_GENERICS_CTXT_FROM_PARAMTYPEARG
+        CORINFO_CALLCONV_PARAMTYPE = 0x80, // Passed last. Same as CORINFO_GENERICS_CTXT_FROM_PARAMTYPEARG
     }
 
     // Represents the calling conventions supported with the extensible calling convention syntax
@@ -389,21 +430,23 @@ namespace Internal.JitInterface
         Stdcall,
         Thiscall,
         Fastcall,
+
         // New calling conventions supported with the extensible calling convention encoding go here.
         CMemberFunction,
         StdcallMemberFunction,
-        FastcallMemberFunction
+        FastcallMemberFunction,
     }
 
     public enum CORINFO_CALLINFO_FLAGS
     {
         CORINFO_CALLINFO_NONE = 0x0000,
-        CORINFO_CALLINFO_ALLOWINSTPARAM = 0x0001,   // Can the compiler generate code to pass an instantiation parameters? Simple compilers should not use this flag
-        CORINFO_CALLINFO_CALLVIRT = 0x0002,   // Is it a virtual call?
+        CORINFO_CALLINFO_ALLOWINSTPARAM = 0x0001, // Can the compiler generate code to pass an instantiation parameters? Simple compilers should not use this flag
+        CORINFO_CALLINFO_CALLVIRT = 0x0002, // Is it a virtual call?
+
         // UNUSED = 0x0004,
         // UNUSED = 0x0008,
-        CORINFO_CALLINFO_SECURITYCHECKS = 0x0010,   // Perform security checks.
-        CORINFO_CALLINFO_LDFTN = 0x0020,   // Resolving target of LDFTN
+        CORINFO_CALLINFO_SECURITYCHECKS = 0x0010, // Perform security checks.
+        CORINFO_CALLINFO_LDFTN = 0x0020, // Resolving target of LDFTN
         // UNUSED = 0x0040,
     }
 
@@ -413,13 +456,14 @@ namespace Internal.JitInterface
     {
         CORINFO_CONTEXTFLAGS_METHOD = 0x00, // CORINFO_CONTEXT_HANDLE is really a CORINFO_METHOD_HANDLE
         CORINFO_CONTEXTFLAGS_CLASS = 0x01, // CORINFO_CONTEXT_HANDLE is really a CORINFO_CLASS_HANDLE
-        CORINFO_CONTEXTFLAGS_MASK = 0x01
+        CORINFO_CONTEXTFLAGS_MASK = 0x01,
     };
 
     public enum CorInfoSigInfoFlags : byte
     {
         CORINFO_SIGFLAG_IS_LOCAL_SIG = 0x01,
         CORINFO_SIGFLAG_IL_STUB = 0x02,
+
         // unused = 0x04,
         CORINFO_SIGFLAG_FAT_CALL = 0x08,
     };
@@ -432,9 +476,12 @@ namespace Internal.JitInterface
         CORINFO_GENERICS_CTXT_FROM_THIS = 0x00000020, // is this shared generic code that access the generic context from the this pointer?  If so, then if the method has SEH then the 'this' pointer must always be reported and kept alive.
         CORINFO_GENERICS_CTXT_FROM_METHODDESC = 0x00000040, // is this shared generic code that access the generic context from the ParamTypeArg(that is a MethodDesc)?  If so, then if the method has SEH then the 'ParamTypeArg' must always be reported and kept alive. Same as CORINFO_CALLCONV_PARAMTYPE
         CORINFO_GENERICS_CTXT_FROM_METHODTABLE = 0x00000080, // is this shared generic code that access the generic context from the ParamTypeArg(that is a MethodTable)?  If so, then if the method has SEH then the 'ParamTypeArg' must always be reported and kept alive. Same as CORINFO_CALLCONV_PARAMTYPE
-        CORINFO_GENERICS_CTXT_MASK = (CORINFO_GENERICS_CTXT_FROM_THIS |
-                                                   CORINFO_GENERICS_CTXT_FROM_METHODDESC |
-                                                   CORINFO_GENERICS_CTXT_FROM_METHODTABLE),
+        CORINFO_GENERICS_CTXT_MASK =
+            (
+                CORINFO_GENERICS_CTXT_FROM_THIS
+                | CORINFO_GENERICS_CTXT_FROM_METHODDESC
+                | CORINFO_GENERICS_CTXT_FROM_METHODTABLE
+            ),
         CORINFO_GENERICS_CTXT_KEEP_ALIVE = 0x00000100, // Keep the generics context alive throughout the method even if there is no explicit use, and report its location to the CLR
     }
 
@@ -446,24 +493,24 @@ namespace Internal.JitInterface
         SET = 1,
         ADDRESS = 2,
 
-        ILLEGAL
+        ILLEGAL,
     }
 
     // Can a value be accessed directly from JITed code.
     public enum InfoAccessType
     {
-        IAT_VALUE,      // The info value is directly available
-        IAT_PVALUE,     // The value needs to be accessed via an       indirection
-        IAT_PPVALUE,    // The value needs to be accessed via a double indirection
-        IAT_RELPVALUE   // The value needs to be accessed via a relative indirection
+        IAT_VALUE, // The info value is directly available
+        IAT_PVALUE, // The value needs to be accessed via an       indirection
+        IAT_PPVALUE, // The value needs to be accessed via a double indirection
+        IAT_RELPVALUE, // The value needs to be accessed via a relative indirection
     }
 
     public enum CorInfoGCType
     {
-        TYPE_GC_NONE,   // no embedded objectrefs
-        TYPE_GC_REF,    // Is an object ref
-        TYPE_GC_BYREF,  // Is an interior pointer - promote it but don't scan it
-        TYPE_GC_OTHER   // requires type-specific treatment
+        TYPE_GC_NONE, // no embedded objectrefs
+        TYPE_GC_REF, // Is an object ref
+        TYPE_GC_BYREF, // Is an interior pointer - promote it but don't scan it
+        TYPE_GC_OTHER, // requires type-specific treatment
     }
 
     public enum CorInfoClassId
@@ -477,17 +524,17 @@ namespace Internal.JitInterface
         CLASSID_ARGUMENT_HANDLE,
         CLASSID_RUNTIME_TYPE,
     }
+
     public enum CorInfoInline
     {
-        INLINE_PASS = 0,   // Inlining OK
-        INLINE_PREJIT_SUCCESS = 1,   // Inline check for prejit checking usage succeeded
-        INLINE_CHECK_CAN_INLINE_SUCCESS = 2,   // JIT detected it is permitted to try to actually inline
-        INLINE_CHECK_CAN_INLINE_VMFAIL = 3,   // VM specified that inline must fail via the CanInline api
-
+        INLINE_PASS = 0, // Inlining OK
+        INLINE_PREJIT_SUCCESS = 1, // Inline check for prejit checking usage succeeded
+        INLINE_CHECK_CAN_INLINE_SUCCESS = 2, // JIT detected it is permitted to try to actually inline
+        INLINE_CHECK_CAN_INLINE_VMFAIL = 3, // VM specified that inline must fail via the CanInline api
 
         // failures are negative
-        INLINE_FAIL = -1,   // Inlining not OK for this case only
-        INLINE_NEVER = -2,   // This method should never be inlined, regardless of context
+        INLINE_FAIL = -1, // Inlining not OK for this case only
+        INLINE_NEVER = -2, // This method should never be inlined, regardless of context
     }
 
     public enum CorInfoInlineTypeCheck
@@ -500,35 +547,37 @@ namespace Internal.JitInterface
     public enum CorInfoInlineTypeCheckSource
     {
         CORINFO_INLINE_TYPECHECK_SOURCE_VTABLE = 0x00000000, // Type handle comes from the vtable
-        CORINFO_INLINE_TYPECHECK_SOURCE_TOKEN  = 0x00000001, // Type handle comes from an ldtoken
+        CORINFO_INLINE_TYPECHECK_SOURCE_TOKEN = 0x00000001, // Type handle comes from an ldtoken
     }
 
     // If you add more values here, keep it in sync with TailCallTypeMap in ..\vm\ClrEtwAll.man
     // and the string enum in CEEInfo::reportTailCallDecision in ..\vm\JITInterface.cpp
     public enum CorInfoTailCall
     {
-        TAILCALL_OPTIMIZED = 0,    // Optimized tail call (epilog + jmp)
-        TAILCALL_RECURSIVE = 1,    // Optimized into a loop (only when a method tail calls itself)
-        TAILCALL_HELPER = 2,    // Helper assisted tail call (call to JIT_TailCall)
+        TAILCALL_OPTIMIZED = 0, // Optimized tail call (epilog + jmp)
+        TAILCALL_RECURSIVE = 1, // Optimized into a loop (only when a method tail calls itself)
+        TAILCALL_HELPER = 2, // Helper assisted tail call (call to JIT_TailCall)
 
         // failures are negative
-        TAILCALL_FAIL = -1,   // Couldn't do a tail call
+        TAILCALL_FAIL = -1, // Couldn't do a tail call
     }
 
     public enum CorInfoCanSkipVerificationResult
     {
-        CORINFO_VERIFICATION_CANNOT_SKIP = 0,    // Cannot skip verification during jit time.
-        CORINFO_VERIFICATION_CAN_SKIP = 1,    // Can skip verification during jit time.
-        CORINFO_VERIFICATION_RUNTIME_CHECK = 2,    // Cannot skip verification during jit time,
+        CORINFO_VERIFICATION_CANNOT_SKIP = 0, // Cannot skip verification during jit time.
+        CORINFO_VERIFICATION_CAN_SKIP = 1, // Can skip verification during jit time.
+        CORINFO_VERIFICATION_RUNTIME_CHECK = 2, // Cannot skip verification during jit time,
+
         //     but need to insert a callout to the VM to ask during runtime
         //     whether to raise a verification or not (if the method is unverifiable).
-        CORINFO_VERIFICATION_DONT_JIT = 3,    // Cannot skip verification during jit time,
+        CORINFO_VERIFICATION_DONT_JIT = 3, // Cannot skip verification during jit time,
         //     but do not jit the method if it is unverifiable.
     }
 
     public enum CorInfoInitClassResult
     {
         CORINFO_INITCLASS_NOT_REQUIRED = 0x00, // No class initialization required, but the class is not actually initialized yet
+
         // (e.g. we are guaranteed to run the static constructor in method prolog)
         CORINFO_INITCLASS_INITIALIZED = 0x01, // Class initialized
         CORINFO_INITCLASS_USE_HELPER = 0x02, // The JIT must insert class initialization helper call.
@@ -542,6 +591,7 @@ namespace Internal.JitInterface
     {
         CORINFO_ACCESS_ANY = 0x0000, // Normal access
         CORINFO_ACCESS_THIS = 0x0001, // Accessed via the this reference
+
         // CORINFO_ACCESS_UNUSED = 0x0002,
 
         CORINFO_ACCESS_NONNULL = 0x0004, // Instance is guaranteed non-null
@@ -553,10 +603,10 @@ namespace Internal.JitInterface
         CORINFO_ACCESS_SET = 0x0200, // Field set (stfld)
         CORINFO_ACCESS_ADDRESS = 0x0400, // Field address (ldflda)
         CORINFO_ACCESS_INIT_ARRAY = 0x0800, // Field use for InitializeArray
+
         // UNUSED = 0x4000,
         CORINFO_ACCESS_INLINECHECK = 0x8000, // Return fieldFlags and fieldAccessor only. Used by JIT64 during inlining.
     }
-
 
     // these are the attribute flags for fields and methods (getMethodAttribs)
     [Flags]
@@ -569,6 +619,7 @@ namespace Internal.JitInterface
         CORINFO_FLG_FINAL = 0x00000010,
         CORINFO_FLG_SYNCH = 0x00000020,
         CORINFO_FLG_VIRTUAL = 0x00000040,
+
         //  CORINFO_FLG_UNUSED                = 0x00000080,
         CORINFO_FLG_NATIVE = 0x00000100,
         CORINFO_FLG_INTRINSIC_TYPE = 0x00000200, // This type is marked by [Intrinsic]
@@ -581,18 +632,21 @@ namespace Internal.JitInterface
         CORINFO_FLG_SHAREDINST = 0x00020000, // the code for this method is shared between different generic instantiations (also set on classes/types)
         CORINFO_FLG_DELEGATE_INVOKE = 0x00040000, // "Delegate
         CORINFO_FLG_PINVOKE = 0x00080000, // Is a P/Invoke call
+
         // CORINFO_FLG_UNUSED = 0x00100000,
         CORINFO_FLG_NOGCCHECK = 0x00200000, // This method is FCALL that has no GC check.  Don't put alone in loops
         CORINFO_FLG_INTRINSIC = 0x00400000, // This method MAY have an intrinsic ID
         CORINFO_FLG_CONSTRUCTOR = 0x00800000, // This method is an instance or type initializer
         CORINFO_FLG_AGGRESSIVE_OPT = 0x01000000, // The method may contain hot code and should be aggressively optimized if possible
         CORINFO_FLG_DISABLE_TIER0_FOR_LOOPS = 0x02000000, // Indicates that tier 0 JIT should not be used for a method that contains a loop
+
         // CORINFO_FLG_UNUSED = 0x04000000,
         CORINFO_FLG_DONT_INLINE = 0x10000000, // The method should not be inlined
         CORINFO_FLG_DONT_INLINE_CALLER = 0x20000000, // The method should not be inlined, nor should its callers. It cannot be tail called.
 
         // These are internal flags that can only be on Classes
         CORINFO_FLG_VALUECLASS = 0x00010000, // is the class a value class
+
         //  This flag is define din the Methods section, but is also valid on classes.
         //  CORINFO_FLG_SHAREDINST            = 0x00020000, // This class is satisfies TypeHandle::IsCanonicalSubtype
         CORINFO_FLG_VAROBJSIZE = 0x00040000, // the object size varies depending of constructor args
@@ -608,7 +662,6 @@ namespace Internal.JitInterface
         CORINFO_FLG_GENERIC_TYPE_VARIABLE = 0x40000000, // This is really a handle for a variable type
         CORINFO_FLG_UNSAFE_VALUECLASS = 0x80000000, // Unsafe (C++'s /GS) value type
     }
-
 
     //----------------------------------------------------------------------------
     // Exception handling
@@ -639,7 +692,7 @@ namespace Internal.JitInterface
                 };*/
     }
 
-    public struct BlockCounts  // Also defined here: code:CORBBTPROF_BLOCK_DATA
+    public struct BlockCounts // Also defined here: code:CORBBTPROF_BLOCK_DATA
     {
         public uint ILOffset;
         public uint ExecutionCount;
@@ -664,7 +717,7 @@ namespace Internal.JitInterface
         CORINFO_TYPE_NATIVEUINT = 0xd,
         CORINFO_TYPE_FLOAT = 0xe,
         CORINFO_TYPE_DOUBLE = 0xf,
-        CORINFO_TYPE_STRING = 0x10,         // Not used, should remove
+        CORINFO_TYPE_STRING = 0x10, // Not used, should remove
         CORINFO_TYPE_PTR = 0x11,
         CORINFO_TYPE_BYREF = 0x12,
         CORINFO_TYPE_VALUECLASS = 0x13,
@@ -678,13 +731,13 @@ namespace Internal.JitInterface
         // the JIT in "import only" mode.
 
         CORINFO_TYPE_VAR = 0x16,
-        CORINFO_TYPE_COUNT,                         // number of jit types
+        CORINFO_TYPE_COUNT, // number of jit types
     }
 
     public enum CorInfoIsAccessAllowedResult
     {
-        CORINFO_ACCESS_ALLOWED = 0,           // Call allowed
-        CORINFO_ACCESS_ILLEGAL = 1,           // Call not allowed
+        CORINFO_ACCESS_ALLOWED = 0, // Call allowed
+        CORINFO_ACCESS_ILLEGAL = 1, // Call not allowed
     }
 
     //----------------------------------------------------------------------------
@@ -708,7 +761,7 @@ namespace Internal.JitInterface
         CORINFO_HANDLETYPE_UNKNOWN,
         CORINFO_HANDLETYPE_CLASS,
         CORINFO_HANDLETYPE_METHOD,
-        CORINFO_HANDLETYPE_FIELD
+        CORINFO_HANDLETYPE_FIELD,
     }
 
     // Enum used for HFA type recognition.
@@ -739,16 +792,16 @@ namespace Internal.JitInterface
         CORJIT_ALLOCMEM_DEFAULT_CODE_ALIGN = 0x00000000, // The code will be use the normal alignment
         CORJIT_ALLOCMEM_FLG_16BYTE_ALIGN = 0x00000001, // The code will be 16-byte aligned
         CORJIT_ALLOCMEM_FLG_RODATA_16BYTE_ALIGN = 0x00000002, // The read-only data will be 16-byte aligned
-        CORJIT_ALLOCMEM_FLG_32BYTE_ALIGN   = 0x00000004, // The code will be 32-byte aligned
+        CORJIT_ALLOCMEM_FLG_32BYTE_ALIGN = 0x00000004, // The code will be 32-byte aligned
         CORJIT_ALLOCMEM_FLG_RODATA_32BYTE_ALIGN = 0x00000008, // The read-only data will be 32-byte aligned
         CORJIT_ALLOCMEM_FLG_RODATA_64BYTE_ALIGN = 0x00000010, // The read-only data will be 64-byte aligned
     }
 
     public enum CorJitFuncKind
     {
-        CORJIT_FUNC_ROOT,          // The main/root function (always id==0)
-        CORJIT_FUNC_HANDLER,       // a funclet associated with an EH handler (finally, fault, catch, filter handler)
-        CORJIT_FUNC_FILTER         // a funclet associated with an EH filter
+        CORJIT_FUNC_ROOT, // The main/root function (always id==0)
+        CORJIT_FUNC_HANDLER, // a funclet associated with an EH handler (finally, fault, catch, filter handler)
+        CORJIT_FUNC_FILTER, // a funclet associated with an EH filter
     }
 
     public unsafe struct CORINFO_METHOD_INFO
@@ -764,6 +817,7 @@ namespace Internal.JitInterface
         public CORINFO_SIG_INFO args;
         public CORINFO_SIG_INFO locals;
     }
+
     //
     // what type of code region we are in
     //
@@ -777,8 +831,8 @@ namespace Internal.JitInterface
 
     public enum CorInfoTypeWithMod
     {
-        CORINFO_TYPE_MASK = 0x3F,        // lower 6 bits are type mask
-        CORINFO_TYPE_MOD_PINNED = 0x40,        // can be applied to CLASS, or BYREF to indicate pinned
+        CORINFO_TYPE_MASK = 0x3F, // lower 6 bits are type mask
+        CORINFO_TYPE_MOD_PINNED = 0x40, // can be applied to CLASS, or BYREF to indicate pinned
     };
 
     public struct CORINFO_HELPER_ARG
@@ -806,7 +860,6 @@ namespace Internal.JitInterface
         public CORINFO_HELPER_ARG args2;
         public CORINFO_HELPER_ARG args3;
     }
-
 
     public enum CORINFO_OS
     {
@@ -841,11 +894,12 @@ namespace Internal.JitInterface
             public uint offsetOfReturnAddress;
             public uint offsetOfSPAfterProlog;
         }
+
         public InlinedCallFrameInfo inlinedCallFrameInfo;
 
         // Offsets into the Thread structure
-        public uint offsetOfThreadFrame;            // offset of the current Frame
-        public uint offsetOfGCState;                // offset of the preemptive/cooperative state of the Thread
+        public uint offsetOfThreadFrame; // offset of the current Frame
+        public uint offsetOfGCState; // offset of the preemptive/cooperative state of the Thread
 
         // Delegate offsets
         public uint offsetOfDelegateInstance;
@@ -889,16 +943,16 @@ namespace Internal.JitInterface
     public unsafe struct CORINFO_TAILCALL_HELPERS
     {
         private CORINFO_TAILCALL_HELPERS_FLAGS flags;
-        private CORINFO_METHOD_STRUCT_*        hStoreArgs;
-        private CORINFO_METHOD_STRUCT_*        hCallTarget;
-        private CORINFO_METHOD_STRUCT_*        hDispatcher;
+        private CORINFO_METHOD_STRUCT_* hStoreArgs;
+        private CORINFO_METHOD_STRUCT_* hCallTarget;
+        private CORINFO_METHOD_STRUCT_* hDispatcher;
     };
 
     public enum CORINFO_THIS_TRANSFORM
     {
         CORINFO_NO_THIS_TRANSFORM,
         CORINFO_BOX_THIS,
-        CORINFO_DEREF_THIS
+        CORINFO_DEREF_THIS,
     };
 
     //----------------------------------------------------------------------------
@@ -988,7 +1042,7 @@ namespace Internal.JitInterface
         CORINFO_CALL_CODE_POINTER,
         CORINFO_VIRTUALCALL_STUB,
         CORINFO_VIRTUALCALL_LDVIRTFTN,
-        CORINFO_VIRTUALCALL_VTABLE
+        CORINFO_VIRTUALCALL_VTABLE,
     };
 
     public enum CORINFO_VIRTUALCALL_NO_CHUNK : uint
@@ -998,10 +1052,10 @@ namespace Internal.JitInterface
 
     public unsafe struct CORINFO_CALL_INFO
     {
-        public CORINFO_METHOD_STRUCT_* hMethod;            //target method handle
-        public uint methodFlags;        //flags for the target method
+        public CORINFO_METHOD_STRUCT_* hMethod; //target method handle
+        public uint methodFlags; //flags for the target method
 
-        public uint classFlags;         //flags for CORINFO_RESOLVED_TOKEN::hClass
+        public uint classFlags; //flags for CORINFO_RESOLVED_TOKEN::hClass
 
         public CORINFO_SIG_INFO sig;
 
@@ -1020,13 +1074,21 @@ namespace Internal.JitInterface
         public CORINFO_CALL_KIND kind;
 
         public byte _nullInstanceCheck;
-        public bool nullInstanceCheck { get { return _nullInstanceCheck != 0; } set { _nullInstanceCheck = value ? (byte)1 : (byte)0; } }
+        public bool nullInstanceCheck
+        {
+            get { return _nullInstanceCheck != 0; }
+            set { _nullInstanceCheck = value ? (byte)1 : (byte)0; }
+        }
 
         // Context for inlining and hidden arg
         public CORINFO_CONTEXT_STRUCT* contextHandle;
 
         public byte _exactContextNeedsRuntimeLookup; // Set if contextHandle is approx handle. Runtime lookup is required to get the exact handle.
-        public bool exactContextNeedsRuntimeLookup { get { return _exactContextNeedsRuntimeLookup != 0; } set { _exactContextNeedsRuntimeLookup = value ? (byte)1 : (byte)0; } }
+        public bool exactContextNeedsRuntimeLookup
+        {
+            get { return _exactContextNeedsRuntimeLookup != 0; }
+            set { _exactContextNeedsRuntimeLookup = value ? (byte)1 : (byte)0; }
+        }
 
         // If kind.CORINFO_VIRTUALCALL_STUB then stubLookup will be set.
         // If kind.CORINFO_CALL_CODE_POINTER then entryPointLookup will be set.
@@ -1036,30 +1098,34 @@ namespace Internal.JitInterface
         public CORINFO_CONST_LOOKUP instParamLookup;
 
         public byte _wrapperDelegateInvoke;
-        public bool wrapperDelegateInvoke { get { return _wrapperDelegateInvoke != 0; } set { _wrapperDelegateInvoke = value ? (byte)1 : (byte)0; } }
+        public bool wrapperDelegateInvoke
+        {
+            get { return _wrapperDelegateInvoke != 0; }
+            set { _wrapperDelegateInvoke = value ? (byte)1 : (byte)0; }
+        }
     }
 
     public enum CORINFO_DEVIRTUALIZATION_DETAIL
     {
-        CORINFO_DEVIRTUALIZATION_UNKNOWN,                              // no details available
-        CORINFO_DEVIRTUALIZATION_SUCCESS,                              // devirtualization was successful
-        CORINFO_DEVIRTUALIZATION_FAILED_CANON,                         // object class was canonical
-        CORINFO_DEVIRTUALIZATION_FAILED_COM,                           // object class was com
-        CORINFO_DEVIRTUALIZATION_FAILED_CAST,                          // object class could not be cast to interface class
-        CORINFO_DEVIRTUALIZATION_FAILED_LOOKUP,                        // interface method could not be found
-        CORINFO_DEVIRTUALIZATION_FAILED_DIM,                           // interface method was default interface method
-        CORINFO_DEVIRTUALIZATION_FAILED_SUBCLASS,                      // object not subclass of base class
-        CORINFO_DEVIRTUALIZATION_FAILED_SLOT,                          // virtual method installed via explicit override
-        CORINFO_DEVIRTUALIZATION_FAILED_BUBBLE,                        // devirtualization crossed version bubble
-        CORINFO_DEVIRTUALIZATION_MULTIPLE_IMPL,                        // object has multiple implementations of interface class
-        CORINFO_DEVIRTUALIZATION_FAILED_BUBBLE_CLASS_DECL,             // decl method is defined on class and decl method not in version bubble, and decl method not in closest to version bubble
-        CORINFO_DEVIRTUALIZATION_FAILED_BUBBLE_INTERFACE_DECL,         // decl method is defined on interface and not in version bubble, and implementation type not entirely defined in bubble
-        CORINFO_DEVIRTUALIZATION_FAILED_BUBBLE_IMPL,                   // object class not defined within version bubble
+        CORINFO_DEVIRTUALIZATION_UNKNOWN, // no details available
+        CORINFO_DEVIRTUALIZATION_SUCCESS, // devirtualization was successful
+        CORINFO_DEVIRTUALIZATION_FAILED_CANON, // object class was canonical
+        CORINFO_DEVIRTUALIZATION_FAILED_COM, // object class was com
+        CORINFO_DEVIRTUALIZATION_FAILED_CAST, // object class could not be cast to interface class
+        CORINFO_DEVIRTUALIZATION_FAILED_LOOKUP, // interface method could not be found
+        CORINFO_DEVIRTUALIZATION_FAILED_DIM, // interface method was default interface method
+        CORINFO_DEVIRTUALIZATION_FAILED_SUBCLASS, // object not subclass of base class
+        CORINFO_DEVIRTUALIZATION_FAILED_SLOT, // virtual method installed via explicit override
+        CORINFO_DEVIRTUALIZATION_FAILED_BUBBLE, // devirtualization crossed version bubble
+        CORINFO_DEVIRTUALIZATION_MULTIPLE_IMPL, // object has multiple implementations of interface class
+        CORINFO_DEVIRTUALIZATION_FAILED_BUBBLE_CLASS_DECL, // decl method is defined on class and decl method not in version bubble, and decl method not in closest to version bubble
+        CORINFO_DEVIRTUALIZATION_FAILED_BUBBLE_INTERFACE_DECL, // decl method is defined on interface and not in version bubble, and implementation type not entirely defined in bubble
+        CORINFO_DEVIRTUALIZATION_FAILED_BUBBLE_IMPL, // object class not defined within version bubble
         CORINFO_DEVIRTUALIZATION_FAILED_BUBBLE_IMPL_NOT_REFERENCEABLE, // object class cannot be referenced from R2R code due to missing tokens
-        CORINFO_DEVIRTUALIZATION_FAILED_DUPLICATE_INTERFACE,           // crossgen2 virtual method algorithm and runtime algorithm differ in the presence of duplicate interface implementations
-        CORINFO_DEVIRTUALIZATION_FAILED_DECL_NOT_REPRESENTABLE,        // Decl method cannot be represented in R2R image
-        CORINFO_DEVIRTUALIZATION_FAILED_TYPE_EQUIVALENCE,              // Support for type equivalence in devirtualization is not yet implemented in crossgen2
-        CORINFO_DEVIRTUALIZATION_COUNT,                                // sentinel for maximum value
+        CORINFO_DEVIRTUALIZATION_FAILED_DUPLICATE_INTERFACE, // crossgen2 virtual method algorithm and runtime algorithm differ in the presence of duplicate interface implementations
+        CORINFO_DEVIRTUALIZATION_FAILED_DECL_NOT_REPRESENTABLE, // Decl method cannot be represented in R2R image
+        CORINFO_DEVIRTUALIZATION_FAILED_TYPE_EQUIVALENCE, // Support for type equivalence in devirtualization is not yet implemented in crossgen2
+        CORINFO_DEVIRTUALIZATION_COUNT, // sentinel for maximum value
     }
 
     public unsafe struct CORINFO_DEVIRTUALIZATION_INFO
@@ -1082,7 +1148,11 @@ namespace Internal.JitInterface
         //
         public CORINFO_METHOD_STRUCT_* devirtualizedMethod;
         public byte _requiresInstMethodTableArg;
-        public bool requiresInstMethodTableArg { get { return _requiresInstMethodTableArg != 0; } set { _requiresInstMethodTableArg = value ? (byte)1 : (byte)0; } }
+        public bool requiresInstMethodTableArg
+        {
+            get { return _requiresInstMethodTableArg != 0; }
+            set { _requiresInstMethodTableArg = value ? (byte)1 : (byte)0; }
+        }
         public CORINFO_CONTEXT_STRUCT* exactContext;
         public CORINFO_DEVIRTUALIZATION_DETAIL detail;
         public CORINFO_RESOLVED_TOKEN resolvedTokenDevirtualizedMethod;
@@ -1094,22 +1164,22 @@ namespace Internal.JitInterface
 
     public enum CORINFO_FIELD_ACCESSOR
     {
-        CORINFO_FIELD_INSTANCE,                 // regular instance field at given offset from this-ptr
-        CORINFO_FIELD_INSTANCE_WITH_BASE,       // instance field with base offset (used by Ready-to-Run)
-        CORINFO_FIELD_INSTANCE_HELPER,          // instance field accessed using helper (arguments are this, FieldDesc * and the value)
-        CORINFO_FIELD_INSTANCE_ADDR_HELPER,     // instance field accessed using address-of helper (arguments are this and FieldDesc *)
+        CORINFO_FIELD_INSTANCE, // regular instance field at given offset from this-ptr
+        CORINFO_FIELD_INSTANCE_WITH_BASE, // instance field with base offset (used by Ready-to-Run)
+        CORINFO_FIELD_INSTANCE_HELPER, // instance field accessed using helper (arguments are this, FieldDesc * and the value)
+        CORINFO_FIELD_INSTANCE_ADDR_HELPER, // instance field accessed using address-of helper (arguments are this and FieldDesc *)
 
-        CORINFO_FIELD_STATIC_ADDRESS,           // field at given address
-        CORINFO_FIELD_STATIC_RVA_ADDRESS,       // RVA field at given address
+        CORINFO_FIELD_STATIC_ADDRESS, // field at given address
+        CORINFO_FIELD_STATIC_RVA_ADDRESS, // RVA field at given address
         CORINFO_FIELD_STATIC_SHARED_STATIC_HELPER, // static field accessed using the "shared static" helper (arguments are ModuleID + ClassID)
         CORINFO_FIELD_STATIC_GENERICS_STATIC_HELPER, // static field access using the "generic static" helper (argument is MethodTable *)
-        CORINFO_FIELD_STATIC_ADDR_HELPER,       // static field accessed using address-of helper (argument is FieldDesc *)
-        CORINFO_FIELD_STATIC_TLS,               // unmanaged TLS access
-        CORINFO_FIELD_STATIC_TLS_MANAGED,       // managed TLS access
+        CORINFO_FIELD_STATIC_ADDR_HELPER, // static field accessed using address-of helper (argument is FieldDesc *)
+        CORINFO_FIELD_STATIC_TLS, // unmanaged TLS access
+        CORINFO_FIELD_STATIC_TLS_MANAGED, // managed TLS access
         CORINFO_FIELD_STATIC_READYTORUN_HELPER, // static field access using a runtime lookup helper
-        CORINFO_FIELD_STATIC_RELOCATABLE,       // static field access from the data segment
-        CORINFO_FIELD_INTRINSIC_ZERO,           // intrinsic zero (IntPtr.Zero, UIntPtr.Zero)
-        CORINFO_FIELD_INTRINSIC_EMPTY_STRING,   // intrinsic emptry string (String.Empty)
+        CORINFO_FIELD_STATIC_RELOCATABLE, // static field access from the data segment
+        CORINFO_FIELD_INTRINSIC_ZERO, // intrinsic zero (IntPtr.Zero, UIntPtr.Zero)
+        CORINFO_FIELD_INTRINSIC_EMPTY_STRING, // intrinsic emptry string (String.Empty)
         CORINFO_FIELD_INTRINSIC_ISLITTLEENDIAN, // intrinsic BitConverter.IsLittleEndian
     }
 
@@ -1162,14 +1232,14 @@ namespace Internal.JitInterface
     // The Classification types are described in the ABI spec at https://software.intel.com/sites/default/files/article/402129/mpx-linux64-abi.pdf
     public enum SystemVClassificationType : byte
     {
-        SystemVClassificationTypeUnknown            = 0,
-        SystemVClassificationTypeStruct             = 1,
-        SystemVClassificationTypeNoClass            = 2,
-        SystemVClassificationTypeMemory             = 3,
-        SystemVClassificationTypeInteger            = 4,
-        SystemVClassificationTypeIntegerReference   = 5,
-        SystemVClassificationTypeIntegerByRef       = 6,
-        SystemVClassificationTypeSSE                = 7,
+        SystemVClassificationTypeUnknown = 0,
+        SystemVClassificationTypeStruct = 1,
+        SystemVClassificationTypeNoClass = 2,
+        SystemVClassificationTypeMemory = 3,
+        SystemVClassificationTypeInteger = 4,
+        SystemVClassificationTypeIntegerReference = 5,
+        SystemVClassificationTypeIntegerByRef = 6,
+        SystemVClassificationTypeSSE = 7,
         // SystemVClassificationTypeSSEUp           = Unused, // Not supported by the CLR.
         // SystemVClassificationTypeX87             = Unused, // Not supported by the CLR.
         // SystemVClassificationTypeX87Up           = Unused, // Not supported by the CLR.
@@ -1185,8 +1255,13 @@ namespace Internal.JitInterface
         public const int SYSTEMV_MAX_NUM_FIELDS_IN_REGISTER_PASSED_STRUCT = 16; // Maximum number of fields in struct passed in registers
 
         public byte _passedInRegisters;
+
         // Whether the struct is passable/passed (this includes struct returning) in registers.
-        public bool passedInRegisters { get { return _passedInRegisters != 0; } set { _passedInRegisters = value ? (byte)1 : (byte)0; } }
+        public bool passedInRegisters
+        {
+            get { return _passedInRegisters != 0; }
+            set { _passedInRegisters = value ? (byte)1 : (byte)0; }
+        }
 
         // Number of eightbytes for this struct.
         public byte eightByteCount;
@@ -1224,43 +1299,56 @@ namespace Internal.JitInterface
     // Note that bit 0 and 3 cannot both be set.
     public enum StructFloatFieldInfoFlags
     {
-        STRUCT_NO_FLOAT_FIELD         = 0x0,
-        STRUCT_FLOAT_FIELD_ONLY_ONE   = 0x1,
-        STRUCT_FLOAT_FIELD_ONLY_TWO   = 0x8,
-        STRUCT_FLOAT_FIELD_FIRST      = 0x2,
-        STRUCT_FLOAT_FIELD_SECOND     = 0x4,
-        STRUCT_FIRST_FIELD_SIZE_IS8   = 0x10,
-        STRUCT_SECOND_FIELD_SIZE_IS8  = 0x20,
+        STRUCT_NO_FLOAT_FIELD = 0x0,
+        STRUCT_FLOAT_FIELD_ONLY_ONE = 0x1,
+        STRUCT_FLOAT_FIELD_ONLY_TWO = 0x8,
+        STRUCT_FLOAT_FIELD_FIRST = 0x2,
+        STRUCT_FLOAT_FIELD_SECOND = 0x4,
+        STRUCT_FIRST_FIELD_SIZE_IS8 = 0x10,
+        STRUCT_SECOND_FIELD_SIZE_IS8 = 0x20,
 
-        STRUCT_FIRST_FIELD_DOUBLE     = (STRUCT_FLOAT_FIELD_FIRST | STRUCT_FIRST_FIELD_SIZE_IS8),
-        STRUCT_SECOND_FIELD_DOUBLE    = (STRUCT_FLOAT_FIELD_SECOND | STRUCT_SECOND_FIELD_SIZE_IS8),
-        STRUCT_FIELD_TWO_DOUBLES      = (STRUCT_FIRST_FIELD_SIZE_IS8 | STRUCT_SECOND_FIELD_SIZE_IS8 | STRUCT_FLOAT_FIELD_ONLY_TWO),
+        STRUCT_FIRST_FIELD_DOUBLE = (STRUCT_FLOAT_FIELD_FIRST | STRUCT_FIRST_FIELD_SIZE_IS8),
+        STRUCT_SECOND_FIELD_DOUBLE = (STRUCT_FLOAT_FIELD_SECOND | STRUCT_SECOND_FIELD_SIZE_IS8),
+        STRUCT_FIELD_TWO_DOUBLES =
+            (
+                STRUCT_FIRST_FIELD_SIZE_IS8
+                | STRUCT_SECOND_FIELD_SIZE_IS8
+                | STRUCT_FLOAT_FIELD_ONLY_TWO
+            ),
 
-        STRUCT_MERGE_FIRST_SECOND     = (STRUCT_FLOAT_FIELD_FIRST | STRUCT_FLOAT_FIELD_ONLY_TWO),
-        STRUCT_MERGE_FIRST_SECOND_8   = (STRUCT_FLOAT_FIELD_FIRST | STRUCT_FLOAT_FIELD_ONLY_TWO | STRUCT_SECOND_FIELD_SIZE_IS8),
+        STRUCT_MERGE_FIRST_SECOND = (STRUCT_FLOAT_FIELD_FIRST | STRUCT_FLOAT_FIELD_ONLY_TWO),
+        STRUCT_MERGE_FIRST_SECOND_8 =
+            (STRUCT_FLOAT_FIELD_FIRST | STRUCT_FLOAT_FIELD_ONLY_TWO | STRUCT_SECOND_FIELD_SIZE_IS8),
 
-        STRUCT_HAS_ONE_FLOAT_MASK     = (STRUCT_FLOAT_FIELD_FIRST | STRUCT_FLOAT_FIELD_SECOND),
-        STRUCT_HAS_FLOAT_FIELDS_MASK  = (STRUCT_FLOAT_FIELD_FIRST | STRUCT_FLOAT_FIELD_SECOND | STRUCT_FLOAT_FIELD_ONLY_TWO | STRUCT_FLOAT_FIELD_ONLY_ONE),
-        STRUCT_HAS_8BYTES_FIELDS_MASK = (STRUCT_FIRST_FIELD_SIZE_IS8 | STRUCT_SECOND_FIELD_SIZE_IS8),
+        STRUCT_HAS_ONE_FLOAT_MASK = (STRUCT_FLOAT_FIELD_FIRST | STRUCT_FLOAT_FIELD_SECOND),
+        STRUCT_HAS_FLOAT_FIELDS_MASK =
+            (
+                STRUCT_FLOAT_FIELD_FIRST
+                | STRUCT_FLOAT_FIELD_SECOND
+                | STRUCT_FLOAT_FIELD_ONLY_TWO
+                | STRUCT_FLOAT_FIELD_ONLY_ONE
+            ),
+        STRUCT_HAS_8BYTES_FIELDS_MASK =
+            (STRUCT_FIRST_FIELD_SIZE_IS8 | STRUCT_SECOND_FIELD_SIZE_IS8),
     };
 
     // DEBUGGER DATA
     public enum MappingTypes
     {
         NO_MAPPING = -1, // -- The IL offset corresponds to no source code (such as EH step blocks).
-        PROLOG = -2,     // -- The IL offset indicates a prolog
-        EPILOG = -3      // -- The IL offset indicates an epilog
+        PROLOG = -2, // -- The IL offset indicates a prolog
+        EPILOG = -3, // -- The IL offset indicates an epilog
     }
 
     public enum BoundaryTypes
     {
-        NO_BOUNDARIES = 0x00,     // No implicit boundaries
-        STACK_EMPTY_BOUNDARIES = 0x01,     // Boundary whenever the IL evaluation stack is empty
-        NOP_BOUNDARIES = 0x02,     // Before every CEE_NOP instruction
-        CALL_SITE_BOUNDARIES = 0x04,     // Before every CEE_CALL, CEE_CALLVIRT, etc instruction
+        NO_BOUNDARIES = 0x00, // No implicit boundaries
+        STACK_EMPTY_BOUNDARIES = 0x01, // Boundary whenever the IL evaluation stack is empty
+        NOP_BOUNDARIES = 0x02, // Before every CEE_NOP instruction
+        CALL_SITE_BOUNDARIES = 0x04, // Before every CEE_CALL, CEE_CALLVIRT, etc instruction
 
         // Set of boundaries that debugger should always reasonably ask the JIT for.
-        DEFAULT_BOUNDARIES = STACK_EMPTY_BOUNDARIES | NOP_BOUNDARIES | CALL_SITE_BOUNDARIES
+        DEFAULT_BOUNDARIES = STACK_EMPTY_BOUNDARIES | NOP_BOUNDARIES | CALL_SITE_BOUNDARIES,
     }
 
     // Note that SourceTypes can be OR'd together - it's possible that
@@ -1275,7 +1363,7 @@ namespace Internal.JitInterface
         STACK_EMPTY = 0x02, // The stack is empty here
         CALL_SITE = 0x04, // This is a call site.
         NATIVE_END_OFFSET_UNKNOWN = 0x08, // Indicates a epilog endpoint
-        CALL_INSTRUCTION = 0x10  // The actual instruction of a call.
+        CALL_INSTRUCTION = 0x10, // The actual instruction of a call.
     };
 
     public struct OffsetMapping
@@ -1291,14 +1379,14 @@ namespace Internal.JitInterface
 
     public enum ILNum
     {
-        VARARGS_HND_ILNUM   = -1, // Value for the CORINFO_VARARGS_HANDLE varNumber
-        RETBUF_ILNUM        = -2, // Pointer to the return-buffer
-        TYPECTXT_ILNUM      = -3, // ParamTypeArg for CORINFO_GENERICS_CTXT_FROM_PARAMTYPEARG
+        VARARGS_HND_ILNUM = -1, // Value for the CORINFO_VARARGS_HANDLE varNumber
+        RETBUF_ILNUM = -2, // Pointer to the return-buffer
+        TYPECTXT_ILNUM = -3, // ParamTypeArg for CORINFO_GENERICS_CTXT_FROM_PARAMTYPEARG
 
-        UNKNOWN_ILNUM       = -4, // Unknown variable
+        UNKNOWN_ILNUM = -4, // Unknown variable
 
-        MAX_ILNUM           = -4  // Sentinel value. This should be set to the largest magnitude value in the enum
-                                  // so that the compression routines know the enum's range.
+        MAX_ILNUM = -4, // Sentinel value. This should be set to the largest magnitude value in the enum
+        // so that the compression routines know the enum's range.
     };
 
     public struct ILVarInfo
@@ -1312,10 +1400,13 @@ namespace Internal.JitInterface
     {
         // Method handle for inlinee (or root)
         public CORINFO_METHOD_STRUCT_* Method;
+
         // IL offset of IL instruction resulting in the inline
         public uint ILOffset;
+
         // Index of child in tree, 0 if no children
         public uint Child;
+
         // Index of sibling in tree, 0 if no sibling
         public uint Sibling;
     }
@@ -1324,10 +1415,13 @@ namespace Internal.JitInterface
     {
         // Offset in emitted code
         public uint NativeOffset;
+
         // Index of inline tree node containing the IL offset (0 for root)
         public uint Inlinee;
+
         // IL offset of IL instruction in inlinee that this mapping was created from
         public uint ILOffset;
+
         // Source information about the IL instruction in the inlinee
         public SourceTypes Source;
     }
@@ -1343,7 +1437,8 @@ namespace Internal.JitInterface
         CORINFO_TOKENKIND_Mask = 0x07,
 
         // token comes from CEE_LDTOKEN
-        CORINFO_TOKENKIND_Ldtoken = 0x10 | CORINFO_TOKENKIND_Class | CORINFO_TOKENKIND_Method | CORINFO_TOKENKIND_Field,
+        CORINFO_TOKENKIND_Ldtoken =
+            0x10 | CORINFO_TOKENKIND_Class | CORINFO_TOKENKIND_Method | CORINFO_TOKENKIND_Field,
 
         // token comes from CEE_CASTCLASS or CEE_ISINST
         CORINFO_TOKENKIND_Casting = 0x20 | CORINFO_TOKENKIND_Class,
@@ -1375,63 +1470,90 @@ namespace Internal.JitInterface
     {
         // Note that I dont use FACILITY_NULL for the facility number,
         // we may want to get a 'real' facility number
-        CORJIT_OK = 0 /*NO_ERROR*/,
-        CORJIT_BADCODE = unchecked((int)0x80000001)/*MAKE_HRESULT(SEVERITY_ERROR, FACILITY_NULL, 1)*/,
-        CORJIT_OUTOFMEM = unchecked((int)0x80000002)/*MAKE_HRESULT(SEVERITY_ERROR, FACILITY_NULL, 2)*/,
-        CORJIT_INTERNALERROR = unchecked((int)0x80000003)/*MAKE_HRESULT(SEVERITY_ERROR, FACILITY_NULL, 3)*/,
-        CORJIT_SKIPPED = unchecked((int)0x80000004)/*MAKE_HRESULT(SEVERITY_ERROR, FACILITY_NULL, 4)*/,
-        CORJIT_RECOVERABLEERROR = unchecked((int)0x80000005)/*MAKE_HRESULT(SEVERITY_ERROR, FACILITY_NULL, 5)*/,
-        CORJIT_IMPLLIMITATION = unchecked((int)0x80000006)/*MAKE_HRESULT(SEVERITY_ERROR,FACILITY_NULL, 6)*/,
+        CORJIT_OK =
+            0 /*NO_ERROR*/
+        ,
+        CORJIT_BADCODE =
+            unchecked(
+                (int)0x80000001
+            ) /*MAKE_HRESULT(SEVERITY_ERROR, FACILITY_NULL, 1)*/
+        ,
+        CORJIT_OUTOFMEM =
+            unchecked(
+                (int)0x80000002
+            ) /*MAKE_HRESULT(SEVERITY_ERROR, FACILITY_NULL, 2)*/
+        ,
+        CORJIT_INTERNALERROR =
+            unchecked(
+                (int)0x80000003
+            ) /*MAKE_HRESULT(SEVERITY_ERROR, FACILITY_NULL, 3)*/
+        ,
+        CORJIT_SKIPPED =
+            unchecked(
+                (int)0x80000004
+            ) /*MAKE_HRESULT(SEVERITY_ERROR, FACILITY_NULL, 4)*/
+        ,
+        CORJIT_RECOVERABLEERROR =
+            unchecked(
+                (int)0x80000005
+            ) /*MAKE_HRESULT(SEVERITY_ERROR, FACILITY_NULL, 5)*/
+        ,
+        CORJIT_IMPLLIMITATION =
+            unchecked(
+                (int)0x80000006
+            ) /*MAKE_HRESULT(SEVERITY_ERROR,FACILITY_NULL, 6)*/
+        ,
     };
 
     public enum TypeCompareState
     {
         MustNot = -1, // types are not equal
-        May = 0,      // types may be equal (must test at runtime)
-        Must = 1,     // type are equal
+        May = 0, // types may be equal (must test at runtime)
+        Must = 1, // type are equal
     }
 
     public enum CorJitFlag : uint
     {
         CORJIT_FLAG_CALL_GETJITFLAGS = 0xffffffff, // Indicates that the JIT should retrieve flags in the form of a
-                                                   // pointer to a CORJIT_FLAGS value via ICorJitInfo::getJitFlags().
 
-        CORJIT_FLAG_SPEED_OPT               = 0, // optimize for speed
-        CORJIT_FLAG_SIZE_OPT                = 1, // optimize for code size
-        CORJIT_FLAG_DEBUG_CODE              = 2, // generate "debuggable" code (no code-mangling optimizations)
-        CORJIT_FLAG_DEBUG_EnC               = 3, // We are in Edit-n-Continue mode
-        CORJIT_FLAG_DEBUG_INFO              = 4, // generate line and local-var info
-        CORJIT_FLAG_MIN_OPT                 = 5, // disable all jit optimizations (not necessarily debuggable code)
-        CORJIT_FLAG_ENABLE_CFG              = 6, // generate CFG enabled code
-        CORJIT_FLAG_OSR                     = 7, // Generate alternate version for On Stack Replacement
-        CORJIT_FLAG_ALT_JIT                 = 8, // JIT should consider itself an ALT_JIT
-        CORJIT_FLAG_FROZEN_ALLOC_ALLOWED    = 9, // JIT is allowed to use *_MAYBEFROZEN allocators
-        CORJIT_FLAG_MAKEFINALCODE           = 10, // Use the final code generator, i.e., not the interpreter.
-        CORJIT_FLAG_READYTORUN              = 11, // Use version-resilient code generation
-        CORJIT_FLAG_PROF_ENTERLEAVE         = 12, // Instrument prologues/epilogues
-        CORJIT_FLAG_PROF_NO_PINVOKE_INLINE  = 13, // Disables PInvoke inlining
-        CORJIT_FLAG_PREJIT                  = 14, // prejit is the execution engine.
-        CORJIT_FLAG_RELOC                   = 15, // Generate relocatable code
-        CORJIT_FLAG_IL_STUB                 = 16, // method is an IL stub
-        CORJIT_FLAG_PROCSPLIT               = 17, // JIT should separate code into hot and cold sections
-        CORJIT_FLAG_BBINSTR                 = 18, // Collect basic block profile information
-        CORJIT_FLAG_BBINSTR_IF_LOOPS        = 19, // JIT must instrument current method if it has loops
-        CORJIT_FLAG_BBOPT                   = 20, // Optimize method based on profile information
-        CORJIT_FLAG_FRAMED                  = 21, // All methods have an EBP frame
-        CORJIT_FLAG_PUBLISH_SECRET_PARAM    = 22, // JIT must place stub secret param into local 0.  (used by IL stubs)
-        CORJIT_FLAG_USE_PINVOKE_HELPERS     = 23, // The JIT should use the PINVOKE_{BEGIN,END} helpers instead of emitting inline transitions
-        CORJIT_FLAG_REVERSE_PINVOKE         = 24, // The JIT should insert REVERSE_PINVOKE_{ENTER,EXIT} helpers into method prolog/epilog
-        CORJIT_FLAG_TRACK_TRANSITIONS       = 25, // The JIT should insert the helper variants that track transitions.
-        CORJIT_FLAG_TIER0                   = 26, // This is the initial tier for tiered compilation which should generate code as quickly as possible
-        CORJIT_FLAG_TIER1                   = 27, // This is the final tier (for now) for tiered compilation which should generate high quality code
-        CORJIT_FLAG_NO_INLINING             = 28, // JIT should not inline any called method into this method
+        // pointer to a CORJIT_FLAGS value via ICorJitInfo::getJitFlags().
+
+        CORJIT_FLAG_SPEED_OPT = 0, // optimize for speed
+        CORJIT_FLAG_SIZE_OPT = 1, // optimize for code size
+        CORJIT_FLAG_DEBUG_CODE = 2, // generate "debuggable" code (no code-mangling optimizations)
+        CORJIT_FLAG_DEBUG_EnC = 3, // We are in Edit-n-Continue mode
+        CORJIT_FLAG_DEBUG_INFO = 4, // generate line and local-var info
+        CORJIT_FLAG_MIN_OPT = 5, // disable all jit optimizations (not necessarily debuggable code)
+        CORJIT_FLAG_ENABLE_CFG = 6, // generate CFG enabled code
+        CORJIT_FLAG_OSR = 7, // Generate alternate version for On Stack Replacement
+        CORJIT_FLAG_ALT_JIT = 8, // JIT should consider itself an ALT_JIT
+        CORJIT_FLAG_FROZEN_ALLOC_ALLOWED = 9, // JIT is allowed to use *_MAYBEFROZEN allocators
+        CORJIT_FLAG_MAKEFINALCODE = 10, // Use the final code generator, i.e., not the interpreter.
+        CORJIT_FLAG_READYTORUN = 11, // Use version-resilient code generation
+        CORJIT_FLAG_PROF_ENTERLEAVE = 12, // Instrument prologues/epilogues
+        CORJIT_FLAG_PROF_NO_PINVOKE_INLINE = 13, // Disables PInvoke inlining
+        CORJIT_FLAG_PREJIT = 14, // prejit is the execution engine.
+        CORJIT_FLAG_RELOC = 15, // Generate relocatable code
+        CORJIT_FLAG_IL_STUB = 16, // method is an IL stub
+        CORJIT_FLAG_PROCSPLIT = 17, // JIT should separate code into hot and cold sections
+        CORJIT_FLAG_BBINSTR = 18, // Collect basic block profile information
+        CORJIT_FLAG_BBINSTR_IF_LOOPS = 19, // JIT must instrument current method if it has loops
+        CORJIT_FLAG_BBOPT = 20, // Optimize method based on profile information
+        CORJIT_FLAG_FRAMED = 21, // All methods have an EBP frame
+        CORJIT_FLAG_PUBLISH_SECRET_PARAM = 22, // JIT must place stub secret param into local 0.  (used by IL stubs)
+        CORJIT_FLAG_USE_PINVOKE_HELPERS = 23, // The JIT should use the PINVOKE_{BEGIN,END} helpers instead of emitting inline transitions
+        CORJIT_FLAG_REVERSE_PINVOKE = 24, // The JIT should insert REVERSE_PINVOKE_{ENTER,EXIT} helpers into method prolog/epilog
+        CORJIT_FLAG_TRACK_TRANSITIONS = 25, // The JIT should insert the helper variants that track transitions.
+        CORJIT_FLAG_TIER0 = 26, // This is the initial tier for tiered compilation which should generate code as quickly as possible
+        CORJIT_FLAG_TIER1 = 27, // This is the final tier (for now) for tiered compilation which should generate high quality code
+        CORJIT_FLAG_NO_INLINING = 28, // JIT should not inline any called method into this method
 
         // ARM only
-        CORJIT_FLAG_RELATIVE_CODE_RELOCS    = 29, // JIT should generate PC-relative address computations instead of EE relocation records
-        CORJIT_FLAG_SOFTFP_ABI              = 30, // Enable armel calling convention
+        CORJIT_FLAG_RELATIVE_CODE_RELOCS = 29, // JIT should generate PC-relative address computations instead of EE relocation records
+        CORJIT_FLAG_SOFTFP_ABI = 30, // Enable armel calling convention
 
         // x86/x64 only
-        CORJIT_FLAG_VECTOR512_THROTTLING    = 31, // On x86/x64, 512-bit vector usage may incur CPU frequency throttling
+        CORJIT_FLAG_VECTOR512_THROTTLING = 31, // On x86/x64, 512-bit vector usage may incur CPU frequency throttling
     }
 
     public struct CORJIT_FLAGS
@@ -1481,6 +1603,10 @@ namespace Internal.JitInterface
         public uint numFields;
         public CorInfoType type;
         private byte _hasSignificantPadding;
-        public bool hasSignificantPadding { get => _hasSignificantPadding != 0; set => _hasSignificantPadding = value ? (byte)1 : (byte)0; }
+        public bool hasSignificantPadding
+        {
+            get => _hasSignificantPadding != 0;
+            set => _hasSignificantPadding = value ? (byte)1 : (byte)0;
+        }
     }
 }
